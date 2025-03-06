@@ -74,12 +74,6 @@ export
 
 type cQLabel*{.exportc: "QLabel", incompleteStruct.} = object
 
-proc fcQLabel_new(parent: pointer): ptr cQLabel {.importc: "QLabel_new".}
-proc fcQLabel_new2(): ptr cQLabel {.importc: "QLabel_new2".}
-proc fcQLabel_new3(text: struct_miqt_string): ptr cQLabel {.importc: "QLabel_new3".}
-proc fcQLabel_new4(parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new4".}
-proc fcQLabel_new5(text: struct_miqt_string, parent: pointer): ptr cQLabel {.importc: "QLabel_new5".}
-proc fcQLabel_new6(text: struct_miqt_string, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new6".}
 proc fcQLabel_metaObject(self: pointer, ): pointer {.importc: "QLabel_metaObject".}
 proc fcQLabel_metacast(self: pointer, param1: cstring): pointer {.importc: "QLabel_metacast".}
 proc fcQLabel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLabel_metacall".}
@@ -131,129 +125,116 @@ proc fcQLabel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLabel
 proc fcQLabel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLabel_tr3".}
 proc fcQLabel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLabel_trUtf82".}
 proc fcQLabel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLabel_trUtf83".}
-proc fQLabel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QLabel_virtualbase_metaObject".}
-proc fcQLabel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QLabel_override_virtual_metaObject".}
-proc fQLabel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QLabel_virtualbase_metacast".}
-proc fcQLabel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QLabel_override_virtual_metacast".}
-proc fQLabel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QLabel_virtualbase_metacall".}
-proc fcQLabel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QLabel_override_virtual_metacall".}
-proc fQLabel_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QLabel_virtualbase_sizeHint".}
-proc fcQLabel_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QLabel_override_virtual_sizeHint".}
-proc fQLabel_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QLabel_virtualbase_minimumSizeHint".}
-proc fcQLabel_override_virtual_minimumSizeHint(self: pointer, slot: int) {.importc: "QLabel_override_virtual_minimumSizeHint".}
-proc fQLabel_virtualbase_heightForWidth(self: pointer, param1: cint): cint{.importc: "QLabel_virtualbase_heightForWidth".}
-proc fcQLabel_override_virtual_heightForWidth(self: pointer, slot: int) {.importc: "QLabel_override_virtual_heightForWidth".}
-proc fQLabel_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QLabel_virtualbase_event".}
-proc fcQLabel_override_virtual_event(self: pointer, slot: int) {.importc: "QLabel_override_virtual_event".}
-proc fQLabel_virtualbase_keyPressEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_keyPressEvent".}
-proc fcQLabel_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_keyPressEvent".}
-proc fQLabel_virtualbase_paintEvent(self: pointer, param1: pointer): void{.importc: "QLabel_virtualbase_paintEvent".}
-proc fcQLabel_override_virtual_paintEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_paintEvent".}
-proc fQLabel_virtualbase_changeEvent(self: pointer, param1: pointer): void{.importc: "QLabel_virtualbase_changeEvent".}
-proc fcQLabel_override_virtual_changeEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_changeEvent".}
-proc fQLabel_virtualbase_mousePressEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_mousePressEvent".}
-proc fcQLabel_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_mousePressEvent".}
-proc fQLabel_virtualbase_mouseMoveEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_mouseMoveEvent".}
-proc fcQLabel_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_mouseMoveEvent".}
-proc fQLabel_virtualbase_mouseReleaseEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_mouseReleaseEvent".}
-proc fcQLabel_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_mouseReleaseEvent".}
-proc fQLabel_virtualbase_contextMenuEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_contextMenuEvent".}
-proc fcQLabel_override_virtual_contextMenuEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_contextMenuEvent".}
-proc fQLabel_virtualbase_focusInEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_focusInEvent".}
-proc fcQLabel_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_focusInEvent".}
-proc fQLabel_virtualbase_focusOutEvent(self: pointer, ev: pointer): void{.importc: "QLabel_virtualbase_focusOutEvent".}
-proc fcQLabel_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_focusOutEvent".}
-proc fQLabel_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool{.importc: "QLabel_virtualbase_focusNextPrevChild".}
-proc fcQLabel_override_virtual_focusNextPrevChild(self: pointer, slot: int) {.importc: "QLabel_override_virtual_focusNextPrevChild".}
-proc fQLabel_virtualbase_devType(self: pointer, ): cint{.importc: "QLabel_virtualbase_devType".}
-proc fcQLabel_override_virtual_devType(self: pointer, slot: int) {.importc: "QLabel_override_virtual_devType".}
-proc fQLabel_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QLabel_virtualbase_setVisible".}
-proc fcQLabel_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QLabel_override_virtual_setVisible".}
-proc fQLabel_virtualbase_hasHeightForWidth(self: pointer, ): bool{.importc: "QLabel_virtualbase_hasHeightForWidth".}
-proc fcQLabel_override_virtual_hasHeightForWidth(self: pointer, slot: int) {.importc: "QLabel_override_virtual_hasHeightForWidth".}
-proc fQLabel_virtualbase_paintEngine(self: pointer, ): pointer{.importc: "QLabel_virtualbase_paintEngine".}
-proc fcQLabel_override_virtual_paintEngine(self: pointer, slot: int) {.importc: "QLabel_override_virtual_paintEngine".}
-proc fQLabel_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_mouseDoubleClickEvent".}
-proc fcQLabel_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_mouseDoubleClickEvent".}
-proc fQLabel_virtualbase_wheelEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_wheelEvent".}
-proc fcQLabel_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_wheelEvent".}
-proc fQLabel_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_keyReleaseEvent".}
-proc fcQLabel_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_keyReleaseEvent".}
-proc fQLabel_virtualbase_enterEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_enterEvent".}
-proc fcQLabel_override_virtual_enterEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_enterEvent".}
-proc fQLabel_virtualbase_leaveEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_leaveEvent".}
-proc fcQLabel_override_virtual_leaveEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_leaveEvent".}
-proc fQLabel_virtualbase_moveEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_moveEvent".}
-proc fcQLabel_override_virtual_moveEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_moveEvent".}
-proc fQLabel_virtualbase_resizeEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_resizeEvent".}
-proc fcQLabel_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_resizeEvent".}
-proc fQLabel_virtualbase_closeEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_closeEvent".}
-proc fcQLabel_override_virtual_closeEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_closeEvent".}
-proc fQLabel_virtualbase_tabletEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_tabletEvent".}
-proc fcQLabel_override_virtual_tabletEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_tabletEvent".}
-proc fQLabel_virtualbase_actionEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_actionEvent".}
-proc fcQLabel_override_virtual_actionEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_actionEvent".}
-proc fQLabel_virtualbase_dragEnterEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_dragEnterEvent".}
-proc fcQLabel_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_dragEnterEvent".}
-proc fQLabel_virtualbase_dragMoveEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_dragMoveEvent".}
-proc fcQLabel_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_dragMoveEvent".}
-proc fQLabel_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_dragLeaveEvent".}
-proc fcQLabel_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_dragLeaveEvent".}
-proc fQLabel_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_dropEvent".}
-proc fcQLabel_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_dropEvent".}
-proc fQLabel_virtualbase_showEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_showEvent".}
-proc fcQLabel_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_showEvent".}
-proc fQLabel_virtualbase_hideEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_hideEvent".}
-proc fcQLabel_override_virtual_hideEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_hideEvent".}
-proc fQLabel_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool{.importc: "QLabel_virtualbase_nativeEvent".}
-proc fcQLabel_override_virtual_nativeEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_nativeEvent".}
-proc fQLabel_virtualbase_metric(self: pointer, param1: cint): cint{.importc: "QLabel_virtualbase_metric".}
-proc fcQLabel_override_virtual_metric(self: pointer, slot: int) {.importc: "QLabel_override_virtual_metric".}
-proc fQLabel_virtualbase_initPainter(self: pointer, painter: pointer): void{.importc: "QLabel_virtualbase_initPainter".}
-proc fcQLabel_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QLabel_override_virtual_initPainter".}
-proc fQLabel_virtualbase_redirected(self: pointer, offset: pointer): pointer{.importc: "QLabel_virtualbase_redirected".}
-proc fcQLabel_override_virtual_redirected(self: pointer, slot: int) {.importc: "QLabel_override_virtual_redirected".}
-proc fQLabel_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QLabel_virtualbase_sharedPainter".}
-proc fcQLabel_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QLabel_override_virtual_sharedPainter".}
-proc fQLabel_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void{.importc: "QLabel_virtualbase_inputMethodEvent".}
-proc fcQLabel_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_inputMethodEvent".}
-proc fQLabel_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer{.importc: "QLabel_virtualbase_inputMethodQuery".}
-proc fcQLabel_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QLabel_override_virtual_inputMethodQuery".}
-proc fQLabel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QLabel_virtualbase_eventFilter".}
-proc fcQLabel_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QLabel_override_virtual_eventFilter".}
-proc fQLabel_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_timerEvent".}
-proc fcQLabel_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_timerEvent".}
-proc fQLabel_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_childEvent".}
-proc fcQLabel_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_childEvent".}
-proc fQLabel_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QLabel_virtualbase_customEvent".}
-proc fcQLabel_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QLabel_override_virtual_customEvent".}
-proc fQLabel_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QLabel_virtualbase_connectNotify".}
-proc fcQLabel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QLabel_override_virtual_connectNotify".}
-proc fQLabel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QLabel_virtualbase_disconnectNotify".}
-proc fcQLabel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QLabel_override_virtual_disconnectNotify".}
+type cQLabelVTable = object
+  destructor*: proc(vtbl: ptr cQLabelVTable, self: ptr cQLabel) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, ev: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQLabel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QLabel_virtualbase_metaObject".}
+proc fcQLabel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QLabel_virtualbase_metacast".}
+proc fcQLabel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLabel_virtualbase_metacall".}
+proc fcQLabel_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QLabel_virtualbase_sizeHint".}
+proc fcQLabel_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QLabel_virtualbase_minimumSizeHint".}
+proc fcQLabel_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QLabel_virtualbase_heightForWidth".}
+proc fcQLabel_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QLabel_virtualbase_event".}
+proc fcQLabel_virtualbase_keyPressEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_keyPressEvent".}
+proc fcQLabel_virtualbase_paintEvent(self: pointer, param1: pointer): void {.importc: "QLabel_virtualbase_paintEvent".}
+proc fcQLabel_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QLabel_virtualbase_changeEvent".}
+proc fcQLabel_virtualbase_mousePressEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_mousePressEvent".}
+proc fcQLabel_virtualbase_mouseMoveEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_mouseMoveEvent".}
+proc fcQLabel_virtualbase_mouseReleaseEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_mouseReleaseEvent".}
+proc fcQLabel_virtualbase_contextMenuEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_contextMenuEvent".}
+proc fcQLabel_virtualbase_focusInEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_focusInEvent".}
+proc fcQLabel_virtualbase_focusOutEvent(self: pointer, ev: pointer): void {.importc: "QLabel_virtualbase_focusOutEvent".}
+proc fcQLabel_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QLabel_virtualbase_focusNextPrevChild".}
+proc fcQLabel_virtualbase_devType(self: pointer, ): cint {.importc: "QLabel_virtualbase_devType".}
+proc fcQLabel_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QLabel_virtualbase_setVisible".}
+proc fcQLabel_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QLabel_virtualbase_hasHeightForWidth".}
+proc fcQLabel_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QLabel_virtualbase_paintEngine".}
+proc fcQLabel_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_mouseDoubleClickEvent".}
+proc fcQLabel_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_wheelEvent".}
+proc fcQLabel_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_keyReleaseEvent".}
+proc fcQLabel_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_enterEvent".}
+proc fcQLabel_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_leaveEvent".}
+proc fcQLabel_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_moveEvent".}
+proc fcQLabel_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_resizeEvent".}
+proc fcQLabel_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_closeEvent".}
+proc fcQLabel_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_tabletEvent".}
+proc fcQLabel_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_actionEvent".}
+proc fcQLabel_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_dragEnterEvent".}
+proc fcQLabel_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_dragMoveEvent".}
+proc fcQLabel_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_dragLeaveEvent".}
+proc fcQLabel_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_dropEvent".}
+proc fcQLabel_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_showEvent".}
+proc fcQLabel_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_hideEvent".}
+proc fcQLabel_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QLabel_virtualbase_nativeEvent".}
+proc fcQLabel_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QLabel_virtualbase_metric".}
+proc fcQLabel_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QLabel_virtualbase_initPainter".}
+proc fcQLabel_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QLabel_virtualbase_redirected".}
+proc fcQLabel_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QLabel_virtualbase_sharedPainter".}
+proc fcQLabel_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QLabel_virtualbase_inputMethodEvent".}
+proc fcQLabel_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QLabel_virtualbase_inputMethodQuery".}
+proc fcQLabel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QLabel_virtualbase_eventFilter".}
+proc fcQLabel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_timerEvent".}
+proc fcQLabel_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_childEvent".}
+proc fcQLabel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLabel_virtualbase_customEvent".}
+proc fcQLabel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLabel_virtualbase_connectNotify".}
+proc fcQLabel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLabel_virtualbase_disconnectNotify".}
+proc fcQLabel_new(vtbl: pointer, parent: pointer): ptr cQLabel {.importc: "QLabel_new".}
+proc fcQLabel_new2(vtbl: pointer, ): ptr cQLabel {.importc: "QLabel_new2".}
+proc fcQLabel_new3(vtbl: pointer, text: struct_miqt_string): ptr cQLabel {.importc: "QLabel_new3".}
+proc fcQLabel_new4(vtbl: pointer, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new4".}
+proc fcQLabel_new5(vtbl: pointer, text: struct_miqt_string, parent: pointer): ptr cQLabel {.importc: "QLabel_new5".}
+proc fcQLabel_new6(vtbl: pointer, text: struct_miqt_string, parent: pointer, f: cint): ptr cQLabel {.importc: "QLabel_new6".}
 proc fcQLabel_staticMetaObject(): pointer {.importc: "QLabel_staticMetaObject".}
 proc fcQLabel_delete(self: pointer) {.importc: "QLabel_delete".}
-
-
-func init*(T: type gen_qlabel_types.QLabel, h: ptr cQLabel): gen_qlabel_types.QLabel =
-  T(h: h)
-proc create*(T: type gen_qlabel_types.QLabel, parent: gen_qwidget_types.QWidget): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new(parent.h))
-
-proc create*(T: type gen_qlabel_types.QLabel, ): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new2())
-
-proc create*(T: type gen_qlabel_types.QLabel, text: string): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new3(struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qlabel_types.QLabel, parent: gen_qwidget_types.QWidget, f: cint): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new4(parent.h, cint(f)))
-
-proc create*(T: type gen_qlabel_types.QLabel, text: string, parent: gen_qwidget_types.QWidget): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new5(struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
-
-proc create*(T: type gen_qlabel_types.QLabel, text: string, parent: gen_qwidget_types.QWidget, f: cint): gen_qlabel_types.QLabel =
-  gen_qlabel_types.QLabel.init(fcQLabel_new6(struct_miqt_string(data: text, len: csize_t(len(text))), parent.h, cint(f)))
 
 proc metaObject*(self: gen_qlabel_types.QLabel, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLabel_metaObject(self.h))
@@ -400,7 +381,7 @@ proc linkActivated*(self: gen_qlabel_types.QLabel, link: string): void =
   fcQLabel_linkActivated(self.h, struct_miqt_string(data: link, len: csize_t(len(link))))
 
 type QLabellinkActivatedSlot* = proc(link: string)
-proc miqt_exec_callback_QLabel_linkActivated(slot: int, link: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQLabel_linkActivated(slot: int, link: struct_miqt_string) {.exportc: "miqt_exec_callback_QLabel_linkActivated".} =
   let nimfunc = cast[ptr QLabellinkActivatedSlot](cast[pointer](slot))
   let vlink_ms = link
   let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
@@ -419,7 +400,7 @@ proc linkHovered*(self: gen_qlabel_types.QLabel, link: string): void =
   fcQLabel_linkHovered(self.h, struct_miqt_string(data: link, len: csize_t(len(link))))
 
 type QLabellinkHoveredSlot* = proc(link: string)
-proc miqt_exec_callback_QLabel_linkHovered(slot: int, link: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQLabel_linkHovered(slot: int, link: struct_miqt_string) {.exportc: "miqt_exec_callback_QLabel_linkHovered".} =
   let nimfunc = cast[ptr QLabellinkHoveredSlot](cast[pointer](slot))
   let vlink_ms = link
   let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
@@ -458,889 +439,1235 @@ proc trUtf8*(_: type gen_qlabel_types.QLabel, s: cstring, c: cstring, n: cint): 
   c_free(v_ms.data)
   vx_ret
 
+type QLabelmetaObjectProc* = proc(self: QLabel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QLabelmetacastProc* = proc(self: QLabel, param1: cstring): pointer {.raises: [], gcsafe.}
+type QLabelmetacallProc* = proc(self: QLabel, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QLabelsizeHintProc* = proc(self: QLabel): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QLabelminimumSizeHintProc* = proc(self: QLabel): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QLabelheightForWidthProc* = proc(self: QLabel, param1: cint): cint {.raises: [], gcsafe.}
+type QLabeleventProc* = proc(self: QLabel, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QLabelkeyPressEventProc* = proc(self: QLabel, ev: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QLabelpaintEventProc* = proc(self: QLabel, param1: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QLabelchangeEventProc* = proc(self: QLabel, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QLabelmousePressEventProc* = proc(self: QLabel, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QLabelmouseMoveEventProc* = proc(self: QLabel, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QLabelmouseReleaseEventProc* = proc(self: QLabel, ev: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QLabelcontextMenuEventProc* = proc(self: QLabel, ev: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QLabelfocusInEventProc* = proc(self: QLabel, ev: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QLabelfocusOutEventProc* = proc(self: QLabel, ev: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QLabelfocusNextPrevChildProc* = proc(self: QLabel, next: bool): bool {.raises: [], gcsafe.}
+type QLabeldevTypeProc* = proc(self: QLabel): cint {.raises: [], gcsafe.}
+type QLabelsetVisibleProc* = proc(self: QLabel, visible: bool): void {.raises: [], gcsafe.}
+type QLabelhasHeightForWidthProc* = proc(self: QLabel): bool {.raises: [], gcsafe.}
+type QLabelpaintEngineProc* = proc(self: QLabel): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QLabelmouseDoubleClickEventProc* = proc(self: QLabel, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QLabelwheelEventProc* = proc(self: QLabel, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QLabelkeyReleaseEventProc* = proc(self: QLabel, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QLabelenterEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QLabelleaveEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QLabelmoveEventProc* = proc(self: QLabel, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QLabelresizeEventProc* = proc(self: QLabel, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QLabelcloseEventProc* = proc(self: QLabel, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QLabeltabletEventProc* = proc(self: QLabel, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QLabelactionEventProc* = proc(self: QLabel, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QLabeldragEnterEventProc* = proc(self: QLabel, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QLabeldragMoveEventProc* = proc(self: QLabel, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QLabeldragLeaveEventProc* = proc(self: QLabel, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QLabeldropEventProc* = proc(self: QLabel, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QLabelshowEventProc* = proc(self: QLabel, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QLabelhideEventProc* = proc(self: QLabel, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QLabelnativeEventProc* = proc(self: QLabel, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QLabelmetricProc* = proc(self: QLabel, param1: cint): cint {.raises: [], gcsafe.}
+type QLabelinitPainterProc* = proc(self: QLabel, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QLabelredirectedProc* = proc(self: QLabel, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QLabelsharedPainterProc* = proc(self: QLabel): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QLabelinputMethodEventProc* = proc(self: QLabel, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QLabelinputMethodQueryProc* = proc(self: QLabel, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QLabeleventFilterProc* = proc(self: QLabel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QLabeltimerEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QLabelchildEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QLabelcustomEventProc* = proc(self: QLabel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QLabelconnectNotifyProc* = proc(self: QLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QLabeldisconnectNotifyProc* = proc(self: QLabel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QLabelVTable* = object
+  vtbl: cQLabelVTable
+  metaObject*: QLabelmetaObjectProc
+  metacast*: QLabelmetacastProc
+  metacall*: QLabelmetacallProc
+  sizeHint*: QLabelsizeHintProc
+  minimumSizeHint*: QLabelminimumSizeHintProc
+  heightForWidth*: QLabelheightForWidthProc
+  event*: QLabeleventProc
+  keyPressEvent*: QLabelkeyPressEventProc
+  paintEvent*: QLabelpaintEventProc
+  changeEvent*: QLabelchangeEventProc
+  mousePressEvent*: QLabelmousePressEventProc
+  mouseMoveEvent*: QLabelmouseMoveEventProc
+  mouseReleaseEvent*: QLabelmouseReleaseEventProc
+  contextMenuEvent*: QLabelcontextMenuEventProc
+  focusInEvent*: QLabelfocusInEventProc
+  focusOutEvent*: QLabelfocusOutEventProc
+  focusNextPrevChild*: QLabelfocusNextPrevChildProc
+  devType*: QLabeldevTypeProc
+  setVisible*: QLabelsetVisibleProc
+  hasHeightForWidth*: QLabelhasHeightForWidthProc
+  paintEngine*: QLabelpaintEngineProc
+  mouseDoubleClickEvent*: QLabelmouseDoubleClickEventProc
+  wheelEvent*: QLabelwheelEventProc
+  keyReleaseEvent*: QLabelkeyReleaseEventProc
+  enterEvent*: QLabelenterEventProc
+  leaveEvent*: QLabelleaveEventProc
+  moveEvent*: QLabelmoveEventProc
+  resizeEvent*: QLabelresizeEventProc
+  closeEvent*: QLabelcloseEventProc
+  tabletEvent*: QLabeltabletEventProc
+  actionEvent*: QLabelactionEventProc
+  dragEnterEvent*: QLabeldragEnterEventProc
+  dragMoveEvent*: QLabeldragMoveEventProc
+  dragLeaveEvent*: QLabeldragLeaveEventProc
+  dropEvent*: QLabeldropEventProc
+  showEvent*: QLabelshowEventProc
+  hideEvent*: QLabelhideEventProc
+  nativeEvent*: QLabelnativeEventProc
+  metric*: QLabelmetricProc
+  initPainter*: QLabelinitPainterProc
+  redirected*: QLabelredirectedProc
+  sharedPainter*: QLabelsharedPainterProc
+  inputMethodEvent*: QLabelinputMethodEventProc
+  inputMethodQuery*: QLabelinputMethodQueryProc
+  eventFilter*: QLabeleventFilterProc
+  timerEvent*: QLabeltimerEventProc
+  childEvent*: QLabelchildEventProc
+  customEvent*: QLabelcustomEventProc
+  connectNotify*: QLabelconnectNotifyProc
+  disconnectNotify*: QLabeldisconnectNotifyProc
 proc QLabelmetaObject*(self: gen_qlabel_types.QLabel, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQLabel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLabel_virtualbase_metaObject(self.h))
 
-type QLabelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qlabel_types.QLabel, slot: QLabelmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QLabelmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_metaObject(self: ptr cQLabel, slot: int): pointer {.exportc: "miqt_exec_callback_QLabel_metaObject ".} =
-  var nimfunc = cast[ptr QLabelmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QLabelmetacast*(self: gen_qlabel_types.QLabel, param1: cstring): pointer =
-  fQLabel_virtualbase_metacast(self.h, param1)
+  fcQLabel_virtualbase_metacast(self.h, param1)
 
-type QLabelmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qlabel_types.QLabel, slot: QLabelmetacastProc) =
-  # TODO check subclass
-  var tmp = new QLabelmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_metacast(self: ptr cQLabel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QLabel_metacast ".} =
-  var nimfunc = cast[ptr QLabelmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QLabelmetacall*(self: gen_qlabel_types.QLabel, param1: cint, param2: cint, param3: pointer): cint =
-  fQLabel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQLabel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QLabelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qlabel_types.QLabel, slot: QLabelmetacallProc) =
-  # TODO check subclass
-  var tmp = new QLabelmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_metacall(self: ptr cQLabel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QLabel_metacall ".} =
-  var nimfunc = cast[ptr QLabelmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QLabelsizeHint*(self: gen_qlabel_types.QLabel, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQLabel_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_virtualbase_sizeHint(self.h))
 
-type QLabelsizeHintProc* = proc(): gen_qsize_types.QSize
-proc onsizeHint*(self: gen_qlabel_types.QLabel, slot: QLabelsizeHintProc) =
-  # TODO check subclass
-  var tmp = new QLabelsizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_sizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_sizeHint(self: ptr cQLabel, slot: int): pointer {.exportc: "miqt_exec_callback_QLabel_sizeHint ".} =
-  var nimfunc = cast[ptr QLabelsizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.h
+
 proc QLabelminimumSizeHint*(self: gen_qlabel_types.QLabel, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQLabel_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQLabel_virtualbase_minimumSizeHint(self.h))
 
-type QLabelminimumSizeHintProc* = proc(): gen_qsize_types.QSize
-proc onminimumSizeHint*(self: gen_qlabel_types.QLabel, slot: QLabelminimumSizeHintProc) =
-  # TODO check subclass
-  var tmp = new QLabelminimumSizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_minimumSizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_minimumSizeHint(self: ptr cQLabel, slot: int): pointer {.exportc: "miqt_exec_callback_QLabel_minimumSizeHint ".} =
-  var nimfunc = cast[ptr QLabelminimumSizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.h
+
 proc QLabelheightForWidth*(self: gen_qlabel_types.QLabel, param1: cint): cint =
-  fQLabel_virtualbase_heightForWidth(self.h, param1)
+  fcQLabel_virtualbase_heightForWidth(self.h, param1)
 
-type QLabelheightForWidthProc* = proc(param1: cint): cint
-proc onheightForWidth*(self: gen_qlabel_types.QLabel, slot: QLabelheightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QLabelheightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_heightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_heightForWidth(self: ptr cQLabel, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QLabel_heightForWidth ".} =
-  var nimfunc = cast[ptr QLabelheightForWidthProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = param1
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
+
 proc QLabelevent*(self: gen_qlabel_types.QLabel, e: gen_qcoreevent_types.QEvent): bool =
-  fQLabel_virtualbase_event(self.h, e.h)
+  fcQLabel_virtualbase_event(self.h, e.h)
 
-type QLabeleventProc* = proc(e: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qlabel_types.QLabel, slot: QLabeleventProc) =
-  # TODO check subclass
-  var tmp = new QLabeleventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_event(self: ptr cQLabel, slot: int, e: pointer): bool {.exportc: "miqt_exec_callback_QLabel_event ".} =
-  var nimfunc = cast[ptr QLabeleventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QLabelkeyPressEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QKeyEvent): void =
-  fQLabel_virtualbase_keyPressEvent(self.h, ev.h)
+  fcQLabel_virtualbase_keyPressEvent(self.h, ev.h)
 
-type QLabelkeyPressEventProc* = proc(ev: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qlabel_types.QLabel, slot: QLabelkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_keyPressEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_keyPressEvent ".} =
-  var nimfunc = cast[ptr QLabelkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_keyPressEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: ev)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelpaintEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_types.QPaintEvent): void =
-  fQLabel_virtualbase_paintEvent(self.h, param1.h)
+  fcQLabel_virtualbase_paintEvent(self.h, param1.h)
 
-type QLabelpaintEventProc* = proc(param1: gen_qevent_types.QPaintEvent): void
-proc onpaintEvent*(self: gen_qlabel_types.QLabel, slot: QLabelpaintEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelpaintEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_paintEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_paintEvent(self: ptr cQLabel, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QLabel_paintEvent ".} =
-  var nimfunc = cast[ptr QLabelpaintEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  vtbl[].paintEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelchangeEvent*(self: gen_qlabel_types.QLabel, param1: gen_qcoreevent_types.QEvent): void =
-  fQLabel_virtualbase_changeEvent(self.h, param1.h)
+  fcQLabel_virtualbase_changeEvent(self.h, param1.h)
 
-type QLabelchangeEventProc* = proc(param1: gen_qcoreevent_types.QEvent): void
-proc onchangeEvent*(self: gen_qlabel_types.QLabel, slot: QLabelchangeEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelchangeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_changeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_changeEvent(self: ptr cQLabel, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QLabel_changeEvent ".} =
-  var nimfunc = cast[ptr QLabelchangeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelmousePressEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
-  fQLabel_virtualbase_mousePressEvent(self.h, ev.h)
+  fcQLabel_virtualbase_mousePressEvent(self.h, ev.h)
 
-type QLabelmousePressEventProc* = proc(ev: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qlabel_types.QLabel, slot: QLabelmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_mousePressEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_mousePressEvent ".} =
-  var nimfunc = cast[ptr QLabelmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_mousePressEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelmouseMoveEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
-  fQLabel_virtualbase_mouseMoveEvent(self.h, ev.h)
+  fcQLabel_virtualbase_mouseMoveEvent(self.h, ev.h)
 
-type QLabelmouseMoveEventProc* = proc(ev: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qlabel_types.QLabel, slot: QLabelmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_mouseMoveEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QLabelmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_mouseMoveEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelmouseReleaseEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QMouseEvent): void =
-  fQLabel_virtualbase_mouseReleaseEvent(self.h, ev.h)
+  fcQLabel_virtualbase_mouseReleaseEvent(self.h, ev.h)
 
-type QLabelmouseReleaseEventProc* = proc(ev: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qlabel_types.QLabel, slot: QLabelmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_mouseReleaseEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QLabelmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_mouseReleaseEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: ev)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelcontextMenuEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QContextMenuEvent): void =
-  fQLabel_virtualbase_contextMenuEvent(self.h, ev.h)
+  fcQLabel_virtualbase_contextMenuEvent(self.h, ev.h)
 
-type QLabelcontextMenuEventProc* = proc(ev: gen_qevent_types.QContextMenuEvent): void
-proc oncontextMenuEvent*(self: gen_qlabel_types.QLabel, slot: QLabelcontextMenuEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelcontextMenuEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_contextMenuEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_contextMenuEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_contextMenuEvent ".} =
-  var nimfunc = cast[ptr QLabelcontextMenuEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_contextMenuEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: ev)
+  vtbl[].contextMenuEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelfocusInEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QFocusEvent): void =
-  fQLabel_virtualbase_focusInEvent(self.h, ev.h)
+  fcQLabel_virtualbase_focusInEvent(self.h, ev.h)
 
-type QLabelfocusInEventProc* = proc(ev: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qlabel_types.QLabel, slot: QLabelfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_focusInEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_focusInEvent ".} =
-  var nimfunc = cast[ptr QLabelfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_focusInEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelfocusOutEvent*(self: gen_qlabel_types.QLabel, ev: gen_qevent_types.QFocusEvent): void =
-  fQLabel_virtualbase_focusOutEvent(self.h, ev.h)
+  fcQLabel_virtualbase_focusOutEvent(self.h, ev.h)
 
-type QLabelfocusOutEventProc* = proc(ev: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qlabel_types.QLabel, slot: QLabelfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_focusOutEvent(self: ptr cQLabel, slot: int, ev: pointer): void {.exportc: "miqt_exec_callback_QLabel_focusOutEvent ".} =
-  var nimfunc = cast[ptr QLabelfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_focusOutEvent(vtbl: pointer, self: pointer, ev: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: ev)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelfocusNextPrevChild*(self: gen_qlabel_types.QLabel, next: bool): bool =
-  fQLabel_virtualbase_focusNextPrevChild(self.h, next)
+  fcQLabel_virtualbase_focusNextPrevChild(self.h, next)
 
-type QLabelfocusNextPrevChildProc* = proc(next: bool): bool
-proc onfocusNextPrevChild*(self: gen_qlabel_types.QLabel, slot: QLabelfocusNextPrevChildProc) =
-  # TODO check subclass
-  var tmp = new QLabelfocusNextPrevChildProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_focusNextPrevChild(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_focusNextPrevChild(self: ptr cQLabel, slot: int, next: bool): bool {.exportc: "miqt_exec_callback_QLabel_focusNextPrevChild ".} =
-  var nimfunc = cast[ptr QLabelfocusNextPrevChildProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = next
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
+
 proc QLabeldevType*(self: gen_qlabel_types.QLabel, ): cint =
-  fQLabel_virtualbase_devType(self.h)
+  fcQLabel_virtualbase_devType(self.h)
 
-type QLabeldevTypeProc* = proc(): cint
-proc ondevType*(self: gen_qlabel_types.QLabel, slot: QLabeldevTypeProc) =
-  # TODO check subclass
-  var tmp = new QLabeldevTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_devType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_devType(self: ptr cQLabel, slot: int): cint {.exportc: "miqt_exec_callback_QLabel_devType ".} =
-  var nimfunc = cast[ptr QLabeldevTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].devType(self)
   virtualReturn
+
 proc QLabelsetVisible*(self: gen_qlabel_types.QLabel, visible: bool): void =
-  fQLabel_virtualbase_setVisible(self.h, visible)
+  fcQLabel_virtualbase_setVisible(self.h, visible)
 
-type QLabelsetVisibleProc* = proc(visible: bool): void
-proc onsetVisible*(self: gen_qlabel_types.QLabel, slot: QLabelsetVisibleProc) =
-  # TODO check subclass
-  var tmp = new QLabelsetVisibleProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_setVisible(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_setVisible(self: ptr cQLabel, slot: int, visible: bool): void {.exportc: "miqt_exec_callback_QLabel_setVisible ".} =
-  var nimfunc = cast[ptr QLabelsetVisibleProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelhasHeightForWidth*(self: gen_qlabel_types.QLabel, ): bool =
-  fQLabel_virtualbase_hasHeightForWidth(self.h)
+  fcQLabel_virtualbase_hasHeightForWidth(self.h)
 
-type QLabelhasHeightForWidthProc* = proc(): bool
-proc onhasHeightForWidth*(self: gen_qlabel_types.QLabel, slot: QLabelhasHeightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QLabelhasHeightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_hasHeightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_hasHeightForWidth(self: ptr cQLabel, slot: int): bool {.exportc: "miqt_exec_callback_QLabel_hasHeightForWidth ".} =
-  var nimfunc = cast[ptr QLabelhasHeightForWidthProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
+
 proc QLabelpaintEngine*(self: gen_qlabel_types.QLabel, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fQLabel_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQLabel_virtualbase_paintEngine(self.h))
 
-type QLabelpaintEngineProc* = proc(): gen_qpaintengine_types.QPaintEngine
-proc onpaintEngine*(self: gen_qlabel_types.QLabel, slot: QLabelpaintEngineProc) =
-  # TODO check subclass
-  var tmp = new QLabelpaintEngineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_paintEngine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_paintEngine(self: ptr cQLabel, slot: int): pointer {.exportc: "miqt_exec_callback_QLabel_paintEngine ".} =
-  var nimfunc = cast[ptr QLabelpaintEngineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.h
+
 proc QLabelmouseDoubleClickEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QMouseEvent): void =
-  fQLabel_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQLabel_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QLabelmouseDoubleClickEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qlabel_types.QLabel, slot: QLabelmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_mouseDoubleClickEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QLabelmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelwheelEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QWheelEvent): void =
-  fQLabel_virtualbase_wheelEvent(self.h, event.h)
+  fcQLabel_virtualbase_wheelEvent(self.h, event.h)
 
-type QLabelwheelEventProc* = proc(event: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qlabel_types.QLabel, slot: QLabelwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_wheelEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_wheelEvent ".} =
-  var nimfunc = cast[ptr QLabelwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelkeyReleaseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QKeyEvent): void =
-  fQLabel_virtualbase_keyReleaseEvent(self.h, event.h)
+  fcQLabel_virtualbase_keyReleaseEvent(self.h, event.h)
 
-type QLabelkeyReleaseEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qlabel_types.QLabel, slot: QLabelkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_keyReleaseEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QLabelkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelenterEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QEvent): void =
-  fQLabel_virtualbase_enterEvent(self.h, event.h)
+  fcQLabel_virtualbase_enterEvent(self.h, event.h)
 
-type QLabelenterEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onenterEvent*(self: gen_qlabel_types.QLabel, slot: QLabelenterEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelenterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_enterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_enterEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_enterEvent ".} =
-  var nimfunc = cast[ptr QLabelenterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelleaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QEvent): void =
-  fQLabel_virtualbase_leaveEvent(self.h, event.h)
+  fcQLabel_virtualbase_leaveEvent(self.h, event.h)
 
-type QLabelleaveEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onleaveEvent*(self: gen_qlabel_types.QLabel, slot: QLabelleaveEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelleaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_leaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_leaveEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_leaveEvent ".} =
-  var nimfunc = cast[ptr QLabelleaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelmoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QMoveEvent): void =
-  fQLabel_virtualbase_moveEvent(self.h, event.h)
+  fcQLabel_virtualbase_moveEvent(self.h, event.h)
 
-type QLabelmoveEventProc* = proc(event: gen_qevent_types.QMoveEvent): void
-proc onmoveEvent*(self: gen_qlabel_types.QLabel, slot: QLabelmoveEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelmoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_moveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_moveEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_moveEvent ".} =
-  var nimfunc = cast[ptr QLabelmoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelresizeEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QResizeEvent): void =
-  fQLabel_virtualbase_resizeEvent(self.h, event.h)
+  fcQLabel_virtualbase_resizeEvent(self.h, event.h)
 
-type QLabelresizeEventProc* = proc(event: gen_qevent_types.QResizeEvent): void
-proc onresizeEvent*(self: gen_qlabel_types.QLabel, slot: QLabelresizeEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelresizeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_resizeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_resizeEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_resizeEvent ".} =
-  var nimfunc = cast[ptr QLabelresizeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelcloseEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QCloseEvent): void =
-  fQLabel_virtualbase_closeEvent(self.h, event.h)
+  fcQLabel_virtualbase_closeEvent(self.h, event.h)
 
-type QLabelcloseEventProc* = proc(event: gen_qevent_types.QCloseEvent): void
-proc oncloseEvent*(self: gen_qlabel_types.QLabel, slot: QLabelcloseEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelcloseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_closeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_closeEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_closeEvent ".} =
-  var nimfunc = cast[ptr QLabelcloseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeltabletEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QTabletEvent): void =
-  fQLabel_virtualbase_tabletEvent(self.h, event.h)
+  fcQLabel_virtualbase_tabletEvent(self.h, event.h)
 
-type QLabeltabletEventProc* = proc(event: gen_qevent_types.QTabletEvent): void
-proc ontabletEvent*(self: gen_qlabel_types.QLabel, slot: QLabeltabletEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeltabletEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_tabletEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_tabletEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_tabletEvent ".} =
-  var nimfunc = cast[ptr QLabeltabletEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelactionEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QActionEvent): void =
-  fQLabel_virtualbase_actionEvent(self.h, event.h)
+  fcQLabel_virtualbase_actionEvent(self.h, event.h)
 
-type QLabelactionEventProc* = proc(event: gen_qevent_types.QActionEvent): void
-proc onactionEvent*(self: gen_qlabel_types.QLabel, slot: QLabelactionEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelactionEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_actionEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_actionEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_actionEvent ".} =
-  var nimfunc = cast[ptr QLabelactionEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeldragEnterEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragEnterEvent): void =
-  fQLabel_virtualbase_dragEnterEvent(self.h, event.h)
+  fcQLabel_virtualbase_dragEnterEvent(self.h, event.h)
 
-type QLabeldragEnterEventProc* = proc(event: gen_qevent_types.QDragEnterEvent): void
-proc ondragEnterEvent*(self: gen_qlabel_types.QLabel, slot: QLabeldragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeldragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_dragEnterEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QLabeldragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeldragMoveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragMoveEvent): void =
-  fQLabel_virtualbase_dragMoveEvent(self.h, event.h)
+  fcQLabel_virtualbase_dragMoveEvent(self.h, event.h)
 
-type QLabeldragMoveEventProc* = proc(event: gen_qevent_types.QDragMoveEvent): void
-proc ondragMoveEvent*(self: gen_qlabel_types.QLabel, slot: QLabeldragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeldragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_dragMoveEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QLabeldragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeldragLeaveEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDragLeaveEvent): void =
-  fQLabel_virtualbase_dragLeaveEvent(self.h, event.h)
+  fcQLabel_virtualbase_dragLeaveEvent(self.h, event.h)
 
-type QLabeldragLeaveEventProc* = proc(event: gen_qevent_types.QDragLeaveEvent): void
-proc ondragLeaveEvent*(self: gen_qlabel_types.QLabel, slot: QLabeldragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeldragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_dragLeaveEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QLabeldragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeldropEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QDropEvent): void =
-  fQLabel_virtualbase_dropEvent(self.h, event.h)
+  fcQLabel_virtualbase_dropEvent(self.h, event.h)
 
-type QLabeldropEventProc* = proc(event: gen_qevent_types.QDropEvent): void
-proc ondropEvent*(self: gen_qlabel_types.QLabel, slot: QLabeldropEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeldropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_dropEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_dropEvent ".} =
-  var nimfunc = cast[ptr QLabeldropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelshowEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QShowEvent): void =
-  fQLabel_virtualbase_showEvent(self.h, event.h)
+  fcQLabel_virtualbase_showEvent(self.h, event.h)
 
-type QLabelshowEventProc* = proc(event: gen_qevent_types.QShowEvent): void
-proc onshowEvent*(self: gen_qlabel_types.QLabel, slot: QLabelshowEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelshowEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_showEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_showEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_showEvent ".} =
-  var nimfunc = cast[ptr QLabelshowEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  vtbl[].showEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelhideEvent*(self: gen_qlabel_types.QLabel, event: gen_qevent_types.QHideEvent): void =
-  fQLabel_virtualbase_hideEvent(self.h, event.h)
+  fcQLabel_virtualbase_hideEvent(self.h, event.h)
 
-type QLabelhideEventProc* = proc(event: gen_qevent_types.QHideEvent): void
-proc onhideEvent*(self: gen_qlabel_types.QLabel, slot: QLabelhideEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelhideEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_hideEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_hideEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_hideEvent ".} =
-  var nimfunc = cast[ptr QLabelhideEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelnativeEvent*(self: gen_qlabel_types.QLabel, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
-  fQLabel_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+  fcQLabel_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-type QLabelnativeEventProc* = proc(eventType: seq[byte], message: pointer, resultVal: ptr clong): bool
-proc onnativeEvent*(self: gen_qlabel_types.QLabel, slot: QLabelnativeEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelnativeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_nativeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_nativeEvent(self: ptr cQLabel, slot: int, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.exportc: "miqt_exec_callback_QLabel_nativeEvent ".} =
-  var nimfunc = cast[ptr QLabelnativeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
-
   let slotval2 = message
-
   let slotval3 = resultVal
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QLabelmetric*(self: gen_qlabel_types.QLabel, param1: cint): cint =
-  fQLabel_virtualbase_metric(self.h, cint(param1))
+  fcQLabel_virtualbase_metric(self.h, cint(param1))
 
-type QLabelmetricProc* = proc(param1: cint): cint
-proc onmetric*(self: gen_qlabel_types.QLabel, slot: QLabelmetricProc) =
-  # TODO check subclass
-  var tmp = new QLabelmetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_metric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_metric(self: ptr cQLabel, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QLabel_metric ".} =
-  var nimfunc = cast[ptr QLabelmetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
+
 proc QLabelinitPainter*(self: gen_qlabel_types.QLabel, painter: gen_qpainter_types.QPainter): void =
-  fQLabel_virtualbase_initPainter(self.h, painter.h)
+  fcQLabel_virtualbase_initPainter(self.h, painter.h)
 
-type QLabelinitPainterProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc oninitPainter*(self: gen_qlabel_types.QLabel, slot: QLabelinitPainterProc) =
-  # TODO check subclass
-  var tmp = new QLabelinitPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_initPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_initPainter(self: ptr cQLabel, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QLabel_initPainter ".} =
-  var nimfunc = cast[ptr QLabelinitPainterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelredirected*(self: gen_qlabel_types.QLabel, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fQLabel_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQLabel_virtualbase_redirected(self.h, offset.h))
 
-type QLabelredirectedProc* = proc(offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice
-proc onredirected*(self: gen_qlabel_types.QLabel, slot: QLabelredirectedProc) =
-  # TODO check subclass
-  var tmp = new QLabelredirectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_redirected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_redirected(self: ptr cQLabel, slot: int, offset: pointer): pointer {.exportc: "miqt_exec_callback_QLabel_redirected ".} =
-  var nimfunc = cast[ptr QLabelredirectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].redirected(self, slotval1)
   virtualReturn.h
+
 proc QLabelsharedPainter*(self: gen_qlabel_types.QLabel, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fQLabel_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQLabel_virtualbase_sharedPainter(self.h))
 
-type QLabelsharedPainterProc* = proc(): gen_qpainter_types.QPainter
-proc onsharedPainter*(self: gen_qlabel_types.QLabel, slot: QLabelsharedPainterProc) =
-  # TODO check subclass
-  var tmp = new QLabelsharedPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_sharedPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_sharedPainter(self: ptr cQLabel, slot: int): pointer {.exportc: "miqt_exec_callback_QLabel_sharedPainter ".} =
-  var nimfunc = cast[ptr QLabelsharedPainterProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLabel_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
 proc QLabelinputMethodEvent*(self: gen_qlabel_types.QLabel, param1: gen_qevent_types.QInputMethodEvent): void =
-  fQLabel_virtualbase_inputMethodEvent(self.h, param1.h)
+  fcQLabel_virtualbase_inputMethodEvent(self.h, param1.h)
 
-type QLabelinputMethodEventProc* = proc(param1: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qlabel_types.QLabel, slot: QLabelinputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelinputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_inputMethodEvent(self: ptr cQLabel, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QLabel_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QLabelinputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelinputMethodQuery*(self: gen_qlabel_types.QLabel, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQLabel_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQLabel_virtualbase_inputMethodQuery(self.h, cint(param1)))
 
-type QLabelinputMethodQueryProc* = proc(param1: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qlabel_types.QLabel, slot: QLabelinputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QLabelinputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_inputMethodQuery(self: ptr cQLabel, slot: int, param1: cint): pointer {.exportc: "miqt_exec_callback_QLabel_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QLabelinputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QLabeleventFilter*(self: gen_qlabel_types.QLabel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQLabel_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQLabel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QLabeleventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qlabel_types.QLabel, slot: QLabeleventFilterProc) =
-  # TODO check subclass
-  var tmp = new QLabeleventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_eventFilter(self: ptr cQLabel, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QLabel_eventFilter ".} =
-  var nimfunc = cast[ptr QLabeleventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QLabeltimerEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQLabel_virtualbase_timerEvent(self.h, event.h)
+  fcQLabel_virtualbase_timerEvent(self.h, event.h)
 
-type QLabeltimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qlabel_types.QLabel, slot: QLabeltimerEventProc) =
-  # TODO check subclass
-  var tmp = new QLabeltimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_timerEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_timerEvent ".} =
-  var nimfunc = cast[ptr QLabeltimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelchildEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QChildEvent): void =
-  fQLabel_virtualbase_childEvent(self.h, event.h)
+  fcQLabel_virtualbase_childEvent(self.h, event.h)
 
-type QLabelchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qlabel_types.QLabel, slot: QLabelchildEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_childEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_childEvent ".} =
-  var nimfunc = cast[ptr QLabelchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelcustomEvent*(self: gen_qlabel_types.QLabel, event: gen_qcoreevent_types.QEvent): void =
-  fQLabel_virtualbase_customEvent(self.h, event.h)
+  fcQLabel_virtualbase_customEvent(self.h, event.h)
 
-type QLabelcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qlabel_types.QLabel, slot: QLabelcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QLabelcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_customEvent(self: ptr cQLabel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLabel_customEvent ".} =
-  var nimfunc = cast[ptr QLabelcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabelconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQLabel_virtualbase_connectNotify(self.h, signal.h)
+  fcQLabel_virtualbase_connectNotify(self.h, signal.h)
 
-type QLabelconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qlabel_types.QLabel, slot: QLabelconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QLabelconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_connectNotify(self: ptr cQLabel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QLabel_connectNotify ".} =
-  var nimfunc = cast[ptr QLabelconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLabeldisconnectNotify*(self: gen_qlabel_types.QLabel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQLabel_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQLabel_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QLabeldisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qlabel_types.QLabel, slot: QLabeldisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QLabeldisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLabel_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLabel_disconnectNotify(self: ptr cQLabel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QLabel_disconnectNotify ".} =
-  var nimfunc = cast[ptr QLabeldisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLabel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLabelVTable](vtbl)
+  let self = QLabel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qlabel_types.QLabel,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new(addr(vtbl[]), parent.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qlabel_types.QLabel,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new2(addr(vtbl[]), ))
+
+proc create*(T: type gen_qlabel_types.QLabel,
+    text: string,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new3(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qlabel_types.QLabel,
+    parent: gen_qwidget_types.QWidget, f: cint,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new4(addr(vtbl[]), parent.h, cint(f)))
+
+proc create*(T: type gen_qlabel_types.QLabel,
+    text: string, parent: gen_qwidget_types.QWidget,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new5(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
+
+proc create*(T: type gen_qlabel_types.QLabel,
+    text: string, parent: gen_qwidget_types.QWidget, f: cint,
+    vtbl: ref QLabelVTable = nil): gen_qlabel_types.QLabel =
+  let vtbl = if vtbl == nil: new QLabelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLabelVTable, _: ptr cQLabel) {.cdecl.} =
+    let vtbl = cast[ref QLabelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLabel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLabel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLabel_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLabel_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQLabel_minimumSizeHint
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLabel_heightForWidth
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLabel_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQLabel_keyPressEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQLabel_paintEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQLabel_changeEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQLabel_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQLabel_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQLabel_mouseReleaseEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQLabel_contextMenuEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQLabel_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQLabel_focusOutEvent
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQLabel_focusNextPrevChild
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQLabel_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQLabel_setVisible
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLabel_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQLabel_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQLabel_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQLabel_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQLabel_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQLabel_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQLabel_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQLabel_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQLabel_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQLabel_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQLabel_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQLabel_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQLabel_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQLabel_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQLabel_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQLabel_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQLabel_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQLabel_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQLabel_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQLabel_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQLabel_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQLabel_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQLabel_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQLabel_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQLabel_inputMethodQuery
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLabel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLabel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLabel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLabel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLabel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLabel_disconnectNotify
+  gen_qlabel_types.QLabel(h: fcQLabel_new6(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h, cint(f)))
+
 proc staticMetaObject*(_: type gen_qlabel_types.QLabel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLabel_staticMetaObject())
 proc delete*(self: gen_qlabel_types.QLabel) =

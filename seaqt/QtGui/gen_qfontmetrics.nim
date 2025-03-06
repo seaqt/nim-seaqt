@@ -53,9 +53,6 @@ export
 type cQFontMetrics*{.exportc: "QFontMetrics", incompleteStruct.} = object
 type cQFontMetricsF*{.exportc: "QFontMetricsF", incompleteStruct.} = object
 
-proc fcQFontMetrics_new(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new".}
-proc fcQFontMetrics_new2(font: pointer, pd: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new2".}
-proc fcQFontMetrics_new3(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new3".}
 proc fcQFontMetrics_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontMetrics_operatorAssign".}
 proc fcQFontMetrics_swap(self: pointer, other: pointer): void {.importc: "QFontMetrics_swap".}
 proc fcQFontMetrics_ascent(self: pointer, ): cint {.importc: "QFontMetrics_ascent".}
@@ -102,11 +99,10 @@ proc fcQFontMetrics_boundingRect8(self: pointer, x: cint, y: cint, w: cint, h: c
 proc fcQFontMetrics_size3(self: pointer, flags: cint, str: struct_miqt_string, tabstops: cint): pointer {.importc: "QFontMetrics_size3".}
 proc fcQFontMetrics_size4(self: pointer, flags: cint, str: struct_miqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetrics_size4".}
 proc fcQFontMetrics_elidedText4(self: pointer, text: struct_miqt_string, mode: cint, width: cint, flags: cint): struct_miqt_string {.importc: "QFontMetrics_elidedText4".}
+proc fcQFontMetrics_new(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new".}
+proc fcQFontMetrics_new2(font: pointer, pd: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new2".}
+proc fcQFontMetrics_new3(param1: pointer): ptr cQFontMetrics {.importc: "QFontMetrics_new3".}
 proc fcQFontMetrics_delete(self: pointer) {.importc: "QFontMetrics_delete".}
-proc fcQFontMetricsF_new(font: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new".}
-proc fcQFontMetricsF_new2(font: pointer, pd: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new2".}
-proc fcQFontMetricsF_new3(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new3".}
-proc fcQFontMetricsF_new4(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new4".}
 proc fcQFontMetricsF_operatorAssign(self: pointer, param1: pointer): void {.importc: "QFontMetricsF_operatorAssign".}
 proc fcQFontMetricsF_operatorAssignWithQFontMetrics(self: pointer, param1: pointer): void {.importc: "QFontMetricsF_operatorAssignWithQFontMetrics".}
 proc fcQFontMetricsF_swap(self: pointer, other: pointer): void {.importc: "QFontMetricsF_swap".}
@@ -148,19 +144,11 @@ proc fcQFontMetricsF_boundingRect5(self: pointer, r: pointer, flags: cint, strin
 proc fcQFontMetricsF_size3(self: pointer, flags: cint, str: struct_miqt_string, tabstops: cint): pointer {.importc: "QFontMetricsF_size3".}
 proc fcQFontMetricsF_size4(self: pointer, flags: cint, str: struct_miqt_string, tabstops: cint, tabarray: ptr cint): pointer {.importc: "QFontMetricsF_size4".}
 proc fcQFontMetricsF_elidedText4(self: pointer, text: struct_miqt_string, mode: cint, width: float64, flags: cint): struct_miqt_string {.importc: "QFontMetricsF_elidedText4".}
+proc fcQFontMetricsF_new(font: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new".}
+proc fcQFontMetricsF_new2(font: pointer, pd: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new2".}
+proc fcQFontMetricsF_new3(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new3".}
+proc fcQFontMetricsF_new4(param1: pointer): ptr cQFontMetricsF {.importc: "QFontMetricsF_new4".}
 proc fcQFontMetricsF_delete(self: pointer) {.importc: "QFontMetricsF_delete".}
-
-
-func init*(T: type gen_qfontmetrics_types.QFontMetrics, h: ptr cQFontMetrics): gen_qfontmetrics_types.QFontMetrics =
-  T(h: h)
-proc create*(T: type gen_qfontmetrics_types.QFontMetrics, param1: gen_qfont_types.QFont): gen_qfontmetrics_types.QFontMetrics =
-  gen_qfontmetrics_types.QFontMetrics.init(fcQFontMetrics_new(param1.h))
-
-proc create*(T: type gen_qfontmetrics_types.QFontMetrics, font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfontmetrics_types.QFontMetrics =
-  gen_qfontmetrics_types.QFontMetrics.init(fcQFontMetrics_new2(font.h, pd.h))
-
-proc create*(T: type gen_qfontmetrics_types.QFontMetrics, param1: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetrics =
-  gen_qfontmetrics_types.QFontMetrics.init(fcQFontMetrics_new3(param1.h))
 
 proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetrics, param1: gen_qfontmetrics_types.QFontMetrics): void =
   fcQFontMetrics_operatorAssign(self.h, param1.h)
@@ -306,23 +294,20 @@ proc elidedText*(self: gen_qfontmetrics_types.QFontMetrics, text: string, mode: 
   c_free(v_ms.data)
   vx_ret
 
+proc create*(T: type gen_qfontmetrics_types.QFontMetrics,
+    param1: gen_qfont_types.QFont): gen_qfontmetrics_types.QFontMetrics =
+  gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new(param1.h))
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetrics,
+    font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfontmetrics_types.QFontMetrics =
+  gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new2(font.h, pd.h))
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetrics,
+    param1: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetrics =
+  gen_qfontmetrics_types.QFontMetrics(h: fcQFontMetrics_new3(param1.h))
+
 proc delete*(self: gen_qfontmetrics_types.QFontMetrics) =
   fcQFontMetrics_delete(self.h)
-
-func init*(T: type gen_qfontmetrics_types.QFontMetricsF, h: ptr cQFontMetricsF): gen_qfontmetrics_types.QFontMetricsF =
-  T(h: h)
-proc create*(T: type gen_qfontmetrics_types.QFontMetricsF, font: gen_qfont_types.QFont): gen_qfontmetrics_types.QFontMetricsF =
-  gen_qfontmetrics_types.QFontMetricsF.init(fcQFontMetricsF_new(font.h))
-
-proc create*(T: type gen_qfontmetrics_types.QFontMetricsF, font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfontmetrics_types.QFontMetricsF =
-  gen_qfontmetrics_types.QFontMetricsF.init(fcQFontMetricsF_new2(font.h, pd.h))
-
-proc create*(T: type gen_qfontmetrics_types.QFontMetricsF, param1: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetricsF =
-  gen_qfontmetrics_types.QFontMetricsF.init(fcQFontMetricsF_new3(param1.h))
-
-proc create*(T: type gen_qfontmetrics_types.QFontMetricsF, param1: gen_qfontmetrics_types.QFontMetricsF): gen_qfontmetrics_types.QFontMetricsF =
-  gen_qfontmetrics_types.QFontMetricsF.init(fcQFontMetricsF_new4(param1.h))
-
 proc operatorAssign*(self: gen_qfontmetrics_types.QFontMetricsF, param1: gen_qfontmetrics_types.QFontMetricsF): void =
   fcQFontMetricsF_operatorAssign(self.h, param1.h)
 
@@ -451,6 +436,22 @@ proc elidedText*(self: gen_qfontmetrics_types.QFontMetricsF, text: string, mode:
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
+    font: gen_qfont_types.QFont): gen_qfontmetrics_types.QFontMetricsF =
+  gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new(font.h))
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
+    font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfontmetrics_types.QFontMetricsF =
+  gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new2(font.h, pd.h))
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
+    param1: gen_qfontmetrics_types.QFontMetrics): gen_qfontmetrics_types.QFontMetricsF =
+  gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new3(param1.h))
+
+proc create*(T: type gen_qfontmetrics_types.QFontMetricsF,
+    param1: gen_qfontmetrics_types.QFontMetricsF): gen_qfontmetrics_types.QFontMetricsF =
+  gen_qfontmetrics_types.QFontMetricsF(h: fcQFontMetricsF_new4(param1.h))
 
 proc delete*(self: gen_qfontmetrics_types.QFontMetricsF) =
   fcQFontMetricsF_delete(self.h)

@@ -67,9 +67,6 @@ proc fcQAbstractState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_stri
 proc fcQAbstractState_staticMetaObject(): pointer {.importc: "QAbstractState_staticMetaObject".}
 proc fcQAbstractState_delete(self: pointer) {.importc: "QAbstractState_delete".}
 
-
-func init*(T: type gen_qabstractstate_types.QAbstractState, h: ptr cQAbstractState): gen_qabstractstate_types.QAbstractState =
-  T(h: h)
 proc metaObject*(self: gen_qabstractstate_types.QAbstractState, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractState_metaObject(self.h))
 
@@ -104,7 +101,7 @@ proc activeChanged*(self: gen_qabstractstate_types.QAbstractState, active: bool)
   fcQAbstractState_activeChanged(self.h, active)
 
 type QAbstractStateactiveChangedSlot* = proc(active: bool)
-proc miqt_exec_callback_QAbstractState_activeChanged(slot: int, active: bool) {.exportc.} =
+proc miqt_exec_callback_cQAbstractState_activeChanged(slot: int, active: bool) {.exportc: "miqt_exec_callback_QAbstractState_activeChanged".} =
   let nimfunc = cast[ptr QAbstractStateactiveChangedSlot](cast[pointer](slot))
   let slotval1 = active
 

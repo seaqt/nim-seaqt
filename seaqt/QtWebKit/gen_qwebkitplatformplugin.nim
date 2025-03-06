@@ -199,13 +199,10 @@ proc fcQWebKitPlatformPlugin_supportsExtension(self: pointer, param1: cint): boo
 proc fcQWebKitPlatformPlugin_createExtension(self: pointer, param1: cint): pointer {.importc: "QWebKitPlatformPlugin_createExtension".}
 proc fcQWebKitPlatformPlugin_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebKitPlatformPlugin_operatorAssign".}
 proc fcQWebKitPlatformPlugin_delete(self: pointer) {.importc: "QWebKitPlatformPlugin_delete".}
-proc fcQWebSpellCheckerGrammarDetail_new(param1: pointer): ptr cQWebSpellCheckerGrammarDetail {.importc: "QWebSpellChecker__GrammarDetail_new".}
 proc fcQWebSpellCheckerGrammarDetail_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebSpellChecker__GrammarDetail_operatorAssign".}
+proc fcQWebSpellCheckerGrammarDetail_new(param1: pointer): ptr cQWebSpellCheckerGrammarDetail {.importc: "QWebSpellChecker__GrammarDetail_new".}
 proc fcQWebSpellCheckerGrammarDetail_delete(self: pointer) {.importc: "QWebSpellChecker__GrammarDetail_delete".}
 
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebSelectData, h: ptr cQWebSelectData): gen_qwebkitplatformplugin_types.QWebSelectData =
-  T(h: h)
 proc itemType*(self: gen_qwebkitplatformplugin_types.QWebSelectData, param1: cint): cint =
   cint(fcQWebSelectData_itemType(self.h, param1))
 
@@ -250,9 +247,6 @@ proc operatorAssign*(self: gen_qwebkitplatformplugin_types.QWebSelectData, param
 
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebSelectData) =
   fcQWebSelectData_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebSelectMethod, h: ptr cQWebSelectMethod): gen_qwebkitplatformplugin_types.QWebSelectMethod =
-  T(h: h)
 proc metaObject*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSelectMethod_metaObject(self.h))
 
@@ -290,7 +284,7 @@ proc selectItem*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, index: 
   fcQWebSelectMethod_selectItem(self.h, index, allowMultiplySelections, shift)
 
 type QWebSelectMethodselectItemSlot* = proc(index: cint, allowMultiplySelections: bool, shift: bool)
-proc miqt_exec_callback_QWebSelectMethod_selectItem(slot: int, index: cint, allowMultiplySelections: bool, shift: bool) {.exportc.} =
+proc miqt_exec_callback_cQWebSelectMethod_selectItem(slot: int, index: cint, allowMultiplySelections: bool, shift: bool) {.exportc: "miqt_exec_callback_QWebSelectMethod_selectItem".} =
   let nimfunc = cast[ptr QWebSelectMethodselectItemSlot](cast[pointer](slot))
   let slotval1 = index
 
@@ -310,7 +304,7 @@ proc didHide*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod, ): void =
   fcQWebSelectMethod_didHide(self.h)
 
 type QWebSelectMethoddidHideSlot* = proc()
-proc miqt_exec_callback_QWebSelectMethod_didHide(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebSelectMethod_didHide(slot: int) {.exportc: "miqt_exec_callback_QWebSelectMethod_didHide".} =
   let nimfunc = cast[ptr QWebSelectMethoddidHideSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -348,9 +342,6 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebSelectMethod)
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSelectMethod_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebSelectMethod) =
   fcQWebSelectMethod_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebNotificationData, h: ptr cQWebNotificationData): gen_qwebkitplatformplugin_types.QWebNotificationData =
-  T(h: h)
 proc title*(self: gen_qwebkitplatformplugin_types.QWebNotificationData, ): string =
   let v_ms = fcQWebNotificationData_title(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -374,9 +365,6 @@ proc operatorAssign*(self: gen_qwebkitplatformplugin_types.QWebNotificationData,
 
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebNotificationData) =
   fcQWebNotificationData_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebNotificationPresenter, h: ptr cQWebNotificationPresenter): gen_qwebkitplatformplugin_types.QWebNotificationPresenter =
-  T(h: h)
 proc metaObject*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebNotificationPresenter_metaObject(self.h))
 
@@ -405,7 +393,7 @@ proc notificationClosed*(self: gen_qwebkitplatformplugin_types.QWebNotificationP
   fcQWebNotificationPresenter_notificationClosed(self.h)
 
 type QWebNotificationPresenternotificationClosedSlot* = proc()
-proc miqt_exec_callback_QWebNotificationPresenter_notificationClosed(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebNotificationPresenter_notificationClosed(slot: int) {.exportc: "miqt_exec_callback_QWebNotificationPresenter_notificationClosed".} =
   let nimfunc = cast[ptr QWebNotificationPresenternotificationClosedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -419,7 +407,7 @@ proc notificationClicked*(self: gen_qwebkitplatformplugin_types.QWebNotification
   fcQWebNotificationPresenter_notificationClicked(self.h)
 
 type QWebNotificationPresenternotificationClickedSlot* = proc()
-proc miqt_exec_callback_QWebNotificationPresenter_notificationClicked(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQWebNotificationPresenter_notificationClicked(slot: int) {.exportc: "miqt_exec_callback_QWebNotificationPresenter_notificationClicked".} =
   let nimfunc = cast[ptr QWebNotificationPresenternotificationClickedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -457,9 +445,6 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebNotificationP
   gen_qobjectdefs_types.QMetaObject(h: fcQWebNotificationPresenter_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebNotificationPresenter) =
   fcQWebNotificationPresenter_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, h: ptr cQWebHapticFeedbackPlayer): gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer =
-  T(h: h)
 proc metaObject*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebHapticFeedbackPlayer_metaObject(self.h))
 
@@ -512,9 +497,6 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebHapticFeedbac
   gen_qobjectdefs_types.QMetaObject(h: fcQWebHapticFeedbackPlayer_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebHapticFeedbackPlayer) =
   fcQWebHapticFeedbackPlayer_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebTouchModifier, h: ptr cQWebTouchModifier): gen_qwebkitplatformplugin_types.QWebTouchModifier =
-  T(h: h)
 proc metaObject*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebTouchModifier_metaObject(self.h))
 
@@ -567,9 +549,6 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebTouchModifier
   gen_qobjectdefs_types.QMetaObject(h: fcQWebTouchModifier_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebTouchModifier) =
   fcQWebTouchModifier_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebSpellChecker, h: ptr cQWebSpellChecker): gen_qwebkitplatformplugin_types.QWebSpellChecker =
-  T(h: h)
 proc metaObject*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSpellChecker_metaObject(self.h))
 
@@ -660,9 +639,6 @@ proc staticMetaObject*(_: type gen_qwebkitplatformplugin_types.QWebSpellChecker)
   gen_qobjectdefs_types.QMetaObject(h: fcQWebSpellChecker_staticMetaObject())
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebSpellChecker) =
   fcQWebSpellChecker_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebKitPlatformPlugin, h: ptr cQWebKitPlatformPlugin): gen_qwebkitplatformplugin_types.QWebKitPlatformPlugin =
-  T(h: h)
 proc supportsExtension*(self: gen_qwebkitplatformplugin_types.QWebKitPlatformPlugin, param1: cint): bool =
   fcQWebKitPlatformPlugin_supportsExtension(self.h, cint(param1))
 
@@ -674,14 +650,12 @@ proc operatorAssign*(self: gen_qwebkitplatformplugin_types.QWebKitPlatformPlugin
 
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebKitPlatformPlugin) =
   fcQWebKitPlatformPlugin_delete(self.h)
-
-func init*(T: type gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail, h: ptr cQWebSpellCheckerGrammarDetail): gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail =
-  T(h: h)
-proc create*(T: type gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail, param1: gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail): gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail =
-  gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail.init(fcQWebSpellCheckerGrammarDetail_new(param1.h))
-
 proc operatorAssign*(self: gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail, param1: gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail): void =
   fcQWebSpellCheckerGrammarDetail_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail,
+    param1: gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail): gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail =
+  gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail(h: fcQWebSpellCheckerGrammarDetail_new(param1.h))
 
 proc delete*(self: gen_qwebkitplatformplugin_types.QWebSpellCheckerGrammarDetail) =
   fcQWebSpellCheckerGrammarDetail_delete(self.h)

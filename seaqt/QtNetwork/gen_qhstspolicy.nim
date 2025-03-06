@@ -48,10 +48,6 @@ export
 
 type cQHstsPolicy*{.exportc: "QHstsPolicy", incompleteStruct.} = object
 
-proc fcQHstsPolicy_new(): ptr cQHstsPolicy {.importc: "QHstsPolicy_new".}
-proc fcQHstsPolicy_new2(expiry: pointer, flags: cint, host: struct_miqt_string): ptr cQHstsPolicy {.importc: "QHstsPolicy_new2".}
-proc fcQHstsPolicy_new3(rhs: pointer): ptr cQHstsPolicy {.importc: "QHstsPolicy_new3".}
-proc fcQHstsPolicy_new4(expiry: pointer, flags: cint, host: struct_miqt_string, mode: cint): ptr cQHstsPolicy {.importc: "QHstsPolicy_new4".}
 proc fcQHstsPolicy_operatorAssign(self: pointer, rhs: pointer): void {.importc: "QHstsPolicy_operatorAssign".}
 proc fcQHstsPolicy_swap(self: pointer, other: pointer): void {.importc: "QHstsPolicy_swap".}
 proc fcQHstsPolicy_setHost(self: pointer, host: struct_miqt_string): void {.importc: "QHstsPolicy_setHost".}
@@ -63,22 +59,11 @@ proc fcQHstsPolicy_includesSubDomains(self: pointer, ): bool {.importc: "QHstsPo
 proc fcQHstsPolicy_isExpired(self: pointer, ): bool {.importc: "QHstsPolicy_isExpired".}
 proc fcQHstsPolicy_setHost2(self: pointer, host: struct_miqt_string, mode: cint): void {.importc: "QHstsPolicy_setHost2".}
 proc fcQHstsPolicy_host1(self: pointer, options: cint): struct_miqt_string {.importc: "QHstsPolicy_host1".}
+proc fcQHstsPolicy_new(): ptr cQHstsPolicy {.importc: "QHstsPolicy_new".}
+proc fcQHstsPolicy_new2(expiry: pointer, flags: cint, host: struct_miqt_string): ptr cQHstsPolicy {.importc: "QHstsPolicy_new2".}
+proc fcQHstsPolicy_new3(rhs: pointer): ptr cQHstsPolicy {.importc: "QHstsPolicy_new3".}
+proc fcQHstsPolicy_new4(expiry: pointer, flags: cint, host: struct_miqt_string, mode: cint): ptr cQHstsPolicy {.importc: "QHstsPolicy_new4".}
 proc fcQHstsPolicy_delete(self: pointer) {.importc: "QHstsPolicy_delete".}
-
-
-func init*(T: type gen_qhstspolicy_types.QHstsPolicy, h: ptr cQHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
-  T(h: h)
-proc create*(T: type gen_qhstspolicy_types.QHstsPolicy, ): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy.init(fcQHstsPolicy_new())
-
-proc create*(T: type gen_qhstspolicy_types.QHstsPolicy, expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy.init(fcQHstsPolicy_new2(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host)))))
-
-proc create*(T: type gen_qhstspolicy_types.QHstsPolicy, rhs: gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy.init(fcQHstsPolicy_new3(rhs.h))
-
-proc create*(T: type gen_qhstspolicy_types.QHstsPolicy, expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string, mode: cint): gen_qhstspolicy_types.QHstsPolicy =
-  gen_qhstspolicy_types.QHstsPolicy.init(fcQHstsPolicy_new4(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host))), cint(mode)))
 
 proc operatorAssign*(self: gen_qhstspolicy_types.QHstsPolicy, rhs: gen_qhstspolicy_types.QHstsPolicy): void =
   fcQHstsPolicy_operatorAssign(self.h, rhs.h)
@@ -118,6 +103,21 @@ proc host*(self: gen_qhstspolicy_types.QHstsPolicy, options: cint): string =
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new())
+
+proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
+    expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string): gen_qhstspolicy_types.QHstsPolicy =
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new2(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host)))))
+
+proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
+    rhs: gen_qhstspolicy_types.QHstsPolicy): gen_qhstspolicy_types.QHstsPolicy =
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new3(rhs.h))
+
+proc create*(T: type gen_qhstspolicy_types.QHstsPolicy,
+    expiry: gen_qdatetime_types.QDateTime, flags: cint, host: string, mode: cint): gen_qhstspolicy_types.QHstsPolicy =
+  gen_qhstspolicy_types.QHstsPolicy(h: fcQHstsPolicy_new4(expiry.h, cint(flags), struct_miqt_string(data: host, len: csize_t(len(host))), cint(mode)))
 
 proc delete*(self: gen_qhstspolicy_types.QHstsPolicy) =
   fcQHstsPolicy_delete(self.h)

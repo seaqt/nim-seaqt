@@ -40,10 +40,6 @@ export gen_qsslcipher_types
 
 type cQSslCipher*{.exportc: "QSslCipher", incompleteStruct.} = object
 
-proc fcQSslCipher_new(): ptr cQSslCipher {.importc: "QSslCipher_new".}
-proc fcQSslCipher_new2(name: struct_miqt_string): ptr cQSslCipher {.importc: "QSslCipher_new2".}
-proc fcQSslCipher_new3(name: struct_miqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new3".}
-proc fcQSslCipher_new4(other: pointer): ptr cQSslCipher {.importc: "QSslCipher_new4".}
 proc fcQSslCipher_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCipher_operatorAssign".}
 proc fcQSslCipher_swap(self: pointer, other: pointer): void {.importc: "QSslCipher_swap".}
 proc fcQSslCipher_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCipher_operatorEqual".}
@@ -57,22 +53,11 @@ proc fcQSslCipher_authenticationMethod(self: pointer, ): struct_miqt_string {.im
 proc fcQSslCipher_encryptionMethod(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_encryptionMethod".}
 proc fcQSslCipher_protocolString(self: pointer, ): struct_miqt_string {.importc: "QSslCipher_protocolString".}
 proc fcQSslCipher_protocol(self: pointer, ): cint {.importc: "QSslCipher_protocol".}
+proc fcQSslCipher_new(): ptr cQSslCipher {.importc: "QSslCipher_new".}
+proc fcQSslCipher_new2(name: struct_miqt_string): ptr cQSslCipher {.importc: "QSslCipher_new2".}
+proc fcQSslCipher_new3(name: struct_miqt_string, protocol: cint): ptr cQSslCipher {.importc: "QSslCipher_new3".}
+proc fcQSslCipher_new4(other: pointer): ptr cQSslCipher {.importc: "QSslCipher_new4".}
 proc fcQSslCipher_delete(self: pointer) {.importc: "QSslCipher_delete".}
-
-
-func init*(T: type gen_qsslcipher_types.QSslCipher, h: ptr cQSslCipher): gen_qsslcipher_types.QSslCipher =
-  T(h: h)
-proc create*(T: type gen_qsslcipher_types.QSslCipher, ): gen_qsslcipher_types.QSslCipher =
-  gen_qsslcipher_types.QSslCipher.init(fcQSslCipher_new())
-
-proc create*(T: type gen_qsslcipher_types.QSslCipher, name: string): gen_qsslcipher_types.QSslCipher =
-  gen_qsslcipher_types.QSslCipher.init(fcQSslCipher_new2(struct_miqt_string(data: name, len: csize_t(len(name)))))
-
-proc create*(T: type gen_qsslcipher_types.QSslCipher, name: string, protocol: cint): gen_qsslcipher_types.QSslCipher =
-  gen_qsslcipher_types.QSslCipher.init(fcQSslCipher_new3(struct_miqt_string(data: name, len: csize_t(len(name))), cint(protocol)))
-
-proc create*(T: type gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
-  gen_qsslcipher_types.QSslCipher.init(fcQSslCipher_new4(other.h))
 
 proc operatorAssign*(self: gen_qsslcipher_types.QSslCipher, other: gen_qsslcipher_types.QSslCipher): void =
   fcQSslCipher_operatorAssign(self.h, other.h)
@@ -127,6 +112,21 @@ proc protocolString*(self: gen_qsslcipher_types.QSslCipher, ): string =
 
 proc protocol*(self: gen_qsslcipher_types.QSslCipher, ): cint =
   cint(fcQSslCipher_protocol(self.h))
+
+proc create*(T: type gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
+  gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new())
+
+proc create*(T: type gen_qsslcipher_types.QSslCipher,
+    name: string): gen_qsslcipher_types.QSslCipher =
+  gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new2(struct_miqt_string(data: name, len: csize_t(len(name)))))
+
+proc create*(T: type gen_qsslcipher_types.QSslCipher,
+    name: string, protocol: cint): gen_qsslcipher_types.QSslCipher =
+  gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new3(struct_miqt_string(data: name, len: csize_t(len(name))), cint(protocol)))
+
+proc create*(T: type gen_qsslcipher_types.QSslCipher,
+    other: gen_qsslcipher_types.QSslCipher): gen_qsslcipher_types.QSslCipher =
+  gen_qsslcipher_types.QSslCipher(h: fcQSslCipher_new4(other.h))
 
 proc delete*(self: gen_qsslcipher_types.QSslCipher) =
   fcQSslCipher_delete(self.h)

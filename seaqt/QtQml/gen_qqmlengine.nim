@@ -87,8 +87,6 @@ type cQQmlEngine*{.exportc: "QQmlEngine", incompleteStruct.} = object
 proc fcQQmlImageProviderBase_imageType(self: pointer, ): cint {.importc: "QQmlImageProviderBase_imageType".}
 proc fcQQmlImageProviderBase_flags(self: pointer, ): cint {.importc: "QQmlImageProviderBase_flags".}
 proc fcQQmlImageProviderBase_delete(self: pointer) {.importc: "QQmlImageProviderBase_delete".}
-proc fcQQmlEngine_new(): ptr cQQmlEngine {.importc: "QQmlEngine_new".}
-proc fcQQmlEngine_new2(p: pointer): ptr cQQmlEngine {.importc: "QQmlEngine_new2".}
 proc fcQQmlEngine_metaObject(self: pointer, ): pointer {.importc: "QQmlEngine_metaObject".}
 proc fcQQmlEngine_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngine_metacast".}
 proc fcQQmlEngine_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngine_metacall".}
@@ -137,32 +135,33 @@ proc fcQQmlEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQ
 proc fcQQmlEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlEngine_tr3".}
 proc fcQQmlEngine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlEngine_trUtf82".}
 proc fcQQmlEngine_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlEngine_trUtf83".}
-proc fQQmlEngine_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQmlEngine_virtualbase_metaObject".}
-proc fcQQmlEngine_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_metaObject".}
-proc fQQmlEngine_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQmlEngine_virtualbase_metacast".}
-proc fcQQmlEngine_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_metacast".}
-proc fQQmlEngine_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQmlEngine_virtualbase_metacall".}
-proc fcQQmlEngine_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_metacall".}
-proc fQQmlEngine_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QQmlEngine_virtualbase_event".}
-proc fcQQmlEngine_override_virtual_event(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_event".}
-proc fQQmlEngine_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQmlEngine_virtualbase_eventFilter".}
-proc fcQQmlEngine_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_eventFilter".}
-proc fQQmlEngine_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QQmlEngine_virtualbase_timerEvent".}
-proc fcQQmlEngine_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_timerEvent".}
-proc fQQmlEngine_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QQmlEngine_virtualbase_childEvent".}
-proc fcQQmlEngine_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_childEvent".}
-proc fQQmlEngine_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QQmlEngine_virtualbase_customEvent".}
-proc fcQQmlEngine_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_customEvent".}
-proc fQQmlEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QQmlEngine_virtualbase_connectNotify".}
-proc fcQQmlEngine_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_connectNotify".}
-proc fQQmlEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQmlEngine_virtualbase_disconnectNotify".}
-proc fcQQmlEngine_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQmlEngine_override_virtual_disconnectNotify".}
+type cQQmlEngineVTable = object
+  destructor*: proc(vtbl: ptr cQQmlEngineVTable, self: ptr cQQmlEngine) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQmlEngine_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQmlEngine_virtualbase_metaObject".}
+proc fcQQmlEngine_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlEngine_virtualbase_metacast".}
+proc fcQQmlEngine_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlEngine_virtualbase_metacall".}
+proc fcQQmlEngine_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QQmlEngine_virtualbase_event".}
+proc fcQQmlEngine_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QQmlEngine_virtualbase_eventFilter".}
+proc fcQQmlEngine_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QQmlEngine_virtualbase_timerEvent".}
+proc fcQQmlEngine_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QQmlEngine_virtualbase_childEvent".}
+proc fcQQmlEngine_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlEngine_virtualbase_customEvent".}
+proc fcQQmlEngine_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlEngine_virtualbase_connectNotify".}
+proc fcQQmlEngine_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlEngine_virtualbase_disconnectNotify".}
+proc fcQQmlEngine_new(vtbl: pointer, ): ptr cQQmlEngine {.importc: "QQmlEngine_new".}
+proc fcQQmlEngine_new2(vtbl: pointer, p: pointer): ptr cQQmlEngine {.importc: "QQmlEngine_new2".}
 proc fcQQmlEngine_staticMetaObject(): pointer {.importc: "QQmlEngine_staticMetaObject".}
 proc fcQQmlEngine_delete(self: pointer) {.importc: "QQmlEngine_delete".}
 
-
-func init*(T: type gen_qqmlengine_types.QQmlImageProviderBase, h: ptr cQQmlImageProviderBase): gen_qqmlengine_types.QQmlImageProviderBase =
-  T(h: h)
 proc imageType*(self: gen_qqmlengine_types.QQmlImageProviderBase, ): cint =
   cint(fcQQmlImageProviderBase_imageType(self.h))
 
@@ -171,15 +170,6 @@ proc flags*(self: gen_qqmlengine_types.QQmlImageProviderBase, ): cint =
 
 proc delete*(self: gen_qqmlengine_types.QQmlImageProviderBase) =
   fcQQmlImageProviderBase_delete(self.h)
-
-func init*(T: type gen_qqmlengine_types.QQmlEngine, h: ptr cQQmlEngine): gen_qqmlengine_types.QQmlEngine =
-  T(h: h)
-proc create*(T: type gen_qqmlengine_types.QQmlEngine, ): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine.init(fcQQmlEngine_new())
-
-proc create*(T: type gen_qqmlengine_types.QQmlEngine, p: gen_qobject_types.QObject): gen_qqmlengine_types.QQmlEngine =
-  gen_qqmlengine_types.QQmlEngine.init(fcQQmlEngine_new2(p.h))
-
 proc metaObject*(self: gen_qqmlengine_types.QQmlEngine, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngine_metaObject(self.h))
 
@@ -338,7 +328,7 @@ proc quit*(self: gen_qqmlengine_types.QQmlEngine, ): void =
   fcQQmlEngine_quit(self.h)
 
 type QQmlEnginequitSlot* = proc()
-proc miqt_exec_callback_QQmlEngine_quit(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQmlEngine_quit(slot: int) {.exportc: "miqt_exec_callback_QQmlEngine_quit".} =
   let nimfunc = cast[ptr QQmlEnginequitSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -352,7 +342,7 @@ proc exit*(self: gen_qqmlengine_types.QQmlEngine, retCode: cint): void =
   fcQQmlEngine_exit(self.h, retCode)
 
 type QQmlEngineexitSlot* = proc(retCode: cint)
-proc miqt_exec_callback_QQmlEngine_exit(slot: int, retCode: cint) {.exportc.} =
+proc miqt_exec_callback_cQQmlEngine_exit(slot: int, retCode: cint) {.exportc: "miqt_exec_callback_QQmlEngine_exit".} =
   let nimfunc = cast[ptr QQmlEngineexitSlot](cast[pointer](slot))
   let slotval1 = retCode
 
@@ -372,7 +362,7 @@ proc warnings*(self: gen_qqmlengine_types.QQmlEngine, warnings: seq[gen_qqmlerro
   fcQQmlEngine_warnings(self.h, struct_miqt_array(len: csize_t(len(warnings)), data: if len(warnings) == 0: nil else: addr(warnings_CArray[0])))
 
 type QQmlEnginewarningsSlot* = proc(warnings: seq[gen_qqmlerror_types.QQmlError])
-proc miqt_exec_callback_QQmlEngine_warnings(slot: int, warnings: struct_miqt_array) {.exportc.} =
+proc miqt_exec_callback_cQQmlEngine_warnings(slot: int, warnings: struct_miqt_array) {.exportc: "miqt_exec_callback_QQmlEngine_warnings".} =
   let nimfunc = cast[ptr QQmlEnginewarningsSlot](cast[pointer](slot))
   var vwarnings_ma = warnings
   var vwarningsx_ret = newSeq[gen_qqmlerror_types.QQmlError](int(vwarnings_ma.len))
@@ -413,190 +403,184 @@ proc trUtf8*(_: type gen_qqmlengine_types.QQmlEngine, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+type QQmlEnginemetaObjectProc* = proc(self: QQmlEngine): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QQmlEnginemetacastProc* = proc(self: QQmlEngine, param1: cstring): pointer {.raises: [], gcsafe.}
+type QQmlEnginemetacallProc* = proc(self: QQmlEngine, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QQmlEngineeventProc* = proc(self: QQmlEngine, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQmlEngineeventFilterProc* = proc(self: QQmlEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQmlEnginetimerEventProc* = proc(self: QQmlEngine, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QQmlEnginechildEventProc* = proc(self: QQmlEngine, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QQmlEnginecustomEventProc* = proc(self: QQmlEngine, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QQmlEngineconnectNotifyProc* = proc(self: QQmlEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQmlEnginedisconnectNotifyProc* = proc(self: QQmlEngine, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQmlEngineVTable* = object
+  vtbl: cQQmlEngineVTable
+  metaObject*: QQmlEnginemetaObjectProc
+  metacast*: QQmlEnginemetacastProc
+  metacall*: QQmlEnginemetacallProc
+  event*: QQmlEngineeventProc
+  eventFilter*: QQmlEngineeventFilterProc
+  timerEvent*: QQmlEnginetimerEventProc
+  childEvent*: QQmlEnginechildEventProc
+  customEvent*: QQmlEnginecustomEventProc
+  connectNotify*: QQmlEngineconnectNotifyProc
+  disconnectNotify*: QQmlEnginedisconnectNotifyProc
 proc QQmlEnginemetaObject*(self: gen_qqmlengine_types.QQmlEngine, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQQmlEngine_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngine_virtualbase_metaObject(self.h))
 
-type QQmlEnginemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_metaObject(self: ptr cQQmlEngine, slot: int): pointer {.exportc: "miqt_exec_callback_QQmlEngine_metaObject ".} =
-  var nimfunc = cast[ptr QQmlEnginemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQmlEngine_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QQmlEnginemetacast*(self: gen_qqmlengine_types.QQmlEngine, param1: cstring): pointer =
-  fQQmlEngine_virtualbase_metacast(self.h, param1)
+  fcQQmlEngine_virtualbase_metacast(self.h, param1)
 
-type QQmlEnginemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginemetacastProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_metacast(self: ptr cQQmlEngine, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQmlEngine_metacast ".} =
-  var nimfunc = cast[ptr QQmlEnginemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QQmlEnginemetacall*(self: gen_qqmlengine_types.QQmlEngine, param1: cint, param2: cint, param3: pointer): cint =
-  fQQmlEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQQmlEngine_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QQmlEnginemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginemetacallProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_metacall(self: ptr cQQmlEngine, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQmlEngine_metacall ".} =
-  var nimfunc = cast[ptr QQmlEnginemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QQmlEngineevent*(self: gen_qqmlengine_types.QQmlEngine, param1: gen_qcoreevent_types.QEvent): bool =
-  fQQmlEngine_virtualbase_event(self.h, param1.h)
+  fcQQmlEngine_virtualbase_event(self.h, param1.h)
 
-type QQmlEngineeventProc* = proc(param1: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEngineeventProc) =
-  # TODO check subclass
-  var tmp = new QQmlEngineeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_event(self: ptr cQQmlEngine, slot: int, param1: pointer): bool {.exportc: "miqt_exec_callback_QQmlEngine_event ".} =
-  var nimfunc = cast[ptr QQmlEngineeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QQmlEngineeventFilter*(self: gen_qqmlengine_types.QQmlEngine, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQQmlEngine_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQQmlEngine_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QQmlEngineeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEngineeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QQmlEngineeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_eventFilter(self: ptr cQQmlEngine, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QQmlEngine_eventFilter ".} =
-  var nimfunc = cast[ptr QQmlEngineeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QQmlEnginetimerEvent*(self: gen_qqmlengine_types.QQmlEngine, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQQmlEngine_virtualbase_timerEvent(self.h, event.h)
+  fcQQmlEngine_virtualbase_timerEvent(self.h, event.h)
 
-type QQmlEnginetimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginetimerEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginetimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_timerEvent(self: ptr cQQmlEngine, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlEngine_timerEvent ".} =
-  var nimfunc = cast[ptr QQmlEnginetimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlEnginechildEvent*(self: gen_qqmlengine_types.QQmlEngine, event: gen_qcoreevent_types.QChildEvent): void =
-  fQQmlEngine_virtualbase_childEvent(self.h, event.h)
+  fcQQmlEngine_virtualbase_childEvent(self.h, event.h)
 
-type QQmlEnginechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginechildEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_childEvent(self: ptr cQQmlEngine, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlEngine_childEvent ".} =
-  var nimfunc = cast[ptr QQmlEnginechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlEnginecustomEvent*(self: gen_qqmlengine_types.QQmlEngine, event: gen_qcoreevent_types.QEvent): void =
-  fQQmlEngine_virtualbase_customEvent(self.h, event.h)
+  fcQQmlEngine_virtualbase_customEvent(self.h, event.h)
 
-type QQmlEnginecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_customEvent(self: ptr cQQmlEngine, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlEngine_customEvent ".} =
-  var nimfunc = cast[ptr QQmlEnginecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlEngineconnectNotify*(self: gen_qqmlengine_types.QQmlEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQmlEngine_virtualbase_connectNotify(self.h, signal.h)
+  fcQQmlEngine_virtualbase_connectNotify(self.h, signal.h)
 
-type QQmlEngineconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEngineconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQmlEngineconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_connectNotify(self: ptr cQQmlEngine, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQmlEngine_connectNotify ".} =
-  var nimfunc = cast[ptr QQmlEngineconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlEnginedisconnectNotify*(self: gen_qqmlengine_types.QQmlEngine, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQmlEngine_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQQmlEngine_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QQmlEnginedisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginedisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQmlEnginedisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlEngine_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlEngine_disconnectNotify(self: ptr cQQmlEngine, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQmlEngine_disconnectNotify ".} =
-  var nimfunc = cast[ptr QQmlEnginedisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlEngine_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlEngineVTable](vtbl)
+  let self = QQmlEngine(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qqmlengine_types.QQmlEngine,
+    vtbl: ref QQmlEngineVTable = nil): gen_qqmlengine_types.QQmlEngine =
+  let vtbl = if vtbl == nil: new QQmlEngineVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlEngineVTable, _: ptr cQQmlEngine) {.cdecl.} =
+    let vtbl = cast[ref QQmlEngineVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlEngine_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlEngine_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlEngine_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlEngine_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlEngine_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlEngine_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlEngine_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlEngine_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlEngine_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlEngine_disconnectNotify
+  gen_qqmlengine_types.QQmlEngine(h: fcQQmlEngine_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qqmlengine_types.QQmlEngine,
+    p: gen_qobject_types.QObject,
+    vtbl: ref QQmlEngineVTable = nil): gen_qqmlengine_types.QQmlEngine =
+  let vtbl = if vtbl == nil: new QQmlEngineVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlEngineVTable, _: ptr cQQmlEngine) {.cdecl.} =
+    let vtbl = cast[ref QQmlEngineVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlEngine_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlEngine_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlEngine_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlEngine_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlEngine_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlEngine_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlEngine_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlEngine_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlEngine_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlEngine_disconnectNotify
+  gen_qqmlengine_types.QQmlEngine(h: fcQQmlEngine_new2(addr(vtbl[]), p.h))
+
 proc staticMetaObject*(_: type gen_qqmlengine_types.QQmlEngine): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlEngine_staticMetaObject())
 proc delete*(self: gen_qqmlengine_types.QQmlEngine) =

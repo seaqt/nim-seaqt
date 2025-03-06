@@ -46,8 +46,6 @@ export
 
 type cQQmlError*{.exportc: "QQmlError", incompleteStruct.} = object
 
-proc fcQQmlError_new(): ptr cQQmlError {.importc: "QQmlError_new".}
-proc fcQQmlError_new2(param1: pointer): ptr cQQmlError {.importc: "QQmlError_new2".}
 proc fcQQmlError_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlError_operatorAssign".}
 proc fcQQmlError_isValid(self: pointer, ): bool {.importc: "QQmlError_isValid".}
 proc fcQQmlError_url(self: pointer, ): pointer {.importc: "QQmlError_url".}
@@ -61,16 +59,9 @@ proc fcQQmlError_setColumn(self: pointer, column: cint): void {.importc: "QQmlEr
 proc fcQQmlError_objectX(self: pointer, ): pointer {.importc: "QQmlError_object".}
 proc fcQQmlError_setObject(self: pointer, objectVal: pointer): void {.importc: "QQmlError_setObject".}
 proc fcQQmlError_toString(self: pointer, ): struct_miqt_string {.importc: "QQmlError_toString".}
+proc fcQQmlError_new(): ptr cQQmlError {.importc: "QQmlError_new".}
+proc fcQQmlError_new2(param1: pointer): ptr cQQmlError {.importc: "QQmlError_new2".}
 proc fcQQmlError_delete(self: pointer) {.importc: "QQmlError_delete".}
-
-
-func init*(T: type gen_qqmlerror_types.QQmlError, h: ptr cQQmlError): gen_qqmlerror_types.QQmlError =
-  T(h: h)
-proc create*(T: type gen_qqmlerror_types.QQmlError, ): gen_qqmlerror_types.QQmlError =
-  gen_qqmlerror_types.QQmlError.init(fcQQmlError_new())
-
-proc create*(T: type gen_qqmlerror_types.QQmlError, param1: gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlError =
-  gen_qqmlerror_types.QQmlError.init(fcQQmlError_new2(param1.h))
 
 proc operatorAssign*(self: gen_qqmlerror_types.QQmlError, param1: gen_qqmlerror_types.QQmlError): void =
   fcQQmlError_operatorAssign(self.h, param1.h)
@@ -116,6 +107,13 @@ proc toString*(self: gen_qqmlerror_types.QQmlError, ): string =
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlError =
+  gen_qqmlerror_types.QQmlError(h: fcQQmlError_new())
+
+proc create*(T: type gen_qqmlerror_types.QQmlError,
+    param1: gen_qqmlerror_types.QQmlError): gen_qqmlerror_types.QQmlError =
+  gen_qqmlerror_types.QQmlError(h: fcQQmlError_new2(param1.h))
 
 proc delete*(self: gen_qqmlerror_types.QQmlError) =
   fcQQmlError_delete(self.h)

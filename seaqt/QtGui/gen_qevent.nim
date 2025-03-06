@@ -165,16 +165,14 @@ type cQApplicationStateChangeEvent*{.exportc: "QApplicationStateChangeEvent", in
 type cQInputMethodEventAttribute*{.exportc: "QInputMethodEvent__Attribute", incompleteStruct.} = object
 type cQTouchEventTouchPoint*{.exportc: "QTouchEvent__TouchPoint", incompleteStruct.} = object
 
-proc fcQInputEvent_new(typeVal: cint): ptr cQInputEvent {.importc: "QInputEvent_new".}
-proc fcQInputEvent_new2(param1: pointer): ptr cQInputEvent {.importc: "QInputEvent_new2".}
-proc fcQInputEvent_new3(typeVal: cint, modifiers: cint): ptr cQInputEvent {.importc: "QInputEvent_new3".}
 proc fcQInputEvent_modifiers(self: pointer, ): cint {.importc: "QInputEvent_modifiers".}
 proc fcQInputEvent_setModifiers(self: pointer, amodifiers: cint): void {.importc: "QInputEvent_setModifiers".}
 proc fcQInputEvent_timestamp(self: pointer, ): culong {.importc: "QInputEvent_timestamp".}
 proc fcQInputEvent_setTimestamp(self: pointer, atimestamp: culong): void {.importc: "QInputEvent_setTimestamp".}
+proc fcQInputEvent_new(typeVal: cint): ptr cQInputEvent {.importc: "QInputEvent_new".}
+proc fcQInputEvent_new2(param1: pointer): ptr cQInputEvent {.importc: "QInputEvent_new2".}
+proc fcQInputEvent_new3(typeVal: cint, modifiers: cint): ptr cQInputEvent {.importc: "QInputEvent_new3".}
 proc fcQInputEvent_delete(self: pointer) {.importc: "QInputEvent_delete".}
-proc fcQEnterEvent_new(localPos: pointer, windowPos: pointer, screenPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new".}
-proc fcQEnterEvent_new2(param1: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new2".}
 proc fcQEnterEvent_pos(self: pointer, ): pointer {.importc: "QEnterEvent_pos".}
 proc fcQEnterEvent_globalPos(self: pointer, ): pointer {.importc: "QEnterEvent_globalPos".}
 proc fcQEnterEvent_x(self: pointer, ): cint {.importc: "QEnterEvent_x".}
@@ -184,12 +182,9 @@ proc fcQEnterEvent_globalY(self: pointer, ): cint {.importc: "QEnterEvent_global
 proc fcQEnterEvent_localPos(self: pointer, ): pointer {.importc: "QEnterEvent_localPos".}
 proc fcQEnterEvent_windowPos(self: pointer, ): pointer {.importc: "QEnterEvent_windowPos".}
 proc fcQEnterEvent_screenPos(self: pointer, ): pointer {.importc: "QEnterEvent_screenPos".}
+proc fcQEnterEvent_new(localPos: pointer, windowPos: pointer, screenPos: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new".}
+proc fcQEnterEvent_new2(param1: pointer): ptr cQEnterEvent {.importc: "QEnterEvent_new2".}
 proc fcQEnterEvent_delete(self: pointer) {.importc: "QEnterEvent_delete".}
-proc fcQMouseEvent_new(typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new".}
-proc fcQMouseEvent_new2(typeVal: cint, localPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new2".}
-proc fcQMouseEvent_new3(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new3".}
-proc fcQMouseEvent_new4(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new4".}
-proc fcQMouseEvent_new5(param1: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new5".}
 proc fcQMouseEvent_pos(self: pointer, ): pointer {.importc: "QMouseEvent_pos".}
 proc fcQMouseEvent_globalPos(self: pointer, ): pointer {.importc: "QMouseEvent_globalPos".}
 proc fcQMouseEvent_x(self: pointer, ): cint {.importc: "QMouseEvent_x".}
@@ -204,26 +199,20 @@ proc fcQMouseEvent_buttons(self: pointer, ): cint {.importc: "QMouseEvent_button
 proc fcQMouseEvent_setLocalPos(self: pointer, localPosition: pointer): void {.importc: "QMouseEvent_setLocalPos".}
 proc fcQMouseEvent_source(self: pointer, ): cint {.importc: "QMouseEvent_source".}
 proc fcQMouseEvent_flags(self: pointer, ): cint {.importc: "QMouseEvent_flags".}
+proc fcQMouseEvent_new(typeVal: cint, localPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new".}
+proc fcQMouseEvent_new2(typeVal: cint, localPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new2".}
+proc fcQMouseEvent_new3(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new3".}
+proc fcQMouseEvent_new4(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, button: cint, buttons: cint, modifiers: cint, source: cint): ptr cQMouseEvent {.importc: "QMouseEvent_new4".}
+proc fcQMouseEvent_new5(param1: pointer): ptr cQMouseEvent {.importc: "QMouseEvent_new5".}
 proc fcQMouseEvent_delete(self: pointer) {.importc: "QMouseEvent_delete".}
-proc fcQHoverEvent_new(typeVal: cint, pos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new".}
-proc fcQHoverEvent_new2(param1: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new2".}
-proc fcQHoverEvent_new3(typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new3".}
 proc fcQHoverEvent_pos(self: pointer, ): pointer {.importc: "QHoverEvent_pos".}
 proc fcQHoverEvent_oldPos(self: pointer, ): pointer {.importc: "QHoverEvent_oldPos".}
 proc fcQHoverEvent_posF(self: pointer, ): pointer {.importc: "QHoverEvent_posF".}
 proc fcQHoverEvent_oldPosF(self: pointer, ): pointer {.importc: "QHoverEvent_oldPosF".}
+proc fcQHoverEvent_new(typeVal: cint, pos: pointer, oldPos: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new".}
+proc fcQHoverEvent_new2(param1: pointer): ptr cQHoverEvent {.importc: "QHoverEvent_new2".}
+proc fcQHoverEvent_new3(typeVal: cint, pos: pointer, oldPos: pointer, modifiers: cint): ptr cQHoverEvent {.importc: "QHoverEvent_new3".}
 proc fcQHoverEvent_delete(self: pointer) {.importc: "QHoverEvent_delete".}
-proc fcQWheelEvent_new(pos: pointer, delta: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new".}
-proc fcQWheelEvent_new2(pos: pointer, globalPos: pointer, delta: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new2".}
-proc fcQWheelEvent_new3(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new3".}
-proc fcQWheelEvent_new4(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new4".}
-proc fcQWheelEvent_new5(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new5".}
-proc fcQWheelEvent_new6(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new6".}
-proc fcQWheelEvent_new7(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new7".}
-proc fcQWheelEvent_new8(param1: pointer): ptr cQWheelEvent {.importc: "QWheelEvent_new8".}
-proc fcQWheelEvent_new9(pos: pointer, delta: cint, buttons: cint, modifiers: cint, orient: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new9".}
-proc fcQWheelEvent_new10(pos: pointer, globalPos: pointer, delta: cint, buttons: cint, modifiers: cint, orient: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new10".}
-proc fcQWheelEvent_new11(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new11".}
 proc fcQWheelEvent_pixelDelta(self: pointer, ): pointer {.importc: "QWheelEvent_pixelDelta".}
 proc fcQWheelEvent_angleDelta(self: pointer, ): pointer {.importc: "QWheelEvent_angleDelta".}
 proc fcQWheelEvent_delta(self: pointer, ): cint {.importc: "QWheelEvent_delta".}
@@ -242,10 +231,18 @@ proc fcQWheelEvent_buttons(self: pointer, ): cint {.importc: "QWheelEvent_button
 proc fcQWheelEvent_phase(self: pointer, ): cint {.importc: "QWheelEvent_phase".}
 proc fcQWheelEvent_inverted(self: pointer, ): bool {.importc: "QWheelEvent_inverted".}
 proc fcQWheelEvent_source(self: pointer, ): cint {.importc: "QWheelEvent_source".}
+proc fcQWheelEvent_new(pos: pointer, delta: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new".}
+proc fcQWheelEvent_new2(pos: pointer, globalPos: pointer, delta: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new2".}
+proc fcQWheelEvent_new3(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new3".}
+proc fcQWheelEvent_new4(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new4".}
+proc fcQWheelEvent_new5(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new5".}
+proc fcQWheelEvent_new6(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new6".}
+proc fcQWheelEvent_new7(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool): ptr cQWheelEvent {.importc: "QWheelEvent_new7".}
+proc fcQWheelEvent_new8(param1: pointer): ptr cQWheelEvent {.importc: "QWheelEvent_new8".}
+proc fcQWheelEvent_new9(pos: pointer, delta: cint, buttons: cint, modifiers: cint, orient: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new9".}
+proc fcQWheelEvent_new10(pos: pointer, globalPos: pointer, delta: cint, buttons: cint, modifiers: cint, orient: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new10".}
+proc fcQWheelEvent_new11(pos: pointer, globalPos: pointer, pixelDelta: pointer, angleDelta: pointer, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): ptr cQWheelEvent {.importc: "QWheelEvent_new11".}
 proc fcQWheelEvent_delete(self: pointer) {.importc: "QWheelEvent_delete".}
-proc fcQTabletEvent_new(t: cint, pos: pointer, globalPos: pointer, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong): ptr cQTabletEvent {.importc: "QTabletEvent_new".}
-proc fcQTabletEvent_new2(t: cint, pos: pointer, globalPos: pointer, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong, button: cint, buttons: cint): ptr cQTabletEvent {.importc: "QTabletEvent_new2".}
-proc fcQTabletEvent_new3(param1: pointer): ptr cQTabletEvent {.importc: "QTabletEvent_new3".}
 proc fcQTabletEvent_pos(self: pointer, ): pointer {.importc: "QTabletEvent_pos".}
 proc fcQTabletEvent_globalPos(self: pointer, ): pointer {.importc: "QTabletEvent_globalPos".}
 proc fcQTabletEvent_posF(self: pointer, ): pointer {.importc: "QTabletEvent_posF".}
@@ -268,11 +265,11 @@ proc fcQTabletEvent_xTilt(self: pointer, ): cint {.importc: "QTabletEvent_xTilt"
 proc fcQTabletEvent_yTilt(self: pointer, ): cint {.importc: "QTabletEvent_yTilt".}
 proc fcQTabletEvent_button(self: pointer, ): cint {.importc: "QTabletEvent_button".}
 proc fcQTabletEvent_buttons(self: pointer, ): cint {.importc: "QTabletEvent_buttons".}
+proc fcQTabletEvent_new(t: cint, pos: pointer, globalPos: pointer, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong): ptr cQTabletEvent {.importc: "QTabletEvent_new".}
+proc fcQTabletEvent_new2(t: cint, pos: pointer, globalPos: pointer, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong, button: cint, buttons: cint): ptr cQTabletEvent {.importc: "QTabletEvent_new2".}
+proc fcQTabletEvent_new3(param1: pointer): ptr cQTabletEvent {.importc: "QTabletEvent_new3".}
 proc fcQTabletEvent_staticMetaObject(): pointer {.importc: "QTabletEvent_staticMetaObject".}
 proc fcQTabletEvent_delete(self: pointer) {.importc: "QTabletEvent_delete".}
-proc fcQNativeGestureEvent_new(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new".}
-proc fcQNativeGestureEvent_new2(typeVal: cint, dev: pointer, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new2".}
-proc fcQNativeGestureEvent_new3(param1: pointer): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new3".}
 proc fcQNativeGestureEvent_gestureType(self: pointer, ): cint {.importc: "QNativeGestureEvent_gestureType".}
 proc fcQNativeGestureEvent_value(self: pointer, ): float64 {.importc: "QNativeGestureEvent_value".}
 proc fcQNativeGestureEvent_pos(self: pointer, ): pointer {.importc: "QNativeGestureEvent_pos".}
@@ -281,16 +278,10 @@ proc fcQNativeGestureEvent_localPos(self: pointer, ): pointer {.importc: "QNativ
 proc fcQNativeGestureEvent_windowPos(self: pointer, ): pointer {.importc: "QNativeGestureEvent_windowPos".}
 proc fcQNativeGestureEvent_screenPos(self: pointer, ): pointer {.importc: "QNativeGestureEvent_screenPos".}
 proc fcQNativeGestureEvent_device(self: pointer, ): pointer {.importc: "QNativeGestureEvent_device".}
+proc fcQNativeGestureEvent_new(typeVal: cint, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new".}
+proc fcQNativeGestureEvent_new2(typeVal: cint, dev: pointer, localPos: pointer, windowPos: pointer, screenPos: pointer, value: float64, sequenceId: culong, intArgument: culonglong): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new2".}
+proc fcQNativeGestureEvent_new3(param1: pointer): ptr cQNativeGestureEvent {.importc: "QNativeGestureEvent_new3".}
 proc fcQNativeGestureEvent_delete(self: pointer) {.importc: "QNativeGestureEvent_delete".}
-proc fcQKeyEvent_new(typeVal: cint, key: cint, modifiers: cint): ptr cQKeyEvent {.importc: "QKeyEvent_new".}
-proc fcQKeyEvent_new2(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): ptr cQKeyEvent {.importc: "QKeyEvent_new2".}
-proc fcQKeyEvent_new3(param1: pointer): ptr cQKeyEvent {.importc: "QKeyEvent_new3".}
-proc fcQKeyEvent_new4(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new4".}
-proc fcQKeyEvent_new5(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new5".}
-proc fcQKeyEvent_new6(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new6".}
-proc fcQKeyEvent_new7(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new7".}
-proc fcQKeyEvent_new8(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new8".}
-proc fcQKeyEvent_new9(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new9".}
 proc fcQKeyEvent_key(self: pointer, ): cint {.importc: "QKeyEvent_key".}
 proc fcQKeyEvent_matches(self: pointer, key: cint): bool {.importc: "QKeyEvent_matches".}
 proc fcQKeyEvent_modifiers(self: pointer, ): cint {.importc: "QKeyEvent_modifiers".}
@@ -300,58 +291,63 @@ proc fcQKeyEvent_count(self: pointer, ): cint {.importc: "QKeyEvent_count".}
 proc fcQKeyEvent_nativeScanCode(self: pointer, ): cuint {.importc: "QKeyEvent_nativeScanCode".}
 proc fcQKeyEvent_nativeVirtualKey(self: pointer, ): cuint {.importc: "QKeyEvent_nativeVirtualKey".}
 proc fcQKeyEvent_nativeModifiers(self: pointer, ): cuint {.importc: "QKeyEvent_nativeModifiers".}
+proc fcQKeyEvent_new(typeVal: cint, key: cint, modifiers: cint): ptr cQKeyEvent {.importc: "QKeyEvent_new".}
+proc fcQKeyEvent_new2(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): ptr cQKeyEvent {.importc: "QKeyEvent_new2".}
+proc fcQKeyEvent_new3(param1: pointer): ptr cQKeyEvent {.importc: "QKeyEvent_new3".}
+proc fcQKeyEvent_new4(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new4".}
+proc fcQKeyEvent_new5(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new5".}
+proc fcQKeyEvent_new6(typeVal: cint, key: cint, modifiers: cint, text: struct_miqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new6".}
+proc fcQKeyEvent_new7(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string): ptr cQKeyEvent {.importc: "QKeyEvent_new7".}
+proc fcQKeyEvent_new8(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool): ptr cQKeyEvent {.importc: "QKeyEvent_new8".}
+proc fcQKeyEvent_new9(typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: struct_miqt_string, autorep: bool, count: cushort): ptr cQKeyEvent {.importc: "QKeyEvent_new9".}
 proc fcQKeyEvent_delete(self: pointer) {.importc: "QKeyEvent_delete".}
-proc fcQFocusEvent_new(typeVal: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new".}
-proc fcQFocusEvent_new2(param1: pointer): ptr cQFocusEvent {.importc: "QFocusEvent_new2".}
-proc fcQFocusEvent_new3(typeVal: cint, reason: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new3".}
 proc fcQFocusEvent_gotFocus(self: pointer, ): bool {.importc: "QFocusEvent_gotFocus".}
 proc fcQFocusEvent_lostFocus(self: pointer, ): bool {.importc: "QFocusEvent_lostFocus".}
 proc fcQFocusEvent_reason(self: pointer, ): cint {.importc: "QFocusEvent_reason".}
+proc fcQFocusEvent_new(typeVal: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new".}
+proc fcQFocusEvent_new2(param1: pointer): ptr cQFocusEvent {.importc: "QFocusEvent_new2".}
+proc fcQFocusEvent_new3(typeVal: cint, reason: cint): ptr cQFocusEvent {.importc: "QFocusEvent_new3".}
 proc fcQFocusEvent_delete(self: pointer) {.importc: "QFocusEvent_delete".}
+proc fcQPaintEvent_rect(self: pointer, ): pointer {.importc: "QPaintEvent_rect".}
+proc fcQPaintEvent_region(self: pointer, ): pointer {.importc: "QPaintEvent_region".}
 proc fcQPaintEvent_new(paintRegion: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new".}
 proc fcQPaintEvent_new2(paintRect: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new2".}
 proc fcQPaintEvent_new3(param1: pointer): ptr cQPaintEvent {.importc: "QPaintEvent_new3".}
-proc fcQPaintEvent_rect(self: pointer, ): pointer {.importc: "QPaintEvent_rect".}
-proc fcQPaintEvent_region(self: pointer, ): pointer {.importc: "QPaintEvent_region".}
 proc fcQPaintEvent_delete(self: pointer) {.importc: "QPaintEvent_delete".}
-proc fcQMoveEvent_new(pos: pointer, oldPos: pointer): ptr cQMoveEvent {.importc: "QMoveEvent_new".}
-proc fcQMoveEvent_new2(param1: pointer): ptr cQMoveEvent {.importc: "QMoveEvent_new2".}
 proc fcQMoveEvent_pos(self: pointer, ): pointer {.importc: "QMoveEvent_pos".}
 proc fcQMoveEvent_oldPos(self: pointer, ): pointer {.importc: "QMoveEvent_oldPos".}
+proc fcQMoveEvent_new(pos: pointer, oldPos: pointer): ptr cQMoveEvent {.importc: "QMoveEvent_new".}
+proc fcQMoveEvent_new2(param1: pointer): ptr cQMoveEvent {.importc: "QMoveEvent_new2".}
 proc fcQMoveEvent_delete(self: pointer) {.importc: "QMoveEvent_delete".}
+proc fcQExposeEvent_region(self: pointer, ): pointer {.importc: "QExposeEvent_region".}
 proc fcQExposeEvent_new(rgn: pointer): ptr cQExposeEvent {.importc: "QExposeEvent_new".}
 proc fcQExposeEvent_new2(param1: pointer): ptr cQExposeEvent {.importc: "QExposeEvent_new2".}
-proc fcQExposeEvent_region(self: pointer, ): pointer {.importc: "QExposeEvent_region".}
 proc fcQExposeEvent_delete(self: pointer) {.importc: "QExposeEvent_delete".}
+proc fcQPlatformSurfaceEvent_surfaceEventType(self: pointer, ): cint {.importc: "QPlatformSurfaceEvent_surfaceEventType".}
 proc fcQPlatformSurfaceEvent_new(surfaceEventType: cint): ptr cQPlatformSurfaceEvent {.importc: "QPlatformSurfaceEvent_new".}
 proc fcQPlatformSurfaceEvent_new2(param1: pointer): ptr cQPlatformSurfaceEvent {.importc: "QPlatformSurfaceEvent_new2".}
-proc fcQPlatformSurfaceEvent_surfaceEventType(self: pointer, ): cint {.importc: "QPlatformSurfaceEvent_surfaceEventType".}
 proc fcQPlatformSurfaceEvent_delete(self: pointer) {.importc: "QPlatformSurfaceEvent_delete".}
-proc fcQResizeEvent_new(size: pointer, oldSize: pointer): ptr cQResizeEvent {.importc: "QResizeEvent_new".}
-proc fcQResizeEvent_new2(param1: pointer): ptr cQResizeEvent {.importc: "QResizeEvent_new2".}
 proc fcQResizeEvent_size(self: pointer, ): pointer {.importc: "QResizeEvent_size".}
 proc fcQResizeEvent_oldSize(self: pointer, ): pointer {.importc: "QResizeEvent_oldSize".}
+proc fcQResizeEvent_new(size: pointer, oldSize: pointer): ptr cQResizeEvent {.importc: "QResizeEvent_new".}
+proc fcQResizeEvent_new2(param1: pointer): ptr cQResizeEvent {.importc: "QResizeEvent_new2".}
 proc fcQResizeEvent_delete(self: pointer) {.importc: "QResizeEvent_delete".}
+proc fcQCloseEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QCloseEvent_operatorAssign".}
 proc fcQCloseEvent_new(): ptr cQCloseEvent {.importc: "QCloseEvent_new".}
 proc fcQCloseEvent_new2(param1: pointer): ptr cQCloseEvent {.importc: "QCloseEvent_new2".}
-proc fcQCloseEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QCloseEvent_operatorAssign".}
 proc fcQCloseEvent_delete(self: pointer) {.importc: "QCloseEvent_delete".}
+proc fcQIconDragEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QIconDragEvent_operatorAssign".}
 proc fcQIconDragEvent_new(): ptr cQIconDragEvent {.importc: "QIconDragEvent_new".}
 proc fcQIconDragEvent_new2(param1: pointer): ptr cQIconDragEvent {.importc: "QIconDragEvent_new2".}
-proc fcQIconDragEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QIconDragEvent_operatorAssign".}
 proc fcQIconDragEvent_delete(self: pointer) {.importc: "QIconDragEvent_delete".}
+proc fcQShowEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QShowEvent_operatorAssign".}
 proc fcQShowEvent_new(): ptr cQShowEvent {.importc: "QShowEvent_new".}
 proc fcQShowEvent_new2(param1: pointer): ptr cQShowEvent {.importc: "QShowEvent_new2".}
-proc fcQShowEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QShowEvent_operatorAssign".}
 proc fcQShowEvent_delete(self: pointer) {.importc: "QShowEvent_delete".}
+proc fcQHideEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QHideEvent_operatorAssign".}
 proc fcQHideEvent_new(): ptr cQHideEvent {.importc: "QHideEvent_new".}
 proc fcQHideEvent_new2(param1: pointer): ptr cQHideEvent {.importc: "QHideEvent_new2".}
-proc fcQHideEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QHideEvent_operatorAssign".}
 proc fcQHideEvent_delete(self: pointer) {.importc: "QHideEvent_delete".}
-proc fcQContextMenuEvent_new(reason: cint, pos: pointer, globalPos: pointer, modifiers: cint): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new".}
-proc fcQContextMenuEvent_new2(reason: cint, pos: pointer, globalPos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new2".}
-proc fcQContextMenuEvent_new3(reason: cint, pos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new3".}
-proc fcQContextMenuEvent_new4(param1: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new4".}
 proc fcQContextMenuEvent_x(self: pointer, ): cint {.importc: "QContextMenuEvent_x".}
 proc fcQContextMenuEvent_y(self: pointer, ): cint {.importc: "QContextMenuEvent_y".}
 proc fcQContextMenuEvent_globalX(self: pointer, ): cint {.importc: "QContextMenuEvent_globalX".}
@@ -359,10 +355,11 @@ proc fcQContextMenuEvent_globalY(self: pointer, ): cint {.importc: "QContextMenu
 proc fcQContextMenuEvent_pos(self: pointer, ): pointer {.importc: "QContextMenuEvent_pos".}
 proc fcQContextMenuEvent_globalPos(self: pointer, ): pointer {.importc: "QContextMenuEvent_globalPos".}
 proc fcQContextMenuEvent_reason(self: pointer, ): cint {.importc: "QContextMenuEvent_reason".}
+proc fcQContextMenuEvent_new(reason: cint, pos: pointer, globalPos: pointer, modifiers: cint): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new".}
+proc fcQContextMenuEvent_new2(reason: cint, pos: pointer, globalPos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new2".}
+proc fcQContextMenuEvent_new3(reason: cint, pos: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new3".}
+proc fcQContextMenuEvent_new4(param1: pointer): ptr cQContextMenuEvent {.importc: "QContextMenuEvent_new4".}
 proc fcQContextMenuEvent_delete(self: pointer) {.importc: "QContextMenuEvent_delete".}
-proc fcQInputMethodEvent_new(): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new".}
-proc fcQInputMethodEvent_new2(preeditText: struct_miqt_string, attributes: struct_miqt_array): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new2".}
-proc fcQInputMethodEvent_new3(other: pointer): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new3".}
 proc fcQInputMethodEvent_setCommitString(self: pointer, commitString: struct_miqt_string): void {.importc: "QInputMethodEvent_setCommitString".}
 proc fcQInputMethodEvent_attributes(self: pointer, ): struct_miqt_array {.importc: "QInputMethodEvent_attributes".}
 proc fcQInputMethodEvent_preeditString(self: pointer, ): struct_miqt_string {.importc: "QInputMethodEvent_preeditString".}
@@ -371,16 +368,16 @@ proc fcQInputMethodEvent_replacementStart(self: pointer, ): cint {.importc: "QIn
 proc fcQInputMethodEvent_replacementLength(self: pointer, ): cint {.importc: "QInputMethodEvent_replacementLength".}
 proc fcQInputMethodEvent_setCommitString2(self: pointer, commitString: struct_miqt_string, replaceFrom: cint): void {.importc: "QInputMethodEvent_setCommitString2".}
 proc fcQInputMethodEvent_setCommitString3(self: pointer, commitString: struct_miqt_string, replaceFrom: cint, replaceLength: cint): void {.importc: "QInputMethodEvent_setCommitString3".}
+proc fcQInputMethodEvent_new(): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new".}
+proc fcQInputMethodEvent_new2(preeditText: struct_miqt_string, attributes: struct_miqt_array): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new2".}
+proc fcQInputMethodEvent_new3(other: pointer): ptr cQInputMethodEvent {.importc: "QInputMethodEvent_new3".}
 proc fcQInputMethodEvent_delete(self: pointer) {.importc: "QInputMethodEvent_delete".}
-proc fcQInputMethodQueryEvent_new(queries: cint): ptr cQInputMethodQueryEvent {.importc: "QInputMethodQueryEvent_new".}
-proc fcQInputMethodQueryEvent_new2(param1: pointer): ptr cQInputMethodQueryEvent {.importc: "QInputMethodQueryEvent_new2".}
 proc fcQInputMethodQueryEvent_queries(self: pointer, ): cint {.importc: "QInputMethodQueryEvent_queries".}
 proc fcQInputMethodQueryEvent_setValue(self: pointer, query: cint, value: pointer): void {.importc: "QInputMethodQueryEvent_setValue".}
 proc fcQInputMethodQueryEvent_value(self: pointer, query: cint): pointer {.importc: "QInputMethodQueryEvent_value".}
+proc fcQInputMethodQueryEvent_new(queries: cint): ptr cQInputMethodQueryEvent {.importc: "QInputMethodQueryEvent_new".}
+proc fcQInputMethodQueryEvent_new2(param1: pointer): ptr cQInputMethodQueryEvent {.importc: "QInputMethodQueryEvent_new2".}
 proc fcQInputMethodQueryEvent_delete(self: pointer) {.importc: "QInputMethodQueryEvent_delete".}
-proc fcQDropEvent_new(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDropEvent {.importc: "QDropEvent_new".}
-proc fcQDropEvent_new2(param1: pointer): ptr cQDropEvent {.importc: "QDropEvent_new2".}
-proc fcQDropEvent_new3(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDropEvent {.importc: "QDropEvent_new3".}
 proc fcQDropEvent_pos(self: pointer, ): pointer {.importc: "QDropEvent_pos".}
 proc fcQDropEvent_posF(self: pointer, ): pointer {.importc: "QDropEvent_posF".}
 proc fcQDropEvent_mouseButtons(self: pointer, ): cint {.importc: "QDropEvent_mouseButtons".}
@@ -392,83 +389,80 @@ proc fcQDropEvent_dropAction(self: pointer, ): cint {.importc: "QDropEvent_dropA
 proc fcQDropEvent_setDropAction(self: pointer, action: cint): void {.importc: "QDropEvent_setDropAction".}
 proc fcQDropEvent_source(self: pointer, ): pointer {.importc: "QDropEvent_source".}
 proc fcQDropEvent_mimeData(self: pointer, ): pointer {.importc: "QDropEvent_mimeData".}
+proc fcQDropEvent_new(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDropEvent {.importc: "QDropEvent_new".}
+proc fcQDropEvent_new2(param1: pointer): ptr cQDropEvent {.importc: "QDropEvent_new2".}
+proc fcQDropEvent_new3(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDropEvent {.importc: "QDropEvent_new3".}
 proc fcQDropEvent_delete(self: pointer) {.importc: "QDropEvent_delete".}
-proc fcQDragMoveEvent_new(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new".}
-proc fcQDragMoveEvent_new2(param1: pointer): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new2".}
-proc fcQDragMoveEvent_new3(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new3".}
 proc fcQDragMoveEvent_answerRect(self: pointer, ): pointer {.importc: "QDragMoveEvent_answerRect".}
 proc fcQDragMoveEvent_accept(self: pointer, ): void {.importc: "QDragMoveEvent_accept".}
 proc fcQDragMoveEvent_ignore(self: pointer, ): void {.importc: "QDragMoveEvent_ignore".}
 proc fcQDragMoveEvent_acceptWithQRect(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_acceptWithQRect".}
 proc fcQDragMoveEvent_ignoreWithQRect(self: pointer, r: pointer): void {.importc: "QDragMoveEvent_ignoreWithQRect".}
+proc fcQDragMoveEvent_new(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new".}
+proc fcQDragMoveEvent_new2(param1: pointer): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new2".}
+proc fcQDragMoveEvent_new3(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint, typeVal: cint): ptr cQDragMoveEvent {.importc: "QDragMoveEvent_new3".}
 proc fcQDragMoveEvent_delete(self: pointer) {.importc: "QDragMoveEvent_delete".}
+proc fcQDragEnterEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDragEnterEvent_operatorAssign".}
 proc fcQDragEnterEvent_new(pos: pointer, actions: cint, data: pointer, buttons: cint, modifiers: cint): ptr cQDragEnterEvent {.importc: "QDragEnterEvent_new".}
 proc fcQDragEnterEvent_new2(param1: pointer): ptr cQDragEnterEvent {.importc: "QDragEnterEvent_new2".}
-proc fcQDragEnterEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDragEnterEvent_operatorAssign".}
 proc fcQDragEnterEvent_delete(self: pointer) {.importc: "QDragEnterEvent_delete".}
+proc fcQDragLeaveEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDragLeaveEvent_operatorAssign".}
 proc fcQDragLeaveEvent_new(): ptr cQDragLeaveEvent {.importc: "QDragLeaveEvent_new".}
 proc fcQDragLeaveEvent_new2(param1: pointer): ptr cQDragLeaveEvent {.importc: "QDragLeaveEvent_new2".}
-proc fcQDragLeaveEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QDragLeaveEvent_operatorAssign".}
 proc fcQDragLeaveEvent_delete(self: pointer) {.importc: "QDragLeaveEvent_delete".}
-proc fcQHelpEvent_new(typeVal: cint, pos: pointer, globalPos: pointer): ptr cQHelpEvent {.importc: "QHelpEvent_new".}
-proc fcQHelpEvent_new2(param1: pointer): ptr cQHelpEvent {.importc: "QHelpEvent_new2".}
 proc fcQHelpEvent_x(self: pointer, ): cint {.importc: "QHelpEvent_x".}
 proc fcQHelpEvent_y(self: pointer, ): cint {.importc: "QHelpEvent_y".}
 proc fcQHelpEvent_globalX(self: pointer, ): cint {.importc: "QHelpEvent_globalX".}
 proc fcQHelpEvent_globalY(self: pointer, ): cint {.importc: "QHelpEvent_globalY".}
 proc fcQHelpEvent_pos(self: pointer, ): pointer {.importc: "QHelpEvent_pos".}
 proc fcQHelpEvent_globalPos(self: pointer, ): pointer {.importc: "QHelpEvent_globalPos".}
+proc fcQHelpEvent_new(typeVal: cint, pos: pointer, globalPos: pointer): ptr cQHelpEvent {.importc: "QHelpEvent_new".}
+proc fcQHelpEvent_new2(param1: pointer): ptr cQHelpEvent {.importc: "QHelpEvent_new2".}
 proc fcQHelpEvent_delete(self: pointer) {.importc: "QHelpEvent_delete".}
+proc fcQStatusTipEvent_tip(self: pointer, ): struct_miqt_string {.importc: "QStatusTipEvent_tip".}
 proc fcQStatusTipEvent_new(tip: struct_miqt_string): ptr cQStatusTipEvent {.importc: "QStatusTipEvent_new".}
 proc fcQStatusTipEvent_new2(param1: pointer): ptr cQStatusTipEvent {.importc: "QStatusTipEvent_new2".}
-proc fcQStatusTipEvent_tip(self: pointer, ): struct_miqt_string {.importc: "QStatusTipEvent_tip".}
 proc fcQStatusTipEvent_delete(self: pointer) {.importc: "QStatusTipEvent_delete".}
+proc fcQWhatsThisClickedEvent_href(self: pointer, ): struct_miqt_string {.importc: "QWhatsThisClickedEvent_href".}
 proc fcQWhatsThisClickedEvent_new(href: struct_miqt_string): ptr cQWhatsThisClickedEvent {.importc: "QWhatsThisClickedEvent_new".}
 proc fcQWhatsThisClickedEvent_new2(param1: pointer): ptr cQWhatsThisClickedEvent {.importc: "QWhatsThisClickedEvent_new2".}
-proc fcQWhatsThisClickedEvent_href(self: pointer, ): struct_miqt_string {.importc: "QWhatsThisClickedEvent_href".}
 proc fcQWhatsThisClickedEvent_delete(self: pointer) {.importc: "QWhatsThisClickedEvent_delete".}
+proc fcQActionEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QActionEvent_operatorAssign".}
 proc fcQActionEvent_new(typeVal: cint, action: ptr cQAction): ptr cQActionEvent {.importc: "QActionEvent_new".}
 proc fcQActionEvent_new2(param1: pointer): ptr cQActionEvent {.importc: "QActionEvent_new2".}
 proc fcQActionEvent_new3(typeVal: cint, action: ptr cQAction, before: ptr cQAction): ptr cQActionEvent {.importc: "QActionEvent_new3".}
-proc fcQActionEvent_operatorAssign(self: pointer, param1: pointer): void {.importc: "QActionEvent_operatorAssign".}
 proc fcQActionEvent_delete(self: pointer) {.importc: "QActionEvent_delete".}
-proc fcQFileOpenEvent_new(file: struct_miqt_string): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new".}
-proc fcQFileOpenEvent_new2(url: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new2".}
-proc fcQFileOpenEvent_new3(param1: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new3".}
 proc fcQFileOpenEvent_file(self: pointer, ): struct_miqt_string {.importc: "QFileOpenEvent_file".}
 proc fcQFileOpenEvent_url(self: pointer, ): pointer {.importc: "QFileOpenEvent_url".}
 proc fcQFileOpenEvent_openFile(self: pointer, file: pointer, flags: cint): bool {.importc: "QFileOpenEvent_openFile".}
+proc fcQFileOpenEvent_new(file: struct_miqt_string): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new".}
+proc fcQFileOpenEvent_new2(url: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new2".}
+proc fcQFileOpenEvent_new3(param1: pointer): ptr cQFileOpenEvent {.importc: "QFileOpenEvent_new3".}
 proc fcQFileOpenEvent_delete(self: pointer) {.importc: "QFileOpenEvent_delete".}
+proc fcQToolBarChangeEvent_toggle(self: pointer, ): bool {.importc: "QToolBarChangeEvent_toggle".}
 proc fcQToolBarChangeEvent_new(t: bool): ptr cQToolBarChangeEvent {.importc: "QToolBarChangeEvent_new".}
 proc fcQToolBarChangeEvent_new2(param1: pointer): ptr cQToolBarChangeEvent {.importc: "QToolBarChangeEvent_new2".}
-proc fcQToolBarChangeEvent_toggle(self: pointer, ): bool {.importc: "QToolBarChangeEvent_toggle".}
 proc fcQToolBarChangeEvent_delete(self: pointer) {.importc: "QToolBarChangeEvent_delete".}
-proc fcQShortcutEvent_new(key: pointer, id: cint): ptr cQShortcutEvent {.importc: "QShortcutEvent_new".}
-proc fcQShortcutEvent_new2(param1: pointer): ptr cQShortcutEvent {.importc: "QShortcutEvent_new2".}
-proc fcQShortcutEvent_new3(key: pointer, id: cint, ambiguous: bool): ptr cQShortcutEvent {.importc: "QShortcutEvent_new3".}
 proc fcQShortcutEvent_key(self: pointer, ): pointer {.importc: "QShortcutEvent_key".}
 proc fcQShortcutEvent_shortcutId(self: pointer, ): cint {.importc: "QShortcutEvent_shortcutId".}
 proc fcQShortcutEvent_isAmbiguous(self: pointer, ): bool {.importc: "QShortcutEvent_isAmbiguous".}
+proc fcQShortcutEvent_new(key: pointer, id: cint): ptr cQShortcutEvent {.importc: "QShortcutEvent_new".}
+proc fcQShortcutEvent_new2(param1: pointer): ptr cQShortcutEvent {.importc: "QShortcutEvent_new2".}
+proc fcQShortcutEvent_new3(key: pointer, id: cint, ambiguous: bool): ptr cQShortcutEvent {.importc: "QShortcutEvent_new3".}
 proc fcQShortcutEvent_delete(self: pointer) {.importc: "QShortcutEvent_delete".}
+proc fcQWindowStateChangeEvent_oldState(self: pointer, ): cint {.importc: "QWindowStateChangeEvent_oldState".}
+proc fcQWindowStateChangeEvent_isOverride(self: pointer, ): bool {.importc: "QWindowStateChangeEvent_isOverride".}
 proc fcQWindowStateChangeEvent_new(aOldState: cint): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new".}
 proc fcQWindowStateChangeEvent_new2(param1: pointer): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new2".}
 proc fcQWindowStateChangeEvent_new3(aOldState: cint, isOverride: bool): ptr cQWindowStateChangeEvent {.importc: "QWindowStateChangeEvent_new3".}
-proc fcQWindowStateChangeEvent_oldState(self: pointer, ): cint {.importc: "QWindowStateChangeEvent_oldState".}
-proc fcQWindowStateChangeEvent_isOverride(self: pointer, ): bool {.importc: "QWindowStateChangeEvent_isOverride".}
 proc fcQWindowStateChangeEvent_delete(self: pointer) {.importc: "QWindowStateChangeEvent_delete".}
-proc fcQPointingDeviceUniqueId_new(): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new".}
-proc fcQPointingDeviceUniqueId_new2(param1: pointer): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new2".}
 proc fcQPointingDeviceUniqueId_fromNumericId(id: clonglong): pointer {.importc: "QPointingDeviceUniqueId_fromNumericId".}
 proc fcQPointingDeviceUniqueId_isValid(self: pointer, ): bool {.importc: "QPointingDeviceUniqueId_isValid".}
 proc fcQPointingDeviceUniqueId_numericId(self: pointer, ): clonglong {.importc: "QPointingDeviceUniqueId_numericId".}
+proc fcQPointingDeviceUniqueId_new(): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new".}
+proc fcQPointingDeviceUniqueId_new2(param1: pointer): ptr cQPointingDeviceUniqueId {.importc: "QPointingDeviceUniqueId_new2".}
 proc fcQPointingDeviceUniqueId_staticMetaObject(): pointer {.importc: "QPointingDeviceUniqueId_staticMetaObject".}
 proc fcQPointingDeviceUniqueId_delete(self: pointer) {.importc: "QPointingDeviceUniqueId_delete".}
-proc fcQTouchEvent_new(eventType: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new".}
-proc fcQTouchEvent_new2(param1: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new2".}
-proc fcQTouchEvent_new3(eventType: cint, device: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new3".}
-proc fcQTouchEvent_new4(eventType: cint, device: pointer, modifiers: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new4".}
-proc fcQTouchEvent_new5(eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new5".}
-proc fcQTouchEvent_new6(eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint, touchPoints: struct_miqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new6".}
 proc fcQTouchEvent_window(self: pointer, ): pointer {.importc: "QTouchEvent_window".}
 proc fcQTouchEvent_target(self: pointer, ): pointer {.importc: "QTouchEvent_target".}
 proc fcQTouchEvent_touchPointStates(self: pointer, ): cint {.importc: "QTouchEvent_touchPointStates".}
@@ -479,9 +473,13 @@ proc fcQTouchEvent_setTarget(self: pointer, atarget: pointer): void {.importc: "
 proc fcQTouchEvent_setTouchPointStates(self: pointer, aTouchPointStates: cint): void {.importc: "QTouchEvent_setTouchPointStates".}
 proc fcQTouchEvent_setTouchPoints(self: pointer, atouchPoints: struct_miqt_array): void {.importc: "QTouchEvent_setTouchPoints".}
 proc fcQTouchEvent_setDevice(self: pointer, adevice: pointer): void {.importc: "QTouchEvent_setDevice".}
+proc fcQTouchEvent_new(eventType: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new".}
+proc fcQTouchEvent_new2(param1: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new2".}
+proc fcQTouchEvent_new3(eventType: cint, device: pointer): ptr cQTouchEvent {.importc: "QTouchEvent_new3".}
+proc fcQTouchEvent_new4(eventType: cint, device: pointer, modifiers: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new4".}
+proc fcQTouchEvent_new5(eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint): ptr cQTouchEvent {.importc: "QTouchEvent_new5".}
+proc fcQTouchEvent_new6(eventType: cint, device: pointer, modifiers: cint, touchPointStates: cint, touchPoints: struct_miqt_array): ptr cQTouchEvent {.importc: "QTouchEvent_new6".}
 proc fcQTouchEvent_delete(self: pointer) {.importc: "QTouchEvent_delete".}
-proc fcQScrollPrepareEvent_new(startPos: pointer): ptr cQScrollPrepareEvent {.importc: "QScrollPrepareEvent_new".}
-proc fcQScrollPrepareEvent_new2(param1: pointer): ptr cQScrollPrepareEvent {.importc: "QScrollPrepareEvent_new2".}
 proc fcQScrollPrepareEvent_startPos(self: pointer, ): pointer {.importc: "QScrollPrepareEvent_startPos".}
 proc fcQScrollPrepareEvent_viewportSize(self: pointer, ): pointer {.importc: "QScrollPrepareEvent_viewportSize".}
 proc fcQScrollPrepareEvent_contentPosRange(self: pointer, ): pointer {.importc: "QScrollPrepareEvent_contentPosRange".}
@@ -489,30 +487,29 @@ proc fcQScrollPrepareEvent_contentPos(self: pointer, ): pointer {.importc: "QScr
 proc fcQScrollPrepareEvent_setViewportSize(self: pointer, size: pointer): void {.importc: "QScrollPrepareEvent_setViewportSize".}
 proc fcQScrollPrepareEvent_setContentPosRange(self: pointer, rect: pointer): void {.importc: "QScrollPrepareEvent_setContentPosRange".}
 proc fcQScrollPrepareEvent_setContentPos(self: pointer, pos: pointer): void {.importc: "QScrollPrepareEvent_setContentPos".}
+proc fcQScrollPrepareEvent_new(startPos: pointer): ptr cQScrollPrepareEvent {.importc: "QScrollPrepareEvent_new".}
+proc fcQScrollPrepareEvent_new2(param1: pointer): ptr cQScrollPrepareEvent {.importc: "QScrollPrepareEvent_new2".}
 proc fcQScrollPrepareEvent_delete(self: pointer) {.importc: "QScrollPrepareEvent_delete".}
-proc fcQScrollEvent_new(contentPos: pointer, overshoot: pointer, scrollState: cint): ptr cQScrollEvent {.importc: "QScrollEvent_new".}
-proc fcQScrollEvent_new2(param1: pointer): ptr cQScrollEvent {.importc: "QScrollEvent_new2".}
 proc fcQScrollEvent_contentPos(self: pointer, ): pointer {.importc: "QScrollEvent_contentPos".}
 proc fcQScrollEvent_overshootDistance(self: pointer, ): pointer {.importc: "QScrollEvent_overshootDistance".}
 proc fcQScrollEvent_scrollState(self: pointer, ): cint {.importc: "QScrollEvent_scrollState".}
+proc fcQScrollEvent_new(contentPos: pointer, overshoot: pointer, scrollState: cint): ptr cQScrollEvent {.importc: "QScrollEvent_new".}
+proc fcQScrollEvent_new2(param1: pointer): ptr cQScrollEvent {.importc: "QScrollEvent_new2".}
 proc fcQScrollEvent_delete(self: pointer) {.importc: "QScrollEvent_delete".}
-proc fcQScreenOrientationChangeEvent_new(screen: pointer, orientation: cint): ptr cQScreenOrientationChangeEvent {.importc: "QScreenOrientationChangeEvent_new".}
-proc fcQScreenOrientationChangeEvent_new2(param1: pointer): ptr cQScreenOrientationChangeEvent {.importc: "QScreenOrientationChangeEvent_new2".}
 proc fcQScreenOrientationChangeEvent_screen(self: pointer, ): pointer {.importc: "QScreenOrientationChangeEvent_screen".}
 proc fcQScreenOrientationChangeEvent_orientation(self: pointer, ): cint {.importc: "QScreenOrientationChangeEvent_orientation".}
+proc fcQScreenOrientationChangeEvent_new(screen: pointer, orientation: cint): ptr cQScreenOrientationChangeEvent {.importc: "QScreenOrientationChangeEvent_new".}
+proc fcQScreenOrientationChangeEvent_new2(param1: pointer): ptr cQScreenOrientationChangeEvent {.importc: "QScreenOrientationChangeEvent_new2".}
 proc fcQScreenOrientationChangeEvent_delete(self: pointer) {.importc: "QScreenOrientationChangeEvent_delete".}
+proc fcQApplicationStateChangeEvent_applicationState(self: pointer, ): cint {.importc: "QApplicationStateChangeEvent_applicationState".}
 proc fcQApplicationStateChangeEvent_new(state: cint): ptr cQApplicationStateChangeEvent {.importc: "QApplicationStateChangeEvent_new".}
 proc fcQApplicationStateChangeEvent_new2(param1: pointer): ptr cQApplicationStateChangeEvent {.importc: "QApplicationStateChangeEvent_new2".}
-proc fcQApplicationStateChangeEvent_applicationState(self: pointer, ): cint {.importc: "QApplicationStateChangeEvent_applicationState".}
 proc fcQApplicationStateChangeEvent_delete(self: pointer) {.importc: "QApplicationStateChangeEvent_delete".}
+proc fcQInputMethodEventAttribute_operatorAssign(self: pointer, param1: pointer): void {.importc: "QInputMethodEvent__Attribute_operatorAssign".}
 proc fcQInputMethodEventAttribute_new(typ: cint, s: cint, l: cint, val: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new".}
 proc fcQInputMethodEventAttribute_new2(typ: cint, s: cint, l: cint): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new2".}
 proc fcQInputMethodEventAttribute_new3(param1: pointer): ptr cQInputMethodEventAttribute {.importc: "QInputMethodEvent__Attribute_new3".}
-proc fcQInputMethodEventAttribute_operatorAssign(self: pointer, param1: pointer): void {.importc: "QInputMethodEvent__Attribute_operatorAssign".}
 proc fcQInputMethodEventAttribute_delete(self: pointer) {.importc: "QInputMethodEvent__Attribute_delete".}
-proc fcQTouchEventTouchPoint_new(): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new".}
-proc fcQTouchEventTouchPoint_new2(other: pointer): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new2".}
-proc fcQTouchEventTouchPoint_new3(id: cint): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new3".}
 proc fcQTouchEventTouchPoint_operatorAssign(self: pointer, other: pointer): void {.importc: "QTouchEvent__TouchPoint_operatorAssign".}
 proc fcQTouchEventTouchPoint_swap(self: pointer, other: pointer): void {.importc: "QTouchEvent__TouchPoint_swap".}
 proc fcQTouchEventTouchPoint_id(self: pointer, ): cint {.importc: "QTouchEvent__TouchPoint_id".}
@@ -563,19 +560,10 @@ proc fcQTouchEventTouchPoint_setEllipseDiameters(self: pointer, dia: pointer): v
 proc fcQTouchEventTouchPoint_setVelocity(self: pointer, v: pointer): void {.importc: "QTouchEvent__TouchPoint_setVelocity".}
 proc fcQTouchEventTouchPoint_setFlags(self: pointer, flags: cint): void {.importc: "QTouchEvent__TouchPoint_setFlags".}
 proc fcQTouchEventTouchPoint_setRawScreenPositions(self: pointer, positions: struct_miqt_array): void {.importc: "QTouchEvent__TouchPoint_setRawScreenPositions".}
+proc fcQTouchEventTouchPoint_new(): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new".}
+proc fcQTouchEventTouchPoint_new2(other: pointer): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new2".}
+proc fcQTouchEventTouchPoint_new3(id: cint): ptr cQTouchEventTouchPoint {.importc: "QTouchEvent__TouchPoint_new3".}
 proc fcQTouchEventTouchPoint_delete(self: pointer) {.importc: "QTouchEvent__TouchPoint_delete".}
-
-
-func init*(T: type gen_qevent_types.QInputEvent, h: ptr cQInputEvent): gen_qevent_types.QInputEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QInputEvent, typeVal: cint): gen_qevent_types.QInputEvent =
-  gen_qevent_types.QInputEvent.init(fcQInputEvent_new(cint(typeVal)))
-
-proc create*(T: type gen_qevent_types.QInputEvent, param1: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
-  gen_qevent_types.QInputEvent.init(fcQInputEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QInputEvent, typeVal: cint, modifiers: cint): gen_qevent_types.QInputEvent =
-  gen_qevent_types.QInputEvent.init(fcQInputEvent_new3(cint(typeVal), cint(modifiers)))
 
 proc modifiers*(self: gen_qevent_types.QInputEvent, ): cint =
   cint(fcQInputEvent_modifiers(self.h))
@@ -589,17 +577,20 @@ proc timestamp*(self: gen_qevent_types.QInputEvent, ): culong =
 proc setTimestamp*(self: gen_qevent_types.QInputEvent, atimestamp: culong): void =
   fcQInputEvent_setTimestamp(self.h, atimestamp)
 
+proc create*(T: type gen_qevent_types.QInputEvent,
+    typeVal: cint): gen_qevent_types.QInputEvent =
+  gen_qevent_types.QInputEvent(h: fcQInputEvent_new(cint(typeVal)))
+
+proc create*(T: type gen_qevent_types.QInputEvent,
+    param1: gen_qevent_types.QInputEvent): gen_qevent_types.QInputEvent =
+  gen_qevent_types.QInputEvent(h: fcQInputEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QInputEvent,
+    typeVal: cint, modifiers: cint): gen_qevent_types.QInputEvent =
+  gen_qevent_types.QInputEvent(h: fcQInputEvent_new3(cint(typeVal), cint(modifiers)))
+
 proc delete*(self: gen_qevent_types.QInputEvent) =
   fcQInputEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QEnterEvent, h: ptr cQEnterEvent): gen_qevent_types.QEnterEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QEnterEvent, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF): gen_qevent_types.QEnterEvent =
-  gen_qevent_types.QEnterEvent.init(fcQEnterEvent_new(localPos.h, windowPos.h, screenPos.h))
-
-proc create*(T: type gen_qevent_types.QEnterEvent, param1: gen_qevent_types.QEnterEvent): gen_qevent_types.QEnterEvent =
-  gen_qevent_types.QEnterEvent.init(fcQEnterEvent_new2(param1.h))
-
 proc pos*(self: gen_qevent_types.QEnterEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQEnterEvent_pos(self.h))
 
@@ -627,26 +618,16 @@ proc windowPos*(self: gen_qevent_types.QEnterEvent, ): gen_qpoint_types.QPointF 
 proc screenPos*(self: gen_qevent_types.QEnterEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQEnterEvent_screenPos(self.h))
 
+proc create*(T: type gen_qevent_types.QEnterEvent,
+    localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF): gen_qevent_types.QEnterEvent =
+  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new(localPos.h, windowPos.h, screenPos.h))
+
+proc create*(T: type gen_qevent_types.QEnterEvent,
+    param1: gen_qevent_types.QEnterEvent): gen_qevent_types.QEnterEvent =
+  gen_qevent_types.QEnterEvent(h: fcQEnterEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QEnterEvent) =
   fcQEnterEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QMouseEvent, h: ptr cQMouseEvent): gen_qevent_types.QMouseEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QMouseEvent, typeVal: cint, localPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent.init(fcQMouseEvent_new(cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QMouseEvent, typeVal: cint, localPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent.init(fcQMouseEvent_new2(cint(typeVal), localPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QMouseEvent, typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent.init(fcQMouseEvent_new3(cint(typeVal), localPos.h, windowPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QMouseEvent, typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, source: cint): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent.init(fcQMouseEvent_new4(cint(typeVal), localPos.h, windowPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers), cint(source)))
-
-proc create*(T: type gen_qevent_types.QMouseEvent, param1: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
-  gen_qevent_types.QMouseEvent.init(fcQMouseEvent_new5(param1.h))
-
 proc pos*(self: gen_qevent_types.QMouseEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQMouseEvent_pos(self.h))
 
@@ -689,20 +670,28 @@ proc source*(self: gen_qevent_types.QMouseEvent, ): cint =
 proc flags*(self: gen_qevent_types.QMouseEvent, ): cint =
   cint(fcQMouseEvent_flags(self.h))
 
+proc create*(T: type gen_qevent_types.QMouseEvent,
+    typeVal: cint, localPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new(cint(typeVal), localPos.h, cint(button), cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QMouseEvent,
+    typeVal: cint, localPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new2(cint(typeVal), localPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QMouseEvent,
+    typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint): gen_qevent_types.QMouseEvent =
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new3(cint(typeVal), localPos.h, windowPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QMouseEvent,
+    typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, button: cint, buttons: cint, modifiers: cint, source: cint): gen_qevent_types.QMouseEvent =
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new4(cint(typeVal), localPos.h, windowPos.h, screenPos.h, cint(button), cint(buttons), cint(modifiers), cint(source)))
+
+proc create*(T: type gen_qevent_types.QMouseEvent,
+    param1: gen_qevent_types.QMouseEvent): gen_qevent_types.QMouseEvent =
+  gen_qevent_types.QMouseEvent(h: fcQMouseEvent_new5(param1.h))
+
 proc delete*(self: gen_qevent_types.QMouseEvent) =
   fcQMouseEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QHoverEvent, h: ptr cQHoverEvent): gen_qevent_types.QHoverEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QHoverEvent, typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF): gen_qevent_types.QHoverEvent =
-  gen_qevent_types.QHoverEvent.init(fcQHoverEvent_new(cint(typeVal), pos.h, oldPos.h))
-
-proc create*(T: type gen_qevent_types.QHoverEvent, param1: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
-  gen_qevent_types.QHoverEvent.init(fcQHoverEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QHoverEvent, typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint): gen_qevent_types.QHoverEvent =
-  gen_qevent_types.QHoverEvent.init(fcQHoverEvent_new3(cint(typeVal), pos.h, oldPos.h, cint(modifiers)))
-
 proc pos*(self: gen_qevent_types.QHoverEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQHoverEvent_pos(self.h))
 
@@ -715,44 +704,20 @@ proc posF*(self: gen_qevent_types.QHoverEvent, ): gen_qpoint_types.QPointF =
 proc oldPosF*(self: gen_qevent_types.QHoverEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQHoverEvent_oldPosF(self.h))
 
+proc create*(T: type gen_qevent_types.QHoverEvent,
+    typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF): gen_qevent_types.QHoverEvent =
+  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new(cint(typeVal), pos.h, oldPos.h))
+
+proc create*(T: type gen_qevent_types.QHoverEvent,
+    param1: gen_qevent_types.QHoverEvent): gen_qevent_types.QHoverEvent =
+  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QHoverEvent,
+    typeVal: cint, pos: gen_qpoint_types.QPointF, oldPos: gen_qpoint_types.QPointF, modifiers: cint): gen_qevent_types.QHoverEvent =
+  gen_qevent_types.QHoverEvent(h: fcQHoverEvent_new3(cint(typeVal), pos.h, oldPos.h, cint(modifiers)))
+
 proc delete*(self: gen_qevent_types.QHoverEvent) =
   fcQHoverEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QWheelEvent, h: ptr cQWheelEvent): gen_qevent_types.QWheelEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new(pos.h, delta, cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new2(pos.h, globalPos.h, delta, cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new3(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new4(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new5(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase), cint(source)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint, inverted: bool): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new6(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase), cint(source), inverted))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new7(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, param1: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new8(param1.h))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint, orient: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new9(pos.h, delta, cint(buttons), cint(modifiers), cint(orient)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint, orient: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new10(pos.h, globalPos.h, delta, cint(buttons), cint(modifiers), cint(orient)))
-
-proc create*(T: type gen_qevent_types.QWheelEvent, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): gen_qevent_types.QWheelEvent =
-  gen_qevent_types.QWheelEvent.init(fcQWheelEvent_new11(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source)))
-
 proc pixelDelta*(self: gen_qevent_types.QWheelEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQWheelEvent_pixelDelta(self.h))
 
@@ -807,20 +772,52 @@ proc inverted*(self: gen_qevent_types.QWheelEvent, ): bool =
 proc source*(self: gen_qevent_types.QWheelEvent, ): cint =
   cint(fcQWheelEvent_source(self.h))
 
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new(pos.h, delta, cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new2(pos.h, globalPos.h, delta, cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new3(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new4(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new5(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase), cint(source)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, qt4Delta: cint, qt4Orientation: cint, buttons: cint, modifiers: cint, phase: cint, source: cint, inverted: bool): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new6(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, qt4Delta, cint(qt4Orientation), cint(buttons), cint(modifiers), cint(phase), cint(source), inverted))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new7(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    param1: gen_qevent_types.QWheelEvent): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new8(param1.h))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint, orient: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new9(pos.h, delta, cint(buttons), cint(modifiers), cint(orient)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, delta: cint, buttons: cint, modifiers: cint, orient: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new10(pos.h, globalPos.h, delta, cint(buttons), cint(modifiers), cint(orient)))
+
+proc create*(T: type gen_qevent_types.QWheelEvent,
+    pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, pixelDelta: gen_qpoint_types.QPoint, angleDelta: gen_qpoint_types.QPoint, buttons: cint, modifiers: cint, phase: cint, inverted: bool, source: cint): gen_qevent_types.QWheelEvent =
+  gen_qevent_types.QWheelEvent(h: fcQWheelEvent_new11(pos.h, globalPos.h, pixelDelta.h, angleDelta.h, cint(buttons), cint(modifiers), cint(phase), inverted, cint(source)))
+
 proc delete*(self: gen_qevent_types.QWheelEvent) =
   fcQWheelEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QTabletEvent, h: ptr cQTabletEvent): gen_qevent_types.QTabletEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QTabletEvent, t: cint, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong): gen_qevent_types.QTabletEvent =
-  gen_qevent_types.QTabletEvent.init(fcQTabletEvent_new(cint(t), pos.h, globalPos.h, device, pointerType, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), uniqueID))
-
-proc create*(T: type gen_qevent_types.QTabletEvent, t: cint, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong, button: cint, buttons: cint): gen_qevent_types.QTabletEvent =
-  gen_qevent_types.QTabletEvent.init(fcQTabletEvent_new2(cint(t), pos.h, globalPos.h, device, pointerType, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), uniqueID, cint(button), cint(buttons)))
-
-proc create*(T: type gen_qevent_types.QTabletEvent, param1: gen_qevent_types.QTabletEvent): gen_qevent_types.QTabletEvent =
-  gen_qevent_types.QTabletEvent.init(fcQTabletEvent_new3(param1.h))
-
 proc pos*(self: gen_qevent_types.QTabletEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQTabletEvent_pos(self.h))
 
@@ -887,22 +884,22 @@ proc button*(self: gen_qevent_types.QTabletEvent, ): cint =
 proc buttons*(self: gen_qevent_types.QTabletEvent, ): cint =
   cint(fcQTabletEvent_buttons(self.h))
 
+proc create*(T: type gen_qevent_types.QTabletEvent,
+    t: cint, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong): gen_qevent_types.QTabletEvent =
+  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_new(cint(t), pos.h, globalPos.h, device, pointerType, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), uniqueID))
+
+proc create*(T: type gen_qevent_types.QTabletEvent,
+    t: cint, pos: gen_qpoint_types.QPointF, globalPos: gen_qpoint_types.QPointF, device: cint, pointerType: cint, pressure: float64, xTilt: cint, yTilt: cint, tangentialPressure: float64, rotation: float64, z: cint, keyState: cint, uniqueID: clonglong, button: cint, buttons: cint): gen_qevent_types.QTabletEvent =
+  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_new2(cint(t), pos.h, globalPos.h, device, pointerType, pressure, xTilt, yTilt, tangentialPressure, rotation, z, cint(keyState), uniqueID, cint(button), cint(buttons)))
+
+proc create*(T: type gen_qevent_types.QTabletEvent,
+    param1: gen_qevent_types.QTabletEvent): gen_qevent_types.QTabletEvent =
+  gen_qevent_types.QTabletEvent(h: fcQTabletEvent_new3(param1.h))
+
 proc staticMetaObject*(_: type gen_qevent_types.QTabletEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTabletEvent_staticMetaObject())
 proc delete*(self: gen_qevent_types.QTabletEvent) =
   fcQTabletEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QNativeGestureEvent, h: ptr cQNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QNativeGestureEvent, typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, value: float64, sequenceId: culong, intArgument: culonglong): gen_qevent_types.QNativeGestureEvent =
-  gen_qevent_types.QNativeGestureEvent.init(fcQNativeGestureEvent_new(cint(typeVal), localPos.h, windowPos.h, screenPos.h, value, sequenceId, intArgument))
-
-proc create*(T: type gen_qevent_types.QNativeGestureEvent, typeVal: cint, dev: gen_qtouchdevice_types.QTouchDevice, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, value: float64, sequenceId: culong, intArgument: culonglong): gen_qevent_types.QNativeGestureEvent =
-  gen_qevent_types.QNativeGestureEvent.init(fcQNativeGestureEvent_new2(cint(typeVal), dev.h, localPos.h, windowPos.h, screenPos.h, value, sequenceId, intArgument))
-
-proc create*(T: type gen_qevent_types.QNativeGestureEvent, param1: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
-  gen_qevent_types.QNativeGestureEvent.init(fcQNativeGestureEvent_new3(param1.h))
-
 proc gestureType*(self: gen_qevent_types.QNativeGestureEvent, ): cint =
   cint(fcQNativeGestureEvent_gestureType(self.h))
 
@@ -927,38 +924,20 @@ proc screenPos*(self: gen_qevent_types.QNativeGestureEvent, ): gen_qpoint_types.
 proc device*(self: gen_qevent_types.QNativeGestureEvent, ): gen_qtouchdevice_types.QTouchDevice =
   gen_qtouchdevice_types.QTouchDevice(h: fcQNativeGestureEvent_device(self.h))
 
+proc create*(T: type gen_qevent_types.QNativeGestureEvent,
+    typeVal: cint, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, value: float64, sequenceId: culong, intArgument: culonglong): gen_qevent_types.QNativeGestureEvent =
+  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new(cint(typeVal), localPos.h, windowPos.h, screenPos.h, value, sequenceId, intArgument))
+
+proc create*(T: type gen_qevent_types.QNativeGestureEvent,
+    typeVal: cint, dev: gen_qtouchdevice_types.QTouchDevice, localPos: gen_qpoint_types.QPointF, windowPos: gen_qpoint_types.QPointF, screenPos: gen_qpoint_types.QPointF, value: float64, sequenceId: culong, intArgument: culonglong): gen_qevent_types.QNativeGestureEvent =
+  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new2(cint(typeVal), dev.h, localPos.h, windowPos.h, screenPos.h, value, sequenceId, intArgument))
+
+proc create*(T: type gen_qevent_types.QNativeGestureEvent,
+    param1: gen_qevent_types.QNativeGestureEvent): gen_qevent_types.QNativeGestureEvent =
+  gen_qevent_types.QNativeGestureEvent(h: fcQNativeGestureEvent_new3(param1.h))
+
 proc delete*(self: gen_qevent_types.QNativeGestureEvent) =
   fcQNativeGestureEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QKeyEvent, h: ptr cQKeyEvent): gen_qevent_types.QKeyEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new(cint(typeVal), key, cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new2(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, param1: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new3(param1.h))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, text: string): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new4(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new5(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new6(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new7(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new8(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep))
-
-proc create*(T: type gen_qevent_types.QKeyEvent, typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
-  gen_qevent_types.QKeyEvent.init(fcQKeyEvent_new9(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count))
-
 proc key*(self: gen_qevent_types.QKeyEvent, ): cint =
   fcQKeyEvent_key(self.h)
 
@@ -989,20 +968,44 @@ proc nativeVirtualKey*(self: gen_qevent_types.QKeyEvent, ): cuint =
 proc nativeModifiers*(self: gen_qevent_types.QKeyEvent, ): cuint =
   fcQKeyEvent_nativeModifiers(self.h)
 
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new(cint(typeVal), key, cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new2(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    param1: gen_qevent_types.QKeyEvent): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new3(param1.h))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, text: string): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new4(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new5(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new6(cint(typeVal), key, cint(modifiers), struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new7(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new8(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep))
+
+proc create*(T: type gen_qevent_types.QKeyEvent,
+    typeVal: cint, key: cint, modifiers: cint, nativeScanCode: cuint, nativeVirtualKey: cuint, nativeModifiers: cuint, text: string, autorep: bool, count: cushort): gen_qevent_types.QKeyEvent =
+  gen_qevent_types.QKeyEvent(h: fcQKeyEvent_new9(cint(typeVal), key, cint(modifiers), nativeScanCode, nativeVirtualKey, nativeModifiers, struct_miqt_string(data: text, len: csize_t(len(text))), autorep, count))
+
 proc delete*(self: gen_qevent_types.QKeyEvent) =
   fcQKeyEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QFocusEvent, h: ptr cQFocusEvent): gen_qevent_types.QFocusEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QFocusEvent, typeVal: cint): gen_qevent_types.QFocusEvent =
-  gen_qevent_types.QFocusEvent.init(fcQFocusEvent_new(cint(typeVal)))
-
-proc create*(T: type gen_qevent_types.QFocusEvent, param1: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
-  gen_qevent_types.QFocusEvent.init(fcQFocusEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QFocusEvent, typeVal: cint, reason: cint): gen_qevent_types.QFocusEvent =
-  gen_qevent_types.QFocusEvent.init(fcQFocusEvent_new3(cint(typeVal), cint(reason)))
-
 proc gotFocus*(self: gen_qevent_types.QFocusEvent, ): bool =
   fcQFocusEvent_gotFocus(self.h)
 
@@ -1012,161 +1015,146 @@ proc lostFocus*(self: gen_qevent_types.QFocusEvent, ): bool =
 proc reason*(self: gen_qevent_types.QFocusEvent, ): cint =
   cint(fcQFocusEvent_reason(self.h))
 
+proc create*(T: type gen_qevent_types.QFocusEvent,
+    typeVal: cint): gen_qevent_types.QFocusEvent =
+  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new(cint(typeVal)))
+
+proc create*(T: type gen_qevent_types.QFocusEvent,
+    param1: gen_qevent_types.QFocusEvent): gen_qevent_types.QFocusEvent =
+  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QFocusEvent,
+    typeVal: cint, reason: cint): gen_qevent_types.QFocusEvent =
+  gen_qevent_types.QFocusEvent(h: fcQFocusEvent_new3(cint(typeVal), cint(reason)))
+
 proc delete*(self: gen_qevent_types.QFocusEvent) =
   fcQFocusEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QPaintEvent, h: ptr cQPaintEvent): gen_qevent_types.QPaintEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QPaintEvent, paintRegion: gen_qregion_types.QRegion): gen_qevent_types.QPaintEvent =
-  gen_qevent_types.QPaintEvent.init(fcQPaintEvent_new(paintRegion.h))
-
-proc create*(T: type gen_qevent_types.QPaintEvent, paintRect: gen_qrect_types.QRect): gen_qevent_types.QPaintEvent =
-  gen_qevent_types.QPaintEvent.init(fcQPaintEvent_new2(paintRect.h))
-
-proc create*(T: type gen_qevent_types.QPaintEvent, param1: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
-  gen_qevent_types.QPaintEvent.init(fcQPaintEvent_new3(param1.h))
-
 proc rect*(self: gen_qevent_types.QPaintEvent, ): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPaintEvent_rect(self.h))
 
 proc region*(self: gen_qevent_types.QPaintEvent, ): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQPaintEvent_region(self.h))
 
+proc create*(T: type gen_qevent_types.QPaintEvent,
+    paintRegion: gen_qregion_types.QRegion): gen_qevent_types.QPaintEvent =
+  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new(paintRegion.h))
+
+proc create*(T: type gen_qevent_types.QPaintEvent,
+    paintRect: gen_qrect_types.QRect): gen_qevent_types.QPaintEvent =
+  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new2(paintRect.h))
+
+proc create*(T: type gen_qevent_types.QPaintEvent,
+    param1: gen_qevent_types.QPaintEvent): gen_qevent_types.QPaintEvent =
+  gen_qevent_types.QPaintEvent(h: fcQPaintEvent_new3(param1.h))
+
 proc delete*(self: gen_qevent_types.QPaintEvent) =
   fcQPaintEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QMoveEvent, h: ptr cQMoveEvent): gen_qevent_types.QMoveEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QMoveEvent, pos: gen_qpoint_types.QPoint, oldPos: gen_qpoint_types.QPoint): gen_qevent_types.QMoveEvent =
-  gen_qevent_types.QMoveEvent.init(fcQMoveEvent_new(pos.h, oldPos.h))
-
-proc create*(T: type gen_qevent_types.QMoveEvent, param1: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
-  gen_qevent_types.QMoveEvent.init(fcQMoveEvent_new2(param1.h))
-
 proc pos*(self: gen_qevent_types.QMoveEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQMoveEvent_pos(self.h))
 
 proc oldPos*(self: gen_qevent_types.QMoveEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQMoveEvent_oldPos(self.h))
 
+proc create*(T: type gen_qevent_types.QMoveEvent,
+    pos: gen_qpoint_types.QPoint, oldPos: gen_qpoint_types.QPoint): gen_qevent_types.QMoveEvent =
+  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_new(pos.h, oldPos.h))
+
+proc create*(T: type gen_qevent_types.QMoveEvent,
+    param1: gen_qevent_types.QMoveEvent): gen_qevent_types.QMoveEvent =
+  gen_qevent_types.QMoveEvent(h: fcQMoveEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QMoveEvent) =
   fcQMoveEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QExposeEvent, h: ptr cQExposeEvent): gen_qevent_types.QExposeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QExposeEvent, rgn: gen_qregion_types.QRegion): gen_qevent_types.QExposeEvent =
-  gen_qevent_types.QExposeEvent.init(fcQExposeEvent_new(rgn.h))
-
-proc create*(T: type gen_qevent_types.QExposeEvent, param1: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
-  gen_qevent_types.QExposeEvent.init(fcQExposeEvent_new2(param1.h))
-
 proc region*(self: gen_qevent_types.QExposeEvent, ): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQExposeEvent_region(self.h))
 
+proc create*(T: type gen_qevent_types.QExposeEvent,
+    rgn: gen_qregion_types.QRegion): gen_qevent_types.QExposeEvent =
+  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_new(rgn.h))
+
+proc create*(T: type gen_qevent_types.QExposeEvent,
+    param1: gen_qevent_types.QExposeEvent): gen_qevent_types.QExposeEvent =
+  gen_qevent_types.QExposeEvent(h: fcQExposeEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QExposeEvent) =
   fcQExposeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QPlatformSurfaceEvent, h: ptr cQPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent, surfaceEventType: cint): gen_qevent_types.QPlatformSurfaceEvent =
-  gen_qevent_types.QPlatformSurfaceEvent.init(fcQPlatformSurfaceEvent_new(cint(surfaceEventType)))
-
-proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent, param1: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
-  gen_qevent_types.QPlatformSurfaceEvent.init(fcQPlatformSurfaceEvent_new2(param1.h))
-
 proc surfaceEventType*(self: gen_qevent_types.QPlatformSurfaceEvent, ): cint =
   cint(fcQPlatformSurfaceEvent_surfaceEventType(self.h))
 
+proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
+    surfaceEventType: cint): gen_qevent_types.QPlatformSurfaceEvent =
+  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_new(cint(surfaceEventType)))
+
+proc create*(T: type gen_qevent_types.QPlatformSurfaceEvent,
+    param1: gen_qevent_types.QPlatformSurfaceEvent): gen_qevent_types.QPlatformSurfaceEvent =
+  gen_qevent_types.QPlatformSurfaceEvent(h: fcQPlatformSurfaceEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QPlatformSurfaceEvent) =
   fcQPlatformSurfaceEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QResizeEvent, h: ptr cQResizeEvent): gen_qevent_types.QResizeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QResizeEvent, size: gen_qsize_types.QSize, oldSize: gen_qsize_types.QSize): gen_qevent_types.QResizeEvent =
-  gen_qevent_types.QResizeEvent.init(fcQResizeEvent_new(size.h, oldSize.h))
-
-proc create*(T: type gen_qevent_types.QResizeEvent, param1: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
-  gen_qevent_types.QResizeEvent.init(fcQResizeEvent_new2(param1.h))
-
 proc size*(self: gen_qevent_types.QResizeEvent, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQResizeEvent_size(self.h))
 
 proc oldSize*(self: gen_qevent_types.QResizeEvent, ): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQResizeEvent_oldSize(self.h))
 
+proc create*(T: type gen_qevent_types.QResizeEvent,
+    size: gen_qsize_types.QSize, oldSize: gen_qsize_types.QSize): gen_qevent_types.QResizeEvent =
+  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_new(size.h, oldSize.h))
+
+proc create*(T: type gen_qevent_types.QResizeEvent,
+    param1: gen_qevent_types.QResizeEvent): gen_qevent_types.QResizeEvent =
+  gen_qevent_types.QResizeEvent(h: fcQResizeEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QResizeEvent) =
   fcQResizeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QCloseEvent, h: ptr cQCloseEvent): gen_qevent_types.QCloseEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QCloseEvent, ): gen_qevent_types.QCloseEvent =
-  gen_qevent_types.QCloseEvent.init(fcQCloseEvent_new())
-
-proc create*(T: type gen_qevent_types.QCloseEvent, param1: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
-  gen_qevent_types.QCloseEvent.init(fcQCloseEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QCloseEvent, param1: gen_qevent_types.QCloseEvent): void =
   fcQCloseEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
+  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_new())
+
+proc create*(T: type gen_qevent_types.QCloseEvent,
+    param1: gen_qevent_types.QCloseEvent): gen_qevent_types.QCloseEvent =
+  gen_qevent_types.QCloseEvent(h: fcQCloseEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QCloseEvent) =
   fcQCloseEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QIconDragEvent, h: ptr cQIconDragEvent): gen_qevent_types.QIconDragEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QIconDragEvent, ): gen_qevent_types.QIconDragEvent =
-  gen_qevent_types.QIconDragEvent.init(fcQIconDragEvent_new())
-
-proc create*(T: type gen_qevent_types.QIconDragEvent, param1: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
-  gen_qevent_types.QIconDragEvent.init(fcQIconDragEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QIconDragEvent, param1: gen_qevent_types.QIconDragEvent): void =
   fcQIconDragEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
+  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_new())
+
+proc create*(T: type gen_qevent_types.QIconDragEvent,
+    param1: gen_qevent_types.QIconDragEvent): gen_qevent_types.QIconDragEvent =
+  gen_qevent_types.QIconDragEvent(h: fcQIconDragEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QIconDragEvent) =
   fcQIconDragEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QShowEvent, h: ptr cQShowEvent): gen_qevent_types.QShowEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QShowEvent, ): gen_qevent_types.QShowEvent =
-  gen_qevent_types.QShowEvent.init(fcQShowEvent_new())
-
-proc create*(T: type gen_qevent_types.QShowEvent, param1: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
-  gen_qevent_types.QShowEvent.init(fcQShowEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QShowEvent, param1: gen_qevent_types.QShowEvent): void =
   fcQShowEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
+  gen_qevent_types.QShowEvent(h: fcQShowEvent_new())
+
+proc create*(T: type gen_qevent_types.QShowEvent,
+    param1: gen_qevent_types.QShowEvent): gen_qevent_types.QShowEvent =
+  gen_qevent_types.QShowEvent(h: fcQShowEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QShowEvent) =
   fcQShowEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QHideEvent, h: ptr cQHideEvent): gen_qevent_types.QHideEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QHideEvent, ): gen_qevent_types.QHideEvent =
-  gen_qevent_types.QHideEvent.init(fcQHideEvent_new())
-
-proc create*(T: type gen_qevent_types.QHideEvent, param1: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
-  gen_qevent_types.QHideEvent.init(fcQHideEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QHideEvent, param1: gen_qevent_types.QHideEvent): void =
   fcQHideEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
+  gen_qevent_types.QHideEvent(h: fcQHideEvent_new())
+
+proc create*(T: type gen_qevent_types.QHideEvent,
+    param1: gen_qevent_types.QHideEvent): gen_qevent_types.QHideEvent =
+  gen_qevent_types.QHideEvent(h: fcQHideEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QHideEvent) =
   fcQHideEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QContextMenuEvent, h: ptr cQContextMenuEvent): gen_qevent_types.QContextMenuEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QContextMenuEvent, reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint, modifiers: cint): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent.init(fcQContextMenuEvent_new(cint(reason), pos.h, globalPos.h, cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QContextMenuEvent, reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent.init(fcQContextMenuEvent_new2(cint(reason), pos.h, globalPos.h))
-
-proc create*(T: type gen_qevent_types.QContextMenuEvent, reason: cint, pos: gen_qpoint_types.QPoint): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent.init(fcQContextMenuEvent_new3(cint(reason), pos.h))
-
-proc create*(T: type gen_qevent_types.QContextMenuEvent, param1: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
-  gen_qevent_types.QContextMenuEvent.init(fcQContextMenuEvent_new4(param1.h))
-
 proc x*(self: gen_qevent_types.QContextMenuEvent, ): cint =
   fcQContextMenuEvent_x(self.h)
 
@@ -1188,24 +1176,24 @@ proc globalPos*(self: gen_qevent_types.QContextMenuEvent, ): gen_qpoint_types.QP
 proc reason*(self: gen_qevent_types.QContextMenuEvent, ): cint =
   cint(fcQContextMenuEvent_reason(self.h))
 
+proc create*(T: type gen_qevent_types.QContextMenuEvent,
+    reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint, modifiers: cint): gen_qevent_types.QContextMenuEvent =
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new(cint(reason), pos.h, globalPos.h, cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QContextMenuEvent,
+    reason: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint): gen_qevent_types.QContextMenuEvent =
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new2(cint(reason), pos.h, globalPos.h))
+
+proc create*(T: type gen_qevent_types.QContextMenuEvent,
+    reason: cint, pos: gen_qpoint_types.QPoint): gen_qevent_types.QContextMenuEvent =
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new3(cint(reason), pos.h))
+
+proc create*(T: type gen_qevent_types.QContextMenuEvent,
+    param1: gen_qevent_types.QContextMenuEvent): gen_qevent_types.QContextMenuEvent =
+  gen_qevent_types.QContextMenuEvent(h: fcQContextMenuEvent_new4(param1.h))
+
 proc delete*(self: gen_qevent_types.QContextMenuEvent) =
   fcQContextMenuEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QInputMethodEvent, h: ptr cQInputMethodEvent): gen_qevent_types.QInputMethodEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QInputMethodEvent, ): gen_qevent_types.QInputMethodEvent =
-  gen_qevent_types.QInputMethodEvent.init(fcQInputMethodEvent_new())
-
-proc create*(T: type gen_qevent_types.QInputMethodEvent, preeditText: string, attributes: seq[gen_qevent_types.QInputMethodEventAttribute]): gen_qevent_types.QInputMethodEvent =
-  var attributes_CArray = newSeq[pointer](len(attributes))
-  for i in 0..<len(attributes):
-    attributes_CArray[i] = attributes[i].h
-
-  gen_qevent_types.QInputMethodEvent.init(fcQInputMethodEvent_new2(struct_miqt_string(data: preeditText, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))))
-
-proc create*(T: type gen_qevent_types.QInputMethodEvent, other: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
-  gen_qevent_types.QInputMethodEvent.init(fcQInputMethodEvent_new3(other.h))
-
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string): void =
   fcQInputMethodEvent_setCommitString(self.h, struct_miqt_string(data: commitString, len: csize_t(len(commitString))))
 
@@ -1241,17 +1229,23 @@ proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: st
 proc setCommitString*(self: gen_qevent_types.QInputMethodEvent, commitString: string, replaceFrom: cint, replaceLength: cint): void =
   fcQInputMethodEvent_setCommitString3(self.h, struct_miqt_string(data: commitString, len: csize_t(len(commitString))), replaceFrom, replaceLength)
 
+proc create*(T: type gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new())
+
+proc create*(T: type gen_qevent_types.QInputMethodEvent,
+    preeditText: string, attributes: seq[gen_qevent_types.QInputMethodEventAttribute]): gen_qevent_types.QInputMethodEvent =
+  var attributes_CArray = newSeq[pointer](len(attributes))
+  for i in 0..<len(attributes):
+    attributes_CArray[i] = attributes[i].h
+
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new2(struct_miqt_string(data: preeditText, len: csize_t(len(preeditText))), struct_miqt_array(len: csize_t(len(attributes)), data: if len(attributes) == 0: nil else: addr(attributes_CArray[0]))))
+
+proc create*(T: type gen_qevent_types.QInputMethodEvent,
+    other: gen_qevent_types.QInputMethodEvent): gen_qevent_types.QInputMethodEvent =
+  gen_qevent_types.QInputMethodEvent(h: fcQInputMethodEvent_new3(other.h))
+
 proc delete*(self: gen_qevent_types.QInputMethodEvent) =
   fcQInputMethodEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QInputMethodQueryEvent, h: ptr cQInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QInputMethodQueryEvent, queries: cint): gen_qevent_types.QInputMethodQueryEvent =
-  gen_qevent_types.QInputMethodQueryEvent.init(fcQInputMethodQueryEvent_new(cint(queries)))
-
-proc create*(T: type gen_qevent_types.QInputMethodQueryEvent, param1: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
-  gen_qevent_types.QInputMethodQueryEvent.init(fcQInputMethodQueryEvent_new2(param1.h))
-
 proc queries*(self: gen_qevent_types.QInputMethodQueryEvent, ): cint =
   cint(fcQInputMethodQueryEvent_queries(self.h))
 
@@ -1261,20 +1255,16 @@ proc setValue*(self: gen_qevent_types.QInputMethodQueryEvent, query: cint, value
 proc value*(self: gen_qevent_types.QInputMethodQueryEvent, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQInputMethodQueryEvent_value(self.h, cint(query)))
 
+proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
+    queries: cint): gen_qevent_types.QInputMethodQueryEvent =
+  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_new(cint(queries)))
+
+proc create*(T: type gen_qevent_types.QInputMethodQueryEvent,
+    param1: gen_qevent_types.QInputMethodQueryEvent): gen_qevent_types.QInputMethodQueryEvent =
+  gen_qevent_types.QInputMethodQueryEvent(h: fcQInputMethodQueryEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QInputMethodQueryEvent) =
   fcQInputMethodQueryEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QDropEvent, h: ptr cQDropEvent): gen_qevent_types.QDropEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QDropEvent, pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDropEvent =
-  gen_qevent_types.QDropEvent.init(fcQDropEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QDropEvent, param1: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
-  gen_qevent_types.QDropEvent.init(fcQDropEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QDropEvent, pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint): gen_qevent_types.QDropEvent =
-  gen_qevent_types.QDropEvent.init(fcQDropEvent_new3(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
-
 proc pos*(self: gen_qevent_types.QDropEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQDropEvent_pos(self.h))
 
@@ -1308,20 +1298,20 @@ proc source*(self: gen_qevent_types.QDropEvent, ): gen_qobject_types.QObject =
 proc mimeData*(self: gen_qevent_types.QDropEvent, ): gen_qmimedata_types.QMimeData =
   gen_qmimedata_types.QMimeData(h: fcQDropEvent_mimeData(self.h))
 
+proc create*(T: type gen_qevent_types.QDropEvent,
+    pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDropEvent =
+  gen_qevent_types.QDropEvent(h: fcQDropEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QDropEvent,
+    param1: gen_qevent_types.QDropEvent): gen_qevent_types.QDropEvent =
+  gen_qevent_types.QDropEvent(h: fcQDropEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QDropEvent,
+    pos: gen_qpoint_types.QPointF, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint): gen_qevent_types.QDropEvent =
+  gen_qevent_types.QDropEvent(h: fcQDropEvent_new3(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
+
 proc delete*(self: gen_qevent_types.QDropEvent) =
   fcQDropEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QDragMoveEvent, h: ptr cQDragMoveEvent): gen_qevent_types.QDragMoveEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QDragMoveEvent, pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDragMoveEvent =
-  gen_qevent_types.QDragMoveEvent.init(fcQDragMoveEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QDragMoveEvent, param1: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
-  gen_qevent_types.QDragMoveEvent.init(fcQDragMoveEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QDragMoveEvent, pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint): gen_qevent_types.QDragMoveEvent =
-  gen_qevent_types.QDragMoveEvent.init(fcQDragMoveEvent_new3(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
-
 proc answerRect*(self: gen_qevent_types.QDragMoveEvent, ): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQDragMoveEvent_answerRect(self.h))
 
@@ -1337,45 +1327,45 @@ proc accept*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): v
 proc ignore*(self: gen_qevent_types.QDragMoveEvent, r: gen_qrect_types.QRect): void =
   fcQDragMoveEvent_ignoreWithQRect(self.h, r.h)
 
+proc create*(T: type gen_qevent_types.QDragMoveEvent,
+    pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDragMoveEvent =
+  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QDragMoveEvent,
+    param1: gen_qevent_types.QDragMoveEvent): gen_qevent_types.QDragMoveEvent =
+  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QDragMoveEvent,
+    pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint, typeVal: cint): gen_qevent_types.QDragMoveEvent =
+  gen_qevent_types.QDragMoveEvent(h: fcQDragMoveEvent_new3(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers), cint(typeVal)))
+
 proc delete*(self: gen_qevent_types.QDragMoveEvent) =
   fcQDragMoveEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QDragEnterEvent, h: ptr cQDragEnterEvent): gen_qevent_types.QDragEnterEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QDragEnterEvent, pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDragEnterEvent =
-  gen_qevent_types.QDragEnterEvent.init(fcQDragEnterEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QDragEnterEvent, param1: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
-  gen_qevent_types.QDragEnterEvent.init(fcQDragEnterEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QDragEnterEvent, param1: gen_qevent_types.QDragEnterEvent): void =
   fcQDragEnterEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QDragEnterEvent,
+    pos: gen_qpoint_types.QPoint, actions: cint, data: gen_qmimedata_types.QMimeData, buttons: cint, modifiers: cint): gen_qevent_types.QDragEnterEvent =
+  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_new(pos.h, cint(actions), data.h, cint(buttons), cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QDragEnterEvent,
+    param1: gen_qevent_types.QDragEnterEvent): gen_qevent_types.QDragEnterEvent =
+  gen_qevent_types.QDragEnterEvent(h: fcQDragEnterEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QDragEnterEvent) =
   fcQDragEnterEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QDragLeaveEvent, h: ptr cQDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QDragLeaveEvent, ): gen_qevent_types.QDragLeaveEvent =
-  gen_qevent_types.QDragLeaveEvent.init(fcQDragLeaveEvent_new())
-
-proc create*(T: type gen_qevent_types.QDragLeaveEvent, param1: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
-  gen_qevent_types.QDragLeaveEvent.init(fcQDragLeaveEvent_new2(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QDragLeaveEvent, param1: gen_qevent_types.QDragLeaveEvent): void =
   fcQDragLeaveEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
+  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_new())
+
+proc create*(T: type gen_qevent_types.QDragLeaveEvent,
+    param1: gen_qevent_types.QDragLeaveEvent): gen_qevent_types.QDragLeaveEvent =
+  gen_qevent_types.QDragLeaveEvent(h: fcQDragLeaveEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QDragLeaveEvent) =
   fcQDragLeaveEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QHelpEvent, h: ptr cQHelpEvent): gen_qevent_types.QHelpEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QHelpEvent, typeVal: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint): gen_qevent_types.QHelpEvent =
-  gen_qevent_types.QHelpEvent.init(fcQHelpEvent_new(cint(typeVal), pos.h, globalPos.h))
-
-proc create*(T: type gen_qevent_types.QHelpEvent, param1: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
-  gen_qevent_types.QHelpEvent.init(fcQHelpEvent_new2(param1.h))
-
 proc x*(self: gen_qevent_types.QHelpEvent, ): cint =
   fcQHelpEvent_x(self.h)
 
@@ -1394,71 +1384,65 @@ proc pos*(self: gen_qevent_types.QHelpEvent, ): gen_qpoint_types.QPoint =
 proc globalPos*(self: gen_qevent_types.QHelpEvent, ): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQHelpEvent_globalPos(self.h))
 
+proc create*(T: type gen_qevent_types.QHelpEvent,
+    typeVal: cint, pos: gen_qpoint_types.QPoint, globalPos: gen_qpoint_types.QPoint): gen_qevent_types.QHelpEvent =
+  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_new(cint(typeVal), pos.h, globalPos.h))
+
+proc create*(T: type gen_qevent_types.QHelpEvent,
+    param1: gen_qevent_types.QHelpEvent): gen_qevent_types.QHelpEvent =
+  gen_qevent_types.QHelpEvent(h: fcQHelpEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QHelpEvent) =
   fcQHelpEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QStatusTipEvent, h: ptr cQStatusTipEvent): gen_qevent_types.QStatusTipEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QStatusTipEvent, tip: string): gen_qevent_types.QStatusTipEvent =
-  gen_qevent_types.QStatusTipEvent.init(fcQStatusTipEvent_new(struct_miqt_string(data: tip, len: csize_t(len(tip)))))
-
-proc create*(T: type gen_qevent_types.QStatusTipEvent, param1: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
-  gen_qevent_types.QStatusTipEvent.init(fcQStatusTipEvent_new2(param1.h))
-
 proc tip*(self: gen_qevent_types.QStatusTipEvent, ): string =
   let v_ms = fcQStatusTipEvent_tip(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
+proc create*(T: type gen_qevent_types.QStatusTipEvent,
+    tip: string): gen_qevent_types.QStatusTipEvent =
+  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new(struct_miqt_string(data: tip, len: csize_t(len(tip)))))
+
+proc create*(T: type gen_qevent_types.QStatusTipEvent,
+    param1: gen_qevent_types.QStatusTipEvent): gen_qevent_types.QStatusTipEvent =
+  gen_qevent_types.QStatusTipEvent(h: fcQStatusTipEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QStatusTipEvent) =
   fcQStatusTipEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QWhatsThisClickedEvent, h: ptr cQWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent, href: string): gen_qevent_types.QWhatsThisClickedEvent =
-  gen_qevent_types.QWhatsThisClickedEvent.init(fcQWhatsThisClickedEvent_new(struct_miqt_string(data: href, len: csize_t(len(href)))))
-
-proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent, param1: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
-  gen_qevent_types.QWhatsThisClickedEvent.init(fcQWhatsThisClickedEvent_new2(param1.h))
-
 proc href*(self: gen_qevent_types.QWhatsThisClickedEvent, ): string =
   let v_ms = fcQWhatsThisClickedEvent_href(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
+proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
+    href: string): gen_qevent_types.QWhatsThisClickedEvent =
+  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new(struct_miqt_string(data: href, len: csize_t(len(href)))))
+
+proc create*(T: type gen_qevent_types.QWhatsThisClickedEvent,
+    param1: gen_qevent_types.QWhatsThisClickedEvent): gen_qevent_types.QWhatsThisClickedEvent =
+  gen_qevent_types.QWhatsThisClickedEvent(h: fcQWhatsThisClickedEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QWhatsThisClickedEvent) =
   fcQWhatsThisClickedEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QActionEvent, h: ptr cQActionEvent): gen_qevent_types.QActionEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QActionEvent, typeVal: cint, action: ptr QAction): gen_qevent_types.QActionEvent =
-  gen_qevent_types.QActionEvent.init(fcQActionEvent_new(typeVal, action))
-
-proc create*(T: type gen_qevent_types.QActionEvent, param1: gen_qevent_types.QActionEvent): gen_qevent_types.QActionEvent =
-  gen_qevent_types.QActionEvent.init(fcQActionEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QActionEvent, typeVal: cint, action: ptr QAction, before: ptr QAction): gen_qevent_types.QActionEvent =
-  gen_qevent_types.QActionEvent.init(fcQActionEvent_new3(typeVal, action, before))
-
 proc operatorAssign*(self: gen_qevent_types.QActionEvent, param1: gen_qevent_types.QActionEvent): void =
   fcQActionEvent_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QActionEvent,
+    typeVal: cint, action: ptr QAction): gen_qevent_types.QActionEvent =
+  gen_qevent_types.QActionEvent(h: fcQActionEvent_new(typeVal, action))
+
+proc create*(T: type gen_qevent_types.QActionEvent,
+    param1: gen_qevent_types.QActionEvent): gen_qevent_types.QActionEvent =
+  gen_qevent_types.QActionEvent(h: fcQActionEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QActionEvent,
+    typeVal: cint, action: ptr QAction, before: ptr QAction): gen_qevent_types.QActionEvent =
+  gen_qevent_types.QActionEvent(h: fcQActionEvent_new3(typeVal, action, before))
+
 proc delete*(self: gen_qevent_types.QActionEvent) =
   fcQActionEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QFileOpenEvent, h: ptr cQFileOpenEvent): gen_qevent_types.QFileOpenEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QFileOpenEvent, file: string): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent.init(fcQFileOpenEvent_new(struct_miqt_string(data: file, len: csize_t(len(file)))))
-
-proc create*(T: type gen_qevent_types.QFileOpenEvent, url: gen_qurl_types.QUrl): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent.init(fcQFileOpenEvent_new2(url.h))
-
-proc create*(T: type gen_qevent_types.QFileOpenEvent, param1: gen_qevent_types.QFileOpenEvent): gen_qevent_types.QFileOpenEvent =
-  gen_qevent_types.QFileOpenEvent.init(fcQFileOpenEvent_new3(param1.h))
-
 proc file*(self: gen_qevent_types.QFileOpenEvent, ): string =
   let v_ms = fcQFileOpenEvent_file(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
@@ -1471,34 +1455,33 @@ proc url*(self: gen_qevent_types.QFileOpenEvent, ): gen_qurl_types.QUrl =
 proc openFile*(self: gen_qevent_types.QFileOpenEvent, file: gen_qfile_types.QFile, flags: cint): bool =
   fcQFileOpenEvent_openFile(self.h, file.h, cint(flags))
 
+proc create*(T: type gen_qevent_types.QFileOpenEvent,
+    file: string): gen_qevent_types.QFileOpenEvent =
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new(struct_miqt_string(data: file, len: csize_t(len(file)))))
+
+proc create*(T: type gen_qevent_types.QFileOpenEvent,
+    url: gen_qurl_types.QUrl): gen_qevent_types.QFileOpenEvent =
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new2(url.h))
+
+proc create*(T: type gen_qevent_types.QFileOpenEvent,
+    param1: gen_qevent_types.QFileOpenEvent): gen_qevent_types.QFileOpenEvent =
+  gen_qevent_types.QFileOpenEvent(h: fcQFileOpenEvent_new3(param1.h))
+
 proc delete*(self: gen_qevent_types.QFileOpenEvent) =
   fcQFileOpenEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QToolBarChangeEvent, h: ptr cQToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QToolBarChangeEvent, t: bool): gen_qevent_types.QToolBarChangeEvent =
-  gen_qevent_types.QToolBarChangeEvent.init(fcQToolBarChangeEvent_new(t))
-
-proc create*(T: type gen_qevent_types.QToolBarChangeEvent, param1: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
-  gen_qevent_types.QToolBarChangeEvent.init(fcQToolBarChangeEvent_new2(param1.h))
-
 proc toggle*(self: gen_qevent_types.QToolBarChangeEvent, ): bool =
   fcQToolBarChangeEvent_toggle(self.h)
 
+proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
+    t: bool): gen_qevent_types.QToolBarChangeEvent =
+  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_new(t))
+
+proc create*(T: type gen_qevent_types.QToolBarChangeEvent,
+    param1: gen_qevent_types.QToolBarChangeEvent): gen_qevent_types.QToolBarChangeEvent =
+  gen_qevent_types.QToolBarChangeEvent(h: fcQToolBarChangeEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QToolBarChangeEvent) =
   fcQToolBarChangeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QShortcutEvent, h: ptr cQShortcutEvent): gen_qevent_types.QShortcutEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QShortcutEvent, key: gen_qkeysequence_types.QKeySequence, id: cint): gen_qevent_types.QShortcutEvent =
-  gen_qevent_types.QShortcutEvent.init(fcQShortcutEvent_new(key.h, id))
-
-proc create*(T: type gen_qevent_types.QShortcutEvent, param1: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
-  gen_qevent_types.QShortcutEvent.init(fcQShortcutEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QShortcutEvent, key: gen_qkeysequence_types.QKeySequence, id: cint, ambiguous: bool): gen_qevent_types.QShortcutEvent =
-  gen_qevent_types.QShortcutEvent.init(fcQShortcutEvent_new3(key.h, id, ambiguous))
-
 proc key*(self: gen_qevent_types.QShortcutEvent, ): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQShortcutEvent_key(self.h))
 
@@ -1508,37 +1491,40 @@ proc shortcutId*(self: gen_qevent_types.QShortcutEvent, ): cint =
 proc isAmbiguous*(self: gen_qevent_types.QShortcutEvent, ): bool =
   fcQShortcutEvent_isAmbiguous(self.h)
 
+proc create*(T: type gen_qevent_types.QShortcutEvent,
+    key: gen_qkeysequence_types.QKeySequence, id: cint): gen_qevent_types.QShortcutEvent =
+  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new(key.h, id))
+
+proc create*(T: type gen_qevent_types.QShortcutEvent,
+    param1: gen_qevent_types.QShortcutEvent): gen_qevent_types.QShortcutEvent =
+  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QShortcutEvent,
+    key: gen_qkeysequence_types.QKeySequence, id: cint, ambiguous: bool): gen_qevent_types.QShortcutEvent =
+  gen_qevent_types.QShortcutEvent(h: fcQShortcutEvent_new3(key.h, id, ambiguous))
+
 proc delete*(self: gen_qevent_types.QShortcutEvent) =
   fcQShortcutEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QWindowStateChangeEvent, h: ptr cQWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QWindowStateChangeEvent, aOldState: cint): gen_qevent_types.QWindowStateChangeEvent =
-  gen_qevent_types.QWindowStateChangeEvent.init(fcQWindowStateChangeEvent_new(cint(aOldState)))
-
-proc create*(T: type gen_qevent_types.QWindowStateChangeEvent, param1: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
-  gen_qevent_types.QWindowStateChangeEvent.init(fcQWindowStateChangeEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QWindowStateChangeEvent, aOldState: cint, isOverride: bool): gen_qevent_types.QWindowStateChangeEvent =
-  gen_qevent_types.QWindowStateChangeEvent.init(fcQWindowStateChangeEvent_new3(cint(aOldState), isOverride))
-
 proc oldState*(self: gen_qevent_types.QWindowStateChangeEvent, ): cint =
   cint(fcQWindowStateChangeEvent_oldState(self.h))
 
 proc isOverride*(self: gen_qevent_types.QWindowStateChangeEvent, ): bool =
   fcQWindowStateChangeEvent_isOverride(self.h)
 
+proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
+    aOldState: cint): gen_qevent_types.QWindowStateChangeEvent =
+  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new(cint(aOldState)))
+
+proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
+    param1: gen_qevent_types.QWindowStateChangeEvent): gen_qevent_types.QWindowStateChangeEvent =
+  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QWindowStateChangeEvent,
+    aOldState: cint, isOverride: bool): gen_qevent_types.QWindowStateChangeEvent =
+  gen_qevent_types.QWindowStateChangeEvent(h: fcQWindowStateChangeEvent_new3(cint(aOldState), isOverride))
+
 proc delete*(self: gen_qevent_types.QWindowStateChangeEvent) =
   fcQWindowStateChangeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QPointingDeviceUniqueId, h: ptr cQPointingDeviceUniqueId): gen_qevent_types.QPointingDeviceUniqueId =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QPointingDeviceUniqueId, ): gen_qevent_types.QPointingDeviceUniqueId =
-  gen_qevent_types.QPointingDeviceUniqueId.init(fcQPointingDeviceUniqueId_new())
-
-proc create*(T: type gen_qevent_types.QPointingDeviceUniqueId, param1: gen_qevent_types.QPointingDeviceUniqueId): gen_qevent_types.QPointingDeviceUniqueId =
-  gen_qevent_types.QPointingDeviceUniqueId.init(fcQPointingDeviceUniqueId_new2(param1.h))
-
 proc fromNumericId*(_: type gen_qevent_types.QPointingDeviceUniqueId, id: clonglong): gen_qevent_types.QPointingDeviceUniqueId =
   gen_qevent_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_fromNumericId(id))
 
@@ -1548,35 +1534,17 @@ proc isValid*(self: gen_qevent_types.QPointingDeviceUniqueId, ): bool =
 proc numericId*(self: gen_qevent_types.QPointingDeviceUniqueId, ): clonglong =
   fcQPointingDeviceUniqueId_numericId(self.h)
 
+proc create*(T: type gen_qevent_types.QPointingDeviceUniqueId): gen_qevent_types.QPointingDeviceUniqueId =
+  gen_qevent_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new())
+
+proc create*(T: type gen_qevent_types.QPointingDeviceUniqueId,
+    param1: gen_qevent_types.QPointingDeviceUniqueId): gen_qevent_types.QPointingDeviceUniqueId =
+  gen_qevent_types.QPointingDeviceUniqueId(h: fcQPointingDeviceUniqueId_new2(param1.h))
+
 proc staticMetaObject*(_: type gen_qevent_types.QPointingDeviceUniqueId): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPointingDeviceUniqueId_staticMetaObject())
 proc delete*(self: gen_qevent_types.QPointingDeviceUniqueId) =
   fcQPointingDeviceUniqueId_delete(self.h)
-
-func init*(T: type gen_qevent_types.QTouchEvent, h: ptr cQTouchEvent): gen_qevent_types.QTouchEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QTouchEvent, eventType: cint): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new(cint(eventType)))
-
-proc create*(T: type gen_qevent_types.QTouchEvent, param1: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new2(param1.h))
-
-proc create*(T: type gen_qevent_types.QTouchEvent, eventType: cint, device: gen_qtouchdevice_types.QTouchDevice): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new3(cint(eventType), device.h))
-
-proc create*(T: type gen_qevent_types.QTouchEvent, eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new4(cint(eventType), device.h, cint(modifiers)))
-
-proc create*(T: type gen_qevent_types.QTouchEvent, eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint): gen_qevent_types.QTouchEvent =
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new5(cint(eventType), device.h, cint(modifiers), cint(touchPointStates)))
-
-proc create*(T: type gen_qevent_types.QTouchEvent, eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint, touchPoints: seq[gen_qevent_types.QTouchEventTouchPoint]): gen_qevent_types.QTouchEvent =
-  var touchPoints_CArray = newSeq[pointer](len(touchPoints))
-  for i in 0..<len(touchPoints):
-    touchPoints_CArray[i] = touchPoints[i].h
-
-  gen_qevent_types.QTouchEvent.init(fcQTouchEvent_new6(cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))))
-
 proc window*(self: gen_qevent_types.QTouchEvent, ): gen_qwindow_types.QWindow =
   gen_qwindow_types.QWindow(h: fcQTouchEvent_window(self.h))
 
@@ -1616,17 +1584,36 @@ proc setTouchPoints*(self: gen_qevent_types.QTouchEvent, atouchPoints: seq[gen_q
 proc setDevice*(self: gen_qevent_types.QTouchEvent, adevice: gen_qtouchdevice_types.QTouchDevice): void =
   fcQTouchEvent_setDevice(self.h, adevice.h)
 
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    eventType: cint): gen_qevent_types.QTouchEvent =
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new(cint(eventType)))
+
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    param1: gen_qevent_types.QTouchEvent): gen_qevent_types.QTouchEvent =
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new2(param1.h))
+
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice): gen_qevent_types.QTouchEvent =
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new3(cint(eventType), device.h))
+
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint): gen_qevent_types.QTouchEvent =
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new4(cint(eventType), device.h, cint(modifiers)))
+
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint): gen_qevent_types.QTouchEvent =
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new5(cint(eventType), device.h, cint(modifiers), cint(touchPointStates)))
+
+proc create*(T: type gen_qevent_types.QTouchEvent,
+    eventType: cint, device: gen_qtouchdevice_types.QTouchDevice, modifiers: cint, touchPointStates: cint, touchPoints: seq[gen_qevent_types.QTouchEventTouchPoint]): gen_qevent_types.QTouchEvent =
+  var touchPoints_CArray = newSeq[pointer](len(touchPoints))
+  for i in 0..<len(touchPoints):
+    touchPoints_CArray[i] = touchPoints[i].h
+
+  gen_qevent_types.QTouchEvent(h: fcQTouchEvent_new6(cint(eventType), device.h, cint(modifiers), cint(touchPointStates), struct_miqt_array(len: csize_t(len(touchPoints)), data: if len(touchPoints) == 0: nil else: addr(touchPoints_CArray[0]))))
+
 proc delete*(self: gen_qevent_types.QTouchEvent) =
   fcQTouchEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QScrollPrepareEvent, h: ptr cQScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QScrollPrepareEvent, startPos: gen_qpoint_types.QPointF): gen_qevent_types.QScrollPrepareEvent =
-  gen_qevent_types.QScrollPrepareEvent.init(fcQScrollPrepareEvent_new(startPos.h))
-
-proc create*(T: type gen_qevent_types.QScrollPrepareEvent, param1: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
-  gen_qevent_types.QScrollPrepareEvent.init(fcQScrollPrepareEvent_new2(param1.h))
-
 proc startPos*(self: gen_qevent_types.QScrollPrepareEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQScrollPrepareEvent_startPos(self.h))
 
@@ -1648,17 +1635,16 @@ proc setContentPosRange*(self: gen_qevent_types.QScrollPrepareEvent, rect: gen_q
 proc setContentPos*(self: gen_qevent_types.QScrollPrepareEvent, pos: gen_qpoint_types.QPointF): void =
   fcQScrollPrepareEvent_setContentPos(self.h, pos.h)
 
+proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
+    startPos: gen_qpoint_types.QPointF): gen_qevent_types.QScrollPrepareEvent =
+  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_new(startPos.h))
+
+proc create*(T: type gen_qevent_types.QScrollPrepareEvent,
+    param1: gen_qevent_types.QScrollPrepareEvent): gen_qevent_types.QScrollPrepareEvent =
+  gen_qevent_types.QScrollPrepareEvent(h: fcQScrollPrepareEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QScrollPrepareEvent) =
   fcQScrollPrepareEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QScrollEvent, h: ptr cQScrollEvent): gen_qevent_types.QScrollEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QScrollEvent, contentPos: gen_qpoint_types.QPointF, overshoot: gen_qpoint_types.QPointF, scrollState: cint): gen_qevent_types.QScrollEvent =
-  gen_qevent_types.QScrollEvent.init(fcQScrollEvent_new(contentPos.h, overshoot.h, cint(scrollState)))
-
-proc create*(T: type gen_qevent_types.QScrollEvent, param1: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
-  gen_qevent_types.QScrollEvent.init(fcQScrollEvent_new2(param1.h))
-
 proc contentPos*(self: gen_qevent_types.QScrollEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQScrollEvent_contentPos(self.h))
 
@@ -1668,68 +1654,62 @@ proc overshootDistance*(self: gen_qevent_types.QScrollEvent, ): gen_qpoint_types
 proc scrollState*(self: gen_qevent_types.QScrollEvent, ): cint =
   cint(fcQScrollEvent_scrollState(self.h))
 
+proc create*(T: type gen_qevent_types.QScrollEvent,
+    contentPos: gen_qpoint_types.QPointF, overshoot: gen_qpoint_types.QPointF, scrollState: cint): gen_qevent_types.QScrollEvent =
+  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_new(contentPos.h, overshoot.h, cint(scrollState)))
+
+proc create*(T: type gen_qevent_types.QScrollEvent,
+    param1: gen_qevent_types.QScrollEvent): gen_qevent_types.QScrollEvent =
+  gen_qevent_types.QScrollEvent(h: fcQScrollEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QScrollEvent) =
   fcQScrollEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QScreenOrientationChangeEvent, h: ptr cQScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent, screen: gen_qscreen_types.QScreen, orientation: cint): gen_qevent_types.QScreenOrientationChangeEvent =
-  gen_qevent_types.QScreenOrientationChangeEvent.init(fcQScreenOrientationChangeEvent_new(screen.h, cint(orientation)))
-
-proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent, param1: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
-  gen_qevent_types.QScreenOrientationChangeEvent.init(fcQScreenOrientationChangeEvent_new2(param1.h))
-
 proc screen*(self: gen_qevent_types.QScreenOrientationChangeEvent, ): gen_qscreen_types.QScreen =
   gen_qscreen_types.QScreen(h: fcQScreenOrientationChangeEvent_screen(self.h))
 
 proc orientation*(self: gen_qevent_types.QScreenOrientationChangeEvent, ): cint =
   cint(fcQScreenOrientationChangeEvent_orientation(self.h))
 
+proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
+    screen: gen_qscreen_types.QScreen, orientation: cint): gen_qevent_types.QScreenOrientationChangeEvent =
+  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_new(screen.h, cint(orientation)))
+
+proc create*(T: type gen_qevent_types.QScreenOrientationChangeEvent,
+    param1: gen_qevent_types.QScreenOrientationChangeEvent): gen_qevent_types.QScreenOrientationChangeEvent =
+  gen_qevent_types.QScreenOrientationChangeEvent(h: fcQScreenOrientationChangeEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QScreenOrientationChangeEvent) =
   fcQScreenOrientationChangeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QApplicationStateChangeEvent, h: ptr cQApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent, state: cint): gen_qevent_types.QApplicationStateChangeEvent =
-  gen_qevent_types.QApplicationStateChangeEvent.init(fcQApplicationStateChangeEvent_new(cint(state)))
-
-proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent, param1: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
-  gen_qevent_types.QApplicationStateChangeEvent.init(fcQApplicationStateChangeEvent_new2(param1.h))
-
 proc applicationState*(self: gen_qevent_types.QApplicationStateChangeEvent, ): cint =
   cint(fcQApplicationStateChangeEvent_applicationState(self.h))
 
+proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
+    state: cint): gen_qevent_types.QApplicationStateChangeEvent =
+  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_new(cint(state)))
+
+proc create*(T: type gen_qevent_types.QApplicationStateChangeEvent,
+    param1: gen_qevent_types.QApplicationStateChangeEvent): gen_qevent_types.QApplicationStateChangeEvent =
+  gen_qevent_types.QApplicationStateChangeEvent(h: fcQApplicationStateChangeEvent_new2(param1.h))
+
 proc delete*(self: gen_qevent_types.QApplicationStateChangeEvent) =
   fcQApplicationStateChangeEvent_delete(self.h)
-
-func init*(T: type gen_qevent_types.QInputMethodEventAttribute, h: ptr cQInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QInputMethodEventAttribute, typ: cint, s: cint, l: cint, val: gen_qvariant_types.QVariant): gen_qevent_types.QInputMethodEventAttribute =
-  gen_qevent_types.QInputMethodEventAttribute.init(fcQInputMethodEventAttribute_new(cint(typ), s, l, val.h))
-
-proc create*(T: type gen_qevent_types.QInputMethodEventAttribute, typ: cint, s: cint, l: cint): gen_qevent_types.QInputMethodEventAttribute =
-  gen_qevent_types.QInputMethodEventAttribute.init(fcQInputMethodEventAttribute_new2(cint(typ), s, l))
-
-proc create*(T: type gen_qevent_types.QInputMethodEventAttribute, param1: gen_qevent_types.QInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
-  gen_qevent_types.QInputMethodEventAttribute.init(fcQInputMethodEventAttribute_new3(param1.h))
-
 proc operatorAssign*(self: gen_qevent_types.QInputMethodEventAttribute, param1: gen_qevent_types.QInputMethodEventAttribute): void =
   fcQInputMethodEventAttribute_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
+    typ: cint, s: cint, l: cint, val: gen_qvariant_types.QVariant): gen_qevent_types.QInputMethodEventAttribute =
+  gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new(cint(typ), s, l, val.h))
+
+proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
+    typ: cint, s: cint, l: cint): gen_qevent_types.QInputMethodEventAttribute =
+  gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new2(cint(typ), s, l))
+
+proc create*(T: type gen_qevent_types.QInputMethodEventAttribute,
+    param1: gen_qevent_types.QInputMethodEventAttribute): gen_qevent_types.QInputMethodEventAttribute =
+  gen_qevent_types.QInputMethodEventAttribute(h: fcQInputMethodEventAttribute_new3(param1.h))
+
 proc delete*(self: gen_qevent_types.QInputMethodEventAttribute) =
   fcQInputMethodEventAttribute_delete(self.h)
-
-func init*(T: type gen_qevent_types.QTouchEventTouchPoint, h: ptr cQTouchEventTouchPoint): gen_qevent_types.QTouchEventTouchPoint =
-  T(h: h)
-proc create*(T: type gen_qevent_types.QTouchEventTouchPoint, ): gen_qevent_types.QTouchEventTouchPoint =
-  gen_qevent_types.QTouchEventTouchPoint.init(fcQTouchEventTouchPoint_new())
-
-proc create*(T: type gen_qevent_types.QTouchEventTouchPoint, other: gen_qevent_types.QTouchEventTouchPoint): gen_qevent_types.QTouchEventTouchPoint =
-  gen_qevent_types.QTouchEventTouchPoint.init(fcQTouchEventTouchPoint_new2(other.h))
-
-proc create*(T: type gen_qevent_types.QTouchEventTouchPoint, id: cint): gen_qevent_types.QTouchEventTouchPoint =
-  gen_qevent_types.QTouchEventTouchPoint.init(fcQTouchEventTouchPoint_new3(id))
-
 proc operatorAssign*(self: gen_qevent_types.QTouchEventTouchPoint, other: gen_qevent_types.QTouchEventTouchPoint): void =
   fcQTouchEventTouchPoint_operatorAssign(self.h, other.h)
 
@@ -1888,6 +1868,17 @@ proc setRawScreenPositions*(self: gen_qevent_types.QTouchEventTouchPoint, positi
     positions_CArray[i] = positions[i].h
 
   fcQTouchEventTouchPoint_setRawScreenPositions(self.h, struct_miqt_array(len: csize_t(len(positions)), data: if len(positions) == 0: nil else: addr(positions_CArray[0])))
+
+proc create*(T: type gen_qevent_types.QTouchEventTouchPoint): gen_qevent_types.QTouchEventTouchPoint =
+  gen_qevent_types.QTouchEventTouchPoint(h: fcQTouchEventTouchPoint_new())
+
+proc create*(T: type gen_qevent_types.QTouchEventTouchPoint,
+    other: gen_qevent_types.QTouchEventTouchPoint): gen_qevent_types.QTouchEventTouchPoint =
+  gen_qevent_types.QTouchEventTouchPoint(h: fcQTouchEventTouchPoint_new2(other.h))
+
+proc create*(T: type gen_qevent_types.QTouchEventTouchPoint,
+    id: cint): gen_qevent_types.QTouchEventTouchPoint =
+  gen_qevent_types.QTouchEventTouchPoint(h: fcQTouchEventTouchPoint_new3(id))
 
 proc delete*(self: gen_qevent_types.QTouchEventTouchPoint) =
   fcQTouchEventTouchPoint_delete(self.h)

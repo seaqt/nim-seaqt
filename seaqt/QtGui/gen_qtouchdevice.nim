@@ -59,7 +59,6 @@ export
 
 type cQTouchDevice*{.exportc: "QTouchDevice", incompleteStruct.} = object
 
-proc fcQTouchDevice_new(): ptr cQTouchDevice {.importc: "QTouchDevice_new".}
 proc fcQTouchDevice_devices(): struct_miqt_array {.importc: "QTouchDevice_devices".}
 proc fcQTouchDevice_name(self: pointer, ): struct_miqt_string {.importc: "QTouchDevice_name".}
 proc fcQTouchDevice_typeX(self: pointer, ): cint {.importc: "QTouchDevice_type".}
@@ -69,14 +68,9 @@ proc fcQTouchDevice_setName(self: pointer, name: struct_miqt_string): void {.imp
 proc fcQTouchDevice_setType(self: pointer, devType: cint): void {.importc: "QTouchDevice_setType".}
 proc fcQTouchDevice_setCapabilities(self: pointer, caps: cint): void {.importc: "QTouchDevice_setCapabilities".}
 proc fcQTouchDevice_setMaximumTouchPoints(self: pointer, max: cint): void {.importc: "QTouchDevice_setMaximumTouchPoints".}
+proc fcQTouchDevice_new(): ptr cQTouchDevice {.importc: "QTouchDevice_new".}
 proc fcQTouchDevice_staticMetaObject(): pointer {.importc: "QTouchDevice_staticMetaObject".}
 proc fcQTouchDevice_delete(self: pointer) {.importc: "QTouchDevice_delete".}
-
-
-func init*(T: type gen_qtouchdevice_types.QTouchDevice, h: ptr cQTouchDevice): gen_qtouchdevice_types.QTouchDevice =
-  T(h: h)
-proc create*(T: type gen_qtouchdevice_types.QTouchDevice, ): gen_qtouchdevice_types.QTouchDevice =
-  gen_qtouchdevice_types.QTouchDevice.init(fcQTouchDevice_new())
 
 proc devices*(_: type gen_qtouchdevice_types.QTouchDevice, ): seq[gen_qtouchdevice_types.QTouchDevice] =
   var v_ma = fcQTouchDevice_devices()
@@ -112,6 +106,9 @@ proc setCapabilities*(self: gen_qtouchdevice_types.QTouchDevice, caps: cint): vo
 
 proc setMaximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice, max: cint): void =
   fcQTouchDevice_setMaximumTouchPoints(self.h, max)
+
+proc create*(T: type gen_qtouchdevice_types.QTouchDevice): gen_qtouchdevice_types.QTouchDevice =
+  gen_qtouchdevice_types.QTouchDevice(h: fcQTouchDevice_new())
 
 proc staticMetaObject*(_: type gen_qtouchdevice_types.QTouchDevice): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTouchDevice_staticMetaObject())

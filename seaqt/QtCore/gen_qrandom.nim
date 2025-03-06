@@ -41,11 +41,6 @@ export gen_qrandom_types
 type cQRandomGenerator*{.exportc: "QRandomGenerator", incompleteStruct.} = object
 type cQRandomGenerator64*{.exportc: "QRandomGenerator64", incompleteStruct.} = object
 
-proc fcQRandomGenerator_new(): ptr cQRandomGenerator {.importc: "QRandomGenerator_new".}
-proc fcQRandomGenerator_new2(seedBuffer: ptr cuint, len: int64): ptr cQRandomGenerator {.importc: "QRandomGenerator_new2".}
-proc fcQRandomGenerator_new3(begin: ptr cuint, endVal: ptr cuint): ptr cQRandomGenerator {.importc: "QRandomGenerator_new3".}
-proc fcQRandomGenerator_new4(other: pointer): ptr cQRandomGenerator {.importc: "QRandomGenerator_new4".}
-proc fcQRandomGenerator_new5(seedValue: cuint): ptr cQRandomGenerator {.importc: "QRandomGenerator_new5".}
 proc fcQRandomGenerator_operatorAssign(self: pointer, other: pointer): void {.importc: "QRandomGenerator_operatorAssign".}
 proc fcQRandomGenerator_generate(self: pointer, ): cuint {.importc: "QRandomGenerator_generate".}
 proc fcQRandomGenerator_generate64(self: pointer, ): culonglong {.importc: "QRandomGenerator_generate64".}
@@ -65,13 +60,12 @@ proc fcQRandomGenerator_system(): pointer {.importc: "QRandomGenerator_system".}
 proc fcQRandomGenerator_global(): pointer {.importc: "QRandomGenerator_global".}
 proc fcQRandomGenerator_securelySeeded(): pointer {.importc: "QRandomGenerator_securelySeeded".}
 proc fcQRandomGenerator_seed1(self: pointer, s: cuint): void {.importc: "QRandomGenerator_seed1".}
+proc fcQRandomGenerator_new(): ptr cQRandomGenerator {.importc: "QRandomGenerator_new".}
+proc fcQRandomGenerator_new2(seedBuffer: ptr cuint, len: int64): ptr cQRandomGenerator {.importc: "QRandomGenerator_new2".}
+proc fcQRandomGenerator_new3(begin: ptr cuint, endVal: ptr cuint): ptr cQRandomGenerator {.importc: "QRandomGenerator_new3".}
+proc fcQRandomGenerator_new4(other: pointer): ptr cQRandomGenerator {.importc: "QRandomGenerator_new4".}
+proc fcQRandomGenerator_new5(seedValue: cuint): ptr cQRandomGenerator {.importc: "QRandomGenerator_new5".}
 proc fcQRandomGenerator_delete(self: pointer) {.importc: "QRandomGenerator_delete".}
-proc fcQRandomGenerator64_new(): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new".}
-proc fcQRandomGenerator64_new2(seedBuffer: ptr cuint, len: int64): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new2".}
-proc fcQRandomGenerator64_new3(begin: ptr cuint, endVal: ptr cuint): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new3".}
-proc fcQRandomGenerator64_new4(other: pointer): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new4".}
-proc fcQRandomGenerator64_new5(param1: pointer): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new5".}
-proc fcQRandomGenerator64_new6(seedValue: cuint): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new6".}
 proc fcQRandomGenerator64_generate(self: pointer, ): culonglong {.importc: "QRandomGenerator64_generate".}
 proc fcQRandomGenerator64_operatorCall(self: pointer, ): culonglong {.importc: "QRandomGenerator64_operatorCall".}
 proc fcQRandomGenerator64_discardX(self: pointer, z: culonglong): void {.importc: "QRandomGenerator64_discard".}
@@ -81,25 +75,13 @@ proc fcQRandomGenerator64_system(): pointer {.importc: "QRandomGenerator64_syste
 proc fcQRandomGenerator64_global(): pointer {.importc: "QRandomGenerator64_global".}
 proc fcQRandomGenerator64_securelySeeded(): pointer {.importc: "QRandomGenerator64_securelySeeded".}
 proc fcQRandomGenerator64_operatorAssign(self: pointer, param1: pointer): void {.importc: "QRandomGenerator64_operatorAssign".}
+proc fcQRandomGenerator64_new(): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new".}
+proc fcQRandomGenerator64_new2(seedBuffer: ptr cuint, len: int64): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new2".}
+proc fcQRandomGenerator64_new3(begin: ptr cuint, endVal: ptr cuint): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new3".}
+proc fcQRandomGenerator64_new4(other: pointer): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new4".}
+proc fcQRandomGenerator64_new5(param1: pointer): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new5".}
+proc fcQRandomGenerator64_new6(seedValue: cuint): ptr cQRandomGenerator64 {.importc: "QRandomGenerator64_new6".}
 proc fcQRandomGenerator64_delete(self: pointer) {.importc: "QRandomGenerator64_delete".}
-
-
-func init*(T: type gen_qrandom_types.QRandomGenerator, h: ptr cQRandomGenerator): gen_qrandom_types.QRandomGenerator =
-  T(h: h)
-proc create*(T: type gen_qrandom_types.QRandomGenerator, ): gen_qrandom_types.QRandomGenerator =
-  gen_qrandom_types.QRandomGenerator.init(fcQRandomGenerator_new())
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator, seedBuffer: ptr cuint, len: int64): gen_qrandom_types.QRandomGenerator =
-  gen_qrandom_types.QRandomGenerator.init(fcQRandomGenerator_new2(seedBuffer, len))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator, begin: ptr cuint, endVal: ptr cuint): gen_qrandom_types.QRandomGenerator =
-  gen_qrandom_types.QRandomGenerator.init(fcQRandomGenerator_new3(begin, endVal))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator, other: gen_qrandom_types.QRandomGenerator): gen_qrandom_types.QRandomGenerator =
-  gen_qrandom_types.QRandomGenerator.init(fcQRandomGenerator_new4(other.h))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator, seedValue: cuint): gen_qrandom_types.QRandomGenerator =
-  gen_qrandom_types.QRandomGenerator.init(fcQRandomGenerator_new5(seedValue))
 
 proc operatorAssign*(self: gen_qrandom_types.QRandomGenerator, other: gen_qrandom_types.QRandomGenerator): void =
   fcQRandomGenerator_operatorAssign(self.h, other.h)
@@ -158,29 +140,27 @@ proc securelySeeded*(_: type gen_qrandom_types.QRandomGenerator, ): gen_qrandom_
 proc seed*(self: gen_qrandom_types.QRandomGenerator, s: cuint): void =
   fcQRandomGenerator_seed1(self.h, s)
 
+proc create*(T: type gen_qrandom_types.QRandomGenerator): gen_qrandom_types.QRandomGenerator =
+  gen_qrandom_types.QRandomGenerator(h: fcQRandomGenerator_new())
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator,
+    seedBuffer: ptr cuint, len: int64): gen_qrandom_types.QRandomGenerator =
+  gen_qrandom_types.QRandomGenerator(h: fcQRandomGenerator_new2(seedBuffer, len))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator,
+    begin: ptr cuint, endVal: ptr cuint): gen_qrandom_types.QRandomGenerator =
+  gen_qrandom_types.QRandomGenerator(h: fcQRandomGenerator_new3(begin, endVal))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator,
+    other: gen_qrandom_types.QRandomGenerator): gen_qrandom_types.QRandomGenerator =
+  gen_qrandom_types.QRandomGenerator(h: fcQRandomGenerator_new4(other.h))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator,
+    seedValue: cuint): gen_qrandom_types.QRandomGenerator =
+  gen_qrandom_types.QRandomGenerator(h: fcQRandomGenerator_new5(seedValue))
+
 proc delete*(self: gen_qrandom_types.QRandomGenerator) =
   fcQRandomGenerator_delete(self.h)
-
-func init*(T: type gen_qrandom_types.QRandomGenerator64, h: ptr cQRandomGenerator64): gen_qrandom_types.QRandomGenerator64 =
-  T(h: h)
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, ): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new())
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, seedBuffer: ptr cuint, len: int64): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new2(seedBuffer, len))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, begin: ptr cuint, endVal: ptr cuint): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new3(begin, endVal))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, other: gen_qrandom_types.QRandomGenerator): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new4(other.h))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, param1: gen_qrandom_types.QRandomGenerator64): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new5(param1.h))
-
-proc create*(T: type gen_qrandom_types.QRandomGenerator64, seedValue: cuint): gen_qrandom_types.QRandomGenerator64 =
-  gen_qrandom_types.QRandomGenerator64.init(fcQRandomGenerator64_new6(seedValue))
-
 proc generate*(self: gen_qrandom_types.QRandomGenerator64, ): culonglong =
   fcQRandomGenerator64_generate(self.h)
 
@@ -207,6 +187,29 @@ proc securelySeeded*(_: type gen_qrandom_types.QRandomGenerator64, ): gen_qrando
 
 proc operatorAssign*(self: gen_qrandom_types.QRandomGenerator64, param1: gen_qrandom_types.QRandomGenerator64): void =
   fcQRandomGenerator64_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new())
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64,
+    seedBuffer: ptr cuint, len: int64): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new2(seedBuffer, len))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64,
+    begin: ptr cuint, endVal: ptr cuint): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new3(begin, endVal))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64,
+    other: gen_qrandom_types.QRandomGenerator): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new4(other.h))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64,
+    param1: gen_qrandom_types.QRandomGenerator64): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new5(param1.h))
+
+proc create*(T: type gen_qrandom_types.QRandomGenerator64,
+    seedValue: cuint): gen_qrandom_types.QRandomGenerator64 =
+  gen_qrandom_types.QRandomGenerator64(h: fcQRandomGenerator64_new6(seedValue))
 
 proc delete*(self: gen_qrandom_types.QRandomGenerator64) =
   fcQRandomGenerator64_delete(self.h)

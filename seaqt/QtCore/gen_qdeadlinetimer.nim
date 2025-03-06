@@ -44,13 +44,6 @@ export gen_qdeadlinetimer_types
 
 type cQDeadlineTimer*{.exportc: "QDeadlineTimer", incompleteStruct.} = object
 
-proc fcQDeadlineTimer_new(): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new".}
-proc fcQDeadlineTimer_new2(param1: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new2".}
-proc fcQDeadlineTimer_new3(msecs: clonglong): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new3".}
-proc fcQDeadlineTimer_new4(param1: pointer): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new4".}
-proc fcQDeadlineTimer_new5(type_x: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new5".}
-proc fcQDeadlineTimer_new6(param1: cint, type_x: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new6".}
-proc fcQDeadlineTimer_new7(msecs: clonglong, typeVal: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new7".}
 proc fcQDeadlineTimer_swap(self: pointer, other: pointer): void {.importc: "QDeadlineTimer_swap".}
 proc fcQDeadlineTimer_isForever(self: pointer, ): bool {.importc: "QDeadlineTimer_isForever".}
 proc fcQDeadlineTimer_hasExpired(self: pointer, ): bool {.importc: "QDeadlineTimer_hasExpired".}
@@ -76,31 +69,14 @@ proc fcQDeadlineTimer_setDeadline2(self: pointer, msecs: clonglong, timerType: c
 proc fcQDeadlineTimer_setPreciseDeadline2(self: pointer, secs: clonglong, nsecs: clonglong): void {.importc: "QDeadlineTimer_setPreciseDeadline2".}
 proc fcQDeadlineTimer_setPreciseDeadline3(self: pointer, secs: clonglong, nsecs: clonglong, typeVal: cint): void {.importc: "QDeadlineTimer_setPreciseDeadline3".}
 proc fcQDeadlineTimer_current1(timerType: cint): pointer {.importc: "QDeadlineTimer_current1".}
+proc fcQDeadlineTimer_new(): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new".}
+proc fcQDeadlineTimer_new2(param1: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new2".}
+proc fcQDeadlineTimer_new3(msecs: clonglong): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new3".}
+proc fcQDeadlineTimer_new4(param1: pointer): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new4".}
+proc fcQDeadlineTimer_new5(type_x: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new5".}
+proc fcQDeadlineTimer_new6(param1: cint, type_x: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new6".}
+proc fcQDeadlineTimer_new7(msecs: clonglong, typeVal: cint): ptr cQDeadlineTimer {.importc: "QDeadlineTimer_new7".}
 proc fcQDeadlineTimer_delete(self: pointer) {.importc: "QDeadlineTimer_delete".}
-
-
-func init*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, h: ptr cQDeadlineTimer): gen_qdeadlinetimer_types.QDeadlineTimer =
-  T(h: h)
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, ): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new())
-
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, param1: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new2(cint(param1)))
-
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clonglong): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new3(msecs))
-
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, param1: gen_qdeadlinetimer_types.QDeadlineTimer): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new4(param1.h))
-
-proc create2*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, type_x: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new5(cint(type_x)))
-
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, param1: cint, type_x: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new6(cint(param1), cint(type_x)))
-
-proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer, msecs: clonglong, typeVal: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
-  gen_qdeadlinetimer_types.QDeadlineTimer.init(fcQDeadlineTimer_new7(msecs, cint(typeVal)))
 
 proc swap*(self: gen_qdeadlinetimer_types.QDeadlineTimer, other: gen_qdeadlinetimer_types.QDeadlineTimer): void =
   fcQDeadlineTimer_swap(self.h, other.h)
@@ -176,6 +152,33 @@ proc setPreciseDeadline*(self: gen_qdeadlinetimer_types.QDeadlineTimer, secs: cl
 
 proc current*(_: type gen_qdeadlinetimer_types.QDeadlineTimer, timerType: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
   gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_current1(cint(timerType)))
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new())
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    param1: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new2(cint(param1)))
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    msecs: clonglong): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new3(msecs))
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    param1: gen_qdeadlinetimer_types.QDeadlineTimer): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new4(param1.h))
+
+proc create2*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    type_x: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new5(cint(type_x)))
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    param1: cint, type_x: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new6(cint(param1), cint(type_x)))
+
+proc create*(T: type gen_qdeadlinetimer_types.QDeadlineTimer,
+    msecs: clonglong, typeVal: cint): gen_qdeadlinetimer_types.QDeadlineTimer =
+  gen_qdeadlinetimer_types.QDeadlineTimer(h: fcQDeadlineTimer_new7(msecs, cint(typeVal)))
 
 proc delete*(self: gen_qdeadlinetimer_types.QDeadlineTimer) =
   fcQDeadlineTimer_delete(self.h)

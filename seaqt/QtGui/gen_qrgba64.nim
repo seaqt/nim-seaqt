@@ -40,8 +40,6 @@ export gen_qrgba64_types
 
 type cQRgba64*{.exportc: "QRgba64", incompleteStruct.} = object
 
-proc fcQRgba64_new(): ptr cQRgba64 {.importc: "QRgba64_new".}
-proc fcQRgba64_new2(param1: pointer): ptr cQRgba64 {.importc: "QRgba64_new2".}
 proc fcQRgba64_fromRgba64(c: culonglong): pointer {.importc: "QRgba64_fromRgba64".}
 proc fcQRgba64_fromRgba642(red: cushort, green: cushort, blue: cushort, alpha: cushort): pointer {.importc: "QRgba64_fromRgba642".}
 proc fcQRgba64_fromRgba(red: uint8, green: uint8, blue: uint8, alpha: uint8): pointer {.importc: "QRgba64_fromRgba".}
@@ -66,16 +64,9 @@ proc fcQRgba64_premultiplied(self: pointer, ): pointer {.importc: "QRgba64_premu
 proc fcQRgba64_unpremultiplied(self: pointer, ): pointer {.importc: "QRgba64_unpremultiplied".}
 proc fcQRgba64_ToUnsignedLongLong(self: pointer, ): culonglong {.importc: "QRgba64_ToUnsignedLongLong".}
 proc fcQRgba64_operatorAssign(self: pointer, x_rgba: culonglong): void {.importc: "QRgba64_operatorAssign".}
+proc fcQRgba64_new(): ptr cQRgba64 {.importc: "QRgba64_new".}
+proc fcQRgba64_new2(param1: pointer): ptr cQRgba64 {.importc: "QRgba64_new2".}
 proc fcQRgba64_delete(self: pointer) {.importc: "QRgba64_delete".}
-
-
-func init*(T: type gen_qrgba64_types.QRgba64, h: ptr cQRgba64): gen_qrgba64_types.QRgba64 =
-  T(h: h)
-proc create*(T: type gen_qrgba64_types.QRgba64, ): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64.init(fcQRgba64_new())
-
-proc create*(T: type gen_qrgba64_types.QRgba64, param1: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
-  gen_qrgba64_types.QRgba64.init(fcQRgba64_new2(param1.h))
 
 proc fromRgba64*(_: type gen_qrgba64_types.QRgba64, c: culonglong): gen_qrgba64_types.QRgba64 =
   gen_qrgba64_types.QRgba64(h: fcQRgba64_fromRgba64(c))
@@ -148,6 +139,13 @@ proc ToUnsignedLongLong*(self: gen_qrgba64_types.QRgba64, ): culonglong =
 
 proc operatorAssign*(self: gen_qrgba64_types.QRgba64, x_rgba: culonglong): void =
   fcQRgba64_operatorAssign(self.h, x_rgba)
+
+proc create*(T: type gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_new())
+
+proc create*(T: type gen_qrgba64_types.QRgba64,
+    param1: gen_qrgba64_types.QRgba64): gen_qrgba64_types.QRgba64 =
+  gen_qrgba64_types.QRgba64(h: fcQRgba64_new2(param1.h))
 
 proc delete*(self: gen_qrgba64_types.QRgba64) =
   fcQRgba64_delete(self.h)

@@ -67,9 +67,6 @@ proc fcQAudioInputSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): stru
 proc fcQAudioInputSelectorControl_staticMetaObject(): pointer {.importc: "QAudioInputSelectorControl_staticMetaObject".}
 proc fcQAudioInputSelectorControl_delete(self: pointer) {.importc: "QAudioInputSelectorControl_delete".}
 
-
-func init*(T: type gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, h: ptr cQAudioInputSelectorControl): gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl =
-  T(h: h)
 proc metaObject*(self: gen_qaudioinputselectorcontrol_types.QAudioInputSelectorControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioInputSelectorControl_metaObject(self.h))
 
@@ -127,7 +124,7 @@ proc activeInputChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioInputS
   fcQAudioInputSelectorControl_activeInputChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
 type QAudioInputSelectorControlactiveInputChangedSlot* = proc(name: string)
-proc miqt_exec_callback_QAudioInputSelectorControl_activeInputChanged(slot: int, name: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQAudioInputSelectorControl_activeInputChanged(slot: int, name: struct_miqt_string) {.exportc: "miqt_exec_callback_QAudioInputSelectorControl_activeInputChanged".} =
   let nimfunc = cast[ptr QAudioInputSelectorControlactiveInputChangedSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
@@ -146,7 +143,7 @@ proc availableInputsChanged*(self: gen_qaudioinputselectorcontrol_types.QAudioIn
   fcQAudioInputSelectorControl_availableInputsChanged(self.h)
 
 type QAudioInputSelectorControlavailableInputsChangedSlot* = proc()
-proc miqt_exec_callback_QAudioInputSelectorControl_availableInputsChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQAudioInputSelectorControl_availableInputsChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioInputSelectorControl_availableInputsChanged".} =
   let nimfunc = cast[ptr QAudioInputSelectorControlavailableInputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

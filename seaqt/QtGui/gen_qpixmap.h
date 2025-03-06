@@ -52,13 +52,22 @@ typedef struct QTransform QTransform;
 typedef struct QVariant QVariant;
 #endif
 
-QPixmap* QPixmap_new();
-QPixmap* QPixmap_new2(int w, int h);
-QPixmap* QPixmap_new3(QSize* param1);
-QPixmap* QPixmap_new4(struct miqt_string fileName);
-QPixmap* QPixmap_new5(QPixmap* param1);
-QPixmap* QPixmap_new6(struct miqt_string fileName, const char* format);
-QPixmap* QPixmap_new7(struct miqt_string fileName, const char* format, int flags);
+struct QPixmap_VTable {
+	void (*destructor)(struct QPixmap_VTable* vtbl, QPixmap* self);
+	int (*devType)(struct QPixmap_VTable* vtbl, const QPixmap* self);
+	QPaintEngine* (*paintEngine)(struct QPixmap_VTable* vtbl, const QPixmap* self);
+	int (*metric)(struct QPixmap_VTable* vtbl, const QPixmap* self, int param1);
+	void (*initPainter)(struct QPixmap_VTable* vtbl, const QPixmap* self, QPainter* painter);
+	QPaintDevice* (*redirected)(struct QPixmap_VTable* vtbl, const QPixmap* self, QPoint* offset);
+	QPainter* (*sharedPainter)(struct QPixmap_VTable* vtbl, const QPixmap* self);
+};
+QPixmap* QPixmap_new(struct QPixmap_VTable* vtbl);
+QPixmap* QPixmap_new2(struct QPixmap_VTable* vtbl, int w, int h);
+QPixmap* QPixmap_new3(struct QPixmap_VTable* vtbl, QSize* param1);
+QPixmap* QPixmap_new4(struct QPixmap_VTable* vtbl, struct miqt_string fileName);
+QPixmap* QPixmap_new5(struct QPixmap_VTable* vtbl, QPixmap* param1);
+QPixmap* QPixmap_new6(struct QPixmap_VTable* vtbl, struct miqt_string fileName, const char* format);
+QPixmap* QPixmap_new7(struct QPixmap_VTable* vtbl, struct miqt_string fileName, const char* format, int flags);
 void QPixmap_virtbase(QPixmap* src, QPaintDevice** outptr_QPaintDevice);
 void QPixmap_operatorAssign(QPixmap* self, QPixmap* param1);
 void QPixmap_swap(QPixmap* self, QPixmap* other);
@@ -148,17 +157,11 @@ bool QPixmap_convertFromImage2(QPixmap* self, QImage* img, int flags);
 QPixmap* QPixmap_copy1(const QPixmap* self, QRect* rect);
 void QPixmap_scroll7(QPixmap* self, int dx, int dy, int x, int y, int width, int height, QRegion* exposed);
 void QPixmap_scroll4(QPixmap* self, int dx, int dy, QRect* rect, QRegion* exposed);
-bool QPixmap_override_virtual_devType(void* self, intptr_t slot);
 int QPixmap_virtualbase_devType(const void* self);
-bool QPixmap_override_virtual_paintEngine(void* self, intptr_t slot);
 QPaintEngine* QPixmap_virtualbase_paintEngine(const void* self);
-bool QPixmap_override_virtual_metric(void* self, intptr_t slot);
 int QPixmap_virtualbase_metric(const void* self, int param1);
-bool QPixmap_override_virtual_initPainter(void* self, intptr_t slot);
 void QPixmap_virtualbase_initPainter(const void* self, QPainter* painter);
-bool QPixmap_override_virtual_redirected(void* self, intptr_t slot);
 QPaintDevice* QPixmap_virtualbase_redirected(const void* self, QPoint* offset);
-bool QPixmap_override_virtual_sharedPainter(void* self, intptr_t slot);
 QPainter* QPixmap_virtualbase_sharedPainter(const void* self);
 void QPixmap_delete(QPixmap* self);
 

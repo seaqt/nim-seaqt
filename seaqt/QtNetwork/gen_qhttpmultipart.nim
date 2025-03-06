@@ -62,8 +62,6 @@ export
 type cQHttpPart*{.exportc: "QHttpPart", incompleteStruct.} = object
 type cQHttpMultiPart*{.exportc: "QHttpMultiPart", incompleteStruct.} = object
 
-proc fcQHttpPart_new(): ptr cQHttpPart {.importc: "QHttpPart_new".}
-proc fcQHttpPart_new2(other: pointer): ptr cQHttpPart {.importc: "QHttpPart_new2".}
 proc fcQHttpPart_operatorAssign(self: pointer, other: pointer): void {.importc: "QHttpPart_operatorAssign".}
 proc fcQHttpPart_swap(self: pointer, other: pointer): void {.importc: "QHttpPart_swap".}
 proc fcQHttpPart_operatorEqual(self: pointer, other: pointer): bool {.importc: "QHttpPart_operatorEqual".}
@@ -72,11 +70,9 @@ proc fcQHttpPart_setHeader(self: pointer, header: cint, value: pointer): void {.
 proc fcQHttpPart_setRawHeader(self: pointer, headerName: struct_miqt_string, headerValue: struct_miqt_string): void {.importc: "QHttpPart_setRawHeader".}
 proc fcQHttpPart_setBody(self: pointer, body: struct_miqt_string): void {.importc: "QHttpPart_setBody".}
 proc fcQHttpPart_setBodyDevice(self: pointer, device: pointer): void {.importc: "QHttpPart_setBodyDevice".}
+proc fcQHttpPart_new(): ptr cQHttpPart {.importc: "QHttpPart_new".}
+proc fcQHttpPart_new2(other: pointer): ptr cQHttpPart {.importc: "QHttpPart_new2".}
 proc fcQHttpPart_delete(self: pointer) {.importc: "QHttpPart_delete".}
-proc fcQHttpMultiPart_new(): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new".}
-proc fcQHttpMultiPart_new2(contentType: cint): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new2".}
-proc fcQHttpMultiPart_new3(parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new3".}
-proc fcQHttpMultiPart_new4(contentType: cint, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new4".}
 proc fcQHttpMultiPart_metaObject(self: pointer, ): pointer {.importc: "QHttpMultiPart_metaObject".}
 proc fcQHttpMultiPart_metacast(self: pointer, param1: cstring): pointer {.importc: "QHttpMultiPart_metacast".}
 proc fcQHttpMultiPart_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHttpMultiPart_metacall".}
@@ -90,37 +86,34 @@ proc fcQHttpMultiPart_tr2(s: cstring, c: cstring): struct_miqt_string {.importc:
 proc fcQHttpMultiPart_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHttpMultiPart_tr3".}
 proc fcQHttpMultiPart_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QHttpMultiPart_trUtf82".}
 proc fcQHttpMultiPart_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QHttpMultiPart_trUtf83".}
-proc fQHttpMultiPart_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QHttpMultiPart_virtualbase_metaObject".}
-proc fcQHttpMultiPart_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_metaObject".}
-proc fQHttpMultiPart_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QHttpMultiPart_virtualbase_metacast".}
-proc fcQHttpMultiPart_override_virtual_metacast(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_metacast".}
-proc fQHttpMultiPart_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QHttpMultiPart_virtualbase_metacall".}
-proc fcQHttpMultiPart_override_virtual_metacall(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_metacall".}
-proc fQHttpMultiPart_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QHttpMultiPart_virtualbase_event".}
-proc fcQHttpMultiPart_override_virtual_event(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_event".}
-proc fQHttpMultiPart_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QHttpMultiPart_virtualbase_eventFilter".}
-proc fcQHttpMultiPart_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_eventFilter".}
-proc fQHttpMultiPart_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QHttpMultiPart_virtualbase_timerEvent".}
-proc fcQHttpMultiPart_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_timerEvent".}
-proc fQHttpMultiPart_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QHttpMultiPart_virtualbase_childEvent".}
-proc fcQHttpMultiPart_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_childEvent".}
-proc fQHttpMultiPart_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QHttpMultiPart_virtualbase_customEvent".}
-proc fcQHttpMultiPart_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_customEvent".}
-proc fQHttpMultiPart_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QHttpMultiPart_virtualbase_connectNotify".}
-proc fcQHttpMultiPart_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_connectNotify".}
-proc fQHttpMultiPart_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QHttpMultiPart_virtualbase_disconnectNotify".}
-proc fcQHttpMultiPart_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QHttpMultiPart_override_virtual_disconnectNotify".}
+type cQHttpMultiPartVTable = object
+  destructor*: proc(vtbl: ptr cQHttpMultiPartVTable, self: ptr cQHttpMultiPart) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQHttpMultiPart_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QHttpMultiPart_virtualbase_metaObject".}
+proc fcQHttpMultiPart_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QHttpMultiPart_virtualbase_metacast".}
+proc fcQHttpMultiPart_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QHttpMultiPart_virtualbase_metacall".}
+proc fcQHttpMultiPart_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QHttpMultiPart_virtualbase_event".}
+proc fcQHttpMultiPart_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QHttpMultiPart_virtualbase_eventFilter".}
+proc fcQHttpMultiPart_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QHttpMultiPart_virtualbase_timerEvent".}
+proc fcQHttpMultiPart_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QHttpMultiPart_virtualbase_childEvent".}
+proc fcQHttpMultiPart_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QHttpMultiPart_virtualbase_customEvent".}
+proc fcQHttpMultiPart_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QHttpMultiPart_virtualbase_connectNotify".}
+proc fcQHttpMultiPart_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QHttpMultiPart_virtualbase_disconnectNotify".}
+proc fcQHttpMultiPart_new(vtbl: pointer, ): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new".}
+proc fcQHttpMultiPart_new2(vtbl: pointer, contentType: cint): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new2".}
+proc fcQHttpMultiPart_new3(vtbl: pointer, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new3".}
+proc fcQHttpMultiPart_new4(vtbl: pointer, contentType: cint, parent: pointer): ptr cQHttpMultiPart {.importc: "QHttpMultiPart_new4".}
 proc fcQHttpMultiPart_staticMetaObject(): pointer {.importc: "QHttpMultiPart_staticMetaObject".}
 proc fcQHttpMultiPart_delete(self: pointer) {.importc: "QHttpMultiPart_delete".}
-
-
-func init*(T: type gen_qhttpmultipart_types.QHttpPart, h: ptr cQHttpPart): gen_qhttpmultipart_types.QHttpPart =
-  T(h: h)
-proc create*(T: type gen_qhttpmultipart_types.QHttpPart, ): gen_qhttpmultipart_types.QHttpPart =
-  gen_qhttpmultipart_types.QHttpPart.init(fcQHttpPart_new())
-
-proc create*(T: type gen_qhttpmultipart_types.QHttpPart, other: gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_types.QHttpPart =
-  gen_qhttpmultipart_types.QHttpPart.init(fcQHttpPart_new2(other.h))
 
 proc operatorAssign*(self: gen_qhttpmultipart_types.QHttpPart, other: gen_qhttpmultipart_types.QHttpPart): void =
   fcQHttpPart_operatorAssign(self.h, other.h)
@@ -146,23 +139,15 @@ proc setBody*(self: gen_qhttpmultipart_types.QHttpPart, body: seq[byte]): void =
 proc setBodyDevice*(self: gen_qhttpmultipart_types.QHttpPart, device: gen_qiodevice_types.QIODevice): void =
   fcQHttpPart_setBodyDevice(self.h, device.h)
 
+proc create*(T: type gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_types.QHttpPart =
+  gen_qhttpmultipart_types.QHttpPart(h: fcQHttpPart_new())
+
+proc create*(T: type gen_qhttpmultipart_types.QHttpPart,
+    other: gen_qhttpmultipart_types.QHttpPart): gen_qhttpmultipart_types.QHttpPart =
+  gen_qhttpmultipart_types.QHttpPart(h: fcQHttpPart_new2(other.h))
+
 proc delete*(self: gen_qhttpmultipart_types.QHttpPart) =
   fcQHttpPart_delete(self.h)
-
-func init*(T: type gen_qhttpmultipart_types.QHttpMultiPart, h: ptr cQHttpMultiPart): gen_qhttpmultipart_types.QHttpMultiPart =
-  T(h: h)
-proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart, ): gen_qhttpmultipart_types.QHttpMultiPart =
-  gen_qhttpmultipart_types.QHttpMultiPart.init(fcQHttpMultiPart_new())
-
-proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart, contentType: cint): gen_qhttpmultipart_types.QHttpMultiPart =
-  gen_qhttpmultipart_types.QHttpMultiPart.init(fcQHttpMultiPart_new2(cint(contentType)))
-
-proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart, parent: gen_qobject_types.QObject): gen_qhttpmultipart_types.QHttpMultiPart =
-  gen_qhttpmultipart_types.QHttpMultiPart.init(fcQHttpMultiPart_new3(parent.h))
-
-proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart, contentType: cint, parent: gen_qobject_types.QObject): gen_qhttpmultipart_types.QHttpMultiPart =
-  gen_qhttpmultipart_types.QHttpMultiPart.init(fcQHttpMultiPart_new4(cint(contentType), parent.h))
-
 proc metaObject*(self: gen_qhttpmultipart_types.QHttpMultiPart, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHttpMultiPart_metaObject(self.h))
 
@@ -223,190 +208,244 @@ proc trUtf8*(_: type gen_qhttpmultipart_types.QHttpMultiPart, s: cstring, c: cst
   c_free(v_ms.data)
   vx_ret
 
+type QHttpMultiPartmetaObjectProc* = proc(self: QHttpMultiPart): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QHttpMultiPartmetacastProc* = proc(self: QHttpMultiPart, param1: cstring): pointer {.raises: [], gcsafe.}
+type QHttpMultiPartmetacallProc* = proc(self: QHttpMultiPart, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QHttpMultiParteventProc* = proc(self: QHttpMultiPart, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QHttpMultiParteventFilterProc* = proc(self: QHttpMultiPart, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QHttpMultiParttimerEventProc* = proc(self: QHttpMultiPart, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QHttpMultiPartchildEventProc* = proc(self: QHttpMultiPart, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QHttpMultiPartcustomEventProc* = proc(self: QHttpMultiPart, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QHttpMultiPartconnectNotifyProc* = proc(self: QHttpMultiPart, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QHttpMultiPartdisconnectNotifyProc* = proc(self: QHttpMultiPart, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QHttpMultiPartVTable* = object
+  vtbl: cQHttpMultiPartVTable
+  metaObject*: QHttpMultiPartmetaObjectProc
+  metacast*: QHttpMultiPartmetacastProc
+  metacall*: QHttpMultiPartmetacallProc
+  event*: QHttpMultiParteventProc
+  eventFilter*: QHttpMultiParteventFilterProc
+  timerEvent*: QHttpMultiParttimerEventProc
+  childEvent*: QHttpMultiPartchildEventProc
+  customEvent*: QHttpMultiPartcustomEventProc
+  connectNotify*: QHttpMultiPartconnectNotifyProc
+  disconnectNotify*: QHttpMultiPartdisconnectNotifyProc
 proc QHttpMultiPartmetaObject*(self: gen_qhttpmultipart_types.QHttpMultiPart, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQHttpMultiPart_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQHttpMultiPart_virtualbase_metaObject(self.h))
 
-type QHttpMultiPartmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_metaObject(self: ptr cQHttpMultiPart, slot: int): pointer {.exportc: "miqt_exec_callback_QHttpMultiPart_metaObject ".} =
-  var nimfunc = cast[ptr QHttpMultiPartmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQHttpMultiPart_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QHttpMultiPartmetacast*(self: gen_qhttpmultipart_types.QHttpMultiPart, param1: cstring): pointer =
-  fQHttpMultiPart_virtualbase_metacast(self.h, param1)
+  fcQHttpMultiPart_virtualbase_metacast(self.h, param1)
 
-type QHttpMultiPartmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartmetacastProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_metacast(self: ptr cQHttpMultiPart, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QHttpMultiPart_metacast ".} =
-  var nimfunc = cast[ptr QHttpMultiPartmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QHttpMultiPartmetacall*(self: gen_qhttpmultipart_types.QHttpMultiPart, param1: cint, param2: cint, param3: pointer): cint =
-  fQHttpMultiPart_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQHttpMultiPart_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QHttpMultiPartmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartmetacallProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_metacall(self: ptr cQHttpMultiPart, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QHttpMultiPart_metacall ".} =
-  var nimfunc = cast[ptr QHttpMultiPartmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QHttpMultiPartevent*(self: gen_qhttpmultipart_types.QHttpMultiPart, event: gen_qcoreevent_types.QEvent): bool =
-  fQHttpMultiPart_virtualbase_event(self.h, event.h)
+  fcQHttpMultiPart_virtualbase_event(self.h, event.h)
 
-type QHttpMultiParteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiParteventProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiParteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_event(self: ptr cQHttpMultiPart, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QHttpMultiPart_event ".} =
-  var nimfunc = cast[ptr QHttpMultiParteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QHttpMultiParteventFilter*(self: gen_qhttpmultipart_types.QHttpMultiPart, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQHttpMultiPart_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQHttpMultiPart_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QHttpMultiParteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiParteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiParteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_eventFilter(self: ptr cQHttpMultiPart, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QHttpMultiPart_eventFilter ".} =
-  var nimfunc = cast[ptr QHttpMultiParteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QHttpMultiParttimerEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQHttpMultiPart_virtualbase_timerEvent(self.h, event.h)
+  fcQHttpMultiPart_virtualbase_timerEvent(self.h, event.h)
 
-type QHttpMultiParttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiParttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiParttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_timerEvent(self: ptr cQHttpMultiPart, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QHttpMultiPart_timerEvent ".} =
-  var nimfunc = cast[ptr QHttpMultiParttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QHttpMultiPartchildEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, event: gen_qcoreevent_types.QChildEvent): void =
-  fQHttpMultiPart_virtualbase_childEvent(self.h, event.h)
+  fcQHttpMultiPart_virtualbase_childEvent(self.h, event.h)
 
-type QHttpMultiPartchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartchildEventProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_childEvent(self: ptr cQHttpMultiPart, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QHttpMultiPart_childEvent ".} =
-  var nimfunc = cast[ptr QHttpMultiPartchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QHttpMultiPartcustomEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, event: gen_qcoreevent_types.QEvent): void =
-  fQHttpMultiPart_virtualbase_customEvent(self.h, event.h)
+  fcQHttpMultiPart_virtualbase_customEvent(self.h, event.h)
 
-type QHttpMultiPartcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_customEvent(self: ptr cQHttpMultiPart, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QHttpMultiPart_customEvent ".} =
-  var nimfunc = cast[ptr QHttpMultiPartcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QHttpMultiPartconnectNotify*(self: gen_qhttpmultipart_types.QHttpMultiPart, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQHttpMultiPart_virtualbase_connectNotify(self.h, signal.h)
+  fcQHttpMultiPart_virtualbase_connectNotify(self.h, signal.h)
 
-type QHttpMultiPartconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_connectNotify(self: ptr cQHttpMultiPart, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QHttpMultiPart_connectNotify ".} =
-  var nimfunc = cast[ptr QHttpMultiPartconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QHttpMultiPartdisconnectNotify*(self: gen_qhttpmultipart_types.QHttpMultiPart, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQHttpMultiPart_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQHttpMultiPart_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QHttpMultiPartdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qhttpmultipart_types.QHttpMultiPart, slot: QHttpMultiPartdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QHttpMultiPartdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQHttpMultiPart_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QHttpMultiPart_disconnectNotify(self: ptr cQHttpMultiPart, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QHttpMultiPart_disconnectNotify ".} =
-  var nimfunc = cast[ptr QHttpMultiPartdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQHttpMultiPart_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QHttpMultiPartVTable](vtbl)
+  let self = QHttpMultiPart(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
+    vtbl: ref QHttpMultiPartVTable = nil): gen_qhttpmultipart_types.QHttpMultiPart =
+  let vtbl = if vtbl == nil: new QHttpMultiPartVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQHttpMultiPartVTable, _: ptr cQHttpMultiPart) {.cdecl.} =
+    let vtbl = cast[ref QHttpMultiPartVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQHttpMultiPart_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQHttpMultiPart_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQHttpMultiPart_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQHttpMultiPart_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHttpMultiPart_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHttpMultiPart_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQHttpMultiPart_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQHttpMultiPart_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHttpMultiPart_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHttpMultiPart_disconnectNotify
+  gen_qhttpmultipart_types.QHttpMultiPart(h: fcQHttpMultiPart_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
+    contentType: cint,
+    vtbl: ref QHttpMultiPartVTable = nil): gen_qhttpmultipart_types.QHttpMultiPart =
+  let vtbl = if vtbl == nil: new QHttpMultiPartVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQHttpMultiPartVTable, _: ptr cQHttpMultiPart) {.cdecl.} =
+    let vtbl = cast[ref QHttpMultiPartVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQHttpMultiPart_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQHttpMultiPart_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQHttpMultiPart_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQHttpMultiPart_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHttpMultiPart_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHttpMultiPart_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQHttpMultiPart_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQHttpMultiPart_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHttpMultiPart_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHttpMultiPart_disconnectNotify
+  gen_qhttpmultipart_types.QHttpMultiPart(h: fcQHttpMultiPart_new2(addr(vtbl[]), cint(contentType)))
+
+proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QHttpMultiPartVTable = nil): gen_qhttpmultipart_types.QHttpMultiPart =
+  let vtbl = if vtbl == nil: new QHttpMultiPartVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQHttpMultiPartVTable, _: ptr cQHttpMultiPart) {.cdecl.} =
+    let vtbl = cast[ref QHttpMultiPartVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQHttpMultiPart_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQHttpMultiPart_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQHttpMultiPart_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQHttpMultiPart_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHttpMultiPart_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHttpMultiPart_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQHttpMultiPart_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQHttpMultiPart_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHttpMultiPart_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHttpMultiPart_disconnectNotify
+  gen_qhttpmultipart_types.QHttpMultiPart(h: fcQHttpMultiPart_new3(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qhttpmultipart_types.QHttpMultiPart,
+    contentType: cint, parent: gen_qobject_types.QObject,
+    vtbl: ref QHttpMultiPartVTable = nil): gen_qhttpmultipart_types.QHttpMultiPart =
+  let vtbl = if vtbl == nil: new QHttpMultiPartVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQHttpMultiPartVTable, _: ptr cQHttpMultiPart) {.cdecl.} =
+    let vtbl = cast[ref QHttpMultiPartVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQHttpMultiPart_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQHttpMultiPart_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQHttpMultiPart_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQHttpMultiPart_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQHttpMultiPart_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQHttpMultiPart_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQHttpMultiPart_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQHttpMultiPart_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQHttpMultiPart_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQHttpMultiPart_disconnectNotify
+  gen_qhttpmultipart_types.QHttpMultiPart(h: fcQHttpMultiPart_new4(addr(vtbl[]), cint(contentType), parent.h))
+
 proc staticMetaObject*(_: type gen_qhttpmultipart_types.QHttpMultiPart): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQHttpMultiPart_staticMetaObject())
 proc delete*(self: gen_qhttpmultipart_types.QHttpMultiPart) =

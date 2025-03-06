@@ -77,9 +77,6 @@ proc fcQWebEngineUrlRequestJob_trUtf83(s: cstring, c: cstring, n: cint): struct_
 proc fcQWebEngineUrlRequestJob_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestJob_staticMetaObject".}
 proc fcQWebEngineUrlRequestJob_delete(self: pointer) {.importc: "QWebEngineUrlRequestJob_delete".}
 
-
-func init*(T: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, h: ptr cQWebEngineUrlRequestJob): gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob =
-  T(h: h)
 proc metaObject*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_metaObject(self.h))
 

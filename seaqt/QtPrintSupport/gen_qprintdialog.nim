@@ -70,10 +70,6 @@ export
 
 type cQPrintDialog*{.exportc: "QPrintDialog", incompleteStruct.} = object
 
-proc fcQPrintDialog_new(parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new".}
-proc fcQPrintDialog_new2(printer: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new2".}
-proc fcQPrintDialog_new3(): ptr cQPrintDialog {.importc: "QPrintDialog_new3".}
-proc fcQPrintDialog_new4(printer: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new4".}
 proc fcQPrintDialog_metaObject(self: pointer, ): pointer {.importc: "QPrintDialog_metaObject".}
 proc fcQPrintDialog_metacast(self: pointer, param1: cstring): pointer {.importc: "QPrintDialog_metacast".}
 proc fcQPrintDialog_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPrintDialog_metacall".}
@@ -94,133 +90,124 @@ proc fcQPrintDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.i
 proc fcQPrintDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPrintDialog_trUtf82".}
 proc fcQPrintDialog_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPrintDialog_trUtf83".}
 proc fcQPrintDialog_setOption2(self: pointer, option: cint, on: bool): void {.importc: "QPrintDialog_setOption2".}
-proc fQPrintDialog_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QPrintDialog_virtualbase_metaObject".}
-proc fcQPrintDialog_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_metaObject".}
-proc fQPrintDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QPrintDialog_virtualbase_metacast".}
-proc fcQPrintDialog_override_virtual_metacast(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_metacast".}
-proc fQPrintDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QPrintDialog_virtualbase_metacall".}
-proc fcQPrintDialog_override_virtual_metacall(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_metacall".}
-proc fQPrintDialog_virtualbase_exec(self: pointer, ): cint{.importc: "QPrintDialog_virtualbase_exec".}
-proc fcQPrintDialog_override_virtual_exec(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_exec".}
-proc fQPrintDialog_virtualbase_accept(self: pointer, ): void{.importc: "QPrintDialog_virtualbase_accept".}
-proc fcQPrintDialog_override_virtual_accept(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_accept".}
-proc fQPrintDialog_virtualbase_done(self: pointer, resultVal: cint): void{.importc: "QPrintDialog_virtualbase_done".}
-proc fcQPrintDialog_override_virtual_done(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_done".}
-proc fQPrintDialog_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QPrintDialog_virtualbase_setVisible".}
-proc fcQPrintDialog_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_setVisible".}
-proc fQPrintDialog_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QPrintDialog_virtualbase_sizeHint".}
-proc fcQPrintDialog_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_sizeHint".}
-proc fQPrintDialog_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QPrintDialog_virtualbase_minimumSizeHint".}
-proc fcQPrintDialog_override_virtual_minimumSizeHint(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_minimumSizeHint".}
-proc fQPrintDialog_virtualbase_open(self: pointer, ): void{.importc: "QPrintDialog_virtualbase_open".}
-proc fcQPrintDialog_override_virtual_open(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_open".}
-proc fQPrintDialog_virtualbase_reject(self: pointer, ): void{.importc: "QPrintDialog_virtualbase_reject".}
-proc fcQPrintDialog_override_virtual_reject(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_reject".}
-proc fQPrintDialog_virtualbase_keyPressEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_keyPressEvent".}
-proc fcQPrintDialog_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_keyPressEvent".}
-proc fQPrintDialog_virtualbase_closeEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_closeEvent".}
-proc fcQPrintDialog_override_virtual_closeEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_closeEvent".}
-proc fQPrintDialog_virtualbase_showEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_showEvent".}
-proc fcQPrintDialog_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_showEvent".}
-proc fQPrintDialog_virtualbase_resizeEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_resizeEvent".}
-proc fcQPrintDialog_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_resizeEvent".}
-proc fQPrintDialog_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_contextMenuEvent".}
-proc fcQPrintDialog_override_virtual_contextMenuEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_contextMenuEvent".}
-proc fQPrintDialog_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool{.importc: "QPrintDialog_virtualbase_eventFilter".}
-proc fcQPrintDialog_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_eventFilter".}
-proc fQPrintDialog_virtualbase_devType(self: pointer, ): cint{.importc: "QPrintDialog_virtualbase_devType".}
-proc fcQPrintDialog_override_virtual_devType(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_devType".}
-proc fQPrintDialog_virtualbase_heightForWidth(self: pointer, param1: cint): cint{.importc: "QPrintDialog_virtualbase_heightForWidth".}
-proc fcQPrintDialog_override_virtual_heightForWidth(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_heightForWidth".}
-proc fQPrintDialog_virtualbase_hasHeightForWidth(self: pointer, ): bool{.importc: "QPrintDialog_virtualbase_hasHeightForWidth".}
-proc fcQPrintDialog_override_virtual_hasHeightForWidth(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_hasHeightForWidth".}
-proc fQPrintDialog_virtualbase_paintEngine(self: pointer, ): pointer{.importc: "QPrintDialog_virtualbase_paintEngine".}
-proc fcQPrintDialog_override_virtual_paintEngine(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_paintEngine".}
-proc fQPrintDialog_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QPrintDialog_virtualbase_event".}
-proc fcQPrintDialog_override_virtual_event(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_event".}
-proc fQPrintDialog_virtualbase_mousePressEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_mousePressEvent".}
-proc fcQPrintDialog_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_mousePressEvent".}
-proc fQPrintDialog_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_mouseReleaseEvent".}
-proc fcQPrintDialog_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_mouseReleaseEvent".}
-proc fQPrintDialog_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_mouseDoubleClickEvent".}
-proc fcQPrintDialog_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_mouseDoubleClickEvent".}
-proc fQPrintDialog_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_mouseMoveEvent".}
-proc fcQPrintDialog_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_mouseMoveEvent".}
-proc fQPrintDialog_virtualbase_wheelEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_wheelEvent".}
-proc fcQPrintDialog_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_wheelEvent".}
-proc fQPrintDialog_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_keyReleaseEvent".}
-proc fcQPrintDialog_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_keyReleaseEvent".}
-proc fQPrintDialog_virtualbase_focusInEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_focusInEvent".}
-proc fcQPrintDialog_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_focusInEvent".}
-proc fQPrintDialog_virtualbase_focusOutEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_focusOutEvent".}
-proc fcQPrintDialog_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_focusOutEvent".}
-proc fQPrintDialog_virtualbase_enterEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_enterEvent".}
-proc fcQPrintDialog_override_virtual_enterEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_enterEvent".}
-proc fQPrintDialog_virtualbase_leaveEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_leaveEvent".}
-proc fcQPrintDialog_override_virtual_leaveEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_leaveEvent".}
-proc fQPrintDialog_virtualbase_paintEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_paintEvent".}
-proc fcQPrintDialog_override_virtual_paintEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_paintEvent".}
-proc fQPrintDialog_virtualbase_moveEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_moveEvent".}
-proc fcQPrintDialog_override_virtual_moveEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_moveEvent".}
-proc fQPrintDialog_virtualbase_tabletEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_tabletEvent".}
-proc fcQPrintDialog_override_virtual_tabletEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_tabletEvent".}
-proc fQPrintDialog_virtualbase_actionEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_actionEvent".}
-proc fcQPrintDialog_override_virtual_actionEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_actionEvent".}
-proc fQPrintDialog_virtualbase_dragEnterEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_dragEnterEvent".}
-proc fcQPrintDialog_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_dragEnterEvent".}
-proc fQPrintDialog_virtualbase_dragMoveEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_dragMoveEvent".}
-proc fcQPrintDialog_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_dragMoveEvent".}
-proc fQPrintDialog_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_dragLeaveEvent".}
-proc fcQPrintDialog_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_dragLeaveEvent".}
-proc fQPrintDialog_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_dropEvent".}
-proc fcQPrintDialog_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_dropEvent".}
-proc fQPrintDialog_virtualbase_hideEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_hideEvent".}
-proc fcQPrintDialog_override_virtual_hideEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_hideEvent".}
-proc fQPrintDialog_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool{.importc: "QPrintDialog_virtualbase_nativeEvent".}
-proc fcQPrintDialog_override_virtual_nativeEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_nativeEvent".}
-proc fQPrintDialog_virtualbase_changeEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_changeEvent".}
-proc fcQPrintDialog_override_virtual_changeEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_changeEvent".}
-proc fQPrintDialog_virtualbase_metric(self: pointer, param1: cint): cint{.importc: "QPrintDialog_virtualbase_metric".}
-proc fcQPrintDialog_override_virtual_metric(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_metric".}
-proc fQPrintDialog_virtualbase_initPainter(self: pointer, painter: pointer): void{.importc: "QPrintDialog_virtualbase_initPainter".}
-proc fcQPrintDialog_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_initPainter".}
-proc fQPrintDialog_virtualbase_redirected(self: pointer, offset: pointer): pointer{.importc: "QPrintDialog_virtualbase_redirected".}
-proc fcQPrintDialog_override_virtual_redirected(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_redirected".}
-proc fQPrintDialog_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QPrintDialog_virtualbase_sharedPainter".}
-proc fcQPrintDialog_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_sharedPainter".}
-proc fQPrintDialog_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void{.importc: "QPrintDialog_virtualbase_inputMethodEvent".}
-proc fcQPrintDialog_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_inputMethodEvent".}
-proc fQPrintDialog_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer{.importc: "QPrintDialog_virtualbase_inputMethodQuery".}
-proc fcQPrintDialog_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_inputMethodQuery".}
-proc fQPrintDialog_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool{.importc: "QPrintDialog_virtualbase_focusNextPrevChild".}
-proc fcQPrintDialog_override_virtual_focusNextPrevChild(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_focusNextPrevChild".}
-proc fQPrintDialog_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_timerEvent".}
-proc fcQPrintDialog_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_timerEvent".}
-proc fQPrintDialog_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_childEvent".}
-proc fcQPrintDialog_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_childEvent".}
-proc fQPrintDialog_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QPrintDialog_virtualbase_customEvent".}
-proc fcQPrintDialog_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_customEvent".}
-proc fQPrintDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QPrintDialog_virtualbase_connectNotify".}
-proc fcQPrintDialog_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_connectNotify".}
-proc fQPrintDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QPrintDialog_virtualbase_disconnectNotify".}
-proc fcQPrintDialog_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QPrintDialog_override_virtual_disconnectNotify".}
+type cQPrintDialogVTable = object
+  destructor*: proc(vtbl: ptr cQPrintDialogVTable, self: ptr cQPrintDialog) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  exec*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  accept*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  done*: proc(vtbl, self: pointer, resultVal: cint): void {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  open*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  reject*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQPrintDialog_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QPrintDialog_virtualbase_metaObject".}
+proc fcQPrintDialog_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QPrintDialog_virtualbase_metacast".}
+proc fcQPrintDialog_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QPrintDialog_virtualbase_metacall".}
+proc fcQPrintDialog_virtualbase_exec(self: pointer, ): cint {.importc: "QPrintDialog_virtualbase_exec".}
+proc fcQPrintDialog_virtualbase_accept(self: pointer, ): void {.importc: "QPrintDialog_virtualbase_accept".}
+proc fcQPrintDialog_virtualbase_done(self: pointer, resultVal: cint): void {.importc: "QPrintDialog_virtualbase_done".}
+proc fcQPrintDialog_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QPrintDialog_virtualbase_setVisible".}
+proc fcQPrintDialog_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QPrintDialog_virtualbase_sizeHint".}
+proc fcQPrintDialog_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QPrintDialog_virtualbase_minimumSizeHint".}
+proc fcQPrintDialog_virtualbase_open(self: pointer, ): void {.importc: "QPrintDialog_virtualbase_open".}
+proc fcQPrintDialog_virtualbase_reject(self: pointer, ): void {.importc: "QPrintDialog_virtualbase_reject".}
+proc fcQPrintDialog_virtualbase_keyPressEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_keyPressEvent".}
+proc fcQPrintDialog_virtualbase_closeEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_closeEvent".}
+proc fcQPrintDialog_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_showEvent".}
+proc fcQPrintDialog_virtualbase_resizeEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_resizeEvent".}
+proc fcQPrintDialog_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_contextMenuEvent".}
+proc fcQPrintDialog_virtualbase_eventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QPrintDialog_virtualbase_eventFilter".}
+proc fcQPrintDialog_virtualbase_devType(self: pointer, ): cint {.importc: "QPrintDialog_virtualbase_devType".}
+proc fcQPrintDialog_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QPrintDialog_virtualbase_heightForWidth".}
+proc fcQPrintDialog_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QPrintDialog_virtualbase_hasHeightForWidth".}
+proc fcQPrintDialog_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QPrintDialog_virtualbase_paintEngine".}
+proc fcQPrintDialog_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QPrintDialog_virtualbase_event".}
+proc fcQPrintDialog_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_mousePressEvent".}
+proc fcQPrintDialog_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_mouseReleaseEvent".}
+proc fcQPrintDialog_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_mouseDoubleClickEvent".}
+proc fcQPrintDialog_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_mouseMoveEvent".}
+proc fcQPrintDialog_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_wheelEvent".}
+proc fcQPrintDialog_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_keyReleaseEvent".}
+proc fcQPrintDialog_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_focusInEvent".}
+proc fcQPrintDialog_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_focusOutEvent".}
+proc fcQPrintDialog_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_enterEvent".}
+proc fcQPrintDialog_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_leaveEvent".}
+proc fcQPrintDialog_virtualbase_paintEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_paintEvent".}
+proc fcQPrintDialog_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_moveEvent".}
+proc fcQPrintDialog_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_tabletEvent".}
+proc fcQPrintDialog_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_actionEvent".}
+proc fcQPrintDialog_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_dragEnterEvent".}
+proc fcQPrintDialog_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_dragMoveEvent".}
+proc fcQPrintDialog_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_dragLeaveEvent".}
+proc fcQPrintDialog_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_dropEvent".}
+proc fcQPrintDialog_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_hideEvent".}
+proc fcQPrintDialog_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QPrintDialog_virtualbase_nativeEvent".}
+proc fcQPrintDialog_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_changeEvent".}
+proc fcQPrintDialog_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QPrintDialog_virtualbase_metric".}
+proc fcQPrintDialog_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPrintDialog_virtualbase_initPainter".}
+proc fcQPrintDialog_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPrintDialog_virtualbase_redirected".}
+proc fcQPrintDialog_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QPrintDialog_virtualbase_sharedPainter".}
+proc fcQPrintDialog_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QPrintDialog_virtualbase_inputMethodEvent".}
+proc fcQPrintDialog_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QPrintDialog_virtualbase_inputMethodQuery".}
+proc fcQPrintDialog_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QPrintDialog_virtualbase_focusNextPrevChild".}
+proc fcQPrintDialog_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_timerEvent".}
+proc fcQPrintDialog_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_childEvent".}
+proc fcQPrintDialog_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QPrintDialog_virtualbase_customEvent".}
+proc fcQPrintDialog_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QPrintDialog_virtualbase_connectNotify".}
+proc fcQPrintDialog_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QPrintDialog_virtualbase_disconnectNotify".}
+proc fcQPrintDialog_new(vtbl: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new".}
+proc fcQPrintDialog_new2(vtbl: pointer, printer: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new2".}
+proc fcQPrintDialog_new3(vtbl: pointer, ): ptr cQPrintDialog {.importc: "QPrintDialog_new3".}
+proc fcQPrintDialog_new4(vtbl: pointer, printer: pointer, parent: pointer): ptr cQPrintDialog {.importc: "QPrintDialog_new4".}
 proc fcQPrintDialog_staticMetaObject(): pointer {.importc: "QPrintDialog_staticMetaObject".}
 proc fcQPrintDialog_delete(self: pointer) {.importc: "QPrintDialog_delete".}
-
-
-func init*(T: type gen_qprintdialog_types.QPrintDialog, h: ptr cQPrintDialog): gen_qprintdialog_types.QPrintDialog =
-  T(h: h)
-proc create*(T: type gen_qprintdialog_types.QPrintDialog, parent: gen_qwidget_types.QWidget): gen_qprintdialog_types.QPrintDialog =
-  gen_qprintdialog_types.QPrintDialog.init(fcQPrintDialog_new(parent.h))
-
-proc create*(T: type gen_qprintdialog_types.QPrintDialog, printer: gen_qprinter_types.QPrinter): gen_qprintdialog_types.QPrintDialog =
-  gen_qprintdialog_types.QPrintDialog.init(fcQPrintDialog_new2(printer.h))
-
-proc create*(T: type gen_qprintdialog_types.QPrintDialog, ): gen_qprintdialog_types.QPrintDialog =
-  gen_qprintdialog_types.QPrintDialog.init(fcQPrintDialog_new3())
-
-proc create*(T: type gen_qprintdialog_types.QPrintDialog, printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget): gen_qprintdialog_types.QPrintDialog =
-  gen_qprintdialog_types.QPrintDialog.init(fcQPrintDialog_new4(printer.h, parent.h))
 
 proc metaObject*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPrintDialog_metaObject(self.h))
@@ -271,7 +258,7 @@ proc accepted*(self: gen_qprintdialog_types.QPrintDialog, printer: gen_qprinter_
   fcQPrintDialog_accepted(self.h, printer.h)
 
 type QPrintDialogacceptedSlot* = proc(printer: gen_qprinter_types.QPrinter)
-proc miqt_exec_callback_QPrintDialog_accepted(slot: int, printer: pointer) {.exportc.} =
+proc miqt_exec_callback_cQPrintDialog_accepted(slot: int, printer: pointer) {.exportc: "miqt_exec_callback_QPrintDialog_accepted".} =
   let nimfunc = cast[ptr QPrintDialogacceptedSlot](cast[pointer](slot))
   let slotval1 = gen_qprinter_types.QPrinter(h: printer)
 
@@ -310,968 +297,1107 @@ proc trUtf8*(_: type gen_qprintdialog_types.QPrintDialog, s: cstring, c: cstring
 proc setOption*(self: gen_qprintdialog_types.QPrintDialog, option: cint, on: bool): void =
   fcQPrintDialog_setOption2(self.h, cint(option), on)
 
+type QPrintDialogmetaObjectProc* = proc(self: QPrintDialog): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QPrintDialogmetacastProc* = proc(self: QPrintDialog, param1: cstring): pointer {.raises: [], gcsafe.}
+type QPrintDialogmetacallProc* = proc(self: QPrintDialog, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QPrintDialogexecProc* = proc(self: QPrintDialog): cint {.raises: [], gcsafe.}
+type QPrintDialogacceptProc* = proc(self: QPrintDialog): void {.raises: [], gcsafe.}
+type QPrintDialogdoneProc* = proc(self: QPrintDialog, resultVal: cint): void {.raises: [], gcsafe.}
+type QPrintDialogsetVisibleProc* = proc(self: QPrintDialog, visible: bool): void {.raises: [], gcsafe.}
+type QPrintDialogsizeHintProc* = proc(self: QPrintDialog): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QPrintDialogminimumSizeHintProc* = proc(self: QPrintDialog): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QPrintDialogopenProc* = proc(self: QPrintDialog): void {.raises: [], gcsafe.}
+type QPrintDialogrejectProc* = proc(self: QPrintDialog): void {.raises: [], gcsafe.}
+type QPrintDialogkeyPressEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QPrintDialogcloseEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QPrintDialogshowEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QPrintDialogresizeEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QPrintDialogcontextMenuEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QPrintDialogeventFilterProc* = proc(self: QPrintDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QPrintDialogdevTypeProc* = proc(self: QPrintDialog): cint {.raises: [], gcsafe.}
+type QPrintDialogheightForWidthProc* = proc(self: QPrintDialog, param1: cint): cint {.raises: [], gcsafe.}
+type QPrintDialoghasHeightForWidthProc* = proc(self: QPrintDialog): bool {.raises: [], gcsafe.}
+type QPrintDialogpaintEngineProc* = proc(self: QPrintDialog): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QPrintDialogeventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QPrintDialogmousePressEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QPrintDialogmouseReleaseEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QPrintDialogmouseDoubleClickEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QPrintDialogmouseMoveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QPrintDialogwheelEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QPrintDialogkeyReleaseEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QPrintDialogfocusInEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QPrintDialogfocusOutEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QPrintDialogenterEventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QPrintDialogleaveEventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QPrintDialogpaintEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QPrintDialogmoveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QPrintDialogtabletEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QPrintDialogactionEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QPrintDialogdragEnterEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QPrintDialogdragMoveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QPrintDialogdragLeaveEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QPrintDialogdropEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QPrintDialoghideEventProc* = proc(self: QPrintDialog, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QPrintDialognativeEventProc* = proc(self: QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QPrintDialogchangeEventProc* = proc(self: QPrintDialog, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QPrintDialogmetricProc* = proc(self: QPrintDialog, param1: cint): cint {.raises: [], gcsafe.}
+type QPrintDialoginitPainterProc* = proc(self: QPrintDialog, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QPrintDialogredirectedProc* = proc(self: QPrintDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QPrintDialogsharedPainterProc* = proc(self: QPrintDialog): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QPrintDialoginputMethodEventProc* = proc(self: QPrintDialog, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QPrintDialoginputMethodQueryProc* = proc(self: QPrintDialog, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QPrintDialogfocusNextPrevChildProc* = proc(self: QPrintDialog, next: bool): bool {.raises: [], gcsafe.}
+type QPrintDialogtimerEventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QPrintDialogchildEventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QPrintDialogcustomEventProc* = proc(self: QPrintDialog, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QPrintDialogconnectNotifyProc* = proc(self: QPrintDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QPrintDialogdisconnectNotifyProc* = proc(self: QPrintDialog, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QPrintDialogVTable* = object
+  vtbl: cQPrintDialogVTable
+  metaObject*: QPrintDialogmetaObjectProc
+  metacast*: QPrintDialogmetacastProc
+  metacall*: QPrintDialogmetacallProc
+  exec*: QPrintDialogexecProc
+  accept*: QPrintDialogacceptProc
+  done*: QPrintDialogdoneProc
+  setVisible*: QPrintDialogsetVisibleProc
+  sizeHint*: QPrintDialogsizeHintProc
+  minimumSizeHint*: QPrintDialogminimumSizeHintProc
+  open*: QPrintDialogopenProc
+  reject*: QPrintDialogrejectProc
+  keyPressEvent*: QPrintDialogkeyPressEventProc
+  closeEvent*: QPrintDialogcloseEventProc
+  showEvent*: QPrintDialogshowEventProc
+  resizeEvent*: QPrintDialogresizeEventProc
+  contextMenuEvent*: QPrintDialogcontextMenuEventProc
+  eventFilter*: QPrintDialogeventFilterProc
+  devType*: QPrintDialogdevTypeProc
+  heightForWidth*: QPrintDialogheightForWidthProc
+  hasHeightForWidth*: QPrintDialoghasHeightForWidthProc
+  paintEngine*: QPrintDialogpaintEngineProc
+  event*: QPrintDialogeventProc
+  mousePressEvent*: QPrintDialogmousePressEventProc
+  mouseReleaseEvent*: QPrintDialogmouseReleaseEventProc
+  mouseDoubleClickEvent*: QPrintDialogmouseDoubleClickEventProc
+  mouseMoveEvent*: QPrintDialogmouseMoveEventProc
+  wheelEvent*: QPrintDialogwheelEventProc
+  keyReleaseEvent*: QPrintDialogkeyReleaseEventProc
+  focusInEvent*: QPrintDialogfocusInEventProc
+  focusOutEvent*: QPrintDialogfocusOutEventProc
+  enterEvent*: QPrintDialogenterEventProc
+  leaveEvent*: QPrintDialogleaveEventProc
+  paintEvent*: QPrintDialogpaintEventProc
+  moveEvent*: QPrintDialogmoveEventProc
+  tabletEvent*: QPrintDialogtabletEventProc
+  actionEvent*: QPrintDialogactionEventProc
+  dragEnterEvent*: QPrintDialogdragEnterEventProc
+  dragMoveEvent*: QPrintDialogdragMoveEventProc
+  dragLeaveEvent*: QPrintDialogdragLeaveEventProc
+  dropEvent*: QPrintDialogdropEventProc
+  hideEvent*: QPrintDialoghideEventProc
+  nativeEvent*: QPrintDialognativeEventProc
+  changeEvent*: QPrintDialogchangeEventProc
+  metric*: QPrintDialogmetricProc
+  initPainter*: QPrintDialoginitPainterProc
+  redirected*: QPrintDialogredirectedProc
+  sharedPainter*: QPrintDialogsharedPainterProc
+  inputMethodEvent*: QPrintDialoginputMethodEventProc
+  inputMethodQuery*: QPrintDialoginputMethodQueryProc
+  focusNextPrevChild*: QPrintDialogfocusNextPrevChildProc
+  timerEvent*: QPrintDialogtimerEventProc
+  childEvent*: QPrintDialogchildEventProc
+  customEvent*: QPrintDialogcustomEventProc
+  connectNotify*: QPrintDialogconnectNotifyProc
+  disconnectNotify*: QPrintDialogdisconnectNotifyProc
 proc QPrintDialogmetaObject*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQPrintDialog_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQPrintDialog_virtualbase_metaObject(self.h))
 
-type QPrintDialogmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_metaObject(self: ptr cQPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPrintDialog_metaObject ".} =
-  var nimfunc = cast[ptr QPrintDialogmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QPrintDialogmetacast*(self: gen_qprintdialog_types.QPrintDialog, param1: cstring): pointer =
-  fQPrintDialog_virtualbase_metacast(self.h, param1)
+  fcQPrintDialog_virtualbase_metacast(self.h, param1)
 
-type QPrintDialogmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmetacastProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_metacast(self: ptr cQPrintDialog, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QPrintDialog_metacast ".} =
-  var nimfunc = cast[ptr QPrintDialogmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QPrintDialogmetacall*(self: gen_qprintdialog_types.QPrintDialog, param1: cint, param2: cint, param3: pointer): cint =
-  fQPrintDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQPrintDialog_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QPrintDialogmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmetacallProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_metacall(self: ptr cQPrintDialog, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QPrintDialog_metacall ".} =
-  var nimfunc = cast[ptr QPrintDialogmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QPrintDialogexec*(self: gen_qprintdialog_types.QPrintDialog, ): cint =
-  fQPrintDialog_virtualbase_exec(self.h)
+  fcQPrintDialog_virtualbase_exec(self.h)
 
-type QPrintDialogexecProc* = proc(): cint
-proc onexec*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogexecProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogexecProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_exec(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_exec(self: ptr cQPrintDialog, slot: int): cint {.exportc: "miqt_exec_callback_QPrintDialog_exec ".} =
-  var nimfunc = cast[ptr QPrintDialogexecProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_exec(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].exec(self)
   virtualReturn
+
 proc QPrintDialogaccept*(self: gen_qprintdialog_types.QPrintDialog, ): void =
-  fQPrintDialog_virtualbase_accept(self.h)
+  fcQPrintDialog_virtualbase_accept(self.h)
 
-type QPrintDialogacceptProc* = proc(): void
-proc onaccept*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogacceptProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogacceptProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_accept(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQPrintDialog_accept(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  vtbl[].accept(self)
 
-proc miqt_exec_callback_QPrintDialog_accept(self: ptr cQPrintDialog, slot: int): void {.exportc: "miqt_exec_callback_QPrintDialog_accept ".} =
-  var nimfunc = cast[ptr QPrintDialogacceptProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QPrintDialogdone*(self: gen_qprintdialog_types.QPrintDialog, resultVal: cint): void =
-  fQPrintDialog_virtualbase_done(self.h, resultVal)
+  fcQPrintDialog_virtualbase_done(self.h, resultVal)
 
-type QPrintDialogdoneProc* = proc(resultVal: cint): void
-proc ondone*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdoneProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdoneProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_done(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_done(self: ptr cQPrintDialog, slot: int, resultVal: cint): void {.exportc: "miqt_exec_callback_QPrintDialog_done ".} =
-  var nimfunc = cast[ptr QPrintDialogdoneProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_done(vtbl: pointer, self: pointer, resultVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = resultVal
+  vtbl[].done(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogsetVisible*(self: gen_qprintdialog_types.QPrintDialog, visible: bool): void =
-  fQPrintDialog_virtualbase_setVisible(self.h, visible)
+  fcQPrintDialog_virtualbase_setVisible(self.h, visible)
 
-type QPrintDialogsetVisibleProc* = proc(visible: bool): void
-proc onsetVisible*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogsetVisibleProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogsetVisibleProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_setVisible(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_setVisible(self: ptr cQPrintDialog, slot: int, visible: bool): void {.exportc: "miqt_exec_callback_QPrintDialog_setVisible ".} =
-  var nimfunc = cast[ptr QPrintDialogsetVisibleProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogsizeHint*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQPrintDialog_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPrintDialog_virtualbase_sizeHint(self.h))
 
-type QPrintDialogsizeHintProc* = proc(): gen_qsize_types.QSize
-proc onsizeHint*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogsizeHintProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogsizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_sizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_sizeHint(self: ptr cQPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPrintDialog_sizeHint ".} =
-  var nimfunc = cast[ptr QPrintDialogsizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.h
+
 proc QPrintDialogminimumSizeHint*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQPrintDialog_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQPrintDialog_virtualbase_minimumSizeHint(self.h))
 
-type QPrintDialogminimumSizeHintProc* = proc(): gen_qsize_types.QSize
-proc onminimumSizeHint*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogminimumSizeHintProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogminimumSizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_minimumSizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_minimumSizeHint(self: ptr cQPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPrintDialog_minimumSizeHint ".} =
-  var nimfunc = cast[ptr QPrintDialogminimumSizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.h
+
 proc QPrintDialogopen*(self: gen_qprintdialog_types.QPrintDialog, ): void =
-  fQPrintDialog_virtualbase_open(self.h)
+  fcQPrintDialog_virtualbase_open(self.h)
 
-type QPrintDialogopenProc* = proc(): void
-proc onopen*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogopenProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogopenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_open(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQPrintDialog_open(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  vtbl[].open(self)
 
-proc miqt_exec_callback_QPrintDialog_open(self: ptr cQPrintDialog, slot: int): void {.exportc: "miqt_exec_callback_QPrintDialog_open ".} =
-  var nimfunc = cast[ptr QPrintDialogopenProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QPrintDialogreject*(self: gen_qprintdialog_types.QPrintDialog, ): void =
-  fQPrintDialog_virtualbase_reject(self.h)
+  fcQPrintDialog_virtualbase_reject(self.h)
 
-type QPrintDialogrejectProc* = proc(): void
-proc onreject*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogrejectProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogrejectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_reject(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQPrintDialog_reject(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  vtbl[].reject(self)
 
-proc miqt_exec_callback_QPrintDialog_reject(self: ptr cQPrintDialog, slot: int): void {.exportc: "miqt_exec_callback_QPrintDialog_reject ".} =
-  var nimfunc = cast[ptr QPrintDialogrejectProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QPrintDialogkeyPressEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QKeyEvent): void =
-  fQPrintDialog_virtualbase_keyPressEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_keyPressEvent(self.h, param1.h)
 
-type QPrintDialogkeyPressEventProc* = proc(param1: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_keyPressEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_keyPressEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogcloseEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QCloseEvent): void =
-  fQPrintDialog_virtualbase_closeEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_closeEvent(self.h, param1.h)
 
-type QPrintDialogcloseEventProc* = proc(param1: gen_qevent_types.QCloseEvent): void
-proc oncloseEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogcloseEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogcloseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_closeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_closeEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_closeEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogcloseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_closeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: param1)
+  vtbl[].closeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogshowEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QShowEvent): void =
-  fQPrintDialog_virtualbase_showEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_showEvent(self.h, param1.h)
 
-type QPrintDialogshowEventProc* = proc(param1: gen_qevent_types.QShowEvent): void
-proc onshowEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogshowEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogshowEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_showEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_showEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_showEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogshowEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_showEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  vtbl[].showEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogresizeEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QResizeEvent): void =
-  fQPrintDialog_virtualbase_resizeEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_resizeEvent(self.h, param1.h)
 
-type QPrintDialogresizeEventProc* = proc(param1: gen_qevent_types.QResizeEvent): void
-proc onresizeEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogresizeEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogresizeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_resizeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_resizeEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_resizeEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogresizeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_resizeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  vtbl[].resizeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogcontextMenuEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QContextMenuEvent): void =
-  fQPrintDialog_virtualbase_contextMenuEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_contextMenuEvent(self.h, param1.h)
 
-type QPrintDialogcontextMenuEventProc* = proc(param1: gen_qevent_types.QContextMenuEvent): void
-proc oncontextMenuEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogcontextMenuEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogcontextMenuEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_contextMenuEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_contextMenuEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_contextMenuEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogcontextMenuEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  vtbl[].contextMenuEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogeventFilter*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool =
-  fQPrintDialog_virtualbase_eventFilter(self.h, param1.h, param2.h)
+  fcQPrintDialog_virtualbase_eventFilter(self.h, param1.h, param2.h)
 
-type QPrintDialogeventFilterProc* = proc(param1: gen_qobject_types.QObject, param2: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_eventFilter(self: ptr cQPrintDialog, slot: int, param1: pointer, param2: pointer): bool {.exportc: "miqt_exec_callback_QPrintDialog_eventFilter ".} =
-  var nimfunc = cast[ptr QPrintDialogeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_eventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qobject_types.QObject(h: param1)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QPrintDialogdevType*(self: gen_qprintdialog_types.QPrintDialog, ): cint =
-  fQPrintDialog_virtualbase_devType(self.h)
+  fcQPrintDialog_virtualbase_devType(self.h)
 
-type QPrintDialogdevTypeProc* = proc(): cint
-proc ondevType*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdevTypeProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdevTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_devType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_devType(self: ptr cQPrintDialog, slot: int): cint {.exportc: "miqt_exec_callback_QPrintDialog_devType ".} =
-  var nimfunc = cast[ptr QPrintDialogdevTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].devType(self)
   virtualReturn
+
 proc QPrintDialogheightForWidth*(self: gen_qprintdialog_types.QPrintDialog, param1: cint): cint =
-  fQPrintDialog_virtualbase_heightForWidth(self.h, param1)
+  fcQPrintDialog_virtualbase_heightForWidth(self.h, param1)
 
-type QPrintDialogheightForWidthProc* = proc(param1: cint): cint
-proc onheightForWidth*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogheightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogheightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_heightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_heightForWidth(self: ptr cQPrintDialog, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QPrintDialog_heightForWidth ".} =
-  var nimfunc = cast[ptr QPrintDialogheightForWidthProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = param1
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
+
 proc QPrintDialoghasHeightForWidth*(self: gen_qprintdialog_types.QPrintDialog, ): bool =
-  fQPrintDialog_virtualbase_hasHeightForWidth(self.h)
+  fcQPrintDialog_virtualbase_hasHeightForWidth(self.h)
 
-type QPrintDialoghasHeightForWidthProc* = proc(): bool
-proc onhasHeightForWidth*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialoghasHeightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialoghasHeightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_hasHeightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_hasHeightForWidth(self: ptr cQPrintDialog, slot: int): bool {.exportc: "miqt_exec_callback_QPrintDialog_hasHeightForWidth ".} =
-  var nimfunc = cast[ptr QPrintDialoghasHeightForWidthProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
+
 proc QPrintDialogpaintEngine*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fQPrintDialog_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPrintDialog_virtualbase_paintEngine(self.h))
 
-type QPrintDialogpaintEngineProc* = proc(): gen_qpaintengine_types.QPaintEngine
-proc onpaintEngine*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogpaintEngineProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogpaintEngineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_paintEngine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_paintEngine(self: ptr cQPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPrintDialog_paintEngine ".} =
-  var nimfunc = cast[ptr QPrintDialogpaintEngineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.h
+
 proc QPrintDialogevent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QEvent): bool =
-  fQPrintDialog_virtualbase_event(self.h, event.h)
+  fcQPrintDialog_virtualbase_event(self.h, event.h)
 
-type QPrintDialogeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogeventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_event(self: ptr cQPrintDialog, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QPrintDialog_event ".} =
-  var nimfunc = cast[ptr QPrintDialogeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QPrintDialogmousePressEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QMouseEvent): void =
-  fQPrintDialog_virtualbase_mousePressEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_mousePressEvent(self.h, event.h)
 
-type QPrintDialogmousePressEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_mousePressEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_mousePressEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogmouseReleaseEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QMouseEvent): void =
-  fQPrintDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-type QPrintDialogmouseReleaseEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_mouseReleaseEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogmouseDoubleClickEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QMouseEvent): void =
-  fQPrintDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QPrintDialogmouseDoubleClickEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_mouseDoubleClickEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogmouseMoveEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QMouseEvent): void =
-  fQPrintDialog_virtualbase_mouseMoveEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_mouseMoveEvent(self.h, event.h)
 
-type QPrintDialogmouseMoveEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_mouseMoveEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogwheelEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QWheelEvent): void =
-  fQPrintDialog_virtualbase_wheelEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_wheelEvent(self.h, event.h)
 
-type QPrintDialogwheelEventProc* = proc(event: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_wheelEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_wheelEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogkeyReleaseEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QKeyEvent): void =
-  fQPrintDialog_virtualbase_keyReleaseEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_keyReleaseEvent(self.h, event.h)
 
-type QPrintDialogkeyReleaseEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_keyReleaseEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogfocusInEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QFocusEvent): void =
-  fQPrintDialog_virtualbase_focusInEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_focusInEvent(self.h, event.h)
 
-type QPrintDialogfocusInEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_focusInEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_focusInEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogfocusOutEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QFocusEvent): void =
-  fQPrintDialog_virtualbase_focusOutEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_focusOutEvent(self.h, event.h)
 
-type QPrintDialogfocusOutEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_focusOutEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_focusOutEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogenterEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QEvent): void =
-  fQPrintDialog_virtualbase_enterEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_enterEvent(self.h, event.h)
 
-type QPrintDialogenterEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onenterEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogenterEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogenterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_enterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_enterEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_enterEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogenterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogleaveEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QEvent): void =
-  fQPrintDialog_virtualbase_leaveEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_leaveEvent(self.h, event.h)
 
-type QPrintDialogleaveEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onleaveEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogleaveEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogleaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_leaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_leaveEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_leaveEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogleaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogpaintEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QPaintEvent): void =
-  fQPrintDialog_virtualbase_paintEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_paintEvent(self.h, event.h)
 
-type QPrintDialogpaintEventProc* = proc(event: gen_qevent_types.QPaintEvent): void
-proc onpaintEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogpaintEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogpaintEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_paintEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_paintEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_paintEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogpaintEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_paintEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: event)
+  vtbl[].paintEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogmoveEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QMoveEvent): void =
-  fQPrintDialog_virtualbase_moveEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_moveEvent(self.h, event.h)
 
-type QPrintDialogmoveEventProc* = proc(event: gen_qevent_types.QMoveEvent): void
-proc onmoveEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmoveEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_moveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_moveEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_moveEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogmoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogtabletEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QTabletEvent): void =
-  fQPrintDialog_virtualbase_tabletEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_tabletEvent(self.h, event.h)
 
-type QPrintDialogtabletEventProc* = proc(event: gen_qevent_types.QTabletEvent): void
-proc ontabletEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogtabletEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogtabletEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_tabletEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_tabletEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_tabletEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogtabletEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogactionEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QActionEvent): void =
-  fQPrintDialog_virtualbase_actionEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_actionEvent(self.h, event.h)
 
-type QPrintDialogactionEventProc* = proc(event: gen_qevent_types.QActionEvent): void
-proc onactionEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogactionEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogactionEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_actionEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_actionEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_actionEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogactionEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogdragEnterEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QDragEnterEvent): void =
-  fQPrintDialog_virtualbase_dragEnterEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_dragEnterEvent(self.h, event.h)
 
-type QPrintDialogdragEnterEventProc* = proc(event: gen_qevent_types.QDragEnterEvent): void
-proc ondragEnterEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_dragEnterEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogdragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogdragMoveEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QDragMoveEvent): void =
-  fQPrintDialog_virtualbase_dragMoveEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_dragMoveEvent(self.h, event.h)
 
-type QPrintDialogdragMoveEventProc* = proc(event: gen_qevent_types.QDragMoveEvent): void
-proc ondragMoveEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_dragMoveEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogdragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogdragLeaveEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QDragLeaveEvent): void =
-  fQPrintDialog_virtualbase_dragLeaveEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_dragLeaveEvent(self.h, event.h)
 
-type QPrintDialogdragLeaveEventProc* = proc(event: gen_qevent_types.QDragLeaveEvent): void
-proc ondragLeaveEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_dragLeaveEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogdragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogdropEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QDropEvent): void =
-  fQPrintDialog_virtualbase_dropEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_dropEvent(self.h, event.h)
 
-type QPrintDialogdropEventProc* = proc(event: gen_qevent_types.QDropEvent): void
-proc ondropEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdropEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_dropEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_dropEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogdropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialoghideEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qevent_types.QHideEvent): void =
-  fQPrintDialog_virtualbase_hideEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_hideEvent(self.h, event.h)
 
-type QPrintDialoghideEventProc* = proc(event: gen_qevent_types.QHideEvent): void
-proc onhideEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialoghideEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialoghideEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_hideEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_hideEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_hideEvent ".} =
-  var nimfunc = cast[ptr QPrintDialoghideEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialognativeEvent*(self: gen_qprintdialog_types.QPrintDialog, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
-  fQPrintDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+  fcQPrintDialog_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-type QPrintDialognativeEventProc* = proc(eventType: seq[byte], message: pointer, resultVal: ptr clong): bool
-proc onnativeEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialognativeEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialognativeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_nativeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_nativeEvent(self: ptr cQPrintDialog, slot: int, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.exportc: "miqt_exec_callback_QPrintDialog_nativeEvent ".} =
-  var nimfunc = cast[ptr QPrintDialognativeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
-
   let slotval2 = message
-
   let slotval3 = resultVal
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QPrintDialogchangeEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qcoreevent_types.QEvent): void =
-  fQPrintDialog_virtualbase_changeEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_changeEvent(self.h, param1.h)
 
-type QPrintDialogchangeEventProc* = proc(param1: gen_qcoreevent_types.QEvent): void
-proc onchangeEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogchangeEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogchangeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_changeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_changeEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_changeEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogchangeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogmetric*(self: gen_qprintdialog_types.QPrintDialog, param1: cint): cint =
-  fQPrintDialog_virtualbase_metric(self.h, cint(param1))
+  fcQPrintDialog_virtualbase_metric(self.h, cint(param1))
 
-type QPrintDialogmetricProc* = proc(param1: cint): cint
-proc onmetric*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogmetricProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogmetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_metric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_metric(self: ptr cQPrintDialog, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QPrintDialog_metric ".} =
-  var nimfunc = cast[ptr QPrintDialogmetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
+
 proc QPrintDialoginitPainter*(self: gen_qprintdialog_types.QPrintDialog, painter: gen_qpainter_types.QPainter): void =
-  fQPrintDialog_virtualbase_initPainter(self.h, painter.h)
+  fcQPrintDialog_virtualbase_initPainter(self.h, painter.h)
 
-type QPrintDialoginitPainterProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc oninitPainter*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialoginitPainterProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialoginitPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_initPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_initPainter(self: ptr cQPrintDialog, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_initPainter ".} =
-  var nimfunc = cast[ptr QPrintDialoginitPainterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogredirected*(self: gen_qprintdialog_types.QPrintDialog, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fQPrintDialog_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPrintDialog_virtualbase_redirected(self.h, offset.h))
 
-type QPrintDialogredirectedProc* = proc(offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice
-proc onredirected*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogredirectedProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogredirectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_redirected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_redirected(self: ptr cQPrintDialog, slot: int, offset: pointer): pointer {.exportc: "miqt_exec_callback_QPrintDialog_redirected ".} =
-  var nimfunc = cast[ptr QPrintDialogredirectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].redirected(self, slotval1)
   virtualReturn.h
+
 proc QPrintDialogsharedPainter*(self: gen_qprintdialog_types.QPrintDialog, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fQPrintDialog_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPrintDialog_virtualbase_sharedPainter(self.h))
 
-type QPrintDialogsharedPainterProc* = proc(): gen_qpainter_types.QPainter
-proc onsharedPainter*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogsharedPainterProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogsharedPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_sharedPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_sharedPainter(self: ptr cQPrintDialog, slot: int): pointer {.exportc: "miqt_exec_callback_QPrintDialog_sharedPainter ".} =
-  var nimfunc = cast[ptr QPrintDialogsharedPainterProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPrintDialog_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
 proc QPrintDialoginputMethodEvent*(self: gen_qprintdialog_types.QPrintDialog, param1: gen_qevent_types.QInputMethodEvent): void =
-  fQPrintDialog_virtualbase_inputMethodEvent(self.h, param1.h)
+  fcQPrintDialog_virtualbase_inputMethodEvent(self.h, param1.h)
 
-type QPrintDialoginputMethodEventProc* = proc(param1: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialoginputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialoginputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_inputMethodEvent(self: ptr cQPrintDialog, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QPrintDialoginputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialoginputMethodQuery*(self: gen_qprintdialog_types.QPrintDialog, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQPrintDialog_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQPrintDialog_virtualbase_inputMethodQuery(self.h, cint(param1)))
 
-type QPrintDialoginputMethodQueryProc* = proc(param1: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialoginputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialoginputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_inputMethodQuery(self: ptr cQPrintDialog, slot: int, param1: cint): pointer {.exportc: "miqt_exec_callback_QPrintDialog_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QPrintDialoginputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QPrintDialogfocusNextPrevChild*(self: gen_qprintdialog_types.QPrintDialog, next: bool): bool =
-  fQPrintDialog_virtualbase_focusNextPrevChild(self.h, next)
+  fcQPrintDialog_virtualbase_focusNextPrevChild(self.h, next)
 
-type QPrintDialogfocusNextPrevChildProc* = proc(next: bool): bool
-proc onfocusNextPrevChild*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogfocusNextPrevChildProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogfocusNextPrevChildProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_focusNextPrevChild(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_focusNextPrevChild(self: ptr cQPrintDialog, slot: int, next: bool): bool {.exportc: "miqt_exec_callback_QPrintDialog_focusNextPrevChild ".} =
-  var nimfunc = cast[ptr QPrintDialogfocusNextPrevChildProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = next
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
+
 proc QPrintDialogtimerEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQPrintDialog_virtualbase_timerEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_timerEvent(self.h, event.h)
 
-type QPrintDialogtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_timerEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_timerEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogchildEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QChildEvent): void =
-  fQPrintDialog_virtualbase_childEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_childEvent(self.h, event.h)
 
-type QPrintDialogchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogchildEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_childEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_childEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogcustomEvent*(self: gen_qprintdialog_types.QPrintDialog, event: gen_qcoreevent_types.QEvent): void =
-  fQPrintDialog_virtualbase_customEvent(self.h, event.h)
+  fcQPrintDialog_virtualbase_customEvent(self.h, event.h)
 
-type QPrintDialogcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_customEvent(self: ptr cQPrintDialog, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_customEvent ".} =
-  var nimfunc = cast[ptr QPrintDialogcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogconnectNotify*(self: gen_qprintdialog_types.QPrintDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQPrintDialog_virtualbase_connectNotify(self.h, signal.h)
+  fcQPrintDialog_virtualbase_connectNotify(self.h, signal.h)
 
-type QPrintDialogconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_connectNotify(self: ptr cQPrintDialog, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_connectNotify ".} =
-  var nimfunc = cast[ptr QPrintDialogconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPrintDialogdisconnectNotify*(self: gen_qprintdialog_types.QPrintDialog, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQPrintDialog_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQPrintDialog_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QPrintDialogdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qprintdialog_types.QPrintDialog, slot: QPrintDialogdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QPrintDialogdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPrintDialog_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPrintDialog_disconnectNotify(self: ptr cQPrintDialog, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QPrintDialog_disconnectNotify ".} =
-  var nimfunc = cast[ptr QPrintDialogdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPrintDialog_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPrintDialogVTable](vtbl)
+  let self = QPrintDialog(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qprintdialog_types.QPrintDialog,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QPrintDialogVTable = nil): gen_qprintdialog_types.QPrintDialog =
+  let vtbl = if vtbl == nil: new QPrintDialogVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintDialogVTable, _: ptr cQPrintDialog) {.cdecl.} =
+    let vtbl = cast[ref QPrintDialogVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintDialog_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintDialog_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintDialog_metacall
+  if not isNil(vtbl.exec):
+    vtbl[].vtbl.exec = miqt_exec_callback_cQPrintDialog_exec
+  if not isNil(vtbl.accept):
+    vtbl[].vtbl.accept = miqt_exec_callback_cQPrintDialog_accept
+  if not isNil(vtbl.done):
+    vtbl[].vtbl.done = miqt_exec_callback_cQPrintDialog_done
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintDialog_setVisible
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintDialog_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintDialog_minimumSizeHint
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQPrintDialog_open
+  if not isNil(vtbl.reject):
+    vtbl[].vtbl.reject = miqt_exec_callback_cQPrintDialog_reject
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintDialog_keyPressEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintDialog_closeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintDialog_showEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintDialog_resizeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintDialog_contextMenuEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintDialog_eventFilter
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPrintDialog_devType
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintDialog_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintDialog_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintDialog_paintEngine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQPrintDialog_event
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintDialog_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintDialog_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintDialog_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintDialog_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintDialog_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintDialog_keyReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintDialog_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintDialog_focusOutEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintDialog_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintDialog_leaveEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintDialog_paintEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintDialog_moveEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintDialog_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintDialog_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintDialog_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintDialog_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintDialog_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintDialog_dropEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintDialog_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintDialog_nativeEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintDialog_changeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPrintDialog_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintDialog_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintDialog_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintDialog_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintDialog_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintDialog_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintDialog_focusNextPrevChild
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintDialog_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintDialog_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintDialog_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintDialog_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintDialog_disconnectNotify
+  gen_qprintdialog_types.QPrintDialog(h: fcQPrintDialog_new(addr(vtbl[]), parent.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qprintdialog_types.QPrintDialog,
+    printer: gen_qprinter_types.QPrinter,
+    vtbl: ref QPrintDialogVTable = nil): gen_qprintdialog_types.QPrintDialog =
+  let vtbl = if vtbl == nil: new QPrintDialogVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintDialogVTable, _: ptr cQPrintDialog) {.cdecl.} =
+    let vtbl = cast[ref QPrintDialogVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintDialog_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintDialog_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintDialog_metacall
+  if not isNil(vtbl.exec):
+    vtbl[].vtbl.exec = miqt_exec_callback_cQPrintDialog_exec
+  if not isNil(vtbl.accept):
+    vtbl[].vtbl.accept = miqt_exec_callback_cQPrintDialog_accept
+  if not isNil(vtbl.done):
+    vtbl[].vtbl.done = miqt_exec_callback_cQPrintDialog_done
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintDialog_setVisible
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintDialog_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintDialog_minimumSizeHint
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQPrintDialog_open
+  if not isNil(vtbl.reject):
+    vtbl[].vtbl.reject = miqt_exec_callback_cQPrintDialog_reject
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintDialog_keyPressEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintDialog_closeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintDialog_showEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintDialog_resizeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintDialog_contextMenuEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintDialog_eventFilter
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPrintDialog_devType
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintDialog_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintDialog_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintDialog_paintEngine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQPrintDialog_event
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintDialog_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintDialog_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintDialog_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintDialog_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintDialog_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintDialog_keyReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintDialog_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintDialog_focusOutEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintDialog_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintDialog_leaveEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintDialog_paintEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintDialog_moveEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintDialog_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintDialog_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintDialog_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintDialog_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintDialog_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintDialog_dropEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintDialog_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintDialog_nativeEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintDialog_changeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPrintDialog_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintDialog_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintDialog_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintDialog_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintDialog_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintDialog_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintDialog_focusNextPrevChild
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintDialog_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintDialog_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintDialog_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintDialog_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintDialog_disconnectNotify
+  gen_qprintdialog_types.QPrintDialog(h: fcQPrintDialog_new2(addr(vtbl[]), printer.h))
+
+proc create*(T: type gen_qprintdialog_types.QPrintDialog,
+    vtbl: ref QPrintDialogVTable = nil): gen_qprintdialog_types.QPrintDialog =
+  let vtbl = if vtbl == nil: new QPrintDialogVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintDialogVTable, _: ptr cQPrintDialog) {.cdecl.} =
+    let vtbl = cast[ref QPrintDialogVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintDialog_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintDialog_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintDialog_metacall
+  if not isNil(vtbl.exec):
+    vtbl[].vtbl.exec = miqt_exec_callback_cQPrintDialog_exec
+  if not isNil(vtbl.accept):
+    vtbl[].vtbl.accept = miqt_exec_callback_cQPrintDialog_accept
+  if not isNil(vtbl.done):
+    vtbl[].vtbl.done = miqt_exec_callback_cQPrintDialog_done
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintDialog_setVisible
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintDialog_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintDialog_minimumSizeHint
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQPrintDialog_open
+  if not isNil(vtbl.reject):
+    vtbl[].vtbl.reject = miqt_exec_callback_cQPrintDialog_reject
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintDialog_keyPressEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintDialog_closeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintDialog_showEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintDialog_resizeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintDialog_contextMenuEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintDialog_eventFilter
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPrintDialog_devType
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintDialog_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintDialog_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintDialog_paintEngine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQPrintDialog_event
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintDialog_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintDialog_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintDialog_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintDialog_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintDialog_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintDialog_keyReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintDialog_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintDialog_focusOutEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintDialog_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintDialog_leaveEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintDialog_paintEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintDialog_moveEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintDialog_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintDialog_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintDialog_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintDialog_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintDialog_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintDialog_dropEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintDialog_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintDialog_nativeEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintDialog_changeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPrintDialog_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintDialog_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintDialog_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintDialog_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintDialog_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintDialog_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintDialog_focusNextPrevChild
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintDialog_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintDialog_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintDialog_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintDialog_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintDialog_disconnectNotify
+  gen_qprintdialog_types.QPrintDialog(h: fcQPrintDialog_new3(addr(vtbl[]), ))
+
+proc create*(T: type gen_qprintdialog_types.QPrintDialog,
+    printer: gen_qprinter_types.QPrinter, parent: gen_qwidget_types.QWidget,
+    vtbl: ref QPrintDialogVTable = nil): gen_qprintdialog_types.QPrintDialog =
+  let vtbl = if vtbl == nil: new QPrintDialogVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPrintDialogVTable, _: ptr cQPrintDialog) {.cdecl.} =
+    let vtbl = cast[ref QPrintDialogVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQPrintDialog_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQPrintDialog_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQPrintDialog_metacall
+  if not isNil(vtbl.exec):
+    vtbl[].vtbl.exec = miqt_exec_callback_cQPrintDialog_exec
+  if not isNil(vtbl.accept):
+    vtbl[].vtbl.accept = miqt_exec_callback_cQPrintDialog_accept
+  if not isNil(vtbl.done):
+    vtbl[].vtbl.done = miqt_exec_callback_cQPrintDialog_done
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQPrintDialog_setVisible
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQPrintDialog_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQPrintDialog_minimumSizeHint
+  if not isNil(vtbl.open):
+    vtbl[].vtbl.open = miqt_exec_callback_cQPrintDialog_open
+  if not isNil(vtbl.reject):
+    vtbl[].vtbl.reject = miqt_exec_callback_cQPrintDialog_reject
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQPrintDialog_keyPressEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQPrintDialog_closeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQPrintDialog_showEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQPrintDialog_resizeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQPrintDialog_contextMenuEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQPrintDialog_eventFilter
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPrintDialog_devType
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQPrintDialog_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQPrintDialog_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPrintDialog_paintEngine
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQPrintDialog_event
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQPrintDialog_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQPrintDialog_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQPrintDialog_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQPrintDialog_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQPrintDialog_wheelEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQPrintDialog_keyReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQPrintDialog_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQPrintDialog_focusOutEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQPrintDialog_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQPrintDialog_leaveEvent
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQPrintDialog_paintEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQPrintDialog_moveEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQPrintDialog_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQPrintDialog_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQPrintDialog_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQPrintDialog_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQPrintDialog_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQPrintDialog_dropEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQPrintDialog_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQPrintDialog_nativeEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQPrintDialog_changeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPrintDialog_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPrintDialog_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPrintDialog_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPrintDialog_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQPrintDialog_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQPrintDialog_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQPrintDialog_focusNextPrevChild
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQPrintDialog_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQPrintDialog_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQPrintDialog_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQPrintDialog_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQPrintDialog_disconnectNotify
+  gen_qprintdialog_types.QPrintDialog(h: fcQPrintDialog_new4(addr(vtbl[]), printer.h, parent.h))
+
 proc staticMetaObject*(_: type gen_qprintdialog_types.QPrintDialog): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPrintDialog_staticMetaObject())
 proc delete*(self: gen_qprintdialog_types.QPrintDialog) =

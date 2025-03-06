@@ -56,8 +56,6 @@ export
 
 type cQVideoProbe*{.exportc: "QVideoProbe", incompleteStruct.} = object
 
-proc fcQVideoProbe_new(): ptr cQVideoProbe {.importc: "QVideoProbe_new".}
-proc fcQVideoProbe_new2(parent: pointer): ptr cQVideoProbe {.importc: "QVideoProbe_new2".}
 proc fcQVideoProbe_metaObject(self: pointer, ): pointer {.importc: "QVideoProbe_metaObject".}
 proc fcQVideoProbe_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoProbe_metacast".}
 proc fcQVideoProbe_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoProbe_metacall".}
@@ -74,37 +72,32 @@ proc fcQVideoProbe_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQVideoProbe_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoProbe_tr3".}
 proc fcQVideoProbe_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoProbe_trUtf82".}
 proc fcQVideoProbe_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoProbe_trUtf83".}
-proc fQVideoProbe_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QVideoProbe_virtualbase_metaObject".}
-proc fcQVideoProbe_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_metaObject".}
-proc fQVideoProbe_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QVideoProbe_virtualbase_metacast".}
-proc fcQVideoProbe_override_virtual_metacast(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_metacast".}
-proc fQVideoProbe_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QVideoProbe_virtualbase_metacall".}
-proc fcQVideoProbe_override_virtual_metacall(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_metacall".}
-proc fQVideoProbe_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QVideoProbe_virtualbase_event".}
-proc fcQVideoProbe_override_virtual_event(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_event".}
-proc fQVideoProbe_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QVideoProbe_virtualbase_eventFilter".}
-proc fcQVideoProbe_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_eventFilter".}
-proc fQVideoProbe_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QVideoProbe_virtualbase_timerEvent".}
-proc fcQVideoProbe_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_timerEvent".}
-proc fQVideoProbe_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QVideoProbe_virtualbase_childEvent".}
-proc fcQVideoProbe_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_childEvent".}
-proc fQVideoProbe_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QVideoProbe_virtualbase_customEvent".}
-proc fcQVideoProbe_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_customEvent".}
-proc fQVideoProbe_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QVideoProbe_virtualbase_connectNotify".}
-proc fcQVideoProbe_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_connectNotify".}
-proc fQVideoProbe_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QVideoProbe_virtualbase_disconnectNotify".}
-proc fcQVideoProbe_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QVideoProbe_override_virtual_disconnectNotify".}
+type cQVideoProbeVTable = object
+  destructor*: proc(vtbl: ptr cQVideoProbeVTable, self: ptr cQVideoProbe) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQVideoProbe_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QVideoProbe_virtualbase_metaObject".}
+proc fcQVideoProbe_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoProbe_virtualbase_metacast".}
+proc fcQVideoProbe_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoProbe_virtualbase_metacall".}
+proc fcQVideoProbe_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QVideoProbe_virtualbase_event".}
+proc fcQVideoProbe_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QVideoProbe_virtualbase_eventFilter".}
+proc fcQVideoProbe_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QVideoProbe_virtualbase_timerEvent".}
+proc fcQVideoProbe_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QVideoProbe_virtualbase_childEvent".}
+proc fcQVideoProbe_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QVideoProbe_virtualbase_customEvent".}
+proc fcQVideoProbe_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QVideoProbe_virtualbase_connectNotify".}
+proc fcQVideoProbe_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QVideoProbe_virtualbase_disconnectNotify".}
+proc fcQVideoProbe_new(vtbl: pointer, ): ptr cQVideoProbe {.importc: "QVideoProbe_new".}
+proc fcQVideoProbe_new2(vtbl: pointer, parent: pointer): ptr cQVideoProbe {.importc: "QVideoProbe_new2".}
 proc fcQVideoProbe_staticMetaObject(): pointer {.importc: "QVideoProbe_staticMetaObject".}
 proc fcQVideoProbe_delete(self: pointer) {.importc: "QVideoProbe_delete".}
-
-
-func init*(T: type gen_qvideoprobe_types.QVideoProbe, h: ptr cQVideoProbe): gen_qvideoprobe_types.QVideoProbe =
-  T(h: h)
-proc create*(T: type gen_qvideoprobe_types.QVideoProbe, ): gen_qvideoprobe_types.QVideoProbe =
-  gen_qvideoprobe_types.QVideoProbe.init(fcQVideoProbe_new())
-
-proc create*(T: type gen_qvideoprobe_types.QVideoProbe, parent: gen_qobject_types.QObject): gen_qvideoprobe_types.QVideoProbe =
-  gen_qvideoprobe_types.QVideoProbe.init(fcQVideoProbe_new2(parent.h))
 
 proc metaObject*(self: gen_qvideoprobe_types.QVideoProbe, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoProbe_metaObject(self.h))
@@ -140,7 +133,7 @@ proc videoFrameProbed*(self: gen_qvideoprobe_types.QVideoProbe, frame: gen_qvide
   fcQVideoProbe_videoFrameProbed(self.h, frame.h)
 
 type QVideoProbevideoFrameProbedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc miqt_exec_callback_QVideoProbe_videoFrameProbed(slot: int, frame: pointer) {.exportc.} =
+proc miqt_exec_callback_cQVideoProbe_videoFrameProbed(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QVideoProbe_videoFrameProbed".} =
   let nimfunc = cast[ptr QVideoProbevideoFrameProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame)
 
@@ -156,7 +149,7 @@ proc flush*(self: gen_qvideoprobe_types.QVideoProbe, ): void =
   fcQVideoProbe_flush(self.h)
 
 type QVideoProbeflushSlot* = proc()
-proc miqt_exec_callback_QVideoProbe_flush(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQVideoProbe_flush(slot: int) {.exportc: "miqt_exec_callback_QVideoProbe_flush".} =
   let nimfunc = cast[ptr QVideoProbeflushSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -190,190 +183,184 @@ proc trUtf8*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+type QVideoProbemetaObjectProc* = proc(self: QVideoProbe): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QVideoProbemetacastProc* = proc(self: QVideoProbe, param1: cstring): pointer {.raises: [], gcsafe.}
+type QVideoProbemetacallProc* = proc(self: QVideoProbe, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QVideoProbeeventProc* = proc(self: QVideoProbe, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QVideoProbeeventFilterProc* = proc(self: QVideoProbe, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QVideoProbetimerEventProc* = proc(self: QVideoProbe, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QVideoProbechildEventProc* = proc(self: QVideoProbe, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QVideoProbecustomEventProc* = proc(self: QVideoProbe, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QVideoProbeconnectNotifyProc* = proc(self: QVideoProbe, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QVideoProbedisconnectNotifyProc* = proc(self: QVideoProbe, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QVideoProbeVTable* = object
+  vtbl: cQVideoProbeVTable
+  metaObject*: QVideoProbemetaObjectProc
+  metacast*: QVideoProbemetacastProc
+  metacall*: QVideoProbemetacallProc
+  event*: QVideoProbeeventProc
+  eventFilter*: QVideoProbeeventFilterProc
+  timerEvent*: QVideoProbetimerEventProc
+  childEvent*: QVideoProbechildEventProc
+  customEvent*: QVideoProbecustomEventProc
+  connectNotify*: QVideoProbeconnectNotifyProc
+  disconnectNotify*: QVideoProbedisconnectNotifyProc
 proc QVideoProbemetaObject*(self: gen_qvideoprobe_types.QVideoProbe, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQVideoProbe_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQVideoProbe_virtualbase_metaObject(self.h))
 
-type QVideoProbemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_metaObject(self: ptr cQVideoProbe, slot: int): pointer {.exportc: "miqt_exec_callback_QVideoProbe_metaObject ".} =
-  var nimfunc = cast[ptr QVideoProbemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQVideoProbe_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QVideoProbemetacast*(self: gen_qvideoprobe_types.QVideoProbe, param1: cstring): pointer =
-  fQVideoProbe_virtualbase_metacast(self.h, param1)
+  fcQVideoProbe_virtualbase_metacast(self.h, param1)
 
-type QVideoProbemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbemetacastProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_metacast(self: ptr cQVideoProbe, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QVideoProbe_metacast ".} =
-  var nimfunc = cast[ptr QVideoProbemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QVideoProbemetacall*(self: gen_qvideoprobe_types.QVideoProbe, param1: cint, param2: cint, param3: pointer): cint =
-  fQVideoProbe_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQVideoProbe_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QVideoProbemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbemetacallProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_metacall(self: ptr cQVideoProbe, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QVideoProbe_metacall ".} =
-  var nimfunc = cast[ptr QVideoProbemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QVideoProbeevent*(self: gen_qvideoprobe_types.QVideoProbe, event: gen_qcoreevent_types.QEvent): bool =
-  fQVideoProbe_virtualbase_event(self.h, event.h)
+  fcQVideoProbe_virtualbase_event(self.h, event.h)
 
-type QVideoProbeeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbeeventProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbeeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_event(self: ptr cQVideoProbe, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QVideoProbe_event ".} =
-  var nimfunc = cast[ptr QVideoProbeeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QVideoProbeeventFilter*(self: gen_qvideoprobe_types.QVideoProbe, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQVideoProbe_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQVideoProbe_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QVideoProbeeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbeeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbeeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_eventFilter(self: ptr cQVideoProbe, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QVideoProbe_eventFilter ".} =
-  var nimfunc = cast[ptr QVideoProbeeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QVideoProbetimerEvent*(self: gen_qvideoprobe_types.QVideoProbe, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQVideoProbe_virtualbase_timerEvent(self.h, event.h)
+  fcQVideoProbe_virtualbase_timerEvent(self.h, event.h)
 
-type QVideoProbetimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbetimerEventProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbetimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_timerEvent(self: ptr cQVideoProbe, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QVideoProbe_timerEvent ".} =
-  var nimfunc = cast[ptr QVideoProbetimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QVideoProbechildEvent*(self: gen_qvideoprobe_types.QVideoProbe, event: gen_qcoreevent_types.QChildEvent): void =
-  fQVideoProbe_virtualbase_childEvent(self.h, event.h)
+  fcQVideoProbe_virtualbase_childEvent(self.h, event.h)
 
-type QVideoProbechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbechildEventProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_childEvent(self: ptr cQVideoProbe, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QVideoProbe_childEvent ".} =
-  var nimfunc = cast[ptr QVideoProbechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QVideoProbecustomEvent*(self: gen_qvideoprobe_types.QVideoProbe, event: gen_qcoreevent_types.QEvent): void =
-  fQVideoProbe_virtualbase_customEvent(self.h, event.h)
+  fcQVideoProbe_virtualbase_customEvent(self.h, event.h)
 
-type QVideoProbecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_customEvent(self: ptr cQVideoProbe, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QVideoProbe_customEvent ".} =
-  var nimfunc = cast[ptr QVideoProbecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QVideoProbeconnectNotify*(self: gen_qvideoprobe_types.QVideoProbe, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQVideoProbe_virtualbase_connectNotify(self.h, signal.h)
+  fcQVideoProbe_virtualbase_connectNotify(self.h, signal.h)
 
-type QVideoProbeconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbeconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbeconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_connectNotify(self: ptr cQVideoProbe, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QVideoProbe_connectNotify ".} =
-  var nimfunc = cast[ptr QVideoProbeconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QVideoProbedisconnectNotify*(self: gen_qvideoprobe_types.QVideoProbe, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQVideoProbe_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQVideoProbe_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QVideoProbedisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbedisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QVideoProbedisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQVideoProbe_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QVideoProbe_disconnectNotify(self: ptr cQVideoProbe, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QVideoProbe_disconnectNotify ".} =
-  var nimfunc = cast[ptr QVideoProbedisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQVideoProbe_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QVideoProbeVTable](vtbl)
+  let self = QVideoProbe(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qvideoprobe_types.QVideoProbe,
+    vtbl: ref QVideoProbeVTable = nil): gen_qvideoprobe_types.QVideoProbe =
+  let vtbl = if vtbl == nil: new QVideoProbeVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQVideoProbeVTable, _: ptr cQVideoProbe) {.cdecl.} =
+    let vtbl = cast[ref QVideoProbeVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQVideoProbe_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQVideoProbe_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQVideoProbe_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQVideoProbe_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVideoProbe_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVideoProbe_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQVideoProbe_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQVideoProbe_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVideoProbe_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVideoProbe_disconnectNotify
+  gen_qvideoprobe_types.QVideoProbe(h: fcQVideoProbe_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qvideoprobe_types.QVideoProbe,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QVideoProbeVTable = nil): gen_qvideoprobe_types.QVideoProbe =
+  let vtbl = if vtbl == nil: new QVideoProbeVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQVideoProbeVTable, _: ptr cQVideoProbe) {.cdecl.} =
+    let vtbl = cast[ref QVideoProbeVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQVideoProbe_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQVideoProbe_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQVideoProbe_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQVideoProbe_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQVideoProbe_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQVideoProbe_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQVideoProbe_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQVideoProbe_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQVideoProbe_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQVideoProbe_disconnectNotify
+  gen_qvideoprobe_types.QVideoProbe(h: fcQVideoProbe_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qvideoprobe_types.QVideoProbe): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoProbe_staticMetaObject())
 proc delete*(self: gen_qvideoprobe_types.QVideoProbe) =

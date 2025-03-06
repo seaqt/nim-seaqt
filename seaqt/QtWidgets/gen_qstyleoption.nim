@@ -462,13 +462,13 @@ type cQStyleHintReturn*{.exportc: "QStyleHintReturn", incompleteStruct.} = objec
 type cQStyleHintReturnMask*{.exportc: "QStyleHintReturnMask", incompleteStruct.} = object
 type cQStyleHintReturnVariant*{.exportc: "QStyleHintReturnVariant", incompleteStruct.} = object
 
+proc fcQStyleOption_init(self: pointer, w: pointer): void {.importc: "QStyleOption_init".}
+proc fcQStyleOption_initFrom(self: pointer, w: pointer): void {.importc: "QStyleOption_initFrom".}
+proc fcQStyleOption_operatorAssign(self: pointer, other: pointer): void {.importc: "QStyleOption_operatorAssign".}
 proc fcQStyleOption_new(): ptr cQStyleOption {.importc: "QStyleOption_new".}
 proc fcQStyleOption_new2(other: pointer): ptr cQStyleOption {.importc: "QStyleOption_new2".}
 proc fcQStyleOption_new3(version: cint): ptr cQStyleOption {.importc: "QStyleOption_new3".}
 proc fcQStyleOption_new4(version: cint, typeVal: cint): ptr cQStyleOption {.importc: "QStyleOption_new4".}
-proc fcQStyleOption_init(self: pointer, w: pointer): void {.importc: "QStyleOption_init".}
-proc fcQStyleOption_initFrom(self: pointer, w: pointer): void {.importc: "QStyleOption_initFrom".}
-proc fcQStyleOption_operatorAssign(self: pointer, other: pointer): void {.importc: "QStyleOption_operatorAssign".}
 proc fcQStyleOption_delete(self: pointer) {.importc: "QStyleOption_delete".}
 proc fcQStyleOptionFocusRect_new(): ptr cQStyleOptionFocusRect {.importc: "QStyleOptionFocusRect_new".}
 proc fcQStyleOptionFocusRect_new2(other: pointer): ptr cQStyleOptionFocusRect {.importc: "QStyleOptionFocusRect_new2".}
@@ -491,9 +491,9 @@ proc fcQStyleOptionButton_delete(self: pointer) {.importc: "QStyleOptionButton_d
 proc fcQStyleOptionTab_new(): ptr cQStyleOptionTab {.importc: "QStyleOptionTab_new".}
 proc fcQStyleOptionTab_new2(other: pointer): ptr cQStyleOptionTab {.importc: "QStyleOptionTab_new2".}
 proc fcQStyleOptionTab_delete(self: pointer) {.importc: "QStyleOptionTab_delete".}
+proc fcQStyleOptionTabV4_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTabV4_operatorAssign".}
 proc fcQStyleOptionTabV4_new(): ptr cQStyleOptionTabV4 {.importc: "QStyleOptionTabV4_new".}
 proc fcQStyleOptionTabV4_new2(param1: pointer): ptr cQStyleOptionTabV4 {.importc: "QStyleOptionTabV4_new2".}
-proc fcQStyleOptionTabV4_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleOptionTabV4_operatorAssign".}
 proc fcQStyleOptionTabV4_delete(self: pointer) {.importc: "QStyleOptionTabV4_delete".}
 proc fcQStyleOptionToolBar_new(): ptr cQStyleOptionToolBar {.importc: "QStyleOptionToolBar_new".}
 proc fcQStyleOptionToolBar_new2(other: pointer): ptr cQStyleOptionToolBar {.importc: "QStyleOptionToolBar_new2".}
@@ -542,39 +542,24 @@ proc fcQStyleOptionGroupBox_delete(self: pointer) {.importc: "QStyleOptionGroupB
 proc fcQStyleOptionSizeGrip_new(): ptr cQStyleOptionSizeGrip {.importc: "QStyleOptionSizeGrip_new".}
 proc fcQStyleOptionSizeGrip_new2(other: pointer): ptr cQStyleOptionSizeGrip {.importc: "QStyleOptionSizeGrip_new2".}
 proc fcQStyleOptionSizeGrip_delete(self: pointer) {.importc: "QStyleOptionSizeGrip_delete".}
+proc fcQStyleOptionGraphicsItem_levelOfDetailFromTransform(worldTransform: pointer): float64 {.importc: "QStyleOptionGraphicsItem_levelOfDetailFromTransform".}
 proc fcQStyleOptionGraphicsItem_new(): ptr cQStyleOptionGraphicsItem {.importc: "QStyleOptionGraphicsItem_new".}
 proc fcQStyleOptionGraphicsItem_new2(other: pointer): ptr cQStyleOptionGraphicsItem {.importc: "QStyleOptionGraphicsItem_new2".}
-proc fcQStyleOptionGraphicsItem_levelOfDetailFromTransform(worldTransform: pointer): float64 {.importc: "QStyleOptionGraphicsItem_levelOfDetailFromTransform".}
 proc fcQStyleOptionGraphicsItem_delete(self: pointer) {.importc: "QStyleOptionGraphicsItem_delete".}
+proc fcQStyleHintReturn_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturn_operatorAssign".}
 proc fcQStyleHintReturn_new(): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new".}
 proc fcQStyleHintReturn_new2(param1: pointer): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new2".}
 proc fcQStyleHintReturn_new3(version: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new3".}
 proc fcQStyleHintReturn_new4(version: cint, typeVal: cint): ptr cQStyleHintReturn {.importc: "QStyleHintReturn_new4".}
-proc fcQStyleHintReturn_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturn_operatorAssign".}
 proc fcQStyleHintReturn_delete(self: pointer) {.importc: "QStyleHintReturn_delete".}
+proc fcQStyleHintReturnMask_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnMask_operatorAssign".}
 proc fcQStyleHintReturnMask_new(): ptr cQStyleHintReturnMask {.importc: "QStyleHintReturnMask_new".}
 proc fcQStyleHintReturnMask_new2(param1: pointer): ptr cQStyleHintReturnMask {.importc: "QStyleHintReturnMask_new2".}
-proc fcQStyleHintReturnMask_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnMask_operatorAssign".}
 proc fcQStyleHintReturnMask_delete(self: pointer) {.importc: "QStyleHintReturnMask_delete".}
+proc fcQStyleHintReturnVariant_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnVariant_operatorAssign".}
 proc fcQStyleHintReturnVariant_new(): ptr cQStyleHintReturnVariant {.importc: "QStyleHintReturnVariant_new".}
 proc fcQStyleHintReturnVariant_new2(param1: pointer): ptr cQStyleHintReturnVariant {.importc: "QStyleHintReturnVariant_new2".}
-proc fcQStyleHintReturnVariant_operatorAssign(self: pointer, param1: pointer): void {.importc: "QStyleHintReturnVariant_operatorAssign".}
 proc fcQStyleHintReturnVariant_delete(self: pointer) {.importc: "QStyleHintReturnVariant_delete".}
-
-
-func init*(T: type gen_qstyleoption_types.QStyleOption, h: ptr cQStyleOption): gen_qstyleoption_types.QStyleOption =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOption, ): gen_qstyleoption_types.QStyleOption =
-  gen_qstyleoption_types.QStyleOption.init(fcQStyleOption_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOption, other: gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
-  gen_qstyleoption_types.QStyleOption.init(fcQStyleOption_new2(other.h))
-
-proc create*(T: type gen_qstyleoption_types.QStyleOption, version: cint): gen_qstyleoption_types.QStyleOption =
-  gen_qstyleoption_types.QStyleOption.init(fcQStyleOption_new3(version))
-
-proc create*(T: type gen_qstyleoption_types.QStyleOption, version: cint, typeVal: cint): gen_qstyleoption_types.QStyleOption =
-  gen_qstyleoption_types.QStyleOption.init(fcQStyleOption_new4(version, typeVal))
 
 proc init*(self: gen_qstyleoption_types.QStyleOption, w: gen_qwidget_types.QWidget): void =
   fcQStyleOption_init(self.h, w.h)
@@ -585,329 +570,294 @@ proc initFrom*(self: gen_qstyleoption_types.QStyleOption, w: gen_qwidget_types.Q
 proc operatorAssign*(self: gen_qstyleoption_types.QStyleOption, other: gen_qstyleoption_types.QStyleOption): void =
   fcQStyleOption_operatorAssign(self.h, other.h)
 
+proc create*(T: type gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
+  gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleOption,
+    other: gen_qstyleoption_types.QStyleOption): gen_qstyleoption_types.QStyleOption =
+  gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new2(other.h))
+
+proc create*(T: type gen_qstyleoption_types.QStyleOption,
+    version: cint): gen_qstyleoption_types.QStyleOption =
+  gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new3(version))
+
+proc create*(T: type gen_qstyleoption_types.QStyleOption,
+    version: cint, typeVal: cint): gen_qstyleoption_types.QStyleOption =
+  gen_qstyleoption_types.QStyleOption(h: fcQStyleOption_new4(version, typeVal))
+
 proc delete*(self: gen_qstyleoption_types.QStyleOption) =
   fcQStyleOption_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
+  gen_qstyleoption_types.QStyleOptionFocusRect(h: fcQStyleOptionFocusRect_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionFocusRect, h: ptr cQStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect, ): gen_qstyleoption_types.QStyleOptionFocusRect =
-  gen_qstyleoption_types.QStyleOptionFocusRect.init(fcQStyleOptionFocusRect_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect, other: gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
-  gen_qstyleoption_types.QStyleOptionFocusRect.init(fcQStyleOptionFocusRect_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionFocusRect,
+    other: gen_qstyleoption_types.QStyleOptionFocusRect): gen_qstyleoption_types.QStyleOptionFocusRect =
+  gen_qstyleoption_types.QStyleOptionFocusRect(h: fcQStyleOptionFocusRect_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionFocusRect) =
   fcQStyleOptionFocusRect_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
+  gen_qstyleoption_types.QStyleOptionFrame(h: fcQStyleOptionFrame_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionFrame, h: ptr cQStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame, ): gen_qstyleoption_types.QStyleOptionFrame =
-  gen_qstyleoption_types.QStyleOptionFrame.init(fcQStyleOptionFrame_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame, other: gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
-  gen_qstyleoption_types.QStyleOptionFrame.init(fcQStyleOptionFrame_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionFrame,
+    other: gen_qstyleoption_types.QStyleOptionFrame): gen_qstyleoption_types.QStyleOptionFrame =
+  gen_qstyleoption_types.QStyleOptionFrame(h: fcQStyleOptionFrame_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionFrame) =
   fcQStyleOptionFrame_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
+  gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: fcQStyleOptionTabWidgetFrame_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame, h: ptr cQStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame, ): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
-  gen_qstyleoption_types.QStyleOptionTabWidgetFrame.init(fcQStyleOptionTabWidgetFrame_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame, other: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
-  gen_qstyleoption_types.QStyleOptionTabWidgetFrame.init(fcQStyleOptionTabWidgetFrame_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabWidgetFrame,
+    other: gen_qstyleoption_types.QStyleOptionTabWidgetFrame): gen_qstyleoption_types.QStyleOptionTabWidgetFrame =
+  gen_qstyleoption_types.QStyleOptionTabWidgetFrame(h: fcQStyleOptionTabWidgetFrame_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionTabWidgetFrame) =
   fcQStyleOptionTabWidgetFrame_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
+  gen_qstyleoption_types.QStyleOptionTabBarBase(h: fcQStyleOptionTabBarBase_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase, h: ptr cQStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase, ): gen_qstyleoption_types.QStyleOptionTabBarBase =
-  gen_qstyleoption_types.QStyleOptionTabBarBase.init(fcQStyleOptionTabBarBase_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase, other: gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
-  gen_qstyleoption_types.QStyleOptionTabBarBase.init(fcQStyleOptionTabBarBase_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabBarBase,
+    other: gen_qstyleoption_types.QStyleOptionTabBarBase): gen_qstyleoption_types.QStyleOptionTabBarBase =
+  gen_qstyleoption_types.QStyleOptionTabBarBase(h: fcQStyleOptionTabBarBase_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionTabBarBase) =
   fcQStyleOptionTabBarBase_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
+  gen_qstyleoption_types.QStyleOptionHeader(h: fcQStyleOptionHeader_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionHeader, h: ptr cQStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader, ): gen_qstyleoption_types.QStyleOptionHeader =
-  gen_qstyleoption_types.QStyleOptionHeader.init(fcQStyleOptionHeader_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader, other: gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
-  gen_qstyleoption_types.QStyleOptionHeader.init(fcQStyleOptionHeader_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionHeader,
+    other: gen_qstyleoption_types.QStyleOptionHeader): gen_qstyleoption_types.QStyleOptionHeader =
+  gen_qstyleoption_types.QStyleOptionHeader(h: fcQStyleOptionHeader_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionHeader) =
   fcQStyleOptionHeader_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
+  gen_qstyleoption_types.QStyleOptionButton(h: fcQStyleOptionButton_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionButton, h: ptr cQStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionButton, ): gen_qstyleoption_types.QStyleOptionButton =
-  gen_qstyleoption_types.QStyleOptionButton.init(fcQStyleOptionButton_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionButton, other: gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
-  gen_qstyleoption_types.QStyleOptionButton.init(fcQStyleOptionButton_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionButton,
+    other: gen_qstyleoption_types.QStyleOptionButton): gen_qstyleoption_types.QStyleOptionButton =
+  gen_qstyleoption_types.QStyleOptionButton(h: fcQStyleOptionButton_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionButton) =
   fcQStyleOptionButton_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
+  gen_qstyleoption_types.QStyleOptionTab(h: fcQStyleOptionTab_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionTab, h: ptr cQStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTab, ): gen_qstyleoption_types.QStyleOptionTab =
-  gen_qstyleoption_types.QStyleOptionTab.init(fcQStyleOptionTab_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTab, other: gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
-  gen_qstyleoption_types.QStyleOptionTab.init(fcQStyleOptionTab_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTab,
+    other: gen_qstyleoption_types.QStyleOptionTab): gen_qstyleoption_types.QStyleOptionTab =
+  gen_qstyleoption_types.QStyleOptionTab(h: fcQStyleOptionTab_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionTab) =
   fcQStyleOptionTab_delete(self.h)
-
-func init*(T: type gen_qstyleoption_types.QStyleOptionTabV4, h: ptr cQStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4, ): gen_qstyleoption_types.QStyleOptionTabV4 =
-  gen_qstyleoption_types.QStyleOptionTabV4.init(fcQStyleOptionTabV4_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4, param1: gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
-  gen_qstyleoption_types.QStyleOptionTabV4.init(fcQStyleOptionTabV4_new2(param1.h))
-
 proc operatorAssign*(self: gen_qstyleoption_types.QStyleOptionTabV4, param1: gen_qstyleoption_types.QStyleOptionTabV4): void =
   fcQStyleOptionTabV4_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
+  gen_qstyleoption_types.QStyleOptionTabV4(h: fcQStyleOptionTabV4_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTabV4,
+    param1: gen_qstyleoption_types.QStyleOptionTabV4): gen_qstyleoption_types.QStyleOptionTabV4 =
+  gen_qstyleoption_types.QStyleOptionTabV4(h: fcQStyleOptionTabV4_new2(param1.h))
+
 proc delete*(self: gen_qstyleoption_types.QStyleOptionTabV4) =
   fcQStyleOptionTabV4_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
+  gen_qstyleoption_types.QStyleOptionToolBar(h: fcQStyleOptionToolBar_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionToolBar, h: ptr cQStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar, ): gen_qstyleoption_types.QStyleOptionToolBar =
-  gen_qstyleoption_types.QStyleOptionToolBar.init(fcQStyleOptionToolBar_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar, other: gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
-  gen_qstyleoption_types.QStyleOptionToolBar.init(fcQStyleOptionToolBar_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBar,
+    other: gen_qstyleoption_types.QStyleOptionToolBar): gen_qstyleoption_types.QStyleOptionToolBar =
+  gen_qstyleoption_types.QStyleOptionToolBar(h: fcQStyleOptionToolBar_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionToolBar) =
   fcQStyleOptionToolBar_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
+  gen_qstyleoption_types.QStyleOptionProgressBar(h: fcQStyleOptionProgressBar_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionProgressBar, h: ptr cQStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar, ): gen_qstyleoption_types.QStyleOptionProgressBar =
-  gen_qstyleoption_types.QStyleOptionProgressBar.init(fcQStyleOptionProgressBar_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar, other: gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
-  gen_qstyleoption_types.QStyleOptionProgressBar.init(fcQStyleOptionProgressBar_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionProgressBar,
+    other: gen_qstyleoption_types.QStyleOptionProgressBar): gen_qstyleoption_types.QStyleOptionProgressBar =
+  gen_qstyleoption_types.QStyleOptionProgressBar(h: fcQStyleOptionProgressBar_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionProgressBar) =
   fcQStyleOptionProgressBar_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
+  gen_qstyleoption_types.QStyleOptionMenuItem(h: fcQStyleOptionMenuItem_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionMenuItem, h: ptr cQStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem, ): gen_qstyleoption_types.QStyleOptionMenuItem =
-  gen_qstyleoption_types.QStyleOptionMenuItem.init(fcQStyleOptionMenuItem_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem, other: gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
-  gen_qstyleoption_types.QStyleOptionMenuItem.init(fcQStyleOptionMenuItem_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionMenuItem,
+    other: gen_qstyleoption_types.QStyleOptionMenuItem): gen_qstyleoption_types.QStyleOptionMenuItem =
+  gen_qstyleoption_types.QStyleOptionMenuItem(h: fcQStyleOptionMenuItem_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionMenuItem) =
   fcQStyleOptionMenuItem_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
+  gen_qstyleoption_types.QStyleOptionDockWidget(h: fcQStyleOptionDockWidget_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionDockWidget, h: ptr cQStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget, ): gen_qstyleoption_types.QStyleOptionDockWidget =
-  gen_qstyleoption_types.QStyleOptionDockWidget.init(fcQStyleOptionDockWidget_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget, other: gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
-  gen_qstyleoption_types.QStyleOptionDockWidget.init(fcQStyleOptionDockWidget_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionDockWidget,
+    other: gen_qstyleoption_types.QStyleOptionDockWidget): gen_qstyleoption_types.QStyleOptionDockWidget =
+  gen_qstyleoption_types.QStyleOptionDockWidget(h: fcQStyleOptionDockWidget_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionDockWidget) =
   fcQStyleOptionDockWidget_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQStyleOptionViewItem_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionViewItem, h: ptr cQStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem, ): gen_qstyleoption_types.QStyleOptionViewItem =
-  gen_qstyleoption_types.QStyleOptionViewItem.init(fcQStyleOptionViewItem_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem, other: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
-  gen_qstyleoption_types.QStyleOptionViewItem.init(fcQStyleOptionViewItem_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionViewItem,
+    other: gen_qstyleoption_types.QStyleOptionViewItem): gen_qstyleoption_types.QStyleOptionViewItem =
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQStyleOptionViewItem_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionViewItem) =
   fcQStyleOptionViewItem_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
+  gen_qstyleoption_types.QStyleOptionToolBox(h: fcQStyleOptionToolBox_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionToolBox, h: ptr cQStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox, ): gen_qstyleoption_types.QStyleOptionToolBox =
-  gen_qstyleoption_types.QStyleOptionToolBox.init(fcQStyleOptionToolBox_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox, other: gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
-  gen_qstyleoption_types.QStyleOptionToolBox.init(fcQStyleOptionToolBox_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolBox,
+    other: gen_qstyleoption_types.QStyleOptionToolBox): gen_qstyleoption_types.QStyleOptionToolBox =
+  gen_qstyleoption_types.QStyleOptionToolBox(h: fcQStyleOptionToolBox_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionToolBox) =
   fcQStyleOptionToolBox_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
+  gen_qstyleoption_types.QStyleOptionRubberBand(h: fcQStyleOptionRubberBand_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionRubberBand, h: ptr cQStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand, ): gen_qstyleoption_types.QStyleOptionRubberBand =
-  gen_qstyleoption_types.QStyleOptionRubberBand.init(fcQStyleOptionRubberBand_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand, other: gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
-  gen_qstyleoption_types.QStyleOptionRubberBand.init(fcQStyleOptionRubberBand_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionRubberBand,
+    other: gen_qstyleoption_types.QStyleOptionRubberBand): gen_qstyleoption_types.QStyleOptionRubberBand =
+  gen_qstyleoption_types.QStyleOptionRubberBand(h: fcQStyleOptionRubberBand_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionRubberBand) =
   fcQStyleOptionRubberBand_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
+  gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionComplex, h: ptr cQStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex, ): gen_qstyleoption_types.QStyleOptionComplex =
-  gen_qstyleoption_types.QStyleOptionComplex.init(fcQStyleOptionComplex_new())
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex,
+    other: gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
+  gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new2(other.h))
 
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex, other: gen_qstyleoption_types.QStyleOptionComplex): gen_qstyleoption_types.QStyleOptionComplex =
-  gen_qstyleoption_types.QStyleOptionComplex.init(fcQStyleOptionComplex_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex,
+    version: cint): gen_qstyleoption_types.QStyleOptionComplex =
+  gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new3(version))
 
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex, version: cint): gen_qstyleoption_types.QStyleOptionComplex =
-  gen_qstyleoption_types.QStyleOptionComplex.init(fcQStyleOptionComplex_new3(version))
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex, version: cint, typeVal: cint): gen_qstyleoption_types.QStyleOptionComplex =
-  gen_qstyleoption_types.QStyleOptionComplex.init(fcQStyleOptionComplex_new4(version, typeVal))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComplex,
+    version: cint, typeVal: cint): gen_qstyleoption_types.QStyleOptionComplex =
+  gen_qstyleoption_types.QStyleOptionComplex(h: fcQStyleOptionComplex_new4(version, typeVal))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionComplex) =
   fcQStyleOptionComplex_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
+  gen_qstyleoption_types.QStyleOptionSlider(h: fcQStyleOptionSlider_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionSlider, h: ptr cQStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider, ): gen_qstyleoption_types.QStyleOptionSlider =
-  gen_qstyleoption_types.QStyleOptionSlider.init(fcQStyleOptionSlider_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider, other: gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
-  gen_qstyleoption_types.QStyleOptionSlider.init(fcQStyleOptionSlider_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSlider,
+    other: gen_qstyleoption_types.QStyleOptionSlider): gen_qstyleoption_types.QStyleOptionSlider =
+  gen_qstyleoption_types.QStyleOptionSlider(h: fcQStyleOptionSlider_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionSlider) =
   fcQStyleOptionSlider_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
+  gen_qstyleoption_types.QStyleOptionSpinBox(h: fcQStyleOptionSpinBox_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionSpinBox, h: ptr cQStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox, ): gen_qstyleoption_types.QStyleOptionSpinBox =
-  gen_qstyleoption_types.QStyleOptionSpinBox.init(fcQStyleOptionSpinBox_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox, other: gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
-  gen_qstyleoption_types.QStyleOptionSpinBox.init(fcQStyleOptionSpinBox_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSpinBox,
+    other: gen_qstyleoption_types.QStyleOptionSpinBox): gen_qstyleoption_types.QStyleOptionSpinBox =
+  gen_qstyleoption_types.QStyleOptionSpinBox(h: fcQStyleOptionSpinBox_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionSpinBox) =
   fcQStyleOptionSpinBox_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
+  gen_qstyleoption_types.QStyleOptionToolButton(h: fcQStyleOptionToolButton_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionToolButton, h: ptr cQStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton, ): gen_qstyleoption_types.QStyleOptionToolButton =
-  gen_qstyleoption_types.QStyleOptionToolButton.init(fcQStyleOptionToolButton_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton, other: gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
-  gen_qstyleoption_types.QStyleOptionToolButton.init(fcQStyleOptionToolButton_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionToolButton,
+    other: gen_qstyleoption_types.QStyleOptionToolButton): gen_qstyleoption_types.QStyleOptionToolButton =
+  gen_qstyleoption_types.QStyleOptionToolButton(h: fcQStyleOptionToolButton_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionToolButton) =
   fcQStyleOptionToolButton_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
+  gen_qstyleoption_types.QStyleOptionComboBox(h: fcQStyleOptionComboBox_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionComboBox, h: ptr cQStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox, ): gen_qstyleoption_types.QStyleOptionComboBox =
-  gen_qstyleoption_types.QStyleOptionComboBox.init(fcQStyleOptionComboBox_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox, other: gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
-  gen_qstyleoption_types.QStyleOptionComboBox.init(fcQStyleOptionComboBox_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionComboBox,
+    other: gen_qstyleoption_types.QStyleOptionComboBox): gen_qstyleoption_types.QStyleOptionComboBox =
+  gen_qstyleoption_types.QStyleOptionComboBox(h: fcQStyleOptionComboBox_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionComboBox) =
   fcQStyleOptionComboBox_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
+  gen_qstyleoption_types.QStyleOptionTitleBar(h: fcQStyleOptionTitleBar_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionTitleBar, h: ptr cQStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar, ): gen_qstyleoption_types.QStyleOptionTitleBar =
-  gen_qstyleoption_types.QStyleOptionTitleBar.init(fcQStyleOptionTitleBar_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar, other: gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
-  gen_qstyleoption_types.QStyleOptionTitleBar.init(fcQStyleOptionTitleBar_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionTitleBar,
+    other: gen_qstyleoption_types.QStyleOptionTitleBar): gen_qstyleoption_types.QStyleOptionTitleBar =
+  gen_qstyleoption_types.QStyleOptionTitleBar(h: fcQStyleOptionTitleBar_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionTitleBar) =
   fcQStyleOptionTitleBar_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
+  gen_qstyleoption_types.QStyleOptionGroupBox(h: fcQStyleOptionGroupBox_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionGroupBox, h: ptr cQStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox, ): gen_qstyleoption_types.QStyleOptionGroupBox =
-  gen_qstyleoption_types.QStyleOptionGroupBox.init(fcQStyleOptionGroupBox_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox, other: gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
-  gen_qstyleoption_types.QStyleOptionGroupBox.init(fcQStyleOptionGroupBox_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionGroupBox,
+    other: gen_qstyleoption_types.QStyleOptionGroupBox): gen_qstyleoption_types.QStyleOptionGroupBox =
+  gen_qstyleoption_types.QStyleOptionGroupBox(h: fcQStyleOptionGroupBox_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionGroupBox) =
   fcQStyleOptionGroupBox_delete(self.h)
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
+  gen_qstyleoption_types.QStyleOptionSizeGrip(h: fcQStyleOptionSizeGrip_new())
 
-func init*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip, h: ptr cQStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip, ): gen_qstyleoption_types.QStyleOptionSizeGrip =
-  gen_qstyleoption_types.QStyleOptionSizeGrip.init(fcQStyleOptionSizeGrip_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip, other: gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
-  gen_qstyleoption_types.QStyleOptionSizeGrip.init(fcQStyleOptionSizeGrip_new2(other.h))
+proc create*(T: type gen_qstyleoption_types.QStyleOptionSizeGrip,
+    other: gen_qstyleoption_types.QStyleOptionSizeGrip): gen_qstyleoption_types.QStyleOptionSizeGrip =
+  gen_qstyleoption_types.QStyleOptionSizeGrip(h: fcQStyleOptionSizeGrip_new2(other.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleOptionSizeGrip) =
   fcQStyleOptionSizeGrip_delete(self.h)
-
-func init*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem, h: ptr cQStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem, ): gen_qstyleoption_types.QStyleOptionGraphicsItem =
-  gen_qstyleoption_types.QStyleOptionGraphicsItem.init(fcQStyleOptionGraphicsItem_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem, other: gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
-  gen_qstyleoption_types.QStyleOptionGraphicsItem.init(fcQStyleOptionGraphicsItem_new2(other.h))
-
 proc levelOfDetailFromTransform*(_: type gen_qstyleoption_types.QStyleOptionGraphicsItem, worldTransform: gen_qtransform_types.QTransform): float64 =
   fcQStyleOptionGraphicsItem_levelOfDetailFromTransform(worldTransform.h)
 
+proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
+  gen_qstyleoption_types.QStyleOptionGraphicsItem(h: fcQStyleOptionGraphicsItem_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleOptionGraphicsItem,
+    other: gen_qstyleoption_types.QStyleOptionGraphicsItem): gen_qstyleoption_types.QStyleOptionGraphicsItem =
+  gen_qstyleoption_types.QStyleOptionGraphicsItem(h: fcQStyleOptionGraphicsItem_new2(other.h))
+
 proc delete*(self: gen_qstyleoption_types.QStyleOptionGraphicsItem) =
   fcQStyleOptionGraphicsItem_delete(self.h)
-
-func init*(T: type gen_qstyleoption_types.QStyleHintReturn, h: ptr cQStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturn, ): gen_qstyleoption_types.QStyleHintReturn =
-  gen_qstyleoption_types.QStyleHintReturn.init(fcQStyleHintReturn_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturn, param1: gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
-  gen_qstyleoption_types.QStyleHintReturn.init(fcQStyleHintReturn_new2(param1.h))
-
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturn, version: cint): gen_qstyleoption_types.QStyleHintReturn =
-  gen_qstyleoption_types.QStyleHintReturn.init(fcQStyleHintReturn_new3(version))
-
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturn, version: cint, typeVal: cint): gen_qstyleoption_types.QStyleHintReturn =
-  gen_qstyleoption_types.QStyleHintReturn.init(fcQStyleHintReturn_new4(version, typeVal))
-
 proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturn, param1: gen_qstyleoption_types.QStyleHintReturn): void =
   fcQStyleHintReturn_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
+  gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturn,
+    param1: gen_qstyleoption_types.QStyleHintReturn): gen_qstyleoption_types.QStyleHintReturn =
+  gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new2(param1.h))
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturn,
+    version: cint): gen_qstyleoption_types.QStyleHintReturn =
+  gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new3(version))
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturn,
+    version: cint, typeVal: cint): gen_qstyleoption_types.QStyleHintReturn =
+  gen_qstyleoption_types.QStyleHintReturn(h: fcQStyleHintReturn_new4(version, typeVal))
+
 proc delete*(self: gen_qstyleoption_types.QStyleHintReturn) =
   fcQStyleHintReturn_delete(self.h)
-
-func init*(T: type gen_qstyleoption_types.QStyleHintReturnMask, h: ptr cQStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask, ): gen_qstyleoption_types.QStyleHintReturnMask =
-  gen_qstyleoption_types.QStyleHintReturnMask.init(fcQStyleHintReturnMask_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask, param1: gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
-  gen_qstyleoption_types.QStyleHintReturnMask.init(fcQStyleHintReturnMask_new2(param1.h))
-
 proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnMask, param1: gen_qstyleoption_types.QStyleHintReturnMask): void =
   fcQStyleHintReturnMask_operatorAssign(self.h, param1.h)
 
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
+  gen_qstyleoption_types.QStyleHintReturnMask(h: fcQStyleHintReturnMask_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturnMask,
+    param1: gen_qstyleoption_types.QStyleHintReturnMask): gen_qstyleoption_types.QStyleHintReturnMask =
+  gen_qstyleoption_types.QStyleHintReturnMask(h: fcQStyleHintReturnMask_new2(param1.h))
+
 proc delete*(self: gen_qstyleoption_types.QStyleHintReturnMask) =
   fcQStyleHintReturnMask_delete(self.h)
-
-func init*(T: type gen_qstyleoption_types.QStyleHintReturnVariant, h: ptr cQStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
-  T(h: h)
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant, ): gen_qstyleoption_types.QStyleHintReturnVariant =
-  gen_qstyleoption_types.QStyleHintReturnVariant.init(fcQStyleHintReturnVariant_new())
-
-proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant, param1: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
-  gen_qstyleoption_types.QStyleHintReturnVariant.init(fcQStyleHintReturnVariant_new2(param1.h))
-
 proc operatorAssign*(self: gen_qstyleoption_types.QStyleHintReturnVariant, param1: gen_qstyleoption_types.QStyleHintReturnVariant): void =
   fcQStyleHintReturnVariant_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
+  gen_qstyleoption_types.QStyleHintReturnVariant(h: fcQStyleHintReturnVariant_new())
+
+proc create*(T: type gen_qstyleoption_types.QStyleHintReturnVariant,
+    param1: gen_qstyleoption_types.QStyleHintReturnVariant): gen_qstyleoption_types.QStyleHintReturnVariant =
+  gen_qstyleoption_types.QStyleHintReturnVariant(h: fcQStyleHintReturnVariant_new2(param1.h))
 
 proc delete*(self: gen_qstyleoption_types.QStyleHintReturnVariant) =
   fcQStyleHintReturnVariant_delete(self.h)

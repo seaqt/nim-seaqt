@@ -58,9 +58,6 @@ export
 
 type cQStylePainter*{.exportc: "QStylePainter", incompleteStruct.} = object
 
-proc fcQStylePainter_new(w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new".}
-proc fcQStylePainter_new2(): ptr cQStylePainter {.importc: "QStylePainter_new2".}
-proc fcQStylePainter_new3(pd: pointer, w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new3".}
 proc fcQStylePainter_begin(self: pointer, w: pointer): bool {.importc: "QStylePainter_begin".}
 proc fcQStylePainter_begin2(self: pointer, pd: pointer, w: pointer): bool {.importc: "QStylePainter_begin2".}
 proc fcQStylePainter_drawPrimitive(self: pointer, pe: cint, opt: pointer): void {.importc: "QStylePainter_drawPrimitive".}
@@ -70,19 +67,10 @@ proc fcQStylePainter_drawItemText(self: pointer, r: pointer, flags: cint, pal: p
 proc fcQStylePainter_drawItemPixmap(self: pointer, r: pointer, flags: cint, pixmap: pointer): void {.importc: "QStylePainter_drawItemPixmap".}
 proc fcQStylePainter_style(self: pointer, ): pointer {.importc: "QStylePainter_style".}
 proc fcQStylePainter_drawItemText6(self: pointer, r: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.importc: "QStylePainter_drawItemText6".}
+proc fcQStylePainter_new(w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new".}
+proc fcQStylePainter_new2(): ptr cQStylePainter {.importc: "QStylePainter_new2".}
+proc fcQStylePainter_new3(pd: pointer, w: pointer): ptr cQStylePainter {.importc: "QStylePainter_new3".}
 proc fcQStylePainter_delete(self: pointer) {.importc: "QStylePainter_delete".}
-
-
-func init*(T: type gen_qstylepainter_types.QStylePainter, h: ptr cQStylePainter): gen_qstylepainter_types.QStylePainter =
-  T(h: h)
-proc create*(T: type gen_qstylepainter_types.QStylePainter, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter.init(fcQStylePainter_new(w.h))
-
-proc create*(T: type gen_qstylepainter_types.QStylePainter, ): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter.init(fcQStylePainter_new2())
-
-proc create*(T: type gen_qstylepainter_types.QStylePainter, pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
-  gen_qstylepainter_types.QStylePainter.init(fcQStylePainter_new3(pd.h, w.h))
 
 proc begin*(self: gen_qstylepainter_types.QStylePainter, w: gen_qwidget_types.QWidget): bool =
   fcQStylePainter_begin(self.h, w.h)
@@ -110,6 +98,17 @@ proc style*(self: gen_qstylepainter_types.QStylePainter, ): gen_qstyle_types.QSt
 
 proc drawItemText*(self: gen_qstylepainter_types.QStylePainter, r: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
   fcQStylePainter_drawItemText6(self.h, r.h, flags, pal.h, enabled, struct_miqt_string(data: text, len: csize_t(len(text))), cint(textRole))
+
+proc create*(T: type gen_qstylepainter_types.QStylePainter,
+    w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new(w.h))
+
+proc create*(T: type gen_qstylepainter_types.QStylePainter): gen_qstylepainter_types.QStylePainter =
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new2())
+
+proc create*(T: type gen_qstylepainter_types.QStylePainter,
+    pd: gen_qpaintdevice_types.QPaintDevice, w: gen_qwidget_types.QWidget): gen_qstylepainter_types.QStylePainter =
+  gen_qstylepainter_types.QStylePainter(h: fcQStylePainter_new3(pd.h, w.h))
 
 proc delete*(self: gen_qstylepainter_types.QStylePainter) =
   fcQStylePainter_delete(self.h)

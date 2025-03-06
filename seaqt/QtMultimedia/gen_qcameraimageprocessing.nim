@@ -102,9 +102,6 @@ proc fcQCameraImageProcessing_trUtf82(s: cstring, c: cstring): struct_miqt_strin
 proc fcQCameraImageProcessing_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageProcessing_trUtf83".}
 proc fcQCameraImageProcessing_staticMetaObject(): pointer {.importc: "QCameraImageProcessing_staticMetaObject".}
 
-
-func init*(T: type gen_qcameraimageprocessing_types.QCameraImageProcessing, h: ptr cQCameraImageProcessing): gen_qcameraimageprocessing_types.QCameraImageProcessing =
-  T(h: h)
 proc metaObject*(self: gen_qcameraimageprocessing_types.QCameraImageProcessing, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessing_metaObject(self.h))
 

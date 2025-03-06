@@ -40,8 +40,6 @@ export gen_qsslpresharedkeyauthenticator_types
 
 type cQSslPreSharedKeyAuthenticator*{.exportc: "QSslPreSharedKeyAuthenticator", incompleteStruct.} = object
 
-proc fcQSslPreSharedKeyAuthenticator_new(): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new".}
-proc fcQSslPreSharedKeyAuthenticator_new2(authenticator: pointer): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new2".}
 proc fcQSslPreSharedKeyAuthenticator_operatorAssign(self: pointer, authenticator: pointer): void {.importc: "QSslPreSharedKeyAuthenticator_operatorAssign".}
 proc fcQSslPreSharedKeyAuthenticator_swap(self: pointer, other: pointer): void {.importc: "QSslPreSharedKeyAuthenticator_swap".}
 proc fcQSslPreSharedKeyAuthenticator_identityHint(self: pointer, ): struct_miqt_string {.importc: "QSslPreSharedKeyAuthenticator_identityHint".}
@@ -51,16 +49,9 @@ proc fcQSslPreSharedKeyAuthenticator_maximumIdentityLength(self: pointer, ): cin
 proc fcQSslPreSharedKeyAuthenticator_setPreSharedKey(self: pointer, preSharedKey: struct_miqt_string): void {.importc: "QSslPreSharedKeyAuthenticator_setPreSharedKey".}
 proc fcQSslPreSharedKeyAuthenticator_preSharedKey(self: pointer, ): struct_miqt_string {.importc: "QSslPreSharedKeyAuthenticator_preSharedKey".}
 proc fcQSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength(self: pointer, ): cint {.importc: "QSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength".}
+proc fcQSslPreSharedKeyAuthenticator_new(): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new".}
+proc fcQSslPreSharedKeyAuthenticator_new2(authenticator: pointer): ptr cQSslPreSharedKeyAuthenticator {.importc: "QSslPreSharedKeyAuthenticator_new2".}
 proc fcQSslPreSharedKeyAuthenticator_delete(self: pointer) {.importc: "QSslPreSharedKeyAuthenticator_delete".}
-
-
-func init*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, h: ptr cQSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  T(h: h)
-proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, ): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator.init(fcQSslPreSharedKeyAuthenticator_new())
-
-proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
-  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator.init(fcQSslPreSharedKeyAuthenticator_new2(authenticator.h))
 
 proc operatorAssign*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): void =
   fcQSslPreSharedKeyAuthenticator_operatorAssign(self.h, authenticator.h)
@@ -97,6 +88,13 @@ proc preSharedKey*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKe
 
 proc maximumPreSharedKeyLength*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator, ): cint =
   fcQSslPreSharedKeyAuthenticator_maximumPreSharedKeyLength(self.h)
+
+proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
+  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new())
+
+proc create*(T: type gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator,
+    authenticator: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator): gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator =
+  gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator(h: fcQSslPreSharedKeyAuthenticator_new2(authenticator.h))
 
 proc delete*(self: gen_qsslpresharedkeyauthenticator_types.QSslPreSharedKeyAuthenticator) =
   fcQSslPreSharedKeyAuthenticator_delete(self.h)

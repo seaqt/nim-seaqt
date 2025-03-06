@@ -68,9 +68,6 @@ proc fcQVideoEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): st
 proc fcQVideoEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QVideoEncoderSettingsControl_staticMetaObject".}
 proc fcQVideoEncoderSettingsControl_delete(self: pointer) {.importc: "QVideoEncoderSettingsControl_delete".}
 
-
-func init*(T: type gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, h: ptr cQVideoEncoderSettingsControl): gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl =
-  T(h: h)
 proc metaObject*(self: gen_qvideoencodersettingscontrol_types.QVideoEncoderSettingsControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoEncoderSettingsControl_metaObject(self.h))
 

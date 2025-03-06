@@ -56,7 +56,6 @@ export
 
 type cQMimeDatabase*{.exportc: "QMimeDatabase", incompleteStruct.} = object
 
-proc fcQMimeDatabase_new(): ptr cQMimeDatabase {.importc: "QMimeDatabase_new".}
 proc fcQMimeDatabase_mimeTypeForName(self: pointer, nameOrAlias: struct_miqt_string): pointer {.importc: "QMimeDatabase_mimeTypeForName".}
 proc fcQMimeDatabase_mimeTypeForFile(self: pointer, fileName: struct_miqt_string): pointer {.importc: "QMimeDatabase_mimeTypeForFile".}
 proc fcQMimeDatabase_mimeTypeForFileWithFileInfo(self: pointer, fileInfo: pointer): pointer {.importc: "QMimeDatabase_mimeTypeForFileWithFileInfo".}
@@ -70,13 +69,8 @@ proc fcQMimeDatabase_suffixForFileName(self: pointer, fileName: struct_miqt_stri
 proc fcQMimeDatabase_allMimeTypes(self: pointer, ): struct_miqt_array {.importc: "QMimeDatabase_allMimeTypes".}
 proc fcQMimeDatabase_mimeTypeForFile2(self: pointer, fileName: struct_miqt_string, mode: cint): pointer {.importc: "QMimeDatabase_mimeTypeForFile2".}
 proc fcQMimeDatabase_mimeTypeForFile22(self: pointer, fileInfo: pointer, mode: cint): pointer {.importc: "QMimeDatabase_mimeTypeForFile22".}
+proc fcQMimeDatabase_new(): ptr cQMimeDatabase {.importc: "QMimeDatabase_new".}
 proc fcQMimeDatabase_delete(self: pointer) {.importc: "QMimeDatabase_delete".}
-
-
-func init*(T: type gen_qmimedatabase_types.QMimeDatabase, h: ptr cQMimeDatabase): gen_qmimedatabase_types.QMimeDatabase =
-  T(h: h)
-proc create*(T: type gen_qmimedatabase_types.QMimeDatabase, ): gen_qmimedatabase_types.QMimeDatabase =
-  gen_qmimedatabase_types.QMimeDatabase.init(fcQMimeDatabase_new())
 
 proc mimeTypeForName*(self: gen_qmimedatabase_types.QMimeDatabase, nameOrAlias: string): gen_qmimetype_types.QMimeType =
   gen_qmimetype_types.QMimeType(h: fcQMimeDatabase_mimeTypeForName(self.h, struct_miqt_string(data: nameOrAlias, len: csize_t(len(nameOrAlias)))))
@@ -129,6 +123,9 @@ proc mimeTypeForFile*(self: gen_qmimedatabase_types.QMimeDatabase, fileName: str
 
 proc mimeTypeForFile*(self: gen_qmimedatabase_types.QMimeDatabase, fileInfo: gen_qfileinfo_types.QFileInfo, mode: cint): gen_qmimetype_types.QMimeType =
   gen_qmimetype_types.QMimeType(h: fcQMimeDatabase_mimeTypeForFile22(self.h, fileInfo.h, cint(mode)))
+
+proc create*(T: type gen_qmimedatabase_types.QMimeDatabase): gen_qmimedatabase_types.QMimeDatabase =
+  gen_qmimedatabase_types.QMimeDatabase(h: fcQMimeDatabase_new())
 
 proc delete*(self: gen_qmimedatabase_types.QMimeDatabase) =
   fcQMimeDatabase_delete(self.h)

@@ -77,8 +77,6 @@ export gen_qnetworkconfiguration_types
 
 type cQNetworkConfiguration*{.exportc: "QNetworkConfiguration", incompleteStruct.} = object
 
-proc fcQNetworkConfiguration_new(): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new".}
-proc fcQNetworkConfiguration_new2(other: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new2".}
 proc fcQNetworkConfiguration_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkConfiguration_operatorAssign".}
 proc fcQNetworkConfiguration_swap(self: pointer, other: pointer): void {.importc: "QNetworkConfiguration_swap".}
 proc fcQNetworkConfiguration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkConfiguration_operatorEqual".}
@@ -96,16 +94,9 @@ proc fcQNetworkConfiguration_name(self: pointer, ): struct_miqt_string {.importc
 proc fcQNetworkConfiguration_isValid(self: pointer, ): bool {.importc: "QNetworkConfiguration_isValid".}
 proc fcQNetworkConfiguration_connectTimeout(self: pointer, ): cint {.importc: "QNetworkConfiguration_connectTimeout".}
 proc fcQNetworkConfiguration_setConnectTimeout(self: pointer, timeout: cint): bool {.importc: "QNetworkConfiguration_setConnectTimeout".}
+proc fcQNetworkConfiguration_new(): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new".}
+proc fcQNetworkConfiguration_new2(other: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new2".}
 proc fcQNetworkConfiguration_delete(self: pointer) {.importc: "QNetworkConfiguration_delete".}
-
-
-func init*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration, h: ptr cQNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  T(h: h)
-proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration, ): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  gen_qnetworkconfiguration_types.QNetworkConfiguration.init(fcQNetworkConfiguration_new())
-
-proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
-  gen_qnetworkconfiguration_types.QNetworkConfiguration.init(fcQNetworkConfiguration_new2(other.h))
 
 proc operatorAssign*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): void =
   fcQNetworkConfiguration_operatorAssign(self.h, other.h)
@@ -171,6 +162,13 @@ proc connectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration
 
 proc setConnectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, timeout: cint): bool =
   fcQNetworkConfiguration_setConnectTimeout(self.h, timeout)
+
+proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
+  gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new())
+
+proc create*(T: type gen_qnetworkconfiguration_types.QNetworkConfiguration,
+    other: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworkconfiguration_types.QNetworkConfiguration =
+  gen_qnetworkconfiguration_types.QNetworkConfiguration(h: fcQNetworkConfiguration_new2(other.h))
 
 proc delete*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration) =
   fcQNetworkConfiguration_delete(self.h)

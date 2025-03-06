@@ -70,12 +70,6 @@ export
 
 type cQSslCertificate*{.exportc: "QSslCertificate", incompleteStruct.} = object
 
-proc fcQSslCertificate_new(device: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new".}
-proc fcQSslCertificate_new2(): ptr cQSslCertificate {.importc: "QSslCertificate_new2".}
-proc fcQSslCertificate_new3(other: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new3".}
-proc fcQSslCertificate_new4(device: pointer, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new4".}
-proc fcQSslCertificate_new5(data: struct_miqt_string): ptr cQSslCertificate {.importc: "QSslCertificate_new5".}
-proc fcQSslCertificate_new6(data: struct_miqt_string, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new6".}
 proc fcQSslCertificate_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslCertificate_operatorAssign".}
 proc fcQSslCertificate_swap(self: pointer, other: pointer): void {.importc: "QSslCertificate_swap".}
 proc fcQSslCertificate_operatorEqual(self: pointer, other: pointer): bool {.importc: "QSslCertificate_operatorEqual".}
@@ -117,28 +111,13 @@ proc fcQSslCertificate_fromData2(data: struct_miqt_string, format: cint): struct
 proc fcQSslCertificate_verify2(certificateChain: struct_miqt_array, hostName: struct_miqt_string): struct_miqt_array {.importc: "QSslCertificate_verify2".}
 proc fcQSslCertificate_importPkcs124(device: pointer, key: pointer, cert: pointer, caCertificates: struct_miqt_array): bool {.importc: "QSslCertificate_importPkcs124".}
 proc fcQSslCertificate_importPkcs125(device: pointer, key: pointer, cert: pointer, caCertificates: struct_miqt_array, passPhrase: struct_miqt_string): bool {.importc: "QSslCertificate_importPkcs125".}
+proc fcQSslCertificate_new(device: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new".}
+proc fcQSslCertificate_new2(): ptr cQSslCertificate {.importc: "QSslCertificate_new2".}
+proc fcQSslCertificate_new3(other: pointer): ptr cQSslCertificate {.importc: "QSslCertificate_new3".}
+proc fcQSslCertificate_new4(device: pointer, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new4".}
+proc fcQSslCertificate_new5(data: struct_miqt_string): ptr cQSslCertificate {.importc: "QSslCertificate_new5".}
+proc fcQSslCertificate_new6(data: struct_miqt_string, format: cint): ptr cQSslCertificate {.importc: "QSslCertificate_new6".}
 proc fcQSslCertificate_delete(self: pointer) {.importc: "QSslCertificate_delete".}
-
-
-func init*(T: type gen_qsslcertificate_types.QSslCertificate, h: ptr cQSslCertificate): gen_qsslcertificate_types.QSslCertificate =
-  T(h: h)
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new(device.h))
-
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, ): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new2())
-
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new3(other.h))
-
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, device: gen_qiodevice_types.QIODevice, format: cint): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new4(device.h, cint(format)))
-
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, data: seq[byte]): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new5(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))))
-
-proc create*(T: type gen_qsslcertificate_types.QSslCertificate, data: seq[byte], format: cint): gen_qsslcertificate_types.QSslCertificate =
-  gen_qsslcertificate_types.QSslCertificate.init(fcQSslCertificate_new6(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), cint(format)))
 
 proc operatorAssign*(self: gen_qsslcertificate_types.QSslCertificate, other: gen_qsslcertificate_types.QSslCertificate): void =
   fcQSslCertificate_operatorAssign(self.h, other.h)
@@ -408,6 +387,29 @@ proc importPkcs12*(_: type gen_qsslcertificate_types.QSslCertificate, device: ge
     caCertificates_CArray[i] = caCertificates[i].h
 
   fcQSslCertificate_importPkcs125(device.h, key.h, cert.h, struct_miqt_array(len: csize_t(len(caCertificates)), data: if len(caCertificates) == 0: nil else: addr(caCertificates_CArray[0])), struct_miqt_string(data: cast[cstring](if len(passPhrase) == 0: nil else: unsafeAddr passPhrase[0]), len: csize_t(len(passPhrase))))
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
+    device: gen_qiodevice_types.QIODevice): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new(device.h))
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new2())
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
+    other: gen_qsslcertificate_types.QSslCertificate): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new3(other.h))
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
+    device: gen_qiodevice_types.QIODevice, format: cint): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new4(device.h, cint(format)))
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
+    data: seq[byte]): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new5(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data)))))
+
+proc create*(T: type gen_qsslcertificate_types.QSslCertificate,
+    data: seq[byte], format: cint): gen_qsslcertificate_types.QSslCertificate =
+  gen_qsslcertificate_types.QSslCertificate(h: fcQSslCertificate_new6(struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))), cint(format)))
 
 proc delete*(self: gen_qsslcertificate_types.QSslCertificate) =
   fcQSslCertificate_delete(self.h)

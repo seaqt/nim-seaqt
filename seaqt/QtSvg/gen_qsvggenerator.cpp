@@ -17,124 +17,100 @@
 extern "C" {
 #endif
 
-QPaintEngine* miqt_exec_callback_QSvgGenerator_paintEngine(const QSvgGenerator*, intptr_t);
-int miqt_exec_callback_QSvgGenerator_metric(const QSvgGenerator*, intptr_t, int);
-int miqt_exec_callback_QSvgGenerator_devType(const QSvgGenerator*, intptr_t);
-void miqt_exec_callback_QSvgGenerator_initPainter(const QSvgGenerator*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QSvgGenerator_redirected(const QSvgGenerator*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QSvgGenerator_sharedPainter(const QSvgGenerator*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSvgGenerator final : public QSvgGenerator {
+	struct QSvgGenerator_VTable* vtbl;
 public:
 
-	VirtualQSvgGenerator(): QSvgGenerator() {};
+	VirtualQSvgGenerator(struct QSvgGenerator_VTable* vtbl): QSvgGenerator(), vtbl(vtbl) {};
 
-	virtual ~VirtualQSvgGenerator() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
+	virtual ~VirtualQSvgGenerator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QSvgGenerator::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QSvgGenerator_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QSvgGenerator_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric metric) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QSvgGenerator::metric(metric);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric metric_ret = metric;
 		int sigval1 = static_cast<int>(metric_ret);
 
-		int callback_return_value = miqt_exec_callback_QSvgGenerator_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSvgGenerator_virtualbase_metric(const void* self, int metric);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QSvgGenerator::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QSvgGenerator_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSvgGenerator_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QSvgGenerator::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QSvgGenerator_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSvgGenerator_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QSvgGenerator::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QSvgGenerator_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QSvgGenerator_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QSvgGenerator::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QSvgGenerator_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
@@ -143,8 +119,8 @@ public:
 
 };
 
-QSvgGenerator* QSvgGenerator_new() {
-	return new VirtualQSvgGenerator();
+QSvgGenerator* QSvgGenerator_new(struct QSvgGenerator_VTable* vtbl) {
+	return new VirtualQSvgGenerator(vtbl);
 }
 
 void QSvgGenerator_virtbase(QSvgGenerator* src, QPaintDevice** outptr_QPaintDevice) {
@@ -239,30 +215,10 @@ int QSvgGenerator_resolution(const QSvgGenerator* self) {
 	return self->resolution();
 }
 
-bool QSvgGenerator_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
-}
-
 QPaintEngine* QSvgGenerator_virtualbase_paintEngine(const void* self) {
 
 	return ( (const VirtualQSvgGenerator*)(self) )->QSvgGenerator::paintEngine();
 
-}
-
-bool QSvgGenerator_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
 }
 
 int QSvgGenerator_virtualbase_metric(const void* self, int metric) {
@@ -271,30 +227,10 @@ int QSvgGenerator_virtualbase_metric(const void* self, int metric) {
 
 }
 
-bool QSvgGenerator_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
-}
-
 int QSvgGenerator_virtualbase_devType(const void* self) {
 
 	return ( (const VirtualQSvgGenerator*)(self) )->QSvgGenerator::devType();
 
-}
-
-bool QSvgGenerator_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
 }
 
 void QSvgGenerator_virtualbase_initPainter(const void* self, QPainter* painter) {
@@ -303,30 +239,10 @@ void QSvgGenerator_virtualbase_initPainter(const void* self, QPainter* painter) 
 
 }
 
-bool QSvgGenerator_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
-}
-
 QPaintDevice* QSvgGenerator_virtualbase_redirected(const void* self, QPoint* offset) {
 
 	return ( (const VirtualQSvgGenerator*)(self) )->QSvgGenerator::redirected(offset);
 
-}
-
-bool QSvgGenerator_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQSvgGenerator* self_cast = dynamic_cast<VirtualQSvgGenerator*>( (QSvgGenerator*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
 }
 
 QPainter* QSvgGenerator_virtualbase_sharedPainter(const void* self) {

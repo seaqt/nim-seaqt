@@ -40,11 +40,6 @@ export gen_qversionnumber_types
 
 type cQVersionNumber*{.exportc: "QVersionNumber", incompleteStruct.} = object
 
-proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
-proc fcQVersionNumber_new2(seg: struct_miqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
-proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
-proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new4".}
-proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new5".}
 proc fcQVersionNumber_isNull(self: pointer, ): bool {.importc: "QVersionNumber_isNull".}
 proc fcQVersionNumber_isNormalized(self: pointer, ): bool {.importc: "QVersionNumber_isNormalized".}
 proc fcQVersionNumber_majorVersion(self: pointer, ): cint {.importc: "QVersionNumber_majorVersion".}
@@ -60,29 +55,12 @@ proc fcQVersionNumber_commonPrefix(v1: pointer, v2: pointer): pointer {.importc:
 proc fcQVersionNumber_toString(self: pointer, ): struct_miqt_string {.importc: "QVersionNumber_toString".}
 proc fcQVersionNumber_fromString(string: struct_miqt_string): pointer {.importc: "QVersionNumber_fromString".}
 proc fcQVersionNumber_fromString22(string: struct_miqt_string, suffixIndex: ptr cint): pointer {.importc: "QVersionNumber_fromString22".}
+proc fcQVersionNumber_new(): ptr cQVersionNumber {.importc: "QVersionNumber_new".}
+proc fcQVersionNumber_new2(seg: struct_miqt_array): ptr cQVersionNumber {.importc: "QVersionNumber_new2".}
+proc fcQVersionNumber_new3(maj: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new3".}
+proc fcQVersionNumber_new4(maj: cint, min: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new4".}
+proc fcQVersionNumber_new5(maj: cint, min: cint, mic: cint): ptr cQVersionNumber {.importc: "QVersionNumber_new5".}
 proc fcQVersionNumber_delete(self: pointer) {.importc: "QVersionNumber_delete".}
-
-
-func init*(T: type gen_qversionnumber_types.QVersionNumber, h: ptr cQVersionNumber): gen_qversionnumber_types.QVersionNumber =
-  T(h: h)
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, ): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new())
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, seg: seq[cint]): gen_qversionnumber_types.QVersionNumber =
-  var seg_CArray = newSeq[cint](len(seg))
-  for i in 0..<len(seg):
-    seg_CArray[i] = seg[i]
-
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new2(struct_miqt_array(len: csize_t(len(seg)), data: if len(seg) == 0: nil else: addr(seg_CArray[0]))))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new3(maj))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint, min: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new4(maj, min))
-
-proc create*(T: type gen_qversionnumber_types.QVersionNumber, maj: cint, min: cint, mic: cint): gen_qversionnumber_types.QVersionNumber =
-  gen_qversionnumber_types.QVersionNumber.init(fcQVersionNumber_new5(maj, min, mic))
 
 proc isNull*(self: gen_qversionnumber_types.QVersionNumber, ): bool =
   fcQVersionNumber_isNull(self.h)
@@ -136,6 +114,29 @@ proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: string
 
 proc fromString*(_: type gen_qversionnumber_types.QVersionNumber, string: string, suffixIndex: ptr cint): gen_qversionnumber_types.QVersionNumber =
   gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_fromString22(struct_miqt_string(data: string, len: csize_t(len(string))), suffixIndex))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new())
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    seg: seq[cint]): gen_qversionnumber_types.QVersionNumber =
+  var seg_CArray = newSeq[cint](len(seg))
+  for i in 0..<len(seg):
+    seg_CArray[i] = seg[i]
+
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new2(struct_miqt_array(len: csize_t(len(seg)), data: if len(seg) == 0: nil else: addr(seg_CArray[0]))))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new3(maj))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint, min: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new4(maj, min))
+
+proc create*(T: type gen_qversionnumber_types.QVersionNumber,
+    maj: cint, min: cint, mic: cint): gen_qversionnumber_types.QVersionNumber =
+  gen_qversionnumber_types.QVersionNumber(h: fcQVersionNumber_new5(maj, min, mic))
 
 proc delete*(self: gen_qversionnumber_types.QVersionNumber) =
   fcQVersionNumber_delete(self.h)

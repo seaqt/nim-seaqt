@@ -30,17 +30,20 @@ typedef struct QSGNode QSGNode;
 typedef struct QSGSimpleRectNode QSGSimpleRectNode;
 #endif
 
-QSGSimpleRectNode* QSGSimpleRectNode_new(QRectF* rect, QColor* color);
-QSGSimpleRectNode* QSGSimpleRectNode_new2();
+struct QSGSimpleRectNode_VTable {
+	void (*destructor)(struct QSGSimpleRectNode_VTable* vtbl, QSGSimpleRectNode* self);
+	bool (*isSubtreeBlocked)(struct QSGSimpleRectNode_VTable* vtbl, const QSGSimpleRectNode* self);
+	void (*preprocess)(struct QSGSimpleRectNode_VTable* vtbl, QSGSimpleRectNode* self);
+};
+QSGSimpleRectNode* QSGSimpleRectNode_new(struct QSGSimpleRectNode_VTable* vtbl, QRectF* rect, QColor* color);
+QSGSimpleRectNode* QSGSimpleRectNode_new2(struct QSGSimpleRectNode_VTable* vtbl);
 void QSGSimpleRectNode_virtbase(QSGSimpleRectNode* src, QSGGeometryNode** outptr_QSGGeometryNode);
 void QSGSimpleRectNode_setRect(QSGSimpleRectNode* self, QRectF* rect);
 void QSGSimpleRectNode_setRect2(QSGSimpleRectNode* self, double x, double y, double w, double h);
 QRectF* QSGSimpleRectNode_rect(const QSGSimpleRectNode* self);
 void QSGSimpleRectNode_setColor(QSGSimpleRectNode* self, QColor* color);
 QColor* QSGSimpleRectNode_color(const QSGSimpleRectNode* self);
-bool QSGSimpleRectNode_override_virtual_isSubtreeBlocked(void* self, intptr_t slot);
 bool QSGSimpleRectNode_virtualbase_isSubtreeBlocked(const void* self);
-bool QSGSimpleRectNode_override_virtual_preprocess(void* self, intptr_t slot);
 void QSGSimpleRectNode_virtualbase_preprocess(void* self);
 void QSGSimpleRectNode_delete(QSGSimpleRectNode* self);
 

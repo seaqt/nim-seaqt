@@ -50,787 +50,594 @@ void miqt_exec_callback_QMenu_aboutToShow(intptr_t);
 void miqt_exec_callback_QMenu_aboutToHide(intptr_t);
 void miqt_exec_callback_QMenu_triggered(intptr_t, QAction*);
 void miqt_exec_callback_QMenu_hovered(intptr_t, QAction*);
-QMetaObject* miqt_exec_callback_QMenu_metaObject(const QMenu*, intptr_t);
-void* miqt_exec_callback_QMenu_metacast(QMenu*, intptr_t, const char*);
-int miqt_exec_callback_QMenu_metacall(QMenu*, intptr_t, int, int, void**);
-QSize* miqt_exec_callback_QMenu_sizeHint(const QMenu*, intptr_t);
-void miqt_exec_callback_QMenu_changeEvent(QMenu*, intptr_t, QEvent*);
-void miqt_exec_callback_QMenu_keyPressEvent(QMenu*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QMenu_mouseReleaseEvent(QMenu*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMenu_mousePressEvent(QMenu*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMenu_mouseMoveEvent(QMenu*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMenu_wheelEvent(QMenu*, intptr_t, QWheelEvent*);
-void miqt_exec_callback_QMenu_enterEvent(QMenu*, intptr_t, QEvent*);
-void miqt_exec_callback_QMenu_leaveEvent(QMenu*, intptr_t, QEvent*);
-void miqt_exec_callback_QMenu_hideEvent(QMenu*, intptr_t, QHideEvent*);
-void miqt_exec_callback_QMenu_paintEvent(QMenu*, intptr_t, QPaintEvent*);
-void miqt_exec_callback_QMenu_actionEvent(QMenu*, intptr_t, QActionEvent*);
-void miqt_exec_callback_QMenu_timerEvent(QMenu*, intptr_t, QTimerEvent*);
-bool miqt_exec_callback_QMenu_event(QMenu*, intptr_t, QEvent*);
-bool miqt_exec_callback_QMenu_focusNextPrevChild(QMenu*, intptr_t, bool);
-int miqt_exec_callback_QMenu_devType(const QMenu*, intptr_t);
-void miqt_exec_callback_QMenu_setVisible(QMenu*, intptr_t, bool);
-QSize* miqt_exec_callback_QMenu_minimumSizeHint(const QMenu*, intptr_t);
-int miqt_exec_callback_QMenu_heightForWidth(const QMenu*, intptr_t, int);
-bool miqt_exec_callback_QMenu_hasHeightForWidth(const QMenu*, intptr_t);
-QPaintEngine* miqt_exec_callback_QMenu_paintEngine(const QMenu*, intptr_t);
-void miqt_exec_callback_QMenu_mouseDoubleClickEvent(QMenu*, intptr_t, QMouseEvent*);
-void miqt_exec_callback_QMenu_keyReleaseEvent(QMenu*, intptr_t, QKeyEvent*);
-void miqt_exec_callback_QMenu_focusInEvent(QMenu*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QMenu_focusOutEvent(QMenu*, intptr_t, QFocusEvent*);
-void miqt_exec_callback_QMenu_moveEvent(QMenu*, intptr_t, QMoveEvent*);
-void miqt_exec_callback_QMenu_resizeEvent(QMenu*, intptr_t, QResizeEvent*);
-void miqt_exec_callback_QMenu_closeEvent(QMenu*, intptr_t, QCloseEvent*);
-void miqt_exec_callback_QMenu_contextMenuEvent(QMenu*, intptr_t, QContextMenuEvent*);
-void miqt_exec_callback_QMenu_tabletEvent(QMenu*, intptr_t, QTabletEvent*);
-void miqt_exec_callback_QMenu_dragEnterEvent(QMenu*, intptr_t, QDragEnterEvent*);
-void miqt_exec_callback_QMenu_dragMoveEvent(QMenu*, intptr_t, QDragMoveEvent*);
-void miqt_exec_callback_QMenu_dragLeaveEvent(QMenu*, intptr_t, QDragLeaveEvent*);
-void miqt_exec_callback_QMenu_dropEvent(QMenu*, intptr_t, QDropEvent*);
-void miqt_exec_callback_QMenu_showEvent(QMenu*, intptr_t, QShowEvent*);
-bool miqt_exec_callback_QMenu_nativeEvent(QMenu*, intptr_t, struct miqt_string, void*, long*);
-int miqt_exec_callback_QMenu_metric(const QMenu*, intptr_t, int);
-void miqt_exec_callback_QMenu_initPainter(const QMenu*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QMenu_redirected(const QMenu*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QMenu_sharedPainter(const QMenu*, intptr_t);
-void miqt_exec_callback_QMenu_inputMethodEvent(QMenu*, intptr_t, QInputMethodEvent*);
-QVariant* miqt_exec_callback_QMenu_inputMethodQuery(const QMenu*, intptr_t, int);
-bool miqt_exec_callback_QMenu_eventFilter(QMenu*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QMenu_childEvent(QMenu*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QMenu_customEvent(QMenu*, intptr_t, QEvent*);
-void miqt_exec_callback_QMenu_connectNotify(QMenu*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QMenu_disconnectNotify(QMenu*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQMenu final : public QMenu {
+	struct QMenu_VTable* vtbl;
 public:
 
-	VirtualQMenu(QWidget* parent): QMenu(parent) {};
-	VirtualQMenu(): QMenu() {};
-	VirtualQMenu(const QString& title): QMenu(title) {};
-	VirtualQMenu(const QString& title, QWidget* parent): QMenu(title, parent) {};
+	VirtualQMenu(struct QMenu_VTable* vtbl, QWidget* parent): QMenu(parent), vtbl(vtbl) {};
+	VirtualQMenu(struct QMenu_VTable* vtbl): QMenu(), vtbl(vtbl) {};
+	VirtualQMenu(struct QMenu_VTable* vtbl, const QString& title): QMenu(title), vtbl(vtbl) {};
+	VirtualQMenu(struct QMenu_VTable* vtbl, const QString& title, QWidget* parent): QMenu(title, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQMenu() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQMenu() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QMenu::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QMenu_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QMenu_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QMenu::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QMenu_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QMenu_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QMenu::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QMenu_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMenu_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QMenu::sizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QMenu_sizeHint(this, handle__sizeHint);
+
+		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QMenu_virtualbase_sizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__changeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
-		if (handle__changeEvent == 0) {
+		if (vtbl->changeEvent == 0) {
 			QMenu::changeEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_changeEvent(this, handle__changeEvent, sigval1);
+		vtbl->changeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_changeEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyPressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
-		if (handle__keyPressEvent == 0) {
+		if (vtbl->keyPressEvent == 0) {
 			QMenu::keyPressEvent(param1);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_keyPressEvent(this, handle__keyPressEvent, sigval1);
+		vtbl->keyPressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
-		if (handle__mouseReleaseEvent == 0) {
+		if (vtbl->mouseReleaseEvent == 0) {
 			QMenu::mouseReleaseEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_mouseReleaseEvent(this, handle__mouseReleaseEvent, sigval1);
+		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mousePressEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
-		if (handle__mousePressEvent == 0) {
+		if (vtbl->mousePressEvent == 0) {
 			QMenu::mousePressEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_mousePressEvent(this, handle__mousePressEvent, sigval1);
+		vtbl->mousePressEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
-		if (handle__mouseMoveEvent == 0) {
+		if (vtbl->mouseMoveEvent == 0) {
 			QMenu::mouseMoveEvent(param1);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_mouseMoveEvent(this, handle__mouseMoveEvent, sigval1);
+		vtbl->mouseMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__wheelEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
-		if (handle__wheelEvent == 0) {
+		if (vtbl->wheelEvent == 0) {
 			QMenu::wheelEvent(param1);
 			return;
 		}
-		
+
 		QWheelEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_wheelEvent(this, handle__wheelEvent, sigval1);
+		vtbl->wheelEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__enterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* param1) override {
-		if (handle__enterEvent == 0) {
+		if (vtbl->enterEvent == 0) {
 			QMenu::enterEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_enterEvent(this, handle__enterEvent, sigval1);
+		vtbl->enterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_enterEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__leaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* param1) override {
-		if (handle__leaveEvent == 0) {
+		if (vtbl->leaveEvent == 0) {
 			QMenu::leaveEvent(param1);
 			return;
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_leaveEvent(this, handle__leaveEvent, sigval1);
+		vtbl->leaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_leaveEvent(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hideEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* param1) override {
-		if (handle__hideEvent == 0) {
+		if (vtbl->hideEvent == 0) {
 			QMenu::hideEvent(param1);
 			return;
 		}
-		
+
 		QHideEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_hideEvent(this, handle__hideEvent, sigval1);
+		vtbl->hideEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_hideEvent(void* self, QHideEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
-		if (handle__paintEvent == 0) {
+		if (vtbl->paintEvent == 0) {
 			QMenu::paintEvent(param1);
 			return;
 		}
-		
+
 		QPaintEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_paintEvent(this, handle__paintEvent, sigval1);
+		vtbl->paintEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_paintEvent(void* self, QPaintEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__actionEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* param1) override {
-		if (handle__actionEvent == 0) {
+		if (vtbl->actionEvent == 0) {
 			QMenu::actionEvent(param1);
 			return;
 		}
-		
+
 		QActionEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_actionEvent(this, handle__actionEvent, sigval1);
+		vtbl->actionEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_actionEvent(void* self, QActionEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QMenu::timerEvent(param1);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_timerEvent(void* self, QTimerEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QMenu::event(param1);
 		}
-		
+
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = miqt_exec_callback_QMenu_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QMenu_virtualbase_event(void* self, QEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusNextPrevChild = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
-		if (handle__focusNextPrevChild == 0) {
+		if (vtbl->focusNextPrevChild == 0) {
 			return QMenu::focusNextPrevChild(next);
 		}
-		
+
 		bool sigval1 = next;
 
-		bool callback_return_value = miqt_exec_callback_QMenu_focusNextPrevChild(this, handle__focusNextPrevChild, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QMenu_virtualbase_focusNextPrevChild(void* self, bool next);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QMenu::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QMenu_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMenu_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setVisible = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
-		if (handle__setVisible == 0) {
+		if (vtbl->setVisible == 0) {
 			QMenu::setVisible(visible);
 			return;
 		}
-		
+
 		bool sigval1 = visible;
 
-		miqt_exec_callback_QMenu_setVisible(this, handle__setVisible, sigval1);
+		vtbl->setVisible(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_setVisible(void* self, bool visible);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__minimumSizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
-		if (handle__minimumSizeHint == 0) {
+		if (vtbl->minimumSizeHint == 0) {
 			return QMenu::minimumSizeHint();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QMenu_minimumSizeHint(this, handle__minimumSizeHint);
+
+		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QMenu_virtualbase_minimumSizeHint(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__heightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
-		if (handle__heightForWidth == 0) {
+		if (vtbl->heightForWidth == 0) {
 			return QMenu::heightForWidth(param1);
 		}
-		
+
 		int sigval1 = param1;
 
-		int callback_return_value = miqt_exec_callback_QMenu_heightForWidth(this, handle__heightForWidth, sigval1);
+		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMenu_virtualbase_heightForWidth(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasHeightForWidth = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
-		if (handle__hasHeightForWidth == 0) {
+		if (vtbl->hasHeightForWidth == 0) {
 			return QMenu::hasHeightForWidth();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QMenu_hasHeightForWidth(this, handle__hasHeightForWidth);
+
+		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QMenu_virtualbase_hasHeightForWidth(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QMenu::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QMenu_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QMenu_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mouseDoubleClickEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
-		if (handle__mouseDoubleClickEvent == 0) {
+		if (vtbl->mouseDoubleClickEvent == 0) {
 			QMenu::mouseDoubleClickEvent(event);
 			return;
 		}
-		
+
 		QMouseEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_mouseDoubleClickEvent(this, handle__mouseDoubleClickEvent, sigval1);
+		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__keyReleaseEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
-		if (handle__keyReleaseEvent == 0) {
+		if (vtbl->keyReleaseEvent == 0) {
 			QMenu::keyReleaseEvent(event);
 			return;
 		}
-		
+
 		QKeyEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_keyReleaseEvent(this, handle__keyReleaseEvent, sigval1);
+		vtbl->keyReleaseEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusInEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
-		if (handle__focusInEvent == 0) {
+		if (vtbl->focusInEvent == 0) {
 			QMenu::focusInEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_focusInEvent(this, handle__focusInEvent, sigval1);
+		vtbl->focusInEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_focusInEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__focusOutEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
-		if (handle__focusOutEvent == 0) {
+		if (vtbl->focusOutEvent == 0) {
 			QMenu::focusOutEvent(event);
 			return;
 		}
-		
+
 		QFocusEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_focusOutEvent(this, handle__focusOutEvent, sigval1);
+		vtbl->focusOutEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
-		if (handle__moveEvent == 0) {
+		if (vtbl->moveEvent == 0) {
 			QMenu::moveEvent(event);
 			return;
 		}
-		
+
 		QMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_moveEvent(this, handle__moveEvent, sigval1);
+		vtbl->moveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_moveEvent(void* self, QMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__resizeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
-		if (handle__resizeEvent == 0) {
+		if (vtbl->resizeEvent == 0) {
 			QMenu::resizeEvent(event);
 			return;
 		}
-		
+
 		QResizeEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_resizeEvent(this, handle__resizeEvent, sigval1);
+		vtbl->resizeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_resizeEvent(void* self, QResizeEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__closeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
-		if (handle__closeEvent == 0) {
+		if (vtbl->closeEvent == 0) {
 			QMenu::closeEvent(event);
 			return;
 		}
-		
+
 		QCloseEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_closeEvent(this, handle__closeEvent, sigval1);
+		vtbl->closeEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_closeEvent(void* self, QCloseEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__contextMenuEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
-		if (handle__contextMenuEvent == 0) {
+		if (vtbl->contextMenuEvent == 0) {
 			QMenu::contextMenuEvent(event);
 			return;
 		}
-		
+
 		QContextMenuEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_contextMenuEvent(this, handle__contextMenuEvent, sigval1);
+		vtbl->contextMenuEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__tabletEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
-		if (handle__tabletEvent == 0) {
+		if (vtbl->tabletEvent == 0) {
 			QMenu::tabletEvent(event);
 			return;
 		}
-		
+
 		QTabletEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_tabletEvent(this, handle__tabletEvent, sigval1);
+		vtbl->tabletEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_tabletEvent(void* self, QTabletEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragEnterEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
-		if (handle__dragEnterEvent == 0) {
+		if (vtbl->dragEnterEvent == 0) {
 			QMenu::dragEnterEvent(event);
 			return;
 		}
-		
+
 		QDragEnterEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_dragEnterEvent(this, handle__dragEnterEvent, sigval1);
+		vtbl->dragEnterEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragMoveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
-		if (handle__dragMoveEvent == 0) {
+		if (vtbl->dragMoveEvent == 0) {
 			QMenu::dragMoveEvent(event);
 			return;
 		}
-		
+
 		QDragMoveEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_dragMoveEvent(this, handle__dragMoveEvent, sigval1);
+		vtbl->dragMoveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dragLeaveEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
-		if (handle__dragLeaveEvent == 0) {
+		if (vtbl->dragLeaveEvent == 0) {
 			QMenu::dragLeaveEvent(event);
 			return;
 		}
-		
+
 		QDragLeaveEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_dragLeaveEvent(this, handle__dragLeaveEvent, sigval1);
+		vtbl->dragLeaveEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
-		if (handle__dropEvent == 0) {
+		if (vtbl->dropEvent == 0) {
 			QMenu::dropEvent(event);
 			return;
 		}
-		
+
 		QDropEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_dropEvent(this, handle__dropEvent, sigval1);
+		vtbl->dropEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_dropEvent(void* self, QDropEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__showEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
-		if (handle__showEvent == 0) {
+		if (vtbl->showEvent == 0) {
 			QMenu::showEvent(event);
 			return;
 		}
-		
+
 		QShowEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_showEvent(this, handle__showEvent, sigval1);
+		vtbl->showEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_showEvent(void* self, QShowEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nativeEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
-		if (handle__nativeEvent == 0) {
+		if (vtbl->nativeEvent == 0) {
 			return QMenu::nativeEvent(eventType, message, result);
 		}
-		
+
 		const QByteArray eventType_qb = eventType;
 		struct miqt_string eventType_ms;
 		eventType_ms.len = eventType_qb.length();
@@ -840,219 +647,180 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = miqt_exec_callback_QMenu_nativeEvent(this, handle__nativeEvent, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QMenu_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QMenu::metric(param1);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = miqt_exec_callback_QMenu_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QMenu_virtualbase_metric(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QMenu::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QMenu_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QMenu::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QMenu_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QMenu_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QMenu::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QMenu_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPainter* QMenu_virtualbase_sharedPainter(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
-		if (handle__inputMethodEvent == 0) {
+		if (vtbl->inputMethodEvent == 0) {
 			QMenu::inputMethodEvent(param1);
 			return;
 		}
-		
+
 		QInputMethodEvent* sigval1 = param1;
 
-		miqt_exec_callback_QMenu_inputMethodEvent(this, handle__inputMethodEvent, sigval1);
+		vtbl->inputMethodEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__inputMethodQuery = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
-		if (handle__inputMethodQuery == 0) {
+		if (vtbl->inputMethodQuery == 0) {
 			return QMenu::inputMethodQuery(param1);
 		}
-		
+
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = miqt_exec_callback_QMenu_inputMethodQuery(this, handle__inputMethodQuery, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QMenu_virtualbase_inputMethodQuery(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QMenu::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QMenu_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QMenu_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QMenu::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QMenu::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QMenu_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QMenu::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QMenu_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QMenu::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QMenu_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QMenu_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1071,22 +839,22 @@ public:
 	friend bool QMenu_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QMenu* QMenu_new(QWidget* parent) {
-	return new VirtualQMenu(parent);
+QMenu* QMenu_new(struct QMenu_VTable* vtbl, QWidget* parent) {
+	return new VirtualQMenu(vtbl, parent);
 }
 
-QMenu* QMenu_new2() {
-	return new VirtualQMenu();
+QMenu* QMenu_new2(struct QMenu_VTable* vtbl) {
+	return new VirtualQMenu(vtbl);
 }
 
-QMenu* QMenu_new3(struct miqt_string title) {
+QMenu* QMenu_new3(struct QMenu_VTable* vtbl, struct miqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQMenu(title_QString);
+	return new VirtualQMenu(vtbl, title_QString);
 }
 
-QMenu* QMenu_new4(struct miqt_string title, QWidget* parent) {
+QMenu* QMenu_new4(struct QMenu_VTable* vtbl, struct miqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQMenu(title_QString, parent);
+	return new VirtualQMenu(vtbl, title_QString, parent);
 }
 
 void QMenu_virtbase(QMenu* src, QWidget** outptr_QWidget) {
@@ -1427,30 +1195,10 @@ QAction* QMenu_exec4(struct miqt_array /* of QAction* */  actions, QPoint* pos, 
 	return QMenu::exec(actions_QList, *pos, at, parent);
 }
 
-bool QMenu_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QMenu_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQMenu*)(self) )->QMenu::metaObject();
 
-}
-
-bool QMenu_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QMenu_virtualbase_metacast(void* self, const char* param1) {
@@ -1459,30 +1207,10 @@ void* QMenu_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QMenu_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QMenu_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQMenu*)(self) )->QMenu::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QMenu_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
 }
 
 QSize* QMenu_virtualbase_sizeHint(const void* self) {
@@ -1491,30 +1219,10 @@ QSize* QMenu_virtualbase_sizeHint(const void* self) {
 
 }
 
-bool QMenu_override_virtual_changeEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__changeEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_changeEvent(void* self, QEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::changeEvent(param1);
 
-}
-
-bool QMenu_override_virtual_keyPressEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyPressEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
@@ -1523,30 +1231,10 @@ void QMenu_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_mouseReleaseEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseReleaseEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::mouseReleaseEvent(param1);
 
-}
-
-bool QMenu_override_virtual_mousePressEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mousePressEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
@@ -1555,30 +1243,10 @@ void QMenu_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_mouseMoveEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseMoveEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::mouseMoveEvent(param1);
 
-}
-
-bool QMenu_override_virtual_wheelEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__wheelEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
@@ -1587,30 +1255,10 @@ void QMenu_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_enterEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__enterEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_enterEvent(void* self, QEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::enterEvent(param1);
 
-}
-
-bool QMenu_override_virtual_leaveEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__leaveEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_leaveEvent(void* self, QEvent* param1) {
@@ -1619,30 +1267,10 @@ void QMenu_virtualbase_leaveEvent(void* self, QEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_hideEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hideEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_hideEvent(void* self, QHideEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::hideEvent(param1);
 
-}
-
-bool QMenu_override_virtual_paintEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
@@ -1651,30 +1279,10 @@ void QMenu_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_actionEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__actionEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_actionEvent(void* self, QActionEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::actionEvent(param1);
 
-}
-
-bool QMenu_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
@@ -1683,30 +1291,10 @@ void QMenu_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
 
 }
 
-bool QMenu_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QMenu_virtualbase_event(void* self, QEvent* param1) {
 
 	return ( (VirtualQMenu*)(self) )->QMenu::event(param1);
 
-}
-
-bool QMenu_override_virtual_focusNextPrevChild(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusNextPrevChild = slot;
-	return true;
 }
 
 bool QMenu_virtualbase_focusNextPrevChild(void* self, bool next) {
@@ -1715,30 +1303,10 @@ bool QMenu_virtualbase_focusNextPrevChild(void* self, bool next) {
 
 }
 
-bool QMenu_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
-}
-
 int QMenu_virtualbase_devType(const void* self) {
 
 	return ( (const VirtualQMenu*)(self) )->QMenu::devType();
 
-}
-
-bool QMenu_override_virtual_setVisible(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setVisible = slot;
-	return true;
 }
 
 void QMenu_virtualbase_setVisible(void* self, bool visible) {
@@ -1747,30 +1315,10 @@ void QMenu_virtualbase_setVisible(void* self, bool visible) {
 
 }
 
-bool QMenu_override_virtual_minimumSizeHint(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__minimumSizeHint = slot;
-	return true;
-}
-
 QSize* QMenu_virtualbase_minimumSizeHint(const void* self) {
 
 	return new QSize(( (const VirtualQMenu*)(self) )->QMenu::minimumSizeHint());
 
-}
-
-bool QMenu_override_virtual_heightForWidth(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__heightForWidth = slot;
-	return true;
 }
 
 int QMenu_virtualbase_heightForWidth(const void* self, int param1) {
@@ -1779,30 +1327,10 @@ int QMenu_virtualbase_heightForWidth(const void* self, int param1) {
 
 }
 
-bool QMenu_override_virtual_hasHeightForWidth(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasHeightForWidth = slot;
-	return true;
-}
-
 bool QMenu_virtualbase_hasHeightForWidth(const void* self) {
 
 	return ( (const VirtualQMenu*)(self) )->QMenu::hasHeightForWidth();
 
-}
-
-bool QMenu_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
 }
 
 QPaintEngine* QMenu_virtualbase_paintEngine(const void* self) {
@@ -1811,30 +1339,10 @@ QPaintEngine* QMenu_virtualbase_paintEngine(const void* self) {
 
 }
 
-bool QMenu_override_virtual_mouseDoubleClickEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mouseDoubleClickEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::mouseDoubleClickEvent(event);
 
-}
-
-bool QMenu_override_virtual_keyReleaseEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__keyReleaseEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
@@ -1843,30 +1351,10 @@ void QMenu_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
 
 }
 
-bool QMenu_override_virtual_focusInEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusInEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::focusInEvent(event);
 
-}
-
-bool QMenu_override_virtual_focusOutEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__focusOutEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
@@ -1875,30 +1363,10 @@ void QMenu_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
 
 }
 
-bool QMenu_override_virtual_moveEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_moveEvent(void* self, QMoveEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::moveEvent(event);
 
-}
-
-bool QMenu_override_virtual_resizeEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__resizeEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
@@ -1907,30 +1375,10 @@ void QMenu_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
 
 }
 
-bool QMenu_override_virtual_closeEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__closeEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_closeEvent(void* self, QCloseEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::closeEvent(event);
 
-}
-
-bool QMenu_override_virtual_contextMenuEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__contextMenuEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
@@ -1939,30 +1387,10 @@ void QMenu_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
 
 }
 
-bool QMenu_override_virtual_tabletEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__tabletEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::tabletEvent(event);
 
-}
-
-bool QMenu_override_virtual_dragEnterEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragEnterEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
@@ -1971,30 +1399,10 @@ void QMenu_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
 
 }
 
-bool QMenu_override_virtual_dragMoveEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragMoveEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::dragMoveEvent(event);
 
-}
-
-bool QMenu_override_virtual_dragLeaveEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dragLeaveEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
@@ -2003,46 +1411,16 @@ void QMenu_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
 
 }
 
-bool QMenu_override_virtual_dropEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_dropEvent(void* self, QDropEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::dropEvent(event);
 
 }
 
-bool QMenu_override_virtual_showEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__showEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_showEvent(void* self, QShowEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::showEvent(event);
 
-}
-
-bool QMenu_override_virtual_nativeEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__nativeEvent = slot;
-	return true;
 }
 
 bool QMenu_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
@@ -2052,30 +1430,10 @@ bool QMenu_virtualbase_nativeEvent(void* self, struct miqt_string eventType, voi
 
 }
 
-bool QMenu_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
-}
-
 int QMenu_virtualbase_metric(const void* self, int param1) {
 
 	return ( (const VirtualQMenu*)(self) )->QMenu::metric(static_cast<VirtualQMenu::PaintDeviceMetric>(param1));
 
-}
-
-bool QMenu_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
 }
 
 void QMenu_virtualbase_initPainter(const void* self, QPainter* painter) {
@@ -2084,30 +1442,10 @@ void QMenu_virtualbase_initPainter(const void* self, QPainter* painter) {
 
 }
 
-bool QMenu_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
-}
-
 QPaintDevice* QMenu_virtualbase_redirected(const void* self, QPoint* offset) {
 
 	return ( (const VirtualQMenu*)(self) )->QMenu::redirected(offset);
 
-}
-
-bool QMenu_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
 }
 
 QPainter* QMenu_virtualbase_sharedPainter(const void* self) {
@@ -2116,30 +1454,10 @@ QPainter* QMenu_virtualbase_sharedPainter(const void* self) {
 
 }
 
-bool QMenu_override_virtual_inputMethodEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
 
 	( (VirtualQMenu*)(self) )->QMenu::inputMethodEvent(param1);
 
-}
-
-bool QMenu_override_virtual_inputMethodQuery(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__inputMethodQuery = slot;
-	return true;
 }
 
 QVariant* QMenu_virtualbase_inputMethodQuery(const void* self, int param1) {
@@ -2148,30 +1466,10 @@ QVariant* QMenu_virtualbase_inputMethodQuery(const void* self, int param1) {
 
 }
 
-bool QMenu_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QMenu_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQMenu*)(self) )->QMenu::eventFilter(watched, event);
 
-}
-
-bool QMenu_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QMenu_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -2180,46 +1478,16 @@ void QMenu_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QMenu_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QMenu_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQMenu*)(self) )->QMenu::customEvent(event);
 
 }
 
-bool QMenu_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QMenu_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQMenu*)(self) )->QMenu::connectNotify(*signal);
 
-}
-
-bool QMenu_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQMenu* self_cast = dynamic_cast<VirtualQMenu*>( (QMenu*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QMenu_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

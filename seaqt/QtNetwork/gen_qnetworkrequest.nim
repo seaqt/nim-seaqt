@@ -133,9 +133,6 @@ export
 
 type cQNetworkRequest*{.exportc: "QNetworkRequest", incompleteStruct.} = object
 
-proc fcQNetworkRequest_new(): ptr cQNetworkRequest {.importc: "QNetworkRequest_new".}
-proc fcQNetworkRequest_new2(url: pointer): ptr cQNetworkRequest {.importc: "QNetworkRequest_new2".}
-proc fcQNetworkRequest_new3(other: pointer): ptr cQNetworkRequest {.importc: "QNetworkRequest_new3".}
 proc fcQNetworkRequest_operatorAssign(self: pointer, other: pointer): void {.importc: "QNetworkRequest_operatorAssign".}
 proc fcQNetworkRequest_swap(self: pointer, other: pointer): void {.importc: "QNetworkRequest_swap".}
 proc fcQNetworkRequest_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkRequest_operatorEqual".}
@@ -166,19 +163,10 @@ proc fcQNetworkRequest_transferTimeout(self: pointer, ): cint {.importc: "QNetwo
 proc fcQNetworkRequest_setTransferTimeout(self: pointer, ): void {.importc: "QNetworkRequest_setTransferTimeout".}
 proc fcQNetworkRequest_attribute2(self: pointer, code: cint, defaultValue: pointer): pointer {.importc: "QNetworkRequest_attribute2".}
 proc fcQNetworkRequest_setTransferTimeout1(self: pointer, timeout: cint): void {.importc: "QNetworkRequest_setTransferTimeout1".}
+proc fcQNetworkRequest_new(): ptr cQNetworkRequest {.importc: "QNetworkRequest_new".}
+proc fcQNetworkRequest_new2(url: pointer): ptr cQNetworkRequest {.importc: "QNetworkRequest_new2".}
+proc fcQNetworkRequest_new3(other: pointer): ptr cQNetworkRequest {.importc: "QNetworkRequest_new3".}
 proc fcQNetworkRequest_delete(self: pointer) {.importc: "QNetworkRequest_delete".}
-
-
-func init*(T: type gen_qnetworkrequest_types.QNetworkRequest, h: ptr cQNetworkRequest): gen_qnetworkrequest_types.QNetworkRequest =
-  T(h: h)
-proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest, ): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest.init(fcQNetworkRequest_new())
-
-proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest, url: gen_qurl_types.QUrl): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest.init(fcQNetworkRequest_new2(url.h))
-
-proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest, other: gen_qnetworkrequest_types.QNetworkRequest): gen_qnetworkrequest_types.QNetworkRequest =
-  gen_qnetworkrequest_types.QNetworkRequest.init(fcQNetworkRequest_new3(other.h))
 
 proc operatorAssign*(self: gen_qnetworkrequest_types.QNetworkRequest, other: gen_qnetworkrequest_types.QNetworkRequest): void =
   fcQNetworkRequest_operatorAssign(self.h, other.h)
@@ -283,6 +271,17 @@ proc attribute*(self: gen_qnetworkrequest_types.QNetworkRequest, code: cint, def
 
 proc setTransferTimeout*(self: gen_qnetworkrequest_types.QNetworkRequest, timeout: cint): void =
   fcQNetworkRequest_setTransferTimeout1(self.h, timeout)
+
+proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest): gen_qnetworkrequest_types.QNetworkRequest =
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQNetworkRequest_new())
+
+proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest,
+    url: gen_qurl_types.QUrl): gen_qnetworkrequest_types.QNetworkRequest =
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQNetworkRequest_new2(url.h))
+
+proc create*(T: type gen_qnetworkrequest_types.QNetworkRequest,
+    other: gen_qnetworkrequest_types.QNetworkRequest): gen_qnetworkrequest_types.QNetworkRequest =
+  gen_qnetworkrequest_types.QNetworkRequest(h: fcQNetworkRequest_new3(other.h))
 
 proc delete*(self: gen_qnetworkrequest_types.QNetworkRequest) =
   fcQNetworkRequest_delete(self.h)

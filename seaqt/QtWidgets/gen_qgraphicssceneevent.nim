@@ -66,12 +66,10 @@ type cQGraphicsSceneDragDropEvent*{.exportc: "QGraphicsSceneDragDropEvent", inco
 type cQGraphicsSceneResizeEvent*{.exportc: "QGraphicsSceneResizeEvent", incompleteStruct.} = object
 type cQGraphicsSceneMoveEvent*{.exportc: "QGraphicsSceneMoveEvent", incompleteStruct.} = object
 
-proc fcQGraphicsSceneEvent_new(typeVal: cint): ptr cQGraphicsSceneEvent {.importc: "QGraphicsSceneEvent_new".}
 proc fcQGraphicsSceneEvent_widget(self: pointer, ): pointer {.importc: "QGraphicsSceneEvent_widget".}
 proc fcQGraphicsSceneEvent_setWidget(self: pointer, widget: pointer): void {.importc: "QGraphicsSceneEvent_setWidget".}
+proc fcQGraphicsSceneEvent_new(typeVal: cint): ptr cQGraphicsSceneEvent {.importc: "QGraphicsSceneEvent_new".}
 proc fcQGraphicsSceneEvent_delete(self: pointer) {.importc: "QGraphicsSceneEvent_delete".}
-proc fcQGraphicsSceneMouseEvent_new(): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
-proc fcQGraphicsSceneMouseEvent_new2(typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
 proc fcQGraphicsSceneMouseEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneMouseEvent_pos".}
 proc fcQGraphicsSceneMouseEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMouseEvent_setPos".}
 proc fcQGraphicsSceneMouseEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneMouseEvent_scenePos".}
@@ -100,9 +98,9 @@ proc fcQGraphicsSceneMouseEvent_source(self: pointer, ): cint {.importc: "QGraph
 proc fcQGraphicsSceneMouseEvent_setSource(self: pointer, source: cint): void {.importc: "QGraphicsSceneMouseEvent_setSource".}
 proc fcQGraphicsSceneMouseEvent_flags(self: pointer, ): cint {.importc: "QGraphicsSceneMouseEvent_flags".}
 proc fcQGraphicsSceneMouseEvent_setFlags(self: pointer, flags: cint): void {.importc: "QGraphicsSceneMouseEvent_setFlags".}
+proc fcQGraphicsSceneMouseEvent_new(): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new".}
+proc fcQGraphicsSceneMouseEvent_new2(typeVal: cint): ptr cQGraphicsSceneMouseEvent {.importc: "QGraphicsSceneMouseEvent_new2".}
 proc fcQGraphicsSceneMouseEvent_delete(self: pointer) {.importc: "QGraphicsSceneMouseEvent_delete".}
-proc fcQGraphicsSceneWheelEvent_new(): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
-proc fcQGraphicsSceneWheelEvent_new2(typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
 proc fcQGraphicsSceneWheelEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneWheelEvent_pos".}
 proc fcQGraphicsSceneWheelEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneWheelEvent_setPos".}
 proc fcQGraphicsSceneWheelEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneWheelEvent_scenePos".}
@@ -117,9 +115,9 @@ proc fcQGraphicsSceneWheelEvent_delta(self: pointer, ): cint {.importc: "QGraphi
 proc fcQGraphicsSceneWheelEvent_setDelta(self: pointer, delta: cint): void {.importc: "QGraphicsSceneWheelEvent_setDelta".}
 proc fcQGraphicsSceneWheelEvent_orientation(self: pointer, ): cint {.importc: "QGraphicsSceneWheelEvent_orientation".}
 proc fcQGraphicsSceneWheelEvent_setOrientation(self: pointer, orientation: cint): void {.importc: "QGraphicsSceneWheelEvent_setOrientation".}
+proc fcQGraphicsSceneWheelEvent_new(): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new".}
+proc fcQGraphicsSceneWheelEvent_new2(typeVal: cint): ptr cQGraphicsSceneWheelEvent {.importc: "QGraphicsSceneWheelEvent_new2".}
 proc fcQGraphicsSceneWheelEvent_delete(self: pointer) {.importc: "QGraphicsSceneWheelEvent_delete".}
-proc fcQGraphicsSceneContextMenuEvent_new(): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
-proc fcQGraphicsSceneContextMenuEvent_new2(typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
 proc fcQGraphicsSceneContextMenuEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneContextMenuEvent_pos".}
 proc fcQGraphicsSceneContextMenuEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneContextMenuEvent_setPos".}
 proc fcQGraphicsSceneContextMenuEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneContextMenuEvent_scenePos".}
@@ -130,9 +128,9 @@ proc fcQGraphicsSceneContextMenuEvent_modifiers(self: pointer, ): cint {.importc
 proc fcQGraphicsSceneContextMenuEvent_setModifiers(self: pointer, modifiers: cint): void {.importc: "QGraphicsSceneContextMenuEvent_setModifiers".}
 proc fcQGraphicsSceneContextMenuEvent_reason(self: pointer, ): cint {.importc: "QGraphicsSceneContextMenuEvent_reason".}
 proc fcQGraphicsSceneContextMenuEvent_setReason(self: pointer, reason: cint): void {.importc: "QGraphicsSceneContextMenuEvent_setReason".}
+proc fcQGraphicsSceneContextMenuEvent_new(): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new".}
+proc fcQGraphicsSceneContextMenuEvent_new2(typeVal: cint): ptr cQGraphicsSceneContextMenuEvent {.importc: "QGraphicsSceneContextMenuEvent_new2".}
 proc fcQGraphicsSceneContextMenuEvent_delete(self: pointer) {.importc: "QGraphicsSceneContextMenuEvent_delete".}
-proc fcQGraphicsSceneHoverEvent_new(): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
-proc fcQGraphicsSceneHoverEvent_new2(typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
 proc fcQGraphicsSceneHoverEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneHoverEvent_pos".}
 proc fcQGraphicsSceneHoverEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setPos".}
 proc fcQGraphicsSceneHoverEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneHoverEvent_scenePos".}
@@ -147,16 +145,16 @@ proc fcQGraphicsSceneHoverEvent_lastScreenPos(self: pointer, ): pointer {.import
 proc fcQGraphicsSceneHoverEvent_setLastScreenPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHoverEvent_setLastScreenPos".}
 proc fcQGraphicsSceneHoverEvent_modifiers(self: pointer, ): cint {.importc: "QGraphicsSceneHoverEvent_modifiers".}
 proc fcQGraphicsSceneHoverEvent_setModifiers(self: pointer, modifiers: cint): void {.importc: "QGraphicsSceneHoverEvent_setModifiers".}
+proc fcQGraphicsSceneHoverEvent_new(): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new".}
+proc fcQGraphicsSceneHoverEvent_new2(typeVal: cint): ptr cQGraphicsSceneHoverEvent {.importc: "QGraphicsSceneHoverEvent_new2".}
 proc fcQGraphicsSceneHoverEvent_delete(self: pointer) {.importc: "QGraphicsSceneHoverEvent_delete".}
-proc fcQGraphicsSceneHelpEvent_new(): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
-proc fcQGraphicsSceneHelpEvent_new2(typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
 proc fcQGraphicsSceneHelpEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneHelpEvent_scenePos".}
 proc fcQGraphicsSceneHelpEvent_setScenePos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScenePos".}
 proc fcQGraphicsSceneHelpEvent_screenPos(self: pointer, ): pointer {.importc: "QGraphicsSceneHelpEvent_screenPos".}
 proc fcQGraphicsSceneHelpEvent_setScreenPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneHelpEvent_setScreenPos".}
+proc fcQGraphicsSceneHelpEvent_new(): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new".}
+proc fcQGraphicsSceneHelpEvent_new2(typeVal: cint): ptr cQGraphicsSceneHelpEvent {.importc: "QGraphicsSceneHelpEvent_new2".}
 proc fcQGraphicsSceneHelpEvent_delete(self: pointer) {.importc: "QGraphicsSceneHelpEvent_delete".}
-proc fcQGraphicsSceneDragDropEvent_new(): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
-proc fcQGraphicsSceneDragDropEvent_new2(typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
 proc fcQGraphicsSceneDragDropEvent_pos(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_pos".}
 proc fcQGraphicsSceneDragDropEvent_setPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setPos".}
 proc fcQGraphicsSceneDragDropEvent_scenePos(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_scenePos".}
@@ -178,25 +176,21 @@ proc fcQGraphicsSceneDragDropEvent_source(self: pointer, ): pointer {.importc: "
 proc fcQGraphicsSceneDragDropEvent_setSource(self: pointer, source: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setSource".}
 proc fcQGraphicsSceneDragDropEvent_mimeData(self: pointer, ): pointer {.importc: "QGraphicsSceneDragDropEvent_mimeData".}
 proc fcQGraphicsSceneDragDropEvent_setMimeData(self: pointer, data: pointer): void {.importc: "QGraphicsSceneDragDropEvent_setMimeData".}
+proc fcQGraphicsSceneDragDropEvent_new(): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new".}
+proc fcQGraphicsSceneDragDropEvent_new2(typeVal: cint): ptr cQGraphicsSceneDragDropEvent {.importc: "QGraphicsSceneDragDropEvent_new2".}
 proc fcQGraphicsSceneDragDropEvent_delete(self: pointer) {.importc: "QGraphicsSceneDragDropEvent_delete".}
-proc fcQGraphicsSceneResizeEvent_new(): ptr cQGraphicsSceneResizeEvent {.importc: "QGraphicsSceneResizeEvent_new".}
 proc fcQGraphicsSceneResizeEvent_oldSize(self: pointer, ): pointer {.importc: "QGraphicsSceneResizeEvent_oldSize".}
 proc fcQGraphicsSceneResizeEvent_setOldSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setOldSize".}
 proc fcQGraphicsSceneResizeEvent_newSize(self: pointer, ): pointer {.importc: "QGraphicsSceneResizeEvent_newSize".}
 proc fcQGraphicsSceneResizeEvent_setNewSize(self: pointer, size: pointer): void {.importc: "QGraphicsSceneResizeEvent_setNewSize".}
+proc fcQGraphicsSceneResizeEvent_new(): ptr cQGraphicsSceneResizeEvent {.importc: "QGraphicsSceneResizeEvent_new".}
 proc fcQGraphicsSceneResizeEvent_delete(self: pointer) {.importc: "QGraphicsSceneResizeEvent_delete".}
-proc fcQGraphicsSceneMoveEvent_new(): ptr cQGraphicsSceneMoveEvent {.importc: "QGraphicsSceneMoveEvent_new".}
 proc fcQGraphicsSceneMoveEvent_oldPos(self: pointer, ): pointer {.importc: "QGraphicsSceneMoveEvent_oldPos".}
 proc fcQGraphicsSceneMoveEvent_setOldPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMoveEvent_setOldPos".}
 proc fcQGraphicsSceneMoveEvent_newPos(self: pointer, ): pointer {.importc: "QGraphicsSceneMoveEvent_newPos".}
 proc fcQGraphicsSceneMoveEvent_setNewPos(self: pointer, pos: pointer): void {.importc: "QGraphicsSceneMoveEvent_setNewPos".}
+proc fcQGraphicsSceneMoveEvent_new(): ptr cQGraphicsSceneMoveEvent {.importc: "QGraphicsSceneMoveEvent_new".}
 proc fcQGraphicsSceneMoveEvent_delete(self: pointer) {.importc: "QGraphicsSceneMoveEvent_delete".}
-
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent, h: ptr cQGraphicsSceneEvent): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneEvent.init(fcQGraphicsSceneEvent_new(cint(typeVal)))
 
 proc widget*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQGraphicsSceneEvent_widget(self.h))
@@ -204,17 +198,12 @@ proc widget*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, ): gen_qwi
 proc setWidget*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsSceneEvent_setWidget(self.h, widget.h)
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneEvent(h: fcQGraphicsSceneEvent_new(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneEvent) =
   fcQGraphicsSceneEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, h: ptr cQGraphicsSceneMouseEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent.init(fcQGraphicsSceneMouseEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent.init(fcQGraphicsSceneMouseEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMouseEvent_pos(self.h))
 
@@ -299,17 +288,15 @@ proc flags*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, ): cin
 proc setFlags*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent, flags: cint): void =
   fcQGraphicsSceneMouseEvent_setFlags(self.h, cint(flags))
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: fcQGraphicsSceneMouseEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: fcQGraphicsSceneMouseEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent) =
   fcQGraphicsSceneMouseEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, h: ptr cQGraphicsSceneWheelEvent): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent.init(fcQGraphicsSceneWheelEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent.init(fcQGraphicsSceneWheelEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneWheelEvent_pos(self.h))
 
@@ -352,17 +339,15 @@ proc orientation*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, 
 proc setOrientation*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent, orientation: cint): void =
   fcQGraphicsSceneWheelEvent_setOrientation(self.h, cint(orientation))
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: fcQGraphicsSceneWheelEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: fcQGraphicsSceneWheelEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent) =
   fcQGraphicsSceneWheelEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, h: ptr cQGraphicsSceneContextMenuEvent): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent.init(fcQGraphicsSceneContextMenuEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent.init(fcQGraphicsSceneContextMenuEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneContextMenuEvent_pos(self.h))
 
@@ -393,17 +378,15 @@ proc reason*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
 proc setReason*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent, reason: cint): void =
   fcQGraphicsSceneContextMenuEvent_setReason(self.h, cint(reason))
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: fcQGraphicsSceneContextMenuEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: fcQGraphicsSceneContextMenuEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent) =
   fcQGraphicsSceneContextMenuEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, h: ptr cQGraphicsSceneHoverEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent.init(fcQGraphicsSceneHoverEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent.init(fcQGraphicsSceneHoverEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHoverEvent_pos(self.h))
 
@@ -446,17 +429,15 @@ proc modifiers*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, ):
 proc setModifiers*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent, modifiers: cint): void =
   fcQGraphicsSceneHoverEvent_setModifiers(self.h, cint(modifiers))
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: fcQGraphicsSceneHoverEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: fcQGraphicsSceneHoverEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent) =
   fcQGraphicsSceneHoverEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, h: ptr cQGraphicsSceneHelpEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent.init(fcQGraphicsSceneHelpEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent.init(fcQGraphicsSceneHelpEvent_new2(cint(typeVal)))
-
 proc scenePos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneHelpEvent_scenePos(self.h))
 
@@ -469,17 +450,15 @@ proc screenPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, ): 
 proc setScreenPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent, pos: gen_qpoint_types.QPoint): void =
   fcQGraphicsSceneHelpEvent_setScreenPos(self.h, pos.h)
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: fcQGraphicsSceneHelpEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent(h: fcQGraphicsSceneHelpEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneHelpEvent) =
   fcQGraphicsSceneHelpEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, h: ptr cQGraphicsSceneDragDropEvent): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent.init(fcQGraphicsSceneDragDropEvent_new())
-
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent.init(fcQGraphicsSceneDragDropEvent_new2(cint(typeVal)))
-
 proc pos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneDragDropEvent_pos(self.h))
 
@@ -543,14 +522,15 @@ proc mimeData*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, 
 proc setMimeData*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent, data: gen_qmimedata_types.QMimeData): void =
   fcQGraphicsSceneDragDropEvent_setMimeData(self.h, data.h)
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: fcQGraphicsSceneDragDropEvent_new())
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent,
+    typeVal: cint): gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: fcQGraphicsSceneDragDropEvent_new2(cint(typeVal)))
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent) =
   fcQGraphicsSceneDragDropEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, h: ptr cQGraphicsSceneResizeEvent): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent.init(fcQGraphicsSceneResizeEvent_new())
-
 proc oldSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQGraphicsSceneResizeEvent_oldSize(self.h))
 
@@ -563,14 +543,11 @@ proc newSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, ): 
 proc setNewSize*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent, size: gen_qsize_types.QSizeF): void =
   fcQGraphicsSceneResizeEvent_setNewSize(self.h, size.h)
 
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent): gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: fcQGraphicsSceneResizeEvent_new())
+
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent) =
   fcQGraphicsSceneResizeEvent_delete(self.h)
-
-func init*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, h: ptr cQGraphicsSceneMoveEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
-  T(h: h)
-proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
-  gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent.init(fcQGraphicsSceneMoveEvent_new())
-
 proc oldPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQGraphicsSceneMoveEvent_oldPos(self.h))
 
@@ -582,6 +559,9 @@ proc newPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, ): gen
 
 proc setNewPos*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent, pos: gen_qpoint_types.QPointF): void =
   fcQGraphicsSceneMoveEvent_setNewPos(self.h, pos.h)
+
+proc create*(T: type gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent =
+  gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: fcQGraphicsSceneMoveEvent_new())
 
 proc delete*(self: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent) =
   fcQGraphicsSceneMoveEvent_delete(self.h)

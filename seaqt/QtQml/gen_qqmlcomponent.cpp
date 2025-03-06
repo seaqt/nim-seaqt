@@ -26,283 +26,226 @@ extern "C" {
 
 void miqt_exec_callback_QQmlComponent_statusChanged(intptr_t, int);
 void miqt_exec_callback_QQmlComponent_progressChanged(intptr_t, double);
-QMetaObject* miqt_exec_callback_QQmlComponent_metaObject(const QQmlComponent*, intptr_t);
-void* miqt_exec_callback_QQmlComponent_metacast(QQmlComponent*, intptr_t, const char*);
-int miqt_exec_callback_QQmlComponent_metacall(QQmlComponent*, intptr_t, int, int, void**);
-QObject* miqt_exec_callback_QQmlComponent_create(QQmlComponent*, intptr_t, QQmlContext*);
-QObject* miqt_exec_callback_QQmlComponent_beginCreate(QQmlComponent*, intptr_t, QQmlContext*);
-void miqt_exec_callback_QQmlComponent_completeCreate(QQmlComponent*, intptr_t);
-bool miqt_exec_callback_QQmlComponent_event(QQmlComponent*, intptr_t, QEvent*);
-bool miqt_exec_callback_QQmlComponent_eventFilter(QQmlComponent*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QQmlComponent_timerEvent(QQmlComponent*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QQmlComponent_childEvent(QQmlComponent*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QQmlComponent_customEvent(QQmlComponent*, intptr_t, QEvent*);
-void miqt_exec_callback_QQmlComponent_connectNotify(QQmlComponent*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QQmlComponent_disconnectNotify(QQmlComponent*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQQmlComponent final : public QQmlComponent {
+	struct QQmlComponent_VTable* vtbl;
 public:
 
-	VirtualQQmlComponent(): QQmlComponent() {};
-	VirtualQQmlComponent(QQmlEngine* param1): QQmlComponent(param1) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QString& fileName): QQmlComponent(param1, fileName) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QString& fileName, QQmlComponent::CompilationMode mode): QQmlComponent(param1, fileName, mode) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QUrl& url): QQmlComponent(param1, url) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QUrl& url, QQmlComponent::CompilationMode mode): QQmlComponent(param1, url, mode) {};
-	VirtualQQmlComponent(QObject* parent): QQmlComponent(parent) {};
-	VirtualQQmlComponent(QQmlEngine* param1, QObject* parent): QQmlComponent(param1, parent) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QString& fileName, QObject* parent): QQmlComponent(param1, fileName, parent) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QString& fileName, QQmlComponent::CompilationMode mode, QObject* parent): QQmlComponent(param1, fileName, mode, parent) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QUrl& url, QObject* parent): QQmlComponent(param1, url, parent) {};
-	VirtualQQmlComponent(QQmlEngine* param1, const QUrl& url, QQmlComponent::CompilationMode mode, QObject* parent): QQmlComponent(param1, url, mode, parent) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl): QQmlComponent(), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1): QQmlComponent(param1), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QString& fileName): QQmlComponent(param1, fileName), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QString& fileName, QQmlComponent::CompilationMode mode): QQmlComponent(param1, fileName, mode), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QUrl& url): QQmlComponent(param1, url), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QUrl& url, QQmlComponent::CompilationMode mode): QQmlComponent(param1, url, mode), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QObject* parent): QQmlComponent(parent), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QObject* parent): QQmlComponent(param1, parent), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QString& fileName, QObject* parent): QQmlComponent(param1, fileName, parent), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QString& fileName, QQmlComponent::CompilationMode mode, QObject* parent): QQmlComponent(param1, fileName, mode, parent), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QUrl& url, QObject* parent): QQmlComponent(param1, url, parent), vtbl(vtbl) {};
+	VirtualQQmlComponent(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, const QUrl& url, QQmlComponent::CompilationMode mode, QObject* parent): QQmlComponent(param1, url, mode, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQQmlComponent() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQQmlComponent() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QQmlComponent::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QQmlComponent_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QQmlComponent_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QQmlComponent::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QQmlComponent_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QQmlComponent_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QQmlComponent::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QQmlComponent_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QQmlComponent_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__create = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QObject* create(QQmlContext* context) override {
-		if (handle__create == 0) {
+		if (vtbl->create == 0) {
 			return QQmlComponent::create(context);
 		}
-		
+
 		QQmlContext* sigval1 = context;
 
-		QObject* callback_return_value = miqt_exec_callback_QQmlComponent_create(this, handle__create, sigval1);
+		QObject* callback_return_value = vtbl->create(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QObject* QQmlComponent_virtualbase_create(void* self, QQmlContext* context);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__beginCreate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QObject* beginCreate(QQmlContext* param1) override {
-		if (handle__beginCreate == 0) {
+		if (vtbl->beginCreate == 0) {
 			return QQmlComponent::beginCreate(param1);
 		}
-		
+
 		QQmlContext* sigval1 = param1;
 
-		QObject* callback_return_value = miqt_exec_callback_QQmlComponent_beginCreate(this, handle__beginCreate, sigval1);
+		QObject* callback_return_value = vtbl->beginCreate(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QObject* QQmlComponent_virtualbase_beginCreate(void* self, QQmlContext* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__completeCreate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void completeCreate() override {
-		if (handle__completeCreate == 0) {
+		if (vtbl->completeCreate == 0) {
 			QQmlComponent::completeCreate();
 			return;
 		}
-		
 
-		miqt_exec_callback_QQmlComponent_completeCreate(this, handle__completeCreate);
 
-		
+		vtbl->completeCreate(vtbl, this);
+
 	}
 
 	friend void QQmlComponent_virtualbase_completeCreate(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QQmlComponent::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQmlComponent_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QQmlComponent_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QQmlComponent::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQmlComponent_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QQmlComponent_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QQmlComponent::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QQmlComponent_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQmlComponent_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QQmlComponent::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QQmlComponent_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQmlComponent_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QQmlComponent::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QQmlComponent_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQmlComponent_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QQmlComponent::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQmlComponent_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQmlComponent_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QQmlComponent::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQmlComponent_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQmlComponent_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -314,56 +257,56 @@ public:
 	friend bool QQmlComponent_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QQmlComponent* QQmlComponent_new() {
-	return new VirtualQQmlComponent();
+QQmlComponent* QQmlComponent_new(struct QQmlComponent_VTable* vtbl) {
+	return new VirtualQQmlComponent(vtbl);
 }
 
-QQmlComponent* QQmlComponent_new2(QQmlEngine* param1) {
-	return new VirtualQQmlComponent(param1);
+QQmlComponent* QQmlComponent_new2(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1) {
+	return new VirtualQQmlComponent(vtbl, param1);
 }
 
-QQmlComponent* QQmlComponent_new3(QQmlEngine* param1, struct miqt_string fileName) {
+QQmlComponent* QQmlComponent_new3(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQQmlComponent(param1, fileName_QString);
+	return new VirtualQQmlComponent(vtbl, param1, fileName_QString);
 }
 
-QQmlComponent* QQmlComponent_new4(QQmlEngine* param1, struct miqt_string fileName, int mode) {
+QQmlComponent* QQmlComponent_new4(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, struct miqt_string fileName, int mode) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQQmlComponent(param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode));
+	return new VirtualQQmlComponent(vtbl, param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode));
 }
 
-QQmlComponent* QQmlComponent_new5(QQmlEngine* param1, QUrl* url) {
-	return new VirtualQQmlComponent(param1, *url);
+QQmlComponent* QQmlComponent_new5(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QUrl* url) {
+	return new VirtualQQmlComponent(vtbl, param1, *url);
 }
 
-QQmlComponent* QQmlComponent_new6(QQmlEngine* param1, QUrl* url, int mode) {
-	return new VirtualQQmlComponent(param1, *url, static_cast<QQmlComponent::CompilationMode>(mode));
+QQmlComponent* QQmlComponent_new6(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QUrl* url, int mode) {
+	return new VirtualQQmlComponent(vtbl, param1, *url, static_cast<QQmlComponent::CompilationMode>(mode));
 }
 
-QQmlComponent* QQmlComponent_new7(QObject* parent) {
-	return new VirtualQQmlComponent(parent);
+QQmlComponent* QQmlComponent_new7(struct QQmlComponent_VTable* vtbl, QObject* parent) {
+	return new VirtualQQmlComponent(vtbl, parent);
 }
 
-QQmlComponent* QQmlComponent_new8(QQmlEngine* param1, QObject* parent) {
-	return new VirtualQQmlComponent(param1, parent);
+QQmlComponent* QQmlComponent_new8(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QObject* parent) {
+	return new VirtualQQmlComponent(vtbl, param1, parent);
 }
 
-QQmlComponent* QQmlComponent_new9(QQmlEngine* param1, struct miqt_string fileName, QObject* parent) {
+QQmlComponent* QQmlComponent_new9(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, struct miqt_string fileName, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQQmlComponent(param1, fileName_QString, parent);
+	return new VirtualQQmlComponent(vtbl, param1, fileName_QString, parent);
 }
 
-QQmlComponent* QQmlComponent_new10(QQmlEngine* param1, struct miqt_string fileName, int mode, QObject* parent) {
+QQmlComponent* QQmlComponent_new10(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, struct miqt_string fileName, int mode, QObject* parent) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQQmlComponent(param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode), parent);
+	return new VirtualQQmlComponent(vtbl, param1, fileName_QString, static_cast<QQmlComponent::CompilationMode>(mode), parent);
 }
 
-QQmlComponent* QQmlComponent_new11(QQmlEngine* param1, QUrl* url, QObject* parent) {
-	return new VirtualQQmlComponent(param1, *url, parent);
+QQmlComponent* QQmlComponent_new11(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QUrl* url, QObject* parent) {
+	return new VirtualQQmlComponent(vtbl, param1, *url, parent);
 }
 
-QQmlComponent* QQmlComponent_new12(QQmlEngine* param1, QUrl* url, int mode, QObject* parent) {
-	return new VirtualQQmlComponent(param1, *url, static_cast<QQmlComponent::CompilationMode>(mode), parent);
+QQmlComponent* QQmlComponent_new12(struct QQmlComponent_VTable* vtbl, QQmlEngine* param1, QUrl* url, int mode, QObject* parent) {
+	return new VirtualQQmlComponent(vtbl, param1, *url, static_cast<QQmlComponent::CompilationMode>(mode), parent);
 }
 
 void QQmlComponent_virtbase(QQmlComponent* src, QObject** outptr_QObject) {
@@ -604,30 +547,10 @@ void QQmlComponent_create3(QQmlComponent* self, QQmlIncubator* param1, QQmlConte
 	self->create(*param1, context, forContext);
 }
 
-bool QQmlComponent_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QQmlComponent_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQQmlComponent*)(self) )->QQmlComponent::metaObject();
 
-}
-
-bool QQmlComponent_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QQmlComponent_virtualbase_metacast(void* self, const char* param1) {
@@ -636,30 +559,10 @@ void* QQmlComponent_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QQmlComponent_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QQmlComponent_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQQmlComponent*)(self) )->QQmlComponent::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QQmlComponent_override_virtual_create(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__create = slot;
-	return true;
 }
 
 QObject* QQmlComponent_virtualbase_create(void* self, QQmlContext* context) {
@@ -668,30 +571,10 @@ QObject* QQmlComponent_virtualbase_create(void* self, QQmlContext* context) {
 
 }
 
-bool QQmlComponent_override_virtual_beginCreate(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__beginCreate = slot;
-	return true;
-}
-
 QObject* QQmlComponent_virtualbase_beginCreate(void* self, QQmlContext* param1) {
 
 	return ( (VirtualQQmlComponent*)(self) )->QQmlComponent::beginCreate(param1);
 
-}
-
-bool QQmlComponent_override_virtual_completeCreate(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__completeCreate = slot;
-	return true;
 }
 
 void QQmlComponent_virtualbase_completeCreate(void* self) {
@@ -700,30 +583,10 @@ void QQmlComponent_virtualbase_completeCreate(void* self) {
 
 }
 
-bool QQmlComponent_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QQmlComponent_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQQmlComponent*)(self) )->QQmlComponent::event(event);
 
-}
-
-bool QQmlComponent_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QQmlComponent_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -732,30 +595,10 @@ bool QQmlComponent_virtualbase_eventFilter(void* self, QObject* watched, QEvent*
 
 }
 
-bool QQmlComponent_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QQmlComponent_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQQmlComponent*)(self) )->QQmlComponent::timerEvent(event);
 
-}
-
-bool QQmlComponent_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QQmlComponent_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -764,46 +607,16 @@ void QQmlComponent_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QQmlComponent_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QQmlComponent_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQQmlComponent*)(self) )->QQmlComponent::customEvent(event);
 
 }
 
-bool QQmlComponent_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QQmlComponent_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQQmlComponent*)(self) )->QQmlComponent::connectNotify(*signal);
 
-}
-
-bool QQmlComponent_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQQmlComponent* self_cast = dynamic_cast<VirtualQQmlComponent*>( (QQmlComponent*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QQmlComponent_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

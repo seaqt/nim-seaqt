@@ -80,8 +80,6 @@ export
 
 type cQQuickPaintedItem*{.exportc: "QQuickPaintedItem", incompleteStruct.} = object
 
-proc fcQQuickPaintedItem_new(): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new".}
-proc fcQQuickPaintedItem_new2(parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new2".}
 proc fcQQuickPaintedItem_metaObject(self: pointer, ): pointer {.importc: "QQuickPaintedItem_metaObject".}
 proc fcQQuickPaintedItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickPaintedItem_metacast".}
 proc fcQQuickPaintedItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickPaintedItem_metacall".}
@@ -128,108 +126,103 @@ proc fcQQuickPaintedItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.i
 proc fcQQuickPaintedItem_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickPaintedItem_trUtf83".}
 proc fcQQuickPaintedItem_update1(self: pointer, rect: pointer): void {.importc: "QQuickPaintedItem_update1".}
 proc fcQQuickPaintedItem_setPerformanceHint2(self: pointer, hint: cint, enabled: bool): void {.importc: "QQuickPaintedItem_setPerformanceHint2".}
-proc fQQuickPaintedItem_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickPaintedItem_virtualbase_metaObject".}
-proc fcQQuickPaintedItem_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_metaObject".}
-proc fQQuickPaintedItem_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickPaintedItem_virtualbase_metacast".}
-proc fcQQuickPaintedItem_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_metacast".}
-proc fQQuickPaintedItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickPaintedItem_virtualbase_metacall".}
-proc fcQQuickPaintedItem_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_metacall".}
-proc fcQQuickPaintedItem_override_virtual_paint(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_paint".}
-proc fQQuickPaintedItem_virtualbase_isTextureProvider(self: pointer, ): bool{.importc: "QQuickPaintedItem_virtualbase_isTextureProvider".}
-proc fcQQuickPaintedItem_override_virtual_isTextureProvider(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_isTextureProvider".}
-proc fQQuickPaintedItem_virtualbase_textureProvider(self: pointer, ): pointer{.importc: "QQuickPaintedItem_virtualbase_textureProvider".}
-proc fcQQuickPaintedItem_override_virtual_textureProvider(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_textureProvider".}
-proc fQQuickPaintedItem_virtualbase_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer{.importc: "QQuickPaintedItem_virtualbase_updatePaintNode".}
-proc fcQQuickPaintedItem_override_virtual_updatePaintNode(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_updatePaintNode".}
-proc fQQuickPaintedItem_virtualbase_releaseResources(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_releaseResources".}
-proc fcQQuickPaintedItem_override_virtual_releaseResources(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_releaseResources".}
-proc fQQuickPaintedItem_virtualbase_itemChange(self: pointer, param1: cint, param2: pointer): void{.importc: "QQuickPaintedItem_virtualbase_itemChange".}
-proc fcQQuickPaintedItem_override_virtual_itemChange(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_itemChange".}
-proc fQQuickPaintedItem_virtualbase_boundingRect(self: pointer, ): pointer{.importc: "QQuickPaintedItem_virtualbase_boundingRect".}
-proc fcQQuickPaintedItem_override_virtual_boundingRect(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_boundingRect".}
-proc fQQuickPaintedItem_virtualbase_clipRect(self: pointer, ): pointer{.importc: "QQuickPaintedItem_virtualbase_clipRect".}
-proc fcQQuickPaintedItem_override_virtual_clipRect(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_clipRect".}
-proc fQQuickPaintedItem_virtualbase_contains(self: pointer, point: pointer): bool{.importc: "QQuickPaintedItem_virtualbase_contains".}
-proc fcQQuickPaintedItem_override_virtual_contains(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_contains".}
-proc fQQuickPaintedItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer{.importc: "QQuickPaintedItem_virtualbase_inputMethodQuery".}
-proc fcQQuickPaintedItem_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_inputMethodQuery".}
-proc fQQuickPaintedItem_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QQuickPaintedItem_virtualbase_event".}
-proc fcQQuickPaintedItem_override_virtual_event(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_event".}
-proc fQQuickPaintedItem_virtualbase_classBegin(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_classBegin".}
-proc fcQQuickPaintedItem_override_virtual_classBegin(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_classBegin".}
-proc fQQuickPaintedItem_virtualbase_componentComplete(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_componentComplete".}
-proc fcQQuickPaintedItem_override_virtual_componentComplete(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_componentComplete".}
-proc fQQuickPaintedItem_virtualbase_keyPressEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_keyPressEvent".}
-proc fcQQuickPaintedItem_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_keyPressEvent".}
-proc fQQuickPaintedItem_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_keyReleaseEvent".}
-proc fcQQuickPaintedItem_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_keyReleaseEvent".}
-proc fQQuickPaintedItem_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_inputMethodEvent".}
-proc fcQQuickPaintedItem_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_inputMethodEvent".}
-proc fQQuickPaintedItem_virtualbase_focusInEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_focusInEvent".}
-proc fcQQuickPaintedItem_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_focusInEvent".}
-proc fQQuickPaintedItem_virtualbase_focusOutEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_focusOutEvent".}
-proc fcQQuickPaintedItem_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_focusOutEvent".}
-proc fQQuickPaintedItem_virtualbase_mousePressEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_mousePressEvent".}
-proc fcQQuickPaintedItem_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_mousePressEvent".}
-proc fQQuickPaintedItem_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_mouseMoveEvent".}
-proc fcQQuickPaintedItem_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_mouseMoveEvent".}
-proc fQQuickPaintedItem_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_mouseReleaseEvent".}
-proc fcQQuickPaintedItem_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_mouseReleaseEvent".}
-proc fQQuickPaintedItem_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_mouseDoubleClickEvent".}
-proc fcQQuickPaintedItem_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_mouseDoubleClickEvent".}
-proc fQQuickPaintedItem_virtualbase_mouseUngrabEvent(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_mouseUngrabEvent".}
-proc fcQQuickPaintedItem_override_virtual_mouseUngrabEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_mouseUngrabEvent".}
-proc fQQuickPaintedItem_virtualbase_touchUngrabEvent(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_touchUngrabEvent".}
-proc fcQQuickPaintedItem_override_virtual_touchUngrabEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_touchUngrabEvent".}
-proc fQQuickPaintedItem_virtualbase_wheelEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_wheelEvent".}
-proc fcQQuickPaintedItem_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_wheelEvent".}
-proc fQQuickPaintedItem_virtualbase_touchEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_touchEvent".}
-proc fcQQuickPaintedItem_override_virtual_touchEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_touchEvent".}
-proc fQQuickPaintedItem_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_hoverEnterEvent".}
-proc fcQQuickPaintedItem_override_virtual_hoverEnterEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_hoverEnterEvent".}
-proc fQQuickPaintedItem_virtualbase_hoverMoveEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_hoverMoveEvent".}
-proc fcQQuickPaintedItem_override_virtual_hoverMoveEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_hoverMoveEvent".}
-proc fQQuickPaintedItem_virtualbase_hoverLeaveEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_hoverLeaveEvent".}
-proc fcQQuickPaintedItem_override_virtual_hoverLeaveEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_hoverLeaveEvent".}
-proc fQQuickPaintedItem_virtualbase_dragEnterEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_dragEnterEvent".}
-proc fcQQuickPaintedItem_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_dragEnterEvent".}
-proc fQQuickPaintedItem_virtualbase_dragMoveEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_dragMoveEvent".}
-proc fcQQuickPaintedItem_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_dragMoveEvent".}
-proc fQQuickPaintedItem_virtualbase_dragLeaveEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_dragLeaveEvent".}
-proc fcQQuickPaintedItem_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_dragLeaveEvent".}
-proc fQQuickPaintedItem_virtualbase_dropEvent(self: pointer, param1: pointer): void{.importc: "QQuickPaintedItem_virtualbase_dropEvent".}
-proc fcQQuickPaintedItem_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_dropEvent".}
-proc fQQuickPaintedItem_virtualbase_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool{.importc: "QQuickPaintedItem_virtualbase_childMouseEventFilter".}
-proc fcQQuickPaintedItem_override_virtual_childMouseEventFilter(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_childMouseEventFilter".}
-proc fQQuickPaintedItem_virtualbase_windowDeactivateEvent(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_windowDeactivateEvent".}
-proc fcQQuickPaintedItem_override_virtual_windowDeactivateEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_windowDeactivateEvent".}
-proc fQQuickPaintedItem_virtualbase_geometryChanged(self: pointer, newGeometry: pointer, oldGeometry: pointer): void{.importc: "QQuickPaintedItem_virtualbase_geometryChanged".}
-proc fcQQuickPaintedItem_override_virtual_geometryChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_geometryChanged".}
-proc fQQuickPaintedItem_virtualbase_updatePolish(self: pointer, ): void{.importc: "QQuickPaintedItem_virtualbase_updatePolish".}
-proc fcQQuickPaintedItem_override_virtual_updatePolish(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_updatePolish".}
-proc fQQuickPaintedItem_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQuickPaintedItem_virtualbase_eventFilter".}
-proc fcQQuickPaintedItem_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_eventFilter".}
-proc fQQuickPaintedItem_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_timerEvent".}
-proc fcQQuickPaintedItem_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_timerEvent".}
-proc fQQuickPaintedItem_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_childEvent".}
-proc fcQQuickPaintedItem_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_childEvent".}
-proc fQQuickPaintedItem_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QQuickPaintedItem_virtualbase_customEvent".}
-proc fcQQuickPaintedItem_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_customEvent".}
-proc fQQuickPaintedItem_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QQuickPaintedItem_virtualbase_connectNotify".}
-proc fcQQuickPaintedItem_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_connectNotify".}
-proc fQQuickPaintedItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickPaintedItem_virtualbase_disconnectNotify".}
-proc fcQQuickPaintedItem_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickPaintedItem_override_virtual_disconnectNotify".}
+type cQQuickPaintedItemVTable = object
+  destructor*: proc(vtbl: ptr cQQuickPaintedItemVTable, self: ptr cQQuickPaintedItem) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  paint*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  isTextureProvider*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  textureProvider*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  updatePaintNode*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  releaseResources*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  itemChange*: proc(vtbl, self: pointer, param1: cint, param2: pointer): void {.cdecl, raises: [], gcsafe.}
+  boundingRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  clipRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  contains*: proc(vtbl, self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  classBegin*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  componentComplete*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseUngrabEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  touchUngrabEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  touchEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  childMouseEventFilter*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  windowDeactivateEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  geometryChanged*: proc(vtbl, self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl, raises: [], gcsafe.}
+  updatePolish*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQuickPaintedItem_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQuickPaintedItem_virtualbase_metaObject".}
+proc fcQQuickPaintedItem_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickPaintedItem_virtualbase_metacast".}
+proc fcQQuickPaintedItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickPaintedItem_virtualbase_metacall".}
+proc fcQQuickPaintedItem_virtualbase_isTextureProvider(self: pointer, ): bool {.importc: "QQuickPaintedItem_virtualbase_isTextureProvider".}
+proc fcQQuickPaintedItem_virtualbase_textureProvider(self: pointer, ): pointer {.importc: "QQuickPaintedItem_virtualbase_textureProvider".}
+proc fcQQuickPaintedItem_virtualbase_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QQuickPaintedItem_virtualbase_updatePaintNode".}
+proc fcQQuickPaintedItem_virtualbase_releaseResources(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_releaseResources".}
+proc fcQQuickPaintedItem_virtualbase_itemChange(self: pointer, param1: cint, param2: pointer): void {.importc: "QQuickPaintedItem_virtualbase_itemChange".}
+proc fcQQuickPaintedItem_virtualbase_boundingRect(self: pointer, ): pointer {.importc: "QQuickPaintedItem_virtualbase_boundingRect".}
+proc fcQQuickPaintedItem_virtualbase_clipRect(self: pointer, ): pointer {.importc: "QQuickPaintedItem_virtualbase_clipRect".}
+proc fcQQuickPaintedItem_virtualbase_contains(self: pointer, point: pointer): bool {.importc: "QQuickPaintedItem_virtualbase_contains".}
+proc fcQQuickPaintedItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QQuickPaintedItem_virtualbase_inputMethodQuery".}
+proc fcQQuickPaintedItem_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QQuickPaintedItem_virtualbase_event".}
+proc fcQQuickPaintedItem_virtualbase_classBegin(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_classBegin".}
+proc fcQQuickPaintedItem_virtualbase_componentComplete(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_componentComplete".}
+proc fcQQuickPaintedItem_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_keyPressEvent".}
+proc fcQQuickPaintedItem_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_keyReleaseEvent".}
+proc fcQQuickPaintedItem_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_inputMethodEvent".}
+proc fcQQuickPaintedItem_virtualbase_focusInEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_focusInEvent".}
+proc fcQQuickPaintedItem_virtualbase_focusOutEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_focusOutEvent".}
+proc fcQQuickPaintedItem_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_mousePressEvent".}
+proc fcQQuickPaintedItem_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_mouseMoveEvent".}
+proc fcQQuickPaintedItem_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_mouseReleaseEvent".}
+proc fcQQuickPaintedItem_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_mouseDoubleClickEvent".}
+proc fcQQuickPaintedItem_virtualbase_mouseUngrabEvent(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_mouseUngrabEvent".}
+proc fcQQuickPaintedItem_virtualbase_touchUngrabEvent(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_touchUngrabEvent".}
+proc fcQQuickPaintedItem_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_wheelEvent".}
+proc fcQQuickPaintedItem_virtualbase_touchEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_touchEvent".}
+proc fcQQuickPaintedItem_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_hoverEnterEvent".}
+proc fcQQuickPaintedItem_virtualbase_hoverMoveEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_hoverMoveEvent".}
+proc fcQQuickPaintedItem_virtualbase_hoverLeaveEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_hoverLeaveEvent".}
+proc fcQQuickPaintedItem_virtualbase_dragEnterEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_dragEnterEvent".}
+proc fcQQuickPaintedItem_virtualbase_dragMoveEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_dragMoveEvent".}
+proc fcQQuickPaintedItem_virtualbase_dragLeaveEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_dragLeaveEvent".}
+proc fcQQuickPaintedItem_virtualbase_dropEvent(self: pointer, param1: pointer): void {.importc: "QQuickPaintedItem_virtualbase_dropEvent".}
+proc fcQQuickPaintedItem_virtualbase_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QQuickPaintedItem_virtualbase_childMouseEventFilter".}
+proc fcQQuickPaintedItem_virtualbase_windowDeactivateEvent(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_windowDeactivateEvent".}
+proc fcQQuickPaintedItem_virtualbase_geometryChanged(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.importc: "QQuickPaintedItem_virtualbase_geometryChanged".}
+proc fcQQuickPaintedItem_virtualbase_updatePolish(self: pointer, ): void {.importc: "QQuickPaintedItem_virtualbase_updatePolish".}
+proc fcQQuickPaintedItem_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QQuickPaintedItem_virtualbase_eventFilter".}
+proc fcQQuickPaintedItem_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_timerEvent".}
+proc fcQQuickPaintedItem_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_childEvent".}
+proc fcQQuickPaintedItem_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickPaintedItem_virtualbase_customEvent".}
+proc fcQQuickPaintedItem_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickPaintedItem_virtualbase_connectNotify".}
+proc fcQQuickPaintedItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickPaintedItem_virtualbase_disconnectNotify".}
+proc fcQQuickPaintedItem_new(vtbl: pointer, ): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new".}
+proc fcQQuickPaintedItem_new2(vtbl: pointer, parent: pointer): ptr cQQuickPaintedItem {.importc: "QQuickPaintedItem_new2".}
 proc fcQQuickPaintedItem_staticMetaObject(): pointer {.importc: "QQuickPaintedItem_staticMetaObject".}
 proc fcQQuickPaintedItem_delete(self: pointer) {.importc: "QQuickPaintedItem_delete".}
-
-
-func init*(T: type gen_qquickpainteditem_types.QQuickPaintedItem, h: ptr cQQuickPaintedItem): gen_qquickpainteditem_types.QQuickPaintedItem =
-  T(h: h)
-proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qquickpainteditem_types.QQuickPaintedItem =
-  gen_qquickpainteditem_types.QQuickPaintedItem.init(fcQQuickPaintedItem_new())
-
-proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem, parent: gen_qquickitem_types.QQuickItem): gen_qquickpainteditem_types.QQuickPaintedItem =
-  gen_qquickpainteditem_types.QQuickPaintedItem.init(fcQQuickPaintedItem_new2(parent.h))
 
 proc metaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_metaObject(self.h))
@@ -331,7 +324,7 @@ proc fillColorChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): v
   fcQQuickPaintedItem_fillColorChanged(self.h)
 
 type QQuickPaintedItemfillColorChangedSlot* = proc()
-proc miqt_exec_callback_QQuickPaintedItem_fillColorChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickPaintedItem_fillColorChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_fillColorChanged".} =
   let nimfunc = cast[ptr QQuickPaintedItemfillColorChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -345,7 +338,7 @@ proc contentsSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, )
   fcQQuickPaintedItem_contentsSizeChanged(self.h)
 
 type QQuickPaintedItemcontentsSizeChangedSlot* = proc()
-proc miqt_exec_callback_QQuickPaintedItem_contentsSizeChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_contentsSizeChanged".} =
   let nimfunc = cast[ptr QQuickPaintedItemcontentsSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -359,7 +352,7 @@ proc contentsScaleChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, 
   fcQQuickPaintedItem_contentsScaleChanged(self.h)
 
 type QQuickPaintedItemcontentsScaleChangedSlot* = proc()
-proc miqt_exec_callback_QQuickPaintedItem_contentsScaleChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_contentsScaleChanged".} =
   let nimfunc = cast[ptr QQuickPaintedItemcontentsScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -373,7 +366,7 @@ proc renderTargetChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, )
   fcQQuickPaintedItem_renderTargetChanged(self.h)
 
 type QQuickPaintedItemrenderTargetChangedSlot* = proc()
-proc miqt_exec_callback_QQuickPaintedItem_renderTargetChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_renderTargetChanged".} =
   let nimfunc = cast[ptr QQuickPaintedItemrenderTargetChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -387,7 +380,7 @@ proc textureSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ):
   fcQQuickPaintedItem_textureSizeChanged(self.h)
 
 type QQuickPaintedItemtextureSizeChangedSlot* = proc()
-proc miqt_exec_callback_QQuickPaintedItem_textureSizeChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_textureSizeChanged".} =
   let nimfunc = cast[ptr QQuickPaintedItemtextureSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -427,801 +420,722 @@ proc update*(self: gen_qquickpainteditem_types.QQuickPaintedItem, rect: gen_qrec
 proc setPerformanceHint*(self: gen_qquickpainteditem_types.QQuickPaintedItem, hint: cint, enabled: bool): void =
   fcQQuickPaintedItem_setPerformanceHint2(self.h, cint(hint), enabled)
 
+type QQuickPaintedItemmetaObjectProc* = proc(self: QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QQuickPaintedItemmetacastProc* = proc(self: QQuickPaintedItem, param1: cstring): pointer {.raises: [], gcsafe.}
+type QQuickPaintedItemmetacallProc* = proc(self: QQuickPaintedItem, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QQuickPaintedItempaintProc* = proc(self: QQuickPaintedItem, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QQuickPaintedItemisTextureProviderProc* = proc(self: QQuickPaintedItem): bool {.raises: [], gcsafe.}
+type QQuickPaintedItemtextureProviderProc* = proc(self: QQuickPaintedItem): gen_qsgtextureprovider_types.QSGTextureProvider {.raises: [], gcsafe.}
+type QQuickPaintedItemupdatePaintNodeProc* = proc(self: QQuickPaintedItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode {.raises: [], gcsafe.}
+type QQuickPaintedItemreleaseResourcesProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemitemChangeProc* = proc(self: QQuickPaintedItem, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void {.raises: [], gcsafe.}
+type QQuickPaintedItemboundingRectProc* = proc(self: QQuickPaintedItem): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QQuickPaintedItemclipRectProc* = proc(self: QQuickPaintedItem): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QQuickPaintedItemcontainsProc* = proc(self: QQuickPaintedItem, point: gen_qpoint_types.QPointF): bool {.raises: [], gcsafe.}
+type QQuickPaintedIteminputMethodQueryProc* = proc(self: QQuickPaintedItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QQuickPaintedItemeventProc* = proc(self: QQuickPaintedItem, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQuickPaintedItemclassBeginProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemcomponentCompleteProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemkeyPressEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemkeyReleaseEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedIteminputMethodEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemfocusInEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemfocusOutEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemmousePressEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemmouseMoveEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemmouseReleaseEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemmouseDoubleClickEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemmouseUngrabEventProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemtouchUngrabEventProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemwheelEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemtouchEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemhoverEnterEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemhoverMoveEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemhoverLeaveEventProc* = proc(self: QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemdragEnterEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemdragMoveEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemdragLeaveEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemdropEventProc* = proc(self: QQuickPaintedItem, param1: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemchildMouseEventFilterProc* = proc(self: QQuickPaintedItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQuickPaintedItemwindowDeactivateEventProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemgeometryChangedProc* = proc(self: QQuickPaintedItem, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void {.raises: [], gcsafe.}
+type QQuickPaintedItemupdatePolishProc* = proc(self: QQuickPaintedItem): void {.raises: [], gcsafe.}
+type QQuickPaintedItemeventFilterProc* = proc(self: QQuickPaintedItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQuickPaintedItemtimerEventProc* = proc(self: QQuickPaintedItem, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemchildEventProc* = proc(self: QQuickPaintedItem, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemcustomEventProc* = proc(self: QQuickPaintedItem, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QQuickPaintedItemconnectNotifyProc* = proc(self: QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQuickPaintedItemdisconnectNotifyProc* = proc(self: QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQuickPaintedItemVTable* = object
+  vtbl: cQQuickPaintedItemVTable
+  metaObject*: QQuickPaintedItemmetaObjectProc
+  metacast*: QQuickPaintedItemmetacastProc
+  metacall*: QQuickPaintedItemmetacallProc
+  paint*: QQuickPaintedItempaintProc
+  isTextureProvider*: QQuickPaintedItemisTextureProviderProc
+  textureProvider*: QQuickPaintedItemtextureProviderProc
+  updatePaintNode*: QQuickPaintedItemupdatePaintNodeProc
+  releaseResources*: QQuickPaintedItemreleaseResourcesProc
+  itemChange*: QQuickPaintedItemitemChangeProc
+  boundingRect*: QQuickPaintedItemboundingRectProc
+  clipRect*: QQuickPaintedItemclipRectProc
+  contains*: QQuickPaintedItemcontainsProc
+  inputMethodQuery*: QQuickPaintedIteminputMethodQueryProc
+  event*: QQuickPaintedItemeventProc
+  classBegin*: QQuickPaintedItemclassBeginProc
+  componentComplete*: QQuickPaintedItemcomponentCompleteProc
+  keyPressEvent*: QQuickPaintedItemkeyPressEventProc
+  keyReleaseEvent*: QQuickPaintedItemkeyReleaseEventProc
+  inputMethodEvent*: QQuickPaintedIteminputMethodEventProc
+  focusInEvent*: QQuickPaintedItemfocusInEventProc
+  focusOutEvent*: QQuickPaintedItemfocusOutEventProc
+  mousePressEvent*: QQuickPaintedItemmousePressEventProc
+  mouseMoveEvent*: QQuickPaintedItemmouseMoveEventProc
+  mouseReleaseEvent*: QQuickPaintedItemmouseReleaseEventProc
+  mouseDoubleClickEvent*: QQuickPaintedItemmouseDoubleClickEventProc
+  mouseUngrabEvent*: QQuickPaintedItemmouseUngrabEventProc
+  touchUngrabEvent*: QQuickPaintedItemtouchUngrabEventProc
+  wheelEvent*: QQuickPaintedItemwheelEventProc
+  touchEvent*: QQuickPaintedItemtouchEventProc
+  hoverEnterEvent*: QQuickPaintedItemhoverEnterEventProc
+  hoverMoveEvent*: QQuickPaintedItemhoverMoveEventProc
+  hoverLeaveEvent*: QQuickPaintedItemhoverLeaveEventProc
+  dragEnterEvent*: QQuickPaintedItemdragEnterEventProc
+  dragMoveEvent*: QQuickPaintedItemdragMoveEventProc
+  dragLeaveEvent*: QQuickPaintedItemdragLeaveEventProc
+  dropEvent*: QQuickPaintedItemdropEventProc
+  childMouseEventFilter*: QQuickPaintedItemchildMouseEventFilterProc
+  windowDeactivateEvent*: QQuickPaintedItemwindowDeactivateEventProc
+  geometryChanged*: QQuickPaintedItemgeometryChangedProc
+  updatePolish*: QQuickPaintedItemupdatePolishProc
+  eventFilter*: QQuickPaintedItemeventFilterProc
+  timerEvent*: QQuickPaintedItemtimerEventProc
+  childEvent*: QQuickPaintedItemchildEventProc
+  customEvent*: QQuickPaintedItemcustomEventProc
+  connectNotify*: QQuickPaintedItemconnectNotifyProc
+  disconnectNotify*: QQuickPaintedItemdisconnectNotifyProc
 proc QQuickPaintedItemmetaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQQuickPaintedItem_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_virtualbase_metaObject(self.h))
 
-type QQuickPaintedItemmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_metaObject(self: ptr cQQuickPaintedItem, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_metaObject ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickPaintedItem_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QQuickPaintedItemmetacast*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cstring): pointer =
-  fQQuickPaintedItem_virtualbase_metacast(self.h, param1)
+  fcQQuickPaintedItem_virtualbase_metacast(self.h, param1)
 
-type QQuickPaintedItemmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmetacastProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_metacast(self: ptr cQQuickPaintedItem, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_metacast ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QQuickPaintedItemmetacall*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cint, param2: cint, param3: pointer): cint =
-  fQQuickPaintedItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQQuickPaintedItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QQuickPaintedItemmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmetacallProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_metacall(self: ptr cQQuickPaintedItem, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickPaintedItem_metacall ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
-type QQuickPaintedItempaintProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc onpaint*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItempaintProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItempaintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_paint(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QQuickPaintedItem_paint(self: ptr cQQuickPaintedItem, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_paint ".} =
-  var nimfunc = cast[ptr QQuickPaintedItempaintProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_paint(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].paint(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemisTextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): bool =
-  fQQuickPaintedItem_virtualbase_isTextureProvider(self.h)
+  fcQQuickPaintedItem_virtualbase_isTextureProvider(self.h)
 
-type QQuickPaintedItemisTextureProviderProc* = proc(): bool
-proc onisTextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemisTextureProviderProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemisTextureProviderProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_isTextureProvider(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_isTextureProvider(self: ptr cQQuickPaintedItem, slot: int): bool {.exportc: "miqt_exec_callback_QQuickPaintedItem_isTextureProvider ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemisTextureProviderProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickPaintedItem_isTextureProvider(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  var virtualReturn = vtbl[].isTextureProvider(self)
   virtualReturn
+
 proc QQuickPaintedItemtextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qsgtextureprovider_types.QSGTextureProvider =
-  gen_qsgtextureprovider_types.QSGTextureProvider(h: fQQuickPaintedItem_virtualbase_textureProvider(self.h))
+  gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickPaintedItem_virtualbase_textureProvider(self.h))
 
-type QQuickPaintedItemtextureProviderProc* = proc(): gen_qsgtextureprovider_types.QSGTextureProvider
-proc ontextureProvider*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemtextureProviderProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemtextureProviderProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_textureProvider(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_textureProvider(self: ptr cQQuickPaintedItem, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_textureProvider ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemtextureProviderProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickPaintedItem_textureProvider(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  var virtualReturn = vtbl[].textureProvider(self)
   virtualReturn.h
+
 proc QQuickPaintedItemupdatePaintNode*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode =
-  gen_qsgnode_types.QSGNode(h: fQQuickPaintedItem_virtualbase_updatePaintNode(self.h, param1.h, param2.h))
+  gen_qsgnode_types.QSGNode(h: fcQQuickPaintedItem_virtualbase_updatePaintNode(self.h, param1.h, param2.h))
 
-type QQuickPaintedItemupdatePaintNodeProc* = proc(param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode
-proc onupdatePaintNode*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemupdatePaintNodeProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemupdatePaintNodeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_updatePaintNode(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_updatePaintNode(self: ptr cQQuickPaintedItem, slot: int, param1: pointer, param2: pointer): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_updatePaintNode ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemupdatePaintNodeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_updatePaintNode(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1)
-
   let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].updatePaintNode(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QQuickPaintedItemreleaseResources*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_releaseResources(self.h)
+  fcQQuickPaintedItem_virtualbase_releaseResources(self.h)
 
-type QQuickPaintedItemreleaseResourcesProc* = proc(): void
-proc onreleaseResources*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemreleaseResourcesProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemreleaseResourcesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_releaseResources(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_releaseResources(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].releaseResources(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_releaseResources(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_releaseResources ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemreleaseResourcesProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemitemChange*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void =
-  fQQuickPaintedItem_virtualbase_itemChange(self.h, cint(param1), param2.h)
+  fcQQuickPaintedItem_virtualbase_itemChange(self.h, cint(param1), param2.h)
 
-type QQuickPaintedItemitemChangeProc* = proc(param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void
-proc onitemChange*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemitemChangeProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemitemChangeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_itemChange(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_itemChange(self: ptr cQQuickPaintedItem, slot: int, param1: cint, param2: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_itemChange ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemitemChangeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_itemChange(vtbl: pointer, self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2)
+  vtbl[].itemChange(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QQuickPaintedItemboundingRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQQuickPaintedItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_boundingRect(self.h))
 
-type QQuickPaintedItemboundingRectProc* = proc(): gen_qrect_types.QRectF
-proc onboundingRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemboundingRectProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemboundingRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_boundingRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_boundingRect(self: ptr cQQuickPaintedItem, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_boundingRect ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemboundingRectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickPaintedItem_boundingRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  var virtualReturn = vtbl[].boundingRect(self)
   virtualReturn.h
+
 proc QQuickPaintedItemclipRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQQuickPaintedItem_virtualbase_clipRect(self.h))
+  gen_qrect_types.QRectF(h: fcQQuickPaintedItem_virtualbase_clipRect(self.h))
 
-type QQuickPaintedItemclipRectProc* = proc(): gen_qrect_types.QRectF
-proc onclipRect*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemclipRectProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemclipRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_clipRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_clipRect(self: ptr cQQuickPaintedItem, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_clipRect ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemclipRectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickPaintedItem_clipRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  var virtualReturn = vtbl[].clipRect(self)
   virtualReturn.h
+
 proc QQuickPaintedItemcontains*(self: gen_qquickpainteditem_types.QQuickPaintedItem, point: gen_qpoint_types.QPointF): bool =
-  fQQuickPaintedItem_virtualbase_contains(self.h, point.h)
+  fcQQuickPaintedItem_virtualbase_contains(self.h, point.h)
 
-type QQuickPaintedItemcontainsProc* = proc(point: gen_qpoint_types.QPointF): bool
-proc oncontains*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemcontainsProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemcontainsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_contains(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_contains(self: ptr cQQuickPaintedItem, slot: int, point: pointer): bool {.exportc: "miqt_exec_callback_QQuickPaintedItem_contains ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemcontainsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_contains(vtbl: pointer, self: pointer, point: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: point)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
+
 proc QQuickPaintedIteminputMethodQuery*(self: gen_qquickpainteditem_types.QQuickPaintedItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQQuickPaintedItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQQuickPaintedItem_virtualbase_inputMethodQuery(self.h, cint(query)))
 
-type QQuickPaintedIteminputMethodQueryProc* = proc(query: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedIteminputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedIteminputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_inputMethodQuery(self: ptr cQQuickPaintedItem, slot: int, query: cint): pointer {.exportc: "miqt_exec_callback_QQuickPaintedItem_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QQuickPaintedIteminputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = cint(query)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QQuickPaintedItemevent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qcoreevent_types.QEvent): bool =
-  fQQuickPaintedItem_virtualbase_event(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_event(self.h, param1.h)
 
-type QQuickPaintedItemeventProc* = proc(param1: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemeventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_event(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): bool {.exportc: "miqt_exec_callback_QQuickPaintedItem_event ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QQuickPaintedItemclassBegin*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_classBegin(self.h)
+  fcQQuickPaintedItem_virtualbase_classBegin(self.h)
 
-type QQuickPaintedItemclassBeginProc* = proc(): void
-proc onclassBegin*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemclassBeginProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemclassBeginProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_classBegin(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_classBegin(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].classBegin(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_classBegin(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_classBegin ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemclassBeginProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemcomponentComplete*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_componentComplete(self.h)
+  fcQQuickPaintedItem_virtualbase_componentComplete(self.h)
 
-type QQuickPaintedItemcomponentCompleteProc* = proc(): void
-proc oncomponentComplete*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemcomponentCompleteProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemcomponentCompleteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_componentComplete(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_componentComplete(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].componentComplete(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_componentComplete(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_componentComplete ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemcomponentCompleteProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemkeyPressEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void =
-  fQQuickPaintedItem_virtualbase_keyPressEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_keyPressEvent(self.h, event.h)
 
-type QQuickPaintedItemkeyPressEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_keyPressEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_keyPressEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemkeyReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QKeyEvent): void =
-  fQQuickPaintedItem_virtualbase_keyReleaseEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_keyReleaseEvent(self.h, event.h)
 
-type QQuickPaintedItemkeyReleaseEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_keyReleaseEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedIteminputMethodEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QInputMethodEvent): void =
-  fQQuickPaintedItem_virtualbase_inputMethodEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_inputMethodEvent(self.h, param1.h)
 
-type QQuickPaintedIteminputMethodEventProc* = proc(param1: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedIteminputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedIteminputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_inputMethodEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedIteminputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemfocusInEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void =
-  fQQuickPaintedItem_virtualbase_focusInEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_focusInEvent(self.h, param1.h)
 
-type QQuickPaintedItemfocusInEventProc* = proc(param1: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_focusInEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_focusInEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemfocusOutEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QFocusEvent): void =
-  fQQuickPaintedItem_virtualbase_focusOutEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_focusOutEvent(self.h, param1.h)
 
-type QQuickPaintedItemfocusOutEventProc* = proc(param1: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_focusOutEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_focusOutEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemmousePressEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
-  fQQuickPaintedItem_virtualbase_mousePressEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_mousePressEvent(self.h, event.h)
 
-type QQuickPaintedItemmousePressEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_mousePressEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_mousePressEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemmouseMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
-  fQQuickPaintedItem_virtualbase_mouseMoveEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_mouseMoveEvent(self.h, event.h)
 
-type QQuickPaintedItemmouseMoveEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_mouseMoveEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemmouseReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
-  fQQuickPaintedItem_virtualbase_mouseReleaseEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-type QQuickPaintedItemmouseReleaseEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_mouseReleaseEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemmouseDoubleClickEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QMouseEvent): void =
-  fQQuickPaintedItem_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QQuickPaintedItemmouseDoubleClickEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_mouseDoubleClickEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemmouseUngrabEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_mouseUngrabEvent(self.h)
+  fcQQuickPaintedItem_virtualbase_mouseUngrabEvent(self.h)
 
-type QQuickPaintedItemmouseUngrabEventProc* = proc(): void
-proc onmouseUngrabEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemmouseUngrabEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemmouseUngrabEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_mouseUngrabEvent(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_mouseUngrabEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].mouseUngrabEvent(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_mouseUngrabEvent(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_mouseUngrabEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemmouseUngrabEventProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemtouchUngrabEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_touchUngrabEvent(self.h)
+  fcQQuickPaintedItem_virtualbase_touchUngrabEvent(self.h)
 
-type QQuickPaintedItemtouchUngrabEventProc* = proc(): void
-proc ontouchUngrabEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemtouchUngrabEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemtouchUngrabEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_touchUngrabEvent(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_touchUngrabEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].touchUngrabEvent(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_touchUngrabEvent(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_touchUngrabEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemtouchUngrabEventProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemwheelEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QWheelEvent): void =
-  fQQuickPaintedItem_virtualbase_wheelEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_wheelEvent(self.h, event.h)
 
-type QQuickPaintedItemwheelEventProc* = proc(event: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_wheelEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_wheelEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemtouchEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QTouchEvent): void =
-  fQQuickPaintedItem_virtualbase_touchEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_touchEvent(self.h, event.h)
 
-type QQuickPaintedItemtouchEventProc* = proc(event: gen_qevent_types.QTouchEvent): void
-proc ontouchEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemtouchEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemtouchEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_touchEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_touchEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_touchEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemtouchEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_touchEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QTouchEvent(h: event)
+  vtbl[].touchEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemhoverEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
-  fQQuickPaintedItem_virtualbase_hoverEnterEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_hoverEnterEvent(self.h, event.h)
 
-type QQuickPaintedItemhoverEnterEventProc* = proc(event: gen_qevent_types.QHoverEvent): void
-proc onhoverEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemhoverEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemhoverEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_hoverEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_hoverEnterEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_hoverEnterEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemhoverEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  vtbl[].hoverEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemhoverMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
-  fQQuickPaintedItem_virtualbase_hoverMoveEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_hoverMoveEvent(self.h, event.h)
 
-type QQuickPaintedItemhoverMoveEventProc* = proc(event: gen_qevent_types.QHoverEvent): void
-proc onhoverMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemhoverMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemhoverMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_hoverMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_hoverMoveEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_hoverMoveEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemhoverMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  vtbl[].hoverMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemhoverLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qevent_types.QHoverEvent): void =
-  fQQuickPaintedItem_virtualbase_hoverLeaveEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_hoverLeaveEvent(self.h, event.h)
 
-type QQuickPaintedItemhoverLeaveEventProc* = proc(event: gen_qevent_types.QHoverEvent): void
-proc onhoverLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemhoverLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemhoverLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_hoverLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_hoverLeaveEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_hoverLeaveEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemhoverLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event)
+  vtbl[].hoverLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemdragEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragEnterEvent): void =
-  fQQuickPaintedItem_virtualbase_dragEnterEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_dragEnterEvent(self.h, param1.h)
 
-type QQuickPaintedItemdragEnterEventProc* = proc(param1: gen_qevent_types.QDragEnterEvent): void
-proc ondragEnterEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemdragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemdragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_dragEnterEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemdragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemdragMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragMoveEvent): void =
-  fQQuickPaintedItem_virtualbase_dragMoveEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_dragMoveEvent(self.h, param1.h)
 
-type QQuickPaintedItemdragMoveEventProc* = proc(param1: gen_qevent_types.QDragMoveEvent): void
-proc ondragMoveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemdragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemdragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_dragMoveEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemdragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemdragLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDragLeaveEvent): void =
-  fQQuickPaintedItem_virtualbase_dragLeaveEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_dragLeaveEvent(self.h, param1.h)
 
-type QQuickPaintedItemdragLeaveEventProc* = proc(param1: gen_qevent_types.QDragLeaveEvent): void
-proc ondragLeaveEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemdragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemdragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_dragLeaveEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemdragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemdropEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qevent_types.QDropEvent): void =
-  fQQuickPaintedItem_virtualbase_dropEvent(self.h, param1.h)
+  fcQQuickPaintedItem_virtualbase_dropEvent(self.h, param1.h)
 
-type QQuickPaintedItemdropEventProc* = proc(param1: gen_qevent_types.QDropEvent): void
-proc ondropEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemdropEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemdropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_dropEvent(self: ptr cQQuickPaintedItem, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_dropEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemdropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_dropEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: param1)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemchildMouseEventFilter*(self: gen_qquickpainteditem_types.QQuickPaintedItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool =
-  fQQuickPaintedItem_virtualbase_childMouseEventFilter(self.h, param1.h, param2.h)
+  fcQQuickPaintedItem_virtualbase_childMouseEventFilter(self.h, param1.h, param2.h)
 
-type QQuickPaintedItemchildMouseEventFilterProc* = proc(param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool
-proc onchildMouseEventFilter*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemchildMouseEventFilterProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemchildMouseEventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_childMouseEventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_childMouseEventFilter(self: ptr cQQuickPaintedItem, slot: int, param1: pointer, param2: pointer): bool {.exportc: "miqt_exec_callback_QQuickPaintedItem_childMouseEventFilter ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemchildMouseEventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].childMouseEventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QQuickPaintedItemwindowDeactivateEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_windowDeactivateEvent(self.h)
+  fcQQuickPaintedItem_virtualbase_windowDeactivateEvent(self.h)
 
-type QQuickPaintedItemwindowDeactivateEventProc* = proc(): void
-proc onwindowDeactivateEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemwindowDeactivateEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemwindowDeactivateEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_windowDeactivateEvent(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_windowDeactivateEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].windowDeactivateEvent(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_windowDeactivateEvent(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_windowDeactivateEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemwindowDeactivateEventProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemgeometryChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void =
-  fQQuickPaintedItem_virtualbase_geometryChanged(self.h, newGeometry.h, oldGeometry.h)
+  fcQQuickPaintedItem_virtualbase_geometryChanged(self.h, newGeometry.h, oldGeometry.h)
 
-type QQuickPaintedItemgeometryChangedProc* = proc(newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void
-proc ongeometryChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemgeometryChangedProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemgeometryChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_geometryChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_geometryChanged(self: ptr cQQuickPaintedItem, slot: int, newGeometry: pointer, oldGeometry: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_geometryChanged ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemgeometryChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_geometryChanged(vtbl: pointer, self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: newGeometry)
-
   let slotval2 = gen_qrect_types.QRectF(h: oldGeometry)
+  vtbl[].geometryChanged(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QQuickPaintedItemupdatePolish*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
-  fQQuickPaintedItem_virtualbase_updatePolish(self.h)
+  fcQQuickPaintedItem_virtualbase_updatePolish(self.h)
 
-type QQuickPaintedItemupdatePolishProc* = proc(): void
-proc onupdatePolish*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemupdatePolishProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemupdatePolishProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_updatePolish(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQQuickPaintedItem_updatePolish(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
+  vtbl[].updatePolish(self)
 
-proc miqt_exec_callback_QQuickPaintedItem_updatePolish(self: ptr cQQuickPaintedItem, slot: int): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_updatePolish ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemupdatePolishProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QQuickPaintedItemeventFilter*(self: gen_qquickpainteditem_types.QQuickPaintedItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQQuickPaintedItem_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQQuickPaintedItem_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QQuickPaintedItemeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_eventFilter(self: ptr cQQuickPaintedItem, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QQuickPaintedItem_eventFilter ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QQuickPaintedItemtimerEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQQuickPaintedItem_virtualbase_timerEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_timerEvent(self.h, event.h)
 
-type QQuickPaintedItemtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_timerEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_timerEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemchildEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qcoreevent_types.QChildEvent): void =
-  fQQuickPaintedItem_virtualbase_childEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_childEvent(self.h, event.h)
 
-type QQuickPaintedItemchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemchildEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_childEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_childEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemcustomEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, event: gen_qcoreevent_types.QEvent): void =
-  fQQuickPaintedItem_virtualbase_customEvent(self.h, event.h)
+  fcQQuickPaintedItem_virtualbase_customEvent(self.h, event.h)
 
-type QQuickPaintedItemcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_customEvent(self: ptr cQQuickPaintedItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_customEvent ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQuickPaintedItem_virtualbase_connectNotify(self.h, signal.h)
+  fcQQuickPaintedItem_virtualbase_connectNotify(self.h, signal.h)
 
-type QQuickPaintedItemconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_connectNotify(self: ptr cQQuickPaintedItem, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_connectNotify ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickPaintedItemdisconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQuickPaintedItem_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQQuickPaintedItem_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QQuickPaintedItemdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQuickPaintedItemdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickPaintedItem_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickPaintedItem_disconnectNotify(self: ptr cQQuickPaintedItem, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQuickPaintedItem_disconnectNotify ".} =
-  var nimfunc = cast[ptr QQuickPaintedItemdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickPaintedItem_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickPaintedItemVTable](vtbl)
+  let self = QQuickPaintedItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
+    vtbl: ref QQuickPaintedItemVTable = nil): gen_qquickpainteditem_types.QQuickPaintedItem =
+  let vtbl = if vtbl == nil: new QQuickPaintedItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+    let vtbl = cast[ref QQuickPaintedItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickPaintedItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickPaintedItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickPaintedItem_metacall
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQQuickPaintedItem_paint
+  if not isNil(vtbl.isTextureProvider):
+    vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickPaintedItem_isTextureProvider
+  if not isNil(vtbl.textureProvider):
+    vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickPaintedItem_textureProvider
+  if not isNil(vtbl.updatePaintNode):
+    vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickPaintedItem_updatePaintNode
+  if not isNil(vtbl.releaseResources):
+    vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickPaintedItem_releaseResources
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickPaintedItem_itemChange
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickPaintedItem_boundingRect
+  if not isNil(vtbl.clipRect):
+    vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickPaintedItem_clipRect
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQQuickPaintedItem_contains
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQuickPaintedItem_event
+  if not isNil(vtbl.classBegin):
+    vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickPaintedItem_classBegin
+  if not isNil(vtbl.componentComplete):
+    vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickPaintedItem_componentComplete
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickPaintedItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickPaintedItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickPaintedItem_focusOutEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickPaintedItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseUngrabEvent):
+    vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_mouseUngrabEvent
+  if not isNil(vtbl.touchUngrabEvent):
+    vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_touchUngrabEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickPaintedItem_wheelEvent
+  if not isNil(vtbl.touchEvent):
+    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickPaintedItem_touchEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickPaintedItem_dropEvent
+  if not isNil(vtbl.childMouseEventFilter):
+    vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter
+  if not isNil(vtbl.windowDeactivateEvent):
+    vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickPaintedItem_windowDeactivateEvent
+  if not isNil(vtbl.geometryChanged):
+    vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickPaintedItem_geometryChanged
+  if not isNil(vtbl.updatePolish):
+    vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickPaintedItem_updatePolish
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickPaintedItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickPaintedItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickPaintedItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickPaintedItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickPaintedItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickPaintedItem_disconnectNotify
+  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qquickpainteditem_types.QQuickPaintedItem,
+    parent: gen_qquickitem_types.QQuickItem,
+    vtbl: ref QQuickPaintedItemVTable = nil): gen_qquickpainteditem_types.QQuickPaintedItem =
+  let vtbl = if vtbl == nil: new QQuickPaintedItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickPaintedItemVTable, _: ptr cQQuickPaintedItem) {.cdecl.} =
+    let vtbl = cast[ref QQuickPaintedItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickPaintedItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickPaintedItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickPaintedItem_metacall
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQQuickPaintedItem_paint
+  if not isNil(vtbl.isTextureProvider):
+    vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickPaintedItem_isTextureProvider
+  if not isNil(vtbl.textureProvider):
+    vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickPaintedItem_textureProvider
+  if not isNil(vtbl.updatePaintNode):
+    vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickPaintedItem_updatePaintNode
+  if not isNil(vtbl.releaseResources):
+    vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickPaintedItem_releaseResources
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickPaintedItem_itemChange
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickPaintedItem_boundingRect
+  if not isNil(vtbl.clipRect):
+    vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickPaintedItem_clipRect
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQQuickPaintedItem_contains
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickPaintedItem_inputMethodQuery
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQuickPaintedItem_event
+  if not isNil(vtbl.classBegin):
+    vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickPaintedItem_classBegin
+  if not isNil(vtbl.componentComplete):
+    vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickPaintedItem_componentComplete
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickPaintedItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_keyReleaseEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickPaintedItem_inputMethodEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickPaintedItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickPaintedItem_focusOutEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickPaintedItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickPaintedItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickPaintedItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickPaintedItem_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseUngrabEvent):
+    vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_mouseUngrabEvent
+  if not isNil(vtbl.touchUngrabEvent):
+    vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickPaintedItem_touchUngrabEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickPaintedItem_wheelEvent
+  if not isNil(vtbl.touchEvent):
+    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickPaintedItem_touchEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickPaintedItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_hoverLeaveEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickPaintedItem_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickPaintedItem_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickPaintedItem_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickPaintedItem_dropEvent
+  if not isNil(vtbl.childMouseEventFilter):
+    vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickPaintedItem_childMouseEventFilter
+  if not isNil(vtbl.windowDeactivateEvent):
+    vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickPaintedItem_windowDeactivateEvent
+  if not isNil(vtbl.geometryChanged):
+    vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickPaintedItem_geometryChanged
+  if not isNil(vtbl.updatePolish):
+    vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickPaintedItem_updatePolish
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickPaintedItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickPaintedItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickPaintedItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickPaintedItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickPaintedItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickPaintedItem_disconnectNotify
+  gen_qquickpainteditem_types.QQuickPaintedItem(h: fcQQuickPaintedItem_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qquickpainteditem_types.QQuickPaintedItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickPaintedItem_staticMetaObject())
 proc delete*(self: gen_qquickpainteditem_types.QQuickPaintedItem) =

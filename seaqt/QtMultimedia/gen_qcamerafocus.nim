@@ -74,10 +74,6 @@ export
 type cQCameraFocusZone*{.exportc: "QCameraFocusZone", incompleteStruct.} = object
 type cQCameraFocus*{.exportc: "QCameraFocus", incompleteStruct.} = object
 
-proc fcQCameraFocusZone_new(): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new".}
-proc fcQCameraFocusZone_new2(area: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new2".}
-proc fcQCameraFocusZone_new3(other: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new3".}
-proc fcQCameraFocusZone_new4(area: pointer, status: cint): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new4".}
 proc fcQCameraFocusZone_operatorAssign(self: pointer, other: pointer): void {.importc: "QCameraFocusZone_operatorAssign".}
 proc fcQCameraFocusZone_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCameraFocusZone_operatorEqual".}
 proc fcQCameraFocusZone_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCameraFocusZone_operatorNotEqual".}
@@ -85,6 +81,10 @@ proc fcQCameraFocusZone_isValid(self: pointer, ): bool {.importc: "QCameraFocusZ
 proc fcQCameraFocusZone_area(self: pointer, ): pointer {.importc: "QCameraFocusZone_area".}
 proc fcQCameraFocusZone_status(self: pointer, ): cint {.importc: "QCameraFocusZone_status".}
 proc fcQCameraFocusZone_setStatus(self: pointer, status: cint): void {.importc: "QCameraFocusZone_setStatus".}
+proc fcQCameraFocusZone_new(): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new".}
+proc fcQCameraFocusZone_new2(area: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new2".}
+proc fcQCameraFocusZone_new3(other: pointer): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new3".}
+proc fcQCameraFocusZone_new4(area: pointer, status: cint): ptr cQCameraFocusZone {.importc: "QCameraFocusZone_new4".}
 proc fcQCameraFocusZone_delete(self: pointer) {.importc: "QCameraFocusZone_delete".}
 proc fcQCameraFocus_metaObject(self: pointer, ): pointer {.importc: "QCameraFocus_metaObject".}
 proc fcQCameraFocus_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFocus_metacast".}
@@ -122,21 +122,6 @@ proc fcQCameraFocus_trUtf82(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQCameraFocus_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocus_trUtf83".}
 proc fcQCameraFocus_staticMetaObject(): pointer {.importc: "QCameraFocus_staticMetaObject".}
 
-
-func init*(T: type gen_qcamerafocus_types.QCameraFocusZone, h: ptr cQCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
-  T(h: h)
-proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone, ): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone.init(fcQCameraFocusZone_new())
-
-proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone, area: gen_qrect_types.QRectF): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone.init(fcQCameraFocusZone_new2(area.h))
-
-proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone, other: gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone.init(fcQCameraFocusZone_new3(other.h))
-
-proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone, area: gen_qrect_types.QRectF, status: cint): gen_qcamerafocus_types.QCameraFocusZone =
-  gen_qcamerafocus_types.QCameraFocusZone.init(fcQCameraFocusZone_new4(area.h, cint(status)))
-
 proc operatorAssign*(self: gen_qcamerafocus_types.QCameraFocusZone, other: gen_qcamerafocus_types.QCameraFocusZone): void =
   fcQCameraFocusZone_operatorAssign(self.h, other.h)
 
@@ -158,11 +143,23 @@ proc status*(self: gen_qcamerafocus_types.QCameraFocusZone, ): cint =
 proc setStatus*(self: gen_qcamerafocus_types.QCameraFocusZone, status: cint): void =
   fcQCameraFocusZone_setStatus(self.h, cint(status))
 
+proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new())
+
+proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
+    area: gen_qrect_types.QRectF): gen_qcamerafocus_types.QCameraFocusZone =
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new2(area.h))
+
+proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
+    other: gen_qcamerafocus_types.QCameraFocusZone): gen_qcamerafocus_types.QCameraFocusZone =
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new3(other.h))
+
+proc create*(T: type gen_qcamerafocus_types.QCameraFocusZone,
+    area: gen_qrect_types.QRectF, status: cint): gen_qcamerafocus_types.QCameraFocusZone =
+  gen_qcamerafocus_types.QCameraFocusZone(h: fcQCameraFocusZone_new4(area.h, cint(status)))
+
 proc delete*(self: gen_qcamerafocus_types.QCameraFocusZone) =
   fcQCameraFocusZone_delete(self.h)
-
-func init*(T: type gen_qcamerafocus_types.QCameraFocus, h: ptr cQCameraFocus): gen_qcamerafocus_types.QCameraFocus =
-  T(h: h)
 proc metaObject*(self: gen_qcamerafocus_types.QCameraFocus, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFocus_metaObject(self.h))
 
@@ -238,7 +235,7 @@ proc opticalZoomChanged*(self: gen_qcamerafocus_types.QCameraFocus, param1: floa
   fcQCameraFocus_opticalZoomChanged(self.h, param1)
 
 type QCameraFocusopticalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraFocus_opticalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraFocus_opticalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraFocus_opticalZoomChanged".} =
   let nimfunc = cast[ptr QCameraFocusopticalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -254,7 +251,7 @@ proc digitalZoomChanged*(self: gen_qcamerafocus_types.QCameraFocus, param1: floa
   fcQCameraFocus_digitalZoomChanged(self.h, param1)
 
 type QCameraFocusdigitalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraFocus_digitalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraFocus_digitalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraFocus_digitalZoomChanged".} =
   let nimfunc = cast[ptr QCameraFocusdigitalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -270,7 +267,7 @@ proc focusZonesChanged*(self: gen_qcamerafocus_types.QCameraFocus, ): void =
   fcQCameraFocus_focusZonesChanged(self.h)
 
 type QCameraFocusfocusZonesChangedSlot* = proc()
-proc miqt_exec_callback_QCameraFocus_focusZonesChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQCameraFocus_focusZonesChanged(slot: int) {.exportc: "miqt_exec_callback_QCameraFocus_focusZonesChanged".} =
   let nimfunc = cast[ptr QCameraFocusfocusZonesChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -284,7 +281,7 @@ proc maximumOpticalZoomChanged*(self: gen_qcamerafocus_types.QCameraFocus, param
   fcQCameraFocus_maximumOpticalZoomChanged(self.h, param1)
 
 type QCameraFocusmaximumOpticalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraFocus_maximumOpticalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged".} =
   let nimfunc = cast[ptr QCameraFocusmaximumOpticalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -300,7 +297,7 @@ proc maximumDigitalZoomChanged*(self: gen_qcamerafocus_types.QCameraFocus, param
   fcQCameraFocus_maximumDigitalZoomChanged(self.h, param1)
 
 type QCameraFocusmaximumDigitalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraFocus_maximumDigitalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraFocus_maximumDigitalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraFocus_maximumDigitalZoomChanged".} =
   let nimfunc = cast[ptr QCameraFocusmaximumDigitalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 

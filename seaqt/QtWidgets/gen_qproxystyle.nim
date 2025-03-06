@@ -76,9 +76,6 @@ export
 
 type cQProxyStyle*{.exportc: "QProxyStyle", incompleteStruct.} = object
 
-proc fcQProxyStyle_new(): ptr cQProxyStyle {.importc: "QProxyStyle_new".}
-proc fcQProxyStyle_new2(key: struct_miqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new2".}
-proc fcQProxyStyle_new3(style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
 proc fcQProxyStyle_metaObject(self: pointer, ): pointer {.importc: "QProxyStyle_metaObject".}
 proc fcQProxyStyle_metacast(self: pointer, param1: cstring): pointer {.importc: "QProxyStyle_metacast".}
 proc fcQProxyStyle_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProxyStyle_metacall".}
@@ -113,86 +110,79 @@ proc fcQProxyStyle_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQProxyStyle_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProxyStyle_tr3".}
 proc fcQProxyStyle_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QProxyStyle_trUtf82".}
 proc fcQProxyStyle_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProxyStyle_trUtf83".}
-proc fQProxyStyle_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QProxyStyle_virtualbase_metaObject".}
-proc fcQProxyStyle_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metaObject".}
-proc fQProxyStyle_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QProxyStyle_virtualbase_metacast".}
-proc fcQProxyStyle_override_virtual_metacast(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metacast".}
-proc fQProxyStyle_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QProxyStyle_virtualbase_metacall".}
-proc fcQProxyStyle_override_virtual_metacall(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_metacall".}
-proc fQProxyStyle_virtualbase_drawPrimitive(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_drawPrimitive".}
-proc fcQProxyStyle_override_virtual_drawPrimitive(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawPrimitive".}
-proc fQProxyStyle_virtualbase_drawControl(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_drawControl".}
-proc fcQProxyStyle_override_virtual_drawControl(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawControl".}
-proc fQProxyStyle_virtualbase_drawComplexControl(self: pointer, control: cint, option: pointer, painter: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_drawComplexControl".}
-proc fcQProxyStyle_override_virtual_drawComplexControl(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawComplexControl".}
-proc fQProxyStyle_virtualbase_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void{.importc: "QProxyStyle_virtualbase_drawItemText".}
-proc fcQProxyStyle_override_virtual_drawItemText(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawItemText".}
-proc fQProxyStyle_virtualbase_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void{.importc: "QProxyStyle_virtualbase_drawItemPixmap".}
-proc fcQProxyStyle_override_virtual_drawItemPixmap(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_drawItemPixmap".}
-proc fQProxyStyle_virtualbase_sizeFromContents(self: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer{.importc: "QProxyStyle_virtualbase_sizeFromContents".}
-proc fcQProxyStyle_override_virtual_sizeFromContents(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_sizeFromContents".}
-proc fQProxyStyle_virtualbase_subElementRect(self: pointer, element: cint, option: pointer, widget: pointer): pointer{.importc: "QProxyStyle_virtualbase_subElementRect".}
-proc fcQProxyStyle_override_virtual_subElementRect(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_subElementRect".}
-proc fQProxyStyle_virtualbase_subControlRect(self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer{.importc: "QProxyStyle_virtualbase_subControlRect".}
-proc fcQProxyStyle_override_virtual_subControlRect(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_subControlRect".}
-proc fQProxyStyle_virtualbase_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer{.importc: "QProxyStyle_virtualbase_itemTextRect".}
-proc fcQProxyStyle_override_virtual_itemTextRect(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_itemTextRect".}
-proc fQProxyStyle_virtualbase_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer{.importc: "QProxyStyle_virtualbase_itemPixmapRect".}
-proc fcQProxyStyle_override_virtual_itemPixmapRect(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_itemPixmapRect".}
-proc fQProxyStyle_virtualbase_hitTestComplexControl(self: pointer, control: cint, option: pointer, pos: pointer, widget: pointer): cint{.importc: "QProxyStyle_virtualbase_hitTestComplexControl".}
-proc fcQProxyStyle_override_virtual_hitTestComplexControl(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_hitTestComplexControl".}
-proc fQProxyStyle_virtualbase_styleHint(self: pointer, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint{.importc: "QProxyStyle_virtualbase_styleHint".}
-proc fcQProxyStyle_override_virtual_styleHint(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_styleHint".}
-proc fQProxyStyle_virtualbase_pixelMetric(self: pointer, metric: cint, option: pointer, widget: pointer): cint{.importc: "QProxyStyle_virtualbase_pixelMetric".}
-proc fcQProxyStyle_override_virtual_pixelMetric(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_pixelMetric".}
-proc fQProxyStyle_virtualbase_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint{.importc: "QProxyStyle_virtualbase_layoutSpacing".}
-proc fcQProxyStyle_override_virtual_layoutSpacing(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_layoutSpacing".}
-proc fQProxyStyle_virtualbase_standardIcon(self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer{.importc: "QProxyStyle_virtualbase_standardIcon".}
-proc fcQProxyStyle_override_virtual_standardIcon(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_standardIcon".}
-proc fQProxyStyle_virtualbase_standardPixmap(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer{.importc: "QProxyStyle_virtualbase_standardPixmap".}
-proc fcQProxyStyle_override_virtual_standardPixmap(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_standardPixmap".}
-proc fQProxyStyle_virtualbase_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer{.importc: "QProxyStyle_virtualbase_generatedIconPixmap".}
-proc fcQProxyStyle_override_virtual_generatedIconPixmap(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_generatedIconPixmap".}
-proc fQProxyStyle_virtualbase_standardPalette(self: pointer, ): pointer{.importc: "QProxyStyle_virtualbase_standardPalette".}
-proc fcQProxyStyle_override_virtual_standardPalette(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_standardPalette".}
-proc fQProxyStyle_virtualbase_polish(self: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_polish".}
-proc fcQProxyStyle_override_virtual_polish(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_polish".}
-proc fQProxyStyle_virtualbase_polishWithPal(self: pointer, pal: pointer): void{.importc: "QProxyStyle_virtualbase_polishWithPal".}
-proc fcQProxyStyle_override_virtual_polishWithPal(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_polishWithPal".}
-proc fQProxyStyle_virtualbase_polishWithApp(self: pointer, app: pointer): void{.importc: "QProxyStyle_virtualbase_polishWithApp".}
-proc fcQProxyStyle_override_virtual_polishWithApp(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_polishWithApp".}
-proc fQProxyStyle_virtualbase_unpolish(self: pointer, widget: pointer): void{.importc: "QProxyStyle_virtualbase_unpolish".}
-proc fcQProxyStyle_override_virtual_unpolish(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_unpolish".}
-proc fQProxyStyle_virtualbase_unpolishWithApp(self: pointer, app: pointer): void{.importc: "QProxyStyle_virtualbase_unpolishWithApp".}
-proc fcQProxyStyle_override_virtual_unpolishWithApp(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_unpolishWithApp".}
-proc fQProxyStyle_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QProxyStyle_virtualbase_event".}
-proc fcQProxyStyle_override_virtual_event(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_event".}
-proc fQProxyStyle_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QProxyStyle_virtualbase_eventFilter".}
-proc fcQProxyStyle_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_eventFilter".}
-proc fQProxyStyle_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QProxyStyle_virtualbase_timerEvent".}
-proc fcQProxyStyle_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_timerEvent".}
-proc fQProxyStyle_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QProxyStyle_virtualbase_childEvent".}
-proc fcQProxyStyle_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_childEvent".}
-proc fQProxyStyle_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QProxyStyle_virtualbase_customEvent".}
-proc fcQProxyStyle_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_customEvent".}
-proc fQProxyStyle_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QProxyStyle_virtualbase_connectNotify".}
-proc fcQProxyStyle_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_connectNotify".}
-proc fQProxyStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QProxyStyle_virtualbase_disconnectNotify".}
-proc fcQProxyStyle_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QProxyStyle_override_virtual_disconnectNotify".}
+type cQProxyStyleVTable = object
+  destructor*: proc(vtbl: ptr cQProxyStyleVTable, self: ptr cQProxyStyle) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  drawPrimitive*: proc(vtbl, self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  drawControl*: proc(vtbl, self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  drawComplexControl*: proc(vtbl, self: pointer, control: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  drawItemText*: proc(vtbl, self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl, raises: [], gcsafe.}
+  drawItemPixmap*: proc(vtbl, self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl, raises: [], gcsafe.}
+  sizeFromContents*: proc(vtbl, self: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  subElementRect*: proc(vtbl, self: pointer, element: cint, option: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  subControlRect*: proc(vtbl, self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  itemTextRect*: proc(vtbl, self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl, raises: [], gcsafe.}
+  itemPixmapRect*: proc(vtbl, self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  hitTestComplexControl*: proc(vtbl, self: pointer, control: cint, option: pointer, pos: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
+  styleHint*: proc(vtbl, self: pointer, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint {.cdecl, raises: [], gcsafe.}
+  pixelMetric*: proc(vtbl, self: pointer, metric: cint, option: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
+  layoutSpacing*: proc(vtbl, self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl, raises: [], gcsafe.}
+  standardIcon*: proc(vtbl, self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  standardPixmap*: proc(vtbl, self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  generatedIconPixmap*: proc(vtbl, self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  standardPalette*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  polish*: proc(vtbl, self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishWithPal*: proc(vtbl, self: pointer, pal: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishWithApp*: proc(vtbl, self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolish*: proc(vtbl, self: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  unpolishWithApp*: proc(vtbl, self: pointer, app: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQProxyStyle_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QProxyStyle_virtualbase_metaObject".}
+proc fcQProxyStyle_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QProxyStyle_virtualbase_metacast".}
+proc fcQProxyStyle_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProxyStyle_virtualbase_metacall".}
+proc fcQProxyStyle_virtualbase_drawPrimitive(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_drawPrimitive".}
+proc fcQProxyStyle_virtualbase_drawControl(self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_drawControl".}
+proc fcQProxyStyle_virtualbase_drawComplexControl(self: pointer, control: cint, option: pointer, painter: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_drawComplexControl".}
+proc fcQProxyStyle_virtualbase_drawItemText(self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.importc: "QProxyStyle_virtualbase_drawItemText".}
+proc fcQProxyStyle_virtualbase_drawItemPixmap(self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.importc: "QProxyStyle_virtualbase_drawItemPixmap".}
+proc fcQProxyStyle_virtualbase_sizeFromContents(self: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_sizeFromContents".}
+proc fcQProxyStyle_virtualbase_subElementRect(self: pointer, element: cint, option: pointer, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_subElementRect".}
+proc fcQProxyStyle_virtualbase_subControlRect(self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_subControlRect".}
+proc fcQProxyStyle_virtualbase_itemTextRect(self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.importc: "QProxyStyle_virtualbase_itemTextRect".}
+proc fcQProxyStyle_virtualbase_itemPixmapRect(self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.importc: "QProxyStyle_virtualbase_itemPixmapRect".}
+proc fcQProxyStyle_virtualbase_hitTestComplexControl(self: pointer, control: cint, option: pointer, pos: pointer, widget: pointer): cint {.importc: "QProxyStyle_virtualbase_hitTestComplexControl".}
+proc fcQProxyStyle_virtualbase_styleHint(self: pointer, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint {.importc: "QProxyStyle_virtualbase_styleHint".}
+proc fcQProxyStyle_virtualbase_pixelMetric(self: pointer, metric: cint, option: pointer, widget: pointer): cint {.importc: "QProxyStyle_virtualbase_pixelMetric".}
+proc fcQProxyStyle_virtualbase_layoutSpacing(self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.importc: "QProxyStyle_virtualbase_layoutSpacing".}
+proc fcQProxyStyle_virtualbase_standardIcon(self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_standardIcon".}
+proc fcQProxyStyle_virtualbase_standardPixmap(self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.importc: "QProxyStyle_virtualbase_standardPixmap".}
+proc fcQProxyStyle_virtualbase_generatedIconPixmap(self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.importc: "QProxyStyle_virtualbase_generatedIconPixmap".}
+proc fcQProxyStyle_virtualbase_standardPalette(self: pointer, ): pointer {.importc: "QProxyStyle_virtualbase_standardPalette".}
+proc fcQProxyStyle_virtualbase_polish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_polish".}
+proc fcQProxyStyle_virtualbase_polishWithPal(self: pointer, pal: pointer): void {.importc: "QProxyStyle_virtualbase_polishWithPal".}
+proc fcQProxyStyle_virtualbase_polishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_polishWithApp".}
+proc fcQProxyStyle_virtualbase_unpolish(self: pointer, widget: pointer): void {.importc: "QProxyStyle_virtualbase_unpolish".}
+proc fcQProxyStyle_virtualbase_unpolishWithApp(self: pointer, app: pointer): void {.importc: "QProxyStyle_virtualbase_unpolishWithApp".}
+proc fcQProxyStyle_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QProxyStyle_virtualbase_event".}
+proc fcQProxyStyle_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QProxyStyle_virtualbase_eventFilter".}
+proc fcQProxyStyle_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QProxyStyle_virtualbase_timerEvent".}
+proc fcQProxyStyle_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QProxyStyle_virtualbase_childEvent".}
+proc fcQProxyStyle_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QProxyStyle_virtualbase_customEvent".}
+proc fcQProxyStyle_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QProxyStyle_virtualbase_connectNotify".}
+proc fcQProxyStyle_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QProxyStyle_virtualbase_disconnectNotify".}
+proc fcQProxyStyle_new(vtbl: pointer, ): ptr cQProxyStyle {.importc: "QProxyStyle_new".}
+proc fcQProxyStyle_new2(vtbl: pointer, key: struct_miqt_string): ptr cQProxyStyle {.importc: "QProxyStyle_new2".}
+proc fcQProxyStyle_new3(vtbl: pointer, style: pointer): ptr cQProxyStyle {.importc: "QProxyStyle_new3".}
 proc fcQProxyStyle_staticMetaObject(): pointer {.importc: "QProxyStyle_staticMetaObject".}
 proc fcQProxyStyle_delete(self: pointer) {.importc: "QProxyStyle_delete".}
-
-
-func init*(T: type gen_qproxystyle_types.QProxyStyle, h: ptr cQProxyStyle): gen_qproxystyle_types.QProxyStyle =
-  T(h: h)
-proc create*(T: type gen_qproxystyle_types.QProxyStyle, ): gen_qproxystyle_types.QProxyStyle =
-  gen_qproxystyle_types.QProxyStyle.init(fcQProxyStyle_new())
-
-proc create*(T: type gen_qproxystyle_types.QProxyStyle, key: string): gen_qproxystyle_types.QProxyStyle =
-  gen_qproxystyle_types.QProxyStyle.init(fcQProxyStyle_new2(struct_miqt_string(data: key, len: csize_t(len(key)))))
-
-proc create*(T: type gen_qproxystyle_types.QProxyStyle, style: gen_qstyle_types.QStyle): gen_qproxystyle_types.QProxyStyle =
-  gen_qproxystyle_types.QProxyStyle.init(fcQProxyStyle_new3(style.h))
 
 proc metaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_metaObject(self.h))
@@ -314,711 +304,673 @@ proc trUtf8*(_: type gen_qproxystyle_types.QProxyStyle, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+type QProxyStylemetaObjectProc* = proc(self: QProxyStyle): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QProxyStylemetacastProc* = proc(self: QProxyStyle, param1: cstring): pointer {.raises: [], gcsafe.}
+type QProxyStylemetacallProc* = proc(self: QProxyStyle, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QProxyStyledrawPrimitiveProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStyledrawControlProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStyledrawComplexControlProc* = proc(self: QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStyledrawItemTextProc* = proc(self: QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void {.raises: [], gcsafe.}
+type QProxyStyledrawItemPixmapProc* = proc(self: QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void {.raises: [], gcsafe.}
+type QProxyStylesizeFromContentsProc* = proc(self: QProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QProxyStylesubElementRectProc* = proc(self: QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QProxyStylesubControlRectProc* = proc(self: QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QProxyStyleitemTextRectProc* = proc(self: QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QProxyStyleitemPixmapRectProc* = proc(self: QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QProxyStylehitTestComplexControlProc* = proc(self: QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QProxyStylestyleHintProc* = proc(self: QProxyStyle, hint: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint {.raises: [], gcsafe.}
+type QProxyStylepixelMetricProc* = proc(self: QProxyStyle, metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QProxyStylelayoutSpacingProc* = proc(self: QProxyStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint {.raises: [], gcsafe.}
+type QProxyStylestandardIconProc* = proc(self: QProxyStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon {.raises: [], gcsafe.}
+type QProxyStylestandardPixmapProc* = proc(self: QProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
+type QProxyStylegeneratedIconPixmapProc* = proc(self: QProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap {.raises: [], gcsafe.}
+type QProxyStylestandardPaletteProc* = proc(self: QProxyStyle): gen_qpalette_types.QPalette {.raises: [], gcsafe.}
+type QProxyStylepolishProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStylepolishWithPalProc* = proc(self: QProxyStyle, pal: gen_qpalette_types.QPalette): void {.raises: [], gcsafe.}
+type QProxyStylepolishWithAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QProxyStyleunpolishProc* = proc(self: QProxyStyle, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QProxyStyleunpolishWithAppProc* = proc(self: QProxyStyle, app: gen_qapplication_types.QApplication): void {.raises: [], gcsafe.}
+type QProxyStyleeventProc* = proc(self: QProxyStyle, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QProxyStyleeventFilterProc* = proc(self: QProxyStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QProxyStyletimerEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QProxyStylechildEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QProxyStylecustomEventProc* = proc(self: QProxyStyle, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QProxyStyleconnectNotifyProc* = proc(self: QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QProxyStyledisconnectNotifyProc* = proc(self: QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QProxyStyleVTable* = object
+  vtbl: cQProxyStyleVTable
+  metaObject*: QProxyStylemetaObjectProc
+  metacast*: QProxyStylemetacastProc
+  metacall*: QProxyStylemetacallProc
+  drawPrimitive*: QProxyStyledrawPrimitiveProc
+  drawControl*: QProxyStyledrawControlProc
+  drawComplexControl*: QProxyStyledrawComplexControlProc
+  drawItemText*: QProxyStyledrawItemTextProc
+  drawItemPixmap*: QProxyStyledrawItemPixmapProc
+  sizeFromContents*: QProxyStylesizeFromContentsProc
+  subElementRect*: QProxyStylesubElementRectProc
+  subControlRect*: QProxyStylesubControlRectProc
+  itemTextRect*: QProxyStyleitemTextRectProc
+  itemPixmapRect*: QProxyStyleitemPixmapRectProc
+  hitTestComplexControl*: QProxyStylehitTestComplexControlProc
+  styleHint*: QProxyStylestyleHintProc
+  pixelMetric*: QProxyStylepixelMetricProc
+  layoutSpacing*: QProxyStylelayoutSpacingProc
+  standardIcon*: QProxyStylestandardIconProc
+  standardPixmap*: QProxyStylestandardPixmapProc
+  generatedIconPixmap*: QProxyStylegeneratedIconPixmapProc
+  standardPalette*: QProxyStylestandardPaletteProc
+  polish*: QProxyStylepolishProc
+  polishWithPal*: QProxyStylepolishWithPalProc
+  polishWithApp*: QProxyStylepolishWithAppProc
+  unpolish*: QProxyStyleunpolishProc
+  unpolishWithApp*: QProxyStyleunpolishWithAppProc
+  event*: QProxyStyleeventProc
+  eventFilter*: QProxyStyleeventFilterProc
+  timerEvent*: QProxyStyletimerEventProc
+  childEvent*: QProxyStylechildEventProc
+  customEvent*: QProxyStylecustomEventProc
+  connectNotify*: QProxyStyleconnectNotifyProc
+  disconnectNotify*: QProxyStyledisconnectNotifyProc
 proc QProxyStylemetaObject*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQProxyStyle_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_virtualbase_metaObject(self.h))
 
-type QProxyStylemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_metaObject(self: ptr cQProxyStyle, slot: int): pointer {.exportc: "miqt_exec_callback_QProxyStyle_metaObject ".} =
-  var nimfunc = cast[ptr QProxyStylemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQProxyStyle_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QProxyStylemetacast*(self: gen_qproxystyle_types.QProxyStyle, param1: cstring): pointer =
-  fQProxyStyle_virtualbase_metacast(self.h, param1)
+  fcQProxyStyle_virtualbase_metacast(self.h, param1)
 
-type QProxyStylemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetacastProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_metacast(self: ptr cQProxyStyle, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QProxyStyle_metacast ".} =
-  var nimfunc = cast[ptr QProxyStylemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QProxyStylemetacall*(self: gen_qproxystyle_types.QProxyStyle, param1: cint, param2: cint, param3: pointer): cint =
-  fQProxyStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQProxyStyle_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QProxyStylemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylemetacallProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_metacall(self: ptr cQProxyStyle, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_metacall ".} =
-  var nimfunc = cast[ptr QProxyStylemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QProxyStyledrawPrimitive*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
-  fQProxyStyle_virtualbase_drawPrimitive(self.h, cint(element), option.h, painter.h, widget.h)
+  fcQProxyStyle_virtualbase_drawPrimitive(self.h, cint(element), option.h, painter.h, widget.h)
 
-type QProxyStyledrawPrimitiveProc* = proc(element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void
-proc ondrawPrimitive*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledrawPrimitiveProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledrawPrimitiveProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_drawPrimitive(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_drawPrimitive(self: ptr cQProxyStyle, slot: int, element: cint, option: pointer, painter: pointer, widget: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_drawPrimitive ".} =
-  var nimfunc = cast[ptr QProxyStyledrawPrimitiveProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_drawPrimitive(vtbl: pointer, self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].drawPrimitive(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QProxyStyledrawControl*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
-  fQProxyStyle_virtualbase_drawControl(self.h, cint(element), option.h, painter.h, widget.h)
+  fcQProxyStyle_virtualbase_drawControl(self.h, cint(element), option.h, painter.h, widget.h)
 
-type QProxyStyledrawControlProc* = proc(element: cint, option: gen_qstyleoption_types.QStyleOption, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void
-proc ondrawControl*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledrawControlProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledrawControlProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_drawControl(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_drawControl(self: ptr cQProxyStyle, slot: int, element: cint, option: pointer, painter: pointer, widget: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_drawControl ".} =
-  var nimfunc = cast[ptr QProxyStyledrawControlProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_drawControl(vtbl: pointer, self: pointer, element: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].drawControl(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QProxyStyledrawComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void =
-  fQProxyStyle_virtualbase_drawComplexControl(self.h, cint(control), option.h, painter.h, widget.h)
+  fcQProxyStyle_virtualbase_drawComplexControl(self.h, cint(control), option.h, painter.h, widget.h)
 
-type QProxyStyledrawComplexControlProc* = proc(control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, painter: gen_qpainter_types.QPainter, widget: gen_qwidget_types.QWidget): void
-proc ondrawComplexControl*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledrawComplexControlProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledrawComplexControlProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_drawComplexControl(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_drawComplexControl(self: ptr cQProxyStyle, slot: int, control: cint, option: pointer, painter: pointer, widget: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_drawComplexControl ".} =
-  var nimfunc = cast[ptr QProxyStyledrawComplexControlProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_drawComplexControl(vtbl: pointer, self: pointer, control: cint, option: pointer, painter: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(control)
-
   let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option)
-
   let slotval3 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].drawComplexControl(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QProxyStyledrawItemText*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void =
-  fQProxyStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: text, len: csize_t(len(text))), cint(textRole))
+  fcQProxyStyle_virtualbase_drawItemText(self.h, painter.h, rect.h, flags, pal.h, enabled, struct_miqt_string(data: text, len: csize_t(len(text))), cint(textRole))
 
-type QProxyStyledrawItemTextProc* = proc(painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, flags: cint, pal: gen_qpalette_types.QPalette, enabled: bool, text: string, textRole: cint): void
-proc ondrawItemText*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledrawItemTextProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledrawItemTextProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_drawItemText(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_drawItemText(self: ptr cQProxyStyle, slot: int, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.exportc: "miqt_exec_callback_QProxyStyle_drawItemText ".} =
-  var nimfunc = cast[ptr QProxyStyledrawItemTextProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_drawItemText(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, flags: cint, pal: pointer, enabled: bool, text: struct_miqt_string, textRole: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval2 = gen_qrect_types.QRect(h: rect)
-
   let slotval3 = flags
-
   let slotval4 = gen_qpalette_types.QPalette(h: pal)
-
   let slotval5 = enabled
-
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
   c_free(vtext_ms.data)
   let slotval6 = vtextx_ret
-
   let slotval7 = cint(textRole)
+  vtbl[].drawItemText(self, slotval1, slotval2, slotval3, slotval4, slotval5, slotval6, slotval7)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5, slotval6, slotval7)
 proc QProxyStyledrawItemPixmap*(self: gen_qproxystyle_types.QProxyStyle, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void =
-  fQProxyStyle_virtualbase_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
+  fcQProxyStyle_virtualbase_drawItemPixmap(self.h, painter.h, rect.h, alignment, pixmap.h)
 
-type QProxyStyledrawItemPixmapProc* = proc(painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, alignment: cint, pixmap: gen_qpixmap_types.QPixmap): void
-proc ondrawItemPixmap*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledrawItemPixmapProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledrawItemPixmapProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_drawItemPixmap(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_drawItemPixmap(self: ptr cQProxyStyle, slot: int, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_drawItemPixmap ".} =
-  var nimfunc = cast[ptr QProxyStyledrawItemPixmapProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_drawItemPixmap(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, alignment: cint, pixmap: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval2 = gen_qrect_types.QRect(h: rect)
-
   let slotval3 = alignment
-
   let slotval4 = gen_qpixmap_types.QPixmap(h: pixmap)
+  vtbl[].drawItemPixmap(self, slotval1, slotval2, slotval3, slotval4)
 
-
-  nimfunc[](slotval1, slotval2, slotval3, slotval4)
 proc QProxyStylesizeFromContents*(self: gen_qproxystyle_types.QProxyStyle, typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQProxyStyle_virtualbase_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h))
+  gen_qsize_types.QSize(h: fcQProxyStyle_virtualbase_sizeFromContents(self.h, cint(typeVal), option.h, size.h, widget.h))
 
-type QProxyStylesizeFromContentsProc* = proc(typeVal: cint, option: gen_qstyleoption_types.QStyleOption, size: gen_qsize_types.QSize, widget: gen_qwidget_types.QWidget): gen_qsize_types.QSize
-proc onsizeFromContents*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylesizeFromContentsProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylesizeFromContentsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_sizeFromContents(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_sizeFromContents(self: ptr cQProxyStyle, slot: int, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_sizeFromContents ".} =
-  var nimfunc = cast[ptr QProxyStylesizeFromContentsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_sizeFromContents(vtbl: pointer, self: pointer, typeVal: cint, option: pointer, size: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(typeVal)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qsize_types.QSize(h: size)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].sizeFromContents(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn.h
+
 proc QProxyStylesubElementRect*(self: gen_qproxystyle_types.QProxyStyle, element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fQProxyStyle_virtualbase_subElementRect(self.h, cint(element), option.h, widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subElementRect(self.h, cint(element), option.h, widget.h))
 
-type QProxyStylesubElementRectProc* = proc(element: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect
-proc onsubElementRect*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylesubElementRectProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylesubElementRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_subElementRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_subElementRect(self: ptr cQProxyStyle, slot: int, element: cint, option: pointer, widget: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_subElementRect ".} =
-  var nimfunc = cast[ptr QProxyStylesubElementRectProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_subElementRect(vtbl: pointer, self: pointer, element: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(element)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].subElementRect(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QProxyStylesubControlRect*(self: gen_qproxystyle_types.QProxyStyle, cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fQProxyStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_subControlRect(self.h, cint(cc), opt.h, cint(sc), widget.h))
 
-type QProxyStylesubControlRectProc* = proc(cc: cint, opt: gen_qstyleoption_types.QStyleOptionComplex, sc: cint, widget: gen_qwidget_types.QWidget): gen_qrect_types.QRect
-proc onsubControlRect*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylesubControlRectProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylesubControlRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_subControlRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_subControlRect(self: ptr cQProxyStyle, slot: int, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_subControlRect ".} =
-  var nimfunc = cast[ptr QProxyStylesubControlRectProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_subControlRect(vtbl: pointer, self: pointer, cc: cint, opt: pointer, sc: cint, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(cc)
-
   let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: opt)
-
   let slotval3 = cint(sc)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].subControlRect(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn.h
+
 proc QProxyStyleitemTextRect*(self: gen_qproxystyle_types.QProxyStyle, fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fQProxyStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemTextRect(self.h, fm.h, r.h, flags, enabled, struct_miqt_string(data: text, len: csize_t(len(text)))))
 
-type QProxyStyleitemTextRectProc* = proc(fm: gen_qfontmetrics_types.QFontMetrics, r: gen_qrect_types.QRect, flags: cint, enabled: bool, text: string): gen_qrect_types.QRect
-proc onitemTextRect*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleitemTextRectProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleitemTextRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_itemTextRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_itemTextRect(self: ptr cQProxyStyle, slot: int, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.exportc: "miqt_exec_callback_QProxyStyle_itemTextRect ".} =
-  var nimfunc = cast[ptr QProxyStyleitemTextRectProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_itemTextRect(vtbl: pointer, self: pointer, fm: pointer, r: pointer, flags: cint, enabled: bool, text: struct_miqt_string): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qfontmetrics_types.QFontMetrics(h: fm)
-
   let slotval2 = gen_qrect_types.QRect(h: r)
-
   let slotval3 = flags
-
   let slotval4 = enabled
-
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
   c_free(vtext_ms.data)
   let slotval5 = vtextx_ret
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].itemTextRect(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn.h
+
 proc QProxyStyleitemPixmapRect*(self: gen_qproxystyle_types.QProxyStyle, r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fQProxyStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h))
+  gen_qrect_types.QRect(h: fcQProxyStyle_virtualbase_itemPixmapRect(self.h, r.h, flags, pixmap.h))
 
-type QProxyStyleitemPixmapRectProc* = proc(r: gen_qrect_types.QRect, flags: cint, pixmap: gen_qpixmap_types.QPixmap): gen_qrect_types.QRect
-proc onitemPixmapRect*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleitemPixmapRectProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleitemPixmapRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_itemPixmapRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_itemPixmapRect(self: ptr cQProxyStyle, slot: int, r: pointer, flags: cint, pixmap: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_itemPixmapRect ".} =
-  var nimfunc = cast[ptr QProxyStyleitemPixmapRectProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_itemPixmapRect(vtbl: pointer, self: pointer, r: pointer, flags: cint, pixmap: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qrect_types.QRect(h: r)
-
   let slotval2 = flags
-
   let slotval3 = gen_qpixmap_types.QPixmap(h: pixmap)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].itemPixmapRect(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QProxyStylehitTestComplexControl*(self: gen_qproxystyle_types.QProxyStyle, control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint =
-  cint(fQProxyStyle_virtualbase_hitTestComplexControl(self.h, cint(control), option.h, pos.h, widget.h))
+  cint(fcQProxyStyle_virtualbase_hitTestComplexControl(self.h, cint(control), option.h, pos.h, widget.h))
 
-type QProxyStylehitTestComplexControlProc* = proc(control: cint, option: gen_qstyleoption_types.QStyleOptionComplex, pos: gen_qpoint_types.QPoint, widget: gen_qwidget_types.QWidget): cint
-proc onhitTestComplexControl*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylehitTestComplexControlProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylehitTestComplexControlProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_hitTestComplexControl(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_hitTestComplexControl(self: ptr cQProxyStyle, slot: int, control: cint, option: pointer, pos: pointer, widget: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_hitTestComplexControl ".} =
-  var nimfunc = cast[ptr QProxyStylehitTestComplexControlProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_hitTestComplexControl(vtbl: pointer, self: pointer, control: cint, option: pointer, pos: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(control)
-
   let slotval2 = gen_qstyleoption_types.QStyleOptionComplex(h: option)
-
   let slotval3 = gen_qpoint_types.QPoint(h: pos)
-
   let slotval4 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].hitTestComplexControl(self, slotval1, slotval2, slotval3, slotval4)
   cint(virtualReturn)
+
 proc QProxyStylestyleHint*(self: gen_qproxystyle_types.QProxyStyle, hint: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint =
-  fQProxyStyle_virtualbase_styleHint(self.h, cint(hint), option.h, widget.h, returnData.h)
+  fcQProxyStyle_virtualbase_styleHint(self.h, cint(hint), option.h, widget.h, returnData.h)
 
-type QProxyStylestyleHintProc* = proc(hint: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget, returnData: gen_qstyleoption_types.QStyleHintReturn): cint
-proc onstyleHint*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylestyleHintProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylestyleHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_styleHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_styleHint(self: ptr cQProxyStyle, slot: int, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_styleHint ".} =
-  var nimfunc = cast[ptr QProxyStylestyleHintProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_styleHint(vtbl: pointer, self: pointer, hint: cint, option: pointer, widget: pointer, returnData: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(hint)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
-
   let slotval4 = gen_qstyleoption_types.QStyleHintReturn(h: returnData)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].styleHint(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
+
 proc QProxyStylepixelMetric*(self: gen_qproxystyle_types.QProxyStyle, metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
-  fQProxyStyle_virtualbase_pixelMetric(self.h, cint(metric), option.h, widget.h)
+  fcQProxyStyle_virtualbase_pixelMetric(self.h, cint(metric), option.h, widget.h)
 
-type QProxyStylepixelMetricProc* = proc(metric: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint
-proc onpixelMetric*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylepixelMetricProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylepixelMetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_pixelMetric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_pixelMetric(self: ptr cQProxyStyle, slot: int, metric: cint, option: pointer, widget: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_pixelMetric ".} =
-  var nimfunc = cast[ptr QProxyStylepixelMetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_pixelMetric(vtbl: pointer, self: pointer, metric: cint, option: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(metric)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].pixelMetric(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QProxyStylelayoutSpacing*(self: gen_qproxystyle_types.QProxyStyle, control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint =
-  fQProxyStyle_virtualbase_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
+  fcQProxyStyle_virtualbase_layoutSpacing(self.h, cint(control1), cint(control2), cint(orientation), option.h, widget.h)
 
-type QProxyStylelayoutSpacingProc* = proc(control1: cint, control2: cint, orientation: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): cint
-proc onlayoutSpacing*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylelayoutSpacingProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylelayoutSpacingProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_layoutSpacing(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_layoutSpacing(self: ptr cQProxyStyle, slot: int, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.exportc: "miqt_exec_callback_QProxyStyle_layoutSpacing ".} =
-  var nimfunc = cast[ptr QProxyStylelayoutSpacingProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_layoutSpacing(vtbl: pointer, self: pointer, control1: cint, control2: cint, orientation: cint, option: pointer, widget: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(control1)
-
   let slotval2 = cint(control2)
-
   let slotval3 = cint(orientation)
-
   let slotval4 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval5 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].layoutSpacing(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QProxyStylestandardIcon*(self: gen_qproxystyle_types.QProxyStyle, standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon(h: fQProxyStyle_virtualbase_standardIcon(self.h, cint(standardIcon), option.h, widget.h))
+  gen_qicon_types.QIcon(h: fcQProxyStyle_virtualbase_standardIcon(self.h, cint(standardIcon), option.h, widget.h))
 
-type QProxyStylestandardIconProc* = proc(standardIcon: cint, option: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qicon_types.QIcon
-proc onstandardIcon*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylestandardIconProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylestandardIconProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_standardIcon(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_standardIcon(self: ptr cQProxyStyle, slot: int, standardIcon: cint, option: pointer, widget: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_standardIcon ".} =
-  var nimfunc = cast[ptr QProxyStylestandardIconProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_standardIcon(vtbl: pointer, self: pointer, standardIcon: cint, option: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(standardIcon)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: option)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].standardIcon(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QProxyStylestandardPixmap*(self: gen_qproxystyle_types.QProxyStyle, standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fQProxyStyle_virtualbase_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_standardPixmap(self.h, cint(standardPixmap), opt.h, widget.h))
 
-type QProxyStylestandardPixmapProc* = proc(standardPixmap: cint, opt: gen_qstyleoption_types.QStyleOption, widget: gen_qwidget_types.QWidget): gen_qpixmap_types.QPixmap
-proc onstandardPixmap*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylestandardPixmapProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylestandardPixmapProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_standardPixmap(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_standardPixmap(self: ptr cQProxyStyle, slot: int, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_standardPixmap ".} =
-  var nimfunc = cast[ptr QProxyStylestandardPixmapProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_standardPixmap(vtbl: pointer, self: pointer, standardPixmap: cint, opt: pointer, widget: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(standardPixmap)
-
   let slotval2 = gen_qstyleoption_types.QStyleOption(h: opt)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].standardPixmap(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QProxyStylegeneratedIconPixmap*(self: gen_qproxystyle_types.QProxyStyle, iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap =
-  gen_qpixmap_types.QPixmap(h: fQProxyStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
+  gen_qpixmap_types.QPixmap(h: fcQProxyStyle_virtualbase_generatedIconPixmap(self.h, cint(iconMode), pixmap.h, opt.h))
 
-type QProxyStylegeneratedIconPixmapProc* = proc(iconMode: cint, pixmap: gen_qpixmap_types.QPixmap, opt: gen_qstyleoption_types.QStyleOption): gen_qpixmap_types.QPixmap
-proc ongeneratedIconPixmap*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylegeneratedIconPixmapProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylegeneratedIconPixmapProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_generatedIconPixmap(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_generatedIconPixmap(self: ptr cQProxyStyle, slot: int, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.exportc: "miqt_exec_callback_QProxyStyle_generatedIconPixmap ".} =
-  var nimfunc = cast[ptr QProxyStylegeneratedIconPixmapProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_generatedIconPixmap(vtbl: pointer, self: pointer, iconMode: cint, pixmap: pointer, opt: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = cint(iconMode)
-
   let slotval2 = gen_qpixmap_types.QPixmap(h: pixmap)
-
   let slotval3 = gen_qstyleoption_types.QStyleOption(h: opt)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].generatedIconPixmap(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QProxyStylestandardPalette*(self: gen_qproxystyle_types.QProxyStyle, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette(h: fQProxyStyle_virtualbase_standardPalette(self.h))
+  gen_qpalette_types.QPalette(h: fcQProxyStyle_virtualbase_standardPalette(self.h))
 
-type QProxyStylestandardPaletteProc* = proc(): gen_qpalette_types.QPalette
-proc onstandardPalette*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylestandardPaletteProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylestandardPaletteProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_standardPalette(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_standardPalette(self: ptr cQProxyStyle, slot: int): pointer {.exportc: "miqt_exec_callback_QProxyStyle_standardPalette ".} =
-  var nimfunc = cast[ptr QProxyStylestandardPaletteProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQProxyStyle_standardPalette(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
+  var virtualReturn = vtbl[].standardPalette(self)
   virtualReturn.h
+
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fQProxyStyle_virtualbase_polish(self.h, widget.h)
+  fcQProxyStyle_virtualbase_polish(self.h, widget.h)
 
-type QProxyStylepolishProc* = proc(widget: gen_qwidget_types.QWidget): void
-proc onpolish*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylepolishProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylepolishProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_polish(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_polish(self: ptr cQProxyStyle, slot: int, widget: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_polish ".} =
-  var nimfunc = cast[ptr QProxyStylepolishProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_polish(vtbl: pointer, self: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].polish(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, pal: gen_qpalette_types.QPalette): void =
-  fQProxyStyle_virtualbase_polishWithPal(self.h, pal.h)
+  fcQProxyStyle_virtualbase_polishWithPal(self.h, pal.h)
 
-type QProxyStylepolishWithPalProc* = proc(pal: gen_qpalette_types.QPalette): void
-proc onpolish*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylepolishWithPalProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylepolishWithPalProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_polishWithPal(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_polishWithPal(self: ptr cQProxyStyle, slot: int, pal: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_polishWithPal ".} =
-  var nimfunc = cast[ptr QProxyStylepolishWithPalProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_polishWithPal(vtbl: pointer, self: pointer, pal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qpalette_types.QPalette(h: pal)
+  vtbl[].polishWithPal(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStylepolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fQProxyStyle_virtualbase_polishWithApp(self.h, app.h)
+  fcQProxyStyle_virtualbase_polishWithApp(self.h, app.h)
 
-type QProxyStylepolishWithAppProc* = proc(app: gen_qapplication_types.QApplication): void
-proc onpolish*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylepolishWithAppProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylepolishWithAppProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_polishWithApp(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_polishWithApp(self: ptr cQProxyStyle, slot: int, app: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_polishWithApp ".} =
-  var nimfunc = cast[ptr QProxyStylepolishWithAppProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_polishWithApp(vtbl: pointer, self: pointer, app: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: app)
+  vtbl[].polishWithApp(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, widget: gen_qwidget_types.QWidget): void =
-  fQProxyStyle_virtualbase_unpolish(self.h, widget.h)
+  fcQProxyStyle_virtualbase_unpolish(self.h, widget.h)
 
-type QProxyStyleunpolishProc* = proc(widget: gen_qwidget_types.QWidget): void
-proc onunpolish*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleunpolishProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleunpolishProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_unpolish(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_unpolish(self: ptr cQProxyStyle, slot: int, widget: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_unpolish ".} =
-  var nimfunc = cast[ptr QProxyStyleunpolishProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_unpolish(vtbl: pointer, self: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].unpolish(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStyleunpolish*(self: gen_qproxystyle_types.QProxyStyle, app: gen_qapplication_types.QApplication): void =
-  fQProxyStyle_virtualbase_unpolishWithApp(self.h, app.h)
+  fcQProxyStyle_virtualbase_unpolishWithApp(self.h, app.h)
 
-type QProxyStyleunpolishWithAppProc* = proc(app: gen_qapplication_types.QApplication): void
-proc onunpolish*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleunpolishWithAppProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleunpolishWithAppProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_unpolishWithApp(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_unpolishWithApp(self: ptr cQProxyStyle, slot: int, app: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_unpolishWithApp ".} =
-  var nimfunc = cast[ptr QProxyStyleunpolishWithAppProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_unpolishWithApp(vtbl: pointer, self: pointer, app: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qapplication_types.QApplication(h: app)
+  vtbl[].unpolishWithApp(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStyleevent*(self: gen_qproxystyle_types.QProxyStyle, e: gen_qcoreevent_types.QEvent): bool =
-  fQProxyStyle_virtualbase_event(self.h, e.h)
+  fcQProxyStyle_virtualbase_event(self.h, e.h)
 
-type QProxyStyleeventProc* = proc(e: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleeventProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_event(self: ptr cQProxyStyle, slot: int, e: pointer): bool {.exportc: "miqt_exec_callback_QProxyStyle_event ".} =
-  var nimfunc = cast[ptr QProxyStyleeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QProxyStyleeventFilter*(self: gen_qproxystyle_types.QProxyStyle, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQProxyStyle_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQProxyStyle_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QProxyStyleeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_eventFilter(self: ptr cQProxyStyle, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QProxyStyle_eventFilter ".} =
-  var nimfunc = cast[ptr QProxyStyleeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QProxyStyletimerEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQProxyStyle_virtualbase_timerEvent(self.h, event.h)
+  fcQProxyStyle_virtualbase_timerEvent(self.h, event.h)
 
-type QProxyStyletimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyletimerEventProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyletimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_timerEvent(self: ptr cQProxyStyle, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_timerEvent ".} =
-  var nimfunc = cast[ptr QProxyStyletimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStylechildEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_qcoreevent_types.QChildEvent): void =
-  fQProxyStyle_virtualbase_childEvent(self.h, event.h)
+  fcQProxyStyle_virtualbase_childEvent(self.h, event.h)
 
-type QProxyStylechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylechildEventProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_childEvent(self: ptr cQProxyStyle, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_childEvent ".} =
-  var nimfunc = cast[ptr QProxyStylechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStylecustomEvent*(self: gen_qproxystyle_types.QProxyStyle, event: gen_qcoreevent_types.QEvent): void =
-  fQProxyStyle_virtualbase_customEvent(self.h, event.h)
+  fcQProxyStyle_virtualbase_customEvent(self.h, event.h)
 
-type QProxyStylecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStylecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QProxyStylecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_customEvent(self: ptr cQProxyStyle, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_customEvent ".} =
-  var nimfunc = cast[ptr QProxyStylecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStyleconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQProxyStyle_virtualbase_connectNotify(self.h, signal.h)
+  fcQProxyStyle_virtualbase_connectNotify(self.h, signal.h)
 
-type QProxyStyleconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyleconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyleconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_connectNotify(self: ptr cQProxyStyle, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_connectNotify ".} =
-  var nimfunc = cast[ptr QProxyStyleconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QProxyStyledisconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQProxyStyle_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQProxyStyle_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QProxyStyledisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qproxystyle_types.QProxyStyle, slot: QProxyStyledisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QProxyStyledisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQProxyStyle_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QProxyStyle_disconnectNotify(self: ptr cQProxyStyle, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QProxyStyle_disconnectNotify ".} =
-  var nimfunc = cast[ptr QProxyStyledisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQProxyStyle_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProxyStyleVTable](vtbl)
+  let self = QProxyStyle(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
+  let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ref QProxyStyleVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
+  if not isNil(vtbl.drawPrimitive):
+    vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
+  if not isNil(vtbl.drawControl):
+    vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
+  if not isNil(vtbl.drawComplexControl):
+    vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
+  if not isNil(vtbl.drawItemText):
+    vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
+  if not isNil(vtbl.drawItemPixmap):
+    vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
+  if not isNil(vtbl.sizeFromContents):
+    vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
+  if not isNil(vtbl.subElementRect):
+    vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
+  if not isNil(vtbl.subControlRect):
+    vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
+  if not isNil(vtbl.itemTextRect):
+    vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
+  if not isNil(vtbl.itemPixmapRect):
+    vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
+  if not isNil(vtbl.hitTestComplexControl):
+    vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
+  if not isNil(vtbl.styleHint):
+    vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
+  if not isNil(vtbl.pixelMetric):
+    vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
+  if not isNil(vtbl.layoutSpacing):
+    vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
+  if not isNil(vtbl.standardIcon):
+    vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
+  if not isNil(vtbl.standardPixmap):
+    vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
+  if not isNil(vtbl.generatedIconPixmap):
+    vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
+  if not isNil(vtbl.standardPalette):
+    vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
+  if not isNil(vtbl.polish):
+    vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
+  if not isNil(vtbl.polishWithPal):
+    vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
+  if not isNil(vtbl.polishWithApp):
+    vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
+  if not isNil(vtbl.unpolish):
+    vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
+  if not isNil(vtbl.unpolishWithApp):
+    vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    key: string,
+    vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
+  let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ref QProxyStyleVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
+  if not isNil(vtbl.drawPrimitive):
+    vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
+  if not isNil(vtbl.drawControl):
+    vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
+  if not isNil(vtbl.drawComplexControl):
+    vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
+  if not isNil(vtbl.drawItemText):
+    vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
+  if not isNil(vtbl.drawItemPixmap):
+    vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
+  if not isNil(vtbl.sizeFromContents):
+    vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
+  if not isNil(vtbl.subElementRect):
+    vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
+  if not isNil(vtbl.subControlRect):
+    vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
+  if not isNil(vtbl.itemTextRect):
+    vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
+  if not isNil(vtbl.itemPixmapRect):
+    vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
+  if not isNil(vtbl.hitTestComplexControl):
+    vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
+  if not isNil(vtbl.styleHint):
+    vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
+  if not isNil(vtbl.pixelMetric):
+    vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
+  if not isNil(vtbl.layoutSpacing):
+    vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
+  if not isNil(vtbl.standardIcon):
+    vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
+  if not isNil(vtbl.standardPixmap):
+    vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
+  if not isNil(vtbl.generatedIconPixmap):
+    vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
+  if not isNil(vtbl.standardPalette):
+    vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
+  if not isNil(vtbl.polish):
+    vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
+  if not isNil(vtbl.polishWithPal):
+    vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
+  if not isNil(vtbl.polishWithApp):
+    vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
+  if not isNil(vtbl.unpolish):
+    vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
+  if not isNil(vtbl.unpolishWithApp):
+    vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new2(addr(vtbl[]), struct_miqt_string(data: key, len: csize_t(len(key)))))
+
+proc create*(T: type gen_qproxystyle_types.QProxyStyle,
+    style: gen_qstyle_types.QStyle,
+    vtbl: ref QProxyStyleVTable = nil): gen_qproxystyle_types.QProxyStyle =
+  let vtbl = if vtbl == nil: new QProxyStyleVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQProxyStyleVTable, _: ptr cQProxyStyle) {.cdecl.} =
+    let vtbl = cast[ref QProxyStyleVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQProxyStyle_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQProxyStyle_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQProxyStyle_metacall
+  if not isNil(vtbl.drawPrimitive):
+    vtbl[].vtbl.drawPrimitive = miqt_exec_callback_cQProxyStyle_drawPrimitive
+  if not isNil(vtbl.drawControl):
+    vtbl[].vtbl.drawControl = miqt_exec_callback_cQProxyStyle_drawControl
+  if not isNil(vtbl.drawComplexControl):
+    vtbl[].vtbl.drawComplexControl = miqt_exec_callback_cQProxyStyle_drawComplexControl
+  if not isNil(vtbl.drawItemText):
+    vtbl[].vtbl.drawItemText = miqt_exec_callback_cQProxyStyle_drawItemText
+  if not isNil(vtbl.drawItemPixmap):
+    vtbl[].vtbl.drawItemPixmap = miqt_exec_callback_cQProxyStyle_drawItemPixmap
+  if not isNil(vtbl.sizeFromContents):
+    vtbl[].vtbl.sizeFromContents = miqt_exec_callback_cQProxyStyle_sizeFromContents
+  if not isNil(vtbl.subElementRect):
+    vtbl[].vtbl.subElementRect = miqt_exec_callback_cQProxyStyle_subElementRect
+  if not isNil(vtbl.subControlRect):
+    vtbl[].vtbl.subControlRect = miqt_exec_callback_cQProxyStyle_subControlRect
+  if not isNil(vtbl.itemTextRect):
+    vtbl[].vtbl.itemTextRect = miqt_exec_callback_cQProxyStyle_itemTextRect
+  if not isNil(vtbl.itemPixmapRect):
+    vtbl[].vtbl.itemPixmapRect = miqt_exec_callback_cQProxyStyle_itemPixmapRect
+  if not isNil(vtbl.hitTestComplexControl):
+    vtbl[].vtbl.hitTestComplexControl = miqt_exec_callback_cQProxyStyle_hitTestComplexControl
+  if not isNil(vtbl.styleHint):
+    vtbl[].vtbl.styleHint = miqt_exec_callback_cQProxyStyle_styleHint
+  if not isNil(vtbl.pixelMetric):
+    vtbl[].vtbl.pixelMetric = miqt_exec_callback_cQProxyStyle_pixelMetric
+  if not isNil(vtbl.layoutSpacing):
+    vtbl[].vtbl.layoutSpacing = miqt_exec_callback_cQProxyStyle_layoutSpacing
+  if not isNil(vtbl.standardIcon):
+    vtbl[].vtbl.standardIcon = miqt_exec_callback_cQProxyStyle_standardIcon
+  if not isNil(vtbl.standardPixmap):
+    vtbl[].vtbl.standardPixmap = miqt_exec_callback_cQProxyStyle_standardPixmap
+  if not isNil(vtbl.generatedIconPixmap):
+    vtbl[].vtbl.generatedIconPixmap = miqt_exec_callback_cQProxyStyle_generatedIconPixmap
+  if not isNil(vtbl.standardPalette):
+    vtbl[].vtbl.standardPalette = miqt_exec_callback_cQProxyStyle_standardPalette
+  if not isNil(vtbl.polish):
+    vtbl[].vtbl.polish = miqt_exec_callback_cQProxyStyle_polish
+  if not isNil(vtbl.polishWithPal):
+    vtbl[].vtbl.polishWithPal = miqt_exec_callback_cQProxyStyle_polishWithPal
+  if not isNil(vtbl.polishWithApp):
+    vtbl[].vtbl.polishWithApp = miqt_exec_callback_cQProxyStyle_polishWithApp
+  if not isNil(vtbl.unpolish):
+    vtbl[].vtbl.unpolish = miqt_exec_callback_cQProxyStyle_unpolish
+  if not isNil(vtbl.unpolishWithApp):
+    vtbl[].vtbl.unpolishWithApp = miqt_exec_callback_cQProxyStyle_unpolishWithApp
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQProxyStyle_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProxyStyle_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProxyStyle_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQProxyStyle_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQProxyStyle_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProxyStyle_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProxyStyle_disconnectNotify
+  gen_qproxystyle_types.QProxyStyle(h: fcQProxyStyle_new3(addr(vtbl[]), style.h))
+
 proc staticMetaObject*(_: type gen_qproxystyle_types.QProxyStyle): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProxyStyle_staticMetaObject())
 proc delete*(self: gen_qproxystyle_types.QProxyStyle) =

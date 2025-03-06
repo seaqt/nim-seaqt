@@ -43,11 +43,8 @@ type cQLinkedListData*{.exportc: "QLinkedListData", incompleteStruct.} = object
 proc fcQLinkedListData_new(): ptr cQLinkedListData {.importc: "QLinkedListData_new".}
 proc fcQLinkedListData_delete(self: pointer) {.importc: "QLinkedListData_delete".}
 
-
-func init*(T: type gen_qlinkedlist_types.QLinkedListData, h: ptr cQLinkedListData): gen_qlinkedlist_types.QLinkedListData =
-  T(h: h)
-proc create*(T: type gen_qlinkedlist_types.QLinkedListData, ): gen_qlinkedlist_types.QLinkedListData =
-  gen_qlinkedlist_types.QLinkedListData.init(fcQLinkedListData_new())
+proc create*(T: type gen_qlinkedlist_types.QLinkedListData): gen_qlinkedlist_types.QLinkedListData =
+  gen_qlinkedlist_types.QLinkedListData(h: fcQLinkedListData_new())
 
 proc delete*(self: gen_qlinkedlist_types.QLinkedListData) =
   fcQLinkedListData_delete(self.h)

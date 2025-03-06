@@ -44,10 +44,6 @@ export
 
 type cQCameraInfo*{.exportc: "QCameraInfo", incompleteStruct.} = object
 
-proc fcQCameraInfo_new(): ptr cQCameraInfo {.importc: "QCameraInfo_new".}
-proc fcQCameraInfo_new2(camera: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new2".}
-proc fcQCameraInfo_new3(other: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new3".}
-proc fcQCameraInfo_new4(name: struct_miqt_string): ptr cQCameraInfo {.importc: "QCameraInfo_new4".}
 proc fcQCameraInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QCameraInfo_operatorAssign".}
 proc fcQCameraInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCameraInfo_operatorEqual".}
 proc fcQCameraInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCameraInfo_operatorNotEqual".}
@@ -59,22 +55,11 @@ proc fcQCameraInfo_orientation(self: pointer, ): cint {.importc: "QCameraInfo_or
 proc fcQCameraInfo_defaultCamera(): pointer {.importc: "QCameraInfo_defaultCamera".}
 proc fcQCameraInfo_availableCameras(): struct_miqt_array {.importc: "QCameraInfo_availableCameras".}
 proc fcQCameraInfo_availableCameras1(position: cint): struct_miqt_array {.importc: "QCameraInfo_availableCameras1".}
+proc fcQCameraInfo_new(): ptr cQCameraInfo {.importc: "QCameraInfo_new".}
+proc fcQCameraInfo_new2(camera: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new2".}
+proc fcQCameraInfo_new3(other: pointer): ptr cQCameraInfo {.importc: "QCameraInfo_new3".}
+proc fcQCameraInfo_new4(name: struct_miqt_string): ptr cQCameraInfo {.importc: "QCameraInfo_new4".}
 proc fcQCameraInfo_delete(self: pointer) {.importc: "QCameraInfo_delete".}
-
-
-func init*(T: type gen_qcamerainfo_types.QCameraInfo, h: ptr cQCameraInfo): gen_qcamerainfo_types.QCameraInfo =
-  T(h: h)
-proc create*(T: type gen_qcamerainfo_types.QCameraInfo, ): gen_qcamerainfo_types.QCameraInfo =
-  gen_qcamerainfo_types.QCameraInfo.init(fcQCameraInfo_new())
-
-proc create*(T: type gen_qcamerainfo_types.QCameraInfo, camera: gen_qcamera_types.QCamera): gen_qcamerainfo_types.QCameraInfo =
-  gen_qcamerainfo_types.QCameraInfo.init(fcQCameraInfo_new2(camera.h))
-
-proc create*(T: type gen_qcamerainfo_types.QCameraInfo, other: gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
-  gen_qcamerainfo_types.QCameraInfo.init(fcQCameraInfo_new3(other.h))
-
-proc create*(T: type gen_qcamerainfo_types.QCameraInfo, name: seq[byte]): gen_qcamerainfo_types.QCameraInfo =
-  gen_qcamerainfo_types.QCameraInfo.init(fcQCameraInfo_new4(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
 
 proc operatorAssign*(self: gen_qcamerainfo_types.QCameraInfo, other: gen_qcamerainfo_types.QCameraInfo): void =
   fcQCameraInfo_operatorAssign(self.h, other.h)
@@ -124,6 +109,21 @@ proc availableCameras*(_: type gen_qcamerainfo_types.QCameraInfo, position: cint
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qcamerainfo_types.QCameraInfo(h: v_outCast[i])
   vx_ret
+
+proc create*(T: type gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
+  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new())
+
+proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
+    camera: gen_qcamera_types.QCamera): gen_qcamerainfo_types.QCameraInfo =
+  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new2(camera.h))
+
+proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
+    other: gen_qcamerainfo_types.QCameraInfo): gen_qcamerainfo_types.QCameraInfo =
+  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new3(other.h))
+
+proc create*(T: type gen_qcamerainfo_types.QCameraInfo,
+    name: seq[byte]): gen_qcamerainfo_types.QCameraInfo =
+  gen_qcamerainfo_types.QCameraInfo(h: fcQCameraInfo_new4(struct_miqt_string(data: cast[cstring](if len(name) == 0: nil else: unsafeAddr name[0]), len: csize_t(len(name)))))
 
 proc delete*(self: gen_qcamerainfo_types.QCameraInfo) =
   fcQCameraInfo_delete(self.h)

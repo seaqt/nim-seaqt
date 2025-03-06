@@ -22,10 +22,13 @@ typedef struct QQmlAbstractUrlInterceptor QQmlAbstractUrlInterceptor;
 typedef struct QUrl QUrl;
 #endif
 
-QQmlAbstractUrlInterceptor* QQmlAbstractUrlInterceptor_new();
+struct QQmlAbstractUrlInterceptor_VTable {
+	void (*destructor)(struct QQmlAbstractUrlInterceptor_VTable* vtbl, QQmlAbstractUrlInterceptor* self);
+	QUrl* (*intercept)(struct QQmlAbstractUrlInterceptor_VTable* vtbl, QQmlAbstractUrlInterceptor* self, QUrl* path, int type);
+};
+QQmlAbstractUrlInterceptor* QQmlAbstractUrlInterceptor_new(struct QQmlAbstractUrlInterceptor_VTable* vtbl);
 QUrl* QQmlAbstractUrlInterceptor_intercept(QQmlAbstractUrlInterceptor* self, QUrl* path, int type);
 void QQmlAbstractUrlInterceptor_operatorAssign(QQmlAbstractUrlInterceptor* self, QQmlAbstractUrlInterceptor* param1);
-bool QQmlAbstractUrlInterceptor_override_virtual_intercept(void* self, intptr_t slot);
 QUrl* QQmlAbstractUrlInterceptor_virtualbase_intercept(void* self, QUrl* path, int type);
 void QQmlAbstractUrlInterceptor_delete(QQmlAbstractUrlInterceptor* self);
 

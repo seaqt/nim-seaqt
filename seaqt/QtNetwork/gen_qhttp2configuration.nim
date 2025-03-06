@@ -40,8 +40,6 @@ export gen_qhttp2configuration_types
 
 type cQHttp2Configuration*{.exportc: "QHttp2Configuration", incompleteStruct.} = object
 
-proc fcQHttp2Configuration_new(): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new".}
-proc fcQHttp2Configuration_new2(other: pointer): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new2".}
 proc fcQHttp2Configuration_operatorAssign(self: pointer, other: pointer): void {.importc: "QHttp2Configuration_operatorAssign".}
 proc fcQHttp2Configuration_setServerPushEnabled(self: pointer, enable: bool): void {.importc: "QHttp2Configuration_setServerPushEnabled".}
 proc fcQHttp2Configuration_serverPushEnabled(self: pointer, ): bool {.importc: "QHttp2Configuration_serverPushEnabled".}
@@ -54,16 +52,9 @@ proc fcQHttp2Configuration_streamReceiveWindowSize(self: pointer, ): cuint {.imp
 proc fcQHttp2Configuration_setMaxFrameSize(self: pointer, size: cuint): bool {.importc: "QHttp2Configuration_setMaxFrameSize".}
 proc fcQHttp2Configuration_maxFrameSize(self: pointer, ): cuint {.importc: "QHttp2Configuration_maxFrameSize".}
 proc fcQHttp2Configuration_swap(self: pointer, other: pointer): void {.importc: "QHttp2Configuration_swap".}
+proc fcQHttp2Configuration_new(): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new".}
+proc fcQHttp2Configuration_new2(other: pointer): ptr cQHttp2Configuration {.importc: "QHttp2Configuration_new2".}
 proc fcQHttp2Configuration_delete(self: pointer) {.importc: "QHttp2Configuration_delete".}
-
-
-func init*(T: type gen_qhttp2configuration_types.QHttp2Configuration, h: ptr cQHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
-  T(h: h)
-proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration, ): gen_qhttp2configuration_types.QHttp2Configuration =
-  gen_qhttp2configuration_types.QHttp2Configuration.init(fcQHttp2Configuration_new())
-
-proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration, other: gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
-  gen_qhttp2configuration_types.QHttp2Configuration.init(fcQHttp2Configuration_new2(other.h))
 
 proc operatorAssign*(self: gen_qhttp2configuration_types.QHttp2Configuration, other: gen_qhttp2configuration_types.QHttp2Configuration): void =
   fcQHttp2Configuration_operatorAssign(self.h, other.h)
@@ -100,6 +91,13 @@ proc maxFrameSize*(self: gen_qhttp2configuration_types.QHttp2Configuration, ): c
 
 proc swap*(self: gen_qhttp2configuration_types.QHttp2Configuration, other: gen_qhttp2configuration_types.QHttp2Configuration): void =
   fcQHttp2Configuration_swap(self.h, other.h)
+
+proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
+  gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new())
+
+proc create*(T: type gen_qhttp2configuration_types.QHttp2Configuration,
+    other: gen_qhttp2configuration_types.QHttp2Configuration): gen_qhttp2configuration_types.QHttp2Configuration =
+  gen_qhttp2configuration_types.QHttp2Configuration(h: fcQHttp2Configuration_new2(other.h))
 
 proc delete*(self: gen_qhttp2configuration_types.QHttp2Configuration) =
   fcQHttp2Configuration_delete(self.h)

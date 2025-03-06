@@ -56,7 +56,6 @@ export
 
 type cQCommandLineParser*{.exportc: "QCommandLineParser", incompleteStruct.} = object
 
-proc fcQCommandLineParser_new(): ptr cQCommandLineParser {.importc: "QCommandLineParser_new".}
 proc fcQCommandLineParser_tr(sourceText: cstring): struct_miqt_string {.importc: "QCommandLineParser_tr".}
 proc fcQCommandLineParser_trUtf8(sourceText: cstring): struct_miqt_string {.importc: "QCommandLineParser_trUtf8".}
 proc fcQCommandLineParser_setSingleDashWordOptionMode(self: pointer, parsingMode: cint): void {.importc: "QCommandLineParser_setSingleDashWordOptionMode".}
@@ -88,13 +87,8 @@ proc fcQCommandLineParser_tr3(sourceText: cstring, disambiguation: cstring, n: c
 proc fcQCommandLineParser_trUtf82(sourceText: cstring, disambiguation: cstring): struct_miqt_string {.importc: "QCommandLineParser_trUtf82".}
 proc fcQCommandLineParser_trUtf83(sourceText: cstring, disambiguation: cstring, n: cint): struct_miqt_string {.importc: "QCommandLineParser_trUtf83".}
 proc fcQCommandLineParser_addPositionalArgument3(self: pointer, name: struct_miqt_string, description: struct_miqt_string, syntax: struct_miqt_string): void {.importc: "QCommandLineParser_addPositionalArgument3".}
+proc fcQCommandLineParser_new(): ptr cQCommandLineParser {.importc: "QCommandLineParser_new".}
 proc fcQCommandLineParser_delete(self: pointer) {.importc: "QCommandLineParser_delete".}
-
-
-func init*(T: type gen_qcommandlineparser_types.QCommandLineParser, h: ptr cQCommandLineParser): gen_qcommandlineparser_types.QCommandLineParser =
-  T(h: h)
-proc create*(T: type gen_qcommandlineparser_types.QCommandLineParser, ): gen_qcommandlineparser_types.QCommandLineParser =
-  gen_qcommandlineparser_types.QCommandLineParser.init(fcQCommandLineParser_new())
 
 proc tr*(_: type gen_qcommandlineparser_types.QCommandLineParser, sourceText: cstring): string =
   let v_ms = fcQCommandLineParser_tr(sourceText)
@@ -273,6 +267,9 @@ proc trUtf8*(_: type gen_qcommandlineparser_types.QCommandLineParser, sourceText
 
 proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string, description: string, syntax: string): void =
   fcQCommandLineParser_addPositionalArgument3(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: description, len: csize_t(len(description))), struct_miqt_string(data: syntax, len: csize_t(len(syntax))))
+
+proc create*(T: type gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineparser_types.QCommandLineParser =
+  gen_qcommandlineparser_types.QCommandLineParser(h: fcQCommandLineParser_new())
 
 proc delete*(self: gen_qcommandlineparser_types.QCommandLineParser) =
   fcQCommandLineParser_delete(self.h)

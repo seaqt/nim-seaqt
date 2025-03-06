@@ -35,133 +35,6 @@ void miqt_exec_callback_QAbstractItemModel_layoutChanged1(intptr_t, struct miqt_
 void miqt_exec_callback_QAbstractItemModel_layoutChanged2(intptr_t, struct miqt_array /* of QPersistentModelIndex* */ , int);
 void miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged1(intptr_t, struct miqt_array /* of QPersistentModelIndex* */ );
 void miqt_exec_callback_QAbstractItemModel_layoutAboutToBeChanged2(intptr_t, struct miqt_array /* of QPersistentModelIndex* */ , int);
-QMetaObject* miqt_exec_callback_QAbstractItemModel_metaObject(const QAbstractItemModel*, intptr_t);
-void* miqt_exec_callback_QAbstractItemModel_metacast(QAbstractItemModel*, intptr_t, const char*);
-int miqt_exec_callback_QAbstractItemModel_metacall(QAbstractItemModel*, intptr_t, int, int, void**);
-QModelIndex* miqt_exec_callback_QAbstractItemModel_index(const QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-QModelIndex* miqt_exec_callback_QAbstractItemModel_parent(const QAbstractItemModel*, intptr_t, QModelIndex*);
-QModelIndex* miqt_exec_callback_QAbstractItemModel_sibling(const QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractItemModel_rowCount(const QAbstractItemModel*, intptr_t, QModelIndex*);
-int miqt_exec_callback_QAbstractItemModel_columnCount(const QAbstractItemModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_hasChildren(const QAbstractItemModel*, intptr_t, QModelIndex*);
-QVariant* miqt_exec_callback_QAbstractItemModel_data(const QAbstractItemModel*, intptr_t, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractItemModel_setData(QAbstractItemModel*, intptr_t, QModelIndex*, QVariant*, int);
-QVariant* miqt_exec_callback_QAbstractItemModel_headerData(const QAbstractItemModel*, intptr_t, int, int, int);
-bool miqt_exec_callback_QAbstractItemModel_setHeaderData(QAbstractItemModel*, intptr_t, int, int, QVariant*, int);
-struct miqt_map /* of int to QVariant* */  miqt_exec_callback_QAbstractItemModel_itemData(const QAbstractItemModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_setItemData(QAbstractItemModel*, intptr_t, QModelIndex*, struct miqt_map /* of int to QVariant* */ );
-struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QAbstractItemModel_mimeTypes(const QAbstractItemModel*, intptr_t);
-QMimeData* miqt_exec_callback_QAbstractItemModel_mimeData(const QAbstractItemModel*, intptr_t, struct miqt_array /* of QModelIndex* */ );
-bool miqt_exec_callback_QAbstractItemModel_canDropMimeData(const QAbstractItemModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_dropMimeData(QAbstractItemModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractItemModel_supportedDropActions(const QAbstractItemModel*, intptr_t);
-int miqt_exec_callback_QAbstractItemModel_supportedDragActions(const QAbstractItemModel*, intptr_t);
-bool miqt_exec_callback_QAbstractItemModel_insertRows(QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_insertColumns(QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_removeRows(QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_removeColumns(QAbstractItemModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_moveRows(QAbstractItemModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractItemModel_moveColumns(QAbstractItemModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-void miqt_exec_callback_QAbstractItemModel_fetchMore(QAbstractItemModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractItemModel_canFetchMore(const QAbstractItemModel*, intptr_t, QModelIndex*);
-int miqt_exec_callback_QAbstractItemModel_flags(const QAbstractItemModel*, intptr_t, QModelIndex*);
-void miqt_exec_callback_QAbstractItemModel_sort(QAbstractItemModel*, intptr_t, int, int);
-QModelIndex* miqt_exec_callback_QAbstractItemModel_buddy(const QAbstractItemModel*, intptr_t, QModelIndex*);
-struct miqt_array /* of QModelIndex* */  miqt_exec_callback_QAbstractItemModel_match(const QAbstractItemModel*, intptr_t, QModelIndex*, int, QVariant*, int, int);
-QSize* miqt_exec_callback_QAbstractItemModel_span(const QAbstractItemModel*, intptr_t, QModelIndex*);
-struct miqt_map /* of int to struct miqt_string */  miqt_exec_callback_QAbstractItemModel_roleNames(const QAbstractItemModel*, intptr_t);
-bool miqt_exec_callback_QAbstractItemModel_submit(QAbstractItemModel*, intptr_t);
-void miqt_exec_callback_QAbstractItemModel_revert(QAbstractItemModel*, intptr_t);
-bool miqt_exec_callback_QAbstractItemModel_event(QAbstractItemModel*, intptr_t, QEvent*);
-bool miqt_exec_callback_QAbstractItemModel_eventFilter(QAbstractItemModel*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QAbstractItemModel_timerEvent(QAbstractItemModel*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QAbstractItemModel_childEvent(QAbstractItemModel*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QAbstractItemModel_customEvent(QAbstractItemModel*, intptr_t, QEvent*);
-void miqt_exec_callback_QAbstractItemModel_connectNotify(QAbstractItemModel*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QAbstractItemModel_disconnectNotify(QAbstractItemModel*, intptr_t, QMetaMethod*);
-QMetaObject* miqt_exec_callback_QAbstractTableModel_metaObject(const QAbstractTableModel*, intptr_t);
-void* miqt_exec_callback_QAbstractTableModel_metacast(QAbstractTableModel*, intptr_t, const char*);
-int miqt_exec_callback_QAbstractTableModel_metacall(QAbstractTableModel*, intptr_t, int, int, void**);
-QModelIndex* miqt_exec_callback_QAbstractTableModel_index(const QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-QModelIndex* miqt_exec_callback_QAbstractTableModel_sibling(const QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_dropMimeData(QAbstractTableModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractTableModel_flags(const QAbstractTableModel*, intptr_t, QModelIndex*);
-int miqt_exec_callback_QAbstractTableModel_rowCount(const QAbstractTableModel*, intptr_t, QModelIndex*);
-int miqt_exec_callback_QAbstractTableModel_columnCount(const QAbstractTableModel*, intptr_t, QModelIndex*);
-QVariant* miqt_exec_callback_QAbstractTableModel_data(const QAbstractTableModel*, intptr_t, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractTableModel_setData(QAbstractTableModel*, intptr_t, QModelIndex*, QVariant*, int);
-QVariant* miqt_exec_callback_QAbstractTableModel_headerData(const QAbstractTableModel*, intptr_t, int, int, int);
-bool miqt_exec_callback_QAbstractTableModel_setHeaderData(QAbstractTableModel*, intptr_t, int, int, QVariant*, int);
-struct miqt_map /* of int to QVariant* */  miqt_exec_callback_QAbstractTableModel_itemData(const QAbstractTableModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_setItemData(QAbstractTableModel*, intptr_t, QModelIndex*, struct miqt_map /* of int to QVariant* */ );
-struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QAbstractTableModel_mimeTypes(const QAbstractTableModel*, intptr_t);
-QMimeData* miqt_exec_callback_QAbstractTableModel_mimeData(const QAbstractTableModel*, intptr_t, struct miqt_array /* of QModelIndex* */ );
-bool miqt_exec_callback_QAbstractTableModel_canDropMimeData(const QAbstractTableModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractTableModel_supportedDropActions(const QAbstractTableModel*, intptr_t);
-int miqt_exec_callback_QAbstractTableModel_supportedDragActions(const QAbstractTableModel*, intptr_t);
-bool miqt_exec_callback_QAbstractTableModel_insertRows(QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_insertColumns(QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_removeRows(QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_removeColumns(QAbstractTableModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_moveRows(QAbstractTableModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractTableModel_moveColumns(QAbstractTableModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-void miqt_exec_callback_QAbstractTableModel_fetchMore(QAbstractTableModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractTableModel_canFetchMore(const QAbstractTableModel*, intptr_t, QModelIndex*);
-void miqt_exec_callback_QAbstractTableModel_sort(QAbstractTableModel*, intptr_t, int, int);
-QModelIndex* miqt_exec_callback_QAbstractTableModel_buddy(const QAbstractTableModel*, intptr_t, QModelIndex*);
-struct miqt_array /* of QModelIndex* */  miqt_exec_callback_QAbstractTableModel_match(const QAbstractTableModel*, intptr_t, QModelIndex*, int, QVariant*, int, int);
-QSize* miqt_exec_callback_QAbstractTableModel_span(const QAbstractTableModel*, intptr_t, QModelIndex*);
-struct miqt_map /* of int to struct miqt_string */  miqt_exec_callback_QAbstractTableModel_roleNames(const QAbstractTableModel*, intptr_t);
-bool miqt_exec_callback_QAbstractTableModel_submit(QAbstractTableModel*, intptr_t);
-void miqt_exec_callback_QAbstractTableModel_revert(QAbstractTableModel*, intptr_t);
-bool miqt_exec_callback_QAbstractTableModel_event(QAbstractTableModel*, intptr_t, QEvent*);
-bool miqt_exec_callback_QAbstractTableModel_eventFilter(QAbstractTableModel*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QAbstractTableModel_timerEvent(QAbstractTableModel*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QAbstractTableModel_childEvent(QAbstractTableModel*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QAbstractTableModel_customEvent(QAbstractTableModel*, intptr_t, QEvent*);
-void miqt_exec_callback_QAbstractTableModel_connectNotify(QAbstractTableModel*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QAbstractTableModel_disconnectNotify(QAbstractTableModel*, intptr_t, QMetaMethod*);
-QMetaObject* miqt_exec_callback_QAbstractListModel_metaObject(const QAbstractListModel*, intptr_t);
-void* miqt_exec_callback_QAbstractListModel_metacast(QAbstractListModel*, intptr_t, const char*);
-int miqt_exec_callback_QAbstractListModel_metacall(QAbstractListModel*, intptr_t, int, int, void**);
-QModelIndex* miqt_exec_callback_QAbstractListModel_index(const QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-QModelIndex* miqt_exec_callback_QAbstractListModel_sibling(const QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_dropMimeData(QAbstractListModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractListModel_flags(const QAbstractListModel*, intptr_t, QModelIndex*);
-int miqt_exec_callback_QAbstractListModel_rowCount(const QAbstractListModel*, intptr_t, QModelIndex*);
-QVariant* miqt_exec_callback_QAbstractListModel_data(const QAbstractListModel*, intptr_t, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractListModel_setData(QAbstractListModel*, intptr_t, QModelIndex*, QVariant*, int);
-QVariant* miqt_exec_callback_QAbstractListModel_headerData(const QAbstractListModel*, intptr_t, int, int, int);
-bool miqt_exec_callback_QAbstractListModel_setHeaderData(QAbstractListModel*, intptr_t, int, int, QVariant*, int);
-struct miqt_map /* of int to QVariant* */  miqt_exec_callback_QAbstractListModel_itemData(const QAbstractListModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_setItemData(QAbstractListModel*, intptr_t, QModelIndex*, struct miqt_map /* of int to QVariant* */ );
-struct miqt_array /* of struct miqt_string */  miqt_exec_callback_QAbstractListModel_mimeTypes(const QAbstractListModel*, intptr_t);
-QMimeData* miqt_exec_callback_QAbstractListModel_mimeData(const QAbstractListModel*, intptr_t, struct miqt_array /* of QModelIndex* */ );
-bool miqt_exec_callback_QAbstractListModel_canDropMimeData(const QAbstractListModel*, intptr_t, QMimeData*, int, int, int, QModelIndex*);
-int miqt_exec_callback_QAbstractListModel_supportedDropActions(const QAbstractListModel*, intptr_t);
-int miqt_exec_callback_QAbstractListModel_supportedDragActions(const QAbstractListModel*, intptr_t);
-bool miqt_exec_callback_QAbstractListModel_insertRows(QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_insertColumns(QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_removeRows(QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_removeColumns(QAbstractListModel*, intptr_t, int, int, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_moveRows(QAbstractListModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-bool miqt_exec_callback_QAbstractListModel_moveColumns(QAbstractListModel*, intptr_t, QModelIndex*, int, int, QModelIndex*, int);
-void miqt_exec_callback_QAbstractListModel_fetchMore(QAbstractListModel*, intptr_t, QModelIndex*);
-bool miqt_exec_callback_QAbstractListModel_canFetchMore(const QAbstractListModel*, intptr_t, QModelIndex*);
-void miqt_exec_callback_QAbstractListModel_sort(QAbstractListModel*, intptr_t, int, int);
-QModelIndex* miqt_exec_callback_QAbstractListModel_buddy(const QAbstractListModel*, intptr_t, QModelIndex*);
-struct miqt_array /* of QModelIndex* */  miqt_exec_callback_QAbstractListModel_match(const QAbstractListModel*, intptr_t, QModelIndex*, int, QVariant*, int, int);
-QSize* miqt_exec_callback_QAbstractListModel_span(const QAbstractListModel*, intptr_t, QModelIndex*);
-struct miqt_map /* of int to struct miqt_string */  miqt_exec_callback_QAbstractListModel_roleNames(const QAbstractListModel*, intptr_t);
-bool miqt_exec_callback_QAbstractListModel_submit(QAbstractListModel*, intptr_t);
-void miqt_exec_callback_QAbstractListModel_revert(QAbstractListModel*, intptr_t);
-bool miqt_exec_callback_QAbstractListModel_event(QAbstractListModel*, intptr_t, QEvent*);
-bool miqt_exec_callback_QAbstractListModel_eventFilter(QAbstractListModel*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QAbstractListModel_timerEvent(QAbstractListModel*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QAbstractListModel_childEvent(QAbstractListModel*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QAbstractListModel_customEvent(QAbstractListModel*, intptr_t, QEvent*);
-void miqt_exec_callback_QAbstractListModel_connectNotify(QAbstractListModel*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QAbstractListModel_disconnectNotify(QAbstractListModel*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -353,213 +226,181 @@ void QPersistentModelIndex_delete(QPersistentModelIndex* self) {
 }
 
 class VirtualQAbstractItemModel final : public QAbstractItemModel {
+	struct QAbstractItemModel_VTable* vtbl;
 public:
 
-	VirtualQAbstractItemModel(): QAbstractItemModel() {};
-	VirtualQAbstractItemModel(QObject* parent): QAbstractItemModel(parent) {};
+	VirtualQAbstractItemModel(struct QAbstractItemModel_VTable* vtbl): QAbstractItemModel(), vtbl(vtbl) {};
+	VirtualQAbstractItemModel(struct QAbstractItemModel_VTable* vtbl, QObject* parent): QAbstractItemModel(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQAbstractItemModel() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQAbstractItemModel() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QAbstractItemModel::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QAbstractItemModel_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QAbstractItemModel_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QAbstractItemModel::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QAbstractItemModel_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QAbstractItemModel_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QAbstractItemModel::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QAbstractItemModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__index = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
-		if (handle__index == 0) {
+		if (vtbl->index == 0) {
 			return QModelIndex(); // Pure virtual, there is no base we can call
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_index(this, handle__index, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->index(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__parent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex parent(const QModelIndex& child) const override {
-		if (handle__parent == 0) {
+		if (vtbl->parent == 0) {
 			return QModelIndex(); // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& child_ret = child;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&child_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_parent(this, handle__parent, sigval1);
+		QModelIndex* callback_return_value = vtbl->parent(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sibling = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
-		if (handle__sibling == 0) {
+		if (vtbl->sibling == 0) {
 			return QAbstractItemModel::sibling(row, column, idx);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& idx_ret = idx;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_sibling(this, handle__sibling, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->sibling(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractItemModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rowCount = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int rowCount(const QModelIndex& parent) const override {
-		if (handle__rowCount == 0) {
+		if (vtbl->rowCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_rowCount(this, handle__rowCount, sigval1);
+		int callback_return_value = vtbl->rowCount(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__columnCount = 0;
 
 	// Subclass to allow providing a Go implementation
 	virtual int columnCount(const QModelIndex& parent) const override {
-		if (handle__columnCount == 0) {
+		if (vtbl->columnCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_columnCount(this, handle__columnCount, sigval1);
+		int callback_return_value = vtbl->columnCount(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasChildren = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasChildren(const QModelIndex& parent) const override {
-		if (handle__hasChildren == 0) {
+		if (vtbl->hasChildren == 0) {
 			return QAbstractItemModel::hasChildren(parent);
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_hasChildren(this, handle__hasChildren, sigval1);
+		bool callback_return_value = vtbl->hasChildren(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_hasChildren(const void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__data = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
-		if (handle__data == 0) {
+		if (vtbl->data == 0) {
 			return QVariant(); // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractItemModel_data(this, handle__data, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1, sigval2);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setData(const QModelIndex& index, const QVariant& value, int role) override {
-		if (handle__setData == 0) {
+		if (vtbl->setData == 0) {
 			return QAbstractItemModel::setData(index, value, role);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -568,43 +409,37 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		int sigval3 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_setData(this, handle__setData, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__headerData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
-		if (handle__headerData == 0) {
+		if (vtbl->headerData == 0) {
 			return QAbstractItemModel::headerData(section, orientation, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractItemModel_headerData(this, handle__headerData, sigval1, sigval2, sigval3);
+		QVariant* callback_return_value = vtbl->headerData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QAbstractItemModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setHeaderData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role) override {
-		if (handle__setHeaderData == 0) {
+		if (vtbl->setHeaderData == 0) {
 			return QAbstractItemModel::setHeaderData(section, orientation, value, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
@@ -613,27 +448,24 @@ public:
 		QVariant* sigval3 = const_cast<QVariant*>(&value_ret);
 		int sigval4 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_setHeaderData(this, handle__setHeaderData, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->setHeaderData(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMap<int, QVariant> itemData(const QModelIndex& index) const override {
-		if (handle__itemData == 0) {
+		if (vtbl->itemData == 0) {
 			return QAbstractItemModel::itemData(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		struct miqt_map /* of int to QVariant* */  callback_return_value = miqt_exec_callback_QAbstractItemModel_itemData(this, handle__itemData, sigval1);
+		struct miqt_map /* of int to QVariant* */  callback_return_value = vtbl->itemData(vtbl, this, sigval1);
 		QMap<int, QVariant> callback_return_value_QMap;
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
 		QVariant** callback_return_value_varr = static_cast<QVariant**>(callback_return_value.values);
@@ -646,15 +478,12 @@ public:
 
 	friend struct miqt_map /* of int to QVariant* */  QAbstractItemModel_virtualbase_itemData(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setItemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setItemData(const QModelIndex& index, const QMap<int, QVariant>& roles) override {
-		if (handle__setItemData == 0) {
+		if (vtbl->setItemData == 0) {
 			return QAbstractItemModel::setItemData(index, roles);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -674,24 +503,21 @@ public:
 		roles_out.values = static_cast<void*>(roles_varr);
 		struct miqt_map /* of int to QVariant* */  sigval2 = roles_out;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_setItemData(this, handle__setItemData, sigval1, sigval2);
+		bool callback_return_value = vtbl->setItemData(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeTypes = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QStringList mimeTypes() const override {
-		if (handle__mimeTypes == 0) {
+		if (vtbl->mimeTypes == 0) {
 			return QAbstractItemModel::mimeTypes();
 		}
-		
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractItemModel_mimeTypes(this, handle__mimeTypes);
+
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->mimeTypes(vtbl, this);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -705,15 +531,12 @@ public:
 
 	friend struct miqt_array /* of struct miqt_string */  QAbstractItemModel_virtualbase_mimeTypes(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMimeData* mimeData(const QModelIndexList& indexes) const override {
-		if (handle__mimeData == 0) {
+		if (vtbl->mimeData == 0) {
 			return QAbstractItemModel::mimeData(indexes);
 		}
-		
+
 		const QModelIndexList& indexes_ret = indexes;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * indexes_ret.length()));
@@ -725,22 +548,19 @@ public:
 		indexes_out.data = static_cast<void*>(indexes_arr);
 		struct miqt_array /* of QModelIndex* */  sigval1 = indexes_out;
 
-		QMimeData* callback_return_value = miqt_exec_callback_QAbstractItemModel_mimeData(this, handle__mimeData, sigval1);
+		QMimeData* callback_return_value = vtbl->mimeData(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QMimeData* QAbstractItemModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canDropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const override {
-		if (handle__canDropMimeData == 0) {
+		if (vtbl->canDropMimeData == 0) {
 			return QAbstractItemModel::canDropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -750,22 +570,19 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_canDropMimeData(this, handle__canDropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->canDropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) override {
-		if (handle__dropMimeData == 0) {
+		if (vtbl->dropMimeData == 0) {
 			return QAbstractItemModel::dropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -775,144 +592,123 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_dropMimeData(this, handle__dropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->dropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDropActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDropActions() const override {
-		if (handle__supportedDropActions == 0) {
+		if (vtbl->supportedDropActions == 0) {
 			return QAbstractItemModel::supportedDropActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_supportedDropActions(this, handle__supportedDropActions);
+
+		int callback_return_value = vtbl->supportedDropActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractItemModel_virtualbase_supportedDropActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDragActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDragActions() const override {
-		if (handle__supportedDragActions == 0) {
+		if (vtbl->supportedDragActions == 0) {
 			return QAbstractItemModel::supportedDragActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_supportedDragActions(this, handle__supportedDragActions);
+
+		int callback_return_value = vtbl->supportedDragActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractItemModel_virtualbase_supportedDragActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__insertRows == 0) {
+		if (vtbl->insertRows == 0) {
 			return QAbstractItemModel::insertRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_insertRows(this, handle__insertRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__insertColumns == 0) {
+		if (vtbl->insertColumns == 0) {
 			return QAbstractItemModel::insertColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_insertColumns(this, handle__insertColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__removeRows == 0) {
+		if (vtbl->removeRows == 0) {
 			return QAbstractItemModel::removeRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_removeRows(this, handle__removeRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__removeColumns == 0) {
+		if (vtbl->removeColumns == 0) {
 			return QAbstractItemModel::removeColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_removeColumns(this, handle__removeColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveRows(const QModelIndex& sourceParent, int sourceRow, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveRows == 0) {
+		if (vtbl->moveRows == 0) {
 			return QAbstractItemModel::moveRows(sourceParent, sourceRow, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -923,22 +719,19 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_moveRows(this, handle__moveRows, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveRows(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveColumns(const QModelIndex& sourceParent, int sourceColumn, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveColumns == 0) {
+		if (vtbl->moveColumns == 0) {
 			return QAbstractItemModel::moveColumns(sourceParent, sourceColumn, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -949,124 +742,104 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_moveColumns(this, handle__moveColumns, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveColumns(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fetchMore(const QModelIndex& parent) override {
-		if (handle__fetchMore == 0) {
+		if (vtbl->fetchMore == 0) {
 			QAbstractItemModel::fetchMore(parent);
 			return;
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		miqt_exec_callback_QAbstractItemModel_fetchMore(this, handle__fetchMore, sigval1);
+		vtbl->fetchMore(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_fetchMore(void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canFetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canFetchMore(const QModelIndex& parent) const override {
-		if (handle__canFetchMore == 0) {
+		if (vtbl->canFetchMore == 0) {
 			return QAbstractItemModel::canFetchMore(parent);
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_canFetchMore(this, handle__canFetchMore, sigval1);
+		bool callback_return_value = vtbl->canFetchMore(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__flags = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::ItemFlags flags(const QModelIndex& index) const override {
-		if (handle__flags == 0) {
+		if (vtbl->flags == 0) {
 			return QAbstractItemModel::flags(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractItemModel_flags(this, handle__flags, sigval1);
+		int callback_return_value = vtbl->flags(vtbl, this, sigval1);
 
 		return static_cast<Qt::ItemFlags>(callback_return_value);
 	}
 
 	friend int QAbstractItemModel_virtualbase_flags(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sort = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void sort(int column, Qt::SortOrder order) override {
-		if (handle__sort == 0) {
+		if (vtbl->sort == 0) {
 			QAbstractItemModel::sort(column, order);
 			return;
 		}
-		
+
 		int sigval1 = column;
 		Qt::SortOrder order_ret = order;
 		int sigval2 = static_cast<int>(order_ret);
 
-		miqt_exec_callback_QAbstractItemModel_sort(this, handle__sort, sigval1, sigval2);
+		vtbl->sort(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_sort(void* self, int column, int order);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__buddy = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
-		if (handle__buddy == 0) {
+		if (vtbl->buddy == 0) {
 			return QAbstractItemModel::buddy(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractItemModel_buddy(this, handle__buddy, sigval1);
+		QModelIndex* callback_return_value = vtbl->buddy(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractItemModel_virtualbase_buddy(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__match = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList match(const QModelIndex& start, int role, const QVariant& value, int hits, Qt::MatchFlags flags) const override {
-		if (handle__match == 0) {
+		if (vtbl->match == 0) {
 			return QAbstractItemModel::match(start, role, value, hits, flags);
 		}
-		
+
 		const QModelIndex& start_ret = start;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&start_ret);
@@ -1078,7 +851,7 @@ public:
 		Qt::MatchFlags flags_ret = flags;
 		int sigval5 = static_cast<int>(flags_ret);
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = miqt_exec_callback_QAbstractItemModel_match(this, handle__match, sigval1, sigval2, sigval3, sigval4, sigval5);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->match(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -1091,37 +864,31 @@ public:
 
 	friend struct miqt_array /* of QModelIndex* */  QAbstractItemModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__span = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
-		if (handle__span == 0) {
+		if (vtbl->span == 0) {
 			return QAbstractItemModel::span(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QSize* callback_return_value = miqt_exec_callback_QAbstractItemModel_span(this, handle__span, sigval1);
+		QSize* callback_return_value = vtbl->span(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QAbstractItemModel_virtualbase_span(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__roleNames = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QHash<int, QByteArray> roleNames() const override {
-		if (handle__roleNames == 0) {
+		if (vtbl->roleNames == 0) {
 			return QAbstractItemModel::roleNames();
 		}
-		
 
-		struct miqt_map /* of int to struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractItemModel_roleNames(this, handle__roleNames);
+
+		struct miqt_map /* of int to struct miqt_string */  callback_return_value = vtbl->roleNames(vtbl, this);
 		QHash<int, QByteArray> callback_return_value_QMap;
 		callback_return_value_QMap.reserve(callback_return_value.len);
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
@@ -1136,173 +903,140 @@ public:
 
 	friend struct miqt_map /* of int to struct miqt_string */  QAbstractItemModel_virtualbase_roleNames(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__submit = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool submit() override {
-		if (handle__submit == 0) {
+		if (vtbl->submit == 0) {
 			return QAbstractItemModel::submit();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_submit(this, handle__submit);
+
+		bool callback_return_value = vtbl->submit(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_submit(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__revert = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void revert() override {
-		if (handle__revert == 0) {
+		if (vtbl->revert == 0) {
 			QAbstractItemModel::revert();
 			return;
 		}
-		
 
-		miqt_exec_callback_QAbstractItemModel_revert(this, handle__revert);
 
-		
+		vtbl->revert(vtbl, this);
+
 	}
 
 	friend void QAbstractItemModel_virtualbase_revert(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QAbstractItemModel::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QAbstractItemModel::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractItemModel_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractItemModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QAbstractItemModel::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractItemModel_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QAbstractItemModel::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractItemModel_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QAbstractItemModel::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractItemModel_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QAbstractItemModel::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractItemModel_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QAbstractItemModel::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractItemModel_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractItemModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -1337,12 +1071,12 @@ public:
 	friend bool QAbstractItemModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QAbstractItemModel* QAbstractItemModel_new() {
-	return new VirtualQAbstractItemModel();
+QAbstractItemModel* QAbstractItemModel_new(struct QAbstractItemModel_VTable* vtbl) {
+	return new VirtualQAbstractItemModel(vtbl);
 }
 
-QAbstractItemModel* QAbstractItemModel_new2(QObject* parent) {
-	return new VirtualQAbstractItemModel(parent);
+QAbstractItemModel* QAbstractItemModel_new2(struct QAbstractItemModel_VTable* vtbl, QObject* parent) {
+	return new VirtualQAbstractItemModel(vtbl, parent);
 }
 
 void QAbstractItemModel_virtbase(QAbstractItemModel* src, QObject** outptr_QObject) {
@@ -1882,30 +1616,10 @@ void QAbstractItemModel_connect_layoutAboutToBeChanged2(QAbstractItemModel* self
 	});
 }
 
-bool QAbstractItemModel_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QAbstractItemModel_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::metaObject();
 
-}
-
-bool QAbstractItemModel_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QAbstractItemModel_virtualbase_metacast(void* self, const char* param1) {
@@ -1914,50 +1628,10 @@ void* QAbstractItemModel_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QAbstractItemModel_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QAbstractItemModel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QAbstractItemModel_override_virtual_index(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__index = slot;
-	return true;
-}
-
-bool QAbstractItemModel_override_virtual_parent(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__parent = slot;
-	return true;
-}
-
-bool QAbstractItemModel_override_virtual_sibling(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sibling = slot;
-	return true;
 }
 
 QModelIndex* QAbstractItemModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx) {
@@ -1966,60 +1640,10 @@ QModelIndex* QAbstractItemModel_virtualbase_sibling(const void* self, int row, i
 
 }
 
-bool QAbstractItemModel_override_virtual_rowCount(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__rowCount = slot;
-	return true;
-}
-
-bool QAbstractItemModel_override_virtual_columnCount(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__columnCount = slot;
-	return true;
-}
-
-bool QAbstractItemModel_override_virtual_hasChildren(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasChildren = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_hasChildren(const void* self, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::hasChildren(*parent);
 
-}
-
-bool QAbstractItemModel_override_virtual_data(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__data = slot;
-	return true;
-}
-
-bool QAbstractItemModel_override_virtual_setData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setData = slot;
-	return true;
 }
 
 bool QAbstractItemModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role) {
@@ -2028,46 +1652,16 @@ bool QAbstractItemModel_virtualbase_setData(void* self, QModelIndex* index, QVar
 
 }
 
-bool QAbstractItemModel_override_virtual_headerData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__headerData = slot;
-	return true;
-}
-
 QVariant* QAbstractItemModel_virtualbase_headerData(const void* self, int section, int orientation, int role) {
 
 	return new QVariant(( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::headerData(static_cast<int>(section), static_cast<Qt::Orientation>(orientation), static_cast<int>(role)));
 
 }
 
-bool QAbstractItemModel_override_virtual_setHeaderData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setHeaderData = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::setHeaderData(static_cast<int>(section), static_cast<Qt::Orientation>(orientation), *value, static_cast<int>(role));
 
-}
-
-bool QAbstractItemModel_override_virtual_itemData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__itemData = slot;
-	return true;
 }
 
 struct miqt_map /* of int to QVariant* */  QAbstractItemModel_virtualbase_itemData(const void* self, QModelIndex* index) {
@@ -2090,16 +1684,6 @@ struct miqt_map /* of int to QVariant* */  QAbstractItemModel_virtualbase_itemDa
 
 }
 
-bool QAbstractItemModel_override_virtual_setItemData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setItemData = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles) {
 	QMap<int, QVariant> roles_QMap;
 	int* roles_karr = static_cast<int*>(roles.keys);
@@ -2110,16 +1694,6 @@ bool QAbstractItemModel_virtualbase_setItemData(void* self, QModelIndex* index, 
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::setItemData(*index, roles_QMap);
 
-}
-
-bool QAbstractItemModel_override_virtual_mimeTypes(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeTypes = slot;
-	return true;
 }
 
 struct miqt_array /* of struct miqt_string */  QAbstractItemModel_virtualbase_mimeTypes(const void* self) {
@@ -2144,16 +1718,6 @@ struct miqt_array /* of struct miqt_string */  QAbstractItemModel_virtualbase_mi
 
 }
 
-bool QAbstractItemModel_override_virtual_mimeData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeData = slot;
-	return true;
-}
-
 QMimeData* QAbstractItemModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes) {
 	QModelIndexList indexes_QList;
 	indexes_QList.reserve(indexes.len);
@@ -2166,46 +1730,16 @@ QMimeData* QAbstractItemModel_virtualbase_mimeData(const void* self, struct miqt
 
 }
 
-bool QAbstractItemModel_override_virtual_canDropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canDropMimeData = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::canDropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
 }
 
-bool QAbstractItemModel_override_virtual_dropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropMimeData = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::dropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
-}
-
-bool QAbstractItemModel_override_virtual_supportedDropActions(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDropActions = slot;
-	return true;
 }
 
 int QAbstractItemModel_virtualbase_supportedDropActions(const void* self) {
@@ -2215,31 +1749,11 @@ int QAbstractItemModel_virtualbase_supportedDropActions(const void* self) {
 
 }
 
-bool QAbstractItemModel_override_virtual_supportedDragActions(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDragActions = slot;
-	return true;
-}
-
 int QAbstractItemModel_virtualbase_supportedDragActions(const void* self) {
 
 	Qt::DropActions _ret = ( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::supportedDragActions();
 	return static_cast<int>(_ret);
 
-}
-
-bool QAbstractItemModel_override_virtual_insertRows(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertRows = slot;
-	return true;
 }
 
 bool QAbstractItemModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent) {
@@ -2248,30 +1762,10 @@ bool QAbstractItemModel_virtualbase_insertRows(void* self, int row, int count, Q
 
 }
 
-bool QAbstractItemModel_override_virtual_insertColumns(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertColumns = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::insertColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractItemModel_override_virtual_removeRows(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeRows = slot;
-	return true;
 }
 
 bool QAbstractItemModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent) {
@@ -2280,30 +1774,10 @@ bool QAbstractItemModel_virtualbase_removeRows(void* self, int row, int count, Q
 
 }
 
-bool QAbstractItemModel_override_virtual_removeColumns(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeColumns = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::removeColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractItemModel_override_virtual_moveRows(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveRows = slot;
-	return true;
 }
 
 bool QAbstractItemModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild) {
@@ -2312,30 +1786,10 @@ bool QAbstractItemModel_virtualbase_moveRows(void* self, QModelIndex* sourcePare
 
 }
 
-bool QAbstractItemModel_override_virtual_moveColumns(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveColumns = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::moveColumns(*sourceParent, static_cast<int>(sourceColumn), static_cast<int>(count), *destinationParent, static_cast<int>(destinationChild));
 
-}
-
-bool QAbstractItemModel_override_virtual_fetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fetchMore = slot;
-	return true;
 }
 
 void QAbstractItemModel_virtualbase_fetchMore(void* self, QModelIndex* parent) {
@@ -2344,30 +1798,10 @@ void QAbstractItemModel_virtualbase_fetchMore(void* self, QModelIndex* parent) {
 
 }
 
-bool QAbstractItemModel_override_virtual_canFetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canFetchMore = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::canFetchMore(*parent);
 
-}
-
-bool QAbstractItemModel_override_virtual_flags(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__flags = slot;
-	return true;
 }
 
 int QAbstractItemModel_virtualbase_flags(const void* self, QModelIndex* index) {
@@ -2377,46 +1811,16 @@ int QAbstractItemModel_virtualbase_flags(const void* self, QModelIndex* index) {
 
 }
 
-bool QAbstractItemModel_override_virtual_sort(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sort = slot;
-	return true;
-}
-
 void QAbstractItemModel_virtualbase_sort(void* self, int column, int order) {
 
 	( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::sort(static_cast<int>(column), static_cast<Qt::SortOrder>(order));
 
 }
 
-bool QAbstractItemModel_override_virtual_buddy(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__buddy = slot;
-	return true;
-}
-
 QModelIndex* QAbstractItemModel_virtualbase_buddy(const void* self, QModelIndex* index) {
 
 	return new QModelIndex(( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::buddy(*index));
 
-}
-
-bool QAbstractItemModel_override_virtual_match(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__match = slot;
-	return true;
 }
 
 struct miqt_array /* of QModelIndex* */  QAbstractItemModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags) {
@@ -2434,30 +1838,10 @@ struct miqt_array /* of QModelIndex* */  QAbstractItemModel_virtualbase_match(co
 
 }
 
-bool QAbstractItemModel_override_virtual_span(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__span = slot;
-	return true;
-}
-
 QSize* QAbstractItemModel_virtualbase_span(const void* self, QModelIndex* index) {
 
 	return new QSize(( (const VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::span(*index));
 
-}
-
-bool QAbstractItemModel_override_virtual_roleNames(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__roleNames = slot;
-	return true;
 }
 
 struct miqt_map /* of int to struct miqt_string */  QAbstractItemModel_virtualbase_roleNames(const void* self) {
@@ -2485,30 +1869,10 @@ struct miqt_map /* of int to struct miqt_string */  QAbstractItemModel_virtualba
 
 }
 
-bool QAbstractItemModel_override_virtual_submit(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__submit = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_submit(void* self) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::submit();
 
-}
-
-bool QAbstractItemModel_override_virtual_revert(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__revert = slot;
-	return true;
 }
 
 void QAbstractItemModel_virtualbase_revert(void* self) {
@@ -2517,30 +1881,10 @@ void QAbstractItemModel_virtualbase_revert(void* self) {
 
 }
 
-bool QAbstractItemModel_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QAbstractItemModel_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::event(event);
 
-}
-
-bool QAbstractItemModel_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QAbstractItemModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -2549,30 +1893,10 @@ bool QAbstractItemModel_virtualbase_eventFilter(void* self, QObject* watched, QE
 
 }
 
-bool QAbstractItemModel_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QAbstractItemModel_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::timerEvent(event);
 
-}
-
-bool QAbstractItemModel_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QAbstractItemModel_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -2581,46 +1905,16 @@ void QAbstractItemModel_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QAbstractItemModel_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QAbstractItemModel_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::customEvent(event);
 
 }
 
-bool QAbstractItemModel_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QAbstractItemModel_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQAbstractItemModel*)(self) )->QAbstractItemModel::connectNotify(*signal);
 
-}
-
-bool QAbstractItemModel_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractItemModel* self_cast = dynamic_cast<VirtualQAbstractItemModel*>( (QAbstractItemModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QAbstractItemModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -3013,122 +2307,105 @@ void QAbstractItemModel_delete(QAbstractItemModel* self) {
 }
 
 class VirtualQAbstractTableModel final : public QAbstractTableModel {
+	struct QAbstractTableModel_VTable* vtbl;
 public:
 
-	VirtualQAbstractTableModel(): QAbstractTableModel() {};
-	VirtualQAbstractTableModel(QObject* parent): QAbstractTableModel(parent) {};
+	VirtualQAbstractTableModel(struct QAbstractTableModel_VTable* vtbl): QAbstractTableModel(), vtbl(vtbl) {};
+	VirtualQAbstractTableModel(struct QAbstractTableModel_VTable* vtbl, QObject* parent): QAbstractTableModel(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQAbstractTableModel() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQAbstractTableModel() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QAbstractTableModel::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QAbstractTableModel_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QAbstractTableModel_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QAbstractTableModel::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QAbstractTableModel_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QAbstractTableModel_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QAbstractTableModel::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QAbstractTableModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__index = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
-		if (handle__index == 0) {
+		if (vtbl->index == 0) {
 			return QAbstractTableModel::index(row, column, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_index(this, handle__index, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->index(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractTableModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sibling = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
-		if (handle__sibling == 0) {
+		if (vtbl->sibling == 0) {
 			return QAbstractTableModel::sibling(row, column, idx);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& idx_ret = idx;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_sibling(this, handle__sibling, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->sibling(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractTableModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) override {
-		if (handle__dropMimeData == 0) {
+		if (vtbl->dropMimeData == 0) {
 			return QAbstractTableModel::dropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -3138,97 +2415,82 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_dropMimeData(this, handle__dropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->dropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__flags = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::ItemFlags flags(const QModelIndex& index) const override {
-		if (handle__flags == 0) {
+		if (vtbl->flags == 0) {
 			return QAbstractTableModel::flags(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_flags(this, handle__flags, sigval1);
+		int callback_return_value = vtbl->flags(vtbl, this, sigval1);
 
 		return static_cast<Qt::ItemFlags>(callback_return_value);
 	}
 
 	friend int QAbstractTableModel_virtualbase_flags(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rowCount = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int rowCount(const QModelIndex& parent) const override {
-		if (handle__rowCount == 0) {
+		if (vtbl->rowCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_rowCount(this, handle__rowCount, sigval1);
+		int callback_return_value = vtbl->rowCount(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__columnCount = 0;
 
 	// Subclass to allow providing a Go implementation
 	virtual int columnCount(const QModelIndex& parent) const override {
-		if (handle__columnCount == 0) {
+		if (vtbl->columnCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_columnCount(this, handle__columnCount, sigval1);
+		int callback_return_value = vtbl->columnCount(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__data = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
-		if (handle__data == 0) {
+		if (vtbl->data == 0) {
 			return QVariant(); // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractTableModel_data(this, handle__data, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1, sigval2);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setData(const QModelIndex& index, const QVariant& value, int role) override {
-		if (handle__setData == 0) {
+		if (vtbl->setData == 0) {
 			return QAbstractTableModel::setData(index, value, role);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -3237,43 +2499,37 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		int sigval3 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_setData(this, handle__setData, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__headerData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
-		if (handle__headerData == 0) {
+		if (vtbl->headerData == 0) {
 			return QAbstractTableModel::headerData(section, orientation, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractTableModel_headerData(this, handle__headerData, sigval1, sigval2, sigval3);
+		QVariant* callback_return_value = vtbl->headerData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QAbstractTableModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setHeaderData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role) override {
-		if (handle__setHeaderData == 0) {
+		if (vtbl->setHeaderData == 0) {
 			return QAbstractTableModel::setHeaderData(section, orientation, value, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
@@ -3282,27 +2538,24 @@ public:
 		QVariant* sigval3 = const_cast<QVariant*>(&value_ret);
 		int sigval4 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_setHeaderData(this, handle__setHeaderData, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->setHeaderData(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMap<int, QVariant> itemData(const QModelIndex& index) const override {
-		if (handle__itemData == 0) {
+		if (vtbl->itemData == 0) {
 			return QAbstractTableModel::itemData(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		struct miqt_map /* of int to QVariant* */  callback_return_value = miqt_exec_callback_QAbstractTableModel_itemData(this, handle__itemData, sigval1);
+		struct miqt_map /* of int to QVariant* */  callback_return_value = vtbl->itemData(vtbl, this, sigval1);
 		QMap<int, QVariant> callback_return_value_QMap;
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
 		QVariant** callback_return_value_varr = static_cast<QVariant**>(callback_return_value.values);
@@ -3315,15 +2568,12 @@ public:
 
 	friend struct miqt_map /* of int to QVariant* */  QAbstractTableModel_virtualbase_itemData(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setItemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setItemData(const QModelIndex& index, const QMap<int, QVariant>& roles) override {
-		if (handle__setItemData == 0) {
+		if (vtbl->setItemData == 0) {
 			return QAbstractTableModel::setItemData(index, roles);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -3343,24 +2593,21 @@ public:
 		roles_out.values = static_cast<void*>(roles_varr);
 		struct miqt_map /* of int to QVariant* */  sigval2 = roles_out;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_setItemData(this, handle__setItemData, sigval1, sigval2);
+		bool callback_return_value = vtbl->setItemData(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeTypes = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QStringList mimeTypes() const override {
-		if (handle__mimeTypes == 0) {
+		if (vtbl->mimeTypes == 0) {
 			return QAbstractTableModel::mimeTypes();
 		}
-		
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractTableModel_mimeTypes(this, handle__mimeTypes);
+
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->mimeTypes(vtbl, this);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -3374,15 +2621,12 @@ public:
 
 	friend struct miqt_array /* of struct miqt_string */  QAbstractTableModel_virtualbase_mimeTypes(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMimeData* mimeData(const QModelIndexList& indexes) const override {
-		if (handle__mimeData == 0) {
+		if (vtbl->mimeData == 0) {
 			return QAbstractTableModel::mimeData(indexes);
 		}
-		
+
 		const QModelIndexList& indexes_ret = indexes;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * indexes_ret.length()));
@@ -3394,22 +2638,19 @@ public:
 		indexes_out.data = static_cast<void*>(indexes_arr);
 		struct miqt_array /* of QModelIndex* */  sigval1 = indexes_out;
 
-		QMimeData* callback_return_value = miqt_exec_callback_QAbstractTableModel_mimeData(this, handle__mimeData, sigval1);
+		QMimeData* callback_return_value = vtbl->mimeData(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QMimeData* QAbstractTableModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canDropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const override {
-		if (handle__canDropMimeData == 0) {
+		if (vtbl->canDropMimeData == 0) {
 			return QAbstractTableModel::canDropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -3419,144 +2660,123 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_canDropMimeData(this, handle__canDropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->canDropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDropActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDropActions() const override {
-		if (handle__supportedDropActions == 0) {
+		if (vtbl->supportedDropActions == 0) {
 			return QAbstractTableModel::supportedDropActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_supportedDropActions(this, handle__supportedDropActions);
+
+		int callback_return_value = vtbl->supportedDropActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractTableModel_virtualbase_supportedDropActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDragActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDragActions() const override {
-		if (handle__supportedDragActions == 0) {
+		if (vtbl->supportedDragActions == 0) {
 			return QAbstractTableModel::supportedDragActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractTableModel_supportedDragActions(this, handle__supportedDragActions);
+
+		int callback_return_value = vtbl->supportedDragActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractTableModel_virtualbase_supportedDragActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__insertRows == 0) {
+		if (vtbl->insertRows == 0) {
 			return QAbstractTableModel::insertRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_insertRows(this, handle__insertRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__insertColumns == 0) {
+		if (vtbl->insertColumns == 0) {
 			return QAbstractTableModel::insertColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_insertColumns(this, handle__insertColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__removeRows == 0) {
+		if (vtbl->removeRows == 0) {
 			return QAbstractTableModel::removeRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_removeRows(this, handle__removeRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__removeColumns == 0) {
+		if (vtbl->removeColumns == 0) {
 			return QAbstractTableModel::removeColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_removeColumns(this, handle__removeColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveRows(const QModelIndex& sourceParent, int sourceRow, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveRows == 0) {
+		if (vtbl->moveRows == 0) {
 			return QAbstractTableModel::moveRows(sourceParent, sourceRow, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -3567,22 +2787,19 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_moveRows(this, handle__moveRows, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveRows(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveColumns(const QModelIndex& sourceParent, int sourceColumn, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveColumns == 0) {
+		if (vtbl->moveColumns == 0) {
 			return QAbstractTableModel::moveColumns(sourceParent, sourceColumn, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -3593,104 +2810,87 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_moveColumns(this, handle__moveColumns, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveColumns(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fetchMore(const QModelIndex& parent) override {
-		if (handle__fetchMore == 0) {
+		if (vtbl->fetchMore == 0) {
 			QAbstractTableModel::fetchMore(parent);
 			return;
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		miqt_exec_callback_QAbstractTableModel_fetchMore(this, handle__fetchMore, sigval1);
+		vtbl->fetchMore(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_fetchMore(void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canFetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canFetchMore(const QModelIndex& parent) const override {
-		if (handle__canFetchMore == 0) {
+		if (vtbl->canFetchMore == 0) {
 			return QAbstractTableModel::canFetchMore(parent);
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_canFetchMore(this, handle__canFetchMore, sigval1);
+		bool callback_return_value = vtbl->canFetchMore(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sort = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void sort(int column, Qt::SortOrder order) override {
-		if (handle__sort == 0) {
+		if (vtbl->sort == 0) {
 			QAbstractTableModel::sort(column, order);
 			return;
 		}
-		
+
 		int sigval1 = column;
 		Qt::SortOrder order_ret = order;
 		int sigval2 = static_cast<int>(order_ret);
 
-		miqt_exec_callback_QAbstractTableModel_sort(this, handle__sort, sigval1, sigval2);
+		vtbl->sort(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_sort(void* self, int column, int order);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__buddy = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
-		if (handle__buddy == 0) {
+		if (vtbl->buddy == 0) {
 			return QAbstractTableModel::buddy(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractTableModel_buddy(this, handle__buddy, sigval1);
+		QModelIndex* callback_return_value = vtbl->buddy(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractTableModel_virtualbase_buddy(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__match = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList match(const QModelIndex& start, int role, const QVariant& value, int hits, Qt::MatchFlags flags) const override {
-		if (handle__match == 0) {
+		if (vtbl->match == 0) {
 			return QAbstractTableModel::match(start, role, value, hits, flags);
 		}
-		
+
 		const QModelIndex& start_ret = start;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&start_ret);
@@ -3702,7 +2902,7 @@ public:
 		Qt::MatchFlags flags_ret = flags;
 		int sigval5 = static_cast<int>(flags_ret);
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = miqt_exec_callback_QAbstractTableModel_match(this, handle__match, sigval1, sigval2, sigval3, sigval4, sigval5);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->match(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -3715,37 +2915,31 @@ public:
 
 	friend struct miqt_array /* of QModelIndex* */  QAbstractTableModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__span = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
-		if (handle__span == 0) {
+		if (vtbl->span == 0) {
 			return QAbstractTableModel::span(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QSize* callback_return_value = miqt_exec_callback_QAbstractTableModel_span(this, handle__span, sigval1);
+		QSize* callback_return_value = vtbl->span(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QAbstractTableModel_virtualbase_span(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__roleNames = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QHash<int, QByteArray> roleNames() const override {
-		if (handle__roleNames == 0) {
+		if (vtbl->roleNames == 0) {
 			return QAbstractTableModel::roleNames();
 		}
-		
 
-		struct miqt_map /* of int to struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractTableModel_roleNames(this, handle__roleNames);
+
+		struct miqt_map /* of int to struct miqt_string */  callback_return_value = vtbl->roleNames(vtbl, this);
 		QHash<int, QByteArray> callback_return_value_QMap;
 		callback_return_value_QMap.reserve(callback_return_value.len);
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
@@ -3760,173 +2954,140 @@ public:
 
 	friend struct miqt_map /* of int to struct miqt_string */  QAbstractTableModel_virtualbase_roleNames(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__submit = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool submit() override {
-		if (handle__submit == 0) {
+		if (vtbl->submit == 0) {
 			return QAbstractTableModel::submit();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_submit(this, handle__submit);
+
+		bool callback_return_value = vtbl->submit(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_submit(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__revert = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void revert() override {
-		if (handle__revert == 0) {
+		if (vtbl->revert == 0) {
 			QAbstractTableModel::revert();
 			return;
 		}
-		
 
-		miqt_exec_callback_QAbstractTableModel_revert(this, handle__revert);
 
-		
+		vtbl->revert(vtbl, this);
+
 	}
 
 	friend void QAbstractTableModel_virtualbase_revert(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QAbstractTableModel::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QAbstractTableModel::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractTableModel_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractTableModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QAbstractTableModel::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractTableModel_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QAbstractTableModel::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractTableModel_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QAbstractTableModel::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractTableModel_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QAbstractTableModel::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractTableModel_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QAbstractTableModel::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractTableModel_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractTableModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -3959,12 +3120,12 @@ public:
 	friend bool QAbstractTableModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QAbstractTableModel* QAbstractTableModel_new() {
-	return new VirtualQAbstractTableModel();
+QAbstractTableModel* QAbstractTableModel_new(struct QAbstractTableModel_VTable* vtbl) {
+	return new VirtualQAbstractTableModel(vtbl);
 }
 
-QAbstractTableModel* QAbstractTableModel_new2(QObject* parent) {
-	return new VirtualQAbstractTableModel(parent);
+QAbstractTableModel* QAbstractTableModel_new2(struct QAbstractTableModel_VTable* vtbl, QObject* parent) {
+	return new VirtualQAbstractTableModel(vtbl, parent);
 }
 
 void QAbstractTableModel_virtbase(QAbstractTableModel* src, QAbstractItemModel** outptr_QAbstractItemModel) {
@@ -4066,30 +3227,10 @@ struct miqt_string QAbstractTableModel_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
-bool QAbstractTableModel_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QAbstractTableModel_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::metaObject();
 
-}
-
-bool QAbstractTableModel_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QAbstractTableModel_virtualbase_metacast(void* self, const char* param1) {
@@ -4098,30 +3239,10 @@ void* QAbstractTableModel_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QAbstractTableModel_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QAbstractTableModel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QAbstractTableModel_override_virtual_index(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__index = slot;
-	return true;
 }
 
 QModelIndex* QAbstractTableModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent) {
@@ -4130,46 +3251,16 @@ QModelIndex* QAbstractTableModel_virtualbase_index(const void* self, int row, in
 
 }
 
-bool QAbstractTableModel_override_virtual_sibling(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sibling = slot;
-	return true;
-}
-
 QModelIndex* QAbstractTableModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx) {
 
 	return new QModelIndex(( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::sibling(static_cast<int>(row), static_cast<int>(column), *idx));
 
 }
 
-bool QAbstractTableModel_override_virtual_dropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropMimeData = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::dropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
-}
-
-bool QAbstractTableModel_override_virtual_flags(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__flags = slot;
-	return true;
 }
 
 int QAbstractTableModel_virtualbase_flags(const void* self, QModelIndex* index) {
@@ -4179,60 +3270,10 @@ int QAbstractTableModel_virtualbase_flags(const void* self, QModelIndex* index) 
 
 }
 
-bool QAbstractTableModel_override_virtual_rowCount(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__rowCount = slot;
-	return true;
-}
-
-bool QAbstractTableModel_override_virtual_columnCount(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__columnCount = slot;
-	return true;
-}
-
-bool QAbstractTableModel_override_virtual_data(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__data = slot;
-	return true;
-}
-
-bool QAbstractTableModel_override_virtual_setData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setData = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::setData(*index, *value, static_cast<int>(role));
 
-}
-
-bool QAbstractTableModel_override_virtual_headerData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__headerData = slot;
-	return true;
 }
 
 QVariant* QAbstractTableModel_virtualbase_headerData(const void* self, int section, int orientation, int role) {
@@ -4241,30 +3282,10 @@ QVariant* QAbstractTableModel_virtualbase_headerData(const void* self, int secti
 
 }
 
-bool QAbstractTableModel_override_virtual_setHeaderData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setHeaderData = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::setHeaderData(static_cast<int>(section), static_cast<Qt::Orientation>(orientation), *value, static_cast<int>(role));
 
-}
-
-bool QAbstractTableModel_override_virtual_itemData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__itemData = slot;
-	return true;
 }
 
 struct miqt_map /* of int to QVariant* */  QAbstractTableModel_virtualbase_itemData(const void* self, QModelIndex* index) {
@@ -4287,16 +3308,6 @@ struct miqt_map /* of int to QVariant* */  QAbstractTableModel_virtualbase_itemD
 
 }
 
-bool QAbstractTableModel_override_virtual_setItemData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setItemData = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles) {
 	QMap<int, QVariant> roles_QMap;
 	int* roles_karr = static_cast<int*>(roles.keys);
@@ -4307,16 +3318,6 @@ bool QAbstractTableModel_virtualbase_setItemData(void* self, QModelIndex* index,
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::setItemData(*index, roles_QMap);
 
-}
-
-bool QAbstractTableModel_override_virtual_mimeTypes(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeTypes = slot;
-	return true;
 }
 
 struct miqt_array /* of struct miqt_string */  QAbstractTableModel_virtualbase_mimeTypes(const void* self) {
@@ -4341,16 +3342,6 @@ struct miqt_array /* of struct miqt_string */  QAbstractTableModel_virtualbase_m
 
 }
 
-bool QAbstractTableModel_override_virtual_mimeData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeData = slot;
-	return true;
-}
-
 QMimeData* QAbstractTableModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes) {
 	QModelIndexList indexes_QList;
 	indexes_QList.reserve(indexes.len);
@@ -4363,30 +3354,10 @@ QMimeData* QAbstractTableModel_virtualbase_mimeData(const void* self, struct miq
 
 }
 
-bool QAbstractTableModel_override_virtual_canDropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canDropMimeData = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::canDropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
-}
-
-bool QAbstractTableModel_override_virtual_supportedDropActions(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDropActions = slot;
-	return true;
 }
 
 int QAbstractTableModel_virtualbase_supportedDropActions(const void* self) {
@@ -4396,31 +3367,11 @@ int QAbstractTableModel_virtualbase_supportedDropActions(const void* self) {
 
 }
 
-bool QAbstractTableModel_override_virtual_supportedDragActions(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDragActions = slot;
-	return true;
-}
-
 int QAbstractTableModel_virtualbase_supportedDragActions(const void* self) {
 
 	Qt::DropActions _ret = ( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::supportedDragActions();
 	return static_cast<int>(_ret);
 
-}
-
-bool QAbstractTableModel_override_virtual_insertRows(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertRows = slot;
-	return true;
 }
 
 bool QAbstractTableModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent) {
@@ -4429,30 +3380,10 @@ bool QAbstractTableModel_virtualbase_insertRows(void* self, int row, int count, 
 
 }
 
-bool QAbstractTableModel_override_virtual_insertColumns(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertColumns = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::insertColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractTableModel_override_virtual_removeRows(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeRows = slot;
-	return true;
 }
 
 bool QAbstractTableModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent) {
@@ -4461,30 +3392,10 @@ bool QAbstractTableModel_virtualbase_removeRows(void* self, int row, int count, 
 
 }
 
-bool QAbstractTableModel_override_virtual_removeColumns(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeColumns = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::removeColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractTableModel_override_virtual_moveRows(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveRows = slot;
-	return true;
 }
 
 bool QAbstractTableModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild) {
@@ -4493,30 +3404,10 @@ bool QAbstractTableModel_virtualbase_moveRows(void* self, QModelIndex* sourcePar
 
 }
 
-bool QAbstractTableModel_override_virtual_moveColumns(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveColumns = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::moveColumns(*sourceParent, static_cast<int>(sourceColumn), static_cast<int>(count), *destinationParent, static_cast<int>(destinationChild));
 
-}
-
-bool QAbstractTableModel_override_virtual_fetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fetchMore = slot;
-	return true;
 }
 
 void QAbstractTableModel_virtualbase_fetchMore(void* self, QModelIndex* parent) {
@@ -4525,30 +3416,10 @@ void QAbstractTableModel_virtualbase_fetchMore(void* self, QModelIndex* parent) 
 
 }
 
-bool QAbstractTableModel_override_virtual_canFetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canFetchMore = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::canFetchMore(*parent);
 
-}
-
-bool QAbstractTableModel_override_virtual_sort(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sort = slot;
-	return true;
 }
 
 void QAbstractTableModel_virtualbase_sort(void* self, int column, int order) {
@@ -4557,30 +3428,10 @@ void QAbstractTableModel_virtualbase_sort(void* self, int column, int order) {
 
 }
 
-bool QAbstractTableModel_override_virtual_buddy(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__buddy = slot;
-	return true;
-}
-
 QModelIndex* QAbstractTableModel_virtualbase_buddy(const void* self, QModelIndex* index) {
 
 	return new QModelIndex(( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::buddy(*index));
 
-}
-
-bool QAbstractTableModel_override_virtual_match(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__match = slot;
-	return true;
 }
 
 struct miqt_array /* of QModelIndex* */  QAbstractTableModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags) {
@@ -4598,30 +3449,10 @@ struct miqt_array /* of QModelIndex* */  QAbstractTableModel_virtualbase_match(c
 
 }
 
-bool QAbstractTableModel_override_virtual_span(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__span = slot;
-	return true;
-}
-
 QSize* QAbstractTableModel_virtualbase_span(const void* self, QModelIndex* index) {
 
 	return new QSize(( (const VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::span(*index));
 
-}
-
-bool QAbstractTableModel_override_virtual_roleNames(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__roleNames = slot;
-	return true;
 }
 
 struct miqt_map /* of int to struct miqt_string */  QAbstractTableModel_virtualbase_roleNames(const void* self) {
@@ -4649,30 +3480,10 @@ struct miqt_map /* of int to struct miqt_string */  QAbstractTableModel_virtualb
 
 }
 
-bool QAbstractTableModel_override_virtual_submit(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__submit = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_submit(void* self) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::submit();
 
-}
-
-bool QAbstractTableModel_override_virtual_revert(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__revert = slot;
-	return true;
 }
 
 void QAbstractTableModel_virtualbase_revert(void* self) {
@@ -4681,30 +3492,10 @@ void QAbstractTableModel_virtualbase_revert(void* self) {
 
 }
 
-bool QAbstractTableModel_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QAbstractTableModel_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::event(event);
 
-}
-
-bool QAbstractTableModel_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QAbstractTableModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -4713,30 +3504,10 @@ bool QAbstractTableModel_virtualbase_eventFilter(void* self, QObject* watched, Q
 
 }
 
-bool QAbstractTableModel_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QAbstractTableModel_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::timerEvent(event);
 
-}
-
-bool QAbstractTableModel_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QAbstractTableModel_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -4745,46 +3516,16 @@ void QAbstractTableModel_virtualbase_childEvent(void* self, QChildEvent* event) 
 
 }
 
-bool QAbstractTableModel_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QAbstractTableModel_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::customEvent(event);
 
 }
 
-bool QAbstractTableModel_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QAbstractTableModel_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQAbstractTableModel*)(self) )->QAbstractTableModel::connectNotify(*signal);
 
-}
-
-bool QAbstractTableModel_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractTableModel* self_cast = dynamic_cast<VirtualQAbstractTableModel*>( (QAbstractTableModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QAbstractTableModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -5151,122 +3892,105 @@ void QAbstractTableModel_delete(QAbstractTableModel* self) {
 }
 
 class VirtualQAbstractListModel final : public QAbstractListModel {
+	struct QAbstractListModel_VTable* vtbl;
 public:
 
-	VirtualQAbstractListModel(): QAbstractListModel() {};
-	VirtualQAbstractListModel(QObject* parent): QAbstractListModel(parent) {};
+	VirtualQAbstractListModel(struct QAbstractListModel_VTable* vtbl): QAbstractListModel(), vtbl(vtbl) {};
+	VirtualQAbstractListModel(struct QAbstractListModel_VTable* vtbl, QObject* parent): QAbstractListModel(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQAbstractListModel() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQAbstractListModel() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QAbstractListModel::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QAbstractListModel_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QAbstractListModel_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QAbstractListModel::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QAbstractListModel_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QAbstractListModel_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QAbstractListModel::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QAbstractListModel_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QAbstractListModel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__index = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex index(int row, int column, const QModelIndex& parent) const override {
-		if (handle__index == 0) {
+		if (vtbl->index == 0) {
 			return QAbstractListModel::index(row, column, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_index(this, handle__index, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->index(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractListModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sibling = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex sibling(int row, int column, const QModelIndex& idx) const override {
-		if (handle__sibling == 0) {
+		if (vtbl->sibling == 0) {
 			return QAbstractListModel::sibling(row, column, idx);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = column;
 		const QModelIndex& idx_ret = idx;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&idx_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_sibling(this, handle__sibling, sigval1, sigval2, sigval3);
+		QModelIndex* callback_return_value = vtbl->sibling(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractListModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__dropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool dropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) override {
-		if (handle__dropMimeData == 0) {
+		if (vtbl->dropMimeData == 0) {
 			return QAbstractListModel::dropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -5276,79 +4000,67 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_dropMimeData(this, handle__dropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->dropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__flags = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::ItemFlags flags(const QModelIndex& index) const override {
-		if (handle__flags == 0) {
+		if (vtbl->flags == 0) {
 			return QAbstractListModel::flags(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractListModel_flags(this, handle__flags, sigval1);
+		int callback_return_value = vtbl->flags(vtbl, this, sigval1);
 
 		return static_cast<Qt::ItemFlags>(callback_return_value);
 	}
 
 	friend int QAbstractListModel_virtualbase_flags(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__rowCount = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int rowCount(const QModelIndex& parent) const override {
-		if (handle__rowCount == 0) {
+		if (vtbl->rowCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		int callback_return_value = miqt_exec_callback_QAbstractListModel_rowCount(this, handle__rowCount, sigval1);
+		int callback_return_value = vtbl->rowCount(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__data = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant data(const QModelIndex& index, int role) const override {
-		if (handle__data == 0) {
+		if (vtbl->data == 0) {
 			return QVariant(); // Pure virtual, there is no base we can call
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		int sigval2 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractListModel_data(this, handle__data, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->data(vtbl, this, sigval1, sigval2);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setData(const QModelIndex& index, const QVariant& value, int role) override {
-		if (handle__setData == 0) {
+		if (vtbl->setData == 0) {
 			return QAbstractListModel::setData(index, value, role);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -5357,43 +4069,37 @@ public:
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 		int sigval3 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_setData(this, handle__setData, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__headerData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QVariant headerData(int section, Qt::Orientation orientation, int role) const override {
-		if (handle__headerData == 0) {
+		if (vtbl->headerData == 0) {
 			return QAbstractListModel::headerData(section, orientation, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
 		int sigval3 = role;
 
-		QVariant* callback_return_value = miqt_exec_callback_QAbstractListModel_headerData(this, handle__headerData, sigval1, sigval2, sigval3);
+		QVariant* callback_return_value = vtbl->headerData(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QVariant* QAbstractListModel_virtualbase_headerData(const void* self, int section, int orientation, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setHeaderData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setHeaderData(int section, Qt::Orientation orientation, const QVariant& value, int role) override {
-		if (handle__setHeaderData == 0) {
+		if (vtbl->setHeaderData == 0) {
 			return QAbstractListModel::setHeaderData(section, orientation, value, role);
 		}
-		
+
 		int sigval1 = section;
 		Qt::Orientation orientation_ret = orientation;
 		int sigval2 = static_cast<int>(orientation_ret);
@@ -5402,27 +4108,24 @@ public:
 		QVariant* sigval3 = const_cast<QVariant*>(&value_ret);
 		int sigval4 = role;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_setHeaderData(this, handle__setHeaderData, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->setHeaderData(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMap<int, QVariant> itemData(const QModelIndex& index) const override {
-		if (handle__itemData == 0) {
+		if (vtbl->itemData == 0) {
 			return QAbstractListModel::itemData(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		struct miqt_map /* of int to QVariant* */  callback_return_value = miqt_exec_callback_QAbstractListModel_itemData(this, handle__itemData, sigval1);
+		struct miqt_map /* of int to QVariant* */  callback_return_value = vtbl->itemData(vtbl, this, sigval1);
 		QMap<int, QVariant> callback_return_value_QMap;
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
 		QVariant** callback_return_value_varr = static_cast<QVariant**>(callback_return_value.values);
@@ -5435,15 +4138,12 @@ public:
 
 	friend struct miqt_map /* of int to QVariant* */  QAbstractListModel_virtualbase_itemData(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setItemData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool setItemData(const QModelIndex& index, const QMap<int, QVariant>& roles) override {
-		if (handle__setItemData == 0) {
+		if (vtbl->setItemData == 0) {
 			return QAbstractListModel::setItemData(index, roles);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
@@ -5463,24 +4163,21 @@ public:
 		roles_out.values = static_cast<void*>(roles_varr);
 		struct miqt_map /* of int to QVariant* */  sigval2 = roles_out;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_setItemData(this, handle__setItemData, sigval1, sigval2);
+		bool callback_return_value = vtbl->setItemData(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeTypes = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QStringList mimeTypes() const override {
-		if (handle__mimeTypes == 0) {
+		if (vtbl->mimeTypes == 0) {
 			return QAbstractListModel::mimeTypes();
 		}
-		
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractListModel_mimeTypes(this, handle__mimeTypes);
+
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->mimeTypes(vtbl, this);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -5494,15 +4191,12 @@ public:
 
 	friend struct miqt_array /* of struct miqt_string */  QAbstractListModel_virtualbase_mimeTypes(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__mimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QMimeData* mimeData(const QModelIndexList& indexes) const override {
-		if (handle__mimeData == 0) {
+		if (vtbl->mimeData == 0) {
 			return QAbstractListModel::mimeData(indexes);
 		}
-		
+
 		const QModelIndexList& indexes_ret = indexes;
 		// Convert QList<> from C++ memory to manually-managed C memory
 		QModelIndex** indexes_arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * indexes_ret.length()));
@@ -5514,22 +4208,19 @@ public:
 		indexes_out.data = static_cast<void*>(indexes_arr);
 		struct miqt_array /* of QModelIndex* */  sigval1 = indexes_out;
 
-		QMimeData* callback_return_value = miqt_exec_callback_QAbstractListModel_mimeData(this, handle__mimeData, sigval1);
+		QMimeData* callback_return_value = vtbl->mimeData(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QMimeData* QAbstractListModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canDropMimeData = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canDropMimeData(const QMimeData* data, Qt::DropAction action, int row, int column, const QModelIndex& parent) const override {
-		if (handle__canDropMimeData == 0) {
+		if (vtbl->canDropMimeData == 0) {
 			return QAbstractListModel::canDropMimeData(data, action, row, column, parent);
 		}
-		
+
 		QMimeData* sigval1 = (QMimeData*) data;
 		Qt::DropAction action_ret = action;
 		int sigval2 = static_cast<int>(action_ret);
@@ -5539,144 +4230,123 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval5 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_canDropMimeData(this, handle__canDropMimeData, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->canDropMimeData(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDropActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDropActions() const override {
-		if (handle__supportedDropActions == 0) {
+		if (vtbl->supportedDropActions == 0) {
 			return QAbstractListModel::supportedDropActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractListModel_supportedDropActions(this, handle__supportedDropActions);
+
+		int callback_return_value = vtbl->supportedDropActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractListModel_virtualbase_supportedDropActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportedDragActions = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual Qt::DropActions supportedDragActions() const override {
-		if (handle__supportedDragActions == 0) {
+		if (vtbl->supportedDragActions == 0) {
 			return QAbstractListModel::supportedDragActions();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QAbstractListModel_supportedDragActions(this, handle__supportedDragActions);
+
+		int callback_return_value = vtbl->supportedDragActions(vtbl, this);
 
 		return static_cast<Qt::DropActions>(callback_return_value);
 	}
 
 	friend int QAbstractListModel_virtualbase_supportedDragActions(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__insertRows == 0) {
+		if (vtbl->insertRows == 0) {
 			return QAbstractListModel::insertRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_insertRows(this, handle__insertRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__insertColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool insertColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__insertColumns == 0) {
+		if (vtbl->insertColumns == 0) {
 			return QAbstractListModel::insertColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_insertColumns(this, handle__insertColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->insertColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeRows(int row, int count, const QModelIndex& parent) override {
-		if (handle__removeRows == 0) {
+		if (vtbl->removeRows == 0) {
 			return QAbstractListModel::removeRows(row, count, parent);
 		}
-		
+
 		int sigval1 = row;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_removeRows(this, handle__removeRows, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeRows(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool removeColumns(int column, int count, const QModelIndex& parent) override {
-		if (handle__removeColumns == 0) {
+		if (vtbl->removeColumns == 0) {
 			return QAbstractListModel::removeColumns(column, count, parent);
 		}
-		
+
 		int sigval1 = column;
 		int sigval2 = count;
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval3 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_removeColumns(this, handle__removeColumns, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->removeColumns(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveRows = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveRows(const QModelIndex& sourceParent, int sourceRow, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveRows == 0) {
+		if (vtbl->moveRows == 0) {
 			return QAbstractListModel::moveRows(sourceParent, sourceRow, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -5687,22 +4357,19 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_moveRows(this, handle__moveRows, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveRows(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__moveColumns = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool moveColumns(const QModelIndex& sourceParent, int sourceColumn, int count, const QModelIndex& destinationParent, int destinationChild) override {
-		if (handle__moveColumns == 0) {
+		if (vtbl->moveColumns == 0) {
 			return QAbstractListModel::moveColumns(sourceParent, sourceColumn, count, destinationParent, destinationChild);
 		}
-		
+
 		const QModelIndex& sourceParent_ret = sourceParent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&sourceParent_ret);
@@ -5713,104 +4380,87 @@ public:
 		QModelIndex* sigval4 = const_cast<QModelIndex*>(&destinationParent_ret);
 		int sigval5 = destinationChild;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_moveColumns(this, handle__moveColumns, sigval1, sigval2, sigval3, sigval4, sigval5);
+		bool callback_return_value = vtbl->moveColumns(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__fetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void fetchMore(const QModelIndex& parent) override {
-		if (handle__fetchMore == 0) {
+		if (vtbl->fetchMore == 0) {
 			QAbstractListModel::fetchMore(parent);
 			return;
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		miqt_exec_callback_QAbstractListModel_fetchMore(this, handle__fetchMore, sigval1);
+		vtbl->fetchMore(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_fetchMore(void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__canFetchMore = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool canFetchMore(const QModelIndex& parent) const override {
-		if (handle__canFetchMore == 0) {
+		if (vtbl->canFetchMore == 0) {
 			return QAbstractListModel::canFetchMore(parent);
 		}
-		
+
 		const QModelIndex& parent_ret = parent;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&parent_ret);
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_canFetchMore(this, handle__canFetchMore, sigval1);
+		bool callback_return_value = vtbl->canFetchMore(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sort = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void sort(int column, Qt::SortOrder order) override {
-		if (handle__sort == 0) {
+		if (vtbl->sort == 0) {
 			QAbstractListModel::sort(column, order);
 			return;
 		}
-		
+
 		int sigval1 = column;
 		Qt::SortOrder order_ret = order;
 		int sigval2 = static_cast<int>(order_ret);
 
-		miqt_exec_callback_QAbstractListModel_sort(this, handle__sort, sigval1, sigval2);
+		vtbl->sort(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_sort(void* self, int column, int order);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__buddy = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndex buddy(const QModelIndex& index) const override {
-		if (handle__buddy == 0) {
+		if (vtbl->buddy == 0) {
 			return QAbstractListModel::buddy(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QModelIndex* callback_return_value = miqt_exec_callback_QAbstractListModel_buddy(this, handle__buddy, sigval1);
+		QModelIndex* callback_return_value = vtbl->buddy(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QModelIndex* QAbstractListModel_virtualbase_buddy(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__match = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList match(const QModelIndex& start, int role, const QVariant& value, int hits, Qt::MatchFlags flags) const override {
-		if (handle__match == 0) {
+		if (vtbl->match == 0) {
 			return QAbstractListModel::match(start, role, value, hits, flags);
 		}
-		
+
 		const QModelIndex& start_ret = start;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&start_ret);
@@ -5822,7 +4472,7 @@ public:
 		Qt::MatchFlags flags_ret = flags;
 		int sigval5 = static_cast<int>(flags_ret);
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = miqt_exec_callback_QAbstractListModel_match(this, handle__match, sigval1, sigval2, sigval3, sigval4, sigval5);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->match(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -5835,37 +4485,31 @@ public:
 
 	friend struct miqt_array /* of QModelIndex* */  QAbstractListModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__span = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize span(const QModelIndex& index) const override {
-		if (handle__span == 0) {
+		if (vtbl->span == 0) {
 			return QAbstractListModel::span(index);
 		}
-		
+
 		const QModelIndex& index_ret = index;
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QSize* callback_return_value = miqt_exec_callback_QAbstractListModel_span(this, handle__span, sigval1);
+		QSize* callback_return_value = vtbl->span(vtbl, this, sigval1);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QAbstractListModel_virtualbase_span(const void* self, QModelIndex* index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__roleNames = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QHash<int, QByteArray> roleNames() const override {
-		if (handle__roleNames == 0) {
+		if (vtbl->roleNames == 0) {
 			return QAbstractListModel::roleNames();
 		}
-		
 
-		struct miqt_map /* of int to struct miqt_string */  callback_return_value = miqt_exec_callback_QAbstractListModel_roleNames(this, handle__roleNames);
+
+		struct miqt_map /* of int to struct miqt_string */  callback_return_value = vtbl->roleNames(vtbl, this);
 		QHash<int, QByteArray> callback_return_value_QMap;
 		callback_return_value_QMap.reserve(callback_return_value.len);
 		int* callback_return_value_karr = static_cast<int*>(callback_return_value.keys);
@@ -5880,173 +4524,140 @@ public:
 
 	friend struct miqt_map /* of int to struct miqt_string */  QAbstractListModel_virtualbase_roleNames(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__submit = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool submit() override {
-		if (handle__submit == 0) {
+		if (vtbl->submit == 0) {
 			return QAbstractListModel::submit();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_submit(this, handle__submit);
+
+		bool callback_return_value = vtbl->submit(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_submit(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__revert = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void revert() override {
-		if (handle__revert == 0) {
+		if (vtbl->revert == 0) {
 			QAbstractListModel::revert();
 			return;
 		}
-		
 
-		miqt_exec_callback_QAbstractListModel_revert(this, handle__revert);
 
-		
+		vtbl->revert(vtbl, this);
+
 	}
 
 	friend void QAbstractListModel_virtualbase_revert(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QAbstractListModel::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QAbstractListModel::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QAbstractListModel_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QAbstractListModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QAbstractListModel::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractListModel_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QAbstractListModel::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractListModel_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QAbstractListModel::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QAbstractListModel_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QAbstractListModel::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractListModel_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QAbstractListModel::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QAbstractListModel_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QAbstractListModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -6079,12 +4690,12 @@ public:
 	friend bool QAbstractListModel_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QAbstractListModel* QAbstractListModel_new() {
-	return new VirtualQAbstractListModel();
+QAbstractListModel* QAbstractListModel_new(struct QAbstractListModel_VTable* vtbl) {
+	return new VirtualQAbstractListModel(vtbl);
 }
 
-QAbstractListModel* QAbstractListModel_new2(QObject* parent) {
-	return new VirtualQAbstractListModel(parent);
+QAbstractListModel* QAbstractListModel_new2(struct QAbstractListModel_VTable* vtbl, QObject* parent) {
+	return new VirtualQAbstractListModel(vtbl, parent);
 }
 
 void QAbstractListModel_virtbase(QAbstractListModel* src, QAbstractItemModel** outptr_QAbstractItemModel) {
@@ -6186,30 +4797,10 @@ struct miqt_string QAbstractListModel_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
-bool QAbstractListModel_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QAbstractListModel_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::metaObject();
 
-}
-
-bool QAbstractListModel_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QAbstractListModel_virtualbase_metacast(void* self, const char* param1) {
@@ -6218,30 +4809,10 @@ void* QAbstractListModel_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QAbstractListModel_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QAbstractListModel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QAbstractListModel_override_virtual_index(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__index = slot;
-	return true;
 }
 
 QModelIndex* QAbstractListModel_virtualbase_index(const void* self, int row, int column, QModelIndex* parent) {
@@ -6250,46 +4821,16 @@ QModelIndex* QAbstractListModel_virtualbase_index(const void* self, int row, int
 
 }
 
-bool QAbstractListModel_override_virtual_sibling(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sibling = slot;
-	return true;
-}
-
 QModelIndex* QAbstractListModel_virtualbase_sibling(const void* self, int row, int column, QModelIndex* idx) {
 
 	return new QModelIndex(( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::sibling(static_cast<int>(row), static_cast<int>(column), *idx));
 
 }
 
-bool QAbstractListModel_override_virtual_dropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__dropMimeData = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_dropMimeData(void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::dropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
-}
-
-bool QAbstractListModel_override_virtual_flags(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__flags = slot;
-	return true;
 }
 
 int QAbstractListModel_virtualbase_flags(const void* self, QModelIndex* index) {
@@ -6299,50 +4840,10 @@ int QAbstractListModel_virtualbase_flags(const void* self, QModelIndex* index) {
 
 }
 
-bool QAbstractListModel_override_virtual_rowCount(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__rowCount = slot;
-	return true;
-}
-
-bool QAbstractListModel_override_virtual_data(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__data = slot;
-	return true;
-}
-
-bool QAbstractListModel_override_virtual_setData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setData = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_setData(void* self, QModelIndex* index, QVariant* value, int role) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::setData(*index, *value, static_cast<int>(role));
 
-}
-
-bool QAbstractListModel_override_virtual_headerData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__headerData = slot;
-	return true;
 }
 
 QVariant* QAbstractListModel_virtualbase_headerData(const void* self, int section, int orientation, int role) {
@@ -6351,30 +4852,10 @@ QVariant* QAbstractListModel_virtualbase_headerData(const void* self, int sectio
 
 }
 
-bool QAbstractListModel_override_virtual_setHeaderData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setHeaderData = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_setHeaderData(void* self, int section, int orientation, QVariant* value, int role) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::setHeaderData(static_cast<int>(section), static_cast<Qt::Orientation>(orientation), *value, static_cast<int>(role));
 
-}
-
-bool QAbstractListModel_override_virtual_itemData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__itemData = slot;
-	return true;
 }
 
 struct miqt_map /* of int to QVariant* */  QAbstractListModel_virtualbase_itemData(const void* self, QModelIndex* index) {
@@ -6397,16 +4878,6 @@ struct miqt_map /* of int to QVariant* */  QAbstractListModel_virtualbase_itemDa
 
 }
 
-bool QAbstractListModel_override_virtual_setItemData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setItemData = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_setItemData(void* self, QModelIndex* index, struct miqt_map /* of int to QVariant* */  roles) {
 	QMap<int, QVariant> roles_QMap;
 	int* roles_karr = static_cast<int*>(roles.keys);
@@ -6417,16 +4888,6 @@ bool QAbstractListModel_virtualbase_setItemData(void* self, QModelIndex* index, 
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::setItemData(*index, roles_QMap);
 
-}
-
-bool QAbstractListModel_override_virtual_mimeTypes(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeTypes = slot;
-	return true;
 }
 
 struct miqt_array /* of struct miqt_string */  QAbstractListModel_virtualbase_mimeTypes(const void* self) {
@@ -6451,16 +4912,6 @@ struct miqt_array /* of struct miqt_string */  QAbstractListModel_virtualbase_mi
 
 }
 
-bool QAbstractListModel_override_virtual_mimeData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__mimeData = slot;
-	return true;
-}
-
 QMimeData* QAbstractListModel_virtualbase_mimeData(const void* self, struct miqt_array /* of QModelIndex* */  indexes) {
 	QModelIndexList indexes_QList;
 	indexes_QList.reserve(indexes.len);
@@ -6473,30 +4924,10 @@ QMimeData* QAbstractListModel_virtualbase_mimeData(const void* self, struct miqt
 
 }
 
-bool QAbstractListModel_override_virtual_canDropMimeData(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canDropMimeData = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_canDropMimeData(const void* self, QMimeData* data, int action, int row, int column, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::canDropMimeData(data, static_cast<Qt::DropAction>(action), static_cast<int>(row), static_cast<int>(column), *parent);
 
-}
-
-bool QAbstractListModel_override_virtual_supportedDropActions(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDropActions = slot;
-	return true;
 }
 
 int QAbstractListModel_virtualbase_supportedDropActions(const void* self) {
@@ -6506,31 +4937,11 @@ int QAbstractListModel_virtualbase_supportedDropActions(const void* self) {
 
 }
 
-bool QAbstractListModel_override_virtual_supportedDragActions(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportedDragActions = slot;
-	return true;
-}
-
 int QAbstractListModel_virtualbase_supportedDragActions(const void* self) {
 
 	Qt::DropActions _ret = ( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::supportedDragActions();
 	return static_cast<int>(_ret);
 
-}
-
-bool QAbstractListModel_override_virtual_insertRows(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertRows = slot;
-	return true;
 }
 
 bool QAbstractListModel_virtualbase_insertRows(void* self, int row, int count, QModelIndex* parent) {
@@ -6539,30 +4950,10 @@ bool QAbstractListModel_virtualbase_insertRows(void* self, int row, int count, Q
 
 }
 
-bool QAbstractListModel_override_virtual_insertColumns(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__insertColumns = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_insertColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::insertColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractListModel_override_virtual_removeRows(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeRows = slot;
-	return true;
 }
 
 bool QAbstractListModel_virtualbase_removeRows(void* self, int row, int count, QModelIndex* parent) {
@@ -6571,30 +4962,10 @@ bool QAbstractListModel_virtualbase_removeRows(void* self, int row, int count, Q
 
 }
 
-bool QAbstractListModel_override_virtual_removeColumns(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeColumns = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_removeColumns(void* self, int column, int count, QModelIndex* parent) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::removeColumns(static_cast<int>(column), static_cast<int>(count), *parent);
 
-}
-
-bool QAbstractListModel_override_virtual_moveRows(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveRows = slot;
-	return true;
 }
 
 bool QAbstractListModel_virtualbase_moveRows(void* self, QModelIndex* sourceParent, int sourceRow, int count, QModelIndex* destinationParent, int destinationChild) {
@@ -6603,30 +4974,10 @@ bool QAbstractListModel_virtualbase_moveRows(void* self, QModelIndex* sourcePare
 
 }
 
-bool QAbstractListModel_override_virtual_moveColumns(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__moveColumns = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_moveColumns(void* self, QModelIndex* sourceParent, int sourceColumn, int count, QModelIndex* destinationParent, int destinationChild) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::moveColumns(*sourceParent, static_cast<int>(sourceColumn), static_cast<int>(count), *destinationParent, static_cast<int>(destinationChild));
 
-}
-
-bool QAbstractListModel_override_virtual_fetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__fetchMore = slot;
-	return true;
 }
 
 void QAbstractListModel_virtualbase_fetchMore(void* self, QModelIndex* parent) {
@@ -6635,30 +4986,10 @@ void QAbstractListModel_virtualbase_fetchMore(void* self, QModelIndex* parent) {
 
 }
 
-bool QAbstractListModel_override_virtual_canFetchMore(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__canFetchMore = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_canFetchMore(const void* self, QModelIndex* parent) {
 
 	return ( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::canFetchMore(*parent);
 
-}
-
-bool QAbstractListModel_override_virtual_sort(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sort = slot;
-	return true;
 }
 
 void QAbstractListModel_virtualbase_sort(void* self, int column, int order) {
@@ -6667,30 +4998,10 @@ void QAbstractListModel_virtualbase_sort(void* self, int column, int order) {
 
 }
 
-bool QAbstractListModel_override_virtual_buddy(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__buddy = slot;
-	return true;
-}
-
 QModelIndex* QAbstractListModel_virtualbase_buddy(const void* self, QModelIndex* index) {
 
 	return new QModelIndex(( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::buddy(*index));
 
-}
-
-bool QAbstractListModel_override_virtual_match(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__match = slot;
-	return true;
 }
 
 struct miqt_array /* of QModelIndex* */  QAbstractListModel_virtualbase_match(const void* self, QModelIndex* start, int role, QVariant* value, int hits, int flags) {
@@ -6708,30 +5019,10 @@ struct miqt_array /* of QModelIndex* */  QAbstractListModel_virtualbase_match(co
 
 }
 
-bool QAbstractListModel_override_virtual_span(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__span = slot;
-	return true;
-}
-
 QSize* QAbstractListModel_virtualbase_span(const void* self, QModelIndex* index) {
 
 	return new QSize(( (const VirtualQAbstractListModel*)(self) )->QAbstractListModel::span(*index));
 
-}
-
-bool QAbstractListModel_override_virtual_roleNames(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__roleNames = slot;
-	return true;
 }
 
 struct miqt_map /* of int to struct miqt_string */  QAbstractListModel_virtualbase_roleNames(const void* self) {
@@ -6759,30 +5050,10 @@ struct miqt_map /* of int to struct miqt_string */  QAbstractListModel_virtualba
 
 }
 
-bool QAbstractListModel_override_virtual_submit(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__submit = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_submit(void* self) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::submit();
 
-}
-
-bool QAbstractListModel_override_virtual_revert(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__revert = slot;
-	return true;
 }
 
 void QAbstractListModel_virtualbase_revert(void* self) {
@@ -6791,30 +5062,10 @@ void QAbstractListModel_virtualbase_revert(void* self) {
 
 }
 
-bool QAbstractListModel_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QAbstractListModel_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::event(event);
 
-}
-
-bool QAbstractListModel_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QAbstractListModel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -6823,30 +5074,10 @@ bool QAbstractListModel_virtualbase_eventFilter(void* self, QObject* watched, QE
 
 }
 
-bool QAbstractListModel_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QAbstractListModel_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::timerEvent(event);
 
-}
-
-bool QAbstractListModel_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QAbstractListModel_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -6855,46 +5086,16 @@ void QAbstractListModel_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QAbstractListModel_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QAbstractListModel_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::customEvent(event);
 
 }
 
-bool QAbstractListModel_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QAbstractListModel_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQAbstractListModel*)(self) )->QAbstractListModel::connectNotify(*signal);
 
-}
-
-bool QAbstractListModel_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQAbstractListModel* self_cast = dynamic_cast<VirtualQAbstractListModel*>( (QAbstractListModel*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QAbstractListModel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

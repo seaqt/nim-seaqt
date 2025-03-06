@@ -68,11 +68,6 @@ export
 
 type cQIcon*{.exportc: "QIcon", incompleteStruct.} = object
 
-proc fcQIcon_new(): ptr cQIcon {.importc: "QIcon_new".}
-proc fcQIcon_new2(pixmap: pointer): ptr cQIcon {.importc: "QIcon_new2".}
-proc fcQIcon_new3(other: pointer): ptr cQIcon {.importc: "QIcon_new3".}
-proc fcQIcon_new4(fileName: struct_miqt_string): ptr cQIcon {.importc: "QIcon_new4".}
-proc fcQIcon_new5(engine: pointer): ptr cQIcon {.importc: "QIcon_new5".}
 proc fcQIcon_operatorAssign(self: pointer, other: pointer): void {.importc: "QIcon_operatorAssign".}
 proc fcQIcon_swap(self: pointer, other: pointer): void {.importc: "QIcon_swap".}
 proc fcQIcon_ToQVariant(self: pointer, ): pointer {.importc: "QIcon_ToQVariant".}
@@ -130,25 +125,12 @@ proc fcQIcon_addFile3(self: pointer, fileName: struct_miqt_string, size: pointer
 proc fcQIcon_addFile4(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.importc: "QIcon_addFile4".}
 proc fcQIcon_availableSizes1(self: pointer, mode: cint): struct_miqt_array {.importc: "QIcon_availableSizes1".}
 proc fcQIcon_availableSizes2(self: pointer, mode: cint, state: cint): struct_miqt_array {.importc: "QIcon_availableSizes2".}
+proc fcQIcon_new(): ptr cQIcon {.importc: "QIcon_new".}
+proc fcQIcon_new2(pixmap: pointer): ptr cQIcon {.importc: "QIcon_new2".}
+proc fcQIcon_new3(other: pointer): ptr cQIcon {.importc: "QIcon_new3".}
+proc fcQIcon_new4(fileName: struct_miqt_string): ptr cQIcon {.importc: "QIcon_new4".}
+proc fcQIcon_new5(engine: pointer): ptr cQIcon {.importc: "QIcon_new5".}
 proc fcQIcon_delete(self: pointer) {.importc: "QIcon_delete".}
-
-
-func init*(T: type gen_qicon_types.QIcon, h: ptr cQIcon): gen_qicon_types.QIcon =
-  T(h: h)
-proc create*(T: type gen_qicon_types.QIcon, ): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon.init(fcQIcon_new())
-
-proc create*(T: type gen_qicon_types.QIcon, pixmap: gen_qpixmap_types.QPixmap): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon.init(fcQIcon_new2(pixmap.h))
-
-proc create*(T: type gen_qicon_types.QIcon, other: gen_qicon_types.QIcon): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon.init(fcQIcon_new3(other.h))
-
-proc create*(T: type gen_qicon_types.QIcon, fileName: string): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon.init(fcQIcon_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
-
-proc create*(T: type gen_qicon_types.QIcon, engine: gen_qiconengine_types.QIconEngine): gen_qicon_types.QIcon =
-  gen_qicon_types.QIcon.init(fcQIcon_new5(engine.h))
 
 proc operatorAssign*(self: gen_qicon_types.QIcon, other: gen_qicon_types.QIcon): void =
   fcQIcon_operatorAssign(self.h, other.h)
@@ -368,6 +350,25 @@ proc availableSizes*(self: gen_qicon_types.QIcon, mode: cint, state: cint): seq[
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qsize_types.QSize(h: v_outCast[i])
   vx_ret
+
+proc create*(T: type gen_qicon_types.QIcon): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQIcon_new())
+
+proc create*(T: type gen_qicon_types.QIcon,
+    pixmap: gen_qpixmap_types.QPixmap): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQIcon_new2(pixmap.h))
+
+proc create*(T: type gen_qicon_types.QIcon,
+    other: gen_qicon_types.QIcon): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQIcon_new3(other.h))
+
+proc create*(T: type gen_qicon_types.QIcon,
+    fileName: string): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQIcon_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+
+proc create*(T: type gen_qicon_types.QIcon,
+    engine: gen_qiconengine_types.QIconEngine): gen_qicon_types.QIcon =
+  gen_qicon_types.QIcon(h: fcQIcon_new5(engine.h))
 
 proc delete*(self: gen_qicon_types.QIcon) =
   fcQIcon_delete(self.h)

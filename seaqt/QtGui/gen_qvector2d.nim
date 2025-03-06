@@ -50,14 +50,6 @@ export
 
 type cQVector2D*{.exportc: "QVector2D", incompleteStruct.} = object
 
-proc fcQVector2D_new(): ptr cQVector2D {.importc: "QVector2D_new".}
-proc fcQVector2D_new2(param1: cint): ptr cQVector2D {.importc: "QVector2D_new2".}
-proc fcQVector2D_new3(xpos: float32, ypos: float32): ptr cQVector2D {.importc: "QVector2D_new3".}
-proc fcQVector2D_new4(point: pointer): ptr cQVector2D {.importc: "QVector2D_new4".}
-proc fcQVector2D_new5(point: pointer): ptr cQVector2D {.importc: "QVector2D_new5".}
-proc fcQVector2D_new6(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new6".}
-proc fcQVector2D_new7(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new7".}
-proc fcQVector2D_new8(param1: pointer): ptr cQVector2D {.importc: "QVector2D_new8".}
 proc fcQVector2D_isNull(self: pointer, ): bool {.importc: "QVector2D_isNull".}
 proc fcQVector2D_x(self: pointer, ): float32 {.importc: "QVector2D_x".}
 proc fcQVector2D_y(self: pointer, ): float32 {.importc: "QVector2D_y".}
@@ -82,34 +74,15 @@ proc fcQVector2D_toVector4D(self: pointer, ): pointer {.importc: "QVector2D_toVe
 proc fcQVector2D_toPoint(self: pointer, ): pointer {.importc: "QVector2D_toPoint".}
 proc fcQVector2D_toPointF(self: pointer, ): pointer {.importc: "QVector2D_toPointF".}
 proc fcQVector2D_ToQVariant(self: pointer, ): pointer {.importc: "QVector2D_ToQVariant".}
+proc fcQVector2D_new(): ptr cQVector2D {.importc: "QVector2D_new".}
+proc fcQVector2D_new2(param1: cint): ptr cQVector2D {.importc: "QVector2D_new2".}
+proc fcQVector2D_new3(xpos: float32, ypos: float32): ptr cQVector2D {.importc: "QVector2D_new3".}
+proc fcQVector2D_new4(point: pointer): ptr cQVector2D {.importc: "QVector2D_new4".}
+proc fcQVector2D_new5(point: pointer): ptr cQVector2D {.importc: "QVector2D_new5".}
+proc fcQVector2D_new6(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new6".}
+proc fcQVector2D_new7(vector: pointer): ptr cQVector2D {.importc: "QVector2D_new7".}
+proc fcQVector2D_new8(param1: pointer): ptr cQVector2D {.importc: "QVector2D_new8".}
 proc fcQVector2D_delete(self: pointer) {.importc: "QVector2D_delete".}
-
-
-func init*(T: type gen_qvector2d_types.QVector2D, h: ptr cQVector2D): gen_qvector2d_types.QVector2D =
-  T(h: h)
-proc create*(T: type gen_qvector2d_types.QVector2D, ): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new())
-
-proc create*(T: type gen_qvector2d_types.QVector2D, param1: cint): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new2(cint(param1)))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, xpos: float32, ypos: float32): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new3(xpos, ypos))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, point: gen_qpoint_types.QPoint): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new4(point.h))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, point: gen_qpoint_types.QPointF): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new5(point.h))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, vector: gen_qvector3d_types.QVector3D): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new6(vector.h))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, vector: gen_qvector4d_types.QVector4D): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new7(vector.h))
-
-proc create*(T: type gen_qvector2d_types.QVector2D, param1: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
-  gen_qvector2d_types.QVector2D.init(fcQVector2D_new8(param1.h))
 
 proc isNull*(self: gen_qvector2d_types.QVector2D, ): bool =
   fcQVector2D_isNull(self.h)
@@ -182,6 +155,37 @@ proc toPointF*(self: gen_qvector2d_types.QVector2D, ): gen_qpoint_types.QPointF 
 
 proc ToQVariant*(self: gen_qvector2d_types.QVector2D, ): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQVector2D_ToQVariant(self.h))
+
+proc create*(T: type gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new())
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    param1: cint): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new2(cint(param1)))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    xpos: float32, ypos: float32): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new3(xpos, ypos))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    point: gen_qpoint_types.QPoint): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new4(point.h))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    point: gen_qpoint_types.QPointF): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new5(point.h))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    vector: gen_qvector3d_types.QVector3D): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new6(vector.h))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    vector: gen_qvector4d_types.QVector4D): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new7(vector.h))
+
+proc create*(T: type gen_qvector2d_types.QVector2D,
+    param1: gen_qvector2d_types.QVector2D): gen_qvector2d_types.QVector2D =
+  gen_qvector2d_types.QVector2D(h: fcQVector2D_new8(param1.h))
 
 proc delete*(self: gen_qvector2d_types.QVector2D) =
   fcQVector2D_delete(self.h)

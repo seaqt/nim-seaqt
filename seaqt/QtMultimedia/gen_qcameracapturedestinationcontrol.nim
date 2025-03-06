@@ -63,9 +63,6 @@ proc fcQCameraCaptureDestinationControl_trUtf83(s: cstring, c: cstring, n: cint)
 proc fcQCameraCaptureDestinationControl_staticMetaObject(): pointer {.importc: "QCameraCaptureDestinationControl_staticMetaObject".}
 proc fcQCameraCaptureDestinationControl_delete(self: pointer) {.importc: "QCameraCaptureDestinationControl_delete".}
 
-
-func init*(T: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, h: ptr cQCameraCaptureDestinationControl): gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl =
-  T(h: h)
 proc metaObject*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraCaptureDestinationControl_metaObject(self.h))
 
@@ -100,7 +97,7 @@ proc captureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types
   fcQCameraCaptureDestinationControl_captureDestinationChanged(self.h, cint(destination))
 
 type QCameraCaptureDestinationControlcaptureDestinationChangedSlot* = proc(destination: cint)
-proc miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged(slot: int, destination: cint) {.exportc.} =
+proc miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged(slot: int, destination: cint) {.exportc: "miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged".} =
   let nimfunc = cast[ptr QCameraCaptureDestinationControlcaptureDestinationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(destination)
 

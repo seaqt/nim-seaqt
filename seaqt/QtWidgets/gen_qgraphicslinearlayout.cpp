@@ -12,154 +12,122 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QGraphicsLinearLayout_removeAt(QGraphicsLinearLayout*, intptr_t, int);
-void miqt_exec_callback_QGraphicsLinearLayout_setGeometry(QGraphicsLinearLayout*, intptr_t, QRectF*);
-int miqt_exec_callback_QGraphicsLinearLayout_count(const QGraphicsLinearLayout*, intptr_t);
-QGraphicsLayoutItem* miqt_exec_callback_QGraphicsLinearLayout_itemAt(const QGraphicsLinearLayout*, intptr_t, int);
-void miqt_exec_callback_QGraphicsLinearLayout_invalidate(QGraphicsLinearLayout*, intptr_t);
-QSizeF* miqt_exec_callback_QGraphicsLinearLayout_sizeHint(const QGraphicsLinearLayout*, intptr_t, int, QSizeF*);
-void miqt_exec_callback_QGraphicsLinearLayout_getContentsMargins(const QGraphicsLinearLayout*, intptr_t, double*, double*, double*, double*);
-void miqt_exec_callback_QGraphicsLinearLayout_updateGeometry(QGraphicsLinearLayout*, intptr_t);
-void miqt_exec_callback_QGraphicsLinearLayout_widgetEvent(QGraphicsLinearLayout*, intptr_t, QEvent*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQGraphicsLinearLayout final : public QGraphicsLinearLayout {
+	struct QGraphicsLinearLayout_VTable* vtbl;
 public:
 
-	VirtualQGraphicsLinearLayout(): QGraphicsLinearLayout() {};
-	VirtualQGraphicsLinearLayout(Qt::Orientation orientation): QGraphicsLinearLayout(orientation) {};
-	VirtualQGraphicsLinearLayout(QGraphicsLayoutItem* parent): QGraphicsLinearLayout(parent) {};
-	VirtualQGraphicsLinearLayout(Qt::Orientation orientation, QGraphicsLayoutItem* parent): QGraphicsLinearLayout(orientation, parent) {};
+	VirtualQGraphicsLinearLayout(struct QGraphicsLinearLayout_VTable* vtbl): QGraphicsLinearLayout(), vtbl(vtbl) {};
+	VirtualQGraphicsLinearLayout(struct QGraphicsLinearLayout_VTable* vtbl, Qt::Orientation orientation): QGraphicsLinearLayout(orientation), vtbl(vtbl) {};
+	VirtualQGraphicsLinearLayout(struct QGraphicsLinearLayout_VTable* vtbl, QGraphicsLayoutItem* parent): QGraphicsLinearLayout(parent), vtbl(vtbl) {};
+	VirtualQGraphicsLinearLayout(struct QGraphicsLinearLayout_VTable* vtbl, Qt::Orientation orientation, QGraphicsLayoutItem* parent): QGraphicsLinearLayout(orientation, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQGraphicsLinearLayout() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__removeAt = 0;
+	virtual ~VirtualQGraphicsLinearLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual void removeAt(int index) override {
-		if (handle__removeAt == 0) {
+		if (vtbl->removeAt == 0) {
 			QGraphicsLinearLayout::removeAt(index);
 			return;
 		}
-		
+
 		int sigval1 = index;
 
-		miqt_exec_callback_QGraphicsLinearLayout_removeAt(this, handle__removeAt, sigval1);
+		vtbl->removeAt(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_removeAt(void* self, int index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setGeometry = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRectF& rect) override {
-		if (handle__setGeometry == 0) {
+		if (vtbl->setGeometry == 0) {
 			QGraphicsLinearLayout::setGeometry(rect);
 			return;
 		}
-		
+
 		const QRectF& rect_ret = rect;
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		miqt_exec_callback_QGraphicsLinearLayout_setGeometry(this, handle__setGeometry, sigval1);
+		vtbl->setGeometry(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_setGeometry(void* self, QRectF* rect);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__count = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int count() const override {
-		if (handle__count == 0) {
+		if (vtbl->count == 0) {
 			return QGraphicsLinearLayout::count();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QGraphicsLinearLayout_count(this, handle__count);
+
+		int callback_return_value = vtbl->count(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QGraphicsLinearLayout_virtualbase_count(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__itemAt = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QGraphicsLayoutItem* itemAt(int index) const override {
-		if (handle__itemAt == 0) {
+		if (vtbl->itemAt == 0) {
 			return QGraphicsLinearLayout::itemAt(index);
 		}
-		
+
 		int sigval1 = index;
 
-		QGraphicsLayoutItem* callback_return_value = miqt_exec_callback_QGraphicsLinearLayout_itemAt(this, handle__itemAt, sigval1);
+		QGraphicsLayoutItem* callback_return_value = vtbl->itemAt(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QGraphicsLayoutItem* QGraphicsLinearLayout_virtualbase_itemAt(const void* self, int index);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__invalidate = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
-		if (handle__invalidate == 0) {
+		if (vtbl->invalidate == 0) {
 			QGraphicsLinearLayout::invalidate();
 			return;
 		}
-		
 
-		miqt_exec_callback_QGraphicsLinearLayout_invalidate(this, handle__invalidate);
 
-		
+		vtbl->invalidate(vtbl, this);
+
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_invalidate(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sizeHint = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
-		if (handle__sizeHint == 0) {
+		if (vtbl->sizeHint == 0) {
 			return QGraphicsLinearLayout::sizeHint(which, constraint);
 		}
-		
+
 		Qt::SizeHint which_ret = which;
 		int sigval1 = static_cast<int>(which_ret);
 		const QSizeF& constraint_ret = constraint;
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
-		QSizeF* callback_return_value = miqt_exec_callback_QGraphicsLinearLayout_sizeHint(this, handle__sizeHint, sigval1, sigval2);
+		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
 
 		return *callback_return_value;
 	}
 
 	friend QSizeF* QGraphicsLinearLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__getContentsMargins = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
-		if (handle__getContentsMargins == 0) {
+		if (vtbl->getContentsMargins == 0) {
 			QGraphicsLinearLayout::getContentsMargins(left, top, right, bottom);
 			return;
 		}
-		
+
 		qreal* left_ret = left;
 		double* sigval1 = static_cast<double*>(left_ret);
 		qreal* top_ret = top;
@@ -169,46 +137,37 @@ public:
 		qreal* bottom_ret = bottom;
 		double* sigval4 = static_cast<double*>(bottom_ret);
 
-		miqt_exec_callback_QGraphicsLinearLayout_getContentsMargins(this, handle__getContentsMargins, sigval1, sigval2, sigval3, sigval4);
+		vtbl->getContentsMargins(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
-		
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateGeometry = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void updateGeometry() override {
-		if (handle__updateGeometry == 0) {
+		if (vtbl->updateGeometry == 0) {
 			QGraphicsLinearLayout::updateGeometry();
 			return;
 		}
-		
 
-		miqt_exec_callback_QGraphicsLinearLayout_updateGeometry(this, handle__updateGeometry);
 
-		
+		vtbl->updateGeometry(vtbl, this);
+
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_updateGeometry(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__widgetEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void widgetEvent(QEvent* e) override {
-		if (handle__widgetEvent == 0) {
+		if (vtbl->widgetEvent == 0) {
 			QGraphicsLinearLayout::widgetEvent(e);
 			return;
 		}
-		
+
 		QEvent* sigval1 = e;
 
-		miqt_exec_callback_QGraphicsLinearLayout_widgetEvent(this, handle__widgetEvent, sigval1);
+		vtbl->widgetEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QGraphicsLinearLayout_virtualbase_widgetEvent(void* self, QEvent* e);
@@ -219,20 +178,20 @@ public:
 	friend void QGraphicsLinearLayout_protectedbase_setOwnedByLayout(bool* _dynamic_cast_ok, void* self, bool ownedByLayout);
 };
 
-QGraphicsLinearLayout* QGraphicsLinearLayout_new() {
-	return new VirtualQGraphicsLinearLayout();
+QGraphicsLinearLayout* QGraphicsLinearLayout_new(struct QGraphicsLinearLayout_VTable* vtbl) {
+	return new VirtualQGraphicsLinearLayout(vtbl);
 }
 
-QGraphicsLinearLayout* QGraphicsLinearLayout_new2(int orientation) {
-	return new VirtualQGraphicsLinearLayout(static_cast<Qt::Orientation>(orientation));
+QGraphicsLinearLayout* QGraphicsLinearLayout_new2(struct QGraphicsLinearLayout_VTable* vtbl, int orientation) {
+	return new VirtualQGraphicsLinearLayout(vtbl, static_cast<Qt::Orientation>(orientation));
 }
 
-QGraphicsLinearLayout* QGraphicsLinearLayout_new3(QGraphicsLayoutItem* parent) {
-	return new VirtualQGraphicsLinearLayout(parent);
+QGraphicsLinearLayout* QGraphicsLinearLayout_new3(struct QGraphicsLinearLayout_VTable* vtbl, QGraphicsLayoutItem* parent) {
+	return new VirtualQGraphicsLinearLayout(vtbl, parent);
 }
 
-QGraphicsLinearLayout* QGraphicsLinearLayout_new4(int orientation, QGraphicsLayoutItem* parent) {
-	return new VirtualQGraphicsLinearLayout(static_cast<Qt::Orientation>(orientation), parent);
+QGraphicsLinearLayout* QGraphicsLinearLayout_new4(struct QGraphicsLinearLayout_VTable* vtbl, int orientation, QGraphicsLayoutItem* parent) {
+	return new VirtualQGraphicsLinearLayout(vtbl, static_cast<Qt::Orientation>(orientation), parent);
 }
 
 void QGraphicsLinearLayout_virtbase(QGraphicsLinearLayout* src, QGraphicsLayout** outptr_QGraphicsLayout) {
@@ -343,30 +302,10 @@ void QGraphicsLinearLayout_dump1(const QGraphicsLinearLayout* self, int indent) 
 	self->dump(static_cast<int>(indent));
 }
 
-bool QGraphicsLinearLayout_override_virtual_removeAt(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__removeAt = slot;
-	return true;
-}
-
 void QGraphicsLinearLayout_virtualbase_removeAt(void* self, int index) {
 
 	( (VirtualQGraphicsLinearLayout*)(self) )->QGraphicsLinearLayout::removeAt(static_cast<int>(index));
 
-}
-
-bool QGraphicsLinearLayout_override_virtual_setGeometry(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setGeometry = slot;
-	return true;
 }
 
 void QGraphicsLinearLayout_virtualbase_setGeometry(void* self, QRectF* rect) {
@@ -375,30 +314,10 @@ void QGraphicsLinearLayout_virtualbase_setGeometry(void* self, QRectF* rect) {
 
 }
 
-bool QGraphicsLinearLayout_override_virtual_count(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__count = slot;
-	return true;
-}
-
 int QGraphicsLinearLayout_virtualbase_count(const void* self) {
 
 	return ( (const VirtualQGraphicsLinearLayout*)(self) )->QGraphicsLinearLayout::count();
 
-}
-
-bool QGraphicsLinearLayout_override_virtual_itemAt(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__itemAt = slot;
-	return true;
 }
 
 QGraphicsLayoutItem* QGraphicsLinearLayout_virtualbase_itemAt(const void* self, int index) {
@@ -407,30 +326,10 @@ QGraphicsLayoutItem* QGraphicsLinearLayout_virtualbase_itemAt(const void* self, 
 
 }
 
-bool QGraphicsLinearLayout_override_virtual_invalidate(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__invalidate = slot;
-	return true;
-}
-
 void QGraphicsLinearLayout_virtualbase_invalidate(void* self) {
 
 	( (VirtualQGraphicsLinearLayout*)(self) )->QGraphicsLinearLayout::invalidate();
 
-}
-
-bool QGraphicsLinearLayout_override_virtual_sizeHint(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sizeHint = slot;
-	return true;
 }
 
 QSizeF* QGraphicsLinearLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint) {
@@ -439,46 +338,16 @@ QSizeF* QGraphicsLinearLayout_virtualbase_sizeHint(const void* self, int which, 
 
 }
 
-bool QGraphicsLinearLayout_override_virtual_getContentsMargins(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__getContentsMargins = slot;
-	return true;
-}
-
 void QGraphicsLinearLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom) {
 
 	( (const VirtualQGraphicsLinearLayout*)(self) )->QGraphicsLinearLayout::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
 
 }
 
-bool QGraphicsLinearLayout_override_virtual_updateGeometry(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__updateGeometry = slot;
-	return true;
-}
-
 void QGraphicsLinearLayout_virtualbase_updateGeometry(void* self) {
 
 	( (VirtualQGraphicsLinearLayout*)(self) )->QGraphicsLinearLayout::updateGeometry();
 
-}
-
-bool QGraphicsLinearLayout_override_virtual_widgetEvent(void* self, intptr_t slot) {
-	VirtualQGraphicsLinearLayout* self_cast = dynamic_cast<VirtualQGraphicsLinearLayout*>( (QGraphicsLinearLayout*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__widgetEvent = slot;
-	return true;
 }
 
 void QGraphicsLinearLayout_virtualbase_widgetEvent(void* self, QEvent* e) {

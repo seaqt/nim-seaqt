@@ -63,10 +63,6 @@ export
 
 type cQVideoSurfaceFormat*{.exportc: "QVideoSurfaceFormat", incompleteStruct.} = object
 
-proc fcQVideoSurfaceFormat_new(): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new".}
-proc fcQVideoSurfaceFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new2".}
-proc fcQVideoSurfaceFormat_new3(format: pointer): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new3".}
-proc fcQVideoSurfaceFormat_new4(size: pointer, pixelFormat: cint, handleType: cint): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new4".}
 proc fcQVideoSurfaceFormat_operatorAssign(self: pointer, format: pointer): void {.importc: "QVideoSurfaceFormat_operatorAssign".}
 proc fcQVideoSurfaceFormat_operatorEqual(self: pointer, format: pointer): bool {.importc: "QVideoSurfaceFormat_operatorEqual".}
 proc fcQVideoSurfaceFormat_operatorNotEqual(self: pointer, format: pointer): bool {.importc: "QVideoSurfaceFormat_operatorNotEqual".}
@@ -95,22 +91,11 @@ proc fcQVideoSurfaceFormat_sizeHint(self: pointer, ): pointer {.importc: "QVideo
 proc fcQVideoSurfaceFormat_propertyNames(self: pointer, ): struct_miqt_array {.importc: "QVideoSurfaceFormat_propertyNames".}
 proc fcQVideoSurfaceFormat_property(self: pointer, name: cstring): pointer {.importc: "QVideoSurfaceFormat_property".}
 proc fcQVideoSurfaceFormat_setProperty(self: pointer, name: cstring, value: pointer): void {.importc: "QVideoSurfaceFormat_setProperty".}
+proc fcQVideoSurfaceFormat_new(): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new".}
+proc fcQVideoSurfaceFormat_new2(size: pointer, pixelFormat: cint): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new2".}
+proc fcQVideoSurfaceFormat_new3(format: pointer): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new3".}
+proc fcQVideoSurfaceFormat_new4(size: pointer, pixelFormat: cint, handleType: cint): ptr cQVideoSurfaceFormat {.importc: "QVideoSurfaceFormat_new4".}
 proc fcQVideoSurfaceFormat_delete(self: pointer) {.importc: "QVideoSurfaceFormat_delete".}
-
-
-func init*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat, h: ptr cQVideoSurfaceFormat): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
-  T(h: h)
-proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat, ): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
-  gen_qvideosurfaceformat_types.QVideoSurfaceFormat.init(fcQVideoSurfaceFormat_new())
-
-proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat, size: gen_qsize_types.QSize, pixelFormat: cint): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
-  gen_qvideosurfaceformat_types.QVideoSurfaceFormat.init(fcQVideoSurfaceFormat_new2(size.h, cint(pixelFormat)))
-
-proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat, format: gen_qvideosurfaceformat_types.QVideoSurfaceFormat): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
-  gen_qvideosurfaceformat_types.QVideoSurfaceFormat.init(fcQVideoSurfaceFormat_new3(format.h))
-
-proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat, size: gen_qsize_types.QSize, pixelFormat: cint, handleType: cint): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
-  gen_qvideosurfaceformat_types.QVideoSurfaceFormat.init(fcQVideoSurfaceFormat_new4(size.h, cint(pixelFormat), cint(handleType)))
 
 proc operatorAssign*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, format: gen_qvideosurfaceformat_types.QVideoSurfaceFormat): void =
   fcQVideoSurfaceFormat_operatorAssign(self.h, format.h)
@@ -203,6 +188,21 @@ proc property*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, name: cs
 
 proc setProperty*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, name: cstring, value: gen_qvariant_types.QVariant): void =
   fcQVideoSurfaceFormat_setProperty(self.h, name, value.h)
+
+proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
+  gen_qvideosurfaceformat_types.QVideoSurfaceFormat(h: fcQVideoSurfaceFormat_new())
+
+proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat,
+    size: gen_qsize_types.QSize, pixelFormat: cint): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
+  gen_qvideosurfaceformat_types.QVideoSurfaceFormat(h: fcQVideoSurfaceFormat_new2(size.h, cint(pixelFormat)))
+
+proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat,
+    format: gen_qvideosurfaceformat_types.QVideoSurfaceFormat): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
+  gen_qvideosurfaceformat_types.QVideoSurfaceFormat(h: fcQVideoSurfaceFormat_new3(format.h))
+
+proc create*(T: type gen_qvideosurfaceformat_types.QVideoSurfaceFormat,
+    size: gen_qsize_types.QSize, pixelFormat: cint, handleType: cint): gen_qvideosurfaceformat_types.QVideoSurfaceFormat =
+  gen_qvideosurfaceformat_types.QVideoSurfaceFormat(h: fcQVideoSurfaceFormat_new4(size.h, cint(pixelFormat), cint(handleType)))
 
 proc delete*(self: gen_qvideosurfaceformat_types.QVideoSurfaceFormat) =
   fcQVideoSurfaceFormat_delete(self.h)

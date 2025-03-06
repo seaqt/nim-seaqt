@@ -80,9 +80,6 @@ proc fcQSessionManager_trUtf82(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQSessionManager_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_trUtf83".}
 proc fcQSessionManager_staticMetaObject(): pointer {.importc: "QSessionManager_staticMetaObject".}
 
-
-func init*(T: type gen_qsessionmanager_types.QSessionManager, h: ptr cQSessionManager): gen_qsessionmanager_types.QSessionManager =
-  T(h: h)
 proc metaObject*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_metaObject(self.h))
 

@@ -61,9 +61,6 @@ proc fcQMediaAvailabilityControl_trUtf83(s: cstring, c: cstring, n: cint): struc
 proc fcQMediaAvailabilityControl_staticMetaObject(): pointer {.importc: "QMediaAvailabilityControl_staticMetaObject".}
 proc fcQMediaAvailabilityControl_delete(self: pointer) {.importc: "QMediaAvailabilityControl_delete".}
 
-
-func init*(T: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, h: ptr cQMediaAvailabilityControl): gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_metaObject(self.h))
 
@@ -92,7 +89,7 @@ proc availabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvaila
   fcQMediaAvailabilityControl_availabilityChanged(self.h, cint(availability))
 
 type QMediaAvailabilityControlavailabilityChangedSlot* = proc(availability: cint)
-proc miqt_exec_callback_QMediaAvailabilityControl_availabilityChanged(slot: int, availability: cint) {.exportc.} =
+proc miqt_exec_callback_cQMediaAvailabilityControl_availabilityChanged(slot: int, availability: cint) {.exportc: "miqt_exec_callback_QMediaAvailabilityControl_availabilityChanged".} =
   let nimfunc = cast[ptr QMediaAvailabilityControlavailabilityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(availability)
 

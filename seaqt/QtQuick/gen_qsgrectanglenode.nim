@@ -55,9 +55,6 @@ proc fcQSGRectangleNode_setColor(self: pointer, color: pointer): void {.importc:
 proc fcQSGRectangleNode_color(self: pointer, ): pointer {.importc: "QSGRectangleNode_color".}
 proc fcQSGRectangleNode_delete(self: pointer) {.importc: "QSGRectangleNode_delete".}
 
-
-func init*(T: type gen_qsgrectanglenode_types.QSGRectangleNode, h: ptr cQSGRectangleNode): gen_qsgrectanglenode_types.QSGRectangleNode =
-  T(h: h)
 proc setRect*(self: gen_qsgrectanglenode_types.QSGRectangleNode, rect: gen_qrect_types.QRectF): void =
   fcQSGRectangleNode_setRect(self.h, rect.h)
 

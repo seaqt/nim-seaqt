@@ -41,8 +41,6 @@ export gen_qsemaphore_types
 type cQSemaphore*{.exportc: "QSemaphore", incompleteStruct.} = object
 type cQSemaphoreReleaser*{.exportc: "QSemaphoreReleaser", incompleteStruct.} = object
 
-proc fcQSemaphore_new(): ptr cQSemaphore {.importc: "QSemaphore_new".}
-proc fcQSemaphore_new2(n: cint): ptr cQSemaphore {.importc: "QSemaphore_new2".}
 proc fcQSemaphore_acquire(self: pointer, ): void {.importc: "QSemaphore_acquire".}
 proc fcQSemaphore_tryAcquire(self: pointer, ): bool {.importc: "QSemaphore_tryAcquire".}
 proc fcQSemaphore_tryAcquire2(self: pointer, n: cint, timeout: cint): bool {.importc: "QSemaphore_tryAcquire2".}
@@ -51,25 +49,18 @@ proc fcQSemaphore_available(self: pointer, ): cint {.importc: "QSemaphore_availa
 proc fcQSemaphore_acquire1(self: pointer, n: cint): void {.importc: "QSemaphore_acquire1".}
 proc fcQSemaphore_tryAcquire1(self: pointer, n: cint): bool {.importc: "QSemaphore_tryAcquire1".}
 proc fcQSemaphore_release1(self: pointer, n: cint): void {.importc: "QSemaphore_release1".}
+proc fcQSemaphore_new(): ptr cQSemaphore {.importc: "QSemaphore_new".}
+proc fcQSemaphore_new2(n: cint): ptr cQSemaphore {.importc: "QSemaphore_new2".}
 proc fcQSemaphore_delete(self: pointer) {.importc: "QSemaphore_delete".}
+proc fcQSemaphoreReleaser_swap(self: pointer, other: pointer): void {.importc: "QSemaphoreReleaser_swap".}
+proc fcQSemaphoreReleaser_semaphore(self: pointer, ): pointer {.importc: "QSemaphoreReleaser_semaphore".}
+proc fcQSemaphoreReleaser_cancel(self: pointer, ): pointer {.importc: "QSemaphoreReleaser_cancel".}
 proc fcQSemaphoreReleaser_new(): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new".}
 proc fcQSemaphoreReleaser_new2(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new2".}
 proc fcQSemaphoreReleaser_new3(sem: pointer): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new3".}
 proc fcQSemaphoreReleaser_new4(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new4".}
 proc fcQSemaphoreReleaser_new5(sem: pointer, n: cint): ptr cQSemaphoreReleaser {.importc: "QSemaphoreReleaser_new5".}
-proc fcQSemaphoreReleaser_swap(self: pointer, other: pointer): void {.importc: "QSemaphoreReleaser_swap".}
-proc fcQSemaphoreReleaser_semaphore(self: pointer, ): pointer {.importc: "QSemaphoreReleaser_semaphore".}
-proc fcQSemaphoreReleaser_cancel(self: pointer, ): pointer {.importc: "QSemaphoreReleaser_cancel".}
 proc fcQSemaphoreReleaser_delete(self: pointer) {.importc: "QSemaphoreReleaser_delete".}
-
-
-func init*(T: type gen_qsemaphore_types.QSemaphore, h: ptr cQSemaphore): gen_qsemaphore_types.QSemaphore =
-  T(h: h)
-proc create*(T: type gen_qsemaphore_types.QSemaphore, ): gen_qsemaphore_types.QSemaphore =
-  gen_qsemaphore_types.QSemaphore.init(fcQSemaphore_new())
-
-proc create*(T: type gen_qsemaphore_types.QSemaphore, n: cint): gen_qsemaphore_types.QSemaphore =
-  gen_qsemaphore_types.QSemaphore.init(fcQSemaphore_new2(n))
 
 proc acquire*(self: gen_qsemaphore_types.QSemaphore, ): void =
   fcQSemaphore_acquire(self.h)
@@ -95,26 +86,15 @@ proc tryAcquire*(self: gen_qsemaphore_types.QSemaphore, n: cint): bool =
 proc release*(self: gen_qsemaphore_types.QSemaphore, n: cint): void =
   fcQSemaphore_release1(self.h, n)
 
+proc create*(T: type gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphore =
+  gen_qsemaphore_types.QSemaphore(h: fcQSemaphore_new())
+
+proc create*(T: type gen_qsemaphore_types.QSemaphore,
+    n: cint): gen_qsemaphore_types.QSemaphore =
+  gen_qsemaphore_types.QSemaphore(h: fcQSemaphore_new2(n))
+
 proc delete*(self: gen_qsemaphore_types.QSemaphore) =
   fcQSemaphore_delete(self.h)
-
-func init*(T: type gen_qsemaphore_types.QSemaphoreReleaser, h: ptr cQSemaphoreReleaser): gen_qsemaphore_types.QSemaphoreReleaser =
-  T(h: h)
-proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser, ): gen_qsemaphore_types.QSemaphoreReleaser =
-  gen_qsemaphore_types.QSemaphoreReleaser.init(fcQSemaphoreReleaser_new())
-
-proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser, sem: gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphoreReleaser =
-  gen_qsemaphore_types.QSemaphoreReleaser.init(fcQSemaphoreReleaser_new2(sem.h))
-
-proc create2*(T: type gen_qsemaphore_types.QSemaphoreReleaser, sem: gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphoreReleaser =
-  gen_qsemaphore_types.QSemaphoreReleaser.init(fcQSemaphoreReleaser_new3(sem.h))
-
-proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser, sem: gen_qsemaphore_types.QSemaphore, n: cint): gen_qsemaphore_types.QSemaphoreReleaser =
-  gen_qsemaphore_types.QSemaphoreReleaser.init(fcQSemaphoreReleaser_new4(sem.h, n))
-
-proc create2*(T: type gen_qsemaphore_types.QSemaphoreReleaser, sem: gen_qsemaphore_types.QSemaphore, n: cint): gen_qsemaphore_types.QSemaphoreReleaser =
-  gen_qsemaphore_types.QSemaphoreReleaser.init(fcQSemaphoreReleaser_new5(sem.h, n))
-
 proc swap*(self: gen_qsemaphore_types.QSemaphoreReleaser, other: gen_qsemaphore_types.QSemaphoreReleaser): void =
   fcQSemaphoreReleaser_swap(self.h, other.h)
 
@@ -123,6 +103,25 @@ proc semaphore*(self: gen_qsemaphore_types.QSemaphoreReleaser, ): gen_qsemaphore
 
 proc cancel*(self: gen_qsemaphore_types.QSemaphoreReleaser, ): gen_qsemaphore_types.QSemaphore =
   gen_qsemaphore_types.QSemaphore(h: fcQSemaphoreReleaser_cancel(self.h))
+
+proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser): gen_qsemaphore_types.QSemaphoreReleaser =
+  gen_qsemaphore_types.QSemaphoreReleaser(h: fcQSemaphoreReleaser_new())
+
+proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser,
+    sem: gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphoreReleaser =
+  gen_qsemaphore_types.QSemaphoreReleaser(h: fcQSemaphoreReleaser_new2(sem.h))
+
+proc create2*(T: type gen_qsemaphore_types.QSemaphoreReleaser,
+    sem: gen_qsemaphore_types.QSemaphore): gen_qsemaphore_types.QSemaphoreReleaser =
+  gen_qsemaphore_types.QSemaphoreReleaser(h: fcQSemaphoreReleaser_new3(sem.h))
+
+proc create*(T: type gen_qsemaphore_types.QSemaphoreReleaser,
+    sem: gen_qsemaphore_types.QSemaphore, n: cint): gen_qsemaphore_types.QSemaphoreReleaser =
+  gen_qsemaphore_types.QSemaphoreReleaser(h: fcQSemaphoreReleaser_new4(sem.h, n))
+
+proc create2*(T: type gen_qsemaphore_types.QSemaphoreReleaser,
+    sem: gen_qsemaphore_types.QSemaphore, n: cint): gen_qsemaphore_types.QSemaphoreReleaser =
+  gen_qsemaphore_types.QSemaphoreReleaser(h: fcQSemaphoreReleaser_new5(sem.h, n))
 
 proc delete*(self: gen_qsemaphore_types.QSemaphoreReleaser) =
   fcQSemaphoreReleaser_delete(self.h)

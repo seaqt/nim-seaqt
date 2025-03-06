@@ -51,8 +51,6 @@ export
 
 type cQWebSecurityOrigin*{.exportc: "QWebSecurityOrigin", incompleteStruct.} = object
 
-proc fcQWebSecurityOrigin_new(url: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new".}
-proc fcQWebSecurityOrigin_new2(other: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new2".}
 proc fcQWebSecurityOrigin_allOrigins(): struct_miqt_array {.importc: "QWebSecurityOrigin_allOrigins".}
 proc fcQWebSecurityOrigin_addLocalScheme(scheme: struct_miqt_string): void {.importc: "QWebSecurityOrigin_addLocalScheme".}
 proc fcQWebSecurityOrigin_removeLocalScheme(scheme: struct_miqt_string): void {.importc: "QWebSecurityOrigin_removeLocalScheme".}
@@ -68,16 +66,9 @@ proc fcQWebSecurityOrigin_setDatabaseQuota(self: pointer, quota: clonglong): voi
 proc fcQWebSecurityOrigin_setApplicationCacheQuota(self: pointer, quota: clonglong): void {.importc: "QWebSecurityOrigin_setApplicationCacheQuota".}
 proc fcQWebSecurityOrigin_databases(self: pointer, ): struct_miqt_array {.importc: "QWebSecurityOrigin_databases".}
 proc fcQWebSecurityOrigin_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebSecurityOrigin_operatorAssign".}
+proc fcQWebSecurityOrigin_new(url: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new".}
+proc fcQWebSecurityOrigin_new2(other: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new2".}
 proc fcQWebSecurityOrigin_delete(self: pointer) {.importc: "QWebSecurityOrigin_delete".}
-
-
-func init*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, h: ptr cQWebSecurityOrigin): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  T(h: h)
-proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, url: gen_qurl_types.QUrl): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  gen_qwebsecurityorigin_types.QWebSecurityOrigin.init(fcQWebSecurityOrigin_new(url.h))
-
-proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, other: gen_qwebsecurityorigin_types.QWebSecurityOrigin): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
-  gen_qwebsecurityorigin_types.QWebSecurityOrigin.init(fcQWebSecurityOrigin_new2(other.h))
 
 proc allOrigins*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): seq[gen_qwebsecurityorigin_types.QWebSecurityOrigin] =
   var v_ma = fcQWebSecurityOrigin_allOrigins()
@@ -147,6 +138,14 @@ proc databases*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): seq[ge
 
 proc operatorAssign*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, other: gen_qwebsecurityorigin_types.QWebSecurityOrigin): void =
   fcQWebSecurityOrigin_operatorAssign(self.h, other.h)
+
+proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin,
+    url: gen_qurl_types.QUrl): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
+  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new(url.h))
+
+proc create*(T: type gen_qwebsecurityorigin_types.QWebSecurityOrigin,
+    other: gen_qwebsecurityorigin_types.QWebSecurityOrigin): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
+  gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebSecurityOrigin_new2(other.h))
 
 proc delete*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin) =
   fcQWebSecurityOrigin_delete(self.h)

@@ -90,9 +90,6 @@ proc fcQWebEngineUrlRequestInfo_blockX(self: pointer, shouldBlock: bool): void {
 proc fcQWebEngineUrlRequestInfo_redirect(self: pointer, url: pointer): void {.importc: "QWebEngineUrlRequestInfo_redirect".}
 proc fcQWebEngineUrlRequestInfo_setHttpHeader(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebEngineUrlRequestInfo_setHttpHeader".}
 
-
-func init*(T: type gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, h: ptr cQWebEngineUrlRequestInfo): gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo =
-  T(h: h)
 proc resourceType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): cint =
   cint(fcQWebEngineUrlRequestInfo_resourceType(self.h))
 

@@ -64,9 +64,6 @@ proc fcQCameraFlashControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt
 proc fcQCameraFlashControl_staticMetaObject(): pointer {.importc: "QCameraFlashControl_staticMetaObject".}
 proc fcQCameraFlashControl_delete(self: pointer) {.importc: "QCameraFlashControl_delete".}
 
-
-func init*(T: type gen_qcameraflashcontrol_types.QCameraFlashControl, h: ptr cQCameraFlashControl): gen_qcameraflashcontrol_types.QCameraFlashControl =
-  T(h: h)
 proc metaObject*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFlashControl_metaObject(self.h))
 
@@ -104,7 +101,7 @@ proc flashReady*(self: gen_qcameraflashcontrol_types.QCameraFlashControl, param1
   fcQCameraFlashControl_flashReady(self.h, param1)
 
 type QCameraFlashControlflashReadySlot* = proc(param1: bool)
-proc miqt_exec_callback_QCameraFlashControl_flashReady(slot: int, param1: bool) {.exportc.} =
+proc miqt_exec_callback_cQCameraFlashControl_flashReady(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QCameraFlashControl_flashReady".} =
   let nimfunc = cast[ptr QCameraFlashControlflashReadySlot](cast[pointer](slot))
   let slotval1 = param1
 

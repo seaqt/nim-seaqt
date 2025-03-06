@@ -21,281 +21,222 @@
 extern "C" {
 #endif
 
-QMetaObject* miqt_exec_callback_QTextList_metaObject(const QTextList*, intptr_t);
-void* miqt_exec_callback_QTextList_metacast(QTextList*, intptr_t, const char*);
-int miqt_exec_callback_QTextList_metacall(QTextList*, intptr_t, int, int, void**);
-void miqt_exec_callback_QTextList_blockInserted(QTextList*, intptr_t, QTextBlock*);
-void miqt_exec_callback_QTextList_blockRemoved(QTextList*, intptr_t, QTextBlock*);
-void miqt_exec_callback_QTextList_blockFormatChanged(QTextList*, intptr_t, QTextBlock*);
-bool miqt_exec_callback_QTextList_event(QTextList*, intptr_t, QEvent*);
-bool miqt_exec_callback_QTextList_eventFilter(QTextList*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QTextList_timerEvent(QTextList*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QTextList_childEvent(QTextList*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QTextList_customEvent(QTextList*, intptr_t, QEvent*);
-void miqt_exec_callback_QTextList_connectNotify(QTextList*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QTextList_disconnectNotify(QTextList*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQTextList final : public QTextList {
+	struct QTextList_VTable* vtbl;
 public:
 
-	VirtualQTextList(QTextDocument* doc): QTextList(doc) {};
+	VirtualQTextList(struct QTextList_VTable* vtbl, QTextDocument* doc): QTextList(doc), vtbl(vtbl) {};
 
-	virtual ~VirtualQTextList() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQTextList() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QTextList::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QTextList_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QTextList_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QTextList::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QTextList_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QTextList_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QTextList::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QTextList_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QTextList_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockInserted = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void blockInserted(const QTextBlock& block) override {
-		if (handle__blockInserted == 0) {
+		if (vtbl->blockInserted == 0) {
 			QTextList::blockInserted(block);
 			return;
 		}
-		
+
 		const QTextBlock& block_ret = block;
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 
-		miqt_exec_callback_QTextList_blockInserted(this, handle__blockInserted, sigval1);
+		vtbl->blockInserted(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_blockInserted(void* self, QTextBlock* block);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockRemoved = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void blockRemoved(const QTextBlock& block) override {
-		if (handle__blockRemoved == 0) {
+		if (vtbl->blockRemoved == 0) {
 			QTextList::blockRemoved(block);
 			return;
 		}
-		
+
 		const QTextBlock& block_ret = block;
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 
-		miqt_exec_callback_QTextList_blockRemoved(this, handle__blockRemoved, sigval1);
+		vtbl->blockRemoved(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_blockRemoved(void* self, QTextBlock* block);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__blockFormatChanged = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void blockFormatChanged(const QTextBlock& block) override {
-		if (handle__blockFormatChanged == 0) {
+		if (vtbl->blockFormatChanged == 0) {
 			QTextList::blockFormatChanged(block);
 			return;
 		}
-		
+
 		const QTextBlock& block_ret = block;
 		// Cast returned reference into pointer
 		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
 
-		miqt_exec_callback_QTextList_blockFormatChanged(this, handle__blockFormatChanged, sigval1);
+		vtbl->blockFormatChanged(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_blockFormatChanged(void* self, QTextBlock* block);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QTextList::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QTextList_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QTextList_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QTextList::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QTextList_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QTextList_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QTextList::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QTextList_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QTextList::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QTextList_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QTextList::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QTextList_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QTextList::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QTextList_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QTextList::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QTextList_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QTextList_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -308,8 +249,8 @@ public:
 	friend bool QTextList_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QTextList* QTextList_new(QTextDocument* doc) {
-	return new VirtualQTextList(doc);
+QTextList* QTextList_new(struct QTextList_VTable* vtbl, QTextDocument* doc) {
+	return new VirtualQTextList(vtbl, doc);
 }
 
 void QTextList_virtbase(QTextList* src, QTextBlockGroup** outptr_QTextBlockGroup) {
@@ -441,30 +382,10 @@ struct miqt_string QTextList_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-bool QTextList_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QTextList_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQTextList*)(self) )->QTextList::metaObject();
 
-}
-
-bool QTextList_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QTextList_virtualbase_metacast(void* self, const char* param1) {
@@ -473,30 +394,10 @@ void* QTextList_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QTextList_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QTextList_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQTextList*)(self) )->QTextList::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QTextList_override_virtual_blockInserted(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__blockInserted = slot;
-	return true;
 }
 
 void QTextList_virtualbase_blockInserted(void* self, QTextBlock* block) {
@@ -505,30 +406,10 @@ void QTextList_virtualbase_blockInserted(void* self, QTextBlock* block) {
 
 }
 
-bool QTextList_override_virtual_blockRemoved(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__blockRemoved = slot;
-	return true;
-}
-
 void QTextList_virtualbase_blockRemoved(void* self, QTextBlock* block) {
 
 	( (VirtualQTextList*)(self) )->QTextList::blockRemoved(*block);
 
-}
-
-bool QTextList_override_virtual_blockFormatChanged(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__blockFormatChanged = slot;
-	return true;
 }
 
 void QTextList_virtualbase_blockFormatChanged(void* self, QTextBlock* block) {
@@ -537,30 +418,10 @@ void QTextList_virtualbase_blockFormatChanged(void* self, QTextBlock* block) {
 
 }
 
-bool QTextList_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QTextList_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQTextList*)(self) )->QTextList::event(event);
 
-}
-
-bool QTextList_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QTextList_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -569,30 +430,10 @@ bool QTextList_virtualbase_eventFilter(void* self, QObject* watched, QEvent* eve
 
 }
 
-bool QTextList_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QTextList_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQTextList*)(self) )->QTextList::timerEvent(event);
 
-}
-
-bool QTextList_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QTextList_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -601,46 +442,16 @@ void QTextList_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QTextList_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QTextList_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQTextList*)(self) )->QTextList::customEvent(event);
 
 }
 
-bool QTextList_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QTextList_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQTextList*)(self) )->QTextList::connectNotify(*signal);
 
-}
-
-bool QTextList_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQTextList* self_cast = dynamic_cast<VirtualQTextList*>( (QTextList*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QTextList_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

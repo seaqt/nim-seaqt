@@ -55,9 +55,6 @@ export
 type cQPicture*{.exportc: "QPicture", incompleteStruct.} = object
 type cQPictureIO*{.exportc: "QPictureIO", incompleteStruct.} = object
 
-proc fcQPicture_new(): ptr cQPicture {.importc: "QPicture_new".}
-proc fcQPicture_new2(param1: pointer): ptr cQPicture {.importc: "QPicture_new2".}
-proc fcQPicture_new3(formatVersion: cint): ptr cQPicture {.importc: "QPicture_new3".}
 proc fcQPicture_isNull(self: pointer, ): bool {.importc: "QPicture_isNull".}
 proc fcQPicture_devType(self: pointer, ): cint {.importc: "QPicture_devType".}
 proc fcQPicture_size(self: pointer, ): cuint {.importc: "QPicture_size".}
@@ -84,24 +81,26 @@ proc fcQPicture_load2(self: pointer, dev: pointer, format: cstring): bool {.impo
 proc fcQPicture_load22(self: pointer, fileName: struct_miqt_string, format: cstring): bool {.importc: "QPicture_load22".}
 proc fcQPicture_save2(self: pointer, dev: pointer, format: cstring): bool {.importc: "QPicture_save2".}
 proc fcQPicture_save22(self: pointer, fileName: struct_miqt_string, format: cstring): bool {.importc: "QPicture_save22".}
-proc fQPicture_virtualbase_devType(self: pointer, ): cint{.importc: "QPicture_virtualbase_devType".}
-proc fcQPicture_override_virtual_devType(self: pointer, slot: int) {.importc: "QPicture_override_virtual_devType".}
-proc fQPicture_virtualbase_setData(self: pointer, data: cstring, size: cuint): void{.importc: "QPicture_virtualbase_setData".}
-proc fcQPicture_override_virtual_setData(self: pointer, slot: int) {.importc: "QPicture_override_virtual_setData".}
-proc fQPicture_virtualbase_paintEngine(self: pointer, ): pointer{.importc: "QPicture_virtualbase_paintEngine".}
-proc fcQPicture_override_virtual_paintEngine(self: pointer, slot: int) {.importc: "QPicture_override_virtual_paintEngine".}
-proc fQPicture_virtualbase_metric(self: pointer, m: cint): cint{.importc: "QPicture_virtualbase_metric".}
-proc fcQPicture_override_virtual_metric(self: pointer, slot: int) {.importc: "QPicture_override_virtual_metric".}
-proc fQPicture_virtualbase_initPainter(self: pointer, painter: pointer): void{.importc: "QPicture_virtualbase_initPainter".}
-proc fcQPicture_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QPicture_override_virtual_initPainter".}
-proc fQPicture_virtualbase_redirected(self: pointer, offset: pointer): pointer{.importc: "QPicture_virtualbase_redirected".}
-proc fcQPicture_override_virtual_redirected(self: pointer, slot: int) {.importc: "QPicture_override_virtual_redirected".}
-proc fQPicture_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QPicture_virtualbase_sharedPainter".}
-proc fcQPicture_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QPicture_override_virtual_sharedPainter".}
+type cQPictureVTable = object
+  destructor*: proc(vtbl: ptr cQPictureVTable, self: ptr cQPicture) {.cdecl, raises:[], gcsafe.}
+  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  setData*: proc(vtbl, self: pointer, data: cstring, size: cuint): void {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metric*: proc(vtbl, self: pointer, m: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQPicture_virtualbase_devType(self: pointer, ): cint {.importc: "QPicture_virtualbase_devType".}
+proc fcQPicture_virtualbase_setData(self: pointer, data: cstring, size: cuint): void {.importc: "QPicture_virtualbase_setData".}
+proc fcQPicture_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QPicture_virtualbase_paintEngine".}
+proc fcQPicture_virtualbase_metric(self: pointer, m: cint): cint {.importc: "QPicture_virtualbase_metric".}
+proc fcQPicture_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QPicture_virtualbase_initPainter".}
+proc fcQPicture_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QPicture_virtualbase_redirected".}
+proc fcQPicture_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QPicture_virtualbase_sharedPainter".}
+proc fcQPicture_new(vtbl: pointer, ): ptr cQPicture {.importc: "QPicture_new".}
+proc fcQPicture_new2(vtbl: pointer, param1: pointer): ptr cQPicture {.importc: "QPicture_new2".}
+proc fcQPicture_new3(vtbl: pointer, formatVersion: cint): ptr cQPicture {.importc: "QPicture_new3".}
 proc fcQPicture_delete(self: pointer) {.importc: "QPicture_delete".}
-proc fcQPictureIO_new(): ptr cQPictureIO {.importc: "QPictureIO_new".}
-proc fcQPictureIO_new2(ioDevice: pointer, format: cstring): ptr cQPictureIO {.importc: "QPictureIO_new2".}
-proc fcQPictureIO_new3(fileName: struct_miqt_string, format: cstring): ptr cQPictureIO {.importc: "QPictureIO_new3".}
 proc fcQPictureIO_picture(self: pointer, ): pointer {.importc: "QPictureIO_picture".}
 proc fcQPictureIO_status(self: pointer, ): cint {.importc: "QPictureIO_status".}
 proc fcQPictureIO_format(self: pointer, ): cstring {.importc: "QPictureIO_format".}
@@ -126,19 +125,10 @@ proc fcQPictureIO_pictureFormat(fileName: struct_miqt_string): struct_miqt_strin
 proc fcQPictureIO_pictureFormatWithQIODevice(param1: pointer): struct_miqt_string {.importc: "QPictureIO_pictureFormatWithQIODevice".}
 proc fcQPictureIO_inputFormats(): struct_miqt_array {.importc: "QPictureIO_inputFormats".}
 proc fcQPictureIO_outputFormats(): struct_miqt_array {.importc: "QPictureIO_outputFormats".}
+proc fcQPictureIO_new(): ptr cQPictureIO {.importc: "QPictureIO_new".}
+proc fcQPictureIO_new2(ioDevice: pointer, format: cstring): ptr cQPictureIO {.importc: "QPictureIO_new2".}
+proc fcQPictureIO_new3(fileName: struct_miqt_string, format: cstring): ptr cQPictureIO {.importc: "QPictureIO_new3".}
 proc fcQPictureIO_delete(self: pointer) {.importc: "QPictureIO_delete".}
-
-
-func init*(T: type gen_qpicture_types.QPicture, h: ptr cQPicture): gen_qpicture_types.QPicture =
-  T(h: h)
-proc create*(T: type gen_qpicture_types.QPicture, ): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture.init(fcQPicture_new())
-
-proc create*(T: type gen_qpicture_types.QPicture, param1: gen_qpicture_types.QPicture): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture.init(fcQPicture_new2(param1.h))
-
-proc create*(T: type gen_qpicture_types.QPicture, formatVersion: cint): gen_qpicture_types.QPicture =
-  gen_qpicture_types.QPicture.init(fcQPicture_new3(formatVersion))
 
 proc isNull*(self: gen_qpicture_types.QPicture, ): bool =
   fcQPicture_isNull(self.h)
@@ -250,145 +240,161 @@ proc save*(self: gen_qpicture_types.QPicture, dev: gen_qiodevice_types.QIODevice
 proc save*(self: gen_qpicture_types.QPicture, fileName: string, format: cstring): bool =
   fcQPicture_save22(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format)
 
+type QPicturedevTypeProc* = proc(self: QPicture): cint {.raises: [], gcsafe.}
+type QPicturesetDataProc* = proc(self: QPicture, data: cstring, size: cuint): void {.raises: [], gcsafe.}
+type QPicturepaintEngineProc* = proc(self: QPicture): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QPicturemetricProc* = proc(self: QPicture, m: cint): cint {.raises: [], gcsafe.}
+type QPictureinitPainterProc* = proc(self: QPicture, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QPictureredirectedProc* = proc(self: QPicture, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QPicturesharedPainterProc* = proc(self: QPicture): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QPictureVTable* = object
+  vtbl: cQPictureVTable
+  devType*: QPicturedevTypeProc
+  setData*: QPicturesetDataProc
+  paintEngine*: QPicturepaintEngineProc
+  metric*: QPicturemetricProc
+  initPainter*: QPictureinitPainterProc
+  redirected*: QPictureredirectedProc
+  sharedPainter*: QPicturesharedPainterProc
 proc QPicturedevType*(self: gen_qpicture_types.QPicture, ): cint =
-  fQPicture_virtualbase_devType(self.h)
+  fcQPicture_virtualbase_devType(self.h)
 
-type QPicturedevTypeProc* = proc(): cint
-proc ondevType*(self: gen_qpicture_types.QPicture, slot: QPicturedevTypeProc) =
-  # TODO check subclass
-  var tmp = new QPicturedevTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_devType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_devType(self: ptr cQPicture, slot: int): cint {.exportc: "miqt_exec_callback_QPicture_devType ".} =
-  var nimfunc = cast[ptr QPicturedevTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPicture_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
+  var virtualReturn = vtbl[].devType(self)
   virtualReturn
+
 proc QPicturesetData*(self: gen_qpicture_types.QPicture, data: cstring, size: cuint): void =
-  fQPicture_virtualbase_setData(self.h, data, size)
+  fcQPicture_virtualbase_setData(self.h, data, size)
 
-type QPicturesetDataProc* = proc(data: cstring, size: cuint): void
-proc onsetData*(self: gen_qpicture_types.QPicture, slot: QPicturesetDataProc) =
-  # TODO check subclass
-  var tmp = new QPicturesetDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_setData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_setData(self: ptr cQPicture, slot: int, data: cstring, size: cuint): void {.exportc: "miqt_exec_callback_QPicture_setData ".} =
-  var nimfunc = cast[ptr QPicturesetDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPicture_setData(vtbl: pointer, self: pointer, data: cstring, size: cuint): void {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
   let slotval1 = (data)
-
   let slotval2 = size
+  vtbl[].setData(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QPicturepaintEngine*(self: gen_qpicture_types.QPicture, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fQPicture_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQPicture_virtualbase_paintEngine(self.h))
 
-type QPicturepaintEngineProc* = proc(): gen_qpaintengine_types.QPaintEngine
-proc onpaintEngine*(self: gen_qpicture_types.QPicture, slot: QPicturepaintEngineProc) =
-  # TODO check subclass
-  var tmp = new QPicturepaintEngineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_paintEngine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_paintEngine(self: ptr cQPicture, slot: int): pointer {.exportc: "miqt_exec_callback_QPicture_paintEngine ".} =
-  var nimfunc = cast[ptr QPicturepaintEngineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPicture_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.h
+
 proc QPicturemetric*(self: gen_qpicture_types.QPicture, m: cint): cint =
-  fQPicture_virtualbase_metric(self.h, cint(m))
+  fcQPicture_virtualbase_metric(self.h, cint(m))
 
-type QPicturemetricProc* = proc(m: cint): cint
-proc onmetric*(self: gen_qpicture_types.QPicture, slot: QPicturemetricProc) =
-  # TODO check subclass
-  var tmp = new QPicturemetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_metric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_metric(self: ptr cQPicture, slot: int, m: cint): cint {.exportc: "miqt_exec_callback_QPicture_metric ".} =
-  var nimfunc = cast[ptr QPicturemetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPicture_metric(vtbl: pointer, self: pointer, m: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
   let slotval1 = cint(m)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
+
 proc QPictureinitPainter*(self: gen_qpicture_types.QPicture, painter: gen_qpainter_types.QPainter): void =
-  fQPicture_virtualbase_initPainter(self.h, painter.h)
+  fcQPicture_virtualbase_initPainter(self.h, painter.h)
 
-type QPictureinitPainterProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc oninitPainter*(self: gen_qpicture_types.QPicture, slot: QPictureinitPainterProc) =
-  # TODO check subclass
-  var tmp = new QPictureinitPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_initPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_initPainter(self: ptr cQPicture, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QPicture_initPainter ".} =
-  var nimfunc = cast[ptr QPictureinitPainterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPicture_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QPictureredirected*(self: gen_qpicture_types.QPicture, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fQPicture_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQPicture_virtualbase_redirected(self.h, offset.h))
 
-type QPictureredirectedProc* = proc(offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice
-proc onredirected*(self: gen_qpicture_types.QPicture, slot: QPictureredirectedProc) =
-  # TODO check subclass
-  var tmp = new QPictureredirectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_redirected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_redirected(self: ptr cQPicture, slot: int, offset: pointer): pointer {.exportc: "miqt_exec_callback_QPicture_redirected ".} =
-  var nimfunc = cast[ptr QPictureredirectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQPicture_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].redirected(self, slotval1)
   virtualReturn.h
+
 proc QPicturesharedPainter*(self: gen_qpicture_types.QPicture, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fQPicture_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQPicture_virtualbase_sharedPainter(self.h))
 
-type QPicturesharedPainterProc* = proc(): gen_qpainter_types.QPainter
-proc onsharedPainter*(self: gen_qpicture_types.QPicture, slot: QPicturesharedPainterProc) =
-  # TODO check subclass
-  var tmp = new QPicturesharedPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQPicture_override_virtual_sharedPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QPicture_sharedPainter(self: ptr cQPicture, slot: int): pointer {.exportc: "miqt_exec_callback_QPicture_sharedPainter ".} =
-  var nimfunc = cast[ptr QPicturesharedPainterProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQPicture_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QPictureVTable](vtbl)
+  let self = QPicture(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
+proc create*(T: type gen_qpicture_types.QPicture,
+    vtbl: ref QPictureVTable = nil): gen_qpicture_types.QPicture =
+  let vtbl = if vtbl == nil: new QPictureVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPictureVTable, _: ptr cQPicture) {.cdecl.} =
+    let vtbl = cast[ref QPictureVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPicture_devType
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQPicture_setData
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPicture_paintEngine
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPicture_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPicture_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPicture_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPicture_sharedPainter
+  gen_qpicture_types.QPicture(h: fcQPicture_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qpicture_types.QPicture,
+    param1: gen_qpicture_types.QPicture,
+    vtbl: ref QPictureVTable = nil): gen_qpicture_types.QPicture =
+  let vtbl = if vtbl == nil: new QPictureVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPictureVTable, _: ptr cQPicture) {.cdecl.} =
+    let vtbl = cast[ref QPictureVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPicture_devType
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQPicture_setData
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPicture_paintEngine
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPicture_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPicture_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPicture_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPicture_sharedPainter
+  gen_qpicture_types.QPicture(h: fcQPicture_new2(addr(vtbl[]), param1.h))
+
+proc create*(T: type gen_qpicture_types.QPicture,
+    formatVersion: cint,
+    vtbl: ref QPictureVTable = nil): gen_qpicture_types.QPicture =
+  let vtbl = if vtbl == nil: new QPictureVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQPictureVTable, _: ptr cQPicture) {.cdecl.} =
+    let vtbl = cast[ref QPictureVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQPicture_devType
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQPicture_setData
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQPicture_paintEngine
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQPicture_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQPicture_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQPicture_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQPicture_sharedPainter
+  gen_qpicture_types.QPicture(h: fcQPicture_new3(addr(vtbl[]), formatVersion))
+
 proc delete*(self: gen_qpicture_types.QPicture) =
   fcQPicture_delete(self.h)
-
-func init*(T: type gen_qpicture_types.QPictureIO, h: ptr cQPictureIO): gen_qpicture_types.QPictureIO =
-  T(h: h)
-proc create*(T: type gen_qpicture_types.QPictureIO, ): gen_qpicture_types.QPictureIO =
-  gen_qpicture_types.QPictureIO.init(fcQPictureIO_new())
-
-proc create*(T: type gen_qpicture_types.QPictureIO, ioDevice: gen_qiodevice_types.QIODevice, format: cstring): gen_qpicture_types.QPictureIO =
-  gen_qpicture_types.QPictureIO.init(fcQPictureIO_new2(ioDevice.h, format))
-
-proc create*(T: type gen_qpicture_types.QPictureIO, fileName: string, format: cstring): gen_qpicture_types.QPictureIO =
-  gen_qpicture_types.QPictureIO.init(fcQPictureIO_new3(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format))
-
 proc picture*(self: gen_qpicture_types.QPictureIO, ): gen_qpicture_types.QPicture =
   gen_qpicture_types.QPicture(h: fcQPictureIO_picture(self.h))
 
@@ -488,6 +494,17 @@ proc outputFormats*(_: type gen_qpicture_types.QPictureIO, ): seq[seq[byte]] =
     c_free(vx_lv_bytearray.data)
     vx_ret[i] = vx_lvx_ret
   vx_ret
+
+proc create*(T: type gen_qpicture_types.QPictureIO): gen_qpicture_types.QPictureIO =
+  gen_qpicture_types.QPictureIO(h: fcQPictureIO_new())
+
+proc create*(T: type gen_qpicture_types.QPictureIO,
+    ioDevice: gen_qiodevice_types.QIODevice, format: cstring): gen_qpicture_types.QPictureIO =
+  gen_qpicture_types.QPictureIO(h: fcQPictureIO_new2(ioDevice.h, format))
+
+proc create*(T: type gen_qpicture_types.QPictureIO,
+    fileName: string, format: cstring): gen_qpicture_types.QPictureIO =
+  gen_qpicture_types.QPictureIO(h: fcQPictureIO_new3(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), format))
 
 proc delete*(self: gen_qpicture_types.QPictureIO) =
   fcQPictureIO_delete(self.h)

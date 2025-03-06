@@ -60,8 +60,6 @@ export
 
 type cQGraphicsItemAnimation*{.exportc: "QGraphicsItemAnimation", incompleteStruct.} = object
 
-proc fcQGraphicsItemAnimation_new(): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new".}
-proc fcQGraphicsItemAnimation_new2(parent: pointer): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new2".}
 proc fcQGraphicsItemAnimation_metaObject(self: pointer, ): pointer {.importc: "QGraphicsItemAnimation_metaObject".}
 proc fcQGraphicsItemAnimation_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsItemAnimation_metacast".}
 proc fcQGraphicsItemAnimation_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsItemAnimation_metacall".}
@@ -98,41 +96,36 @@ proc fcQGraphicsItemAnimation_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQGraphicsItemAnimation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsItemAnimation_tr3".}
 proc fcQGraphicsItemAnimation_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsItemAnimation_trUtf82".}
 proc fcQGraphicsItemAnimation_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsItemAnimation_trUtf83".}
-proc fQGraphicsItemAnimation_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsItemAnimation_virtualbase_metaObject".}
-proc fcQGraphicsItemAnimation_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_metaObject".}
-proc fQGraphicsItemAnimation_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsItemAnimation_virtualbase_metacast".}
-proc fcQGraphicsItemAnimation_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_metacast".}
-proc fQGraphicsItemAnimation_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsItemAnimation_virtualbase_metacall".}
-proc fcQGraphicsItemAnimation_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_metacall".}
-proc fQGraphicsItemAnimation_virtualbase_beforeAnimationStep(self: pointer, step: float64): void{.importc: "QGraphicsItemAnimation_virtualbase_beforeAnimationStep".}
-proc fcQGraphicsItemAnimation_override_virtual_beforeAnimationStep(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_beforeAnimationStep".}
-proc fQGraphicsItemAnimation_virtualbase_afterAnimationStep(self: pointer, step: float64): void{.importc: "QGraphicsItemAnimation_virtualbase_afterAnimationStep".}
-proc fcQGraphicsItemAnimation_override_virtual_afterAnimationStep(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_afterAnimationStep".}
-proc fQGraphicsItemAnimation_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QGraphicsItemAnimation_virtualbase_event".}
-proc fcQGraphicsItemAnimation_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_event".}
-proc fQGraphicsItemAnimation_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsItemAnimation_virtualbase_eventFilter".}
-proc fcQGraphicsItemAnimation_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_eventFilter".}
-proc fQGraphicsItemAnimation_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsItemAnimation_virtualbase_timerEvent".}
-proc fcQGraphicsItemAnimation_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_timerEvent".}
-proc fQGraphicsItemAnimation_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsItemAnimation_virtualbase_childEvent".}
-proc fcQGraphicsItemAnimation_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_childEvent".}
-proc fQGraphicsItemAnimation_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsItemAnimation_virtualbase_customEvent".}
-proc fcQGraphicsItemAnimation_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_customEvent".}
-proc fQGraphicsItemAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsItemAnimation_virtualbase_connectNotify".}
-proc fcQGraphicsItemAnimation_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_connectNotify".}
-proc fQGraphicsItemAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsItemAnimation_virtualbase_disconnectNotify".}
-proc fcQGraphicsItemAnimation_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsItemAnimation_override_virtual_disconnectNotify".}
+type cQGraphicsItemAnimationVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsItemAnimationVTable, self: ptr cQGraphicsItemAnimation) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  beforeAnimationStep*: proc(vtbl, self: pointer, step: float64): void {.cdecl, raises: [], gcsafe.}
+  afterAnimationStep*: proc(vtbl, self: pointer, step: float64): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsItemAnimation_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsItemAnimation_virtualbase_metaObject".}
+proc fcQGraphicsItemAnimation_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsItemAnimation_virtualbase_metacast".}
+proc fcQGraphicsItemAnimation_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsItemAnimation_virtualbase_metacall".}
+proc fcQGraphicsItemAnimation_virtualbase_beforeAnimationStep(self: pointer, step: float64): void {.importc: "QGraphicsItemAnimation_virtualbase_beforeAnimationStep".}
+proc fcQGraphicsItemAnimation_virtualbase_afterAnimationStep(self: pointer, step: float64): void {.importc: "QGraphicsItemAnimation_virtualbase_afterAnimationStep".}
+proc fcQGraphicsItemAnimation_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QGraphicsItemAnimation_virtualbase_event".}
+proc fcQGraphicsItemAnimation_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsItemAnimation_virtualbase_eventFilter".}
+proc fcQGraphicsItemAnimation_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_timerEvent".}
+proc fcQGraphicsItemAnimation_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_childEvent".}
+proc fcQGraphicsItemAnimation_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_customEvent".}
+proc fcQGraphicsItemAnimation_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_connectNotify".}
+proc fcQGraphicsItemAnimation_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsItemAnimation_virtualbase_disconnectNotify".}
+proc fcQGraphicsItemAnimation_new(vtbl: pointer, ): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new".}
+proc fcQGraphicsItemAnimation_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsItemAnimation {.importc: "QGraphicsItemAnimation_new2".}
 proc fcQGraphicsItemAnimation_staticMetaObject(): pointer {.importc: "QGraphicsItemAnimation_staticMetaObject".}
 proc fcQGraphicsItemAnimation_delete(self: pointer) {.importc: "QGraphicsItemAnimation_delete".}
-
-
-func init*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, h: ptr cQGraphicsItemAnimation): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =
-  T(h: h)
-proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =
-  gen_qgraphicsitemanimation_types.QGraphicsItemAnimation.init(fcQGraphicsItemAnimation_new())
-
-proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, parent: gen_qobject_types.QObject): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =
-  gen_qgraphicsitemanimation_types.QGraphicsItemAnimation.init(fcQGraphicsItemAnimation_new2(parent.h))
 
 proc metaObject*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsItemAnimation_metaObject(self.h))
@@ -320,224 +313,214 @@ proc trUtf8*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, s:
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsItemAnimationmetaObjectProc* = proc(self: QGraphicsItemAnimation): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsItemAnimationmetacastProc* = proc(self: QGraphicsItemAnimation, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsItemAnimationmetacallProc* = proc(self: QGraphicsItemAnimation, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsItemAnimationbeforeAnimationStepProc* = proc(self: QGraphicsItemAnimation, step: float64): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationafterAnimationStepProc* = proc(self: QGraphicsItemAnimation, step: float64): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationeventProc* = proc(self: QGraphicsItemAnimation, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsItemAnimationeventFilterProc* = proc(self: QGraphicsItemAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsItemAnimationtimerEventProc* = proc(self: QGraphicsItemAnimation, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationchildEventProc* = proc(self: QGraphicsItemAnimation, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationcustomEventProc* = proc(self: QGraphicsItemAnimation, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationconnectNotifyProc* = proc(self: QGraphicsItemAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationdisconnectNotifyProc* = proc(self: QGraphicsItemAnimation, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsItemAnimationVTable* = object
+  vtbl: cQGraphicsItemAnimationVTable
+  metaObject*: QGraphicsItemAnimationmetaObjectProc
+  metacast*: QGraphicsItemAnimationmetacastProc
+  metacall*: QGraphicsItemAnimationmetacallProc
+  beforeAnimationStep*: QGraphicsItemAnimationbeforeAnimationStepProc
+  afterAnimationStep*: QGraphicsItemAnimationafterAnimationStepProc
+  event*: QGraphicsItemAnimationeventProc
+  eventFilter*: QGraphicsItemAnimationeventFilterProc
+  timerEvent*: QGraphicsItemAnimationtimerEventProc
+  childEvent*: QGraphicsItemAnimationchildEventProc
+  customEvent*: QGraphicsItemAnimationcustomEventProc
+  connectNotify*: QGraphicsItemAnimationconnectNotifyProc
+  disconnectNotify*: QGraphicsItemAnimationdisconnectNotifyProc
 proc QGraphicsItemAnimationmetaObject*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsItemAnimation_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsItemAnimation_virtualbase_metaObject(self.h))
 
-type QGraphicsItemAnimationmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_metaObject(self: ptr cQGraphicsItemAnimation, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsItemAnimation_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsItemAnimationmetacast*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, param1: cstring): pointer =
-  fQGraphicsItemAnimation_virtualbase_metacast(self.h, param1)
+  fcQGraphicsItemAnimation_virtualbase_metacast(self.h, param1)
 
-type QGraphicsItemAnimationmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_metacast(self: ptr cQGraphicsItemAnimation, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsItemAnimationmetacall*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsItemAnimation_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsItemAnimation_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsItemAnimationmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_metacall(self: ptr cQGraphicsItemAnimation, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsItemAnimationbeforeAnimationStep*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64): void =
-  fQGraphicsItemAnimation_virtualbase_beforeAnimationStep(self.h, step)
+  fcQGraphicsItemAnimation_virtualbase_beforeAnimationStep(self.h, step)
 
-type QGraphicsItemAnimationbeforeAnimationStepProc* = proc(step: float64): void
-proc onbeforeAnimationStep*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationbeforeAnimationStepProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationbeforeAnimationStepProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_beforeAnimationStep(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_beforeAnimationStep(self: ptr cQGraphicsItemAnimation, slot: int, step: float64): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_beforeAnimationStep ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationbeforeAnimationStepProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_beforeAnimationStep(vtbl: pointer, self: pointer, step: float64): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = step
+  vtbl[].beforeAnimationStep(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationafterAnimationStep*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, step: float64): void =
-  fQGraphicsItemAnimation_virtualbase_afterAnimationStep(self.h, step)
+  fcQGraphicsItemAnimation_virtualbase_afterAnimationStep(self.h, step)
 
-type QGraphicsItemAnimationafterAnimationStepProc* = proc(step: float64): void
-proc onafterAnimationStep*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationafterAnimationStepProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationafterAnimationStepProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_afterAnimationStep(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_afterAnimationStep(self: ptr cQGraphicsItemAnimation, slot: int, step: float64): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_afterAnimationStep ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationafterAnimationStepProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_afterAnimationStep(vtbl: pointer, self: pointer, step: float64): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = step
+  vtbl[].afterAnimationStep(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationevent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsItemAnimation_virtualbase_event(self.h, event.h)
+  fcQGraphicsItemAnimation_virtualbase_event(self.h, event.h)
 
-type QGraphicsItemAnimationeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationeventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_event(self: ptr cQGraphicsItemAnimation, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_event ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsItemAnimationeventFilter*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsItemAnimation_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsItemAnimation_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsItemAnimationeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_eventFilter(self: ptr cQGraphicsItemAnimation, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsItemAnimationtimerEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsItemAnimation_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsItemAnimation_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsItemAnimationtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_timerEvent(self: ptr cQGraphicsItemAnimation, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationchildEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsItemAnimation_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsItemAnimation_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsItemAnimationchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_childEvent(self: ptr cQGraphicsItemAnimation, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationcustomEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsItemAnimation_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsItemAnimation_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsItemAnimationcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_customEvent(self: ptr cQGraphicsItemAnimation, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationconnectNotify*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsItemAnimation_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsItemAnimation_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsItemAnimationconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_connectNotify(self: ptr cQGraphicsItemAnimation, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsItemAnimationdisconnectNotify*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsItemAnimation_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsItemAnimation_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsItemAnimationdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation, slot: QGraphicsItemAnimationdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsItemAnimationdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsItemAnimation_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsItemAnimation_disconnectNotify(self: ptr cQGraphicsItemAnimation, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsItemAnimation_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsItemAnimationdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsItemAnimation_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsItemAnimationVTable](vtbl)
+  let self = QGraphicsItemAnimation(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
+    vtbl: ref QGraphicsItemAnimationVTable = nil): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =
+  let vtbl = if vtbl == nil: new QGraphicsItemAnimationVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsItemAnimationVTable, _: ptr cQGraphicsItemAnimation) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsItemAnimationVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsItemAnimation_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsItemAnimation_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsItemAnimation_metacall
+  if not isNil(vtbl.beforeAnimationStep):
+    vtbl[].vtbl.beforeAnimationStep = miqt_exec_callback_cQGraphicsItemAnimation_beforeAnimationStep
+  if not isNil(vtbl.afterAnimationStep):
+    vtbl[].vtbl.afterAnimationStep = miqt_exec_callback_cQGraphicsItemAnimation_afterAnimationStep
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsItemAnimation_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsItemAnimation_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsItemAnimation_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsItemAnimation_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsItemAnimation_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsItemAnimation_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsItemAnimation_disconnectNotify
+  gen_qgraphicsitemanimation_types.QGraphicsItemAnimation(h: fcQGraphicsItemAnimation_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QGraphicsItemAnimationVTable = nil): gen_qgraphicsitemanimation_types.QGraphicsItemAnimation =
+  let vtbl = if vtbl == nil: new QGraphicsItemAnimationVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsItemAnimationVTable, _: ptr cQGraphicsItemAnimation) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsItemAnimationVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsItemAnimation_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsItemAnimation_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsItemAnimation_metacall
+  if not isNil(vtbl.beforeAnimationStep):
+    vtbl[].vtbl.beforeAnimationStep = miqt_exec_callback_cQGraphicsItemAnimation_beforeAnimationStep
+  if not isNil(vtbl.afterAnimationStep):
+    vtbl[].vtbl.afterAnimationStep = miqt_exec_callback_cQGraphicsItemAnimation_afterAnimationStep
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsItemAnimation_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsItemAnimation_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsItemAnimation_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsItemAnimation_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsItemAnimation_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsItemAnimation_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsItemAnimation_disconnectNotify
+  gen_qgraphicsitemanimation_types.QGraphicsItemAnimation(h: fcQGraphicsItemAnimation_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qgraphicsitemanimation_types.QGraphicsItemAnimation): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsItemAnimation_staticMetaObject())
 proc delete*(self: gen_qgraphicsitemanimation_types.QGraphicsItemAnimation) =

@@ -58,14 +58,6 @@ export
 
 type cQMatrix4x4*{.exportc: "QMatrix4x4", incompleteStruct.} = object
 
-proc fcQMatrix4x4_new(): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new".}
-proc fcQMatrix4x4_new2(param1: cint): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new2".}
-proc fcQMatrix4x4_new3(values: ptr float32): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new3".}
-proc fcQMatrix4x4_new4(m11: float32, m12: float32, m13: float32, m14: float32, m21: float32, m22: float32, m23: float32, m24: float32, m31: float32, m32: float32, m33: float32, m34: float32, m41: float32, m42: float32, m43: float32, m44: float32): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new4".}
-proc fcQMatrix4x4_new5(values: ptr float32, cols: cint, rows: cint): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new5".}
-proc fcQMatrix4x4_new6(transform: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new6".}
-proc fcQMatrix4x4_new7(matrix: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new7".}
-proc fcQMatrix4x4_new8(param1: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new8".}
 proc fcQMatrix4x4_column(self: pointer, index: cint): pointer {.importc: "QMatrix4x4_column".}
 proc fcQMatrix4x4_setColumn(self: pointer, index: cint, value: pointer): void {.importc: "QMatrix4x4_setColumn".}
 proc fcQMatrix4x4_row(self: pointer, index: cint): pointer {.importc: "QMatrix4x4_row".}
@@ -123,34 +115,15 @@ proc fcQMatrix4x4_inverted1(self: pointer, invertible: ptr bool): pointer {.impo
 proc fcQMatrix4x4_rotate4(self: pointer, angle: float32, x: float32, y: float32, z: float32): void {.importc: "QMatrix4x4_rotate4".}
 proc fcQMatrix4x4_viewport5(self: pointer, left: float32, bottom: float32, width: float32, height: float32, nearPlane: float32): void {.importc: "QMatrix4x4_viewport5".}
 proc fcQMatrix4x4_viewport6(self: pointer, left: float32, bottom: float32, width: float32, height: float32, nearPlane: float32, farPlane: float32): void {.importc: "QMatrix4x4_viewport6".}
+proc fcQMatrix4x4_new(): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new".}
+proc fcQMatrix4x4_new2(param1: cint): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new2".}
+proc fcQMatrix4x4_new3(values: ptr float32): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new3".}
+proc fcQMatrix4x4_new4(m11: float32, m12: float32, m13: float32, m14: float32, m21: float32, m22: float32, m23: float32, m24: float32, m31: float32, m32: float32, m33: float32, m34: float32, m41: float32, m42: float32, m43: float32, m44: float32): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new4".}
+proc fcQMatrix4x4_new5(values: ptr float32, cols: cint, rows: cint): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new5".}
+proc fcQMatrix4x4_new6(transform: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new6".}
+proc fcQMatrix4x4_new7(matrix: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new7".}
+proc fcQMatrix4x4_new8(param1: pointer): ptr cQMatrix4x4 {.importc: "QMatrix4x4_new8".}
 proc fcQMatrix4x4_delete(self: pointer) {.importc: "QMatrix4x4_delete".}
-
-
-func init*(T: type gen_qmatrix4x4_types.QMatrix4x4, h: ptr cQMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
-  T(h: h)
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, ): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new())
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, param1: cint): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new2(cint(param1)))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, values: ptr float32): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new3(values))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, m11: float32, m12: float32, m13: float32, m14: float32, m21: float32, m22: float32, m23: float32, m24: float32, m31: float32, m32: float32, m33: float32, m34: float32, m41: float32, m42: float32, m43: float32, m44: float32): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new4(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, values: ptr float32, cols: cint, rows: cint): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new5(values, cols, rows))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, transform: gen_qtransform_types.QTransform): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new6(transform.h))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, matrix: gen_qmatrix_types.QMatrix): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new7(matrix.h))
-
-proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4, param1: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
-  gen_qmatrix4x4_types.QMatrix4x4.init(fcQMatrix4x4_new8(param1.h))
 
 proc column*(self: gen_qmatrix4x4_types.QMatrix4x4, index: cint): gen_qvector4d_types.QVector4D =
   gen_qvector4d_types.QVector4D(h: fcQMatrix4x4_column(self.h, index))
@@ -322,6 +295,37 @@ proc viewport*(self: gen_qmatrix4x4_types.QMatrix4x4, left: float32, bottom: flo
 
 proc viewport*(self: gen_qmatrix4x4_types.QMatrix4x4, left: float32, bottom: float32, width: float32, height: float32, nearPlane: float32, farPlane: float32): void =
   fcQMatrix4x4_viewport6(self.h, left, bottom, width, height, nearPlane, farPlane)
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new())
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    param1: cint): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new2(cint(param1)))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    values: ptr float32): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new3(values))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    m11: float32, m12: float32, m13: float32, m14: float32, m21: float32, m22: float32, m23: float32, m24: float32, m31: float32, m32: float32, m33: float32, m34: float32, m41: float32, m42: float32, m43: float32, m44: float32): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new4(m11, m12, m13, m14, m21, m22, m23, m24, m31, m32, m33, m34, m41, m42, m43, m44))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    values: ptr float32, cols: cint, rows: cint): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new5(values, cols, rows))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    transform: gen_qtransform_types.QTransform): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new6(transform.h))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    matrix: gen_qmatrix_types.QMatrix): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new7(matrix.h))
+
+proc create*(T: type gen_qmatrix4x4_types.QMatrix4x4,
+    param1: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
+  gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_new8(param1.h))
 
 proc delete*(self: gen_qmatrix4x4_types.QMatrix4x4) =
   fcQMatrix4x4_delete(self.h)

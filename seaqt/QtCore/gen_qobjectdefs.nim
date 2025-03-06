@@ -66,20 +66,18 @@ type cQMetaObject*{.exportc: "QMetaObject", incompleteStruct.} = object
 type cQMetaObjectConnection*{.exportc: "QMetaObject__Connection", incompleteStruct.} = object
 type cQMetaObjectSuperData*{.exportc: "QMetaObject__SuperData", incompleteStruct.} = object
 
+proc fcQGenericArgument_data(self: pointer, ): pointer {.importc: "QGenericArgument_data".}
+proc fcQGenericArgument_name(self: pointer, ): cstring {.importc: "QGenericArgument_name".}
 proc fcQGenericArgument_new(): ptr cQGenericArgument {.importc: "QGenericArgument_new".}
 proc fcQGenericArgument_new2(param1: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new2".}
 proc fcQGenericArgument_new3(aName: cstring): ptr cQGenericArgument {.importc: "QGenericArgument_new3".}
 proc fcQGenericArgument_new4(aName: cstring, aData: pointer): ptr cQGenericArgument {.importc: "QGenericArgument_new4".}
-proc fcQGenericArgument_data(self: pointer, ): pointer {.importc: "QGenericArgument_data".}
-proc fcQGenericArgument_name(self: pointer, ): cstring {.importc: "QGenericArgument_name".}
 proc fcQGenericArgument_delete(self: pointer) {.importc: "QGenericArgument_delete".}
 proc fcQGenericReturnArgument_new(): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new".}
 proc fcQGenericReturnArgument_new2(param1: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new2".}
 proc fcQGenericReturnArgument_new3(aName: cstring): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new3".}
 proc fcQGenericReturnArgument_new4(aName: cstring, aData: pointer): ptr cQGenericReturnArgument {.importc: "QGenericReturnArgument_new4".}
 proc fcQGenericReturnArgument_delete(self: pointer) {.importc: "QGenericReturnArgument_delete".}
-proc fcQMetaObject_new(): ptr cQMetaObject {.importc: "QMetaObject_new".}
-proc fcQMetaObject_new2(param1: pointer): ptr cQMetaObject {.importc: "QMetaObject_new2".}
 proc fcQMetaObject_className(self: pointer, ): cstring {.importc: "QMetaObject_className".}
 proc fcQMetaObject_superClass(self: pointer, ): pointer {.importc: "QMetaObject_superClass".}
 proc fcQMetaObject_inherits(self: pointer, metaObject: pointer): bool {.importc: "QMetaObject_inherits".}
@@ -179,33 +177,20 @@ proc fcQMetaObject_newInstance7(self: pointer, val0: pointer, val1: pointer, val
 proc fcQMetaObject_newInstance8(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer): pointer {.importc: "QMetaObject_newInstance8".}
 proc fcQMetaObject_newInstance9(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer): pointer {.importc: "QMetaObject_newInstance9".}
 proc fcQMetaObject_newInstance10(self: pointer, val0: pointer, val1: pointer, val2: pointer, val3: pointer, val4: pointer, val5: pointer, val6: pointer, val7: pointer, val8: pointer, val9: pointer): pointer {.importc: "QMetaObject_newInstance10".}
+proc fcQMetaObject_new(): ptr cQMetaObject {.importc: "QMetaObject_new".}
+proc fcQMetaObject_new2(param1: pointer): ptr cQMetaObject {.importc: "QMetaObject_new2".}
 proc fcQMetaObject_delete(self: pointer) {.importc: "QMetaObject_delete".}
+proc fcQMetaObjectConnection_operatorAssign(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_operatorAssign".}
 proc fcQMetaObjectConnection_new(): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new".}
 proc fcQMetaObjectConnection_new2(other: pointer): ptr cQMetaObjectConnection {.importc: "QMetaObject__Connection_new2".}
-proc fcQMetaObjectConnection_operatorAssign(self: pointer, other: pointer): void {.importc: "QMetaObject__Connection_operatorAssign".}
 proc fcQMetaObjectConnection_delete(self: pointer) {.importc: "QMetaObject__Connection_delete".}
-proc fcQMetaObjectSuperData_new(): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new".}
-proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new2".}
-proc fcQMetaObjectSuperData_new3(param1: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new3".}
 proc fcQMetaObjectSuperData_operatorMinusGreater(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_operatorMinusGreater".}
 proc fcQMetaObjectSuperData_ToConstQMetaObjectMultiply(self: pointer, ): pointer {.importc: "QMetaObject__SuperData_ToConstQMetaObjectMultiply".}
 proc fcQMetaObjectSuperData_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMetaObject__SuperData_operatorAssign".}
+proc fcQMetaObjectSuperData_new(): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new".}
+proc fcQMetaObjectSuperData_new2(mo: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new2".}
+proc fcQMetaObjectSuperData_new3(param1: pointer): ptr cQMetaObjectSuperData {.importc: "QMetaObject__SuperData_new3".}
 proc fcQMetaObjectSuperData_delete(self: pointer) {.importc: "QMetaObject__SuperData_delete".}
-
-
-func init*(T: type gen_qobjectdefs_types.QGenericArgument, h: ptr cQGenericArgument): gen_qobjectdefs_types.QGenericArgument =
-  T(h: h)
-proc create*(T: type gen_qobjectdefs_types.QGenericArgument, ): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument.init(fcQGenericArgument_new())
-
-proc create*(T: type gen_qobjectdefs_types.QGenericArgument, param1: gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument.init(fcQGenericArgument_new2(param1.h))
-
-proc create*(T: type gen_qobjectdefs_types.QGenericArgument, aName: cstring): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument.init(fcQGenericArgument_new3(aName))
-
-proc create*(T: type gen_qobjectdefs_types.QGenericArgument, aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericArgument =
-  gen_qobjectdefs_types.QGenericArgument.init(fcQGenericArgument_new4(aName, aData))
 
 proc data*(self: gen_qobjectdefs_types.QGenericArgument, ): pointer =
   fcQGenericArgument_data(self.h)
@@ -213,34 +198,40 @@ proc data*(self: gen_qobjectdefs_types.QGenericArgument, ): pointer =
 proc name*(self: gen_qobjectdefs_types.QGenericArgument, ): cstring =
   (fcQGenericArgument_name(self.h))
 
+proc create*(T: type gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new())
+
+proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
+    param1: gen_qobjectdefs_types.QGenericArgument): gen_qobjectdefs_types.QGenericArgument =
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new2(param1.h))
+
+proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
+    aName: cstring): gen_qobjectdefs_types.QGenericArgument =
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new3(aName))
+
+proc create*(T: type gen_qobjectdefs_types.QGenericArgument,
+    aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericArgument =
+  gen_qobjectdefs_types.QGenericArgument(h: fcQGenericArgument_new4(aName, aData))
+
 proc delete*(self: gen_qobjectdefs_types.QGenericArgument) =
   fcQGenericArgument_delete(self.h)
+proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new())
 
-func init*(T: type gen_qobjectdefs_types.QGenericReturnArgument, h: ptr cQGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
-  T(h: h)
-proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument, ): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument.init(fcQGenericReturnArgument_new())
+proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
+    param1: gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new2(param1.h))
 
-proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument, param1: gen_qobjectdefs_types.QGenericReturnArgument): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument.init(fcQGenericReturnArgument_new2(param1.h))
+proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
+    aName: cstring): gen_qobjectdefs_types.QGenericReturnArgument =
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new3(aName))
 
-proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument, aName: cstring): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument.init(fcQGenericReturnArgument_new3(aName))
-
-proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument, aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericReturnArgument =
-  gen_qobjectdefs_types.QGenericReturnArgument.init(fcQGenericReturnArgument_new4(aName, aData))
+proc create*(T: type gen_qobjectdefs_types.QGenericReturnArgument,
+    aName: cstring, aData: pointer): gen_qobjectdefs_types.QGenericReturnArgument =
+  gen_qobjectdefs_types.QGenericReturnArgument(h: fcQGenericReturnArgument_new4(aName, aData))
 
 proc delete*(self: gen_qobjectdefs_types.QGenericReturnArgument) =
   fcQGenericReturnArgument_delete(self.h)
-
-func init*(T: type gen_qobjectdefs_types.QMetaObject, h: ptr cQMetaObject): gen_qobjectdefs_types.QMetaObject =
-  T(h: h)
-proc create*(T: type gen_qobjectdefs_types.QMetaObject, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject.init(fcQMetaObject_new())
-
-proc create*(T: type gen_qobjectdefs_types.QMetaObject, param1: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject.init(fcQMetaObject_new2(param1.h))
-
 proc className*(self: gen_qobjectdefs_types.QMetaObject, ): cstring =
   (fcQMetaObject_className(self.h))
 
@@ -550,34 +541,27 @@ proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs
 proc newInstance*(self: gen_qobjectdefs_types.QMetaObject, val0: gen_qobjectdefs_types.QGenericArgument, val1: gen_qobjectdefs_types.QGenericArgument, val2: gen_qobjectdefs_types.QGenericArgument, val3: gen_qobjectdefs_types.QGenericArgument, val4: gen_qobjectdefs_types.QGenericArgument, val5: gen_qobjectdefs_types.QGenericArgument, val6: gen_qobjectdefs_types.QGenericArgument, val7: gen_qobjectdefs_types.QGenericArgument, val8: gen_qobjectdefs_types.QGenericArgument, val9: gen_qobjectdefs_types.QGenericArgument): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMetaObject_newInstance10(self.h, val0.h, val1.h, val2.h, val3.h, val4.h, val5.h, val6.h, val7.h, val8.h, val9.h))
 
+proc create*(T: type gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new())
+
+proc create*(T: type gen_qobjectdefs_types.QMetaObject,
+    param1: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObject =
+  gen_qobjectdefs_types.QMetaObject(h: fcQMetaObject_new2(param1.h))
+
 proc delete*(self: gen_qobjectdefs_types.QMetaObject) =
   fcQMetaObject_delete(self.h)
-
-func init*(T: type gen_qobjectdefs_types.QMetaObjectConnection, h: ptr cQMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
-  T(h: h)
-proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection, ): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection.init(fcQMetaObjectConnection_new())
-
-proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
-  gen_qobjectdefs_types.QMetaObjectConnection.init(fcQMetaObjectConnection_new2(other.h))
-
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectConnection, other: gen_qobjectdefs_types.QMetaObjectConnection): void =
   fcQMetaObjectConnection_operatorAssign(self.h, other.h)
 
+proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new())
+
+proc create*(T: type gen_qobjectdefs_types.QMetaObjectConnection,
+    other: gen_qobjectdefs_types.QMetaObjectConnection): gen_qobjectdefs_types.QMetaObjectConnection =
+  gen_qobjectdefs_types.QMetaObjectConnection(h: fcQMetaObjectConnection_new2(other.h))
+
 proc delete*(self: gen_qobjectdefs_types.QMetaObjectConnection) =
   fcQMetaObjectConnection_delete(self.h)
-
-func init*(T: type gen_qobjectdefs_types.QMetaObjectSuperData, h: ptr cQMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
-  T(h: h)
-proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData.init(fcQMetaObjectSuperData_new())
-
-proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData, mo: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData.init(fcQMetaObjectSuperData_new2(mo.h))
-
-proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData, param1: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
-  gen_qobjectdefs_types.QMetaObjectSuperData.init(fcQMetaObjectSuperData_new3(param1.h))
-
 proc operatorMinusGreater*(self: gen_qobjectdefs_types.QMetaObjectSuperData, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMetaObjectSuperData_operatorMinusGreater(self.h))
 
@@ -586,6 +570,17 @@ proc ToConstQMetaObjectMultiply*(self: gen_qobjectdefs_types.QMetaObjectSuperDat
 
 proc operatorAssign*(self: gen_qobjectdefs_types.QMetaObjectSuperData, param1: gen_qobjectdefs_types.QMetaObjectSuperData): void =
   fcQMetaObjectSuperData_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new())
+
+proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
+    mo: gen_qobjectdefs_types.QMetaObject): gen_qobjectdefs_types.QMetaObjectSuperData =
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new2(mo.h))
+
+proc create*(T: type gen_qobjectdefs_types.QMetaObjectSuperData,
+    param1: gen_qobjectdefs_types.QMetaObjectSuperData): gen_qobjectdefs_types.QMetaObjectSuperData =
+  gen_qobjectdefs_types.QMetaObjectSuperData(h: fcQMetaObjectSuperData_new3(param1.h))
 
 proc delete*(self: gen_qobjectdefs_types.QMetaObjectSuperData) =
   fcQMetaObjectSuperData_delete(self.h)

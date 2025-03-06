@@ -68,10 +68,6 @@ export
 
 type cQCheckBox*{.exportc: "QCheckBox", incompleteStruct.} = object
 
-proc fcQCheckBox_new(parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new".}
-proc fcQCheckBox_new2(): ptr cQCheckBox {.importc: "QCheckBox_new2".}
-proc fcQCheckBox_new3(text: struct_miqt_string): ptr cQCheckBox {.importc: "QCheckBox_new3".}
-proc fcQCheckBox_new4(text: struct_miqt_string, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new4".}
 proc fcQCheckBox_metaObject(self: pointer, ): pointer {.importc: "QCheckBox_metaObject".}
 proc fcQCheckBox_metacast(self: pointer, param1: cstring): pointer {.importc: "QCheckBox_metacast".}
 proc fcQCheckBox_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCheckBox_metacall".}
@@ -90,129 +86,120 @@ proc fcQCheckBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.impo
 proc fcQCheckBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCheckBox_trUtf82".}
 proc fcQCheckBox_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCheckBox_trUtf83".}
 proc fcQCheckBox_setTristate1(self: pointer, y: bool): void {.importc: "QCheckBox_setTristate1".}
-proc fQCheckBox_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_metaObject".}
-proc fcQCheckBox_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metaObject".}
-proc fQCheckBox_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QCheckBox_virtualbase_metacast".}
-proc fcQCheckBox_override_virtual_metacast(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metacast".}
-proc fQCheckBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QCheckBox_virtualbase_metacall".}
-proc fcQCheckBox_override_virtual_metacall(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metacall".}
-proc fQCheckBox_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_sizeHint".}
-proc fcQCheckBox_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_sizeHint".}
-proc fQCheckBox_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_minimumSizeHint".}
-proc fcQCheckBox_override_virtual_minimumSizeHint(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_minimumSizeHint".}
-proc fQCheckBox_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QCheckBox_virtualbase_event".}
-proc fcQCheckBox_override_virtual_event(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_event".}
-proc fQCheckBox_virtualbase_hitButton(self: pointer, pos: pointer): bool{.importc: "QCheckBox_virtualbase_hitButton".}
-proc fcQCheckBox_override_virtual_hitButton(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_hitButton".}
-proc fQCheckBox_virtualbase_checkStateSet(self: pointer, ): void{.importc: "QCheckBox_virtualbase_checkStateSet".}
-proc fcQCheckBox_override_virtual_checkStateSet(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_checkStateSet".}
-proc fQCheckBox_virtualbase_nextCheckState(self: pointer, ): void{.importc: "QCheckBox_virtualbase_nextCheckState".}
-proc fcQCheckBox_override_virtual_nextCheckState(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_nextCheckState".}
-proc fQCheckBox_virtualbase_paintEvent(self: pointer, param1: pointer): void{.importc: "QCheckBox_virtualbase_paintEvent".}
-proc fcQCheckBox_override_virtual_paintEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_paintEvent".}
-proc fQCheckBox_virtualbase_mouseMoveEvent(self: pointer, param1: pointer): void{.importc: "QCheckBox_virtualbase_mouseMoveEvent".}
-proc fcQCheckBox_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_mouseMoveEvent".}
-proc fQCheckBox_virtualbase_keyPressEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_keyPressEvent".}
-proc fcQCheckBox_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_keyPressEvent".}
-proc fQCheckBox_virtualbase_keyReleaseEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_keyReleaseEvent".}
-proc fcQCheckBox_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_keyReleaseEvent".}
-proc fQCheckBox_virtualbase_mousePressEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_mousePressEvent".}
-proc fcQCheckBox_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_mousePressEvent".}
-proc fQCheckBox_virtualbase_mouseReleaseEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_mouseReleaseEvent".}
-proc fcQCheckBox_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_mouseReleaseEvent".}
-proc fQCheckBox_virtualbase_focusInEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_focusInEvent".}
-proc fcQCheckBox_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_focusInEvent".}
-proc fQCheckBox_virtualbase_focusOutEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_focusOutEvent".}
-proc fcQCheckBox_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_focusOutEvent".}
-proc fQCheckBox_virtualbase_changeEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_changeEvent".}
-proc fcQCheckBox_override_virtual_changeEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_changeEvent".}
-proc fQCheckBox_virtualbase_timerEvent(self: pointer, e: pointer): void{.importc: "QCheckBox_virtualbase_timerEvent".}
-proc fcQCheckBox_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_timerEvent".}
-proc fQCheckBox_virtualbase_devType(self: pointer, ): cint{.importc: "QCheckBox_virtualbase_devType".}
-proc fcQCheckBox_override_virtual_devType(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_devType".}
-proc fQCheckBox_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QCheckBox_virtualbase_setVisible".}
-proc fcQCheckBox_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_setVisible".}
-proc fQCheckBox_virtualbase_heightForWidth(self: pointer, param1: cint): cint{.importc: "QCheckBox_virtualbase_heightForWidth".}
-proc fcQCheckBox_override_virtual_heightForWidth(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_heightForWidth".}
-proc fQCheckBox_virtualbase_hasHeightForWidth(self: pointer, ): bool{.importc: "QCheckBox_virtualbase_hasHeightForWidth".}
-proc fcQCheckBox_override_virtual_hasHeightForWidth(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_hasHeightForWidth".}
-proc fQCheckBox_virtualbase_paintEngine(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_paintEngine".}
-proc fcQCheckBox_override_virtual_paintEngine(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_paintEngine".}
-proc fQCheckBox_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_mouseDoubleClickEvent".}
-proc fcQCheckBox_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_mouseDoubleClickEvent".}
-proc fQCheckBox_virtualbase_wheelEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_wheelEvent".}
-proc fcQCheckBox_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_wheelEvent".}
-proc fQCheckBox_virtualbase_enterEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_enterEvent".}
-proc fcQCheckBox_override_virtual_enterEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_enterEvent".}
-proc fQCheckBox_virtualbase_leaveEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_leaveEvent".}
-proc fcQCheckBox_override_virtual_leaveEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_leaveEvent".}
-proc fQCheckBox_virtualbase_moveEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_moveEvent".}
-proc fcQCheckBox_override_virtual_moveEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_moveEvent".}
-proc fQCheckBox_virtualbase_resizeEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_resizeEvent".}
-proc fcQCheckBox_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_resizeEvent".}
-proc fQCheckBox_virtualbase_closeEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_closeEvent".}
-proc fcQCheckBox_override_virtual_closeEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_closeEvent".}
-proc fQCheckBox_virtualbase_contextMenuEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_contextMenuEvent".}
-proc fcQCheckBox_override_virtual_contextMenuEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_contextMenuEvent".}
-proc fQCheckBox_virtualbase_tabletEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_tabletEvent".}
-proc fcQCheckBox_override_virtual_tabletEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_tabletEvent".}
-proc fQCheckBox_virtualbase_actionEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_actionEvent".}
-proc fcQCheckBox_override_virtual_actionEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_actionEvent".}
-proc fQCheckBox_virtualbase_dragEnterEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_dragEnterEvent".}
-proc fcQCheckBox_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_dragEnterEvent".}
-proc fQCheckBox_virtualbase_dragMoveEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_dragMoveEvent".}
-proc fcQCheckBox_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_dragMoveEvent".}
-proc fQCheckBox_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_dragLeaveEvent".}
-proc fcQCheckBox_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_dragLeaveEvent".}
-proc fQCheckBox_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_dropEvent".}
-proc fcQCheckBox_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_dropEvent".}
-proc fQCheckBox_virtualbase_showEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_showEvent".}
-proc fcQCheckBox_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_showEvent".}
-proc fQCheckBox_virtualbase_hideEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_hideEvent".}
-proc fcQCheckBox_override_virtual_hideEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_hideEvent".}
-proc fQCheckBox_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool{.importc: "QCheckBox_virtualbase_nativeEvent".}
-proc fcQCheckBox_override_virtual_nativeEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_nativeEvent".}
-proc fQCheckBox_virtualbase_metric(self: pointer, param1: cint): cint{.importc: "QCheckBox_virtualbase_metric".}
-proc fcQCheckBox_override_virtual_metric(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_metric".}
-proc fQCheckBox_virtualbase_initPainter(self: pointer, painter: pointer): void{.importc: "QCheckBox_virtualbase_initPainter".}
-proc fcQCheckBox_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_initPainter".}
-proc fQCheckBox_virtualbase_redirected(self: pointer, offset: pointer): pointer{.importc: "QCheckBox_virtualbase_redirected".}
-proc fcQCheckBox_override_virtual_redirected(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_redirected".}
-proc fQCheckBox_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QCheckBox_virtualbase_sharedPainter".}
-proc fcQCheckBox_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_sharedPainter".}
-proc fQCheckBox_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void{.importc: "QCheckBox_virtualbase_inputMethodEvent".}
-proc fcQCheckBox_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_inputMethodEvent".}
-proc fQCheckBox_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer{.importc: "QCheckBox_virtualbase_inputMethodQuery".}
-proc fcQCheckBox_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_inputMethodQuery".}
-proc fQCheckBox_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool{.importc: "QCheckBox_virtualbase_focusNextPrevChild".}
-proc fcQCheckBox_override_virtual_focusNextPrevChild(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_focusNextPrevChild".}
-proc fQCheckBox_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QCheckBox_virtualbase_eventFilter".}
-proc fcQCheckBox_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_eventFilter".}
-proc fQCheckBox_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_childEvent".}
-proc fcQCheckBox_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_childEvent".}
-proc fQCheckBox_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QCheckBox_virtualbase_customEvent".}
-proc fcQCheckBox_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_customEvent".}
-proc fQCheckBox_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QCheckBox_virtualbase_connectNotify".}
-proc fcQCheckBox_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_connectNotify".}
-proc fQCheckBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QCheckBox_virtualbase_disconnectNotify".}
-proc fcQCheckBox_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QCheckBox_override_virtual_disconnectNotify".}
+type cQCheckBoxVTable = object
+  destructor*: proc(vtbl: ptr cQCheckBoxVTable, self: ptr cQCheckBox) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  hitButton*: proc(vtbl, self: pointer, pos: pointer): bool {.cdecl, raises: [], gcsafe.}
+  checkStateSet*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  nextCheckState*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, param1: cint): pointer {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQCheckBox_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QCheckBox_virtualbase_metaObject".}
+proc fcQCheckBox_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QCheckBox_virtualbase_metacast".}
+proc fcQCheckBox_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCheckBox_virtualbase_metacall".}
+proc fcQCheckBox_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QCheckBox_virtualbase_sizeHint".}
+proc fcQCheckBox_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QCheckBox_virtualbase_minimumSizeHint".}
+proc fcQCheckBox_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QCheckBox_virtualbase_event".}
+proc fcQCheckBox_virtualbase_hitButton(self: pointer, pos: pointer): bool {.importc: "QCheckBox_virtualbase_hitButton".}
+proc fcQCheckBox_virtualbase_checkStateSet(self: pointer, ): void {.importc: "QCheckBox_virtualbase_checkStateSet".}
+proc fcQCheckBox_virtualbase_nextCheckState(self: pointer, ): void {.importc: "QCheckBox_virtualbase_nextCheckState".}
+proc fcQCheckBox_virtualbase_paintEvent(self: pointer, param1: pointer): void {.importc: "QCheckBox_virtualbase_paintEvent".}
+proc fcQCheckBox_virtualbase_mouseMoveEvent(self: pointer, param1: pointer): void {.importc: "QCheckBox_virtualbase_mouseMoveEvent".}
+proc fcQCheckBox_virtualbase_keyPressEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_keyPressEvent".}
+proc fcQCheckBox_virtualbase_keyReleaseEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_keyReleaseEvent".}
+proc fcQCheckBox_virtualbase_mousePressEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_mousePressEvent".}
+proc fcQCheckBox_virtualbase_mouseReleaseEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_mouseReleaseEvent".}
+proc fcQCheckBox_virtualbase_focusInEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_focusInEvent".}
+proc fcQCheckBox_virtualbase_focusOutEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_focusOutEvent".}
+proc fcQCheckBox_virtualbase_changeEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_changeEvent".}
+proc fcQCheckBox_virtualbase_timerEvent(self: pointer, e: pointer): void {.importc: "QCheckBox_virtualbase_timerEvent".}
+proc fcQCheckBox_virtualbase_devType(self: pointer, ): cint {.importc: "QCheckBox_virtualbase_devType".}
+proc fcQCheckBox_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QCheckBox_virtualbase_setVisible".}
+proc fcQCheckBox_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QCheckBox_virtualbase_heightForWidth".}
+proc fcQCheckBox_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QCheckBox_virtualbase_hasHeightForWidth".}
+proc fcQCheckBox_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QCheckBox_virtualbase_paintEngine".}
+proc fcQCheckBox_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_mouseDoubleClickEvent".}
+proc fcQCheckBox_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_wheelEvent".}
+proc fcQCheckBox_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_enterEvent".}
+proc fcQCheckBox_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_leaveEvent".}
+proc fcQCheckBox_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_moveEvent".}
+proc fcQCheckBox_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_resizeEvent".}
+proc fcQCheckBox_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_closeEvent".}
+proc fcQCheckBox_virtualbase_contextMenuEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_contextMenuEvent".}
+proc fcQCheckBox_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_tabletEvent".}
+proc fcQCheckBox_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_actionEvent".}
+proc fcQCheckBox_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_dragEnterEvent".}
+proc fcQCheckBox_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_dragMoveEvent".}
+proc fcQCheckBox_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_dragLeaveEvent".}
+proc fcQCheckBox_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_dropEvent".}
+proc fcQCheckBox_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_showEvent".}
+proc fcQCheckBox_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_hideEvent".}
+proc fcQCheckBox_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QCheckBox_virtualbase_nativeEvent".}
+proc fcQCheckBox_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QCheckBox_virtualbase_metric".}
+proc fcQCheckBox_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QCheckBox_virtualbase_initPainter".}
+proc fcQCheckBox_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QCheckBox_virtualbase_redirected".}
+proc fcQCheckBox_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QCheckBox_virtualbase_sharedPainter".}
+proc fcQCheckBox_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QCheckBox_virtualbase_inputMethodEvent".}
+proc fcQCheckBox_virtualbase_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QCheckBox_virtualbase_inputMethodQuery".}
+proc fcQCheckBox_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QCheckBox_virtualbase_focusNextPrevChild".}
+proc fcQCheckBox_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QCheckBox_virtualbase_eventFilter".}
+proc fcQCheckBox_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_childEvent".}
+proc fcQCheckBox_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCheckBox_virtualbase_customEvent".}
+proc fcQCheckBox_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCheckBox_virtualbase_connectNotify".}
+proc fcQCheckBox_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCheckBox_virtualbase_disconnectNotify".}
+proc fcQCheckBox_new(vtbl: pointer, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new".}
+proc fcQCheckBox_new2(vtbl: pointer, ): ptr cQCheckBox {.importc: "QCheckBox_new2".}
+proc fcQCheckBox_new3(vtbl: pointer, text: struct_miqt_string): ptr cQCheckBox {.importc: "QCheckBox_new3".}
+proc fcQCheckBox_new4(vtbl: pointer, text: struct_miqt_string, parent: pointer): ptr cQCheckBox {.importc: "QCheckBox_new4".}
 proc fcQCheckBox_staticMetaObject(): pointer {.importc: "QCheckBox_staticMetaObject".}
 proc fcQCheckBox_delete(self: pointer) {.importc: "QCheckBox_delete".}
-
-
-func init*(T: type gen_qcheckbox_types.QCheckBox, h: ptr cQCheckBox): gen_qcheckbox_types.QCheckBox =
-  T(h: h)
-proc create*(T: type gen_qcheckbox_types.QCheckBox, parent: gen_qwidget_types.QWidget): gen_qcheckbox_types.QCheckBox =
-  gen_qcheckbox_types.QCheckBox.init(fcQCheckBox_new(parent.h))
-
-proc create*(T: type gen_qcheckbox_types.QCheckBox, ): gen_qcheckbox_types.QCheckBox =
-  gen_qcheckbox_types.QCheckBox.init(fcQCheckBox_new2())
-
-proc create*(T: type gen_qcheckbox_types.QCheckBox, text: string): gen_qcheckbox_types.QCheckBox =
-  gen_qcheckbox_types.QCheckBox.init(fcQCheckBox_new3(struct_miqt_string(data: text, len: csize_t(len(text)))))
-
-proc create*(T: type gen_qcheckbox_types.QCheckBox, text: string, parent: gen_qwidget_types.QWidget): gen_qcheckbox_types.QCheckBox =
-  gen_qcheckbox_types.QCheckBox.init(fcQCheckBox_new4(struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
 
 proc metaObject*(self: gen_qcheckbox_types.QCheckBox, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCheckBox_metaObject(self.h))
@@ -257,7 +244,7 @@ proc stateChanged*(self: gen_qcheckbox_types.QCheckBox, param1: cint): void =
   fcQCheckBox_stateChanged(self.h, param1)
 
 type QCheckBoxstateChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_QCheckBox_stateChanged(slot: int, param1: cint) {.exportc.} =
+proc miqt_exec_callback_cQCheckBox_stateChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QCheckBox_stateChanged".} =
   let nimfunc = cast[ptr QCheckBoxstateChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -296,938 +283,1071 @@ proc trUtf8*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring, n: c
 proc setTristate*(self: gen_qcheckbox_types.QCheckBox, y: bool): void =
   fcQCheckBox_setTristate1(self.h, y)
 
+type QCheckBoxmetaObjectProc* = proc(self: QCheckBox): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QCheckBoxmetacastProc* = proc(self: QCheckBox, param1: cstring): pointer {.raises: [], gcsafe.}
+type QCheckBoxmetacallProc* = proc(self: QCheckBox, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QCheckBoxsizeHintProc* = proc(self: QCheckBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QCheckBoxminimumSizeHintProc* = proc(self: QCheckBox): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QCheckBoxeventProc* = proc(self: QCheckBox, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QCheckBoxhitButtonProc* = proc(self: QCheckBox, pos: gen_qpoint_types.QPoint): bool {.raises: [], gcsafe.}
+type QCheckBoxcheckStateSetProc* = proc(self: QCheckBox): void {.raises: [], gcsafe.}
+type QCheckBoxnextCheckStateProc* = proc(self: QCheckBox): void {.raises: [], gcsafe.}
+type QCheckBoxpaintEventProc* = proc(self: QCheckBox, param1: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QCheckBoxmouseMoveEventProc* = proc(self: QCheckBox, param1: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QCheckBoxkeyPressEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QCheckBoxkeyReleaseEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QCheckBoxmousePressEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QCheckBoxmouseReleaseEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QCheckBoxfocusInEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QCheckBoxfocusOutEventProc* = proc(self: QCheckBox, e: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QCheckBoxchangeEventProc* = proc(self: QCheckBox, e: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QCheckBoxtimerEventProc* = proc(self: QCheckBox, e: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QCheckBoxdevTypeProc* = proc(self: QCheckBox): cint {.raises: [], gcsafe.}
+type QCheckBoxsetVisibleProc* = proc(self: QCheckBox, visible: bool): void {.raises: [], gcsafe.}
+type QCheckBoxheightForWidthProc* = proc(self: QCheckBox, param1: cint): cint {.raises: [], gcsafe.}
+type QCheckBoxhasHeightForWidthProc* = proc(self: QCheckBox): bool {.raises: [], gcsafe.}
+type QCheckBoxpaintEngineProc* = proc(self: QCheckBox): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QCheckBoxmouseDoubleClickEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QCheckBoxwheelEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QCheckBoxenterEventProc* = proc(self: QCheckBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QCheckBoxleaveEventProc* = proc(self: QCheckBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QCheckBoxmoveEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QCheckBoxresizeEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QCheckBoxcloseEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QCheckBoxcontextMenuEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QCheckBoxtabletEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QCheckBoxactionEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QCheckBoxdragEnterEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QCheckBoxdragMoveEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QCheckBoxdragLeaveEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QCheckBoxdropEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QCheckBoxshowEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QCheckBoxhideEventProc* = proc(self: QCheckBox, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QCheckBoxnativeEventProc* = proc(self: QCheckBox, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QCheckBoxmetricProc* = proc(self: QCheckBox, param1: cint): cint {.raises: [], gcsafe.}
+type QCheckBoxinitPainterProc* = proc(self: QCheckBox, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QCheckBoxredirectedProc* = proc(self: QCheckBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QCheckBoxsharedPainterProc* = proc(self: QCheckBox): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QCheckBoxinputMethodEventProc* = proc(self: QCheckBox, param1: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QCheckBoxinputMethodQueryProc* = proc(self: QCheckBox, param1: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QCheckBoxfocusNextPrevChildProc* = proc(self: QCheckBox, next: bool): bool {.raises: [], gcsafe.}
+type QCheckBoxeventFilterProc* = proc(self: QCheckBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QCheckBoxchildEventProc* = proc(self: QCheckBox, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QCheckBoxcustomEventProc* = proc(self: QCheckBox, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QCheckBoxconnectNotifyProc* = proc(self: QCheckBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QCheckBoxdisconnectNotifyProc* = proc(self: QCheckBox, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QCheckBoxVTable* = object
+  vtbl: cQCheckBoxVTable
+  metaObject*: QCheckBoxmetaObjectProc
+  metacast*: QCheckBoxmetacastProc
+  metacall*: QCheckBoxmetacallProc
+  sizeHint*: QCheckBoxsizeHintProc
+  minimumSizeHint*: QCheckBoxminimumSizeHintProc
+  event*: QCheckBoxeventProc
+  hitButton*: QCheckBoxhitButtonProc
+  checkStateSet*: QCheckBoxcheckStateSetProc
+  nextCheckState*: QCheckBoxnextCheckStateProc
+  paintEvent*: QCheckBoxpaintEventProc
+  mouseMoveEvent*: QCheckBoxmouseMoveEventProc
+  keyPressEvent*: QCheckBoxkeyPressEventProc
+  keyReleaseEvent*: QCheckBoxkeyReleaseEventProc
+  mousePressEvent*: QCheckBoxmousePressEventProc
+  mouseReleaseEvent*: QCheckBoxmouseReleaseEventProc
+  focusInEvent*: QCheckBoxfocusInEventProc
+  focusOutEvent*: QCheckBoxfocusOutEventProc
+  changeEvent*: QCheckBoxchangeEventProc
+  timerEvent*: QCheckBoxtimerEventProc
+  devType*: QCheckBoxdevTypeProc
+  setVisible*: QCheckBoxsetVisibleProc
+  heightForWidth*: QCheckBoxheightForWidthProc
+  hasHeightForWidth*: QCheckBoxhasHeightForWidthProc
+  paintEngine*: QCheckBoxpaintEngineProc
+  mouseDoubleClickEvent*: QCheckBoxmouseDoubleClickEventProc
+  wheelEvent*: QCheckBoxwheelEventProc
+  enterEvent*: QCheckBoxenterEventProc
+  leaveEvent*: QCheckBoxleaveEventProc
+  moveEvent*: QCheckBoxmoveEventProc
+  resizeEvent*: QCheckBoxresizeEventProc
+  closeEvent*: QCheckBoxcloseEventProc
+  contextMenuEvent*: QCheckBoxcontextMenuEventProc
+  tabletEvent*: QCheckBoxtabletEventProc
+  actionEvent*: QCheckBoxactionEventProc
+  dragEnterEvent*: QCheckBoxdragEnterEventProc
+  dragMoveEvent*: QCheckBoxdragMoveEventProc
+  dragLeaveEvent*: QCheckBoxdragLeaveEventProc
+  dropEvent*: QCheckBoxdropEventProc
+  showEvent*: QCheckBoxshowEventProc
+  hideEvent*: QCheckBoxhideEventProc
+  nativeEvent*: QCheckBoxnativeEventProc
+  metric*: QCheckBoxmetricProc
+  initPainter*: QCheckBoxinitPainterProc
+  redirected*: QCheckBoxredirectedProc
+  sharedPainter*: QCheckBoxsharedPainterProc
+  inputMethodEvent*: QCheckBoxinputMethodEventProc
+  inputMethodQuery*: QCheckBoxinputMethodQueryProc
+  focusNextPrevChild*: QCheckBoxfocusNextPrevChildProc
+  eventFilter*: QCheckBoxeventFilterProc
+  childEvent*: QCheckBoxchildEventProc
+  customEvent*: QCheckBoxcustomEventProc
+  connectNotify*: QCheckBoxconnectNotifyProc
+  disconnectNotify*: QCheckBoxdisconnectNotifyProc
 proc QCheckBoxmetaObject*(self: gen_qcheckbox_types.QCheckBox, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQCheckBox_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQCheckBox_virtualbase_metaObject(self.h))
 
-type QCheckBoxmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_metaObject(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_metaObject ".} =
-  var nimfunc = cast[ptr QCheckBoxmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QCheckBoxmetacast*(self: gen_qcheckbox_types.QCheckBox, param1: cstring): pointer =
-  fQCheckBox_virtualbase_metacast(self.h, param1)
+  fcQCheckBox_virtualbase_metacast(self.h, param1)
 
-type QCheckBoxmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetacastProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_metacast(self: ptr cQCheckBox, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QCheckBox_metacast ".} =
-  var nimfunc = cast[ptr QCheckBoxmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QCheckBoxmetacall*(self: gen_qcheckbox_types.QCheckBox, param1: cint, param2: cint, param3: pointer): cint =
-  fQCheckBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQCheckBox_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QCheckBoxmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetacallProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_metacall(self: ptr cQCheckBox, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QCheckBox_metacall ".} =
-  var nimfunc = cast[ptr QCheckBoxmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QCheckBoxsizeHint*(self: gen_qcheckbox_types.QCheckBox, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQCheckBox_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCheckBox_virtualbase_sizeHint(self.h))
 
-type QCheckBoxsizeHintProc* = proc(): gen_qsize_types.QSize
-proc onsizeHint*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxsizeHintProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxsizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_sizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_sizeHint(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_sizeHint ".} =
-  var nimfunc = cast[ptr QCheckBoxsizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.h
+
 proc QCheckBoxminimumSizeHint*(self: gen_qcheckbox_types.QCheckBox, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQCheckBox_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQCheckBox_virtualbase_minimumSizeHint(self.h))
 
-type QCheckBoxminimumSizeHintProc* = proc(): gen_qsize_types.QSize
-proc onminimumSizeHint*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxminimumSizeHintProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxminimumSizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_minimumSizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_minimumSizeHint(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_minimumSizeHint ".} =
-  var nimfunc = cast[ptr QCheckBoxminimumSizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.h
+
 proc QCheckBoxevent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qcoreevent_types.QEvent): bool =
-  fQCheckBox_virtualbase_event(self.h, e.h)
+  fcQCheckBox_virtualbase_event(self.h, e.h)
 
-type QCheckBoxeventProc* = proc(e: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxeventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_event(self: ptr cQCheckBox, slot: int, e: pointer): bool {.exportc: "miqt_exec_callback_QCheckBox_event ".} =
-  var nimfunc = cast[ptr QCheckBoxeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QCheckBoxhitButton*(self: gen_qcheckbox_types.QCheckBox, pos: gen_qpoint_types.QPoint): bool =
-  fQCheckBox_virtualbase_hitButton(self.h, pos.h)
+  fcQCheckBox_virtualbase_hitButton(self.h, pos.h)
 
-type QCheckBoxhitButtonProc* = proc(pos: gen_qpoint_types.QPoint): bool
-proc onhitButton*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxhitButtonProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxhitButtonProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_hitButton(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_hitButton(self: ptr cQCheckBox, slot: int, pos: pointer): bool {.exportc: "miqt_exec_callback_QCheckBox_hitButton ".} =
-  var nimfunc = cast[ptr QCheckBoxhitButtonProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_hitButton(vtbl: pointer, self: pointer, pos: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: pos)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].hitButton(self, slotval1)
   virtualReturn
+
 proc QCheckBoxcheckStateSet*(self: gen_qcheckbox_types.QCheckBox, ): void =
-  fQCheckBox_virtualbase_checkStateSet(self.h)
+  fcQCheckBox_virtualbase_checkStateSet(self.h)
 
-type QCheckBoxcheckStateSetProc* = proc(): void
-proc oncheckStateSet*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxcheckStateSetProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxcheckStateSetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_checkStateSet(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQCheckBox_checkStateSet(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  vtbl[].checkStateSet(self)
 
-proc miqt_exec_callback_QCheckBox_checkStateSet(self: ptr cQCheckBox, slot: int): void {.exportc: "miqt_exec_callback_QCheckBox_checkStateSet ".} =
-  var nimfunc = cast[ptr QCheckBoxcheckStateSetProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QCheckBoxnextCheckState*(self: gen_qcheckbox_types.QCheckBox, ): void =
-  fQCheckBox_virtualbase_nextCheckState(self.h)
+  fcQCheckBox_virtualbase_nextCheckState(self.h)
 
-type QCheckBoxnextCheckStateProc* = proc(): void
-proc onnextCheckState*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxnextCheckStateProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxnextCheckStateProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_nextCheckState(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQCheckBox_nextCheckState(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  vtbl[].nextCheckState(self)
 
-proc miqt_exec_callback_QCheckBox_nextCheckState(self: ptr cQCheckBox, slot: int): void {.exportc: "miqt_exec_callback_QCheckBox_nextCheckState ".} =
-  var nimfunc = cast[ptr QCheckBoxnextCheckStateProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QCheckBoxpaintEvent*(self: gen_qcheckbox_types.QCheckBox, param1: gen_qevent_types.QPaintEvent): void =
-  fQCheckBox_virtualbase_paintEvent(self.h, param1.h)
+  fcQCheckBox_virtualbase_paintEvent(self.h, param1.h)
 
-type QCheckBoxpaintEventProc* = proc(param1: gen_qevent_types.QPaintEvent): void
-proc onpaintEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxpaintEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxpaintEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_paintEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_paintEvent(self: ptr cQCheckBox, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_paintEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxpaintEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_paintEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: param1)
+  vtbl[].paintEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxmouseMoveEvent*(self: gen_qcheckbox_types.QCheckBox, param1: gen_qevent_types.QMouseEvent): void =
-  fQCheckBox_virtualbase_mouseMoveEvent(self.h, param1.h)
+  fcQCheckBox_virtualbase_mouseMoveEvent(self.h, param1.h)
 
-type QCheckBoxmouseMoveEventProc* = proc(param1: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_mouseMoveEvent(self: ptr cQCheckBox, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxkeyPressEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QKeyEvent): void =
-  fQCheckBox_virtualbase_keyPressEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_keyPressEvent(self.h, e.h)
 
-type QCheckBoxkeyPressEventProc* = proc(e: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_keyPressEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_keyPressEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_keyPressEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxkeyReleaseEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QKeyEvent): void =
-  fQCheckBox_virtualbase_keyReleaseEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_keyReleaseEvent(self.h, e.h)
 
-type QCheckBoxkeyReleaseEventProc* = proc(e: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_keyReleaseEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_keyReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: e)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxmousePressEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QMouseEvent): void =
-  fQCheckBox_virtualbase_mousePressEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_mousePressEvent(self.h, e.h)
 
-type QCheckBoxmousePressEventProc* = proc(e: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_mousePressEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_mousePressEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_mousePressEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxmouseReleaseEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QMouseEvent): void =
-  fQCheckBox_virtualbase_mouseReleaseEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_mouseReleaseEvent(self.h, e.h)
 
-type QCheckBoxmouseReleaseEventProc* = proc(e: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_mouseReleaseEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_mouseReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxfocusInEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QFocusEvent): void =
-  fQCheckBox_virtualbase_focusInEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_focusInEvent(self.h, e.h)
 
-type QCheckBoxfocusInEventProc* = proc(e: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_focusInEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_focusInEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_focusInEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxfocusOutEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qevent_types.QFocusEvent): void =
-  fQCheckBox_virtualbase_focusOutEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_focusOutEvent(self.h, e.h)
 
-type QCheckBoxfocusOutEventProc* = proc(e: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_focusOutEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_focusOutEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_focusOutEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: e)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxchangeEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qcoreevent_types.QEvent): void =
-  fQCheckBox_virtualbase_changeEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_changeEvent(self.h, e.h)
 
-type QCheckBoxchangeEventProc* = proc(e: gen_qcoreevent_types.QEvent): void
-proc onchangeEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxchangeEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxchangeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_changeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_changeEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_changeEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxchangeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_changeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
+  vtbl[].changeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxtimerEvent*(self: gen_qcheckbox_types.QCheckBox, e: gen_qcoreevent_types.QTimerEvent): void =
-  fQCheckBox_virtualbase_timerEvent(self.h, e.h)
+  fcQCheckBox_virtualbase_timerEvent(self.h, e.h)
 
-type QCheckBoxtimerEventProc* = proc(e: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_timerEvent(self: ptr cQCheckBox, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_timerEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_timerEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdevType*(self: gen_qcheckbox_types.QCheckBox, ): cint =
-  fQCheckBox_virtualbase_devType(self.h)
+  fcQCheckBox_virtualbase_devType(self.h)
 
-type QCheckBoxdevTypeProc* = proc(): cint
-proc ondevType*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdevTypeProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdevTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_devType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_devType(self: ptr cQCheckBox, slot: int): cint {.exportc: "miqt_exec_callback_QCheckBox_devType ".} =
-  var nimfunc = cast[ptr QCheckBoxdevTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].devType(self)
   virtualReturn
+
 proc QCheckBoxsetVisible*(self: gen_qcheckbox_types.QCheckBox, visible: bool): void =
-  fQCheckBox_virtualbase_setVisible(self.h, visible)
+  fcQCheckBox_virtualbase_setVisible(self.h, visible)
 
-type QCheckBoxsetVisibleProc* = proc(visible: bool): void
-proc onsetVisible*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxsetVisibleProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxsetVisibleProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_setVisible(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_setVisible(self: ptr cQCheckBox, slot: int, visible: bool): void {.exportc: "miqt_exec_callback_QCheckBox_setVisible ".} =
-  var nimfunc = cast[ptr QCheckBoxsetVisibleProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxheightForWidth*(self: gen_qcheckbox_types.QCheckBox, param1: cint): cint =
-  fQCheckBox_virtualbase_heightForWidth(self.h, param1)
+  fcQCheckBox_virtualbase_heightForWidth(self.h, param1)
 
-type QCheckBoxheightForWidthProc* = proc(param1: cint): cint
-proc onheightForWidth*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxheightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxheightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_heightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_heightForWidth(self: ptr cQCheckBox, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QCheckBox_heightForWidth ".} =
-  var nimfunc = cast[ptr QCheckBoxheightForWidthProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = param1
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
+
 proc QCheckBoxhasHeightForWidth*(self: gen_qcheckbox_types.QCheckBox, ): bool =
-  fQCheckBox_virtualbase_hasHeightForWidth(self.h)
+  fcQCheckBox_virtualbase_hasHeightForWidth(self.h)
 
-type QCheckBoxhasHeightForWidthProc* = proc(): bool
-proc onhasHeightForWidth*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxhasHeightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxhasHeightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_hasHeightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_hasHeightForWidth(self: ptr cQCheckBox, slot: int): bool {.exportc: "miqt_exec_callback_QCheckBox_hasHeightForWidth ".} =
-  var nimfunc = cast[ptr QCheckBoxhasHeightForWidthProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
+
 proc QCheckBoxpaintEngine*(self: gen_qcheckbox_types.QCheckBox, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fQCheckBox_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQCheckBox_virtualbase_paintEngine(self.h))
 
-type QCheckBoxpaintEngineProc* = proc(): gen_qpaintengine_types.QPaintEngine
-proc onpaintEngine*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxpaintEngineProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxpaintEngineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_paintEngine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_paintEngine(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_paintEngine ".} =
-  var nimfunc = cast[ptr QCheckBoxpaintEngineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.h
+
 proc QCheckBoxmouseDoubleClickEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QMouseEvent): void =
-  fQCheckBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QCheckBoxmouseDoubleClickEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_mouseDoubleClickEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxwheelEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QWheelEvent): void =
-  fQCheckBox_virtualbase_wheelEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_wheelEvent(self.h, event.h)
 
-type QCheckBoxwheelEventProc* = proc(event: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_wheelEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_wheelEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxenterEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qcoreevent_types.QEvent): void =
-  fQCheckBox_virtualbase_enterEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_enterEvent(self.h, event.h)
 
-type QCheckBoxenterEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onenterEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxenterEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxenterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_enterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_enterEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_enterEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxenterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxleaveEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qcoreevent_types.QEvent): void =
-  fQCheckBox_virtualbase_leaveEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_leaveEvent(self.h, event.h)
 
-type QCheckBoxleaveEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onleaveEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxleaveEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxleaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_leaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_leaveEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_leaveEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxleaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxmoveEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QMoveEvent): void =
-  fQCheckBox_virtualbase_moveEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_moveEvent(self.h, event.h)
 
-type QCheckBoxmoveEventProc* = proc(event: gen_qevent_types.QMoveEvent): void
-proc onmoveEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmoveEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_moveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_moveEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_moveEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxmoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxresizeEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QResizeEvent): void =
-  fQCheckBox_virtualbase_resizeEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_resizeEvent(self.h, event.h)
 
-type QCheckBoxresizeEventProc* = proc(event: gen_qevent_types.QResizeEvent): void
-proc onresizeEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxresizeEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxresizeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_resizeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_resizeEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_resizeEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxresizeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxcloseEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QCloseEvent): void =
-  fQCheckBox_virtualbase_closeEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_closeEvent(self.h, event.h)
 
-type QCheckBoxcloseEventProc* = proc(event: gen_qevent_types.QCloseEvent): void
-proc oncloseEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxcloseEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxcloseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_closeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_closeEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_closeEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxcloseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxcontextMenuEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QContextMenuEvent): void =
-  fQCheckBox_virtualbase_contextMenuEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_contextMenuEvent(self.h, event.h)
 
-type QCheckBoxcontextMenuEventProc* = proc(event: gen_qevent_types.QContextMenuEvent): void
-proc oncontextMenuEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxcontextMenuEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxcontextMenuEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_contextMenuEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_contextMenuEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_contextMenuEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxcontextMenuEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: event)
+  vtbl[].contextMenuEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxtabletEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QTabletEvent): void =
-  fQCheckBox_virtualbase_tabletEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_tabletEvent(self.h, event.h)
 
-type QCheckBoxtabletEventProc* = proc(event: gen_qevent_types.QTabletEvent): void
-proc ontabletEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxtabletEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxtabletEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_tabletEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_tabletEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_tabletEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxtabletEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxactionEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QActionEvent): void =
-  fQCheckBox_virtualbase_actionEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_actionEvent(self.h, event.h)
 
-type QCheckBoxactionEventProc* = proc(event: gen_qevent_types.QActionEvent): void
-proc onactionEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxactionEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxactionEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_actionEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_actionEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_actionEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxactionEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdragEnterEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QDragEnterEvent): void =
-  fQCheckBox_virtualbase_dragEnterEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_dragEnterEvent(self.h, event.h)
 
-type QCheckBoxdragEnterEventProc* = proc(event: gen_qevent_types.QDragEnterEvent): void
-proc ondragEnterEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_dragEnterEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxdragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdragMoveEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QDragMoveEvent): void =
-  fQCheckBox_virtualbase_dragMoveEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_dragMoveEvent(self.h, event.h)
 
-type QCheckBoxdragMoveEventProc* = proc(event: gen_qevent_types.QDragMoveEvent): void
-proc ondragMoveEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_dragMoveEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxdragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdragLeaveEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QDragLeaveEvent): void =
-  fQCheckBox_virtualbase_dragLeaveEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_dragLeaveEvent(self.h, event.h)
 
-type QCheckBoxdragLeaveEventProc* = proc(event: gen_qevent_types.QDragLeaveEvent): void
-proc ondragLeaveEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_dragLeaveEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxdragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdropEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QDropEvent): void =
-  fQCheckBox_virtualbase_dropEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_dropEvent(self.h, event.h)
 
-type QCheckBoxdropEventProc* = proc(event: gen_qevent_types.QDropEvent): void
-proc ondropEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdropEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_dropEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_dropEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxdropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxshowEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QShowEvent): void =
-  fQCheckBox_virtualbase_showEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_showEvent(self.h, event.h)
 
-type QCheckBoxshowEventProc* = proc(event: gen_qevent_types.QShowEvent): void
-proc onshowEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxshowEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxshowEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_showEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_showEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_showEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxshowEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  vtbl[].showEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxhideEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qevent_types.QHideEvent): void =
-  fQCheckBox_virtualbase_hideEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_hideEvent(self.h, event.h)
 
-type QCheckBoxhideEventProc* = proc(event: gen_qevent_types.QHideEvent): void
-proc onhideEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxhideEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxhideEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_hideEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_hideEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_hideEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxhideEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxnativeEvent*(self: gen_qcheckbox_types.QCheckBox, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
-  fQCheckBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+  fcQCheckBox_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-type QCheckBoxnativeEventProc* = proc(eventType: seq[byte], message: pointer, resultVal: ptr clong): bool
-proc onnativeEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxnativeEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxnativeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_nativeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_nativeEvent(self: ptr cQCheckBox, slot: int, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.exportc: "miqt_exec_callback_QCheckBox_nativeEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxnativeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
-
   let slotval2 = message
-
   let slotval3 = resultVal
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QCheckBoxmetric*(self: gen_qcheckbox_types.QCheckBox, param1: cint): cint =
-  fQCheckBox_virtualbase_metric(self.h, cint(param1))
+  fcQCheckBox_virtualbase_metric(self.h, cint(param1))
 
-type QCheckBoxmetricProc* = proc(param1: cint): cint
-proc onmetric*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxmetricProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxmetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_metric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_metric(self: ptr cQCheckBox, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QCheckBox_metric ".} =
-  var nimfunc = cast[ptr QCheckBoxmetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
+
 proc QCheckBoxinitPainter*(self: gen_qcheckbox_types.QCheckBox, painter: gen_qpainter_types.QPainter): void =
-  fQCheckBox_virtualbase_initPainter(self.h, painter.h)
+  fcQCheckBox_virtualbase_initPainter(self.h, painter.h)
 
-type QCheckBoxinitPainterProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc oninitPainter*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxinitPainterProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxinitPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_initPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_initPainter(self: ptr cQCheckBox, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_initPainter ".} =
-  var nimfunc = cast[ptr QCheckBoxinitPainterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxredirected*(self: gen_qcheckbox_types.QCheckBox, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fQCheckBox_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQCheckBox_virtualbase_redirected(self.h, offset.h))
 
-type QCheckBoxredirectedProc* = proc(offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice
-proc onredirected*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxredirectedProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxredirectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_redirected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_redirected(self: ptr cQCheckBox, slot: int, offset: pointer): pointer {.exportc: "miqt_exec_callback_QCheckBox_redirected ".} =
-  var nimfunc = cast[ptr QCheckBoxredirectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].redirected(self, slotval1)
   virtualReturn.h
+
 proc QCheckBoxsharedPainter*(self: gen_qcheckbox_types.QCheckBox, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fQCheckBox_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQCheckBox_virtualbase_sharedPainter(self.h))
 
-type QCheckBoxsharedPainterProc* = proc(): gen_qpainter_types.QPainter
-proc onsharedPainter*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxsharedPainterProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxsharedPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_sharedPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_sharedPainter(self: ptr cQCheckBox, slot: int): pointer {.exportc: "miqt_exec_callback_QCheckBox_sharedPainter ".} =
-  var nimfunc = cast[ptr QCheckBoxsharedPainterProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQCheckBox_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
 proc QCheckBoxinputMethodEvent*(self: gen_qcheckbox_types.QCheckBox, param1: gen_qevent_types.QInputMethodEvent): void =
-  fQCheckBox_virtualbase_inputMethodEvent(self.h, param1.h)
+  fcQCheckBox_virtualbase_inputMethodEvent(self.h, param1.h)
 
-type QCheckBoxinputMethodEventProc* = proc(param1: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxinputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxinputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_inputMethodEvent(self: ptr cQCheckBox, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxinputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxinputMethodQuery*(self: gen_qcheckbox_types.QCheckBox, param1: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQCheckBox_virtualbase_inputMethodQuery(self.h, cint(param1)))
+  gen_qvariant_types.QVariant(h: fcQCheckBox_virtualbase_inputMethodQuery(self.h, cint(param1)))
 
-type QCheckBoxinputMethodQueryProc* = proc(param1: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxinputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxinputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_inputMethodQuery(self: ptr cQCheckBox, slot: int, param1: cint): pointer {.exportc: "miqt_exec_callback_QCheckBox_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QCheckBoxinputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_inputMethodQuery(vtbl: pointer, self: pointer, param1: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QCheckBoxfocusNextPrevChild*(self: gen_qcheckbox_types.QCheckBox, next: bool): bool =
-  fQCheckBox_virtualbase_focusNextPrevChild(self.h, next)
+  fcQCheckBox_virtualbase_focusNextPrevChild(self.h, next)
 
-type QCheckBoxfocusNextPrevChildProc* = proc(next: bool): bool
-proc onfocusNextPrevChild*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxfocusNextPrevChildProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxfocusNextPrevChildProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_focusNextPrevChild(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_focusNextPrevChild(self: ptr cQCheckBox, slot: int, next: bool): bool {.exportc: "miqt_exec_callback_QCheckBox_focusNextPrevChild ".} =
-  var nimfunc = cast[ptr QCheckBoxfocusNextPrevChildProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = next
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
+
 proc QCheckBoxeventFilter*(self: gen_qcheckbox_types.QCheckBox, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQCheckBox_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQCheckBox_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QCheckBoxeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_eventFilter(self: ptr cQCheckBox, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QCheckBox_eventFilter ".} =
-  var nimfunc = cast[ptr QCheckBoxeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QCheckBoxchildEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qcoreevent_types.QChildEvent): void =
-  fQCheckBox_virtualbase_childEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_childEvent(self.h, event.h)
 
-type QCheckBoxchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxchildEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_childEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_childEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxcustomEvent*(self: gen_qcheckbox_types.QCheckBox, event: gen_qcoreevent_types.QEvent): void =
-  fQCheckBox_virtualbase_customEvent(self.h, event.h)
+  fcQCheckBox_virtualbase_customEvent(self.h, event.h)
 
-type QCheckBoxcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_customEvent(self: ptr cQCheckBox, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_customEvent ".} =
-  var nimfunc = cast[ptr QCheckBoxcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxconnectNotify*(self: gen_qcheckbox_types.QCheckBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQCheckBox_virtualbase_connectNotify(self.h, signal.h)
+  fcQCheckBox_virtualbase_connectNotify(self.h, signal.h)
 
-type QCheckBoxconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_connectNotify(self: ptr cQCheckBox, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_connectNotify ".} =
-  var nimfunc = cast[ptr QCheckBoxconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QCheckBoxdisconnectNotify*(self: gen_qcheckbox_types.QCheckBox, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQCheckBox_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQCheckBox_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QCheckBoxdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QCheckBoxdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQCheckBox_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QCheckBox_disconnectNotify(self: ptr cQCheckBox, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QCheckBox_disconnectNotify ".} =
-  var nimfunc = cast[ptr QCheckBoxdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQCheckBox_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCheckBoxVTable](vtbl)
+  let self = QCheckBox(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qcheckbox_types.QCheckBox,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
+  let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQCheckBoxVTable, _: ptr cQCheckBox) {.cdecl.} =
+    let vtbl = cast[ref QCheckBoxVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCheckBox_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQCheckBox_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQCheckBox_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCheckBox_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCheckBox_minimumSizeHint
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQCheckBox_event
+  if not isNil(vtbl.hitButton):
+    vtbl[].vtbl.hitButton = miqt_exec_callback_cQCheckBox_hitButton
+  if not isNil(vtbl.checkStateSet):
+    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQCheckBox_checkStateSet
+  if not isNil(vtbl.nextCheckState):
+    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQCheckBox_nextCheckState
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCheckBox_paintEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCheckBox_mouseMoveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCheckBox_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCheckBox_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCheckBox_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCheckBox_mouseReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCheckBox_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCheckBox_focusOutEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCheckBox_changeEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCheckBox_timerEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQCheckBox_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQCheckBox_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCheckBox_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCheckBox_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCheckBox_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCheckBox_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCheckBox_wheelEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCheckBox_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCheckBox_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCheckBox_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCheckBox_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCheckBox_closeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCheckBox_contextMenuEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCheckBox_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCheckBox_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCheckBox_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCheckBox_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCheckBox_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCheckBox_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQCheckBox_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCheckBox_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCheckBox_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQCheckBox_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQCheckBox_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQCheckBox_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCheckBox_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCheckBox_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCheckBox_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCheckBox_focusNextPrevChild
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCheckBox_eventFilter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCheckBox_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCheckBox_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCheckBox_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCheckBox_disconnectNotify
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new(addr(vtbl[]), parent.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qcheckbox_types.QCheckBox,
+    vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
+  let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQCheckBoxVTable, _: ptr cQCheckBox) {.cdecl.} =
+    let vtbl = cast[ref QCheckBoxVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCheckBox_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQCheckBox_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQCheckBox_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCheckBox_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCheckBox_minimumSizeHint
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQCheckBox_event
+  if not isNil(vtbl.hitButton):
+    vtbl[].vtbl.hitButton = miqt_exec_callback_cQCheckBox_hitButton
+  if not isNil(vtbl.checkStateSet):
+    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQCheckBox_checkStateSet
+  if not isNil(vtbl.nextCheckState):
+    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQCheckBox_nextCheckState
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCheckBox_paintEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCheckBox_mouseMoveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCheckBox_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCheckBox_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCheckBox_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCheckBox_mouseReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCheckBox_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCheckBox_focusOutEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCheckBox_changeEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCheckBox_timerEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQCheckBox_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQCheckBox_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCheckBox_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCheckBox_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCheckBox_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCheckBox_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCheckBox_wheelEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCheckBox_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCheckBox_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCheckBox_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCheckBox_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCheckBox_closeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCheckBox_contextMenuEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCheckBox_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCheckBox_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCheckBox_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCheckBox_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCheckBox_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCheckBox_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQCheckBox_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCheckBox_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCheckBox_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQCheckBox_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQCheckBox_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQCheckBox_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCheckBox_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCheckBox_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCheckBox_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCheckBox_focusNextPrevChild
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCheckBox_eventFilter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCheckBox_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCheckBox_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCheckBox_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCheckBox_disconnectNotify
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new2(addr(vtbl[]), ))
+
+proc create*(T: type gen_qcheckbox_types.QCheckBox,
+    text: string,
+    vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
+  let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQCheckBoxVTable, _: ptr cQCheckBox) {.cdecl.} =
+    let vtbl = cast[ref QCheckBoxVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCheckBox_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQCheckBox_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQCheckBox_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCheckBox_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCheckBox_minimumSizeHint
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQCheckBox_event
+  if not isNil(vtbl.hitButton):
+    vtbl[].vtbl.hitButton = miqt_exec_callback_cQCheckBox_hitButton
+  if not isNil(vtbl.checkStateSet):
+    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQCheckBox_checkStateSet
+  if not isNil(vtbl.nextCheckState):
+    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQCheckBox_nextCheckState
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCheckBox_paintEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCheckBox_mouseMoveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCheckBox_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCheckBox_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCheckBox_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCheckBox_mouseReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCheckBox_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCheckBox_focusOutEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCheckBox_changeEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCheckBox_timerEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQCheckBox_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQCheckBox_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCheckBox_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCheckBox_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCheckBox_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCheckBox_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCheckBox_wheelEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCheckBox_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCheckBox_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCheckBox_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCheckBox_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCheckBox_closeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCheckBox_contextMenuEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCheckBox_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCheckBox_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCheckBox_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCheckBox_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCheckBox_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCheckBox_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQCheckBox_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCheckBox_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCheckBox_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQCheckBox_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQCheckBox_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQCheckBox_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCheckBox_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCheckBox_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCheckBox_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCheckBox_focusNextPrevChild
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCheckBox_eventFilter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCheckBox_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCheckBox_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCheckBox_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCheckBox_disconnectNotify
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new3(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))))
+
+proc create*(T: type gen_qcheckbox_types.QCheckBox,
+    text: string, parent: gen_qwidget_types.QWidget,
+    vtbl: ref QCheckBoxVTable = nil): gen_qcheckbox_types.QCheckBox =
+  let vtbl = if vtbl == nil: new QCheckBoxVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQCheckBoxVTable, _: ptr cQCheckBox) {.cdecl.} =
+    let vtbl = cast[ref QCheckBoxVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCheckBox_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQCheckBox_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQCheckBox_metacall
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQCheckBox_sizeHint
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQCheckBox_minimumSizeHint
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQCheckBox_event
+  if not isNil(vtbl.hitButton):
+    vtbl[].vtbl.hitButton = miqt_exec_callback_cQCheckBox_hitButton
+  if not isNil(vtbl.checkStateSet):
+    vtbl[].vtbl.checkStateSet = miqt_exec_callback_cQCheckBox_checkStateSet
+  if not isNil(vtbl.nextCheckState):
+    vtbl[].vtbl.nextCheckState = miqt_exec_callback_cQCheckBox_nextCheckState
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQCheckBox_paintEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQCheckBox_mouseMoveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQCheckBox_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQCheckBox_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQCheckBox_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQCheckBox_mouseReleaseEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQCheckBox_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQCheckBox_focusOutEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQCheckBox_changeEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCheckBox_timerEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQCheckBox_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQCheckBox_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQCheckBox_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQCheckBox_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQCheckBox_paintEngine
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQCheckBox_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQCheckBox_wheelEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQCheckBox_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQCheckBox_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQCheckBox_moveEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQCheckBox_resizeEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQCheckBox_closeEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQCheckBox_contextMenuEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQCheckBox_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQCheckBox_actionEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQCheckBox_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQCheckBox_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQCheckBox_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQCheckBox_dropEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQCheckBox_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQCheckBox_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQCheckBox_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQCheckBox_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQCheckBox_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQCheckBox_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQCheckBox_sharedPainter
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQCheckBox_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQCheckBox_inputMethodQuery
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQCheckBox_focusNextPrevChild
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCheckBox_eventFilter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCheckBox_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCheckBox_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCheckBox_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCheckBox_disconnectNotify
+  gen_qcheckbox_types.QCheckBox(h: fcQCheckBox_new4(addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), parent.h))
+
 proc staticMetaObject*(_: type gen_qcheckbox_types.QCheckBox): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCheckBox_staticMetaObject())
 proc delete*(self: gen_qcheckbox_types.QCheckBox) =

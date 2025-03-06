@@ -99,9 +99,6 @@ proc fcQSGAbstractRenderer_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt
 proc fcQSGAbstractRenderer_staticMetaObject(): pointer {.importc: "QSGAbstractRenderer_staticMetaObject".}
 proc fcQSGAbstractRenderer_delete(self: pointer) {.importc: "QSGAbstractRenderer_delete".}
 
-
-func init*(T: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, h: ptr cQSGAbstractRenderer): gen_qsgabstractrenderer_types.QSGAbstractRenderer =
-  T(h: h)
 proc metaObject*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSGAbstractRenderer_metaObject(self.h))
 
@@ -184,7 +181,7 @@ proc sceneGraphChanged*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer,
   fcQSGAbstractRenderer_sceneGraphChanged(self.h)
 
 type QSGAbstractRenderersceneGraphChangedSlot* = proc()
-proc miqt_exec_callback_QSGAbstractRenderer_sceneGraphChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged(slot: int) {.exportc: "miqt_exec_callback_QSGAbstractRenderer_sceneGraphChanged".} =
   let nimfunc = cast[ptr QSGAbstractRenderersceneGraphChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

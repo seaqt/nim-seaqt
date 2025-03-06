@@ -22,210 +22,167 @@
 extern "C" {
 #endif
 
-int miqt_exec_callback_QPrinter_devType(const QPrinter*, intptr_t);
-void miqt_exec_callback_QPrinter_setPageSize(QPrinter*, intptr_t, int);
-void miqt_exec_callback_QPrinter_setPageSizeMM(QPrinter*, intptr_t, QSizeF*);
-bool miqt_exec_callback_QPrinter_newPage(QPrinter*, intptr_t);
-QPaintEngine* miqt_exec_callback_QPrinter_paintEngine(const QPrinter*, intptr_t);
-void miqt_exec_callback_QPrinter_setMargins(QPrinter*, intptr_t, QPagedPaintDevice__Margins*);
-int miqt_exec_callback_QPrinter_metric(const QPrinter*, intptr_t, int);
-void miqt_exec_callback_QPrinter_initPainter(const QPrinter*, intptr_t, QPainter*);
-QPaintDevice* miqt_exec_callback_QPrinter_redirected(const QPrinter*, intptr_t, QPoint*);
-QPainter* miqt_exec_callback_QPrinter_sharedPainter(const QPrinter*, intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQPrinter final : public QPrinter {
+	struct QPrinter_VTable* vtbl;
 public:
 
-	VirtualQPrinter(): QPrinter() {};
-	VirtualQPrinter(const QPrinterInfo& printer): QPrinter(printer) {};
-	VirtualQPrinter(QPrinter::PrinterMode mode): QPrinter(mode) {};
-	VirtualQPrinter(const QPrinterInfo& printer, QPrinter::PrinterMode mode): QPrinter(printer, mode) {};
+	VirtualQPrinter(struct QPrinter_VTable* vtbl): QPrinter(), vtbl(vtbl) {};
+	VirtualQPrinter(struct QPrinter_VTable* vtbl, const QPrinterInfo& printer): QPrinter(printer), vtbl(vtbl) {};
+	VirtualQPrinter(struct QPrinter_VTable* vtbl, QPrinter::PrinterMode mode): QPrinter(mode), vtbl(vtbl) {};
+	VirtualQPrinter(struct QPrinter_VTable* vtbl, const QPrinterInfo& printer, QPrinter::PrinterMode mode): QPrinter(printer, mode), vtbl(vtbl) {};
 
-	virtual ~VirtualQPrinter() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__devType = 0;
+	virtual ~VirtualQPrinter() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
-		if (handle__devType == 0) {
+		if (vtbl->devType == 0) {
 			return QPrinter::devType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QPrinter_devType(this, handle__devType);
+
+		int callback_return_value = vtbl->devType(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QPrinter_virtualbase_devType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPageSize = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setPageSize(QPagedPaintDevice::PageSize pageSize) override {
-		if (handle__setPageSize == 0) {
+		if (vtbl->setPageSize == 0) {
 			QPrinter::setPageSize(pageSize);
 			return;
 		}
-		
+
 		QPagedPaintDevice::PageSize pageSize_ret = pageSize;
 		int sigval1 = static_cast<int>(pageSize_ret);
 
-		miqt_exec_callback_QPrinter_setPageSize(this, handle__setPageSize, sigval1);
+		vtbl->setPageSize(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QPrinter_virtualbase_setPageSize(void* self, int pageSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setPageSizeMM = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setPageSizeMM(const QSizeF& size) override {
-		if (handle__setPageSizeMM == 0) {
+		if (vtbl->setPageSizeMM == 0) {
 			QPrinter::setPageSizeMM(size);
 			return;
 		}
-		
+
 		const QSizeF& size_ret = size;
 		// Cast returned reference into pointer
 		QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
 
-		miqt_exec_callback_QPrinter_setPageSizeMM(this, handle__setPageSizeMM, sigval1);
+		vtbl->setPageSizeMM(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QPrinter_virtualbase_setPageSizeMM(void* self, QSizeF* size);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__newPage = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool newPage() override {
-		if (handle__newPage == 0) {
+		if (vtbl->newPage == 0) {
 			return QPrinter::newPage();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QPrinter_newPage(this, handle__newPage);
+
+		bool callback_return_value = vtbl->newPage(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QPrinter_virtualbase_newPage(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__paintEngine = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
-		if (handle__paintEngine == 0) {
+		if (vtbl->paintEngine == 0) {
 			return QPrinter::paintEngine();
 		}
-		
 
-		QPaintEngine* callback_return_value = miqt_exec_callback_QPrinter_paintEngine(this, handle__paintEngine);
+
+		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QPaintEngine* QPrinter_virtualbase_paintEngine(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__setMargins = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void setMargins(const QPagedPaintDevice::Margins& m) override {
-		if (handle__setMargins == 0) {
+		if (vtbl->setMargins == 0) {
 			QPrinter::setMargins(m);
 			return;
 		}
-		
+
 		const QPagedPaintDevice::Margins& m_ret = m;
 		// Cast returned reference into pointer
 		QPagedPaintDevice__Margins* sigval1 = const_cast<QPagedPaintDevice::Margins*>(&m_ret);
 
-		miqt_exec_callback_QPrinter_setMargins(this, handle__setMargins, sigval1);
+		vtbl->setMargins(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QPrinter_virtualbase_setMargins(void* self, QPagedPaintDevice__Margins* m);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metric = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
-		if (handle__metric == 0) {
+		if (vtbl->metric == 0) {
 			return QPrinter::metric(param1);
 		}
-		
+
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = miqt_exec_callback_QPrinter_metric(this, handle__metric, sigval1);
+		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QPrinter_virtualbase_metric(const void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__initPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
-		if (handle__initPainter == 0) {
+		if (vtbl->initPainter == 0) {
 			QPrinter::initPainter(painter);
 			return;
 		}
-		
+
 		QPainter* sigval1 = painter;
 
-		miqt_exec_callback_QPrinter_initPainter(this, handle__initPainter, sigval1);
+		vtbl->initPainter(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QPrinter_virtualbase_initPainter(const void* self, QPainter* painter);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__redirected = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
-		if (handle__redirected == 0) {
+		if (vtbl->redirected == 0) {
 			return QPrinter::redirected(offset);
 		}
-		
+
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = miqt_exec_callback_QPrinter_redirected(this, handle__redirected, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend QPaintDevice* QPrinter_virtualbase_redirected(const void* self, QPoint* offset);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__sharedPainter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
-		if (handle__sharedPainter == 0) {
+		if (vtbl->sharedPainter == 0) {
 			return QPrinter::sharedPainter();
 		}
-		
 
-		QPainter* callback_return_value = miqt_exec_callback_QPrinter_sharedPainter(this, handle__sharedPainter);
+
+		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
 
 		return callback_return_value;
 	}
@@ -237,20 +194,20 @@ public:
 	friend QPageLayout* QPrinter_protectedbase_devicePageLayout(bool* _dynamic_cast_ok, const void* self);
 };
 
-QPrinter* QPrinter_new() {
-	return new VirtualQPrinter();
+QPrinter* QPrinter_new(struct QPrinter_VTable* vtbl) {
+	return new VirtualQPrinter(vtbl);
 }
 
-QPrinter* QPrinter_new2(QPrinterInfo* printer) {
-	return new VirtualQPrinter(*printer);
+QPrinter* QPrinter_new2(struct QPrinter_VTable* vtbl, QPrinterInfo* printer) {
+	return new VirtualQPrinter(vtbl, *printer);
 }
 
-QPrinter* QPrinter_new3(int mode) {
-	return new VirtualQPrinter(static_cast<QPrinter::PrinterMode>(mode));
+QPrinter* QPrinter_new3(struct QPrinter_VTable* vtbl, int mode) {
+	return new VirtualQPrinter(vtbl, static_cast<QPrinter::PrinterMode>(mode));
 }
 
-QPrinter* QPrinter_new4(QPrinterInfo* printer, int mode) {
-	return new VirtualQPrinter(*printer, static_cast<QPrinter::PrinterMode>(mode));
+QPrinter* QPrinter_new4(struct QPrinter_VTable* vtbl, QPrinterInfo* printer, int mode) {
+	return new VirtualQPrinter(vtbl, *printer, static_cast<QPrinter::PrinterMode>(mode));
 }
 
 void QPrinter_virtbase(QPrinter* src, QPagedPaintDevice** outptr_QPagedPaintDevice) {
@@ -625,30 +582,10 @@ void QPrinter_getPageMargins(const QPrinter* self, double* left, double* top, do
 	self->getPageMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom), static_cast<QPrinter::Unit>(unit));
 }
 
-bool QPrinter_override_virtual_devType(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__devType = slot;
-	return true;
-}
-
 int QPrinter_virtualbase_devType(const void* self) {
 
 	return ( (const VirtualQPrinter*)(self) )->QPrinter::devType();
 
-}
-
-bool QPrinter_override_virtual_setPageSize(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setPageSize = slot;
-	return true;
 }
 
 void QPrinter_virtualbase_setPageSize(void* self, int pageSize) {
@@ -657,30 +594,10 @@ void QPrinter_virtualbase_setPageSize(void* self, int pageSize) {
 
 }
 
-bool QPrinter_override_virtual_setPageSizeMM(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setPageSizeMM = slot;
-	return true;
-}
-
 void QPrinter_virtualbase_setPageSizeMM(void* self, QSizeF* size) {
 
 	( (VirtualQPrinter*)(self) )->QPrinter::setPageSizeMM(*size);
 
-}
-
-bool QPrinter_override_virtual_newPage(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__newPage = slot;
-	return true;
 }
 
 bool QPrinter_virtualbase_newPage(void* self) {
@@ -689,30 +606,10 @@ bool QPrinter_virtualbase_newPage(void* self) {
 
 }
 
-bool QPrinter_override_virtual_paintEngine(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__paintEngine = slot;
-	return true;
-}
-
 QPaintEngine* QPrinter_virtualbase_paintEngine(const void* self) {
 
 	return ( (const VirtualQPrinter*)(self) )->QPrinter::paintEngine();
 
-}
-
-bool QPrinter_override_virtual_setMargins(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__setMargins = slot;
-	return true;
 }
 
 void QPrinter_virtualbase_setMargins(void* self, QPagedPaintDevice__Margins* m) {
@@ -721,30 +618,10 @@ void QPrinter_virtualbase_setMargins(void* self, QPagedPaintDevice__Margins* m) 
 
 }
 
-bool QPrinter_override_virtual_metric(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metric = slot;
-	return true;
-}
-
 int QPrinter_virtualbase_metric(const void* self, int param1) {
 
 	return ( (const VirtualQPrinter*)(self) )->QPrinter::metric(static_cast<VirtualQPrinter::PaintDeviceMetric>(param1));
 
-}
-
-bool QPrinter_override_virtual_initPainter(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__initPainter = slot;
-	return true;
 }
 
 void QPrinter_virtualbase_initPainter(const void* self, QPainter* painter) {
@@ -753,30 +630,10 @@ void QPrinter_virtualbase_initPainter(const void* self, QPainter* painter) {
 
 }
 
-bool QPrinter_override_virtual_redirected(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__redirected = slot;
-	return true;
-}
-
 QPaintDevice* QPrinter_virtualbase_redirected(const void* self, QPoint* offset) {
 
 	return ( (const VirtualQPrinter*)(self) )->QPrinter::redirected(offset);
 
-}
-
-bool QPrinter_override_virtual_sharedPainter(void* self, intptr_t slot) {
-	VirtualQPrinter* self_cast = dynamic_cast<VirtualQPrinter*>( (QPrinter*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__sharedPainter = slot;
-	return true;
 }
 
 QPainter* QPrinter_virtualbase_sharedPainter(const void* self) {

@@ -26,20 +26,26 @@ typedef struct QQmlExtensionInterface QQmlExtensionInterface;
 typedef struct QQmlTypesExtensionInterface QQmlTypesExtensionInterface;
 #endif
 
-QQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(QQmlTypesExtensionInterface* param1);
+struct QQmlTypesExtensionInterface_VTable {
+	void (*destructor)(struct QQmlTypesExtensionInterface_VTable* vtbl, QQmlTypesExtensionInterface* self);
+	void (*registerTypes)(struct QQmlTypesExtensionInterface_VTable* vtbl, QQmlTypesExtensionInterface* self, const char* uri);
+};
+QQmlTypesExtensionInterface* QQmlTypesExtensionInterface_new(struct QQmlTypesExtensionInterface_VTable* vtbl, QQmlTypesExtensionInterface* param1);
 void QQmlTypesExtensionInterface_registerTypes(QQmlTypesExtensionInterface* self, const char* uri);
 void QQmlTypesExtensionInterface_operatorAssign(QQmlTypesExtensionInterface* self, QQmlTypesExtensionInterface* param1);
-bool QQmlTypesExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot);
 void QQmlTypesExtensionInterface_virtualbase_registerTypes(void* self, const char* uri);
 void QQmlTypesExtensionInterface_delete(QQmlTypesExtensionInterface* self);
 
-QQmlExtensionInterface* QQmlExtensionInterface_new(QQmlExtensionInterface* param1);
+struct QQmlExtensionInterface_VTable {
+	void (*destructor)(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* self);
+	void (*initializeEngine)(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* self, QQmlEngine* engine, const char* uri);
+	void (*registerTypes)(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* self, const char* uri);
+};
+QQmlExtensionInterface* QQmlExtensionInterface_new(struct QQmlExtensionInterface_VTable* vtbl, QQmlExtensionInterface* param1);
 void QQmlExtensionInterface_virtbase(QQmlExtensionInterface* src, QQmlTypesExtensionInterface** outptr_QQmlTypesExtensionInterface);
 void QQmlExtensionInterface_initializeEngine(QQmlExtensionInterface* self, QQmlEngine* engine, const char* uri);
 void QQmlExtensionInterface_operatorAssign(QQmlExtensionInterface* self, QQmlExtensionInterface* param1);
-bool QQmlExtensionInterface_override_virtual_initializeEngine(void* self, intptr_t slot);
 void QQmlExtensionInterface_virtualbase_initializeEngine(void* self, QQmlEngine* engine, const char* uri);
-bool QQmlExtensionInterface_override_virtual_registerTypes(void* self, intptr_t slot);
 void QQmlExtensionInterface_virtualbase_registerTypes(void* self, const char* uri);
 void QQmlExtensionInterface_delete(QQmlExtensionInterface* self);
 

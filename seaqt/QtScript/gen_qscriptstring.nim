@@ -40,8 +40,6 @@ export gen_qscriptstring_types
 
 type cQScriptString*{.exportc: "QScriptString", incompleteStruct.} = object
 
-proc fcQScriptString_new(): ptr cQScriptString {.importc: "QScriptString_new".}
-proc fcQScriptString_new2(other: pointer): ptr cQScriptString {.importc: "QScriptString_new2".}
 proc fcQScriptString_operatorAssign(self: pointer, other: pointer): void {.importc: "QScriptString_operatorAssign".}
 proc fcQScriptString_isValid(self: pointer, ): bool {.importc: "QScriptString_isValid".}
 proc fcQScriptString_operatorEqual(self: pointer, other: pointer): bool {.importc: "QScriptString_operatorEqual".}
@@ -50,16 +48,9 @@ proc fcQScriptString_toArrayIndex(self: pointer, ): cuint {.importc: "QScriptStr
 proc fcQScriptString_toString(self: pointer, ): struct_miqt_string {.importc: "QScriptString_toString".}
 proc fcQScriptString_ToQString(self: pointer, ): struct_miqt_string {.importc: "QScriptString_ToQString".}
 proc fcQScriptString_toArrayIndex1(self: pointer, ok: ptr bool): cuint {.importc: "QScriptString_toArrayIndex1".}
+proc fcQScriptString_new(): ptr cQScriptString {.importc: "QScriptString_new".}
+proc fcQScriptString_new2(other: pointer): ptr cQScriptString {.importc: "QScriptString_new2".}
 proc fcQScriptString_delete(self: pointer) {.importc: "QScriptString_delete".}
-
-
-func init*(T: type gen_qscriptstring_types.QScriptString, h: ptr cQScriptString): gen_qscriptstring_types.QScriptString =
-  T(h: h)
-proc create*(T: type gen_qscriptstring_types.QScriptString, ): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString.init(fcQScriptString_new())
-
-proc create*(T: type gen_qscriptstring_types.QScriptString, other: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
-  gen_qscriptstring_types.QScriptString.init(fcQScriptString_new2(other.h))
 
 proc operatorAssign*(self: gen_qscriptstring_types.QScriptString, other: gen_qscriptstring_types.QScriptString): void =
   fcQScriptString_operatorAssign(self.h, other.h)
@@ -90,6 +81,13 @@ proc ToQString*(self: gen_qscriptstring_types.QScriptString, ): string =
 
 proc toArrayIndex*(self: gen_qscriptstring_types.QScriptString, ok: ptr bool): cuint =
   fcQScriptString_toArrayIndex1(self.h, ok)
+
+proc create*(T: type gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
+  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new())
+
+proc create*(T: type gen_qscriptstring_types.QScriptString,
+    other: gen_qscriptstring_types.QScriptString): gen_qscriptstring_types.QScriptString =
+  gen_qscriptstring_types.QScriptString(h: fcQScriptString_new2(other.h))
 
 proc delete*(self: gen_qscriptstring_types.QScriptString) =
   fcQScriptString_delete(self.h)

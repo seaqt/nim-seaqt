@@ -77,9 +77,6 @@ proc fcQCameraFeedbackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_m
 proc fcQCameraFeedbackControl_staticMetaObject(): pointer {.importc: "QCameraFeedbackControl_staticMetaObject".}
 proc fcQCameraFeedbackControl_delete(self: pointer) {.importc: "QCameraFeedbackControl_delete".}
 
-
-func init*(T: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, h: ptr cQCameraFeedbackControl): gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl =
-  T(h: h)
 proc metaObject*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFeedbackControl_metaObject(self.h))
 

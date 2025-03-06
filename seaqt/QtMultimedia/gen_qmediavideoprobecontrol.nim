@@ -64,9 +64,6 @@ proc fcQMediaVideoProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_
 proc fcQMediaVideoProbeControl_staticMetaObject(): pointer {.importc: "QMediaVideoProbeControl_staticMetaObject".}
 proc fcQMediaVideoProbeControl_delete(self: pointer) {.importc: "QMediaVideoProbeControl_delete".}
 
-
-func init*(T: type gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, h: ptr cQMediaVideoProbeControl): gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaVideoProbeControl_metaObject(self.h))
 
@@ -92,7 +89,7 @@ proc videoFrameProbed*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeC
   fcQMediaVideoProbeControl_videoFrameProbed(self.h, frame.h)
 
 type QMediaVideoProbeControlvideoFrameProbedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(slot: int, frame: pointer) {.exportc.} =
+proc miqt_exec_callback_cQMediaVideoProbeControl_videoFrameProbed(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed".} =
   let nimfunc = cast[ptr QMediaVideoProbeControlvideoFrameProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame)
 
@@ -108,7 +105,7 @@ proc flush*(self: gen_qmediavideoprobecontrol_types.QMediaVideoProbeControl, ): 
   fcQMediaVideoProbeControl_flush(self.h)
 
 type QMediaVideoProbeControlflushSlot* = proc()
-proc miqt_exec_callback_QMediaVideoProbeControl_flush(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQMediaVideoProbeControl_flush(slot: int) {.exportc: "miqt_exec_callback_QMediaVideoProbeControl_flush".} =
   let nimfunc = cast[ptr QMediaVideoProbeControlflushSlot](cast[pointer](slot))
   nimfunc[]()
 

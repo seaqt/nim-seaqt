@@ -52,8 +52,6 @@ export
 
 type cQParallelAnimationGroup*{.exportc: "QParallelAnimationGroup", incompleteStruct.} = object
 
-proc fcQParallelAnimationGroup_new(): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new".}
-proc fcQParallelAnimationGroup_new2(parent: pointer): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new2".}
 proc fcQParallelAnimationGroup_metaObject(self: pointer, ): pointer {.importc: "QParallelAnimationGroup_metaObject".}
 proc fcQParallelAnimationGroup_metacast(self: pointer, param1: cstring): pointer {.importc: "QParallelAnimationGroup_metacast".}
 proc fcQParallelAnimationGroup_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QParallelAnimationGroup_metacall".}
@@ -64,45 +62,40 @@ proc fcQParallelAnimationGroup_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQParallelAnimationGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QParallelAnimationGroup_tr3".}
 proc fcQParallelAnimationGroup_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QParallelAnimationGroup_trUtf82".}
 proc fcQParallelAnimationGroup_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QParallelAnimationGroup_trUtf83".}
-proc fQParallelAnimationGroup_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QParallelAnimationGroup_virtualbase_metaObject".}
-proc fcQParallelAnimationGroup_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_metaObject".}
-proc fQParallelAnimationGroup_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QParallelAnimationGroup_virtualbase_metacast".}
-proc fcQParallelAnimationGroup_override_virtual_metacast(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_metacast".}
-proc fQParallelAnimationGroup_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QParallelAnimationGroup_virtualbase_metacall".}
-proc fcQParallelAnimationGroup_override_virtual_metacall(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_metacall".}
-proc fQParallelAnimationGroup_virtualbase_duration(self: pointer, ): cint{.importc: "QParallelAnimationGroup_virtualbase_duration".}
-proc fcQParallelAnimationGroup_override_virtual_duration(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_duration".}
-proc fQParallelAnimationGroup_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QParallelAnimationGroup_virtualbase_event".}
-proc fcQParallelAnimationGroup_override_virtual_event(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_event".}
-proc fQParallelAnimationGroup_virtualbase_updateCurrentTime(self: pointer, currentTime: cint): void{.importc: "QParallelAnimationGroup_virtualbase_updateCurrentTime".}
-proc fcQParallelAnimationGroup_override_virtual_updateCurrentTime(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_updateCurrentTime".}
-proc fQParallelAnimationGroup_virtualbase_updateState(self: pointer, newState: cint, oldState: cint): void{.importc: "QParallelAnimationGroup_virtualbase_updateState".}
-proc fcQParallelAnimationGroup_override_virtual_updateState(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_updateState".}
-proc fQParallelAnimationGroup_virtualbase_updateDirection(self: pointer, direction: cint): void{.importc: "QParallelAnimationGroup_virtualbase_updateDirection".}
-proc fcQParallelAnimationGroup_override_virtual_updateDirection(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_updateDirection".}
-proc fQParallelAnimationGroup_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QParallelAnimationGroup_virtualbase_eventFilter".}
-proc fcQParallelAnimationGroup_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_eventFilter".}
-proc fQParallelAnimationGroup_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QParallelAnimationGroup_virtualbase_timerEvent".}
-proc fcQParallelAnimationGroup_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_timerEvent".}
-proc fQParallelAnimationGroup_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QParallelAnimationGroup_virtualbase_childEvent".}
-proc fcQParallelAnimationGroup_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_childEvent".}
-proc fQParallelAnimationGroup_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QParallelAnimationGroup_virtualbase_customEvent".}
-proc fcQParallelAnimationGroup_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_customEvent".}
-proc fQParallelAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QParallelAnimationGroup_virtualbase_connectNotify".}
-proc fcQParallelAnimationGroup_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_connectNotify".}
-proc fQParallelAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QParallelAnimationGroup_virtualbase_disconnectNotify".}
-proc fcQParallelAnimationGroup_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QParallelAnimationGroup_override_virtual_disconnectNotify".}
+type cQParallelAnimationGroupVTable = object
+  destructor*: proc(vtbl: ptr cQParallelAnimationGroupVTable, self: ptr cQParallelAnimationGroup) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  duration*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  updateCurrentTime*: proc(vtbl, self: pointer, currentTime: cint): void {.cdecl, raises: [], gcsafe.}
+  updateState*: proc(vtbl, self: pointer, newState: cint, oldState: cint): void {.cdecl, raises: [], gcsafe.}
+  updateDirection*: proc(vtbl, self: pointer, direction: cint): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQParallelAnimationGroup_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QParallelAnimationGroup_virtualbase_metaObject".}
+proc fcQParallelAnimationGroup_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QParallelAnimationGroup_virtualbase_metacast".}
+proc fcQParallelAnimationGroup_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QParallelAnimationGroup_virtualbase_metacall".}
+proc fcQParallelAnimationGroup_virtualbase_duration(self: pointer, ): cint {.importc: "QParallelAnimationGroup_virtualbase_duration".}
+proc fcQParallelAnimationGroup_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QParallelAnimationGroup_virtualbase_event".}
+proc fcQParallelAnimationGroup_virtualbase_updateCurrentTime(self: pointer, currentTime: cint): void {.importc: "QParallelAnimationGroup_virtualbase_updateCurrentTime".}
+proc fcQParallelAnimationGroup_virtualbase_updateState(self: pointer, newState: cint, oldState: cint): void {.importc: "QParallelAnimationGroup_virtualbase_updateState".}
+proc fcQParallelAnimationGroup_virtualbase_updateDirection(self: pointer, direction: cint): void {.importc: "QParallelAnimationGroup_virtualbase_updateDirection".}
+proc fcQParallelAnimationGroup_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QParallelAnimationGroup_virtualbase_eventFilter".}
+proc fcQParallelAnimationGroup_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_timerEvent".}
+proc fcQParallelAnimationGroup_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_childEvent".}
+proc fcQParallelAnimationGroup_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_customEvent".}
+proc fcQParallelAnimationGroup_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_connectNotify".}
+proc fcQParallelAnimationGroup_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QParallelAnimationGroup_virtualbase_disconnectNotify".}
+proc fcQParallelAnimationGroup_new(vtbl: pointer, ): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new".}
+proc fcQParallelAnimationGroup_new2(vtbl: pointer, parent: pointer): ptr cQParallelAnimationGroup {.importc: "QParallelAnimationGroup_new2".}
 proc fcQParallelAnimationGroup_staticMetaObject(): pointer {.importc: "QParallelAnimationGroup_staticMetaObject".}
 proc fcQParallelAnimationGroup_delete(self: pointer) {.importc: "QParallelAnimationGroup_delete".}
-
-
-func init*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, h: ptr cQParallelAnimationGroup): gen_qparallelanimationgroup_types.QParallelAnimationGroup =
-  T(h: h)
-proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): gen_qparallelanimationgroup_types.QParallelAnimationGroup =
-  gen_qparallelanimationgroup_types.QParallelAnimationGroup.init(fcQParallelAnimationGroup_new())
-
-proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, parent: gen_qobject_types.QObject): gen_qparallelanimationgroup_types.QParallelAnimationGroup =
-  gen_qparallelanimationgroup_types.QParallelAnimationGroup.init(fcQParallelAnimationGroup_new2(parent.h))
 
 proc metaObject*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQParallelAnimationGroup_metaObject(self.h))
@@ -152,260 +145,245 @@ proc trUtf8*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup, 
   c_free(v_ms.data)
   vx_ret
 
+type QParallelAnimationGroupmetaObjectProc* = proc(self: QParallelAnimationGroup): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QParallelAnimationGroupmetacastProc* = proc(self: QParallelAnimationGroup, param1: cstring): pointer {.raises: [], gcsafe.}
+type QParallelAnimationGroupmetacallProc* = proc(self: QParallelAnimationGroup, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QParallelAnimationGroupdurationProc* = proc(self: QParallelAnimationGroup): cint {.raises: [], gcsafe.}
+type QParallelAnimationGroupeventProc* = proc(self: QParallelAnimationGroup, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QParallelAnimationGroupupdateCurrentTimeProc* = proc(self: QParallelAnimationGroup, currentTime: cint): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupupdateStateProc* = proc(self: QParallelAnimationGroup, newState: cint, oldState: cint): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupupdateDirectionProc* = proc(self: QParallelAnimationGroup, direction: cint): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupeventFilterProc* = proc(self: QParallelAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QParallelAnimationGrouptimerEventProc* = proc(self: QParallelAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupchildEventProc* = proc(self: QParallelAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupcustomEventProc* = proc(self: QParallelAnimationGroup, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupconnectNotifyProc* = proc(self: QParallelAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupdisconnectNotifyProc* = proc(self: QParallelAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QParallelAnimationGroupVTable* = object
+  vtbl: cQParallelAnimationGroupVTable
+  metaObject*: QParallelAnimationGroupmetaObjectProc
+  metacast*: QParallelAnimationGroupmetacastProc
+  metacall*: QParallelAnimationGroupmetacallProc
+  duration*: QParallelAnimationGroupdurationProc
+  event*: QParallelAnimationGroupeventProc
+  updateCurrentTime*: QParallelAnimationGroupupdateCurrentTimeProc
+  updateState*: QParallelAnimationGroupupdateStateProc
+  updateDirection*: QParallelAnimationGroupupdateDirectionProc
+  eventFilter*: QParallelAnimationGroupeventFilterProc
+  timerEvent*: QParallelAnimationGrouptimerEventProc
+  childEvent*: QParallelAnimationGroupchildEventProc
+  customEvent*: QParallelAnimationGroupcustomEventProc
+  connectNotify*: QParallelAnimationGroupconnectNotifyProc
+  disconnectNotify*: QParallelAnimationGroupdisconnectNotifyProc
 proc QParallelAnimationGroupmetaObject*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQParallelAnimationGroup_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQParallelAnimationGroup_virtualbase_metaObject(self.h))
 
-type QParallelAnimationGroupmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_metaObject(self: ptr cQParallelAnimationGroup, slot: int): pointer {.exportc: "miqt_exec_callback_QParallelAnimationGroup_metaObject ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQParallelAnimationGroup_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QParallelAnimationGroupmetacast*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, param1: cstring): pointer =
-  fQParallelAnimationGroup_virtualbase_metacast(self.h, param1)
+  fcQParallelAnimationGroup_virtualbase_metacast(self.h, param1)
 
-type QParallelAnimationGroupmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupmetacastProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_metacast(self: ptr cQParallelAnimationGroup, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QParallelAnimationGroup_metacast ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QParallelAnimationGroupmetacall*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, param1: cint, param2: cint, param3: pointer): cint =
-  fQParallelAnimationGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQParallelAnimationGroup_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QParallelAnimationGroupmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupmetacallProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_metacall(self: ptr cQParallelAnimationGroup, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QParallelAnimationGroup_metacall ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QParallelAnimationGroupduration*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, ): cint =
-  fQParallelAnimationGroup_virtualbase_duration(self.h)
+  fcQParallelAnimationGroup_virtualbase_duration(self.h)
 
-type QParallelAnimationGroupdurationProc* = proc(): cint
-proc onduration*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupdurationProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupdurationProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_duration(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_duration(self: ptr cQParallelAnimationGroup, slot: int): cint {.exportc: "miqt_exec_callback_QParallelAnimationGroup_duration ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupdurationProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQParallelAnimationGroup_duration(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
+  var virtualReturn = vtbl[].duration(self)
   virtualReturn
+
 proc QParallelAnimationGroupevent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, event: gen_qcoreevent_types.QEvent): bool =
-  fQParallelAnimationGroup_virtualbase_event(self.h, event.h)
+  fcQParallelAnimationGroup_virtualbase_event(self.h, event.h)
 
-type QParallelAnimationGroupeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupeventProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_event(self: ptr cQParallelAnimationGroup, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QParallelAnimationGroup_event ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QParallelAnimationGroupupdateCurrentTime*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, currentTime: cint): void =
-  fQParallelAnimationGroup_virtualbase_updateCurrentTime(self.h, currentTime)
+  fcQParallelAnimationGroup_virtualbase_updateCurrentTime(self.h, currentTime)
 
-type QParallelAnimationGroupupdateCurrentTimeProc* = proc(currentTime: cint): void
-proc onupdateCurrentTime*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupupdateCurrentTimeProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupupdateCurrentTimeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_updateCurrentTime(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_updateCurrentTime(self: ptr cQParallelAnimationGroup, slot: int, currentTime: cint): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_updateCurrentTime ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupupdateCurrentTimeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_updateCurrentTime(vtbl: pointer, self: pointer, currentTime: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = currentTime
+  vtbl[].updateCurrentTime(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupupdateState*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, newState: cint, oldState: cint): void =
-  fQParallelAnimationGroup_virtualbase_updateState(self.h, cint(newState), cint(oldState))
+  fcQParallelAnimationGroup_virtualbase_updateState(self.h, cint(newState), cint(oldState))
 
-type QParallelAnimationGroupupdateStateProc* = proc(newState: cint, oldState: cint): void
-proc onupdateState*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupupdateStateProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupupdateStateProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_updateState(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_updateState(self: ptr cQParallelAnimationGroup, slot: int, newState: cint, oldState: cint): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_updateState ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupupdateStateProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_updateState(vtbl: pointer, self: pointer, newState: cint, oldState: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = cint(newState)
-
   let slotval2 = cint(oldState)
+  vtbl[].updateState(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QParallelAnimationGroupupdateDirection*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, direction: cint): void =
-  fQParallelAnimationGroup_virtualbase_updateDirection(self.h, cint(direction))
+  fcQParallelAnimationGroup_virtualbase_updateDirection(self.h, cint(direction))
 
-type QParallelAnimationGroupupdateDirectionProc* = proc(direction: cint): void
-proc onupdateDirection*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupupdateDirectionProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupupdateDirectionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_updateDirection(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_updateDirection(self: ptr cQParallelAnimationGroup, slot: int, direction: cint): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_updateDirection ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupupdateDirectionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_updateDirection(vtbl: pointer, self: pointer, direction: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = cint(direction)
+  vtbl[].updateDirection(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupeventFilter*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQParallelAnimationGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQParallelAnimationGroup_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QParallelAnimationGroupeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_eventFilter(self: ptr cQParallelAnimationGroup, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QParallelAnimationGroup_eventFilter ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QParallelAnimationGrouptimerEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQParallelAnimationGroup_virtualbase_timerEvent(self.h, event.h)
+  fcQParallelAnimationGroup_virtualbase_timerEvent(self.h, event.h)
 
-type QParallelAnimationGrouptimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGrouptimerEventProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGrouptimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_timerEvent(self: ptr cQParallelAnimationGroup, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_timerEvent ".} =
-  var nimfunc = cast[ptr QParallelAnimationGrouptimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupchildEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, event: gen_qcoreevent_types.QChildEvent): void =
-  fQParallelAnimationGroup_virtualbase_childEvent(self.h, event.h)
+  fcQParallelAnimationGroup_virtualbase_childEvent(self.h, event.h)
 
-type QParallelAnimationGroupchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupchildEventProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_childEvent(self: ptr cQParallelAnimationGroup, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_childEvent ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupcustomEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, event: gen_qcoreevent_types.QEvent): void =
-  fQParallelAnimationGroup_virtualbase_customEvent(self.h, event.h)
+  fcQParallelAnimationGroup_virtualbase_customEvent(self.h, event.h)
 
-type QParallelAnimationGroupcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_customEvent(self: ptr cQParallelAnimationGroup, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_customEvent ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupconnectNotify*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQParallelAnimationGroup_virtualbase_connectNotify(self.h, signal.h)
+  fcQParallelAnimationGroup_virtualbase_connectNotify(self.h, signal.h)
 
-type QParallelAnimationGroupconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_connectNotify(self: ptr cQParallelAnimationGroup, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_connectNotify ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QParallelAnimationGroupdisconnectNotify*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQParallelAnimationGroup_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQParallelAnimationGroup_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QParallelAnimationGroupdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup, slot: QParallelAnimationGroupdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QParallelAnimationGroupdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQParallelAnimationGroup_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QParallelAnimationGroup_disconnectNotify(self: ptr cQParallelAnimationGroup, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QParallelAnimationGroup_disconnectNotify ".} =
-  var nimfunc = cast[ptr QParallelAnimationGroupdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQParallelAnimationGroup_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QParallelAnimationGroupVTable](vtbl)
+  let self = QParallelAnimationGroup(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
+    vtbl: ref QParallelAnimationGroupVTable = nil): gen_qparallelanimationgroup_types.QParallelAnimationGroup =
+  let vtbl = if vtbl == nil: new QParallelAnimationGroupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQParallelAnimationGroupVTable, _: ptr cQParallelAnimationGroup) {.cdecl.} =
+    let vtbl = cast[ref QParallelAnimationGroupVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQParallelAnimationGroup_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQParallelAnimationGroup_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQParallelAnimationGroup_metacall
+  if not isNil(vtbl.duration):
+    vtbl[].vtbl.duration = miqt_exec_callback_cQParallelAnimationGroup_duration
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQParallelAnimationGroup_event
+  if not isNil(vtbl.updateCurrentTime):
+    vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQParallelAnimationGroup_updateCurrentTime
+  if not isNil(vtbl.updateState):
+    vtbl[].vtbl.updateState = miqt_exec_callback_cQParallelAnimationGroup_updateState
+  if not isNil(vtbl.updateDirection):
+    vtbl[].vtbl.updateDirection = miqt_exec_callback_cQParallelAnimationGroup_updateDirection
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQParallelAnimationGroup_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQParallelAnimationGroup_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQParallelAnimationGroup_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQParallelAnimationGroup_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQParallelAnimationGroup_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQParallelAnimationGroup_disconnectNotify
+  gen_qparallelanimationgroup_types.QParallelAnimationGroup(h: fcQParallelAnimationGroup_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qparallelanimationgroup_types.QParallelAnimationGroup,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QParallelAnimationGroupVTable = nil): gen_qparallelanimationgroup_types.QParallelAnimationGroup =
+  let vtbl = if vtbl == nil: new QParallelAnimationGroupVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQParallelAnimationGroupVTable, _: ptr cQParallelAnimationGroup) {.cdecl.} =
+    let vtbl = cast[ref QParallelAnimationGroupVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQParallelAnimationGroup_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQParallelAnimationGroup_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQParallelAnimationGroup_metacall
+  if not isNil(vtbl.duration):
+    vtbl[].vtbl.duration = miqt_exec_callback_cQParallelAnimationGroup_duration
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQParallelAnimationGroup_event
+  if not isNil(vtbl.updateCurrentTime):
+    vtbl[].vtbl.updateCurrentTime = miqt_exec_callback_cQParallelAnimationGroup_updateCurrentTime
+  if not isNil(vtbl.updateState):
+    vtbl[].vtbl.updateState = miqt_exec_callback_cQParallelAnimationGroup_updateState
+  if not isNil(vtbl.updateDirection):
+    vtbl[].vtbl.updateDirection = miqt_exec_callback_cQParallelAnimationGroup_updateDirection
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQParallelAnimationGroup_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQParallelAnimationGroup_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQParallelAnimationGroup_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQParallelAnimationGroup_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQParallelAnimationGroup_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQParallelAnimationGroup_disconnectNotify
+  gen_qparallelanimationgroup_types.QParallelAnimationGroup(h: fcQParallelAnimationGroup_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qparallelanimationgroup_types.QParallelAnimationGroup): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQParallelAnimationGroup_staticMetaObject())
 proc delete*(self: gen_qparallelanimationgroup_types.QParallelAnimationGroup) =

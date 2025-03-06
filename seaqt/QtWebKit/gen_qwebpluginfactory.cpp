@@ -21,100 +21,74 @@
 extern "C" {
 #endif
 
-QMetaObject* miqt_exec_callback_QWebPluginFactory_metaObject(const QWebPluginFactory*, intptr_t);
-void* miqt_exec_callback_QWebPluginFactory_metacast(QWebPluginFactory*, intptr_t, const char*);
-int miqt_exec_callback_QWebPluginFactory_metacall(QWebPluginFactory*, intptr_t, int, int, void**);
-struct miqt_array /* of QWebPluginFactory__Plugin* */  miqt_exec_callback_QWebPluginFactory_plugins(const QWebPluginFactory*, intptr_t);
-void miqt_exec_callback_QWebPluginFactory_refreshPlugins(QWebPluginFactory*, intptr_t);
-QObject* miqt_exec_callback_QWebPluginFactory_create(const QWebPluginFactory*, intptr_t, struct miqt_string, QUrl*, struct miqt_array /* of struct miqt_string */ , struct miqt_array /* of struct miqt_string */ );
-bool miqt_exec_callback_QWebPluginFactory_extension(QWebPluginFactory*, intptr_t, int, QWebPluginFactory__ExtensionOption*, QWebPluginFactory__ExtensionReturn*);
-bool miqt_exec_callback_QWebPluginFactory_supportsExtension(const QWebPluginFactory*, intptr_t, int);
-bool miqt_exec_callback_QWebPluginFactory_event(QWebPluginFactory*, intptr_t, QEvent*);
-bool miqt_exec_callback_QWebPluginFactory_eventFilter(QWebPluginFactory*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QWebPluginFactory_timerEvent(QWebPluginFactory*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QWebPluginFactory_childEvent(QWebPluginFactory*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QWebPluginFactory_customEvent(QWebPluginFactory*, intptr_t, QEvent*);
-void miqt_exec_callback_QWebPluginFactory_connectNotify(QWebPluginFactory*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QWebPluginFactory_disconnectNotify(QWebPluginFactory*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQWebPluginFactory final : public QWebPluginFactory {
+	struct QWebPluginFactory_VTable* vtbl;
 public:
 
-	VirtualQWebPluginFactory(): QWebPluginFactory() {};
-	VirtualQWebPluginFactory(QObject* parent): QWebPluginFactory(parent) {};
+	VirtualQWebPluginFactory(struct QWebPluginFactory_VTable* vtbl): QWebPluginFactory(), vtbl(vtbl) {};
+	VirtualQWebPluginFactory(struct QWebPluginFactory_VTable* vtbl, QObject* parent): QWebPluginFactory(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQWebPluginFactory() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQWebPluginFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QWebPluginFactory::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QWebPluginFactory_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QWebPluginFactory_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QWebPluginFactory::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QWebPluginFactory_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QWebPluginFactory::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QWebPluginFactory_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QWebPluginFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__plugins = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QList<QWebPluginFactory::Plugin> plugins() const override {
-		if (handle__plugins == 0) {
+		if (vtbl->plugins == 0) {
 			return QList<QWebPluginFactory::Plugin>(); // Pure virtual, there is no base we can call
 		}
-		
 
-		struct miqt_array /* of QWebPluginFactory__Plugin* */  callback_return_value = miqt_exec_callback_QWebPluginFactory_plugins(this, handle__plugins);
+
+		struct miqt_array /* of QWebPluginFactory__Plugin* */  callback_return_value = vtbl->plugins(vtbl, this);
 		QList<QWebPluginFactory::Plugin> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QWebPluginFactory__Plugin** callback_return_value_arr = static_cast<QWebPluginFactory__Plugin**>(callback_return_value.data);
@@ -125,33 +99,26 @@ public:
 		return callback_return_value_QList;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__refreshPlugins = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void refreshPlugins() override {
-		if (handle__refreshPlugins == 0) {
+		if (vtbl->refreshPlugins == 0) {
 			QWebPluginFactory::refreshPlugins();
 			return;
 		}
-		
 
-		miqt_exec_callback_QWebPluginFactory_refreshPlugins(this, handle__refreshPlugins);
 
-		
+		vtbl->refreshPlugins(vtbl, this);
+
 	}
 
 	friend void QWebPluginFactory_virtualbase_refreshPlugins(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__create = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QObject* create(const QString& mimeType, const QUrl& param2, const QStringList& argumentNames, const QStringList& argumentValues) const override {
-		if (handle__create == 0) {
+		if (vtbl->create == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QString mimeType_ret = mimeType;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray mimeType_b = mimeType_ret.toUtf8();
@@ -198,183 +165,151 @@ public:
 		argumentValues_out.data = static_cast<void*>(argumentValues_arr);
 		struct miqt_array /* of struct miqt_string */  sigval4 = argumentValues_out;
 
-		QObject* callback_return_value = miqt_exec_callback_QWebPluginFactory_create(this, handle__create, sigval1, sigval2, sigval3, sigval4);
+		QObject* callback_return_value = vtbl->create(vtbl, this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__extension = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool extension(QWebPluginFactory::Extension extension, const QWebPluginFactory::ExtensionOption* option, QWebPluginFactory::ExtensionReturn* output) override {
-		if (handle__extension == 0) {
+		if (vtbl->extension == 0) {
 			return QWebPluginFactory::extension(extension, option, output);
 		}
-		
+
 		QWebPluginFactory::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 		QWebPluginFactory__ExtensionOption* sigval2 = (QWebPluginFactory__ExtensionOption*) option;
 		QWebPluginFactory__ExtensionReturn* sigval3 = output;
 
-		bool callback_return_value = miqt_exec_callback_QWebPluginFactory_extension(this, handle__extension, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->extension(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebPluginFactory_virtualbase_extension(void* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__supportsExtension = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QWebPluginFactory::Extension extension) const override {
-		if (handle__supportsExtension == 0) {
+		if (vtbl->supportsExtension == 0) {
 			return QWebPluginFactory::supportsExtension(extension);
 		}
-		
+
 		QWebPluginFactory::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = miqt_exec_callback_QWebPluginFactory_supportsExtension(this, handle__supportsExtension, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebPluginFactory_virtualbase_supportsExtension(const void* self, int extension);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QWebPluginFactory::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QWebPluginFactory_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebPluginFactory_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QWebPluginFactory::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QWebPluginFactory_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QWebPluginFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QWebPluginFactory::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebPluginFactory_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebPluginFactory_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QWebPluginFactory::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebPluginFactory_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebPluginFactory_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QWebPluginFactory::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QWebPluginFactory_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebPluginFactory_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QWebPluginFactory::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QWebPluginFactory_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebPluginFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QWebPluginFactory::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QWebPluginFactory_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -386,12 +321,12 @@ public:
 	friend bool QWebPluginFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QWebPluginFactory* QWebPluginFactory_new() {
-	return new VirtualQWebPluginFactory();
+QWebPluginFactory* QWebPluginFactory_new(struct QWebPluginFactory_VTable* vtbl) {
+	return new VirtualQWebPluginFactory(vtbl);
 }
 
-QWebPluginFactory* QWebPluginFactory_new2(QObject* parent) {
-	return new VirtualQWebPluginFactory(parent);
+QWebPluginFactory* QWebPluginFactory_new2(struct QWebPluginFactory_VTable* vtbl, QObject* parent) {
+	return new VirtualQWebPluginFactory(vtbl, parent);
 }
 
 void QWebPluginFactory_virtbase(QWebPluginFactory* src, QObject** outptr_QObject) {
@@ -520,30 +455,10 @@ struct miqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-bool QWebPluginFactory_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QWebPluginFactory_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::metaObject();
 
-}
-
-bool QWebPluginFactory_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1) {
@@ -552,40 +467,10 @@ void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QWebPluginFactory_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QWebPluginFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QWebPluginFactory_override_virtual_plugins(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__plugins = slot;
-	return true;
-}
-
-bool QWebPluginFactory_override_virtual_refreshPlugins(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__refreshPlugins = slot;
-	return true;
 }
 
 void QWebPluginFactory_virtualbase_refreshPlugins(void* self) {
@@ -594,40 +479,10 @@ void QWebPluginFactory_virtualbase_refreshPlugins(void* self) {
 
 }
 
-bool QWebPluginFactory_override_virtual_create(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__create = slot;
-	return true;
-}
-
-bool QWebPluginFactory_override_virtual_extension(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__extension = slot;
-	return true;
-}
-
 bool QWebPluginFactory_virtualbase_extension(void* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output) {
 
 	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::extension(static_cast<VirtualQWebPluginFactory::Extension>(extension), option, output);
 
-}
-
-bool QWebPluginFactory_override_virtual_supportsExtension(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__supportsExtension = slot;
-	return true;
 }
 
 bool QWebPluginFactory_virtualbase_supportsExtension(const void* self, int extension) {
@@ -636,30 +491,10 @@ bool QWebPluginFactory_virtualbase_supportsExtension(const void* self, int exten
 
 }
 
-bool QWebPluginFactory_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QWebPluginFactory_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::event(event);
 
-}
-
-bool QWebPluginFactory_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QWebPluginFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -668,30 +503,10 @@ bool QWebPluginFactory_virtualbase_eventFilter(void* self, QObject* watched, QEv
 
 }
 
-bool QWebPluginFactory_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QWebPluginFactory_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::timerEvent(event);
 
-}
-
-bool QWebPluginFactory_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QWebPluginFactory_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -700,46 +515,16 @@ void QWebPluginFactory_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QWebPluginFactory_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QWebPluginFactory_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::customEvent(event);
 
 }
 
-bool QWebPluginFactory_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QWebPluginFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::connectNotify(*signal);
 
-}
-
-bool QWebPluginFactory_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQWebPluginFactory* self_cast = dynamic_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

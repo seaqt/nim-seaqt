@@ -52,8 +52,6 @@ export gen_qaudioformat_types
 
 type cQAudioFormat*{.exportc: "QAudioFormat", incompleteStruct.} = object
 
-proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
-proc fcQAudioFormat_new2(other: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
 proc fcQAudioFormat_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioFormat_operatorAssign".}
 proc fcQAudioFormat_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioFormat_operatorEqual".}
 proc fcQAudioFormat_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioFormat_operatorNotEqual".}
@@ -77,16 +75,9 @@ proc fcQAudioFormat_framesForBytes(self: pointer, byteCount: cint): cint {.impor
 proc fcQAudioFormat_framesForDuration(self: pointer, duration: clonglong): cint {.importc: "QAudioFormat_framesForDuration".}
 proc fcQAudioFormat_durationForFrames(self: pointer, frameCount: cint): clonglong {.importc: "QAudioFormat_durationForFrames".}
 proc fcQAudioFormat_bytesPerFrame(self: pointer, ): cint {.importc: "QAudioFormat_bytesPerFrame".}
+proc fcQAudioFormat_new(): ptr cQAudioFormat {.importc: "QAudioFormat_new".}
+proc fcQAudioFormat_new2(other: pointer): ptr cQAudioFormat {.importc: "QAudioFormat_new2".}
 proc fcQAudioFormat_delete(self: pointer) {.importc: "QAudioFormat_delete".}
-
-
-func init*(T: type gen_qaudioformat_types.QAudioFormat, h: ptr cQAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  T(h: h)
-proc create*(T: type gen_qaudioformat_types.QAudioFormat, ): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat.init(fcQAudioFormat_new())
-
-proc create*(T: type gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
-  gen_qaudioformat_types.QAudioFormat.init(fcQAudioFormat_new2(other.h))
 
 proc operatorAssign*(self: gen_qaudioformat_types.QAudioFormat, other: gen_qaudioformat_types.QAudioFormat): void =
   fcQAudioFormat_operatorAssign(self.h, other.h)
@@ -159,6 +150,13 @@ proc durationForFrames*(self: gen_qaudioformat_types.QAudioFormat, frameCount: c
 
 proc bytesPerFrame*(self: gen_qaudioformat_types.QAudioFormat, ): cint =
   fcQAudioFormat_bytesPerFrame(self.h)
+
+proc create*(T: type gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new())
+
+proc create*(T: type gen_qaudioformat_types.QAudioFormat,
+    other: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
+  gen_qaudioformat_types.QAudioFormat(h: fcQAudioFormat_new2(other.h))
 
 proc delete*(self: gen_qaudioformat_types.QAudioFormat) =
   fcQAudioFormat_delete(self.h)

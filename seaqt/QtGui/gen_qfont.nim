@@ -155,14 +155,6 @@ export
 
 type cQFont*{.exportc: "QFont", incompleteStruct.} = object
 
-proc fcQFont_new(): ptr cQFont {.importc: "QFont_new".}
-proc fcQFont_new2(family: struct_miqt_string): ptr cQFont {.importc: "QFont_new2".}
-proc fcQFont_new3(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new3".}
-proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new4".}
-proc fcQFont_new5(font: pointer): ptr cQFont {.importc: "QFont_new5".}
-proc fcQFont_new6(family: struct_miqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new6".}
-proc fcQFont_new7(family: struct_miqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
-proc fcQFont_new8(family: struct_miqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
 proc fcQFont_swap(self: pointer, other: pointer): void {.importc: "QFont_swap".}
 proc fcQFont_family(self: pointer, ): struct_miqt_string {.importc: "QFont_family".}
 proc fcQFont_setFamily(self: pointer, family: struct_miqt_string): void {.importc: "QFont_setFamily".}
@@ -239,35 +231,16 @@ proc fcQFont_resolve(self: pointer, param1: pointer): pointer {.importc: "QFont_
 proc fcQFont_resolve2(self: pointer, ): cuint {.importc: "QFont_resolve2".}
 proc fcQFont_resolveWithMask(self: pointer, mask: cuint): void {.importc: "QFont_resolveWithMask".}
 proc fcQFont_setStyleHint2(self: pointer, param1: cint, param2: cint): void {.importc: "QFont_setStyleHint2".}
+proc fcQFont_new(): ptr cQFont {.importc: "QFont_new".}
+proc fcQFont_new2(family: struct_miqt_string): ptr cQFont {.importc: "QFont_new2".}
+proc fcQFont_new3(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new3".}
+proc fcQFont_new4(font: pointer, pd: pointer): ptr cQFont {.importc: "QFont_new4".}
+proc fcQFont_new5(font: pointer): ptr cQFont {.importc: "QFont_new5".}
+proc fcQFont_new6(family: struct_miqt_string, pointSize: cint): ptr cQFont {.importc: "QFont_new6".}
+proc fcQFont_new7(family: struct_miqt_string, pointSize: cint, weight: cint): ptr cQFont {.importc: "QFont_new7".}
+proc fcQFont_new8(family: struct_miqt_string, pointSize: cint, weight: cint, italic: bool): ptr cQFont {.importc: "QFont_new8".}
 proc fcQFont_staticMetaObject(): pointer {.importc: "QFont_staticMetaObject".}
 proc fcQFont_delete(self: pointer) {.importc: "QFont_delete".}
-
-
-func init*(T: type gen_qfont_types.QFont, h: ptr cQFont): gen_qfont_types.QFont =
-  T(h: h)
-proc create*(T: type gen_qfont_types.QFont, ): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new())
-
-proc create*(T: type gen_qfont_types.QFont, family: string): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new2(struct_miqt_string(data: family, len: csize_t(len(family)))))
-
-proc create*(T: type gen_qfont_types.QFont, font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new3(font.h, pd.h))
-
-proc create2*(T: type gen_qfont_types.QFont, font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new4(font.h, pd.h))
-
-proc create*(T: type gen_qfont_types.QFont, font: gen_qfont_types.QFont): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new5(font.h))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new6(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint, weight: cint): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new7(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight))
-
-proc create*(T: type gen_qfont_types.QFont, family: string, pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
-  gen_qfont_types.QFont.init(fcQFont_new8(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight, italic))
 
 proc swap*(self: gen_qfont_types.QFont, other: gen_qfont_types.QFont): void =
   fcQFont_swap(self.h, other.h)
@@ -555,6 +528,37 @@ proc resolve*(self: gen_qfont_types.QFont, mask: cuint): void =
 
 proc setStyleHint*(self: gen_qfont_types.QFont, param1: cint, param2: cint): void =
   fcQFont_setStyleHint2(self.h, cint(param1), cint(param2))
+
+proc create*(T: type gen_qfont_types.QFont): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new())
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new2(struct_miqt_string(data: family, len: csize_t(len(family)))))
+
+proc create*(T: type gen_qfont_types.QFont,
+    font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new3(font.h, pd.h))
+
+proc create2*(T: type gen_qfont_types.QFont,
+    font: gen_qfont_types.QFont, pd: gen_qpaintdevice_types.QPaintDevice): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new4(font.h, pd.h))
+
+proc create*(T: type gen_qfont_types.QFont,
+    font: gen_qfont_types.QFont): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new5(font.h))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new6(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint, weight: cint): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new7(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight))
+
+proc create*(T: type gen_qfont_types.QFont,
+    family: string, pointSize: cint, weight: cint, italic: bool): gen_qfont_types.QFont =
+  gen_qfont_types.QFont(h: fcQFont_new8(struct_miqt_string(data: family, len: csize_t(len(family))), pointSize, weight, italic))
 
 proc staticMetaObject*(_: type gen_qfont_types.QFont): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQFont_staticMetaObject())

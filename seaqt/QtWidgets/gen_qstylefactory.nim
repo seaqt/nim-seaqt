@@ -48,9 +48,6 @@ proc fcQStyleFactory_keys(): struct_miqt_array {.importc: "QStyleFactory_keys".}
 proc fcQStyleFactory_create(param1: struct_miqt_string): pointer {.importc: "QStyleFactory_create".}
 proc fcQStyleFactory_delete(self: pointer) {.importc: "QStyleFactory_delete".}
 
-
-func init*(T: type gen_qstylefactory_types.QStyleFactory, h: ptr cQStyleFactory): gen_qstylefactory_types.QStyleFactory =
-  T(h: h)
 proc keys*(_: type gen_qstylefactory_types.QStyleFactory, ): seq[string] =
   var v_ma = fcQStyleFactory_keys()
   var vx_ret = newSeq[string](int(v_ma.len))

@@ -20,9 +20,12 @@ class QAbstractNativeEventFilter;
 typedef struct QAbstractNativeEventFilter QAbstractNativeEventFilter;
 #endif
 
-QAbstractNativeEventFilter* QAbstractNativeEventFilter_new();
+struct QAbstractNativeEventFilter_VTable {
+	void (*destructor)(struct QAbstractNativeEventFilter_VTable* vtbl, QAbstractNativeEventFilter* self);
+	bool (*nativeEventFilter)(struct QAbstractNativeEventFilter_VTable* vtbl, QAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
+};
+QAbstractNativeEventFilter* QAbstractNativeEventFilter_new(struct QAbstractNativeEventFilter_VTable* vtbl);
 bool QAbstractNativeEventFilter_nativeEventFilter(QAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
-bool QAbstractNativeEventFilter_override_virtual_nativeEventFilter(void* self, intptr_t slot);
 bool QAbstractNativeEventFilter_virtualbase_nativeEventFilter(void* self, struct miqt_string eventType, void* message, long* result);
 void QAbstractNativeEventFilter_delete(QAbstractNativeEventFilter* self);
 

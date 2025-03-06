@@ -68,10 +68,6 @@ export
 
 type cQState*{.exportc: "QState", incompleteStruct.} = object
 
-proc fcQState_new(): ptr cQState {.importc: "QState_new".}
-proc fcQState_new2(childMode: cint): ptr cQState {.importc: "QState_new2".}
-proc fcQState_new3(parent: pointer): ptr cQState {.importc: "QState_new3".}
-proc fcQState_new4(childMode: cint, parent: pointer): ptr cQState {.importc: "QState_new4".}
 proc fcQState_metaObject(self: pointer, ): pointer {.importc: "QState_metaObject".}
 proc fcQState_metacast(self: pointer, param1: cstring): pointer {.importc: "QState_metacast".}
 proc fcQState_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QState_metacall".}
@@ -93,47 +89,38 @@ proc fcQState_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QState
 proc fcQState_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QState_tr3".}
 proc fcQState_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QState_trUtf82".}
 proc fcQState_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QState_trUtf83".}
-proc fQState_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QState_virtualbase_metaObject".}
-proc fcQState_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QState_override_virtual_metaObject".}
-proc fQState_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QState_virtualbase_metacast".}
-proc fcQState_override_virtual_metacast(self: pointer, slot: int) {.importc: "QState_override_virtual_metacast".}
-proc fQState_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QState_virtualbase_metacall".}
-proc fcQState_override_virtual_metacall(self: pointer, slot: int) {.importc: "QState_override_virtual_metacall".}
-proc fQState_virtualbase_onEntry(self: pointer, event: pointer): void{.importc: "QState_virtualbase_onEntry".}
-proc fcQState_override_virtual_onEntry(self: pointer, slot: int) {.importc: "QState_override_virtual_onEntry".}
-proc fQState_virtualbase_onExit(self: pointer, event: pointer): void{.importc: "QState_virtualbase_onExit".}
-proc fcQState_override_virtual_onExit(self: pointer, slot: int) {.importc: "QState_override_virtual_onExit".}
-proc fQState_virtualbase_event(self: pointer, e: pointer): bool{.importc: "QState_virtualbase_event".}
-proc fcQState_override_virtual_event(self: pointer, slot: int) {.importc: "QState_override_virtual_event".}
-proc fQState_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QState_virtualbase_eventFilter".}
-proc fcQState_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QState_override_virtual_eventFilter".}
-proc fQState_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QState_virtualbase_timerEvent".}
-proc fcQState_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QState_override_virtual_timerEvent".}
-proc fQState_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QState_virtualbase_childEvent".}
-proc fcQState_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QState_override_virtual_childEvent".}
-proc fQState_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QState_virtualbase_customEvent".}
-proc fcQState_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QState_override_virtual_customEvent".}
-proc fQState_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QState_virtualbase_connectNotify".}
-proc fcQState_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QState_override_virtual_connectNotify".}
-proc fQState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QState_virtualbase_disconnectNotify".}
-proc fcQState_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QState_override_virtual_disconnectNotify".}
+type cQStateVTable = object
+  destructor*: proc(vtbl: ptr cQStateVTable, self: ptr cQState) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  onEntry*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  onExit*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQState_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QState_virtualbase_metaObject".}
+proc fcQState_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QState_virtualbase_metacast".}
+proc fcQState_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QState_virtualbase_metacall".}
+proc fcQState_virtualbase_onEntry(self: pointer, event: pointer): void {.importc: "QState_virtualbase_onEntry".}
+proc fcQState_virtualbase_onExit(self: pointer, event: pointer): void {.importc: "QState_virtualbase_onExit".}
+proc fcQState_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QState_virtualbase_event".}
+proc fcQState_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QState_virtualbase_eventFilter".}
+proc fcQState_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QState_virtualbase_timerEvent".}
+proc fcQState_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QState_virtualbase_childEvent".}
+proc fcQState_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QState_virtualbase_customEvent".}
+proc fcQState_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QState_virtualbase_connectNotify".}
+proc fcQState_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QState_virtualbase_disconnectNotify".}
+proc fcQState_new(vtbl: pointer, ): ptr cQState {.importc: "QState_new".}
+proc fcQState_new2(vtbl: pointer, childMode: cint): ptr cQState {.importc: "QState_new2".}
+proc fcQState_new3(vtbl: pointer, parent: pointer): ptr cQState {.importc: "QState_new3".}
+proc fcQState_new4(vtbl: pointer, childMode: cint, parent: pointer): ptr cQState {.importc: "QState_new4".}
 proc fcQState_staticMetaObject(): pointer {.importc: "QState_staticMetaObject".}
 proc fcQState_delete(self: pointer) {.importc: "QState_delete".}
-
-
-func init*(T: type gen_qstate_types.QState, h: ptr cQState): gen_qstate_types.QState =
-  T(h: h)
-proc create*(T: type gen_qstate_types.QState, ): gen_qstate_types.QState =
-  gen_qstate_types.QState.init(fcQState_new())
-
-proc create*(T: type gen_qstate_types.QState, childMode: cint): gen_qstate_types.QState =
-  gen_qstate_types.QState.init(fcQState_new2(cint(childMode)))
-
-proc create*(T: type gen_qstate_types.QState, parent: gen_qstate_types.QState): gen_qstate_types.QState =
-  gen_qstate_types.QState.init(fcQState_new3(parent.h))
-
-proc create*(T: type gen_qstate_types.QState, childMode: cint, parent: gen_qstate_types.QState): gen_qstate_types.QState =
-  gen_qstate_types.QState.init(fcQState_new4(cint(childMode), parent.h))
 
 proc metaObject*(self: gen_qstate_types.QState, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQState_metaObject(self.h))
@@ -221,224 +208,282 @@ proc trUtf8*(_: type gen_qstate_types.QState, s: cstring, c: cstring, n: cint): 
   c_free(v_ms.data)
   vx_ret
 
+type QStatemetaObjectProc* = proc(self: QState): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QStatemetacastProc* = proc(self: QState, param1: cstring): pointer {.raises: [], gcsafe.}
+type QStatemetacallProc* = proc(self: QState, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QStateonEntryProc* = proc(self: QState, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QStateonExitProc* = proc(self: QState, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QStateeventProc* = proc(self: QState, e: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QStateeventFilterProc* = proc(self: QState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QStatetimerEventProc* = proc(self: QState, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QStatechildEventProc* = proc(self: QState, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QStatecustomEventProc* = proc(self: QState, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QStateconnectNotifyProc* = proc(self: QState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QStatedisconnectNotifyProc* = proc(self: QState, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QStateVTable* = object
+  vtbl: cQStateVTable
+  metaObject*: QStatemetaObjectProc
+  metacast*: QStatemetacastProc
+  metacall*: QStatemetacallProc
+  onEntry*: QStateonEntryProc
+  onExit*: QStateonExitProc
+  event*: QStateeventProc
+  eventFilter*: QStateeventFilterProc
+  timerEvent*: QStatetimerEventProc
+  childEvent*: QStatechildEventProc
+  customEvent*: QStatecustomEventProc
+  connectNotify*: QStateconnectNotifyProc
+  disconnectNotify*: QStatedisconnectNotifyProc
 proc QStatemetaObject*(self: gen_qstate_types.QState, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQState_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQState_virtualbase_metaObject(self.h))
 
-type QStatemetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qstate_types.QState, slot: QStatemetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QStatemetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_metaObject(self: ptr cQState, slot: int): pointer {.exportc: "miqt_exec_callback_QState_metaObject ".} =
-  var nimfunc = cast[ptr QStatemetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQState_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QStatemetacast*(self: gen_qstate_types.QState, param1: cstring): pointer =
-  fQState_virtualbase_metacast(self.h, param1)
+  fcQState_virtualbase_metacast(self.h, param1)
 
-type QStatemetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qstate_types.QState, slot: QStatemetacastProc) =
-  # TODO check subclass
-  var tmp = new QStatemetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_metacast(self: ptr cQState, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QState_metacast ".} =
-  var nimfunc = cast[ptr QStatemetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QStatemetacall*(self: gen_qstate_types.QState, param1: cint, param2: cint, param3: pointer): cint =
-  fQState_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQState_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QStatemetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qstate_types.QState, slot: QStatemetacallProc) =
-  # TODO check subclass
-  var tmp = new QStatemetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_metacall(self: ptr cQState, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QState_metacall ".} =
-  var nimfunc = cast[ptr QStatemetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QStateonEntry*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fQState_virtualbase_onEntry(self.h, event.h)
+  fcQState_virtualbase_onEntry(self.h, event.h)
 
-type QStateonEntryProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc ononEntry*(self: gen_qstate_types.QState, slot: QStateonEntryProc) =
-  # TODO check subclass
-  var tmp = new QStateonEntryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_onEntry(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_onEntry(self: ptr cQState, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QState_onEntry ".} =
-  var nimfunc = cast[ptr QStateonEntryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_onEntry(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].onEntry(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStateonExit*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fQState_virtualbase_onExit(self.h, event.h)
+  fcQState_virtualbase_onExit(self.h, event.h)
 
-type QStateonExitProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc ononExit*(self: gen_qstate_types.QState, slot: QStateonExitProc) =
-  # TODO check subclass
-  var tmp = new QStateonExitProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_onExit(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_onExit(self: ptr cQState, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QState_onExit ".} =
-  var nimfunc = cast[ptr QStateonExitProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_onExit(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].onExit(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStateevent*(self: gen_qstate_types.QState, e: gen_qcoreevent_types.QEvent): bool =
-  fQState_virtualbase_event(self.h, e.h)
+  fcQState_virtualbase_event(self.h, e.h)
 
-type QStateeventProc* = proc(e: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qstate_types.QState, slot: QStateeventProc) =
-  # TODO check subclass
-  var tmp = new QStateeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_event(self: ptr cQState, slot: int, e: pointer): bool {.exportc: "miqt_exec_callback_QState_event ".} =
-  var nimfunc = cast[ptr QStateeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QStateeventFilter*(self: gen_qstate_types.QState, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQState_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQState_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QStateeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qstate_types.QState, slot: QStateeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QStateeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_eventFilter(self: ptr cQState, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QState_eventFilter ".} =
-  var nimfunc = cast[ptr QStateeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QStatetimerEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQState_virtualbase_timerEvent(self.h, event.h)
+  fcQState_virtualbase_timerEvent(self.h, event.h)
 
-type QStatetimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qstate_types.QState, slot: QStatetimerEventProc) =
-  # TODO check subclass
-  var tmp = new QStatetimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_timerEvent(self: ptr cQState, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QState_timerEvent ".} =
-  var nimfunc = cast[ptr QStatetimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStatechildEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QChildEvent): void =
-  fQState_virtualbase_childEvent(self.h, event.h)
+  fcQState_virtualbase_childEvent(self.h, event.h)
 
-type QStatechildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qstate_types.QState, slot: QStatechildEventProc) =
-  # TODO check subclass
-  var tmp = new QStatechildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_childEvent(self: ptr cQState, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QState_childEvent ".} =
-  var nimfunc = cast[ptr QStatechildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStatecustomEvent*(self: gen_qstate_types.QState, event: gen_qcoreevent_types.QEvent): void =
-  fQState_virtualbase_customEvent(self.h, event.h)
+  fcQState_virtualbase_customEvent(self.h, event.h)
 
-type QStatecustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qstate_types.QState, slot: QStatecustomEventProc) =
-  # TODO check subclass
-  var tmp = new QStatecustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_customEvent(self: ptr cQState, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QState_customEvent ".} =
-  var nimfunc = cast[ptr QStatecustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStateconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQState_virtualbase_connectNotify(self.h, signal.h)
+  fcQState_virtualbase_connectNotify(self.h, signal.h)
 
-type QStateconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qstate_types.QState, slot: QStateconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QStateconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_connectNotify(self: ptr cQState, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QState_connectNotify ".} =
-  var nimfunc = cast[ptr QStateconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QStatedisconnectNotify*(self: gen_qstate_types.QState, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQState_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQState_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QStatedisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qstate_types.QState, slot: QStatedisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QStatedisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQState_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QState_disconnectNotify(self: ptr cQState, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QState_disconnectNotify ".} =
-  var nimfunc = cast[ptr QStatedisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQState_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QStateVTable](vtbl)
+  let self = QState(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qstate_types.QState,
+    vtbl: ref QStateVTable = nil): gen_qstate_types.QState =
+  let vtbl = if vtbl == nil: new QStateVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateVTable, _: ptr cQState) {.cdecl.} =
+    let vtbl = cast[ref QStateVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQState_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQState_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQState_metacall
+  if not isNil(vtbl.onEntry):
+    vtbl[].vtbl.onEntry = miqt_exec_callback_cQState_onEntry
+  if not isNil(vtbl.onExit):
+    vtbl[].vtbl.onExit = miqt_exec_callback_cQState_onExit
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQState_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQState_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQState_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQState_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQState_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQState_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQState_disconnectNotify
+  gen_qstate_types.QState(h: fcQState_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qstate_types.QState,
+    childMode: cint,
+    vtbl: ref QStateVTable = nil): gen_qstate_types.QState =
+  let vtbl = if vtbl == nil: new QStateVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateVTable, _: ptr cQState) {.cdecl.} =
+    let vtbl = cast[ref QStateVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQState_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQState_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQState_metacall
+  if not isNil(vtbl.onEntry):
+    vtbl[].vtbl.onEntry = miqt_exec_callback_cQState_onEntry
+  if not isNil(vtbl.onExit):
+    vtbl[].vtbl.onExit = miqt_exec_callback_cQState_onExit
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQState_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQState_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQState_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQState_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQState_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQState_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQState_disconnectNotify
+  gen_qstate_types.QState(h: fcQState_new2(addr(vtbl[]), cint(childMode)))
+
+proc create*(T: type gen_qstate_types.QState,
+    parent: gen_qstate_types.QState,
+    vtbl: ref QStateVTable = nil): gen_qstate_types.QState =
+  let vtbl = if vtbl == nil: new QStateVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateVTable, _: ptr cQState) {.cdecl.} =
+    let vtbl = cast[ref QStateVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQState_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQState_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQState_metacall
+  if not isNil(vtbl.onEntry):
+    vtbl[].vtbl.onEntry = miqt_exec_callback_cQState_onEntry
+  if not isNil(vtbl.onExit):
+    vtbl[].vtbl.onExit = miqt_exec_callback_cQState_onExit
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQState_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQState_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQState_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQState_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQState_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQState_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQState_disconnectNotify
+  gen_qstate_types.QState(h: fcQState_new3(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qstate_types.QState,
+    childMode: cint, parent: gen_qstate_types.QState,
+    vtbl: ref QStateVTable = nil): gen_qstate_types.QState =
+  let vtbl = if vtbl == nil: new QStateVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQStateVTable, _: ptr cQState) {.cdecl.} =
+    let vtbl = cast[ref QStateVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQState_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQState_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQState_metacall
+  if not isNil(vtbl.onEntry):
+    vtbl[].vtbl.onEntry = miqt_exec_callback_cQState_onEntry
+  if not isNil(vtbl.onExit):
+    vtbl[].vtbl.onExit = miqt_exec_callback_cQState_onExit
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQState_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQState_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQState_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQState_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQState_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQState_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQState_disconnectNotify
+  gen_qstate_types.QState(h: fcQState_new4(addr(vtbl[]), cint(childMode), parent.h))
+
 proc staticMetaObject*(_: type gen_qstate_types.QState): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQState_staticMetaObject())
 proc delete*(self: gen_qstate_types.QState) =

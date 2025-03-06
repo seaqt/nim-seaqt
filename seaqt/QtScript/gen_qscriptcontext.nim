@@ -84,9 +84,6 @@ proc fcQScriptContext_backtrace(self: pointer, ): struct_miqt_array {.importc: "
 proc fcQScriptContext_toString(self: pointer, ): struct_miqt_string {.importc: "QScriptContext_toString".}
 proc fcQScriptContext_delete(self: pointer) {.importc: "QScriptContext_delete".}
 
-
-func init*(T: type gen_qscriptcontext_types.QScriptContext, h: ptr cQScriptContext): gen_qscriptcontext_types.QScriptContext =
-  T(h: h)
 proc parentContext*(self: gen_qscriptcontext_types.QScriptContext, ): gen_qscriptcontext_types.QScriptContext =
   gen_qscriptcontext_types.QScriptContext(h: fcQScriptContext_parentContext(self.h))
 

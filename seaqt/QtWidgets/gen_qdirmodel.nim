@@ -71,10 +71,6 @@ export
 
 type cQDirModel*{.exportc: "QDirModel", incompleteStruct.} = object
 
-proc fcQDirModel_new(nameFilters: struct_miqt_array, filters: cint, sort: cint): ptr cQDirModel {.importc: "QDirModel_new".}
-proc fcQDirModel_new2(): ptr cQDirModel {.importc: "QDirModel_new2".}
-proc fcQDirModel_new3(nameFilters: struct_miqt_array, filters: cint, sort: cint, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new3".}
-proc fcQDirModel_new4(parent: pointer): ptr cQDirModel {.importc: "QDirModel_new4".}
 proc fcQDirModel_metaObject(self: pointer, ): pointer {.importc: "QDirModel_metaObject".}
 proc fcQDirModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QDirModel_metacast".}
 proc fcQDirModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDirModel_metacall".}
@@ -124,119 +120,102 @@ proc fcQDirModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQDirModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDirModel_trUtf83".}
 proc fcQDirModel_index2(self: pointer, path: struct_miqt_string, column: cint): pointer {.importc: "QDirModel_index2".}
 proc fcQDirModel_refresh1(self: pointer, parent: pointer): void {.importc: "QDirModel_refresh1".}
-proc fQDirModel_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QDirModel_virtualbase_metaObject".}
-proc fcQDirModel_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_metaObject".}
-proc fQDirModel_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QDirModel_virtualbase_metacast".}
-proc fcQDirModel_override_virtual_metacast(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_metacast".}
-proc fQDirModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QDirModel_virtualbase_metacall".}
-proc fcQDirModel_override_virtual_metacall(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_metacall".}
-proc fQDirModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer{.importc: "QDirModel_virtualbase_index".}
-proc fcQDirModel_override_virtual_index(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_index".}
-proc fQDirModel_virtualbase_parent(self: pointer, child: pointer): pointer{.importc: "QDirModel_virtualbase_parent".}
-proc fcQDirModel_override_virtual_parent(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_parent".}
-proc fQDirModel_virtualbase_rowCount(self: pointer, parent: pointer): cint{.importc: "QDirModel_virtualbase_rowCount".}
-proc fcQDirModel_override_virtual_rowCount(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_rowCount".}
-proc fQDirModel_virtualbase_columnCount(self: pointer, parent: pointer): cint{.importc: "QDirModel_virtualbase_columnCount".}
-proc fcQDirModel_override_virtual_columnCount(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_columnCount".}
-proc fQDirModel_virtualbase_data(self: pointer, index: pointer, role: cint): pointer{.importc: "QDirModel_virtualbase_data".}
-proc fcQDirModel_override_virtual_data(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_data".}
-proc fQDirModel_virtualbase_setData(self: pointer, index: pointer, value: pointer, role: cint): bool{.importc: "QDirModel_virtualbase_setData".}
-proc fcQDirModel_override_virtual_setData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_setData".}
-proc fQDirModel_virtualbase_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer{.importc: "QDirModel_virtualbase_headerData".}
-proc fcQDirModel_override_virtual_headerData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_headerData".}
-proc fQDirModel_virtualbase_hasChildren(self: pointer, index: pointer): bool{.importc: "QDirModel_virtualbase_hasChildren".}
-proc fcQDirModel_override_virtual_hasChildren(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_hasChildren".}
-proc fQDirModel_virtualbase_flags(self: pointer, index: pointer): cint{.importc: "QDirModel_virtualbase_flags".}
-proc fcQDirModel_override_virtual_flags(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_flags".}
-proc fQDirModel_virtualbase_sort(self: pointer, column: cint, order: cint): void{.importc: "QDirModel_virtualbase_sort".}
-proc fcQDirModel_override_virtual_sort(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_sort".}
-proc fQDirModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array{.importc: "QDirModel_virtualbase_mimeTypes".}
-proc fcQDirModel_override_virtual_mimeTypes(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_mimeTypes".}
-proc fQDirModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer{.importc: "QDirModel_virtualbase_mimeData".}
-proc fcQDirModel_override_virtual_mimeData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_mimeData".}
-proc fQDirModel_virtualbase_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_dropMimeData".}
-proc fcQDirModel_override_virtual_dropMimeData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_dropMimeData".}
-proc fQDirModel_virtualbase_supportedDropActions(self: pointer, ): cint{.importc: "QDirModel_virtualbase_supportedDropActions".}
-proc fcQDirModel_override_virtual_supportedDropActions(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_supportedDropActions".}
-proc fQDirModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer{.importc: "QDirModel_virtualbase_sibling".}
-proc fcQDirModel_override_virtual_sibling(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_sibling".}
-proc fQDirModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool{.importc: "QDirModel_virtualbase_setHeaderData".}
-proc fcQDirModel_override_virtual_setHeaderData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_setHeaderData".}
-proc fQDirModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map{.importc: "QDirModel_virtualbase_itemData".}
-proc fcQDirModel_override_virtual_itemData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_itemData".}
-proc fQDirModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool{.importc: "QDirModel_virtualbase_setItemData".}
-proc fcQDirModel_override_virtual_setItemData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_setItemData".}
-proc fQDirModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_canDropMimeData".}
-proc fcQDirModel_override_virtual_canDropMimeData(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_canDropMimeData".}
-proc fQDirModel_virtualbase_supportedDragActions(self: pointer, ): cint{.importc: "QDirModel_virtualbase_supportedDragActions".}
-proc fcQDirModel_override_virtual_supportedDragActions(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_supportedDragActions".}
-proc fQDirModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_insertRows".}
-proc fcQDirModel_override_virtual_insertRows(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_insertRows".}
-proc fQDirModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_insertColumns".}
-proc fcQDirModel_override_virtual_insertColumns(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_insertColumns".}
-proc fQDirModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_removeRows".}
-proc fcQDirModel_override_virtual_removeRows(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_removeRows".}
-proc fQDirModel_virtualbase_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool{.importc: "QDirModel_virtualbase_removeColumns".}
-proc fcQDirModel_override_virtual_removeColumns(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_removeColumns".}
-proc fQDirModel_virtualbase_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool{.importc: "QDirModel_virtualbase_moveRows".}
-proc fcQDirModel_override_virtual_moveRows(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_moveRows".}
-proc fQDirModel_virtualbase_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool{.importc: "QDirModel_virtualbase_moveColumns".}
-proc fcQDirModel_override_virtual_moveColumns(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_moveColumns".}
-proc fQDirModel_virtualbase_fetchMore(self: pointer, parent: pointer): void{.importc: "QDirModel_virtualbase_fetchMore".}
-proc fcQDirModel_override_virtual_fetchMore(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_fetchMore".}
-proc fQDirModel_virtualbase_canFetchMore(self: pointer, parent: pointer): bool{.importc: "QDirModel_virtualbase_canFetchMore".}
-proc fcQDirModel_override_virtual_canFetchMore(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_canFetchMore".}
-proc fQDirModel_virtualbase_buddy(self: pointer, index: pointer): pointer{.importc: "QDirModel_virtualbase_buddy".}
-proc fcQDirModel_override_virtual_buddy(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_buddy".}
-proc fQDirModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array{.importc: "QDirModel_virtualbase_match".}
-proc fcQDirModel_override_virtual_match(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_match".}
-proc fQDirModel_virtualbase_span(self: pointer, index: pointer): pointer{.importc: "QDirModel_virtualbase_span".}
-proc fcQDirModel_override_virtual_span(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_span".}
-proc fQDirModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map{.importc: "QDirModel_virtualbase_roleNames".}
-proc fcQDirModel_override_virtual_roleNames(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_roleNames".}
-proc fQDirModel_virtualbase_submit(self: pointer, ): bool{.importc: "QDirModel_virtualbase_submit".}
-proc fcQDirModel_override_virtual_submit(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_submit".}
-proc fQDirModel_virtualbase_revert(self: pointer, ): void{.importc: "QDirModel_virtualbase_revert".}
-proc fcQDirModel_override_virtual_revert(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_revert".}
-proc fQDirModel_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QDirModel_virtualbase_event".}
-proc fcQDirModel_override_virtual_event(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_event".}
-proc fQDirModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QDirModel_virtualbase_eventFilter".}
-proc fcQDirModel_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_eventFilter".}
-proc fQDirModel_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QDirModel_virtualbase_timerEvent".}
-proc fcQDirModel_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_timerEvent".}
-proc fQDirModel_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QDirModel_virtualbase_childEvent".}
-proc fcQDirModel_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_childEvent".}
-proc fQDirModel_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QDirModel_virtualbase_customEvent".}
-proc fcQDirModel_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_customEvent".}
-proc fQDirModel_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QDirModel_virtualbase_connectNotify".}
-proc fcQDirModel_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_connectNotify".}
-proc fQDirModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QDirModel_virtualbase_disconnectNotify".}
-proc fcQDirModel_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QDirModel_override_virtual_disconnectNotify".}
+type cQDirModelVTable = object
+  destructor*: proc(vtbl: ptr cQDirModelVTable, self: ptr cQDirModel) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  index*: proc(vtbl, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  parent*: proc(vtbl, self: pointer, child: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  rowCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  columnCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  data*: proc(vtbl, self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(vtbl, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  headerData*: proc(vtbl, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  hasChildren*: proc(vtbl, self: pointer, index: pointer): bool {.cdecl, raises: [], gcsafe.}
+  flags*: proc(vtbl, self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sort*: proc(vtbl, self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(vtbl, self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  sibling*: proc(vtbl, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  setHeaderData*: proc(vtbl, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  itemData*: proc(vtbl, self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  setItemData*: proc(vtbl, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
+  canDropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDragActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  insertRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  insertColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveRows*: proc(vtbl, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  moveColumns*: proc(vtbl, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  fetchMore*: proc(vtbl, self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
+  canFetchMore*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  buddy*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  match*: proc(vtbl, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  span*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  roleNames*: proc(vtbl, self: pointer, ): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  submit*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  revert*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQDirModel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QDirModel_virtualbase_metaObject".}
+proc fcQDirModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QDirModel_virtualbase_metacast".}
+proc fcQDirModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QDirModel_virtualbase_metacall".}
+proc fcQDirModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QDirModel_virtualbase_index".}
+proc fcQDirModel_virtualbase_parent(self: pointer, child: pointer): pointer {.importc: "QDirModel_virtualbase_parent".}
+proc fcQDirModel_virtualbase_rowCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_virtualbase_rowCount".}
+proc fcQDirModel_virtualbase_columnCount(self: pointer, parent: pointer): cint {.importc: "QDirModel_virtualbase_columnCount".}
+proc fcQDirModel_virtualbase_data(self: pointer, index: pointer, role: cint): pointer {.importc: "QDirModel_virtualbase_data".}
+proc fcQDirModel_virtualbase_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.importc: "QDirModel_virtualbase_setData".}
+proc fcQDirModel_virtualbase_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.importc: "QDirModel_virtualbase_headerData".}
+proc fcQDirModel_virtualbase_hasChildren(self: pointer, index: pointer): bool {.importc: "QDirModel_virtualbase_hasChildren".}
+proc fcQDirModel_virtualbase_flags(self: pointer, index: pointer): cint {.importc: "QDirModel_virtualbase_flags".}
+proc fcQDirModel_virtualbase_sort(self: pointer, column: cint, order: cint): void {.importc: "QDirModel_virtualbase_sort".}
+proc fcQDirModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QDirModel_virtualbase_mimeTypes".}
+proc fcQDirModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QDirModel_virtualbase_mimeData".}
+proc fcQDirModel_virtualbase_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_dropMimeData".}
+proc fcQDirModel_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QDirModel_virtualbase_supportedDropActions".}
+proc fcQDirModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QDirModel_virtualbase_sibling".}
+proc fcQDirModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QDirModel_virtualbase_setHeaderData".}
+proc fcQDirModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QDirModel_virtualbase_itemData".}
+proc fcQDirModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QDirModel_virtualbase_setItemData".}
+proc fcQDirModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_canDropMimeData".}
+proc fcQDirModel_virtualbase_supportedDragActions(self: pointer, ): cint {.importc: "QDirModel_virtualbase_supportedDragActions".}
+proc fcQDirModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_insertRows".}
+proc fcQDirModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_insertColumns".}
+proc fcQDirModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_removeRows".}
+proc fcQDirModel_virtualbase_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QDirModel_virtualbase_removeColumns".}
+proc fcQDirModel_virtualbase_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QDirModel_virtualbase_moveRows".}
+proc fcQDirModel_virtualbase_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.importc: "QDirModel_virtualbase_moveColumns".}
+proc fcQDirModel_virtualbase_fetchMore(self: pointer, parent: pointer): void {.importc: "QDirModel_virtualbase_fetchMore".}
+proc fcQDirModel_virtualbase_canFetchMore(self: pointer, parent: pointer): bool {.importc: "QDirModel_virtualbase_canFetchMore".}
+proc fcQDirModel_virtualbase_buddy(self: pointer, index: pointer): pointer {.importc: "QDirModel_virtualbase_buddy".}
+proc fcQDirModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QDirModel_virtualbase_match".}
+proc fcQDirModel_virtualbase_span(self: pointer, index: pointer): pointer {.importc: "QDirModel_virtualbase_span".}
+proc fcQDirModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map {.importc: "QDirModel_virtualbase_roleNames".}
+proc fcQDirModel_virtualbase_submit(self: pointer, ): bool {.importc: "QDirModel_virtualbase_submit".}
+proc fcQDirModel_virtualbase_revert(self: pointer, ): void {.importc: "QDirModel_virtualbase_revert".}
+proc fcQDirModel_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QDirModel_virtualbase_event".}
+proc fcQDirModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QDirModel_virtualbase_eventFilter".}
+proc fcQDirModel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QDirModel_virtualbase_timerEvent".}
+proc fcQDirModel_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QDirModel_virtualbase_childEvent".}
+proc fcQDirModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QDirModel_virtualbase_customEvent".}
+proc fcQDirModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_connectNotify".}
+proc fcQDirModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QDirModel_virtualbase_disconnectNotify".}
+proc fcQDirModel_new(vtbl: pointer, nameFilters: struct_miqt_array, filters: cint, sort: cint): ptr cQDirModel {.importc: "QDirModel_new".}
+proc fcQDirModel_new2(vtbl: pointer, ): ptr cQDirModel {.importc: "QDirModel_new2".}
+proc fcQDirModel_new3(vtbl: pointer, nameFilters: struct_miqt_array, filters: cint, sort: cint, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new3".}
+proc fcQDirModel_new4(vtbl: pointer, parent: pointer): ptr cQDirModel {.importc: "QDirModel_new4".}
 proc fcQDirModel_staticMetaObject(): pointer {.importc: "QDirModel_staticMetaObject".}
 proc fcQDirModel_delete(self: pointer) {.importc: "QDirModel_delete".}
-
-
-func init*(T: type gen_qdirmodel_types.QDirModel, h: ptr cQDirModel): gen_qdirmodel_types.QDirModel =
-  T(h: h)
-proc create*(T: type gen_qdirmodel_types.QDirModel, nameFilters: seq[string], filters: cint, sort: cint): gen_qdirmodel_types.QDirModel =
-  var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
-  for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
-
-  gen_qdirmodel_types.QDirModel.init(fcQDirModel_new(struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort)))
-
-proc create*(T: type gen_qdirmodel_types.QDirModel, ): gen_qdirmodel_types.QDirModel =
-  gen_qdirmodel_types.QDirModel.init(fcQDirModel_new2())
-
-proc create*(T: type gen_qdirmodel_types.QDirModel, nameFilters: seq[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject): gen_qdirmodel_types.QDirModel =
-  var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
-  for i in 0..<len(nameFilters):
-    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
-
-  gen_qdirmodel_types.QDirModel.init(fcQDirModel_new3(struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort), parent.h))
-
-proc create*(T: type gen_qdirmodel_types.QDirModel, parent: gen_qobject_types.QObject): gen_qdirmodel_types.QDirModel =
-  gen_qdirmodel_types.QDirModel.init(fcQDirModel_new4(parent.h))
 
 proc metaObject*(self: gen_qdirmodel_types.QDirModel, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDirModel_metaObject(self.h))
@@ -433,271 +412,236 @@ proc index*(self: gen_qdirmodel_types.QDirModel, path: string, column: cint): ge
 proc refresh*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQDirModel_refresh1(self.h, parent.h)
 
+type QDirModelmetaObjectProc* = proc(self: QDirModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QDirModelmetacastProc* = proc(self: QDirModel, param1: cstring): pointer {.raises: [], gcsafe.}
+type QDirModelmetacallProc* = proc(self: QDirModel, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QDirModelindexProc* = proc(self: QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QDirModelparentProc* = proc(self: QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QDirModelrowCountProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
+type QDirModelcolumnCountProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
+type QDirModeldataProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QDirModelsetDataProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.raises: [], gcsafe.}
+type QDirModelheaderDataProc* = proc(self: QDirModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QDirModelhasChildrenProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelflagsProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.raises: [], gcsafe.}
+type QDirModelsortProc* = proc(self: QDirModel, column: cint, order: cint): void {.raises: [], gcsafe.}
+type QDirModelmimeTypesProc* = proc(self: QDirModel): seq[string] {.raises: [], gcsafe.}
+type QDirModelmimeDataProc* = proc(self: QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.raises: [], gcsafe.}
+type QDirModeldropMimeDataProc* = proc(self: QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelsupportedDropActionsProc* = proc(self: QDirModel): cint {.raises: [], gcsafe.}
+type QDirModelsiblingProc* = proc(self: QDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QDirModelsetHeaderDataProc* = proc(self: QDirModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.raises: [], gcsafe.}
+type QDirModelitemDataProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.raises: [], gcsafe.}
+type QDirModelsetItemDataProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.raises: [], gcsafe.}
+type QDirModelcanDropMimeDataProc* = proc(self: QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelsupportedDragActionsProc* = proc(self: QDirModel): cint {.raises: [], gcsafe.}
+type QDirModelinsertRowsProc* = proc(self: QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelinsertColumnsProc* = proc(self: QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelremoveRowsProc* = proc(self: QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelremoveColumnsProc* = proc(self: QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelmoveRowsProc* = proc(self: QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.raises: [], gcsafe.}
+type QDirModelmoveColumnsProc* = proc(self: QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.raises: [], gcsafe.}
+type QDirModelfetchMoreProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
+type QDirModelcanFetchMoreProc* = proc(self: QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QDirModelbuddyProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QDirModelmatchProc* = proc(self: QDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
+type QDirModelspanProc* = proc(self: QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QDirModelroleNamesProc* = proc(self: QDirModel): Table[cint,seq[byte]] {.raises: [], gcsafe.}
+type QDirModelsubmitProc* = proc(self: QDirModel): bool {.raises: [], gcsafe.}
+type QDirModelrevertProc* = proc(self: QDirModel): void {.raises: [], gcsafe.}
+type QDirModeleventProc* = proc(self: QDirModel, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QDirModeleventFilterProc* = proc(self: QDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QDirModeltimerEventProc* = proc(self: QDirModel, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QDirModelchildEventProc* = proc(self: QDirModel, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QDirModelcustomEventProc* = proc(self: QDirModel, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QDirModelconnectNotifyProc* = proc(self: QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QDirModeldisconnectNotifyProc* = proc(self: QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QDirModelVTable* = object
+  vtbl: cQDirModelVTable
+  metaObject*: QDirModelmetaObjectProc
+  metacast*: QDirModelmetacastProc
+  metacall*: QDirModelmetacallProc
+  index*: QDirModelindexProc
+  parent*: QDirModelparentProc
+  rowCount*: QDirModelrowCountProc
+  columnCount*: QDirModelcolumnCountProc
+  data*: QDirModeldataProc
+  setData*: QDirModelsetDataProc
+  headerData*: QDirModelheaderDataProc
+  hasChildren*: QDirModelhasChildrenProc
+  flags*: QDirModelflagsProc
+  sort*: QDirModelsortProc
+  mimeTypes*: QDirModelmimeTypesProc
+  mimeData*: QDirModelmimeDataProc
+  dropMimeData*: QDirModeldropMimeDataProc
+  supportedDropActions*: QDirModelsupportedDropActionsProc
+  sibling*: QDirModelsiblingProc
+  setHeaderData*: QDirModelsetHeaderDataProc
+  itemData*: QDirModelitemDataProc
+  setItemData*: QDirModelsetItemDataProc
+  canDropMimeData*: QDirModelcanDropMimeDataProc
+  supportedDragActions*: QDirModelsupportedDragActionsProc
+  insertRows*: QDirModelinsertRowsProc
+  insertColumns*: QDirModelinsertColumnsProc
+  removeRows*: QDirModelremoveRowsProc
+  removeColumns*: QDirModelremoveColumnsProc
+  moveRows*: QDirModelmoveRowsProc
+  moveColumns*: QDirModelmoveColumnsProc
+  fetchMore*: QDirModelfetchMoreProc
+  canFetchMore*: QDirModelcanFetchMoreProc
+  buddy*: QDirModelbuddyProc
+  match*: QDirModelmatchProc
+  span*: QDirModelspanProc
+  roleNames*: QDirModelroleNamesProc
+  submit*: QDirModelsubmitProc
+  revert*: QDirModelrevertProc
+  event*: QDirModeleventProc
+  eventFilter*: QDirModeleventFilterProc
+  timerEvent*: QDirModeltimerEventProc
+  childEvent*: QDirModelchildEventProc
+  customEvent*: QDirModelcustomEventProc
+  connectNotify*: QDirModelconnectNotifyProc
+  disconnectNotify*: QDirModeldisconnectNotifyProc
 proc QDirModelmetaObject*(self: gen_qdirmodel_types.QDirModel, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQDirModel_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQDirModel_virtualbase_metaObject(self.h))
 
-type QDirModelmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_metaObject(self: ptr cQDirModel, slot: int): pointer {.exportc: "miqt_exec_callback_QDirModel_metaObject ".} =
-  var nimfunc = cast[ptr QDirModelmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQDirModel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QDirModelmetacast*(self: gen_qdirmodel_types.QDirModel, param1: cstring): pointer =
-  fQDirModel_virtualbase_metacast(self.h, param1)
+  fcQDirModel_virtualbase_metacast(self.h, param1)
 
-type QDirModelmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmetacastProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_metacast(self: ptr cQDirModel, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QDirModel_metacast ".} =
-  var nimfunc = cast[ptr QDirModelmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QDirModelmetacall*(self: gen_qdirmodel_types.QDirModel, param1: cint, param2: cint, param3: pointer): cint =
-  fQDirModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQDirModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QDirModelmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmetacallProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_metacall(self: ptr cQDirModel, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QDirModel_metacall ".} =
-  var nimfunc = cast[ptr QDirModelmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelindex*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQDirModel_virtualbase_index(self.h, row, column, parent.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_index(self.h, row, column, parent.h))
 
-type QDirModelindexProc* = proc(row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onindex*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelindexProc) =
-  # TODO check subclass
-  var tmp = new QDirModelindexProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_index(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_index(self: ptr cQDirModel, slot: int, row: cint, column: cint, parent: pointer): pointer {.exportc: "miqt_exec_callback_QDirModel_index ".} =
-  var nimfunc = cast[ptr QDirModelindexProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_index(vtbl: pointer, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = row
-
   let slotval2 = column
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].index(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QDirModelparent*(self: gen_qdirmodel_types.QDirModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQDirModel_virtualbase_parent(self.h, child.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_parent(self.h, child.h))
 
-type QDirModelparentProc* = proc(child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onparent*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelparentProc) =
-  # TODO check subclass
-  var tmp = new QDirModelparentProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_parent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_parent(self: ptr cQDirModel, slot: int, child: pointer): pointer {.exportc: "miqt_exec_callback_QDirModel_parent ".} =
-  var nimfunc = cast[ptr QDirModelparentProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_parent(vtbl: pointer, self: pointer, child: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].parent(self, slotval1)
   virtualReturn.h
+
 proc QDirModelrowCount*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
-  fQDirModel_virtualbase_rowCount(self.h, parent.h)
+  fcQDirModel_virtualbase_rowCount(self.h, parent.h)
 
-type QDirModelrowCountProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): cint
-proc onrowCount*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelrowCountProc) =
-  # TODO check subclass
-  var tmp = new QDirModelrowCountProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_rowCount(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_rowCount(self: ptr cQDirModel, slot: int, parent: pointer): cint {.exportc: "miqt_exec_callback_QDirModel_rowCount ".} =
-  var nimfunc = cast[ptr QDirModelrowCountProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_rowCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
+
 proc QDirModelcolumnCount*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint =
-  fQDirModel_virtualbase_columnCount(self.h, parent.h)
+  fcQDirModel_virtualbase_columnCount(self.h, parent.h)
 
-type QDirModelcolumnCountProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): cint
-proc oncolumnCount*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelcolumnCountProc) =
-  # TODO check subclass
-  var tmp = new QDirModelcolumnCountProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_columnCount(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_columnCount(self: ptr cQDirModel, slot: int, parent: pointer): cint {.exportc: "miqt_exec_callback_QDirModel_columnCount ".} =
-  var nimfunc = cast[ptr QDirModelcolumnCountProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_columnCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
+
 proc QDirModeldata*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQDirModel_virtualbase_data(self.h, index.h, role))
+  gen_qvariant_types.QVariant(h: fcQDirModel_virtualbase_data(self.h, index.h, role))
 
-type QDirModeldataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant
-proc ondata*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeldataProc) =
-  # TODO check subclass
-  var tmp = new QDirModeldataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_data(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_data(self: ptr cQDirModel, slot: int, index: pointer, role: cint): pointer {.exportc: "miqt_exec_callback_QDirModel_data ".} =
-  var nimfunc = cast[ptr QDirModeldataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_data(vtbl: pointer, self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].data(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QDirModelsetData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fQDirModel_virtualbase_setData(self.h, index.h, value.h, role)
+  fcQDirModel_virtualbase_setData(self.h, index.h, value.h, role)
 
-type QDirModelsetDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool
-proc onsetData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsetDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsetDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_setData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_setData(self: ptr cQDirModel, slot: int, index: pointer, value: pointer, role: cint): bool {.exportc: "miqt_exec_callback_QDirModel_setData ".} =
-  var nimfunc = cast[ptr QDirModelsetDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_setData(vtbl: pointer, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = gen_qvariant_types.QVariant(h: value)
-
   let slotval3 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].setData(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelheaderData*(self: gen_qdirmodel_types.QDirModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQDirModel_virtualbase_headerData(self.h, section, cint(orientation), role))
+  gen_qvariant_types.QVariant(h: fcQDirModel_virtualbase_headerData(self.h, section, cint(orientation), role))
 
-type QDirModelheaderDataProc* = proc(section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant
-proc onheaderData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelheaderDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelheaderDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_headerData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_headerData(self: ptr cQDirModel, slot: int, section: cint, orientation: cint, role: cint): pointer {.exportc: "miqt_exec_callback_QDirModel_headerData ".} =
-  var nimfunc = cast[ptr QDirModelheaderDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_headerData(vtbl: pointer, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = section
-
   let slotval2 = cint(orientation)
-
   let slotval3 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].headerData(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QDirModelhasChildren*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_hasChildren(self.h, index.h)
+  fcQDirModel_virtualbase_hasChildren(self.h, index.h)
 
-type QDirModelhasChildrenProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onhasChildren*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelhasChildrenProc) =
-  # TODO check subclass
-  var tmp = new QDirModelhasChildrenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_hasChildren(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_hasChildren(self: ptr cQDirModel, slot: int, index: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_hasChildren ".} =
-  var nimfunc = cast[ptr QDirModelhasChildrenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_hasChildren(vtbl: pointer, self: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
+
 proc QDirModelflags*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
-  cint(fQDirModel_virtualbase_flags(self.h, index.h))
+  cint(fcQDirModel_virtualbase_flags(self.h, index.h))
 
-type QDirModelflagsProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): cint
-proc onflags*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelflagsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelflagsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_flags(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_flags(self: ptr cQDirModel, slot: int, index: pointer): cint {.exportc: "miqt_exec_callback_QDirModel_flags ".} =
-  var nimfunc = cast[ptr QDirModelflagsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_flags(vtbl: pointer, self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
+
 proc QDirModelsort*(self: gen_qdirmodel_types.QDirModel, column: cint, order: cint): void =
-  fQDirModel_virtualbase_sort(self.h, column, cint(order))
+  fcQDirModel_virtualbase_sort(self.h, column, cint(order))
 
-type QDirModelsortProc* = proc(column: cint, order: cint): void
-proc onsort*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsortProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsortProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_sort(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_sort(self: ptr cQDirModel, slot: int, column: cint, order: cint): void {.exportc: "miqt_exec_callback_QDirModel_sort ".} =
-  var nimfunc = cast[ptr QDirModelsortProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_sort(vtbl: pointer, self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = column
-
   let slotval2 = cint(order)
+  vtbl[].sort(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QDirModelmimeTypes*(self: gen_qdirmodel_types.QDirModel, ): seq[string] =
-  var v_ma = fQDirModel_virtualbase_mimeTypes(self.h)
+  var v_ma = fcQDirModel_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
   for i in 0 ..< v_ma.len:
@@ -707,146 +651,85 @@ proc QDirModelmimeTypes*(self: gen_qdirmodel_types.QDirModel, ): seq[string] =
     vx_ret[i] = vx_lvx_ret
   vx_ret
 
-type QDirModelmimeTypesProc* = proc(): seq[string]
-proc onmimeTypes*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmimeTypesProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmimeTypesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_mimeTypes(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_mimeTypes(self: ptr cQDirModel, slot: int): struct_miqt_array {.exportc: "miqt_exec_callback_QDirModel_mimeTypes ".} =
-  var nimfunc = cast[ptr QDirModelmimeTypesProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQDirModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 proc QDirModelmimeData*(self: gen_qdirmodel_types.QDirModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData =
   var indexes_CArray = newSeq[pointer](len(indexes))
   for i in 0..<len(indexes):
     indexes_CArray[i] = indexes[i].h
 
-  gen_qmimedata_types.QMimeData(h: fQDirModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
+  gen_qmimedata_types.QMimeData(h: fcQDirModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))))
 
-type QDirModelmimeDataProc* = proc(indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData
-proc onmimeData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmimeDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_mimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_mimeData(self: ptr cQDirModel, slot: int, indexes: struct_miqt_array): pointer {.exportc: "miqt_exec_callback_QDirModel_mimeData ".} =
-  var nimfunc = cast[ptr QDirModelmimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_mimeData(vtbl: pointer, self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
   for i in 0 ..< vindexes_ma.len:
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i])
   let slotval1 = vindexesx_ret
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].mimeData(self, slotval1)
   virtualReturn.h
+
 proc QDirModeldropMimeData*(self: gen_qdirmodel_types.QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+  fcQDirModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-type QDirModeldropMimeDataProc* = proc(data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc ondropMimeData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeldropMimeDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModeldropMimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_dropMimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_dropMimeData(self: ptr cQDirModel, slot: int, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_dropMimeData ".} =
-  var nimfunc = cast[ptr QDirModeldropMimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_dropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data)
-
   let slotval2 = cint(action)
-
   let slotval3 = row
-
   let slotval4 = column
-
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QDirModelsupportedDropActions*(self: gen_qdirmodel_types.QDirModel, ): cint =
-  cint(fQDirModel_virtualbase_supportedDropActions(self.h))
+  cint(fcQDirModel_virtualbase_supportedDropActions(self.h))
 
-type QDirModelsupportedDropActionsProc* = proc(): cint
-proc onsupportedDropActions*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsupportedDropActionsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsupportedDropActionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_supportedDropActions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_supportedDropActions(self: ptr cQDirModel, slot: int): cint {.exportc: "miqt_exec_callback_QDirModel_supportedDropActions ".} =
-  var nimfunc = cast[ptr QDirModelsupportedDropActionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQDirModel_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
+
 proc QDirModelsibling*(self: gen_qdirmodel_types.QDirModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQDirModel_virtualbase_sibling(self.h, row, column, idx.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_sibling(self.h, row, column, idx.h))
 
-type QDirModelsiblingProc* = proc(row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onsibling*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsiblingProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsiblingProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_sibling(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_sibling(self: ptr cQDirModel, slot: int, row: cint, column: cint, idx: pointer): pointer {.exportc: "miqt_exec_callback_QDirModel_sibling ".} =
-  var nimfunc = cast[ptr QDirModelsiblingProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_sibling(vtbl: pointer, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = row
-
   let slotval2 = column
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].sibling(self, slotval1, slotval2, slotval3)
   virtualReturn.h
+
 proc QDirModelsetHeaderData*(self: gen_qdirmodel_types.QDirModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
-  fQDirModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
+  fcQDirModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
-type QDirModelsetHeaderDataProc* = proc(section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool
-proc onsetHeaderData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsetHeaderDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsetHeaderDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_setHeaderData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_setHeaderData(self: ptr cQDirModel, slot: int, section: cint, orientation: cint, value: pointer, role: cint): bool {.exportc: "miqt_exec_callback_QDirModel_setHeaderData ".} =
-  var nimfunc = cast[ptr QDirModelsetHeaderDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_setHeaderData(vtbl: pointer, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = section
-
   let slotval2 = cint(orientation)
-
   let slotval3 = gen_qvariant_types.QVariant(h: value)
-
   let slotval4 = role
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4 )
-
+  var virtualReturn = vtbl[].setHeaderData(self, slotval1, slotval2, slotval3, slotval4)
   virtualReturn
+
 proc QDirModelitemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] =
-  var v_mm = fQDirModel_virtualbase_itemData(self.h, index.h)
+  var v_mm = fcQDirModel_virtualbase_itemData(self.h, index.h)
   var vx_ret: Table[cint, gen_qvariant_types.QVariant]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
   var v_Values = cast[ptr UncheckedArray[pointer]](v_mm.values)
@@ -858,20 +741,11 @@ proc QDirModelitemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstrac
     vx_ret[v_entry_Key] = v_entry_Value
   vx_ret
 
-type QDirModelitemDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant]
-proc onitemData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelitemDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelitemDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_itemData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_itemData(self: ptr cQDirModel, slot: int, index: pointer): struct_miqt_map {.exportc: "miqt_exec_callback_QDirModel_itemData ".} =
-  var nimfunc = cast[ptr QDirModelitemDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
+  var virtualReturn = vtbl[].itemData(self, slotval1)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[pointer](len(virtualReturn))
   var virtualReturn_ctr = 0
@@ -880,8 +754,8 @@ proc miqt_exec_callback_QDirModel_itemData(self: ptr cQDirModel, slot: int, inde
     virtualReturn_Values_CArray[virtualReturn_ctr] = virtualReturn_v.h
     virtualReturn_ctr += 1
 
-
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
+
 proc QDirModelsetItemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool =
   var roles_Keys_CArray = newSeq[cint](len(roles))
   var roles_Values_CArray = newSeq[pointer](len(roles))
@@ -891,20 +765,12 @@ proc QDirModelsetItemData*(self: gen_qdirmodel_types.QDirModel, index: gen_qabst
     roles_Values_CArray[roles_ctr] = roles_v.h
     roles_ctr += 1
 
-  fQDirModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
+  fcQDirModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-type QDirModelsetItemDataProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool
-proc onsetItemData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsetItemDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsetItemDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_setItemData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_setItemData(self: ptr cQDirModel, slot: int, index: pointer, roles: struct_miqt_map): bool {.exportc: "miqt_exec_callback_QDirModel_setItemData ".} =
-  var nimfunc = cast[ptr QDirModelsetItemDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_setItemData(vtbl: pointer, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
   var vroles_Keys = cast[ptr UncheckedArray[cint]](vroles_mm.keys)
@@ -916,313 +782,172 @@ proc miqt_exec_callback_QDirModel_setItemData(self: ptr cQDirModel, slot: int, i
 
     vrolesx_ret[vroles_entry_Key] = vroles_entry_Value
   let slotval2 = vrolesx_ret
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
+
 proc QDirModelcanDropMimeData*(self: gen_qdirmodel_types.QDirModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
+  fcQDirModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-type QDirModelcanDropMimeDataProc* = proc(data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oncanDropMimeData*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelcanDropMimeDataProc) =
-  # TODO check subclass
-  var tmp = new QDirModelcanDropMimeDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_canDropMimeData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_canDropMimeData(self: ptr cQDirModel, slot: int, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_canDropMimeData ".} =
-  var nimfunc = cast[ptr QDirModelcanDropMimeDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_canDropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data)
-
   let slotval2 = cint(action)
-
   let slotval3 = row
-
   let slotval4 = column
-
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QDirModelsupportedDragActions*(self: gen_qdirmodel_types.QDirModel, ): cint =
-  cint(fQDirModel_virtualbase_supportedDragActions(self.h))
+  cint(fcQDirModel_virtualbase_supportedDragActions(self.h))
 
-type QDirModelsupportedDragActionsProc* = proc(): cint
-proc onsupportedDragActions*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsupportedDragActionsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsupportedDragActionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_supportedDragActions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_supportedDragActions(self: ptr cQDirModel, slot: int): cint {.exportc: "miqt_exec_callback_QDirModel_supportedDragActions ".} =
-  var nimfunc = cast[ptr QDirModelsupportedDragActionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQDirModel_supportedDragActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
+
 proc QDirModelinsertRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_insertRows(self.h, row, count, parent.h)
+  fcQDirModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
-type QDirModelinsertRowsProc* = proc(row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oninsertRows*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelinsertRowsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelinsertRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_insertRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_insertRows(self: ptr cQDirModel, slot: int, row: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_insertRows ".} =
-  var nimfunc = cast[ptr QDirModelinsertRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_insertRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = row
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].insertRows(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelinsertColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_insertColumns(self.h, column, count, parent.h)
+  fcQDirModel_virtualbase_insertColumns(self.h, column, count, parent.h)
 
-type QDirModelinsertColumnsProc* = proc(column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oninsertColumns*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelinsertColumnsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelinsertColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_insertColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_insertColumns(self: ptr cQDirModel, slot: int, column: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_insertColumns ".} =
-  var nimfunc = cast[ptr QDirModelinsertColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_insertColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = column
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].insertColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelremoveRows*(self: gen_qdirmodel_types.QDirModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_removeRows(self.h, row, count, parent.h)
+  fcQDirModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
-type QDirModelremoveRowsProc* = proc(row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onremoveRows*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelremoveRowsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelremoveRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_removeRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_removeRows(self: ptr cQDirModel, slot: int, row: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_removeRows ".} =
-  var nimfunc = cast[ptr QDirModelremoveRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_removeRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = row
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].removeRows(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelremoveColumns*(self: gen_qdirmodel_types.QDirModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_removeColumns(self.h, column, count, parent.h)
+  fcQDirModel_virtualbase_removeColumns(self.h, column, count, parent.h)
 
-type QDirModelremoveColumnsProc* = proc(column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onremoveColumns*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelremoveColumnsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelremoveColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_removeColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_removeColumns(self: ptr cQDirModel, slot: int, column: cint, count: cint, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_removeColumns ".} =
-  var nimfunc = cast[ptr QDirModelremoveColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_removeColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = column
-
   let slotval2 = count
-
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].removeColumns(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QDirModelmoveRows*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fQDirModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
+  fcQDirModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
-type QDirModelmoveRowsProc* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool
-proc onmoveRows*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmoveRowsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmoveRowsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_moveRows(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_moveRows(self: ptr cQDirModel, slot: int, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.exportc: "miqt_exec_callback_QDirModel_moveRows ".} =
-  var nimfunc = cast[ptr QDirModelmoveRowsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_moveRows(vtbl: pointer, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
-
   let slotval2 = sourceRow
-
   let slotval3 = count
-
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
-
   let slotval5 = destinationChild
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].moveRows(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QDirModelmoveColumns*(self: gen_qdirmodel_types.QDirModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
-  fQDirModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
+  fcQDirModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
-type QDirModelmoveColumnsProc* = proc(sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool
-proc onmoveColumns*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmoveColumnsProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmoveColumnsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_moveColumns(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_moveColumns(self: ptr cQDirModel, slot: int, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.exportc: "miqt_exec_callback_QDirModel_moveColumns ".} =
-  var nimfunc = cast[ptr QDirModelmoveColumnsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_moveColumns(vtbl: pointer, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent)
-
   let slotval2 = sourceColumn
-
   let slotval3 = count
-
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent)
-
   let slotval5 = destinationChild
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
-
+  var virtualReturn = vtbl[].moveColumns(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
+
 proc QDirModelfetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
-  fQDirModel_virtualbase_fetchMore(self.h, parent.h)
+  fcQDirModel_virtualbase_fetchMore(self.h, parent.h)
 
-type QDirModelfetchMoreProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): void
-proc onfetchMore*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelfetchMoreProc) =
-  # TODO check subclass
-  var tmp = new QDirModelfetchMoreProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_fetchMore(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_fetchMore(self: ptr cQDirModel, slot: int, parent: pointer): void {.exportc: "miqt_exec_callback_QDirModel_fetchMore ".} =
-  var nimfunc = cast[ptr QDirModelfetchMoreProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_fetchMore(vtbl: pointer, self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
+  vtbl[].fetchMore(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QDirModelcanFetchMore*(self: gen_qdirmodel_types.QDirModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQDirModel_virtualbase_canFetchMore(self.h, parent.h)
+  fcQDirModel_virtualbase_canFetchMore(self.h, parent.h)
 
-type QDirModelcanFetchMoreProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex): bool
-proc oncanFetchMore*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelcanFetchMoreProc) =
-  # TODO check subclass
-  var tmp = new QDirModelcanFetchMoreProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_canFetchMore(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_canFetchMore(self: ptr cQDirModel, slot: int, parent: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_canFetchMore ".} =
-  var nimfunc = cast[ptr QDirModelcanFetchMoreProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_canFetchMore(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].canFetchMore(self, slotval1)
   virtualReturn
+
 proc QDirModelbuddy*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQDirModel_virtualbase_buddy(self.h, index.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQDirModel_virtualbase_buddy(self.h, index.h))
 
-type QDirModelbuddyProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex
-proc onbuddy*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelbuddyProc) =
-  # TODO check subclass
-  var tmp = new QDirModelbuddyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_buddy(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_buddy(self: ptr cQDirModel, slot: int, index: pointer): pointer {.exportc: "miqt_exec_callback_QDirModel_buddy ".} =
-  var nimfunc = cast[ptr QDirModelbuddyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_buddy(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].buddy(self, slotval1)
   virtualReturn.h
+
 proc QDirModelmatch*(self: gen_qdirmodel_types.QDirModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fQDirModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
+  var v_ma = fcQDirModel_virtualbase_match(self.h, start.h, role, value.h, hits, cint(flags))
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
   vx_ret
 
-type QDirModelmatchProc* = proc(start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex]
-proc onmatch*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelmatchProc) =
-  # TODO check subclass
-  var tmp = new QDirModelmatchProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_match(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_match(self: ptr cQDirModel, slot: int, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.exportc: "miqt_exec_callback_QDirModel_match ".} =
-  var nimfunc = cast[ptr QDirModelmatchProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start)
-
   let slotval2 = role
-
   let slotval3 = gen_qvariant_types.QVariant(h: value)
-
   let slotval4 = hits
-
   let slotval5 = cint(flags)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5 )
+  var virtualReturn = vtbl[].match(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 proc QDirModelspan*(self: gen_qdirmodel_types.QDirModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQDirModel_virtualbase_span(self.h, index.h))
+  gen_qsize_types.QSize(h: fcQDirModel_virtualbase_span(self.h, index.h))
 
-type QDirModelspanProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize
-proc onspan*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelspanProc) =
-  # TODO check subclass
-  var tmp = new QDirModelspanProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_span(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_span(self: ptr cQDirModel, slot: int, index: pointer): pointer {.exportc: "miqt_exec_callback_QDirModel_span ".} =
-  var nimfunc = cast[ptr QDirModelspanProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_span(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].span(self, slotval1)
   virtualReturn.h
+
 proc QDirModelroleNames*(self: gen_qdirmodel_types.QDirModel, ): Table[cint,seq[byte]] =
-  var v_mm = fQDirModel_virtualbase_roleNames(self.h)
+  var v_mm = fcQDirModel_virtualbase_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
   var v_Values = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.values)
@@ -1237,18 +962,10 @@ proc QDirModelroleNames*(self: gen_qdirmodel_types.QDirModel, ): Table[cint,seq[
     vx_ret[v_entry_Key] = v_entry_Value
   vx_ret
 
-type QDirModelroleNamesProc* = proc(): Table[cint,seq[byte]]
-proc onroleNames*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelroleNamesProc) =
-  # TODO check subclass
-  var tmp = new QDirModelroleNamesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_roleNames(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_roleNames(self: ptr cQDirModel, slot: int): struct_miqt_map {.exportc: "miqt_exec_callback_QDirModel_roleNames ".} =
-  var nimfunc = cast[ptr QDirModelroleNamesProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQDirModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].roleNames(self)
   var virtualReturn_Keys_CArray = newSeq[cint](len(virtualReturn))
   var virtualReturn_Values_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   var virtualReturn_ctr = 0
@@ -1257,165 +974,490 @@ proc miqt_exec_callback_QDirModel_roleNames(self: ptr cQDirModel, slot: int): st
     virtualReturn_Values_CArray[virtualReturn_ctr] = struct_miqt_string(data: cast[cstring](if len(virtualReturn_v) == 0: nil else: unsafeAddr virtualReturn_v[0]), len: csize_t(len(virtualReturn_v)))
     virtualReturn_ctr += 1
 
-
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
+
 proc QDirModelsubmit*(self: gen_qdirmodel_types.QDirModel, ): bool =
-  fQDirModel_virtualbase_submit(self.h)
+  fcQDirModel_virtualbase_submit(self.h)
 
-type QDirModelsubmitProc* = proc(): bool
-proc onsubmit*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelsubmitProc) =
-  # TODO check subclass
-  var tmp = new QDirModelsubmitProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_submit(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_submit(self: ptr cQDirModel, slot: int): bool {.exportc: "miqt_exec_callback_QDirModel_submit ".} =
-  var nimfunc = cast[ptr QDirModelsubmitProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQDirModel_submit(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  var virtualReturn = vtbl[].submit(self)
   virtualReturn
+
 proc QDirModelrevert*(self: gen_qdirmodel_types.QDirModel, ): void =
-  fQDirModel_virtualbase_revert(self.h)
+  fcQDirModel_virtualbase_revert(self.h)
 
-type QDirModelrevertProc* = proc(): void
-proc onrevert*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelrevertProc) =
-  # TODO check subclass
-  var tmp = new QDirModelrevertProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_revert(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQDirModel_revert(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
+  vtbl[].revert(self)
 
-proc miqt_exec_callback_QDirModel_revert(self: ptr cQDirModel, slot: int): void {.exportc: "miqt_exec_callback_QDirModel_revert ".} =
-  var nimfunc = cast[ptr QDirModelrevertProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QDirModelevent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): bool =
-  fQDirModel_virtualbase_event(self.h, event.h)
+  fcQDirModel_virtualbase_event(self.h, event.h)
 
-type QDirModeleventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeleventProc) =
-  # TODO check subclass
-  var tmp = new QDirModeleventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_event(self: ptr cQDirModel, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_event ".} =
-  var nimfunc = cast[ptr QDirModeleventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QDirModeleventFilter*(self: gen_qdirmodel_types.QDirModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQDirModel_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQDirModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QDirModeleventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeleventFilterProc) =
-  # TODO check subclass
-  var tmp = new QDirModeleventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_eventFilter(self: ptr cQDirModel, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QDirModel_eventFilter ".} =
-  var nimfunc = cast[ptr QDirModeleventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QDirModeltimerEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQDirModel_virtualbase_timerEvent(self.h, event.h)
+  fcQDirModel_virtualbase_timerEvent(self.h, event.h)
 
-type QDirModeltimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeltimerEventProc) =
-  # TODO check subclass
-  var tmp = new QDirModeltimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_timerEvent(self: ptr cQDirModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QDirModel_timerEvent ".} =
-  var nimfunc = cast[ptr QDirModeltimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QDirModelchildEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QChildEvent): void =
-  fQDirModel_virtualbase_childEvent(self.h, event.h)
+  fcQDirModel_virtualbase_childEvent(self.h, event.h)
 
-type QDirModelchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelchildEventProc) =
-  # TODO check subclass
-  var tmp = new QDirModelchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_childEvent(self: ptr cQDirModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QDirModel_childEvent ".} =
-  var nimfunc = cast[ptr QDirModelchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QDirModelcustomEvent*(self: gen_qdirmodel_types.QDirModel, event: gen_qcoreevent_types.QEvent): void =
-  fQDirModel_virtualbase_customEvent(self.h, event.h)
+  fcQDirModel_virtualbase_customEvent(self.h, event.h)
 
-type QDirModelcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QDirModelcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_customEvent(self: ptr cQDirModel, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QDirModel_customEvent ".} =
-  var nimfunc = cast[ptr QDirModelcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QDirModelconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQDirModel_virtualbase_connectNotify(self.h, signal.h)
+  fcQDirModel_virtualbase_connectNotify(self.h, signal.h)
 
-type QDirModelconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qdirmodel_types.QDirModel, slot: QDirModelconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QDirModelconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_connectNotify(self: ptr cQDirModel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QDirModel_connectNotify ".} =
-  var nimfunc = cast[ptr QDirModelconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QDirModeldisconnectNotify*(self: gen_qdirmodel_types.QDirModel, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQDirModel_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQDirModel_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QDirModeldisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qdirmodel_types.QDirModel, slot: QDirModeldisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QDirModeldisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQDirModel_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QDirModel_disconnectNotify(self: ptr cQDirModel, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QDirModel_disconnectNotify ".} =
-  var nimfunc = cast[ptr QDirModeldisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQDirModel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QDirModelVTable](vtbl)
+  let self = QDirModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qdirmodel_types.QDirModel,
+    nameFilters: seq[string], filters: cint, sort: cint,
+    vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
+  var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
+  for i in 0..<len(nameFilters):
+    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
 
-  nimfunc[](slotval1)
+  let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQDirModelVTable, _: ptr cQDirModel) {.cdecl.} =
+    let vtbl = cast[ref QDirModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDirModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQDirModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQDirModel_metacall
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQDirModel_index
+  if not isNil(vtbl.parent):
+    vtbl[].vtbl.parent = miqt_exec_callback_cQDirModel_parent
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQDirModel_rowCount
+  if not isNil(vtbl.columnCount):
+    vtbl[].vtbl.columnCount = miqt_exec_callback_cQDirModel_columnCount
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQDirModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQDirModel_setData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQDirModel_headerData
+  if not isNil(vtbl.hasChildren):
+    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQDirModel_hasChildren
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQDirModel_flags
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQDirModel_sort
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQDirModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQDirModel_mimeData
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQDirModel_dropMimeData
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQDirModel_supportedDropActions
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQDirModel_sibling
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQDirModel_setHeaderData
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQDirModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQDirModel_setItemData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQDirModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQDirModel_supportedDragActions
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQDirModel_insertRows
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQDirModel_insertColumns
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQDirModel_removeRows
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQDirModel_removeColumns
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQDirModel_moveRows
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQDirModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQDirModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQDirModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQDirModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQDirModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQDirModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQDirModel_roleNames
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQDirModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQDirModel_revert
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQDirModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDirModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDirModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDirModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDirModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDirModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDirModel_disconnectNotify
+  gen_qdirmodel_types.QDirModel(h: fcQDirModel_new(addr(vtbl[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort)))
+
+proc create*(T: type gen_qdirmodel_types.QDirModel,
+    vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
+  let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQDirModelVTable, _: ptr cQDirModel) {.cdecl.} =
+    let vtbl = cast[ref QDirModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDirModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQDirModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQDirModel_metacall
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQDirModel_index
+  if not isNil(vtbl.parent):
+    vtbl[].vtbl.parent = miqt_exec_callback_cQDirModel_parent
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQDirModel_rowCount
+  if not isNil(vtbl.columnCount):
+    vtbl[].vtbl.columnCount = miqt_exec_callback_cQDirModel_columnCount
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQDirModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQDirModel_setData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQDirModel_headerData
+  if not isNil(vtbl.hasChildren):
+    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQDirModel_hasChildren
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQDirModel_flags
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQDirModel_sort
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQDirModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQDirModel_mimeData
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQDirModel_dropMimeData
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQDirModel_supportedDropActions
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQDirModel_sibling
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQDirModel_setHeaderData
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQDirModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQDirModel_setItemData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQDirModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQDirModel_supportedDragActions
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQDirModel_insertRows
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQDirModel_insertColumns
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQDirModel_removeRows
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQDirModel_removeColumns
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQDirModel_moveRows
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQDirModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQDirModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQDirModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQDirModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQDirModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQDirModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQDirModel_roleNames
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQDirModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQDirModel_revert
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQDirModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDirModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDirModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDirModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDirModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDirModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDirModel_disconnectNotify
+  gen_qdirmodel_types.QDirModel(h: fcQDirModel_new2(addr(vtbl[]), ))
+
+proc create*(T: type gen_qdirmodel_types.QDirModel,
+    nameFilters: seq[string], filters: cint, sort: cint, parent: gen_qobject_types.QObject,
+    vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
+  var nameFilters_CArray = newSeq[struct_miqt_string](len(nameFilters))
+  for i in 0..<len(nameFilters):
+    nameFilters_CArray[i] = struct_miqt_string(data: nameFilters[i], len: csize_t(len(nameFilters[i])))
+
+  let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQDirModelVTable, _: ptr cQDirModel) {.cdecl.} =
+    let vtbl = cast[ref QDirModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDirModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQDirModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQDirModel_metacall
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQDirModel_index
+  if not isNil(vtbl.parent):
+    vtbl[].vtbl.parent = miqt_exec_callback_cQDirModel_parent
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQDirModel_rowCount
+  if not isNil(vtbl.columnCount):
+    vtbl[].vtbl.columnCount = miqt_exec_callback_cQDirModel_columnCount
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQDirModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQDirModel_setData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQDirModel_headerData
+  if not isNil(vtbl.hasChildren):
+    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQDirModel_hasChildren
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQDirModel_flags
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQDirModel_sort
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQDirModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQDirModel_mimeData
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQDirModel_dropMimeData
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQDirModel_supportedDropActions
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQDirModel_sibling
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQDirModel_setHeaderData
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQDirModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQDirModel_setItemData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQDirModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQDirModel_supportedDragActions
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQDirModel_insertRows
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQDirModel_insertColumns
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQDirModel_removeRows
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQDirModel_removeColumns
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQDirModel_moveRows
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQDirModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQDirModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQDirModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQDirModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQDirModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQDirModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQDirModel_roleNames
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQDirModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQDirModel_revert
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQDirModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDirModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDirModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDirModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDirModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDirModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDirModel_disconnectNotify
+  gen_qdirmodel_types.QDirModel(h: fcQDirModel_new3(addr(vtbl[]), struct_miqt_array(len: csize_t(len(nameFilters)), data: if len(nameFilters) == 0: nil else: addr(nameFilters_CArray[0])), cint(filters), cint(sort), parent.h))
+
+proc create*(T: type gen_qdirmodel_types.QDirModel,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QDirModelVTable = nil): gen_qdirmodel_types.QDirModel =
+  let vtbl = if vtbl == nil: new QDirModelVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQDirModelVTable, _: ptr cQDirModel) {.cdecl.} =
+    let vtbl = cast[ref QDirModelVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQDirModel_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQDirModel_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQDirModel_metacall
+  if not isNil(vtbl.index):
+    vtbl[].vtbl.index = miqt_exec_callback_cQDirModel_index
+  if not isNil(vtbl.parent):
+    vtbl[].vtbl.parent = miqt_exec_callback_cQDirModel_parent
+  if not isNil(vtbl.rowCount):
+    vtbl[].vtbl.rowCount = miqt_exec_callback_cQDirModel_rowCount
+  if not isNil(vtbl.columnCount):
+    vtbl[].vtbl.columnCount = miqt_exec_callback_cQDirModel_columnCount
+  if not isNil(vtbl.data):
+    vtbl[].vtbl.data = miqt_exec_callback_cQDirModel_data
+  if not isNil(vtbl.setData):
+    vtbl[].vtbl.setData = miqt_exec_callback_cQDirModel_setData
+  if not isNil(vtbl.headerData):
+    vtbl[].vtbl.headerData = miqt_exec_callback_cQDirModel_headerData
+  if not isNil(vtbl.hasChildren):
+    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQDirModel_hasChildren
+  if not isNil(vtbl.flags):
+    vtbl[].vtbl.flags = miqt_exec_callback_cQDirModel_flags
+  if not isNil(vtbl.sort):
+    vtbl[].vtbl.sort = miqt_exec_callback_cQDirModel_sort
+  if not isNil(vtbl.mimeTypes):
+    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQDirModel_mimeTypes
+  if not isNil(vtbl.mimeData):
+    vtbl[].vtbl.mimeData = miqt_exec_callback_cQDirModel_mimeData
+  if not isNil(vtbl.dropMimeData):
+    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQDirModel_dropMimeData
+  if not isNil(vtbl.supportedDropActions):
+    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQDirModel_supportedDropActions
+  if not isNil(vtbl.sibling):
+    vtbl[].vtbl.sibling = miqt_exec_callback_cQDirModel_sibling
+  if not isNil(vtbl.setHeaderData):
+    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQDirModel_setHeaderData
+  if not isNil(vtbl.itemData):
+    vtbl[].vtbl.itemData = miqt_exec_callback_cQDirModel_itemData
+  if not isNil(vtbl.setItemData):
+    vtbl[].vtbl.setItemData = miqt_exec_callback_cQDirModel_setItemData
+  if not isNil(vtbl.canDropMimeData):
+    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQDirModel_canDropMimeData
+  if not isNil(vtbl.supportedDragActions):
+    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQDirModel_supportedDragActions
+  if not isNil(vtbl.insertRows):
+    vtbl[].vtbl.insertRows = miqt_exec_callback_cQDirModel_insertRows
+  if not isNil(vtbl.insertColumns):
+    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQDirModel_insertColumns
+  if not isNil(vtbl.removeRows):
+    vtbl[].vtbl.removeRows = miqt_exec_callback_cQDirModel_removeRows
+  if not isNil(vtbl.removeColumns):
+    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQDirModel_removeColumns
+  if not isNil(vtbl.moveRows):
+    vtbl[].vtbl.moveRows = miqt_exec_callback_cQDirModel_moveRows
+  if not isNil(vtbl.moveColumns):
+    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQDirModel_moveColumns
+  if not isNil(vtbl.fetchMore):
+    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQDirModel_fetchMore
+  if not isNil(vtbl.canFetchMore):
+    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQDirModel_canFetchMore
+  if not isNil(vtbl.buddy):
+    vtbl[].vtbl.buddy = miqt_exec_callback_cQDirModel_buddy
+  if not isNil(vtbl.match):
+    vtbl[].vtbl.match = miqt_exec_callback_cQDirModel_match
+  if not isNil(vtbl.span):
+    vtbl[].vtbl.span = miqt_exec_callback_cQDirModel_span
+  if not isNil(vtbl.roleNames):
+    vtbl[].vtbl.roleNames = miqt_exec_callback_cQDirModel_roleNames
+  if not isNil(vtbl.submit):
+    vtbl[].vtbl.submit = miqt_exec_callback_cQDirModel_submit
+  if not isNil(vtbl.revert):
+    vtbl[].vtbl.revert = miqt_exec_callback_cQDirModel_revert
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQDirModel_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQDirModel_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQDirModel_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQDirModel_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQDirModel_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQDirModel_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQDirModel_disconnectNotify
+  gen_qdirmodel_types.QDirModel(h: fcQDirModel_new4(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qdirmodel_types.QDirModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQDirModel_staticMetaObject())
 proc delete*(self: gen_qdirmodel_types.QDirModel) =

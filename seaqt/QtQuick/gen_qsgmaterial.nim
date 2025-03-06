@@ -56,24 +56,20 @@ export
 
 type cQSGMaterial*{.exportc: "QSGMaterial", incompleteStruct.} = object
 
-proc fcQSGMaterial_new(): ptr cQSGMaterial {.importc: "QSGMaterial_new".}
 proc fcQSGMaterial_typeX(self: pointer, ): pointer {.importc: "QSGMaterial_type".}
 proc fcQSGMaterial_createShader(self: pointer, ): pointer {.importc: "QSGMaterial_createShader".}
 proc fcQSGMaterial_compare(self: pointer, other: pointer): cint {.importc: "QSGMaterial_compare".}
 proc fcQSGMaterial_flags(self: pointer, ): cint {.importc: "QSGMaterial_flags".}
 proc fcQSGMaterial_setFlag(self: pointer, flags: cint): void {.importc: "QSGMaterial_setFlag".}
 proc fcQSGMaterial_setFlag2(self: pointer, flags: cint, on: bool): void {.importc: "QSGMaterial_setFlag2".}
-proc fcQSGMaterial_override_virtual_typeX(self: pointer, slot: int) {.importc: "QSGMaterial_override_virtual_type".}
-proc fcQSGMaterial_override_virtual_createShader(self: pointer, slot: int) {.importc: "QSGMaterial_override_virtual_createShader".}
-proc fQSGMaterial_virtualbase_compare(self: pointer, other: pointer): cint{.importc: "QSGMaterial_virtualbase_compare".}
-proc fcQSGMaterial_override_virtual_compare(self: pointer, slot: int) {.importc: "QSGMaterial_override_virtual_compare".}
+type cQSGMaterialVTable = object
+  destructor*: proc(vtbl: ptr cQSGMaterialVTable, self: ptr cQSGMaterial) {.cdecl, raises:[], gcsafe.}
+  typeX*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  createShader*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  compare*: proc(vtbl, self: pointer, other: pointer): cint {.cdecl, raises: [], gcsafe.}
+proc fcQSGMaterial_virtualbase_compare(self: pointer, other: pointer): cint {.importc: "QSGMaterial_virtualbase_compare".}
+proc fcQSGMaterial_new(vtbl: pointer, ): ptr cQSGMaterial {.importc: "QSGMaterial_new".}
 proc fcQSGMaterial_delete(self: pointer) {.importc: "QSGMaterial_delete".}
-
-
-func init*(T: type gen_qsgmaterial_types.QSGMaterial, h: ptr cQSGMaterial): gen_qsgmaterial_types.QSGMaterial =
-  T(h: h)
-proc create*(T: type gen_qsgmaterial_types.QSGMaterial, ): gen_qsgmaterial_types.QSGMaterial =
-  gen_qsgmaterial_types.QSGMaterial.init(fcQSGMaterial_new())
 
 proc typeX*(self: gen_qsgmaterial_types.QSGMaterial, ): gen_qsgmaterialtype_types.QSGMaterialType =
   gen_qsgmaterialtype_types.QSGMaterialType(h: fcQSGMaterial_typeX(self.h))
@@ -93,52 +89,50 @@ proc setFlag*(self: gen_qsgmaterial_types.QSGMaterial, flags: cint): void =
 proc setFlag*(self: gen_qsgmaterial_types.QSGMaterial, flags: cint, on: bool): void =
   fcQSGMaterial_setFlag2(self.h, cint(flags), on)
 
-type QSGMaterialtypeXProc* = proc(): gen_qsgmaterialtype_types.QSGMaterialType
-proc ontypeX*(self: gen_qsgmaterial_types.QSGMaterial, slot: QSGMaterialtypeXProc) =
-  # TODO check subclass
-  var tmp = new QSGMaterialtypeXProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGMaterial_override_virtual_typeX(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGMaterial_type(self: ptr cQSGMaterial, slot: int): pointer {.exportc: "miqt_exec_callback_QSGMaterial_type ".} =
-  var nimfunc = cast[ptr QSGMaterialtypeXProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+type QSGMaterialtypeXProc* = proc(self: QSGMaterial): gen_qsgmaterialtype_types.QSGMaterialType {.raises: [], gcsafe.}
+type QSGMaterialcreateShaderProc* = proc(self: QSGMaterial): gen_qsgmaterialshader_types.QSGMaterialShader {.raises: [], gcsafe.}
+type QSGMaterialcompareProc* = proc(self: QSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint {.raises: [], gcsafe.}
+type QSGMaterialVTable* = object
+  vtbl: cQSGMaterialVTable
+  typeX*: QSGMaterialtypeXProc
+  createShader*: QSGMaterialcreateShaderProc
+  compare*: QSGMaterialcompareProc
+proc miqt_exec_callback_cQSGMaterial_typeX(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGMaterialVTable](vtbl)
+  let self = QSGMaterial(h: self)
+  var virtualReturn = vtbl[].typeX(self)
   virtualReturn.h
-type QSGMaterialcreateShaderProc* = proc(): gen_qsgmaterialshader_types.QSGMaterialShader
-proc oncreateShader*(self: gen_qsgmaterial_types.QSGMaterial, slot: QSGMaterialcreateShaderProc) =
-  # TODO check subclass
-  var tmp = new QSGMaterialcreateShaderProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGMaterial_override_virtual_createShader(self.h, cast[int](addr tmp[]))
 
-proc miqt_exec_callback_QSGMaterial_createShader(self: ptr cQSGMaterial, slot: int): pointer {.exportc: "miqt_exec_callback_QSGMaterial_createShader ".} =
-  var nimfunc = cast[ptr QSGMaterialcreateShaderProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQSGMaterial_createShader(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSGMaterialVTable](vtbl)
+  let self = QSGMaterial(h: self)
+  var virtualReturn = vtbl[].createShader(self)
   virtualReturn.h
+
 proc QSGMaterialcompare*(self: gen_qsgmaterial_types.QSGMaterial, other: gen_qsgmaterial_types.QSGMaterial): cint =
-  fQSGMaterial_virtualbase_compare(self.h, other.h)
+  fcQSGMaterial_virtualbase_compare(self.h, other.h)
 
-type QSGMaterialcompareProc* = proc(other: gen_qsgmaterial_types.QSGMaterial): cint
-proc oncompare*(self: gen_qsgmaterial_types.QSGMaterial, slot: QSGMaterialcompareProc) =
-  # TODO check subclass
-  var tmp = new QSGMaterialcompareProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQSGMaterial_override_virtual_compare(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QSGMaterial_compare(self: ptr cQSGMaterial, slot: int, other: pointer): cint {.exportc: "miqt_exec_callback_QSGMaterial_compare ".} =
-  var nimfunc = cast[ptr QSGMaterialcompareProc](cast[pointer](slot))
+proc miqt_exec_callback_cQSGMaterial_compare(vtbl: pointer, self: pointer, other: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSGMaterialVTable](vtbl)
+  let self = QSGMaterial(h: self)
   let slotval1 = gen_qsgmaterial_types.QSGMaterial(h: other)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].compare(self, slotval1)
   virtualReturn
+
+proc create*(T: type gen_qsgmaterial_types.QSGMaterial,
+    vtbl: ref QSGMaterialVTable = nil): gen_qsgmaterial_types.QSGMaterial =
+  let vtbl = if vtbl == nil: new QSGMaterialVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQSGMaterialVTable, _: ptr cQSGMaterial) {.cdecl.} =
+    let vtbl = cast[ref QSGMaterialVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.typeX):
+    vtbl[].vtbl.typeX = miqt_exec_callback_cQSGMaterial_typeX
+  if not isNil(vtbl.createShader):
+    vtbl[].vtbl.createShader = miqt_exec_callback_cQSGMaterial_createShader
+  if not isNil(vtbl.compare):
+    vtbl[].vtbl.compare = miqt_exec_callback_cQSGMaterial_compare
+  gen_qsgmaterial_types.QSGMaterial(h: fcQSGMaterial_new(addr(vtbl[]), ))
+
 proc delete*(self: gen_qsgmaterial_types.QSGMaterial) =
   fcQSGMaterial_delete(self.h)

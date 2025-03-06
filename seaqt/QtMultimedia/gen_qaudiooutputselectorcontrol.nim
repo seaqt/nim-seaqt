@@ -67,9 +67,6 @@ proc fcQAudioOutputSelectorControl_trUtf83(s: cstring, c: cstring, n: cint): str
 proc fcQAudioOutputSelectorControl_staticMetaObject(): pointer {.importc: "QAudioOutputSelectorControl_staticMetaObject".}
 proc fcQAudioOutputSelectorControl_delete(self: pointer) {.importc: "QAudioOutputSelectorControl_delete".}
 
-
-func init*(T: type gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, h: ptr cQAudioOutputSelectorControl): gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl =
-  T(h: h)
 proc metaObject*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutputSelectorControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioOutputSelectorControl_metaObject(self.h))
 
@@ -127,7 +124,7 @@ proc activeOutputChanged*(self: gen_qaudiooutputselectorcontrol_types.QAudioOutp
   fcQAudioOutputSelectorControl_activeOutputChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
 type QAudioOutputSelectorControlactiveOutputChangedSlot* = proc(name: string)
-proc miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged(slot: int, name: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQAudioOutputSelectorControl_activeOutputChanged(slot: int, name: struct_miqt_string) {.exportc: "miqt_exec_callback_QAudioOutputSelectorControl_activeOutputChanged".} =
   let nimfunc = cast[ptr QAudioOutputSelectorControlactiveOutputChangedSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
@@ -146,7 +143,7 @@ proc availableOutputsChanged*(self: gen_qaudiooutputselectorcontrol_types.QAudio
   fcQAudioOutputSelectorControl_availableOutputsChanged(self.h)
 
 type QAudioOutputSelectorControlavailableOutputsChangedSlot* = proc()
-proc miqt_exec_callback_QAudioOutputSelectorControl_availableOutputsChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQAudioOutputSelectorControl_availableOutputsChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioOutputSelectorControl_availableOutputsChanged".} =
   let nimfunc = cast[ptr QAudioOutputSelectorControlavailableOutputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

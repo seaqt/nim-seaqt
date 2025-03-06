@@ -96,10 +96,6 @@ export
 
 type cQVideoFrame*{.exportc: "QVideoFrame", incompleteStruct.} = object
 
-proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
-proc fcQVideoFrame_new2(bytes: cint, size: pointer, bytesPerLine: cint, format: cint): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
-proc fcQVideoFrame_new3(image: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
-proc fcQVideoFrame_new4(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new4".}
 proc fcQVideoFrame_operatorAssign(self: pointer, other: pointer): void {.importc: "QVideoFrame_operatorAssign".}
 proc fcQVideoFrame_operatorEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorEqual".}
 proc fcQVideoFrame_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QVideoFrame_operatorNotEqual".}
@@ -136,22 +132,11 @@ proc fcQVideoFrame_setMetaData(self: pointer, key: struct_miqt_string, value: po
 proc fcQVideoFrame_image(self: pointer, ): pointer {.importc: "QVideoFrame_image".}
 proc fcQVideoFrame_pixelFormatFromImageFormat(format: cint): cint {.importc: "QVideoFrame_pixelFormatFromImageFormat".}
 proc fcQVideoFrame_imageFormatFromPixelFormat(format: cint): cint {.importc: "QVideoFrame_imageFormatFromPixelFormat".}
+proc fcQVideoFrame_new(): ptr cQVideoFrame {.importc: "QVideoFrame_new".}
+proc fcQVideoFrame_new2(bytes: cint, size: pointer, bytesPerLine: cint, format: cint): ptr cQVideoFrame {.importc: "QVideoFrame_new2".}
+proc fcQVideoFrame_new3(image: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new3".}
+proc fcQVideoFrame_new4(other: pointer): ptr cQVideoFrame {.importc: "QVideoFrame_new4".}
 proc fcQVideoFrame_delete(self: pointer) {.importc: "QVideoFrame_delete".}
-
-
-func init*(T: type gen_qvideoframe_types.QVideoFrame, h: ptr cQVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  T(h: h)
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, ): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new())
-
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, bytes: cint, size: gen_qsize_types.QSize, bytesPerLine: cint, format: cint): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new2(bytes, size.h, bytesPerLine, cint(format)))
-
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, image: gen_qimage_types.QImage): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new3(image.h))
-
-proc create*(T: type gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
-  gen_qvideoframe_types.QVideoFrame.init(fcQVideoFrame_new4(other.h))
 
 proc operatorAssign*(self: gen_qvideoframe_types.QVideoFrame, other: gen_qvideoframe_types.QVideoFrame): void =
   fcQVideoFrame_operatorAssign(self.h, other.h)
@@ -273,6 +258,21 @@ proc pixelFormatFromImageFormat*(_: type gen_qvideoframe_types.QVideoFrame, form
 
 proc imageFormatFromPixelFormat*(_: type gen_qvideoframe_types.QVideoFrame, format: cint): cint =
   cint(fcQVideoFrame_imageFormatFromPixelFormat(cint(format)))
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new())
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame,
+    bytes: cint, size: gen_qsize_types.QSize, bytesPerLine: cint, format: cint): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new2(bytes, size.h, bytesPerLine, cint(format)))
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame,
+    image: gen_qimage_types.QImage): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new3(image.h))
+
+proc create*(T: type gen_qvideoframe_types.QVideoFrame,
+    other: gen_qvideoframe_types.QVideoFrame): gen_qvideoframe_types.QVideoFrame =
+  gen_qvideoframe_types.QVideoFrame(h: fcQVideoFrame_new4(other.h))
 
 proc delete*(self: gen_qvideoframe_types.QVideoFrame) =
   fcQVideoFrame_delete(self.h)

@@ -48,19 +48,13 @@ export
 
 type cQScriptable*{.exportc: "QScriptable", incompleteStruct.} = object
 
-proc fcQScriptable_new(): ptr cQScriptable {.importc: "QScriptable_new".}
 proc fcQScriptable_engine(self: pointer, ): pointer {.importc: "QScriptable_engine".}
 proc fcQScriptable_context(self: pointer, ): pointer {.importc: "QScriptable_context".}
 proc fcQScriptable_thisObject(self: pointer, ): pointer {.importc: "QScriptable_thisObject".}
 proc fcQScriptable_argumentCount(self: pointer, ): cint {.importc: "QScriptable_argumentCount".}
 proc fcQScriptable_argument(self: pointer, index: cint): pointer {.importc: "QScriptable_argument".}
+proc fcQScriptable_new(): ptr cQScriptable {.importc: "QScriptable_new".}
 proc fcQScriptable_delete(self: pointer) {.importc: "QScriptable_delete".}
-
-
-func init*(T: type gen_qscriptable_types.QScriptable, h: ptr cQScriptable): gen_qscriptable_types.QScriptable =
-  T(h: h)
-proc create*(T: type gen_qscriptable_types.QScriptable, ): gen_qscriptable_types.QScriptable =
-  gen_qscriptable_types.QScriptable.init(fcQScriptable_new())
 
 proc engine*(self: gen_qscriptable_types.QScriptable, ): gen_qscriptengine_types.QScriptEngine =
   gen_qscriptengine_types.QScriptEngine(h: fcQScriptable_engine(self.h))
@@ -76,6 +70,9 @@ proc argumentCount*(self: gen_qscriptable_types.QScriptable, ): cint =
 
 proc argument*(self: gen_qscriptable_types.QScriptable, index: cint): gen_qscriptvalue_types.QScriptValue =
   gen_qscriptvalue_types.QScriptValue(h: fcQScriptable_argument(self.h, index))
+
+proc create*(T: type gen_qscriptable_types.QScriptable): gen_qscriptable_types.QScriptable =
+  gen_qscriptable_types.QScriptable(h: fcQScriptable_new())
 
 proc delete*(self: gen_qscriptable_types.QScriptable) =
   fcQScriptable_delete(self.h)

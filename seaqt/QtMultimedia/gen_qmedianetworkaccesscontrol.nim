@@ -64,9 +64,6 @@ proc fcQMediaNetworkAccessControl_trUtf83(s: cstring, c: cstring, n: cint): stru
 proc fcQMediaNetworkAccessControl_staticMetaObject(): pointer {.importc: "QMediaNetworkAccessControl_staticMetaObject".}
 proc fcQMediaNetworkAccessControl_delete(self: pointer) {.importc: "QMediaNetworkAccessControl_delete".}
 
-
-func init*(T: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, h: ptr cQMediaNetworkAccessControl): gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl =
-  T(h: h)
 proc metaObject*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaNetworkAccessControl_metaObject(self.h))
 
@@ -102,7 +99,7 @@ proc configurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetw
   fcQMediaNetworkAccessControl_configurationChanged(self.h, configuration.h)
 
 type QMediaNetworkAccessControlconfigurationChangedSlot* = proc(configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged(slot: int, configuration: pointer) {.exportc.} =
+proc miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged(slot: int, configuration: pointer) {.exportc: "miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged".} =
   let nimfunc = cast[ptr QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: configuration)
 

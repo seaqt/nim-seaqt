@@ -57,10 +57,6 @@ export
 type cQQmlContext*{.exportc: "QQmlContext", incompleteStruct.} = object
 type cQQmlContextPropertyPair*{.exportc: "QQmlContext__PropertyPair", incompleteStruct.} = object
 
-proc fcQQmlContext_new(parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new".}
-proc fcQQmlContext_new2(parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new2".}
-proc fcQQmlContext_new3(parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new3".}
-proc fcQQmlContext_new4(parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new4".}
 proc fcQQmlContext_metaObject(self: pointer, ): pointer {.importc: "QQmlContext_metaObject".}
 proc fcQQmlContext_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlContext_metacast".}
 proc fcQQmlContext_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlContext_metacall".}
@@ -83,46 +79,37 @@ proc fcQQmlContext_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "Q
 proc fcQQmlContext_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlContext_tr3".}
 proc fcQQmlContext_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlContext_trUtf82".}
 proc fcQQmlContext_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlContext_trUtf83".}
-proc fQQmlContext_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQmlContext_virtualbase_metaObject".}
-proc fcQQmlContext_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_metaObject".}
-proc fQQmlContext_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQmlContext_virtualbase_metacast".}
-proc fcQQmlContext_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_metacast".}
-proc fQQmlContext_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQmlContext_virtualbase_metacall".}
-proc fcQQmlContext_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_metacall".}
-proc fQQmlContext_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QQmlContext_virtualbase_event".}
-proc fcQQmlContext_override_virtual_event(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_event".}
-proc fQQmlContext_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQmlContext_virtualbase_eventFilter".}
-proc fcQQmlContext_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_eventFilter".}
-proc fQQmlContext_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QQmlContext_virtualbase_timerEvent".}
-proc fcQQmlContext_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_timerEvent".}
-proc fQQmlContext_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QQmlContext_virtualbase_childEvent".}
-proc fcQQmlContext_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_childEvent".}
-proc fQQmlContext_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QQmlContext_virtualbase_customEvent".}
-proc fcQQmlContext_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_customEvent".}
-proc fQQmlContext_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QQmlContext_virtualbase_connectNotify".}
-proc fcQQmlContext_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_connectNotify".}
-proc fQQmlContext_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQmlContext_virtualbase_disconnectNotify".}
-proc fcQQmlContext_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQmlContext_override_virtual_disconnectNotify".}
+type cQQmlContextVTable = object
+  destructor*: proc(vtbl: ptr cQQmlContextVTable, self: ptr cQQmlContext) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQmlContext_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQmlContext_virtualbase_metaObject".}
+proc fcQQmlContext_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlContext_virtualbase_metacast".}
+proc fcQQmlContext_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlContext_virtualbase_metacall".}
+proc fcQQmlContext_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QQmlContext_virtualbase_event".}
+proc fcQQmlContext_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QQmlContext_virtualbase_eventFilter".}
+proc fcQQmlContext_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QQmlContext_virtualbase_timerEvent".}
+proc fcQQmlContext_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QQmlContext_virtualbase_childEvent".}
+proc fcQQmlContext_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlContext_virtualbase_customEvent".}
+proc fcQQmlContext_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlContext_virtualbase_connectNotify".}
+proc fcQQmlContext_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlContext_virtualbase_disconnectNotify".}
+proc fcQQmlContext_new(vtbl: pointer, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new".}
+proc fcQQmlContext_new2(vtbl: pointer, parent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new2".}
+proc fcQQmlContext_new3(vtbl: pointer, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new3".}
+proc fcQQmlContext_new4(vtbl: pointer, parent: pointer, objParent: pointer): ptr cQQmlContext {.importc: "QQmlContext_new4".}
 proc fcQQmlContext_staticMetaObject(): pointer {.importc: "QQmlContext_staticMetaObject".}
 proc fcQQmlContext_delete(self: pointer) {.importc: "QQmlContext_delete".}
-proc fcQQmlContextPropertyPair_new(param1: pointer): ptr cQQmlContextPropertyPair {.importc: "QQmlContext__PropertyPair_new".}
 proc fcQQmlContextPropertyPair_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlContext__PropertyPair_operatorAssign".}
+proc fcQQmlContextPropertyPair_new(param1: pointer): ptr cQQmlContextPropertyPair {.importc: "QQmlContext__PropertyPair_new".}
 proc fcQQmlContextPropertyPair_delete(self: pointer) {.importc: "QQmlContext__PropertyPair_delete".}
-
-
-func init*(T: type gen_qqmlcontext_types.QQmlContext, h: ptr cQQmlContext): gen_qqmlcontext_types.QQmlContext =
-  T(h: h)
-proc create*(T: type gen_qqmlcontext_types.QQmlContext, parent: gen_qqmlengine_types.QQmlEngine): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext.init(fcQQmlContext_new(parent.h))
-
-proc create*(T: type gen_qqmlcontext_types.QQmlContext, parent: gen_qqmlcontext_types.QQmlContext): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext.init(fcQQmlContext_new2(parent.h))
-
-proc create*(T: type gen_qqmlcontext_types.QQmlContext, parent: gen_qqmlengine_types.QQmlEngine, objParent: gen_qobject_types.QObject): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext.init(fcQQmlContext_new3(parent.h, objParent.h))
-
-proc create*(T: type gen_qqmlcontext_types.QQmlContext, parent: gen_qqmlcontext_types.QQmlContext, objParent: gen_qobject_types.QObject): gen_qqmlcontext_types.QQmlContext =
-  gen_qqmlcontext_types.QQmlContext.init(fcQQmlContext_new4(parent.h, objParent.h))
 
 proc metaObject*(self: gen_qqmlcontext_types.QQmlContext, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_metaObject(self.h))
@@ -215,202 +202,255 @@ proc trUtf8*(_: type gen_qqmlcontext_types.QQmlContext, s: cstring, c: cstring, 
   c_free(v_ms.data)
   vx_ret
 
+type QQmlContextmetaObjectProc* = proc(self: QQmlContext): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QQmlContextmetacastProc* = proc(self: QQmlContext, param1: cstring): pointer {.raises: [], gcsafe.}
+type QQmlContextmetacallProc* = proc(self: QQmlContext, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QQmlContexteventProc* = proc(self: QQmlContext, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQmlContexteventFilterProc* = proc(self: QQmlContext, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQmlContexttimerEventProc* = proc(self: QQmlContext, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QQmlContextchildEventProc* = proc(self: QQmlContext, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QQmlContextcustomEventProc* = proc(self: QQmlContext, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QQmlContextconnectNotifyProc* = proc(self: QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQmlContextdisconnectNotifyProc* = proc(self: QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQmlContextVTable* = object
+  vtbl: cQQmlContextVTable
+  metaObject*: QQmlContextmetaObjectProc
+  metacast*: QQmlContextmetacastProc
+  metacall*: QQmlContextmetacallProc
+  event*: QQmlContexteventProc
+  eventFilter*: QQmlContexteventFilterProc
+  timerEvent*: QQmlContexttimerEventProc
+  childEvent*: QQmlContextchildEventProc
+  customEvent*: QQmlContextcustomEventProc
+  connectNotify*: QQmlContextconnectNotifyProc
+  disconnectNotify*: QQmlContextdisconnectNotifyProc
 proc QQmlContextmetaObject*(self: gen_qqmlcontext_types.QQmlContext, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQQmlContext_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_virtualbase_metaObject(self.h))
 
-type QQmlContextmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_metaObject(self: ptr cQQmlContext, slot: int): pointer {.exportc: "miqt_exec_callback_QQmlContext_metaObject ".} =
-  var nimfunc = cast[ptr QQmlContextmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQmlContext_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QQmlContextmetacast*(self: gen_qqmlcontext_types.QQmlContext, param1: cstring): pointer =
-  fQQmlContext_virtualbase_metacast(self.h, param1)
+  fcQQmlContext_virtualbase_metacast(self.h, param1)
 
-type QQmlContextmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextmetacastProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_metacast(self: ptr cQQmlContext, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQmlContext_metacast ".} =
-  var nimfunc = cast[ptr QQmlContextmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QQmlContextmetacall*(self: gen_qqmlcontext_types.QQmlContext, param1: cint, param2: cint, param3: pointer): cint =
-  fQQmlContext_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQQmlContext_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QQmlContextmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextmetacallProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_metacall(self: ptr cQQmlContext, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQmlContext_metacall ".} =
-  var nimfunc = cast[ptr QQmlContextmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QQmlContextevent*(self: gen_qqmlcontext_types.QQmlContext, event: gen_qcoreevent_types.QEvent): bool =
-  fQQmlContext_virtualbase_event(self.h, event.h)
+  fcQQmlContext_virtualbase_event(self.h, event.h)
 
-type QQmlContexteventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContexteventProc) =
-  # TODO check subclass
-  var tmp = new QQmlContexteventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_event(self: ptr cQQmlContext, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QQmlContext_event ".} =
-  var nimfunc = cast[ptr QQmlContexteventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QQmlContexteventFilter*(self: gen_qqmlcontext_types.QQmlContext, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQQmlContext_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQQmlContext_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QQmlContexteventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContexteventFilterProc) =
-  # TODO check subclass
-  var tmp = new QQmlContexteventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_eventFilter(self: ptr cQQmlContext, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QQmlContext_eventFilter ".} =
-  var nimfunc = cast[ptr QQmlContexteventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QQmlContexttimerEvent*(self: gen_qqmlcontext_types.QQmlContext, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQQmlContext_virtualbase_timerEvent(self.h, event.h)
+  fcQQmlContext_virtualbase_timerEvent(self.h, event.h)
 
-type QQmlContexttimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContexttimerEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlContexttimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_timerEvent(self: ptr cQQmlContext, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlContext_timerEvent ".} =
-  var nimfunc = cast[ptr QQmlContexttimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlContextchildEvent*(self: gen_qqmlcontext_types.QQmlContext, event: gen_qcoreevent_types.QChildEvent): void =
-  fQQmlContext_virtualbase_childEvent(self.h, event.h)
+  fcQQmlContext_virtualbase_childEvent(self.h, event.h)
 
-type QQmlContextchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextchildEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_childEvent(self: ptr cQQmlContext, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlContext_childEvent ".} =
-  var nimfunc = cast[ptr QQmlContextchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlContextcustomEvent*(self: gen_qqmlcontext_types.QQmlContext, event: gen_qcoreevent_types.QEvent): void =
-  fQQmlContext_virtualbase_customEvent(self.h, event.h)
+  fcQQmlContext_virtualbase_customEvent(self.h, event.h)
 
-type QQmlContextcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_customEvent(self: ptr cQQmlContext, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQmlContext_customEvent ".} =
-  var nimfunc = cast[ptr QQmlContextcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlContextconnectNotify*(self: gen_qqmlcontext_types.QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQmlContext_virtualbase_connectNotify(self.h, signal.h)
+  fcQQmlContext_virtualbase_connectNotify(self.h, signal.h)
 
-type QQmlContextconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_connectNotify(self: ptr cQQmlContext, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQmlContext_connectNotify ".} =
-  var nimfunc = cast[ptr QQmlContextconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQmlContextdisconnectNotify*(self: gen_qqmlcontext_types.QQmlContext, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQmlContext_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQQmlContext_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QQmlContextdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qqmlcontext_types.QQmlContext, slot: QQmlContextdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQmlContextdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQmlContext_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQmlContext_disconnectNotify(self: ptr cQQmlContext, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQmlContext_disconnectNotify ".} =
-  var nimfunc = cast[ptr QQmlContextdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQmlContext_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlContextVTable](vtbl)
+  let self = QQmlContext(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qqmlcontext_types.QQmlContext,
+    parent: gen_qqmlengine_types.QQmlEngine,
+    vtbl: ref QQmlContextVTable = nil): gen_qqmlcontext_types.QQmlContext =
+  let vtbl = if vtbl == nil: new QQmlContextVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlContextVTable, _: ptr cQQmlContext) {.cdecl.} =
+    let vtbl = cast[ref QQmlContextVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlContext_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlContext_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlContext_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlContext_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlContext_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlContext_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlContext_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlContext_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlContext_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlContext_disconnectNotify
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new(addr(vtbl[]), parent.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qqmlcontext_types.QQmlContext,
+    parent: gen_qqmlcontext_types.QQmlContext,
+    vtbl: ref QQmlContextVTable = nil): gen_qqmlcontext_types.QQmlContext =
+  let vtbl = if vtbl == nil: new QQmlContextVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlContextVTable, _: ptr cQQmlContext) {.cdecl.} =
+    let vtbl = cast[ref QQmlContextVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlContext_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlContext_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlContext_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlContext_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlContext_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlContext_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlContext_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlContext_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlContext_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlContext_disconnectNotify
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new2(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qqmlcontext_types.QQmlContext,
+    parent: gen_qqmlengine_types.QQmlEngine, objParent: gen_qobject_types.QObject,
+    vtbl: ref QQmlContextVTable = nil): gen_qqmlcontext_types.QQmlContext =
+  let vtbl = if vtbl == nil: new QQmlContextVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlContextVTable, _: ptr cQQmlContext) {.cdecl.} =
+    let vtbl = cast[ref QQmlContextVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlContext_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlContext_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlContext_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlContext_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlContext_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlContext_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlContext_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlContext_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlContext_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlContext_disconnectNotify
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new3(addr(vtbl[]), parent.h, objParent.h))
+
+proc create*(T: type gen_qqmlcontext_types.QQmlContext,
+    parent: gen_qqmlcontext_types.QQmlContext, objParent: gen_qobject_types.QObject,
+    vtbl: ref QQmlContextVTable = nil): gen_qqmlcontext_types.QQmlContext =
+  let vtbl = if vtbl == nil: new QQmlContextVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQmlContextVTable, _: ptr cQQmlContext) {.cdecl.} =
+    let vtbl = cast[ref QQmlContextVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlContext_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlContext_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlContext_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQmlContext_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlContext_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlContext_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlContext_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlContext_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlContext_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlContext_disconnectNotify
+  gen_qqmlcontext_types.QQmlContext(h: fcQQmlContext_new4(addr(vtbl[]), parent.h, objParent.h))
+
 proc staticMetaObject*(_: type gen_qqmlcontext_types.QQmlContext): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlContext_staticMetaObject())
 proc delete*(self: gen_qqmlcontext_types.QQmlContext) =
   fcQQmlContext_delete(self.h)
-
-func init*(T: type gen_qqmlcontext_types.QQmlContextPropertyPair, h: ptr cQQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
-  T(h: h)
-proc create*(T: type gen_qqmlcontext_types.QQmlContextPropertyPair, param1: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
-  gen_qqmlcontext_types.QQmlContextPropertyPair.init(fcQQmlContextPropertyPair_new(param1.h))
-
 proc operatorAssign*(self: gen_qqmlcontext_types.QQmlContextPropertyPair, param1: gen_qqmlcontext_types.QQmlContextPropertyPair): void =
   fcQQmlContextPropertyPair_operatorAssign(self.h, param1.h)
+
+proc create*(T: type gen_qqmlcontext_types.QQmlContextPropertyPair,
+    param1: gen_qqmlcontext_types.QQmlContextPropertyPair): gen_qqmlcontext_types.QQmlContextPropertyPair =
+  gen_qqmlcontext_types.QQmlContextPropertyPair(h: fcQQmlContextPropertyPair_new(param1.h))
 
 proc delete*(self: gen_qqmlcontext_types.QQmlContextPropertyPair) =
   fcQQmlContextPropertyPair_delete(self.h)

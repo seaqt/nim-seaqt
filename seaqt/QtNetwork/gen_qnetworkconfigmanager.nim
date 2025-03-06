@@ -62,8 +62,6 @@ export
 
 type cQNetworkConfigurationManager*{.exportc: "QNetworkConfigurationManager", incompleteStruct.} = object
 
-proc fcQNetworkConfigurationManager_new(): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new".}
-proc fcQNetworkConfigurationManager_new2(parent: pointer): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new2".}
 proc fcQNetworkConfigurationManager_metaObject(self: pointer, ): pointer {.importc: "QNetworkConfigurationManager_metaObject".}
 proc fcQNetworkConfigurationManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkConfigurationManager_metacast".}
 proc fcQNetworkConfigurationManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkConfigurationManager_metacall".}
@@ -90,37 +88,32 @@ proc fcQNetworkConfigurationManager_tr3(s: cstring, c: cstring, n: cint): struct
 proc fcQNetworkConfigurationManager_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkConfigurationManager_trUtf82".}
 proc fcQNetworkConfigurationManager_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkConfigurationManager_trUtf83".}
 proc fcQNetworkConfigurationManager_allConfigurations1(self: pointer, flags: cint): struct_miqt_array {.importc: "QNetworkConfigurationManager_allConfigurations1".}
-proc fQNetworkConfigurationManager_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QNetworkConfigurationManager_virtualbase_metaObject".}
-proc fcQNetworkConfigurationManager_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_metaObject".}
-proc fQNetworkConfigurationManager_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QNetworkConfigurationManager_virtualbase_metacast".}
-proc fcQNetworkConfigurationManager_override_virtual_metacast(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_metacast".}
-proc fQNetworkConfigurationManager_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QNetworkConfigurationManager_virtualbase_metacall".}
-proc fcQNetworkConfigurationManager_override_virtual_metacall(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_metacall".}
-proc fQNetworkConfigurationManager_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QNetworkConfigurationManager_virtualbase_event".}
-proc fcQNetworkConfigurationManager_override_virtual_event(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_event".}
-proc fQNetworkConfigurationManager_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QNetworkConfigurationManager_virtualbase_eventFilter".}
-proc fcQNetworkConfigurationManager_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_eventFilter".}
-proc fQNetworkConfigurationManager_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QNetworkConfigurationManager_virtualbase_timerEvent".}
-proc fcQNetworkConfigurationManager_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_timerEvent".}
-proc fQNetworkConfigurationManager_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QNetworkConfigurationManager_virtualbase_childEvent".}
-proc fcQNetworkConfigurationManager_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_childEvent".}
-proc fQNetworkConfigurationManager_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QNetworkConfigurationManager_virtualbase_customEvent".}
-proc fcQNetworkConfigurationManager_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_customEvent".}
-proc fQNetworkConfigurationManager_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QNetworkConfigurationManager_virtualbase_connectNotify".}
-proc fcQNetworkConfigurationManager_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_connectNotify".}
-proc fQNetworkConfigurationManager_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QNetworkConfigurationManager_virtualbase_disconnectNotify".}
-proc fcQNetworkConfigurationManager_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QNetworkConfigurationManager_override_virtual_disconnectNotify".}
+type cQNetworkConfigurationManagerVTable = object
+  destructor*: proc(vtbl: ptr cQNetworkConfigurationManagerVTable, self: ptr cQNetworkConfigurationManager) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQNetworkConfigurationManager_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QNetworkConfigurationManager_virtualbase_metaObject".}
+proc fcQNetworkConfigurationManager_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkConfigurationManager_virtualbase_metacast".}
+proc fcQNetworkConfigurationManager_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkConfigurationManager_virtualbase_metacall".}
+proc fcQNetworkConfigurationManager_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QNetworkConfigurationManager_virtualbase_event".}
+proc fcQNetworkConfigurationManager_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QNetworkConfigurationManager_virtualbase_eventFilter".}
+proc fcQNetworkConfigurationManager_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_timerEvent".}
+proc fcQNetworkConfigurationManager_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_childEvent".}
+proc fcQNetworkConfigurationManager_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_customEvent".}
+proc fcQNetworkConfigurationManager_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_connectNotify".}
+proc fcQNetworkConfigurationManager_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkConfigurationManager_virtualbase_disconnectNotify".}
+proc fcQNetworkConfigurationManager_new(vtbl: pointer, ): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new".}
+proc fcQNetworkConfigurationManager_new2(vtbl: pointer, parent: pointer): ptr cQNetworkConfigurationManager {.importc: "QNetworkConfigurationManager_new2".}
 proc fcQNetworkConfigurationManager_staticMetaObject(): pointer {.importc: "QNetworkConfigurationManager_staticMetaObject".}
 proc fcQNetworkConfigurationManager_delete(self: pointer) {.importc: "QNetworkConfigurationManager_delete".}
-
-
-func init*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, h: ptr cQNetworkConfigurationManager): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =
-  T(h: h)
-proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, ): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =
-  gen_qnetworkconfigmanager_types.QNetworkConfigurationManager.init(fcQNetworkConfigurationManager_new())
-
-proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, parent: gen_qobject_types.QObject): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =
-  gen_qnetworkconfigmanager_types.QNetworkConfigurationManager.init(fcQNetworkConfigurationManager_new2(parent.h))
 
 proc metaObject*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkConfigurationManager_metaObject(self.h))
@@ -170,7 +163,7 @@ proc configurationAdded*(self: gen_qnetworkconfigmanager_types.QNetworkConfigura
   fcQNetworkConfigurationManager_configurationAdded(self.h, config.h)
 
 type QNetworkConfigurationManagerconfigurationAddedSlot* = proc(config: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc miqt_exec_callback_QNetworkConfigurationManager_configurationAdded(slot: int, config: pointer) {.exportc.} =
+proc miqt_exec_callback_cQNetworkConfigurationManager_configurationAdded(slot: int, config: pointer) {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_configurationAdded".} =
   let nimfunc = cast[ptr QNetworkConfigurationManagerconfigurationAddedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: config)
 
@@ -186,7 +179,7 @@ proc configurationRemoved*(self: gen_qnetworkconfigmanager_types.QNetworkConfigu
   fcQNetworkConfigurationManager_configurationRemoved(self.h, config.h)
 
 type QNetworkConfigurationManagerconfigurationRemovedSlot* = proc(config: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc miqt_exec_callback_QNetworkConfigurationManager_configurationRemoved(slot: int, config: pointer) {.exportc.} =
+proc miqt_exec_callback_cQNetworkConfigurationManager_configurationRemoved(slot: int, config: pointer) {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_configurationRemoved".} =
   let nimfunc = cast[ptr QNetworkConfigurationManagerconfigurationRemovedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: config)
 
@@ -202,7 +195,7 @@ proc configurationChanged*(self: gen_qnetworkconfigmanager_types.QNetworkConfigu
   fcQNetworkConfigurationManager_configurationChanged(self.h, config.h)
 
 type QNetworkConfigurationManagerconfigurationChangedSlot* = proc(config: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc miqt_exec_callback_QNetworkConfigurationManager_configurationChanged(slot: int, config: pointer) {.exportc.} =
+proc miqt_exec_callback_cQNetworkConfigurationManager_configurationChanged(slot: int, config: pointer) {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_configurationChanged".} =
   let nimfunc = cast[ptr QNetworkConfigurationManagerconfigurationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: config)
 
@@ -218,7 +211,7 @@ proc onlineStateChanged*(self: gen_qnetworkconfigmanager_types.QNetworkConfigura
   fcQNetworkConfigurationManager_onlineStateChanged(self.h, isOnline)
 
 type QNetworkConfigurationManageronlineStateChangedSlot* = proc(isOnline: bool)
-proc miqt_exec_callback_QNetworkConfigurationManager_onlineStateChanged(slot: int, isOnline: bool) {.exportc.} =
+proc miqt_exec_callback_cQNetworkConfigurationManager_onlineStateChanged(slot: int, isOnline: bool) {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_onlineStateChanged".} =
   let nimfunc = cast[ptr QNetworkConfigurationManageronlineStateChangedSlot](cast[pointer](slot))
   let slotval1 = isOnline
 
@@ -234,7 +227,7 @@ proc updateCompleted*(self: gen_qnetworkconfigmanager_types.QNetworkConfiguratio
   fcQNetworkConfigurationManager_updateCompleted(self.h)
 
 type QNetworkConfigurationManagerupdateCompletedSlot* = proc()
-proc miqt_exec_callback_QNetworkConfigurationManager_updateCompleted(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQNetworkConfigurationManager_updateCompleted(slot: int) {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_updateCompleted".} =
   let nimfunc = cast[ptr QNetworkConfigurationManagerupdateCompletedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -276,190 +269,184 @@ proc allConfigurations*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurat
     vx_ret[i] = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: v_outCast[i])
   vx_ret
 
+type QNetworkConfigurationManagermetaObjectProc* = proc(self: QNetworkConfigurationManager): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QNetworkConfigurationManagermetacastProc* = proc(self: QNetworkConfigurationManager, param1: cstring): pointer {.raises: [], gcsafe.}
+type QNetworkConfigurationManagermetacallProc* = proc(self: QNetworkConfigurationManager, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QNetworkConfigurationManagereventProc* = proc(self: QNetworkConfigurationManager, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QNetworkConfigurationManagereventFilterProc* = proc(self: QNetworkConfigurationManager, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QNetworkConfigurationManagertimerEventProc* = proc(self: QNetworkConfigurationManager, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QNetworkConfigurationManagerchildEventProc* = proc(self: QNetworkConfigurationManager, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QNetworkConfigurationManagercustomEventProc* = proc(self: QNetworkConfigurationManager, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QNetworkConfigurationManagerconnectNotifyProc* = proc(self: QNetworkConfigurationManager, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QNetworkConfigurationManagerdisconnectNotifyProc* = proc(self: QNetworkConfigurationManager, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QNetworkConfigurationManagerVTable* = object
+  vtbl: cQNetworkConfigurationManagerVTable
+  metaObject*: QNetworkConfigurationManagermetaObjectProc
+  metacast*: QNetworkConfigurationManagermetacastProc
+  metacall*: QNetworkConfigurationManagermetacallProc
+  event*: QNetworkConfigurationManagereventProc
+  eventFilter*: QNetworkConfigurationManagereventFilterProc
+  timerEvent*: QNetworkConfigurationManagertimerEventProc
+  childEvent*: QNetworkConfigurationManagerchildEventProc
+  customEvent*: QNetworkConfigurationManagercustomEventProc
+  connectNotify*: QNetworkConfigurationManagerconnectNotifyProc
+  disconnectNotify*: QNetworkConfigurationManagerdisconnectNotifyProc
 proc QNetworkConfigurationManagermetaObject*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQNetworkConfigurationManager_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkConfigurationManager_virtualbase_metaObject(self.h))
 
-type QNetworkConfigurationManagermetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagermetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagermetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_metaObject(self: ptr cQNetworkConfigurationManager, slot: int): pointer {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_metaObject ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagermetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQNetworkConfigurationManager_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QNetworkConfigurationManagermetacast*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, param1: cstring): pointer =
-  fQNetworkConfigurationManager_virtualbase_metacast(self.h, param1)
+  fcQNetworkConfigurationManager_virtualbase_metacast(self.h, param1)
 
-type QNetworkConfigurationManagermetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagermetacastProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagermetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_metacast(self: ptr cQNetworkConfigurationManager, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_metacast ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagermetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QNetworkConfigurationManagermetacall*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, param1: cint, param2: cint, param3: pointer): cint =
-  fQNetworkConfigurationManager_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQNetworkConfigurationManager_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QNetworkConfigurationManagermetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagermetacallProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagermetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_metacall(self: ptr cQNetworkConfigurationManager, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_metacall ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagermetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QNetworkConfigurationManagerevent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, event: gen_qcoreevent_types.QEvent): bool =
-  fQNetworkConfigurationManager_virtualbase_event(self.h, event.h)
+  fcQNetworkConfigurationManager_virtualbase_event(self.h, event.h)
 
-type QNetworkConfigurationManagereventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagereventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagereventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_event(self: ptr cQNetworkConfigurationManager, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_event ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagereventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QNetworkConfigurationManagereventFilter*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQNetworkConfigurationManager_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQNetworkConfigurationManager_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QNetworkConfigurationManagereventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagereventFilterProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagereventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_eventFilter(self: ptr cQNetworkConfigurationManager, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_eventFilter ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagereventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QNetworkConfigurationManagertimerEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQNetworkConfigurationManager_virtualbase_timerEvent(self.h, event.h)
+  fcQNetworkConfigurationManager_virtualbase_timerEvent(self.h, event.h)
 
-type QNetworkConfigurationManagertimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagertimerEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagertimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_timerEvent(self: ptr cQNetworkConfigurationManager, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_timerEvent ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagertimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkConfigurationManagerchildEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, event: gen_qcoreevent_types.QChildEvent): void =
-  fQNetworkConfigurationManager_virtualbase_childEvent(self.h, event.h)
+  fcQNetworkConfigurationManager_virtualbase_childEvent(self.h, event.h)
 
-type QNetworkConfigurationManagerchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagerchildEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagerchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_childEvent(self: ptr cQNetworkConfigurationManager, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_childEvent ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagerchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkConfigurationManagercustomEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, event: gen_qcoreevent_types.QEvent): void =
-  fQNetworkConfigurationManager_virtualbase_customEvent(self.h, event.h)
+  fcQNetworkConfigurationManager_virtualbase_customEvent(self.h, event.h)
 
-type QNetworkConfigurationManagercustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagercustomEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagercustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_customEvent(self: ptr cQNetworkConfigurationManager, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_customEvent ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagercustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkConfigurationManagerconnectNotify*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQNetworkConfigurationManager_virtualbase_connectNotify(self.h, signal.h)
+  fcQNetworkConfigurationManager_virtualbase_connectNotify(self.h, signal.h)
 
-type QNetworkConfigurationManagerconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagerconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagerconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_connectNotify(self: ptr cQNetworkConfigurationManager, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_connectNotify ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagerconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkConfigurationManagerdisconnectNotify*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQNetworkConfigurationManager_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQNetworkConfigurationManager_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QNetworkConfigurationManagerdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager, slot: QNetworkConfigurationManagerdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QNetworkConfigurationManagerdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkConfigurationManager_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkConfigurationManager_disconnectNotify(self: ptr cQNetworkConfigurationManager, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QNetworkConfigurationManager_disconnectNotify ".} =
-  var nimfunc = cast[ptr QNetworkConfigurationManagerdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkConfigurationManager_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkConfigurationManagerVTable](vtbl)
+  let self = QNetworkConfigurationManager(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager,
+    vtbl: ref QNetworkConfigurationManagerVTable = nil): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =
+  let vtbl = if vtbl == nil: new QNetworkConfigurationManagerVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkConfigurationManagerVTable, _: ptr cQNetworkConfigurationManager) {.cdecl.} =
+    let vtbl = cast[ref QNetworkConfigurationManagerVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkConfigurationManager_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkConfigurationManager_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkConfigurationManager_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQNetworkConfigurationManager_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkConfigurationManager_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkConfigurationManager_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkConfigurationManager_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkConfigurationManager_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkConfigurationManager_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkConfigurationManager_disconnectNotify
+  gen_qnetworkconfigmanager_types.QNetworkConfigurationManager(h: fcQNetworkConfigurationManager_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QNetworkConfigurationManagerVTable = nil): gen_qnetworkconfigmanager_types.QNetworkConfigurationManager =
+  let vtbl = if vtbl == nil: new QNetworkConfigurationManagerVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkConfigurationManagerVTable, _: ptr cQNetworkConfigurationManager) {.cdecl.} =
+    let vtbl = cast[ref QNetworkConfigurationManagerVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkConfigurationManager_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkConfigurationManager_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkConfigurationManager_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQNetworkConfigurationManager_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkConfigurationManager_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkConfigurationManager_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkConfigurationManager_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkConfigurationManager_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkConfigurationManager_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkConfigurationManager_disconnectNotify
+  gen_qnetworkconfigmanager_types.QNetworkConfigurationManager(h: fcQNetworkConfigurationManager_new2(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qnetworkconfigmanager_types.QNetworkConfigurationManager): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkConfigurationManager_staticMetaObject())
 proc delete*(self: gen_qnetworkconfigmanager_types.QNetworkConfigurationManager) =

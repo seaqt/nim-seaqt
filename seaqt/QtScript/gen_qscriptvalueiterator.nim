@@ -46,7 +46,6 @@ export
 
 type cQScriptValueIterator*{.exportc: "QScriptValueIterator", incompleteStruct.} = object
 
-proc fcQScriptValueIterator_new(value: pointer): ptr cQScriptValueIterator {.importc: "QScriptValueIterator_new".}
 proc fcQScriptValueIterator_hasNext(self: pointer, ): bool {.importc: "QScriptValueIterator_hasNext".}
 proc fcQScriptValueIterator_next(self: pointer, ): void {.importc: "QScriptValueIterator_next".}
 proc fcQScriptValueIterator_hasPrevious(self: pointer, ): bool {.importc: "QScriptValueIterator_hasPrevious".}
@@ -60,13 +59,8 @@ proc fcQScriptValueIterator_remove(self: pointer, ): void {.importc: "QScriptVal
 proc fcQScriptValueIterator_toFront(self: pointer, ): void {.importc: "QScriptValueIterator_toFront".}
 proc fcQScriptValueIterator_toBack(self: pointer, ): void {.importc: "QScriptValueIterator_toBack".}
 proc fcQScriptValueIterator_operatorAssign(self: pointer, value: pointer): void {.importc: "QScriptValueIterator_operatorAssign".}
+proc fcQScriptValueIterator_new(value: pointer): ptr cQScriptValueIterator {.importc: "QScriptValueIterator_new".}
 proc fcQScriptValueIterator_delete(self: pointer) {.importc: "QScriptValueIterator_delete".}
-
-
-func init*(T: type gen_qscriptvalueiterator_types.QScriptValueIterator, h: ptr cQScriptValueIterator): gen_qscriptvalueiterator_types.QScriptValueIterator =
-  T(h: h)
-proc create*(T: type gen_qscriptvalueiterator_types.QScriptValueIterator, value: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalueiterator_types.QScriptValueIterator =
-  gen_qscriptvalueiterator_types.QScriptValueIterator.init(fcQScriptValueIterator_new(value.h))
 
 proc hasNext*(self: gen_qscriptvalueiterator_types.QScriptValueIterator, ): bool =
   fcQScriptValueIterator_hasNext(self.h)
@@ -109,6 +103,10 @@ proc toBack*(self: gen_qscriptvalueiterator_types.QScriptValueIterator, ): void 
 
 proc operatorAssign*(self: gen_qscriptvalueiterator_types.QScriptValueIterator, value: gen_qscriptvalue_types.QScriptValue): void =
   fcQScriptValueIterator_operatorAssign(self.h, value.h)
+
+proc create*(T: type gen_qscriptvalueiterator_types.QScriptValueIterator,
+    value: gen_qscriptvalue_types.QScriptValue): gen_qscriptvalueiterator_types.QScriptValueIterator =
+  gen_qscriptvalueiterator_types.QScriptValueIterator(h: fcQScriptValueIterator_new(value.h))
 
 proc delete*(self: gen_qscriptvalueiterator_types.QScriptValueIterator) =
   fcQScriptValueIterator_delete(self.h)

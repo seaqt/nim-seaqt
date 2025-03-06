@@ -44,7 +44,6 @@ export
 
 type cQWebDatabase*{.exportc: "QWebDatabase", incompleteStruct.} = object
 
-proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
 proc fcQWebDatabase_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebDatabase_operatorAssign".}
 proc fcQWebDatabase_name(self: pointer, ): struct_miqt_string {.importc: "QWebDatabase_name".}
 proc fcQWebDatabase_displayName(self: pointer, ): struct_miqt_string {.importc: "QWebDatabase_displayName".}
@@ -54,13 +53,8 @@ proc fcQWebDatabase_fileName(self: pointer, ): struct_miqt_string {.importc: "QW
 proc fcQWebDatabase_origin(self: pointer, ): pointer {.importc: "QWebDatabase_origin".}
 proc fcQWebDatabase_removeDatabase(param1: pointer): void {.importc: "QWebDatabase_removeDatabase".}
 proc fcQWebDatabase_removeAllDatabases(): void {.importc: "QWebDatabase_removeAllDatabases".}
+proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
 proc fcQWebDatabase_delete(self: pointer) {.importc: "QWebDatabase_delete".}
-
-
-func init*(T: type gen_qwebdatabase_types.QWebDatabase, h: ptr cQWebDatabase): gen_qwebdatabase_types.QWebDatabase =
-  T(h: h)
-proc create*(T: type gen_qwebdatabase_types.QWebDatabase, other: gen_qwebdatabase_types.QWebDatabase): gen_qwebdatabase_types.QWebDatabase =
-  gen_qwebdatabase_types.QWebDatabase.init(fcQWebDatabase_new(other.h))
 
 proc operatorAssign*(self: gen_qwebdatabase_types.QWebDatabase, other: gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_operatorAssign(self.h, other.h)
@@ -97,6 +91,10 @@ proc removeDatabase*(_: type gen_qwebdatabase_types.QWebDatabase, param1: gen_qw
 
 proc removeAllDatabases*(_: type gen_qwebdatabase_types.QWebDatabase, ): void =
   fcQWebDatabase_removeAllDatabases()
+
+proc create*(T: type gen_qwebdatabase_types.QWebDatabase,
+    other: gen_qwebdatabase_types.QWebDatabase): gen_qwebdatabase_types.QWebDatabase =
+  gen_qwebdatabase_types.QWebDatabase(h: fcQWebDatabase_new(other.h))
 
 proc delete*(self: gen_qwebdatabase_types.QWebDatabase) =
   fcQWebDatabase_delete(self.h)

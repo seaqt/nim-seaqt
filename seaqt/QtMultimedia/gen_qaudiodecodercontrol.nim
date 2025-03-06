@@ -95,9 +95,6 @@ proc fcQAudioDecoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miq
 proc fcQAudioDecoderControl_staticMetaObject(): pointer {.importc: "QAudioDecoderControl_staticMetaObject".}
 proc fcQAudioDecoderControl_delete(self: pointer) {.importc: "QAudioDecoderControl_delete".}
 
-
-func init*(T: type gen_qaudiodecodercontrol_types.QAudioDecoderControl, h: ptr cQAudioDecoderControl): gen_qaudiodecodercontrol_types.QAudioDecoderControl =
-  T(h: h)
 proc metaObject*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioDecoderControl_metaObject(self.h))
 
@@ -165,7 +162,7 @@ proc stateChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ne
   fcQAudioDecoderControl_stateChanged(self.h, cint(newState))
 
 type QAudioDecoderControlstateChangedSlot* = proc(newState: cint)
-proc miqt_exec_callback_QAudioDecoderControl_stateChanged(slot: int, newState: cint) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_stateChanged(slot: int, newState: cint) {.exportc: "miqt_exec_callback_QAudioDecoderControl_stateChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControlstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(newState)
 
@@ -181,7 +178,7 @@ proc formatChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, f
   fcQAudioDecoderControl_formatChanged(self.h, format.h)
 
 type QAudioDecoderControlformatChangedSlot* = proc(format: gen_qaudioformat_types.QAudioFormat)
-proc miqt_exec_callback_QAudioDecoderControl_formatChanged(slot: int, format: pointer) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_formatChanged(slot: int, format: pointer) {.exportc: "miqt_exec_callback_QAudioDecoderControl_formatChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControlformatChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudioformat_types.QAudioFormat(h: format)
 
@@ -197,7 +194,7 @@ proc sourceChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, )
   fcQAudioDecoderControl_sourceChanged(self.h)
 
 type QAudioDecoderControlsourceChangedSlot* = proc()
-proc miqt_exec_callback_QAudioDecoderControl_sourceChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_sourceChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioDecoderControl_sourceChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControlsourceChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -211,7 +208,7 @@ proc error*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, error: ci
   fcQAudioDecoderControl_error(self.h, error, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 type QAudioDecoderControlerrorSlot* = proc(error: cint, errorString: string)
-proc miqt_exec_callback_QAudioDecoderControl_error(slot: int, error: cint, errorString: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_error(slot: int, error: cint, errorString: struct_miqt_string) {.exportc: "miqt_exec_callback_QAudioDecoderControl_error".} =
   let nimfunc = cast[ptr QAudioDecoderControlerrorSlot](cast[pointer](slot))
   let slotval1 = error
 
@@ -232,7 +229,7 @@ proc bufferReady*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): 
   fcQAudioDecoderControl_bufferReady(self.h)
 
 type QAudioDecoderControlbufferReadySlot* = proc()
-proc miqt_exec_callback_QAudioDecoderControl_bufferReady(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_bufferReady(slot: int) {.exportc: "miqt_exec_callback_QAudioDecoderControl_bufferReady".} =
   let nimfunc = cast[ptr QAudioDecoderControlbufferReadySlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -246,7 +243,7 @@ proc bufferAvailableChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderC
   fcQAudioDecoderControl_bufferAvailableChanged(self.h, available)
 
 type QAudioDecoderControlbufferAvailableChangedSlot* = proc(available: bool)
-proc miqt_exec_callback_QAudioDecoderControl_bufferAvailableChanged(slot: int, available: bool) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_bufferAvailableChanged(slot: int, available: bool) {.exportc: "miqt_exec_callback_QAudioDecoderControl_bufferAvailableChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControlbufferAvailableChangedSlot](cast[pointer](slot))
   let slotval1 = available
 
@@ -262,7 +259,7 @@ proc finished*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl, ): voi
   fcQAudioDecoderControl_finished(self.h)
 
 type QAudioDecoderControlfinishedSlot* = proc()
-proc miqt_exec_callback_QAudioDecoderControl_finished(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_finished(slot: int) {.exportc: "miqt_exec_callback_QAudioDecoderControl_finished".} =
   let nimfunc = cast[ptr QAudioDecoderControlfinishedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -276,7 +273,7 @@ proc positionChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl,
   fcQAudioDecoderControl_positionChanged(self.h, position)
 
 type QAudioDecoderControlpositionChangedSlot* = proc(position: clonglong)
-proc miqt_exec_callback_QAudioDecoderControl_positionChanged(slot: int, position: clonglong) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_positionChanged(slot: int, position: clonglong) {.exportc: "miqt_exec_callback_QAudioDecoderControl_positionChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControlpositionChangedSlot](cast[pointer](slot))
   let slotval1 = position
 
@@ -292,7 +289,7 @@ proc durationChanged*(self: gen_qaudiodecodercontrol_types.QAudioDecoderControl,
   fcQAudioDecoderControl_durationChanged(self.h, duration)
 
 type QAudioDecoderControldurationChangedSlot* = proc(duration: clonglong)
-proc miqt_exec_callback_QAudioDecoderControl_durationChanged(slot: int, duration: clonglong) {.exportc.} =
+proc miqt_exec_callback_cQAudioDecoderControl_durationChanged(slot: int, duration: clonglong) {.exportc: "miqt_exec_callback_QAudioDecoderControl_durationChanged".} =
   let nimfunc = cast[ptr QAudioDecoderControldurationChangedSlot](cast[pointer](slot))
   let slotval1 = duration
 

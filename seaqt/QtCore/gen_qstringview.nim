@@ -44,7 +44,6 @@ export
 
 type cQStringView*{.exportc: "QStringView", incompleteStruct.} = object
 
-proc fcQStringView_new(): ptr cQStringView {.importc: "QStringView_new".}
 proc fcQStringView_toString(self: pointer, ): struct_miqt_string {.importc: "QStringView_toString".}
 proc fcQStringView_size(self: pointer, ): int64 {.importc: "QStringView_size".}
 proc fcQStringView_data(self: pointer, ): pointer {.importc: "QStringView_data".}
@@ -114,13 +113,8 @@ proc fcQStringView_toULongLong1(self: pointer, ok: ptr bool): culonglong {.impor
 proc fcQStringView_toULongLong2(self: pointer, ok: ptr bool, base: cint): culonglong {.importc: "QStringView_toULongLong2".}
 proc fcQStringView_toFloat1(self: pointer, ok: ptr bool): float32 {.importc: "QStringView_toFloat1".}
 proc fcQStringView_toDouble1(self: pointer, ok: ptr bool): float64 {.importc: "QStringView_toDouble1".}
+proc fcQStringView_new(): ptr cQStringView {.importc: "QStringView_new".}
 proc fcQStringView_delete(self: pointer) {.importc: "QStringView_delete".}
-
-
-func init*(T: type gen_qstringview_types.QStringView, h: ptr cQStringView): gen_qstringview_types.QStringView =
-  T(h: h)
-proc create*(T: type gen_qstringview_types.QStringView, ): gen_qstringview_types.QStringView =
-  gen_qstringview_types.QStringView.init(fcQStringView_new())
 
 proc toString*(self: gen_qstringview_types.QStringView, ): string =
   let v_ms = fcQStringView_toString(self.h)
@@ -345,6 +339,9 @@ proc toFloat*(self: gen_qstringview_types.QStringView, ok: ptr bool): float32 =
 
 proc toDouble*(self: gen_qstringview_types.QStringView, ok: ptr bool): float64 =
   fcQStringView_toDouble1(self.h, ok)
+
+proc create*(T: type gen_qstringview_types.QStringView): gen_qstringview_types.QStringView =
+  gen_qstringview_types.QStringView(h: fcQStringView_new())
 
 proc delete*(self: gen_qstringview_types.QStringView) =
   fcQStringView_delete(self.h)

@@ -78,10 +78,6 @@ export
 
 type cQGraphicsSvgItem*{.exportc: "QGraphicsSvgItem", incompleteStruct.} = object
 
-proc fcQGraphicsSvgItem_new(): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new".}
-proc fcQGraphicsSvgItem_new2(fileName: struct_miqt_string): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new2".}
-proc fcQGraphicsSvgItem_new3(parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new3".}
-proc fcQGraphicsSvgItem_new4(fileName: struct_miqt_string, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new4".}
 proc fcQGraphicsSvgItem_metaObject(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_metaObject".}
 proc fcQGraphicsSvgItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsSvgItem_metacast".}
 proc fcQGraphicsSvgItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsSvgItem_metacall".}
@@ -102,113 +98,104 @@ proc fcQGraphicsSvgItem_tr2(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQGraphicsSvgItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsSvgItem_tr3".}
 proc fcQGraphicsSvgItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsSvgItem_trUtf82".}
 proc fcQGraphicsSvgItem_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsSvgItem_trUtf83".}
-proc fQGraphicsSvgItem_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QGraphicsSvgItem_virtualbase_metaObject".}
-proc fcQGraphicsSvgItem_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_metaObject".}
-proc fQGraphicsSvgItem_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QGraphicsSvgItem_virtualbase_metacast".}
-proc fcQGraphicsSvgItem_override_virtual_metacast(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_metacast".}
-proc fQGraphicsSvgItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QGraphicsSvgItem_virtualbase_metacall".}
-proc fcQGraphicsSvgItem_override_virtual_metacall(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_metacall".}
-proc fQGraphicsSvgItem_virtualbase_boundingRect(self: pointer, ): pointer{.importc: "QGraphicsSvgItem_virtualbase_boundingRect".}
-proc fcQGraphicsSvgItem_override_virtual_boundingRect(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_boundingRect".}
-proc fQGraphicsSvgItem_virtualbase_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_paint".}
-proc fcQGraphicsSvgItem_override_virtual_paint(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_paint".}
-proc fQGraphicsSvgItem_virtualbase_type(self: pointer, ): cint{.importc: "QGraphicsSvgItem_virtualbase_type".}
-proc fcQGraphicsSvgItem_override_virtual_typeX(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_type".}
-proc fQGraphicsSvgItem_virtualbase_event(self: pointer, ev: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_event".}
-proc fcQGraphicsSvgItem_override_virtual_event(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_event".}
-proc fQGraphicsSvgItem_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_eventFilter".}
-proc fcQGraphicsSvgItem_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_eventFilter".}
-proc fQGraphicsSvgItem_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_timerEvent".}
-proc fcQGraphicsSvgItem_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_timerEvent".}
-proc fQGraphicsSvgItem_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_childEvent".}
-proc fcQGraphicsSvgItem_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_childEvent".}
-proc fQGraphicsSvgItem_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_customEvent".}
-proc fcQGraphicsSvgItem_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_customEvent".}
-proc fQGraphicsSvgItem_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_connectNotify".}
-proc fcQGraphicsSvgItem_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_connectNotify".}
-proc fQGraphicsSvgItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_disconnectNotify".}
-proc fcQGraphicsSvgItem_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_disconnectNotify".}
-proc fQGraphicsSvgItem_virtualbase_advance(self: pointer, phase: cint): void{.importc: "QGraphicsSvgItem_virtualbase_advance".}
-proc fcQGraphicsSvgItem_override_virtual_advance(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_advance".}
-proc fQGraphicsSvgItem_virtualbase_shape(self: pointer, ): pointer{.importc: "QGraphicsSvgItem_virtualbase_shape".}
-proc fcQGraphicsSvgItem_override_virtual_shape(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_shape".}
-proc fQGraphicsSvgItem_virtualbase_contains(self: pointer, point: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_contains".}
-proc fcQGraphicsSvgItem_override_virtual_contains(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_contains".}
-proc fQGraphicsSvgItem_virtualbase_collidesWithItem(self: pointer, other: pointer, mode: cint): bool{.importc: "QGraphicsSvgItem_virtualbase_collidesWithItem".}
-proc fcQGraphicsSvgItem_override_virtual_collidesWithItem(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_collidesWithItem".}
-proc fQGraphicsSvgItem_virtualbase_collidesWithPath(self: pointer, path: pointer, mode: cint): bool{.importc: "QGraphicsSvgItem_virtualbase_collidesWithPath".}
-proc fcQGraphicsSvgItem_override_virtual_collidesWithPath(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_collidesWithPath".}
-proc fQGraphicsSvgItem_virtualbase_isObscuredBy(self: pointer, item: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_isObscuredBy".}
-proc fcQGraphicsSvgItem_override_virtual_isObscuredBy(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_isObscuredBy".}
-proc fQGraphicsSvgItem_virtualbase_opaqueArea(self: pointer, ): pointer{.importc: "QGraphicsSvgItem_virtualbase_opaqueArea".}
-proc fcQGraphicsSvgItem_override_virtual_opaqueArea(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_opaqueArea".}
-proc fQGraphicsSvgItem_virtualbase_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_sceneEventFilter".}
-proc fcQGraphicsSvgItem_override_virtual_sceneEventFilter(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_sceneEventFilter".}
-proc fQGraphicsSvgItem_virtualbase_sceneEvent(self: pointer, event: pointer): bool{.importc: "QGraphicsSvgItem_virtualbase_sceneEvent".}
-proc fcQGraphicsSvgItem_override_virtual_sceneEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_sceneEvent".}
-proc fQGraphicsSvgItem_virtualbase_contextMenuEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_contextMenuEvent".}
-proc fcQGraphicsSvgItem_override_virtual_contextMenuEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_contextMenuEvent".}
-proc fQGraphicsSvgItem_virtualbase_dragEnterEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_dragEnterEvent".}
-proc fcQGraphicsSvgItem_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_dragEnterEvent".}
-proc fQGraphicsSvgItem_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_dragLeaveEvent".}
-proc fcQGraphicsSvgItem_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_dragLeaveEvent".}
-proc fQGraphicsSvgItem_virtualbase_dragMoveEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_dragMoveEvent".}
-proc fcQGraphicsSvgItem_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_dragMoveEvent".}
-proc fQGraphicsSvgItem_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_dropEvent".}
-proc fcQGraphicsSvgItem_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_dropEvent".}
-proc fQGraphicsSvgItem_virtualbase_focusInEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_focusInEvent".}
-proc fcQGraphicsSvgItem_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_focusInEvent".}
-proc fQGraphicsSvgItem_virtualbase_focusOutEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_focusOutEvent".}
-proc fcQGraphicsSvgItem_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_focusOutEvent".}
-proc fQGraphicsSvgItem_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_hoverEnterEvent".}
-proc fcQGraphicsSvgItem_override_virtual_hoverEnterEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_hoverEnterEvent".}
-proc fQGraphicsSvgItem_virtualbase_hoverMoveEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_hoverMoveEvent".}
-proc fcQGraphicsSvgItem_override_virtual_hoverMoveEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_hoverMoveEvent".}
-proc fQGraphicsSvgItem_virtualbase_hoverLeaveEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_hoverLeaveEvent".}
-proc fcQGraphicsSvgItem_override_virtual_hoverLeaveEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_hoverLeaveEvent".}
-proc fQGraphicsSvgItem_virtualbase_keyPressEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_keyPressEvent".}
-proc fcQGraphicsSvgItem_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_keyPressEvent".}
-proc fQGraphicsSvgItem_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_keyReleaseEvent".}
-proc fcQGraphicsSvgItem_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_keyReleaseEvent".}
-proc fQGraphicsSvgItem_virtualbase_mousePressEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_mousePressEvent".}
-proc fcQGraphicsSvgItem_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_mousePressEvent".}
-proc fQGraphicsSvgItem_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_mouseMoveEvent".}
-proc fcQGraphicsSvgItem_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_mouseMoveEvent".}
-proc fQGraphicsSvgItem_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_mouseReleaseEvent".}
-proc fcQGraphicsSvgItem_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_mouseReleaseEvent".}
-proc fQGraphicsSvgItem_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_mouseDoubleClickEvent".}
-proc fcQGraphicsSvgItem_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_mouseDoubleClickEvent".}
-proc fQGraphicsSvgItem_virtualbase_wheelEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_wheelEvent".}
-proc fcQGraphicsSvgItem_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_wheelEvent".}
-proc fQGraphicsSvgItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_inputMethodEvent".}
-proc fcQGraphicsSvgItem_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_inputMethodEvent".}
-proc fQGraphicsSvgItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer{.importc: "QGraphicsSvgItem_virtualbase_inputMethodQuery".}
-proc fcQGraphicsSvgItem_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_inputMethodQuery".}
-proc fQGraphicsSvgItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer{.importc: "QGraphicsSvgItem_virtualbase_itemChange".}
-proc fcQGraphicsSvgItem_override_virtual_itemChange(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_itemChange".}
-proc fQGraphicsSvgItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool{.importc: "QGraphicsSvgItem_virtualbase_supportsExtension".}
-proc fcQGraphicsSvgItem_override_virtual_supportsExtension(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_supportsExtension".}
-proc fQGraphicsSvgItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void{.importc: "QGraphicsSvgItem_virtualbase_setExtension".}
-proc fcQGraphicsSvgItem_override_virtual_setExtension(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_setExtension".}
-proc fQGraphicsSvgItem_virtualbase_extension(self: pointer, variant: pointer): pointer{.importc: "QGraphicsSvgItem_virtualbase_extension".}
-proc fcQGraphicsSvgItem_override_virtual_extension(self: pointer, slot: int) {.importc: "QGraphicsSvgItem_override_virtual_extension".}
+type cQGraphicsSvgItemVTable = object
+  destructor*: proc(vtbl: ptr cQGraphicsSvgItemVTable, self: ptr cQGraphicsSvgItem) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  boundingRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  paint*: proc(vtbl, self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  typeX*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, ev: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  advance*: proc(vtbl, self: pointer, phase: cint): void {.cdecl, raises: [], gcsafe.}
+  shape*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  contains*: proc(vtbl, self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
+  collidesWithItem*: proc(vtbl, self: pointer, other: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  collidesWithPath*: proc(vtbl, self: pointer, path: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  isObscuredBy*: proc(vtbl, self: pointer, item: pointer): bool {.cdecl, raises: [], gcsafe.}
+  opaqueArea*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  sceneEventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  sceneEvent*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  itemChange*: proc(vtbl, self: pointer, change: cint, value: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  supportsExtension*: proc(vtbl, self: pointer, extension: cint): bool {.cdecl, raises: [], gcsafe.}
+  setExtension*: proc(vtbl, self: pointer, extension: cint, variant: pointer): void {.cdecl, raises: [], gcsafe.}
+  extension*: proc(vtbl, self: pointer, variant: pointer): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsSvgItem_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_virtualbase_metaObject".}
+proc fcQGraphicsSvgItem_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsSvgItem_virtualbase_metacast".}
+proc fcQGraphicsSvgItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsSvgItem_virtualbase_metacall".}
+proc fcQGraphicsSvgItem_virtualbase_boundingRect(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_virtualbase_boundingRect".}
+proc fcQGraphicsSvgItem_virtualbase_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_paint".}
+proc fcQGraphicsSvgItem_virtualbase_typeX(self: pointer, ): cint {.importc: "QGraphicsSvgItem_virtualbase_type".}
+proc fcQGraphicsSvgItem_virtualbase_event(self: pointer, ev: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_event".}
+proc fcQGraphicsSvgItem_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_eventFilter".}
+proc fcQGraphicsSvgItem_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_timerEvent".}
+proc fcQGraphicsSvgItem_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_childEvent".}
+proc fcQGraphicsSvgItem_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_customEvent".}
+proc fcQGraphicsSvgItem_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_connectNotify".}
+proc fcQGraphicsSvgItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_disconnectNotify".}
+proc fcQGraphicsSvgItem_virtualbase_advance(self: pointer, phase: cint): void {.importc: "QGraphicsSvgItem_virtualbase_advance".}
+proc fcQGraphicsSvgItem_virtualbase_shape(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_virtualbase_shape".}
+proc fcQGraphicsSvgItem_virtualbase_contains(self: pointer, point: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_contains".}
+proc fcQGraphicsSvgItem_virtualbase_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.importc: "QGraphicsSvgItem_virtualbase_collidesWithItem".}
+proc fcQGraphicsSvgItem_virtualbase_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.importc: "QGraphicsSvgItem_virtualbase_collidesWithPath".}
+proc fcQGraphicsSvgItem_virtualbase_isObscuredBy(self: pointer, item: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_isObscuredBy".}
+proc fcQGraphicsSvgItem_virtualbase_opaqueArea(self: pointer, ): pointer {.importc: "QGraphicsSvgItem_virtualbase_opaqueArea".}
+proc fcQGraphicsSvgItem_virtualbase_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_sceneEventFilter".}
+proc fcQGraphicsSvgItem_virtualbase_sceneEvent(self: pointer, event: pointer): bool {.importc: "QGraphicsSvgItem_virtualbase_sceneEvent".}
+proc fcQGraphicsSvgItem_virtualbase_contextMenuEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_contextMenuEvent".}
+proc fcQGraphicsSvgItem_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_dragEnterEvent".}
+proc fcQGraphicsSvgItem_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_dragLeaveEvent".}
+proc fcQGraphicsSvgItem_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_dragMoveEvent".}
+proc fcQGraphicsSvgItem_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_dropEvent".}
+proc fcQGraphicsSvgItem_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_focusInEvent".}
+proc fcQGraphicsSvgItem_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_focusOutEvent".}
+proc fcQGraphicsSvgItem_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_hoverEnterEvent".}
+proc fcQGraphicsSvgItem_virtualbase_hoverMoveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_hoverMoveEvent".}
+proc fcQGraphicsSvgItem_virtualbase_hoverLeaveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_hoverLeaveEvent".}
+proc fcQGraphicsSvgItem_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_keyPressEvent".}
+proc fcQGraphicsSvgItem_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_keyReleaseEvent".}
+proc fcQGraphicsSvgItem_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_mousePressEvent".}
+proc fcQGraphicsSvgItem_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_mouseMoveEvent".}
+proc fcQGraphicsSvgItem_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_mouseReleaseEvent".}
+proc fcQGraphicsSvgItem_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_mouseDoubleClickEvent".}
+proc fcQGraphicsSvgItem_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_wheelEvent".}
+proc fcQGraphicsSvgItem_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_inputMethodEvent".}
+proc fcQGraphicsSvgItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsSvgItem_virtualbase_inputMethodQuery".}
+proc fcQGraphicsSvgItem_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsSvgItem_virtualbase_itemChange".}
+proc fcQGraphicsSvgItem_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsSvgItem_virtualbase_supportsExtension".}
+proc fcQGraphicsSvgItem_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsSvgItem_virtualbase_setExtension".}
+proc fcQGraphicsSvgItem_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsSvgItem_virtualbase_extension".}
+proc fcQGraphicsSvgItem_new(vtbl: pointer, ): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new".}
+proc fcQGraphicsSvgItem_new2(vtbl: pointer, fileName: struct_miqt_string): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new2".}
+proc fcQGraphicsSvgItem_new3(vtbl: pointer, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new3".}
+proc fcQGraphicsSvgItem_new4(vtbl: pointer, fileName: struct_miqt_string, parentItem: pointer): ptr cQGraphicsSvgItem {.importc: "QGraphicsSvgItem_new4".}
 proc fcQGraphicsSvgItem_staticMetaObject(): pointer {.importc: "QGraphicsSvgItem_staticMetaObject".}
 proc fcQGraphicsSvgItem_delete(self: pointer) {.importc: "QGraphicsSvgItem_delete".}
-
-
-func init*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, h: ptr cQGraphicsSvgItem): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
-  T(h: h)
-proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem.init(fcQGraphicsSvgItem_new())
-
-proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, fileName: string): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem.init(fcQGraphicsSvgItem_new2(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
-
-proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, parentItem: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem.init(fcQGraphicsSvgItem_new3(parentItem.h))
-
-proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
-  gen_qgraphicssvgitem_types.QGraphicsSvgItem.init(fcQGraphicsSvgItem_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parentItem.h))
 
 proc metaObject*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsSvgItem_metaObject(self.h))
@@ -291,819 +278,926 @@ proc trUtf8*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem, s: cstring, c:
   c_free(v_ms.data)
   vx_ret
 
+type QGraphicsSvgItemmetaObjectProc* = proc(self: QGraphicsSvgItem): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QGraphicsSvgItemmetacastProc* = proc(self: QGraphicsSvgItem, param1: cstring): pointer {.raises: [], gcsafe.}
+type QGraphicsSvgItemmetacallProc* = proc(self: QGraphicsSvgItem, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QGraphicsSvgItemboundingRectProc* = proc(self: QGraphicsSvgItem): gen_qrect_types.QRectF {.raises: [], gcsafe.}
+type QGraphicsSvgItempaintProc* = proc(self: QGraphicsSvgItem, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemtypeXProc* = proc(self: QGraphicsSvgItem): cint {.raises: [], gcsafe.}
+type QGraphicsSvgItemeventProc* = proc(self: QGraphicsSvgItem, ev: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemeventFilterProc* = proc(self: QGraphicsSvgItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemtimerEventProc* = proc(self: QGraphicsSvgItem, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemchildEventProc* = proc(self: QGraphicsSvgItem, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemcustomEventProc* = proc(self: QGraphicsSvgItem, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemconnectNotifyProc* = proc(self: QGraphicsSvgItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemdisconnectNotifyProc* = proc(self: QGraphicsSvgItem, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemadvanceProc* = proc(self: QGraphicsSvgItem, phase: cint): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemshapeProc* = proc(self: QGraphicsSvgItem): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
+type QGraphicsSvgItemcontainsProc* = proc(self: QGraphicsSvgItem, point: gen_qpoint_types.QPointF): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemcollidesWithItemProc* = proc(self: QGraphicsSvgItem, other: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemcollidesWithPathProc* = proc(self: QGraphicsSvgItem, path: gen_qpainterpath_types.QPainterPath, mode: cint): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemisObscuredByProc* = proc(self: QGraphicsSvgItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemopaqueAreaProc* = proc(self: QGraphicsSvgItem): gen_qpainterpath_types.QPainterPath {.raises: [], gcsafe.}
+type QGraphicsSvgItemsceneEventFilterProc* = proc(self: QGraphicsSvgItem, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemsceneEventProc* = proc(self: QGraphicsSvgItem, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemcontextMenuEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemdragEnterEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemdragLeaveEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemdragMoveEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemdropEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemfocusInEventProc* = proc(self: QGraphicsSvgItem, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemfocusOutEventProc* = proc(self: QGraphicsSvgItem, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemhoverEnterEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemhoverMoveEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemhoverLeaveEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemkeyPressEventProc* = proc(self: QGraphicsSvgItem, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemkeyReleaseEventProc* = proc(self: QGraphicsSvgItem, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemmousePressEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemmouseMoveEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemmouseReleaseEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemmouseDoubleClickEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemwheelEventProc* = proc(self: QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgIteminputMethodEventProc* = proc(self: QGraphicsSvgItem, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QGraphicsSvgIteminputMethodQueryProc* = proc(self: QGraphicsSvgItem, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsSvgItemitemChangeProc* = proc(self: QGraphicsSvgItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsSvgItemsupportsExtensionProc* = proc(self: QGraphicsSvgItem, extension: cint): bool {.raises: [], gcsafe.}
+type QGraphicsSvgItemsetExtensionProc* = proc(self: QGraphicsSvgItem, extension: cint, variant: gen_qvariant_types.QVariant): void {.raises: [], gcsafe.}
+type QGraphicsSvgItemextensionProc* = proc(self: QGraphicsSvgItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QGraphicsSvgItemVTable* = object
+  vtbl: cQGraphicsSvgItemVTable
+  metaObject*: QGraphicsSvgItemmetaObjectProc
+  metacast*: QGraphicsSvgItemmetacastProc
+  metacall*: QGraphicsSvgItemmetacallProc
+  boundingRect*: QGraphicsSvgItemboundingRectProc
+  paint*: QGraphicsSvgItempaintProc
+  typeX*: QGraphicsSvgItemtypeXProc
+  event*: QGraphicsSvgItemeventProc
+  eventFilter*: QGraphicsSvgItemeventFilterProc
+  timerEvent*: QGraphicsSvgItemtimerEventProc
+  childEvent*: QGraphicsSvgItemchildEventProc
+  customEvent*: QGraphicsSvgItemcustomEventProc
+  connectNotify*: QGraphicsSvgItemconnectNotifyProc
+  disconnectNotify*: QGraphicsSvgItemdisconnectNotifyProc
+  advance*: QGraphicsSvgItemadvanceProc
+  shape*: QGraphicsSvgItemshapeProc
+  contains*: QGraphicsSvgItemcontainsProc
+  collidesWithItem*: QGraphicsSvgItemcollidesWithItemProc
+  collidesWithPath*: QGraphicsSvgItemcollidesWithPathProc
+  isObscuredBy*: QGraphicsSvgItemisObscuredByProc
+  opaqueArea*: QGraphicsSvgItemopaqueAreaProc
+  sceneEventFilter*: QGraphicsSvgItemsceneEventFilterProc
+  sceneEvent*: QGraphicsSvgItemsceneEventProc
+  contextMenuEvent*: QGraphicsSvgItemcontextMenuEventProc
+  dragEnterEvent*: QGraphicsSvgItemdragEnterEventProc
+  dragLeaveEvent*: QGraphicsSvgItemdragLeaveEventProc
+  dragMoveEvent*: QGraphicsSvgItemdragMoveEventProc
+  dropEvent*: QGraphicsSvgItemdropEventProc
+  focusInEvent*: QGraphicsSvgItemfocusInEventProc
+  focusOutEvent*: QGraphicsSvgItemfocusOutEventProc
+  hoverEnterEvent*: QGraphicsSvgItemhoverEnterEventProc
+  hoverMoveEvent*: QGraphicsSvgItemhoverMoveEventProc
+  hoverLeaveEvent*: QGraphicsSvgItemhoverLeaveEventProc
+  keyPressEvent*: QGraphicsSvgItemkeyPressEventProc
+  keyReleaseEvent*: QGraphicsSvgItemkeyReleaseEventProc
+  mousePressEvent*: QGraphicsSvgItemmousePressEventProc
+  mouseMoveEvent*: QGraphicsSvgItemmouseMoveEventProc
+  mouseReleaseEvent*: QGraphicsSvgItemmouseReleaseEventProc
+  mouseDoubleClickEvent*: QGraphicsSvgItemmouseDoubleClickEventProc
+  wheelEvent*: QGraphicsSvgItemwheelEventProc
+  inputMethodEvent*: QGraphicsSvgIteminputMethodEventProc
+  inputMethodQuery*: QGraphicsSvgIteminputMethodQueryProc
+  itemChange*: QGraphicsSvgItemitemChangeProc
+  supportsExtension*: QGraphicsSvgItemsupportsExtensionProc
+  setExtension*: QGraphicsSvgItemsetExtensionProc
+  extension*: QGraphicsSvgItemextensionProc
 proc QGraphicsSvgItemmetaObject*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQGraphicsSvgItem_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsSvgItem_virtualbase_metaObject(self.h))
 
-type QGraphicsSvgItemmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_metaObject(self: ptr cQGraphicsSvgItem, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_metaObject ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSvgItem_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QGraphicsSvgItemmetacast*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, param1: cstring): pointer =
-  fQGraphicsSvgItem_virtualbase_metacast(self.h, param1)
+  fcQGraphicsSvgItem_virtualbase_metacast(self.h, param1)
 
-type QGraphicsSvgItemmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmetacastProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_metacast(self: ptr cQGraphicsSvgItem, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_metacast ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemmetacall*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, param1: cint, param2: cint, param3: pointer): cint =
-  fQGraphicsSvgItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQGraphicsSvgItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QGraphicsSvgItemmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmetacallProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_metacall(self: ptr cQGraphicsSvgItem, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QGraphicsSvgItem_metacall ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QGraphicsSvgItemboundingRect*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qrect_types.QRectF =
-  gen_qrect_types.QRectF(h: fQGraphicsSvgItem_virtualbase_boundingRect(self.h))
+  gen_qrect_types.QRectF(h: fcQGraphicsSvgItem_virtualbase_boundingRect(self.h))
 
-type QGraphicsSvgItemboundingRectProc* = proc(): gen_qrect_types.QRectF
-proc onboundingRect*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemboundingRectProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemboundingRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_boundingRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_boundingRect(self: ptr cQGraphicsSvgItem, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_boundingRect ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemboundingRectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSvgItem_boundingRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
+  var virtualReturn = vtbl[].boundingRect(self)
   virtualReturn.h
+
 proc QGraphicsSvgItempaint*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
-  fQGraphicsSvgItem_virtualbase_paint(self.h, painter.h, option.h, widget.h)
+  fcQGraphicsSvgItem_virtualbase_paint(self.h, painter.h, option.h, widget.h)
 
-type QGraphicsSvgItempaintProc* = proc(painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void
-proc onpaint*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItempaintProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItempaintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_paint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_paint(self: ptr cQGraphicsSvgItem, slot: int, painter: pointer, option: pointer, widget: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_paint ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItempaintProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_paint(vtbl: pointer, self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
-
   let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option)
-
   let slotval3 = gen_qwidget_types.QWidget(h: widget)
+  vtbl[].paint(self, slotval1, slotval2, slotval3)
 
-
-  nimfunc[](slotval1, slotval2, slotval3)
 proc QGraphicsSvgItemtypeX*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): cint =
-  fQGraphicsSvgItem_virtualbase_type(self.h)
+  fcQGraphicsSvgItem_virtualbase_typeX(self.h)
 
-type QGraphicsSvgItemtypeXProc* = proc(): cint
-proc ontypeX*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemtypeXProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemtypeXProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_typeX(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_type(self: ptr cQGraphicsSvgItem, slot: int): cint {.exportc: "miqt_exec_callback_QGraphicsSvgItem_type ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemtypeXProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSvgItem_typeX(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
+  var virtualReturn = vtbl[].typeX(self)
   virtualReturn
+
 proc QGraphicsSvgItemevent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ev: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsSvgItem_virtualbase_event(self.h, ev.h)
+  fcQGraphicsSvgItem_virtualbase_event(self.h, ev.h)
 
-type QGraphicsSvgItemeventProc* = proc(ev: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemeventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_event(self: ptr cQGraphicsSvgItem, slot: int, ev: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_event ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_event(vtbl: pointer, self: pointer, ev: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: ev)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemeventFilter*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsSvgItem_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QGraphicsSvgItemeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_eventFilter(self: ptr cQGraphicsSvgItem, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_eventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsSvgItemtimerEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQGraphicsSvgItem_virtualbase_timerEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_timerEvent(self.h, event.h)
 
-type QGraphicsSvgItemtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_timerEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_timerEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemchildEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qcoreevent_types.QChildEvent): void =
-  fQGraphicsSvgItem_virtualbase_childEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_childEvent(self.h, event.h)
 
-type QGraphicsSvgItemchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemchildEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_childEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_childEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemcustomEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qcoreevent_types.QEvent): void =
-  fQGraphicsSvgItem_virtualbase_customEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_customEvent(self.h, event.h)
 
-type QGraphicsSvgItemcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_customEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_customEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemconnectNotify*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsSvgItem_virtualbase_connectNotify(self.h, signal.h)
+  fcQGraphicsSvgItem_virtualbase_connectNotify(self.h, signal.h)
 
-type QGraphicsSvgItemconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_connectNotify(self: ptr cQGraphicsSvgItem, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_connectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemdisconnectNotify*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQGraphicsSvgItem_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQGraphicsSvgItem_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QGraphicsSvgItemdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_disconnectNotify(self: ptr cQGraphicsSvgItem, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_disconnectNotify ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemadvance*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, phase: cint): void =
-  fQGraphicsSvgItem_virtualbase_advance(self.h, phase)
+  fcQGraphicsSvgItem_virtualbase_advance(self.h, phase)
 
-type QGraphicsSvgItemadvanceProc* = proc(phase: cint): void
-proc onadvance*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemadvanceProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemadvanceProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_advance(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_advance(self: ptr cQGraphicsSvgItem, slot: int, phase: cint): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_advance ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemadvanceProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_advance(vtbl: pointer, self: pointer, phase: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = phase
+  vtbl[].advance(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemshape*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fQGraphicsSvgItem_virtualbase_shape(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSvgItem_virtualbase_shape(self.h))
 
-type QGraphicsSvgItemshapeProc* = proc(): gen_qpainterpath_types.QPainterPath
-proc onshape*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemshapeProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemshapeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_shape(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_shape(self: ptr cQGraphicsSvgItem, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_shape ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemshapeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSvgItem_shape(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
+  var virtualReturn = vtbl[].shape(self)
   virtualReturn.h
+
 proc QGraphicsSvgItemcontains*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, point: gen_qpoint_types.QPointF): bool =
-  fQGraphicsSvgItem_virtualbase_contains(self.h, point.h)
+  fcQGraphicsSvgItem_virtualbase_contains(self.h, point.h)
 
-type QGraphicsSvgItemcontainsProc* = proc(point: gen_qpoint_types.QPointF): bool
-proc oncontains*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemcontainsProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemcontainsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_contains(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_contains(self: ptr cQGraphicsSvgItem, slot: int, point: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_contains ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemcontainsProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_contains(vtbl: pointer, self: pointer, point: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: point)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].contains(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemcollidesWithItem*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, other: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): bool =
-  fQGraphicsSvgItem_virtualbase_collidesWithItem(self.h, other.h, cint(mode))
+  fcQGraphicsSvgItem_virtualbase_collidesWithItem(self.h, other.h, cint(mode))
 
-type QGraphicsSvgItemcollidesWithItemProc* = proc(other: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): bool
-proc oncollidesWithItem*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemcollidesWithItemProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemcollidesWithItemProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_collidesWithItem(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_collidesWithItem(self: ptr cQGraphicsSvgItem, slot: int, other: pointer, mode: cint): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_collidesWithItem ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemcollidesWithItemProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_collidesWithItem(vtbl: pointer, self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other)
-
   let slotval2 = cint(mode)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].collidesWithItem(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsSvgItemcollidesWithPath*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, path: gen_qpainterpath_types.QPainterPath, mode: cint): bool =
-  fQGraphicsSvgItem_virtualbase_collidesWithPath(self.h, path.h, cint(mode))
+  fcQGraphicsSvgItem_virtualbase_collidesWithPath(self.h, path.h, cint(mode))
 
-type QGraphicsSvgItemcollidesWithPathProc* = proc(path: gen_qpainterpath_types.QPainterPath, mode: cint): bool
-proc oncollidesWithPath*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemcollidesWithPathProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemcollidesWithPathProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_collidesWithPath(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_collidesWithPath(self: ptr cQGraphicsSvgItem, slot: int, path: pointer, mode: cint): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_collidesWithPath ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemcollidesWithPathProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_collidesWithPath(vtbl: pointer, self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qpainterpath_types.QPainterPath(h: path)
-
   let slotval2 = cint(mode)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].collidesWithPath(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsSvgItemisObscuredBy*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
-  fQGraphicsSvgItem_virtualbase_isObscuredBy(self.h, item.h)
+  fcQGraphicsSvgItem_virtualbase_isObscuredBy(self.h, item.h)
 
-type QGraphicsSvgItemisObscuredByProc* = proc(item: gen_qgraphicsitem_types.QGraphicsItem): bool
-proc onisObscuredBy*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemisObscuredByProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemisObscuredByProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_isObscuredBy(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_isObscuredBy(self: ptr cQGraphicsSvgItem, slot: int, item: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_isObscuredBy ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemisObscuredByProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_isObscuredBy(vtbl: pointer, self: pointer, item: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemopaqueArea*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, ): gen_qpainterpath_types.QPainterPath =
-  gen_qpainterpath_types.QPainterPath(h: fQGraphicsSvgItem_virtualbase_opaqueArea(self.h))
+  gen_qpainterpath_types.QPainterPath(h: fcQGraphicsSvgItem_virtualbase_opaqueArea(self.h))
 
-type QGraphicsSvgItemopaqueAreaProc* = proc(): gen_qpainterpath_types.QPainterPath
-proc onopaqueArea*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemopaqueAreaProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemopaqueAreaProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_opaqueArea(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_opaqueArea(self: ptr cQGraphicsSvgItem, slot: int): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_opaqueArea ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemopaqueAreaProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQGraphicsSvgItem_opaqueArea(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
+  var virtualReturn = vtbl[].opaqueArea(self)
   virtualReturn.h
+
 proc QGraphicsSvgItemsceneEventFilter*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsSvgItem_virtualbase_sceneEventFilter(self.h, watched.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_sceneEventFilter(self.h, watched.h, event.h)
 
-type QGraphicsSvgItemsceneEventFilterProc* = proc(watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool
-proc onsceneEventFilter*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemsceneEventFilterProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemsceneEventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_sceneEventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_sceneEventFilter(self: ptr cQGraphicsSvgItem, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_sceneEventFilter ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemsceneEventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_sceneEventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].sceneEventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QGraphicsSvgItemsceneEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qcoreevent_types.QEvent): bool =
-  fQGraphicsSvgItem_virtualbase_sceneEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_sceneEvent(self.h, event.h)
 
-type QGraphicsSvgItemsceneEventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onsceneEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemsceneEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemsceneEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_sceneEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_sceneEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_sceneEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemsceneEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_sceneEvent(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].sceneEvent(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemcontextMenuEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void =
-  fQGraphicsSvgItem_virtualbase_contextMenuEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_contextMenuEvent(self.h, event.h)
 
-type QGraphicsSvgItemcontextMenuEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void
-proc oncontextMenuEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemcontextMenuEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemcontextMenuEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_contextMenuEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_contextMenuEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_contextMenuEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemcontextMenuEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_contextMenuEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: event)
+  vtbl[].contextMenuEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemdragEnterEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
-  fQGraphicsSvgItem_virtualbase_dragEnterEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_dragEnterEvent(self.h, event.h)
 
-type QGraphicsSvgItemdragEnterEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void
-proc ondragEnterEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemdragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemdragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_dragEnterEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemdragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemdragLeaveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
-  fQGraphicsSvgItem_virtualbase_dragLeaveEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_dragLeaveEvent(self.h, event.h)
 
-type QGraphicsSvgItemdragLeaveEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void
-proc ondragLeaveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemdragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemdragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_dragLeaveEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemdragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemdragMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
-  fQGraphicsSvgItem_virtualbase_dragMoveEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_dragMoveEvent(self.h, event.h)
 
-type QGraphicsSvgItemdragMoveEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void
-proc ondragMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemdragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemdragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_dragMoveEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemdragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemdropEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
-  fQGraphicsSvgItem_virtualbase_dropEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_dropEvent(self.h, event.h)
 
-type QGraphicsSvgItemdropEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void
-proc ondropEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemdropEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemdropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_dropEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_dropEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemdropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemfocusInEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qevent_types.QFocusEvent): void =
-  fQGraphicsSvgItem_virtualbase_focusInEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_focusInEvent(self.h, event.h)
 
-type QGraphicsSvgItemfocusInEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_focusInEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_focusInEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemfocusOutEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qevent_types.QFocusEvent): void =
-  fQGraphicsSvgItem_virtualbase_focusOutEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_focusOutEvent(self.h, event.h)
 
-type QGraphicsSvgItemfocusOutEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_focusOutEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_focusOutEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemhoverEnterEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
-  fQGraphicsSvgItem_virtualbase_hoverEnterEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_hoverEnterEvent(self.h, event.h)
 
-type QGraphicsSvgItemhoverEnterEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void
-proc onhoverEnterEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemhoverEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemhoverEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_hoverEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_hoverEnterEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_hoverEnterEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemhoverEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_hoverEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  vtbl[].hoverEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemhoverMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
-  fQGraphicsSvgItem_virtualbase_hoverMoveEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_hoverMoveEvent(self.h, event.h)
 
-type QGraphicsSvgItemhoverMoveEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void
-proc onhoverMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemhoverMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemhoverMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_hoverMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_hoverMoveEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_hoverMoveEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemhoverMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_hoverMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  vtbl[].hoverMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemhoverLeaveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
-  fQGraphicsSvgItem_virtualbase_hoverLeaveEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_hoverLeaveEvent(self.h, event.h)
 
-type QGraphicsSvgItemhoverLeaveEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void
-proc onhoverLeaveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemhoverLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemhoverLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_hoverLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_hoverLeaveEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_hoverLeaveEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemhoverLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_hoverLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event)
+  vtbl[].hoverLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemkeyPressEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qevent_types.QKeyEvent): void =
-  fQGraphicsSvgItem_virtualbase_keyPressEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_keyPressEvent(self.h, event.h)
 
-type QGraphicsSvgItemkeyPressEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_keyPressEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_keyPressEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemkeyReleaseEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qevent_types.QKeyEvent): void =
-  fQGraphicsSvgItem_virtualbase_keyReleaseEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_keyReleaseEvent(self.h, event.h)
 
-type QGraphicsSvgItemkeyReleaseEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_keyReleaseEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemmousePressEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
-  fQGraphicsSvgItem_virtualbase_mousePressEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_mousePressEvent(self.h, event.h)
 
-type QGraphicsSvgItemmousePressEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void
-proc onmousePressEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_mousePressEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_mousePressEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemmouseMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
-  fQGraphicsSvgItem_virtualbase_mouseMoveEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_mouseMoveEvent(self.h, event.h)
 
-type QGraphicsSvgItemmouseMoveEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_mouseMoveEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemmouseReleaseEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
-  fQGraphicsSvgItem_virtualbase_mouseReleaseEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-type QGraphicsSvgItemmouseReleaseEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_mouseReleaseEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemmouseDoubleClickEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
-  fQGraphicsSvgItem_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QGraphicsSvgItemmouseDoubleClickEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_mouseDoubleClickEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgItemwheelEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
-  fQGraphicsSvgItem_virtualbase_wheelEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_wheelEvent(self.h, event.h)
 
-type QGraphicsSvgItemwheelEventProc* = proc(event: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void
-proc onwheelEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_wheelEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_wheelEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: event)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgIteminputMethodEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, event: gen_qevent_types.QInputMethodEvent): void =
-  fQGraphicsSvgItem_virtualbase_inputMethodEvent(self.h, event.h)
+  fcQGraphicsSvgItem_virtualbase_inputMethodEvent(self.h, event.h)
 
-type QGraphicsSvgIteminputMethodEventProc* = proc(event: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgIteminputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgIteminputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_inputMethodEvent(self: ptr cQGraphicsSvgItem, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QGraphicsSvgIteminputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_inputMethodEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QGraphicsSvgIteminputMethodQuery*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQGraphicsSvgItem_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSvgItem_virtualbase_inputMethodQuery(self.h, cint(query)))
 
-type QGraphicsSvgIteminputMethodQueryProc* = proc(query: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgIteminputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgIteminputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_inputMethodQuery(self: ptr cQGraphicsSvgItem, slot: int, query: cint): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QGraphicsSvgIteminputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = cint(query)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QGraphicsSvgItemitemChange*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQGraphicsSvgItem_virtualbase_itemChange(self.h, cint(change), value.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSvgItem_virtualbase_itemChange(self.h, cint(change), value.h))
 
-type QGraphicsSvgItemitemChangeProc* = proc(change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant
-proc onitemChange*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemitemChangeProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemitemChangeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_itemChange(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_itemChange(self: ptr cQGraphicsSvgItem, slot: int, change: cint, value: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_itemChange ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemitemChangeProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_itemChange(vtbl: pointer, self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = cint(change)
-
   let slotval2 = gen_qvariant_types.QVariant(h: value)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].itemChange(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QGraphicsSvgItemsupportsExtension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, extension: cint): bool =
-  fQGraphicsSvgItem_virtualbase_supportsExtension(self.h, cint(extension))
+  fcQGraphicsSvgItem_virtualbase_supportsExtension(self.h, cint(extension))
 
-type QGraphicsSvgItemsupportsExtensionProc* = proc(extension: cint): bool
-proc onsupportsExtension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemsupportsExtensionProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemsupportsExtensionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_supportsExtension(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_supportsExtension(self: ptr cQGraphicsSvgItem, slot: int, extension: cint): bool {.exportc: "miqt_exec_callback_QGraphicsSvgItem_supportsExtension ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemsupportsExtensionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_supportsExtension(vtbl: pointer, self: pointer, extension: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = cint(extension)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].supportsExtension(self, slotval1)
   virtualReturn
+
 proc QGraphicsSvgItemsetExtension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, extension: cint, variant: gen_qvariant_types.QVariant): void =
-  fQGraphicsSvgItem_virtualbase_setExtension(self.h, cint(extension), variant.h)
+  fcQGraphicsSvgItem_virtualbase_setExtension(self.h, cint(extension), variant.h)
 
-type QGraphicsSvgItemsetExtensionProc* = proc(extension: cint, variant: gen_qvariant_types.QVariant): void
-proc onsetExtension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemsetExtensionProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemsetExtensionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_setExtension(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_setExtension(self: ptr cQGraphicsSvgItem, slot: int, extension: cint, variant: pointer): void {.exportc: "miqt_exec_callback_QGraphicsSvgItem_setExtension ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemsetExtensionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_setExtension(vtbl: pointer, self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = cint(extension)
-
   let slotval2 = gen_qvariant_types.QVariant(h: variant)
+  vtbl[].setExtension(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QGraphicsSvgItemextension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQGraphicsSvgItem_virtualbase_extension(self.h, variant.h))
+  gen_qvariant_types.QVariant(h: fcQGraphicsSvgItem_virtualbase_extension(self.h, variant.h))
 
-type QGraphicsSvgItemextensionProc* = proc(variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant
-proc onextension*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem, slot: QGraphicsSvgItemextensionProc) =
-  # TODO check subclass
-  var tmp = new QGraphicsSvgItemextensionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQGraphicsSvgItem_override_virtual_extension(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QGraphicsSvgItem_extension(self: ptr cQGraphicsSvgItem, slot: int, variant: pointer): pointer {.exportc: "miqt_exec_callback_QGraphicsSvgItem_extension ".} =
-  var nimfunc = cast[ptr QGraphicsSvgItemextensionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQGraphicsSvgItem_extension(vtbl: pointer, self: pointer, variant: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsSvgItemVTable](vtbl)
+  let self = QGraphicsSvgItem(h: self)
   let slotval1 = gen_qvariant_types.QVariant(h: variant)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].extension(self, slotval1)
   virtualReturn.h
+
+proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
+    vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
+  let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSvgItemVTable, _: ptr cQGraphicsSvgItem) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSvgItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsSvgItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsSvgItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsSvgItem_metacall
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsSvgItem_boundingRect
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsSvgItem_paint
+  if not isNil(vtbl.typeX):
+    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsSvgItem_typeX
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsSvgItem_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsSvgItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsSvgItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsSvgItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsSvgItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsSvgItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsSvgItem_disconnectNotify
+  if not isNil(vtbl.advance):
+    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsSvgItem_advance
+  if not isNil(vtbl.shape):
+    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsSvgItem_shape
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsSvgItem_contains
+  if not isNil(vtbl.collidesWithItem):
+    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsSvgItem_collidesWithItem
+  if not isNil(vtbl.collidesWithPath):
+    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsSvgItem_collidesWithPath
+  if not isNil(vtbl.isObscuredBy):
+    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsSvgItem_isObscuredBy
+  if not isNil(vtbl.opaqueArea):
+    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsSvgItem_opaqueArea
+  if not isNil(vtbl.sceneEventFilter):
+    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsSvgItem_sceneEventFilter
+  if not isNil(vtbl.sceneEvent):
+    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsSvgItem_sceneEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsSvgItem_contextMenuEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_dragEnterEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragLeaveEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragMoveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsSvgItem_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsSvgItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsSvgItem_focusOutEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverLeaveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsSvgItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsSvgItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsSvgItem_wheelEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsSvgItem_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsSvgItem_inputMethodQuery
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsSvgItem_itemChange
+  if not isNil(vtbl.supportsExtension):
+    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsSvgItem_supportsExtension
+  if not isNil(vtbl.setExtension):
+    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsSvgItem_setExtension
+  if not isNil(vtbl.extension):
+    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsSvgItem_extension
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new(addr(vtbl[]), ))
+
+proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
+    fileName: string,
+    vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
+  let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSvgItemVTable, _: ptr cQGraphicsSvgItem) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSvgItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsSvgItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsSvgItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsSvgItem_metacall
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsSvgItem_boundingRect
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsSvgItem_paint
+  if not isNil(vtbl.typeX):
+    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsSvgItem_typeX
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsSvgItem_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsSvgItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsSvgItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsSvgItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsSvgItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsSvgItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsSvgItem_disconnectNotify
+  if not isNil(vtbl.advance):
+    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsSvgItem_advance
+  if not isNil(vtbl.shape):
+    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsSvgItem_shape
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsSvgItem_contains
+  if not isNil(vtbl.collidesWithItem):
+    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsSvgItem_collidesWithItem
+  if not isNil(vtbl.collidesWithPath):
+    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsSvgItem_collidesWithPath
+  if not isNil(vtbl.isObscuredBy):
+    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsSvgItem_isObscuredBy
+  if not isNil(vtbl.opaqueArea):
+    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsSvgItem_opaqueArea
+  if not isNil(vtbl.sceneEventFilter):
+    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsSvgItem_sceneEventFilter
+  if not isNil(vtbl.sceneEvent):
+    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsSvgItem_sceneEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsSvgItem_contextMenuEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_dragEnterEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragLeaveEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragMoveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsSvgItem_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsSvgItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsSvgItem_focusOutEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverLeaveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsSvgItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsSvgItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsSvgItem_wheelEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsSvgItem_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsSvgItem_inputMethodQuery
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsSvgItem_itemChange
+  if not isNil(vtbl.supportsExtension):
+    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsSvgItem_supportsExtension
+  if not isNil(vtbl.setExtension):
+    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsSvgItem_setExtension
+  if not isNil(vtbl.extension):
+    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsSvgItem_extension
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new2(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+
+proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
+    parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
+  let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSvgItemVTable, _: ptr cQGraphicsSvgItem) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSvgItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsSvgItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsSvgItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsSvgItem_metacall
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsSvgItem_boundingRect
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsSvgItem_paint
+  if not isNil(vtbl.typeX):
+    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsSvgItem_typeX
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsSvgItem_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsSvgItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsSvgItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsSvgItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsSvgItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsSvgItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsSvgItem_disconnectNotify
+  if not isNil(vtbl.advance):
+    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsSvgItem_advance
+  if not isNil(vtbl.shape):
+    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsSvgItem_shape
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsSvgItem_contains
+  if not isNil(vtbl.collidesWithItem):
+    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsSvgItem_collidesWithItem
+  if not isNil(vtbl.collidesWithPath):
+    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsSvgItem_collidesWithPath
+  if not isNil(vtbl.isObscuredBy):
+    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsSvgItem_isObscuredBy
+  if not isNil(vtbl.opaqueArea):
+    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsSvgItem_opaqueArea
+  if not isNil(vtbl.sceneEventFilter):
+    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsSvgItem_sceneEventFilter
+  if not isNil(vtbl.sceneEvent):
+    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsSvgItem_sceneEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsSvgItem_contextMenuEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_dragEnterEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragLeaveEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragMoveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsSvgItem_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsSvgItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsSvgItem_focusOutEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverLeaveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsSvgItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsSvgItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsSvgItem_wheelEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsSvgItem_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsSvgItem_inputMethodQuery
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsSvgItem_itemChange
+  if not isNil(vtbl.supportsExtension):
+    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsSvgItem_supportsExtension
+  if not isNil(vtbl.setExtension):
+    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsSvgItem_setExtension
+  if not isNil(vtbl.extension):
+    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsSvgItem_extension
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new3(addr(vtbl[]), parentItem.h))
+
+proc create*(T: type gen_qgraphicssvgitem_types.QGraphicsSvgItem,
+    fileName: string, parentItem: gen_qgraphicsitem_types.QGraphicsItem,
+    vtbl: ref QGraphicsSvgItemVTable = nil): gen_qgraphicssvgitem_types.QGraphicsSvgItem =
+  let vtbl = if vtbl == nil: new QGraphicsSvgItemVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQGraphicsSvgItemVTable, _: ptr cQGraphicsSvgItem) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsSvgItemVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsSvgItem_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsSvgItem_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsSvgItem_metacall
+  if not isNil(vtbl.boundingRect):
+    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsSvgItem_boundingRect
+  if not isNil(vtbl.paint):
+    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsSvgItem_paint
+  if not isNil(vtbl.typeX):
+    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsSvgItem_typeX
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsSvgItem_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsSvgItem_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsSvgItem_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsSvgItem_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsSvgItem_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsSvgItem_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsSvgItem_disconnectNotify
+  if not isNil(vtbl.advance):
+    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsSvgItem_advance
+  if not isNil(vtbl.shape):
+    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsSvgItem_shape
+  if not isNil(vtbl.contains):
+    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsSvgItem_contains
+  if not isNil(vtbl.collidesWithItem):
+    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsSvgItem_collidesWithItem
+  if not isNil(vtbl.collidesWithPath):
+    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsSvgItem_collidesWithPath
+  if not isNil(vtbl.isObscuredBy):
+    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsSvgItem_isObscuredBy
+  if not isNil(vtbl.opaqueArea):
+    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsSvgItem_opaqueArea
+  if not isNil(vtbl.sceneEventFilter):
+    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsSvgItem_sceneEventFilter
+  if not isNil(vtbl.sceneEvent):
+    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsSvgItem_sceneEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsSvgItem_contextMenuEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_dragEnterEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragLeaveEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_dragMoveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsSvgItem_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsSvgItem_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsSvgItem_focusOutEvent
+  if not isNil(vtbl.hoverEnterEvent):
+    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverEnterEvent
+  if not isNil(vtbl.hoverMoveEvent):
+    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverMoveEvent
+  if not isNil(vtbl.hoverLeaveEvent):
+    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsSvgItem_hoverLeaveEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsSvgItem_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsSvgItem_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsSvgItem_mouseDoubleClickEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsSvgItem_wheelEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsSvgItem_inputMethodEvent
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsSvgItem_inputMethodQuery
+  if not isNil(vtbl.itemChange):
+    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsSvgItem_itemChange
+  if not isNil(vtbl.supportsExtension):
+    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsSvgItem_supportsExtension
+  if not isNil(vtbl.setExtension):
+    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsSvgItem_setExtension
+  if not isNil(vtbl.extension):
+    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsSvgItem_extension
+  gen_qgraphicssvgitem_types.QGraphicsSvgItem(h: fcQGraphicsSvgItem_new4(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parentItem.h))
+
 proc staticMetaObject*(_: type gen_qgraphicssvgitem_types.QGraphicsSvgItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsSvgItem_staticMetaObject())
 proc delete*(self: gen_qgraphicssvgitem_types.QGraphicsSvgItem) =

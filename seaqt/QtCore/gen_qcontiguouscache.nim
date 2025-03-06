@@ -44,9 +44,6 @@ proc fcQContiguousCacheData_allocateData(size: cint, alignment: cint): pointer {
 proc fcQContiguousCacheData_freeData(data: pointer): void {.importc: "QContiguousCacheData_freeData".}
 proc fcQContiguousCacheData_delete(self: pointer) {.importc: "QContiguousCacheData_delete".}
 
-
-func init*(T: type gen_qcontiguouscache_types.QContiguousCacheData, h: ptr cQContiguousCacheData): gen_qcontiguouscache_types.QContiguousCacheData =
-  T(h: h)
 proc allocateData*(_: type gen_qcontiguouscache_types.QContiguousCacheData, size: cint, alignment: cint): gen_qcontiguouscache_types.QContiguousCacheData =
   gen_qcontiguouscache_types.QContiguousCacheData(h: fcQContiguousCacheData_allocateData(size, alignment))
 

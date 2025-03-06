@@ -60,9 +60,6 @@ proc fcQSGNinePatchNode_update(self: pointer, ): void {.importc: "QSGNinePatchNo
 proc fcQSGNinePatchNode_rebuildGeometry(texture: pointer, geometry: pointer, padding: pointer, bounds: pointer, dpr: float64): void {.importc: "QSGNinePatchNode_rebuildGeometry".}
 proc fcQSGNinePatchNode_delete(self: pointer) {.importc: "QSGNinePatchNode_delete".}
 
-
-func init*(T: type gen_qsgninepatchnode_types.QSGNinePatchNode, h: ptr cQSGNinePatchNode): gen_qsgninepatchnode_types.QSGNinePatchNode =
-  T(h: h)
 proc setTexture*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, texture: gen_qsgtexture_types.QSGTexture): void =
   fcQSGNinePatchNode_setTexture(self.h, texture.h)
 

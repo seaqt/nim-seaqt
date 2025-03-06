@@ -70,9 +70,6 @@ proc fcQSurface_size(self: pointer, ): pointer {.importc: "QSurface_size".}
 proc fcQSurface_staticMetaObject(): pointer {.importc: "QSurface_staticMetaObject".}
 proc fcQSurface_delete(self: pointer) {.importc: "QSurface_delete".}
 
-
-func init*(T: type gen_qsurface_types.QSurface, h: ptr cQSurface): gen_qsurface_types.QSurface =
-  T(h: h)
 proc surfaceClass*(self: gen_qsurface_types.QSurface, ): cint =
   cint(fcQSurface_surfaceClass(self.h))
 

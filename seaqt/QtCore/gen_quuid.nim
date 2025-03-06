@@ -64,12 +64,6 @@ export gen_quuid_types
 
 type cQUuid*{.exportc: "QUuid", incompleteStruct.} = object
 
-proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
-proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
-proc fcQUuid_new3(param1: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new3".}
-proc fcQUuid_new4(param1: cstring): ptr cQUuid {.importc: "QUuid_new4".}
-proc fcQUuid_new5(param1: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new5".}
-proc fcQUuid_new6(param1: pointer): ptr cQUuid {.importc: "QUuid_new6".}
 proc fcQUuid_toString(self: pointer, ): struct_miqt_string {.importc: "QUuid_toString".}
 proc fcQUuid_toStringWithMode(self: pointer, mode: cint): struct_miqt_string {.importc: "QUuid_toStringWithMode".}
 proc fcQUuid_toByteArray(self: pointer, ): struct_miqt_string {.importc: "QUuid_toByteArray".}
@@ -88,28 +82,13 @@ proc fcQUuid_createUuidV32(ns: pointer, baseData: struct_miqt_string): pointer {
 proc fcQUuid_createUuidV52(ns: pointer, baseData: struct_miqt_string): pointer {.importc: "QUuid_createUuidV52".}
 proc fcQUuid_variant(self: pointer, ): cint {.importc: "QUuid_variant".}
 proc fcQUuid_version(self: pointer, ): cint {.importc: "QUuid_version".}
+proc fcQUuid_new(): ptr cQUuid {.importc: "QUuid_new".}
+proc fcQUuid_new2(l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): ptr cQUuid {.importc: "QUuid_new2".}
+proc fcQUuid_new3(param1: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new3".}
+proc fcQUuid_new4(param1: cstring): ptr cQUuid {.importc: "QUuid_new4".}
+proc fcQUuid_new5(param1: struct_miqt_string): ptr cQUuid {.importc: "QUuid_new5".}
+proc fcQUuid_new6(param1: pointer): ptr cQUuid {.importc: "QUuid_new6".}
 proc fcQUuid_delete(self: pointer) {.importc: "QUuid_delete".}
-
-
-func init*(T: type gen_quuid_types.QUuid, h: ptr cQUuid): gen_quuid_types.QUuid =
-  T(h: h)
-proc create*(T: type gen_quuid_types.QUuid, ): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new())
-
-proc create*(T: type gen_quuid_types.QUuid, l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8))
-
-proc create*(T: type gen_quuid_types.QUuid, param1: string): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new3(struct_miqt_string(data: param1, len: csize_t(len(param1)))))
-
-proc create*(T: type gen_quuid_types.QUuid, param1: cstring): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new4(param1))
-
-proc create*(T: type gen_quuid_types.QUuid, param1: seq[byte]): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new5(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))))
-
-proc create*(T: type gen_quuid_types.QUuid, param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
-  gen_quuid_types.QUuid.init(fcQUuid_new6(param1.h))
 
 proc toString*(self: gen_quuid_types.QUuid, ): string =
   let v_ms = fcQUuid_toString(self.h)
@@ -179,6 +158,29 @@ proc variant*(self: gen_quuid_types.QUuid, ): cint =
 
 proc version*(self: gen_quuid_types.QUuid, ): cint =
   cint(fcQUuid_version(self.h))
+
+proc create*(T: type gen_quuid_types.QUuid): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new())
+
+proc create*(T: type gen_quuid_types.QUuid,
+    l: cuint, w1: cushort, w2: cushort, b1: uint8, b2: uint8, b3: uint8, b4: uint8, b5: uint8, b6: uint8, b7: uint8, b8: uint8): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new2(l, w1, w2, b1, b2, b3, b4, b5, b6, b7, b8))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    param1: string): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new3(struct_miqt_string(data: param1, len: csize_t(len(param1)))))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    param1: cstring): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new4(param1))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    param1: seq[byte]): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new5(struct_miqt_string(data: cast[cstring](if len(param1) == 0: nil else: unsafeAddr param1[0]), len: csize_t(len(param1)))))
+
+proc create*(T: type gen_quuid_types.QUuid,
+    param1: gen_quuid_types.QUuid): gen_quuid_types.QUuid =
+  gen_quuid_types.QUuid(h: fcQUuid_new6(param1.h))
 
 proc delete*(self: gen_quuid_types.QUuid) =
   fcQUuid_delete(self.h)

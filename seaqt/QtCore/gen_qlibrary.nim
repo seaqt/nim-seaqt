@@ -58,14 +58,6 @@ export
 
 type cQLibrary*{.exportc: "QLibrary", incompleteStruct.} = object
 
-proc fcQLibrary_new(): ptr cQLibrary {.importc: "QLibrary_new".}
-proc fcQLibrary_new2(fileName: struct_miqt_string): ptr cQLibrary {.importc: "QLibrary_new2".}
-proc fcQLibrary_new3(fileName: struct_miqt_string, verNum: cint): ptr cQLibrary {.importc: "QLibrary_new3".}
-proc fcQLibrary_new4(fileName: struct_miqt_string, version: struct_miqt_string): ptr cQLibrary {.importc: "QLibrary_new4".}
-proc fcQLibrary_new5(parent: pointer): ptr cQLibrary {.importc: "QLibrary_new5".}
-proc fcQLibrary_new6(fileName: struct_miqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new6".}
-proc fcQLibrary_new7(fileName: struct_miqt_string, verNum: cint, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new7".}
-proc fcQLibrary_new8(fileName: struct_miqt_string, version: struct_miqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new8".}
 proc fcQLibrary_metaObject(self: pointer, ): pointer {.importc: "QLibrary_metaObject".}
 proc fcQLibrary_metacast(self: pointer, param1: cstring): pointer {.importc: "QLibrary_metacast".}
 proc fcQLibrary_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLibrary_metacall".}
@@ -86,55 +78,38 @@ proc fcQLibrary_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLib
 proc fcQLibrary_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLibrary_tr3".}
 proc fcQLibrary_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLibrary_trUtf82".}
 proc fcQLibrary_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLibrary_trUtf83".}
-proc fQLibrary_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QLibrary_virtualbase_metaObject".}
-proc fcQLibrary_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_metaObject".}
-proc fQLibrary_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QLibrary_virtualbase_metacast".}
-proc fcQLibrary_override_virtual_metacast(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_metacast".}
-proc fQLibrary_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QLibrary_virtualbase_metacall".}
-proc fcQLibrary_override_virtual_metacall(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_metacall".}
-proc fQLibrary_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QLibrary_virtualbase_event".}
-proc fcQLibrary_override_virtual_event(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_event".}
-proc fQLibrary_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QLibrary_virtualbase_eventFilter".}
-proc fcQLibrary_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_eventFilter".}
-proc fQLibrary_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QLibrary_virtualbase_timerEvent".}
-proc fcQLibrary_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_timerEvent".}
-proc fQLibrary_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QLibrary_virtualbase_childEvent".}
-proc fcQLibrary_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_childEvent".}
-proc fQLibrary_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QLibrary_virtualbase_customEvent".}
-proc fcQLibrary_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_customEvent".}
-proc fQLibrary_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QLibrary_virtualbase_connectNotify".}
-proc fcQLibrary_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_connectNotify".}
-proc fQLibrary_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QLibrary_virtualbase_disconnectNotify".}
-proc fcQLibrary_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QLibrary_override_virtual_disconnectNotify".}
+type cQLibraryVTable = object
+  destructor*: proc(vtbl: ptr cQLibraryVTable, self: ptr cQLibrary) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQLibrary_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QLibrary_virtualbase_metaObject".}
+proc fcQLibrary_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QLibrary_virtualbase_metacast".}
+proc fcQLibrary_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLibrary_virtualbase_metacall".}
+proc fcQLibrary_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QLibrary_virtualbase_event".}
+proc fcQLibrary_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QLibrary_virtualbase_eventFilter".}
+proc fcQLibrary_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QLibrary_virtualbase_timerEvent".}
+proc fcQLibrary_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QLibrary_virtualbase_childEvent".}
+proc fcQLibrary_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLibrary_virtualbase_customEvent".}
+proc fcQLibrary_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLibrary_virtualbase_connectNotify".}
+proc fcQLibrary_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLibrary_virtualbase_disconnectNotify".}
+proc fcQLibrary_new(vtbl: pointer, ): ptr cQLibrary {.importc: "QLibrary_new".}
+proc fcQLibrary_new2(vtbl: pointer, fileName: struct_miqt_string): ptr cQLibrary {.importc: "QLibrary_new2".}
+proc fcQLibrary_new3(vtbl: pointer, fileName: struct_miqt_string, verNum: cint): ptr cQLibrary {.importc: "QLibrary_new3".}
+proc fcQLibrary_new4(vtbl: pointer, fileName: struct_miqt_string, version: struct_miqt_string): ptr cQLibrary {.importc: "QLibrary_new4".}
+proc fcQLibrary_new5(vtbl: pointer, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new5".}
+proc fcQLibrary_new6(vtbl: pointer, fileName: struct_miqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new6".}
+proc fcQLibrary_new7(vtbl: pointer, fileName: struct_miqt_string, verNum: cint, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new7".}
+proc fcQLibrary_new8(vtbl: pointer, fileName: struct_miqt_string, version: struct_miqt_string, parent: pointer): ptr cQLibrary {.importc: "QLibrary_new8".}
 proc fcQLibrary_staticMetaObject(): pointer {.importc: "QLibrary_staticMetaObject".}
 proc fcQLibrary_delete(self: pointer) {.importc: "QLibrary_delete".}
-
-
-func init*(T: type gen_qlibrary_types.QLibrary, h: ptr cQLibrary): gen_qlibrary_types.QLibrary =
-  T(h: h)
-proc create*(T: type gen_qlibrary_types.QLibrary, ): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new())
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new2(struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string, verNum: cint): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new3(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), verNum))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string, version: string): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new4(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: version, len: csize_t(len(version)))))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, parent: gen_qobject_types.QObject): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new5(parent.h))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string, parent: gen_qobject_types.QObject): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new6(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string, verNum: cint, parent: gen_qobject_types.QObject): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new7(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), verNum, parent.h))
-
-proc create*(T: type gen_qlibrary_types.QLibrary, fileName: string, version: string, parent: gen_qobject_types.QObject): gen_qlibrary_types.QLibrary =
-  gen_qlibrary_types.QLibrary.init(fcQLibrary_new8(struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: version, len: csize_t(len(version))), parent.h))
 
 proc metaObject*(self: gen_qlibrary_types.QLibrary, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLibrary_metaObject(self.h))
@@ -220,190 +195,364 @@ proc trUtf8*(_: type gen_qlibrary_types.QLibrary, s: cstring, c: cstring, n: cin
   c_free(v_ms.data)
   vx_ret
 
+type QLibrarymetaObjectProc* = proc(self: QLibrary): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QLibrarymetacastProc* = proc(self: QLibrary, param1: cstring): pointer {.raises: [], gcsafe.}
+type QLibrarymetacallProc* = proc(self: QLibrary, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QLibraryeventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QLibraryeventFilterProc* = proc(self: QLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QLibrarytimerEventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QLibrarychildEventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QLibrarycustomEventProc* = proc(self: QLibrary, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QLibraryconnectNotifyProc* = proc(self: QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QLibrarydisconnectNotifyProc* = proc(self: QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QLibraryVTable* = object
+  vtbl: cQLibraryVTable
+  metaObject*: QLibrarymetaObjectProc
+  metacast*: QLibrarymetacastProc
+  metacall*: QLibrarymetacallProc
+  event*: QLibraryeventProc
+  eventFilter*: QLibraryeventFilterProc
+  timerEvent*: QLibrarytimerEventProc
+  childEvent*: QLibrarychildEventProc
+  customEvent*: QLibrarycustomEventProc
+  connectNotify*: QLibraryconnectNotifyProc
+  disconnectNotify*: QLibrarydisconnectNotifyProc
 proc QLibrarymetaObject*(self: gen_qlibrary_types.QLibrary, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQLibrary_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQLibrary_virtualbase_metaObject(self.h))
 
-type QLibrarymetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qlibrary_types.QLibrary, slot: QLibrarymetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QLibrarymetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_metaObject(self: ptr cQLibrary, slot: int): pointer {.exportc: "miqt_exec_callback_QLibrary_metaObject ".} =
-  var nimfunc = cast[ptr QLibrarymetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQLibrary_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QLibrarymetacast*(self: gen_qlibrary_types.QLibrary, param1: cstring): pointer =
-  fQLibrary_virtualbase_metacast(self.h, param1)
+  fcQLibrary_virtualbase_metacast(self.h, param1)
 
-type QLibrarymetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qlibrary_types.QLibrary, slot: QLibrarymetacastProc) =
-  # TODO check subclass
-  var tmp = new QLibrarymetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_metacast(self: ptr cQLibrary, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QLibrary_metacast ".} =
-  var nimfunc = cast[ptr QLibrarymetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QLibrarymetacall*(self: gen_qlibrary_types.QLibrary, param1: cint, param2: cint, param3: pointer): cint =
-  fQLibrary_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQLibrary_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QLibrarymetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qlibrary_types.QLibrary, slot: QLibrarymetacallProc) =
-  # TODO check subclass
-  var tmp = new QLibrarymetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_metacall(self: ptr cQLibrary, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QLibrary_metacall ".} =
-  var nimfunc = cast[ptr QLibrarymetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QLibraryevent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): bool =
-  fQLibrary_virtualbase_event(self.h, event.h)
+  fcQLibrary_virtualbase_event(self.h, event.h)
 
-type QLibraryeventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qlibrary_types.QLibrary, slot: QLibraryeventProc) =
-  # TODO check subclass
-  var tmp = new QLibraryeventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_event(self: ptr cQLibrary, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QLibrary_event ".} =
-  var nimfunc = cast[ptr QLibraryeventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QLibraryeventFilter*(self: gen_qlibrary_types.QLibrary, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQLibrary_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQLibrary_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QLibraryeventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qlibrary_types.QLibrary, slot: QLibraryeventFilterProc) =
-  # TODO check subclass
-  var tmp = new QLibraryeventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_eventFilter(self: ptr cQLibrary, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QLibrary_eventFilter ".} =
-  var nimfunc = cast[ptr QLibraryeventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QLibrarytimerEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQLibrary_virtualbase_timerEvent(self.h, event.h)
+  fcQLibrary_virtualbase_timerEvent(self.h, event.h)
 
-type QLibrarytimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qlibrary_types.QLibrary, slot: QLibrarytimerEventProc) =
-  # TODO check subclass
-  var tmp = new QLibrarytimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_timerEvent(self: ptr cQLibrary, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLibrary_timerEvent ".} =
-  var nimfunc = cast[ptr QLibrarytimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLibrarychildEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QChildEvent): void =
-  fQLibrary_virtualbase_childEvent(self.h, event.h)
+  fcQLibrary_virtualbase_childEvent(self.h, event.h)
 
-type QLibrarychildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qlibrary_types.QLibrary, slot: QLibrarychildEventProc) =
-  # TODO check subclass
-  var tmp = new QLibrarychildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_childEvent(self: ptr cQLibrary, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLibrary_childEvent ".} =
-  var nimfunc = cast[ptr QLibrarychildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLibrarycustomEvent*(self: gen_qlibrary_types.QLibrary, event: gen_qcoreevent_types.QEvent): void =
-  fQLibrary_virtualbase_customEvent(self.h, event.h)
+  fcQLibrary_virtualbase_customEvent(self.h, event.h)
 
-type QLibrarycustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qlibrary_types.QLibrary, slot: QLibrarycustomEventProc) =
-  # TODO check subclass
-  var tmp = new QLibrarycustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_customEvent(self: ptr cQLibrary, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QLibrary_customEvent ".} =
-  var nimfunc = cast[ptr QLibrarycustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLibraryconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQLibrary_virtualbase_connectNotify(self.h, signal.h)
+  fcQLibrary_virtualbase_connectNotify(self.h, signal.h)
 
-type QLibraryconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qlibrary_types.QLibrary, slot: QLibraryconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QLibraryconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_connectNotify(self: ptr cQLibrary, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QLibrary_connectNotify ".} =
-  var nimfunc = cast[ptr QLibraryconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QLibrarydisconnectNotify*(self: gen_qlibrary_types.QLibrary, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQLibrary_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQLibrary_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QLibrarydisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qlibrary_types.QLibrary, slot: QLibrarydisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QLibrarydisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQLibrary_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QLibrary_disconnectNotify(self: ptr cQLibrary, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QLibrary_disconnectNotify ".} =
-  var nimfunc = cast[ptr QLibrarydisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQLibrary_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLibraryVTable](vtbl)
+  let self = QLibrary(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new2(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName)))))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string, verNum: cint,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new3(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), verNum))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string, version: string,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new4(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: version, len: csize_t(len(version)))))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    parent: gen_qobject_types.QObject,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new5(addr(vtbl[]), parent.h))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string, parent: gen_qobject_types.QObject,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new6(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), parent.h))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string, verNum: cint, parent: gen_qobject_types.QObject,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new7(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), verNum, parent.h))
+
+proc create*(T: type gen_qlibrary_types.QLibrary,
+    fileName: string, version: string, parent: gen_qobject_types.QObject,
+    vtbl: ref QLibraryVTable = nil): gen_qlibrary_types.QLibrary =
+  let vtbl = if vtbl == nil: new QLibraryVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQLibraryVTable, _: ptr cQLibrary) {.cdecl.} =
+    let vtbl = cast[ref QLibraryVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLibrary_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQLibrary_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQLibrary_metacall
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQLibrary_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLibrary_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLibrary_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLibrary_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLibrary_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLibrary_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLibrary_disconnectNotify
+  gen_qlibrary_types.QLibrary(h: fcQLibrary_new8(addr(vtbl[]), struct_miqt_string(data: fileName, len: csize_t(len(fileName))), struct_miqt_string(data: version, len: csize_t(len(version))), parent.h))
+
 proc staticMetaObject*(_: type gen_qlibrary_types.QLibrary): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLibrary_staticMetaObject())
 proc delete*(self: gen_qlibrary_types.QLibrary) =

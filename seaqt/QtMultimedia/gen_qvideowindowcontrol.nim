@@ -92,9 +92,6 @@ proc fcQVideoWindowControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt
 proc fcQVideoWindowControl_staticMetaObject(): pointer {.importc: "QVideoWindowControl_staticMetaObject".}
 proc fcQVideoWindowControl_delete(self: pointer) {.importc: "QVideoWindowControl_delete".}
 
-
-func init*(T: type gen_qvideowindowcontrol_types.QVideoWindowControl, h: ptr cQVideoWindowControl): gen_qvideowindowcontrol_types.QVideoWindowControl =
-  T(h: h)
 proc metaObject*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoWindowControl_metaObject(self.h))
 
@@ -174,7 +171,7 @@ proc fullScreenChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl,
   fcQVideoWindowControl_fullScreenChanged(self.h, fullScreen)
 
 type QVideoWindowControlfullScreenChangedSlot* = proc(fullScreen: bool)
-proc miqt_exec_callback_QVideoWindowControl_fullScreenChanged(slot: int, fullScreen: bool) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_fullScreenChanged(slot: int, fullScreen: bool) {.exportc: "miqt_exec_callback_QVideoWindowControl_fullScreenChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlfullScreenChangedSlot](cast[pointer](slot))
   let slotval1 = fullScreen
 
@@ -190,7 +187,7 @@ proc brightnessChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl,
   fcQVideoWindowControl_brightnessChanged(self.h, brightness)
 
 type QVideoWindowControlbrightnessChangedSlot* = proc(brightness: cint)
-proc miqt_exec_callback_QVideoWindowControl_brightnessChanged(slot: int, brightness: cint) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_brightnessChanged(slot: int, brightness: cint) {.exportc: "miqt_exec_callback_QVideoWindowControl_brightnessChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlbrightnessChangedSlot](cast[pointer](slot))
   let slotval1 = brightness
 
@@ -206,7 +203,7 @@ proc contrastChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, c
   fcQVideoWindowControl_contrastChanged(self.h, contrast)
 
 type QVideoWindowControlcontrastChangedSlot* = proc(contrast: cint)
-proc miqt_exec_callback_QVideoWindowControl_contrastChanged(slot: int, contrast: cint) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_contrastChanged(slot: int, contrast: cint) {.exportc: "miqt_exec_callback_QVideoWindowControl_contrastChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlcontrastChangedSlot](cast[pointer](slot))
   let slotval1 = contrast
 
@@ -222,7 +219,7 @@ proc hueChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl, hue: c
   fcQVideoWindowControl_hueChanged(self.h, hue)
 
 type QVideoWindowControlhueChangedSlot* = proc(hue: cint)
-proc miqt_exec_callback_QVideoWindowControl_hueChanged(slot: int, hue: cint) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_hueChanged(slot: int, hue: cint) {.exportc: "miqt_exec_callback_QVideoWindowControl_hueChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlhueChangedSlot](cast[pointer](slot))
   let slotval1 = hue
 
@@ -238,7 +235,7 @@ proc saturationChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl,
   fcQVideoWindowControl_saturationChanged(self.h, saturation)
 
 type QVideoWindowControlsaturationChangedSlot* = proc(saturation: cint)
-proc miqt_exec_callback_QVideoWindowControl_saturationChanged(slot: int, saturation: cint) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_saturationChanged(slot: int, saturation: cint) {.exportc: "miqt_exec_callback_QVideoWindowControl_saturationChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlsaturationChangedSlot](cast[pointer](slot))
   let slotval1 = saturation
 
@@ -254,7 +251,7 @@ proc nativeSizeChanged*(self: gen_qvideowindowcontrol_types.QVideoWindowControl,
   fcQVideoWindowControl_nativeSizeChanged(self.h)
 
 type QVideoWindowControlnativeSizeChangedSlot* = proc()
-proc miqt_exec_callback_QVideoWindowControl_nativeSizeChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQVideoWindowControl_nativeSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QVideoWindowControl_nativeSizeChanged".} =
   let nimfunc = cast[ptr QVideoWindowControlnativeSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

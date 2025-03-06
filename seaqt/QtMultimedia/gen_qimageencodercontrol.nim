@@ -67,9 +67,6 @@ proc fcQImageEncoderControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miq
 proc fcQImageEncoderControl_staticMetaObject(): pointer {.importc: "QImageEncoderControl_staticMetaObject".}
 proc fcQImageEncoderControl_delete(self: pointer) {.importc: "QImageEncoderControl_delete".}
 
-
-func init*(T: type gen_qimageencodercontrol_types.QImageEncoderControl, h: ptr cQImageEncoderControl): gen_qimageencodercontrol_types.QImageEncoderControl =
-  T(h: h)
 proc metaObject*(self: gen_qimageencodercontrol_types.QImageEncoderControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQImageEncoderControl_metaObject(self.h))
 

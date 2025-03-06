@@ -46,18 +46,14 @@ export
 
 type cQScriptExtensionInterface*{.exportc: "QScriptExtensionInterface", incompleteStruct.} = object
 
-proc fcQScriptExtensionInterface_new(param1: pointer): ptr cQScriptExtensionInterface {.importc: "QScriptExtensionInterface_new".}
 proc fcQScriptExtensionInterface_initialize(self: pointer, key: struct_miqt_string, engine: pointer): void {.importc: "QScriptExtensionInterface_initialize".}
 proc fcQScriptExtensionInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QScriptExtensionInterface_operatorAssign".}
-proc fcQScriptExtensionInterface_override_virtual_initialize(self: pointer, slot: int) {.importc: "QScriptExtensionInterface_override_virtual_initialize".}
-proc fcQScriptExtensionInterface_override_virtual_keys(self: pointer, slot: int) {.importc: "QScriptExtensionInterface_override_virtual_keys".}
+type cQScriptExtensionInterfaceVTable = object
+  destructor*: proc(vtbl: ptr cQScriptExtensionInterfaceVTable, self: ptr cQScriptExtensionInterface) {.cdecl, raises:[], gcsafe.}
+  initialize*: proc(vtbl, self: pointer, key: struct_miqt_string, engine: pointer): void {.cdecl, raises: [], gcsafe.}
+  keys*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+proc fcQScriptExtensionInterface_new(vtbl: pointer, param1: pointer): ptr cQScriptExtensionInterface {.importc: "QScriptExtensionInterface_new".}
 proc fcQScriptExtensionInterface_delete(self: pointer) {.importc: "QScriptExtensionInterface_delete".}
-
-
-func init*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterface, h: ptr cQScriptExtensionInterface): gen_qscriptextensioninterface_types.QScriptExtensionInterface =
-  T(h: h)
-proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterface, param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface): gen_qscriptextensioninterface_types.QScriptExtensionInterface =
-  gen_qscriptextensioninterface_types.QScriptExtensionInterface.init(fcQScriptExtensionInterface_new(param1.h))
 
 proc initialize*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, key: string, engine: gen_qscriptengine_types.QScriptEngine): void =
   fcQScriptExtensionInterface_initialize(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), engine.h)
@@ -65,42 +61,45 @@ proc initialize*(self: gen_qscriptextensioninterface_types.QScriptExtensionInter
 proc operatorAssign*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface): void =
   fcQScriptExtensionInterface_operatorAssign(self.h, param1.h)
 
-type QScriptExtensionInterfaceinitializeProc* = proc(key: string, engine: gen_qscriptengine_types.QScriptEngine): void
-proc oninitialize*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, slot: QScriptExtensionInterfaceinitializeProc) =
-  # TODO check subclass
-  var tmp = new QScriptExtensionInterfaceinitializeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQScriptExtensionInterface_override_virtual_initialize(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QScriptExtensionInterface_initialize(self: ptr cQScriptExtensionInterface, slot: int, key: struct_miqt_string, engine: pointer): void {.exportc: "miqt_exec_callback_QScriptExtensionInterface_initialize ".} =
-  var nimfunc = cast[ptr QScriptExtensionInterfaceinitializeProc](cast[pointer](slot))
+type QScriptExtensionInterfaceinitializeProc* = proc(self: QScriptExtensionInterface, key: string, engine: gen_qscriptengine_types.QScriptEngine): void {.raises: [], gcsafe.}
+type QScriptExtensionInterfacekeysProc* = proc(self: QScriptExtensionInterface): seq[string] {.raises: [], gcsafe.}
+type QScriptExtensionInterfaceVTable* = object
+  vtbl: cQScriptExtensionInterfaceVTable
+  initialize*: QScriptExtensionInterfaceinitializeProc
+  keys*: QScriptExtensionInterfacekeysProc
+proc miqt_exec_callback_cQScriptExtensionInterface_initialize(vtbl: pointer, self: pointer, key: struct_miqt_string, engine: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QScriptExtensionInterfaceVTable](vtbl)
+  let self = QScriptExtensionInterface(h: self)
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
-
   let slotval2 = gen_qscriptengine_types.QScriptEngine(h: engine)
+  vtbl[].initialize(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
-type QScriptExtensionInterfacekeysProc* = proc(): seq[string]
-proc onkeys*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface, slot: QScriptExtensionInterfacekeysProc) =
-  # TODO check subclass
-  var tmp = new QScriptExtensionInterfacekeysProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQScriptExtensionInterface_override_virtual_keys(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QScriptExtensionInterface_keys(self: ptr cQScriptExtensionInterface, slot: int): struct_miqt_array {.exportc: "miqt_exec_callback_QScriptExtensionInterface_keys ".} =
-  var nimfunc = cast[ptr QScriptExtensionInterfacekeysProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQScriptExtensionInterface_keys(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QScriptExtensionInterfaceVTable](vtbl)
+  let self = QScriptExtensionInterface(h: self)
+  var virtualReturn = vtbl[].keys(self)
   var virtualReturn_CArray = newSeq[struct_miqt_string](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = struct_miqt_string(data: virtualReturn[i], len: csize_t(len(virtualReturn[i])))
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
+proc create*(T: type gen_qscriptextensioninterface_types.QScriptExtensionInterface,
+    param1: gen_qscriptextensioninterface_types.QScriptExtensionInterface,
+    vtbl: ref QScriptExtensionInterfaceVTable = nil): gen_qscriptextensioninterface_types.QScriptExtensionInterface =
+  let vtbl = if vtbl == nil: new QScriptExtensionInterfaceVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQScriptExtensionInterfaceVTable, _: ptr cQScriptExtensionInterface) {.cdecl.} =
+    let vtbl = cast[ref QScriptExtensionInterfaceVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.initialize):
+    vtbl[].vtbl.initialize = miqt_exec_callback_cQScriptExtensionInterface_initialize
+  if not isNil(vtbl.keys):
+    vtbl[].vtbl.keys = miqt_exec_callback_cQScriptExtensionInterface_keys
+  gen_qscriptextensioninterface_types.QScriptExtensionInterface(h: fcQScriptExtensionInterface_new(addr(vtbl[]), param1.h))
+
 proc delete*(self: gen_qscriptextensioninterface_types.QScriptExtensionInterface) =
   fcQScriptExtensionInterface_delete(self.h)

@@ -77,9 +77,6 @@ proc fcQMediaStreamsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miq
 proc fcQMediaStreamsControl_staticMetaObject(): pointer {.importc: "QMediaStreamsControl_staticMetaObject".}
 proc fcQMediaStreamsControl_delete(self: pointer) {.importc: "QMediaStreamsControl_delete".}
 
-
-func init*(T: type gen_qmediastreamscontrol_types.QMediaStreamsControl, h: ptr cQMediaStreamsControl): gen_qmediastreamscontrol_types.QMediaStreamsControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaStreamsControl_metaObject(self.h))
 
@@ -120,7 +117,7 @@ proc streamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, 
   fcQMediaStreamsControl_streamsChanged(self.h)
 
 type QMediaStreamsControlstreamsChangedSlot* = proc()
-proc miqt_exec_callback_QMediaStreamsControl_streamsChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQMediaStreamsControl_streamsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaStreamsControl_streamsChanged".} =
   let nimfunc = cast[ptr QMediaStreamsControlstreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -134,7 +131,7 @@ proc activeStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsCon
   fcQMediaStreamsControl_activeStreamsChanged(self.h)
 
 type QMediaStreamsControlactiveStreamsChangedSlot* = proc()
-proc miqt_exec_callback_QMediaStreamsControl_activeStreamsChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaStreamsControl_activeStreamsChanged".} =
   let nimfunc = cast[ptr QMediaStreamsControlactiveStreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

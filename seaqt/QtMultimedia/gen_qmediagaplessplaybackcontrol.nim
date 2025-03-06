@@ -71,9 +71,6 @@ proc fcQMediaGaplessPlaybackControl_trUtf83(s: cstring, c: cstring, n: cint): st
 proc fcQMediaGaplessPlaybackControl_staticMetaObject(): pointer {.importc: "QMediaGaplessPlaybackControl_staticMetaObject".}
 proc fcQMediaGaplessPlaybackControl_delete(self: pointer) {.importc: "QMediaGaplessPlaybackControl_delete".}
 
-
-func init*(T: type gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, h: ptr cQMediaGaplessPlaybackControl): gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaplessPlaybackControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaGaplessPlaybackControl_metaObject(self.h))
 
@@ -114,7 +111,7 @@ proc crossfadeTimeChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGa
   fcQMediaGaplessPlaybackControl_crossfadeTimeChanged(self.h, crossfadeTime)
 
 type QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot* = proc(crossfadeTime: float64)
-proc miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged(slot: int, crossfadeTime: float64) {.exportc.} =
+proc miqt_exec_callback_cQMediaGaplessPlaybackControl_crossfadeTimeChanged(slot: int, crossfadeTime: float64) {.exportc: "miqt_exec_callback_QMediaGaplessPlaybackControl_crossfadeTimeChanged".} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControlcrossfadeTimeChangedSlot](cast[pointer](slot))
   let slotval1 = crossfadeTime
 
@@ -130,7 +127,7 @@ proc nextMediaChanged*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGaples
   fcQMediaGaplessPlaybackControl_nextMediaChanged(self.h, media.h)
 
 type QMediaGaplessPlaybackControlnextMediaChangedSlot* = proc(media: gen_qmediacontent_types.QMediaContent)
-proc miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged(slot: int, media: pointer) {.exportc.} =
+proc miqt_exec_callback_cQMediaGaplessPlaybackControl_nextMediaChanged(slot: int, media: pointer) {.exportc: "miqt_exec_callback_QMediaGaplessPlaybackControl_nextMediaChanged".} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControlnextMediaChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qmediacontent_types.QMediaContent(h: media)
 
@@ -146,7 +143,7 @@ proc advancedToNextMedia*(self: gen_qmediagaplessplaybackcontrol_types.QMediaGap
   fcQMediaGaplessPlaybackControl_advancedToNextMedia(self.h)
 
 type QMediaGaplessPlaybackControladvancedToNextMediaSlot* = proc()
-proc miqt_exec_callback_QMediaGaplessPlaybackControl_advancedToNextMedia(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQMediaGaplessPlaybackControl_advancedToNextMedia(slot: int) {.exportc: "miqt_exec_callback_QMediaGaplessPlaybackControl_advancedToNextMedia".} =
   let nimfunc = cast[ptr QMediaGaplessPlaybackControladvancedToNextMediaSlot](cast[pointer](slot))
   nimfunc[]()
 

@@ -62,9 +62,6 @@ proc fcQMediaContainerControl_trUtf83(s: cstring, c: cstring, n: cint): struct_m
 proc fcQMediaContainerControl_staticMetaObject(): pointer {.importc: "QMediaContainerControl_staticMetaObject".}
 proc fcQMediaContainerControl_delete(self: pointer) {.importc: "QMediaContainerControl_delete".}
 
-
-func init*(T: type gen_qmediacontainercontrol_types.QMediaContainerControl, h: ptr cQMediaContainerControl): gen_qmediacontainercontrol_types.QMediaContainerControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediacontainercontrol_types.QMediaContainerControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaContainerControl_metaObject(self.h))
 

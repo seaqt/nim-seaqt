@@ -20,271 +20,215 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QOffscreenSurface_screenChanged(intptr_t, QScreen*);
-QMetaObject* miqt_exec_callback_QOffscreenSurface_metaObject(const QOffscreenSurface*, intptr_t);
-void* miqt_exec_callback_QOffscreenSurface_metacast(QOffscreenSurface*, intptr_t, const char*);
-int miqt_exec_callback_QOffscreenSurface_metacall(QOffscreenSurface*, intptr_t, int, int, void**);
-int miqt_exec_callback_QOffscreenSurface_surfaceType(const QOffscreenSurface*, intptr_t);
-QSurfaceFormat* miqt_exec_callback_QOffscreenSurface_format(const QOffscreenSurface*, intptr_t);
-QSize* miqt_exec_callback_QOffscreenSurface_size(const QOffscreenSurface*, intptr_t);
-bool miqt_exec_callback_QOffscreenSurface_event(QOffscreenSurface*, intptr_t, QEvent*);
-bool miqt_exec_callback_QOffscreenSurface_eventFilter(QOffscreenSurface*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QOffscreenSurface_timerEvent(QOffscreenSurface*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QOffscreenSurface_childEvent(QOffscreenSurface*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QOffscreenSurface_customEvent(QOffscreenSurface*, intptr_t, QEvent*);
-void miqt_exec_callback_QOffscreenSurface_connectNotify(QOffscreenSurface*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QOffscreenSurface_disconnectNotify(QOffscreenSurface*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQOffscreenSurface final : public QOffscreenSurface {
+	struct QOffscreenSurface_VTable* vtbl;
 public:
 
-	VirtualQOffscreenSurface(QScreen* screen, QObject* parent): QOffscreenSurface(screen, parent) {};
-	VirtualQOffscreenSurface(): QOffscreenSurface() {};
-	VirtualQOffscreenSurface(QScreen* screen): QOffscreenSurface(screen) {};
+	VirtualQOffscreenSurface(struct QOffscreenSurface_VTable* vtbl, QScreen* screen, QObject* parent): QOffscreenSurface(screen, parent), vtbl(vtbl) {};
+	VirtualQOffscreenSurface(struct QOffscreenSurface_VTable* vtbl): QOffscreenSurface(), vtbl(vtbl) {};
+	VirtualQOffscreenSurface(struct QOffscreenSurface_VTable* vtbl, QScreen* screen): QOffscreenSurface(screen), vtbl(vtbl) {};
 
-	virtual ~VirtualQOffscreenSurface() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQOffscreenSurface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QOffscreenSurface::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QOffscreenSurface_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QOffscreenSurface_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QOffscreenSurface::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QOffscreenSurface_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QOffscreenSurface_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QOffscreenSurface::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QOffscreenSurface_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QOffscreenSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__surfaceType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSurface::SurfaceType surfaceType() const override {
-		if (handle__surfaceType == 0) {
+		if (vtbl->surfaceType == 0) {
 			return QOffscreenSurface::surfaceType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QOffscreenSurface_surfaceType(this, handle__surfaceType);
+
+		int callback_return_value = vtbl->surfaceType(vtbl, this);
 
 		return static_cast<QSurface::SurfaceType>(callback_return_value);
 	}
 
 	friend int QOffscreenSurface_virtualbase_surfaceType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__format = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSurfaceFormat format() const override {
-		if (handle__format == 0) {
+		if (vtbl->format == 0) {
 			return QOffscreenSurface::format();
 		}
-		
 
-		QSurfaceFormat* callback_return_value = miqt_exec_callback_QOffscreenSurface_format(this, handle__format);
+
+		QSurfaceFormat* callback_return_value = vtbl->format(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSurfaceFormat* QOffscreenSurface_virtualbase_format(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__size = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize size() const override {
-		if (handle__size == 0) {
+		if (vtbl->size == 0) {
 			return QOffscreenSurface::size();
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QOffscreenSurface_size(this, handle__size);
+
+		QSize* callback_return_value = vtbl->size(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QSize* QOffscreenSurface_virtualbase_size(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QOffscreenSurface::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QOffscreenSurface_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QOffscreenSurface_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QOffscreenSurface::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QOffscreenSurface_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QOffscreenSurface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QOffscreenSurface::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QOffscreenSurface_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QOffscreenSurface_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QOffscreenSurface::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QOffscreenSurface_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QOffscreenSurface_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QOffscreenSurface::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QOffscreenSurface_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QOffscreenSurface_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QOffscreenSurface::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QOffscreenSurface_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QOffscreenSurface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QOffscreenSurface::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QOffscreenSurface_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QOffscreenSurface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -296,16 +240,16 @@ public:
 	friend bool QOffscreenSurface_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QOffscreenSurface* QOffscreenSurface_new(QScreen* screen, QObject* parent) {
-	return new VirtualQOffscreenSurface(screen, parent);
+QOffscreenSurface* QOffscreenSurface_new(struct QOffscreenSurface_VTable* vtbl, QScreen* screen, QObject* parent) {
+	return new VirtualQOffscreenSurface(vtbl, screen, parent);
 }
 
-QOffscreenSurface* QOffscreenSurface_new2() {
-	return new VirtualQOffscreenSurface();
+QOffscreenSurface* QOffscreenSurface_new2(struct QOffscreenSurface_VTable* vtbl) {
+	return new VirtualQOffscreenSurface(vtbl);
 }
 
-QOffscreenSurface* QOffscreenSurface_new3(QScreen* screen) {
-	return new VirtualQOffscreenSurface(screen);
+QOffscreenSurface* QOffscreenSurface_new3(struct QOffscreenSurface_VTable* vtbl, QScreen* screen) {
+	return new VirtualQOffscreenSurface(vtbl, screen);
 }
 
 void QOffscreenSurface_virtbase(QOffscreenSurface* src, QObject** outptr_QObject, QSurface** outptr_QSurface) {
@@ -451,30 +395,10 @@ struct miqt_string QOffscreenSurface_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-bool QOffscreenSurface_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QOffscreenSurface_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::metaObject();
 
-}
-
-bool QOffscreenSurface_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QOffscreenSurface_virtualbase_metacast(void* self, const char* param1) {
@@ -483,30 +407,10 @@ void* QOffscreenSurface_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QOffscreenSurface_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QOffscreenSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QOffscreenSurface_override_virtual_surfaceType(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__surfaceType = slot;
-	return true;
 }
 
 int QOffscreenSurface_virtualbase_surfaceType(const void* self) {
@@ -516,30 +420,10 @@ int QOffscreenSurface_virtualbase_surfaceType(const void* self) {
 
 }
 
-bool QOffscreenSurface_override_virtual_format(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__format = slot;
-	return true;
-}
-
 QSurfaceFormat* QOffscreenSurface_virtualbase_format(const void* self) {
 
 	return new QSurfaceFormat(( (const VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::format());
 
-}
-
-bool QOffscreenSurface_override_virtual_size(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__size = slot;
-	return true;
 }
 
 QSize* QOffscreenSurface_virtualbase_size(const void* self) {
@@ -548,30 +432,10 @@ QSize* QOffscreenSurface_virtualbase_size(const void* self) {
 
 }
 
-bool QOffscreenSurface_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QOffscreenSurface_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::event(event);
 
-}
-
-bool QOffscreenSurface_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QOffscreenSurface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -580,30 +444,10 @@ bool QOffscreenSurface_virtualbase_eventFilter(void* self, QObject* watched, QEv
 
 }
 
-bool QOffscreenSurface_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QOffscreenSurface_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::timerEvent(event);
 
-}
-
-bool QOffscreenSurface_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QOffscreenSurface_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -612,46 +456,16 @@ void QOffscreenSurface_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QOffscreenSurface_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QOffscreenSurface_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::customEvent(event);
 
 }
 
-bool QOffscreenSurface_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QOffscreenSurface_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQOffscreenSurface*)(self) )->QOffscreenSurface::connectNotify(*signal);
 
-}
-
-bool QOffscreenSurface_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQOffscreenSurface* self_cast = dynamic_cast<VirtualQOffscreenSurface*>( (QOffscreenSurface*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QOffscreenSurface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

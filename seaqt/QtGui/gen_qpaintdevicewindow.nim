@@ -65,9 +65,6 @@ proc fcQPaintDeviceWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_
 proc fcQPaintDeviceWindow_staticMetaObject(): pointer {.importc: "QPaintDeviceWindow_staticMetaObject".}
 proc fcQPaintDeviceWindow_delete(self: pointer) {.importc: "QPaintDeviceWindow_delete".}
 
-
-func init*(T: type gen_qpaintdevicewindow_types.QPaintDeviceWindow, h: ptr cQPaintDeviceWindow): gen_qpaintdevicewindow_types.QPaintDeviceWindow =
-  T(h: h)
 proc metaObject*(self: gen_qpaintdevicewindow_types.QPaintDeviceWindow, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPaintDeviceWindow_metaObject(self.h))
 

@@ -80,8 +80,6 @@ export
 
 type cQTableView*{.exportc: "QTableView", incompleteStruct.} = object
 
-proc fcQTableView_new(parent: pointer): ptr cQTableView {.importc: "QTableView_new".}
-proc fcQTableView_new2(): ptr cQTableView {.importc: "QTableView_new2".}
 proc fcQTableView_metaObject(self: pointer, ): pointer {.importc: "QTableView_metaObject".}
 proc fcQTableView_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableView_metacast".}
 proc fcQTableView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableView_metacall".}
@@ -140,201 +138,196 @@ proc fcQTableView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QT
 proc fcQTableView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableView_tr3".}
 proc fcQTableView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTableView_trUtf82".}
 proc fcQTableView_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableView_trUtf83".}
-proc fQTableView_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QTableView_virtualbase_metaObject".}
-proc fcQTableView_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metaObject".}
-proc fQTableView_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QTableView_virtualbase_metacast".}
-proc fcQTableView_override_virtual_metacast(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metacast".}
-proc fQTableView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QTableView_virtualbase_metacall".}
-proc fcQTableView_override_virtual_metacall(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metacall".}
-proc fQTableView_virtualbase_setModel(self: pointer, model: pointer): void{.importc: "QTableView_virtualbase_setModel".}
-proc fcQTableView_override_virtual_setModel(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setModel".}
-proc fQTableView_virtualbase_setRootIndex(self: pointer, index: pointer): void{.importc: "QTableView_virtualbase_setRootIndex".}
-proc fcQTableView_override_virtual_setRootIndex(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setRootIndex".}
-proc fQTableView_virtualbase_setSelectionModel(self: pointer, selectionModel: pointer): void{.importc: "QTableView_virtualbase_setSelectionModel".}
-proc fcQTableView_override_virtual_setSelectionModel(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setSelectionModel".}
-proc fQTableView_virtualbase_doItemsLayout(self: pointer, ): void{.importc: "QTableView_virtualbase_doItemsLayout".}
-proc fcQTableView_override_virtual_doItemsLayout(self: pointer, slot: int) {.importc: "QTableView_override_virtual_doItemsLayout".}
-proc fQTableView_virtualbase_visualRect(self: pointer, index: pointer): pointer{.importc: "QTableView_virtualbase_visualRect".}
-proc fcQTableView_override_virtual_visualRect(self: pointer, slot: int) {.importc: "QTableView_override_virtual_visualRect".}
-proc fQTableView_virtualbase_scrollTo(self: pointer, index: pointer, hint: cint): void{.importc: "QTableView_virtualbase_scrollTo".}
-proc fcQTableView_override_virtual_scrollTo(self: pointer, slot: int) {.importc: "QTableView_override_virtual_scrollTo".}
-proc fQTableView_virtualbase_indexAt(self: pointer, p: pointer): pointer{.importc: "QTableView_virtualbase_indexAt".}
-proc fcQTableView_override_virtual_indexAt(self: pointer, slot: int) {.importc: "QTableView_override_virtual_indexAt".}
-proc fQTableView_virtualbase_scrollContentsBy(self: pointer, dx: cint, dy: cint): void{.importc: "QTableView_virtualbase_scrollContentsBy".}
-proc fcQTableView_override_virtual_scrollContentsBy(self: pointer, slot: int) {.importc: "QTableView_override_virtual_scrollContentsBy".}
-proc fQTableView_virtualbase_viewOptions(self: pointer, ): pointer{.importc: "QTableView_virtualbase_viewOptions".}
-proc fcQTableView_override_virtual_viewOptions(self: pointer, slot: int) {.importc: "QTableView_override_virtual_viewOptions".}
-proc fQTableView_virtualbase_paintEvent(self: pointer, e: pointer): void{.importc: "QTableView_virtualbase_paintEvent".}
-proc fcQTableView_override_virtual_paintEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_paintEvent".}
-proc fQTableView_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_timerEvent".}
-proc fcQTableView_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_timerEvent".}
-proc fQTableView_virtualbase_horizontalOffset(self: pointer, ): cint{.importc: "QTableView_virtualbase_horizontalOffset".}
-proc fcQTableView_override_virtual_horizontalOffset(self: pointer, slot: int) {.importc: "QTableView_override_virtual_horizontalOffset".}
-proc fQTableView_virtualbase_verticalOffset(self: pointer, ): cint{.importc: "QTableView_virtualbase_verticalOffset".}
-proc fcQTableView_override_virtual_verticalOffset(self: pointer, slot: int) {.importc: "QTableView_override_virtual_verticalOffset".}
-proc fQTableView_virtualbase_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer{.importc: "QTableView_virtualbase_moveCursor".}
-proc fcQTableView_override_virtual_moveCursor(self: pointer, slot: int) {.importc: "QTableView_override_virtual_moveCursor".}
-proc fQTableView_virtualbase_setSelection(self: pointer, rect: pointer, command: cint): void{.importc: "QTableView_virtualbase_setSelection".}
-proc fcQTableView_override_virtual_setSelection(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setSelection".}
-proc fQTableView_virtualbase_visualRegionForSelection(self: pointer, selection: pointer): pointer{.importc: "QTableView_virtualbase_visualRegionForSelection".}
-proc fcQTableView_override_virtual_visualRegionForSelection(self: pointer, slot: int) {.importc: "QTableView_override_virtual_visualRegionForSelection".}
-proc fQTableView_virtualbase_selectedIndexes(self: pointer, ): struct_miqt_array{.importc: "QTableView_virtualbase_selectedIndexes".}
-proc fcQTableView_override_virtual_selectedIndexes(self: pointer, slot: int) {.importc: "QTableView_override_virtual_selectedIndexes".}
-proc fQTableView_virtualbase_updateGeometries(self: pointer, ): void{.importc: "QTableView_virtualbase_updateGeometries".}
-proc fcQTableView_override_virtual_updateGeometries(self: pointer, slot: int) {.importc: "QTableView_override_virtual_updateGeometries".}
-proc fQTableView_virtualbase_viewportSizeHint(self: pointer, ): pointer{.importc: "QTableView_virtualbase_viewportSizeHint".}
-proc fcQTableView_override_virtual_viewportSizeHint(self: pointer, slot: int) {.importc: "QTableView_override_virtual_viewportSizeHint".}
-proc fQTableView_virtualbase_sizeHintForRow(self: pointer, row: cint): cint{.importc: "QTableView_virtualbase_sizeHintForRow".}
-proc fcQTableView_override_virtual_sizeHintForRow(self: pointer, slot: int) {.importc: "QTableView_override_virtual_sizeHintForRow".}
-proc fQTableView_virtualbase_sizeHintForColumn(self: pointer, column: cint): cint{.importc: "QTableView_virtualbase_sizeHintForColumn".}
-proc fcQTableView_override_virtual_sizeHintForColumn(self: pointer, slot: int) {.importc: "QTableView_override_virtual_sizeHintForColumn".}
-proc fQTableView_virtualbase_verticalScrollbarAction(self: pointer, action: cint): void{.importc: "QTableView_virtualbase_verticalScrollbarAction".}
-proc fcQTableView_override_virtual_verticalScrollbarAction(self: pointer, slot: int) {.importc: "QTableView_override_virtual_verticalScrollbarAction".}
-proc fQTableView_virtualbase_horizontalScrollbarAction(self: pointer, action: cint): void{.importc: "QTableView_virtualbase_horizontalScrollbarAction".}
-proc fcQTableView_override_virtual_horizontalScrollbarAction(self: pointer, slot: int) {.importc: "QTableView_override_virtual_horizontalScrollbarAction".}
-proc fQTableView_virtualbase_isIndexHidden(self: pointer, index: pointer): bool{.importc: "QTableView_virtualbase_isIndexHidden".}
-proc fcQTableView_override_virtual_isIndexHidden(self: pointer, slot: int) {.importc: "QTableView_override_virtual_isIndexHidden".}
-proc fQTableView_virtualbase_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void{.importc: "QTableView_virtualbase_selectionChanged".}
-proc fcQTableView_override_virtual_selectionChanged(self: pointer, slot: int) {.importc: "QTableView_override_virtual_selectionChanged".}
-proc fQTableView_virtualbase_currentChanged(self: pointer, current: pointer, previous: pointer): void{.importc: "QTableView_virtualbase_currentChanged".}
-proc fcQTableView_override_virtual_currentChanged(self: pointer, slot: int) {.importc: "QTableView_override_virtual_currentChanged".}
-proc fQTableView_virtualbase_keyboardSearch(self: pointer, search: struct_miqt_string): void{.importc: "QTableView_virtualbase_keyboardSearch".}
-proc fcQTableView_override_virtual_keyboardSearch(self: pointer, slot: int) {.importc: "QTableView_override_virtual_keyboardSearch".}
-proc fQTableView_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer{.importc: "QTableView_virtualbase_inputMethodQuery".}
-proc fcQTableView_override_virtual_inputMethodQuery(self: pointer, slot: int) {.importc: "QTableView_override_virtual_inputMethodQuery".}
-proc fQTableView_virtualbase_reset(self: pointer, ): void{.importc: "QTableView_virtualbase_reset".}
-proc fcQTableView_override_virtual_reset(self: pointer, slot: int) {.importc: "QTableView_override_virtual_reset".}
-proc fQTableView_virtualbase_selectAll(self: pointer, ): void{.importc: "QTableView_virtualbase_selectAll".}
-proc fcQTableView_override_virtual_selectAll(self: pointer, slot: int) {.importc: "QTableView_override_virtual_selectAll".}
-proc fQTableView_virtualbase_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void{.importc: "QTableView_virtualbase_dataChanged".}
-proc fcQTableView_override_virtual_dataChanged(self: pointer, slot: int) {.importc: "QTableView_override_virtual_dataChanged".}
-proc fQTableView_virtualbase_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void{.importc: "QTableView_virtualbase_rowsInserted".}
-proc fcQTableView_override_virtual_rowsInserted(self: pointer, slot: int) {.importc: "QTableView_override_virtual_rowsInserted".}
-proc fQTableView_virtualbase_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void{.importc: "QTableView_virtualbase_rowsAboutToBeRemoved".}
-proc fcQTableView_override_virtual_rowsAboutToBeRemoved(self: pointer, slot: int) {.importc: "QTableView_override_virtual_rowsAboutToBeRemoved".}
-proc fQTableView_virtualbase_updateEditorData(self: pointer, ): void{.importc: "QTableView_virtualbase_updateEditorData".}
-proc fcQTableView_override_virtual_updateEditorData(self: pointer, slot: int) {.importc: "QTableView_override_virtual_updateEditorData".}
-proc fQTableView_virtualbase_updateEditorGeometries(self: pointer, ): void{.importc: "QTableView_virtualbase_updateEditorGeometries".}
-proc fcQTableView_override_virtual_updateEditorGeometries(self: pointer, slot: int) {.importc: "QTableView_override_virtual_updateEditorGeometries".}
-proc fQTableView_virtualbase_verticalScrollbarValueChanged(self: pointer, value: cint): void{.importc: "QTableView_virtualbase_verticalScrollbarValueChanged".}
-proc fcQTableView_override_virtual_verticalScrollbarValueChanged(self: pointer, slot: int) {.importc: "QTableView_override_virtual_verticalScrollbarValueChanged".}
-proc fQTableView_virtualbase_horizontalScrollbarValueChanged(self: pointer, value: cint): void{.importc: "QTableView_virtualbase_horizontalScrollbarValueChanged".}
-proc fcQTableView_override_virtual_horizontalScrollbarValueChanged(self: pointer, slot: int) {.importc: "QTableView_override_virtual_horizontalScrollbarValueChanged".}
-proc fQTableView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void{.importc: "QTableView_virtualbase_closeEditor".}
-proc fcQTableView_override_virtual_closeEditor(self: pointer, slot: int) {.importc: "QTableView_override_virtual_closeEditor".}
-proc fQTableView_virtualbase_commitData(self: pointer, editor: pointer): void{.importc: "QTableView_virtualbase_commitData".}
-proc fcQTableView_override_virtual_commitData(self: pointer, slot: int) {.importc: "QTableView_override_virtual_commitData".}
-proc fQTableView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void{.importc: "QTableView_virtualbase_editorDestroyed".}
-proc fcQTableView_override_virtual_editorDestroyed(self: pointer, slot: int) {.importc: "QTableView_override_virtual_editorDestroyed".}
-proc fQTableView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool{.importc: "QTableView_virtualbase_edit2".}
-proc fcQTableView_override_virtual_edit2(self: pointer, slot: int) {.importc: "QTableView_override_virtual_edit2".}
-proc fQTableView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint{.importc: "QTableView_virtualbase_selectionCommand".}
-proc fcQTableView_override_virtual_selectionCommand(self: pointer, slot: int) {.importc: "QTableView_override_virtual_selectionCommand".}
-proc fQTableView_virtualbase_startDrag(self: pointer, supportedActions: cint): void{.importc: "QTableView_virtualbase_startDrag".}
-proc fcQTableView_override_virtual_startDrag(self: pointer, slot: int) {.importc: "QTableView_override_virtual_startDrag".}
-proc fQTableView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool{.importc: "QTableView_virtualbase_focusNextPrevChild".}
-proc fcQTableView_override_virtual_focusNextPrevChild(self: pointer, slot: int) {.importc: "QTableView_override_virtual_focusNextPrevChild".}
-proc fQTableView_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QTableView_virtualbase_event".}
-proc fcQTableView_override_virtual_event(self: pointer, slot: int) {.importc: "QTableView_override_virtual_event".}
-proc fQTableView_virtualbase_viewportEvent(self: pointer, event: pointer): bool{.importc: "QTableView_virtualbase_viewportEvent".}
-proc fcQTableView_override_virtual_viewportEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_viewportEvent".}
-proc fQTableView_virtualbase_mousePressEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_mousePressEvent".}
-proc fcQTableView_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_mousePressEvent".}
-proc fQTableView_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_mouseMoveEvent".}
-proc fcQTableView_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_mouseMoveEvent".}
-proc fQTableView_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_mouseReleaseEvent".}
-proc fcQTableView_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_mouseReleaseEvent".}
-proc fQTableView_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_mouseDoubleClickEvent".}
-proc fcQTableView_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_mouseDoubleClickEvent".}
-proc fQTableView_virtualbase_dragEnterEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_dragEnterEvent".}
-proc fcQTableView_override_virtual_dragEnterEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_dragEnterEvent".}
-proc fQTableView_virtualbase_dragMoveEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_dragMoveEvent".}
-proc fcQTableView_override_virtual_dragMoveEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_dragMoveEvent".}
-proc fQTableView_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_dragLeaveEvent".}
-proc fcQTableView_override_virtual_dragLeaveEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_dragLeaveEvent".}
-proc fQTableView_virtualbase_dropEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_dropEvent".}
-proc fcQTableView_override_virtual_dropEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_dropEvent".}
-proc fQTableView_virtualbase_focusInEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_focusInEvent".}
-proc fcQTableView_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_focusInEvent".}
-proc fQTableView_virtualbase_focusOutEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_focusOutEvent".}
-proc fcQTableView_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_focusOutEvent".}
-proc fQTableView_virtualbase_keyPressEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_keyPressEvent".}
-proc fcQTableView_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_keyPressEvent".}
-proc fQTableView_virtualbase_resizeEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_resizeEvent".}
-proc fcQTableView_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_resizeEvent".}
-proc fQTableView_virtualbase_inputMethodEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_inputMethodEvent".}
-proc fcQTableView_override_virtual_inputMethodEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_inputMethodEvent".}
-proc fQTableView_virtualbase_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool{.importc: "QTableView_virtualbase_eventFilter".}
-proc fcQTableView_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QTableView_override_virtual_eventFilter".}
-proc fQTableView_virtualbase_minimumSizeHint(self: pointer, ): pointer{.importc: "QTableView_virtualbase_minimumSizeHint".}
-proc fcQTableView_override_virtual_minimumSizeHint(self: pointer, slot: int) {.importc: "QTableView_override_virtual_minimumSizeHint".}
-proc fQTableView_virtualbase_sizeHint(self: pointer, ): pointer{.importc: "QTableView_virtualbase_sizeHint".}
-proc fcQTableView_override_virtual_sizeHint(self: pointer, slot: int) {.importc: "QTableView_override_virtual_sizeHint".}
-proc fQTableView_virtualbase_setupViewport(self: pointer, viewport: pointer): void{.importc: "QTableView_virtualbase_setupViewport".}
-proc fcQTableView_override_virtual_setupViewport(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setupViewport".}
-proc fQTableView_virtualbase_wheelEvent(self: pointer, param1: pointer): void{.importc: "QTableView_virtualbase_wheelEvent".}
-proc fcQTableView_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_wheelEvent".}
-proc fQTableView_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void{.importc: "QTableView_virtualbase_contextMenuEvent".}
-proc fcQTableView_override_virtual_contextMenuEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_contextMenuEvent".}
-proc fQTableView_virtualbase_changeEvent(self: pointer, param1: pointer): void{.importc: "QTableView_virtualbase_changeEvent".}
-proc fcQTableView_override_virtual_changeEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_changeEvent".}
-proc fQTableView_virtualbase_devType(self: pointer, ): cint{.importc: "QTableView_virtualbase_devType".}
-proc fcQTableView_override_virtual_devType(self: pointer, slot: int) {.importc: "QTableView_override_virtual_devType".}
-proc fQTableView_virtualbase_setVisible(self: pointer, visible: bool): void{.importc: "QTableView_virtualbase_setVisible".}
-proc fcQTableView_override_virtual_setVisible(self: pointer, slot: int) {.importc: "QTableView_override_virtual_setVisible".}
-proc fQTableView_virtualbase_heightForWidth(self: pointer, param1: cint): cint{.importc: "QTableView_virtualbase_heightForWidth".}
-proc fcQTableView_override_virtual_heightForWidth(self: pointer, slot: int) {.importc: "QTableView_override_virtual_heightForWidth".}
-proc fQTableView_virtualbase_hasHeightForWidth(self: pointer, ): bool{.importc: "QTableView_virtualbase_hasHeightForWidth".}
-proc fcQTableView_override_virtual_hasHeightForWidth(self: pointer, slot: int) {.importc: "QTableView_override_virtual_hasHeightForWidth".}
-proc fQTableView_virtualbase_paintEngine(self: pointer, ): pointer{.importc: "QTableView_virtualbase_paintEngine".}
-proc fcQTableView_override_virtual_paintEngine(self: pointer, slot: int) {.importc: "QTableView_override_virtual_paintEngine".}
-proc fQTableView_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_keyReleaseEvent".}
-proc fcQTableView_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_keyReleaseEvent".}
-proc fQTableView_virtualbase_enterEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_enterEvent".}
-proc fcQTableView_override_virtual_enterEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_enterEvent".}
-proc fQTableView_virtualbase_leaveEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_leaveEvent".}
-proc fcQTableView_override_virtual_leaveEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_leaveEvent".}
-proc fQTableView_virtualbase_moveEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_moveEvent".}
-proc fcQTableView_override_virtual_moveEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_moveEvent".}
-proc fQTableView_virtualbase_closeEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_closeEvent".}
-proc fcQTableView_override_virtual_closeEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_closeEvent".}
-proc fQTableView_virtualbase_tabletEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_tabletEvent".}
-proc fcQTableView_override_virtual_tabletEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_tabletEvent".}
-proc fQTableView_virtualbase_actionEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_actionEvent".}
-proc fcQTableView_override_virtual_actionEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_actionEvent".}
-proc fQTableView_virtualbase_showEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_showEvent".}
-proc fcQTableView_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_showEvent".}
-proc fQTableView_virtualbase_hideEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_hideEvent".}
-proc fcQTableView_override_virtual_hideEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_hideEvent".}
-proc fQTableView_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool{.importc: "QTableView_virtualbase_nativeEvent".}
-proc fcQTableView_override_virtual_nativeEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_nativeEvent".}
-proc fQTableView_virtualbase_metric(self: pointer, param1: cint): cint{.importc: "QTableView_virtualbase_metric".}
-proc fcQTableView_override_virtual_metric(self: pointer, slot: int) {.importc: "QTableView_override_virtual_metric".}
-proc fQTableView_virtualbase_initPainter(self: pointer, painter: pointer): void{.importc: "QTableView_virtualbase_initPainter".}
-proc fcQTableView_override_virtual_initPainter(self: pointer, slot: int) {.importc: "QTableView_override_virtual_initPainter".}
-proc fQTableView_virtualbase_redirected(self: pointer, offset: pointer): pointer{.importc: "QTableView_virtualbase_redirected".}
-proc fcQTableView_override_virtual_redirected(self: pointer, slot: int) {.importc: "QTableView_override_virtual_redirected".}
-proc fQTableView_virtualbase_sharedPainter(self: pointer, ): pointer{.importc: "QTableView_virtualbase_sharedPainter".}
-proc fcQTableView_override_virtual_sharedPainter(self: pointer, slot: int) {.importc: "QTableView_override_virtual_sharedPainter".}
-proc fQTableView_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_childEvent".}
-proc fcQTableView_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_childEvent".}
-proc fQTableView_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QTableView_virtualbase_customEvent".}
-proc fcQTableView_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QTableView_override_virtual_customEvent".}
-proc fQTableView_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QTableView_virtualbase_connectNotify".}
-proc fcQTableView_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QTableView_override_virtual_connectNotify".}
-proc fQTableView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QTableView_virtualbase_disconnectNotify".}
-proc fcQTableView_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QTableView_override_virtual_disconnectNotify".}
+type cQTableViewVTable = object
+  destructor*: proc(vtbl: ptr cQTableViewVTable, self: ptr cQTableView) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setModel*: proc(vtbl, self: pointer, model: pointer): void {.cdecl, raises: [], gcsafe.}
+  setRootIndex*: proc(vtbl, self: pointer, index: pointer): void {.cdecl, raises: [], gcsafe.}
+  setSelectionModel*: proc(vtbl, self: pointer, selectionModel: pointer): void {.cdecl, raises: [], gcsafe.}
+  doItemsLayout*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  visualRect*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  scrollTo*: proc(vtbl, self: pointer, index: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
+  indexAt*: proc(vtbl, self: pointer, p: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  scrollContentsBy*: proc(vtbl, self: pointer, dx: cint, dy: cint): void {.cdecl, raises: [], gcsafe.}
+  viewOptions*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  horizontalOffset*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  verticalOffset*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  moveCursor*: proc(vtbl, self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setSelection*: proc(vtbl, self: pointer, rect: pointer, command: cint): void {.cdecl, raises: [], gcsafe.}
+  visualRegionForSelection*: proc(vtbl, self: pointer, selection: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  selectedIndexes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  updateGeometries*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  viewportSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  sizeHintForRow*: proc(vtbl, self: pointer, row: cint): cint {.cdecl, raises: [], gcsafe.}
+  sizeHintForColumn*: proc(vtbl, self: pointer, column: cint): cint {.cdecl, raises: [], gcsafe.}
+  verticalScrollbarAction*: proc(vtbl, self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
+  horizontalScrollbarAction*: proc(vtbl, self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
+  isIndexHidden*: proc(vtbl, self: pointer, index: pointer): bool {.cdecl, raises: [], gcsafe.}
+  selectionChanged*: proc(vtbl, self: pointer, selected: pointer, deselected: pointer): void {.cdecl, raises: [], gcsafe.}
+  currentChanged*: proc(vtbl, self: pointer, current: pointer, previous: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyboardSearch*: proc(vtbl, self: pointer, search: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  reset*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  selectAll*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  dataChanged*: proc(vtbl, self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl, raises: [], gcsafe.}
+  rowsInserted*: proc(vtbl, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
+  rowsAboutToBeRemoved*: proc(vtbl, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
+  updateEditorData*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  updateEditorGeometries*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
+  verticalScrollbarValueChanged*: proc(vtbl, self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
+  horizontalScrollbarValueChanged*: proc(vtbl, self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
+  closeEditor*: proc(vtbl, self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
+  commitData*: proc(vtbl, self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
+  editorDestroyed*: proc(vtbl, self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
+  edit2*: proc(vtbl, self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  selectionCommand*: proc(vtbl, self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
+  startDrag*: proc(vtbl, self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  viewportEvent*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  setupViewport*: proc(vtbl, self: pointer, viewport: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQTableView_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QTableView_virtualbase_metaObject".}
+proc fcQTableView_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QTableView_virtualbase_metacast".}
+proc fcQTableView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QTableView_virtualbase_metacall".}
+proc fcQTableView_virtualbase_setModel(self: pointer, model: pointer): void {.importc: "QTableView_virtualbase_setModel".}
+proc fcQTableView_virtualbase_setRootIndex(self: pointer, index: pointer): void {.importc: "QTableView_virtualbase_setRootIndex".}
+proc fcQTableView_virtualbase_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QTableView_virtualbase_setSelectionModel".}
+proc fcQTableView_virtualbase_doItemsLayout(self: pointer, ): void {.importc: "QTableView_virtualbase_doItemsLayout".}
+proc fcQTableView_virtualbase_visualRect(self: pointer, index: pointer): pointer {.importc: "QTableView_virtualbase_visualRect".}
+proc fcQTableView_virtualbase_scrollTo(self: pointer, index: pointer, hint: cint): void {.importc: "QTableView_virtualbase_scrollTo".}
+proc fcQTableView_virtualbase_indexAt(self: pointer, p: pointer): pointer {.importc: "QTableView_virtualbase_indexAt".}
+proc fcQTableView_virtualbase_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.importc: "QTableView_virtualbase_scrollContentsBy".}
+proc fcQTableView_virtualbase_viewOptions(self: pointer, ): pointer {.importc: "QTableView_virtualbase_viewOptions".}
+proc fcQTableView_virtualbase_paintEvent(self: pointer, e: pointer): void {.importc: "QTableView_virtualbase_paintEvent".}
+proc fcQTableView_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_timerEvent".}
+proc fcQTableView_virtualbase_horizontalOffset(self: pointer, ): cint {.importc: "QTableView_virtualbase_horizontalOffset".}
+proc fcQTableView_virtualbase_verticalOffset(self: pointer, ): cint {.importc: "QTableView_virtualbase_verticalOffset".}
+proc fcQTableView_virtualbase_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.importc: "QTableView_virtualbase_moveCursor".}
+proc fcQTableView_virtualbase_setSelection(self: pointer, rect: pointer, command: cint): void {.importc: "QTableView_virtualbase_setSelection".}
+proc fcQTableView_virtualbase_visualRegionForSelection(self: pointer, selection: pointer): pointer {.importc: "QTableView_virtualbase_visualRegionForSelection".}
+proc fcQTableView_virtualbase_selectedIndexes(self: pointer, ): struct_miqt_array {.importc: "QTableView_virtualbase_selectedIndexes".}
+proc fcQTableView_virtualbase_updateGeometries(self: pointer, ): void {.importc: "QTableView_virtualbase_updateGeometries".}
+proc fcQTableView_virtualbase_viewportSizeHint(self: pointer, ): pointer {.importc: "QTableView_virtualbase_viewportSizeHint".}
+proc fcQTableView_virtualbase_sizeHintForRow(self: pointer, row: cint): cint {.importc: "QTableView_virtualbase_sizeHintForRow".}
+proc fcQTableView_virtualbase_sizeHintForColumn(self: pointer, column: cint): cint {.importc: "QTableView_virtualbase_sizeHintForColumn".}
+proc fcQTableView_virtualbase_verticalScrollbarAction(self: pointer, action: cint): void {.importc: "QTableView_virtualbase_verticalScrollbarAction".}
+proc fcQTableView_virtualbase_horizontalScrollbarAction(self: pointer, action: cint): void {.importc: "QTableView_virtualbase_horizontalScrollbarAction".}
+proc fcQTableView_virtualbase_isIndexHidden(self: pointer, index: pointer): bool {.importc: "QTableView_virtualbase_isIndexHidden".}
+proc fcQTableView_virtualbase_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.importc: "QTableView_virtualbase_selectionChanged".}
+proc fcQTableView_virtualbase_currentChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QTableView_virtualbase_currentChanged".}
+proc fcQTableView_virtualbase_keyboardSearch(self: pointer, search: struct_miqt_string): void {.importc: "QTableView_virtualbase_keyboardSearch".}
+proc fcQTableView_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QTableView_virtualbase_inputMethodQuery".}
+proc fcQTableView_virtualbase_reset(self: pointer, ): void {.importc: "QTableView_virtualbase_reset".}
+proc fcQTableView_virtualbase_selectAll(self: pointer, ): void {.importc: "QTableView_virtualbase_selectAll".}
+proc fcQTableView_virtualbase_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.importc: "QTableView_virtualbase_dataChanged".}
+proc fcQTableView_virtualbase_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.importc: "QTableView_virtualbase_rowsInserted".}
+proc fcQTableView_virtualbase_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.importc: "QTableView_virtualbase_rowsAboutToBeRemoved".}
+proc fcQTableView_virtualbase_updateEditorData(self: pointer, ): void {.importc: "QTableView_virtualbase_updateEditorData".}
+proc fcQTableView_virtualbase_updateEditorGeometries(self: pointer, ): void {.importc: "QTableView_virtualbase_updateEditorGeometries".}
+proc fcQTableView_virtualbase_verticalScrollbarValueChanged(self: pointer, value: cint): void {.importc: "QTableView_virtualbase_verticalScrollbarValueChanged".}
+proc fcQTableView_virtualbase_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.importc: "QTableView_virtualbase_horizontalScrollbarValueChanged".}
+proc fcQTableView_virtualbase_closeEditor(self: pointer, editor: pointer, hint: cint): void {.importc: "QTableView_virtualbase_closeEditor".}
+proc fcQTableView_virtualbase_commitData(self: pointer, editor: pointer): void {.importc: "QTableView_virtualbase_commitData".}
+proc fcQTableView_virtualbase_editorDestroyed(self: pointer, editor: pointer): void {.importc: "QTableView_virtualbase_editorDestroyed".}
+proc fcQTableView_virtualbase_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.importc: "QTableView_virtualbase_edit2".}
+proc fcQTableView_virtualbase_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.importc: "QTableView_virtualbase_selectionCommand".}
+proc fcQTableView_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QTableView_virtualbase_startDrag".}
+proc fcQTableView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QTableView_virtualbase_focusNextPrevChild".}
+proc fcQTableView_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QTableView_virtualbase_event".}
+proc fcQTableView_virtualbase_viewportEvent(self: pointer, event: pointer): bool {.importc: "QTableView_virtualbase_viewportEvent".}
+proc fcQTableView_virtualbase_mousePressEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_mousePressEvent".}
+proc fcQTableView_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_mouseMoveEvent".}
+proc fcQTableView_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_mouseReleaseEvent".}
+proc fcQTableView_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_mouseDoubleClickEvent".}
+proc fcQTableView_virtualbase_dragEnterEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_dragEnterEvent".}
+proc fcQTableView_virtualbase_dragMoveEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_dragMoveEvent".}
+proc fcQTableView_virtualbase_dragLeaveEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_dragLeaveEvent".}
+proc fcQTableView_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_dropEvent".}
+proc fcQTableView_virtualbase_focusInEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_focusInEvent".}
+proc fcQTableView_virtualbase_focusOutEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_focusOutEvent".}
+proc fcQTableView_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_keyPressEvent".}
+proc fcQTableView_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_resizeEvent".}
+proc fcQTableView_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_inputMethodEvent".}
+proc fcQTableView_virtualbase_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.importc: "QTableView_virtualbase_eventFilter".}
+proc fcQTableView_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QTableView_virtualbase_minimumSizeHint".}
+proc fcQTableView_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QTableView_virtualbase_sizeHint".}
+proc fcQTableView_virtualbase_setupViewport(self: pointer, viewport: pointer): void {.importc: "QTableView_virtualbase_setupViewport".}
+proc fcQTableView_virtualbase_wheelEvent(self: pointer, param1: pointer): void {.importc: "QTableView_virtualbase_wheelEvent".}
+proc fcQTableView_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QTableView_virtualbase_contextMenuEvent".}
+proc fcQTableView_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QTableView_virtualbase_changeEvent".}
+proc fcQTableView_virtualbase_devType(self: pointer, ): cint {.importc: "QTableView_virtualbase_devType".}
+proc fcQTableView_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QTableView_virtualbase_setVisible".}
+proc fcQTableView_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QTableView_virtualbase_heightForWidth".}
+proc fcQTableView_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QTableView_virtualbase_hasHeightForWidth".}
+proc fcQTableView_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QTableView_virtualbase_paintEngine".}
+proc fcQTableView_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_keyReleaseEvent".}
+proc fcQTableView_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_enterEvent".}
+proc fcQTableView_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_leaveEvent".}
+proc fcQTableView_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_moveEvent".}
+proc fcQTableView_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_closeEvent".}
+proc fcQTableView_virtualbase_tabletEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_tabletEvent".}
+proc fcQTableView_virtualbase_actionEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_actionEvent".}
+proc fcQTableView_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_showEvent".}
+proc fcQTableView_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_hideEvent".}
+proc fcQTableView_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QTableView_virtualbase_nativeEvent".}
+proc fcQTableView_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QTableView_virtualbase_metric".}
+proc fcQTableView_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QTableView_virtualbase_initPainter".}
+proc fcQTableView_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QTableView_virtualbase_redirected".}
+proc fcQTableView_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QTableView_virtualbase_sharedPainter".}
+proc fcQTableView_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_childEvent".}
+proc fcQTableView_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QTableView_virtualbase_customEvent".}
+proc fcQTableView_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QTableView_virtualbase_connectNotify".}
+proc fcQTableView_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QTableView_virtualbase_disconnectNotify".}
+proc fcQTableView_new(vtbl: pointer, parent: pointer): ptr cQTableView {.importc: "QTableView_new".}
+proc fcQTableView_new2(vtbl: pointer, ): ptr cQTableView {.importc: "QTableView_new2".}
 proc fcQTableView_staticMetaObject(): pointer {.importc: "QTableView_staticMetaObject".}
 proc fcQTableView_delete(self: pointer) {.importc: "QTableView_delete".}
-
-
-func init*(T: type gen_qtableview_types.QTableView, h: ptr cQTableView): gen_qtableview_types.QTableView =
-  T(h: h)
-proc create*(T: type gen_qtableview_types.QTableView, parent: gen_qwidget_types.QWidget): gen_qtableview_types.QTableView =
-  gen_qtableview_types.QTableView.init(fcQTableView_new(parent.h))
-
-proc create*(T: type gen_qtableview_types.QTableView, ): gen_qtableview_types.QTableView =
-  gen_qtableview_types.QTableView.init(fcQTableView_new2())
 
 proc metaObject*(self: gen_qtableview_types.QTableView, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableView_metaObject(self.h))
@@ -528,1664 +521,1466 @@ proc trUtf8*(_: type gen_qtableview_types.QTableView, s: cstring, c: cstring, n:
   c_free(v_ms.data)
   vx_ret
 
+type QTableViewmetaObjectProc* = proc(self: QTableView): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QTableViewmetacastProc* = proc(self: QTableView, param1: cstring): pointer {.raises: [], gcsafe.}
+type QTableViewmetacallProc* = proc(self: QTableView, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QTableViewsetModelProc* = proc(self: QTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void {.raises: [], gcsafe.}
+type QTableViewsetRootIndexProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
+type QTableViewsetSelectionModelProc* = proc(self: QTableView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.raises: [], gcsafe.}
+type QTableViewdoItemsLayoutProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewvisualRectProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.raises: [], gcsafe.}
+type QTableViewscrollToProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.raises: [], gcsafe.}
+type QTableViewindexAtProc* = proc(self: QTableView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QTableViewscrollContentsByProc* = proc(self: QTableView, dx: cint, dy: cint): void {.raises: [], gcsafe.}
+type QTableViewviewOptionsProc* = proc(self: QTableView): gen_qstyleoption_types.QStyleOptionViewItem {.raises: [], gcsafe.}
+type QTableViewpaintEventProc* = proc(self: QTableView, e: gen_qevent_types.QPaintEvent): void {.raises: [], gcsafe.}
+type QTableViewtimerEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QTableViewhorizontalOffsetProc* = proc(self: QTableView): cint {.raises: [], gcsafe.}
+type QTableViewverticalOffsetProc* = proc(self: QTableView): cint {.raises: [], gcsafe.}
+type QTableViewmoveCursorProc* = proc(self: QTableView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.raises: [], gcsafe.}
+type QTableViewsetSelectionProc* = proc(self: QTableView, rect: gen_qrect_types.QRect, command: cint): void {.raises: [], gcsafe.}
+type QTableViewvisualRegionForSelectionProc* = proc(self: QTableView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.raises: [], gcsafe.}
+type QTableViewselectedIndexesProc* = proc(self: QTableView): seq[gen_qabstractitemmodel_types.QModelIndex] {.raises: [], gcsafe.}
+type QTableViewupdateGeometriesProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewviewportSizeHintProc* = proc(self: QTableView): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QTableViewsizeHintForRowProc* = proc(self: QTableView, row: cint): cint {.raises: [], gcsafe.}
+type QTableViewsizeHintForColumnProc* = proc(self: QTableView, column: cint): cint {.raises: [], gcsafe.}
+type QTableViewverticalScrollbarActionProc* = proc(self: QTableView, action: cint): void {.raises: [], gcsafe.}
+type QTableViewhorizontalScrollbarActionProc* = proc(self: QTableView, action: cint): void {.raises: [], gcsafe.}
+type QTableViewisIndexHiddenProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool {.raises: [], gcsafe.}
+type QTableViewselectionChangedProc* = proc(self: QTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.raises: [], gcsafe.}
+type QTableViewcurrentChangedProc* = proc(self: QTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.raises: [], gcsafe.}
+type QTableViewkeyboardSearchProc* = proc(self: QTableView, search: string): void {.raises: [], gcsafe.}
+type QTableViewinputMethodQueryProc* = proc(self: QTableView, query: cint): gen_qvariant_types.QVariant {.raises: [], gcsafe.}
+type QTableViewresetProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewselectAllProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewdataChangedProc* = proc(self: QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.raises: [], gcsafe.}
+type QTableViewrowsInsertedProc* = proc(self: QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
+type QTableViewrowsAboutToBeRemovedProc* = proc(self: QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.raises: [], gcsafe.}
+type QTableViewupdateEditorDataProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewupdateEditorGeometriesProc* = proc(self: QTableView): void {.raises: [], gcsafe.}
+type QTableViewverticalScrollbarValueChangedProc* = proc(self: QTableView, value: cint): void {.raises: [], gcsafe.}
+type QTableViewhorizontalScrollbarValueChangedProc* = proc(self: QTableView, value: cint): void {.raises: [], gcsafe.}
+type QTableViewcloseEditorProc* = proc(self: QTableView, editor: gen_qwidget_types.QWidget, hint: cint): void {.raises: [], gcsafe.}
+type QTableViewcommitDataProc* = proc(self: QTableView, editor: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QTableVieweditorDestroyedProc* = proc(self: QTableView, editor: gen_qobject_types.QObject): void {.raises: [], gcsafe.}
+type QTableViewedit2Proc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableViewselectionCommandProc* = proc(self: QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.raises: [], gcsafe.}
+type QTableViewstartDragProc* = proc(self: QTableView, supportedActions: cint): void {.raises: [], gcsafe.}
+type QTableViewfocusNextPrevChildProc* = proc(self: QTableView, next: bool): bool {.raises: [], gcsafe.}
+type QTableVieweventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableViewviewportEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableViewmousePressEventProc* = proc(self: QTableView, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTableViewmouseMoveEventProc* = proc(self: QTableView, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTableViewmouseReleaseEventProc* = proc(self: QTableView, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTableViewmouseDoubleClickEventProc* = proc(self: QTableView, event: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QTableViewdragEnterEventProc* = proc(self: QTableView, event: gen_qevent_types.QDragEnterEvent): void {.raises: [], gcsafe.}
+type QTableViewdragMoveEventProc* = proc(self: QTableView, event: gen_qevent_types.QDragMoveEvent): void {.raises: [], gcsafe.}
+type QTableViewdragLeaveEventProc* = proc(self: QTableView, event: gen_qevent_types.QDragLeaveEvent): void {.raises: [], gcsafe.}
+type QTableViewdropEventProc* = proc(self: QTableView, event: gen_qevent_types.QDropEvent): void {.raises: [], gcsafe.}
+type QTableViewfocusInEventProc* = proc(self: QTableView, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QTableViewfocusOutEventProc* = proc(self: QTableView, event: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QTableViewkeyPressEventProc* = proc(self: QTableView, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QTableViewresizeEventProc* = proc(self: QTableView, event: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QTableViewinputMethodEventProc* = proc(self: QTableView, event: gen_qevent_types.QInputMethodEvent): void {.raises: [], gcsafe.}
+type QTableVieweventFilterProc* = proc(self: QTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QTableViewminimumSizeHintProc* = proc(self: QTableView): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QTableViewsizeHintProc* = proc(self: QTableView): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QTableViewsetupViewportProc* = proc(self: QTableView, viewport: gen_qwidget_types.QWidget): void {.raises: [], gcsafe.}
+type QTableViewwheelEventProc* = proc(self: QTableView, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QTableViewcontextMenuEventProc* = proc(self: QTableView, param1: gen_qevent_types.QContextMenuEvent): void {.raises: [], gcsafe.}
+type QTableViewchangeEventProc* = proc(self: QTableView, param1: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTableViewdevTypeProc* = proc(self: QTableView): cint {.raises: [], gcsafe.}
+type QTableViewsetVisibleProc* = proc(self: QTableView, visible: bool): void {.raises: [], gcsafe.}
+type QTableViewheightForWidthProc* = proc(self: QTableView, param1: cint): cint {.raises: [], gcsafe.}
+type QTableViewhasHeightForWidthProc* = proc(self: QTableView): bool {.raises: [], gcsafe.}
+type QTableViewpaintEngineProc* = proc(self: QTableView): gen_qpaintengine_types.QPaintEngine {.raises: [], gcsafe.}
+type QTableViewkeyReleaseEventProc* = proc(self: QTableView, event: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QTableViewenterEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTableViewleaveEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTableViewmoveEventProc* = proc(self: QTableView, event: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QTableViewcloseEventProc* = proc(self: QTableView, event: gen_qevent_types.QCloseEvent): void {.raises: [], gcsafe.}
+type QTableViewtabletEventProc* = proc(self: QTableView, event: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QTableViewactionEventProc* = proc(self: QTableView, event: gen_qevent_types.QActionEvent): void {.raises: [], gcsafe.}
+type QTableViewshowEventProc* = proc(self: QTableView, event: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QTableViewhideEventProc* = proc(self: QTableView, event: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QTableViewnativeEventProc* = proc(self: QTableView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QTableViewmetricProc* = proc(self: QTableView, param1: cint): cint {.raises: [], gcsafe.}
+type QTableViewinitPainterProc* = proc(self: QTableView, painter: gen_qpainter_types.QPainter): void {.raises: [], gcsafe.}
+type QTableViewredirectedProc* = proc(self: QTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.raises: [], gcsafe.}
+type QTableViewsharedPainterProc* = proc(self: QTableView): gen_qpainter_types.QPainter {.raises: [], gcsafe.}
+type QTableViewchildEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QTableViewcustomEventProc* = proc(self: QTableView, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QTableViewconnectNotifyProc* = proc(self: QTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTableViewdisconnectNotifyProc* = proc(self: QTableView, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QTableViewVTable* = object
+  vtbl: cQTableViewVTable
+  metaObject*: QTableViewmetaObjectProc
+  metacast*: QTableViewmetacastProc
+  metacall*: QTableViewmetacallProc
+  setModel*: QTableViewsetModelProc
+  setRootIndex*: QTableViewsetRootIndexProc
+  setSelectionModel*: QTableViewsetSelectionModelProc
+  doItemsLayout*: QTableViewdoItemsLayoutProc
+  visualRect*: QTableViewvisualRectProc
+  scrollTo*: QTableViewscrollToProc
+  indexAt*: QTableViewindexAtProc
+  scrollContentsBy*: QTableViewscrollContentsByProc
+  viewOptions*: QTableViewviewOptionsProc
+  paintEvent*: QTableViewpaintEventProc
+  timerEvent*: QTableViewtimerEventProc
+  horizontalOffset*: QTableViewhorizontalOffsetProc
+  verticalOffset*: QTableViewverticalOffsetProc
+  moveCursor*: QTableViewmoveCursorProc
+  setSelection*: QTableViewsetSelectionProc
+  visualRegionForSelection*: QTableViewvisualRegionForSelectionProc
+  selectedIndexes*: QTableViewselectedIndexesProc
+  updateGeometries*: QTableViewupdateGeometriesProc
+  viewportSizeHint*: QTableViewviewportSizeHintProc
+  sizeHintForRow*: QTableViewsizeHintForRowProc
+  sizeHintForColumn*: QTableViewsizeHintForColumnProc
+  verticalScrollbarAction*: QTableViewverticalScrollbarActionProc
+  horizontalScrollbarAction*: QTableViewhorizontalScrollbarActionProc
+  isIndexHidden*: QTableViewisIndexHiddenProc
+  selectionChanged*: QTableViewselectionChangedProc
+  currentChanged*: QTableViewcurrentChangedProc
+  keyboardSearch*: QTableViewkeyboardSearchProc
+  inputMethodQuery*: QTableViewinputMethodQueryProc
+  reset*: QTableViewresetProc
+  selectAll*: QTableViewselectAllProc
+  dataChanged*: QTableViewdataChangedProc
+  rowsInserted*: QTableViewrowsInsertedProc
+  rowsAboutToBeRemoved*: QTableViewrowsAboutToBeRemovedProc
+  updateEditorData*: QTableViewupdateEditorDataProc
+  updateEditorGeometries*: QTableViewupdateEditorGeometriesProc
+  verticalScrollbarValueChanged*: QTableViewverticalScrollbarValueChangedProc
+  horizontalScrollbarValueChanged*: QTableViewhorizontalScrollbarValueChangedProc
+  closeEditor*: QTableViewcloseEditorProc
+  commitData*: QTableViewcommitDataProc
+  editorDestroyed*: QTableVieweditorDestroyedProc
+  edit2*: QTableViewedit2Proc
+  selectionCommand*: QTableViewselectionCommandProc
+  startDrag*: QTableViewstartDragProc
+  focusNextPrevChild*: QTableViewfocusNextPrevChildProc
+  event*: QTableVieweventProc
+  viewportEvent*: QTableViewviewportEventProc
+  mousePressEvent*: QTableViewmousePressEventProc
+  mouseMoveEvent*: QTableViewmouseMoveEventProc
+  mouseReleaseEvent*: QTableViewmouseReleaseEventProc
+  mouseDoubleClickEvent*: QTableViewmouseDoubleClickEventProc
+  dragEnterEvent*: QTableViewdragEnterEventProc
+  dragMoveEvent*: QTableViewdragMoveEventProc
+  dragLeaveEvent*: QTableViewdragLeaveEventProc
+  dropEvent*: QTableViewdropEventProc
+  focusInEvent*: QTableViewfocusInEventProc
+  focusOutEvent*: QTableViewfocusOutEventProc
+  keyPressEvent*: QTableViewkeyPressEventProc
+  resizeEvent*: QTableViewresizeEventProc
+  inputMethodEvent*: QTableViewinputMethodEventProc
+  eventFilter*: QTableVieweventFilterProc
+  minimumSizeHint*: QTableViewminimumSizeHintProc
+  sizeHint*: QTableViewsizeHintProc
+  setupViewport*: QTableViewsetupViewportProc
+  wheelEvent*: QTableViewwheelEventProc
+  contextMenuEvent*: QTableViewcontextMenuEventProc
+  changeEvent*: QTableViewchangeEventProc
+  devType*: QTableViewdevTypeProc
+  setVisible*: QTableViewsetVisibleProc
+  heightForWidth*: QTableViewheightForWidthProc
+  hasHeightForWidth*: QTableViewhasHeightForWidthProc
+  paintEngine*: QTableViewpaintEngineProc
+  keyReleaseEvent*: QTableViewkeyReleaseEventProc
+  enterEvent*: QTableViewenterEventProc
+  leaveEvent*: QTableViewleaveEventProc
+  moveEvent*: QTableViewmoveEventProc
+  closeEvent*: QTableViewcloseEventProc
+  tabletEvent*: QTableViewtabletEventProc
+  actionEvent*: QTableViewactionEventProc
+  showEvent*: QTableViewshowEventProc
+  hideEvent*: QTableViewhideEventProc
+  nativeEvent*: QTableViewnativeEventProc
+  metric*: QTableViewmetricProc
+  initPainter*: QTableViewinitPainterProc
+  redirected*: QTableViewredirectedProc
+  sharedPainter*: QTableViewsharedPainterProc
+  childEvent*: QTableViewchildEventProc
+  customEvent*: QTableViewcustomEventProc
+  connectNotify*: QTableViewconnectNotifyProc
+  disconnectNotify*: QTableViewdisconnectNotifyProc
 proc QTableViewmetaObject*(self: gen_qtableview_types.QTableView, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQTableView_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQTableView_virtualbase_metaObject(self.h))
 
-type QTableViewmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qtableview_types.QTableView, slot: QTableViewmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_metaObject(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_metaObject ".} =
-  var nimfunc = cast[ptr QTableViewmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QTableViewmetacast*(self: gen_qtableview_types.QTableView, param1: cstring): pointer =
-  fQTableView_virtualbase_metacast(self.h, param1)
+  fcQTableView_virtualbase_metacast(self.h, param1)
 
-type QTableViewmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qtableview_types.QTableView, slot: QTableViewmetacastProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_metacast(self: ptr cQTableView, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QTableView_metacast ".} =
-  var nimfunc = cast[ptr QTableViewmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QTableViewmetacall*(self: gen_qtableview_types.QTableView, param1: cint, param2: cint, param3: pointer): cint =
-  fQTableView_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQTableView_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QTableViewmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qtableview_types.QTableView, slot: QTableViewmetacallProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_metacall(self: ptr cQTableView, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QTableView_metacall ".} =
-  var nimfunc = cast[ptr QTableViewmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QTableViewsetModel*(self: gen_qtableview_types.QTableView, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
-  fQTableView_virtualbase_setModel(self.h, model.h)
+  fcQTableView_virtualbase_setModel(self.h, model.h)
 
-type QTableViewsetModelProc* = proc(model: gen_qabstractitemmodel_types.QAbstractItemModel): void
-proc onsetModel*(self: gen_qtableview_types.QTableView, slot: QTableViewsetModelProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetModelProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setModel(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setModel(self: ptr cQTableView, slot: int, model: pointer): void {.exportc: "miqt_exec_callback_QTableView_setModel ".} =
-  var nimfunc = cast[ptr QTableViewsetModelProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setModel(vtbl: pointer, self: pointer, model: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
+  vtbl[].setModel(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewsetRootIndex*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): void =
-  fQTableView_virtualbase_setRootIndex(self.h, index.h)
+  fcQTableView_virtualbase_setRootIndex(self.h, index.h)
 
-type QTableViewsetRootIndexProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): void
-proc onsetRootIndex*(self: gen_qtableview_types.QTableView, slot: QTableViewsetRootIndexProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetRootIndexProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setRootIndex(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setRootIndex(self: ptr cQTableView, slot: int, index: pointer): void {.exportc: "miqt_exec_callback_QTableView_setRootIndex ".} =
-  var nimfunc = cast[ptr QTableViewsetRootIndexProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setRootIndex(vtbl: pointer, self: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
+  vtbl[].setRootIndex(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewsetSelectionModel*(self: gen_qtableview_types.QTableView, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
-  fQTableView_virtualbase_setSelectionModel(self.h, selectionModel.h)
+  fcQTableView_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
-type QTableViewsetSelectionModelProc* = proc(selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void
-proc onsetSelectionModel*(self: gen_qtableview_types.QTableView, slot: QTableViewsetSelectionModelProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetSelectionModelProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setSelectionModel(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setSelectionModel(self: ptr cQTableView, slot: int, selectionModel: pointer): void {.exportc: "miqt_exec_callback_QTableView_setSelectionModel ".} =
-  var nimfunc = cast[ptr QTableViewsetSelectionModelProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setSelectionModel(vtbl: pointer, self: pointer, selectionModel: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel)
+  vtbl[].setSelectionModel(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdoItemsLayout*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_doItemsLayout(self.h)
+  fcQTableView_virtualbase_doItemsLayout(self.h)
 
-type QTableViewdoItemsLayoutProc* = proc(): void
-proc ondoItemsLayout*(self: gen_qtableview_types.QTableView, slot: QTableViewdoItemsLayoutProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdoItemsLayoutProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_doItemsLayout(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_doItemsLayout(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].doItemsLayout(self)
 
-proc miqt_exec_callback_QTableView_doItemsLayout(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_doItemsLayout ".} =
-  var nimfunc = cast[ptr QTableViewdoItemsLayoutProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewvisualRect*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
-  gen_qrect_types.QRect(h: fQTableView_virtualbase_visualRect(self.h, index.h))
+  gen_qrect_types.QRect(h: fcQTableView_virtualbase_visualRect(self.h, index.h))
 
-type QTableViewvisualRectProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect
-proc onvisualRect*(self: gen_qtableview_types.QTableView, slot: QTableViewvisualRectProc) =
-  # TODO check subclass
-  var tmp = new QTableViewvisualRectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_visualRect(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_visualRect(self: ptr cQTableView, slot: int, index: pointer): pointer {.exportc: "miqt_exec_callback_QTableView_visualRect ".} =
-  var nimfunc = cast[ptr QTableViewvisualRectProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_visualRect(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].visualRect(self, slotval1)
   virtualReturn.h
+
 proc QTableViewscrollTo*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
-  fQTableView_virtualbase_scrollTo(self.h, index.h, cint(hint))
+  fcQTableView_virtualbase_scrollTo(self.h, index.h, cint(hint))
 
-type QTableViewscrollToProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void
-proc onscrollTo*(self: gen_qtableview_types.QTableView, slot: QTableViewscrollToProc) =
-  # TODO check subclass
-  var tmp = new QTableViewscrollToProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_scrollTo(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_scrollTo(self: ptr cQTableView, slot: int, index: pointer, hint: cint): void {.exportc: "miqt_exec_callback_QTableView_scrollTo ".} =
-  var nimfunc = cast[ptr QTableViewscrollToProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_scrollTo(vtbl: pointer, self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = cint(hint)
+  vtbl[].scrollTo(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewindexAt*(self: gen_qtableview_types.QTableView, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQTableView_virtualbase_indexAt(self.h, p.h))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTableView_virtualbase_indexAt(self.h, p.h))
 
-type QTableViewindexAtProc* = proc(p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex
-proc onindexAt*(self: gen_qtableview_types.QTableView, slot: QTableViewindexAtProc) =
-  # TODO check subclass
-  var tmp = new QTableViewindexAtProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_indexAt(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_indexAt(self: ptr cQTableView, slot: int, p: pointer): pointer {.exportc: "miqt_exec_callback_QTableView_indexAt ".} =
-  var nimfunc = cast[ptr QTableViewindexAtProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_indexAt(vtbl: pointer, self: pointer, p: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: p)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].indexAt(self, slotval1)
   virtualReturn.h
+
 proc QTableViewscrollContentsBy*(self: gen_qtableview_types.QTableView, dx: cint, dy: cint): void =
-  fQTableView_virtualbase_scrollContentsBy(self.h, dx, dy)
+  fcQTableView_virtualbase_scrollContentsBy(self.h, dx, dy)
 
-type QTableViewscrollContentsByProc* = proc(dx: cint, dy: cint): void
-proc onscrollContentsBy*(self: gen_qtableview_types.QTableView, slot: QTableViewscrollContentsByProc) =
-  # TODO check subclass
-  var tmp = new QTableViewscrollContentsByProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_scrollContentsBy(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_scrollContentsBy(self: ptr cQTableView, slot: int, dx: cint, dy: cint): void {.exportc: "miqt_exec_callback_QTableView_scrollContentsBy ".} =
-  var nimfunc = cast[ptr QTableViewscrollContentsByProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_scrollContentsBy(vtbl: pointer, self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = dx
-
   let slotval2 = dy
+  vtbl[].scrollContentsBy(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewviewOptions*(self: gen_qtableview_types.QTableView, ): gen_qstyleoption_types.QStyleOptionViewItem =
-  gen_qstyleoption_types.QStyleOptionViewItem(h: fQTableView_virtualbase_viewOptions(self.h))
+  gen_qstyleoption_types.QStyleOptionViewItem(h: fcQTableView_virtualbase_viewOptions(self.h))
 
-type QTableViewviewOptionsProc* = proc(): gen_qstyleoption_types.QStyleOptionViewItem
-proc onviewOptions*(self: gen_qtableview_types.QTableView, slot: QTableViewviewOptionsProc) =
-  # TODO check subclass
-  var tmp = new QTableViewviewOptionsProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_viewOptions(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_viewOptions(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_viewOptions ".} =
-  var nimfunc = cast[ptr QTableViewviewOptionsProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_viewOptions(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].viewOptions(self)
   virtualReturn.h
+
 proc QTableViewpaintEvent*(self: gen_qtableview_types.QTableView, e: gen_qevent_types.QPaintEvent): void =
-  fQTableView_virtualbase_paintEvent(self.h, e.h)
+  fcQTableView_virtualbase_paintEvent(self.h, e.h)
 
-type QTableViewpaintEventProc* = proc(e: gen_qevent_types.QPaintEvent): void
-proc onpaintEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewpaintEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewpaintEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_paintEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_paintEvent(self: ptr cQTableView, slot: int, e: pointer): void {.exportc: "miqt_exec_callback_QTableView_paintEvent ".} =
-  var nimfunc = cast[ptr QTableViewpaintEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_paintEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: e)
+  vtbl[].paintEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewtimerEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQTableView_virtualbase_timerEvent(self.h, event.h)
+  fcQTableView_virtualbase_timerEvent(self.h, event.h)
 
-type QTableViewtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_timerEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_timerEvent ".} =
-  var nimfunc = cast[ptr QTableViewtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewhorizontalOffset*(self: gen_qtableview_types.QTableView, ): cint =
-  fQTableView_virtualbase_horizontalOffset(self.h)
+  fcQTableView_virtualbase_horizontalOffset(self.h)
 
-type QTableViewhorizontalOffsetProc* = proc(): cint
-proc onhorizontalOffset*(self: gen_qtableview_types.QTableView, slot: QTableViewhorizontalOffsetProc) =
-  # TODO check subclass
-  var tmp = new QTableViewhorizontalOffsetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_horizontalOffset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_horizontalOffset(self: ptr cQTableView, slot: int): cint {.exportc: "miqt_exec_callback_QTableView_horizontalOffset ".} =
-  var nimfunc = cast[ptr QTableViewhorizontalOffsetProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_horizontalOffset(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].horizontalOffset(self)
   virtualReturn
+
 proc QTableViewverticalOffset*(self: gen_qtableview_types.QTableView, ): cint =
-  fQTableView_virtualbase_verticalOffset(self.h)
+  fcQTableView_virtualbase_verticalOffset(self.h)
 
-type QTableViewverticalOffsetProc* = proc(): cint
-proc onverticalOffset*(self: gen_qtableview_types.QTableView, slot: QTableViewverticalOffsetProc) =
-  # TODO check subclass
-  var tmp = new QTableViewverticalOffsetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_verticalOffset(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_verticalOffset(self: ptr cQTableView, slot: int): cint {.exportc: "miqt_exec_callback_QTableView_verticalOffset ".} =
-  var nimfunc = cast[ptr QTableViewverticalOffsetProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_verticalOffset(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].verticalOffset(self)
   virtualReturn
+
 proc QTableViewmoveCursor*(self: gen_qtableview_types.QTableView, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
-  gen_qabstractitemmodel_types.QModelIndex(h: fQTableView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)))
+  gen_qabstractitemmodel_types.QModelIndex(h: fcQTableView_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)))
 
-type QTableViewmoveCursorProc* = proc(cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex
-proc onmoveCursor*(self: gen_qtableview_types.QTableView, slot: QTableViewmoveCursorProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmoveCursorProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_moveCursor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_moveCursor(self: ptr cQTableView, slot: int, cursorAction: cint, modifiers: cint): pointer {.exportc: "miqt_exec_callback_QTableView_moveCursor ".} =
-  var nimfunc = cast[ptr QTableViewmoveCursorProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_moveCursor(vtbl: pointer, self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = cint(cursorAction)
-
   let slotval2 = cint(modifiers)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].moveCursor(self, slotval1, slotval2)
   virtualReturn.h
+
 proc QTableViewsetSelection*(self: gen_qtableview_types.QTableView, rect: gen_qrect_types.QRect, command: cint): void =
-  fQTableView_virtualbase_setSelection(self.h, rect.h, cint(command))
+  fcQTableView_virtualbase_setSelection(self.h, rect.h, cint(command))
 
-type QTableViewsetSelectionProc* = proc(rect: gen_qrect_types.QRect, command: cint): void
-proc onsetSelection*(self: gen_qtableview_types.QTableView, slot: QTableViewsetSelectionProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetSelectionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setSelection(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setSelection(self: ptr cQTableView, slot: int, rect: pointer, command: cint): void {.exportc: "miqt_exec_callback_QTableView_setSelection ".} =
-  var nimfunc = cast[ptr QTableViewsetSelectionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setSelection(vtbl: pointer, self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect)
-
   let slotval2 = cint(command)
+  vtbl[].setSelection(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewvisualRegionForSelection*(self: gen_qtableview_types.QTableView, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
-  gen_qregion_types.QRegion(h: fQTableView_virtualbase_visualRegionForSelection(self.h, selection.h))
+  gen_qregion_types.QRegion(h: fcQTableView_virtualbase_visualRegionForSelection(self.h, selection.h))
 
-type QTableViewvisualRegionForSelectionProc* = proc(selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion
-proc onvisualRegionForSelection*(self: gen_qtableview_types.QTableView, slot: QTableViewvisualRegionForSelectionProc) =
-  # TODO check subclass
-  var tmp = new QTableViewvisualRegionForSelectionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_visualRegionForSelection(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_visualRegionForSelection(self: ptr cQTableView, slot: int, selection: pointer): pointer {.exportc: "miqt_exec_callback_QTableView_visualRegionForSelection ".} =
-  var nimfunc = cast[ptr QTableViewvisualRegionForSelectionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_visualRegionForSelection(vtbl: pointer, self: pointer, selection: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
   virtualReturn.h
+
 proc QTableViewselectedIndexes*(self: gen_qtableview_types.QTableView, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
-  var v_ma = fQTableView_virtualbase_selectedIndexes(self.h)
+  var v_ma = fcQTableView_virtualbase_selectedIndexes(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: v_outCast[i])
   vx_ret
 
-type QTableViewselectedIndexesProc* = proc(): seq[gen_qabstractitemmodel_types.QModelIndex]
-proc onselectedIndexes*(self: gen_qtableview_types.QTableView, slot: QTableViewselectedIndexesProc) =
-  # TODO check subclass
-  var tmp = new QTableViewselectedIndexesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_selectedIndexes(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_selectedIndexes(self: ptr cQTableView, slot: int): struct_miqt_array {.exportc: "miqt_exec_callback_QTableView_selectedIndexes ".} =
-  var nimfunc = cast[ptr QTableViewselectedIndexesProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
+proc miqt_exec_callback_cQTableView_selectedIndexes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].selectedIndexes(self)
   var virtualReturn_CArray = newSeq[pointer](len(virtualReturn))
   for i in 0..<len(virtualReturn):
     virtualReturn_CArray[i] = virtualReturn[i].h
 
-
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
+
 proc QTableViewupdateGeometries*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_updateGeometries(self.h)
+  fcQTableView_virtualbase_updateGeometries(self.h)
 
-type QTableViewupdateGeometriesProc* = proc(): void
-proc onupdateGeometries*(self: gen_qtableview_types.QTableView, slot: QTableViewupdateGeometriesProc) =
-  # TODO check subclass
-  var tmp = new QTableViewupdateGeometriesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_updateGeometries(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_updateGeometries(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].updateGeometries(self)
 
-proc miqt_exec_callback_QTableView_updateGeometries(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_updateGeometries ".} =
-  var nimfunc = cast[ptr QTableViewupdateGeometriesProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewviewportSizeHint*(self: gen_qtableview_types.QTableView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQTableView_virtualbase_viewportSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_viewportSizeHint(self.h))
 
-type QTableViewviewportSizeHintProc* = proc(): gen_qsize_types.QSize
-proc onviewportSizeHint*(self: gen_qtableview_types.QTableView, slot: QTableViewviewportSizeHintProc) =
-  # TODO check subclass
-  var tmp = new QTableViewviewportSizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_viewportSizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_viewportSizeHint(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_viewportSizeHint ".} =
-  var nimfunc = cast[ptr QTableViewviewportSizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_viewportSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].viewportSizeHint(self)
   virtualReturn.h
+
 proc QTableViewsizeHintForRow*(self: gen_qtableview_types.QTableView, row: cint): cint =
-  fQTableView_virtualbase_sizeHintForRow(self.h, row)
+  fcQTableView_virtualbase_sizeHintForRow(self.h, row)
 
-type QTableViewsizeHintForRowProc* = proc(row: cint): cint
-proc onsizeHintForRow*(self: gen_qtableview_types.QTableView, slot: QTableViewsizeHintForRowProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsizeHintForRowProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_sizeHintForRow(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_sizeHintForRow(self: ptr cQTableView, slot: int, row: cint): cint {.exportc: "miqt_exec_callback_QTableView_sizeHintForRow ".} =
-  var nimfunc = cast[ptr QTableViewsizeHintForRowProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_sizeHintForRow(vtbl: pointer, self: pointer, row: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = row
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].sizeHintForRow(self, slotval1)
   virtualReturn
+
 proc QTableViewsizeHintForColumn*(self: gen_qtableview_types.QTableView, column: cint): cint =
-  fQTableView_virtualbase_sizeHintForColumn(self.h, column)
+  fcQTableView_virtualbase_sizeHintForColumn(self.h, column)
 
-type QTableViewsizeHintForColumnProc* = proc(column: cint): cint
-proc onsizeHintForColumn*(self: gen_qtableview_types.QTableView, slot: QTableViewsizeHintForColumnProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsizeHintForColumnProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_sizeHintForColumn(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_sizeHintForColumn(self: ptr cQTableView, slot: int, column: cint): cint {.exportc: "miqt_exec_callback_QTableView_sizeHintForColumn ".} =
-  var nimfunc = cast[ptr QTableViewsizeHintForColumnProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_sizeHintForColumn(vtbl: pointer, self: pointer, column: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = column
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].sizeHintForColumn(self, slotval1)
   virtualReturn
+
 proc QTableViewverticalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
-  fQTableView_virtualbase_verticalScrollbarAction(self.h, action)
+  fcQTableView_virtualbase_verticalScrollbarAction(self.h, action)
 
-type QTableViewverticalScrollbarActionProc* = proc(action: cint): void
-proc onverticalScrollbarAction*(self: gen_qtableview_types.QTableView, slot: QTableViewverticalScrollbarActionProc) =
-  # TODO check subclass
-  var tmp = new QTableViewverticalScrollbarActionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_verticalScrollbarAction(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_verticalScrollbarAction(self: ptr cQTableView, slot: int, action: cint): void {.exportc: "miqt_exec_callback_QTableView_verticalScrollbarAction ".} =
-  var nimfunc = cast[ptr QTableViewverticalScrollbarActionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_verticalScrollbarAction(vtbl: pointer, self: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = action
+  vtbl[].verticalScrollbarAction(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewhorizontalScrollbarAction*(self: gen_qtableview_types.QTableView, action: cint): void =
-  fQTableView_virtualbase_horizontalScrollbarAction(self.h, action)
+  fcQTableView_virtualbase_horizontalScrollbarAction(self.h, action)
 
-type QTableViewhorizontalScrollbarActionProc* = proc(action: cint): void
-proc onhorizontalScrollbarAction*(self: gen_qtableview_types.QTableView, slot: QTableViewhorizontalScrollbarActionProc) =
-  # TODO check subclass
-  var tmp = new QTableViewhorizontalScrollbarActionProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_horizontalScrollbarAction(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_horizontalScrollbarAction(self: ptr cQTableView, slot: int, action: cint): void {.exportc: "miqt_exec_callback_QTableView_horizontalScrollbarAction ".} =
-  var nimfunc = cast[ptr QTableViewhorizontalScrollbarActionProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_horizontalScrollbarAction(vtbl: pointer, self: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = action
+  vtbl[].horizontalScrollbarAction(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewisIndexHidden*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex): bool =
-  fQTableView_virtualbase_isIndexHidden(self.h, index.h)
+  fcQTableView_virtualbase_isIndexHidden(self.h, index.h)
 
-type QTableViewisIndexHiddenProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex): bool
-proc onisIndexHidden*(self: gen_qtableview_types.QTableView, slot: QTableViewisIndexHiddenProc) =
-  # TODO check subclass
-  var tmp = new QTableViewisIndexHiddenProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_isIndexHidden(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_isIndexHidden(self: ptr cQTableView, slot: int, index: pointer): bool {.exportc: "miqt_exec_callback_QTableView_isIndexHidden ".} =
-  var nimfunc = cast[ptr QTableViewisIndexHiddenProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_isIndexHidden(vtbl: pointer, self: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
   virtualReturn
+
 proc QTableViewselectionChanged*(self: gen_qtableview_types.QTableView, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
-  fQTableView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
+  fcQTableView_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
 
-type QTableViewselectionChangedProc* = proc(selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void
-proc onselectionChanged*(self: gen_qtableview_types.QTableView, slot: QTableViewselectionChangedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewselectionChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_selectionChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_selectionChanged(self: ptr cQTableView, slot: int, selected: pointer, deselected: pointer): void {.exportc: "miqt_exec_callback_QTableView_selectionChanged ".} =
-  var nimfunc = cast[ptr QTableViewselectionChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_selectionChanged(vtbl: pointer, self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected)
-
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected)
+  vtbl[].selectionChanged(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewcurrentChanged*(self: gen_qtableview_types.QTableView, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
-  fQTableView_virtualbase_currentChanged(self.h, current.h, previous.h)
+  fcQTableView_virtualbase_currentChanged(self.h, current.h, previous.h)
 
-type QTableViewcurrentChangedProc* = proc(current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void
-proc oncurrentChanged*(self: gen_qtableview_types.QTableView, slot: QTableViewcurrentChangedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcurrentChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_currentChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_currentChanged(self: ptr cQTableView, slot: int, current: pointer, previous: pointer): void {.exportc: "miqt_exec_callback_QTableView_currentChanged ".} =
-  var nimfunc = cast[ptr QTableViewcurrentChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_currentChanged(vtbl: pointer, self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
-
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous)
+  vtbl[].currentChanged(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewkeyboardSearch*(self: gen_qtableview_types.QTableView, search: string): void =
-  fQTableView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: search, len: csize_t(len(search))))
+  fcQTableView_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: search, len: csize_t(len(search))))
 
-type QTableViewkeyboardSearchProc* = proc(search: string): void
-proc onkeyboardSearch*(self: gen_qtableview_types.QTableView, slot: QTableViewkeyboardSearchProc) =
-  # TODO check subclass
-  var tmp = new QTableViewkeyboardSearchProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_keyboardSearch(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_keyboardSearch(self: ptr cQTableView, slot: int, search: struct_miqt_string): void {.exportc: "miqt_exec_callback_QTableView_keyboardSearch ".} =
-  var nimfunc = cast[ptr QTableViewkeyboardSearchProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_keyboardSearch(vtbl: pointer, self: pointer, search: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let vsearch_ms = search
   let vsearchx_ret = string.fromBytes(toOpenArrayByte(vsearch_ms.data, 0, int(vsearch_ms.len)-1))
   c_free(vsearch_ms.data)
   let slotval1 = vsearchx_ret
+  vtbl[].keyboardSearch(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewinputMethodQuery*(self: gen_qtableview_types.QTableView, query: cint): gen_qvariant_types.QVariant =
-  gen_qvariant_types.QVariant(h: fQTableView_virtualbase_inputMethodQuery(self.h, cint(query)))
+  gen_qvariant_types.QVariant(h: fcQTableView_virtualbase_inputMethodQuery(self.h, cint(query)))
 
-type QTableViewinputMethodQueryProc* = proc(query: cint): gen_qvariant_types.QVariant
-proc oninputMethodQuery*(self: gen_qtableview_types.QTableView, slot: QTableViewinputMethodQueryProc) =
-  # TODO check subclass
-  var tmp = new QTableViewinputMethodQueryProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_inputMethodQuery(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_inputMethodQuery(self: ptr cQTableView, slot: int, query: cint): pointer {.exportc: "miqt_exec_callback_QTableView_inputMethodQuery ".} =
-  var nimfunc = cast[ptr QTableViewinputMethodQueryProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = cint(query)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
   virtualReturn.h
+
 proc QTableViewreset*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_reset(self.h)
+  fcQTableView_virtualbase_reset(self.h)
 
-type QTableViewresetProc* = proc(): void
-proc onreset*(self: gen_qtableview_types.QTableView, slot: QTableViewresetProc) =
-  # TODO check subclass
-  var tmp = new QTableViewresetProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_reset(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_reset(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].reset(self)
 
-proc miqt_exec_callback_QTableView_reset(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_reset ".} =
-  var nimfunc = cast[ptr QTableViewresetProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewselectAll*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_selectAll(self.h)
+  fcQTableView_virtualbase_selectAll(self.h)
 
-type QTableViewselectAllProc* = proc(): void
-proc onselectAll*(self: gen_qtableview_types.QTableView, slot: QTableViewselectAllProc) =
-  # TODO check subclass
-  var tmp = new QTableViewselectAllProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_selectAll(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_selectAll(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].selectAll(self)
 
-proc miqt_exec_callback_QTableView_selectAll(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_selectAll ".} =
-  var nimfunc = cast[ptr QTableViewselectAllProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewdataChanged*(self: gen_qtableview_types.QTableView, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void =
   var roles_CArray = newSeq[cint](len(roles))
   for i in 0..<len(roles):
     roles_CArray[i] = roles[i]
 
-  fQTableView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
+  fcQTableView_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
-type QTableViewdataChangedProc* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void
-proc ondataChanged*(self: gen_qtableview_types.QTableView, slot: QTableViewdataChangedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdataChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_dataChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_dataChanged(self: ptr cQTableView, slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.exportc: "miqt_exec_callback_QTableView_dataChanged ".} =
-  var nimfunc = cast[ptr QTableViewdataChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_dataChanged(vtbl: pointer, self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft)
-
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight)
-
   var vroles_ma = roles
   var vrolesx_ret = newSeq[cint](int(vroles_ma.len))
   let vroles_outCast = cast[ptr UncheckedArray[cint]](vroles_ma.data)
   for i in 0 ..< vroles_ma.len:
     vrolesx_ret[i] = vroles_outCast[i]
   let slotval3 = vrolesx_ret
+  vtbl[].dataChanged(self, slotval1, slotval2, slotval3)
 
-
-  nimfunc[](slotval1, slotval2, slotval3)
 proc QTableViewrowsInserted*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fQTableView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
+  fcQTableView_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
 
-type QTableViewrowsInsertedProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void
-proc onrowsInserted*(self: gen_qtableview_types.QTableView, slot: QTableViewrowsInsertedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewrowsInsertedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_rowsInserted(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_rowsInserted(self: ptr cQTableView, slot: int, parent: pointer, start: cint, endVal: cint): void {.exportc: "miqt_exec_callback_QTableView_rowsInserted ".} =
-  var nimfunc = cast[ptr QTableViewrowsInsertedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_rowsInserted(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
   let slotval2 = start
-
   let slotval3 = endVal
+  vtbl[].rowsInserted(self, slotval1, slotval2, slotval3)
 
-
-  nimfunc[](slotval1, slotval2, slotval3)
 proc QTableViewrowsAboutToBeRemoved*(self: gen_qtableview_types.QTableView, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
-  fQTableView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
+  fcQTableView_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
 
-type QTableViewrowsAboutToBeRemovedProc* = proc(parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void
-proc onrowsAboutToBeRemoved*(self: gen_qtableview_types.QTableView, slot: QTableViewrowsAboutToBeRemovedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewrowsAboutToBeRemovedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_rowsAboutToBeRemoved(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_rowsAboutToBeRemoved(self: ptr cQTableView, slot: int, parent: pointer, start: cint, endVal: cint): void {.exportc: "miqt_exec_callback_QTableView_rowsAboutToBeRemoved ".} =
-  var nimfunc = cast[ptr QTableViewrowsAboutToBeRemovedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_rowsAboutToBeRemoved(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent)
-
   let slotval2 = start
-
   let slotval3 = endVal
+  vtbl[].rowsAboutToBeRemoved(self, slotval1, slotval2, slotval3)
 
-
-  nimfunc[](slotval1, slotval2, slotval3)
 proc QTableViewupdateEditorData*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_updateEditorData(self.h)
+  fcQTableView_virtualbase_updateEditorData(self.h)
 
-type QTableViewupdateEditorDataProc* = proc(): void
-proc onupdateEditorData*(self: gen_qtableview_types.QTableView, slot: QTableViewupdateEditorDataProc) =
-  # TODO check subclass
-  var tmp = new QTableViewupdateEditorDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_updateEditorData(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_updateEditorData(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].updateEditorData(self)
 
-proc miqt_exec_callback_QTableView_updateEditorData(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_updateEditorData ".} =
-  var nimfunc = cast[ptr QTableViewupdateEditorDataProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewupdateEditorGeometries*(self: gen_qtableview_types.QTableView, ): void =
-  fQTableView_virtualbase_updateEditorGeometries(self.h)
+  fcQTableView_virtualbase_updateEditorGeometries(self.h)
 
-type QTableViewupdateEditorGeometriesProc* = proc(): void
-proc onupdateEditorGeometries*(self: gen_qtableview_types.QTableView, slot: QTableViewupdateEditorGeometriesProc) =
-  # TODO check subclass
-  var tmp = new QTableViewupdateEditorGeometriesProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_updateEditorGeometries(self.h, cast[int](addr tmp[]))
+proc miqt_exec_callback_cQTableView_updateEditorGeometries(vtbl: pointer, self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  vtbl[].updateEditorGeometries(self)
 
-proc miqt_exec_callback_QTableView_updateEditorGeometries(self: ptr cQTableView, slot: int): void {.exportc: "miqt_exec_callback_QTableView_updateEditorGeometries ".} =
-  var nimfunc = cast[ptr QTableViewupdateEditorGeometriesProc](cast[pointer](slot))
-
-  nimfunc[]()
 proc QTableViewverticalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
-  fQTableView_virtualbase_verticalScrollbarValueChanged(self.h, value)
+  fcQTableView_virtualbase_verticalScrollbarValueChanged(self.h, value)
 
-type QTableViewverticalScrollbarValueChangedProc* = proc(value: cint): void
-proc onverticalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, slot: QTableViewverticalScrollbarValueChangedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewverticalScrollbarValueChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_verticalScrollbarValueChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_verticalScrollbarValueChanged(self: ptr cQTableView, slot: int, value: cint): void {.exportc: "miqt_exec_callback_QTableView_verticalScrollbarValueChanged ".} =
-  var nimfunc = cast[ptr QTableViewverticalScrollbarValueChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_verticalScrollbarValueChanged(vtbl: pointer, self: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = value
+  vtbl[].verticalScrollbarValueChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewhorizontalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, value: cint): void =
-  fQTableView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
+  fcQTableView_virtualbase_horizontalScrollbarValueChanged(self.h, value)
 
-type QTableViewhorizontalScrollbarValueChangedProc* = proc(value: cint): void
-proc onhorizontalScrollbarValueChanged*(self: gen_qtableview_types.QTableView, slot: QTableViewhorizontalScrollbarValueChangedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewhorizontalScrollbarValueChangedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_horizontalScrollbarValueChanged(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_horizontalScrollbarValueChanged(self: ptr cQTableView, slot: int, value: cint): void {.exportc: "miqt_exec_callback_QTableView_horizontalScrollbarValueChanged ".} =
-  var nimfunc = cast[ptr QTableViewhorizontalScrollbarValueChangedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_horizontalScrollbarValueChanged(vtbl: pointer, self: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = value
+  vtbl[].horizontalScrollbarValueChanged(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewcloseEditor*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget, hint: cint): void =
-  fQTableView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
+  fcQTableView_virtualbase_closeEditor(self.h, editor.h, cint(hint))
 
-type QTableViewcloseEditorProc* = proc(editor: gen_qwidget_types.QWidget, hint: cint): void
-proc oncloseEditor*(self: gen_qtableview_types.QTableView, slot: QTableViewcloseEditorProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcloseEditorProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_closeEditor(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_closeEditor(self: ptr cQTableView, slot: int, editor: pointer, hint: cint): void {.exportc: "miqt_exec_callback_QTableView_closeEditor ".} =
-  var nimfunc = cast[ptr QTableViewcloseEditorProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_closeEditor(vtbl: pointer, self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor)
-
   let slotval2 = cint(hint)
+  vtbl[].closeEditor(self, slotval1, slotval2)
 
-
-  nimfunc[](slotval1, slotval2)
 proc QTableViewcommitData*(self: gen_qtableview_types.QTableView, editor: gen_qwidget_types.QWidget): void =
-  fQTableView_virtualbase_commitData(self.h, editor.h)
+  fcQTableView_virtualbase_commitData(self.h, editor.h)
 
-type QTableViewcommitDataProc* = proc(editor: gen_qwidget_types.QWidget): void
-proc oncommitData*(self: gen_qtableview_types.QTableView, slot: QTableViewcommitDataProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcommitDataProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_commitData(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_commitData(self: ptr cQTableView, slot: int, editor: pointer): void {.exportc: "miqt_exec_callback_QTableView_commitData ".} =
-  var nimfunc = cast[ptr QTableViewcommitDataProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_commitData(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor)
+  vtbl[].commitData(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableVieweditorDestroyed*(self: gen_qtableview_types.QTableView, editor: gen_qobject_types.QObject): void =
-  fQTableView_virtualbase_editorDestroyed(self.h, editor.h)
+  fcQTableView_virtualbase_editorDestroyed(self.h, editor.h)
 
-type QTableVieweditorDestroyedProc* = proc(editor: gen_qobject_types.QObject): void
-proc oneditorDestroyed*(self: gen_qtableview_types.QTableView, slot: QTableVieweditorDestroyedProc) =
-  # TODO check subclass
-  var tmp = new QTableVieweditorDestroyedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_editorDestroyed(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_editorDestroyed(self: ptr cQTableView, slot: int, editor: pointer): void {.exportc: "miqt_exec_callback_QTableView_editorDestroyed ".} =
-  var nimfunc = cast[ptr QTableVieweditorDestroyedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_editorDestroyed(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: editor)
+  vtbl[].editorDestroyed(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewedit*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
-  fQTableView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
+  fcQTableView_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
 
-type QTableViewedit2Proc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool
-proc onedit*(self: gen_qtableview_types.QTableView, slot: QTableViewedit2Proc) =
-  # TODO check subclass
-  var tmp = new QTableViewedit2Proc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_edit2(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_edit2(self: ptr cQTableView, slot: int, index: pointer, trigger: cint, event: pointer): bool {.exportc: "miqt_exec_callback_QTableView_edit2 ".} =
-  var nimfunc = cast[ptr QTableViewedit2Proc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_edit2(vtbl: pointer, self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = cint(trigger)
-
   let slotval3 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].edit2(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QTableViewselectionCommand*(self: gen_qtableview_types.QTableView, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
-  cint(fQTableView_virtualbase_selectionCommand(self.h, index.h, event.h))
+  cint(fcQTableView_virtualbase_selectionCommand(self.h, index.h, event.h))
 
-type QTableViewselectionCommandProc* = proc(index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint
-proc onselectionCommand*(self: gen_qtableview_types.QTableView, slot: QTableViewselectionCommandProc) =
-  # TODO check subclass
-  var tmp = new QTableViewselectionCommandProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_selectionCommand(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_selectionCommand(self: ptr cQTableView, slot: int, index: pointer, event: pointer): cint {.exportc: "miqt_exec_callback_QTableView_selectionCommand ".} =
-  var nimfunc = cast[ptr QTableViewselectionCommandProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_selectionCommand(vtbl: pointer, self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].selectionCommand(self, slotval1, slotval2)
   cint(virtualReturn)
+
 proc QTableViewstartDrag*(self: gen_qtableview_types.QTableView, supportedActions: cint): void =
-  fQTableView_virtualbase_startDrag(self.h, cint(supportedActions))
+  fcQTableView_virtualbase_startDrag(self.h, cint(supportedActions))
 
-type QTableViewstartDragProc* = proc(supportedActions: cint): void
-proc onstartDrag*(self: gen_qtableview_types.QTableView, slot: QTableViewstartDragProc) =
-  # TODO check subclass
-  var tmp = new QTableViewstartDragProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_startDrag(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_startDrag(self: ptr cQTableView, slot: int, supportedActions: cint): void {.exportc: "miqt_exec_callback_QTableView_startDrag ".} =
-  var nimfunc = cast[ptr QTableViewstartDragProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_startDrag(vtbl: pointer, self: pointer, supportedActions: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = cint(supportedActions)
+  vtbl[].startDrag(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewfocusNextPrevChild*(self: gen_qtableview_types.QTableView, next: bool): bool =
-  fQTableView_virtualbase_focusNextPrevChild(self.h, next)
+  fcQTableView_virtualbase_focusNextPrevChild(self.h, next)
 
-type QTableViewfocusNextPrevChildProc* = proc(next: bool): bool
-proc onfocusNextPrevChild*(self: gen_qtableview_types.QTableView, slot: QTableViewfocusNextPrevChildProc) =
-  # TODO check subclass
-  var tmp = new QTableViewfocusNextPrevChildProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_focusNextPrevChild(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_focusNextPrevChild(self: ptr cQTableView, slot: int, next: bool): bool {.exportc: "miqt_exec_callback_QTableView_focusNextPrevChild ".} =
-  var nimfunc = cast[ptr QTableViewfocusNextPrevChildProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = next
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
   virtualReturn
+
 proc QTableViewevent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
-  fQTableView_virtualbase_event(self.h, event.h)
+  fcQTableView_virtualbase_event(self.h, event.h)
 
-type QTableVieweventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qtableview_types.QTableView, slot: QTableVieweventProc) =
-  # TODO check subclass
-  var tmp = new QTableVieweventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_event(self: ptr cQTableView, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QTableView_event ".} =
-  var nimfunc = cast[ptr QTableVieweventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QTableViewviewportEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): bool =
-  fQTableView_virtualbase_viewportEvent(self.h, event.h)
+  fcQTableView_virtualbase_viewportEvent(self.h, event.h)
 
-type QTableViewviewportEventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onviewportEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewviewportEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewviewportEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_viewportEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_viewportEvent(self: ptr cQTableView, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QTableView_viewportEvent ".} =
-  var nimfunc = cast[ptr QTableViewviewportEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_viewportEvent(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].viewportEvent(self, slotval1)
   virtualReturn
+
 proc QTableViewmousePressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fQTableView_virtualbase_mousePressEvent(self.h, event.h)
+  fcQTableView_virtualbase_mousePressEvent(self.h, event.h)
 
-type QTableViewmousePressEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_mousePressEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_mousePressEvent ".} =
-  var nimfunc = cast[ptr QTableViewmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewmouseMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fQTableView_virtualbase_mouseMoveEvent(self.h, event.h)
+  fcQTableView_virtualbase_mouseMoveEvent(self.h, event.h)
 
-type QTableViewmouseMoveEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_mouseMoveEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QTableViewmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewmouseReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fQTableView_virtualbase_mouseReleaseEvent(self.h, event.h)
+  fcQTableView_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-type QTableViewmouseReleaseEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_mouseReleaseEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QTableViewmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewmouseDoubleClickEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMouseEvent): void =
-  fQTableView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
+  fcQTableView_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-type QTableViewmouseDoubleClickEventProc* = proc(event: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_mouseDoubleClickEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QTableViewmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdragEnterEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragEnterEvent): void =
-  fQTableView_virtualbase_dragEnterEvent(self.h, event.h)
+  fcQTableView_virtualbase_dragEnterEvent(self.h, event.h)
 
-type QTableViewdragEnterEventProc* = proc(event: gen_qevent_types.QDragEnterEvent): void
-proc ondragEnterEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewdragEnterEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdragEnterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_dragEnterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_dragEnterEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_dragEnterEvent ".} =
-  var nimfunc = cast[ptr QTableViewdragEnterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event)
+  vtbl[].dragEnterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdragMoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragMoveEvent): void =
-  fQTableView_virtualbase_dragMoveEvent(self.h, event.h)
+  fcQTableView_virtualbase_dragMoveEvent(self.h, event.h)
 
-type QTableViewdragMoveEventProc* = proc(event: gen_qevent_types.QDragMoveEvent): void
-proc ondragMoveEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewdragMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdragMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_dragMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_dragMoveEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_dragMoveEvent ".} =
-  var nimfunc = cast[ptr QTableViewdragMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_dragMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: event)
+  vtbl[].dragMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdragLeaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDragLeaveEvent): void =
-  fQTableView_virtualbase_dragLeaveEvent(self.h, event.h)
+  fcQTableView_virtualbase_dragLeaveEvent(self.h, event.h)
 
-type QTableViewdragLeaveEventProc* = proc(event: gen_qevent_types.QDragLeaveEvent): void
-proc ondragLeaveEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewdragLeaveEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdragLeaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_dragLeaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_dragLeaveEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_dragLeaveEvent ".} =
-  var nimfunc = cast[ptr QTableViewdragLeaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_dragLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: event)
+  vtbl[].dragLeaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdropEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QDropEvent): void =
-  fQTableView_virtualbase_dropEvent(self.h, event.h)
+  fcQTableView_virtualbase_dropEvent(self.h, event.h)
 
-type QTableViewdropEventProc* = proc(event: gen_qevent_types.QDropEvent): void
-proc ondropEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewdropEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdropEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_dropEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_dropEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_dropEvent ".} =
-  var nimfunc = cast[ptr QTableViewdropEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event)
+  vtbl[].dropEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewfocusInEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
-  fQTableView_virtualbase_focusInEvent(self.h, event.h)
+  fcQTableView_virtualbase_focusInEvent(self.h, event.h)
 
-type QTableViewfocusInEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_focusInEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_focusInEvent ".} =
-  var nimfunc = cast[ptr QTableViewfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewfocusOutEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QFocusEvent): void =
-  fQTableView_virtualbase_focusOutEvent(self.h, event.h)
+  fcQTableView_virtualbase_focusOutEvent(self.h, event.h)
 
-type QTableViewfocusOutEventProc* = proc(event: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_focusOutEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_focusOutEvent ".} =
-  var nimfunc = cast[ptr QTableViewfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewkeyPressEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
-  fQTableView_virtualbase_keyPressEvent(self.h, event.h)
+  fcQTableView_virtualbase_keyPressEvent(self.h, event.h)
 
-type QTableViewkeyPressEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_keyPressEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_keyPressEvent ".} =
-  var nimfunc = cast[ptr QTableViewkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewresizeEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QResizeEvent): void =
-  fQTableView_virtualbase_resizeEvent(self.h, event.h)
+  fcQTableView_virtualbase_resizeEvent(self.h, event.h)
 
-type QTableViewresizeEventProc* = proc(event: gen_qevent_types.QResizeEvent): void
-proc onresizeEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewresizeEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewresizeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_resizeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_resizeEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_resizeEvent ".} =
-  var nimfunc = cast[ptr QTableViewresizeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: event)
+  vtbl[].resizeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewinputMethodEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QInputMethodEvent): void =
-  fQTableView_virtualbase_inputMethodEvent(self.h, event.h)
+  fcQTableView_virtualbase_inputMethodEvent(self.h, event.h)
 
-type QTableViewinputMethodEventProc* = proc(event: gen_qevent_types.QInputMethodEvent): void
-proc oninputMethodEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewinputMethodEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewinputMethodEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_inputMethodEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_inputMethodEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_inputMethodEvent ".} =
-  var nimfunc = cast[ptr QTableViewinputMethodEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_inputMethodEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event)
+  vtbl[].inputMethodEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableVieweventFilter*(self: gen_qtableview_types.QTableView, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQTableView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
+  fcQTableView_virtualbase_eventFilter(self.h, objectVal.h, event.h)
 
-type QTableVieweventFilterProc* = proc(objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qtableview_types.QTableView, slot: QTableVieweventFilterProc) =
-  # TODO check subclass
-  var tmp = new QTableVieweventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_eventFilter(self: ptr cQTableView, slot: int, objectVal: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QTableView_eventFilter ".} =
-  var nimfunc = cast[ptr QTableVieweventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_eventFilter(vtbl: pointer, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: objectVal)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QTableViewminimumSizeHint*(self: gen_qtableview_types.QTableView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQTableView_virtualbase_minimumSizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_minimumSizeHint(self.h))
 
-type QTableViewminimumSizeHintProc* = proc(): gen_qsize_types.QSize
-proc onminimumSizeHint*(self: gen_qtableview_types.QTableView, slot: QTableViewminimumSizeHintProc) =
-  # TODO check subclass
-  var tmp = new QTableViewminimumSizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_minimumSizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_minimumSizeHint(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_minimumSizeHint ".} =
-  var nimfunc = cast[ptr QTableViewminimumSizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.h
+
 proc QTableViewsizeHint*(self: gen_qtableview_types.QTableView, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQTableView_virtualbase_sizeHint(self.h))
+  gen_qsize_types.QSize(h: fcQTableView_virtualbase_sizeHint(self.h))
 
-type QTableViewsizeHintProc* = proc(): gen_qsize_types.QSize
-proc onsizeHint*(self: gen_qtableview_types.QTableView, slot: QTableViewsizeHintProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsizeHintProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_sizeHint(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_sizeHint(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_sizeHint ".} =
-  var nimfunc = cast[ptr QTableViewsizeHintProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.h
+
 proc QTableViewsetupViewport*(self: gen_qtableview_types.QTableView, viewport: gen_qwidget_types.QWidget): void =
-  fQTableView_virtualbase_setupViewport(self.h, viewport.h)
+  fcQTableView_virtualbase_setupViewport(self.h, viewport.h)
 
-type QTableViewsetupViewportProc* = proc(viewport: gen_qwidget_types.QWidget): void
-proc onsetupViewport*(self: gen_qtableview_types.QTableView, slot: QTableViewsetupViewportProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetupViewportProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setupViewport(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setupViewport(self: ptr cQTableView, slot: int, viewport: pointer): void {.exportc: "miqt_exec_callback_QTableView_setupViewport ".} =
-  var nimfunc = cast[ptr QTableViewsetupViewportProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setupViewport(vtbl: pointer, self: pointer, viewport: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport)
+  vtbl[].setupViewport(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewwheelEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QWheelEvent): void =
-  fQTableView_virtualbase_wheelEvent(self.h, param1.h)
+  fcQTableView_virtualbase_wheelEvent(self.h, param1.h)
 
-type QTableViewwheelEventProc* = proc(param1: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_wheelEvent(self: ptr cQTableView, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QTableView_wheelEvent ".} =
-  var nimfunc = cast[ptr QTableViewwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewcontextMenuEvent*(self: gen_qtableview_types.QTableView, param1: gen_qevent_types.QContextMenuEvent): void =
-  fQTableView_virtualbase_contextMenuEvent(self.h, param1.h)
+  fcQTableView_virtualbase_contextMenuEvent(self.h, param1.h)
 
-type QTableViewcontextMenuEventProc* = proc(param1: gen_qevent_types.QContextMenuEvent): void
-proc oncontextMenuEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewcontextMenuEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcontextMenuEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_contextMenuEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_contextMenuEvent(self: ptr cQTableView, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QTableView_contextMenuEvent ".} =
-  var nimfunc = cast[ptr QTableViewcontextMenuEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1)
+  vtbl[].contextMenuEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewchangeEvent*(self: gen_qtableview_types.QTableView, param1: gen_qcoreevent_types.QEvent): void =
-  fQTableView_virtualbase_changeEvent(self.h, param1.h)
+  fcQTableView_virtualbase_changeEvent(self.h, param1.h)
 
-type QTableViewchangeEventProc* = proc(param1: gen_qcoreevent_types.QEvent): void
-proc onchangeEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewchangeEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewchangeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_changeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_changeEvent(self: ptr cQTableView, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QTableView_changeEvent ".} =
-  var nimfunc = cast[ptr QTableViewchangeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
+  vtbl[].changeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdevType*(self: gen_qtableview_types.QTableView, ): cint =
-  fQTableView_virtualbase_devType(self.h)
+  fcQTableView_virtualbase_devType(self.h)
 
-type QTableViewdevTypeProc* = proc(): cint
-proc ondevType*(self: gen_qtableview_types.QTableView, slot: QTableViewdevTypeProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdevTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_devType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_devType(self: ptr cQTableView, slot: int): cint {.exportc: "miqt_exec_callback_QTableView_devType ".} =
-  var nimfunc = cast[ptr QTableViewdevTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].devType(self)
   virtualReturn
+
 proc QTableViewsetVisible*(self: gen_qtableview_types.QTableView, visible: bool): void =
-  fQTableView_virtualbase_setVisible(self.h, visible)
+  fcQTableView_virtualbase_setVisible(self.h, visible)
 
-type QTableViewsetVisibleProc* = proc(visible: bool): void
-proc onsetVisible*(self: gen_qtableview_types.QTableView, slot: QTableViewsetVisibleProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsetVisibleProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_setVisible(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_setVisible(self: ptr cQTableView, slot: int, visible: bool): void {.exportc: "miqt_exec_callback_QTableView_setVisible ".} =
-  var nimfunc = cast[ptr QTableViewsetVisibleProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = visible
+  vtbl[].setVisible(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewheightForWidth*(self: gen_qtableview_types.QTableView, param1: cint): cint =
-  fQTableView_virtualbase_heightForWidth(self.h, param1)
+  fcQTableView_virtualbase_heightForWidth(self.h, param1)
 
-type QTableViewheightForWidthProc* = proc(param1: cint): cint
-proc onheightForWidth*(self: gen_qtableview_types.QTableView, slot: QTableViewheightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QTableViewheightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_heightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_heightForWidth(self: ptr cQTableView, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QTableView_heightForWidth ".} =
-  var nimfunc = cast[ptr QTableViewheightForWidthProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = param1
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
+
 proc QTableViewhasHeightForWidth*(self: gen_qtableview_types.QTableView, ): bool =
-  fQTableView_virtualbase_hasHeightForWidth(self.h)
+  fcQTableView_virtualbase_hasHeightForWidth(self.h)
 
-type QTableViewhasHeightForWidthProc* = proc(): bool
-proc onhasHeightForWidth*(self: gen_qtableview_types.QTableView, slot: QTableViewhasHeightForWidthProc) =
-  # TODO check subclass
-  var tmp = new QTableViewhasHeightForWidthProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_hasHeightForWidth(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_hasHeightForWidth(self: ptr cQTableView, slot: int): bool {.exportc: "miqt_exec_callback_QTableView_hasHeightForWidth ".} =
-  var nimfunc = cast[ptr QTableViewhasHeightForWidthProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
+
 proc QTableViewpaintEngine*(self: gen_qtableview_types.QTableView, ): gen_qpaintengine_types.QPaintEngine =
-  gen_qpaintengine_types.QPaintEngine(h: fQTableView_virtualbase_paintEngine(self.h))
+  gen_qpaintengine_types.QPaintEngine(h: fcQTableView_virtualbase_paintEngine(self.h))
 
-type QTableViewpaintEngineProc* = proc(): gen_qpaintengine_types.QPaintEngine
-proc onpaintEngine*(self: gen_qtableview_types.QTableView, slot: QTableViewpaintEngineProc) =
-  # TODO check subclass
-  var tmp = new QTableViewpaintEngineProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_paintEngine(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_paintEngine(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_paintEngine ".} =
-  var nimfunc = cast[ptr QTableViewpaintEngineProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.h
+
 proc QTableViewkeyReleaseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QKeyEvent): void =
-  fQTableView_virtualbase_keyReleaseEvent(self.h, event.h)
+  fcQTableView_virtualbase_keyReleaseEvent(self.h, event.h)
 
-type QTableViewkeyReleaseEventProc* = proc(event: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_keyReleaseEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QTableViewkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewenterEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fQTableView_virtualbase_enterEvent(self.h, event.h)
+  fcQTableView_virtualbase_enterEvent(self.h, event.h)
 
-type QTableViewenterEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onenterEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewenterEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewenterEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_enterEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_enterEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_enterEvent ".} =
-  var nimfunc = cast[ptr QTableViewenterEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].enterEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewleaveEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fQTableView_virtualbase_leaveEvent(self.h, event.h)
+  fcQTableView_virtualbase_leaveEvent(self.h, event.h)
 
-type QTableViewleaveEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc onleaveEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewleaveEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewleaveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_leaveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_leaveEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_leaveEvent ".} =
-  var nimfunc = cast[ptr QTableViewleaveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].leaveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewmoveEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QMoveEvent): void =
-  fQTableView_virtualbase_moveEvent(self.h, event.h)
+  fcQTableView_virtualbase_moveEvent(self.h, event.h)
 
-type QTableViewmoveEventProc* = proc(event: gen_qevent_types.QMoveEvent): void
-proc onmoveEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewmoveEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_moveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_moveEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_moveEvent ".} =
-  var nimfunc = cast[ptr QTableViewmoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event)
+  vtbl[].moveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewcloseEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QCloseEvent): void =
-  fQTableView_virtualbase_closeEvent(self.h, event.h)
+  fcQTableView_virtualbase_closeEvent(self.h, event.h)
 
-type QTableViewcloseEventProc* = proc(event: gen_qevent_types.QCloseEvent): void
-proc oncloseEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewcloseEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcloseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_closeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_closeEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_closeEvent ".} =
-  var nimfunc = cast[ptr QTableViewcloseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event)
+  vtbl[].closeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewtabletEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QTabletEvent): void =
-  fQTableView_virtualbase_tabletEvent(self.h, event.h)
+  fcQTableView_virtualbase_tabletEvent(self.h, event.h)
 
-type QTableViewtabletEventProc* = proc(event: gen_qevent_types.QTabletEvent): void
-proc ontabletEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewtabletEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewtabletEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_tabletEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_tabletEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_tabletEvent ".} =
-  var nimfunc = cast[ptr QTableViewtabletEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event)
+  vtbl[].tabletEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewactionEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QActionEvent): void =
-  fQTableView_virtualbase_actionEvent(self.h, event.h)
+  fcQTableView_virtualbase_actionEvent(self.h, event.h)
 
-type QTableViewactionEventProc* = proc(event: gen_qevent_types.QActionEvent): void
-proc onactionEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewactionEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewactionEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_actionEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_actionEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_actionEvent ".} =
-  var nimfunc = cast[ptr QTableViewactionEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event)
+  vtbl[].actionEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewshowEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QShowEvent): void =
-  fQTableView_virtualbase_showEvent(self.h, event.h)
+  fcQTableView_virtualbase_showEvent(self.h, event.h)
 
-type QTableViewshowEventProc* = proc(event: gen_qevent_types.QShowEvent): void
-proc onshowEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewshowEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewshowEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_showEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_showEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_showEvent ".} =
-  var nimfunc = cast[ptr QTableViewshowEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event)
+  vtbl[].showEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewhideEvent*(self: gen_qtableview_types.QTableView, event: gen_qevent_types.QHideEvent): void =
-  fQTableView_virtualbase_hideEvent(self.h, event.h)
+  fcQTableView_virtualbase_hideEvent(self.h, event.h)
 
-type QTableViewhideEventProc* = proc(event: gen_qevent_types.QHideEvent): void
-proc onhideEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewhideEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewhideEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_hideEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_hideEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_hideEvent ".} =
-  var nimfunc = cast[ptr QTableViewhideEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event)
+  vtbl[].hideEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewnativeEvent*(self: gen_qtableview_types.QTableView, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
-  fQTableView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+  fcQTableView_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-type QTableViewnativeEventProc* = proc(eventType: seq[byte], message: pointer, resultVal: ptr clong): bool
-proc onnativeEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewnativeEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewnativeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_nativeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_nativeEvent(self: ptr cQTableView, slot: int, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.exportc: "miqt_exec_callback_QTableView_nativeEvent ".} =
-  var nimfunc = cast[ptr QTableViewnativeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
-
   let slotval2 = message
-
   let slotval3 = resultVal
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QTableViewmetric*(self: gen_qtableview_types.QTableView, param1: cint): cint =
-  fQTableView_virtualbase_metric(self.h, cint(param1))
+  fcQTableView_virtualbase_metric(self.h, cint(param1))
 
-type QTableViewmetricProc* = proc(param1: cint): cint
-proc onmetric*(self: gen_qtableview_types.QTableView, slot: QTableViewmetricProc) =
-  # TODO check subclass
-  var tmp = new QTableViewmetricProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_metric(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_metric(self: ptr cQTableView, slot: int, param1: cint): cint {.exportc: "miqt_exec_callback_QTableView_metric ".} =
-  var nimfunc = cast[ptr QTableViewmetricProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = cint(param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metric(self, slotval1)
   virtualReturn
+
 proc QTableViewinitPainter*(self: gen_qtableview_types.QTableView, painter: gen_qpainter_types.QPainter): void =
-  fQTableView_virtualbase_initPainter(self.h, painter.h)
+  fcQTableView_virtualbase_initPainter(self.h, painter.h)
 
-type QTableViewinitPainterProc* = proc(painter: gen_qpainter_types.QPainter): void
-proc oninitPainter*(self: gen_qtableview_types.QTableView, slot: QTableViewinitPainterProc) =
-  # TODO check subclass
-  var tmp = new QTableViewinitPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_initPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_initPainter(self: ptr cQTableView, slot: int, painter: pointer): void {.exportc: "miqt_exec_callback_QTableView_initPainter ".} =
-  var nimfunc = cast[ptr QTableViewinitPainterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter)
+  vtbl[].initPainter(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewredirected*(self: gen_qtableview_types.QTableView, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
-  gen_qpaintdevice_types.QPaintDevice(h: fQTableView_virtualbase_redirected(self.h, offset.h))
+  gen_qpaintdevice_types.QPaintDevice(h: fcQTableView_virtualbase_redirected(self.h, offset.h))
 
-type QTableViewredirectedProc* = proc(offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice
-proc onredirected*(self: gen_qtableview_types.QTableView, slot: QTableViewredirectedProc) =
-  # TODO check subclass
-  var tmp = new QTableViewredirectedProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_redirected(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_redirected(self: ptr cQTableView, slot: int, offset: pointer): pointer {.exportc: "miqt_exec_callback_QTableView_redirected ".} =
-  var nimfunc = cast[ptr QTableViewredirectedProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].redirected(self, slotval1)
   virtualReturn.h
+
 proc QTableViewsharedPainter*(self: gen_qtableview_types.QTableView, ): gen_qpainter_types.QPainter =
-  gen_qpainter_types.QPainter(h: fQTableView_virtualbase_sharedPainter(self.h))
+  gen_qpainter_types.QPainter(h: fcQTableView_virtualbase_sharedPainter(self.h))
 
-type QTableViewsharedPainterProc* = proc(): gen_qpainter_types.QPainter
-proc onsharedPainter*(self: gen_qtableview_types.QTableView, slot: QTableViewsharedPainterProc) =
-  # TODO check subclass
-  var tmp = new QTableViewsharedPainterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_sharedPainter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_sharedPainter(self: ptr cQTableView, slot: int): pointer {.exportc: "miqt_exec_callback_QTableView_sharedPainter ".} =
-  var nimfunc = cast[ptr QTableViewsharedPainterProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQTableView_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
+  var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.h
+
 proc QTableViewchildEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QChildEvent): void =
-  fQTableView_virtualbase_childEvent(self.h, event.h)
+  fcQTableView_virtualbase_childEvent(self.h, event.h)
 
-type QTableViewchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewchildEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_childEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_childEvent ".} =
-  var nimfunc = cast[ptr QTableViewchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewcustomEvent*(self: gen_qtableview_types.QTableView, event: gen_qcoreevent_types.QEvent): void =
-  fQTableView_virtualbase_customEvent(self.h, event.h)
+  fcQTableView_virtualbase_customEvent(self.h, event.h)
 
-type QTableViewcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qtableview_types.QTableView, slot: QTableViewcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QTableViewcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_customEvent(self: ptr cQTableView, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QTableView_customEvent ".} =
-  var nimfunc = cast[ptr QTableViewcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQTableView_virtualbase_connectNotify(self.h, signal.h)
+  fcQTableView_virtualbase_connectNotify(self.h, signal.h)
 
-type QTableViewconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qtableview_types.QTableView, slot: QTableViewconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QTableViewconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_connectNotify(self: ptr cQTableView, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QTableView_connectNotify ".} =
-  var nimfunc = cast[ptr QTableViewconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QTableViewdisconnectNotify*(self: gen_qtableview_types.QTableView, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQTableView_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQTableView_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QTableViewdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qtableview_types.QTableView, slot: QTableViewdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QTableViewdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQTableView_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QTableView_disconnectNotify(self: ptr cQTableView, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QTableView_disconnectNotify ".} =
-  var nimfunc = cast[ptr QTableViewdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQTableView_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QTableViewVTable](vtbl)
+  let self = QTableView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qtableview_types.QTableView,
+    parent: gen_qwidget_types.QWidget,
+    vtbl: ref QTableViewVTable = nil): gen_qtableview_types.QTableView =
+  let vtbl = if vtbl == nil: new QTableViewVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQTableViewVTable, _: ptr cQTableView) {.cdecl.} =
+    let vtbl = cast[ref QTableViewVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQTableView_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQTableView_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQTableView_metacall
+  if not isNil(vtbl.setModel):
+    vtbl[].vtbl.setModel = miqt_exec_callback_cQTableView_setModel
+  if not isNil(vtbl.setRootIndex):
+    vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQTableView_setRootIndex
+  if not isNil(vtbl.setSelectionModel):
+    vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQTableView_setSelectionModel
+  if not isNil(vtbl.doItemsLayout):
+    vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQTableView_doItemsLayout
+  if not isNil(vtbl.visualRect):
+    vtbl[].vtbl.visualRect = miqt_exec_callback_cQTableView_visualRect
+  if not isNil(vtbl.scrollTo):
+    vtbl[].vtbl.scrollTo = miqt_exec_callback_cQTableView_scrollTo
+  if not isNil(vtbl.indexAt):
+    vtbl[].vtbl.indexAt = miqt_exec_callback_cQTableView_indexAt
+  if not isNil(vtbl.scrollContentsBy):
+    vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQTableView_scrollContentsBy
+  if not isNil(vtbl.viewOptions):
+    vtbl[].vtbl.viewOptions = miqt_exec_callback_cQTableView_viewOptions
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTableView_paintEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTableView_timerEvent
+  if not isNil(vtbl.horizontalOffset):
+    vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQTableView_horizontalOffset
+  if not isNil(vtbl.verticalOffset):
+    vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQTableView_verticalOffset
+  if not isNil(vtbl.moveCursor):
+    vtbl[].vtbl.moveCursor = miqt_exec_callback_cQTableView_moveCursor
+  if not isNil(vtbl.setSelection):
+    vtbl[].vtbl.setSelection = miqt_exec_callback_cQTableView_setSelection
+  if not isNil(vtbl.visualRegionForSelection):
+    vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQTableView_visualRegionForSelection
+  if not isNil(vtbl.selectedIndexes):
+    vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQTableView_selectedIndexes
+  if not isNil(vtbl.updateGeometries):
+    vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQTableView_updateGeometries
+  if not isNil(vtbl.viewportSizeHint):
+    vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQTableView_viewportSizeHint
+  if not isNil(vtbl.sizeHintForRow):
+    vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQTableView_sizeHintForRow
+  if not isNil(vtbl.sizeHintForColumn):
+    vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQTableView_sizeHintForColumn
+  if not isNil(vtbl.verticalScrollbarAction):
+    vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQTableView_verticalScrollbarAction
+  if not isNil(vtbl.horizontalScrollbarAction):
+    vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQTableView_horizontalScrollbarAction
+  if not isNil(vtbl.isIndexHidden):
+    vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQTableView_isIndexHidden
+  if not isNil(vtbl.selectionChanged):
+    vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQTableView_selectionChanged
+  if not isNil(vtbl.currentChanged):
+    vtbl[].vtbl.currentChanged = miqt_exec_callback_cQTableView_currentChanged
+  if not isNil(vtbl.keyboardSearch):
+    vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQTableView_keyboardSearch
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTableView_inputMethodQuery
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQTableView_reset
+  if not isNil(vtbl.selectAll):
+    vtbl[].vtbl.selectAll = miqt_exec_callback_cQTableView_selectAll
+  if not isNil(vtbl.dataChanged):
+    vtbl[].vtbl.dataChanged = miqt_exec_callback_cQTableView_dataChanged
+  if not isNil(vtbl.rowsInserted):
+    vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQTableView_rowsInserted
+  if not isNil(vtbl.rowsAboutToBeRemoved):
+    vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQTableView_rowsAboutToBeRemoved
+  if not isNil(vtbl.updateEditorData):
+    vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQTableView_updateEditorData
+  if not isNil(vtbl.updateEditorGeometries):
+    vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQTableView_updateEditorGeometries
+  if not isNil(vtbl.verticalScrollbarValueChanged):
+    vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQTableView_verticalScrollbarValueChanged
+  if not isNil(vtbl.horizontalScrollbarValueChanged):
+    vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQTableView_horizontalScrollbarValueChanged
+  if not isNil(vtbl.closeEditor):
+    vtbl[].vtbl.closeEditor = miqt_exec_callback_cQTableView_closeEditor
+  if not isNil(vtbl.commitData):
+    vtbl[].vtbl.commitData = miqt_exec_callback_cQTableView_commitData
+  if not isNil(vtbl.editorDestroyed):
+    vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQTableView_editorDestroyed
+  if not isNil(vtbl.edit2):
+    vtbl[].vtbl.edit2 = miqt_exec_callback_cQTableView_edit2
+  if not isNil(vtbl.selectionCommand):
+    vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQTableView_selectionCommand
+  if not isNil(vtbl.startDrag):
+    vtbl[].vtbl.startDrag = miqt_exec_callback_cQTableView_startDrag
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTableView_focusNextPrevChild
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQTableView_event
+  if not isNil(vtbl.viewportEvent):
+    vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQTableView_viewportEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTableView_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTableView_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTableView_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTableView_mouseDoubleClickEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTableView_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTableView_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTableView_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTableView_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTableView_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTableView_focusOutEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTableView_keyPressEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTableView_resizeEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTableView_inputMethodEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTableView_eventFilter
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTableView_minimumSizeHint
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTableView_sizeHint
+  if not isNil(vtbl.setupViewport):
+    vtbl[].vtbl.setupViewport = miqt_exec_callback_cQTableView_setupViewport
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTableView_wheelEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTableView_contextMenuEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTableView_changeEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQTableView_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQTableView_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTableView_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTableView_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTableView_paintEngine
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTableView_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTableView_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTableView_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTableView_moveEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTableView_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTableView_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTableView_actionEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQTableView_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTableView_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTableView_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQTableView_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQTableView_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQTableView_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTableView_sharedPainter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQTableView_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQTableView_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTableView_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTableView_disconnectNotify
+  gen_qtableview_types.QTableView(h: fcQTableView_new(addr(vtbl[]), parent.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qtableview_types.QTableView,
+    vtbl: ref QTableViewVTable = nil): gen_qtableview_types.QTableView =
+  let vtbl = if vtbl == nil: new QTableViewVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQTableViewVTable, _: ptr cQTableView) {.cdecl.} =
+    let vtbl = cast[ref QTableViewVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQTableView_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQTableView_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQTableView_metacall
+  if not isNil(vtbl.setModel):
+    vtbl[].vtbl.setModel = miqt_exec_callback_cQTableView_setModel
+  if not isNil(vtbl.setRootIndex):
+    vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQTableView_setRootIndex
+  if not isNil(vtbl.setSelectionModel):
+    vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQTableView_setSelectionModel
+  if not isNil(vtbl.doItemsLayout):
+    vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQTableView_doItemsLayout
+  if not isNil(vtbl.visualRect):
+    vtbl[].vtbl.visualRect = miqt_exec_callback_cQTableView_visualRect
+  if not isNil(vtbl.scrollTo):
+    vtbl[].vtbl.scrollTo = miqt_exec_callback_cQTableView_scrollTo
+  if not isNil(vtbl.indexAt):
+    vtbl[].vtbl.indexAt = miqt_exec_callback_cQTableView_indexAt
+  if not isNil(vtbl.scrollContentsBy):
+    vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQTableView_scrollContentsBy
+  if not isNil(vtbl.viewOptions):
+    vtbl[].vtbl.viewOptions = miqt_exec_callback_cQTableView_viewOptions
+  if not isNil(vtbl.paintEvent):
+    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQTableView_paintEvent
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQTableView_timerEvent
+  if not isNil(vtbl.horizontalOffset):
+    vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQTableView_horizontalOffset
+  if not isNil(vtbl.verticalOffset):
+    vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQTableView_verticalOffset
+  if not isNil(vtbl.moveCursor):
+    vtbl[].vtbl.moveCursor = miqt_exec_callback_cQTableView_moveCursor
+  if not isNil(vtbl.setSelection):
+    vtbl[].vtbl.setSelection = miqt_exec_callback_cQTableView_setSelection
+  if not isNil(vtbl.visualRegionForSelection):
+    vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQTableView_visualRegionForSelection
+  if not isNil(vtbl.selectedIndexes):
+    vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQTableView_selectedIndexes
+  if not isNil(vtbl.updateGeometries):
+    vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQTableView_updateGeometries
+  if not isNil(vtbl.viewportSizeHint):
+    vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQTableView_viewportSizeHint
+  if not isNil(vtbl.sizeHintForRow):
+    vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQTableView_sizeHintForRow
+  if not isNil(vtbl.sizeHintForColumn):
+    vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQTableView_sizeHintForColumn
+  if not isNil(vtbl.verticalScrollbarAction):
+    vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQTableView_verticalScrollbarAction
+  if not isNil(vtbl.horizontalScrollbarAction):
+    vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQTableView_horizontalScrollbarAction
+  if not isNil(vtbl.isIndexHidden):
+    vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQTableView_isIndexHidden
+  if not isNil(vtbl.selectionChanged):
+    vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQTableView_selectionChanged
+  if not isNil(vtbl.currentChanged):
+    vtbl[].vtbl.currentChanged = miqt_exec_callback_cQTableView_currentChanged
+  if not isNil(vtbl.keyboardSearch):
+    vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQTableView_keyboardSearch
+  if not isNil(vtbl.inputMethodQuery):
+    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQTableView_inputMethodQuery
+  if not isNil(vtbl.reset):
+    vtbl[].vtbl.reset = miqt_exec_callback_cQTableView_reset
+  if not isNil(vtbl.selectAll):
+    vtbl[].vtbl.selectAll = miqt_exec_callback_cQTableView_selectAll
+  if not isNil(vtbl.dataChanged):
+    vtbl[].vtbl.dataChanged = miqt_exec_callback_cQTableView_dataChanged
+  if not isNil(vtbl.rowsInserted):
+    vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQTableView_rowsInserted
+  if not isNil(vtbl.rowsAboutToBeRemoved):
+    vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQTableView_rowsAboutToBeRemoved
+  if not isNil(vtbl.updateEditorData):
+    vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQTableView_updateEditorData
+  if not isNil(vtbl.updateEditorGeometries):
+    vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQTableView_updateEditorGeometries
+  if not isNil(vtbl.verticalScrollbarValueChanged):
+    vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQTableView_verticalScrollbarValueChanged
+  if not isNil(vtbl.horizontalScrollbarValueChanged):
+    vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQTableView_horizontalScrollbarValueChanged
+  if not isNil(vtbl.closeEditor):
+    vtbl[].vtbl.closeEditor = miqt_exec_callback_cQTableView_closeEditor
+  if not isNil(vtbl.commitData):
+    vtbl[].vtbl.commitData = miqt_exec_callback_cQTableView_commitData
+  if not isNil(vtbl.editorDestroyed):
+    vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQTableView_editorDestroyed
+  if not isNil(vtbl.edit2):
+    vtbl[].vtbl.edit2 = miqt_exec_callback_cQTableView_edit2
+  if not isNil(vtbl.selectionCommand):
+    vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQTableView_selectionCommand
+  if not isNil(vtbl.startDrag):
+    vtbl[].vtbl.startDrag = miqt_exec_callback_cQTableView_startDrag
+  if not isNil(vtbl.focusNextPrevChild):
+    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQTableView_focusNextPrevChild
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQTableView_event
+  if not isNil(vtbl.viewportEvent):
+    vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQTableView_viewportEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQTableView_mousePressEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQTableView_mouseMoveEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQTableView_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQTableView_mouseDoubleClickEvent
+  if not isNil(vtbl.dragEnterEvent):
+    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQTableView_dragEnterEvent
+  if not isNil(vtbl.dragMoveEvent):
+    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQTableView_dragMoveEvent
+  if not isNil(vtbl.dragLeaveEvent):
+    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQTableView_dragLeaveEvent
+  if not isNil(vtbl.dropEvent):
+    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQTableView_dropEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQTableView_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQTableView_focusOutEvent
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQTableView_keyPressEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQTableView_resizeEvent
+  if not isNil(vtbl.inputMethodEvent):
+    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQTableView_inputMethodEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQTableView_eventFilter
+  if not isNil(vtbl.minimumSizeHint):
+    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQTableView_minimumSizeHint
+  if not isNil(vtbl.sizeHint):
+    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQTableView_sizeHint
+  if not isNil(vtbl.setupViewport):
+    vtbl[].vtbl.setupViewport = miqt_exec_callback_cQTableView_setupViewport
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQTableView_wheelEvent
+  if not isNil(vtbl.contextMenuEvent):
+    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQTableView_contextMenuEvent
+  if not isNil(vtbl.changeEvent):
+    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQTableView_changeEvent
+  if not isNil(vtbl.devType):
+    vtbl[].vtbl.devType = miqt_exec_callback_cQTableView_devType
+  if not isNil(vtbl.setVisible):
+    vtbl[].vtbl.setVisible = miqt_exec_callback_cQTableView_setVisible
+  if not isNil(vtbl.heightForWidth):
+    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQTableView_heightForWidth
+  if not isNil(vtbl.hasHeightForWidth):
+    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQTableView_hasHeightForWidth
+  if not isNil(vtbl.paintEngine):
+    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQTableView_paintEngine
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQTableView_keyReleaseEvent
+  if not isNil(vtbl.enterEvent):
+    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQTableView_enterEvent
+  if not isNil(vtbl.leaveEvent):
+    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQTableView_leaveEvent
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQTableView_moveEvent
+  if not isNil(vtbl.closeEvent):
+    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQTableView_closeEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQTableView_tabletEvent
+  if not isNil(vtbl.actionEvent):
+    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQTableView_actionEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQTableView_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQTableView_hideEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQTableView_nativeEvent
+  if not isNil(vtbl.metric):
+    vtbl[].vtbl.metric = miqt_exec_callback_cQTableView_metric
+  if not isNil(vtbl.initPainter):
+    vtbl[].vtbl.initPainter = miqt_exec_callback_cQTableView_initPainter
+  if not isNil(vtbl.redirected):
+    vtbl[].vtbl.redirected = miqt_exec_callback_cQTableView_redirected
+  if not isNil(vtbl.sharedPainter):
+    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQTableView_sharedPainter
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQTableView_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQTableView_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQTableView_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQTableView_disconnectNotify
+  gen_qtableview_types.QTableView(h: fcQTableView_new2(addr(vtbl[]), ))
+
 proc staticMetaObject*(_: type gen_qtableview_types.QTableView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQTableView_staticMetaObject())
 proc delete*(self: gen_qtableview_types.QTableView) =

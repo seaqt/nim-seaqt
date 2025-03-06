@@ -17,218 +17,174 @@
 extern "C" {
 #endif
 
-QMetaObject* miqt_exec_callback_QSharedMemory_metaObject(const QSharedMemory*, intptr_t);
-void* miqt_exec_callback_QSharedMemory_metacast(QSharedMemory*, intptr_t, const char*);
-int miqt_exec_callback_QSharedMemory_metacall(QSharedMemory*, intptr_t, int, int, void**);
-bool miqt_exec_callback_QSharedMemory_event(QSharedMemory*, intptr_t, QEvent*);
-bool miqt_exec_callback_QSharedMemory_eventFilter(QSharedMemory*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QSharedMemory_timerEvent(QSharedMemory*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QSharedMemory_childEvent(QSharedMemory*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QSharedMemory_customEvent(QSharedMemory*, intptr_t, QEvent*);
-void miqt_exec_callback_QSharedMemory_connectNotify(QSharedMemory*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QSharedMemory_disconnectNotify(QSharedMemory*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSharedMemory final : public QSharedMemory {
+	struct QSharedMemory_VTable* vtbl;
 public:
 
-	VirtualQSharedMemory(): QSharedMemory() {};
-	VirtualQSharedMemory(const QString& key): QSharedMemory(key) {};
-	VirtualQSharedMemory(QObject* parent): QSharedMemory(parent) {};
-	VirtualQSharedMemory(const QString& key, QObject* parent): QSharedMemory(key, parent) {};
+	VirtualQSharedMemory(struct QSharedMemory_VTable* vtbl): QSharedMemory(), vtbl(vtbl) {};
+	VirtualQSharedMemory(struct QSharedMemory_VTable* vtbl, const QString& key): QSharedMemory(key), vtbl(vtbl) {};
+	VirtualQSharedMemory(struct QSharedMemory_VTable* vtbl, QObject* parent): QSharedMemory(parent), vtbl(vtbl) {};
+	VirtualQSharedMemory(struct QSharedMemory_VTable* vtbl, const QString& key, QObject* parent): QSharedMemory(key, parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQSharedMemory() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQSharedMemory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QSharedMemory::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QSharedMemory_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QSharedMemory_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QSharedMemory::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QSharedMemory_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QSharedMemory_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QSharedMemory::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QSharedMemory_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSharedMemory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QSharedMemory::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSharedMemory_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSharedMemory_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QSharedMemory::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSharedMemory_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QSharedMemory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QSharedMemory::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QSharedMemory_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSharedMemory_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QSharedMemory::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QSharedMemory_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSharedMemory_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QSharedMemory::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QSharedMemory_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSharedMemory_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QSharedMemory::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSharedMemory_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSharedMemory_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QSharedMemory::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSharedMemory_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSharedMemory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -240,22 +196,22 @@ public:
 	friend bool QSharedMemory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QSharedMemory* QSharedMemory_new() {
-	return new VirtualQSharedMemory();
+QSharedMemory* QSharedMemory_new(struct QSharedMemory_VTable* vtbl) {
+	return new VirtualQSharedMemory(vtbl);
 }
 
-QSharedMemory* QSharedMemory_new2(struct miqt_string key) {
+QSharedMemory* QSharedMemory_new2(struct QSharedMemory_VTable* vtbl, struct miqt_string key) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
-	return new VirtualQSharedMemory(key_QString);
+	return new VirtualQSharedMemory(vtbl, key_QString);
 }
 
-QSharedMemory* QSharedMemory_new3(QObject* parent) {
-	return new VirtualQSharedMemory(parent);
+QSharedMemory* QSharedMemory_new3(struct QSharedMemory_VTable* vtbl, QObject* parent) {
+	return new VirtualQSharedMemory(vtbl, parent);
 }
 
-QSharedMemory* QSharedMemory_new4(struct miqt_string key, QObject* parent) {
+QSharedMemory* QSharedMemory_new4(struct QSharedMemory_VTable* vtbl, struct miqt_string key, QObject* parent) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
-	return new VirtualQSharedMemory(key_QString, parent);
+	return new VirtualQSharedMemory(vtbl, key_QString, parent);
 }
 
 void QSharedMemory_virtbase(QSharedMemory* src, QObject** outptr_QObject) {
@@ -436,30 +392,10 @@ bool QSharedMemory_attach1(QSharedMemory* self, int mode) {
 	return self->attach(static_cast<QSharedMemory::AccessMode>(mode));
 }
 
-bool QSharedMemory_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QSharedMemory_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQSharedMemory*)(self) )->QSharedMemory::metaObject();
 
-}
-
-bool QSharedMemory_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QSharedMemory_virtualbase_metacast(void* self, const char* param1) {
@@ -468,30 +404,10 @@ void* QSharedMemory_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QSharedMemory_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QSharedMemory_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQSharedMemory*)(self) )->QSharedMemory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QSharedMemory_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QSharedMemory_virtualbase_event(void* self, QEvent* event) {
@@ -500,30 +416,10 @@ bool QSharedMemory_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QSharedMemory_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QSharedMemory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQSharedMemory*)(self) )->QSharedMemory::eventFilter(watched, event);
 
-}
-
-bool QSharedMemory_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QSharedMemory_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -532,30 +428,10 @@ void QSharedMemory_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 }
 
-bool QSharedMemory_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QSharedMemory_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQSharedMemory*)(self) )->QSharedMemory::childEvent(event);
 
-}
-
-bool QSharedMemory_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QSharedMemory_virtualbase_customEvent(void* self, QEvent* event) {
@@ -564,30 +440,10 @@ void QSharedMemory_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QSharedMemory_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QSharedMemory_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQSharedMemory*)(self) )->QSharedMemory::connectNotify(*signal);
 
-}
-
-bool QSharedMemory_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQSharedMemory* self_cast = dynamic_cast<VirtualQSharedMemory*>( (QSharedMemory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QSharedMemory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

@@ -44,7 +44,6 @@ export
 
 type cQCborStreamWriter*{.exportc: "QCborStreamWriter", incompleteStruct.} = object
 
-proc fcQCborStreamWriter_new(device: pointer): ptr cQCborStreamWriter {.importc: "QCborStreamWriter_new".}
 proc fcQCborStreamWriter_setDevice(self: pointer, device: pointer): void {.importc: "QCborStreamWriter_setDevice".}
 proc fcQCborStreamWriter_device(self: pointer, ): pointer {.importc: "QCborStreamWriter_device".}
 proc fcQCborStreamWriter_append(self: pointer, u: culonglong): void {.importc: "QCborStreamWriter_append".}
@@ -71,13 +70,8 @@ proc fcQCborStreamWriter_startMap(self: pointer, ): void {.importc: "QCborStream
 proc fcQCborStreamWriter_startMapWithCount(self: pointer, count: culonglong): void {.importc: "QCborStreamWriter_startMapWithCount".}
 proc fcQCborStreamWriter_endMap(self: pointer, ): bool {.importc: "QCborStreamWriter_endMap".}
 proc fcQCborStreamWriter_append22(self: pointer, str: cstring, size: int64): void {.importc: "QCborStreamWriter_append22".}
+proc fcQCborStreamWriter_new(device: pointer): ptr cQCborStreamWriter {.importc: "QCborStreamWriter_new".}
 proc fcQCborStreamWriter_delete(self: pointer) {.importc: "QCborStreamWriter_delete".}
-
-
-func init*(T: type gen_qcborstreamwriter_types.QCborStreamWriter, h: ptr cQCborStreamWriter): gen_qcborstreamwriter_types.QCborStreamWriter =
-  T(h: h)
-proc create*(T: type gen_qcborstreamwriter_types.QCborStreamWriter, device: gen_qiodevice_types.QIODevice): gen_qcborstreamwriter_types.QCborStreamWriter =
-  gen_qcborstreamwriter_types.QCborStreamWriter.init(fcQCborStreamWriter_new(device.h))
 
 proc setDevice*(self: gen_qcborstreamwriter_types.QCborStreamWriter, device: gen_qiodevice_types.QIODevice): void =
   fcQCborStreamWriter_setDevice(self.h, device.h)
@@ -156,6 +150,10 @@ proc endMap*(self: gen_qcborstreamwriter_types.QCborStreamWriter, ): bool =
 
 proc append*(self: gen_qcborstreamwriter_types.QCborStreamWriter, str: cstring, size: int64): void =
   fcQCborStreamWriter_append22(self.h, str, size)
+
+proc create*(T: type gen_qcborstreamwriter_types.QCborStreamWriter,
+    device: gen_qiodevice_types.QIODevice): gen_qcborstreamwriter_types.QCborStreamWriter =
+  gen_qcborstreamwriter_types.QCborStreamWriter(h: fcQCborStreamWriter_new(device.h))
 
 proc delete*(self: gen_qcborstreamwriter_types.QCborStreamWriter) =
   fcQCborStreamWriter_delete(self.h)

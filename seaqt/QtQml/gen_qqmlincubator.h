@@ -30,8 +30,13 @@ typedef struct QQmlIncubator QQmlIncubator;
 typedef struct QVariant QVariant;
 #endif
 
-QQmlIncubator* QQmlIncubator_new();
-QQmlIncubator* QQmlIncubator_new2(int param1);
+struct QQmlIncubator_VTable {
+	void (*destructor)(struct QQmlIncubator_VTable* vtbl, QQmlIncubator* self);
+	void (*statusChanged)(struct QQmlIncubator_VTable* vtbl, QQmlIncubator* self, int param1);
+	void (*setInitialState)(struct QQmlIncubator_VTable* vtbl, QQmlIncubator* self, QObject* initialState);
+};
+QQmlIncubator* QQmlIncubator_new(struct QQmlIncubator_VTable* vtbl);
+QQmlIncubator* QQmlIncubator_new2(struct QQmlIncubator_VTable* vtbl, int param1);
 void QQmlIncubator_clear(QQmlIncubator* self);
 void QQmlIncubator_forceCompletion(QQmlIncubator* self);
 bool QQmlIncubator_isNull(const QQmlIncubator* self);
@@ -45,20 +50,21 @@ QObject* QQmlIncubator_object(const QQmlIncubator* self);
 void QQmlIncubator_setInitialProperties(QQmlIncubator* self, struct miqt_map /* of struct miqt_string to QVariant* */  initialProperties);
 void QQmlIncubator_statusChanged(QQmlIncubator* self, int param1);
 void QQmlIncubator_setInitialState(QQmlIncubator* self, QObject* initialState);
-bool QQmlIncubator_override_virtual_statusChanged(void* self, intptr_t slot);
 void QQmlIncubator_virtualbase_statusChanged(void* self, int param1);
-bool QQmlIncubator_override_virtual_setInitialState(void* self, intptr_t slot);
 void QQmlIncubator_virtualbase_setInitialState(void* self, QObject* initialState);
 void QQmlIncubator_delete(QQmlIncubator* self);
 
-QQmlIncubationController* QQmlIncubationController_new();
+struct QQmlIncubationController_VTable {
+	void (*destructor)(struct QQmlIncubationController_VTable* vtbl, QQmlIncubationController* self);
+	void (*incubatingObjectCountChanged)(struct QQmlIncubationController_VTable* vtbl, QQmlIncubationController* self, int param1);
+};
+QQmlIncubationController* QQmlIncubationController_new(struct QQmlIncubationController_VTable* vtbl);
 QQmlEngine* QQmlIncubationController_engine(const QQmlIncubationController* self);
 int QQmlIncubationController_incubatingObjectCount(const QQmlIncubationController* self);
 void QQmlIncubationController_incubateFor(QQmlIncubationController* self, int msecs);
 void QQmlIncubationController_incubateWhile(QQmlIncubationController* self, volatile bool* flag);
 void QQmlIncubationController_incubatingObjectCountChanged(QQmlIncubationController* self, int param1);
 void QQmlIncubationController_incubateWhile2(QQmlIncubationController* self, volatile bool* flag, int msecs);
-bool QQmlIncubationController_override_virtual_incubatingObjectCountChanged(void* self, intptr_t slot);
 void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(void* self, int param1);
 void QQmlIncubationController_delete(QQmlIncubationController* self);
 

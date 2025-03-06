@@ -17,273 +17,216 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QLocalServer_newConnection(intptr_t);
-QMetaObject* miqt_exec_callback_QLocalServer_metaObject(const QLocalServer*, intptr_t);
-void* miqt_exec_callback_QLocalServer_metacast(QLocalServer*, intptr_t, const char*);
-int miqt_exec_callback_QLocalServer_metacall(QLocalServer*, intptr_t, int, int, void**);
-bool miqt_exec_callback_QLocalServer_hasPendingConnections(const QLocalServer*, intptr_t);
-QLocalSocket* miqt_exec_callback_QLocalServer_nextPendingConnection(QLocalServer*, intptr_t);
-void miqt_exec_callback_QLocalServer_incomingConnection(QLocalServer*, intptr_t, uintptr_t);
-bool miqt_exec_callback_QLocalServer_event(QLocalServer*, intptr_t, QEvent*);
-bool miqt_exec_callback_QLocalServer_eventFilter(QLocalServer*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QLocalServer_timerEvent(QLocalServer*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QLocalServer_childEvent(QLocalServer*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QLocalServer_customEvent(QLocalServer*, intptr_t, QEvent*);
-void miqt_exec_callback_QLocalServer_connectNotify(QLocalServer*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QLocalServer_disconnectNotify(QLocalServer*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQLocalServer final : public QLocalServer {
+	struct QLocalServer_VTable* vtbl;
 public:
 
-	VirtualQLocalServer(): QLocalServer() {};
-	VirtualQLocalServer(QObject* parent): QLocalServer(parent) {};
+	VirtualQLocalServer(struct QLocalServer_VTable* vtbl): QLocalServer(), vtbl(vtbl) {};
+	VirtualQLocalServer(struct QLocalServer_VTable* vtbl, QObject* parent): QLocalServer(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQLocalServer() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQLocalServer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QLocalServer::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QLocalServer_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QLocalServer_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QLocalServer::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QLocalServer_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QLocalServer_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QLocalServer::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QLocalServer_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QLocalServer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__hasPendingConnections = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool hasPendingConnections() const override {
-		if (handle__hasPendingConnections == 0) {
+		if (vtbl->hasPendingConnections == 0) {
 			return QLocalServer::hasPendingConnections();
 		}
-		
 
-		bool callback_return_value = miqt_exec_callback_QLocalServer_hasPendingConnections(this, handle__hasPendingConnections);
+
+		bool callback_return_value = vtbl->hasPendingConnections(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend bool QLocalServer_virtualbase_hasPendingConnections(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__nextPendingConnection = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QLocalSocket* nextPendingConnection() override {
-		if (handle__nextPendingConnection == 0) {
+		if (vtbl->nextPendingConnection == 0) {
 			return QLocalServer::nextPendingConnection();
 		}
-		
 
-		QLocalSocket* callback_return_value = miqt_exec_callback_QLocalServer_nextPendingConnection(this, handle__nextPendingConnection);
+
+		QLocalSocket* callback_return_value = vtbl->nextPendingConnection(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QLocalSocket* QLocalServer_virtualbase_nextPendingConnection(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__incomingConnection = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void incomingConnection(quintptr socketDescriptor) override {
-		if (handle__incomingConnection == 0) {
+		if (vtbl->incomingConnection == 0) {
 			QLocalServer::incomingConnection(socketDescriptor);
 			return;
 		}
-		
+
 		quintptr socketDescriptor_ret = socketDescriptor;
 		uintptr_t sigval1 = static_cast<uintptr_t>(socketDescriptor_ret);
 
-		miqt_exec_callback_QLocalServer_incomingConnection(this, handle__incomingConnection, sigval1);
+		vtbl->incomingConnection(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_incomingConnection(void* self, uintptr_t socketDescriptor);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QLocalServer::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QLocalServer_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QLocalServer_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QLocalServer::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QLocalServer_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QLocalServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QLocalServer::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QLocalServer_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QLocalServer::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QLocalServer_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QLocalServer::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QLocalServer_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QLocalServer::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QLocalServer_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QLocalServer::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QLocalServer_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QLocalServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -295,12 +238,12 @@ public:
 	friend bool QLocalServer_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QLocalServer* QLocalServer_new() {
-	return new VirtualQLocalServer();
+QLocalServer* QLocalServer_new(struct QLocalServer_VTable* vtbl) {
+	return new VirtualQLocalServer(vtbl);
 }
 
-QLocalServer* QLocalServer_new2(QObject* parent) {
-	return new VirtualQLocalServer(parent);
+QLocalServer* QLocalServer_new2(struct QLocalServer_VTable* vtbl, QObject* parent) {
+	return new VirtualQLocalServer(vtbl, parent);
 }
 
 void QLocalServer_virtbase(QLocalServer* src, QObject** outptr_QObject) {
@@ -497,30 +440,10 @@ bool QLocalServer_waitForNewConnection2(QLocalServer* self, int msec, bool* time
 	return self->waitForNewConnection(static_cast<int>(msec), timedOut);
 }
 
-bool QLocalServer_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QLocalServer_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQLocalServer*)(self) )->QLocalServer::metaObject();
 
-}
-
-bool QLocalServer_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QLocalServer_virtualbase_metacast(void* self, const char* param1) {
@@ -529,30 +452,10 @@ void* QLocalServer_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QLocalServer_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QLocalServer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQLocalServer*)(self) )->QLocalServer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QLocalServer_override_virtual_hasPendingConnections(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__hasPendingConnections = slot;
-	return true;
 }
 
 bool QLocalServer_virtualbase_hasPendingConnections(const void* self) {
@@ -561,30 +464,10 @@ bool QLocalServer_virtualbase_hasPendingConnections(const void* self) {
 
 }
 
-bool QLocalServer_override_virtual_nextPendingConnection(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__nextPendingConnection = slot;
-	return true;
-}
-
 QLocalSocket* QLocalServer_virtualbase_nextPendingConnection(void* self) {
 
 	return ( (VirtualQLocalServer*)(self) )->QLocalServer::nextPendingConnection();
 
-}
-
-bool QLocalServer_override_virtual_incomingConnection(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__incomingConnection = slot;
-	return true;
 }
 
 void QLocalServer_virtualbase_incomingConnection(void* self, uintptr_t socketDescriptor) {
@@ -593,30 +476,10 @@ void QLocalServer_virtualbase_incomingConnection(void* self, uintptr_t socketDes
 
 }
 
-bool QLocalServer_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QLocalServer_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQLocalServer*)(self) )->QLocalServer::event(event);
 
-}
-
-bool QLocalServer_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QLocalServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -625,30 +488,10 @@ bool QLocalServer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* 
 
 }
 
-bool QLocalServer_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QLocalServer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQLocalServer*)(self) )->QLocalServer::timerEvent(event);
 
-}
-
-bool QLocalServer_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QLocalServer_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -657,46 +500,16 @@ void QLocalServer_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 }
 
-bool QLocalServer_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QLocalServer_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQLocalServer*)(self) )->QLocalServer::customEvent(event);
 
 }
 
-bool QLocalServer_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QLocalServer_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQLocalServer*)(self) )->QLocalServer::connectNotify(*signal);
 
-}
-
-bool QLocalServer_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQLocalServer* self_cast = dynamic_cast<VirtualQLocalServer*>( (QLocalServer*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QLocalServer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

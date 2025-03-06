@@ -68,7 +68,6 @@ export
 
 type cQCryptographicHash*{.exportc: "QCryptographicHash", incompleteStruct.} = object
 
-proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_reset(self: pointer, ): void {.importc: "QCryptographicHash_reset".}
 proc fcQCryptographicHash_addData(self: pointer, data: cstring, length: cint): void {.importc: "QCryptographicHash_addData".}
 proc fcQCryptographicHash_addDataWithData(self: pointer, data: struct_miqt_string): void {.importc: "QCryptographicHash_addDataWithData".}
@@ -76,14 +75,9 @@ proc fcQCryptographicHash_addDataWithDevice(self: pointer, device: pointer): boo
 proc fcQCryptographicHash_resultX(self: pointer, ): struct_miqt_string {.importc: "QCryptographicHash_result".}
 proc fcQCryptographicHash_hash(data: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QCryptographicHash_hash".}
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
+proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_staticMetaObject(): pointer {.importc: "QCryptographicHash_staticMetaObject".}
 proc fcQCryptographicHash_delete(self: pointer) {.importc: "QCryptographicHash_delete".}
-
-
-func init*(T: type gen_qcryptographichash_types.QCryptographicHash, h: ptr cQCryptographicHash): gen_qcryptographichash_types.QCryptographicHash =
-  T(h: h)
-proc create*(T: type gen_qcryptographichash_types.QCryptographicHash, methodVal: cint): gen_qcryptographichash_types.QCryptographicHash =
-  gen_qcryptographichash_types.QCryptographicHash.init(fcQCryptographicHash_new(cint(methodVal)))
 
 proc reset*(self: gen_qcryptographichash_types.QCryptographicHash, ): void =
   fcQCryptographicHash_reset(self.h)
@@ -111,6 +105,10 @@ proc hash*(_: type gen_qcryptographichash_types.QCryptographicHash, data: seq[by
 
 proc hashLength*(_: type gen_qcryptographichash_types.QCryptographicHash, methodVal: cint): cint =
   fcQCryptographicHash_hashLength(cint(methodVal))
+
+proc create*(T: type gen_qcryptographichash_types.QCryptographicHash,
+    methodVal: cint): gen_qcryptographichash_types.QCryptographicHash =
+  gen_qcryptographichash_types.QCryptographicHash(h: fcQCryptographicHash_new(cint(methodVal)))
 
 proc staticMetaObject*(_: type gen_qcryptographichash_types.QCryptographicHash): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCryptographicHash_staticMetaObject())

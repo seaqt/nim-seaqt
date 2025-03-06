@@ -24,307 +24,223 @@
 extern "C" {
 #endif
 
-QMetaObject* miqt_exec_callback_QQuickTextureFactory_metaObject(const QQuickTextureFactory*, intptr_t);
-void* miqt_exec_callback_QQuickTextureFactory_metacast(QQuickTextureFactory*, intptr_t, const char*);
-int miqt_exec_callback_QQuickTextureFactory_metacall(QQuickTextureFactory*, intptr_t, int, int, void**);
-QSGTexture* miqt_exec_callback_QQuickTextureFactory_createTexture(const QQuickTextureFactory*, intptr_t, QQuickWindow*);
-QSize* miqt_exec_callback_QQuickTextureFactory_textureSize(const QQuickTextureFactory*, intptr_t);
-int miqt_exec_callback_QQuickTextureFactory_textureByteCount(const QQuickTextureFactory*, intptr_t);
-QImage* miqt_exec_callback_QQuickTextureFactory_image(const QQuickTextureFactory*, intptr_t);
-bool miqt_exec_callback_QQuickTextureFactory_event(QQuickTextureFactory*, intptr_t, QEvent*);
-bool miqt_exec_callback_QQuickTextureFactory_eventFilter(QQuickTextureFactory*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QQuickTextureFactory_timerEvent(QQuickTextureFactory*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QQuickTextureFactory_childEvent(QQuickTextureFactory*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QQuickTextureFactory_customEvent(QQuickTextureFactory*, intptr_t, QEvent*);
-void miqt_exec_callback_QQuickTextureFactory_connectNotify(QQuickTextureFactory*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QQuickTextureFactory_disconnectNotify(QQuickTextureFactory*, intptr_t, QMetaMethod*);
 void miqt_exec_callback_QQuickImageResponse_finished(intptr_t);
-QMetaObject* miqt_exec_callback_QQuickImageResponse_metaObject(const QQuickImageResponse*, intptr_t);
-void* miqt_exec_callback_QQuickImageResponse_metacast(QQuickImageResponse*, intptr_t, const char*);
-int miqt_exec_callback_QQuickImageResponse_metacall(QQuickImageResponse*, intptr_t, int, int, void**);
-QQuickTextureFactory* miqt_exec_callback_QQuickImageResponse_textureFactory(const QQuickImageResponse*, intptr_t);
-struct miqt_string miqt_exec_callback_QQuickImageResponse_errorString(const QQuickImageResponse*, intptr_t);
-void miqt_exec_callback_QQuickImageResponse_cancel(QQuickImageResponse*, intptr_t);
-bool miqt_exec_callback_QQuickImageResponse_event(QQuickImageResponse*, intptr_t, QEvent*);
-bool miqt_exec_callback_QQuickImageResponse_eventFilter(QQuickImageResponse*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QQuickImageResponse_timerEvent(QQuickImageResponse*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QQuickImageResponse_childEvent(QQuickImageResponse*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QQuickImageResponse_customEvent(QQuickImageResponse*, intptr_t, QEvent*);
-void miqt_exec_callback_QQuickImageResponse_connectNotify(QQuickImageResponse*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QQuickImageResponse_disconnectNotify(QQuickImageResponse*, intptr_t, QMetaMethod*);
-int miqt_exec_callback_QQuickImageProvider_imageType(const QQuickImageProvider*, intptr_t);
-int miqt_exec_callback_QQuickImageProvider_flags(const QQuickImageProvider*, intptr_t);
-QImage* miqt_exec_callback_QQuickImageProvider_requestImage(QQuickImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
-QPixmap* miqt_exec_callback_QQuickImageProvider_requestPixmap(QQuickImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
-QQuickTextureFactory* miqt_exec_callback_QQuickImageProvider_requestTexture(QQuickImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
-QQuickImageResponse* miqt_exec_callback_QQuickAsyncImageProvider_requestImageResponse(QQuickAsyncImageProvider*, intptr_t, struct miqt_string, QSize*);
-int miqt_exec_callback_QQuickAsyncImageProvider_imageType(const QQuickAsyncImageProvider*, intptr_t);
-int miqt_exec_callback_QQuickAsyncImageProvider_flags(const QQuickAsyncImageProvider*, intptr_t);
-QImage* miqt_exec_callback_QQuickAsyncImageProvider_requestImage(QQuickAsyncImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
-QPixmap* miqt_exec_callback_QQuickAsyncImageProvider_requestPixmap(QQuickAsyncImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
-QQuickTextureFactory* miqt_exec_callback_QQuickAsyncImageProvider_requestTexture(QQuickAsyncImageProvider*, intptr_t, struct miqt_string, QSize*, QSize*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQQuickTextureFactory final : public QQuickTextureFactory {
+	struct QQuickTextureFactory_VTable* vtbl;
 public:
 
-	VirtualQQuickTextureFactory(): QQuickTextureFactory() {};
+	VirtualQQuickTextureFactory(struct QQuickTextureFactory_VTable* vtbl): QQuickTextureFactory(), vtbl(vtbl) {};
 
-	virtual ~VirtualQQuickTextureFactory() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQQuickTextureFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QQuickTextureFactory::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QQuickTextureFactory_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QQuickTextureFactory_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QQuickTextureFactory::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QQuickTextureFactory_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QQuickTextureFactory_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QQuickTextureFactory::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QQuickTextureFactory_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QQuickTextureFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createTexture = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSGTexture* createTexture(QQuickWindow* window) const override {
-		if (handle__createTexture == 0) {
+		if (vtbl->createTexture == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
+
 		QQuickWindow* sigval1 = window;
 
-		QSGTexture* callback_return_value = miqt_exec_callback_QQuickTextureFactory_createTexture(this, handle__createTexture, sigval1);
+		QSGTexture* callback_return_value = vtbl->createTexture(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textureSize = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QSize textureSize() const override {
-		if (handle__textureSize == 0) {
+		if (vtbl->textureSize == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
 		}
-		
 
-		QSize* callback_return_value = miqt_exec_callback_QQuickTextureFactory_textureSize(this, handle__textureSize);
+
+		QSize* callback_return_value = vtbl->textureSize(vtbl, this);
 
 		return *callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textureByteCount = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int textureByteCount() const override {
-		if (handle__textureByteCount == 0) {
+		if (vtbl->textureByteCount == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QQuickTextureFactory_textureByteCount(this, handle__textureByteCount);
+
+		int callback_return_value = vtbl->textureByteCount(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__image = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QImage image() const override {
-		if (handle__image == 0) {
+		if (vtbl->image == 0) {
 			return QQuickTextureFactory::image();
 		}
-		
 
-		QImage* callback_return_value = miqt_exec_callback_QQuickTextureFactory_image(this, handle__image);
+
+		QImage* callback_return_value = vtbl->image(vtbl, this);
 
 		return *callback_return_value;
 	}
 
 	friend QImage* QQuickTextureFactory_virtualbase_image(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QQuickTextureFactory::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQuickTextureFactory_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QQuickTextureFactory_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QQuickTextureFactory::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQuickTextureFactory_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QQuickTextureFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QQuickTextureFactory::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickTextureFactory_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickTextureFactory_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QQuickTextureFactory::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickTextureFactory_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickTextureFactory_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QQuickTextureFactory::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickTextureFactory_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickTextureFactory_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QQuickTextureFactory::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQuickTextureFactory_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickTextureFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QQuickTextureFactory::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQuickTextureFactory_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickTextureFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -336,8 +252,8 @@ public:
 	friend bool QQuickTextureFactory_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QQuickTextureFactory* QQuickTextureFactory_new() {
-	return new VirtualQQuickTextureFactory();
+QQuickTextureFactory* QQuickTextureFactory_new(struct QQuickTextureFactory_VTable* vtbl) {
+	return new VirtualQQuickTextureFactory(vtbl);
 }
 
 void QQuickTextureFactory_virtbase(QQuickTextureFactory* src, QObject** outptr_QObject) {
@@ -442,30 +358,10 @@ struct miqt_string QQuickTextureFactory_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
-bool QQuickTextureFactory_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QQuickTextureFactory_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::metaObject();
 
-}
-
-bool QQuickTextureFactory_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QQuickTextureFactory_virtualbase_metacast(void* self, const char* param1) {
@@ -474,60 +370,10 @@ void* QQuickTextureFactory_virtualbase_metacast(void* self, const char* param1) 
 
 }
 
-bool QQuickTextureFactory_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QQuickTextureFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QQuickTextureFactory_override_virtual_createTexture(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__createTexture = slot;
-	return true;
-}
-
-bool QQuickTextureFactory_override_virtual_textureSize(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__textureSize = slot;
-	return true;
-}
-
-bool QQuickTextureFactory_override_virtual_textureByteCount(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__textureByteCount = slot;
-	return true;
-}
-
-bool QQuickTextureFactory_override_virtual_image(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__image = slot;
-	return true;
 }
 
 QImage* QQuickTextureFactory_virtualbase_image(const void* self) {
@@ -536,30 +382,10 @@ QImage* QQuickTextureFactory_virtualbase_image(const void* self) {
 
 }
 
-bool QQuickTextureFactory_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QQuickTextureFactory_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::event(event);
 
-}
-
-bool QQuickTextureFactory_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
 }
 
 bool QQuickTextureFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
@@ -568,30 +394,10 @@ bool QQuickTextureFactory_virtualbase_eventFilter(void* self, QObject* watched, 
 
 }
 
-bool QQuickTextureFactory_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
-}
-
 void QQuickTextureFactory_virtualbase_timerEvent(void* self, QTimerEvent* event) {
 
 	( (VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::timerEvent(event);
 
-}
-
-bool QQuickTextureFactory_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
 }
 
 void QQuickTextureFactory_virtualbase_childEvent(void* self, QChildEvent* event) {
@@ -600,46 +406,16 @@ void QQuickTextureFactory_virtualbase_childEvent(void* self, QChildEvent* event)
 
 }
 
-bool QQuickTextureFactory_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
-}
-
 void QQuickTextureFactory_virtualbase_customEvent(void* self, QEvent* event) {
 
 	( (VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::customEvent(event);
 
 }
 
-bool QQuickTextureFactory_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QQuickTextureFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQQuickTextureFactory*)(self) )->QQuickTextureFactory::connectNotify(*signal);
 
-}
-
-bool QQuickTextureFactory_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQQuickTextureFactory* self_cast = dynamic_cast<VirtualQQuickTextureFactory*>( (QQuickTextureFactory*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QQuickTextureFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -706,94 +482,80 @@ void QQuickTextureFactory_delete(QQuickTextureFactory* self) {
 }
 
 class VirtualQQuickImageResponse final : public QQuickImageResponse {
+	struct QQuickImageResponse_VTable* vtbl;
 public:
 
-	VirtualQQuickImageResponse(): QQuickImageResponse() {};
+	VirtualQQuickImageResponse(struct QQuickImageResponse_VTable* vtbl): QQuickImageResponse(), vtbl(vtbl) {};
 
-	virtual ~VirtualQQuickImageResponse() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQQuickImageResponse() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QQuickImageResponse::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QQuickImageResponse_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QQuickImageResponse_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QQuickImageResponse::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QQuickImageResponse_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QQuickImageResponse_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QQuickImageResponse::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QQuickImageResponse_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QQuickImageResponse_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__textureFactory = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQuickTextureFactory* textureFactory() const override {
-		if (handle__textureFactory == 0) {
+		if (vtbl->textureFactory == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
 
-		QQuickTextureFactory* callback_return_value = miqt_exec_callback_QQuickImageResponse_textureFactory(this, handle__textureFactory);
+
+		QQuickTextureFactory* callback_return_value = vtbl->textureFactory(vtbl, this);
 
 		return callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__errorString = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QString errorString() const override {
-		if (handle__errorString == 0) {
+		if (vtbl->errorString == 0) {
 			return QQuickImageResponse::errorString();
 		}
-		
 
-		struct miqt_string callback_return_value = miqt_exec_callback_QQuickImageResponse_errorString(this, handle__errorString);
+
+		struct miqt_string callback_return_value = vtbl->errorString(vtbl, this);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 
 		return callback_return_value_QString;
@@ -801,156 +563,126 @@ public:
 
 	friend struct miqt_string QQuickImageResponse_virtualbase_errorString(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__cancel = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void cancel() override {
-		if (handle__cancel == 0) {
+		if (vtbl->cancel == 0) {
 			QQuickImageResponse::cancel();
 			return;
 		}
-		
 
-		miqt_exec_callback_QQuickImageResponse_cancel(this, handle__cancel);
 
-		
+		vtbl->cancel(vtbl, this);
+
 	}
 
 	friend void QQuickImageResponse_virtualbase_cancel(void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QQuickImageResponse::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQuickImageResponse_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QQuickImageResponse_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QQuickImageResponse::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QQuickImageResponse_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QQuickImageResponse_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QQuickImageResponse::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickImageResponse_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickImageResponse_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QQuickImageResponse::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickImageResponse_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickImageResponse_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QQuickImageResponse::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QQuickImageResponse_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickImageResponse_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QQuickImageResponse::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQuickImageResponse_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickImageResponse_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QQuickImageResponse::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QQuickImageResponse_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QQuickImageResponse_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -962,8 +694,8 @@ public:
 	friend bool QQuickImageResponse_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QQuickImageResponse* QQuickImageResponse_new() {
-	return new VirtualQQuickImageResponse();
+QQuickImageResponse* QQuickImageResponse_new(struct QQuickImageResponse_VTable* vtbl) {
+	return new VirtualQQuickImageResponse(vtbl);
 }
 
 void QQuickImageResponse_virtbase(QQuickImageResponse* src, QObject** outptr_QObject) {
@@ -1077,30 +809,10 @@ struct miqt_string QQuickImageResponse_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
-bool QQuickImageResponse_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QQuickImageResponse_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::metaObject();
 
-}
-
-bool QQuickImageResponse_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QQuickImageResponse_virtualbase_metacast(void* self, const char* param1) {
@@ -1109,40 +821,10 @@ void* QQuickImageResponse_virtualbase_metacast(void* self, const char* param1) {
 
 }
 
-bool QQuickImageResponse_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QQuickImageResponse_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QQuickImageResponse_override_virtual_textureFactory(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__textureFactory = slot;
-	return true;
-}
-
-bool QQuickImageResponse_override_virtual_errorString(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__errorString = slot;
-	return true;
 }
 
 struct miqt_string QQuickImageResponse_virtualbase_errorString(const void* self) {
@@ -1158,30 +840,10 @@ struct miqt_string QQuickImageResponse_virtualbase_errorString(const void* self)
 
 }
 
-bool QQuickImageResponse_override_virtual_cancel(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__cancel = slot;
-	return true;
-}
-
 void QQuickImageResponse_virtualbase_cancel(void* self) {
 
 	( (VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::cancel();
 
-}
-
-bool QQuickImageResponse_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
 }
 
 bool QQuickImageResponse_virtualbase_event(void* self, QEvent* event) {
@@ -1190,30 +852,10 @@ bool QQuickImageResponse_virtualbase_event(void* self, QEvent* event) {
 
 }
 
-bool QQuickImageResponse_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QQuickImageResponse_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::eventFilter(watched, event);
 
-}
-
-bool QQuickImageResponse_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QQuickImageResponse_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -1222,30 +864,10 @@ void QQuickImageResponse_virtualbase_timerEvent(void* self, QTimerEvent* event) 
 
 }
 
-bool QQuickImageResponse_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QQuickImageResponse_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::childEvent(event);
 
-}
-
-bool QQuickImageResponse_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QQuickImageResponse_virtualbase_customEvent(void* self, QEvent* event) {
@@ -1254,30 +876,10 @@ void QQuickImageResponse_virtualbase_customEvent(void* self, QEvent* event) {
 
 }
 
-bool QQuickImageResponse_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QQuickImageResponse_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQQuickImageResponse*)(self) )->QQuickImageResponse::connectNotify(*signal);
 
-}
-
-bool QQuickImageResponse_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQQuickImageResponse* self_cast = dynamic_cast<VirtualQQuickImageResponse*>( (QQuickImageResponse*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QQuickImageResponse_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
@@ -1344,57 +946,49 @@ void QQuickImageResponse_delete(QQuickImageResponse* self) {
 }
 
 class VirtualQQuickImageProvider final : public QQuickImageProvider {
+	struct QQuickImageProvider_VTable* vtbl;
 public:
 
-	VirtualQQuickImageProvider(QQmlImageProviderBase::ImageType type): QQuickImageProvider(type) {};
-	VirtualQQuickImageProvider(const QQuickImageProvider& param1): QQuickImageProvider(param1) {};
-	VirtualQQuickImageProvider(QQmlImageProviderBase::ImageType type, QQmlImageProviderBase::Flags flags): QQuickImageProvider(type, flags) {};
+	VirtualQQuickImageProvider(struct QQuickImageProvider_VTable* vtbl, QQmlImageProviderBase::ImageType type): QQuickImageProvider(type), vtbl(vtbl) {};
+	VirtualQQuickImageProvider(struct QQuickImageProvider_VTable* vtbl, const QQuickImageProvider& param1): QQuickImageProvider(param1), vtbl(vtbl) {};
+	VirtualQQuickImageProvider(struct QQuickImageProvider_VTable* vtbl, QQmlImageProviderBase::ImageType type, QQmlImageProviderBase::Flags flags): QQuickImageProvider(type, flags), vtbl(vtbl) {};
 
-	virtual ~VirtualQQuickImageProvider() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__imageType = 0;
+	virtual ~VirtualQQuickImageProvider() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual QQmlImageProviderBase::ImageType imageType() const override {
-		if (handle__imageType == 0) {
+		if (vtbl->imageType == 0) {
 			return QQuickImageProvider::imageType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QQuickImageProvider_imageType(this, handle__imageType);
+
+		int callback_return_value = vtbl->imageType(vtbl, this);
 
 		return static_cast<QQmlImageProviderBase::ImageType>(callback_return_value);
 	}
 
 	friend int QQuickImageProvider_virtualbase_imageType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__flags = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQmlImageProviderBase::Flags flags() const override {
-		if (handle__flags == 0) {
+		if (vtbl->flags == 0) {
 			return QQuickImageProvider::flags();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QQuickImageProvider_flags(this, handle__flags);
+
+		int callback_return_value = vtbl->flags(vtbl, this);
 
 		return static_cast<QQmlImageProviderBase::Flags>(callback_return_value);
 	}
 
 	friend int QQuickImageProvider_virtualbase_flags(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestImage = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QImage requestImage(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestImage == 0) {
+		if (vtbl->requestImage == 0) {
 			return QQuickImageProvider::requestImage(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1408,22 +1002,19 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QImage* callback_return_value = miqt_exec_callback_QQuickImageProvider_requestImage(this, handle__requestImage, sigval1, sigval2, sigval3);
+		QImage* callback_return_value = vtbl->requestImage(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QImage* QQuickImageProvider_virtualbase_requestImage(void* self, struct miqt_string id, QSize* size, QSize* requestedSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestPixmap = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestPixmap == 0) {
+		if (vtbl->requestPixmap == 0) {
 			return QQuickImageProvider::requestPixmap(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1437,22 +1028,19 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QPixmap* callback_return_value = miqt_exec_callback_QQuickImageProvider_requestPixmap(this, handle__requestPixmap, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = vtbl->requestPixmap(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QPixmap* QQuickImageProvider_virtualbase_requestPixmap(void* self, struct miqt_string id, QSize* size, QSize* requestedSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestTexture = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQuickTextureFactory* requestTexture(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestTexture == 0) {
+		if (vtbl->requestTexture == 0) {
 			return QQuickImageProvider::requestTexture(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1466,7 +1054,7 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QQuickTextureFactory* callback_return_value = miqt_exec_callback_QQuickImageProvider_requestTexture(this, handle__requestTexture, sigval1, sigval2, sigval3);
+		QQuickTextureFactory* callback_return_value = vtbl->requestTexture(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
@@ -1475,16 +1063,16 @@ public:
 
 };
 
-QQuickImageProvider* QQuickImageProvider_new(int type) {
-	return new VirtualQQuickImageProvider(static_cast<QQmlImageProviderBase::ImageType>(type));
+QQuickImageProvider* QQuickImageProvider_new(struct QQuickImageProvider_VTable* vtbl, int type) {
+	return new VirtualQQuickImageProvider(vtbl, static_cast<QQmlImageProviderBase::ImageType>(type));
 }
 
-QQuickImageProvider* QQuickImageProvider_new2(QQuickImageProvider* param1) {
-	return new VirtualQQuickImageProvider(*param1);
+QQuickImageProvider* QQuickImageProvider_new2(struct QQuickImageProvider_VTable* vtbl, QQuickImageProvider* param1) {
+	return new VirtualQQuickImageProvider(vtbl, *param1);
 }
 
-QQuickImageProvider* QQuickImageProvider_new3(int type, int flags) {
-	return new VirtualQQuickImageProvider(static_cast<QQmlImageProviderBase::ImageType>(type), static_cast<QQmlImageProviderBase::Flags>(flags));
+QQuickImageProvider* QQuickImageProvider_new3(struct QQuickImageProvider_VTable* vtbl, int type, int flags) {
+	return new VirtualQQuickImageProvider(vtbl, static_cast<QQmlImageProviderBase::ImageType>(type), static_cast<QQmlImageProviderBase::Flags>(flags));
 }
 
 void QQuickImageProvider_virtbase(QQuickImageProvider* src, QQmlImageProviderBase** outptr_QQmlImageProviderBase) {
@@ -1516,31 +1104,11 @@ QQuickTextureFactory* QQuickImageProvider_requestTexture(QQuickImageProvider* se
 	return self->requestTexture(id_QString, size, *requestedSize);
 }
 
-bool QQuickImageProvider_override_virtual_imageType(void* self, intptr_t slot) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__imageType = slot;
-	return true;
-}
-
 int QQuickImageProvider_virtualbase_imageType(const void* self) {
 
 	VirtualQQuickImageProvider::ImageType _ret = ( (const VirtualQQuickImageProvider*)(self) )->QQuickImageProvider::imageType();
 	return static_cast<int>(_ret);
 
-}
-
-bool QQuickImageProvider_override_virtual_flags(void* self, intptr_t slot) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__flags = slot;
-	return true;
 }
 
 int QQuickImageProvider_virtualbase_flags(const void* self) {
@@ -1550,16 +1118,6 @@ int QQuickImageProvider_virtualbase_flags(const void* self) {
 
 }
 
-bool QQuickImageProvider_override_virtual_requestImage(void* self, intptr_t slot) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestImage = slot;
-	return true;
-}
-
 QImage* QQuickImageProvider_virtualbase_requestImage(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {
 	QString id_QString = QString::fromUtf8(id.data, id.len);
 
@@ -1567,31 +1125,11 @@ QImage* QQuickImageProvider_virtualbase_requestImage(void* self, struct miqt_str
 
 }
 
-bool QQuickImageProvider_override_virtual_requestPixmap(void* self, intptr_t slot) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestPixmap = slot;
-	return true;
-}
-
 QPixmap* QQuickImageProvider_virtualbase_requestPixmap(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {
 	QString id_QString = QString::fromUtf8(id.data, id.len);
 
 	return new QPixmap(( (VirtualQQuickImageProvider*)(self) )->QQuickImageProvider::requestPixmap(id_QString, size, *requestedSize));
 
-}
-
-bool QQuickImageProvider_override_virtual_requestTexture(void* self, intptr_t slot) {
-	VirtualQQuickImageProvider* self_cast = dynamic_cast<VirtualQQuickImageProvider*>( (QQuickImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestTexture = slot;
-	return true;
 }
 
 QQuickTextureFactory* QQuickImageProvider_virtualbase_requestTexture(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {
@@ -1606,22 +1144,20 @@ void QQuickImageProvider_delete(QQuickImageProvider* self) {
 }
 
 class VirtualQQuickAsyncImageProvider final : public QQuickAsyncImageProvider {
+	struct QQuickAsyncImageProvider_VTable* vtbl;
 public:
 
-	VirtualQQuickAsyncImageProvider(): QQuickAsyncImageProvider() {};
-	VirtualQQuickAsyncImageProvider(const QQuickAsyncImageProvider& param1): QQuickAsyncImageProvider(param1) {};
+	VirtualQQuickAsyncImageProvider(struct QQuickAsyncImageProvider_VTable* vtbl): QQuickAsyncImageProvider(), vtbl(vtbl) {};
+	VirtualQQuickAsyncImageProvider(struct QQuickAsyncImageProvider_VTable* vtbl, const QQuickAsyncImageProvider& param1): QQuickAsyncImageProvider(param1), vtbl(vtbl) {};
 
-	virtual ~VirtualQQuickAsyncImageProvider() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestImageResponse = 0;
+	virtual ~VirtualQQuickAsyncImageProvider() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual QQuickImageResponse* requestImageResponse(const QString& id, const QSize& requestedSize) override {
-		if (handle__requestImageResponse == 0) {
+		if (vtbl->requestImageResponse == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1634,54 +1170,45 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval2 = const_cast<QSize*>(&requestedSize_ret);
 
-		QQuickImageResponse* callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_requestImageResponse(this, handle__requestImageResponse, sigval1, sigval2);
+		QQuickImageResponse* callback_return_value = vtbl->requestImageResponse(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__imageType = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQmlImageProviderBase::ImageType imageType() const override {
-		if (handle__imageType == 0) {
+		if (vtbl->imageType == 0) {
 			return QQuickAsyncImageProvider::imageType();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_imageType(this, handle__imageType);
+
+		int callback_return_value = vtbl->imageType(vtbl, this);
 
 		return static_cast<QQmlImageProviderBase::ImageType>(callback_return_value);
 	}
 
 	friend int QQuickAsyncImageProvider_virtualbase_imageType(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__flags = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQmlImageProviderBase::Flags flags() const override {
-		if (handle__flags == 0) {
+		if (vtbl->flags == 0) {
 			return QQuickAsyncImageProvider::flags();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_flags(this, handle__flags);
+
+		int callback_return_value = vtbl->flags(vtbl, this);
 
 		return static_cast<QQmlImageProviderBase::Flags>(callback_return_value);
 	}
 
 	friend int QQuickAsyncImageProvider_virtualbase_flags(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestImage = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QImage requestImage(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestImage == 0) {
+		if (vtbl->requestImage == 0) {
 			return QQuickAsyncImageProvider::requestImage(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1695,22 +1222,19 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QImage* callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_requestImage(this, handle__requestImage, sigval1, sigval2, sigval3);
+		QImage* callback_return_value = vtbl->requestImage(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QImage* QQuickAsyncImageProvider_virtualbase_requestImage(void* self, struct miqt_string id, QSize* size, QSize* requestedSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestPixmap = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QPixmap requestPixmap(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestPixmap == 0) {
+		if (vtbl->requestPixmap == 0) {
 			return QQuickAsyncImageProvider::requestPixmap(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1724,22 +1248,19 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QPixmap* callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_requestPixmap(this, handle__requestPixmap, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = vtbl->requestPixmap(vtbl, this, sigval1, sigval2, sigval3);
 
 		return *callback_return_value;
 	}
 
 	friend QPixmap* QQuickAsyncImageProvider_virtualbase_requestPixmap(void* self, struct miqt_string id, QSize* size, QSize* requestedSize);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__requestTexture = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual QQuickTextureFactory* requestTexture(const QString& id, QSize* size, const QSize& requestedSize) override {
-		if (handle__requestTexture == 0) {
+		if (vtbl->requestTexture == 0) {
 			return QQuickAsyncImageProvider::requestTexture(id, size, requestedSize);
 		}
-		
+
 		const QString id_ret = id;
 		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 		QByteArray id_b = id_ret.toUtf8();
@@ -1753,7 +1274,7 @@ public:
 		// Cast returned reference into pointer
 		QSize* sigval3 = const_cast<QSize*>(&requestedSize_ret);
 
-		QQuickTextureFactory* callback_return_value = miqt_exec_callback_QQuickAsyncImageProvider_requestTexture(this, handle__requestTexture, sigval1, sigval2, sigval3);
+		QQuickTextureFactory* callback_return_value = vtbl->requestTexture(vtbl, this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
@@ -1762,12 +1283,12 @@ public:
 
 };
 
-QQuickAsyncImageProvider* QQuickAsyncImageProvider_new() {
-	return new VirtualQQuickAsyncImageProvider();
+QQuickAsyncImageProvider* QQuickAsyncImageProvider_new(struct QQuickAsyncImageProvider_VTable* vtbl) {
+	return new VirtualQQuickAsyncImageProvider(vtbl);
 }
 
-QQuickAsyncImageProvider* QQuickAsyncImageProvider_new2(QQuickAsyncImageProvider* param1) {
-	return new VirtualQQuickAsyncImageProvider(*param1);
+QQuickAsyncImageProvider* QQuickAsyncImageProvider_new2(struct QQuickAsyncImageProvider_VTable* vtbl, QQuickAsyncImageProvider* param1) {
+	return new VirtualQQuickAsyncImageProvider(vtbl, *param1);
 }
 
 void QQuickAsyncImageProvider_virtbase(QQuickAsyncImageProvider* src, QQuickImageProvider** outptr_QQuickImageProvider) {
@@ -1779,41 +1300,11 @@ QQuickImageResponse* QQuickAsyncImageProvider_requestImageResponse(QQuickAsyncIm
 	return self->requestImageResponse(id_QString, *requestedSize);
 }
 
-bool QQuickAsyncImageProvider_override_virtual_requestImageResponse(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestImageResponse = slot;
-	return true;
-}
-
-bool QQuickAsyncImageProvider_override_virtual_imageType(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__imageType = slot;
-	return true;
-}
-
 int QQuickAsyncImageProvider_virtualbase_imageType(const void* self) {
 
 	VirtualQQuickAsyncImageProvider::ImageType _ret = ( (const VirtualQQuickAsyncImageProvider*)(self) )->QQuickAsyncImageProvider::imageType();
 	return static_cast<int>(_ret);
 
-}
-
-bool QQuickAsyncImageProvider_override_virtual_flags(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__flags = slot;
-	return true;
 }
 
 int QQuickAsyncImageProvider_virtualbase_flags(const void* self) {
@@ -1823,16 +1314,6 @@ int QQuickAsyncImageProvider_virtualbase_flags(const void* self) {
 
 }
 
-bool QQuickAsyncImageProvider_override_virtual_requestImage(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestImage = slot;
-	return true;
-}
-
 QImage* QQuickAsyncImageProvider_virtualbase_requestImage(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {
 	QString id_QString = QString::fromUtf8(id.data, id.len);
 
@@ -1840,31 +1321,11 @@ QImage* QQuickAsyncImageProvider_virtualbase_requestImage(void* self, struct miq
 
 }
 
-bool QQuickAsyncImageProvider_override_virtual_requestPixmap(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestPixmap = slot;
-	return true;
-}
-
 QPixmap* QQuickAsyncImageProvider_virtualbase_requestPixmap(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {
 	QString id_QString = QString::fromUtf8(id.data, id.len);
 
 	return new QPixmap(( (VirtualQQuickAsyncImageProvider*)(self) )->QQuickAsyncImageProvider::requestPixmap(id_QString, size, *requestedSize));
 
-}
-
-bool QQuickAsyncImageProvider_override_virtual_requestTexture(void* self, intptr_t slot) {
-	VirtualQQuickAsyncImageProvider* self_cast = dynamic_cast<VirtualQQuickAsyncImageProvider*>( (QQuickAsyncImageProvider*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__requestTexture = slot;
-	return true;
 }
 
 QQuickTextureFactory* QQuickAsyncImageProvider_virtualbase_requestTexture(void* self, struct miqt_string id, QSize* size, QSize* requestedSize) {

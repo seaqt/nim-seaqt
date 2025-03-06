@@ -44,8 +44,6 @@ export
 
 type cQAudioDeviceInfo*{.exportc: "QAudioDeviceInfo", incompleteStruct.} = object
 
-proc fcQAudioDeviceInfo_new(): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new".}
-proc fcQAudioDeviceInfo_new2(other: pointer): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new2".}
 proc fcQAudioDeviceInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioDeviceInfo_operatorAssign".}
 proc fcQAudioDeviceInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorEqual".}
 proc fcQAudioDeviceInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorNotEqual".}
@@ -64,16 +62,9 @@ proc fcQAudioDeviceInfo_realm(self: pointer, ): struct_miqt_string {.importc: "Q
 proc fcQAudioDeviceInfo_defaultInputDevice(): pointer {.importc: "QAudioDeviceInfo_defaultInputDevice".}
 proc fcQAudioDeviceInfo_defaultOutputDevice(): pointer {.importc: "QAudioDeviceInfo_defaultOutputDevice".}
 proc fcQAudioDeviceInfo_availableDevices(mode: cint): struct_miqt_array {.importc: "QAudioDeviceInfo_availableDevices".}
+proc fcQAudioDeviceInfo_new(): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new".}
+proc fcQAudioDeviceInfo_new2(other: pointer): ptr cQAudioDeviceInfo {.importc: "QAudioDeviceInfo_new2".}
 proc fcQAudioDeviceInfo_delete(self: pointer) {.importc: "QAudioDeviceInfo_delete".}
-
-
-func init*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, h: ptr cQAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
-  T(h: h)
-proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
-  gen_qaudiodeviceinfo_types.QAudioDeviceInfo.init(fcQAudioDeviceInfo_new())
-
-proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
-  gen_qaudiodeviceinfo_types.QAudioDeviceInfo.init(fcQAudioDeviceInfo_new2(other.h))
 
 proc operatorAssign*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): void =
   fcQAudioDeviceInfo_operatorAssign(self.h, other.h)
@@ -172,6 +163,13 @@ proc availableDevices*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, mode
   for i in 0 ..< v_ma.len:
     vx_ret[i] = gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: v_outCast[i])
   vx_ret
+
+proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
+  gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_new())
+
+proc create*(T: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo,
+    other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
+  gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_new2(other.h))
 
 proc delete*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo) =
   fcQAudioDeviceInfo_delete(self.h)

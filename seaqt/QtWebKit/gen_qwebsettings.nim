@@ -168,9 +168,6 @@ proc fcQWebSettings_setCSSMediaType(self: pointer, cSSMediaType: struct_miqt_str
 proc fcQWebSettings_cssMediaType(self: pointer, ): struct_miqt_string {.importc: "QWebSettings_cssMediaType".}
 proc fcQWebSettings_enablePersistentStorage1(path: struct_miqt_string): void {.importc: "QWebSettings_enablePersistentStorage1".}
 
-
-func init*(T: type gen_qwebsettings_types.QWebSettings, h: ptr cQWebSettings): gen_qwebsettings_types.QWebSettings =
-  T(h: h)
 proc globalSettings*(_: type gen_qwebsettings_types.QWebSettings, ): gen_qwebsettings_types.QWebSettings =
   gen_qwebsettings_types.QWebSettings(h: fcQWebSettings_globalSettings())
 

@@ -62,9 +62,6 @@ proc fcQMediaService_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_strin
 proc fcQMediaService_staticMetaObject(): pointer {.importc: "QMediaService_staticMetaObject".}
 proc fcQMediaService_delete(self: pointer) {.importc: "QMediaService_delete".}
 
-
-func init*(T: type gen_qmediaservice_types.QMediaService, h: ptr cQMediaService): gen_qmediaservice_types.QMediaService =
-  T(h: h)
 proc metaObject*(self: gen_qmediaservice_types.QMediaService, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaService_metaObject(self.h))
 

@@ -87,13 +87,6 @@ export
 
 type cQPalette*{.exportc: "QPalette", incompleteStruct.} = object
 
-proc fcQPalette_new(): ptr cQPalette {.importc: "QPalette_new".}
-proc fcQPalette_new2(button: pointer): ptr cQPalette {.importc: "QPalette_new2".}
-proc fcQPalette_new3(button: cint): ptr cQPalette {.importc: "QPalette_new3".}
-proc fcQPalette_new4(button: pointer, window: pointer): ptr cQPalette {.importc: "QPalette_new4".}
-proc fcQPalette_new5(windowText: pointer, button: pointer, light: pointer, dark: pointer, mid: pointer, text: pointer, bright_text: pointer, base: pointer, window: pointer): ptr cQPalette {.importc: "QPalette_new5".}
-proc fcQPalette_new6(windowText: pointer, window: pointer, light: pointer, dark: pointer, mid: pointer, text: pointer, base: pointer): ptr cQPalette {.importc: "QPalette_new6".}
-proc fcQPalette_new7(palette: pointer): ptr cQPalette {.importc: "QPalette_new7".}
 proc fcQPalette_operatorAssign(self: pointer, palette: pointer): void {.importc: "QPalette_operatorAssign".}
 proc fcQPalette_swap(self: pointer, other: pointer): void {.importc: "QPalette_swap".}
 proc fcQPalette_ToQVariant(self: pointer, ): pointer {.importc: "QPalette_ToQVariant".}
@@ -139,32 +132,15 @@ proc fcQPalette_cacheKey(self: pointer, ): clonglong {.importc: "QPalette_cacheK
 proc fcQPalette_resolve(self: pointer, param1: pointer): pointer {.importc: "QPalette_resolve".}
 proc fcQPalette_resolve2(self: pointer, ): cuint {.importc: "QPalette_resolve2".}
 proc fcQPalette_resolveWithMask(self: pointer, mask: cuint): void {.importc: "QPalette_resolveWithMask".}
+proc fcQPalette_new(): ptr cQPalette {.importc: "QPalette_new".}
+proc fcQPalette_new2(button: pointer): ptr cQPalette {.importc: "QPalette_new2".}
+proc fcQPalette_new3(button: cint): ptr cQPalette {.importc: "QPalette_new3".}
+proc fcQPalette_new4(button: pointer, window: pointer): ptr cQPalette {.importc: "QPalette_new4".}
+proc fcQPalette_new5(windowText: pointer, button: pointer, light: pointer, dark: pointer, mid: pointer, text: pointer, bright_text: pointer, base: pointer, window: pointer): ptr cQPalette {.importc: "QPalette_new5".}
+proc fcQPalette_new6(windowText: pointer, window: pointer, light: pointer, dark: pointer, mid: pointer, text: pointer, base: pointer): ptr cQPalette {.importc: "QPalette_new6".}
+proc fcQPalette_new7(palette: pointer): ptr cQPalette {.importc: "QPalette_new7".}
 proc fcQPalette_staticMetaObject(): pointer {.importc: "QPalette_staticMetaObject".}
 proc fcQPalette_delete(self: pointer) {.importc: "QPalette_delete".}
-
-
-func init*(T: type gen_qpalette_types.QPalette, h: ptr cQPalette): gen_qpalette_types.QPalette =
-  T(h: h)
-proc create*(T: type gen_qpalette_types.QPalette, ): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new())
-
-proc create*(T: type gen_qpalette_types.QPalette, button: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new2(button.h))
-
-proc create*(T: type gen_qpalette_types.QPalette, button: cint): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new3(cint(button)))
-
-proc create*(T: type gen_qpalette_types.QPalette, button: gen_qcolor_types.QColor, window: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new4(button.h, window.h))
-
-proc create*(T: type gen_qpalette_types.QPalette, windowText: gen_qbrush_types.QBrush, button: gen_qbrush_types.QBrush, light: gen_qbrush_types.QBrush, dark: gen_qbrush_types.QBrush, mid: gen_qbrush_types.QBrush, text: gen_qbrush_types.QBrush, bright_text: gen_qbrush_types.QBrush, base: gen_qbrush_types.QBrush, window: gen_qbrush_types.QBrush): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new5(windowText.h, button.h, light.h, dark.h, mid.h, text.h, bright_text.h, base.h, window.h))
-
-proc create*(T: type gen_qpalette_types.QPalette, windowText: gen_qcolor_types.QColor, window: gen_qcolor_types.QColor, light: gen_qcolor_types.QColor, dark: gen_qcolor_types.QColor, mid: gen_qcolor_types.QColor, text: gen_qcolor_types.QColor, base: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new6(windowText.h, window.h, light.h, dark.h, mid.h, text.h, base.h))
-
-proc create*(T: type gen_qpalette_types.QPalette, palette: gen_qpalette_types.QPalette): gen_qpalette_types.QPalette =
-  gen_qpalette_types.QPalette.init(fcQPalette_new7(palette.h))
 
 proc operatorAssign*(self: gen_qpalette_types.QPalette, palette: gen_qpalette_types.QPalette): void =
   fcQPalette_operatorAssign(self.h, palette.h)
@@ -300,6 +276,33 @@ proc resolve*(self: gen_qpalette_types.QPalette, ): cuint =
 
 proc resolve*(self: gen_qpalette_types.QPalette, mask: cuint): void =
   fcQPalette_resolveWithMask(self.h, mask)
+
+proc create*(T: type gen_qpalette_types.QPalette): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new())
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    button: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new2(button.h))
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    button: cint): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new3(cint(button)))
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    button: gen_qcolor_types.QColor, window: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new4(button.h, window.h))
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    windowText: gen_qbrush_types.QBrush, button: gen_qbrush_types.QBrush, light: gen_qbrush_types.QBrush, dark: gen_qbrush_types.QBrush, mid: gen_qbrush_types.QBrush, text: gen_qbrush_types.QBrush, bright_text: gen_qbrush_types.QBrush, base: gen_qbrush_types.QBrush, window: gen_qbrush_types.QBrush): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new5(windowText.h, button.h, light.h, dark.h, mid.h, text.h, bright_text.h, base.h, window.h))
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    windowText: gen_qcolor_types.QColor, window: gen_qcolor_types.QColor, light: gen_qcolor_types.QColor, dark: gen_qcolor_types.QColor, mid: gen_qcolor_types.QColor, text: gen_qcolor_types.QColor, base: gen_qcolor_types.QColor): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new6(windowText.h, window.h, light.h, dark.h, mid.h, text.h, base.h))
+
+proc create*(T: type gen_qpalette_types.QPalette,
+    palette: gen_qpalette_types.QPalette): gen_qpalette_types.QPalette =
+  gen_qpalette_types.QPalette(h: fcQPalette_new7(palette.h))
 
 proc staticMetaObject*(_: type gen_qpalette_types.QPalette): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQPalette_staticMetaObject())

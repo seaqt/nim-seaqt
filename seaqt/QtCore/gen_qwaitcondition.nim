@@ -48,7 +48,6 @@ export
 
 type cQWaitCondition*{.exportc: "QWaitCondition", incompleteStruct.} = object
 
-proc fcQWaitCondition_new(): ptr cQWaitCondition {.importc: "QWaitCondition_new".}
 proc fcQWaitCondition_wait(self: pointer, lockedMutex: pointer): bool {.importc: "QWaitCondition_wait".}
 proc fcQWaitCondition_wait2(self: pointer, lockedMutex: pointer, time: culong): bool {.importc: "QWaitCondition_wait2".}
 proc fcQWaitCondition_waitWithLockedReadWriteLock(self: pointer, lockedReadWriteLock: pointer): bool {.importc: "QWaitCondition_waitWithLockedReadWriteLock".}
@@ -59,13 +58,8 @@ proc fcQWaitCondition_notifyOne(self: pointer, ): void {.importc: "QWaitConditio
 proc fcQWaitCondition_notifyAll(self: pointer, ): void {.importc: "QWaitCondition_notifyAll".}
 proc fcQWaitCondition_wait22(self: pointer, lockedMutex: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait22".}
 proc fcQWaitCondition_wait23(self: pointer, lockedReadWriteLock: pointer, deadline: pointer): bool {.importc: "QWaitCondition_wait23".}
+proc fcQWaitCondition_new(): ptr cQWaitCondition {.importc: "QWaitCondition_new".}
 proc fcQWaitCondition_delete(self: pointer) {.importc: "QWaitCondition_delete".}
-
-
-func init*(T: type gen_qwaitcondition_types.QWaitCondition, h: ptr cQWaitCondition): gen_qwaitcondition_types.QWaitCondition =
-  T(h: h)
-proc create*(T: type gen_qwaitcondition_types.QWaitCondition, ): gen_qwaitcondition_types.QWaitCondition =
-  gen_qwaitcondition_types.QWaitCondition.init(fcQWaitCondition_new())
 
 proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedMutex: gen_qmutex_types.QMutex): bool =
   fcQWaitCondition_wait(self.h, lockedMutex.h)
@@ -96,6 +90,9 @@ proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedMutex: gen_qmute
 
 proc wait*(self: gen_qwaitcondition_types.QWaitCondition, lockedReadWriteLock: gen_qreadwritelock_types.QReadWriteLock, deadline: gen_qdeadlinetimer_types.QDeadlineTimer): bool =
   fcQWaitCondition_wait23(self.h, lockedReadWriteLock.h, deadline.h)
+
+proc create*(T: type gen_qwaitcondition_types.QWaitCondition): gen_qwaitcondition_types.QWaitCondition =
+  gen_qwaitcondition_types.QWaitCondition(h: fcQWaitCondition_new())
 
 proc delete*(self: gen_qwaitcondition_types.QWaitCondition) =
   fcQWaitCondition_delete(self.h)

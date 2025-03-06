@@ -65,9 +65,6 @@ proc fcQAudioEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): st
 proc fcQAudioEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QAudioEncoderSettingsControl_staticMetaObject".}
 proc fcQAudioEncoderSettingsControl_delete(self: pointer) {.importc: "QAudioEncoderSettingsControl_delete".}
 
-
-func init*(T: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, h: ptr cQAudioEncoderSettingsControl): gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl =
-  T(h: h)
 proc metaObject*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_metaObject(self.h))
 

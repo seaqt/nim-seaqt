@@ -63,9 +63,6 @@ proc fcQCustomAudioRoleControl_trUtf83(s: cstring, c: cstring, n: cint): struct_
 proc fcQCustomAudioRoleControl_staticMetaObject(): pointer {.importc: "QCustomAudioRoleControl_staticMetaObject".}
 proc fcQCustomAudioRoleControl_delete(self: pointer) {.importc: "QCustomAudioRoleControl_delete".}
 
-
-func init*(T: type gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, h: ptr cQCustomAudioRoleControl): gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl =
-  T(h: h)
 proc metaObject*(self: gen_qcustomaudiorolecontrol_types.QCustomAudioRoleControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCustomAudioRoleControl_metaObject(self.h))
 
@@ -111,7 +108,7 @@ proc customAudioRoleChanged*(self: gen_qcustomaudiorolecontrol_types.QCustomAudi
   fcQCustomAudioRoleControl_customAudioRoleChanged(self.h, struct_miqt_string(data: role, len: csize_t(len(role))))
 
 type QCustomAudioRoleControlcustomAudioRoleChangedSlot* = proc(role: string)
-proc miqt_exec_callback_QCustomAudioRoleControl_customAudioRoleChanged(slot: int, role: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQCustomAudioRoleControl_customAudioRoleChanged(slot: int, role: struct_miqt_string) {.exportc: "miqt_exec_callback_QCustomAudioRoleControl_customAudioRoleChanged".} =
   let nimfunc = cast[ptr QCustomAudioRoleControlcustomAudioRoleChangedSlot](cast[pointer](slot))
   let vrole_ms = role
   let vrolex_ret = string.fromBytes(toOpenArrayByte(vrole_ms.data, 0, int(vrole_ms.len)-1))

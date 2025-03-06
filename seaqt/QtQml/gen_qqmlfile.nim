@@ -55,9 +55,6 @@ export
 
 type cQQmlFile*{.exportc: "QQmlFile", incompleteStruct.} = object
 
-proc fcQQmlFile_new(): ptr cQQmlFile {.importc: "QQmlFile_new".}
-proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new2".}
-proc fcQQmlFile_new3(param1: pointer, param2: struct_miqt_string): ptr cQQmlFile {.importc: "QQmlFile_new3".}
 proc fcQQmlFile_isNull(self: pointer, ): bool {.importc: "QQmlFile_isNull".}
 proc fcQQmlFile_isReady(self: pointer, ): bool {.importc: "QQmlFile_isReady".}
 proc fcQQmlFile_isError(self: pointer, ): bool {.importc: "QQmlFile_isError".}
@@ -82,19 +79,10 @@ proc fcQQmlFile_isLocalFile(url: struct_miqt_string): bool {.importc: "QQmlFile_
 proc fcQQmlFile_isLocalFileWithUrl(url: pointer): bool {.importc: "QQmlFile_isLocalFileWithUrl".}
 proc fcQQmlFile_urlToLocalFileOrQrc(param1: struct_miqt_string): struct_miqt_string {.importc: "QQmlFile_urlToLocalFileOrQrc".}
 proc fcQQmlFile_urlToLocalFileOrQrcWithQUrl(param1: pointer): struct_miqt_string {.importc: "QQmlFile_urlToLocalFileOrQrcWithQUrl".}
+proc fcQQmlFile_new(): ptr cQQmlFile {.importc: "QQmlFile_new".}
+proc fcQQmlFile_new2(param1: pointer, param2: pointer): ptr cQQmlFile {.importc: "QQmlFile_new2".}
+proc fcQQmlFile_new3(param1: pointer, param2: struct_miqt_string): ptr cQQmlFile {.importc: "QQmlFile_new3".}
 proc fcQQmlFile_delete(self: pointer) {.importc: "QQmlFile_delete".}
-
-
-func init*(T: type gen_qqmlfile_types.QQmlFile, h: ptr cQQmlFile): gen_qqmlfile_types.QQmlFile =
-  T(h: h)
-proc create*(T: type gen_qqmlfile_types.QQmlFile, ): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile.init(fcQQmlFile_new())
-
-proc create*(T: type gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: gen_qurl_types.QUrl): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile.init(fcQQmlFile_new2(param1.h, param2.h))
-
-proc create*(T: type gen_qqmlfile_types.QQmlFile, param1: gen_qqmlengine_types.QQmlEngine, param2: string): gen_qqmlfile_types.QQmlFile =
-  gen_qqmlfile_types.QQmlFile.init(fcQQmlFile_new3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))))
 
 proc isNull*(self: gen_qqmlfile_types.QQmlFile, ): bool =
   fcQQmlFile_isNull(self.h)
@@ -179,6 +167,17 @@ proc urlToLocalFileOrQrc*(_: type gen_qqmlfile_types.QQmlFile, param1: gen_qurl_
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
+
+proc create*(T: type gen_qqmlfile_types.QQmlFile): gen_qqmlfile_types.QQmlFile =
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new())
+
+proc create*(T: type gen_qqmlfile_types.QQmlFile,
+    param1: gen_qqmlengine_types.QQmlEngine, param2: gen_qurl_types.QUrl): gen_qqmlfile_types.QQmlFile =
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new2(param1.h, param2.h))
+
+proc create*(T: type gen_qqmlfile_types.QQmlFile,
+    param1: gen_qqmlengine_types.QQmlEngine, param2: string): gen_qqmlfile_types.QQmlFile =
+  gen_qqmlfile_types.QQmlFile(h: fcQQmlFile_new3(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))))
 
 proc delete*(self: gen_qqmlfile_types.QQmlFile) =
   fcQQmlFile_delete(self.h)

@@ -58,9 +58,6 @@ export
 
 type cQFutureInterfaceBase*{.exportc: "QFutureInterfaceBase", incompleteStruct.} = object
 
-proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
-proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
-proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
 proc fcQFutureInterfaceBase_reportStarted(self: pointer, ): void {.importc: "QFutureInterfaceBase_reportStarted".}
 proc fcQFutureInterfaceBase_reportFinished(self: pointer, ): void {.importc: "QFutureInterfaceBase_reportFinished".}
 proc fcQFutureInterfaceBase_reportCanceled(self: pointer, ): void {.importc: "QFutureInterfaceBase_reportCanceled".}
@@ -100,19 +97,10 @@ proc fcQFutureInterfaceBase_mutexWithInt(self: pointer, param1: cint): pointer {
 proc fcQFutureInterfaceBase_operatorEqual(self: pointer, other: pointer): bool {.importc: "QFutureInterfaceBase_operatorEqual".}
 proc fcQFutureInterfaceBase_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QFutureInterfaceBase_operatorNotEqual".}
 proc fcQFutureInterfaceBase_operatorAssign(self: pointer, other: pointer): void {.importc: "QFutureInterfaceBase_operatorAssign".}
+proc fcQFutureInterfaceBase_new(): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new".}
+proc fcQFutureInterfaceBase_new2(other: pointer): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new2".}
+proc fcQFutureInterfaceBase_new3(initialState: cint): ptr cQFutureInterfaceBase {.importc: "QFutureInterfaceBase_new3".}
 proc fcQFutureInterfaceBase_delete(self: pointer) {.importc: "QFutureInterfaceBase_delete".}
-
-
-func init*(T: type gen_qfutureinterface_types.QFutureInterfaceBase, h: ptr cQFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  T(h: h)
-proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase, ): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase.init(fcQFutureInterfaceBase_new())
-
-proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase.init(fcQFutureInterfaceBase_new2(other.h))
-
-proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase, initialState: cint): gen_qfutureinterface_types.QFutureInterfaceBase =
-  gen_qfutureinterface_types.QFutureInterfaceBase.init(fcQFutureInterfaceBase_new3(cint(initialState)))
 
 proc reportStarted*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ): void =
   fcQFutureInterfaceBase_reportStarted(self.h)
@@ -233,6 +221,17 @@ proc operatorNotEqual*(self: gen_qfutureinterface_types.QFutureInterfaceBase, ot
 
 proc operatorAssign*(self: gen_qfutureinterface_types.QFutureInterfaceBase, other: gen_qfutureinterface_types.QFutureInterfaceBase): void =
   fcQFutureInterfaceBase_operatorAssign(self.h, other.h)
+
+proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new())
+
+proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
+    other: gen_qfutureinterface_types.QFutureInterfaceBase): gen_qfutureinterface_types.QFutureInterfaceBase =
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new2(other.h))
+
+proc create*(T: type gen_qfutureinterface_types.QFutureInterfaceBase,
+    initialState: cint): gen_qfutureinterface_types.QFutureInterfaceBase =
+  gen_qfutureinterface_types.QFutureInterfaceBase(h: fcQFutureInterfaceBase_new3(cint(initialState)))
 
 proc delete*(self: gen_qfutureinterface_types.QFutureInterfaceBase) =
   fcQFutureInterfaceBase_delete(self.h)

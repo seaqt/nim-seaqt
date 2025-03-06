@@ -65,14 +65,6 @@ export
 
 type cQQmlProperty*{.exportc: "QQmlProperty", incompleteStruct.} = object
 
-proc fcQQmlProperty_new(): ptr cQQmlProperty {.importc: "QQmlProperty_new".}
-proc fcQQmlProperty_new2(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new2".}
-proc fcQQmlProperty_new3(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new3".}
-proc fcQQmlProperty_new4(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new4".}
-proc fcQQmlProperty_new5(param1: pointer, param2: struct_miqt_string): ptr cQQmlProperty {.importc: "QQmlProperty_new5".}
-proc fcQQmlProperty_new6(param1: pointer, param2: struct_miqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new6".}
-proc fcQQmlProperty_new7(param1: pointer, param2: struct_miqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new7".}
-proc fcQQmlProperty_new8(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new8".}
 proc fcQQmlProperty_operatorAssign(self: pointer, param1: pointer): void {.importc: "QQmlProperty_operatorAssign".}
 proc fcQQmlProperty_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QQmlProperty_operatorEqual".}
 proc fcQQmlProperty_typeX(self: pointer, ): cint {.importc: "QQmlProperty_type".}
@@ -103,34 +95,15 @@ proc fcQQmlProperty_objectX(self: pointer, ): pointer {.importc: "QQmlProperty_o
 proc fcQQmlProperty_index(self: pointer, ): cint {.importc: "QQmlProperty_index".}
 proc fcQQmlProperty_property(self: pointer, ): pointer {.importc: "QQmlProperty_property".}
 proc fcQQmlProperty_methodX(self: pointer, ): pointer {.importc: "QQmlProperty_method".}
+proc fcQQmlProperty_new(): ptr cQQmlProperty {.importc: "QQmlProperty_new".}
+proc fcQQmlProperty_new2(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new2".}
+proc fcQQmlProperty_new3(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new3".}
+proc fcQQmlProperty_new4(param1: pointer, param2: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new4".}
+proc fcQQmlProperty_new5(param1: pointer, param2: struct_miqt_string): ptr cQQmlProperty {.importc: "QQmlProperty_new5".}
+proc fcQQmlProperty_new6(param1: pointer, param2: struct_miqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new6".}
+proc fcQQmlProperty_new7(param1: pointer, param2: struct_miqt_string, param3: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new7".}
+proc fcQQmlProperty_new8(param1: pointer): ptr cQQmlProperty {.importc: "QQmlProperty_new8".}
 proc fcQQmlProperty_delete(self: pointer) {.importc: "QQmlProperty_delete".}
-
-
-func init*(T: type gen_qqmlproperty_types.QQmlProperty, h: ptr cQQmlProperty): gen_qqmlproperty_types.QQmlProperty =
-  T(h: h)
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, ): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new())
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new2(param1.h))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new3(param1.h, param2.h))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new4(param1.h, param2.h))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new5(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new6(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new7(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h))
-
-proc create*(T: type gen_qqmlproperty_types.QQmlProperty, param1: gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =
-  gen_qqmlproperty_types.QQmlProperty.init(fcQQmlProperty_new8(param1.h))
 
 proc operatorAssign*(self: gen_qqmlproperty_types.QQmlProperty, param1: gen_qqmlproperty_types.QQmlProperty): void =
   fcQQmlProperty_operatorAssign(self.h, param1.h)
@@ -224,6 +197,37 @@ proc property*(self: gen_qqmlproperty_types.QQmlProperty, ): gen_qmetaobject_typ
 
 proc methodX*(self: gen_qqmlproperty_types.QQmlProperty, ): gen_qmetaobject_types.QMetaMethod =
   gen_qmetaobject_types.QMetaMethod(h: fcQQmlProperty_methodX(self.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new())
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new2(param1.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject, param2: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new3(param1.h, param2.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject, param2: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new4(param1.h, param2.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject, param2: string): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new5(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2)))))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlcontext_types.QQmlContext): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new6(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qobject_types.QObject, param2: string, param3: gen_qqmlengine_types.QQmlEngine): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new7(param1.h, struct_miqt_string(data: param2, len: csize_t(len(param2))), param3.h))
+
+proc create*(T: type gen_qqmlproperty_types.QQmlProperty,
+    param1: gen_qqmlproperty_types.QQmlProperty): gen_qqmlproperty_types.QQmlProperty =
+  gen_qqmlproperty_types.QQmlProperty(h: fcQQmlProperty_new8(param1.h))
 
 proc delete*(self: gen_qqmlproperty_types.QQmlProperty) =
   fcQQmlProperty_delete(self.h)

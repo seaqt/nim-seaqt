@@ -170,8 +170,6 @@ export
 
 type cQMetaType*{.exportc: "QMetaType", incompleteStruct.} = object
 
-proc fcQMetaType_new(): ptr cQMetaType {.importc: "QMetaType_new".}
-proc fcQMetaType_new2(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new2".}
 proc fcQMetaType_unregisterType(typeVal: cint): bool {.importc: "QMetaType_unregisterType".}
 proc fcQMetaType_registerTypedef(typeName: cstring, aliasId: cint): cint {.importc: "QMetaType_registerTypedef".}
 proc fcQMetaType_registerNormalizedTypedef(normalizedTypeName: struct_miqt_string, aliasId: cint): cint {.importc: "QMetaType_registerNormalizedTypedef".}
@@ -209,16 +207,9 @@ proc fcQMetaType_hasRegisteredConverterFunction(fromTypeId: cint, toTypeId: cint
 proc fcQMetaType_create22(typeVal: cint, copy: pointer): pointer {.importc: "QMetaType_create22".}
 proc fcQMetaType_create1(self: pointer, copy: pointer): pointer {.importc: "QMetaType_create1".}
 proc fcQMetaType_construct2(self: pointer, where: pointer, copy: pointer): pointer {.importc: "QMetaType_construct2".}
+proc fcQMetaType_new(): ptr cQMetaType {.importc: "QMetaType_new".}
+proc fcQMetaType_new2(typeVal: cint): ptr cQMetaType {.importc: "QMetaType_new2".}
 proc fcQMetaType_delete(self: pointer) {.importc: "QMetaType_delete".}
-
-
-func init*(T: type gen_qmetatype_types.QMetaType, h: ptr cQMetaType): gen_qmetatype_types.QMetaType =
-  T(h: h)
-proc create*(T: type gen_qmetatype_types.QMetaType, ): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType.init(fcQMetaType_new())
-
-proc create*(T: type gen_qmetatype_types.QMetaType, typeVal: cint): gen_qmetatype_types.QMetaType =
-  gen_qmetatype_types.QMetaType.init(fcQMetaType_new2(typeVal))
 
 proc unregisterType*(_: type gen_qmetatype_types.QMetaType, typeVal: cint): bool =
   fcQMetaType_unregisterType(typeVal)
@@ -333,6 +324,13 @@ proc create*(self: gen_qmetatype_types.QMetaType, copy: pointer): pointer =
 
 proc construct*(self: gen_qmetatype_types.QMetaType, where: pointer, copy: pointer): pointer =
   fcQMetaType_construct2(self.h, where, copy)
+
+proc create*(T: type gen_qmetatype_types.QMetaType): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new())
+
+proc create*(T: type gen_qmetatype_types.QMetaType,
+    typeVal: cint): gen_qmetatype_types.QMetaType =
+  gen_qmetatype_types.QMetaType(h: fcQMetaType_new2(typeVal))
 
 proc delete*(self: gen_qmetatype_types.QMetaType) =
   fcQMetaType_delete(self.h)

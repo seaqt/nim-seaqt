@@ -55,11 +55,6 @@ export gen_qregexp_types
 
 type cQRegExp*{.exportc: "QRegExp", incompleteStruct.} = object
 
-proc fcQRegExp_new(): ptr cQRegExp {.importc: "QRegExp_new".}
-proc fcQRegExp_new2(pattern: struct_miqt_string): ptr cQRegExp {.importc: "QRegExp_new2".}
-proc fcQRegExp_new3(rx: pointer): ptr cQRegExp {.importc: "QRegExp_new3".}
-proc fcQRegExp_new4(pattern: struct_miqt_string, cs: cint): ptr cQRegExp {.importc: "QRegExp_new4".}
-proc fcQRegExp_new5(pattern: struct_miqt_string, cs: cint, syntax: cint): ptr cQRegExp {.importc: "QRegExp_new5".}
 proc fcQRegExp_operatorAssign(self: pointer, rx: pointer): void {.importc: "QRegExp_operatorAssign".}
 proc fcQRegExp_swap(self: pointer, other: pointer): void {.importc: "QRegExp_swap".}
 proc fcQRegExp_operatorEqual(self: pointer, rx: pointer): bool {.importc: "QRegExp_operatorEqual".}
@@ -96,25 +91,12 @@ proc fcQRegExp_cap1(self: pointer, nth: cint): struct_miqt_string {.importc: "QR
 proc fcQRegExp_cap1WithNth(self: pointer, nth: cint): struct_miqt_string {.importc: "QRegExp_cap1WithNth".}
 proc fcQRegExp_pos1(self: pointer, nth: cint): cint {.importc: "QRegExp_pos1".}
 proc fcQRegExp_pos1WithNth(self: pointer, nth: cint): cint {.importc: "QRegExp_pos1WithNth".}
+proc fcQRegExp_new(): ptr cQRegExp {.importc: "QRegExp_new".}
+proc fcQRegExp_new2(pattern: struct_miqt_string): ptr cQRegExp {.importc: "QRegExp_new2".}
+proc fcQRegExp_new3(rx: pointer): ptr cQRegExp {.importc: "QRegExp_new3".}
+proc fcQRegExp_new4(pattern: struct_miqt_string, cs: cint): ptr cQRegExp {.importc: "QRegExp_new4".}
+proc fcQRegExp_new5(pattern: struct_miqt_string, cs: cint, syntax: cint): ptr cQRegExp {.importc: "QRegExp_new5".}
 proc fcQRegExp_delete(self: pointer) {.importc: "QRegExp_delete".}
-
-
-func init*(T: type gen_qregexp_types.QRegExp, h: ptr cQRegExp): gen_qregexp_types.QRegExp =
-  T(h: h)
-proc create*(T: type gen_qregexp_types.QRegExp, ): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp.init(fcQRegExp_new())
-
-proc create*(T: type gen_qregexp_types.QRegExp, pattern: string): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp.init(fcQRegExp_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))))
-
-proc create*(T: type gen_qregexp_types.QRegExp, rx: gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp.init(fcQRegExp_new3(rx.h))
-
-proc create*(T: type gen_qregexp_types.QRegExp, pattern: string, cs: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp.init(fcQRegExp_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)))
-
-proc create*(T: type gen_qregexp_types.QRegExp, pattern: string, cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
-  gen_qregexp_types.QRegExp.init(fcQRegExp_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs), cint(syntax)))
 
 proc operatorAssign*(self: gen_qregexp_types.QRegExp, rx: gen_qregexp_types.QRegExp): void =
   fcQRegExp_operatorAssign(self.h, rx.h)
@@ -263,6 +245,25 @@ proc pos*(self: gen_qregexp_types.QRegExp, nth: cint): cint =
 
 proc pos2*(self: gen_qregexp_types.QRegExp, nth: cint): cint =
   fcQRegExp_pos1WithNth(self.h, nth)
+
+proc create*(T: type gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new())
+
+proc create*(T: type gen_qregexp_types.QRegExp,
+    pattern: string): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new2(struct_miqt_string(data: pattern, len: csize_t(len(pattern)))))
+
+proc create*(T: type gen_qregexp_types.QRegExp,
+    rx: gen_qregexp_types.QRegExp): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new3(rx.h))
+
+proc create*(T: type gen_qregexp_types.QRegExp,
+    pattern: string, cs: cint): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new4(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs)))
+
+proc create*(T: type gen_qregexp_types.QRegExp,
+    pattern: string, cs: cint, syntax: cint): gen_qregexp_types.QRegExp =
+  gen_qregexp_types.QRegExp(h: fcQRegExp_new5(struct_miqt_string(data: pattern, len: csize_t(len(pattern))), cint(cs), cint(syntax)))
 
 proc delete*(self: gen_qregexp_types.QRegExp) =
   fcQRegExp_delete(self.h)

@@ -19,298 +19,235 @@ extern "C" {
 #endif
 
 void miqt_exec_callback_QSequentialAnimationGroup_currentAnimationChanged(intptr_t, QAbstractAnimation*);
-QMetaObject* miqt_exec_callback_QSequentialAnimationGroup_metaObject(const QSequentialAnimationGroup*, intptr_t);
-void* miqt_exec_callback_QSequentialAnimationGroup_metacast(QSequentialAnimationGroup*, intptr_t, const char*);
-int miqt_exec_callback_QSequentialAnimationGroup_metacall(QSequentialAnimationGroup*, intptr_t, int, int, void**);
-int miqt_exec_callback_QSequentialAnimationGroup_duration(const QSequentialAnimationGroup*, intptr_t);
-bool miqt_exec_callback_QSequentialAnimationGroup_event(QSequentialAnimationGroup*, intptr_t, QEvent*);
-void miqt_exec_callback_QSequentialAnimationGroup_updateCurrentTime(QSequentialAnimationGroup*, intptr_t, int);
-void miqt_exec_callback_QSequentialAnimationGroup_updateState(QSequentialAnimationGroup*, intptr_t, int, int);
-void miqt_exec_callback_QSequentialAnimationGroup_updateDirection(QSequentialAnimationGroup*, intptr_t, int);
-bool miqt_exec_callback_QSequentialAnimationGroup_eventFilter(QSequentialAnimationGroup*, intptr_t, QObject*, QEvent*);
-void miqt_exec_callback_QSequentialAnimationGroup_timerEvent(QSequentialAnimationGroup*, intptr_t, QTimerEvent*);
-void miqt_exec_callback_QSequentialAnimationGroup_childEvent(QSequentialAnimationGroup*, intptr_t, QChildEvent*);
-void miqt_exec_callback_QSequentialAnimationGroup_customEvent(QSequentialAnimationGroup*, intptr_t, QEvent*);
-void miqt_exec_callback_QSequentialAnimationGroup_connectNotify(QSequentialAnimationGroup*, intptr_t, QMetaMethod*);
-void miqt_exec_callback_QSequentialAnimationGroup_disconnectNotify(QSequentialAnimationGroup*, intptr_t, QMetaMethod*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSequentialAnimationGroup final : public QSequentialAnimationGroup {
+	struct QSequentialAnimationGroup_VTable* vtbl;
 public:
 
-	VirtualQSequentialAnimationGroup(): QSequentialAnimationGroup() {};
-	VirtualQSequentialAnimationGroup(QObject* parent): QSequentialAnimationGroup(parent) {};
+	VirtualQSequentialAnimationGroup(struct QSequentialAnimationGroup_VTable* vtbl): QSequentialAnimationGroup(), vtbl(vtbl) {};
+	VirtualQSequentialAnimationGroup(struct QSequentialAnimationGroup_VTable* vtbl, QObject* parent): QSequentialAnimationGroup(parent), vtbl(vtbl) {};
 
-	virtual ~VirtualQSequentialAnimationGroup() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metaObject = 0;
+	virtual ~VirtualQSequentialAnimationGroup() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
-		if (handle__metaObject == 0) {
+		if (vtbl->metaObject == 0) {
 			return QSequentialAnimationGroup::metaObject();
 		}
-		
 
-		QMetaObject* callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_metaObject(this, handle__metaObject);
+
+		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
 
 		return callback_return_value;
 	}
 
 	friend QMetaObject* QSequentialAnimationGroup_virtualbase_metaObject(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacast = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
-		if (handle__metacast == 0) {
+		if (vtbl->metacast == 0) {
 			return QSequentialAnimationGroup::qt_metacast(param1);
 		}
-		
+
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_metacast(this, handle__metacast, sigval1);
+		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend void* QSequentialAnimationGroup_virtualbase_metacast(void* self, const char* param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__metacall = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
-		if (handle__metacall == 0) {
+		if (vtbl->metacall == 0) {
 			return QSequentialAnimationGroup::qt_metacall(param1, param2, param3);
 		}
-		
+
 		QMetaObject::Call param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_metacall(this, handle__metacall, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSequentialAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__duration = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int duration() const override {
-		if (handle__duration == 0) {
+		if (vtbl->duration == 0) {
 			return QSequentialAnimationGroup::duration();
 		}
-		
 
-		int callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_duration(this, handle__duration);
+
+		int callback_return_value = vtbl->duration(vtbl, this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
 	friend int QSequentialAnimationGroup_virtualbase_duration(const void* self);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__event = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
-		if (handle__event == 0) {
+		if (vtbl->event == 0) {
 			return QSequentialAnimationGroup::event(event);
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_event(this, handle__event, sigval1);
+		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
 
 		return callback_return_value;
 	}
 
 	friend bool QSequentialAnimationGroup_virtualbase_event(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateCurrentTime = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void updateCurrentTime(int param1) override {
-		if (handle__updateCurrentTime == 0) {
+		if (vtbl->updateCurrentTime == 0) {
 			QSequentialAnimationGroup::updateCurrentTime(param1);
 			return;
 		}
-		
+
 		int sigval1 = param1;
 
-		miqt_exec_callback_QSequentialAnimationGroup_updateCurrentTime(this, handle__updateCurrentTime, sigval1);
+		vtbl->updateCurrentTime(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_updateCurrentTime(void* self, int param1);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateState = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void updateState(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) override {
-		if (handle__updateState == 0) {
+		if (vtbl->updateState == 0) {
 			QSequentialAnimationGroup::updateState(newState, oldState);
 			return;
 		}
-		
+
 		QAbstractAnimation::State newState_ret = newState;
 		int sigval1 = static_cast<int>(newState_ret);
 		QAbstractAnimation::State oldState_ret = oldState;
 		int sigval2 = static_cast<int>(oldState_ret);
 
-		miqt_exec_callback_QSequentialAnimationGroup_updateState(this, handle__updateState, sigval1, sigval2);
+		vtbl->updateState(vtbl, this, sigval1, sigval2);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_updateState(void* self, int newState, int oldState);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__updateDirection = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void updateDirection(QAbstractAnimation::Direction direction) override {
-		if (handle__updateDirection == 0) {
+		if (vtbl->updateDirection == 0) {
 			QSequentialAnimationGroup::updateDirection(direction);
 			return;
 		}
-		
+
 		QAbstractAnimation::Direction direction_ret = direction;
 		int sigval1 = static_cast<int>(direction_ret);
 
-		miqt_exec_callback_QSequentialAnimationGroup_updateDirection(this, handle__updateDirection, sigval1);
+		vtbl->updateDirection(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_updateDirection(void* self, int direction);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__eventFilter = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
-		if (handle__eventFilter == 0) {
+		if (vtbl->eventFilter == 0) {
 			return QSequentialAnimationGroup::eventFilter(watched, event);
 		}
-		
+
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = miqt_exec_callback_QSequentialAnimationGroup_eventFilter(this, handle__eventFilter, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
 	friend bool QSequentialAnimationGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__timerEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
-		if (handle__timerEvent == 0) {
+		if (vtbl->timerEvent == 0) {
 			QSequentialAnimationGroup::timerEvent(event);
 			return;
 		}
-		
+
 		QTimerEvent* sigval1 = event;
 
-		miqt_exec_callback_QSequentialAnimationGroup_timerEvent(this, handle__timerEvent, sigval1);
+		vtbl->timerEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_timerEvent(void* self, QTimerEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__childEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
-		if (handle__childEvent == 0) {
+		if (vtbl->childEvent == 0) {
 			QSequentialAnimationGroup::childEvent(event);
 			return;
 		}
-		
+
 		QChildEvent* sigval1 = event;
 
-		miqt_exec_callback_QSequentialAnimationGroup_childEvent(this, handle__childEvent, sigval1);
+		vtbl->childEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_childEvent(void* self, QChildEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__customEvent = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
-		if (handle__customEvent == 0) {
+		if (vtbl->customEvent == 0) {
 			QSequentialAnimationGroup::customEvent(event);
 			return;
 		}
-		
+
 		QEvent* sigval1 = event;
 
-		miqt_exec_callback_QSequentialAnimationGroup_customEvent(this, handle__customEvent, sigval1);
+		vtbl->customEvent(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_customEvent(void* self, QEvent* event);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__connectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
-		if (handle__connectNotify == 0) {
+		if (vtbl->connectNotify == 0) {
 			QSequentialAnimationGroup::connectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSequentialAnimationGroup_connectNotify(this, handle__connectNotify, sigval1);
+		vtbl->connectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__disconnectNotify = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
-		if (handle__disconnectNotify == 0) {
+		if (vtbl->disconnectNotify == 0) {
 			QSequentialAnimationGroup::disconnectNotify(signal);
 			return;
 		}
-		
+
 		const QMetaMethod& signal_ret = signal;
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		miqt_exec_callback_QSequentialAnimationGroup_disconnectNotify(this, handle__disconnectNotify, sigval1);
+		vtbl->disconnectNotify(vtbl, this, sigval1);
 
-		
 	}
 
 	friend void QSequentialAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
@@ -322,12 +259,12 @@ public:
 	friend bool QSequentialAnimationGroup_protectedbase_isSignalConnected(bool* _dynamic_cast_ok, const void* self, QMetaMethod* signal);
 };
 
-QSequentialAnimationGroup* QSequentialAnimationGroup_new() {
-	return new VirtualQSequentialAnimationGroup();
+QSequentialAnimationGroup* QSequentialAnimationGroup_new(struct QSequentialAnimationGroup_VTable* vtbl) {
+	return new VirtualQSequentialAnimationGroup(vtbl);
 }
 
-QSequentialAnimationGroup* QSequentialAnimationGroup_new2(QObject* parent) {
-	return new VirtualQSequentialAnimationGroup(parent);
+QSequentialAnimationGroup* QSequentialAnimationGroup_new2(struct QSequentialAnimationGroup_VTable* vtbl, QObject* parent) {
+	return new VirtualQSequentialAnimationGroup(vtbl, parent);
 }
 
 void QSequentialAnimationGroup_virtbase(QSequentialAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup) {
@@ -439,30 +376,10 @@ struct miqt_string QSequentialAnimationGroup_trUtf83(const char* s, const char* 
 	return _ms;
 }
 
-bool QSequentialAnimationGroup_override_virtual_metaObject(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metaObject = slot;
-	return true;
-}
-
 QMetaObject* QSequentialAnimationGroup_virtualbase_metaObject(const void* self) {
 
 	return (QMetaObject*) ( (const VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::metaObject();
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_metacast(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacast = slot;
-	return true;
 }
 
 void* QSequentialAnimationGroup_virtualbase_metacast(void* self, const char* param1) {
@@ -471,30 +388,10 @@ void* QSequentialAnimationGroup_virtualbase_metacast(void* self, const char* par
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_metacall(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__metacall = slot;
-	return true;
-}
-
 int QSequentialAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
 
 	return ( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_duration(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__duration = slot;
-	return true;
 }
 
 int QSequentialAnimationGroup_virtualbase_duration(const void* self) {
@@ -503,30 +400,10 @@ int QSequentialAnimationGroup_virtualbase_duration(const void* self) {
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_event(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__event = slot;
-	return true;
-}
-
 bool QSequentialAnimationGroup_virtualbase_event(void* self, QEvent* event) {
 
 	return ( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::event(event);
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_updateCurrentTime(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__updateCurrentTime = slot;
-	return true;
 }
 
 void QSequentialAnimationGroup_virtualbase_updateCurrentTime(void* self, int param1) {
@@ -535,30 +412,10 @@ void QSequentialAnimationGroup_virtualbase_updateCurrentTime(void* self, int par
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_updateState(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__updateState = slot;
-	return true;
-}
-
 void QSequentialAnimationGroup_virtualbase_updateState(void* self, int newState, int oldState) {
 
 	( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::updateState(static_cast<VirtualQSequentialAnimationGroup::State>(newState), static_cast<VirtualQSequentialAnimationGroup::State>(oldState));
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_updateDirection(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__updateDirection = slot;
-	return true;
 }
 
 void QSequentialAnimationGroup_virtualbase_updateDirection(void* self, int direction) {
@@ -567,30 +424,10 @@ void QSequentialAnimationGroup_virtualbase_updateDirection(void* self, int direc
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_eventFilter(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__eventFilter = slot;
-	return true;
-}
-
 bool QSequentialAnimationGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
 
 	return ( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::eventFilter(watched, event);
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_timerEvent(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__timerEvent = slot;
-	return true;
 }
 
 void QSequentialAnimationGroup_virtualbase_timerEvent(void* self, QTimerEvent* event) {
@@ -599,30 +436,10 @@ void QSequentialAnimationGroup_virtualbase_timerEvent(void* self, QTimerEvent* e
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_childEvent(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__childEvent = slot;
-	return true;
-}
-
 void QSequentialAnimationGroup_virtualbase_childEvent(void* self, QChildEvent* event) {
 
 	( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::childEvent(event);
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_customEvent(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__customEvent = slot;
-	return true;
 }
 
 void QSequentialAnimationGroup_virtualbase_customEvent(void* self, QEvent* event) {
@@ -631,30 +448,10 @@ void QSequentialAnimationGroup_virtualbase_customEvent(void* self, QEvent* event
 
 }
 
-bool QSequentialAnimationGroup_override_virtual_connectNotify(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__connectNotify = slot;
-	return true;
-}
-
 void QSequentialAnimationGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
 
 	( (VirtualQSequentialAnimationGroup*)(self) )->QSequentialAnimationGroup::connectNotify(*signal);
 
-}
-
-bool QSequentialAnimationGroup_override_virtual_disconnectNotify(void* self, intptr_t slot) {
-	VirtualQSequentialAnimationGroup* self_cast = dynamic_cast<VirtualQSequentialAnimationGroup*>( (QSequentialAnimationGroup*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__disconnectNotify = slot;
-	return true;
 }
 
 void QSequentialAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {

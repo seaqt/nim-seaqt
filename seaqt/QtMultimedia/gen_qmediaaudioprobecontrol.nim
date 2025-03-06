@@ -64,9 +64,6 @@ proc fcQMediaAudioProbeControl_trUtf83(s: cstring, c: cstring, n: cint): struct_
 proc fcQMediaAudioProbeControl_staticMetaObject(): pointer {.importc: "QMediaAudioProbeControl_staticMetaObject".}
 proc fcQMediaAudioProbeControl_delete(self: pointer) {.importc: "QMediaAudioProbeControl_delete".}
 
-
-func init*(T: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, h: ptr cQMediaAudioProbeControl): gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl =
-  T(h: h)
 proc metaObject*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAudioProbeControl_metaObject(self.h))
 
@@ -92,7 +89,7 @@ proc audioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbe
   fcQMediaAudioProbeControl_audioBufferProbed(self.h, buffer.h)
 
 type QMediaAudioProbeControlaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
-proc miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed(slot: int, buffer: pointer) {.exportc.} =
+proc miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed(slot: int, buffer: pointer) {.exportc: "miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed".} =
   let nimfunc = cast[ptr QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
 
@@ -108,7 +105,7 @@ proc flush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, ): 
   fcQMediaAudioProbeControl_flush(self.h)
 
 type QMediaAudioProbeControlflushSlot* = proc()
-proc miqt_exec_callback_QMediaAudioProbeControl_flush(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQMediaAudioProbeControl_flush(slot: int) {.exportc: "miqt_exec_callback_QMediaAudioProbeControl_flush".} =
   let nimfunc = cast[ptr QMediaAudioProbeControlflushSlot](cast[pointer](slot))
   nimfunc[]()
 

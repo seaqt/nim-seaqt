@@ -79,8 +79,6 @@ export
 
 type cQNetworkSession*{.exportc: "QNetworkSession", incompleteStruct.} = object
 
-proc fcQNetworkSession_new(connConfig: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new".}
-proc fcQNetworkSession_new2(connConfig: pointer, parent: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new2".}
 proc fcQNetworkSession_metaObject(self: pointer, ): pointer {.importc: "QNetworkSession_metaObject".}
 proc fcQNetworkSession_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkSession_metacast".}
 proc fcQNetworkSession_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkSession_metacall".}
@@ -125,37 +123,32 @@ proc fcQNetworkSession_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string 
 proc fcQNetworkSession_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QNetworkSession_trUtf82".}
 proc fcQNetworkSession_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QNetworkSession_trUtf83".}
 proc fcQNetworkSession_waitForOpened1(self: pointer, msecs: cint): bool {.importc: "QNetworkSession_waitForOpened1".}
-proc fQNetworkSession_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QNetworkSession_virtualbase_metaObject".}
-proc fcQNetworkSession_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_metaObject".}
-proc fQNetworkSession_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QNetworkSession_virtualbase_metacast".}
-proc fcQNetworkSession_override_virtual_metacast(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_metacast".}
-proc fQNetworkSession_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QNetworkSession_virtualbase_metacall".}
-proc fcQNetworkSession_override_virtual_metacall(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_metacall".}
-proc fQNetworkSession_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QNetworkSession_virtualbase_connectNotify".}
-proc fcQNetworkSession_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_connectNotify".}
-proc fQNetworkSession_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QNetworkSession_virtualbase_disconnectNotify".}
-proc fcQNetworkSession_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_disconnectNotify".}
-proc fQNetworkSession_virtualbase_event(self: pointer, event: pointer): bool{.importc: "QNetworkSession_virtualbase_event".}
-proc fcQNetworkSession_override_virtual_event(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_event".}
-proc fQNetworkSession_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QNetworkSession_virtualbase_eventFilter".}
-proc fcQNetworkSession_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_eventFilter".}
-proc fQNetworkSession_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QNetworkSession_virtualbase_timerEvent".}
-proc fcQNetworkSession_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_timerEvent".}
-proc fQNetworkSession_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QNetworkSession_virtualbase_childEvent".}
-proc fcQNetworkSession_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_childEvent".}
-proc fQNetworkSession_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QNetworkSession_virtualbase_customEvent".}
-proc fcQNetworkSession_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QNetworkSession_override_virtual_customEvent".}
+type cQNetworkSessionVTable = object
+  destructor*: proc(vtbl: ptr cQNetworkSessionVTable, self: ptr cQNetworkSession) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQNetworkSession_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QNetworkSession_virtualbase_metaObject".}
+proc fcQNetworkSession_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QNetworkSession_virtualbase_metacast".}
+proc fcQNetworkSession_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QNetworkSession_virtualbase_metacall".}
+proc fcQNetworkSession_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkSession_virtualbase_connectNotify".}
+proc fcQNetworkSession_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QNetworkSession_virtualbase_disconnectNotify".}
+proc fcQNetworkSession_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QNetworkSession_virtualbase_event".}
+proc fcQNetworkSession_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QNetworkSession_virtualbase_eventFilter".}
+proc fcQNetworkSession_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_timerEvent".}
+proc fcQNetworkSession_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_childEvent".}
+proc fcQNetworkSession_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QNetworkSession_virtualbase_customEvent".}
+proc fcQNetworkSession_new(vtbl: pointer, connConfig: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new".}
+proc fcQNetworkSession_new2(vtbl: pointer, connConfig: pointer, parent: pointer): ptr cQNetworkSession {.importc: "QNetworkSession_new2".}
 proc fcQNetworkSession_staticMetaObject(): pointer {.importc: "QNetworkSession_staticMetaObject".}
 proc fcQNetworkSession_delete(self: pointer) {.importc: "QNetworkSession_delete".}
-
-
-func init*(T: type gen_qnetworksession_types.QNetworkSession, h: ptr cQNetworkSession): gen_qnetworksession_types.QNetworkSession =
-  T(h: h)
-proc create*(T: type gen_qnetworksession_types.QNetworkSession, connConfig: gen_qnetworkconfiguration_types.QNetworkConfiguration): gen_qnetworksession_types.QNetworkSession =
-  gen_qnetworksession_types.QNetworkSession.init(fcQNetworkSession_new(connConfig.h))
-
-proc create*(T: type gen_qnetworksession_types.QNetworkSession, connConfig: gen_qnetworkconfiguration_types.QNetworkConfiguration, parent: gen_qobject_types.QObject): gen_qnetworksession_types.QNetworkSession =
-  gen_qnetworksession_types.QNetworkSession.init(fcQNetworkSession_new2(connConfig.h, parent.h))
 
 proc metaObject*(self: gen_qnetworksession_types.QNetworkSession, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkSession_metaObject(self.h))
@@ -245,7 +238,7 @@ proc stateChanged*(self: gen_qnetworksession_types.QNetworkSession, param1: cint
   fcQNetworkSession_stateChanged(self.h, cint(param1))
 
 type QNetworkSessionstateChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_QNetworkSession_stateChanged(slot: int, param1: cint) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_stateChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QNetworkSession_stateChanged".} =
   let nimfunc = cast[ptr QNetworkSessionstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
@@ -261,7 +254,7 @@ proc opened*(self: gen_qnetworksession_types.QNetworkSession, ): void =
   fcQNetworkSession_opened(self.h)
 
 type QNetworkSessionopenedSlot* = proc()
-proc miqt_exec_callback_QNetworkSession_opened(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_opened(slot: int) {.exportc: "miqt_exec_callback_QNetworkSession_opened".} =
   let nimfunc = cast[ptr QNetworkSessionopenedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -275,7 +268,7 @@ proc closed*(self: gen_qnetworksession_types.QNetworkSession, ): void =
   fcQNetworkSession_closed(self.h)
 
 type QNetworkSessionclosedSlot* = proc()
-proc miqt_exec_callback_QNetworkSession_closed(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_closed(slot: int) {.exportc: "miqt_exec_callback_QNetworkSession_closed".} =
   let nimfunc = cast[ptr QNetworkSessionclosedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -289,7 +282,7 @@ proc error*(self: gen_qnetworksession_types.QNetworkSession, param1: cint): void
   fcQNetworkSession_errorWithQNetworkSessionSessionError(self.h, cint(param1))
 
 type QNetworkSessionerrorWithQNetworkSessionSessionErrorSlot* = proc(param1: cint)
-proc miqt_exec_callback_QNetworkSession_errorWithQNetworkSessionSessionError(slot: int, param1: cint) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_errorWithQNetworkSessionSessionError(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QNetworkSession_errorWithQNetworkSessionSessionError".} =
   let nimfunc = cast[ptr QNetworkSessionerrorWithQNetworkSessionSessionErrorSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
@@ -305,7 +298,7 @@ proc preferredConfigurationChanged*(self: gen_qnetworksession_types.QNetworkSess
   fcQNetworkSession_preferredConfigurationChanged(self.h, config.h, isSeamless)
 
 type QNetworkSessionpreferredConfigurationChangedSlot* = proc(config: gen_qnetworkconfiguration_types.QNetworkConfiguration, isSeamless: bool)
-proc miqt_exec_callback_QNetworkSession_preferredConfigurationChanged(slot: int, config: pointer, isSeamless: bool) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_preferredConfigurationChanged(slot: int, config: pointer, isSeamless: bool) {.exportc: "miqt_exec_callback_QNetworkSession_preferredConfigurationChanged".} =
   let nimfunc = cast[ptr QNetworkSessionpreferredConfigurationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: config)
 
@@ -323,7 +316,7 @@ proc newConfigurationActivated*(self: gen_qnetworksession_types.QNetworkSession,
   fcQNetworkSession_newConfigurationActivated(self.h)
 
 type QNetworkSessionnewConfigurationActivatedSlot* = proc()
-proc miqt_exec_callback_QNetworkSession_newConfigurationActivated(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_newConfigurationActivated(slot: int) {.exportc: "miqt_exec_callback_QNetworkSession_newConfigurationActivated".} =
   let nimfunc = cast[ptr QNetworkSessionnewConfigurationActivatedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -337,7 +330,7 @@ proc usagePoliciesChanged*(self: gen_qnetworksession_types.QNetworkSession, usag
   fcQNetworkSession_usagePoliciesChanged(self.h, cint(usagePolicies))
 
 type QNetworkSessionusagePoliciesChangedSlot* = proc(usagePolicies: cint)
-proc miqt_exec_callback_QNetworkSession_usagePoliciesChanged(slot: int, usagePolicies: cint) {.exportc.} =
+proc miqt_exec_callback_cQNetworkSession_usagePoliciesChanged(slot: int, usagePolicies: cint) {.exportc: "miqt_exec_callback_QNetworkSession_usagePoliciesChanged".} =
   let nimfunc = cast[ptr QNetworkSessionusagePoliciesChangedSlot](cast[pointer](slot))
   let slotval1 = cint(usagePolicies)
 
@@ -376,190 +369,185 @@ proc trUtf8*(_: type gen_qnetworksession_types.QNetworkSession, s: cstring, c: c
 proc waitForOpened*(self: gen_qnetworksession_types.QNetworkSession, msecs: cint): bool =
   fcQNetworkSession_waitForOpened1(self.h, msecs)
 
+type QNetworkSessionmetaObjectProc* = proc(self: QNetworkSession): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QNetworkSessionmetacastProc* = proc(self: QNetworkSession, param1: cstring): pointer {.raises: [], gcsafe.}
+type QNetworkSessionmetacallProc* = proc(self: QNetworkSession, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QNetworkSessionconnectNotifyProc* = proc(self: QNetworkSession, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QNetworkSessiondisconnectNotifyProc* = proc(self: QNetworkSession, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QNetworkSessioneventProc* = proc(self: QNetworkSession, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QNetworkSessioneventFilterProc* = proc(self: QNetworkSession, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QNetworkSessiontimerEventProc* = proc(self: QNetworkSession, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QNetworkSessionchildEventProc* = proc(self: QNetworkSession, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QNetworkSessioncustomEventProc* = proc(self: QNetworkSession, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QNetworkSessionVTable* = object
+  vtbl: cQNetworkSessionVTable
+  metaObject*: QNetworkSessionmetaObjectProc
+  metacast*: QNetworkSessionmetacastProc
+  metacall*: QNetworkSessionmetacallProc
+  connectNotify*: QNetworkSessionconnectNotifyProc
+  disconnectNotify*: QNetworkSessiondisconnectNotifyProc
+  event*: QNetworkSessioneventProc
+  eventFilter*: QNetworkSessioneventFilterProc
+  timerEvent*: QNetworkSessiontimerEventProc
+  childEvent*: QNetworkSessionchildEventProc
+  customEvent*: QNetworkSessioncustomEventProc
 proc QNetworkSessionmetaObject*(self: gen_qnetworksession_types.QNetworkSession, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQNetworkSession_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQNetworkSession_virtualbase_metaObject(self.h))
 
-type QNetworkSessionmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessionmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessionmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_metaObject(self: ptr cQNetworkSession, slot: int): pointer {.exportc: "miqt_exec_callback_QNetworkSession_metaObject ".} =
-  var nimfunc = cast[ptr QNetworkSessionmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQNetworkSession_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QNetworkSessionmetacast*(self: gen_qnetworksession_types.QNetworkSession, param1: cstring): pointer =
-  fQNetworkSession_virtualbase_metacast(self.h, param1)
+  fcQNetworkSession_virtualbase_metacast(self.h, param1)
 
-type QNetworkSessionmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessionmetacastProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessionmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_metacast(self: ptr cQNetworkSession, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QNetworkSession_metacast ".} =
-  var nimfunc = cast[ptr QNetworkSessionmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QNetworkSessionmetacall*(self: gen_qnetworksession_types.QNetworkSession, param1: cint, param2: cint, param3: pointer): cint =
-  fQNetworkSession_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQNetworkSession_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QNetworkSessionmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessionmetacallProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessionmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_metacall(self: ptr cQNetworkSession, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QNetworkSession_metacall ".} =
-  var nimfunc = cast[ptr QNetworkSessionmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QNetworkSessionconnectNotify*(self: gen_qnetworksession_types.QNetworkSession, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQNetworkSession_virtualbase_connectNotify(self.h, signal.h)
+  fcQNetworkSession_virtualbase_connectNotify(self.h, signal.h)
 
-type QNetworkSessionconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessionconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessionconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_connectNotify(self: ptr cQNetworkSession, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QNetworkSession_connectNotify ".} =
-  var nimfunc = cast[ptr QNetworkSessionconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkSessiondisconnectNotify*(self: gen_qnetworksession_types.QNetworkSession, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQNetworkSession_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQNetworkSession_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QNetworkSessiondisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessiondisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessiondisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_disconnectNotify(self: ptr cQNetworkSession, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QNetworkSession_disconnectNotify ".} =
-  var nimfunc = cast[ptr QNetworkSessiondisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkSessionevent*(self: gen_qnetworksession_types.QNetworkSession, event: gen_qcoreevent_types.QEvent): bool =
-  fQNetworkSession_virtualbase_event(self.h, event.h)
+  fcQNetworkSession_virtualbase_event(self.h, event.h)
 
-type QNetworkSessioneventProc* = proc(event: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessioneventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessioneventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_event(self: ptr cQNetworkSession, slot: int, event: pointer): bool {.exportc: "miqt_exec_callback_QNetworkSession_event ".} =
-  var nimfunc = cast[ptr QNetworkSessioneventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QNetworkSessioneventFilter*(self: gen_qnetworksession_types.QNetworkSession, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQNetworkSession_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQNetworkSession_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QNetworkSessioneventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessioneventFilterProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessioneventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_eventFilter(self: ptr cQNetworkSession, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QNetworkSession_eventFilter ".} =
-  var nimfunc = cast[ptr QNetworkSessioneventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QNetworkSessiontimerEvent*(self: gen_qnetworksession_types.QNetworkSession, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQNetworkSession_virtualbase_timerEvent(self.h, event.h)
+  fcQNetworkSession_virtualbase_timerEvent(self.h, event.h)
 
-type QNetworkSessiontimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessiontimerEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessiontimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_timerEvent(self: ptr cQNetworkSession, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkSession_timerEvent ".} =
-  var nimfunc = cast[ptr QNetworkSessiontimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkSessionchildEvent*(self: gen_qnetworksession_types.QNetworkSession, event: gen_qcoreevent_types.QChildEvent): void =
-  fQNetworkSession_virtualbase_childEvent(self.h, event.h)
+  fcQNetworkSession_virtualbase_childEvent(self.h, event.h)
 
-type QNetworkSessionchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessionchildEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessionchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_childEvent(self: ptr cQNetworkSession, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkSession_childEvent ".} =
-  var nimfunc = cast[ptr QNetworkSessionchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QNetworkSessioncustomEvent*(self: gen_qnetworksession_types.QNetworkSession, event: gen_qcoreevent_types.QEvent): void =
-  fQNetworkSession_virtualbase_customEvent(self.h, event.h)
+  fcQNetworkSession_virtualbase_customEvent(self.h, event.h)
 
-type QNetworkSessioncustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qnetworksession_types.QNetworkSession, slot: QNetworkSessioncustomEventProc) =
-  # TODO check subclass
-  var tmp = new QNetworkSessioncustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQNetworkSession_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QNetworkSession_customEvent(self: ptr cQNetworkSession, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QNetworkSession_customEvent ".} =
-  var nimfunc = cast[ptr QNetworkSessioncustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQNetworkSession_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QNetworkSessionVTable](vtbl)
+  let self = QNetworkSession(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
+proc create*(T: type gen_qnetworksession_types.QNetworkSession,
+    connConfig: gen_qnetworkconfiguration_types.QNetworkConfiguration,
+    vtbl: ref QNetworkSessionVTable = nil): gen_qnetworksession_types.QNetworkSession =
+  let vtbl = if vtbl == nil: new QNetworkSessionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkSessionVTable, _: ptr cQNetworkSession) {.cdecl.} =
+    let vtbl = cast[ref QNetworkSessionVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkSession_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkSession_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkSession_metacall
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkSession_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkSession_disconnectNotify
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQNetworkSession_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkSession_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkSession_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkSession_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkSession_customEvent
+  gen_qnetworksession_types.QNetworkSession(h: fcQNetworkSession_new(addr(vtbl[]), connConfig.h))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qnetworksession_types.QNetworkSession,
+    connConfig: gen_qnetworkconfiguration_types.QNetworkConfiguration, parent: gen_qobject_types.QObject,
+    vtbl: ref QNetworkSessionVTable = nil): gen_qnetworksession_types.QNetworkSession =
+  let vtbl = if vtbl == nil: new QNetworkSessionVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQNetworkSessionVTable, _: ptr cQNetworkSession) {.cdecl.} =
+    let vtbl = cast[ref QNetworkSessionVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQNetworkSession_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQNetworkSession_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQNetworkSession_metacall
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQNetworkSession_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQNetworkSession_disconnectNotify
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQNetworkSession_event
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQNetworkSession_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQNetworkSession_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQNetworkSession_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQNetworkSession_customEvent
+  gen_qnetworksession_types.QNetworkSession(h: fcQNetworkSession_new2(addr(vtbl[]), connConfig.h, parent.h))
+
 proc staticMetaObject*(_: type gen_qnetworksession_types.QNetworkSession): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQNetworkSession_staticMetaObject())
 proc delete*(self: gen_qnetworksession_types.QNetworkSession) =

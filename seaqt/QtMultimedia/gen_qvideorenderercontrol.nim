@@ -62,9 +62,6 @@ proc fcQVideoRendererControl_trUtf83(s: cstring, c: cstring, n: cint): struct_mi
 proc fcQVideoRendererControl_staticMetaObject(): pointer {.importc: "QVideoRendererControl_staticMetaObject".}
 proc fcQVideoRendererControl_delete(self: pointer) {.importc: "QVideoRendererControl_delete".}
 
-
-func init*(T: type gen_qvideorenderercontrol_types.QVideoRendererControl, h: ptr cQVideoRendererControl): gen_qvideorenderercontrol_types.QVideoRendererControl =
-  T(h: h)
 proc metaObject*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_metaObject(self.h))
 

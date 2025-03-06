@@ -77,9 +77,6 @@ proc fcQCameraZoomControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_
 proc fcQCameraZoomControl_staticMetaObject(): pointer {.importc: "QCameraZoomControl_staticMetaObject".}
 proc fcQCameraZoomControl_delete(self: pointer) {.importc: "QCameraZoomControl_delete".}
 
-
-func init*(T: type gen_qcamerazoomcontrol_types.QCameraZoomControl, h: ptr cQCameraZoomControl): gen_qcamerazoomcontrol_types.QCameraZoomControl =
-  T(h: h)
 proc metaObject*(self: gen_qcamerazoomcontrol_types.QCameraZoomControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraZoomControl_metaObject(self.h))
 
@@ -126,7 +123,7 @@ proc maximumOpticalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoomCo
   fcQCameraZoomControl_maximumOpticalZoomChanged(self.h, param1)
 
 type QCameraZoomControlmaximumOpticalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraZoomControl_maximumOpticalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_maximumOpticalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_maximumOpticalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlmaximumOpticalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -142,7 +139,7 @@ proc maximumDigitalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoomCo
   fcQCameraZoomControl_maximumDigitalZoomChanged(self.h, param1)
 
 type QCameraZoomControlmaximumDigitalZoomChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_QCameraZoomControl_maximumDigitalZoomChanged(slot: int, param1: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_maximumDigitalZoomChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_maximumDigitalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlmaximumDigitalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
@@ -158,7 +155,7 @@ proc requestedOpticalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoom
   fcQCameraZoomControl_requestedOpticalZoomChanged(self.h, opticalZoom)
 
 type QCameraZoomControlrequestedOpticalZoomChangedSlot* = proc(opticalZoom: float64)
-proc miqt_exec_callback_QCameraZoomControl_requestedOpticalZoomChanged(slot: int, opticalZoom: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_requestedOpticalZoomChanged(slot: int, opticalZoom: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_requestedOpticalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlrequestedOpticalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = opticalZoom
 
@@ -174,7 +171,7 @@ proc requestedDigitalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoom
   fcQCameraZoomControl_requestedDigitalZoomChanged(self.h, digitalZoom)
 
 type QCameraZoomControlrequestedDigitalZoomChangedSlot* = proc(digitalZoom: float64)
-proc miqt_exec_callback_QCameraZoomControl_requestedDigitalZoomChanged(slot: int, digitalZoom: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_requestedDigitalZoomChanged(slot: int, digitalZoom: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_requestedDigitalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlrequestedDigitalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = digitalZoom
 
@@ -190,7 +187,7 @@ proc currentOpticalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoomCo
   fcQCameraZoomControl_currentOpticalZoomChanged(self.h, opticalZoom)
 
 type QCameraZoomControlcurrentOpticalZoomChangedSlot* = proc(opticalZoom: float64)
-proc miqt_exec_callback_QCameraZoomControl_currentOpticalZoomChanged(slot: int, opticalZoom: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_currentOpticalZoomChanged(slot: int, opticalZoom: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_currentOpticalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlcurrentOpticalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = opticalZoom
 
@@ -206,7 +203,7 @@ proc currentDigitalZoomChanged*(self: gen_qcamerazoomcontrol_types.QCameraZoomCo
   fcQCameraZoomControl_currentDigitalZoomChanged(self.h, digitalZoom)
 
 type QCameraZoomControlcurrentDigitalZoomChangedSlot* = proc(digitalZoom: float64)
-proc miqt_exec_callback_QCameraZoomControl_currentDigitalZoomChanged(slot: int, digitalZoom: float64) {.exportc.} =
+proc miqt_exec_callback_cQCameraZoomControl_currentDigitalZoomChanged(slot: int, digitalZoom: float64) {.exportc: "miqt_exec_callback_QCameraZoomControl_currentDigitalZoomChanged".} =
   let nimfunc = cast[ptr QCameraZoomControlcurrentDigitalZoomChangedSlot](cast[pointer](slot))
   let slotval1 = digitalZoom
 

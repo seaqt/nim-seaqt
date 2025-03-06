@@ -48,7 +48,6 @@ export gen_qelapsedtimer_types
 
 type cQElapsedTimer*{.exportc: "QElapsedTimer", incompleteStruct.} = object
 
-proc fcQElapsedTimer_new(): ptr cQElapsedTimer {.importc: "QElapsedTimer_new".}
 proc fcQElapsedTimer_clockType(): cint {.importc: "QElapsedTimer_clockType".}
 proc fcQElapsedTimer_isMonotonic(): bool {.importc: "QElapsedTimer_isMonotonic".}
 proc fcQElapsedTimer_start(self: pointer, ): void {.importc: "QElapsedTimer_start".}
@@ -63,13 +62,8 @@ proc fcQElapsedTimer_msecsTo(self: pointer, other: pointer): clonglong {.importc
 proc fcQElapsedTimer_secsTo(self: pointer, other: pointer): clonglong {.importc: "QElapsedTimer_secsTo".}
 proc fcQElapsedTimer_operatorEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorEqual".}
 proc fcQElapsedTimer_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorNotEqual".}
+proc fcQElapsedTimer_new(): ptr cQElapsedTimer {.importc: "QElapsedTimer_new".}
 proc fcQElapsedTimer_delete(self: pointer) {.importc: "QElapsedTimer_delete".}
-
-
-func init*(T: type gen_qelapsedtimer_types.QElapsedTimer, h: ptr cQElapsedTimer): gen_qelapsedtimer_types.QElapsedTimer =
-  T(h: h)
-proc create*(T: type gen_qelapsedtimer_types.QElapsedTimer, ): gen_qelapsedtimer_types.QElapsedTimer =
-  gen_qelapsedtimer_types.QElapsedTimer.init(fcQElapsedTimer_new())
 
 proc clockType*(_: type gen_qelapsedtimer_types.QElapsedTimer, ): cint =
   cint(fcQElapsedTimer_clockType())
@@ -112,6 +106,9 @@ proc operatorEqual*(self: gen_qelapsedtimer_types.QElapsedTimer, other: gen_qela
 
 proc operatorNotEqual*(self: gen_qelapsedtimer_types.QElapsedTimer, other: gen_qelapsedtimer_types.QElapsedTimer): bool =
   fcQElapsedTimer_operatorNotEqual(self.h, other.h)
+
+proc create*(T: type gen_qelapsedtimer_types.QElapsedTimer): gen_qelapsedtimer_types.QElapsedTimer =
+  gen_qelapsedtimer_types.QElapsedTimer(h: fcQElapsedTimer_new())
 
 proc delete*(self: gen_qelapsedtimer_types.QElapsedTimer) =
   fcQElapsedTimer_delete(self.h)

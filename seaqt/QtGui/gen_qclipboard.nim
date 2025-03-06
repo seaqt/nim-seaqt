@@ -103,9 +103,6 @@ proc fcQClipboard_setImage2(self: pointer, param1: pointer, mode: cint): void {.
 proc fcQClipboard_setPixmap2(self: pointer, param1: pointer, mode: cint): void {.importc: "QClipboard_setPixmap2".}
 proc fcQClipboard_staticMetaObject(): pointer {.importc: "QClipboard_staticMetaObject".}
 
-
-func init*(T: type gen_qclipboard_types.QClipboard, h: ptr cQClipboard): gen_qclipboard_types.QClipboard =
-  T(h: h)
 proc metaObject*(self: gen_qclipboard_types.QClipboard, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQClipboard_metaObject(self.h))
 
@@ -182,7 +179,7 @@ proc changed*(self: gen_qclipboard_types.QClipboard, mode: cint): void =
   fcQClipboard_changed(self.h, cint(mode))
 
 type QClipboardchangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_QClipboard_changed(slot: int, mode: cint) {.exportc.} =
+proc miqt_exec_callback_cQClipboard_changed(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QClipboard_changed".} =
   let nimfunc = cast[ptr QClipboardchangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
@@ -198,7 +195,7 @@ proc selectionChanged*(self: gen_qclipboard_types.QClipboard, ): void =
   fcQClipboard_selectionChanged(self.h)
 
 type QClipboardselectionChangedSlot* = proc()
-proc miqt_exec_callback_QClipboard_selectionChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQClipboard_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QClipboard_selectionChanged".} =
   let nimfunc = cast[ptr QClipboardselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -212,7 +209,7 @@ proc findBufferChanged*(self: gen_qclipboard_types.QClipboard, ): void =
   fcQClipboard_findBufferChanged(self.h)
 
 type QClipboardfindBufferChangedSlot* = proc()
-proc miqt_exec_callback_QClipboard_findBufferChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQClipboard_findBufferChanged(slot: int) {.exportc: "miqt_exec_callback_QClipboard_findBufferChanged".} =
   let nimfunc = cast[ptr QClipboardfindBufferChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -226,7 +223,7 @@ proc dataChanged*(self: gen_qclipboard_types.QClipboard, ): void =
   fcQClipboard_dataChanged(self.h)
 
 type QClipboarddataChangedSlot* = proc()
-proc miqt_exec_callback_QClipboard_dataChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQClipboard_dataChanged(slot: int) {.exportc: "miqt_exec_callback_QClipboard_dataChanged".} =
   let nimfunc = cast[ptr QClipboarddataChangedSlot](cast[pointer](slot))
   nimfunc[]()
 

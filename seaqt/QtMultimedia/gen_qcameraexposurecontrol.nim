@@ -84,9 +84,6 @@ proc fcQCameraExposureControl_trUtf83(s: cstring, c: cstring, n: cint): struct_m
 proc fcQCameraExposureControl_staticMetaObject(): pointer {.importc: "QCameraExposureControl_staticMetaObject".}
 proc fcQCameraExposureControl_delete(self: pointer) {.importc: "QCameraExposureControl_delete".}
 
-
-func init*(T: type gen_qcameraexposurecontrol_types.QCameraExposureControl, h: ptr cQCameraExposureControl): gen_qcameraexposurecontrol_types.QCameraExposureControl =
-  T(h: h)
 proc metaObject*(self: gen_qcameraexposurecontrol_types.QCameraExposureControl, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraExposureControl_metaObject(self.h))
 
@@ -124,7 +121,7 @@ proc requestedValueChanged*(self: gen_qcameraexposurecontrol_types.QCameraExposu
   fcQCameraExposureControl_requestedValueChanged(self.h, parameter)
 
 type QCameraExposureControlrequestedValueChangedSlot* = proc(parameter: cint)
-proc miqt_exec_callback_QCameraExposureControl_requestedValueChanged(slot: int, parameter: cint) {.exportc.} =
+proc miqt_exec_callback_cQCameraExposureControl_requestedValueChanged(slot: int, parameter: cint) {.exportc: "miqt_exec_callback_QCameraExposureControl_requestedValueChanged".} =
   let nimfunc = cast[ptr QCameraExposureControlrequestedValueChangedSlot](cast[pointer](slot))
   let slotval1 = parameter
 
@@ -140,7 +137,7 @@ proc actualValueChanged*(self: gen_qcameraexposurecontrol_types.QCameraExposureC
   fcQCameraExposureControl_actualValueChanged(self.h, parameter)
 
 type QCameraExposureControlactualValueChangedSlot* = proc(parameter: cint)
-proc miqt_exec_callback_QCameraExposureControl_actualValueChanged(slot: int, parameter: cint) {.exportc.} =
+proc miqt_exec_callback_cQCameraExposureControl_actualValueChanged(slot: int, parameter: cint) {.exportc: "miqt_exec_callback_QCameraExposureControl_actualValueChanged".} =
   let nimfunc = cast[ptr QCameraExposureControlactualValueChangedSlot](cast[pointer](slot))
   let slotval1 = parameter
 
@@ -156,7 +153,7 @@ proc parameterRangeChanged*(self: gen_qcameraexposurecontrol_types.QCameraExposu
   fcQCameraExposureControl_parameterRangeChanged(self.h, parameter)
 
 type QCameraExposureControlparameterRangeChangedSlot* = proc(parameter: cint)
-proc miqt_exec_callback_QCameraExposureControl_parameterRangeChanged(slot: int, parameter: cint) {.exportc.} =
+proc miqt_exec_callback_cQCameraExposureControl_parameterRangeChanged(slot: int, parameter: cint) {.exportc: "miqt_exec_callback_QCameraExposureControl_parameterRangeChanged".} =
   let nimfunc = cast[ptr QCameraExposureControlparameterRangeChangedSlot](cast[pointer](slot))
   let slotval1 = parameter
 

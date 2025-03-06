@@ -24,13 +24,16 @@ typedef struct QScriptEngine QScriptEngine;
 typedef struct QScriptExtensionInterface QScriptExtensionInterface;
 #endif
 
-QScriptExtensionInterface* QScriptExtensionInterface_new(QScriptExtensionInterface* param1);
+struct QScriptExtensionInterface_VTable {
+	void (*destructor)(struct QScriptExtensionInterface_VTable* vtbl, QScriptExtensionInterface* self);
+	void (*initialize)(struct QScriptExtensionInterface_VTable* vtbl, QScriptExtensionInterface* self, struct miqt_string key, QScriptEngine* engine);
+	struct miqt_array /* of struct miqt_string */  (*keys)(struct QScriptExtensionInterface_VTable* vtbl, const QScriptExtensionInterface* self);
+};
+QScriptExtensionInterface* QScriptExtensionInterface_new(struct QScriptExtensionInterface_VTable* vtbl, QScriptExtensionInterface* param1);
 void QScriptExtensionInterface_virtbase(QScriptExtensionInterface* src, QFactoryInterface** outptr_QFactoryInterface);
 void QScriptExtensionInterface_initialize(QScriptExtensionInterface* self, struct miqt_string key, QScriptEngine* engine);
 void QScriptExtensionInterface_operatorAssign(QScriptExtensionInterface* self, QScriptExtensionInterface* param1);
-bool QScriptExtensionInterface_override_virtual_initialize(void* self, intptr_t slot);
 void QScriptExtensionInterface_virtualbase_initialize(void* self, struct miqt_string key, QScriptEngine* engine);
-bool QScriptExtensionInterface_override_virtual_keys(void* self, intptr_t slot);
 struct miqt_array /* of struct miqt_string */  QScriptExtensionInterface_virtualbase_keys(const void* self);
 void QScriptExtensionInterface_delete(QScriptExtensionInterface* self);
 

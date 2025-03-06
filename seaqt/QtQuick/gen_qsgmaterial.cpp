@@ -8,62 +8,51 @@
 extern "C" {
 #endif
 
-QSGMaterialType* miqt_exec_callback_QSGMaterial_type(const QSGMaterial*, intptr_t);
-QSGMaterialShader* miqt_exec_callback_QSGMaterial_createShader(const QSGMaterial*, intptr_t);
-int miqt_exec_callback_QSGMaterial_compare(const QSGMaterial*, intptr_t, QSGMaterial*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
 
 class VirtualQSGMaterial final : public QSGMaterial {
+	struct QSGMaterial_VTable* vtbl;
 public:
 
-	VirtualQSGMaterial(): QSGMaterial() {};
+	VirtualQSGMaterial(struct QSGMaterial_VTable* vtbl): QSGMaterial(), vtbl(vtbl) {};
 
-	virtual ~VirtualQSGMaterial() override = default;
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__type = 0;
+	virtual ~VirtualQSGMaterial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
 
 	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialType* type() const override {
-		if (handle__type == 0) {
+		if (vtbl->type == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
 
-		QSGMaterialType* callback_return_value = miqt_exec_callback_QSGMaterial_type(this, handle__type);
+
+		QSGMaterialType* callback_return_value = vtbl->type(vtbl, this);
 
 		return callback_return_value;
 	}
-
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__createShader = 0;
 
 	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialShader* createShader() const override {
-		if (handle__createShader == 0) {
+		if (vtbl->createShader == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
-		
 
-		QSGMaterialShader* callback_return_value = miqt_exec_callback_QSGMaterial_createShader(this, handle__createShader);
+
+		QSGMaterialShader* callback_return_value = vtbl->createShader(vtbl, this);
 
 		return callback_return_value;
 	}
 
-	// cgo.Handle value for overwritten implementation
-	intptr_t handle__compare = 0;
-
 	// Subclass to allow providing a Go implementation
 	virtual int compare(const QSGMaterial* other) const override {
-		if (handle__compare == 0) {
+		if (vtbl->compare == 0) {
 			return QSGMaterial::compare(other);
 		}
-		
+
 		QSGMaterial* sigval1 = (QSGMaterial*) other;
 
-		int callback_return_value = miqt_exec_callback_QSGMaterial_compare(this, handle__compare, sigval1);
+		int callback_return_value = vtbl->compare(vtbl, this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
@@ -72,8 +61,8 @@ public:
 
 };
 
-QSGMaterial* QSGMaterial_new() {
-	return new VirtualQSGMaterial();
+QSGMaterial* QSGMaterial_new(struct QSGMaterial_VTable* vtbl) {
+	return new VirtualQSGMaterial(vtbl);
 }
 
 QSGMaterialType* QSGMaterial_type(const QSGMaterial* self) {
@@ -99,36 +88,6 @@ void QSGMaterial_setFlag(QSGMaterial* self, int flags) {
 
 void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterial::Flags>(flags), on);
-}
-
-bool QSGMaterial_override_virtual_type(void* self, intptr_t slot) {
-	VirtualQSGMaterial* self_cast = dynamic_cast<VirtualQSGMaterial*>( (QSGMaterial*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__type = slot;
-	return true;
-}
-
-bool QSGMaterial_override_virtual_createShader(void* self, intptr_t slot) {
-	VirtualQSGMaterial* self_cast = dynamic_cast<VirtualQSGMaterial*>( (QSGMaterial*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__createShader = slot;
-	return true;
-}
-
-bool QSGMaterial_override_virtual_compare(void* self, intptr_t slot) {
-	VirtualQSGMaterial* self_cast = dynamic_cast<VirtualQSGMaterial*>( (QSGMaterial*)(self) );
-	if (self_cast == nullptr) {
-		return false;
-	}
-	
-	self_cast->handle__compare = slot;
-	return true;
 }
 
 int QSGMaterial_virtualbase_compare(const void* self, QSGMaterial* other) {

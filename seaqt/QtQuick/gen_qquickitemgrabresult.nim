@@ -68,9 +68,6 @@ proc fcQQuickItemGrabResult_trUtf83(s: cstring, c: cstring, n: cint): struct_miq
 proc fcQQuickItemGrabResult_staticMetaObject(): pointer {.importc: "QQuickItemGrabResult_staticMetaObject".}
 proc fcQQuickItemGrabResult_delete(self: pointer) {.importc: "QQuickItemGrabResult_delete".}
 
-
-func init*(T: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, h: ptr cQQuickItemGrabResult): gen_qquickitemgrabresult_types.QQuickItemGrabResult =
-  T(h: h)
 proc metaObject*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItemGrabResult_metaObject(self.h))
 
@@ -108,7 +105,7 @@ proc ready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): void =
   fcQQuickItemGrabResult_ready(self.h)
 
 type QQuickItemGrabResultreadySlot* = proc()
-proc miqt_exec_callback_QQuickItemGrabResult_ready(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickItemGrabResult_ready(slot: int) {.exportc: "miqt_exec_callback_QQuickItemGrabResult_ready".} =
   let nimfunc = cast[ptr QQuickItemGrabResultreadySlot](cast[pointer](slot))
   nimfunc[]()
 

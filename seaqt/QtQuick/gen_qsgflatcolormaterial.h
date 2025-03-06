@@ -28,18 +28,21 @@ typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialType QSGMaterialType;
 #endif
 
-QSGFlatColorMaterial* QSGFlatColorMaterial_new();
+struct QSGFlatColorMaterial_VTable {
+	void (*destructor)(struct QSGFlatColorMaterial_VTable* vtbl, QSGFlatColorMaterial* self);
+	QSGMaterialType* (*type)(struct QSGFlatColorMaterial_VTable* vtbl, const QSGFlatColorMaterial* self);
+	QSGMaterialShader* (*createShader)(struct QSGFlatColorMaterial_VTable* vtbl, const QSGFlatColorMaterial* self);
+	int (*compare)(struct QSGFlatColorMaterial_VTable* vtbl, const QSGFlatColorMaterial* self, QSGMaterial* other);
+};
+QSGFlatColorMaterial* QSGFlatColorMaterial_new(struct QSGFlatColorMaterial_VTable* vtbl);
 void QSGFlatColorMaterial_virtbase(QSGFlatColorMaterial* src, QSGMaterial** outptr_QSGMaterial);
 QSGMaterialType* QSGFlatColorMaterial_type(const QSGFlatColorMaterial* self);
 QSGMaterialShader* QSGFlatColorMaterial_createShader(const QSGFlatColorMaterial* self);
 void QSGFlatColorMaterial_setColor(QSGFlatColorMaterial* self, QColor* color);
 QColor* QSGFlatColorMaterial_color(const QSGFlatColorMaterial* self);
 int QSGFlatColorMaterial_compare(const QSGFlatColorMaterial* self, QSGMaterial* other);
-bool QSGFlatColorMaterial_override_virtual_type(void* self, intptr_t slot);
 QSGMaterialType* QSGFlatColorMaterial_virtualbase_type(const void* self);
-bool QSGFlatColorMaterial_override_virtual_createShader(void* self, intptr_t slot);
 QSGMaterialShader* QSGFlatColorMaterial_virtualbase_createShader(const void* self);
-bool QSGFlatColorMaterial_override_virtual_compare(void* self, intptr_t slot);
 int QSGFlatColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
 void QSGFlatColorMaterial_delete(QSGFlatColorMaterial* self);
 

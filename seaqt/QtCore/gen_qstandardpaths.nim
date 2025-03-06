@@ -86,9 +86,6 @@ proc fcQStandardPaths_locateAll3(typeVal: cint, fileName: struct_miqt_string, op
 proc fcQStandardPaths_findExecutable2(executableName: struct_miqt_string, paths: struct_miqt_array): struct_miqt_string {.importc: "QStandardPaths_findExecutable2".}
 proc fcQStandardPaths_staticMetaObject(): pointer {.importc: "QStandardPaths_staticMetaObject".}
 
-
-func init*(T: type gen_qstandardpaths_types.QStandardPaths, h: ptr cQStandardPaths): gen_qstandardpaths_types.QStandardPaths =
-  T(h: h)
 proc writableLocation*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint): string =
   let v_ms = fcQStandardPaths_writableLocation(cint(typeVal))
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))

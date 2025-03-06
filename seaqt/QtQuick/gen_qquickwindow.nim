@@ -113,9 +113,6 @@ export
 type cQQuickWindow*{.exportc: "QQuickWindow", incompleteStruct.} = object
 type cQQuickWindowGraphicsStateInfo*{.exportc: "QQuickWindow__GraphicsStateInfo", incompleteStruct.} = object
 
-proc fcQQuickWindow_new(): ptr cQQuickWindow {.importc: "QQuickWindow_new".}
-proc fcQQuickWindow_new2(renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new2".}
-proc fcQQuickWindow_new3(parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
 proc fcQQuickWindow_metaObject(self: pointer, ): pointer {.importc: "QQuickWindow_metaObject".}
 proc fcQQuickWindow_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWindow_metacast".}
 proc fcQQuickWindow_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWindow_metacall".}
@@ -198,85 +195,78 @@ proc fcQQuickWindow_trUtf82(s: cstring, c: cstring): struct_miqt_string {.import
 proc fcQQuickWindow_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickWindow_trUtf83".}
 proc fcQQuickWindow_createTextureFromId3(self: pointer, id: cuint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromId3".}
 proc fcQQuickWindow_createTextureFromNativeObject5(self: pointer, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: pointer, options: cint): pointer {.importc: "QQuickWindow_createTextureFromNativeObject5".}
-proc fQQuickWindow_virtualbase_metaObject(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_metaObject".}
-proc fcQQuickWindow_override_virtual_metaObject(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metaObject".}
-proc fQQuickWindow_virtualbase_metacast(self: pointer, param1: cstring): pointer{.importc: "QQuickWindow_virtualbase_metacast".}
-proc fcQQuickWindow_override_virtual_metacast(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metacast".}
-proc fQQuickWindow_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint{.importc: "QQuickWindow_virtualbase_metacall".}
-proc fcQQuickWindow_override_virtual_metacall(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_metacall".}
-proc fQQuickWindow_virtualbase_focusObject(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_focusObject".}
-proc fcQQuickWindow_override_virtual_focusObject(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_focusObject".}
-proc fQQuickWindow_virtualbase_accessibleRoot(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_accessibleRoot".}
-proc fcQQuickWindow_override_virtual_accessibleRoot(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_accessibleRoot".}
-proc fQQuickWindow_virtualbase_exposeEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_exposeEvent".}
-proc fcQQuickWindow_override_virtual_exposeEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_exposeEvent".}
-proc fQQuickWindow_virtualbase_resizeEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_resizeEvent".}
-proc fcQQuickWindow_override_virtual_resizeEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_resizeEvent".}
-proc fQQuickWindow_virtualbase_showEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_showEvent".}
-proc fcQQuickWindow_override_virtual_showEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_showEvent".}
-proc fQQuickWindow_virtualbase_hideEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_hideEvent".}
-proc fcQQuickWindow_override_virtual_hideEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_hideEvent".}
-proc fQQuickWindow_virtualbase_focusInEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_focusInEvent".}
-proc fcQQuickWindow_override_virtual_focusInEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_focusInEvent".}
-proc fQQuickWindow_virtualbase_focusOutEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_focusOutEvent".}
-proc fcQQuickWindow_override_virtual_focusOutEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_focusOutEvent".}
-proc fQQuickWindow_virtualbase_event(self: pointer, param1: pointer): bool{.importc: "QQuickWindow_virtualbase_event".}
-proc fcQQuickWindow_override_virtual_event(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_event".}
-proc fQQuickWindow_virtualbase_keyPressEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_keyPressEvent".}
-proc fcQQuickWindow_override_virtual_keyPressEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_keyPressEvent".}
-proc fQQuickWindow_virtualbase_keyReleaseEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_keyReleaseEvent".}
-proc fcQQuickWindow_override_virtual_keyReleaseEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_keyReleaseEvent".}
-proc fQQuickWindow_virtualbase_mousePressEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_mousePressEvent".}
-proc fcQQuickWindow_override_virtual_mousePressEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_mousePressEvent".}
-proc fQQuickWindow_virtualbase_mouseReleaseEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_mouseReleaseEvent".}
-proc fcQQuickWindow_override_virtual_mouseReleaseEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_mouseReleaseEvent".}
-proc fQQuickWindow_virtualbase_mouseDoubleClickEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_mouseDoubleClickEvent".}
-proc fcQQuickWindow_override_virtual_mouseDoubleClickEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_mouseDoubleClickEvent".}
-proc fQQuickWindow_virtualbase_mouseMoveEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_mouseMoveEvent".}
-proc fcQQuickWindow_override_virtual_mouseMoveEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_mouseMoveEvent".}
-proc fQQuickWindow_virtualbase_wheelEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_wheelEvent".}
-proc fcQQuickWindow_override_virtual_wheelEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_wheelEvent".}
-proc fQQuickWindow_virtualbase_tabletEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_tabletEvent".}
-proc fcQQuickWindow_override_virtual_tabletEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_tabletEvent".}
-proc fQQuickWindow_virtualbase_surfaceType(self: pointer, ): cint{.importc: "QQuickWindow_virtualbase_surfaceType".}
-proc fcQQuickWindow_override_virtual_surfaceType(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_surfaceType".}
-proc fQQuickWindow_virtualbase_format(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_format".}
-proc fcQQuickWindow_override_virtual_format(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_format".}
-proc fQQuickWindow_virtualbase_size(self: pointer, ): pointer{.importc: "QQuickWindow_virtualbase_size".}
-proc fcQQuickWindow_override_virtual_size(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_size".}
-proc fQQuickWindow_virtualbase_moveEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_moveEvent".}
-proc fcQQuickWindow_override_virtual_moveEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_moveEvent".}
-proc fQQuickWindow_virtualbase_touchEvent(self: pointer, param1: pointer): void{.importc: "QQuickWindow_virtualbase_touchEvent".}
-proc fcQQuickWindow_override_virtual_touchEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_touchEvent".}
-proc fQQuickWindow_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool{.importc: "QQuickWindow_virtualbase_nativeEvent".}
-proc fcQQuickWindow_override_virtual_nativeEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_nativeEvent".}
-proc fQQuickWindow_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool{.importc: "QQuickWindow_virtualbase_eventFilter".}
-proc fcQQuickWindow_override_virtual_eventFilter(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_eventFilter".}
-proc fQQuickWindow_virtualbase_timerEvent(self: pointer, event: pointer): void{.importc: "QQuickWindow_virtualbase_timerEvent".}
-proc fcQQuickWindow_override_virtual_timerEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_timerEvent".}
-proc fQQuickWindow_virtualbase_childEvent(self: pointer, event: pointer): void{.importc: "QQuickWindow_virtualbase_childEvent".}
-proc fcQQuickWindow_override_virtual_childEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_childEvent".}
-proc fQQuickWindow_virtualbase_customEvent(self: pointer, event: pointer): void{.importc: "QQuickWindow_virtualbase_customEvent".}
-proc fcQQuickWindow_override_virtual_customEvent(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_customEvent".}
-proc fQQuickWindow_virtualbase_connectNotify(self: pointer, signal: pointer): void{.importc: "QQuickWindow_virtualbase_connectNotify".}
-proc fcQQuickWindow_override_virtual_connectNotify(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_connectNotify".}
-proc fQQuickWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer): void{.importc: "QQuickWindow_virtualbase_disconnectNotify".}
-proc fcQQuickWindow_override_virtual_disconnectNotify(self: pointer, slot: int) {.importc: "QQuickWindow_override_virtual_disconnectNotify".}
+type cQQuickWindowVTable = object
+  destructor*: proc(vtbl: ptr cQQuickWindowVTable, self: ptr cQQuickWindow) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  focusObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  accessibleRoot*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  exposeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  surfaceType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
+  format*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  size*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  touchEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQuickWindow_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQuickWindow_virtualbase_metaObject".}
+proc fcQQuickWindow_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickWindow_virtualbase_metacast".}
+proc fcQQuickWindow_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickWindow_virtualbase_metacall".}
+proc fcQQuickWindow_virtualbase_focusObject(self: pointer, ): pointer {.importc: "QQuickWindow_virtualbase_focusObject".}
+proc fcQQuickWindow_virtualbase_accessibleRoot(self: pointer, ): pointer {.importc: "QQuickWindow_virtualbase_accessibleRoot".}
+proc fcQQuickWindow_virtualbase_exposeEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_exposeEvent".}
+proc fcQQuickWindow_virtualbase_resizeEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_resizeEvent".}
+proc fcQQuickWindow_virtualbase_showEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_showEvent".}
+proc fcQQuickWindow_virtualbase_hideEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_hideEvent".}
+proc fcQQuickWindow_virtualbase_focusInEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_focusInEvent".}
+proc fcQQuickWindow_virtualbase_focusOutEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_focusOutEvent".}
+proc fcQQuickWindow_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QQuickWindow_virtualbase_event".}
+proc fcQQuickWindow_virtualbase_keyPressEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_keyPressEvent".}
+proc fcQQuickWindow_virtualbase_keyReleaseEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_keyReleaseEvent".}
+proc fcQQuickWindow_virtualbase_mousePressEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_mousePressEvent".}
+proc fcQQuickWindow_virtualbase_mouseReleaseEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_mouseReleaseEvent".}
+proc fcQQuickWindow_virtualbase_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_mouseDoubleClickEvent".}
+proc fcQQuickWindow_virtualbase_mouseMoveEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_mouseMoveEvent".}
+proc fcQQuickWindow_virtualbase_wheelEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_wheelEvent".}
+proc fcQQuickWindow_virtualbase_tabletEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_tabletEvent".}
+proc fcQQuickWindow_virtualbase_surfaceType(self: pointer, ): cint {.importc: "QQuickWindow_virtualbase_surfaceType".}
+proc fcQQuickWindow_virtualbase_format(self: pointer, ): pointer {.importc: "QQuickWindow_virtualbase_format".}
+proc fcQQuickWindow_virtualbase_size(self: pointer, ): pointer {.importc: "QQuickWindow_virtualbase_size".}
+proc fcQQuickWindow_virtualbase_moveEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_moveEvent".}
+proc fcQQuickWindow_virtualbase_touchEvent(self: pointer, param1: pointer): void {.importc: "QQuickWindow_virtualbase_touchEvent".}
+proc fcQQuickWindow_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QQuickWindow_virtualbase_nativeEvent".}
+proc fcQQuickWindow_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QQuickWindow_virtualbase_eventFilter".}
+proc fcQQuickWindow_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QQuickWindow_virtualbase_timerEvent".}
+proc fcQQuickWindow_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QQuickWindow_virtualbase_childEvent".}
+proc fcQQuickWindow_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickWindow_virtualbase_customEvent".}
+proc fcQQuickWindow_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWindow_virtualbase_connectNotify".}
+proc fcQQuickWindow_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickWindow_virtualbase_disconnectNotify".}
+proc fcQQuickWindow_new(vtbl: pointer, ): ptr cQQuickWindow {.importc: "QQuickWindow_new".}
+proc fcQQuickWindow_new2(vtbl: pointer, renderControl: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new2".}
+proc fcQQuickWindow_new3(vtbl: pointer, parent: pointer): ptr cQQuickWindow {.importc: "QQuickWindow_new3".}
 proc fcQQuickWindow_staticMetaObject(): pointer {.importc: "QQuickWindow_staticMetaObject".}
 proc fcQQuickWindow_delete(self: pointer) {.importc: "QQuickWindow_delete".}
 proc fcQQuickWindowGraphicsStateInfo_delete(self: pointer) {.importc: "QQuickWindow__GraphicsStateInfo_delete".}
-
-
-func init*(T: type gen_qquickwindow_types.QQuickWindow, h: ptr cQQuickWindow): gen_qquickwindow_types.QQuickWindow =
-  T(h: h)
-proc create*(T: type gen_qquickwindow_types.QQuickWindow, ): gen_qquickwindow_types.QQuickWindow =
-  gen_qquickwindow_types.QQuickWindow.init(fcQQuickWindow_new())
-
-proc create*(T: type gen_qquickwindow_types.QQuickWindow, renderControl: gen_qquickrendercontrol_types.QQuickRenderControl): gen_qquickwindow_types.QQuickWindow =
-  gen_qquickwindow_types.QQuickWindow.init(fcQQuickWindow_new2(renderControl.h))
-
-proc create*(T: type gen_qquickwindow_types.QQuickWindow, parent: gen_qwindow_types.QWindow): gen_qquickwindow_types.QQuickWindow =
-  gen_qquickwindow_types.QQuickWindow.init(fcQQuickWindow_new3(parent.h))
 
 proc metaObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickWindow_metaObject(self.h))
@@ -429,7 +419,7 @@ proc frameSwapped*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_frameSwapped(self.h)
 
 type QQuickWindowframeSwappedSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_frameSwapped(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_frameSwapped(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_frameSwapped".} =
   let nimfunc = cast[ptr QQuickWindowframeSwappedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -443,7 +433,7 @@ proc sceneGraphInitialized*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_sceneGraphInitialized(self.h)
 
 type QQuickWindowsceneGraphInitializedSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_sceneGraphInitialized(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_sceneGraphInitialized(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_sceneGraphInitialized".} =
   let nimfunc = cast[ptr QQuickWindowsceneGraphInitializedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -457,7 +447,7 @@ proc sceneGraphInvalidated*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_sceneGraphInvalidated(self.h)
 
 type QQuickWindowsceneGraphInvalidatedSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_sceneGraphInvalidated(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_sceneGraphInvalidated(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_sceneGraphInvalidated".} =
   let nimfunc = cast[ptr QQuickWindowsceneGraphInvalidatedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -471,7 +461,7 @@ proc beforeSynchronizing*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_beforeSynchronizing(self.h)
 
 type QQuickWindowbeforeSynchronizingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_beforeSynchronizing(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_beforeSynchronizing(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_beforeSynchronizing".} =
   let nimfunc = cast[ptr QQuickWindowbeforeSynchronizingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -485,7 +475,7 @@ proc afterSynchronizing*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_afterSynchronizing(self.h)
 
 type QQuickWindowafterSynchronizingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_afterSynchronizing(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_afterSynchronizing(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_afterSynchronizing".} =
   let nimfunc = cast[ptr QQuickWindowafterSynchronizingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -499,7 +489,7 @@ proc beforeRendering*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_beforeRendering(self.h)
 
 type QQuickWindowbeforeRenderingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_beforeRendering(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_beforeRendering(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_beforeRendering".} =
   let nimfunc = cast[ptr QQuickWindowbeforeRenderingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -513,7 +503,7 @@ proc afterRendering*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_afterRendering(self.h)
 
 type QQuickWindowafterRenderingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_afterRendering(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_afterRendering(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_afterRendering".} =
   let nimfunc = cast[ptr QQuickWindowafterRenderingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -527,7 +517,7 @@ proc afterAnimating*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_afterAnimating(self.h)
 
 type QQuickWindowafterAnimatingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_afterAnimating(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_afterAnimating(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_afterAnimating".} =
   let nimfunc = cast[ptr QQuickWindowafterAnimatingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -541,7 +531,7 @@ proc sceneGraphAboutToStop*(self: gen_qquickwindow_types.QQuickWindow, ): void =
   fcQQuickWindow_sceneGraphAboutToStop(self.h)
 
 type QQuickWindowsceneGraphAboutToStopSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_sceneGraphAboutToStop(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_sceneGraphAboutToStop(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_sceneGraphAboutToStop".} =
   let nimfunc = cast[ptr QQuickWindowsceneGraphAboutToStopSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -555,7 +545,7 @@ proc colorChanged*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qcolor
   fcQQuickWindow_colorChanged(self.h, param1.h)
 
 type QQuickWindowcolorChangedSlot* = proc(param1: gen_qcolor_types.QColor)
-proc miqt_exec_callback_QQuickWindow_colorChanged(slot: int, param1: pointer) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_colorChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QQuickWindow_colorChanged".} =
   let nimfunc = cast[ptr QQuickWindowcolorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: param1)
 
@@ -571,7 +561,7 @@ proc activeFocusItemChanged*(self: gen_qquickwindow_types.QQuickWindow, ): void 
   fcQQuickWindow_activeFocusItemChanged(self.h)
 
 type QQuickWindowactiveFocusItemChangedSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_activeFocusItemChanged(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_activeFocusItemChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_activeFocusItemChanged".} =
   let nimfunc = cast[ptr QQuickWindowactiveFocusItemChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -585,7 +575,7 @@ proc sceneGraphError*(self: gen_qquickwindow_types.QQuickWindow, error: cint, me
   fcQQuickWindow_sceneGraphError(self.h, cint(error), struct_miqt_string(data: message, len: csize_t(len(message))))
 
 type QQuickWindowsceneGraphErrorSlot* = proc(error: cint, message: string)
-proc miqt_exec_callback_QQuickWindow_sceneGraphError(slot: int, error: cint, message: struct_miqt_string) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_sceneGraphError(slot: int, error: cint, message: struct_miqt_string) {.exportc: "miqt_exec_callback_QQuickWindow_sceneGraphError".} =
   let nimfunc = cast[ptr QQuickWindowsceneGraphErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
@@ -606,7 +596,7 @@ proc beforeRenderPassRecording*(self: gen_qquickwindow_types.QQuickWindow, ): vo
   fcQQuickWindow_beforeRenderPassRecording(self.h)
 
 type QQuickWindowbeforeRenderPassRecordingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_beforeRenderPassRecording(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_beforeRenderPassRecording(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_beforeRenderPassRecording".} =
   let nimfunc = cast[ptr QQuickWindowbeforeRenderPassRecordingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -620,7 +610,7 @@ proc afterRenderPassRecording*(self: gen_qquickwindow_types.QQuickWindow, ): voi
   fcQQuickWindow_afterRenderPassRecording(self.h)
 
 type QQuickWindowafterRenderPassRecordingSlot* = proc()
-proc miqt_exec_callback_QQuickWindow_afterRenderPassRecording(slot: int) {.exportc.} =
+proc miqt_exec_callback_cQQuickWindow_afterRenderPassRecording(slot: int) {.exportc: "miqt_exec_callback_QQuickWindow_afterRenderPassRecording".} =
   let nimfunc = cast[ptr QQuickWindowafterRenderPassRecordingSlot](cast[pointer](slot))
   nimfunc[]()
 
@@ -666,579 +656,597 @@ proc createTextureFromId*(self: gen_qquickwindow_types.QQuickWindow, id: cuint, 
 proc createTextureFromNativeObject*(self: gen_qquickwindow_types.QQuickWindow, typeVal: cint, nativeObjectPtr: pointer, nativeLayout: cint, size: gen_qsize_types.QSize, options: cint): gen_qsgtexture_types.QSGTexture =
   gen_qsgtexture_types.QSGTexture(h: fcQQuickWindow_createTextureFromNativeObject5(self.h, cint(typeVal), nativeObjectPtr, nativeLayout, size.h, cint(options)))
 
+type QQuickWindowmetaObjectProc* = proc(self: QQuickWindow): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
+type QQuickWindowmetacastProc* = proc(self: QQuickWindow, param1: cstring): pointer {.raises: [], gcsafe.}
+type QQuickWindowmetacallProc* = proc(self: QQuickWindow, param1: cint, param2: cint, param3: pointer): cint {.raises: [], gcsafe.}
+type QQuickWindowfocusObjectProc* = proc(self: QQuickWindow): gen_qobject_types.QObject {.raises: [], gcsafe.}
+type QQuickWindowaccessibleRootProc* = proc(self: QQuickWindow): gen_qaccessible_types.QAccessibleInterface {.raises: [], gcsafe.}
+type QQuickWindowexposeEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QExposeEvent): void {.raises: [], gcsafe.}
+type QQuickWindowresizeEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QResizeEvent): void {.raises: [], gcsafe.}
+type QQuickWindowshowEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QShowEvent): void {.raises: [], gcsafe.}
+type QQuickWindowhideEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QHideEvent): void {.raises: [], gcsafe.}
+type QQuickWindowfocusInEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QQuickWindowfocusOutEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QFocusEvent): void {.raises: [], gcsafe.}
+type QQuickWindoweventProc* = proc(self: QQuickWindow, param1: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQuickWindowkeyPressEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QQuickWindowkeyReleaseEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QKeyEvent): void {.raises: [], gcsafe.}
+type QQuickWindowmousePressEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickWindowmouseReleaseEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickWindowmouseDoubleClickEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickWindowmouseMoveEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMouseEvent): void {.raises: [], gcsafe.}
+type QQuickWindowwheelEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QWheelEvent): void {.raises: [], gcsafe.}
+type QQuickWindowtabletEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QTabletEvent): void {.raises: [], gcsafe.}
+type QQuickWindowsurfaceTypeProc* = proc(self: QQuickWindow): cint {.raises: [], gcsafe.}
+type QQuickWindowformatProc* = proc(self: QQuickWindow): gen_qsurfaceformat_types.QSurfaceFormat {.raises: [], gcsafe.}
+type QQuickWindowsizeProc* = proc(self: QQuickWindow): gen_qsize_types.QSize {.raises: [], gcsafe.}
+type QQuickWindowmoveEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QMoveEvent): void {.raises: [], gcsafe.}
+type QQuickWindowtouchEventProc* = proc(self: QQuickWindow, param1: gen_qevent_types.QTouchEvent): void {.raises: [], gcsafe.}
+type QQuickWindownativeEventProc* = proc(self: QQuickWindow, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.raises: [], gcsafe.}
+type QQuickWindoweventFilterProc* = proc(self: QQuickWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.raises: [], gcsafe.}
+type QQuickWindowtimerEventProc* = proc(self: QQuickWindow, event: gen_qcoreevent_types.QTimerEvent): void {.raises: [], gcsafe.}
+type QQuickWindowchildEventProc* = proc(self: QQuickWindow, event: gen_qcoreevent_types.QChildEvent): void {.raises: [], gcsafe.}
+type QQuickWindowcustomEventProc* = proc(self: QQuickWindow, event: gen_qcoreevent_types.QEvent): void {.raises: [], gcsafe.}
+type QQuickWindowconnectNotifyProc* = proc(self: QQuickWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQuickWindowdisconnectNotifyProc* = proc(self: QQuickWindow, signal: gen_qmetaobject_types.QMetaMethod): void {.raises: [], gcsafe.}
+type QQuickWindowVTable* = object
+  vtbl: cQQuickWindowVTable
+  metaObject*: QQuickWindowmetaObjectProc
+  metacast*: QQuickWindowmetacastProc
+  metacall*: QQuickWindowmetacallProc
+  focusObject*: QQuickWindowfocusObjectProc
+  accessibleRoot*: QQuickWindowaccessibleRootProc
+  exposeEvent*: QQuickWindowexposeEventProc
+  resizeEvent*: QQuickWindowresizeEventProc
+  showEvent*: QQuickWindowshowEventProc
+  hideEvent*: QQuickWindowhideEventProc
+  focusInEvent*: QQuickWindowfocusInEventProc
+  focusOutEvent*: QQuickWindowfocusOutEventProc
+  event*: QQuickWindoweventProc
+  keyPressEvent*: QQuickWindowkeyPressEventProc
+  keyReleaseEvent*: QQuickWindowkeyReleaseEventProc
+  mousePressEvent*: QQuickWindowmousePressEventProc
+  mouseReleaseEvent*: QQuickWindowmouseReleaseEventProc
+  mouseDoubleClickEvent*: QQuickWindowmouseDoubleClickEventProc
+  mouseMoveEvent*: QQuickWindowmouseMoveEventProc
+  wheelEvent*: QQuickWindowwheelEventProc
+  tabletEvent*: QQuickWindowtabletEventProc
+  surfaceType*: QQuickWindowsurfaceTypeProc
+  format*: QQuickWindowformatProc
+  size*: QQuickWindowsizeProc
+  moveEvent*: QQuickWindowmoveEventProc
+  touchEvent*: QQuickWindowtouchEventProc
+  nativeEvent*: QQuickWindownativeEventProc
+  eventFilter*: QQuickWindoweventFilterProc
+  timerEvent*: QQuickWindowtimerEventProc
+  childEvent*: QQuickWindowchildEventProc
+  customEvent*: QQuickWindowcustomEventProc
+  connectNotify*: QQuickWindowconnectNotifyProc
+  disconnectNotify*: QQuickWindowdisconnectNotifyProc
 proc QQuickWindowmetaObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobjectdefs_types.QMetaObject =
-  gen_qobjectdefs_types.QMetaObject(h: fQQuickWindow_virtualbase_metaObject(self.h))
+  gen_qobjectdefs_types.QMetaObject(h: fcQQuickWindow_virtualbase_metaObject(self.h))
 
-type QQuickWindowmetaObjectProc* = proc(): gen_qobjectdefs_types.QMetaObject
-proc onmetaObject*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetaObjectProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmetaObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_metaObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_metaObject(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_metaObject ".} =
-  var nimfunc = cast[ptr QQuickWindowmetaObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.h
+
 proc QQuickWindowmetacast*(self: gen_qquickwindow_types.QQuickWindow, param1: cstring): pointer =
-  fQQuickWindow_virtualbase_metacast(self.h, param1)
+  fcQQuickWindow_virtualbase_metacast(self.h, param1)
 
-type QQuickWindowmetacastProc* = proc(param1: cstring): pointer
-proc onmetacast*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetacastProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmetacastProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_metacast(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_metacast(self: ptr cQQuickWindow, slot: int, param1: cstring): pointer {.exportc: "miqt_exec_callback_QQuickWindow_metacast ".} =
-  var nimfunc = cast[ptr QQuickWindowmetacastProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = (param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].metacast(self, slotval1)
   virtualReturn
+
 proc QQuickWindowmetacall*(self: gen_qquickwindow_types.QQuickWindow, param1: cint, param2: cint, param3: pointer): cint =
-  fQQuickWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
+  fcQQuickWindow_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-type QQuickWindowmetacallProc* = proc(param1: cint, param2: cint, param3: pointer): cint
-proc onmetacall*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmetacallProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmetacallProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_metacall(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_metacall(self: ptr cQQuickWindow, slot: int, param1: cint, param2: cint, param3: pointer): cint {.exportc: "miqt_exec_callback_QQuickWindow_metacall ".} =
-  var nimfunc = cast[ptr QQuickWindowmetacallProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = cint(param1)
-
   let slotval2 = param2
-
   let slotval3 = param3
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QQuickWindowfocusObject*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qobject_types.QObject =
-  gen_qobject_types.QObject(h: fQQuickWindow_virtualbase_focusObject(self.h))
+  gen_qobject_types.QObject(h: fcQQuickWindow_virtualbase_focusObject(self.h))
 
-type QQuickWindowfocusObjectProc* = proc(): gen_qobject_types.QObject
-proc onfocusObject*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowfocusObjectProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowfocusObjectProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_focusObject(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_focusObject(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_focusObject ".} =
-  var nimfunc = cast[ptr QQuickWindowfocusObjectProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_focusObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].focusObject(self)
   virtualReturn.h
+
 proc QQuickWindowaccessibleRoot*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qaccessible_types.QAccessibleInterface =
-  gen_qaccessible_types.QAccessibleInterface(h: fQQuickWindow_virtualbase_accessibleRoot(self.h))
+  gen_qaccessible_types.QAccessibleInterface(h: fcQQuickWindow_virtualbase_accessibleRoot(self.h))
 
-type QQuickWindowaccessibleRootProc* = proc(): gen_qaccessible_types.QAccessibleInterface
-proc onaccessibleRoot*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowaccessibleRootProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowaccessibleRootProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_accessibleRoot(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_accessibleRoot(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_accessibleRoot ".} =
-  var nimfunc = cast[ptr QQuickWindowaccessibleRootProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_accessibleRoot(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].accessibleRoot(self)
   virtualReturn.h
+
 proc QQuickWindowexposeEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QExposeEvent): void =
-  fQQuickWindow_virtualbase_exposeEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_exposeEvent(self.h, param1.h)
 
-type QQuickWindowexposeEventProc* = proc(param1: gen_qevent_types.QExposeEvent): void
-proc onexposeEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowexposeEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowexposeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_exposeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_exposeEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_exposeEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowexposeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_exposeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QExposeEvent(h: param1)
+  vtbl[].exposeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowresizeEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QResizeEvent): void =
-  fQQuickWindow_virtualbase_resizeEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_resizeEvent(self.h, param1.h)
 
-type QQuickWindowresizeEventProc* = proc(param1: gen_qevent_types.QResizeEvent): void
-proc onresizeEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowresizeEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowresizeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_resizeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_resizeEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_resizeEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowresizeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_resizeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: param1)
+  vtbl[].resizeEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowshowEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QShowEvent): void =
-  fQQuickWindow_virtualbase_showEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_showEvent(self.h, param1.h)
 
-type QQuickWindowshowEventProc* = proc(param1: gen_qevent_types.QShowEvent): void
-proc onshowEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowshowEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowshowEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_showEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_showEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_showEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowshowEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_showEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: param1)
+  vtbl[].showEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowhideEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QHideEvent): void =
-  fQQuickWindow_virtualbase_hideEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_hideEvent(self.h, param1.h)
 
-type QQuickWindowhideEventProc* = proc(param1: gen_qevent_types.QHideEvent): void
-proc onhideEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowhideEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowhideEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_hideEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_hideEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_hideEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowhideEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_hideEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: param1)
+  vtbl[].hideEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowfocusInEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QFocusEvent): void =
-  fQQuickWindow_virtualbase_focusInEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_focusInEvent(self.h, param1.h)
 
-type QQuickWindowfocusInEventProc* = proc(param1: gen_qevent_types.QFocusEvent): void
-proc onfocusInEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowfocusInEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowfocusInEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_focusInEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_focusInEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_focusInEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowfocusInEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  vtbl[].focusInEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowfocusOutEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QFocusEvent): void =
-  fQQuickWindow_virtualbase_focusOutEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_focusOutEvent(self.h, param1.h)
 
-type QQuickWindowfocusOutEventProc* = proc(param1: gen_qevent_types.QFocusEvent): void
-proc onfocusOutEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowfocusOutEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowfocusOutEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_focusOutEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_focusOutEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_focusOutEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowfocusOutEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1)
+  vtbl[].focusOutEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowevent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qcoreevent_types.QEvent): bool =
-  fQQuickWindow_virtualbase_event(self.h, param1.h)
+  fcQQuickWindow_virtualbase_event(self.h, param1.h)
 
-type QQuickWindoweventProc* = proc(param1: gen_qcoreevent_types.QEvent): bool
-proc onevent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindoweventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindoweventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_event(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_event(self: ptr cQQuickWindow, slot: int, param1: pointer): bool {.exportc: "miqt_exec_callback_QQuickWindow_event ".} =
-  var nimfunc = cast[ptr QQuickWindoweventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1)
-
-
-  let virtualReturn = nimfunc[](slotval1 )
-
+  var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
+
 proc QQuickWindowkeyPressEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QKeyEvent): void =
-  fQQuickWindow_virtualbase_keyPressEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_keyPressEvent(self.h, param1.h)
 
-type QQuickWindowkeyPressEventProc* = proc(param1: gen_qevent_types.QKeyEvent): void
-proc onkeyPressEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowkeyPressEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowkeyPressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_keyPressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_keyPressEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_keyPressEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowkeyPressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  vtbl[].keyPressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowkeyReleaseEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QKeyEvent): void =
-  fQQuickWindow_virtualbase_keyReleaseEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_keyReleaseEvent(self.h, param1.h)
 
-type QQuickWindowkeyReleaseEventProc* = proc(param1: gen_qevent_types.QKeyEvent): void
-proc onkeyReleaseEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowkeyReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowkeyReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_keyReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_keyReleaseEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_keyReleaseEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowkeyReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_keyReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1)
+  vtbl[].keyReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowmousePressEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fQQuickWindow_virtualbase_mousePressEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_mousePressEvent(self.h, param1.h)
 
-type QQuickWindowmousePressEventProc* = proc(param1: gen_qevent_types.QMouseEvent): void
-proc onmousePressEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmousePressEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmousePressEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_mousePressEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_mousePressEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_mousePressEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowmousePressEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  vtbl[].mousePressEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowmouseReleaseEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fQQuickWindow_virtualbase_mouseReleaseEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_mouseReleaseEvent(self.h, param1.h)
 
-type QQuickWindowmouseReleaseEventProc* = proc(param1: gen_qevent_types.QMouseEvent): void
-proc onmouseReleaseEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmouseReleaseEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmouseReleaseEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_mouseReleaseEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_mouseReleaseEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_mouseReleaseEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowmouseReleaseEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_mouseReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  vtbl[].mouseReleaseEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowmouseDoubleClickEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fQQuickWindow_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
 
-type QQuickWindowmouseDoubleClickEventProc* = proc(param1: gen_qevent_types.QMouseEvent): void
-proc onmouseDoubleClickEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmouseDoubleClickEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmouseDoubleClickEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_mouseDoubleClickEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_mouseDoubleClickEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_mouseDoubleClickEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowmouseDoubleClickEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_mouseDoubleClickEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowmouseMoveEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QMouseEvent): void =
-  fQQuickWindow_virtualbase_mouseMoveEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_mouseMoveEvent(self.h, param1.h)
 
-type QQuickWindowmouseMoveEventProc* = proc(param1: gen_qevent_types.QMouseEvent): void
-proc onmouseMoveEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmouseMoveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmouseMoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_mouseMoveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_mouseMoveEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_mouseMoveEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowmouseMoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: param1)
+  vtbl[].mouseMoveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowwheelEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QWheelEvent): void =
-  fQQuickWindow_virtualbase_wheelEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_wheelEvent(self.h, param1.h)
 
-type QQuickWindowwheelEventProc* = proc(param1: gen_qevent_types.QWheelEvent): void
-proc onwheelEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowwheelEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowwheelEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_wheelEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_wheelEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_wheelEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowwheelEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: param1)
+  vtbl[].wheelEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowtabletEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QTabletEvent): void =
-  fQQuickWindow_virtualbase_tabletEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_tabletEvent(self.h, param1.h)
 
-type QQuickWindowtabletEventProc* = proc(param1: gen_qevent_types.QTabletEvent): void
-proc ontabletEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowtabletEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowtabletEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_tabletEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_tabletEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_tabletEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowtabletEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_tabletEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: param1)
+  vtbl[].tabletEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowsurfaceType*(self: gen_qquickwindow_types.QQuickWindow, ): cint =
-  cint(fQQuickWindow_virtualbase_surfaceType(self.h))
+  cint(fcQQuickWindow_virtualbase_surfaceType(self.h))
 
-type QQuickWindowsurfaceTypeProc* = proc(): cint
-proc onsurfaceType*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowsurfaceTypeProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowsurfaceTypeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_surfaceType(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_surfaceType(self: ptr cQQuickWindow, slot: int): cint {.exportc: "miqt_exec_callback_QQuickWindow_surfaceType ".} =
-  var nimfunc = cast[ptr QQuickWindowsurfaceTypeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_surfaceType(vtbl: pointer, self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].surfaceType(self)
   cint(virtualReturn)
+
 proc QQuickWindowformat*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qsurfaceformat_types.QSurfaceFormat =
-  gen_qsurfaceformat_types.QSurfaceFormat(h: fQQuickWindow_virtualbase_format(self.h))
+  gen_qsurfaceformat_types.QSurfaceFormat(h: fcQQuickWindow_virtualbase_format(self.h))
 
-type QQuickWindowformatProc* = proc(): gen_qsurfaceformat_types.QSurfaceFormat
-proc onformat*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowformatProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowformatProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_format(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_format(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_format ".} =
-  var nimfunc = cast[ptr QQuickWindowformatProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_format(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].format(self)
   virtualReturn.h
+
 proc QQuickWindowsize*(self: gen_qquickwindow_types.QQuickWindow, ): gen_qsize_types.QSize =
-  gen_qsize_types.QSize(h: fQQuickWindow_virtualbase_size(self.h))
+  gen_qsize_types.QSize(h: fcQQuickWindow_virtualbase_size(self.h))
 
-type QQuickWindowsizeProc* = proc(): gen_qsize_types.QSize
-proc onsize*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowsizeProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowsizeProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_size(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_size(self: ptr cQQuickWindow, slot: int): pointer {.exportc: "miqt_exec_callback_QQuickWindow_size ".} =
-  var nimfunc = cast[ptr QQuickWindowsizeProc](cast[pointer](slot))
-
-  let virtualReturn = nimfunc[]( )
-
+proc miqt_exec_callback_cQQuickWindow_size(vtbl: pointer, self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
+  var virtualReturn = vtbl[].size(self)
   virtualReturn.h
+
 proc QQuickWindowmoveEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QMoveEvent): void =
-  fQQuickWindow_virtualbase_moveEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_moveEvent(self.h, param1.h)
 
-type QQuickWindowmoveEventProc* = proc(param1: gen_qevent_types.QMoveEvent): void
-proc onmoveEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowmoveEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowmoveEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_moveEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_moveEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_moveEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowmoveEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_moveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: param1)
+  vtbl[].moveEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowtouchEvent*(self: gen_qquickwindow_types.QQuickWindow, param1: gen_qevent_types.QTouchEvent): void =
-  fQQuickWindow_virtualbase_touchEvent(self.h, param1.h)
+  fcQQuickWindow_virtualbase_touchEvent(self.h, param1.h)
 
-type QQuickWindowtouchEventProc* = proc(param1: gen_qevent_types.QTouchEvent): void
-proc ontouchEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowtouchEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowtouchEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_touchEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_touchEvent(self: ptr cQQuickWindow, slot: int, param1: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_touchEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowtouchEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_touchEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qevent_types.QTouchEvent(h: param1)
+  vtbl[].touchEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindownativeEvent*(self: gen_qquickwindow_types.QQuickWindow, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
-  fQQuickWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
+  fcQQuickWindow_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-type QQuickWindownativeEventProc* = proc(eventType: seq[byte], message: pointer, resultVal: ptr clong): bool
-proc onnativeEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindownativeEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindownativeEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_nativeEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_nativeEvent(self: ptr cQQuickWindow, slot: int, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.exportc: "miqt_exec_callback_QQuickWindow_nativeEvent ".} =
-  var nimfunc = cast[ptr QQuickWindownativeEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
-
   let slotval2 = message
-
   let slotval3 = resultVal
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2, slotval3 )
-
+  var virtualReturn = vtbl[].nativeEvent(self, slotval1, slotval2, slotval3)
   virtualReturn
+
 proc QQuickWindoweventFilter*(self: gen_qquickwindow_types.QQuickWindow, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
-  fQQuickWindow_virtualbase_eventFilter(self.h, watched.h, event.h)
+  fcQQuickWindow_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-type QQuickWindoweventFilterProc* = proc(watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool
-proc oneventFilter*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindoweventFilterProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindoweventFilterProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_eventFilter(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_eventFilter(self: ptr cQQuickWindow, slot: int, watched: pointer, event: pointer): bool {.exportc: "miqt_exec_callback_QQuickWindow_eventFilter ".} =
-  var nimfunc = cast[ptr QQuickWindoweventFilterProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched)
-
   let slotval2 = gen_qcoreevent_types.QEvent(h: event)
-
-
-  let virtualReturn = nimfunc[](slotval1, slotval2 )
-
+  var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
+
 proc QQuickWindowtimerEvent*(self: gen_qquickwindow_types.QQuickWindow, event: gen_qcoreevent_types.QTimerEvent): void =
-  fQQuickWindow_virtualbase_timerEvent(self.h, event.h)
+  fcQQuickWindow_virtualbase_timerEvent(self.h, event.h)
 
-type QQuickWindowtimerEventProc* = proc(event: gen_qcoreevent_types.QTimerEvent): void
-proc ontimerEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowtimerEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowtimerEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_timerEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_timerEvent(self: ptr cQQuickWindow, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_timerEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowtimerEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event)
+  vtbl[].timerEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowchildEvent*(self: gen_qquickwindow_types.QQuickWindow, event: gen_qcoreevent_types.QChildEvent): void =
-  fQQuickWindow_virtualbase_childEvent(self.h, event.h)
+  fcQQuickWindow_virtualbase_childEvent(self.h, event.h)
 
-type QQuickWindowchildEventProc* = proc(event: gen_qcoreevent_types.QChildEvent): void
-proc onchildEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowchildEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowchildEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_childEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_childEvent(self: ptr cQQuickWindow, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_childEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowchildEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event)
+  vtbl[].childEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowcustomEvent*(self: gen_qquickwindow_types.QQuickWindow, event: gen_qcoreevent_types.QEvent): void =
-  fQQuickWindow_virtualbase_customEvent(self.h, event.h)
+  fcQQuickWindow_virtualbase_customEvent(self.h, event.h)
 
-type QQuickWindowcustomEventProc* = proc(event: gen_qcoreevent_types.QEvent): void
-proc oncustomEvent*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowcustomEventProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowcustomEventProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_customEvent(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_customEvent(self: ptr cQQuickWindow, slot: int, event: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_customEvent ".} =
-  var nimfunc = cast[ptr QQuickWindowcustomEventProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event)
+  vtbl[].customEvent(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowconnectNotify*(self: gen_qquickwindow_types.QQuickWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQuickWindow_virtualbase_connectNotify(self.h, signal.h)
+  fcQQuickWindow_virtualbase_connectNotify(self.h, signal.h)
 
-type QQuickWindowconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc onconnectNotify*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_connectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_connectNotify(self: ptr cQQuickWindow, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_connectNotify ".} =
-  var nimfunc = cast[ptr QQuickWindowconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].connectNotify(self, slotval1)
 
-
-  nimfunc[](slotval1)
 proc QQuickWindowdisconnectNotify*(self: gen_qquickwindow_types.QQuickWindow, signal: gen_qmetaobject_types.QMetaMethod): void =
-  fQQuickWindow_virtualbase_disconnectNotify(self.h, signal.h)
+  fcQQuickWindow_virtualbase_disconnectNotify(self.h, signal.h)
 
-type QQuickWindowdisconnectNotifyProc* = proc(signal: gen_qmetaobject_types.QMetaMethod): void
-proc ondisconnectNotify*(self: gen_qquickwindow_types.QQuickWindow, slot: QQuickWindowdisconnectNotifyProc) =
-  # TODO check subclass
-  var tmp = new QQuickWindowdisconnectNotifyProc
-  tmp[] = slot
-  GC_ref(tmp)
-  fcQQuickWindow_override_virtual_disconnectNotify(self.h, cast[int](addr tmp[]))
-
-proc miqt_exec_callback_QQuickWindow_disconnectNotify(self: ptr cQQuickWindow, slot: int, signal: pointer): void {.exportc: "miqt_exec_callback_QQuickWindow_disconnectNotify ".} =
-  var nimfunc = cast[ptr QQuickWindowdisconnectNotifyProc](cast[pointer](slot))
+proc miqt_exec_callback_cQQuickWindow_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickWindowVTable](vtbl)
+  let self = QQuickWindow(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal)
+  vtbl[].disconnectNotify(self, slotval1)
 
+proc create*(T: type gen_qquickwindow_types.QQuickWindow,
+    vtbl: ref QQuickWindowVTable = nil): gen_qquickwindow_types.QQuickWindow =
+  let vtbl = if vtbl == nil: new QQuickWindowVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickWindowVTable, _: ptr cQQuickWindow) {.cdecl.} =
+    let vtbl = cast[ref QQuickWindowVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickWindow_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickWindow_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickWindow_metacall
+  if not isNil(vtbl.focusObject):
+    vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickWindow_focusObject
+  if not isNil(vtbl.accessibleRoot):
+    vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickWindow_accessibleRoot
+  if not isNil(vtbl.exposeEvent):
+    vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickWindow_exposeEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickWindow_resizeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickWindow_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickWindow_hideEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickWindow_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickWindow_focusOutEvent
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQuickWindow_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickWindow_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickWindow_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickWindow_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickWindow_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickWindow_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickWindow_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickWindow_wheelEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickWindow_tabletEvent
+  if not isNil(vtbl.surfaceType):
+    vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickWindow_surfaceType
+  if not isNil(vtbl.format):
+    vtbl[].vtbl.format = miqt_exec_callback_cQQuickWindow_format
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQQuickWindow_size
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickWindow_moveEvent
+  if not isNil(vtbl.touchEvent):
+    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickWindow_touchEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickWindow_nativeEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickWindow_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickWindow_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickWindow_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickWindow_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickWindow_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickWindow_disconnectNotify
+  gen_qquickwindow_types.QQuickWindow(h: fcQQuickWindow_new(addr(vtbl[]), ))
 
-  nimfunc[](slotval1)
+proc create*(T: type gen_qquickwindow_types.QQuickWindow,
+    renderControl: gen_qquickrendercontrol_types.QQuickRenderControl,
+    vtbl: ref QQuickWindowVTable = nil): gen_qquickwindow_types.QQuickWindow =
+  let vtbl = if vtbl == nil: new QQuickWindowVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickWindowVTable, _: ptr cQQuickWindow) {.cdecl.} =
+    let vtbl = cast[ref QQuickWindowVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickWindow_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickWindow_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickWindow_metacall
+  if not isNil(vtbl.focusObject):
+    vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickWindow_focusObject
+  if not isNil(vtbl.accessibleRoot):
+    vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickWindow_accessibleRoot
+  if not isNil(vtbl.exposeEvent):
+    vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickWindow_exposeEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickWindow_resizeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickWindow_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickWindow_hideEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickWindow_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickWindow_focusOutEvent
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQuickWindow_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickWindow_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickWindow_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickWindow_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickWindow_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickWindow_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickWindow_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickWindow_wheelEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickWindow_tabletEvent
+  if not isNil(vtbl.surfaceType):
+    vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickWindow_surfaceType
+  if not isNil(vtbl.format):
+    vtbl[].vtbl.format = miqt_exec_callback_cQQuickWindow_format
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQQuickWindow_size
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickWindow_moveEvent
+  if not isNil(vtbl.touchEvent):
+    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickWindow_touchEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickWindow_nativeEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickWindow_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickWindow_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickWindow_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickWindow_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickWindow_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickWindow_disconnectNotify
+  gen_qquickwindow_types.QQuickWindow(h: fcQQuickWindow_new2(addr(vtbl[]), renderControl.h))
+
+proc create*(T: type gen_qquickwindow_types.QQuickWindow,
+    parent: gen_qwindow_types.QWindow,
+    vtbl: ref QQuickWindowVTable = nil): gen_qquickwindow_types.QQuickWindow =
+  let vtbl = if vtbl == nil: new QQuickWindowVTable else: vtbl
+  GC_ref(vtbl)
+  vtbl.vtbl.destructor = proc(vtbl: ptr cQQuickWindowVTable, _: ptr cQQuickWindow) {.cdecl.} =
+    let vtbl = cast[ref QQuickWindowVTable](vtbl)
+    GC_unref(vtbl)
+  if not isNil(vtbl.metaObject):
+    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickWindow_metaObject
+  if not isNil(vtbl.metacast):
+    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickWindow_metacast
+  if not isNil(vtbl.metacall):
+    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickWindow_metacall
+  if not isNil(vtbl.focusObject):
+    vtbl[].vtbl.focusObject = miqt_exec_callback_cQQuickWindow_focusObject
+  if not isNil(vtbl.accessibleRoot):
+    vtbl[].vtbl.accessibleRoot = miqt_exec_callback_cQQuickWindow_accessibleRoot
+  if not isNil(vtbl.exposeEvent):
+    vtbl[].vtbl.exposeEvent = miqt_exec_callback_cQQuickWindow_exposeEvent
+  if not isNil(vtbl.resizeEvent):
+    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQQuickWindow_resizeEvent
+  if not isNil(vtbl.showEvent):
+    vtbl[].vtbl.showEvent = miqt_exec_callback_cQQuickWindow_showEvent
+  if not isNil(vtbl.hideEvent):
+    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQQuickWindow_hideEvent
+  if not isNil(vtbl.focusInEvent):
+    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickWindow_focusInEvent
+  if not isNil(vtbl.focusOutEvent):
+    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickWindow_focusOutEvent
+  if not isNil(vtbl.event):
+    vtbl[].vtbl.event = miqt_exec_callback_cQQuickWindow_event
+  if not isNil(vtbl.keyPressEvent):
+    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickWindow_keyPressEvent
+  if not isNil(vtbl.keyReleaseEvent):
+    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickWindow_keyReleaseEvent
+  if not isNil(vtbl.mousePressEvent):
+    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickWindow_mousePressEvent
+  if not isNil(vtbl.mouseReleaseEvent):
+    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickWindow_mouseReleaseEvent
+  if not isNil(vtbl.mouseDoubleClickEvent):
+    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickWindow_mouseDoubleClickEvent
+  if not isNil(vtbl.mouseMoveEvent):
+    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickWindow_mouseMoveEvent
+  if not isNil(vtbl.wheelEvent):
+    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickWindow_wheelEvent
+  if not isNil(vtbl.tabletEvent):
+    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQQuickWindow_tabletEvent
+  if not isNil(vtbl.surfaceType):
+    vtbl[].vtbl.surfaceType = miqt_exec_callback_cQQuickWindow_surfaceType
+  if not isNil(vtbl.format):
+    vtbl[].vtbl.format = miqt_exec_callback_cQQuickWindow_format
+  if not isNil(vtbl.size):
+    vtbl[].vtbl.size = miqt_exec_callback_cQQuickWindow_size
+  if not isNil(vtbl.moveEvent):
+    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQQuickWindow_moveEvent
+  if not isNil(vtbl.touchEvent):
+    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickWindow_touchEvent
+  if not isNil(vtbl.nativeEvent):
+    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQQuickWindow_nativeEvent
+  if not isNil(vtbl.eventFilter):
+    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickWindow_eventFilter
+  if not isNil(vtbl.timerEvent):
+    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickWindow_timerEvent
+  if not isNil(vtbl.childEvent):
+    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickWindow_childEvent
+  if not isNil(vtbl.customEvent):
+    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickWindow_customEvent
+  if not isNil(vtbl.connectNotify):
+    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickWindow_connectNotify
+  if not isNil(vtbl.disconnectNotify):
+    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickWindow_disconnectNotify
+  gen_qquickwindow_types.QQuickWindow(h: fcQQuickWindow_new3(addr(vtbl[]), parent.h))
+
 proc staticMetaObject*(_: type gen_qquickwindow_types.QQuickWindow): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickWindow_staticMetaObject())
 proc delete*(self: gen_qquickwindow_types.QQuickWindow) =
   fcQQuickWindow_delete(self.h)
-
-func init*(T: type gen_qquickwindow_types.QQuickWindowGraphicsStateInfo, h: ptr cQQuickWindowGraphicsStateInfo): gen_qquickwindow_types.QQuickWindowGraphicsStateInfo =
-  T(h: h)
 proc delete*(self: gen_qquickwindow_types.QQuickWindowGraphicsStateInfo) =
   fcQQuickWindowGraphicsStateInfo_delete(self.h)
