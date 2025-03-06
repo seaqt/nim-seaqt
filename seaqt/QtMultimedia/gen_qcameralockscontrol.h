@@ -39,7 +39,7 @@ int QCameraLocksControl_lockStatus(const QCameraLocksControl* self, int lock);
 void QCameraLocksControl_searchAndLock(QCameraLocksControl* self, int locks);
 void QCameraLocksControl_unlock(QCameraLocksControl* self, int locks);
 void QCameraLocksControl_lockStatusChanged(QCameraLocksControl* self, int type, int status, int reason);
-void QCameraLocksControl_connect_lockStatusChanged(QCameraLocksControl* self, intptr_t slot);
+void QCameraLocksControl_connect_lockStatusChanged(QCameraLocksControl* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t));
 struct miqt_string QCameraLocksControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraLocksControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraLocksControl_trUtf82(const char* s, const char* c);

@@ -80,7 +80,7 @@ proc fcQCheckBox_isTristate(self: pointer, ): bool {.importc: "QCheckBox_isTrist
 proc fcQCheckBox_checkState(self: pointer, ): cint {.importc: "QCheckBox_checkState".}
 proc fcQCheckBox_setCheckState(self: pointer, state: cint): void {.importc: "QCheckBox_setCheckState".}
 proc fcQCheckBox_stateChanged(self: pointer, param1: cint): void {.importc: "QCheckBox_stateChanged".}
-proc fcQCheckBox_connect_stateChanged(self: pointer, slot: int) {.importc: "QCheckBox_connect_stateChanged".}
+proc fcQCheckBox_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCheckBox_connect_stateChanged".}
 proc fcQCheckBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCheckBox_tr2".}
 proc fcQCheckBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCheckBox_tr3".}
 proc fcQCheckBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCheckBox_trUtf82".}
@@ -244,17 +244,21 @@ proc stateChanged*(self: gen_qcheckbox_types.QCheckBox, param1: cint): void =
   fcQCheckBox_stateChanged(self.h, param1)
 
 type QCheckBoxstateChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQCheckBox_stateChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QCheckBox_stateChanged".} =
+proc miqt_exec_callback_cQCheckBox_stateChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCheckBoxstateChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCheckBox_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCheckBoxstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qcheckbox_types.QCheckBox, slot: QCheckBoxstateChangedSlot) =
   var tmp = new QCheckBoxstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCheckBox_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQCheckBox_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCheckBox_stateChanged, miqt_exec_callback_cQCheckBox_stateChanged_release)
 
 proc tr*(_: type gen_qcheckbox_types.QCheckBox, s: cstring, c: cstring): string =
   let v_ms = fcQCheckBox_tr2(s, c)

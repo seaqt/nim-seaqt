@@ -186,13 +186,13 @@ proc fcQGraphicsScene_advance(self: pointer, ): void {.importc: "QGraphicsScene_
 proc fcQGraphicsScene_clearSelection(self: pointer, ): void {.importc: "QGraphicsScene_clearSelection".}
 proc fcQGraphicsScene_clear(self: pointer, ): void {.importc: "QGraphicsScene_clear".}
 proc fcQGraphicsScene_changed(self: pointer, region: struct_miqt_array): void {.importc: "QGraphicsScene_changed".}
-proc fcQGraphicsScene_connect_changed(self: pointer, slot: int) {.importc: "QGraphicsScene_connect_changed".}
+proc fcQGraphicsScene_connect_changed(self: pointer, slot: int, callback: proc (slot: int, region: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_changed".}
 proc fcQGraphicsScene_sceneRectChanged(self: pointer, rect: pointer): void {.importc: "QGraphicsScene_sceneRectChanged".}
-proc fcQGraphicsScene_connect_sceneRectChanged(self: pointer, slot: int) {.importc: "QGraphicsScene_connect_sceneRectChanged".}
+proc fcQGraphicsScene_connect_sceneRectChanged(self: pointer, slot: int, callback: proc (slot: int, rect: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_sceneRectChanged".}
 proc fcQGraphicsScene_selectionChanged(self: pointer, ): void {.importc: "QGraphicsScene_selectionChanged".}
-proc fcQGraphicsScene_connect_selectionChanged(self: pointer, slot: int) {.importc: "QGraphicsScene_connect_selectionChanged".}
+proc fcQGraphicsScene_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_selectionChanged".}
 proc fcQGraphicsScene_focusItemChanged(self: pointer, newFocus: pointer, oldFocus: pointer, reason: cint): void {.importc: "QGraphicsScene_focusItemChanged".}
-proc fcQGraphicsScene_connect_focusItemChanged(self: pointer, slot: int) {.importc: "QGraphicsScene_connect_focusItemChanged".}
+proc fcQGraphicsScene_connect_focusItemChanged(self: pointer, slot: int, callback: proc (slot: int, newFocus: pointer, oldFocus: pointer, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsScene_connect_focusItemChanged".}
 proc fcQGraphicsScene_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsScene_tr2".}
 proc fcQGraphicsScene_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsScene_tr3".}
 proc fcQGraphicsScene_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsScene_trUtf82".}
@@ -613,7 +613,7 @@ proc changed*(self: gen_qgraphicsscene_types.QGraphicsScene, region: seq[gen_qre
   fcQGraphicsScene_changed(self.h, struct_miqt_array(len: csize_t(len(region)), data: if len(region) == 0: nil else: addr(region_CArray[0])))
 
 type QGraphicsScenechangedSlot* = proc(region: seq[gen_qrect_types.QRectF])
-proc miqt_exec_callback_cQGraphicsScene_changed(slot: int, region: struct_miqt_array) {.exportc: "miqt_exec_callback_QGraphicsScene_changed".} =
+proc miqt_exec_callback_cQGraphicsScene_changed(slot: int, region: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenechangedSlot](cast[pointer](slot))
   var vregion_ma = region
   var vregionx_ret = newSeq[gen_qrect_types.QRectF](int(vregion_ma.len))
@@ -624,47 +624,59 @@ proc miqt_exec_callback_cQGraphicsScene_changed(slot: int, region: struct_miqt_a
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsScene_changed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScenechangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onchanged*(self: gen_qgraphicsscene_types.QGraphicsScene, slot: QGraphicsScenechangedSlot) =
   var tmp = new QGraphicsScenechangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScene_connect_changed(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScene_connect_changed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScene_changed, miqt_exec_callback_cQGraphicsScene_changed_release)
 
 proc sceneRectChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsScene_sceneRectChanged(self.h, rect.h)
 
 type QGraphicsScenesceneRectChangedSlot* = proc(rect: gen_qrect_types.QRectF)
-proc miqt_exec_callback_cQGraphicsScene_sceneRectChanged(slot: int, rect: pointer) {.exportc: "miqt_exec_callback_QGraphicsScene_sceneRectChanged".} =
+proc miqt_exec_callback_cQGraphicsScene_sceneRectChanged(slot: int, rect: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenesceneRectChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRectF(h: rect)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsScene_sceneRectChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScenesceneRectChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsceneRectChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, slot: QGraphicsScenesceneRectChangedSlot) =
   var tmp = new QGraphicsScenesceneRectChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScene_connect_sceneRectChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScene_connect_sceneRectChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScene_sceneRectChanged, miqt_exec_callback_cQGraphicsScene_sceneRectChanged_release)
 
 proc selectionChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, ): void =
   fcQGraphicsScene_selectionChanged(self.h)
 
 type QGraphicsSceneselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsScene_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsScene_selectionChanged".} =
+proc miqt_exec_callback_cQGraphicsScene_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsSceneselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsScene_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsSceneselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, slot: QGraphicsSceneselectionChangedSlot) =
   var tmp = new QGraphicsSceneselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScene_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScene_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScene_selectionChanged, miqt_exec_callback_cQGraphicsScene_selectionChanged_release)
 
 proc focusItemChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, newFocus: gen_qgraphicsitem_types.QGraphicsItem, oldFocus: gen_qgraphicsitem_types.QGraphicsItem, reason: cint): void =
   fcQGraphicsScene_focusItemChanged(self.h, newFocus.h, oldFocus.h, cint(reason))
 
 type QGraphicsScenefocusItemChangedSlot* = proc(newFocus: gen_qgraphicsitem_types.QGraphicsItem, oldFocus: gen_qgraphicsitem_types.QGraphicsItem, reason: cint)
-proc miqt_exec_callback_cQGraphicsScene_focusItemChanged(slot: int, newFocus: pointer, oldFocus: pointer, reason: cint) {.exportc: "miqt_exec_callback_QGraphicsScene_focusItemChanged".} =
+proc miqt_exec_callback_cQGraphicsScene_focusItemChanged(slot: int, newFocus: pointer, oldFocus: pointer, reason: cint) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsScenefocusItemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: newFocus)
 
@@ -674,11 +686,15 @@ proc miqt_exec_callback_cQGraphicsScene_focusItemChanged(slot: int, newFocus: po
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQGraphicsScene_focusItemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsScenefocusItemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusItemChanged*(self: gen_qgraphicsscene_types.QGraphicsScene, slot: QGraphicsScenefocusItemChangedSlot) =
   var tmp = new QGraphicsScenefocusItemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsScene_connect_focusItemChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsScene_connect_focusItemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsScene_focusItemChanged, miqt_exec_callback_cQGraphicsScene_focusItemChanged_release)
 
 proc tr*(_: type gen_qgraphicsscene_types.QGraphicsScene, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsScene_tr2(s, c)

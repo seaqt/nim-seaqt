@@ -67,15 +67,15 @@ proc fcQVideoWidgetControl_setHue(self: pointer, hue: cint): void {.importc: "QV
 proc fcQVideoWidgetControl_saturation(self: pointer, ): cint {.importc: "QVideoWidgetControl_saturation".}
 proc fcQVideoWidgetControl_setSaturation(self: pointer, saturation: cint): void {.importc: "QVideoWidgetControl_setSaturation".}
 proc fcQVideoWidgetControl_fullScreenChanged(self: pointer, fullScreen: bool): void {.importc: "QVideoWidgetControl_fullScreenChanged".}
-proc fcQVideoWidgetControl_connect_fullScreenChanged(self: pointer, slot: int) {.importc: "QVideoWidgetControl_connect_fullScreenChanged".}
+proc fcQVideoWidgetControl_connect_fullScreenChanged(self: pointer, slot: int, callback: proc (slot: int, fullScreen: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidgetControl_connect_fullScreenChanged".}
 proc fcQVideoWidgetControl_brightnessChanged(self: pointer, brightness: cint): void {.importc: "QVideoWidgetControl_brightnessChanged".}
-proc fcQVideoWidgetControl_connect_brightnessChanged(self: pointer, slot: int) {.importc: "QVideoWidgetControl_connect_brightnessChanged".}
+proc fcQVideoWidgetControl_connect_brightnessChanged(self: pointer, slot: int, callback: proc (slot: int, brightness: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidgetControl_connect_brightnessChanged".}
 proc fcQVideoWidgetControl_contrastChanged(self: pointer, contrast: cint): void {.importc: "QVideoWidgetControl_contrastChanged".}
-proc fcQVideoWidgetControl_connect_contrastChanged(self: pointer, slot: int) {.importc: "QVideoWidgetControl_connect_contrastChanged".}
+proc fcQVideoWidgetControl_connect_contrastChanged(self: pointer, slot: int, callback: proc (slot: int, contrast: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidgetControl_connect_contrastChanged".}
 proc fcQVideoWidgetControl_hueChanged(self: pointer, hue: cint): void {.importc: "QVideoWidgetControl_hueChanged".}
-proc fcQVideoWidgetControl_connect_hueChanged(self: pointer, slot: int) {.importc: "QVideoWidgetControl_connect_hueChanged".}
+proc fcQVideoWidgetControl_connect_hueChanged(self: pointer, slot: int, callback: proc (slot: int, hue: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidgetControl_connect_hueChanged".}
 proc fcQVideoWidgetControl_saturationChanged(self: pointer, saturation: cint): void {.importc: "QVideoWidgetControl_saturationChanged".}
-proc fcQVideoWidgetControl_connect_saturationChanged(self: pointer, slot: int) {.importc: "QVideoWidgetControl_connect_saturationChanged".}
+proc fcQVideoWidgetControl_connect_saturationChanged(self: pointer, slot: int, callback: proc (slot: int, saturation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoWidgetControl_connect_saturationChanged".}
 proc fcQVideoWidgetControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWidgetControl_tr2".}
 proc fcQVideoWidgetControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoWidgetControl_tr3".}
 proc fcQVideoWidgetControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoWidgetControl_trUtf82".}
@@ -147,81 +147,101 @@ proc fullScreenChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl,
   fcQVideoWidgetControl_fullScreenChanged(self.h, fullScreen)
 
 type QVideoWidgetControlfullScreenChangedSlot* = proc(fullScreen: bool)
-proc miqt_exec_callback_cQVideoWidgetControl_fullScreenChanged(slot: int, fullScreen: bool) {.exportc: "miqt_exec_callback_QVideoWidgetControl_fullScreenChanged".} =
+proc miqt_exec_callback_cQVideoWidgetControl_fullScreenChanged(slot: int, fullScreen: bool) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetControlfullScreenChangedSlot](cast[pointer](slot))
   let slotval1 = fullScreen
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidgetControl_fullScreenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetControlfullScreenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfullScreenChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, slot: QVideoWidgetControlfullScreenChangedSlot) =
   var tmp = new QVideoWidgetControlfullScreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidgetControl_connect_fullScreenChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidgetControl_connect_fullScreenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidgetControl_fullScreenChanged, miqt_exec_callback_cQVideoWidgetControl_fullScreenChanged_release)
 
 proc brightnessChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, brightness: cint): void =
   fcQVideoWidgetControl_brightnessChanged(self.h, brightness)
 
 type QVideoWidgetControlbrightnessChangedSlot* = proc(brightness: cint)
-proc miqt_exec_callback_cQVideoWidgetControl_brightnessChanged(slot: int, brightness: cint) {.exportc: "miqt_exec_callback_QVideoWidgetControl_brightnessChanged".} =
+proc miqt_exec_callback_cQVideoWidgetControl_brightnessChanged(slot: int, brightness: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetControlbrightnessChangedSlot](cast[pointer](slot))
   let slotval1 = brightness
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidgetControl_brightnessChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetControlbrightnessChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbrightnessChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, slot: QVideoWidgetControlbrightnessChangedSlot) =
   var tmp = new QVideoWidgetControlbrightnessChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidgetControl_connect_brightnessChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidgetControl_connect_brightnessChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidgetControl_brightnessChanged, miqt_exec_callback_cQVideoWidgetControl_brightnessChanged_release)
 
 proc contrastChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, contrast: cint): void =
   fcQVideoWidgetControl_contrastChanged(self.h, contrast)
 
 type QVideoWidgetControlcontrastChangedSlot* = proc(contrast: cint)
-proc miqt_exec_callback_cQVideoWidgetControl_contrastChanged(slot: int, contrast: cint) {.exportc: "miqt_exec_callback_QVideoWidgetControl_contrastChanged".} =
+proc miqt_exec_callback_cQVideoWidgetControl_contrastChanged(slot: int, contrast: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetControlcontrastChangedSlot](cast[pointer](slot))
   let slotval1 = contrast
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidgetControl_contrastChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetControlcontrastChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncontrastChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, slot: QVideoWidgetControlcontrastChangedSlot) =
   var tmp = new QVideoWidgetControlcontrastChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidgetControl_connect_contrastChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidgetControl_connect_contrastChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidgetControl_contrastChanged, miqt_exec_callback_cQVideoWidgetControl_contrastChanged_release)
 
 proc hueChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, hue: cint): void =
   fcQVideoWidgetControl_hueChanged(self.h, hue)
 
 type QVideoWidgetControlhueChangedSlot* = proc(hue: cint)
-proc miqt_exec_callback_cQVideoWidgetControl_hueChanged(slot: int, hue: cint) {.exportc: "miqt_exec_callback_QVideoWidgetControl_hueChanged".} =
+proc miqt_exec_callback_cQVideoWidgetControl_hueChanged(slot: int, hue: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetControlhueChangedSlot](cast[pointer](slot))
   let slotval1 = hue
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidgetControl_hueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetControlhueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhueChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, slot: QVideoWidgetControlhueChangedSlot) =
   var tmp = new QVideoWidgetControlhueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidgetControl_connect_hueChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidgetControl_connect_hueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidgetControl_hueChanged, miqt_exec_callback_cQVideoWidgetControl_hueChanged_release)
 
 proc saturationChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, saturation: cint): void =
   fcQVideoWidgetControl_saturationChanged(self.h, saturation)
 
 type QVideoWidgetControlsaturationChangedSlot* = proc(saturation: cint)
-proc miqt_exec_callback_cQVideoWidgetControl_saturationChanged(slot: int, saturation: cint) {.exportc: "miqt_exec_callback_QVideoWidgetControl_saturationChanged".} =
+proc miqt_exec_callback_cQVideoWidgetControl_saturationChanged(slot: int, saturation: cint) {.cdecl.} =
   let nimfunc = cast[ptr QVideoWidgetControlsaturationChangedSlot](cast[pointer](slot))
   let slotval1 = saturation
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoWidgetControl_saturationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoWidgetControlsaturationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsaturationChanged*(self: gen_qvideowidgetcontrol_types.QVideoWidgetControl, slot: QVideoWidgetControlsaturationChangedSlot) =
   var tmp = new QVideoWidgetControlsaturationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoWidgetControl_connect_saturationChanged(self.h, cast[int](addr tmp[]))
+  fcQVideoWidgetControl_connect_saturationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoWidgetControl_saturationChanged, miqt_exec_callback_cQVideoWidgetControl_saturationChanged_release)
 
 proc tr*(_: type gen_qvideowidgetcontrol_types.QVideoWidgetControl, s: cstring, c: cstring): string =
   let v_ms = fcQVideoWidgetControl_tr2(s, c)

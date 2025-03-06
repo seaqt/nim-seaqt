@@ -41,11 +41,11 @@ QVariant* QCameraExposureControl_requestedValue(const QCameraExposureControl* se
 QVariant* QCameraExposureControl_actualValue(const QCameraExposureControl* self, int parameter);
 bool QCameraExposureControl_setValue(QCameraExposureControl* self, int parameter, QVariant* value);
 void QCameraExposureControl_requestedValueChanged(QCameraExposureControl* self, int parameter);
-void QCameraExposureControl_connect_requestedValueChanged(QCameraExposureControl* self, intptr_t slot);
+void QCameraExposureControl_connect_requestedValueChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QCameraExposureControl_actualValueChanged(QCameraExposureControl* self, int parameter);
-void QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot);
+void QCameraExposureControl_connect_actualValueChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QCameraExposureControl_parameterRangeChanged(QCameraExposureControl* self, int parameter);
-void QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot);
+void QCameraExposureControl_connect_parameterRangeChanged(QCameraExposureControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QCameraExposureControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraExposureControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraExposureControl_trUtf82(const char* s, const char* c);

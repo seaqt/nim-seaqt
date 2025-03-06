@@ -44,7 +44,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QSplashScreen_messageChanged(intptr_t, struct miqt_string);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -967,18 +966,23 @@ void QSplashScreen_messageChanged(QSplashScreen* self, struct miqt_string messag
 	self->messageChanged(message_QString);
 }
 
-void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot) {
-	VirtualQSplashScreen::connect(self, static_cast<void (QSplashScreen::*)(const QString&)>(&QSplashScreen::messageChanged), self, [=](const QString& message) {
-		const QString message_ret = message;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray message_b = message_ret.toUtf8();
-		struct miqt_string message_ms;
-		message_ms.len = message_b.length();
-		message_ms.data = static_cast<char*>(malloc(message_ms.len));
-		memcpy(message_ms.data, message_b.data(), message_ms.len);
-		struct miqt_string sigval1 = message_ms;
-		miqt_exec_callback_QSplashScreen_messageChanged(slot, sigval1);
-	});
+void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& message) {
+			const QString message_ret = message;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray message_b = message_ret.toUtf8();
+			struct miqt_string message_ms;
+			message_ms.len = message_b.length();
+			message_ms.data = static_cast<char*>(malloc(message_ms.len));
+			memcpy(message_ms.data, message_b.data(), message_ms.len);
+			struct miqt_string sigval1 = message_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQSplashScreen::connect(self, static_cast<void (QSplashScreen::*)(const QString&)>(&QSplashScreen::messageChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QSplashScreen_tr2(const char* s, const char* c) {

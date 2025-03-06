@@ -43,8 +43,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QFontDialog_currentFontChanged(intptr_t, QFont*);
-void miqt_exec_callback_QFontDialog_fontSelected(intptr_t, QFont*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1003,26 +1001,36 @@ void QFontDialog_currentFontChanged(QFontDialog* self, QFont* font) {
 	self->currentFontChanged(*font);
 }
 
-void QFontDialog_connect_currentFontChanged(QFontDialog* self, intptr_t slot) {
-	VirtualQFontDialog::connect(self, static_cast<void (QFontDialog::*)(const QFont&)>(&QFontDialog::currentFontChanged), self, [=](const QFont& font) {
-		const QFont& font_ret = font;
-		// Cast returned reference into pointer
-		QFont* sigval1 = const_cast<QFont*>(&font_ret);
-		miqt_exec_callback_QFontDialog_currentFontChanged(slot, sigval1);
-	});
+void QFontDialog_connect_currentFontChanged(QFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QFont*);
+		void operator()(const QFont& font) {
+			const QFont& font_ret = font;
+			// Cast returned reference into pointer
+			QFont* sigval1 = const_cast<QFont*>(&font_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQFontDialog::connect(self, static_cast<void (QFontDialog::*)(const QFont&)>(&QFontDialog::currentFontChanged), self, local_caller{slot, callback, release});
 }
 
 void QFontDialog_fontSelected(QFontDialog* self, QFont* font) {
 	self->fontSelected(*font);
 }
 
-void QFontDialog_connect_fontSelected(QFontDialog* self, intptr_t slot) {
-	VirtualQFontDialog::connect(self, static_cast<void (QFontDialog::*)(const QFont&)>(&QFontDialog::fontSelected), self, [=](const QFont& font) {
-		const QFont& font_ret = font;
-		// Cast returned reference into pointer
-		QFont* sigval1 = const_cast<QFont*>(&font_ret);
-		miqt_exec_callback_QFontDialog_fontSelected(slot, sigval1);
-	});
+void QFontDialog_connect_fontSelected(QFontDialog* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QFont*);
+		void operator()(const QFont& font) {
+			const QFont& font_ret = font;
+			// Cast returned reference into pointer
+			QFont* sigval1 = const_cast<QFont*>(&font_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQFontDialog::connect(self, static_cast<void (QFontDialog::*)(const QFont&)>(&QFontDialog::fontSelected), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QFontDialog_tr2(const char* s, const char* c) {

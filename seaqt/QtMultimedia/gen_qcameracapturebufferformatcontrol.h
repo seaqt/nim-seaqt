@@ -38,7 +38,7 @@ struct miqt_array /* of int */  QCameraCaptureBufferFormatControl_supportedBuffe
 int QCameraCaptureBufferFormatControl_bufferFormat(const QCameraCaptureBufferFormatControl* self);
 void QCameraCaptureBufferFormatControl_setBufferFormat(QCameraCaptureBufferFormatControl* self, int format);
 void QCameraCaptureBufferFormatControl_bufferFormatChanged(QCameraCaptureBufferFormatControl* self, int format);
-void QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(QCameraCaptureBufferFormatControl* self, intptr_t slot);
+void QCameraCaptureBufferFormatControl_connect_bufferFormatChanged(QCameraCaptureBufferFormatControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QCameraCaptureBufferFormatControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraCaptureBufferFormatControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraCaptureBufferFormatControl_trUtf82(const char* s, const char* c);

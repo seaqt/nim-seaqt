@@ -326,67 +326,67 @@ proc fcQWebPage_extension(self: pointer, extension: cint, option: pointer, outpu
 proc fcQWebPage_supportsExtension(self: pointer, extension: cint): bool {.importc: "QWebPage_supportsExtension".}
 proc fcQWebPage_shouldInterruptJavaScript(self: pointer, ): bool {.importc: "QWebPage_shouldInterruptJavaScript".}
 proc fcQWebPage_loadStarted(self: pointer, ): void {.importc: "QWebPage_loadStarted".}
-proc fcQWebPage_connect_loadStarted(self: pointer, slot: int) {.importc: "QWebPage_connect_loadStarted".}
+proc fcQWebPage_connect_loadStarted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_loadStarted".}
 proc fcQWebPage_loadProgress(self: pointer, progress: cint): void {.importc: "QWebPage_loadProgress".}
-proc fcQWebPage_connect_loadProgress(self: pointer, slot: int) {.importc: "QWebPage_connect_loadProgress".}
+proc fcQWebPage_connect_loadProgress(self: pointer, slot: int, callback: proc (slot: int, progress: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_loadProgress".}
 proc fcQWebPage_loadFinished(self: pointer, ok: bool): void {.importc: "QWebPage_loadFinished".}
-proc fcQWebPage_connect_loadFinished(self: pointer, slot: int) {.importc: "QWebPage_connect_loadFinished".}
+proc fcQWebPage_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, ok: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_loadFinished".}
 proc fcQWebPage_linkHovered(self: pointer, link: struct_miqt_string, title: struct_miqt_string, textContent: struct_miqt_string): void {.importc: "QWebPage_linkHovered".}
-proc fcQWebPage_connect_linkHovered(self: pointer, slot: int) {.importc: "QWebPage_connect_linkHovered".}
+proc fcQWebPage_connect_linkHovered(self: pointer, slot: int, callback: proc (slot: int, link: struct_miqt_string, title: struct_miqt_string, textContent: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_linkHovered".}
 proc fcQWebPage_statusBarMessage(self: pointer, text: struct_miqt_string): void {.importc: "QWebPage_statusBarMessage".}
-proc fcQWebPage_connect_statusBarMessage(self: pointer, slot: int) {.importc: "QWebPage_connect_statusBarMessage".}
+proc fcQWebPage_connect_statusBarMessage(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_statusBarMessage".}
 proc fcQWebPage_selectionChanged(self: pointer, ): void {.importc: "QWebPage_selectionChanged".}
-proc fcQWebPage_connect_selectionChanged(self: pointer, slot: int) {.importc: "QWebPage_connect_selectionChanged".}
+proc fcQWebPage_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_selectionChanged".}
 proc fcQWebPage_frameCreated(self: pointer, frame: pointer): void {.importc: "QWebPage_frameCreated".}
-proc fcQWebPage_connect_frameCreated(self: pointer, slot: int) {.importc: "QWebPage_connect_frameCreated".}
+proc fcQWebPage_connect_frameCreated(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_frameCreated".}
 proc fcQWebPage_geometryChangeRequested(self: pointer, geom: pointer): void {.importc: "QWebPage_geometryChangeRequested".}
-proc fcQWebPage_connect_geometryChangeRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_geometryChangeRequested".}
+proc fcQWebPage_connect_geometryChangeRequested(self: pointer, slot: int, callback: proc (slot: int, geom: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_geometryChangeRequested".}
 proc fcQWebPage_repaintRequested(self: pointer, dirtyRect: pointer): void {.importc: "QWebPage_repaintRequested".}
-proc fcQWebPage_connect_repaintRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_repaintRequested".}
+proc fcQWebPage_connect_repaintRequested(self: pointer, slot: int, callback: proc (slot: int, dirtyRect: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_repaintRequested".}
 proc fcQWebPage_scrollRequested(self: pointer, dx: cint, dy: cint, scrollViewRect: pointer): void {.importc: "QWebPage_scrollRequested".}
-proc fcQWebPage_connect_scrollRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_scrollRequested".}
+proc fcQWebPage_connect_scrollRequested(self: pointer, slot: int, callback: proc (slot: int, dx: cint, dy: cint, scrollViewRect: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_scrollRequested".}
 proc fcQWebPage_windowCloseRequested(self: pointer, ): void {.importc: "QWebPage_windowCloseRequested".}
-proc fcQWebPage_connect_windowCloseRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_windowCloseRequested".}
+proc fcQWebPage_connect_windowCloseRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_windowCloseRequested".}
 proc fcQWebPage_printRequested(self: pointer, frame: pointer): void {.importc: "QWebPage_printRequested".}
-proc fcQWebPage_connect_printRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_printRequested".}
+proc fcQWebPage_connect_printRequested(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_printRequested".}
 proc fcQWebPage_linkClicked(self: pointer, url: pointer): void {.importc: "QWebPage_linkClicked".}
-proc fcQWebPage_connect_linkClicked(self: pointer, slot: int) {.importc: "QWebPage_connect_linkClicked".}
+proc fcQWebPage_connect_linkClicked(self: pointer, slot: int, callback: proc (slot: int, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_linkClicked".}
 proc fcQWebPage_toolBarVisibilityChangeRequested(self: pointer, visible: bool): void {.importc: "QWebPage_toolBarVisibilityChangeRequested".}
-proc fcQWebPage_connect_toolBarVisibilityChangeRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_toolBarVisibilityChangeRequested".}
+proc fcQWebPage_connect_toolBarVisibilityChangeRequested(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_toolBarVisibilityChangeRequested".}
 proc fcQWebPage_statusBarVisibilityChangeRequested(self: pointer, visible: bool): void {.importc: "QWebPage_statusBarVisibilityChangeRequested".}
-proc fcQWebPage_connect_statusBarVisibilityChangeRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_statusBarVisibilityChangeRequested".}
+proc fcQWebPage_connect_statusBarVisibilityChangeRequested(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_statusBarVisibilityChangeRequested".}
 proc fcQWebPage_menuBarVisibilityChangeRequested(self: pointer, visible: bool): void {.importc: "QWebPage_menuBarVisibilityChangeRequested".}
-proc fcQWebPage_connect_menuBarVisibilityChangeRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_menuBarVisibilityChangeRequested".}
+proc fcQWebPage_connect_menuBarVisibilityChangeRequested(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_menuBarVisibilityChangeRequested".}
 proc fcQWebPage_unsupportedContent(self: pointer, reply: pointer): void {.importc: "QWebPage_unsupportedContent".}
-proc fcQWebPage_connect_unsupportedContent(self: pointer, slot: int) {.importc: "QWebPage_connect_unsupportedContent".}
+proc fcQWebPage_connect_unsupportedContent(self: pointer, slot: int, callback: proc (slot: int, reply: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_unsupportedContent".}
 proc fcQWebPage_downloadRequested(self: pointer, request: pointer): void {.importc: "QWebPage_downloadRequested".}
-proc fcQWebPage_connect_downloadRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_downloadRequested".}
+proc fcQWebPage_connect_downloadRequested(self: pointer, slot: int, callback: proc (slot: int, request: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_downloadRequested".}
 proc fcQWebPage_focusedElementChanged(self: pointer, element: pointer): void {.importc: "QWebPage_focusedElementChanged".}
-proc fcQWebPage_connect_focusedElementChanged(self: pointer, slot: int) {.importc: "QWebPage_connect_focusedElementChanged".}
+proc fcQWebPage_connect_focusedElementChanged(self: pointer, slot: int, callback: proc (slot: int, element: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_focusedElementChanged".}
 proc fcQWebPage_microFocusChanged(self: pointer, ): void {.importc: "QWebPage_microFocusChanged".}
-proc fcQWebPage_connect_microFocusChanged(self: pointer, slot: int) {.importc: "QWebPage_connect_microFocusChanged".}
+proc fcQWebPage_connect_microFocusChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_microFocusChanged".}
 proc fcQWebPage_contentsChanged(self: pointer, ): void {.importc: "QWebPage_contentsChanged".}
-proc fcQWebPage_connect_contentsChanged(self: pointer, slot: int) {.importc: "QWebPage_connect_contentsChanged".}
+proc fcQWebPage_connect_contentsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_contentsChanged".}
 proc fcQWebPage_databaseQuotaExceeded(self: pointer, frame: pointer, databaseName: struct_miqt_string): void {.importc: "QWebPage_databaseQuotaExceeded".}
-proc fcQWebPage_connect_databaseQuotaExceeded(self: pointer, slot: int) {.importc: "QWebPage_connect_databaseQuotaExceeded".}
+proc fcQWebPage_connect_databaseQuotaExceeded(self: pointer, slot: int, callback: proc (slot: int, frame: pointer, databaseName: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_databaseQuotaExceeded".}
 proc fcQWebPage_applicationCacheQuotaExceeded(self: pointer, origin: pointer, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong): void {.importc: "QWebPage_applicationCacheQuotaExceeded".}
-proc fcQWebPage_connect_applicationCacheQuotaExceeded(self: pointer, slot: int) {.importc: "QWebPage_connect_applicationCacheQuotaExceeded".}
+proc fcQWebPage_connect_applicationCacheQuotaExceeded(self: pointer, slot: int, callback: proc (slot: int, origin: pointer, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_applicationCacheQuotaExceeded".}
 proc fcQWebPage_saveFrameStateRequested(self: pointer, frame: pointer, item: pointer): void {.importc: "QWebPage_saveFrameStateRequested".}
-proc fcQWebPage_connect_saveFrameStateRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_saveFrameStateRequested".}
+proc fcQWebPage_connect_saveFrameStateRequested(self: pointer, slot: int, callback: proc (slot: int, frame: pointer, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_saveFrameStateRequested".}
 proc fcQWebPage_restoreFrameStateRequested(self: pointer, frame: pointer): void {.importc: "QWebPage_restoreFrameStateRequested".}
-proc fcQWebPage_connect_restoreFrameStateRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_restoreFrameStateRequested".}
+proc fcQWebPage_connect_restoreFrameStateRequested(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_restoreFrameStateRequested".}
 proc fcQWebPage_viewportChangeRequested(self: pointer, ): void {.importc: "QWebPage_viewportChangeRequested".}
-proc fcQWebPage_connect_viewportChangeRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_viewportChangeRequested".}
+proc fcQWebPage_connect_viewportChangeRequested(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_viewportChangeRequested".}
 proc fcQWebPage_featurePermissionRequested(self: pointer, frame: pointer, feature: cint): void {.importc: "QWebPage_featurePermissionRequested".}
-proc fcQWebPage_connect_featurePermissionRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_featurePermissionRequested".}
+proc fcQWebPage_connect_featurePermissionRequested(self: pointer, slot: int, callback: proc (slot: int, frame: pointer, feature: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_featurePermissionRequested".}
 proc fcQWebPage_featurePermissionRequestCanceled(self: pointer, frame: pointer, feature: cint): void {.importc: "QWebPage_featurePermissionRequestCanceled".}
-proc fcQWebPage_connect_featurePermissionRequestCanceled(self: pointer, slot: int) {.importc: "QWebPage_connect_featurePermissionRequestCanceled".}
+proc fcQWebPage_connect_featurePermissionRequestCanceled(self: pointer, slot: int, callback: proc (slot: int, frame: pointer, feature: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_featurePermissionRequestCanceled".}
 proc fcQWebPage_fullScreenRequested(self: pointer, fullScreenRequest: pointer): void {.importc: "QWebPage_fullScreenRequested".}
-proc fcQWebPage_connect_fullScreenRequested(self: pointer, slot: int) {.importc: "QWebPage_connect_fullScreenRequested".}
+proc fcQWebPage_connect_fullScreenRequested(self: pointer, slot: int, callback: proc (slot: int, fullScreenRequest: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_fullScreenRequested".}
 proc fcQWebPage_consoleMessageReceived(self: pointer, source: cint, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string): void {.importc: "QWebPage_consoleMessageReceived".}
-proc fcQWebPage_connect_consoleMessageReceived(self: pointer, slot: int) {.importc: "QWebPage_connect_consoleMessageReceived".}
+proc fcQWebPage_connect_consoleMessageReceived(self: pointer, slot: int, callback: proc (slot: int, source: cint, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_consoleMessageReceived".}
 proc fcQWebPage_recentlyAudibleChanged(self: pointer, recentlyAudible: bool): void {.importc: "QWebPage_recentlyAudibleChanged".}
-proc fcQWebPage_connect_recentlyAudibleChanged(self: pointer, slot: int) {.importc: "QWebPage_connect_recentlyAudibleChanged".}
+proc fcQWebPage_connect_recentlyAudibleChanged(self: pointer, slot: int, callback: proc (slot: int, recentlyAudible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebPage_connect_recentlyAudibleChanged".}
 proc fcQWebPage_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebPage_tr2".}
 proc fcQWebPage_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebPage_tr3".}
 proc fcQWebPage_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebPage_trUtf82".}
@@ -669,53 +669,65 @@ proc loadStarted*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_loadStarted(self.h)
 
 type QWebPageloadStartedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_loadStarted(slot: int) {.exportc: "miqt_exec_callback_QWebPage_loadStarted".} =
+proc miqt_exec_callback_cQWebPage_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_loadStarted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageloadStartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloadStarted*(self: gen_qwebpage_types.QWebPage, slot: QWebPageloadStartedSlot) =
   var tmp = new QWebPageloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_loadStarted(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_loadStarted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_loadStarted, miqt_exec_callback_cQWebPage_loadStarted_release)
 
 proc loadProgress*(self: gen_qwebpage_types.QWebPage, progress: cint): void =
   fcQWebPage_loadProgress(self.h, progress)
 
 type QWebPageloadProgressSlot* = proc(progress: cint)
-proc miqt_exec_callback_cQWebPage_loadProgress(slot: int, progress: cint) {.exportc: "miqt_exec_callback_QWebPage_loadProgress".} =
+proc miqt_exec_callback_cQWebPage_loadProgress(slot: int, progress: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageloadProgressSlot](cast[pointer](slot))
   let slotval1 = progress
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_loadProgress_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageloadProgressSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadProgress*(self: gen_qwebpage_types.QWebPage, slot: QWebPageloadProgressSlot) =
   var tmp = new QWebPageloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_loadProgress(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_loadProgress(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_loadProgress, miqt_exec_callback_cQWebPage_loadProgress_release)
 
 proc loadFinished*(self: gen_qwebpage_types.QWebPage, ok: bool): void =
   fcQWebPage_loadFinished(self.h, ok)
 
 type QWebPageloadFinishedSlot* = proc(ok: bool)
-proc miqt_exec_callback_cQWebPage_loadFinished(slot: int, ok: bool) {.exportc: "miqt_exec_callback_QWebPage_loadFinished".} =
+proc miqt_exec_callback_cQWebPage_loadFinished(slot: int, ok: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageloadFinishedSlot](cast[pointer](slot))
   let slotval1 = ok
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_loadFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageloadFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadFinished*(self: gen_qwebpage_types.QWebPage, slot: QWebPageloadFinishedSlot) =
   var tmp = new QWebPageloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_loadFinished(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_loadFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_loadFinished, miqt_exec_callback_cQWebPage_loadFinished_release)
 
 proc linkHovered*(self: gen_qwebpage_types.QWebPage, link: string, title: string, textContent: string): void =
   fcQWebPage_linkHovered(self.h, struct_miqt_string(data: link, len: csize_t(len(link))), struct_miqt_string(data: title, len: csize_t(len(title))), struct_miqt_string(data: textContent, len: csize_t(len(textContent))))
 
 type QWebPagelinkHoveredSlot* = proc(link: string, title: string, textContent: string)
-proc miqt_exec_callback_cQWebPage_linkHovered(slot: int, link: struct_miqt_string, title: struct_miqt_string, textContent: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebPage_linkHovered".} =
+proc miqt_exec_callback_cQWebPage_linkHovered(slot: int, link: struct_miqt_string, title: struct_miqt_string, textContent: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagelinkHoveredSlot](cast[pointer](slot))
   let vlink_ms = link
   let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
@@ -734,17 +746,21 @@ proc miqt_exec_callback_cQWebPage_linkHovered(slot: int, link: struct_miqt_strin
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQWebPage_linkHovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagelinkHoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkHovered*(self: gen_qwebpage_types.QWebPage, slot: QWebPagelinkHoveredSlot) =
   var tmp = new QWebPagelinkHoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_linkHovered(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_linkHovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_linkHovered, miqt_exec_callback_cQWebPage_linkHovered_release)
 
 proc statusBarMessage*(self: gen_qwebpage_types.QWebPage, text: string): void =
   fcQWebPage_statusBarMessage(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QWebPagestatusBarMessageSlot* = proc(text: string)
-proc miqt_exec_callback_cQWebPage_statusBarMessage(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebPage_statusBarMessage".} =
+proc miqt_exec_callback_cQWebPage_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagestatusBarMessageSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -753,79 +769,99 @@ proc miqt_exec_callback_cQWebPage_statusBarMessage(slot: int, text: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_statusBarMessage_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagestatusBarMessageSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusBarMessage*(self: gen_qwebpage_types.QWebPage, slot: QWebPagestatusBarMessageSlot) =
   var tmp = new QWebPagestatusBarMessageSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_statusBarMessage(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_statusBarMessage(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_statusBarMessage, miqt_exec_callback_cQWebPage_statusBarMessage_release)
 
 proc selectionChanged*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_selectionChanged(self.h)
 
 type QWebPageselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QWebPage_selectionChanged".} =
+proc miqt_exec_callback_cQWebPage_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPageselectionChangedSlot) =
   var tmp = new QWebPageselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_selectionChanged, miqt_exec_callback_cQWebPage_selectionChanged_release)
 
 proc frameCreated*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame): void =
   fcQWebPage_frameCreated(self.h, frame.h)
 
 type QWebPageframeCreatedSlot* = proc(frame: gen_qwebframe_types.QWebFrame)
-proc miqt_exec_callback_cQWebPage_frameCreated(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QWebPage_frameCreated".} =
+proc miqt_exec_callback_cQWebPage_frameCreated(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageframeCreatedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_frameCreated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageframeCreatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onframeCreated*(self: gen_qwebpage_types.QWebPage, slot: QWebPageframeCreatedSlot) =
   var tmp = new QWebPageframeCreatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_frameCreated(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_frameCreated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_frameCreated, miqt_exec_callback_cQWebPage_frameCreated_release)
 
 proc geometryChangeRequested*(self: gen_qwebpage_types.QWebPage, geom: gen_qrect_types.QRect): void =
   fcQWebPage_geometryChangeRequested(self.h, geom.h)
 
 type QWebPagegeometryChangeRequestedSlot* = proc(geom: gen_qrect_types.QRect)
-proc miqt_exec_callback_cQWebPage_geometryChangeRequested(slot: int, geom: pointer) {.exportc: "miqt_exec_callback_QWebPage_geometryChangeRequested".} =
+proc miqt_exec_callback_cQWebPage_geometryChangeRequested(slot: int, geom: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagegeometryChangeRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRect(h: geom)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_geometryChangeRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagegeometryChangeRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ongeometryChangeRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagegeometryChangeRequestedSlot) =
   var tmp = new QWebPagegeometryChangeRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_geometryChangeRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_geometryChangeRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_geometryChangeRequested, miqt_exec_callback_cQWebPage_geometryChangeRequested_release)
 
 proc repaintRequested*(self: gen_qwebpage_types.QWebPage, dirtyRect: gen_qrect_types.QRect): void =
   fcQWebPage_repaintRequested(self.h, dirtyRect.h)
 
 type QWebPagerepaintRequestedSlot* = proc(dirtyRect: gen_qrect_types.QRect)
-proc miqt_exec_callback_cQWebPage_repaintRequested(slot: int, dirtyRect: pointer) {.exportc: "miqt_exec_callback_QWebPage_repaintRequested".} =
+proc miqt_exec_callback_cQWebPage_repaintRequested(slot: int, dirtyRect: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagerepaintRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRect(h: dirtyRect)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_repaintRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagerepaintRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrepaintRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagerepaintRequestedSlot) =
   var tmp = new QWebPagerepaintRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_repaintRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_repaintRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_repaintRequested, miqt_exec_callback_cQWebPage_repaintRequested_release)
 
 proc scrollRequested*(self: gen_qwebpage_types.QWebPage, dx: cint, dy: cint, scrollViewRect: gen_qrect_types.QRect): void =
   fcQWebPage_scrollRequested(self.h, dx, dy, scrollViewRect.h)
 
 type QWebPagescrollRequestedSlot* = proc(dx: cint, dy: cint, scrollViewRect: gen_qrect_types.QRect)
-proc miqt_exec_callback_cQWebPage_scrollRequested(slot: int, dx: cint, dy: cint, scrollViewRect: pointer) {.exportc: "miqt_exec_callback_QWebPage_scrollRequested".} =
+proc miqt_exec_callback_cQWebPage_scrollRequested(slot: int, dx: cint, dy: cint, scrollViewRect: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagescrollRequestedSlot](cast[pointer](slot))
   let slotval1 = dx
 
@@ -835,187 +871,235 @@ proc miqt_exec_callback_cQWebPage_scrollRequested(slot: int, dx: cint, dy: cint,
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQWebPage_scrollRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagescrollRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onscrollRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagescrollRequestedSlot) =
   var tmp = new QWebPagescrollRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_scrollRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_scrollRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_scrollRequested, miqt_exec_callback_cQWebPage_scrollRequested_release)
 
 proc windowCloseRequested*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_windowCloseRequested(self.h)
 
 type QWebPagewindowCloseRequestedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_windowCloseRequested(slot: int) {.exportc: "miqt_exec_callback_QWebPage_windowCloseRequested".} =
+proc miqt_exec_callback_cQWebPage_windowCloseRequested(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagewindowCloseRequestedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_windowCloseRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagewindowCloseRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onwindowCloseRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagewindowCloseRequestedSlot) =
   var tmp = new QWebPagewindowCloseRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_windowCloseRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_windowCloseRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_windowCloseRequested, miqt_exec_callback_cQWebPage_windowCloseRequested_release)
 
 proc printRequested*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame): void =
   fcQWebPage_printRequested(self.h, frame.h)
 
 type QWebPageprintRequestedSlot* = proc(frame: gen_qwebframe_types.QWebFrame)
-proc miqt_exec_callback_cQWebPage_printRequested(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QWebPage_printRequested".} =
+proc miqt_exec_callback_cQWebPage_printRequested(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageprintRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_printRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageprintRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onprintRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPageprintRequestedSlot) =
   var tmp = new QWebPageprintRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_printRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_printRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_printRequested, miqt_exec_callback_cQWebPage_printRequested_release)
 
 proc linkClicked*(self: gen_qwebpage_types.QWebPage, url: gen_qurl_types.QUrl): void =
   fcQWebPage_linkClicked(self.h, url.h)
 
 type QWebPagelinkClickedSlot* = proc(url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebPage_linkClicked(slot: int, url: pointer) {.exportc: "miqt_exec_callback_QWebPage_linkClicked".} =
+proc miqt_exec_callback_cQWebPage_linkClicked(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagelinkClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_linkClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagelinkClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkClicked*(self: gen_qwebpage_types.QWebPage, slot: QWebPagelinkClickedSlot) =
   var tmp = new QWebPagelinkClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_linkClicked(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_linkClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_linkClicked, miqt_exec_callback_cQWebPage_linkClicked_release)
 
 proc toolBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, visible: bool): void =
   fcQWebPage_toolBarVisibilityChangeRequested(self.h, visible)
 
 type QWebPagetoolBarVisibilityChangeRequestedSlot* = proc(visible: bool)
-proc miqt_exec_callback_cQWebPage_toolBarVisibilityChangeRequested(slot: int, visible: bool) {.exportc: "miqt_exec_callback_QWebPage_toolBarVisibilityChangeRequested".} =
+proc miqt_exec_callback_cQWebPage_toolBarVisibilityChangeRequested(slot: int, visible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagetoolBarVisibilityChangeRequestedSlot](cast[pointer](slot))
   let slotval1 = visible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_toolBarVisibilityChangeRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagetoolBarVisibilityChangeRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontoolBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagetoolBarVisibilityChangeRequestedSlot) =
   var tmp = new QWebPagetoolBarVisibilityChangeRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_toolBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_toolBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_toolBarVisibilityChangeRequested, miqt_exec_callback_cQWebPage_toolBarVisibilityChangeRequested_release)
 
 proc statusBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, visible: bool): void =
   fcQWebPage_statusBarVisibilityChangeRequested(self.h, visible)
 
 type QWebPagestatusBarVisibilityChangeRequestedSlot* = proc(visible: bool)
-proc miqt_exec_callback_cQWebPage_statusBarVisibilityChangeRequested(slot: int, visible: bool) {.exportc: "miqt_exec_callback_QWebPage_statusBarVisibilityChangeRequested".} =
+proc miqt_exec_callback_cQWebPage_statusBarVisibilityChangeRequested(slot: int, visible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagestatusBarVisibilityChangeRequestedSlot](cast[pointer](slot))
   let slotval1 = visible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_statusBarVisibilityChangeRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagestatusBarVisibilityChangeRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagestatusBarVisibilityChangeRequestedSlot) =
   var tmp = new QWebPagestatusBarVisibilityChangeRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_statusBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_statusBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_statusBarVisibilityChangeRequested, miqt_exec_callback_cQWebPage_statusBarVisibilityChangeRequested_release)
 
 proc menuBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, visible: bool): void =
   fcQWebPage_menuBarVisibilityChangeRequested(self.h, visible)
 
 type QWebPagemenuBarVisibilityChangeRequestedSlot* = proc(visible: bool)
-proc miqt_exec_callback_cQWebPage_menuBarVisibilityChangeRequested(slot: int, visible: bool) {.exportc: "miqt_exec_callback_QWebPage_menuBarVisibilityChangeRequested".} =
+proc miqt_exec_callback_cQWebPage_menuBarVisibilityChangeRequested(slot: int, visible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagemenuBarVisibilityChangeRequestedSlot](cast[pointer](slot))
   let slotval1 = visible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_menuBarVisibilityChangeRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagemenuBarVisibilityChangeRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmenuBarVisibilityChangeRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagemenuBarVisibilityChangeRequestedSlot) =
   var tmp = new QWebPagemenuBarVisibilityChangeRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_menuBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_menuBarVisibilityChangeRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_menuBarVisibilityChangeRequested, miqt_exec_callback_cQWebPage_menuBarVisibilityChangeRequested_release)
 
 proc unsupportedContent*(self: gen_qwebpage_types.QWebPage, reply: gen_qnetworkreply_types.QNetworkReply): void =
   fcQWebPage_unsupportedContent(self.h, reply.h)
 
 type QWebPageunsupportedContentSlot* = proc(reply: gen_qnetworkreply_types.QNetworkReply)
-proc miqt_exec_callback_cQWebPage_unsupportedContent(slot: int, reply: pointer) {.exportc: "miqt_exec_callback_QWebPage_unsupportedContent".} =
+proc miqt_exec_callback_cQWebPage_unsupportedContent(slot: int, reply: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageunsupportedContentSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkreply_types.QNetworkReply(h: reply)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_unsupportedContent_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageunsupportedContentSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onunsupportedContent*(self: gen_qwebpage_types.QWebPage, slot: QWebPageunsupportedContentSlot) =
   var tmp = new QWebPageunsupportedContentSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_unsupportedContent(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_unsupportedContent(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_unsupportedContent, miqt_exec_callback_cQWebPage_unsupportedContent_release)
 
 proc downloadRequested*(self: gen_qwebpage_types.QWebPage, request: gen_qnetworkrequest_types.QNetworkRequest): void =
   fcQWebPage_downloadRequested(self.h, request.h)
 
 type QWebPagedownloadRequestedSlot* = proc(request: gen_qnetworkrequest_types.QNetworkRequest)
-proc miqt_exec_callback_cQWebPage_downloadRequested(slot: int, request: pointer) {.exportc: "miqt_exec_callback_QWebPage_downloadRequested".} =
+proc miqt_exec_callback_cQWebPage_downloadRequested(slot: int, request: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagedownloadRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkrequest_types.QNetworkRequest(h: request)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_downloadRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagedownloadRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondownloadRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagedownloadRequestedSlot) =
   var tmp = new QWebPagedownloadRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_downloadRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_downloadRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_downloadRequested, miqt_exec_callback_cQWebPage_downloadRequested_release)
 
 proc focusedElementChanged*(self: gen_qwebpage_types.QWebPage, element: gen_qwebelement_types.QWebElement): void =
   fcQWebPage_focusedElementChanged(self.h, element.h)
 
 type QWebPagefocusedElementChangedSlot* = proc(element: gen_qwebelement_types.QWebElement)
-proc miqt_exec_callback_cQWebPage_focusedElementChanged(slot: int, element: pointer) {.exportc: "miqt_exec_callback_QWebPage_focusedElementChanged".} =
+proc miqt_exec_callback_cQWebPage_focusedElementChanged(slot: int, element: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagefocusedElementChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebelement_types.QWebElement(h: element)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_focusedElementChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagefocusedElementChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusedElementChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPagefocusedElementChangedSlot) =
   var tmp = new QWebPagefocusedElementChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_focusedElementChanged(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_focusedElementChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_focusedElementChanged, miqt_exec_callback_cQWebPage_focusedElementChanged_release)
 
 proc microFocusChanged*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_microFocusChanged(self.h)
 
 type QWebPagemicroFocusChangedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_microFocusChanged(slot: int) {.exportc: "miqt_exec_callback_QWebPage_microFocusChanged".} =
+proc miqt_exec_callback_cQWebPage_microFocusChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagemicroFocusChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_microFocusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagemicroFocusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onmicroFocusChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPagemicroFocusChangedSlot) =
   var tmp = new QWebPagemicroFocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_microFocusChanged(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_microFocusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_microFocusChanged, miqt_exec_callback_cQWebPage_microFocusChanged_release)
 
 proc contentsChanged*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_contentsChanged(self.h)
 
 type QWebPagecontentsChangedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_contentsChanged(slot: int) {.exportc: "miqt_exec_callback_QWebPage_contentsChanged".} =
+proc miqt_exec_callback_cQWebPage_contentsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagecontentsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_contentsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagecontentsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncontentsChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPagecontentsChangedSlot) =
   var tmp = new QWebPagecontentsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_contentsChanged(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_contentsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_contentsChanged, miqt_exec_callback_cQWebPage_contentsChanged_release)
 
 proc databaseQuotaExceeded*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, databaseName: string): void =
   fcQWebPage_databaseQuotaExceeded(self.h, frame.h, struct_miqt_string(data: databaseName, len: csize_t(len(databaseName))))
 
 type QWebPagedatabaseQuotaExceededSlot* = proc(frame: gen_qwebframe_types.QWebFrame, databaseName: string)
-proc miqt_exec_callback_cQWebPage_databaseQuotaExceeded(slot: int, frame: pointer, databaseName: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebPage_databaseQuotaExceeded".} =
+proc miqt_exec_callback_cQWebPage_databaseQuotaExceeded(slot: int, frame: pointer, databaseName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagedatabaseQuotaExceededSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
@@ -1026,17 +1110,21 @@ proc miqt_exec_callback_cQWebPage_databaseQuotaExceeded(slot: int, frame: pointe
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebPage_databaseQuotaExceeded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagedatabaseQuotaExceededSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondatabaseQuotaExceeded*(self: gen_qwebpage_types.QWebPage, slot: QWebPagedatabaseQuotaExceededSlot) =
   var tmp = new QWebPagedatabaseQuotaExceededSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_databaseQuotaExceeded(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_databaseQuotaExceeded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_databaseQuotaExceeded, miqt_exec_callback_cQWebPage_databaseQuotaExceeded_release)
 
 proc applicationCacheQuotaExceeded*(self: gen_qwebpage_types.QWebPage, origin: gen_qwebsecurityorigin_types.QWebSecurityOrigin, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong): void =
   fcQWebPage_applicationCacheQuotaExceeded(self.h, origin.h, defaultOriginQuota, totalSpaceNeeded)
 
 type QWebPageapplicationCacheQuotaExceededSlot* = proc(origin: gen_qwebsecurityorigin_types.QWebSecurityOrigin, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong)
-proc miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded(slot: int, origin: pointer, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong) {.exportc: "miqt_exec_callback_QWebPage_applicationCacheQuotaExceeded".} =
+proc miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded(slot: int, origin: pointer, defaultOriginQuota: culonglong, totalSpaceNeeded: culonglong) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageapplicationCacheQuotaExceededSlot](cast[pointer](slot))
   let slotval1 = gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: origin)
 
@@ -1046,17 +1134,21 @@ proc miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded(slot: int, origi
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageapplicationCacheQuotaExceededSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onapplicationCacheQuotaExceeded*(self: gen_qwebpage_types.QWebPage, slot: QWebPageapplicationCacheQuotaExceededSlot) =
   var tmp = new QWebPageapplicationCacheQuotaExceededSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_applicationCacheQuotaExceeded(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_applicationCacheQuotaExceeded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded, miqt_exec_callback_cQWebPage_applicationCacheQuotaExceeded_release)
 
 proc saveFrameStateRequested*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, item: gen_qwebhistory_types.QWebHistoryItem): void =
   fcQWebPage_saveFrameStateRequested(self.h, frame.h, item.h)
 
 type QWebPagesaveFrameStateRequestedSlot* = proc(frame: gen_qwebframe_types.QWebFrame, item: gen_qwebhistory_types.QWebHistoryItem)
-proc miqt_exec_callback_cQWebPage_saveFrameStateRequested(slot: int, frame: pointer, item: pointer) {.exportc: "miqt_exec_callback_QWebPage_saveFrameStateRequested".} =
+proc miqt_exec_callback_cQWebPage_saveFrameStateRequested(slot: int, frame: pointer, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagesaveFrameStateRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
@@ -1064,47 +1156,59 @@ proc miqt_exec_callback_cQWebPage_saveFrameStateRequested(slot: int, frame: poin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebPage_saveFrameStateRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagesaveFrameStateRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsaveFrameStateRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagesaveFrameStateRequestedSlot) =
   var tmp = new QWebPagesaveFrameStateRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_saveFrameStateRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_saveFrameStateRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_saveFrameStateRequested, miqt_exec_callback_cQWebPage_saveFrameStateRequested_release)
 
 proc restoreFrameStateRequested*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame): void =
   fcQWebPage_restoreFrameStateRequested(self.h, frame.h)
 
 type QWebPagerestoreFrameStateRequestedSlot* = proc(frame: gen_qwebframe_types.QWebFrame)
-proc miqt_exec_callback_cQWebPage_restoreFrameStateRequested(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QWebPage_restoreFrameStateRequested".} =
+proc miqt_exec_callback_cQWebPage_restoreFrameStateRequested(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagerestoreFrameStateRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_restoreFrameStateRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagerestoreFrameStateRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrestoreFrameStateRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagerestoreFrameStateRequestedSlot) =
   var tmp = new QWebPagerestoreFrameStateRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_restoreFrameStateRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_restoreFrameStateRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_restoreFrameStateRequested, miqt_exec_callback_cQWebPage_restoreFrameStateRequested_release)
 
 proc viewportChangeRequested*(self: gen_qwebpage_types.QWebPage, ): void =
   fcQWebPage_viewportChangeRequested(self.h)
 
 type QWebPageviewportChangeRequestedSlot* = proc()
-proc miqt_exec_callback_cQWebPage_viewportChangeRequested(slot: int) {.exportc: "miqt_exec_callback_QWebPage_viewportChangeRequested".} =
+proc miqt_exec_callback_cQWebPage_viewportChangeRequested(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageviewportChangeRequestedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebPage_viewportChangeRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageviewportChangeRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onviewportChangeRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPageviewportChangeRequestedSlot) =
   var tmp = new QWebPageviewportChangeRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_viewportChangeRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_viewportChangeRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_viewportChangeRequested, miqt_exec_callback_cQWebPage_viewportChangeRequested_release)
 
 proc featurePermissionRequested*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, feature: cint): void =
   fcQWebPage_featurePermissionRequested(self.h, frame.h, cint(feature))
 
 type QWebPagefeaturePermissionRequestedSlot* = proc(frame: gen_qwebframe_types.QWebFrame, feature: cint)
-proc miqt_exec_callback_cQWebPage_featurePermissionRequested(slot: int, frame: pointer, feature: cint) {.exportc: "miqt_exec_callback_QWebPage_featurePermissionRequested".} =
+proc miqt_exec_callback_cQWebPage_featurePermissionRequested(slot: int, frame: pointer, feature: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagefeaturePermissionRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
@@ -1112,17 +1216,21 @@ proc miqt_exec_callback_cQWebPage_featurePermissionRequested(slot: int, frame: p
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebPage_featurePermissionRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagefeaturePermissionRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfeaturePermissionRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagefeaturePermissionRequestedSlot) =
   var tmp = new QWebPagefeaturePermissionRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_featurePermissionRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_featurePermissionRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_featurePermissionRequested, miqt_exec_callback_cQWebPage_featurePermissionRequested_release)
 
 proc featurePermissionRequestCanceled*(self: gen_qwebpage_types.QWebPage, frame: gen_qwebframe_types.QWebFrame, feature: cint): void =
   fcQWebPage_featurePermissionRequestCanceled(self.h, frame.h, cint(feature))
 
 type QWebPagefeaturePermissionRequestCanceledSlot* = proc(frame: gen_qwebframe_types.QWebFrame, feature: cint)
-proc miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled(slot: int, frame: pointer, feature: cint) {.exportc: "miqt_exec_callback_QWebPage_featurePermissionRequestCanceled".} =
+proc miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled(slot: int, frame: pointer, feature: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagefeaturePermissionRequestCanceledSlot](cast[pointer](slot))
   let slotval1 = gen_qwebframe_types.QWebFrame(h: frame)
 
@@ -1130,33 +1238,41 @@ proc miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled(slot: int, fr
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagefeaturePermissionRequestCanceledSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfeaturePermissionRequestCanceled*(self: gen_qwebpage_types.QWebPage, slot: QWebPagefeaturePermissionRequestCanceledSlot) =
   var tmp = new QWebPagefeaturePermissionRequestCanceledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_featurePermissionRequestCanceled(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_featurePermissionRequestCanceled(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled, miqt_exec_callback_cQWebPage_featurePermissionRequestCanceled_release)
 
 proc fullScreenRequested*(self: gen_qwebpage_types.QWebPage, fullScreenRequest: gen_qwebfullscreenrequest_types.QWebFullScreenRequest): void =
   fcQWebPage_fullScreenRequested(self.h, fullScreenRequest.h)
 
 type QWebPagefullScreenRequestedSlot* = proc(fullScreenRequest: gen_qwebfullscreenrequest_types.QWebFullScreenRequest)
-proc miqt_exec_callback_cQWebPage_fullScreenRequested(slot: int, fullScreenRequest: pointer) {.exportc: "miqt_exec_callback_QWebPage_fullScreenRequested".} =
+proc miqt_exec_callback_cQWebPage_fullScreenRequested(slot: int, fullScreenRequest: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagefullScreenRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qwebfullscreenrequest_types.QWebFullScreenRequest(h: fullScreenRequest)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_fullScreenRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagefullScreenRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfullScreenRequested*(self: gen_qwebpage_types.QWebPage, slot: QWebPagefullScreenRequestedSlot) =
   var tmp = new QWebPagefullScreenRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_fullScreenRequested(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_fullScreenRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_fullScreenRequested, miqt_exec_callback_cQWebPage_fullScreenRequested_release)
 
 proc consoleMessageReceived*(self: gen_qwebpage_types.QWebPage, source: cint, level: cint, message: string, lineNumber: cint, sourceID: string): void =
   fcQWebPage_consoleMessageReceived(self.h, cint(source), cint(level), struct_miqt_string(data: message, len: csize_t(len(message))), lineNumber, struct_miqt_string(data: sourceID, len: csize_t(len(sourceID))))
 
 type QWebPageconsoleMessageReceivedSlot* = proc(source: cint, level: cint, message: string, lineNumber: cint, sourceID: string)
-proc miqt_exec_callback_cQWebPage_consoleMessageReceived(slot: int, source: cint, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebPage_consoleMessageReceived".} =
+proc miqt_exec_callback_cQWebPage_consoleMessageReceived(slot: int, source: cint, level: cint, message: struct_miqt_string, lineNumber: cint, sourceID: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebPageconsoleMessageReceivedSlot](cast[pointer](slot))
   let slotval1 = cint(source)
 
@@ -1176,27 +1292,35 @@ proc miqt_exec_callback_cQWebPage_consoleMessageReceived(slot: int, source: cint
 
   nimfunc[](slotval1, slotval2, slotval3, slotval4, slotval5)
 
+proc miqt_exec_callback_cQWebPage_consoleMessageReceived_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPageconsoleMessageReceivedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onconsoleMessageReceived*(self: gen_qwebpage_types.QWebPage, slot: QWebPageconsoleMessageReceivedSlot) =
   var tmp = new QWebPageconsoleMessageReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_consoleMessageReceived(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_consoleMessageReceived(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_consoleMessageReceived, miqt_exec_callback_cQWebPage_consoleMessageReceived_release)
 
 proc recentlyAudibleChanged*(self: gen_qwebpage_types.QWebPage, recentlyAudible: bool): void =
   fcQWebPage_recentlyAudibleChanged(self.h, recentlyAudible)
 
 type QWebPagerecentlyAudibleChangedSlot* = proc(recentlyAudible: bool)
-proc miqt_exec_callback_cQWebPage_recentlyAudibleChanged(slot: int, recentlyAudible: bool) {.exportc: "miqt_exec_callback_QWebPage_recentlyAudibleChanged".} =
+proc miqt_exec_callback_cQWebPage_recentlyAudibleChanged(slot: int, recentlyAudible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebPagerecentlyAudibleChangedSlot](cast[pointer](slot))
   let slotval1 = recentlyAudible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebPage_recentlyAudibleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebPagerecentlyAudibleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrecentlyAudibleChanged*(self: gen_qwebpage_types.QWebPage, slot: QWebPagerecentlyAudibleChangedSlot) =
   var tmp = new QWebPagerecentlyAudibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebPage_connect_recentlyAudibleChanged(self.h, cast[int](addr tmp[]))
+  fcQWebPage_connect_recentlyAudibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebPage_recentlyAudibleChanged, miqt_exec_callback_cQWebPage_recentlyAudibleChanged_release)
 
 proc tr*(_: type gen_qwebpage_types.QWebPage, s: cstring, c: cstring): string =
   let v_ms = fcQWebPage_tr2(s, c)

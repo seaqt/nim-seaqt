@@ -87,13 +87,13 @@ proc fcQDesktopWidget_screenGeometryWithPoint(self: pointer, point: pointer): po
 proc fcQDesktopWidget_availableGeometry2(self: pointer, ): pointer {.importc: "QDesktopWidget_availableGeometry2".}
 proc fcQDesktopWidget_availableGeometryWithPoint(self: pointer, point: pointer): pointer {.importc: "QDesktopWidget_availableGeometryWithPoint".}
 proc fcQDesktopWidget_resized(self: pointer, param1: cint): void {.importc: "QDesktopWidget_resized".}
-proc fcQDesktopWidget_connect_resized(self: pointer, slot: int) {.importc: "QDesktopWidget_connect_resized".}
+proc fcQDesktopWidget_connect_resized(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_resized".}
 proc fcQDesktopWidget_workAreaResized(self: pointer, param1: cint): void {.importc: "QDesktopWidget_workAreaResized".}
-proc fcQDesktopWidget_connect_workAreaResized(self: pointer, slot: int) {.importc: "QDesktopWidget_connect_workAreaResized".}
+proc fcQDesktopWidget_connect_workAreaResized(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_workAreaResized".}
 proc fcQDesktopWidget_screenCountChanged(self: pointer, param1: cint): void {.importc: "QDesktopWidget_screenCountChanged".}
-proc fcQDesktopWidget_connect_screenCountChanged(self: pointer, slot: int) {.importc: "QDesktopWidget_connect_screenCountChanged".}
+proc fcQDesktopWidget_connect_screenCountChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_screenCountChanged".}
 proc fcQDesktopWidget_primaryScreenChanged(self: pointer, ): void {.importc: "QDesktopWidget_primaryScreenChanged".}
-proc fcQDesktopWidget_connect_primaryScreenChanged(self: pointer, slot: int) {.importc: "QDesktopWidget_connect_primaryScreenChanged".}
+proc fcQDesktopWidget_connect_primaryScreenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDesktopWidget_connect_primaryScreenChanged".}
 proc fcQDesktopWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDesktopWidget_tr2".}
 proc fcQDesktopWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDesktopWidget_tr3".}
 proc fcQDesktopWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDesktopWidget_trUtf82".}
@@ -272,63 +272,79 @@ proc resized*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void
   fcQDesktopWidget_resized(self.h, param1)
 
 type QDesktopWidgetresizedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQDesktopWidget_resized(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QDesktopWidget_resized".} =
+proc miqt_exec_callback_cQDesktopWidget_resized(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetresizedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDesktopWidget_resized_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesktopWidgetresizedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onresized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetresizedSlot) =
   var tmp = new QDesktopWidgetresizedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_resized(self.h, cast[int](addr tmp[]))
+  fcQDesktopWidget_connect_resized(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDesktopWidget_resized, miqt_exec_callback_cQDesktopWidget_resized_release)
 
 proc workAreaResized*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void =
   fcQDesktopWidget_workAreaResized(self.h, param1)
 
 type QDesktopWidgetworkAreaResizedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQDesktopWidget_workAreaResized(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QDesktopWidget_workAreaResized".} =
+proc miqt_exec_callback_cQDesktopWidget_workAreaResized(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetworkAreaResizedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDesktopWidget_workAreaResized_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesktopWidgetworkAreaResizedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onworkAreaResized*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetworkAreaResizedSlot) =
   var tmp = new QDesktopWidgetworkAreaResizedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_workAreaResized(self.h, cast[int](addr tmp[]))
+  fcQDesktopWidget_connect_workAreaResized(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDesktopWidget_workAreaResized, miqt_exec_callback_cQDesktopWidget_workAreaResized_release)
 
 proc screenCountChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, param1: cint): void =
   fcQDesktopWidget_screenCountChanged(self.h, param1)
 
 type QDesktopWidgetscreenCountChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQDesktopWidget_screenCountChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QDesktopWidget_screenCountChanged".} =
+proc miqt_exec_callback_cQDesktopWidget_screenCountChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetscreenCountChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDesktopWidget_screenCountChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesktopWidgetscreenCountChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onscreenCountChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetscreenCountChangedSlot) =
   var tmp = new QDesktopWidgetscreenCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_screenCountChanged(self.h, cast[int](addr tmp[]))
+  fcQDesktopWidget_connect_screenCountChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDesktopWidget_screenCountChanged, miqt_exec_callback_cQDesktopWidget_screenCountChanged_release)
 
 proc primaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, ): void =
   fcQDesktopWidget_primaryScreenChanged(self.h)
 
 type QDesktopWidgetprimaryScreenChangedSlot* = proc()
-proc miqt_exec_callback_cQDesktopWidget_primaryScreenChanged(slot: int) {.exportc: "miqt_exec_callback_QDesktopWidget_primaryScreenChanged".} =
+proc miqt_exec_callback_cQDesktopWidget_primaryScreenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDesktopWidgetprimaryScreenChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQDesktopWidget_primaryScreenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDesktopWidgetprimaryScreenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onprimaryScreenChanged*(self: gen_qdesktopwidget_types.QDesktopWidget, slot: QDesktopWidgetprimaryScreenChangedSlot) =
   var tmp = new QDesktopWidgetprimaryScreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDesktopWidget_connect_primaryScreenChanged(self.h, cast[int](addr tmp[]))
+  fcQDesktopWidget_connect_primaryScreenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDesktopWidget_primaryScreenChanged, miqt_exec_callback_cQDesktopWidget_primaryScreenChanged_release)
 
 proc tr*(_: type gen_qdesktopwidget_types.QDesktopWidget, s: cstring, c: cstring): string =
   let v_ms = fcQDesktopWidget_tr2(s, c)

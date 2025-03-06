@@ -126,11 +126,11 @@ proc fcQQmlEngine_setContextForObject(param1: pointer, param2: pointer): void {.
 proc fcQQmlEngine_setObjectOwnership(param1: pointer, param2: cint): void {.importc: "QQmlEngine_setObjectOwnership".}
 proc fcQQmlEngine_objectOwnership(param1: pointer): cint {.importc: "QQmlEngine_objectOwnership".}
 proc fcQQmlEngine_quit(self: pointer, ): void {.importc: "QQmlEngine_quit".}
-proc fcQQmlEngine_connect_quit(self: pointer, slot: int) {.importc: "QQmlEngine_connect_quit".}
+proc fcQQmlEngine_connect_quit(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlEngine_connect_quit".}
 proc fcQQmlEngine_exit(self: pointer, retCode: cint): void {.importc: "QQmlEngine_exit".}
-proc fcQQmlEngine_connect_exit(self: pointer, slot: int) {.importc: "QQmlEngine_connect_exit".}
+proc fcQQmlEngine_connect_exit(self: pointer, slot: int, callback: proc (slot: int, retCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlEngine_connect_exit".}
 proc fcQQmlEngine_warnings(self: pointer, warnings: struct_miqt_array): void {.importc: "QQmlEngine_warnings".}
-proc fcQQmlEngine_connect_warnings(self: pointer, slot: int) {.importc: "QQmlEngine_connect_warnings".}
+proc fcQQmlEngine_connect_warnings(self: pointer, slot: int, callback: proc (slot: int, warnings: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlEngine_connect_warnings".}
 proc fcQQmlEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlEngine_tr2".}
 proc fcQQmlEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlEngine_tr3".}
 proc fcQQmlEngine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlEngine_trUtf82".}
@@ -328,31 +328,39 @@ proc quit*(self: gen_qqmlengine_types.QQmlEngine, ): void =
   fcQQmlEngine_quit(self.h)
 
 type QQmlEnginequitSlot* = proc()
-proc miqt_exec_callback_cQQmlEngine_quit(slot: int) {.exportc: "miqt_exec_callback_QQmlEngine_quit".} =
+proc miqt_exec_callback_cQQmlEngine_quit(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQmlEnginequitSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQmlEngine_quit_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlEnginequitSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onquit*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginequitSlot) =
   var tmp = new QQmlEnginequitSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlEngine_connect_quit(self.h, cast[int](addr tmp[]))
+  fcQQmlEngine_connect_quit(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlEngine_quit, miqt_exec_callback_cQQmlEngine_quit_release)
 
 proc exit*(self: gen_qqmlengine_types.QQmlEngine, retCode: cint): void =
   fcQQmlEngine_exit(self.h, retCode)
 
 type QQmlEngineexitSlot* = proc(retCode: cint)
-proc miqt_exec_callback_cQQmlEngine_exit(slot: int, retCode: cint) {.exportc: "miqt_exec_callback_QQmlEngine_exit".} =
+proc miqt_exec_callback_cQQmlEngine_exit(slot: int, retCode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QQmlEngineexitSlot](cast[pointer](slot))
   let slotval1 = retCode
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQmlEngine_exit_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlEngineexitSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onexit*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEngineexitSlot) =
   var tmp = new QQmlEngineexitSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlEngine_connect_exit(self.h, cast[int](addr tmp[]))
+  fcQQmlEngine_connect_exit(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlEngine_exit, miqt_exec_callback_cQQmlEngine_exit_release)
 
 proc warnings*(self: gen_qqmlengine_types.QQmlEngine, warnings: seq[gen_qqmlerror_types.QQmlError]): void =
   var warnings_CArray = newSeq[pointer](len(warnings))
@@ -362,7 +370,7 @@ proc warnings*(self: gen_qqmlengine_types.QQmlEngine, warnings: seq[gen_qqmlerro
   fcQQmlEngine_warnings(self.h, struct_miqt_array(len: csize_t(len(warnings)), data: if len(warnings) == 0: nil else: addr(warnings_CArray[0])))
 
 type QQmlEnginewarningsSlot* = proc(warnings: seq[gen_qqmlerror_types.QQmlError])
-proc miqt_exec_callback_cQQmlEngine_warnings(slot: int, warnings: struct_miqt_array) {.exportc: "miqt_exec_callback_QQmlEngine_warnings".} =
+proc miqt_exec_callback_cQQmlEngine_warnings(slot: int, warnings: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QQmlEnginewarningsSlot](cast[pointer](slot))
   var vwarnings_ma = warnings
   var vwarningsx_ret = newSeq[gen_qqmlerror_types.QQmlError](int(vwarnings_ma.len))
@@ -373,11 +381,15 @@ proc miqt_exec_callback_cQQmlEngine_warnings(slot: int, warnings: struct_miqt_ar
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQmlEngine_warnings_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlEnginewarningsSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwarnings*(self: gen_qqmlengine_types.QQmlEngine, slot: QQmlEnginewarningsSlot) =
   var tmp = new QQmlEnginewarningsSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlEngine_connect_warnings(self.h, cast[int](addr tmp[]))
+  fcQQmlEngine_connect_warnings(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlEngine_warnings, miqt_exec_callback_cQQmlEngine_warnings_release)
 
 proc tr*(_: type gen_qqmlengine_types.QQmlEngine, s: cstring, c: cstring): string =
   let v_ms = fcQQmlEngine_tr2(s, c)

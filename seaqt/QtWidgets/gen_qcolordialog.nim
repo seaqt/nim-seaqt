@@ -97,9 +97,9 @@ proc fcQColorDialog_setCustomColor(index: cint, color: pointer): void {.importc:
 proc fcQColorDialog_standardColor(index: cint): pointer {.importc: "QColorDialog_standardColor".}
 proc fcQColorDialog_setStandardColor(index: cint, color: pointer): void {.importc: "QColorDialog_setStandardColor".}
 proc fcQColorDialog_currentColorChanged(self: pointer, color: pointer): void {.importc: "QColorDialog_currentColorChanged".}
-proc fcQColorDialog_connect_currentColorChanged(self: pointer, slot: int) {.importc: "QColorDialog_connect_currentColorChanged".}
+proc fcQColorDialog_connect_currentColorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColorDialog_connect_currentColorChanged".}
 proc fcQColorDialog_colorSelected(self: pointer, color: pointer): void {.importc: "QColorDialog_colorSelected".}
-proc fcQColorDialog_connect_colorSelected(self: pointer, slot: int) {.importc: "QColorDialog_connect_colorSelected".}
+proc fcQColorDialog_connect_colorSelected(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QColorDialog_connect_colorSelected".}
 proc fcQColorDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QColorDialog_tr2".}
 proc fcQColorDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QColorDialog_tr3".}
 proc fcQColorDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QColorDialog_trUtf82".}
@@ -301,33 +301,41 @@ proc currentColorChanged*(self: gen_qcolordialog_types.QColorDialog, color: gen_
   fcQColorDialog_currentColorChanged(self.h, color.h)
 
 type QColorDialogcurrentColorChangedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_cQColorDialog_currentColorChanged(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QColorDialog_currentColorChanged".} =
+proc miqt_exec_callback_cQColorDialog_currentColorChanged(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColorDialogcurrentColorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQColorDialog_currentColorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QColorDialogcurrentColorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentColorChanged*(self: gen_qcolordialog_types.QColorDialog, slot: QColorDialogcurrentColorChangedSlot) =
   var tmp = new QColorDialogcurrentColorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQColorDialog_connect_currentColorChanged(self.h, cast[int](addr tmp[]))
+  fcQColorDialog_connect_currentColorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQColorDialog_currentColorChanged, miqt_exec_callback_cQColorDialog_currentColorChanged_release)
 
 proc colorSelected*(self: gen_qcolordialog_types.QColorDialog, color: gen_qcolor_types.QColor): void =
   fcQColorDialog_colorSelected(self.h, color.h)
 
 type QColorDialogcolorSelectedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_cQColorDialog_colorSelected(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QColorDialog_colorSelected".} =
+proc miqt_exec_callback_cQColorDialog_colorSelected(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QColorDialogcolorSelectedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQColorDialog_colorSelected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QColorDialogcolorSelectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncolorSelected*(self: gen_qcolordialog_types.QColorDialog, slot: QColorDialogcolorSelectedSlot) =
   var tmp = new QColorDialogcolorSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQColorDialog_connect_colorSelected(self.h, cast[int](addr tmp[]))
+  fcQColorDialog_connect_colorSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQColorDialog_colorSelected, miqt_exec_callback_cQColorDialog_colorSelected_release)
 
 proc tr*(_: type gen_qcolordialog_types.QColorDialog, s: cstring, c: cstring): string =
   let v_ms = fcQColorDialog_tr2(s, c)

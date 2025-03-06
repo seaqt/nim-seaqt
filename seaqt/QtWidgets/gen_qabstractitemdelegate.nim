@@ -91,17 +91,17 @@ proc fcQAbstractItemDelegate_elidedText(fontMetrics: pointer, width: cint, mode:
 proc fcQAbstractItemDelegate_helpEvent(self: pointer, event: pointer, view: pointer, option: pointer, index: pointer): bool {.importc: "QAbstractItemDelegate_helpEvent".}
 proc fcQAbstractItemDelegate_paintingRoles(self: pointer, ): struct_miqt_array {.importc: "QAbstractItemDelegate_paintingRoles".}
 proc fcQAbstractItemDelegate_commitData(self: pointer, editor: pointer): void {.importc: "QAbstractItemDelegate_commitData".}
-proc fcQAbstractItemDelegate_connect_commitData(self: pointer, slot: int) {.importc: "QAbstractItemDelegate_connect_commitData".}
+proc fcQAbstractItemDelegate_connect_commitData(self: pointer, slot: int, callback: proc (slot: int, editor: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemDelegate_connect_commitData".}
 proc fcQAbstractItemDelegate_closeEditor(self: pointer, editor: pointer): void {.importc: "QAbstractItemDelegate_closeEditor".}
-proc fcQAbstractItemDelegate_connect_closeEditor(self: pointer, slot: int) {.importc: "QAbstractItemDelegate_connect_closeEditor".}
+proc fcQAbstractItemDelegate_connect_closeEditor(self: pointer, slot: int, callback: proc (slot: int, editor: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemDelegate_connect_closeEditor".}
 proc fcQAbstractItemDelegate_sizeHintChanged(self: pointer, param1: pointer): void {.importc: "QAbstractItemDelegate_sizeHintChanged".}
-proc fcQAbstractItemDelegate_connect_sizeHintChanged(self: pointer, slot: int) {.importc: "QAbstractItemDelegate_connect_sizeHintChanged".}
+proc fcQAbstractItemDelegate_connect_sizeHintChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemDelegate_connect_sizeHintChanged".}
 proc fcQAbstractItemDelegate_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemDelegate_tr2".}
 proc fcQAbstractItemDelegate_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractItemDelegate_tr3".}
 proc fcQAbstractItemDelegate_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemDelegate_trUtf82".}
 proc fcQAbstractItemDelegate_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractItemDelegate_trUtf83".}
 proc fcQAbstractItemDelegate_closeEditor2(self: pointer, editor: pointer, hint: cint): void {.importc: "QAbstractItemDelegate_closeEditor2".}
-proc fcQAbstractItemDelegate_connect_closeEditor2(self: pointer, slot: int) {.importc: "QAbstractItemDelegate_connect_closeEditor2".}
+proc fcQAbstractItemDelegate_connect_closeEditor2(self: pointer, slot: int, callback: proc (slot: int, editor: pointer, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemDelegate_connect_closeEditor2".}
 type cQAbstractItemDelegateVTable = object
   destructor*: proc(vtbl: ptr cQAbstractItemDelegateVTable, self: ptr cQAbstractItemDelegate) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -213,49 +213,61 @@ proc commitData*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, ed
   fcQAbstractItemDelegate_commitData(self.h, editor.h)
 
 type QAbstractItemDelegatecommitDataSlot* = proc(editor: gen_qwidget_types.QWidget)
-proc miqt_exec_callback_cQAbstractItemDelegate_commitData(slot: int, editor: pointer) {.exportc: "miqt_exec_callback_QAbstractItemDelegate_commitData".} =
+proc miqt_exec_callback_cQAbstractItemDelegate_commitData(slot: int, editor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecommitDataSlot](cast[pointer](slot))
   let slotval1 = gen_qwidget_types.QWidget(h: editor)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemDelegate_commitData_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemDelegatecommitDataSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncommitData*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, slot: QAbstractItemDelegatecommitDataSlot) =
   var tmp = new QAbstractItemDelegatecommitDataSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemDelegate_connect_commitData(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemDelegate_connect_commitData(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemDelegate_commitData, miqt_exec_callback_cQAbstractItemDelegate_commitData_release)
 
 proc closeEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, editor: gen_qwidget_types.QWidget): void =
   fcQAbstractItemDelegate_closeEditor(self.h, editor.h)
 
 type QAbstractItemDelegatecloseEditorSlot* = proc(editor: gen_qwidget_types.QWidget)
-proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor(slot: int, editor: pointer) {.exportc: "miqt_exec_callback_QAbstractItemDelegate_closeEditor".} =
+proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor(slot: int, editor: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecloseEditorSlot](cast[pointer](slot))
   let slotval1 = gen_qwidget_types.QWidget(h: editor)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemDelegatecloseEditorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncloseEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, slot: QAbstractItemDelegatecloseEditorSlot) =
   var tmp = new QAbstractItemDelegatecloseEditorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemDelegate_connect_closeEditor(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemDelegate_connect_closeEditor(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemDelegate_closeEditor, miqt_exec_callback_cQAbstractItemDelegate_closeEditor_release)
 
 proc sizeHintChanged*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, param1: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemDelegate_sizeHintChanged(self.h, param1.h)
 
 type QAbstractItemDelegatesizeHintChangedSlot* = proc(param1: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemDelegate_sizeHintChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QAbstractItemDelegate_sizeHintChanged".} =
+proc miqt_exec_callback_cQAbstractItemDelegate_sizeHintChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatesizeHintChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractItemDelegate_sizeHintChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemDelegatesizeHintChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsizeHintChanged*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, slot: QAbstractItemDelegatesizeHintChangedSlot) =
   var tmp = new QAbstractItemDelegatesizeHintChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemDelegate_connect_sizeHintChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemDelegate_connect_sizeHintChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemDelegate_sizeHintChanged, miqt_exec_callback_cQAbstractItemDelegate_sizeHintChanged_release)
 
 proc tr*(_: type gen_qabstractitemdelegate_types.QAbstractItemDelegate, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractItemDelegate_tr2(s, c)
@@ -285,7 +297,7 @@ proc closeEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, e
   fcQAbstractItemDelegate_closeEditor2(self.h, editor.h, cint(hint))
 
 type QAbstractItemDelegatecloseEditor2Slot* = proc(editor: gen_qwidget_types.QWidget, hint: cint)
-proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor2(slot: int, editor: pointer, hint: cint) {.exportc: "miqt_exec_callback_QAbstractItemDelegate_closeEditor2".} =
+proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor2(slot: int, editor: pointer, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemDelegatecloseEditor2Slot](cast[pointer](slot))
   let slotval1 = gen_qwidget_types.QWidget(h: editor)
 
@@ -293,11 +305,15 @@ proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor2(slot: int, editor: p
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractItemDelegate_closeEditor2_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractItemDelegatecloseEditor2Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncloseEditor*(self: gen_qabstractitemdelegate_types.QAbstractItemDelegate, slot: QAbstractItemDelegatecloseEditor2Slot) =
   var tmp = new QAbstractItemDelegatecloseEditor2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemDelegate_connect_closeEditor2(self.h, cast[int](addr tmp[]))
+  fcQAbstractItemDelegate_connect_closeEditor2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemDelegate_closeEditor2, miqt_exec_callback_cQAbstractItemDelegate_closeEditor2_release)
 
 type QAbstractItemDelegatemetaObjectProc* = proc(self: QAbstractItemDelegate): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractItemDelegatemetacastProc* = proc(self: QAbstractItemDelegate, param1: cstring): pointer {.raises: [], gcsafe.}

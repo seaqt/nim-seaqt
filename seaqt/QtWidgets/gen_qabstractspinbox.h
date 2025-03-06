@@ -204,7 +204,7 @@ void QAbstractSpinBox_paintEvent(QAbstractSpinBox* self, QPaintEvent* event);
 void QAbstractSpinBox_showEvent(QAbstractSpinBox* self, QShowEvent* event);
 int QAbstractSpinBox_stepEnabled(const QAbstractSpinBox* self);
 void QAbstractSpinBox_editingFinished(QAbstractSpinBox* self);
-void QAbstractSpinBox_connect_editingFinished(QAbstractSpinBox* self, intptr_t slot);
+void QAbstractSpinBox_connect_editingFinished(QAbstractSpinBox* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QAbstractSpinBox_tr2(const char* s, const char* c);
 struct miqt_string QAbstractSpinBox_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractSpinBox_trUtf82(const char* s, const char* c);

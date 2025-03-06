@@ -35,16 +35,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QTextDocument_contentsChange(intptr_t, int, int, int);
-void miqt_exec_callback_QTextDocument_contentsChanged(intptr_t);
-void miqt_exec_callback_QTextDocument_undoAvailable(intptr_t, bool);
-void miqt_exec_callback_QTextDocument_redoAvailable(intptr_t, bool);
-void miqt_exec_callback_QTextDocument_undoCommandAdded(intptr_t);
-void miqt_exec_callback_QTextDocument_modificationChanged(intptr_t, bool);
-void miqt_exec_callback_QTextDocument_cursorPositionChanged(intptr_t, QTextCursor*);
-void miqt_exec_callback_QTextDocument_blockCountChanged(intptr_t, int);
-void miqt_exec_callback_QTextDocument_baseUrlChanged(intptr_t, QUrl*);
-void miqt_exec_callback_QTextDocument_documentLayoutChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -724,113 +714,163 @@ void QTextDocument_contentsChange(QTextDocument* self, int from, int charsRemove
 	self->contentsChange(static_cast<int>(from), static_cast<int>(charsRemoved), static_cast<int>(charsAdded));
 }
 
-void QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(int, int, int)>(&QTextDocument::contentsChange), self, [=](int from, int charsRemoved, int charsAdded) {
-		int sigval1 = from;
-		int sigval2 = charsRemoved;
-		int sigval3 = charsAdded;
-		miqt_exec_callback_QTextDocument_contentsChange(slot, sigval1, sigval2, sigval3);
-	});
+void QTextDocument_connect_contentsChange(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int, int);
+		void operator()(int from, int charsRemoved, int charsAdded) {
+			int sigval1 = from;
+			int sigval2 = charsRemoved;
+			int sigval3 = charsAdded;
+			callback(slot, sigval1, sigval2, sigval3);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(int, int, int)>(&QTextDocument::contentsChange), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_contentsChanged(QTextDocument* self) {
 	self->contentsChanged();
 }
 
-void QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::contentsChanged), self, [=]() {
-		miqt_exec_callback_QTextDocument_contentsChanged(slot);
-	});
+void QTextDocument_connect_contentsChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::contentsChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_undoAvailable(QTextDocument* self, bool param1) {
 	self->undoAvailable(param1);
 }
 
-void QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::undoAvailable), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QTextDocument_undoAvailable(slot, sigval1);
-	});
+void QTextDocument_connect_undoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::undoAvailable), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_redoAvailable(QTextDocument* self, bool param1) {
 	self->redoAvailable(param1);
 }
 
-void QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::redoAvailable), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QTextDocument_redoAvailable(slot, sigval1);
-	});
+void QTextDocument_connect_redoAvailable(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::redoAvailable), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_undoCommandAdded(QTextDocument* self) {
 	self->undoCommandAdded();
 }
 
-void QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::undoCommandAdded), self, [=]() {
-		miqt_exec_callback_QTextDocument_undoCommandAdded(slot);
-	});
+void QTextDocument_connect_undoCommandAdded(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::undoCommandAdded), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_modificationChanged(QTextDocument* self, bool m) {
 	self->modificationChanged(m);
 }
 
-void QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::modificationChanged), self, [=](bool m) {
-		bool sigval1 = m;
-		miqt_exec_callback_QTextDocument_modificationChanged(slot, sigval1);
-	});
+void QTextDocument_connect_modificationChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool m) {
+			bool sigval1 = m;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(bool)>(&QTextDocument::modificationChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_cursorPositionChanged(QTextDocument* self, QTextCursor* cursor) {
 	self->cursorPositionChanged(*cursor);
 }
 
-void QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QTextCursor&)>(&QTextDocument::cursorPositionChanged), self, [=](const QTextCursor& cursor) {
-		const QTextCursor& cursor_ret = cursor;
-		// Cast returned reference into pointer
-		QTextCursor* sigval1 = const_cast<QTextCursor*>(&cursor_ret);
-		miqt_exec_callback_QTextDocument_cursorPositionChanged(slot, sigval1);
-	});
+void QTextDocument_connect_cursorPositionChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTextCursor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTextCursor*);
+		void operator()(const QTextCursor& cursor) {
+			const QTextCursor& cursor_ret = cursor;
+			// Cast returned reference into pointer
+			QTextCursor* sigval1 = const_cast<QTextCursor*>(&cursor_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QTextCursor&)>(&QTextDocument::cursorPositionChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_blockCountChanged(QTextDocument* self, int newBlockCount) {
 	self->blockCountChanged(static_cast<int>(newBlockCount));
 }
 
-void QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(int)>(&QTextDocument::blockCountChanged), self, [=](int newBlockCount) {
-		int sigval1 = newBlockCount;
-		miqt_exec_callback_QTextDocument_blockCountChanged(slot, sigval1);
-	});
+void QTextDocument_connect_blockCountChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int newBlockCount) {
+			int sigval1 = newBlockCount;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(int)>(&QTextDocument::blockCountChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_baseUrlChanged(QTextDocument* self, QUrl* url) {
 	self->baseUrlChanged(*url);
 }
 
-void QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QUrl&)>(&QTextDocument::baseUrlChanged), self, [=](const QUrl& url) {
-		const QUrl& url_ret = url;
-		// Cast returned reference into pointer
-		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-		miqt_exec_callback_QTextDocument_baseUrlChanged(slot, sigval1);
-	});
+void QTextDocument_connect_baseUrlChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QUrl*);
+		void operator()(const QUrl& url) {
+			const QUrl& url_ret = url;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)(const QUrl&)>(&QTextDocument::baseUrlChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_documentLayoutChanged(QTextDocument* self) {
 	self->documentLayoutChanged();
 }
 
-void QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot) {
-	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::documentLayoutChanged), self, [=]() {
-		miqt_exec_callback_QTextDocument_documentLayoutChanged(slot);
-	});
+void QTextDocument_connect_documentLayoutChanged(QTextDocument* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQTextDocument::connect(self, static_cast<void (QTextDocument::*)()>(&QTextDocument::documentLayoutChanged), self, local_caller{slot, callback, release});
 }
 
 void QTextDocument_undo2(QTextDocument* self) {

@@ -104,21 +104,21 @@ proc fcQToolBar_isFloating(self: pointer, ): bool {.importc: "QToolBar_isFloatin
 proc fcQToolBar_setIconSize(self: pointer, iconSize: pointer): void {.importc: "QToolBar_setIconSize".}
 proc fcQToolBar_setToolButtonStyle(self: pointer, toolButtonStyle: cint): void {.importc: "QToolBar_setToolButtonStyle".}
 proc fcQToolBar_actionTriggered(self: pointer, action: pointer): void {.importc: "QToolBar_actionTriggered".}
-proc fcQToolBar_connect_actionTriggered(self: pointer, slot: int) {.importc: "QToolBar_connect_actionTriggered".}
+proc fcQToolBar_connect_actionTriggered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_actionTriggered".}
 proc fcQToolBar_movableChanged(self: pointer, movable: bool): void {.importc: "QToolBar_movableChanged".}
-proc fcQToolBar_connect_movableChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_movableChanged".}
+proc fcQToolBar_connect_movableChanged(self: pointer, slot: int, callback: proc (slot: int, movable: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_movableChanged".}
 proc fcQToolBar_allowedAreasChanged(self: pointer, allowedAreas: cint): void {.importc: "QToolBar_allowedAreasChanged".}
-proc fcQToolBar_connect_allowedAreasChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_allowedAreasChanged".}
+proc fcQToolBar_connect_allowedAreasChanged(self: pointer, slot: int, callback: proc (slot: int, allowedAreas: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_allowedAreasChanged".}
 proc fcQToolBar_orientationChanged(self: pointer, orientation: cint): void {.importc: "QToolBar_orientationChanged".}
-proc fcQToolBar_connect_orientationChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_orientationChanged".}
+proc fcQToolBar_connect_orientationChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_orientationChanged".}
 proc fcQToolBar_iconSizeChanged(self: pointer, iconSize: pointer): void {.importc: "QToolBar_iconSizeChanged".}
-proc fcQToolBar_connect_iconSizeChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_iconSizeChanged".}
+proc fcQToolBar_connect_iconSizeChanged(self: pointer, slot: int, callback: proc (slot: int, iconSize: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_iconSizeChanged".}
 proc fcQToolBar_toolButtonStyleChanged(self: pointer, toolButtonStyle: cint): void {.importc: "QToolBar_toolButtonStyleChanged".}
-proc fcQToolBar_connect_toolButtonStyleChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_toolButtonStyleChanged".}
+proc fcQToolBar_connect_toolButtonStyleChanged(self: pointer, slot: int, callback: proc (slot: int, toolButtonStyle: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_toolButtonStyleChanged".}
 proc fcQToolBar_topLevelChanged(self: pointer, topLevel: bool): void {.importc: "QToolBar_topLevelChanged".}
-proc fcQToolBar_connect_topLevelChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_topLevelChanged".}
+proc fcQToolBar_connect_topLevelChanged(self: pointer, slot: int, callback: proc (slot: int, topLevel: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_topLevelChanged".}
 proc fcQToolBar_visibilityChanged(self: pointer, visible: bool): void {.importc: "QToolBar_visibilityChanged".}
-proc fcQToolBar_connect_visibilityChanged(self: pointer, slot: int) {.importc: "QToolBar_connect_visibilityChanged".}
+proc fcQToolBar_connect_visibilityChanged(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBar_connect_visibilityChanged".}
 proc fcQToolBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolBar_tr2".}
 proc fcQToolBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBar_tr3".}
 proc fcQToolBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolBar_trUtf82".}
@@ -335,129 +335,161 @@ proc actionTriggered*(self: gen_qtoolbar_types.QToolBar, action: gen_qaction_typ
   fcQToolBar_actionTriggered(self.h, action.h)
 
 type QToolBaractionTriggeredSlot* = proc(action: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQToolBar_actionTriggered(slot: int, action: pointer) {.exportc: "miqt_exec_callback_QToolBar_actionTriggered".} =
+proc miqt_exec_callback_cQToolBar_actionTriggered(slot: int, action: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QToolBaractionTriggeredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: action)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_actionTriggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBaractionTriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactionTriggered*(self: gen_qtoolbar_types.QToolBar, slot: QToolBaractionTriggeredSlot) =
   var tmp = new QToolBaractionTriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_actionTriggered(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_actionTriggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_actionTriggered, miqt_exec_callback_cQToolBar_actionTriggered_release)
 
 proc movableChanged*(self: gen_qtoolbar_types.QToolBar, movable: bool): void =
   fcQToolBar_movableChanged(self.h, movable)
 
 type QToolBarmovableChangedSlot* = proc(movable: bool)
-proc miqt_exec_callback_cQToolBar_movableChanged(slot: int, movable: bool) {.exportc: "miqt_exec_callback_QToolBar_movableChanged".} =
+proc miqt_exec_callback_cQToolBar_movableChanged(slot: int, movable: bool) {.cdecl.} =
   let nimfunc = cast[ptr QToolBarmovableChangedSlot](cast[pointer](slot))
   let slotval1 = movable
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_movableChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBarmovableChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmovableChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarmovableChangedSlot) =
   var tmp = new QToolBarmovableChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_movableChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_movableChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_movableChanged, miqt_exec_callback_cQToolBar_movableChanged_release)
 
 proc allowedAreasChanged*(self: gen_qtoolbar_types.QToolBar, allowedAreas: cint): void =
   fcQToolBar_allowedAreasChanged(self.h, cint(allowedAreas))
 
 type QToolBarallowedAreasChangedSlot* = proc(allowedAreas: cint)
-proc miqt_exec_callback_cQToolBar_allowedAreasChanged(slot: int, allowedAreas: cint) {.exportc: "miqt_exec_callback_QToolBar_allowedAreasChanged".} =
+proc miqt_exec_callback_cQToolBar_allowedAreasChanged(slot: int, allowedAreas: cint) {.cdecl.} =
   let nimfunc = cast[ptr QToolBarallowedAreasChangedSlot](cast[pointer](slot))
   let slotval1 = cint(allowedAreas)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_allowedAreasChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBarallowedAreasChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onallowedAreasChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarallowedAreasChangedSlot) =
   var tmp = new QToolBarallowedAreasChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_allowedAreasChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_allowedAreasChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_allowedAreasChanged, miqt_exec_callback_cQToolBar_allowedAreasChanged_release)
 
 proc orientationChanged*(self: gen_qtoolbar_types.QToolBar, orientation: cint): void =
   fcQToolBar_orientationChanged(self.h, cint(orientation))
 
 type QToolBarorientationChangedSlot* = proc(orientation: cint)
-proc miqt_exec_callback_cQToolBar_orientationChanged(slot: int, orientation: cint) {.exportc: "miqt_exec_callback_QToolBar_orientationChanged".} =
+proc miqt_exec_callback_cQToolBar_orientationChanged(slot: int, orientation: cint) {.cdecl.} =
   let nimfunc = cast[ptr QToolBarorientationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(orientation)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_orientationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBarorientationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onorientationChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarorientationChangedSlot) =
   var tmp = new QToolBarorientationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_orientationChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_orientationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_orientationChanged, miqt_exec_callback_cQToolBar_orientationChanged_release)
 
 proc iconSizeChanged*(self: gen_qtoolbar_types.QToolBar, iconSize: gen_qsize_types.QSize): void =
   fcQToolBar_iconSizeChanged(self.h, iconSize.h)
 
 type QToolBariconSizeChangedSlot* = proc(iconSize: gen_qsize_types.QSize)
-proc miqt_exec_callback_cQToolBar_iconSizeChanged(slot: int, iconSize: pointer) {.exportc: "miqt_exec_callback_QToolBar_iconSizeChanged".} =
+proc miqt_exec_callback_cQToolBar_iconSizeChanged(slot: int, iconSize: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QToolBariconSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSize(h: iconSize)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_iconSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBariconSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oniconSizeChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBariconSizeChangedSlot) =
   var tmp = new QToolBariconSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_iconSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_iconSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_iconSizeChanged, miqt_exec_callback_cQToolBar_iconSizeChanged_release)
 
 proc toolButtonStyleChanged*(self: gen_qtoolbar_types.QToolBar, toolButtonStyle: cint): void =
   fcQToolBar_toolButtonStyleChanged(self.h, cint(toolButtonStyle))
 
 type QToolBartoolButtonStyleChangedSlot* = proc(toolButtonStyle: cint)
-proc miqt_exec_callback_cQToolBar_toolButtonStyleChanged(slot: int, toolButtonStyle: cint) {.exportc: "miqt_exec_callback_QToolBar_toolButtonStyleChanged".} =
+proc miqt_exec_callback_cQToolBar_toolButtonStyleChanged(slot: int, toolButtonStyle: cint) {.cdecl.} =
   let nimfunc = cast[ptr QToolBartoolButtonStyleChangedSlot](cast[pointer](slot))
   let slotval1 = cint(toolButtonStyle)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_toolButtonStyleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBartoolButtonStyleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontoolButtonStyleChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartoolButtonStyleChangedSlot) =
   var tmp = new QToolBartoolButtonStyleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_toolButtonStyleChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_toolButtonStyleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_toolButtonStyleChanged, miqt_exec_callback_cQToolBar_toolButtonStyleChanged_release)
 
 proc topLevelChanged*(self: gen_qtoolbar_types.QToolBar, topLevel: bool): void =
   fcQToolBar_topLevelChanged(self.h, topLevel)
 
 type QToolBartopLevelChangedSlot* = proc(topLevel: bool)
-proc miqt_exec_callback_cQToolBar_topLevelChanged(slot: int, topLevel: bool) {.exportc: "miqt_exec_callback_QToolBar_topLevelChanged".} =
+proc miqt_exec_callback_cQToolBar_topLevelChanged(slot: int, topLevel: bool) {.cdecl.} =
   let nimfunc = cast[ptr QToolBartopLevelChangedSlot](cast[pointer](slot))
   let slotval1 = topLevel
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_topLevelChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBartopLevelChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontopLevelChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBartopLevelChangedSlot) =
   var tmp = new QToolBartopLevelChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_topLevelChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_topLevelChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_topLevelChanged, miqt_exec_callback_cQToolBar_topLevelChanged_release)
 
 proc visibilityChanged*(self: gen_qtoolbar_types.QToolBar, visible: bool): void =
   fcQToolBar_visibilityChanged(self.h, visible)
 
 type QToolBarvisibilityChangedSlot* = proc(visible: bool)
-proc miqt_exec_callback_cQToolBar_visibilityChanged(slot: int, visible: bool) {.exportc: "miqt_exec_callback_QToolBar_visibilityChanged".} =
+proc miqt_exec_callback_cQToolBar_visibilityChanged(slot: int, visible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QToolBarvisibilityChangedSlot](cast[pointer](slot))
   let slotval1 = visible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBar_visibilityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBarvisibilityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvisibilityChanged*(self: gen_qtoolbar_types.QToolBar, slot: QToolBarvisibilityChangedSlot) =
   var tmp = new QToolBarvisibilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBar_connect_visibilityChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBar_connect_visibilityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBar_visibilityChanged, miqt_exec_callback_cQToolBar_visibilityChanged_release)
 
 proc tr*(_: type gen_qtoolbar_types.QToolBar, s: cstring, c: cstring): string =
   let v_ms = fcQToolBar_tr2(s, c)

@@ -49,14 +49,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QGraphicsWebView_loadStarted(intptr_t);
-void miqt_exec_callback_QGraphicsWebView_loadFinished(intptr_t, bool);
-void miqt_exec_callback_QGraphicsWebView_loadProgress(intptr_t, int);
-void miqt_exec_callback_QGraphicsWebView_urlChanged(intptr_t, QUrl*);
-void miqt_exec_callback_QGraphicsWebView_titleChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QGraphicsWebView_iconChanged(intptr_t);
-void miqt_exec_callback_QGraphicsWebView_statusBarMessage(intptr_t, struct miqt_string);
-void miqt_exec_callback_QGraphicsWebView_linkClicked(intptr_t, QUrl*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1330,45 +1322,65 @@ void QGraphicsWebView_loadStarted(QGraphicsWebView* self) {
 	self->loadStarted();
 }
 
-void QGraphicsWebView_connect_loadStarted(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)()>(&QGraphicsWebView::loadStarted), self, [=]() {
-		miqt_exec_callback_QGraphicsWebView_loadStarted(slot);
-	});
+void QGraphicsWebView_connect_loadStarted(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)()>(&QGraphicsWebView::loadStarted), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_loadFinished(QGraphicsWebView* self, bool param1) {
 	self->loadFinished(param1);
 }
 
-void QGraphicsWebView_connect_loadFinished(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(bool)>(&QGraphicsWebView::loadFinished), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QGraphicsWebView_loadFinished(slot, sigval1);
-	});
+void QGraphicsWebView_connect_loadFinished(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(bool)>(&QGraphicsWebView::loadFinished), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_loadProgress(QGraphicsWebView* self, int progress) {
 	self->loadProgress(static_cast<int>(progress));
 }
 
-void QGraphicsWebView_connect_loadProgress(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(int)>(&QGraphicsWebView::loadProgress), self, [=](int progress) {
-		int sigval1 = progress;
-		miqt_exec_callback_QGraphicsWebView_loadProgress(slot, sigval1);
-	});
+void QGraphicsWebView_connect_loadProgress(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int progress) {
+			int sigval1 = progress;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(int)>(&QGraphicsWebView::loadProgress), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_urlChanged(QGraphicsWebView* self, QUrl* param1) {
 	self->urlChanged(*param1);
 }
 
-void QGraphicsWebView_connect_urlChanged(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QUrl&)>(&QGraphicsWebView::urlChanged), self, [=](const QUrl& param1) {
-		const QUrl& param1_ret = param1;
-		// Cast returned reference into pointer
-		QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-		miqt_exec_callback_QGraphicsWebView_urlChanged(slot, sigval1);
-	});
+void QGraphicsWebView_connect_urlChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QUrl*);
+		void operator()(const QUrl& param1) {
+			const QUrl& param1_ret = param1;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QUrl&)>(&QGraphicsWebView::urlChanged), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_titleChanged(QGraphicsWebView* self, struct miqt_string param1) {
@@ -1376,28 +1388,38 @@ void QGraphicsWebView_titleChanged(QGraphicsWebView* self, struct miqt_string pa
 	self->titleChanged(param1_QString);
 }
 
-void QGraphicsWebView_connect_titleChanged(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QString&)>(&QGraphicsWebView::titleChanged), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QGraphicsWebView_titleChanged(slot, sigval1);
-	});
+void QGraphicsWebView_connect_titleChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QString&)>(&QGraphicsWebView::titleChanged), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_iconChanged(QGraphicsWebView* self) {
 	self->iconChanged();
 }
 
-void QGraphicsWebView_connect_iconChanged(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)()>(&QGraphicsWebView::iconChanged), self, [=]() {
-		miqt_exec_callback_QGraphicsWebView_iconChanged(slot);
-	});
+void QGraphicsWebView_connect_iconChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)()>(&QGraphicsWebView::iconChanged), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_statusBarMessage(QGraphicsWebView* self, struct miqt_string message) {
@@ -1405,31 +1427,41 @@ void QGraphicsWebView_statusBarMessage(QGraphicsWebView* self, struct miqt_strin
 	self->statusBarMessage(message_QString);
 }
 
-void QGraphicsWebView_connect_statusBarMessage(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QString&)>(&QGraphicsWebView::statusBarMessage), self, [=](const QString& message) {
-		const QString message_ret = message;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray message_b = message_ret.toUtf8();
-		struct miqt_string message_ms;
-		message_ms.len = message_b.length();
-		message_ms.data = static_cast<char*>(malloc(message_ms.len));
-		memcpy(message_ms.data, message_b.data(), message_ms.len);
-		struct miqt_string sigval1 = message_ms;
-		miqt_exec_callback_QGraphicsWebView_statusBarMessage(slot, sigval1);
-	});
+void QGraphicsWebView_connect_statusBarMessage(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& message) {
+			const QString message_ret = message;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray message_b = message_ret.toUtf8();
+			struct miqt_string message_ms;
+			message_ms.len = message_b.length();
+			message_ms.data = static_cast<char*>(malloc(message_ms.len));
+			memcpy(message_ms.data, message_b.data(), message_ms.len);
+			struct miqt_string sigval1 = message_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QString&)>(&QGraphicsWebView::statusBarMessage), self, local_caller{slot, callback, release});
 }
 
 void QGraphicsWebView_linkClicked(QGraphicsWebView* self, QUrl* param1) {
 	self->linkClicked(*param1);
 }
 
-void QGraphicsWebView_connect_linkClicked(QGraphicsWebView* self, intptr_t slot) {
-	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QUrl&)>(&QGraphicsWebView::linkClicked), self, [=](const QUrl& param1) {
-		const QUrl& param1_ret = param1;
-		// Cast returned reference into pointer
-		QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
-		miqt_exec_callback_QGraphicsWebView_linkClicked(slot, sigval1);
-	});
+void QGraphicsWebView_connect_linkClicked(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QUrl*);
+		void operator()(const QUrl& param1) {
+			const QUrl& param1_ret = param1;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsWebView::connect(self, static_cast<void (QGraphicsWebView::*)(const QUrl&)>(&QGraphicsWebView::linkClicked), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QGraphicsWebView_tr2(const char* s, const char* c) {

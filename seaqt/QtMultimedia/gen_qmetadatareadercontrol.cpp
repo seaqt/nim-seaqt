@@ -15,9 +15,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMetaDataReaderControl_metaDataChanged(intptr_t);
-void miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2(intptr_t, struct miqt_string, QVariant*);
-void miqt_exec_callback_QMetaDataReaderControl_metaDataAvailableChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -93,10 +90,15 @@ void QMetaDataReaderControl_metaDataChanged(QMetaDataReaderControl* self) {
 	self->metaDataChanged();
 }
 
-void QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)()>(&QMetaDataReaderControl::metaDataChanged), self, [=]() {
-		miqt_exec_callback_QMetaDataReaderControl_metaDataChanged(slot);
-	});
+void QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)()>(&QMetaDataReaderControl::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
 void QMetaDataReaderControl_metaDataChanged2(QMetaDataReaderControl* self, struct miqt_string key, QVariant* value) {
@@ -104,32 +106,42 @@ void QMetaDataReaderControl_metaDataChanged2(QMetaDataReaderControl* self, struc
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(const QString&, const QVariant&)>(&QMetaDataReaderControl::metaDataChanged), self, [=](const QString& key, const QVariant& value) {
-		const QString key_ret = key;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray key_b = key_ret.toUtf8();
-		struct miqt_string key_ms;
-		key_ms.len = key_b.length();
-		key_ms.data = static_cast<char*>(malloc(key_ms.len));
-		memcpy(key_ms.data, key_b.data(), key_ms.len);
-		struct miqt_string sigval1 = key_ms;
-		const QVariant& value_ret = value;
-		// Cast returned reference into pointer
-		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		miqt_exec_callback_QMetaDataReaderControl_metaDataChanged2(slot, sigval1, sigval2);
-	});
+void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string, QVariant*);
+		void operator()(const QString& key, const QVariant& value) {
+			const QString key_ret = key;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray key_b = key_ret.toUtf8();
+			struct miqt_string key_ms;
+			key_ms.len = key_b.length();
+			key_ms.data = static_cast<char*>(malloc(key_ms.len));
+			memcpy(key_ms.data, key_b.data(), key_ms.len);
+			struct miqt_string sigval1 = key_ms;
+			const QVariant& value_ret = value;
+			// Cast returned reference into pointer
+			QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(const QString&, const QVariant&)>(&QMetaDataReaderControl::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
 void QMetaDataReaderControl_metaDataAvailableChanged(QMetaDataReaderControl* self, bool available) {
 	self->metaDataAvailableChanged(available);
 }
 
-void QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot) {
-	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(bool)>(&QMetaDataReaderControl::metaDataAvailableChanged), self, [=](bool available) {
-		bool sigval1 = available;
-		miqt_exec_callback_QMetaDataReaderControl_metaDataAvailableChanged(slot, sigval1);
-	});
+void QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool available) {
+			bool sigval1 = available;
+			callback(slot, sigval1);
+		}
+	};
+	QMetaDataReaderControl::connect(self, static_cast<void (QMetaDataReaderControl::*)(bool)>(&QMetaDataReaderControl::metaDataAvailableChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMetaDataReaderControl_tr2(const char* s, const char* c) {

@@ -109,13 +109,13 @@ proc fcQCompleter_setWrapAround(self: pointer, wrap: bool): void {.importc: "QCo
 proc fcQCompleter_pathFromIndex(self: pointer, index: pointer): struct_miqt_string {.importc: "QCompleter_pathFromIndex".}
 proc fcQCompleter_splitPath(self: pointer, path: struct_miqt_string): struct_miqt_array {.importc: "QCompleter_splitPath".}
 proc fcQCompleter_activated(self: pointer, text: struct_miqt_string): void {.importc: "QCompleter_activated".}
-proc fcQCompleter_connect_activated(self: pointer, slot: int) {.importc: "QCompleter_connect_activated".}
+proc fcQCompleter_connect_activated(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activated".}
 proc fcQCompleter_activatedWithIndex(self: pointer, index: pointer): void {.importc: "QCompleter_activatedWithIndex".}
-proc fcQCompleter_connect_activatedWithIndex(self: pointer, slot: int) {.importc: "QCompleter_connect_activatedWithIndex".}
+proc fcQCompleter_connect_activatedWithIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_activatedWithIndex".}
 proc fcQCompleter_highlighted(self: pointer, text: struct_miqt_string): void {.importc: "QCompleter_highlighted".}
-proc fcQCompleter_connect_highlighted(self: pointer, slot: int) {.importc: "QCompleter_connect_highlighted".}
+proc fcQCompleter_connect_highlighted(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlighted".}
 proc fcQCompleter_highlightedWithIndex(self: pointer, index: pointer): void {.importc: "QCompleter_highlightedWithIndex".}
-proc fcQCompleter_connect_highlightedWithIndex(self: pointer, slot: int) {.importc: "QCompleter_connect_highlightedWithIndex".}
+proc fcQCompleter_connect_highlightedWithIndex(self: pointer, slot: int, callback: proc (slot: int, index: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCompleter_connect_highlightedWithIndex".}
 proc fcQCompleter_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCompleter_tr2".}
 proc fcQCompleter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCompleter_tr3".}
 proc fcQCompleter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCompleter_trUtf82".}
@@ -297,7 +297,7 @@ proc activated*(self: gen_qcompleter_types.QCompleter, text: string): void =
   fcQCompleter_activated(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QCompleteractivatedSlot* = proc(text: string)
-proc miqt_exec_callback_cQCompleter_activated(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QCompleter_activated".} =
+proc miqt_exec_callback_cQCompleter_activated(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCompleteractivatedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -306,33 +306,41 @@ proc miqt_exec_callback_cQCompleter_activated(slot: int, text: struct_miqt_strin
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCompleter_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleteractivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedSlot) =
   var tmp = new QCompleteractivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQCompleter_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_activated, miqt_exec_callback_cQCompleter_activated_release)
 
 proc activated*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQCompleter_activatedWithIndex(self.h, index.h)
 
 type QCompleteractivatedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQCompleter_activatedWithIndex(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QCompleter_activatedWithIndex".} =
+proc miqt_exec_callback_cQCompleter_activatedWithIndex(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCompleteractivatedWithIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCompleter_activatedWithIndex_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleteractivatedWithIndexSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivatedWithIndexSlot) =
   var tmp = new QCompleteractivatedWithIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activatedWithIndex(self.h, cast[int](addr tmp[]))
+  fcQCompleter_connect_activatedWithIndex(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_activatedWithIndex, miqt_exec_callback_cQCompleter_activatedWithIndex_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, text: string): void =
   fcQCompleter_highlighted(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QCompleterhighlightedSlot* = proc(text: string)
-proc miqt_exec_callback_cQCompleter_highlighted(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QCompleter_highlighted".} =
+proc miqt_exec_callback_cQCompleter_highlighted(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCompleterhighlightedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -341,27 +349,35 @@ proc miqt_exec_callback_cQCompleter_highlighted(slot: int, text: struct_miqt_str
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCompleter_highlighted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleterhighlightedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedSlot) =
   var tmp = new QCompleterhighlightedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlighted(self.h, cast[int](addr tmp[]))
+  fcQCompleter_connect_highlighted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_highlighted, miqt_exec_callback_cQCompleter_highlighted_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQCompleter_highlightedWithIndex(self.h, index.h)
 
 type QCompleterhighlightedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQCompleter_highlightedWithIndex(slot: int, index: pointer) {.exportc: "miqt_exec_callback_QCompleter_highlightedWithIndex".} =
+proc miqt_exec_callback_cQCompleter_highlightedWithIndex(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCompleter_highlightedWithIndex_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighlightedWithIndexSlot) =
   var tmp = new QCompleterhighlightedWithIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlightedWithIndex(self.h, cast[int](addr tmp[]))
+  fcQCompleter_connect_highlightedWithIndex(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_highlightedWithIndex, miqt_exec_callback_cQCompleter_highlightedWithIndex_release)
 
 proc tr*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring): string =
   let v_ms = fcQCompleter_tr2(s, c)

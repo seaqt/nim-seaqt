@@ -170,7 +170,7 @@ void QToolButton_showMenu(QToolButton* self);
 void QToolButton_setToolButtonStyle(QToolButton* self, int style);
 void QToolButton_setDefaultAction(QToolButton* self, QAction* defaultAction);
 void QToolButton_triggered(QToolButton* self, QAction* param1);
-void QToolButton_connect_triggered(QToolButton* self, intptr_t slot);
+void QToolButton_connect_triggered(QToolButton* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t));
 bool QToolButton_event(QToolButton* self, QEvent* e);
 void QToolButton_mousePressEvent(QToolButton* self, QMouseEvent* param1);
 void QToolButton_mouseReleaseEvent(QToolButton* self, QMouseEvent* param1);

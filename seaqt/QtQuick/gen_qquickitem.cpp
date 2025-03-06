@@ -43,33 +43,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQuickItem_childrenRectChanged(intptr_t, QRectF*);
-void miqt_exec_callback_QQuickItem_baselineOffsetChanged(intptr_t, double);
-void miqt_exec_callback_QQuickItem_stateChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QQuickItem_focusChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_activeFocusChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_activeFocusOnTabChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_parentChanged(intptr_t, QQuickItem*);
-void miqt_exec_callback_QQuickItem_transformOriginChanged(intptr_t, int);
-void miqt_exec_callback_QQuickItem_smoothChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_antialiasingChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_clipChanged(intptr_t, bool);
-void miqt_exec_callback_QQuickItem_windowChanged(intptr_t, QQuickWindow*);
-void miqt_exec_callback_QQuickItem_childrenChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_opacityChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_enabledChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_visibleChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_visibleChildrenChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_rotationChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_scaleChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_xChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_yChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_widthChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_heightChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_zChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_implicitWidthChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_implicitHeightChanged(intptr_t);
-void miqt_exec_callback_QQuickItem_containmentMaskChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1727,25 +1700,35 @@ void QQuickItem_childrenRectChanged(QQuickItem* self, QRectF* param1) {
 	self->childrenRectChanged(*param1);
 }
 
-void QQuickItem_connect_childrenRectChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QRectF&)>(&QQuickItem::childrenRectChanged), self, [=](const QRectF& param1) {
-		const QRectF& param1_ret = param1;
-		// Cast returned reference into pointer
-		QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
-		miqt_exec_callback_QQuickItem_childrenRectChanged(slot, sigval1);
-	});
+void QQuickItem_connect_childrenRectChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QRectF*);
+		void operator()(const QRectF& param1) {
+			const QRectF& param1_ret = param1;
+			// Cast returned reference into pointer
+			QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QRectF&)>(&QQuickItem::childrenRectChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_baselineOffsetChanged(QQuickItem* self, double param1) {
 	self->baselineOffsetChanged(static_cast<qreal>(param1));
 }
 
-void QQuickItem_connect_baselineOffsetChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(qreal)>(&QQuickItem::baselineOffsetChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QQuickItem_baselineOffsetChanged(slot, sigval1);
-	});
+void QQuickItem_connect_baselineOffsetChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(qreal)>(&QQuickItem::baselineOffsetChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_stateChanged(QQuickItem* self, struct miqt_string param1) {
@@ -1753,268 +1736,393 @@ void QQuickItem_stateChanged(QQuickItem* self, struct miqt_string param1) {
 	self->stateChanged(param1_QString);
 }
 
-void QQuickItem_connect_stateChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QString&)>(&QQuickItem::stateChanged), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QQuickItem_stateChanged(slot, sigval1);
-	});
+void QQuickItem_connect_stateChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(const QString&)>(&QQuickItem::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_focusChanged(QQuickItem* self, bool param1) {
 	self->focusChanged(param1);
 }
 
-void QQuickItem_connect_focusChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::focusChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_focusChanged(slot, sigval1);
-	});
+void QQuickItem_connect_focusChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::focusChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_activeFocusChanged(QQuickItem* self, bool param1) {
 	self->activeFocusChanged(param1);
 }
 
-void QQuickItem_connect_activeFocusChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_activeFocusChanged(slot, sigval1);
-	});
+void QQuickItem_connect_activeFocusChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_activeFocusOnTabChanged(QQuickItem* self, bool param1) {
 	self->activeFocusOnTabChanged(param1);
 }
 
-void QQuickItem_connect_activeFocusOnTabChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusOnTabChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_activeFocusOnTabChanged(slot, sigval1);
-	});
+void QQuickItem_connect_activeFocusOnTabChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::activeFocusOnTabChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_parentChanged(QQuickItem* self, QQuickItem* param1) {
 	self->parentChanged(param1);
 }
 
-void QQuickItem_connect_parentChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem*)>(&QQuickItem::parentChanged), self, [=](QQuickItem* param1) {
-		QQuickItem* sigval1 = param1;
-		miqt_exec_callback_QQuickItem_parentChanged(slot, sigval1);
-	});
+void QQuickItem_connect_parentChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QQuickItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QQuickItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QQuickItem*);
+		void operator()(QQuickItem* param1) {
+			QQuickItem* sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem*)>(&QQuickItem::parentChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_transformOriginChanged(QQuickItem* self, int param1) {
 	self->transformOriginChanged(static_cast<QQuickItem::TransformOrigin>(param1));
 }
 
-void QQuickItem_connect_transformOriginChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem::TransformOrigin)>(&QQuickItem::transformOriginChanged), self, [=](QQuickItem::TransformOrigin param1) {
-		QQuickItem::TransformOrigin param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QQuickItem_transformOriginChanged(slot, sigval1);
-	});
+void QQuickItem_connect_transformOriginChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QQuickItem::TransformOrigin param1) {
+			QQuickItem::TransformOrigin param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickItem::TransformOrigin)>(&QQuickItem::transformOriginChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_smoothChanged(QQuickItem* self, bool param1) {
 	self->smoothChanged(param1);
 }
 
-void QQuickItem_connect_smoothChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::smoothChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_smoothChanged(slot, sigval1);
-	});
+void QQuickItem_connect_smoothChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::smoothChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_antialiasingChanged(QQuickItem* self, bool param1) {
 	self->antialiasingChanged(param1);
 }
 
-void QQuickItem_connect_antialiasingChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::antialiasingChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_antialiasingChanged(slot, sigval1);
-	});
+void QQuickItem_connect_antialiasingChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::antialiasingChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_clipChanged(QQuickItem* self, bool param1) {
 	self->clipChanged(param1);
 }
 
-void QQuickItem_connect_clipChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::clipChanged), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QQuickItem_clipChanged(slot, sigval1);
-	});
+void QQuickItem_connect_clipChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(bool)>(&QQuickItem::clipChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_windowChanged(QQuickItem* self, QQuickWindow* window) {
 	self->windowChanged(window);
 }
 
-void QQuickItem_connect_windowChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickWindow*)>(&QQuickItem::windowChanged), self, [=](QQuickWindow* window) {
-		QQuickWindow* sigval1 = window;
-		miqt_exec_callback_QQuickItem_windowChanged(slot, sigval1);
-	});
+void QQuickItem_connect_windowChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t, QQuickWindow*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QQuickWindow*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QQuickWindow*);
+		void operator()(QQuickWindow* window) {
+			QQuickWindow* sigval1 = window;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)(QQuickWindow*)>(&QQuickItem::windowChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_childrenChanged(QQuickItem* self) {
 	self->childrenChanged();
 }
 
-void QQuickItem_connect_childrenChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::childrenChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_childrenChanged(slot);
-	});
+void QQuickItem_connect_childrenChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::childrenChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_opacityChanged(QQuickItem* self) {
 	self->opacityChanged();
 }
 
-void QQuickItem_connect_opacityChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::opacityChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_opacityChanged(slot);
-	});
+void QQuickItem_connect_opacityChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::opacityChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_enabledChanged(QQuickItem* self) {
 	self->enabledChanged();
 }
 
-void QQuickItem_connect_enabledChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::enabledChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_enabledChanged(slot);
-	});
+void QQuickItem_connect_enabledChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::enabledChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_visibleChanged(QQuickItem* self) {
 	self->visibleChanged();
 }
 
-void QQuickItem_connect_visibleChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_visibleChanged(slot);
-	});
+void QQuickItem_connect_visibleChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_visibleChildrenChanged(QQuickItem* self) {
 	self->visibleChildrenChanged();
 }
 
-void QQuickItem_connect_visibleChildrenChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChildrenChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_visibleChildrenChanged(slot);
-	});
+void QQuickItem_connect_visibleChildrenChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::visibleChildrenChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_rotationChanged(QQuickItem* self) {
 	self->rotationChanged();
 }
 
-void QQuickItem_connect_rotationChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::rotationChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_rotationChanged(slot);
-	});
+void QQuickItem_connect_rotationChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::rotationChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_scaleChanged(QQuickItem* self) {
 	self->scaleChanged();
 }
 
-void QQuickItem_connect_scaleChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::scaleChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_scaleChanged(slot);
-	});
+void QQuickItem_connect_scaleChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::scaleChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_xChanged(QQuickItem* self) {
 	self->xChanged();
 }
 
-void QQuickItem_connect_xChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::xChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_xChanged(slot);
-	});
+void QQuickItem_connect_xChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::xChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_yChanged(QQuickItem* self) {
 	self->yChanged();
 }
 
-void QQuickItem_connect_yChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::yChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_yChanged(slot);
-	});
+void QQuickItem_connect_yChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::yChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_widthChanged(QQuickItem* self) {
 	self->widthChanged();
 }
 
-void QQuickItem_connect_widthChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::widthChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_widthChanged(slot);
-	});
+void QQuickItem_connect_widthChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::widthChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_heightChanged(QQuickItem* self) {
 	self->heightChanged();
 }
 
-void QQuickItem_connect_heightChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::heightChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_heightChanged(slot);
-	});
+void QQuickItem_connect_heightChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::heightChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_zChanged(QQuickItem* self) {
 	self->zChanged();
 }
 
-void QQuickItem_connect_zChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::zChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_zChanged(slot);
-	});
+void QQuickItem_connect_zChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::zChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_implicitWidthChanged(QQuickItem* self) {
 	self->implicitWidthChanged();
 }
 
-void QQuickItem_connect_implicitWidthChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitWidthChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_implicitWidthChanged(slot);
-	});
+void QQuickItem_connect_implicitWidthChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitWidthChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_implicitHeightChanged(QQuickItem* self) {
 	self->implicitHeightChanged();
 }
 
-void QQuickItem_connect_implicitHeightChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitHeightChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_implicitHeightChanged(slot);
-	});
+void QQuickItem_connect_implicitHeightChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::implicitHeightChanged), self, local_caller{slot, callback, release});
 }
 
 void QQuickItem_containmentMaskChanged(QQuickItem* self) {
 	self->containmentMaskChanged();
 }
 
-void QQuickItem_connect_containmentMaskChanged(QQuickItem* self, intptr_t slot) {
-	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::containmentMaskChanged), self, [=]() {
-		miqt_exec_callback_QQuickItem_containmentMaskChanged(slot);
-	});
+void QQuickItem_connect_containmentMaskChanged(QQuickItem* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickItem::connect(self, static_cast<void (QQuickItem::*)()>(&QQuickItem::containmentMaskChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQuickItem_tr2(const char* s, const char* c) {

@@ -55,7 +55,7 @@ proc fcQCameraCaptureDestinationControl_isCaptureDestinationSupported(self: poin
 proc fcQCameraCaptureDestinationControl_captureDestination(self: pointer, ): cint {.importc: "QCameraCaptureDestinationControl_captureDestination".}
 proc fcQCameraCaptureDestinationControl_setCaptureDestination(self: pointer, destination: cint): void {.importc: "QCameraCaptureDestinationControl_setCaptureDestination".}
 proc fcQCameraCaptureDestinationControl_captureDestinationChanged(self: pointer, destination: cint): void {.importc: "QCameraCaptureDestinationControl_captureDestinationChanged".}
-proc fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self: pointer, slot: int) {.importc: "QCameraCaptureDestinationControl_connect_captureDestinationChanged".}
+proc fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self: pointer, slot: int, callback: proc (slot: int, destination: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraCaptureDestinationControl_connect_captureDestinationChanged".}
 proc fcQCameraCaptureDestinationControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_tr2".}
 proc fcQCameraCaptureDestinationControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_tr3".}
 proc fcQCameraCaptureDestinationControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraCaptureDestinationControl_trUtf82".}
@@ -97,17 +97,21 @@ proc captureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types
   fcQCameraCaptureDestinationControl_captureDestinationChanged(self.h, cint(destination))
 
 type QCameraCaptureDestinationControlcaptureDestinationChangedSlot* = proc(destination: cint)
-proc miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged(slot: int, destination: cint) {.exportc: "miqt_exec_callback_QCameraCaptureDestinationControl_captureDestinationChanged".} =
+proc miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged(slot: int, destination: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraCaptureDestinationControlcaptureDestinationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(destination)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraCaptureDestinationControlcaptureDestinationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncaptureDestinationChanged*(self: gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, slot: QCameraCaptureDestinationControlcaptureDestinationChangedSlot) =
   var tmp = new QCameraCaptureDestinationControlcaptureDestinationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraCaptureDestinationControl_connect_captureDestinationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged, miqt_exec_callback_cQCameraCaptureDestinationControl_captureDestinationChanged_release)
 
 proc tr*(_: type gen_qcameracapturedestinationcontrol_types.QCameraCaptureDestinationControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraCaptureDestinationControl_tr2(s, c)

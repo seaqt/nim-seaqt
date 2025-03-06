@@ -25,9 +25,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQmlEngine_quit(intptr_t);
-void miqt_exec_callback_QQmlEngine_exit(intptr_t, int);
-void miqt_exec_callback_QQmlEngine_warnings(intptr_t, struct miqt_array /* of QQmlError* */ );
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -479,21 +476,31 @@ void QQmlEngine_quit(QQmlEngine* self) {
 	self->quit();
 }
 
-void QQmlEngine_connect_quit(QQmlEngine* self, intptr_t slot) {
-	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)()>(&QQmlEngine::quit), self, [=]() {
-		miqt_exec_callback_QQmlEngine_quit(slot);
-	});
+void QQmlEngine_connect_quit(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)()>(&QQmlEngine::quit), self, local_caller{slot, callback, release});
 }
 
 void QQmlEngine_exit(QQmlEngine* self, int retCode) {
 	self->exit(static_cast<int>(retCode));
 }
 
-void QQmlEngine_connect_exit(QQmlEngine* self, intptr_t slot) {
-	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)(int)>(&QQmlEngine::exit), self, [=](int retCode) {
-		int sigval1 = retCode;
-		miqt_exec_callback_QQmlEngine_exit(slot, sigval1);
-	});
+void QQmlEngine_connect_exit(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int retCode) {
+			int sigval1 = retCode;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)(int)>(&QQmlEngine::exit), self, local_caller{slot, callback, release});
 }
 
 void QQmlEngine_warnings(QQmlEngine* self, struct miqt_array /* of QQmlError* */  warnings) {
@@ -506,20 +513,25 @@ void QQmlEngine_warnings(QQmlEngine* self, struct miqt_array /* of QQmlError* */
 	self->warnings(warnings_QList);
 }
 
-void QQmlEngine_connect_warnings(QQmlEngine* self, intptr_t slot) {
-	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)(const QList<QQmlError>&)>(&QQmlEngine::warnings), self, [=](const QList<QQmlError>& warnings) {
-		const QList<QQmlError>& warnings_ret = warnings;
-		// Convert QList<> from C++ memory to manually-managed C memory
-		QQmlError** warnings_arr = static_cast<QQmlError**>(malloc(sizeof(QQmlError*) * warnings_ret.length()));
-		for (size_t i = 0, e = warnings_ret.length(); i < e; ++i) {
-			warnings_arr[i] = new QQmlError(warnings_ret[i]);
+void QQmlEngine_connect_warnings(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QQmlError* */ ), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QQmlError* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_array /* of QQmlError* */ );
+		void operator()(const QList<QQmlError>& warnings) {
+			const QList<QQmlError>& warnings_ret = warnings;
+			// Convert QList<> from C++ memory to manually-managed C memory
+			QQmlError** warnings_arr = static_cast<QQmlError**>(malloc(sizeof(QQmlError*) * warnings_ret.length()));
+			for (size_t i = 0, e = warnings_ret.length(); i < e; ++i) {
+				warnings_arr[i] = new QQmlError(warnings_ret[i]);
+			}
+			struct miqt_array warnings_out;
+			warnings_out.len = warnings_ret.length();
+			warnings_out.data = static_cast<void*>(warnings_arr);
+			struct miqt_array /* of QQmlError* */  sigval1 = warnings_out;
+			callback(slot, sigval1);
 		}
-		struct miqt_array warnings_out;
-		warnings_out.len = warnings_ret.length();
-		warnings_out.data = static_cast<void*>(warnings_arr);
-		struct miqt_array /* of QQmlError* */  sigval1 = warnings_out;
-		miqt_exec_callback_QQmlEngine_warnings(slot, sigval1);
-	});
+	};
+	VirtualQQmlEngine::connect(self, static_cast<void (QQmlEngine::*)(const QList<QQmlError>&)>(&QQmlEngine::warnings), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQmlEngine_tr2(const char* s, const char* c) {

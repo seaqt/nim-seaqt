@@ -114,17 +114,17 @@ proc fcQAbstractSlider_setValue(self: pointer, value: cint): void {.importc: "QA
 proc fcQAbstractSlider_setOrientation(self: pointer, orientation: cint): void {.importc: "QAbstractSlider_setOrientation".}
 proc fcQAbstractSlider_setRange(self: pointer, min: cint, max: cint): void {.importc: "QAbstractSlider_setRange".}
 proc fcQAbstractSlider_valueChanged(self: pointer, value: cint): void {.importc: "QAbstractSlider_valueChanged".}
-proc fcQAbstractSlider_connect_valueChanged(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_valueChanged".}
+proc fcQAbstractSlider_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, value: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_valueChanged".}
 proc fcQAbstractSlider_sliderPressed(self: pointer, ): void {.importc: "QAbstractSlider_sliderPressed".}
-proc fcQAbstractSlider_connect_sliderPressed(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_sliderPressed".}
+proc fcQAbstractSlider_connect_sliderPressed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_sliderPressed".}
 proc fcQAbstractSlider_sliderMoved(self: pointer, position: cint): void {.importc: "QAbstractSlider_sliderMoved".}
-proc fcQAbstractSlider_connect_sliderMoved(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_sliderMoved".}
+proc fcQAbstractSlider_connect_sliderMoved(self: pointer, slot: int, callback: proc (slot: int, position: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_sliderMoved".}
 proc fcQAbstractSlider_sliderReleased(self: pointer, ): void {.importc: "QAbstractSlider_sliderReleased".}
-proc fcQAbstractSlider_connect_sliderReleased(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_sliderReleased".}
+proc fcQAbstractSlider_connect_sliderReleased(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_sliderReleased".}
 proc fcQAbstractSlider_rangeChanged(self: pointer, min: cint, max: cint): void {.importc: "QAbstractSlider_rangeChanged".}
-proc fcQAbstractSlider_connect_rangeChanged(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_rangeChanged".}
+proc fcQAbstractSlider_connect_rangeChanged(self: pointer, slot: int, callback: proc (slot: int, min: cint, max: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_rangeChanged".}
 proc fcQAbstractSlider_actionTriggered(self: pointer, action: cint): void {.importc: "QAbstractSlider_actionTriggered".}
-proc fcQAbstractSlider_connect_actionTriggered(self: pointer, slot: int) {.importc: "QAbstractSlider_connect_actionTriggered".}
+proc fcQAbstractSlider_connect_actionTriggered(self: pointer, slot: int, callback: proc (slot: int, action: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSlider_connect_actionTriggered".}
 proc fcQAbstractSlider_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSlider_tr2".}
 proc fcQAbstractSlider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSlider_tr3".}
 proc fcQAbstractSlider_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSlider_trUtf82".}
@@ -335,67 +335,83 @@ proc valueChanged*(self: gen_qabstractslider_types.QAbstractSlider, value: cint)
   fcQAbstractSlider_valueChanged(self.h, value)
 
 type QAbstractSlidervalueChangedSlot* = proc(value: cint)
-proc miqt_exec_callback_cQAbstractSlider_valueChanged(slot: int, value: cint) {.exportc: "miqt_exec_callback_QAbstractSlider_valueChanged".} =
+proc miqt_exec_callback_cQAbstractSlider_valueChanged(slot: int, value: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSlidervalueChangedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSlider_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSlidervalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidervalueChangedSlot) =
   var tmp = new QAbstractSlidervalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_valueChanged, miqt_exec_callback_cQAbstractSlider_valueChanged_release)
 
 proc sliderPressed*(self: gen_qabstractslider_types.QAbstractSlider, ): void =
   fcQAbstractSlider_sliderPressed(self.h)
 
 type QAbstractSlidersliderPressedSlot* = proc()
-proc miqt_exec_callback_cQAbstractSlider_sliderPressed(slot: int) {.exportc: "miqt_exec_callback_QAbstractSlider_sliderPressed".} =
+proc miqt_exec_callback_cQAbstractSlider_sliderPressed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSlidersliderPressedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSlider_sliderPressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSlidersliderPressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onsliderPressed*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidersliderPressedSlot) =
   var tmp = new QAbstractSlidersliderPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_sliderPressed(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_sliderPressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_sliderPressed, miqt_exec_callback_cQAbstractSlider_sliderPressed_release)
 
 proc sliderMoved*(self: gen_qabstractslider_types.QAbstractSlider, position: cint): void =
   fcQAbstractSlider_sliderMoved(self.h, position)
 
 type QAbstractSlidersliderMovedSlot* = proc(position: cint)
-proc miqt_exec_callback_cQAbstractSlider_sliderMoved(slot: int, position: cint) {.exportc: "miqt_exec_callback_QAbstractSlider_sliderMoved".} =
+proc miqt_exec_callback_cQAbstractSlider_sliderMoved(slot: int, position: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSlidersliderMovedSlot](cast[pointer](slot))
   let slotval1 = position
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSlider_sliderMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSlidersliderMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsliderMoved*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidersliderMovedSlot) =
   var tmp = new QAbstractSlidersliderMovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_sliderMoved(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_sliderMoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_sliderMoved, miqt_exec_callback_cQAbstractSlider_sliderMoved_release)
 
 proc sliderReleased*(self: gen_qabstractslider_types.QAbstractSlider, ): void =
   fcQAbstractSlider_sliderReleased(self.h)
 
 type QAbstractSlidersliderReleasedSlot* = proc()
-proc miqt_exec_callback_cQAbstractSlider_sliderReleased(slot: int) {.exportc: "miqt_exec_callback_QAbstractSlider_sliderReleased".} =
+proc miqt_exec_callback_cQAbstractSlider_sliderReleased(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSlidersliderReleasedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSlider_sliderReleased_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSlidersliderReleasedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onsliderReleased*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlidersliderReleasedSlot) =
   var tmp = new QAbstractSlidersliderReleasedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_sliderReleased(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_sliderReleased(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_sliderReleased, miqt_exec_callback_cQAbstractSlider_sliderReleased_release)
 
 proc rangeChanged*(self: gen_qabstractslider_types.QAbstractSlider, min: cint, max: cint): void =
   fcQAbstractSlider_rangeChanged(self.h, min, max)
 
 type QAbstractSliderrangeChangedSlot* = proc(min: cint, max: cint)
-proc miqt_exec_callback_cQAbstractSlider_rangeChanged(slot: int, min: cint, max: cint) {.exportc: "miqt_exec_callback_QAbstractSlider_rangeChanged".} =
+proc miqt_exec_callback_cQAbstractSlider_rangeChanged(slot: int, min: cint, max: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSliderrangeChangedSlot](cast[pointer](slot))
   let slotval1 = min
 
@@ -403,27 +419,35 @@ proc miqt_exec_callback_cQAbstractSlider_rangeChanged(slot: int, min: cint, max:
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractSlider_rangeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSliderrangeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrangeChanged*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSliderrangeChangedSlot) =
   var tmp = new QAbstractSliderrangeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_rangeChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_rangeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_rangeChanged, miqt_exec_callback_cQAbstractSlider_rangeChanged_release)
 
 proc actionTriggered*(self: gen_qabstractslider_types.QAbstractSlider, action: cint): void =
   fcQAbstractSlider_actionTriggered(self.h, action)
 
 type QAbstractSlideractionTriggeredSlot* = proc(action: cint)
-proc miqt_exec_callback_cQAbstractSlider_actionTriggered(slot: int, action: cint) {.exportc: "miqt_exec_callback_QAbstractSlider_actionTriggered".} =
+proc miqt_exec_callback_cQAbstractSlider_actionTriggered(slot: int, action: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSlideractionTriggeredSlot](cast[pointer](slot))
   let slotval1 = action
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSlider_actionTriggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSlideractionTriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactionTriggered*(self: gen_qabstractslider_types.QAbstractSlider, slot: QAbstractSlideractionTriggeredSlot) =
   var tmp = new QAbstractSlideractionTriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSlider_connect_actionTriggered(self.h, cast[int](addr tmp[]))
+  fcQAbstractSlider_connect_actionTriggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSlider_actionTriggered, miqt_exec_callback_cQAbstractSlider_actionTriggered_release)
 
 proc tr*(_: type gen_qabstractslider_types.QAbstractSlider, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSlider_tr2(s, c)

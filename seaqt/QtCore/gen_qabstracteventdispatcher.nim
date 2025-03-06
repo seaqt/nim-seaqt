@@ -78,9 +78,9 @@ proc fcQAbstractEventDispatcher_installNativeEventFilter(self: pointer, filterOb
 proc fcQAbstractEventDispatcher_removeNativeEventFilter(self: pointer, filterObj: pointer): void {.importc: "QAbstractEventDispatcher_removeNativeEventFilter".}
 proc fcQAbstractEventDispatcher_filterNativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.importc: "QAbstractEventDispatcher_filterNativeEvent".}
 proc fcQAbstractEventDispatcher_aboutToBlock(self: pointer, ): void {.importc: "QAbstractEventDispatcher_aboutToBlock".}
-proc fcQAbstractEventDispatcher_connect_aboutToBlock(self: pointer, slot: int) {.importc: "QAbstractEventDispatcher_connect_aboutToBlock".}
+proc fcQAbstractEventDispatcher_connect_aboutToBlock(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_aboutToBlock".}
 proc fcQAbstractEventDispatcher_awake(self: pointer, ): void {.importc: "QAbstractEventDispatcher_awake".}
-proc fcQAbstractEventDispatcher_connect_awake(self: pointer, slot: int) {.importc: "QAbstractEventDispatcher_connect_awake".}
+proc fcQAbstractEventDispatcher_connect_awake(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractEventDispatcher_connect_awake".}
 proc fcQAbstractEventDispatcher_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr2".}
 proc fcQAbstractEventDispatcher_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractEventDispatcher_tr3".}
 proc fcQAbstractEventDispatcher_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractEventDispatcher_trUtf82".}
@@ -178,29 +178,37 @@ proc aboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispat
   fcQAbstractEventDispatcher_aboutToBlock(self.h)
 
 type QAbstractEventDispatcheraboutToBlockSlot* = proc()
-proc miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock(slot: int) {.exportc: "miqt_exec_callback_QAbstractEventDispatcher_aboutToBlock".} =
+proc miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractEventDispatcheraboutToBlockSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaboutToBlock*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcheraboutToBlockSlot) =
   var tmp = new QAbstractEventDispatcheraboutToBlockSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]))
+  fcQAbstractEventDispatcher_connect_aboutToBlock(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock, miqt_exec_callback_cQAbstractEventDispatcher_aboutToBlock_release)
 
 proc awake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, ): void =
   fcQAbstractEventDispatcher_awake(self.h)
 
 type QAbstractEventDispatcherawakeSlot* = proc()
-proc miqt_exec_callback_cQAbstractEventDispatcher_awake(slot: int) {.exportc: "miqt_exec_callback_QAbstractEventDispatcher_awake".} =
+proc miqt_exec_callback_cQAbstractEventDispatcher_awake(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractEventDispatcher_awake_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractEventDispatcherawakeSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onawake*(self: gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, slot: QAbstractEventDispatcherawakeSlot) =
   var tmp = new QAbstractEventDispatcherawakeSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]))
+  fcQAbstractEventDispatcher_connect_awake(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractEventDispatcher_awake, miqt_exec_callback_cQAbstractEventDispatcher_awake_release)
 
 proc tr*(_: type gen_qabstracteventdispatcher_types.QAbstractEventDispatcher, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractEventDispatcher_tr2(s, c)

@@ -152,9 +152,9 @@ proc fcQGraphicsWidget_paintWindowFrame(self: pointer, painter: pointer, option:
 proc fcQGraphicsWidget_boundingRect(self: pointer, ): pointer {.importc: "QGraphicsWidget_boundingRect".}
 proc fcQGraphicsWidget_shape(self: pointer, ): pointer {.importc: "QGraphicsWidget_shape".}
 proc fcQGraphicsWidget_geometryChanged(self: pointer, ): void {.importc: "QGraphicsWidget_geometryChanged".}
-proc fcQGraphicsWidget_connect_geometryChanged(self: pointer, slot: int) {.importc: "QGraphicsWidget_connect_geometryChanged".}
+proc fcQGraphicsWidget_connect_geometryChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWidget_connect_geometryChanged".}
 proc fcQGraphicsWidget_layoutChanged(self: pointer, ): void {.importc: "QGraphicsWidget_layoutChanged".}
-proc fcQGraphicsWidget_connect_layoutChanged(self: pointer, slot: int) {.importc: "QGraphicsWidget_connect_layoutChanged".}
+proc fcQGraphicsWidget_connect_layoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWidget_connect_layoutChanged".}
 proc fcQGraphicsWidget_close(self: pointer, ): bool {.importc: "QGraphicsWidget_close".}
 proc fcQGraphicsWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsWidget_tr2".}
 proc fcQGraphicsWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsWidget_tr3".}
@@ -513,29 +513,37 @@ proc geometryChanged*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
   fcQGraphicsWidget_geometryChanged(self.h)
 
 type QGraphicsWidgetgeometryChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsWidget_geometryChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsWidget_geometryChanged".} =
+proc miqt_exec_callback_cQGraphicsWidget_geometryChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWidgetgeometryChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsWidget_geometryChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsWidgetgeometryChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ongeometryChanged*(self: gen_qgraphicswidget_types.QGraphicsWidget, slot: QGraphicsWidgetgeometryChangedSlot) =
   var tmp = new QGraphicsWidgetgeometryChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWidget_connect_geometryChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsWidget_connect_geometryChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWidget_geometryChanged, miqt_exec_callback_cQGraphicsWidget_geometryChanged_release)
 
 proc layoutChanged*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): void =
   fcQGraphicsWidget_layoutChanged(self.h)
 
 type QGraphicsWidgetlayoutChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsWidget_layoutChanged(slot: int) {.exportc: "miqt_exec_callback_QGraphicsWidget_layoutChanged".} =
+proc miqt_exec_callback_cQGraphicsWidget_layoutChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWidgetlayoutChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQGraphicsWidget_layoutChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsWidgetlayoutChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onlayoutChanged*(self: gen_qgraphicswidget_types.QGraphicsWidget, slot: QGraphicsWidgetlayoutChangedSlot) =
   var tmp = new QGraphicsWidgetlayoutChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWidget_connect_layoutChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsWidget_connect_layoutChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWidget_layoutChanged, miqt_exec_callback_cQGraphicsWidget_layoutChanged_release)
 
 proc close*(self: gen_qgraphicswidget_types.QGraphicsWidget, ): bool =
   fcQGraphicsWidget_close(self.h)

@@ -46,8 +46,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMenuBar_triggered(intptr_t, QAction*);
-void miqt_exec_callback_QMenuBar_hovered(intptr_t, QAction*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -975,22 +973,32 @@ void QMenuBar_triggered(QMenuBar* self, QAction* action) {
 	self->triggered(action);
 }
 
-void QMenuBar_connect_triggered(QMenuBar* self, intptr_t slot) {
-	VirtualQMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::triggered), self, [=](QAction* action) {
-		QAction* sigval1 = action;
-		miqt_exec_callback_QMenuBar_triggered(slot, sigval1);
-	});
+void QMenuBar_connect_triggered(QMenuBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* action) {
+			QAction* sigval1 = action;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::triggered), self, local_caller{slot, callback, release});
 }
 
 void QMenuBar_hovered(QMenuBar* self, QAction* action) {
 	self->hovered(action);
 }
 
-void QMenuBar_connect_hovered(QMenuBar* self, intptr_t slot) {
-	VirtualQMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::hovered), self, [=](QAction* action) {
-		QAction* sigval1 = action;
-		miqt_exec_callback_QMenuBar_hovered(slot, sigval1);
-	});
+void QMenuBar_connect_hovered(QMenuBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QAction*);
+		void operator()(QAction* action) {
+			QAction* sigval1 = action;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMenuBar::connect(self, static_cast<void (QMenuBar::*)(QAction*)>(&QMenuBar::hovered), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMenuBar_tr2(const char* s, const char* c) {

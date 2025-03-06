@@ -22,16 +22,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMediaPlaylist_currentIndexChanged(intptr_t, int);
-void miqt_exec_callback_QMediaPlaylist_playbackModeChanged(intptr_t, int);
-void miqt_exec_callback_QMediaPlaylist_currentMediaChanged(intptr_t, QMediaContent*);
-void miqt_exec_callback_QMediaPlaylist_mediaAboutToBeInserted(intptr_t, int, int);
-void miqt_exec_callback_QMediaPlaylist_mediaInserted(intptr_t, int, int);
-void miqt_exec_callback_QMediaPlaylist_mediaAboutToBeRemoved(intptr_t, int, int);
-void miqt_exec_callback_QMediaPlaylist_mediaRemoved(intptr_t, int, int);
-void miqt_exec_callback_QMediaPlaylist_mediaChanged(intptr_t, int, int);
-void miqt_exec_callback_QMediaPlaylist_loaded(intptr_t);
-void miqt_exec_callback_QMediaPlaylist_loadFailed(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -430,116 +420,166 @@ void QMediaPlaylist_currentIndexChanged(QMediaPlaylist* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QMediaPlaylist_connect_currentIndexChanged(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int)>(&QMediaPlaylist::currentIndexChanged), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QMediaPlaylist_currentIndexChanged(slot, sigval1);
-	});
+void QMediaPlaylist_connect_currentIndexChanged(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int)>(&QMediaPlaylist::currentIndexChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_playbackModeChanged(QMediaPlaylist* self, int mode) {
 	self->playbackModeChanged(static_cast<QMediaPlaylist::PlaybackMode>(mode));
 }
 
-void QMediaPlaylist_connect_playbackModeChanged(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(QMediaPlaylist::PlaybackMode)>(&QMediaPlaylist::playbackModeChanged), self, [=](QMediaPlaylist::PlaybackMode mode) {
-		QMediaPlaylist::PlaybackMode mode_ret = mode;
-		int sigval1 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QMediaPlaylist_playbackModeChanged(slot, sigval1);
-	});
+void QMediaPlaylist_connect_playbackModeChanged(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QMediaPlaylist::PlaybackMode mode) {
+			QMediaPlaylist::PlaybackMode mode_ret = mode;
+			int sigval1 = static_cast<int>(mode_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(QMediaPlaylist::PlaybackMode)>(&QMediaPlaylist::playbackModeChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_currentMediaChanged(QMediaPlaylist* self, QMediaContent* param1) {
 	self->currentMediaChanged(*param1);
 }
 
-void QMediaPlaylist_connect_currentMediaChanged(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(const QMediaContent&)>(&QMediaPlaylist::currentMediaChanged), self, [=](const QMediaContent& param1) {
-		const QMediaContent& param1_ret = param1;
-		// Cast returned reference into pointer
-		QMediaContent* sigval1 = const_cast<QMediaContent*>(&param1_ret);
-		miqt_exec_callback_QMediaPlaylist_currentMediaChanged(slot, sigval1);
-	});
+void QMediaPlaylist_connect_currentMediaChanged(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QMediaContent*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QMediaContent*);
+		void operator()(const QMediaContent& param1) {
+			const QMediaContent& param1_ret = param1;
+			// Cast returned reference into pointer
+			QMediaContent* sigval1 = const_cast<QMediaContent*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(const QMediaContent&)>(&QMediaPlaylist::currentMediaChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_mediaAboutToBeInserted(QMediaPlaylist* self, int start, int end) {
 	self->mediaAboutToBeInserted(static_cast<int>(start), static_cast<int>(end));
 }
 
-void QMediaPlaylist_connect_mediaAboutToBeInserted(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaAboutToBeInserted), self, [=](int start, int end) {
-		int sigval1 = start;
-		int sigval2 = end;
-		miqt_exec_callback_QMediaPlaylist_mediaAboutToBeInserted(slot, sigval1, sigval2);
-	});
+void QMediaPlaylist_connect_mediaAboutToBeInserted(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int start, int end) {
+			int sigval1 = start;
+			int sigval2 = end;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaAboutToBeInserted), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_mediaInserted(QMediaPlaylist* self, int start, int end) {
 	self->mediaInserted(static_cast<int>(start), static_cast<int>(end));
 }
 
-void QMediaPlaylist_connect_mediaInserted(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaInserted), self, [=](int start, int end) {
-		int sigval1 = start;
-		int sigval2 = end;
-		miqt_exec_callback_QMediaPlaylist_mediaInserted(slot, sigval1, sigval2);
-	});
+void QMediaPlaylist_connect_mediaInserted(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int start, int end) {
+			int sigval1 = start;
+			int sigval2 = end;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaInserted), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_mediaAboutToBeRemoved(QMediaPlaylist* self, int start, int end) {
 	self->mediaAboutToBeRemoved(static_cast<int>(start), static_cast<int>(end));
 }
 
-void QMediaPlaylist_connect_mediaAboutToBeRemoved(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaAboutToBeRemoved), self, [=](int start, int end) {
-		int sigval1 = start;
-		int sigval2 = end;
-		miqt_exec_callback_QMediaPlaylist_mediaAboutToBeRemoved(slot, sigval1, sigval2);
-	});
+void QMediaPlaylist_connect_mediaAboutToBeRemoved(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int start, int end) {
+			int sigval1 = start;
+			int sigval2 = end;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaAboutToBeRemoved), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_mediaRemoved(QMediaPlaylist* self, int start, int end) {
 	self->mediaRemoved(static_cast<int>(start), static_cast<int>(end));
 }
 
-void QMediaPlaylist_connect_mediaRemoved(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaRemoved), self, [=](int start, int end) {
-		int sigval1 = start;
-		int sigval2 = end;
-		miqt_exec_callback_QMediaPlaylist_mediaRemoved(slot, sigval1, sigval2);
-	});
+void QMediaPlaylist_connect_mediaRemoved(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int start, int end) {
+			int sigval1 = start;
+			int sigval2 = end;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaRemoved), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_mediaChanged(QMediaPlaylist* self, int start, int end) {
 	self->mediaChanged(static_cast<int>(start), static_cast<int>(end));
 }
 
-void QMediaPlaylist_connect_mediaChanged(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaChanged), self, [=](int start, int end) {
-		int sigval1 = start;
-		int sigval2 = end;
-		miqt_exec_callback_QMediaPlaylist_mediaChanged(slot, sigval1, sigval2);
-	});
+void QMediaPlaylist_connect_mediaChanged(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int start, int end) {
+			int sigval1 = start;
+			int sigval2 = end;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)(int, int)>(&QMediaPlaylist::mediaChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_loaded(QMediaPlaylist* self) {
 	self->loaded();
 }
 
-void QMediaPlaylist_connect_loaded(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)()>(&QMediaPlaylist::loaded), self, [=]() {
-		miqt_exec_callback_QMediaPlaylist_loaded(slot);
-	});
+void QMediaPlaylist_connect_loaded(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)()>(&QMediaPlaylist::loaded), self, local_caller{slot, callback, release});
 }
 
 void QMediaPlaylist_loadFailed(QMediaPlaylist* self) {
 	self->loadFailed();
 }
 
-void QMediaPlaylist_connect_loadFailed(QMediaPlaylist* self, intptr_t slot) {
-	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)()>(&QMediaPlaylist::loadFailed), self, [=]() {
-		miqt_exec_callback_QMediaPlaylist_loadFailed(slot);
-	});
+void QMediaPlaylist_connect_loadFailed(QMediaPlaylist* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQMediaPlaylist::connect(self, static_cast<void (QMediaPlaylist::*)()>(&QMediaPlaylist::loadFailed), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMediaPlaylist_tr2(const char* s, const char* c) {

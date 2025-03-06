@@ -185,7 +185,7 @@ int QMdiArea_tabShape(const QMdiArea* self);
 void QMdiArea_setTabPosition(QMdiArea* self, int position);
 int QMdiArea_tabPosition(const QMdiArea* self);
 void QMdiArea_subWindowActivated(QMdiArea* self, QMdiSubWindow* param1);
-void QMdiArea_connect_subWindowActivated(QMdiArea* self, intptr_t slot);
+void QMdiArea_connect_subWindowActivated(QMdiArea* self, intptr_t slot, void (*callback)(intptr_t, QMdiSubWindow*), void (*release)(intptr_t));
 void QMdiArea_setActiveSubWindow(QMdiArea* self, QMdiSubWindow* window);
 void QMdiArea_tileSubWindows(QMdiArea* self);
 void QMdiArea_cascadeSubWindows(QMdiArea* self);

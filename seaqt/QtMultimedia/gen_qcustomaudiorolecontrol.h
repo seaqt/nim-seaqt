@@ -38,7 +38,7 @@ struct miqt_string QCustomAudioRoleControl_customAudioRole(const QCustomAudioRol
 void QCustomAudioRoleControl_setCustomAudioRole(QCustomAudioRoleControl* self, struct miqt_string role);
 struct miqt_array /* of struct miqt_string */  QCustomAudioRoleControl_supportedCustomAudioRoles(const QCustomAudioRoleControl* self);
 void QCustomAudioRoleControl_customAudioRoleChanged(QCustomAudioRoleControl* self, struct miqt_string role);
-void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleControl* self, intptr_t slot);
+void QCustomAudioRoleControl_connect_customAudioRoleChanged(QCustomAudioRoleControl* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 struct miqt_string QCustomAudioRoleControl_tr2(const char* s, const char* c);
 struct miqt_string QCustomAudioRoleControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCustomAudioRoleControl_trUtf82(const char* s, const char* c);

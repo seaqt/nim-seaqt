@@ -14,8 +14,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(intptr_t, QVideoFrame*);
-void miqt_exec_callback_QMediaVideoProbeControl_flush(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -62,23 +60,33 @@ void QMediaVideoProbeControl_videoFrameProbed(QMediaVideoProbeControl* self, QVi
 	self->videoFrameProbed(*frame);
 }
 
-void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot) {
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, [=](const QVideoFrame& frame) {
-		const QVideoFrame& frame_ret = frame;
-		// Cast returned reference into pointer
-		QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
-		miqt_exec_callback_QMediaVideoProbeControl_videoFrameProbed(slot, sigval1);
-	});
+void QMediaVideoProbeControl_connect_videoFrameProbed(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QVideoFrame*);
+		void operator()(const QVideoFrame& frame) {
+			const QVideoFrame& frame_ret = frame;
+			// Cast returned reference into pointer
+			QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)(const QVideoFrame&)>(&QMediaVideoProbeControl::videoFrameProbed), self, local_caller{slot, callback, release});
 }
 
 void QMediaVideoProbeControl_flush(QMediaVideoProbeControl* self) {
 	self->flush();
 }
 
-void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot) {
-	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, [=]() {
-		miqt_exec_callback_QMediaVideoProbeControl_flush(slot);
-	});
+void QMediaVideoProbeControl_connect_flush(QMediaVideoProbeControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QMediaVideoProbeControl::connect(self, static_cast<void (QMediaVideoProbeControl::*)()>(&QMediaVideoProbeControl::flush), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMediaVideoProbeControl_tr2(const char* s, const char* c) {

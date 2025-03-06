@@ -18,13 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QNetworkSession_stateChanged(intptr_t, int);
-void miqt_exec_callback_QNetworkSession_opened(intptr_t);
-void miqt_exec_callback_QNetworkSession_closed(intptr_t);
-void miqt_exec_callback_QNetworkSession_errorWithQNetworkSessionSessionError(intptr_t, int);
-void miqt_exec_callback_QNetworkSession_preferredConfigurationChanged(intptr_t, QNetworkConfiguration*, bool);
-void miqt_exec_callback_QNetworkSession_newConfigurationActivated(intptr_t);
-void miqt_exec_callback_QNetworkSession_usagePoliciesChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -347,80 +340,115 @@ void QNetworkSession_stateChanged(QNetworkSession* self, int param1) {
 	self->stateChanged(static_cast<QNetworkSession::State>(param1));
 }
 
-void QNetworkSession_connect_stateChanged(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, [=](QNetworkSession::State param1) {
-		QNetworkSession::State param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QNetworkSession_stateChanged(slot, sigval1);
-	});
+void QNetworkSession_connect_stateChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QNetworkSession::State param1) {
+			QNetworkSession::State param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::State)>(&QNetworkSession::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_opened(QNetworkSession* self) {
 	self->opened();
 }
 
-void QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, [=]() {
-		miqt_exec_callback_QNetworkSession_opened(slot);
-	});
+void QNetworkSession_connect_opened(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::opened), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_closed(QNetworkSession* self) {
 	self->closed();
 }
 
-void QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, [=]() {
-		miqt_exec_callback_QNetworkSession_closed(slot);
-	});
+void QNetworkSession_connect_closed(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::closed), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_errorWithQNetworkSessionSessionError(QNetworkSession* self, int param1) {
 	self->error(static_cast<QNetworkSession::SessionError>(param1));
 }
 
-void QNetworkSession_connect_errorWithQNetworkSessionSessionError(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, [=](QNetworkSession::SessionError param1) {
-		QNetworkSession::SessionError param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QNetworkSession_errorWithQNetworkSessionSessionError(slot, sigval1);
-	});
+void QNetworkSession_connect_errorWithQNetworkSessionSessionError(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QNetworkSession::SessionError param1) {
+			QNetworkSession::SessionError param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::SessionError)>(&QNetworkSession::error), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_preferredConfigurationChanged(QNetworkSession* self, QNetworkConfiguration* config, bool isSeamless) {
 	self->preferredConfigurationChanged(*config, isSeamless);
 }
 
-void QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, [=](const QNetworkConfiguration& config, bool isSeamless) {
-		const QNetworkConfiguration& config_ret = config;
-		// Cast returned reference into pointer
-		QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&config_ret);
-		bool sigval2 = isSeamless;
-		miqt_exec_callback_QNetworkSession_preferredConfigurationChanged(slot, sigval1, sigval2);
-	});
+void QNetworkSession_connect_preferredConfigurationChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkConfiguration*, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QNetworkConfiguration*, bool);
+		void operator()(const QNetworkConfiguration& config, bool isSeamless) {
+			const QNetworkConfiguration& config_ret = config;
+			// Cast returned reference into pointer
+			QNetworkConfiguration* sigval1 = const_cast<QNetworkConfiguration*>(&config_ret);
+			bool sigval2 = isSeamless;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(const QNetworkConfiguration&, bool)>(&QNetworkSession::preferredConfigurationChanged), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_newConfigurationActivated(QNetworkSession* self) {
 	self->newConfigurationActivated();
 }
 
-void QNetworkSession_connect_newConfigurationActivated(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, [=]() {
-		miqt_exec_callback_QNetworkSession_newConfigurationActivated(slot);
-	});
+void QNetworkSession_connect_newConfigurationActivated(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)()>(&QNetworkSession::newConfigurationActivated), self, local_caller{slot, callback, release});
 }
 
 void QNetworkSession_usagePoliciesChanged(QNetworkSession* self, int usagePolicies) {
 	self->usagePoliciesChanged(static_cast<QNetworkSession::UsagePolicies>(usagePolicies));
 }
 
-void QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot) {
-	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, [=](QNetworkSession::UsagePolicies usagePolicies) {
-		QNetworkSession::UsagePolicies usagePolicies_ret = usagePolicies;
-		int sigval1 = static_cast<int>(usagePolicies_ret);
-		miqt_exec_callback_QNetworkSession_usagePoliciesChanged(slot, sigval1);
-	});
+void QNetworkSession_connect_usagePoliciesChanged(QNetworkSession* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QNetworkSession::UsagePolicies usagePolicies) {
+			QNetworkSession::UsagePolicies usagePolicies_ret = usagePolicies;
+			int sigval1 = static_cast<int>(usagePolicies_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQNetworkSession::connect(self, static_cast<void (QNetworkSession::*)(QNetworkSession::UsagePolicies)>(&QNetworkSession::usagePoliciesChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QNetworkSession_tr2(const char* s, const char* c) {

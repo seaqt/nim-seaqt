@@ -67,9 +67,9 @@ struct miqt_string QAudioRecorder_audioInputDescription(const QAudioRecorder* se
 struct miqt_string QAudioRecorder_audioInput(const QAudioRecorder* self);
 void QAudioRecorder_setAudioInput(QAudioRecorder* self, struct miqt_string name);
 void QAudioRecorder_audioInputChanged(QAudioRecorder* self, struct miqt_string name);
-void QAudioRecorder_connect_audioInputChanged(QAudioRecorder* self, intptr_t slot);
+void QAudioRecorder_connect_audioInputChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QAudioRecorder_availableAudioInputsChanged(QAudioRecorder* self);
-void QAudioRecorder_connect_availableAudioInputsChanged(QAudioRecorder* self, intptr_t slot);
+void QAudioRecorder_connect_availableAudioInputsChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QAudioRecorder_tr2(const char* s, const char* c);
 struct miqt_string QAudioRecorder_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioRecorder_trUtf82(const char* s, const char* c);

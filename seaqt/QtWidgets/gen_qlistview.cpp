@@ -54,7 +54,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QListView_indexesMoved(intptr_t, struct miqt_array /* of QModelIndex* */ );
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1771,20 +1770,25 @@ void QListView_indexesMoved(QListView* self, struct miqt_array /* of QModelIndex
 	self->indexesMoved(indexes_QList);
 }
 
-void QListView_connect_indexesMoved(QListView* self, intptr_t slot) {
-	VirtualQListView::connect(self, static_cast<void (QListView::*)(const QModelIndexList&)>(&QListView::indexesMoved), self, [=](const QModelIndexList& indexes) {
-		const QModelIndexList& indexes_ret = indexes;
-		// Convert QList<> from C++ memory to manually-managed C memory
-		QModelIndex** indexes_arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * indexes_ret.length()));
-		for (size_t i = 0, e = indexes_ret.length(); i < e; ++i) {
-			indexes_arr[i] = new QModelIndex(indexes_ret[i]);
+void QListView_connect_indexesMoved(QListView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QModelIndex* */ ), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QModelIndex* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_array /* of QModelIndex* */ );
+		void operator()(const QModelIndexList& indexes) {
+			const QModelIndexList& indexes_ret = indexes;
+			// Convert QList<> from C++ memory to manually-managed C memory
+			QModelIndex** indexes_arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * indexes_ret.length()));
+			for (size_t i = 0, e = indexes_ret.length(); i < e; ++i) {
+				indexes_arr[i] = new QModelIndex(indexes_ret[i]);
+			}
+			struct miqt_array indexes_out;
+			indexes_out.len = indexes_ret.length();
+			indexes_out.data = static_cast<void*>(indexes_arr);
+			struct miqt_array /* of QModelIndex* */  sigval1 = indexes_out;
+			callback(slot, sigval1);
 		}
-		struct miqt_array indexes_out;
-		indexes_out.len = indexes_ret.length();
-		indexes_out.data = static_cast<void*>(indexes_arr);
-		struct miqt_array /* of QModelIndex* */  sigval1 = indexes_out;
-		miqt_exec_callback_QListView_indexesMoved(slot, sigval1);
-	});
+	};
+	VirtualQListView::connect(self, static_cast<void (QListView::*)(const QModelIndexList&)>(&QListView::indexesMoved), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QListView_tr2(const char* s, const char* c) {

@@ -99,9 +99,9 @@ proc fcQMdiSubWindow_setSystemMenu(self: pointer, systemMenu: pointer): void {.i
 proc fcQMdiSubWindow_systemMenu(self: pointer, ): pointer {.importc: "QMdiSubWindow_systemMenu".}
 proc fcQMdiSubWindow_mdiArea(self: pointer, ): pointer {.importc: "QMdiSubWindow_mdiArea".}
 proc fcQMdiSubWindow_windowStateChanged(self: pointer, oldState: cint, newState: cint): void {.importc: "QMdiSubWindow_windowStateChanged".}
-proc fcQMdiSubWindow_connect_windowStateChanged(self: pointer, slot: int) {.importc: "QMdiSubWindow_connect_windowStateChanged".}
+proc fcQMdiSubWindow_connect_windowStateChanged(self: pointer, slot: int, callback: proc (slot: int, oldState: cint, newState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMdiSubWindow_connect_windowStateChanged".}
 proc fcQMdiSubWindow_aboutToActivate(self: pointer, ): void {.importc: "QMdiSubWindow_aboutToActivate".}
-proc fcQMdiSubWindow_connect_aboutToActivate(self: pointer, slot: int) {.importc: "QMdiSubWindow_connect_aboutToActivate".}
+proc fcQMdiSubWindow_connect_aboutToActivate(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMdiSubWindow_connect_aboutToActivate".}
 proc fcQMdiSubWindow_showSystemMenu(self: pointer, ): void {.importc: "QMdiSubWindow_showSystemMenu".}
 proc fcQMdiSubWindow_showShaded(self: pointer, ): void {.importc: "QMdiSubWindow_showShaded".}
 proc fcQMdiSubWindow_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMdiSubWindow_tr2".}
@@ -290,7 +290,7 @@ proc windowStateChanged*(self: gen_qmdisubwindow_types.QMdiSubWindow, oldState: 
   fcQMdiSubWindow_windowStateChanged(self.h, cint(oldState), cint(newState))
 
 type QMdiSubWindowwindowStateChangedSlot* = proc(oldState: cint, newState: cint)
-proc miqt_exec_callback_cQMdiSubWindow_windowStateChanged(slot: int, oldState: cint, newState: cint) {.exportc: "miqt_exec_callback_QMdiSubWindow_windowStateChanged".} =
+proc miqt_exec_callback_cQMdiSubWindow_windowStateChanged(slot: int, oldState: cint, newState: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMdiSubWindowwindowStateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(oldState)
 
@@ -298,25 +298,33 @@ proc miqt_exec_callback_cQMdiSubWindow_windowStateChanged(slot: int, oldState: c
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMdiSubWindow_windowStateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMdiSubWindowwindowStateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowStateChanged*(self: gen_qmdisubwindow_types.QMdiSubWindow, slot: QMdiSubWindowwindowStateChangedSlot) =
   var tmp = new QMdiSubWindowwindowStateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMdiSubWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]))
+  fcQMdiSubWindow_connect_windowStateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMdiSubWindow_windowStateChanged, miqt_exec_callback_cQMdiSubWindow_windowStateChanged_release)
 
 proc aboutToActivate*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): void =
   fcQMdiSubWindow_aboutToActivate(self.h)
 
 type QMdiSubWindowaboutToActivateSlot* = proc()
-proc miqt_exec_callback_cQMdiSubWindow_aboutToActivate(slot: int) {.exportc: "miqt_exec_callback_QMdiSubWindow_aboutToActivate".} =
+proc miqt_exec_callback_cQMdiSubWindow_aboutToActivate(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMdiSubWindowaboutToActivateSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMdiSubWindow_aboutToActivate_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMdiSubWindowaboutToActivateSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaboutToActivate*(self: gen_qmdisubwindow_types.QMdiSubWindow, slot: QMdiSubWindowaboutToActivateSlot) =
   var tmp = new QMdiSubWindowaboutToActivateSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMdiSubWindow_connect_aboutToActivate(self.h, cast[int](addr tmp[]))
+  fcQMdiSubWindow_connect_aboutToActivate(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMdiSubWindow_aboutToActivate, miqt_exec_callback_cQMdiSubWindow_aboutToActivate_release)
 
 proc showSystemMenu*(self: gen_qmdisubwindow_types.QMdiSubWindow, ): void =
   fcQMdiSubWindow_showSystemMenu(self.h)

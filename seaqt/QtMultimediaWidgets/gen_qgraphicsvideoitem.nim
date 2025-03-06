@@ -93,7 +93,7 @@ proc fcQGraphicsVideoItem_nativeSize(self: pointer, ): pointer {.importc: "QGrap
 proc fcQGraphicsVideoItem_boundingRect(self: pointer, ): pointer {.importc: "QGraphicsVideoItem_boundingRect".}
 proc fcQGraphicsVideoItem_paint(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsVideoItem_paint".}
 proc fcQGraphicsVideoItem_nativeSizeChanged(self: pointer, size: pointer): void {.importc: "QGraphicsVideoItem_nativeSizeChanged".}
-proc fcQGraphicsVideoItem_connect_nativeSizeChanged(self: pointer, slot: int) {.importc: "QGraphicsVideoItem_connect_nativeSizeChanged".}
+proc fcQGraphicsVideoItem_connect_nativeSizeChanged(self: pointer, slot: int, callback: proc (slot: int, size: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsVideoItem_connect_nativeSizeChanged".}
 proc fcQGraphicsVideoItem_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsVideoItem_tr2".}
 proc fcQGraphicsVideoItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsVideoItem_tr3".}
 proc fcQGraphicsVideoItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsVideoItem_trUtf82".}
@@ -257,17 +257,21 @@ proc nativeSizeChanged*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s
   fcQGraphicsVideoItem_nativeSizeChanged(self.h, size.h)
 
 type QGraphicsVideoItemnativeSizeChangedSlot* = proc(size: gen_qsize_types.QSizeF)
-proc miqt_exec_callback_cQGraphicsVideoItem_nativeSizeChanged(slot: int, size: pointer) {.exportc: "miqt_exec_callback_QGraphicsVideoItem_nativeSizeChanged".} =
+proc miqt_exec_callback_cQGraphicsVideoItem_nativeSizeChanged(slot: int, size: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsVideoItemnativeSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSizeF(h: size)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsVideoItem_nativeSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsVideoItemnativeSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onnativeSizeChanged*(self: gen_qgraphicsvideoitem_types.QGraphicsVideoItem, slot: QGraphicsVideoItemnativeSizeChangedSlot) =
   var tmp = new QGraphicsVideoItemnativeSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsVideoItem_connect_nativeSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsVideoItem_connect_nativeSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsVideoItem_nativeSizeChanged, miqt_exec_callback_cQGraphicsVideoItem_nativeSizeChanged_release)
 
 proc tr*(_: type gen_qgraphicsvideoitem_types.QGraphicsVideoItem, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsVideoItem_tr2(s, c)

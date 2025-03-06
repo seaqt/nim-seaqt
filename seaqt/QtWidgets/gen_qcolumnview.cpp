@@ -54,7 +54,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QColumnView_updatePreviewWidget(intptr_t, QModelIndex*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1625,13 +1624,18 @@ void QColumnView_updatePreviewWidget(QColumnView* self, QModelIndex* index) {
 	self->updatePreviewWidget(*index);
 }
 
-void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot) {
-	VirtualQColumnView::connect(self, static_cast<void (QColumnView::*)(const QModelIndex&)>(&QColumnView::updatePreviewWidget), self, [=](const QModelIndex& index) {
-		const QModelIndex& index_ret = index;
-		// Cast returned reference into pointer
-		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
-		miqt_exec_callback_QColumnView_updatePreviewWidget(slot, sigval1);
-	});
+void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QModelIndex*);
+		void operator()(const QModelIndex& index) {
+			const QModelIndex& index_ret = index;
+			// Cast returned reference into pointer
+			QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQColumnView::connect(self, static_cast<void (QColumnView::*)(const QModelIndex&)>(&QColumnView::updatePreviewWidget), self, local_caller{slot, callback, release});
 }
 
 QModelIndex* QColumnView_indexAt(const QColumnView* self, QPoint* point) {

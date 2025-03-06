@@ -247,7 +247,7 @@ void QListView_doItemsLayout(QListView* self);
 void QListView_reset(QListView* self);
 void QListView_setRootIndex(QListView* self, QModelIndex* index);
 void QListView_indexesMoved(QListView* self, struct miqt_array /* of QModelIndex* */  indexes);
-void QListView_connect_indexesMoved(QListView* self, intptr_t slot);
+void QListView_connect_indexesMoved(QListView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QModelIndex* */ ), void (*release)(intptr_t));
 bool QListView_event(QListView* self, QEvent* e);
 void QListView_scrollContentsBy(QListView* self, int dx, int dy);
 void QListView_dataChanged(QListView* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);

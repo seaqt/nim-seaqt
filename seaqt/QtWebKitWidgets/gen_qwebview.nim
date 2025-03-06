@@ -122,23 +122,23 @@ proc fcQWebView_forward(self: pointer, ): void {.importc: "QWebView_forward".}
 proc fcQWebView_reload(self: pointer, ): void {.importc: "QWebView_reload".}
 proc fcQWebView_print(self: pointer, param1: pointer): void {.importc: "QWebView_print".}
 proc fcQWebView_loadStarted(self: pointer, ): void {.importc: "QWebView_loadStarted".}
-proc fcQWebView_connect_loadStarted(self: pointer, slot: int) {.importc: "QWebView_connect_loadStarted".}
+proc fcQWebView_connect_loadStarted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_loadStarted".}
 proc fcQWebView_loadProgress(self: pointer, progress: cint): void {.importc: "QWebView_loadProgress".}
-proc fcQWebView_connect_loadProgress(self: pointer, slot: int) {.importc: "QWebView_connect_loadProgress".}
+proc fcQWebView_connect_loadProgress(self: pointer, slot: int, callback: proc (slot: int, progress: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_loadProgress".}
 proc fcQWebView_loadFinished(self: pointer, param1: bool): void {.importc: "QWebView_loadFinished".}
-proc fcQWebView_connect_loadFinished(self: pointer, slot: int) {.importc: "QWebView_connect_loadFinished".}
+proc fcQWebView_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_loadFinished".}
 proc fcQWebView_titleChanged(self: pointer, title: struct_miqt_string): void {.importc: "QWebView_titleChanged".}
-proc fcQWebView_connect_titleChanged(self: pointer, slot: int) {.importc: "QWebView_connect_titleChanged".}
+proc fcQWebView_connect_titleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_titleChanged".}
 proc fcQWebView_statusBarMessage(self: pointer, text: struct_miqt_string): void {.importc: "QWebView_statusBarMessage".}
-proc fcQWebView_connect_statusBarMessage(self: pointer, slot: int) {.importc: "QWebView_connect_statusBarMessage".}
+proc fcQWebView_connect_statusBarMessage(self: pointer, slot: int, callback: proc (slot: int, text: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_statusBarMessage".}
 proc fcQWebView_linkClicked(self: pointer, param1: pointer): void {.importc: "QWebView_linkClicked".}
-proc fcQWebView_connect_linkClicked(self: pointer, slot: int) {.importc: "QWebView_connect_linkClicked".}
+proc fcQWebView_connect_linkClicked(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_linkClicked".}
 proc fcQWebView_selectionChanged(self: pointer, ): void {.importc: "QWebView_selectionChanged".}
-proc fcQWebView_connect_selectionChanged(self: pointer, slot: int) {.importc: "QWebView_connect_selectionChanged".}
+proc fcQWebView_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_selectionChanged".}
 proc fcQWebView_iconChanged(self: pointer, ): void {.importc: "QWebView_iconChanged".}
-proc fcQWebView_connect_iconChanged(self: pointer, slot: int) {.importc: "QWebView_connect_iconChanged".}
+proc fcQWebView_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_iconChanged".}
 proc fcQWebView_urlChanged(self: pointer, param1: pointer): void {.importc: "QWebView_urlChanged".}
-proc fcQWebView_connect_urlChanged(self: pointer, slot: int) {.importc: "QWebView_connect_urlChanged".}
+proc fcQWebView_connect_urlChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebView_connect_urlChanged".}
 proc fcQWebView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebView_tr2".}
 proc fcQWebView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebView_tr3".}
 proc fcQWebView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebView_trUtf82".}
@@ -396,53 +396,65 @@ proc loadStarted*(self: gen_qwebview_types.QWebView, ): void =
   fcQWebView_loadStarted(self.h)
 
 type QWebViewloadStartedSlot* = proc()
-proc miqt_exec_callback_cQWebView_loadStarted(slot: int) {.exportc: "miqt_exec_callback_QWebView_loadStarted".} =
+proc miqt_exec_callback_cQWebView_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebView_loadStarted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewloadStartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloadStarted*(self: gen_qwebview_types.QWebView, slot: QWebViewloadStartedSlot) =
   var tmp = new QWebViewloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadStarted(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_loadStarted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_loadStarted, miqt_exec_callback_cQWebView_loadStarted_release)
 
 proc loadProgress*(self: gen_qwebview_types.QWebView, progress: cint): void =
   fcQWebView_loadProgress(self.h, progress)
 
 type QWebViewloadProgressSlot* = proc(progress: cint)
-proc miqt_exec_callback_cQWebView_loadProgress(slot: int, progress: cint) {.exportc: "miqt_exec_callback_QWebView_loadProgress".} =
+proc miqt_exec_callback_cQWebView_loadProgress(slot: int, progress: cint) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadProgressSlot](cast[pointer](slot))
   let slotval1 = progress
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_loadProgress_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewloadProgressSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadProgress*(self: gen_qwebview_types.QWebView, slot: QWebViewloadProgressSlot) =
   var tmp = new QWebViewloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadProgress(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_loadProgress(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_loadProgress, miqt_exec_callback_cQWebView_loadProgress_release)
 
 proc loadFinished*(self: gen_qwebview_types.QWebView, param1: bool): void =
   fcQWebView_loadFinished(self.h, param1)
 
 type QWebViewloadFinishedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQWebView_loadFinished(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QWebView_loadFinished".} =
+proc miqt_exec_callback_cQWebView_loadFinished(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewloadFinishedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_loadFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewloadFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadFinished*(self: gen_qwebview_types.QWebView, slot: QWebViewloadFinishedSlot) =
   var tmp = new QWebViewloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_loadFinished(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_loadFinished, miqt_exec_callback_cQWebView_loadFinished_release)
 
 proc titleChanged*(self: gen_qwebview_types.QWebView, title: string): void =
   fcQWebView_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
 
 type QWebViewtitleChangedSlot* = proc(title: string)
-proc miqt_exec_callback_cQWebView_titleChanged(slot: int, title: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebView_titleChanged".} =
+proc miqt_exec_callback_cQWebView_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewtitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
@@ -451,17 +463,21 @@ proc miqt_exec_callback_cQWebView_titleChanged(slot: int, title: struct_miqt_str
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_titleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewtitleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontitleChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewtitleChangedSlot) =
   var tmp = new QWebViewtitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_titleChanged(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_titleChanged, miqt_exec_callback_cQWebView_titleChanged_release)
 
 proc statusBarMessage*(self: gen_qwebview_types.QWebView, text: string): void =
   fcQWebView_statusBarMessage(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QWebViewstatusBarMessageSlot* = proc(text: string)
-proc miqt_exec_callback_cQWebView_statusBarMessage(slot: int, text: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebView_statusBarMessage".} =
+proc miqt_exec_callback_cQWebView_statusBarMessage(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewstatusBarMessageSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -470,71 +486,91 @@ proc miqt_exec_callback_cQWebView_statusBarMessage(slot: int, text: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_statusBarMessage_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewstatusBarMessageSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusBarMessage*(self: gen_qwebview_types.QWebView, slot: QWebViewstatusBarMessageSlot) =
   var tmp = new QWebViewstatusBarMessageSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_statusBarMessage, miqt_exec_callback_cQWebView_statusBarMessage_release)
 
 proc linkClicked*(self: gen_qwebview_types.QWebView, param1: gen_qurl_types.QUrl): void =
   fcQWebView_linkClicked(self.h, param1.h)
 
 type QWebViewlinkClickedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebView_linkClicked(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QWebView_linkClicked".} =
+proc miqt_exec_callback_cQWebView_linkClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewlinkClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_linkClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewlinkClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkClicked*(self: gen_qwebview_types.QWebView, slot: QWebViewlinkClickedSlot) =
   var tmp = new QWebViewlinkClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_linkClicked(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_linkClicked, miqt_exec_callback_cQWebView_linkClicked_release)
 
 proc selectionChanged*(self: gen_qwebview_types.QWebView, ): void =
   fcQWebView_selectionChanged(self.h)
 
 type QWebViewselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQWebView_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QWebView_selectionChanged".} =
+proc miqt_exec_callback_cQWebView_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebView_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewselectionChangedSlot) =
   var tmp = new QWebViewselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_selectionChanged, miqt_exec_callback_cQWebView_selectionChanged_release)
 
 proc iconChanged*(self: gen_qwebview_types.QWebView, ): void =
   fcQWebView_iconChanged(self.h)
 
 type QWebViewiconChangedSlot* = proc()
-proc miqt_exec_callback_cQWebView_iconChanged(slot: int) {.exportc: "miqt_exec_callback_QWebView_iconChanged".} =
+proc miqt_exec_callback_cQWebView_iconChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewiconChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebView_iconChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewiconChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oniconChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewiconChangedSlot) =
   var tmp = new QWebViewiconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_iconChanged(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_iconChanged, miqt_exec_callback_cQWebView_iconChanged_release)
 
 proc urlChanged*(self: gen_qwebview_types.QWebView, param1: gen_qurl_types.QUrl): void =
   fcQWebView_urlChanged(self.h, param1.h)
 
 type QWebViewurlChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebView_urlChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QWebView_urlChanged".} =
+proc miqt_exec_callback_cQWebView_urlChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebViewurlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebView_urlChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebViewurlChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onurlChanged*(self: gen_qwebview_types.QWebView, slot: QWebViewurlChangedSlot) =
   var tmp = new QWebViewurlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebView_connect_urlChanged(self.h, cast[int](addr tmp[]))
+  fcQWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebView_urlChanged, miqt_exec_callback_cQWebView_urlChanged_release)
 
 proc tr*(_: type gen_qwebview_types.QWebView, s: cstring, c: cstring): string =
   let v_ms = fcQWebView_tr2(s, c)

@@ -65,13 +65,13 @@ proc fcQCameraFocusControl_customFocusPoint(self: pointer, ): pointer {.importc:
 proc fcQCameraFocusControl_setCustomFocusPoint(self: pointer, point: pointer): void {.importc: "QCameraFocusControl_setCustomFocusPoint".}
 proc fcQCameraFocusControl_focusZones(self: pointer, ): struct_miqt_array {.importc: "QCameraFocusControl_focusZones".}
 proc fcQCameraFocusControl_focusModeChanged(self: pointer, mode: cint): void {.importc: "QCameraFocusControl_focusModeChanged".}
-proc fcQCameraFocusControl_connect_focusModeChanged(self: pointer, slot: int) {.importc: "QCameraFocusControl_connect_focusModeChanged".}
+proc fcQCameraFocusControl_connect_focusModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_focusModeChanged".}
 proc fcQCameraFocusControl_focusPointModeChanged(self: pointer, mode: cint): void {.importc: "QCameraFocusControl_focusPointModeChanged".}
-proc fcQCameraFocusControl_connect_focusPointModeChanged(self: pointer, slot: int) {.importc: "QCameraFocusControl_connect_focusPointModeChanged".}
+proc fcQCameraFocusControl_connect_focusPointModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_focusPointModeChanged".}
 proc fcQCameraFocusControl_customFocusPointChanged(self: pointer, point: pointer): void {.importc: "QCameraFocusControl_customFocusPointChanged".}
-proc fcQCameraFocusControl_connect_customFocusPointChanged(self: pointer, slot: int) {.importc: "QCameraFocusControl_connect_customFocusPointChanged".}
+proc fcQCameraFocusControl_connect_customFocusPointChanged(self: pointer, slot: int, callback: proc (slot: int, point: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_customFocusPointChanged".}
 proc fcQCameraFocusControl_focusZonesChanged(self: pointer, ): void {.importc: "QCameraFocusControl_focusZonesChanged".}
-proc fcQCameraFocusControl_connect_focusZonesChanged(self: pointer, slot: int) {.importc: "QCameraFocusControl_connect_focusZonesChanged".}
+proc fcQCameraFocusControl_connect_focusZonesChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraFocusControl_connect_focusZonesChanged".}
 proc fcQCameraFocusControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocusControl_tr2".}
 proc fcQCameraFocusControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFocusControl_tr3".}
 proc fcQCameraFocusControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFocusControl_trUtf82".}
@@ -136,63 +136,79 @@ proc focusModeChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, 
   fcQCameraFocusControl_focusModeChanged(self.h, cint(mode))
 
 type QCameraFocusControlfocusModeChangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQCameraFocusControl_focusModeChanged(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QCameraFocusControl_focusModeChanged".} =
+proc miqt_exec_callback_cQCameraFocusControl_focusModeChanged(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFocusControlfocusModeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraFocusControl_focusModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraFocusControlfocusModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusModeChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, slot: QCameraFocusControlfocusModeChangedSlot) =
   var tmp = new QCameraFocusControlfocusModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraFocusControl_connect_focusModeChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraFocusControl_connect_focusModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraFocusControl_focusModeChanged, miqt_exec_callback_cQCameraFocusControl_focusModeChanged_release)
 
 proc focusPointModeChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, mode: cint): void =
   fcQCameraFocusControl_focusPointModeChanged(self.h, cint(mode))
 
 type QCameraFocusControlfocusPointModeChangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQCameraFocusControl_focusPointModeChanged(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QCameraFocusControl_focusPointModeChanged".} =
+proc miqt_exec_callback_cQCameraFocusControl_focusPointModeChanged(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFocusControlfocusPointModeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraFocusControl_focusPointModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraFocusControlfocusPointModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusPointModeChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, slot: QCameraFocusControlfocusPointModeChangedSlot) =
   var tmp = new QCameraFocusControlfocusPointModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraFocusControl_connect_focusPointModeChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraFocusControl_connect_focusPointModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraFocusControl_focusPointModeChanged, miqt_exec_callback_cQCameraFocusControl_focusPointModeChanged_release)
 
 proc customFocusPointChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, point: gen_qpoint_types.QPointF): void =
   fcQCameraFocusControl_customFocusPointChanged(self.h, point.h)
 
 type QCameraFocusControlcustomFocusPointChangedSlot* = proc(point: gen_qpoint_types.QPointF)
-proc miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged(slot: int, point: pointer) {.exportc: "miqt_exec_callback_QCameraFocusControl_customFocusPointChanged".} =
+proc miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged(slot: int, point: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFocusControlcustomFocusPointChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qpoint_types.QPointF(h: point)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraFocusControlcustomFocusPointChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncustomFocusPointChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, slot: QCameraFocusControlcustomFocusPointChangedSlot) =
   var tmp = new QCameraFocusControlcustomFocusPointChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraFocusControl_connect_customFocusPointChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraFocusControl_connect_customFocusPointChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged, miqt_exec_callback_cQCameraFocusControl_customFocusPointChanged_release)
 
 proc focusZonesChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, ): void =
   fcQCameraFocusControl_focusZonesChanged(self.h)
 
 type QCameraFocusControlfocusZonesChangedSlot* = proc()
-proc miqt_exec_callback_cQCameraFocusControl_focusZonesChanged(slot: int) {.exportc: "miqt_exec_callback_QCameraFocusControl_focusZonesChanged".} =
+proc miqt_exec_callback_cQCameraFocusControl_focusZonesChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCameraFocusControlfocusZonesChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCameraFocusControl_focusZonesChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraFocusControlfocusZonesChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfocusZonesChanged*(self: gen_qcamerafocuscontrol_types.QCameraFocusControl, slot: QCameraFocusControlfocusZonesChangedSlot) =
   var tmp = new QCameraFocusControlfocusZonesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraFocusControl_connect_focusZonesChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraFocusControl_connect_focusZonesChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraFocusControl_focusZonesChanged, miqt_exec_callback_cQCameraFocusControl_focusZonesChanged_release)
 
 proc tr*(_: type gen_qcamerafocuscontrol_types.QCameraFocusControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraFocusControl_tr2(s, c)

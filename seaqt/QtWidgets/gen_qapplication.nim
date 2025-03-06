@@ -131,7 +131,7 @@ proc fcQApplication_setEffectEnabled(param1: cint): void {.importc: "QApplicatio
 proc fcQApplication_exec(): cint {.importc: "QApplication_exec".}
 proc fcQApplication_notify(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QApplication_notify".}
 proc fcQApplication_focusChanged(self: pointer, old: pointer, now: pointer): void {.importc: "QApplication_focusChanged".}
-proc fcQApplication_connect_focusChanged(self: pointer, slot: int) {.importc: "QApplication_connect_focusChanged".}
+proc fcQApplication_connect_focusChanged(self: pointer, slot: int, callback: proc (slot: int, old: pointer, now: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QApplication_connect_focusChanged".}
 proc fcQApplication_styleSheet(self: pointer, ): struct_miqt_string {.importc: "QApplication_styleSheet".}
 proc fcQApplication_setStyleSheet(self: pointer, sheet: struct_miqt_string): void {.importc: "QApplication_setStyleSheet".}
 proc fcQApplication_setAutoSipEnabled(self: pointer, enabled: bool): void {.importc: "QApplication_setAutoSipEnabled".}
@@ -351,7 +351,7 @@ proc focusChanged*(self: gen_qapplication_types.QApplication, old: gen_qwidget_t
   fcQApplication_focusChanged(self.h, old.h, now.h)
 
 type QApplicationfocusChangedSlot* = proc(old: gen_qwidget_types.QWidget, now: gen_qwidget_types.QWidget)
-proc miqt_exec_callback_cQApplication_focusChanged(slot: int, old: pointer, now: pointer) {.exportc: "miqt_exec_callback_QApplication_focusChanged".} =
+proc miqt_exec_callback_cQApplication_focusChanged(slot: int, old: pointer, now: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QApplicationfocusChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qwidget_types.QWidget(h: old)
 
@@ -359,11 +359,15 @@ proc miqt_exec_callback_cQApplication_focusChanged(slot: int, old: pointer, now:
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQApplication_focusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QApplicationfocusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfocusChanged*(self: gen_qapplication_types.QApplication, slot: QApplicationfocusChangedSlot) =
   var tmp = new QApplicationfocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQApplication_connect_focusChanged(self.h, cast[int](addr tmp[]))
+  fcQApplication_connect_focusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQApplication_focusChanged, miqt_exec_callback_cQApplication_focusChanged_release)
 
 proc styleSheet*(self: gen_qapplication_types.QApplication, ): string =
   let v_ms = fcQApplication_styleSheet(self.h)

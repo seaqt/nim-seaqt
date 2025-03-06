@@ -368,13 +368,13 @@ proc fcQWidget_windowHandle(self: pointer, ): pointer {.importc: "QWidget_window
 proc fcQWidget_screen(self: pointer, ): pointer {.importc: "QWidget_screen".}
 proc fcQWidget_createWindowContainer(window: pointer): pointer {.importc: "QWidget_createWindowContainer".}
 proc fcQWidget_windowTitleChanged(self: pointer, title: struct_miqt_string): void {.importc: "QWidget_windowTitleChanged".}
-proc fcQWidget_connect_windowTitleChanged(self: pointer, slot: int) {.importc: "QWidget_connect_windowTitleChanged".}
+proc fcQWidget_connect_windowTitleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWidget_connect_windowTitleChanged".}
 proc fcQWidget_windowIconChanged(self: pointer, icon: pointer): void {.importc: "QWidget_windowIconChanged".}
-proc fcQWidget_connect_windowIconChanged(self: pointer, slot: int) {.importc: "QWidget_connect_windowIconChanged".}
+proc fcQWidget_connect_windowIconChanged(self: pointer, slot: int, callback: proc (slot: int, icon: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWidget_connect_windowIconChanged".}
 proc fcQWidget_windowIconTextChanged(self: pointer, iconText: struct_miqt_string): void {.importc: "QWidget_windowIconTextChanged".}
-proc fcQWidget_connect_windowIconTextChanged(self: pointer, slot: int) {.importc: "QWidget_connect_windowIconTextChanged".}
+proc fcQWidget_connect_windowIconTextChanged(self: pointer, slot: int, callback: proc (slot: int, iconText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWidget_connect_windowIconTextChanged".}
 proc fcQWidget_customContextMenuRequested(self: pointer, pos: pointer): void {.importc: "QWidget_customContextMenuRequested".}
-proc fcQWidget_connect_customContextMenuRequested(self: pointer, slot: int) {.importc: "QWidget_connect_customContextMenuRequested".}
+proc fcQWidget_connect_customContextMenuRequested(self: pointer, slot: int, callback: proc (slot: int, pos: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWidget_connect_customContextMenuRequested".}
 proc fcQWidget_inputMethodQuery(self: pointer, param1: cint): pointer {.importc: "QWidget_inputMethodQuery".}
 proc fcQWidget_inputMethodHints(self: pointer, ): cint {.importc: "QWidget_inputMethodHints".}
 proc fcQWidget_setInputMethodHints(self: pointer, hints: cint): void {.importc: "QWidget_setInputMethodHints".}
@@ -1317,7 +1317,7 @@ proc windowTitleChanged*(self: gen_qwidget_types.QWidget, title: string): void =
   fcQWidget_windowTitleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
 
 type QWidgetwindowTitleChangedSlot* = proc(title: string)
-proc miqt_exec_callback_cQWidget_windowTitleChanged(slot: int, title: struct_miqt_string) {.exportc: "miqt_exec_callback_QWidget_windowTitleChanged".} =
+proc miqt_exec_callback_cQWidget_windowTitleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetwindowTitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
@@ -1326,33 +1326,41 @@ proc miqt_exec_callback_cQWidget_windowTitleChanged(slot: int, title: struct_miq
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWidget_windowTitleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWidgetwindowTitleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowTitleChanged*(self: gen_qwidget_types.QWidget, slot: QWidgetwindowTitleChangedSlot) =
   var tmp = new QWidgetwindowTitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWidget_connect_windowTitleChanged(self.h, cast[int](addr tmp[]))
+  fcQWidget_connect_windowTitleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWidget_windowTitleChanged, miqt_exec_callback_cQWidget_windowTitleChanged_release)
 
 proc windowIconChanged*(self: gen_qwidget_types.QWidget, icon: gen_qicon_types.QIcon): void =
   fcQWidget_windowIconChanged(self.h, icon.h)
 
 type QWidgetwindowIconChangedSlot* = proc(icon: gen_qicon_types.QIcon)
-proc miqt_exec_callback_cQWidget_windowIconChanged(slot: int, icon: pointer) {.exportc: "miqt_exec_callback_QWidget_windowIconChanged".} =
+proc miqt_exec_callback_cQWidget_windowIconChanged(slot: int, icon: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetwindowIconChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qicon_types.QIcon(h: icon)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWidget_windowIconChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWidgetwindowIconChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowIconChanged*(self: gen_qwidget_types.QWidget, slot: QWidgetwindowIconChangedSlot) =
   var tmp = new QWidgetwindowIconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWidget_connect_windowIconChanged(self.h, cast[int](addr tmp[]))
+  fcQWidget_connect_windowIconChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWidget_windowIconChanged, miqt_exec_callback_cQWidget_windowIconChanged_release)
 
 proc windowIconTextChanged*(self: gen_qwidget_types.QWidget, iconText: string): void =
   fcQWidget_windowIconTextChanged(self.h, struct_miqt_string(data: iconText, len: csize_t(len(iconText))))
 
 type QWidgetwindowIconTextChangedSlot* = proc(iconText: string)
-proc miqt_exec_callback_cQWidget_windowIconTextChanged(slot: int, iconText: struct_miqt_string) {.exportc: "miqt_exec_callback_QWidget_windowIconTextChanged".} =
+proc miqt_exec_callback_cQWidget_windowIconTextChanged(slot: int, iconText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetwindowIconTextChangedSlot](cast[pointer](slot))
   let viconText_ms = iconText
   let viconTextx_ret = string.fromBytes(toOpenArrayByte(viconText_ms.data, 0, int(viconText_ms.len)-1))
@@ -1361,27 +1369,35 @@ proc miqt_exec_callback_cQWidget_windowIconTextChanged(slot: int, iconText: stru
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWidget_windowIconTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWidgetwindowIconTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwindowIconTextChanged*(self: gen_qwidget_types.QWidget, slot: QWidgetwindowIconTextChangedSlot) =
   var tmp = new QWidgetwindowIconTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWidget_connect_windowIconTextChanged(self.h, cast[int](addr tmp[]))
+  fcQWidget_connect_windowIconTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWidget_windowIconTextChanged, miqt_exec_callback_cQWidget_windowIconTextChanged_release)
 
 proc customContextMenuRequested*(self: gen_qwidget_types.QWidget, pos: gen_qpoint_types.QPoint): void =
   fcQWidget_customContextMenuRequested(self.h, pos.h)
 
 type QWidgetcustomContextMenuRequestedSlot* = proc(pos: gen_qpoint_types.QPoint)
-proc miqt_exec_callback_cQWidget_customContextMenuRequested(slot: int, pos: pointer) {.exportc: "miqt_exec_callback_QWidget_customContextMenuRequested".} =
+proc miqt_exec_callback_cQWidget_customContextMenuRequested(slot: int, pos: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWidgetcustomContextMenuRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qpoint_types.QPoint(h: pos)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWidget_customContextMenuRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWidgetcustomContextMenuRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncustomContextMenuRequested*(self: gen_qwidget_types.QWidget, slot: QWidgetcustomContextMenuRequestedSlot) =
   var tmp = new QWidgetcustomContextMenuRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWidget_connect_customContextMenuRequested(self.h, cast[int](addr tmp[]))
+  fcQWidget_connect_customContextMenuRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWidget_customContextMenuRequested, miqt_exec_callback_cQWidget_customContextMenuRequested_release)
 
 proc inputMethodQuery*(self: gen_qwidget_types.QWidget, param1: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQWidget_inputMethodQuery(self.h, cint(param1)))

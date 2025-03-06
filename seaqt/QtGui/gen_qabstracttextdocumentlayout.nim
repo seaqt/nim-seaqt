@@ -93,20 +93,20 @@ proc fcQAbstractTextDocumentLayout_registerHandler(self: pointer, objectType: ci
 proc fcQAbstractTextDocumentLayout_unregisterHandler(self: pointer, objectType: cint): void {.importc: "QAbstractTextDocumentLayout_unregisterHandler".}
 proc fcQAbstractTextDocumentLayout_handlerForObject(self: pointer, objectType: cint): pointer {.importc: "QAbstractTextDocumentLayout_handlerForObject".}
 proc fcQAbstractTextDocumentLayout_update(self: pointer, ): void {.importc: "QAbstractTextDocumentLayout_update".}
-proc fcQAbstractTextDocumentLayout_connect_update(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_update".}
+proc fcQAbstractTextDocumentLayout_connect_update(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTextDocumentLayout_connect_update".}
 proc fcQAbstractTextDocumentLayout_updateBlock(self: pointer, blockVal: pointer): void {.importc: "QAbstractTextDocumentLayout_updateBlock".}
-proc fcQAbstractTextDocumentLayout_connect_updateBlock(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_updateBlock".}
+proc fcQAbstractTextDocumentLayout_connect_updateBlock(self: pointer, slot: int, callback: proc (slot: int, blockVal: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTextDocumentLayout_connect_updateBlock".}
 proc fcQAbstractTextDocumentLayout_documentSizeChanged(self: pointer, newSize: pointer): void {.importc: "QAbstractTextDocumentLayout_documentSizeChanged".}
-proc fcQAbstractTextDocumentLayout_connect_documentSizeChanged(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_documentSizeChanged".}
+proc fcQAbstractTextDocumentLayout_connect_documentSizeChanged(self: pointer, slot: int, callback: proc (slot: int, newSize: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTextDocumentLayout_connect_documentSizeChanged".}
 proc fcQAbstractTextDocumentLayout_pageCountChanged(self: pointer, newPages: cint): void {.importc: "QAbstractTextDocumentLayout_pageCountChanged".}
-proc fcQAbstractTextDocumentLayout_connect_pageCountChanged(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_pageCountChanged".}
+proc fcQAbstractTextDocumentLayout_connect_pageCountChanged(self: pointer, slot: int, callback: proc (slot: int, newPages: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTextDocumentLayout_connect_pageCountChanged".}
 proc fcQAbstractTextDocumentLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractTextDocumentLayout_tr2".}
 proc fcQAbstractTextDocumentLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTextDocumentLayout_tr3".}
 proc fcQAbstractTextDocumentLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractTextDocumentLayout_trUtf82".}
 proc fcQAbstractTextDocumentLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTextDocumentLayout_trUtf83".}
 proc fcQAbstractTextDocumentLayout_unregisterHandler2(self: pointer, objectType: cint, component: pointer): void {.importc: "QAbstractTextDocumentLayout_unregisterHandler2".}
 proc fcQAbstractTextDocumentLayout_update1(self: pointer, param1: pointer): void {.importc: "QAbstractTextDocumentLayout_update1".}
-proc fcQAbstractTextDocumentLayout_connect_update1(self: pointer, slot: int) {.importc: "QAbstractTextDocumentLayout_connect_update1".}
+proc fcQAbstractTextDocumentLayout_connect_update1(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractTextDocumentLayout_connect_update1".}
 type cQAbstractTextDocumentLayoutVTable = object
   destructor*: proc(vtbl: ptr cQAbstractTextDocumentLayoutVTable, self: ptr cQAbstractTextDocumentLayout) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -236,63 +236,79 @@ proc update*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLa
   fcQAbstractTextDocumentLayout_update(self.h)
 
 type QAbstractTextDocumentLayoutupdateSlot* = proc()
-proc miqt_exec_callback_cQAbstractTextDocumentLayout_update(slot: int) {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_update".} =
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_update(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractTextDocumentLayoutupdateSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_update_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTextDocumentLayoutupdateSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onupdate*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutupdateSlot) =
   var tmp = new QAbstractTextDocumentLayoutupdateSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractTextDocumentLayout_connect_update(self.h, cast[int](addr tmp[]))
+  fcQAbstractTextDocumentLayout_connect_update(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractTextDocumentLayout_update, miqt_exec_callback_cQAbstractTextDocumentLayout_update_release)
 
 proc updateBlock*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, blockVal: gen_qtextobject_types.QTextBlock): void =
   fcQAbstractTextDocumentLayout_updateBlock(self.h, blockVal.h)
 
 type QAbstractTextDocumentLayoutupdateBlockSlot* = proc(blockVal: gen_qtextobject_types.QTextBlock)
-proc miqt_exec_callback_cQAbstractTextDocumentLayout_updateBlock(slot: int, blockVal: pointer) {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_updateBlock".} =
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_updateBlock(slot: int, blockVal: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractTextDocumentLayoutupdateBlockSlot](cast[pointer](slot))
   let slotval1 = gen_qtextobject_types.QTextBlock(h: blockVal)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_updateBlock_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTextDocumentLayoutupdateBlockSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onupdateBlock*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutupdateBlockSlot) =
   var tmp = new QAbstractTextDocumentLayoutupdateBlockSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractTextDocumentLayout_connect_updateBlock(self.h, cast[int](addr tmp[]))
+  fcQAbstractTextDocumentLayout_connect_updateBlock(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractTextDocumentLayout_updateBlock, miqt_exec_callback_cQAbstractTextDocumentLayout_updateBlock_release)
 
 proc documentSizeChanged*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, newSize: gen_qsize_types.QSizeF): void =
   fcQAbstractTextDocumentLayout_documentSizeChanged(self.h, newSize.h)
 
 type QAbstractTextDocumentLayoutdocumentSizeChangedSlot* = proc(newSize: gen_qsize_types.QSizeF)
-proc miqt_exec_callback_cQAbstractTextDocumentLayout_documentSizeChanged(slot: int, newSize: pointer) {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_documentSizeChanged".} =
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_documentSizeChanged(slot: int, newSize: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractTextDocumentLayoutdocumentSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSizeF(h: newSize)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_documentSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTextDocumentLayoutdocumentSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondocumentSizeChanged*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutdocumentSizeChangedSlot) =
   var tmp = new QAbstractTextDocumentLayoutdocumentSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractTextDocumentLayout_connect_documentSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractTextDocumentLayout_connect_documentSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractTextDocumentLayout_documentSizeChanged, miqt_exec_callback_cQAbstractTextDocumentLayout_documentSizeChanged_release)
 
 proc pageCountChanged*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, newPages: cint): void =
   fcQAbstractTextDocumentLayout_pageCountChanged(self.h, newPages)
 
 type QAbstractTextDocumentLayoutpageCountChangedSlot* = proc(newPages: cint)
-proc miqt_exec_callback_cQAbstractTextDocumentLayout_pageCountChanged(slot: int, newPages: cint) {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_pageCountChanged".} =
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_pageCountChanged(slot: int, newPages: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractTextDocumentLayoutpageCountChangedSlot](cast[pointer](slot))
   let slotval1 = newPages
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_pageCountChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTextDocumentLayoutpageCountChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpageCountChanged*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutpageCountChangedSlot) =
   var tmp = new QAbstractTextDocumentLayoutpageCountChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractTextDocumentLayout_connect_pageCountChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractTextDocumentLayout_connect_pageCountChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractTextDocumentLayout_pageCountChanged, miqt_exec_callback_cQAbstractTextDocumentLayout_pageCountChanged_release)
 
 proc tr*(_: type gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractTextDocumentLayout_tr2(s, c)
@@ -325,17 +341,21 @@ proc update*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLa
   fcQAbstractTextDocumentLayout_update1(self.h, param1.h)
 
 type QAbstractTextDocumentLayoutupdate1Slot* = proc(param1: gen_qrect_types.QRectF)
-proc miqt_exec_callback_cQAbstractTextDocumentLayout_update1(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QAbstractTextDocumentLayout_update1".} =
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_update1(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractTextDocumentLayoutupdate1Slot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRectF(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractTextDocumentLayout_update1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractTextDocumentLayoutupdate1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onupdate*(self: gen_qabstracttextdocumentlayout_types.QAbstractTextDocumentLayout, slot: QAbstractTextDocumentLayoutupdate1Slot) =
   var tmp = new QAbstractTextDocumentLayoutupdate1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractTextDocumentLayout_connect_update1(self.h, cast[int](addr tmp[]))
+  fcQAbstractTextDocumentLayout_connect_update1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractTextDocumentLayout_update1, miqt_exec_callback_cQAbstractTextDocumentLayout_update1_release)
 
 type QAbstractTextDocumentLayoutmetaObjectProc* = proc(self: QAbstractTextDocumentLayout): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractTextDocumentLayoutmetacastProc* = proc(self: QAbstractTextDocumentLayout, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -179,19 +179,19 @@ proc fcQAbstractSocket_proxy(self: pointer, ): pointer {.importc: "QAbstractSock
 proc fcQAbstractSocket_protocolTag(self: pointer, ): struct_miqt_string {.importc: "QAbstractSocket_protocolTag".}
 proc fcQAbstractSocket_setProtocolTag(self: pointer, tag: struct_miqt_string): void {.importc: "QAbstractSocket_setProtocolTag".}
 proc fcQAbstractSocket_hostFound(self: pointer, ): void {.importc: "QAbstractSocket_hostFound".}
-proc fcQAbstractSocket_connect_hostFound(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_hostFound".}
+proc fcQAbstractSocket_connect_hostFound(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_hostFound".}
 proc fcQAbstractSocket_connected(self: pointer, ): void {.importc: "QAbstractSocket_connected".}
-proc fcQAbstractSocket_connect_connected(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_connected".}
+proc fcQAbstractSocket_connect_connected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_connected".}
 proc fcQAbstractSocket_disconnected(self: pointer, ): void {.importc: "QAbstractSocket_disconnected".}
-proc fcQAbstractSocket_connect_disconnected(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_disconnected".}
+proc fcQAbstractSocket_connect_disconnected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_disconnected".}
 proc fcQAbstractSocket_stateChanged(self: pointer, param1: cint): void {.importc: "QAbstractSocket_stateChanged".}
-proc fcQAbstractSocket_connect_stateChanged(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_stateChanged".}
+proc fcQAbstractSocket_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_stateChanged".}
 proc fcQAbstractSocket_errorWithQAbstractSocketSocketError(self: pointer, param1: cint): void {.importc: "QAbstractSocket_errorWithQAbstractSocketSocketError".}
-proc fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_errorWithQAbstractSocketSocketError".}
+proc fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_errorWithQAbstractSocketSocketError".}
 proc fcQAbstractSocket_errorOccurred(self: pointer, param1: cint): void {.importc: "QAbstractSocket_errorOccurred".}
-proc fcQAbstractSocket_connect_errorOccurred(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_errorOccurred".}
+proc fcQAbstractSocket_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_errorOccurred".}
 proc fcQAbstractSocket_proxyAuthenticationRequired(self: pointer, proxy: pointer, authenticator: pointer): void {.importc: "QAbstractSocket_proxyAuthenticationRequired".}
-proc fcQAbstractSocket_connect_proxyAuthenticationRequired(self: pointer, slot: int) {.importc: "QAbstractSocket_connect_proxyAuthenticationRequired".}
+proc fcQAbstractSocket_connect_proxyAuthenticationRequired(self: pointer, slot: int, callback: proc (slot: int, proxy: pointer, authenticator: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSocket_connect_proxyAuthenticationRequired".}
 proc fcQAbstractSocket_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSocket_tr2".}
 proc fcQAbstractSocket_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSocket_tr3".}
 proc fcQAbstractSocket_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSocket_trUtf82".}
@@ -428,97 +428,121 @@ proc hostFound*(self: gen_qabstractsocket_types.QAbstractSocket, ): void =
   fcQAbstractSocket_hostFound(self.h)
 
 type QAbstractSockethostFoundSlot* = proc()
-proc miqt_exec_callback_cQAbstractSocket_hostFound(slot: int) {.exportc: "miqt_exec_callback_QAbstractSocket_hostFound".} =
+proc miqt_exec_callback_cQAbstractSocket_hostFound(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSockethostFoundSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSocket_hostFound_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSockethostFoundSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onhostFound*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSockethostFoundSlot) =
   var tmp = new QAbstractSockethostFoundSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_hostFound(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_hostFound(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_hostFound, miqt_exec_callback_cQAbstractSocket_hostFound_release)
 
 proc connected*(self: gen_qabstractsocket_types.QAbstractSocket, ): void =
   fcQAbstractSocket_connected(self.h)
 
 type QAbstractSocketconnectedSlot* = proc()
-proc miqt_exec_callback_cQAbstractSocket_connected(slot: int) {.exportc: "miqt_exec_callback_QAbstractSocket_connected".} =
+proc miqt_exec_callback_cQAbstractSocket_connected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketconnectedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSocket_connected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketconnectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onconnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketconnectedSlot) =
   var tmp = new QAbstractSocketconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_connected(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_connected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_connected, miqt_exec_callback_cQAbstractSocket_connected_release)
 
 proc disconnected*(self: gen_qabstractsocket_types.QAbstractSocket, ): void =
   fcQAbstractSocket_disconnected(self.h)
 
 type QAbstractSocketdisconnectedSlot* = proc()
-proc miqt_exec_callback_cQAbstractSocket_disconnected(slot: int) {.exportc: "miqt_exec_callback_QAbstractSocket_disconnected".} =
+proc miqt_exec_callback_cQAbstractSocket_disconnected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketdisconnectedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSocket_disconnected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketdisconnectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondisconnected*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketdisconnectedSlot) =
   var tmp = new QAbstractSocketdisconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_disconnected(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_disconnected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_disconnected, miqt_exec_callback_cQAbstractSocket_disconnected_release)
 
 proc stateChanged*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_stateChanged(self.h, cint(param1))
 
 type QAbstractSocketstateChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQAbstractSocket_stateChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QAbstractSocket_stateChanged".} =
+proc miqt_exec_callback_cQAbstractSocket_stateChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSocket_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketstateChangedSlot) =
   var tmp = new QAbstractSocketstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_stateChanged, miqt_exec_callback_cQAbstractSocket_stateChanged_release)
 
 proc error*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_errorWithQAbstractSocketSocketError(self.h, cint(param1))
 
 type QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQAbstractSocket_errorWithQAbstractSocketSocketError(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QAbstractSocket_errorWithQAbstractSocketSocketError".} =
+proc miqt_exec_callback_cQAbstractSocket_errorWithQAbstractSocketSocketError(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSocket_errorWithQAbstractSocketSocketError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot) =
   var tmp = new QAbstractSocketerrorWithQAbstractSocketSocketErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_errorWithQAbstractSocketSocketError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_errorWithQAbstractSocketSocketError, miqt_exec_callback_cQAbstractSocket_errorWithQAbstractSocketSocketError_release)
 
 proc errorOccurred*(self: gen_qabstractsocket_types.QAbstractSocket, param1: cint): void =
   fcQAbstractSocket_errorOccurred(self.h, cint(param1))
 
 type QAbstractSocketerrorOccurredSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQAbstractSocket_errorOccurred(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QAbstractSocket_errorOccurred".} =
+proc miqt_exec_callback_cQAbstractSocket_errorOccurred(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractSocket_errorOccurred_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketerrorOccurredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerrorOccurred*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketerrorOccurredSlot) =
   var tmp = new QAbstractSocketerrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_errorOccurred, miqt_exec_callback_cQAbstractSocket_errorOccurred_release)
 
 proc proxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSocket, proxy: gen_qnetworkproxy_types.QNetworkProxy, authenticator: gen_qauthenticator_types.QAuthenticator): void =
   fcQAbstractSocket_proxyAuthenticationRequired(self.h, proxy.h, authenticator.h)
 
 type QAbstractSocketproxyAuthenticationRequiredSlot* = proc(proxy: gen_qnetworkproxy_types.QNetworkProxy, authenticator: gen_qauthenticator_types.QAuthenticator)
-proc miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired(slot: int, proxy: pointer, authenticator: pointer) {.exportc: "miqt_exec_callback_QAbstractSocket_proxyAuthenticationRequired".} =
+proc miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired(slot: int, proxy: pointer, authenticator: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSocketproxyAuthenticationRequiredSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkproxy_types.QNetworkProxy(h: proxy)
 
@@ -526,11 +550,15 @@ proc miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired(slot: int, 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSocketproxyAuthenticationRequiredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onproxyAuthenticationRequired*(self: gen_qabstractsocket_types.QAbstractSocket, slot: QAbstractSocketproxyAuthenticationRequiredSlot) =
   var tmp = new QAbstractSocketproxyAuthenticationRequiredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSocket_connect_proxyAuthenticationRequired(self.h, cast[int](addr tmp[]))
+  fcQAbstractSocket_connect_proxyAuthenticationRequired(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired, miqt_exec_callback_cQAbstractSocket_proxyAuthenticationRequired_release)
 
 proc tr*(_: type gen_qabstractsocket_types.QAbstractSocket, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSocket_tr2(s, c)

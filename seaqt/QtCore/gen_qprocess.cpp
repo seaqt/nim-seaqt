@@ -19,10 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QProcess_finished(intptr_t, int);
-void miqt_exec_callback_QProcess_finished2(intptr_t, int, int);
-void miqt_exec_callback_QProcess_errorWithError(intptr_t, int);
-void miqt_exec_callback_QProcess_errorOccurred(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1005,48 +1001,68 @@ void QProcess_finished(QProcess* self, int exitCode) {
 	self->finished(static_cast<int>(exitCode));
 }
 
-void QProcess_connect_finished(QProcess* self, intptr_t slot) {
-	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(int)>(&QProcess::finished), self, [=](int exitCode) {
-		int sigval1 = exitCode;
-		miqt_exec_callback_QProcess_finished(slot, sigval1);
-	});
+void QProcess_connect_finished(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int exitCode) {
+			int sigval1 = exitCode;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(int)>(&QProcess::finished), self, local_caller{slot, callback, release});
 }
 
 void QProcess_finished2(QProcess* self, int exitCode, int exitStatus) {
 	self->finished(static_cast<int>(exitCode), static_cast<QProcess::ExitStatus>(exitStatus));
 }
 
-void QProcess_connect_finished2(QProcess* self, intptr_t slot) {
-	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, [=](int exitCode, QProcess::ExitStatus exitStatus) {
-		int sigval1 = exitCode;
-		QProcess::ExitStatus exitStatus_ret = exitStatus;
-		int sigval2 = static_cast<int>(exitStatus_ret);
-		miqt_exec_callback_QProcess_finished2(slot, sigval1, sigval2);
-	});
+void QProcess_connect_finished2(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int exitCode, QProcess::ExitStatus exitStatus) {
+			int sigval1 = exitCode;
+			QProcess::ExitStatus exitStatus_ret = exitStatus;
+			int sigval2 = static_cast<int>(exitStatus_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(int, QProcess::ExitStatus)>(&QProcess::finished), self, local_caller{slot, callback, release});
 }
 
 void QProcess_errorWithError(QProcess* self, int error) {
 	self->error(static_cast<QProcess::ProcessError>(error));
 }
 
-void QProcess_connect_errorWithError(QProcess* self, intptr_t slot) {
-	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), self, [=](QProcess::ProcessError error) {
-		QProcess::ProcessError error_ret = error;
-		int sigval1 = static_cast<int>(error_ret);
-		miqt_exec_callback_QProcess_errorWithError(slot, sigval1);
-	});
+void QProcess_connect_errorWithError(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QProcess::ProcessError error) {
+			QProcess::ProcessError error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::error), self, local_caller{slot, callback, release});
 }
 
 void QProcess_errorOccurred(QProcess* self, int error) {
 	self->errorOccurred(static_cast<QProcess::ProcessError>(error));
 }
 
-void QProcess_connect_errorOccurred(QProcess* self, intptr_t slot) {
-	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::errorOccurred), self, [=](QProcess::ProcessError error) {
-		QProcess::ProcessError error_ret = error;
-		int sigval1 = static_cast<int>(error_ret);
-		miqt_exec_callback_QProcess_errorOccurred(slot, sigval1);
-	});
+void QProcess_connect_errorOccurred(QProcess* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QProcess::ProcessError error) {
+			QProcess::ProcessError error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQProcess::connect(self, static_cast<void (QProcess::*)(QProcess::ProcessError)>(&QProcess::errorOccurred), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QProcess_tr2(const char* s, const char* c) {

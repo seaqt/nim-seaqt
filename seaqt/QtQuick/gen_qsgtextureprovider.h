@@ -36,7 +36,7 @@ struct miqt_string QSGTextureProvider_tr(const char* s);
 struct miqt_string QSGTextureProvider_trUtf8(const char* s);
 QSGTexture* QSGTextureProvider_texture(const QSGTextureProvider* self);
 void QSGTextureProvider_textureChanged(QSGTextureProvider* self);
-void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot);
+void QSGTextureProvider_connect_textureChanged(QSGTextureProvider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QSGTextureProvider_tr2(const char* s, const char* c);
 struct miqt_string QSGTextureProvider_tr3(const char* s, const char* c, int n);
 struct miqt_string QSGTextureProvider_trUtf82(const char* s, const char* c);

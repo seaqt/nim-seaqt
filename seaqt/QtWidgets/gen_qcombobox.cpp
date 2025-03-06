@@ -51,16 +51,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QComboBox_editTextChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_activated(intptr_t, int);
-void miqt_exec_callback_QComboBox_textActivated(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_highlighted(intptr_t, int);
-void miqt_exec_callback_QComboBox_textHighlighted(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_currentIndexChanged(intptr_t, int);
-void miqt_exec_callback_QComboBox_currentIndexChangedWithQString(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_currentTextChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_activatedWithQString(intptr_t, struct miqt_string);
-void miqt_exec_callback_QComboBox_highlightedWithQString(intptr_t, struct miqt_string);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1261,29 +1251,39 @@ void QComboBox_editTextChanged(QComboBox* self, struct miqt_string param1) {
 	self->editTextChanged(param1_QString);
 }
 
-void QComboBox_connect_editTextChanged(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::editTextChanged), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_editTextChanged(slot, sigval1);
-	});
+void QComboBox_connect_editTextChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::editTextChanged), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_activated(QComboBox* self, int index) {
 	self->activated(static_cast<int>(index));
 }
 
-void QComboBox_connect_activated(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QComboBox_activated(slot, sigval1);
-	});
+void QComboBox_connect_activated(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::activated), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_textActivated(QComboBox* self, struct miqt_string param1) {
@@ -1291,29 +1291,39 @@ void QComboBox_textActivated(QComboBox* self, struct miqt_string param1) {
 	self->textActivated(param1_QString);
 }
 
-void QComboBox_connect_textActivated(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textActivated), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_textActivated(slot, sigval1);
-	});
+void QComboBox_connect_textActivated(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textActivated), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_highlighted(QComboBox* self, int index) {
 	self->highlighted(static_cast<int>(index));
 }
 
-void QComboBox_connect_highlighted(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QComboBox_highlighted(slot, sigval1);
-	});
+void QComboBox_connect_highlighted(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::highlighted), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_textHighlighted(QComboBox* self, struct miqt_string param1) {
@@ -1321,29 +1331,39 @@ void QComboBox_textHighlighted(QComboBox* self, struct miqt_string param1) {
 	self->textHighlighted(param1_QString);
 }
 
-void QComboBox_connect_textHighlighted(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textHighlighted), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_textHighlighted(slot, sigval1);
-	});
+void QComboBox_connect_textHighlighted(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::textHighlighted), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_currentIndexChanged(QComboBox* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QComboBox_connect_currentIndexChanged(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QComboBox_currentIndexChanged(slot, sigval1);
-	});
+void QComboBox_connect_currentIndexChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(int)>(&QComboBox::currentIndexChanged), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_currentIndexChangedWithQString(QComboBox* self, struct miqt_string param1) {
@@ -1351,18 +1371,23 @@ void QComboBox_currentIndexChangedWithQString(QComboBox* self, struct miqt_strin
 	self->currentIndexChanged(param1_QString);
 }
 
-void QComboBox_connect_currentIndexChangedWithQString(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_currentIndexChangedWithQString(slot, sigval1);
-	});
+void QComboBox_connect_currentIndexChangedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentIndexChanged), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_currentTextChanged(QComboBox* self, struct miqt_string param1) {
@@ -1370,18 +1395,23 @@ void QComboBox_currentTextChanged(QComboBox* self, struct miqt_string param1) {
 	self->currentTextChanged(param1_QString);
 }
 
-void QComboBox_connect_currentTextChanged(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentTextChanged), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_currentTextChanged(slot, sigval1);
-	});
+void QComboBox_connect_currentTextChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::currentTextChanged), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_activatedWithQString(QComboBox* self, struct miqt_string param1) {
@@ -1389,18 +1419,23 @@ void QComboBox_activatedWithQString(QComboBox* self, struct miqt_string param1) 
 	self->activated(param1_QString);
 }
 
-void QComboBox_connect_activatedWithQString(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::activated), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_activatedWithQString(slot, sigval1);
-	});
+void QComboBox_connect_activatedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::activated), self, local_caller{slot, callback, release});
 }
 
 void QComboBox_highlightedWithQString(QComboBox* self, struct miqt_string param1) {
@@ -1408,18 +1443,23 @@ void QComboBox_highlightedWithQString(QComboBox* self, struct miqt_string param1
 	self->highlighted(param1_QString);
 }
 
-void QComboBox_connect_highlightedWithQString(QComboBox* self, intptr_t slot) {
-	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::highlighted), self, [=](const QString& param1) {
-		const QString param1_ret = param1;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray param1_b = param1_ret.toUtf8();
-		struct miqt_string param1_ms;
-		param1_ms.len = param1_b.length();
-		param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
-		memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
-		struct miqt_string sigval1 = param1_ms;
-		miqt_exec_callback_QComboBox_highlightedWithQString(slot, sigval1);
-	});
+void QComboBox_connect_highlightedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& param1) {
+			const QString param1_ret = param1;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray param1_b = param1_ret.toUtf8();
+			struct miqt_string param1_ms;
+			param1_ms.len = param1_b.length();
+			param1_ms.data = static_cast<char*>(malloc(param1_ms.len));
+			memcpy(param1_ms.data, param1_b.data(), param1_ms.len);
+			struct miqt_string sigval1 = param1_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQComboBox::connect(self, static_cast<void (QComboBox::*)(const QString&)>(&QComboBox::highlighted), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QComboBox_tr2(const char* s, const char* c) {

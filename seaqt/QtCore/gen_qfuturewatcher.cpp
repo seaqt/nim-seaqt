@@ -13,16 +13,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QFutureWatcherBase_started(intptr_t);
-void miqt_exec_callback_QFutureWatcherBase_finished(intptr_t);
-void miqt_exec_callback_QFutureWatcherBase_canceled(intptr_t);
-void miqt_exec_callback_QFutureWatcherBase_paused(intptr_t);
-void miqt_exec_callback_QFutureWatcherBase_resumed(intptr_t);
-void miqt_exec_callback_QFutureWatcherBase_resultReadyAt(intptr_t, int);
-void miqt_exec_callback_QFutureWatcherBase_resultsReadyAt(intptr_t, int, int);
-void miqt_exec_callback_QFutureWatcherBase_progressRangeChanged(intptr_t, int, int);
-void miqt_exec_callback_QFutureWatcherBase_progressValueChanged(intptr_t, int);
-void miqt_exec_callback_QFutureWatcherBase_progressTextChanged(intptr_t, struct miqt_string);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -124,96 +114,141 @@ void QFutureWatcherBase_started(QFutureWatcherBase* self) {
 	self->started();
 }
 
-void QFutureWatcherBase_connect_started(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::started), self, [=]() {
-		miqt_exec_callback_QFutureWatcherBase_started(slot);
-	});
+void QFutureWatcherBase_connect_started(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::started), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_finished(QFutureWatcherBase* self) {
 	self->finished();
 }
 
-void QFutureWatcherBase_connect_finished(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::finished), self, [=]() {
-		miqt_exec_callback_QFutureWatcherBase_finished(slot);
-	});
+void QFutureWatcherBase_connect_finished(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::finished), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_canceled(QFutureWatcherBase* self) {
 	self->canceled();
 }
 
-void QFutureWatcherBase_connect_canceled(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::canceled), self, [=]() {
-		miqt_exec_callback_QFutureWatcherBase_canceled(slot);
-	});
+void QFutureWatcherBase_connect_canceled(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::canceled), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_paused(QFutureWatcherBase* self) {
 	self->paused();
 }
 
-void QFutureWatcherBase_connect_paused(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::paused), self, [=]() {
-		miqt_exec_callback_QFutureWatcherBase_paused(slot);
-	});
+void QFutureWatcherBase_connect_paused(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::paused), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_resumed(QFutureWatcherBase* self) {
 	self->resumed();
 }
 
-void QFutureWatcherBase_connect_resumed(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::resumed), self, [=]() {
-		miqt_exec_callback_QFutureWatcherBase_resumed(slot);
-	});
+void QFutureWatcherBase_connect_resumed(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)()>(&QFutureWatcherBase::resumed), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_resultReadyAt(QFutureWatcherBase* self, int resultIndex) {
 	self->resultReadyAt(static_cast<int>(resultIndex));
 }
 
-void QFutureWatcherBase_connect_resultReadyAt(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int)>(&QFutureWatcherBase::resultReadyAt), self, [=](int resultIndex) {
-		int sigval1 = resultIndex;
-		miqt_exec_callback_QFutureWatcherBase_resultReadyAt(slot, sigval1);
-	});
+void QFutureWatcherBase_connect_resultReadyAt(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int resultIndex) {
+			int sigval1 = resultIndex;
+			callback(slot, sigval1);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int)>(&QFutureWatcherBase::resultReadyAt), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_resultsReadyAt(QFutureWatcherBase* self, int beginIndex, int endIndex) {
 	self->resultsReadyAt(static_cast<int>(beginIndex), static_cast<int>(endIndex));
 }
 
-void QFutureWatcherBase_connect_resultsReadyAt(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int, int)>(&QFutureWatcherBase::resultsReadyAt), self, [=](int beginIndex, int endIndex) {
-		int sigval1 = beginIndex;
-		int sigval2 = endIndex;
-		miqt_exec_callback_QFutureWatcherBase_resultsReadyAt(slot, sigval1, sigval2);
-	});
+void QFutureWatcherBase_connect_resultsReadyAt(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int beginIndex, int endIndex) {
+			int sigval1 = beginIndex;
+			int sigval2 = endIndex;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int, int)>(&QFutureWatcherBase::resultsReadyAt), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_progressRangeChanged(QFutureWatcherBase* self, int minimum, int maximum) {
 	self->progressRangeChanged(static_cast<int>(minimum), static_cast<int>(maximum));
 }
 
-void QFutureWatcherBase_connect_progressRangeChanged(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int, int)>(&QFutureWatcherBase::progressRangeChanged), self, [=](int minimum, int maximum) {
-		int sigval1 = minimum;
-		int sigval2 = maximum;
-		miqt_exec_callback_QFutureWatcherBase_progressRangeChanged(slot, sigval1, sigval2);
-	});
+void QFutureWatcherBase_connect_progressRangeChanged(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int minimum, int maximum) {
+			int sigval1 = minimum;
+			int sigval2 = maximum;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int, int)>(&QFutureWatcherBase::progressRangeChanged), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_progressValueChanged(QFutureWatcherBase* self, int progressValue) {
 	self->progressValueChanged(static_cast<int>(progressValue));
 }
 
-void QFutureWatcherBase_connect_progressValueChanged(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int)>(&QFutureWatcherBase::progressValueChanged), self, [=](int progressValue) {
-		int sigval1 = progressValue;
-		miqt_exec_callback_QFutureWatcherBase_progressValueChanged(slot, sigval1);
-	});
+void QFutureWatcherBase_connect_progressValueChanged(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int progressValue) {
+			int sigval1 = progressValue;
+			callback(slot, sigval1);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(int)>(&QFutureWatcherBase::progressValueChanged), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_progressTextChanged(QFutureWatcherBase* self, struct miqt_string progressText) {
@@ -221,18 +256,23 @@ void QFutureWatcherBase_progressTextChanged(QFutureWatcherBase* self, struct miq
 	self->progressTextChanged(progressText_QString);
 }
 
-void QFutureWatcherBase_connect_progressTextChanged(QFutureWatcherBase* self, intptr_t slot) {
-	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(const QString&)>(&QFutureWatcherBase::progressTextChanged), self, [=](const QString& progressText) {
-		const QString progressText_ret = progressText;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray progressText_b = progressText_ret.toUtf8();
-		struct miqt_string progressText_ms;
-		progressText_ms.len = progressText_b.length();
-		progressText_ms.data = static_cast<char*>(malloc(progressText_ms.len));
-		memcpy(progressText_ms.data, progressText_b.data(), progressText_ms.len);
-		struct miqt_string sigval1 = progressText_ms;
-		miqt_exec_callback_QFutureWatcherBase_progressTextChanged(slot, sigval1);
-	});
+void QFutureWatcherBase_connect_progressTextChanged(QFutureWatcherBase* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& progressText) {
+			const QString progressText_ret = progressText;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray progressText_b = progressText_ret.toUtf8();
+			struct miqt_string progressText_ms;
+			progressText_ms.len = progressText_b.length();
+			progressText_ms.data = static_cast<char*>(malloc(progressText_ms.len));
+			memcpy(progressText_ms.data, progressText_b.data(), progressText_ms.len);
+			struct miqt_string sigval1 = progressText_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QFutureWatcherBase::connect(self, static_cast<void (QFutureWatcherBase::*)(const QString&)>(&QFutureWatcherBase::progressTextChanged), self, local_caller{slot, callback, release});
 }
 
 void QFutureWatcherBase_cancel(QFutureWatcherBase* self) {

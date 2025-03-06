@@ -173,7 +173,7 @@ int QToolBox_count(const QToolBox* self);
 void QToolBox_setCurrentIndex(QToolBox* self, int index);
 void QToolBox_setCurrentWidget(QToolBox* self, QWidget* widget);
 void QToolBox_currentChanged(QToolBox* self, int index);
-void QToolBox_connect_currentChanged(QToolBox* self, intptr_t slot);
+void QToolBox_connect_currentChanged(QToolBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 bool QToolBox_event(QToolBox* self, QEvent* e);
 void QToolBox_itemInserted(QToolBox* self, int index);
 void QToolBox_itemRemoved(QToolBox* self, int index);

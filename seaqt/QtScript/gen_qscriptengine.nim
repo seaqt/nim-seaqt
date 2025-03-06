@@ -152,7 +152,7 @@ proc fcQScriptEngine_toStringHandle(self: pointer, str: struct_miqt_string): poi
 proc fcQScriptEngine_toObject(self: pointer, value: pointer): pointer {.importc: "QScriptEngine_toObject".}
 proc fcQScriptEngine_objectById(self: pointer, id: clonglong): pointer {.importc: "QScriptEngine_objectById".}
 proc fcQScriptEngine_signalHandlerException(self: pointer, exception: pointer): void {.importc: "QScriptEngine_signalHandlerException".}
-proc fcQScriptEngine_connect_signalHandlerException(self: pointer, slot: int) {.importc: "QScriptEngine_connect_signalHandlerException".}
+proc fcQScriptEngine_connect_signalHandlerException(self: pointer, slot: int, callback: proc (slot: int, exception: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QScriptEngine_connect_signalHandlerException".}
 proc fcQScriptEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QScriptEngine_tr2".}
 proc fcQScriptEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QScriptEngine_tr3".}
 proc fcQScriptEngine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QScriptEngine_trUtf82".}
@@ -406,17 +406,21 @@ proc signalHandlerException*(self: gen_qscriptengine_types.QScriptEngine, except
   fcQScriptEngine_signalHandlerException(self.h, exception.h)
 
 type QScriptEnginesignalHandlerExceptionSlot* = proc(exception: gen_qscriptvalue_types.QScriptValue)
-proc miqt_exec_callback_cQScriptEngine_signalHandlerException(slot: int, exception: pointer) {.exportc: "miqt_exec_callback_QScriptEngine_signalHandlerException".} =
+proc miqt_exec_callback_cQScriptEngine_signalHandlerException(slot: int, exception: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QScriptEnginesignalHandlerExceptionSlot](cast[pointer](slot))
   let slotval1 = gen_qscriptvalue_types.QScriptValue(h: exception)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQScriptEngine_signalHandlerException_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QScriptEnginesignalHandlerExceptionSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsignalHandlerException*(self: gen_qscriptengine_types.QScriptEngine, slot: QScriptEnginesignalHandlerExceptionSlot) =
   var tmp = new QScriptEnginesignalHandlerExceptionSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQScriptEngine_connect_signalHandlerException(self.h, cast[int](addr tmp[]))
+  fcQScriptEngine_connect_signalHandlerException(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQScriptEngine_signalHandlerException, miqt_exec_callback_cQScriptEngine_signalHandlerException_release)
 
 proc tr*(_: type gen_qscriptengine_types.QScriptEngine, s: cstring, c: cstring): string =
   let v_ms = fcQScriptEngine_tr2(s, c)

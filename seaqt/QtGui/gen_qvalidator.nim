@@ -81,7 +81,7 @@ proc fcQValidator_locale(self: pointer, ): pointer {.importc: "QValidator_locale
 proc fcQValidator_validate(self: pointer, param1: struct_miqt_string, param2: ptr cint): cint {.importc: "QValidator_validate".}
 proc fcQValidator_fixup(self: pointer, param1: struct_miqt_string): void {.importc: "QValidator_fixup".}
 proc fcQValidator_changed(self: pointer, ): void {.importc: "QValidator_changed".}
-proc fcQValidator_connect_changed(self: pointer, slot: int) {.importc: "QValidator_connect_changed".}
+proc fcQValidator_connect_changed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QValidator_connect_changed".}
 proc fcQValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QValidator_tr2".}
 proc fcQValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QValidator_tr3".}
 proc fcQValidator_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QValidator_trUtf82".}
@@ -128,9 +128,9 @@ proc fcQIntValidator_setRange(self: pointer, bottom: cint, top: cint): void {.im
 proc fcQIntValidator_bottom(self: pointer, ): cint {.importc: "QIntValidator_bottom".}
 proc fcQIntValidator_top(self: pointer, ): cint {.importc: "QIntValidator_top".}
 proc fcQIntValidator_bottomChanged(self: pointer, bottom: cint): void {.importc: "QIntValidator_bottomChanged".}
-proc fcQIntValidator_connect_bottomChanged(self: pointer, slot: int) {.importc: "QIntValidator_connect_bottomChanged".}
+proc fcQIntValidator_connect_bottomChanged(self: pointer, slot: int, callback: proc (slot: int, bottom: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_bottomChanged".}
 proc fcQIntValidator_topChanged(self: pointer, top: cint): void {.importc: "QIntValidator_topChanged".}
-proc fcQIntValidator_connect_topChanged(self: pointer, slot: int) {.importc: "QIntValidator_connect_topChanged".}
+proc fcQIntValidator_connect_topChanged(self: pointer, slot: int, callback: proc (slot: int, top: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIntValidator_connect_topChanged".}
 proc fcQIntValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QIntValidator_tr2".}
 proc fcQIntValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIntValidator_tr3".}
 proc fcQIntValidator_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIntValidator_trUtf82".}
@@ -185,13 +185,13 @@ proc fcQDoubleValidator_top(self: pointer, ): float64 {.importc: "QDoubleValidat
 proc fcQDoubleValidator_decimals(self: pointer, ): cint {.importc: "QDoubleValidator_decimals".}
 proc fcQDoubleValidator_notation(self: pointer, ): cint {.importc: "QDoubleValidator_notation".}
 proc fcQDoubleValidator_bottomChanged(self: pointer, bottom: float64): void {.importc: "QDoubleValidator_bottomChanged".}
-proc fcQDoubleValidator_connect_bottomChanged(self: pointer, slot: int) {.importc: "QDoubleValidator_connect_bottomChanged".}
+proc fcQDoubleValidator_connect_bottomChanged(self: pointer, slot: int, callback: proc (slot: int, bottom: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_bottomChanged".}
 proc fcQDoubleValidator_topChanged(self: pointer, top: float64): void {.importc: "QDoubleValidator_topChanged".}
-proc fcQDoubleValidator_connect_topChanged(self: pointer, slot: int) {.importc: "QDoubleValidator_connect_topChanged".}
+proc fcQDoubleValidator_connect_topChanged(self: pointer, slot: int, callback: proc (slot: int, top: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_topChanged".}
 proc fcQDoubleValidator_decimalsChanged(self: pointer, decimals: cint): void {.importc: "QDoubleValidator_decimalsChanged".}
-proc fcQDoubleValidator_connect_decimalsChanged(self: pointer, slot: int) {.importc: "QDoubleValidator_connect_decimalsChanged".}
+proc fcQDoubleValidator_connect_decimalsChanged(self: pointer, slot: int, callback: proc (slot: int, decimals: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_decimalsChanged".}
 proc fcQDoubleValidator_notationChanged(self: pointer, notation: cint): void {.importc: "QDoubleValidator_notationChanged".}
-proc fcQDoubleValidator_connect_notationChanged(self: pointer, slot: int) {.importc: "QDoubleValidator_connect_notationChanged".}
+proc fcQDoubleValidator_connect_notationChanged(self: pointer, slot: int, callback: proc (slot: int, notation: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDoubleValidator_connect_notationChanged".}
 proc fcQDoubleValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDoubleValidator_tr2".}
 proc fcQDoubleValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDoubleValidator_tr3".}
 proc fcQDoubleValidator_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDoubleValidator_trUtf82".}
@@ -239,7 +239,7 @@ proc fcQRegExpValidator_validate(self: pointer, input: struct_miqt_string, pos: 
 proc fcQRegExpValidator_setRegExp(self: pointer, rx: pointer): void {.importc: "QRegExpValidator_setRegExp".}
 proc fcQRegExpValidator_regExp(self: pointer, ): pointer {.importc: "QRegExpValidator_regExp".}
 proc fcQRegExpValidator_regExpChanged(self: pointer, regExp: pointer): void {.importc: "QRegExpValidator_regExpChanged".}
-proc fcQRegExpValidator_connect_regExpChanged(self: pointer, slot: int) {.importc: "QRegExpValidator_connect_regExpChanged".}
+proc fcQRegExpValidator_connect_regExpChanged(self: pointer, slot: int, callback: proc (slot: int, regExp: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRegExpValidator_connect_regExpChanged".}
 proc fcQRegExpValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRegExpValidator_tr2".}
 proc fcQRegExpValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRegExpValidator_tr3".}
 proc fcQRegExpValidator_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRegExpValidator_trUtf82".}
@@ -285,7 +285,7 @@ proc fcQRegularExpressionValidator_validate(self: pointer, input: struct_miqt_st
 proc fcQRegularExpressionValidator_regularExpression(self: pointer, ): pointer {.importc: "QRegularExpressionValidator_regularExpression".}
 proc fcQRegularExpressionValidator_setRegularExpression(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_setRegularExpression".}
 proc fcQRegularExpressionValidator_regularExpressionChanged(self: pointer, re: pointer): void {.importc: "QRegularExpressionValidator_regularExpressionChanged".}
-proc fcQRegularExpressionValidator_connect_regularExpressionChanged(self: pointer, slot: int) {.importc: "QRegularExpressionValidator_connect_regularExpressionChanged".}
+proc fcQRegularExpressionValidator_connect_regularExpressionChanged(self: pointer, slot: int, callback: proc (slot: int, re: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRegularExpressionValidator_connect_regularExpressionChanged".}
 proc fcQRegularExpressionValidator_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRegularExpressionValidator_tr2".}
 proc fcQRegularExpressionValidator_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRegularExpressionValidator_tr3".}
 proc fcQRegularExpressionValidator_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRegularExpressionValidator_trUtf82".}
@@ -360,15 +360,19 @@ proc changed*(self: gen_qvalidator_types.QValidator, ): void =
   fcQValidator_changed(self.h)
 
 type QValidatorchangedSlot* = proc()
-proc miqt_exec_callback_cQValidator_changed(slot: int) {.exportc: "miqt_exec_callback_QValidator_changed".} =
+proc miqt_exec_callback_cQValidator_changed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QValidatorchangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQValidator_changed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QValidatorchangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onchanged*(self: gen_qvalidator_types.QValidator, slot: QValidatorchangedSlot) =
   var tmp = new QValidatorchangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQValidator_connect_changed(self.h, cast[int](addr tmp[]))
+  fcQValidator_connect_changed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQValidator_changed, miqt_exec_callback_cQValidator_changed_release)
 
 proc tr*(_: type gen_qvalidator_types.QValidator, s: cstring, c: cstring): string =
   let v_ms = fcQValidator_tr2(s, c)
@@ -657,33 +661,41 @@ proc bottomChanged*(self: gen_qvalidator_types.QIntValidator, bottom: cint): voi
   fcQIntValidator_bottomChanged(self.h, bottom)
 
 type QIntValidatorbottomChangedSlot* = proc(bottom: cint)
-proc miqt_exec_callback_cQIntValidator_bottomChanged(slot: int, bottom: cint) {.exportc: "miqt_exec_callback_QIntValidator_bottomChanged".} =
+proc miqt_exec_callback_cQIntValidator_bottomChanged(slot: int, bottom: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIntValidatorbottomChangedSlot](cast[pointer](slot))
   let slotval1 = bottom
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQIntValidator_bottomChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIntValidatorbottomChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbottomChanged*(self: gen_qvalidator_types.QIntValidator, slot: QIntValidatorbottomChangedSlot) =
   var tmp = new QIntValidatorbottomChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIntValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]))
+  fcQIntValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIntValidator_bottomChanged, miqt_exec_callback_cQIntValidator_bottomChanged_release)
 
 proc topChanged*(self: gen_qvalidator_types.QIntValidator, top: cint): void =
   fcQIntValidator_topChanged(self.h, top)
 
 type QIntValidatortopChangedSlot* = proc(top: cint)
-proc miqt_exec_callback_cQIntValidator_topChanged(slot: int, top: cint) {.exportc: "miqt_exec_callback_QIntValidator_topChanged".} =
+proc miqt_exec_callback_cQIntValidator_topChanged(slot: int, top: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIntValidatortopChangedSlot](cast[pointer](slot))
   let slotval1 = top
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQIntValidator_topChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIntValidatortopChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontopChanged*(self: gen_qvalidator_types.QIntValidator, slot: QIntValidatortopChangedSlot) =
   var tmp = new QIntValidatortopChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIntValidator_connect_topChanged(self.h, cast[int](addr tmp[]))
+  fcQIntValidator_connect_topChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIntValidator_topChanged, miqt_exec_callback_cQIntValidator_topChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QIntValidator, s: cstring, c: cstring): string =
   let v_ms = fcQIntValidator_tr2(s, c)
@@ -1072,65 +1084,81 @@ proc bottomChanged*(self: gen_qvalidator_types.QDoubleValidator, bottom: float64
   fcQDoubleValidator_bottomChanged(self.h, bottom)
 
 type QDoubleValidatorbottomChangedSlot* = proc(bottom: float64)
-proc miqt_exec_callback_cQDoubleValidator_bottomChanged(slot: int, bottom: float64) {.exportc: "miqt_exec_callback_QDoubleValidator_bottomChanged".} =
+proc miqt_exec_callback_cQDoubleValidator_bottomChanged(slot: int, bottom: float64) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatorbottomChangedSlot](cast[pointer](slot))
   let slotval1 = bottom
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleValidator_bottomChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleValidatorbottomChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbottomChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoubleValidatorbottomChangedSlot) =
   var tmp = new QDoubleValidatorbottomChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleValidator_connect_bottomChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_bottomChanged, miqt_exec_callback_cQDoubleValidator_bottomChanged_release)
 
 proc topChanged*(self: gen_qvalidator_types.QDoubleValidator, top: float64): void =
   fcQDoubleValidator_topChanged(self.h, top)
 
 type QDoubleValidatortopChangedSlot* = proc(top: float64)
-proc miqt_exec_callback_cQDoubleValidator_topChanged(slot: int, top: float64) {.exportc: "miqt_exec_callback_QDoubleValidator_topChanged".} =
+proc miqt_exec_callback_cQDoubleValidator_topChanged(slot: int, top: float64) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatortopChangedSlot](cast[pointer](slot))
   let slotval1 = top
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleValidator_topChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleValidatortopChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontopChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoubleValidatortopChangedSlot) =
   var tmp = new QDoubleValidatortopChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_topChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleValidator_connect_topChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_topChanged, miqt_exec_callback_cQDoubleValidator_topChanged_release)
 
 proc decimalsChanged*(self: gen_qvalidator_types.QDoubleValidator, decimals: cint): void =
   fcQDoubleValidator_decimalsChanged(self.h, decimals)
 
 type QDoubleValidatordecimalsChangedSlot* = proc(decimals: cint)
-proc miqt_exec_callback_cQDoubleValidator_decimalsChanged(slot: int, decimals: cint) {.exportc: "miqt_exec_callback_QDoubleValidator_decimalsChanged".} =
+proc miqt_exec_callback_cQDoubleValidator_decimalsChanged(slot: int, decimals: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatordecimalsChangedSlot](cast[pointer](slot))
   let slotval1 = decimals
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleValidator_decimalsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleValidatordecimalsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondecimalsChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoubleValidatordecimalsChangedSlot) =
   var tmp = new QDoubleValidatordecimalsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_decimalsChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleValidator_connect_decimalsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_decimalsChanged, miqt_exec_callback_cQDoubleValidator_decimalsChanged_release)
 
 proc notationChanged*(self: gen_qvalidator_types.QDoubleValidator, notation: cint): void =
   fcQDoubleValidator_notationChanged(self.h, cint(notation))
 
 type QDoubleValidatornotationChangedSlot* = proc(notation: cint)
-proc miqt_exec_callback_cQDoubleValidator_notationChanged(slot: int, notation: cint) {.exportc: "miqt_exec_callback_QDoubleValidator_notationChanged".} =
+proc miqt_exec_callback_cQDoubleValidator_notationChanged(slot: int, notation: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDoubleValidatornotationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(notation)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDoubleValidator_notationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDoubleValidatornotationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onnotationChanged*(self: gen_qvalidator_types.QDoubleValidator, slot: QDoubleValidatornotationChangedSlot) =
   var tmp = new QDoubleValidatornotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDoubleValidator_connect_notationChanged(self.h, cast[int](addr tmp[]))
+  fcQDoubleValidator_connect_notationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDoubleValidator_notationChanged, miqt_exec_callback_cQDoubleValidator_notationChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QDoubleValidator, s: cstring, c: cstring): string =
   let v_ms = fcQDoubleValidator_tr2(s, c)
@@ -1499,17 +1527,21 @@ proc regExpChanged*(self: gen_qvalidator_types.QRegExpValidator, regExp: gen_qre
   fcQRegExpValidator_regExpChanged(self.h, regExp.h)
 
 type QRegExpValidatorregExpChangedSlot* = proc(regExp: gen_qregexp_types.QRegExp)
-proc miqt_exec_callback_cQRegExpValidator_regExpChanged(slot: int, regExp: pointer) {.exportc: "miqt_exec_callback_QRegExpValidator_regExpChanged".} =
+proc miqt_exec_callback_cQRegExpValidator_regExpChanged(slot: int, regExp: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QRegExpValidatorregExpChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qregexp_types.QRegExp(h: regExp)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRegExpValidator_regExpChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRegExpValidatorregExpChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onregExpChanged*(self: gen_qvalidator_types.QRegExpValidator, slot: QRegExpValidatorregExpChangedSlot) =
   var tmp = new QRegExpValidatorregExpChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRegExpValidator_connect_regExpChanged(self.h, cast[int](addr tmp[]))
+  fcQRegExpValidator_connect_regExpChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRegExpValidator_regExpChanged, miqt_exec_callback_cQRegExpValidator_regExpChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QRegExpValidator, s: cstring, c: cstring): string =
   let v_ms = fcQRegExpValidator_tr2(s, c)
@@ -1857,17 +1889,21 @@ proc regularExpressionChanged*(self: gen_qvalidator_types.QRegularExpressionVali
   fcQRegularExpressionValidator_regularExpressionChanged(self.h, re.h)
 
 type QRegularExpressionValidatorregularExpressionChangedSlot* = proc(re: gen_qregularexpression_types.QRegularExpression)
-proc miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged(slot: int, re: pointer) {.exportc: "miqt_exec_callback_QRegularExpressionValidator_regularExpressionChanged".} =
+proc miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged(slot: int, re: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QRegularExpressionValidatorregularExpressionChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qregularexpression_types.QRegularExpression(h: re)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRegularExpressionValidatorregularExpressionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onregularExpressionChanged*(self: gen_qvalidator_types.QRegularExpressionValidator, slot: QRegularExpressionValidatorregularExpressionChangedSlot) =
   var tmp = new QRegularExpressionValidatorregularExpressionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRegularExpressionValidator_connect_regularExpressionChanged(self.h, cast[int](addr tmp[]))
+  fcQRegularExpressionValidator_connect_regularExpressionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged, miqt_exec_callback_cQRegularExpressionValidator_regularExpressionChanged_release)
 
 proc tr*(_: type gen_qvalidator_types.QRegularExpressionValidator, s: cstring, c: cstring): string =
   let v_ms = fcQRegularExpressionValidator_tr2(s, c)

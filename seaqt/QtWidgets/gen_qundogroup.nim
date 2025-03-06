@@ -74,19 +74,19 @@ proc fcQUndoGroup_undo(self: pointer, ): void {.importc: "QUndoGroup_undo".}
 proc fcQUndoGroup_redo(self: pointer, ): void {.importc: "QUndoGroup_redo".}
 proc fcQUndoGroup_setActiveStack(self: pointer, stack: pointer): void {.importc: "QUndoGroup_setActiveStack".}
 proc fcQUndoGroup_activeStackChanged(self: pointer, stack: pointer): void {.importc: "QUndoGroup_activeStackChanged".}
-proc fcQUndoGroup_connect_activeStackChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_activeStackChanged".}
+proc fcQUndoGroup_connect_activeStackChanged(self: pointer, slot: int, callback: proc (slot: int, stack: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_activeStackChanged".}
 proc fcQUndoGroup_indexChanged(self: pointer, idx: cint): void {.importc: "QUndoGroup_indexChanged".}
-proc fcQUndoGroup_connect_indexChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_indexChanged".}
+proc fcQUndoGroup_connect_indexChanged(self: pointer, slot: int, callback: proc (slot: int, idx: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_indexChanged".}
 proc fcQUndoGroup_cleanChanged(self: pointer, clean: bool): void {.importc: "QUndoGroup_cleanChanged".}
-proc fcQUndoGroup_connect_cleanChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_cleanChanged".}
+proc fcQUndoGroup_connect_cleanChanged(self: pointer, slot: int, callback: proc (slot: int, clean: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_cleanChanged".}
 proc fcQUndoGroup_canUndoChanged(self: pointer, canUndo: bool): void {.importc: "QUndoGroup_canUndoChanged".}
-proc fcQUndoGroup_connect_canUndoChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_canUndoChanged".}
+proc fcQUndoGroup_connect_canUndoChanged(self: pointer, slot: int, callback: proc (slot: int, canUndo: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_canUndoChanged".}
 proc fcQUndoGroup_canRedoChanged(self: pointer, canRedo: bool): void {.importc: "QUndoGroup_canRedoChanged".}
-proc fcQUndoGroup_connect_canRedoChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_canRedoChanged".}
+proc fcQUndoGroup_connect_canRedoChanged(self: pointer, slot: int, callback: proc (slot: int, canRedo: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_canRedoChanged".}
 proc fcQUndoGroup_undoTextChanged(self: pointer, undoText: struct_miqt_string): void {.importc: "QUndoGroup_undoTextChanged".}
-proc fcQUndoGroup_connect_undoTextChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_undoTextChanged".}
+proc fcQUndoGroup_connect_undoTextChanged(self: pointer, slot: int, callback: proc (slot: int, undoText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_undoTextChanged".}
 proc fcQUndoGroup_redoTextChanged(self: pointer, redoText: struct_miqt_string): void {.importc: "QUndoGroup_redoTextChanged".}
-proc fcQUndoGroup_connect_redoTextChanged(self: pointer, slot: int) {.importc: "QUndoGroup_connect_redoTextChanged".}
+proc fcQUndoGroup_connect_redoTextChanged(self: pointer, slot: int, callback: proc (slot: int, redoText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QUndoGroup_connect_redoTextChanged".}
 proc fcQUndoGroup_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QUndoGroup_tr2".}
 proc fcQUndoGroup_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QUndoGroup_tr3".}
 proc fcQUndoGroup_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QUndoGroup_trUtf82".}
@@ -198,87 +198,107 @@ proc activeStackChanged*(self: gen_qundogroup_types.QUndoGroup, stack: gen_qundo
   fcQUndoGroup_activeStackChanged(self.h, stack.h)
 
 type QUndoGroupactiveStackChangedSlot* = proc(stack: gen_qundostack_types.QUndoStack)
-proc miqt_exec_callback_cQUndoGroup_activeStackChanged(slot: int, stack: pointer) {.exportc: "miqt_exec_callback_QUndoGroup_activeStackChanged".} =
+proc miqt_exec_callback_cQUndoGroup_activeStackChanged(slot: int, stack: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupactiveStackChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qundostack_types.QUndoStack(h: stack)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_activeStackChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupactiveStackChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactiveStackChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupactiveStackChangedSlot) =
   var tmp = new QUndoGroupactiveStackChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_activeStackChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_activeStackChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_activeStackChanged, miqt_exec_callback_cQUndoGroup_activeStackChanged_release)
 
 proc indexChanged*(self: gen_qundogroup_types.QUndoGroup, idx: cint): void =
   fcQUndoGroup_indexChanged(self.h, idx)
 
 type QUndoGroupindexChangedSlot* = proc(idx: cint)
-proc miqt_exec_callback_cQUndoGroup_indexChanged(slot: int, idx: cint) {.exportc: "miqt_exec_callback_QUndoGroup_indexChanged".} =
+proc miqt_exec_callback_cQUndoGroup_indexChanged(slot: int, idx: cint) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupindexChangedSlot](cast[pointer](slot))
   let slotval1 = idx
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_indexChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupindexChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onindexChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupindexChangedSlot) =
   var tmp = new QUndoGroupindexChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_indexChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_indexChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_indexChanged, miqt_exec_callback_cQUndoGroup_indexChanged_release)
 
 proc cleanChanged*(self: gen_qundogroup_types.QUndoGroup, clean: bool): void =
   fcQUndoGroup_cleanChanged(self.h, clean)
 
 type QUndoGroupcleanChangedSlot* = proc(clean: bool)
-proc miqt_exec_callback_cQUndoGroup_cleanChanged(slot: int, clean: bool) {.exportc: "miqt_exec_callback_QUndoGroup_cleanChanged".} =
+proc miqt_exec_callback_cQUndoGroup_cleanChanged(slot: int, clean: bool) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupcleanChangedSlot](cast[pointer](slot))
   let slotval1 = clean
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_cleanChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupcleanChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncleanChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcleanChangedSlot) =
   var tmp = new QUndoGroupcleanChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_cleanChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_cleanChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_cleanChanged, miqt_exec_callback_cQUndoGroup_cleanChanged_release)
 
 proc canUndoChanged*(self: gen_qundogroup_types.QUndoGroup, canUndo: bool): void =
   fcQUndoGroup_canUndoChanged(self.h, canUndo)
 
 type QUndoGroupcanUndoChangedSlot* = proc(canUndo: bool)
-proc miqt_exec_callback_cQUndoGroup_canUndoChanged(slot: int, canUndo: bool) {.exportc: "miqt_exec_callback_QUndoGroup_canUndoChanged".} =
+proc miqt_exec_callback_cQUndoGroup_canUndoChanged(slot: int, canUndo: bool) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupcanUndoChangedSlot](cast[pointer](slot))
   let slotval1 = canUndo
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_canUndoChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupcanUndoChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncanUndoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanUndoChangedSlot) =
   var tmp = new QUndoGroupcanUndoChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_canUndoChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_canUndoChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_canUndoChanged, miqt_exec_callback_cQUndoGroup_canUndoChanged_release)
 
 proc canRedoChanged*(self: gen_qundogroup_types.QUndoGroup, canRedo: bool): void =
   fcQUndoGroup_canRedoChanged(self.h, canRedo)
 
 type QUndoGroupcanRedoChangedSlot* = proc(canRedo: bool)
-proc miqt_exec_callback_cQUndoGroup_canRedoChanged(slot: int, canRedo: bool) {.exportc: "miqt_exec_callback_QUndoGroup_canRedoChanged".} =
+proc miqt_exec_callback_cQUndoGroup_canRedoChanged(slot: int, canRedo: bool) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupcanRedoChangedSlot](cast[pointer](slot))
   let slotval1 = canRedo
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_canRedoChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupcanRedoChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncanRedoChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupcanRedoChangedSlot) =
   var tmp = new QUndoGroupcanRedoChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_canRedoChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_canRedoChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_canRedoChanged, miqt_exec_callback_cQUndoGroup_canRedoChanged_release)
 
 proc undoTextChanged*(self: gen_qundogroup_types.QUndoGroup, undoText: string): void =
   fcQUndoGroup_undoTextChanged(self.h, struct_miqt_string(data: undoText, len: csize_t(len(undoText))))
 
 type QUndoGroupundoTextChangedSlot* = proc(undoText: string)
-proc miqt_exec_callback_cQUndoGroup_undoTextChanged(slot: int, undoText: struct_miqt_string) {.exportc: "miqt_exec_callback_QUndoGroup_undoTextChanged".} =
+proc miqt_exec_callback_cQUndoGroup_undoTextChanged(slot: int, undoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupundoTextChangedSlot](cast[pointer](slot))
   let vundoText_ms = undoText
   let vundoTextx_ret = string.fromBytes(toOpenArrayByte(vundoText_ms.data, 0, int(vundoText_ms.len)-1))
@@ -287,17 +307,21 @@ proc miqt_exec_callback_cQUndoGroup_undoTextChanged(slot: int, undoText: struct_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_undoTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupundoTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onundoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupundoTextChangedSlot) =
   var tmp = new QUndoGroupundoTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_undoTextChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_undoTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_undoTextChanged, miqt_exec_callback_cQUndoGroup_undoTextChanged_release)
 
 proc redoTextChanged*(self: gen_qundogroup_types.QUndoGroup, redoText: string): void =
   fcQUndoGroup_redoTextChanged(self.h, struct_miqt_string(data: redoText, len: csize_t(len(redoText))))
 
 type QUndoGroupredoTextChangedSlot* = proc(redoText: string)
-proc miqt_exec_callback_cQUndoGroup_redoTextChanged(slot: int, redoText: struct_miqt_string) {.exportc: "miqt_exec_callback_QUndoGroup_redoTextChanged".} =
+proc miqt_exec_callback_cQUndoGroup_redoTextChanged(slot: int, redoText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QUndoGroupredoTextChangedSlot](cast[pointer](slot))
   let vredoText_ms = redoText
   let vredoTextx_ret = string.fromBytes(toOpenArrayByte(vredoText_ms.data, 0, int(vredoText_ms.len)-1))
@@ -306,11 +330,15 @@ proc miqt_exec_callback_cQUndoGroup_redoTextChanged(slot: int, redoText: struct_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQUndoGroup_redoTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QUndoGroupredoTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onredoTextChanged*(self: gen_qundogroup_types.QUndoGroup, slot: QUndoGroupredoTextChangedSlot) =
   var tmp = new QUndoGroupredoTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQUndoGroup_connect_redoTextChanged(self.h, cast[int](addr tmp[]))
+  fcQUndoGroup_connect_redoTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQUndoGroup_redoTextChanged, miqt_exec_callback_cQUndoGroup_redoTextChanged_release)
 
 proc tr*(_: type gen_qundogroup_types.QUndoGroup, s: cstring, c: cstring): string =
   let v_ms = fcQUndoGroup_tr2(s, c)

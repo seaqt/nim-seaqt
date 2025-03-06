@@ -67,13 +67,13 @@ proc fcQCameraControl_setCaptureMode(self: pointer, captureMode: cint): void {.i
 proc fcQCameraControl_isCaptureModeSupported(self: pointer, mode: cint): bool {.importc: "QCameraControl_isCaptureModeSupported".}
 proc fcQCameraControl_canChangeProperty(self: pointer, changeType: cint, status: cint): bool {.importc: "QCameraControl_canChangeProperty".}
 proc fcQCameraControl_stateChanged(self: pointer, param1: cint): void {.importc: "QCameraControl_stateChanged".}
-proc fcQCameraControl_connect_stateChanged(self: pointer, slot: int) {.importc: "QCameraControl_connect_stateChanged".}
+proc fcQCameraControl_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraControl_connect_stateChanged".}
 proc fcQCameraControl_statusChanged(self: pointer, param1: cint): void {.importc: "QCameraControl_statusChanged".}
-proc fcQCameraControl_connect_statusChanged(self: pointer, slot: int) {.importc: "QCameraControl_connect_statusChanged".}
+proc fcQCameraControl_connect_statusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraControl_connect_statusChanged".}
 proc fcQCameraControl_error(self: pointer, error: cint, errorString: struct_miqt_string): void {.importc: "QCameraControl_error".}
-proc fcQCameraControl_connect_error(self: pointer, slot: int) {.importc: "QCameraControl_connect_error".}
+proc fcQCameraControl_connect_error(self: pointer, slot: int, callback: proc (slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraControl_connect_error".}
 proc fcQCameraControl_captureModeChanged(self: pointer, mode: cint): void {.importc: "QCameraControl_captureModeChanged".}
-proc fcQCameraControl_connect_captureModeChanged(self: pointer, slot: int) {.importc: "QCameraControl_connect_captureModeChanged".}
+proc fcQCameraControl_connect_captureModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraControl_connect_captureModeChanged".}
 proc fcQCameraControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraControl_tr2".}
 proc fcQCameraControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraControl_tr3".}
 proc fcQCameraControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraControl_trUtf82".}
@@ -127,39 +127,47 @@ proc stateChanged*(self: gen_qcameracontrol_types.QCameraControl, param1: cint):
   fcQCameraControl_stateChanged(self.h, cint(param1))
 
 type QCameraControlstateChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQCameraControl_stateChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QCameraControl_stateChanged".} =
+proc miqt_exec_callback_cQCameraControl_stateChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraControlstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraControl_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraControlstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qcameracontrol_types.QCameraControl, slot: QCameraControlstateChangedSlot) =
   var tmp = new QCameraControlstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraControl_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraControl_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraControl_stateChanged, miqt_exec_callback_cQCameraControl_stateChanged_release)
 
 proc statusChanged*(self: gen_qcameracontrol_types.QCameraControl, param1: cint): void =
   fcQCameraControl_statusChanged(self.h, cint(param1))
 
 type QCameraControlstatusChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQCameraControl_statusChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QCameraControl_statusChanged".} =
+proc miqt_exec_callback_cQCameraControl_statusChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraControlstatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraControl_statusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraControlstatusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusChanged*(self: gen_qcameracontrol_types.QCameraControl, slot: QCameraControlstatusChangedSlot) =
   var tmp = new QCameraControlstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraControl_connect_statusChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraControl_connect_statusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraControl_statusChanged, miqt_exec_callback_cQCameraControl_statusChanged_release)
 
 proc error*(self: gen_qcameracontrol_types.QCameraControl, error: cint, errorString: string): void =
   fcQCameraControl_error(self.h, error, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
 type QCameraControlerrorSlot* = proc(error: cint, errorString: string)
-proc miqt_exec_callback_cQCameraControl_error(slot: int, error: cint, errorString: struct_miqt_string) {.exportc: "miqt_exec_callback_QCameraControl_error".} =
+proc miqt_exec_callback_cQCameraControl_error(slot: int, error: cint, errorString: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCameraControlerrorSlot](cast[pointer](slot))
   let slotval1 = error
 
@@ -170,27 +178,35 @@ proc miqt_exec_callback_cQCameraControl_error(slot: int, error: cint, errorStrin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQCameraControl_error_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraControlerrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qcameracontrol_types.QCameraControl, slot: QCameraControlerrorSlot) =
   var tmp = new QCameraControlerrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraControl_connect_error(self.h, cast[int](addr tmp[]))
+  fcQCameraControl_connect_error(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraControl_error, miqt_exec_callback_cQCameraControl_error_release)
 
 proc captureModeChanged*(self: gen_qcameracontrol_types.QCameraControl, mode: cint): void =
   fcQCameraControl_captureModeChanged(self.h, cint(mode))
 
 type QCameraControlcaptureModeChangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQCameraControl_captureModeChanged(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QCameraControl_captureModeChanged".} =
+proc miqt_exec_callback_cQCameraControl_captureModeChanged(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraControlcaptureModeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCameraControl_captureModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraControlcaptureModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncaptureModeChanged*(self: gen_qcameracontrol_types.QCameraControl, slot: QCameraControlcaptureModeChangedSlot) =
   var tmp = new QCameraControlcaptureModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraControl_connect_captureModeChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraControl_connect_captureModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraControl_captureModeChanged, miqt_exec_callback_cQCameraControl_captureModeChanged_release)
 
 proc tr*(_: type gen_qcameracontrol_types.QCameraControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraControl_tr2(s, c)

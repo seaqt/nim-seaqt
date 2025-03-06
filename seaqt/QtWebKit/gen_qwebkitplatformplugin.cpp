@@ -25,10 +25,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWebSelectMethod_selectItem(intptr_t, int, bool, bool);
-void miqt_exec_callback_QWebSelectMethod_didHide(intptr_t);
-void miqt_exec_callback_QWebNotificationPresenter_notificationClosed(intptr_t);
-void miqt_exec_callback_QWebNotificationPresenter_notificationClicked(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -158,23 +154,33 @@ void QWebSelectMethod_selectItem(QWebSelectMethod* self, int index, bool allowMu
 	self->selectItem(static_cast<int>(index), allowMultiplySelections, shift);
 }
 
-void QWebSelectMethod_connect_selectItem(QWebSelectMethod* self, intptr_t slot) {
-	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)(int, bool, bool)>(&QWebSelectMethod::selectItem), self, [=](int index, bool allowMultiplySelections, bool shift) {
-		int sigval1 = index;
-		bool sigval2 = allowMultiplySelections;
-		bool sigval3 = shift;
-		miqt_exec_callback_QWebSelectMethod_selectItem(slot, sigval1, sigval2, sigval3);
-	});
+void QWebSelectMethod_connect_selectItem(QWebSelectMethod* self, intptr_t slot, void (*callback)(intptr_t, int, bool, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, bool, bool);
+		void operator()(int index, bool allowMultiplySelections, bool shift) {
+			int sigval1 = index;
+			bool sigval2 = allowMultiplySelections;
+			bool sigval3 = shift;
+			callback(slot, sigval1, sigval2, sigval3);
+		}
+	};
+	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)(int, bool, bool)>(&QWebSelectMethod::selectItem), self, local_caller{slot, callback, release});
 }
 
 void QWebSelectMethod_didHide(QWebSelectMethod* self) {
 	self->didHide();
 }
 
-void QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot) {
-	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)()>(&QWebSelectMethod::didHide), self, [=]() {
-		miqt_exec_callback_QWebSelectMethod_didHide(slot);
-	});
+void QWebSelectMethod_connect_didHide(QWebSelectMethod* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebSelectMethod::connect(self, static_cast<void (QWebSelectMethod::*)()>(&QWebSelectMethod::didHide), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWebSelectMethod_tr2(const char* s, const char* c) {
@@ -310,20 +316,30 @@ void QWebNotificationPresenter_notificationClosed(QWebNotificationPresenter* sel
 	self->notificationClosed();
 }
 
-void QWebNotificationPresenter_connect_notificationClosed(QWebNotificationPresenter* self, intptr_t slot) {
-	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClosed), self, [=]() {
-		miqt_exec_callback_QWebNotificationPresenter_notificationClosed(slot);
-	});
+void QWebNotificationPresenter_connect_notificationClosed(QWebNotificationPresenter* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClosed), self, local_caller{slot, callback, release});
 }
 
 void QWebNotificationPresenter_notificationClicked(QWebNotificationPresenter* self) {
 	self->notificationClicked();
 }
 
-void QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPresenter* self, intptr_t slot) {
-	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClicked), self, [=]() {
-		miqt_exec_callback_QWebNotificationPresenter_notificationClicked(slot);
-	});
+void QWebNotificationPresenter_connect_notificationClicked(QWebNotificationPresenter* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebNotificationPresenter::connect(self, static_cast<void (QWebNotificationPresenter::*)()>(&QWebNotificationPresenter::notificationClicked), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWebNotificationPresenter_tr2(const char* s, const char* c) {

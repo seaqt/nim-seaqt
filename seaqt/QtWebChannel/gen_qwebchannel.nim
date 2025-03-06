@@ -65,7 +65,7 @@ proc fcQWebChannel_deregisterObject(self: pointer, objectVal: pointer): void {.i
 proc fcQWebChannel_blockUpdates(self: pointer, ): bool {.importc: "QWebChannel_blockUpdates".}
 proc fcQWebChannel_setBlockUpdates(self: pointer, blockVal: bool): void {.importc: "QWebChannel_setBlockUpdates".}
 proc fcQWebChannel_blockUpdatesChanged(self: pointer, blockVal: bool): void {.importc: "QWebChannel_blockUpdatesChanged".}
-proc fcQWebChannel_connect_blockUpdatesChanged(self: pointer, slot: int) {.importc: "QWebChannel_connect_blockUpdatesChanged".}
+proc fcQWebChannel_connect_blockUpdatesChanged(self: pointer, slot: int, callback: proc (slot: int, blockVal: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebChannel_connect_blockUpdatesChanged".}
 proc fcQWebChannel_connectTo(self: pointer, transport: pointer): void {.importc: "QWebChannel_connectTo".}
 proc fcQWebChannel_disconnectFrom(self: pointer, transport: pointer): void {.importc: "QWebChannel_disconnectFrom".}
 proc fcQWebChannel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebChannel_tr2".}
@@ -163,17 +163,21 @@ proc blockUpdatesChanged*(self: gen_qwebchannel_types.QWebChannel, blockVal: boo
   fcQWebChannel_blockUpdatesChanged(self.h, blockVal)
 
 type QWebChannelblockUpdatesChangedSlot* = proc(blockVal: bool)
-proc miqt_exec_callback_cQWebChannel_blockUpdatesChanged(slot: int, blockVal: bool) {.exportc: "miqt_exec_callback_QWebChannel_blockUpdatesChanged".} =
+proc miqt_exec_callback_cQWebChannel_blockUpdatesChanged(slot: int, blockVal: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebChannelblockUpdatesChangedSlot](cast[pointer](slot))
   let slotval1 = blockVal
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebChannel_blockUpdatesChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebChannelblockUpdatesChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onblockUpdatesChanged*(self: gen_qwebchannel_types.QWebChannel, slot: QWebChannelblockUpdatesChangedSlot) =
   var tmp = new QWebChannelblockUpdatesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebChannel_connect_blockUpdatesChanged(self.h, cast[int](addr tmp[]))
+  fcQWebChannel_connect_blockUpdatesChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebChannel_blockUpdatesChanged, miqt_exec_callback_cQWebChannel_blockUpdatesChanged_release)
 
 proc connectTo*(self: gen_qwebchannel_types.QWebChannel, transport: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport): void =
   fcQWebChannel_connectTo(self.h, transport.h)

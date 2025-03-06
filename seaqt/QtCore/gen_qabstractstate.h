@@ -42,7 +42,7 @@ QState* QAbstractState_parentState(const QAbstractState* self);
 QStateMachine* QAbstractState_machine(const QAbstractState* self);
 bool QAbstractState_active(const QAbstractState* self);
 void QAbstractState_activeChanged(QAbstractState* self, bool active);
-void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot);
+void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QAbstractState_onEntry(QAbstractState* self, QEvent* event);
 void QAbstractState_onExit(QAbstractState* self, QEvent* event);
 bool QAbstractState_event(QAbstractState* self, QEvent* e);

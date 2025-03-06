@@ -15,7 +15,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAbstractState_activeChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -74,11 +73,16 @@ void QAbstractState_activeChanged(QAbstractState* self, bool active) {
 	self->activeChanged(active);
 }
 
-void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot) {
-	QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, [=](bool active) {
-		bool sigval1 = active;
-		miqt_exec_callback_QAbstractState_activeChanged(slot, sigval1);
-	});
+void QAbstractState_connect_activeChanged(QAbstractState* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool active) {
+			bool sigval1 = active;
+			callback(slot, sigval1);
+		}
+	};
+	QAbstractState::connect(self, static_cast<void (QAbstractState::*)(bool)>(&QAbstractState::activeChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAbstractState_tr2(const char* s, const char* c) {

@@ -128,7 +128,7 @@ proc fcQAbstractSpinBox_stepDown(self: pointer, ): void {.importc: "QAbstractSpi
 proc fcQAbstractSpinBox_selectAll(self: pointer, ): void {.importc: "QAbstractSpinBox_selectAll".}
 proc fcQAbstractSpinBox_clear(self: pointer, ): void {.importc: "QAbstractSpinBox_clear".}
 proc fcQAbstractSpinBox_editingFinished(self: pointer, ): void {.importc: "QAbstractSpinBox_editingFinished".}
-proc fcQAbstractSpinBox_connect_editingFinished(self: pointer, slot: int) {.importc: "QAbstractSpinBox_connect_editingFinished".}
+proc fcQAbstractSpinBox_connect_editingFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractSpinBox_connect_editingFinished".}
 proc fcQAbstractSpinBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSpinBox_tr2".}
 proc fcQAbstractSpinBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractSpinBox_tr3".}
 proc fcQAbstractSpinBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractSpinBox_trUtf82".}
@@ -383,15 +383,19 @@ proc editingFinished*(self: gen_qabstractspinbox_types.QAbstractSpinBox, ): void
   fcQAbstractSpinBox_editingFinished(self.h)
 
 type QAbstractSpinBoxeditingFinishedSlot* = proc()
-proc miqt_exec_callback_cQAbstractSpinBox_editingFinished(slot: int) {.exportc: "miqt_exec_callback_QAbstractSpinBox_editingFinished".} =
+proc miqt_exec_callback_cQAbstractSpinBox_editingFinished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractSpinBoxeditingFinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractSpinBox_editingFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractSpinBoxeditingFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oneditingFinished*(self: gen_qabstractspinbox_types.QAbstractSpinBox, slot: QAbstractSpinBoxeditingFinishedSlot) =
   var tmp = new QAbstractSpinBoxeditingFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractSpinBox_connect_editingFinished(self.h, cast[int](addr tmp[]))
+  fcQAbstractSpinBox_connect_editingFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractSpinBox_editingFinished, miqt_exec_callback_cQAbstractSpinBox_editingFinished_release)
 
 proc tr*(_: type gen_qabstractspinbox_types.QAbstractSpinBox, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractSpinBox_tr2(s, c)

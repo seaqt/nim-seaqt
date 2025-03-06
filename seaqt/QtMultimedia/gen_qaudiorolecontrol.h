@@ -38,7 +38,7 @@ int QAudioRoleControl_audioRole(const QAudioRoleControl* self);
 void QAudioRoleControl_setAudioRole(QAudioRoleControl* self, int role);
 struct miqt_array /* of int */  QAudioRoleControl_supportedAudioRoles(const QAudioRoleControl* self);
 void QAudioRoleControl_audioRoleChanged(QAudioRoleControl* self, int role);
-void QAudioRoleControl_connect_audioRoleChanged(QAudioRoleControl* self, intptr_t slot);
+void QAudioRoleControl_connect_audioRoleChanged(QAudioRoleControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QAudioRoleControl_tr2(const char* s, const char* c);
 struct miqt_string QAudioRoleControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioRoleControl_trUtf82(const char* s, const char* c);

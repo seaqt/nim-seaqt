@@ -68,7 +68,7 @@ proc fcQQmlPropertyMap_contains(self: pointer, key: struct_miqt_string): bool {.
 proc fcQQmlPropertyMap_operatorSubscript(self: pointer, key: struct_miqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscript".}
 proc fcQQmlPropertyMap_operatorSubscriptWithKey(self: pointer, key: struct_miqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscriptWithKey".}
 proc fcQQmlPropertyMap_valueChanged(self: pointer, key: struct_miqt_string, value: pointer): void {.importc: "QQmlPropertyMap_valueChanged".}
-proc fcQQmlPropertyMap_connect_valueChanged(self: pointer, slot: int) {.importc: "QQmlPropertyMap_connect_valueChanged".}
+proc fcQQmlPropertyMap_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, key: struct_miqt_string, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlPropertyMap_connect_valueChanged".}
 proc fcQQmlPropertyMap_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlPropertyMap_tr2".}
 proc fcQQmlPropertyMap_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlPropertyMap_tr3".}
 proc fcQQmlPropertyMap_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlPropertyMap_trUtf82".}
@@ -165,7 +165,7 @@ proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string,
   fcQQmlPropertyMap_valueChanged(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
 
 type QQmlPropertyMapvalueChangedSlot* = proc(key: string, value: gen_qvariant_types.QVariant)
-proc miqt_exec_callback_cQQmlPropertyMap_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.exportc: "miqt_exec_callback_QQmlPropertyMap_valueChanged".} =
+proc miqt_exec_callback_cQQmlPropertyMap_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
@@ -176,11 +176,15 @@ proc miqt_exec_callback_cQQmlPropertyMap_valueChanged(slot: int, key: struct_miq
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQQmlPropertyMap_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, slot: QQmlPropertyMapvalueChangedSlot) =
   var tmp = new QQmlPropertyMapvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlPropertyMap_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQQmlPropertyMap_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlPropertyMap_valueChanged, miqt_exec_callback_cQQmlPropertyMap_valueChanged_release)
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring): string =
   let v_ms = fcQQmlPropertyMap_tr2(s, c)

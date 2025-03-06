@@ -79,7 +79,7 @@ proc fcQPrintPreviewDialog_printer(self: pointer, ): pointer {.importc: "QPrintP
 proc fcQPrintPreviewDialog_setVisible(self: pointer, visible: bool): void {.importc: "QPrintPreviewDialog_setVisible".}
 proc fcQPrintPreviewDialog_done(self: pointer, resultVal: cint): void {.importc: "QPrintPreviewDialog_done".}
 proc fcQPrintPreviewDialog_paintRequested(self: pointer, printer: pointer): void {.importc: "QPrintPreviewDialog_paintRequested".}
-proc fcQPrintPreviewDialog_connect_paintRequested(self: pointer, slot: int) {.importc: "QPrintPreviewDialog_connect_paintRequested".}
+proc fcQPrintPreviewDialog_connect_paintRequested(self: pointer, slot: int, callback: proc (slot: int, printer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QPrintPreviewDialog_connect_paintRequested".}
 proc fcQPrintPreviewDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QPrintPreviewDialog_tr2".}
 proc fcQPrintPreviewDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QPrintPreviewDialog_tr3".}
 proc fcQPrintPreviewDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QPrintPreviewDialog_trUtf82".}
@@ -239,17 +239,21 @@ proc paintRequested*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog, pr
   fcQPrintPreviewDialog_paintRequested(self.h, printer.h)
 
 type QPrintPreviewDialogpaintRequestedSlot* = proc(printer: gen_qprinter_types.QPrinter)
-proc miqt_exec_callback_cQPrintPreviewDialog_paintRequested(slot: int, printer: pointer) {.exportc: "miqt_exec_callback_QPrintPreviewDialog_paintRequested".} =
+proc miqt_exec_callback_cQPrintPreviewDialog_paintRequested(slot: int, printer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QPrintPreviewDialogpaintRequestedSlot](cast[pointer](slot))
   let slotval1 = gen_qprinter_types.QPrinter(h: printer)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQPrintPreviewDialog_paintRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QPrintPreviewDialogpaintRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onpaintRequested*(self: gen_qprintpreviewdialog_types.QPrintPreviewDialog, slot: QPrintPreviewDialogpaintRequestedSlot) =
   var tmp = new QPrintPreviewDialogpaintRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQPrintPreviewDialog_connect_paintRequested(self.h, cast[int](addr tmp[]))
+  fcQPrintPreviewDialog_connect_paintRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQPrintPreviewDialog_paintRequested, miqt_exec_callback_cQPrintPreviewDialog_paintRequested_release)
 
 proc tr*(_: type gen_qprintpreviewdialog_types.QPrintPreviewDialog, s: cstring, c: cstring): string =
   let v_ms = fcQPrintPreviewDialog_tr2(s, c)

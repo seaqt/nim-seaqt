@@ -67,7 +67,7 @@ bool QQmlPropertyMap_contains(const QQmlPropertyMap* self, struct miqt_string ke
 QVariant* QQmlPropertyMap_operatorSubscript(QQmlPropertyMap* self, struct miqt_string key);
 QVariant* QQmlPropertyMap_operatorSubscriptWithKey(const QQmlPropertyMap* self, struct miqt_string key);
 void QQmlPropertyMap_valueChanged(QQmlPropertyMap* self, struct miqt_string key, QVariant* value);
-void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot);
+void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t));
 QVariant* QQmlPropertyMap_updateValue(QQmlPropertyMap* self, struct miqt_string key, QVariant* input);
 struct miqt_string QQmlPropertyMap_tr2(const char* s, const char* c);
 struct miqt_string QQmlPropertyMap_tr3(const char* s, const char* c, int n);

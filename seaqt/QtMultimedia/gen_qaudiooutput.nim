@@ -83,9 +83,9 @@ proc fcQAudioOutput_volume(self: pointer, ): float64 {.importc: "QAudioOutput_vo
 proc fcQAudioOutput_category(self: pointer, ): struct_miqt_string {.importc: "QAudioOutput_category".}
 proc fcQAudioOutput_setCategory(self: pointer, category: struct_miqt_string): void {.importc: "QAudioOutput_setCategory".}
 proc fcQAudioOutput_stateChanged(self: pointer, state: cint): void {.importc: "QAudioOutput_stateChanged".}
-proc fcQAudioOutput_connect_stateChanged(self: pointer, slot: int) {.importc: "QAudioOutput_connect_stateChanged".}
+proc fcQAudioOutput_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioOutput_connect_stateChanged".}
 proc fcQAudioOutput_notify(self: pointer, ): void {.importc: "QAudioOutput_notify".}
-proc fcQAudioOutput_connect_notify(self: pointer, slot: int) {.importc: "QAudioOutput_connect_notify".}
+proc fcQAudioOutput_connect_notify(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioOutput_connect_notify".}
 proc fcQAudioOutput_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioOutput_tr2".}
 proc fcQAudioOutput_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioOutput_tr3".}
 proc fcQAudioOutput_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioOutput_trUtf82".}
@@ -212,31 +212,39 @@ proc stateChanged*(self: gen_qaudiooutput_types.QAudioOutput, state: cint): void
   fcQAudioOutput_stateChanged(self.h, cint(state))
 
 type QAudioOutputstateChangedSlot* = proc(state: cint)
-proc miqt_exec_callback_cQAudioOutput_stateChanged(slot: int, state: cint) {.exportc: "miqt_exec_callback_QAudioOutput_stateChanged".} =
+proc miqt_exec_callback_cQAudioOutput_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioOutputstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioOutput_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioOutputstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qaudiooutput_types.QAudioOutput, slot: QAudioOutputstateChangedSlot) =
   var tmp = new QAudioOutputstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioOutput_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioOutput_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioOutput_stateChanged, miqt_exec_callback_cQAudioOutput_stateChanged_release)
 
 proc notify*(self: gen_qaudiooutput_types.QAudioOutput, ): void =
   fcQAudioOutput_notify(self.h)
 
 type QAudioOutputnotifySlot* = proc()
-proc miqt_exec_callback_cQAudioOutput_notify(slot: int) {.exportc: "miqt_exec_callback_QAudioOutput_notify".} =
+proc miqt_exec_callback_cQAudioOutput_notify(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioOutputnotifySlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioOutput_notify_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioOutputnotifySlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onnotify*(self: gen_qaudiooutput_types.QAudioOutput, slot: QAudioOutputnotifySlot) =
   var tmp = new QAudioOutputnotifySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioOutput_connect_notify(self.h, cast[int](addr tmp[]))
+  fcQAudioOutput_connect_notify(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioOutput_notify, miqt_exec_callback_cQAudioOutput_notify_release)
 
 proc tr*(_: type gen_qaudiooutput_types.QAudioOutput, s: cstring, c: cstring): string =
   let v_ms = fcQAudioOutput_tr2(s, c)

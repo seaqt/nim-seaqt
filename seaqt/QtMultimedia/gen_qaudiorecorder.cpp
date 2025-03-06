@@ -19,8 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAudioRecorder_audioInputChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QAudioRecorder_availableAudioInputsChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -337,28 +335,38 @@ void QAudioRecorder_audioInputChanged(QAudioRecorder* self, struct miqt_string n
 	self->audioInputChanged(name_QString);
 }
 
-void QAudioRecorder_connect_audioInputChanged(QAudioRecorder* self, intptr_t slot) {
-	VirtualQAudioRecorder::connect(self, static_cast<void (QAudioRecorder::*)(const QString&)>(&QAudioRecorder::audioInputChanged), self, [=](const QString& name) {
-		const QString name_ret = name;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray name_b = name_ret.toUtf8();
-		struct miqt_string name_ms;
-		name_ms.len = name_b.length();
-		name_ms.data = static_cast<char*>(malloc(name_ms.len));
-		memcpy(name_ms.data, name_b.data(), name_ms.len);
-		struct miqt_string sigval1 = name_ms;
-		miqt_exec_callback_QAudioRecorder_audioInputChanged(slot, sigval1);
-	});
+void QAudioRecorder_connect_audioInputChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& name) {
+			const QString name_ret = name;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray name_b = name_ret.toUtf8();
+			struct miqt_string name_ms;
+			name_ms.len = name_b.length();
+			name_ms.data = static_cast<char*>(malloc(name_ms.len));
+			memcpy(name_ms.data, name_b.data(), name_ms.len);
+			struct miqt_string sigval1 = name_ms;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAudioRecorder::connect(self, static_cast<void (QAudioRecorder::*)(const QString&)>(&QAudioRecorder::audioInputChanged), self, local_caller{slot, callback, release});
 }
 
 void QAudioRecorder_availableAudioInputsChanged(QAudioRecorder* self) {
 	self->availableAudioInputsChanged();
 }
 
-void QAudioRecorder_connect_availableAudioInputsChanged(QAudioRecorder* self, intptr_t slot) {
-	VirtualQAudioRecorder::connect(self, static_cast<void (QAudioRecorder::*)()>(&QAudioRecorder::availableAudioInputsChanged), self, [=]() {
-		miqt_exec_callback_QAudioRecorder_availableAudioInputsChanged(slot);
-	});
+void QAudioRecorder_connect_availableAudioInputsChanged(QAudioRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAudioRecorder::connect(self, static_cast<void (QAudioRecorder::*)()>(&QAudioRecorder::availableAudioInputsChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAudioRecorder_tr2(const char* s, const char* c) {

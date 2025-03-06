@@ -101,7 +101,7 @@ void QStateMachine_start(QStateMachine* self);
 void QStateMachine_stop(QStateMachine* self);
 void QStateMachine_setRunning(QStateMachine* self, bool running);
 void QStateMachine_runningChanged(QStateMachine* self, bool running);
-void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot);
+void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QStateMachine_onEntry(QStateMachine* self, QEvent* event);
 void QStateMachine_onExit(QStateMachine* self, QEvent* event);
 void QStateMachine_beginSelectTransitions(QStateMachine* self, QEvent* event);

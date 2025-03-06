@@ -59,7 +59,7 @@ proc fcQWebChannelAbstractTransport_tr(s: cstring): struct_miqt_string {.importc
 proc fcQWebChannelAbstractTransport_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebChannelAbstractTransport_trUtf8".}
 proc fcQWebChannelAbstractTransport_sendMessage(self: pointer, message: pointer): void {.importc: "QWebChannelAbstractTransport_sendMessage".}
 proc fcQWebChannelAbstractTransport_messageReceived(self: pointer, message: pointer, transport: pointer): void {.importc: "QWebChannelAbstractTransport_messageReceived".}
-proc fcQWebChannelAbstractTransport_connect_messageReceived(self: pointer, slot: int) {.importc: "QWebChannelAbstractTransport_connect_messageReceived".}
+proc fcQWebChannelAbstractTransport_connect_messageReceived(self: pointer, slot: int, callback: proc (slot: int, message: pointer, transport: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebChannelAbstractTransport_connect_messageReceived".}
 proc fcQWebChannelAbstractTransport_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebChannelAbstractTransport_tr2".}
 proc fcQWebChannelAbstractTransport_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebChannelAbstractTransport_tr3".}
 proc fcQWebChannelAbstractTransport_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebChannelAbstractTransport_trUtf82".}
@@ -120,7 +120,7 @@ proc messageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannelAb
   fcQWebChannelAbstractTransport_messageReceived(self.h, message.h, transport.h)
 
 type QWebChannelAbstractTransportmessageReceivedSlot* = proc(message: gen_qjsonobject_types.QJsonObject, transport: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport)
-proc miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived(slot: int, message: pointer, transport: pointer) {.exportc: "miqt_exec_callback_QWebChannelAbstractTransport_messageReceived".} =
+proc miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived(slot: int, message: pointer, transport: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebChannelAbstractTransportmessageReceivedSlot](cast[pointer](slot))
   let slotval1 = gen_qjsonobject_types.QJsonObject(h: message)
 
@@ -128,11 +128,15 @@ proc miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived(slot: int,
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebChannelAbstractTransportmessageReceivedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmessageReceived*(self: gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, slot: QWebChannelAbstractTransportmessageReceivedSlot) =
   var tmp = new QWebChannelAbstractTransportmessageReceivedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebChannelAbstractTransport_connect_messageReceived(self.h, cast[int](addr tmp[]))
+  fcQWebChannelAbstractTransport_connect_messageReceived(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived, miqt_exec_callback_cQWebChannelAbstractTransport_messageReceived_release)
 
 proc tr*(_: type gen_qwebchannelabstracttransport_types.QWebChannelAbstractTransport, s: cstring, c: cstring): string =
   let v_ms = fcQWebChannelAbstractTransport_tr2(s, c)

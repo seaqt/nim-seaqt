@@ -171,13 +171,13 @@ proc fcQProcess_nullDevice(): struct_miqt_string {.importc: "QProcess_nullDevice
 proc fcQProcess_terminate(self: pointer, ): void {.importc: "QProcess_terminate".}
 proc fcQProcess_kill(self: pointer, ): void {.importc: "QProcess_kill".}
 proc fcQProcess_finished(self: pointer, exitCode: cint): void {.importc: "QProcess_finished".}
-proc fcQProcess_connect_finished(self: pointer, slot: int) {.importc: "QProcess_connect_finished".}
+proc fcQProcess_connect_finished(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished".}
 proc fcQProcess_finished2(self: pointer, exitCode: cint, exitStatus: cint): void {.importc: "QProcess_finished2".}
-proc fcQProcess_connect_finished2(self: pointer, slot: int) {.importc: "QProcess_connect_finished2".}
+proc fcQProcess_connect_finished2(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint, exitStatus: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished2".}
 proc fcQProcess_errorWithError(self: pointer, error: cint): void {.importc: "QProcess_errorWithError".}
-proc fcQProcess_connect_errorWithError(self: pointer, slot: int) {.importc: "QProcess_connect_errorWithError".}
+proc fcQProcess_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_errorWithError".}
 proc fcQProcess_errorOccurred(self: pointer, error: cint): void {.importc: "QProcess_errorOccurred".}
-proc fcQProcess_connect_errorOccurred(self: pointer, slot: int) {.importc: "QProcess_connect_errorOccurred".}
+proc fcQProcess_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_errorOccurred".}
 proc fcQProcess_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QProcess_tr2".}
 proc fcQProcess_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProcess_tr3".}
 proc fcQProcess_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QProcess_trUtf82".}
@@ -584,23 +584,27 @@ proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint): void =
   fcQProcess_finished(self.h, exitCode)
 
 type QProcessfinishedSlot* = proc(exitCode: cint)
-proc miqt_exec_callback_cQProcess_finished(slot: int, exitCode: cint) {.exportc: "miqt_exec_callback_QProcess_finished".} =
+proc miqt_exec_callback_cQProcess_finished(slot: int, exitCode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcessfinishedSlot](cast[pointer](slot))
   let slotval1 = exitCode
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQProcess_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedSlot) =
   var tmp = new QProcessfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished(self.h, cast[int](addr tmp[]))
+  fcQProcess_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_finished, miqt_exec_callback_cQProcess_finished_release)
 
 proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint, exitStatus: cint): void =
   fcQProcess_finished2(self.h, exitCode, cint(exitStatus))
 
 type QProcessfinished2Slot* = proc(exitCode: cint, exitStatus: cint)
-proc miqt_exec_callback_cQProcess_finished2(slot: int, exitCode: cint, exitStatus: cint) {.exportc: "miqt_exec_callback_QProcess_finished2".} =
+proc miqt_exec_callback_cQProcess_finished2(slot: int, exitCode: cint, exitStatus: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcessfinished2Slot](cast[pointer](slot))
   let slotval1 = exitCode
 
@@ -608,43 +612,55 @@ proc miqt_exec_callback_cQProcess_finished2(slot: int, exitCode: cint, exitStatu
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQProcess_finished2_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcessfinished2Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinished2Slot) =
   var tmp = new QProcessfinished2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished2(self.h, cast[int](addr tmp[]))
+  fcQProcess_connect_finished2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_finished2, miqt_exec_callback_cQProcess_finished2_release)
 
 proc error*(self: gen_qprocess_types.QProcess, error: cint): void =
   fcQProcess_errorWithError(self.h, cint(error))
 
 type QProcesserrorWithErrorSlot* = proc(error: cint)
-proc miqt_exec_callback_cQProcess_errorWithError(slot: int, error: cint) {.exportc: "miqt_exec_callback_QProcess_errorWithError".} =
+proc miqt_exec_callback_cQProcess_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcesserrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQProcess_errorWithError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcesserrorWithErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qprocess_types.QProcess, slot: QProcesserrorWithErrorSlot) =
   var tmp = new QProcesserrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_errorWithError(self.h, cast[int](addr tmp[]))
+  fcQProcess_connect_errorWithError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_errorWithError, miqt_exec_callback_cQProcess_errorWithError_release)
 
 proc errorOccurred*(self: gen_qprocess_types.QProcess, error: cint): void =
   fcQProcess_errorOccurred(self.h, cint(error))
 
 type QProcesserrorOccurredSlot* = proc(error: cint)
-proc miqt_exec_callback_cQProcess_errorOccurred(slot: int, error: cint) {.exportc: "miqt_exec_callback_QProcess_errorOccurred".} =
+proc miqt_exec_callback_cQProcess_errorOccurred(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcesserrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQProcess_errorOccurred_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProcesserrorOccurredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerrorOccurred*(self: gen_qprocess_types.QProcess, slot: QProcesserrorOccurredSlot) =
   var tmp = new QProcesserrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_errorOccurred(self.h, cast[int](addr tmp[]))
+  fcQProcess_connect_errorOccurred(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_errorOccurred, miqt_exec_callback_cQProcess_errorOccurred_release)
 
 proc tr*(_: type gen_qprocess_types.QProcess, s: cstring, c: cstring): string =
   let v_ms = fcQProcess_tr2(s, c)

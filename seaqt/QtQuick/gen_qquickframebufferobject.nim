@@ -79,9 +79,9 @@ proc fcQQuickFramebufferObject_isTextureProvider(self: pointer, ): bool {.import
 proc fcQQuickFramebufferObject_textureProvider(self: pointer, ): pointer {.importc: "QQuickFramebufferObject_textureProvider".}
 proc fcQQuickFramebufferObject_releaseResources(self: pointer, ): void {.importc: "QQuickFramebufferObject_releaseResources".}
 proc fcQQuickFramebufferObject_textureFollowsItemSizeChanged(self: pointer, param1: bool): void {.importc: "QQuickFramebufferObject_textureFollowsItemSizeChanged".}
-proc fcQQuickFramebufferObject_connect_textureFollowsItemSizeChanged(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_connect_textureFollowsItemSizeChanged".}
+proc fcQQuickFramebufferObject_connect_textureFollowsItemSizeChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickFramebufferObject_connect_textureFollowsItemSizeChanged".}
 proc fcQQuickFramebufferObject_mirrorVerticallyChanged(self: pointer, param1: bool): void {.importc: "QQuickFramebufferObject_mirrorVerticallyChanged".}
-proc fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self: pointer, slot: int) {.importc: "QQuickFramebufferObject_connect_mirrorVerticallyChanged".}
+proc fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickFramebufferObject_connect_mirrorVerticallyChanged".}
 proc fcQQuickFramebufferObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickFramebufferObject_tr2".}
 proc fcQQuickFramebufferObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickFramebufferObject_tr3".}
 proc fcQQuickFramebufferObject_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickFramebufferObject_trUtf82".}
@@ -233,33 +233,41 @@ proc textureFollowsItemSizeChanged*(self: gen_qquickframebufferobject_types.QQui
   fcQQuickFramebufferObject_textureFollowsItemSizeChanged(self.h, param1)
 
 type QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickFramebufferObject_textureFollowsItemSizeChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickFramebufferObject_textureFollowsItemSizeChanged".} =
+proc miqt_exec_callback_cQQuickFramebufferObject_textureFollowsItemSizeChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickFramebufferObject_textureFollowsItemSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontextureFollowsItemSizeChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot) =
   var tmp = new QQuickFramebufferObjecttextureFollowsItemSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickFramebufferObject_connect_textureFollowsItemSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickFramebufferObject_connect_textureFollowsItemSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickFramebufferObject_textureFollowsItemSizeChanged, miqt_exec_callback_cQQuickFramebufferObject_textureFollowsItemSizeChanged_release)
 
 proc mirrorVerticallyChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, param1: bool): void =
   fcQQuickFramebufferObject_mirrorVerticallyChanged(self.h, param1)
 
 type QQuickFramebufferObjectmirrorVerticallyChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickFramebufferObject_mirrorVerticallyChanged(slot: int, param1: bool) {.exportc: "miqt_exec_callback_QQuickFramebufferObject_mirrorVerticallyChanged".} =
+proc miqt_exec_callback_cQQuickFramebufferObject_mirrorVerticallyChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickFramebufferObjectmirrorVerticallyChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickFramebufferObject_mirrorVerticallyChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickFramebufferObjectmirrorVerticallyChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmirrorVerticallyChanged*(self: gen_qquickframebufferobject_types.QQuickFramebufferObject, slot: QQuickFramebufferObjectmirrorVerticallyChangedSlot) =
   var tmp = new QQuickFramebufferObjectmirrorVerticallyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickFramebufferObject_connect_mirrorVerticallyChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickFramebufferObject_mirrorVerticallyChanged, miqt_exec_callback_cQQuickFramebufferObject_mirrorVerticallyChanged_release)
 
 proc tr*(_: type gen_qquickframebufferobject_types.QQuickFramebufferObject, s: cstring, c: cstring): string =
   let v_ms = fcQQuickFramebufferObject_tr2(s, c)

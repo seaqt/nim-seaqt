@@ -141,13 +141,13 @@ proc fcQCalendarWidget_showPreviousYear(self: pointer, ): void {.importc: "QCale
 proc fcQCalendarWidget_showSelectedDate(self: pointer, ): void {.importc: "QCalendarWidget_showSelectedDate".}
 proc fcQCalendarWidget_showToday(self: pointer, ): void {.importc: "QCalendarWidget_showToday".}
 proc fcQCalendarWidget_selectionChanged(self: pointer, ): void {.importc: "QCalendarWidget_selectionChanged".}
-proc fcQCalendarWidget_connect_selectionChanged(self: pointer, slot: int) {.importc: "QCalendarWidget_connect_selectionChanged".}
+proc fcQCalendarWidget_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_selectionChanged".}
 proc fcQCalendarWidget_clicked(self: pointer, date: pointer): void {.importc: "QCalendarWidget_clicked".}
-proc fcQCalendarWidget_connect_clicked(self: pointer, slot: int) {.importc: "QCalendarWidget_connect_clicked".}
+proc fcQCalendarWidget_connect_clicked(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_clicked".}
 proc fcQCalendarWidget_activated(self: pointer, date: pointer): void {.importc: "QCalendarWidget_activated".}
-proc fcQCalendarWidget_connect_activated(self: pointer, slot: int) {.importc: "QCalendarWidget_connect_activated".}
+proc fcQCalendarWidget_connect_activated(self: pointer, slot: int, callback: proc (slot: int, date: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_activated".}
 proc fcQCalendarWidget_currentPageChanged(self: pointer, year: cint, month: cint): void {.importc: "QCalendarWidget_currentPageChanged".}
-proc fcQCalendarWidget_connect_currentPageChanged(self: pointer, slot: int) {.importc: "QCalendarWidget_connect_currentPageChanged".}
+proc fcQCalendarWidget_connect_currentPageChanged(self: pointer, slot: int, callback: proc (slot: int, year: cint, month: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCalendarWidget_connect_currentPageChanged".}
 proc fcQCalendarWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCalendarWidget_tr2".}
 proc fcQCalendarWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCalendarWidget_tr3".}
 proc fcQCalendarWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCalendarWidget_trUtf82".}
@@ -425,53 +425,65 @@ proc selectionChanged*(self: gen_qcalendarwidget_types.QCalendarWidget, ): void 
   fcQCalendarWidget_selectionChanged(self.h)
 
 type QCalendarWidgetselectionChangedSlot* = proc()
-proc miqt_exec_callback_cQCalendarWidget_selectionChanged(slot: int) {.exportc: "miqt_exec_callback_QCalendarWidget_selectionChanged".} =
+proc miqt_exec_callback_cQCalendarWidget_selectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetselectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCalendarWidget_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCalendarWidgetselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onselectionChanged*(self: gen_qcalendarwidget_types.QCalendarWidget, slot: QCalendarWidgetselectionChangedSlot) =
   var tmp = new QCalendarWidgetselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCalendarWidget_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQCalendarWidget_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCalendarWidget_selectionChanged, miqt_exec_callback_cQCalendarWidget_selectionChanged_release)
 
 proc clicked*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): void =
   fcQCalendarWidget_clicked(self.h, date.h)
 
 type QCalendarWidgetclickedSlot* = proc(date: gen_qdatetime_types.QDate)
-proc miqt_exec_callback_cQCalendarWidget_clicked(slot: int, date: pointer) {.exportc: "miqt_exec_callback_QCalendarWidget_clicked".} =
+proc miqt_exec_callback_cQCalendarWidget_clicked(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetclickedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QDate(h: date)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCalendarWidget_clicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCalendarWidgetclickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onclicked*(self: gen_qcalendarwidget_types.QCalendarWidget, slot: QCalendarWidgetclickedSlot) =
   var tmp = new QCalendarWidgetclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCalendarWidget_connect_clicked(self.h, cast[int](addr tmp[]))
+  fcQCalendarWidget_connect_clicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCalendarWidget_clicked, miqt_exec_callback_cQCalendarWidget_clicked_release)
 
 proc activated*(self: gen_qcalendarwidget_types.QCalendarWidget, date: gen_qdatetime_types.QDate): void =
   fcQCalendarWidget_activated(self.h, date.h)
 
 type QCalendarWidgetactivatedSlot* = proc(date: gen_qdatetime_types.QDate)
-proc miqt_exec_callback_cQCalendarWidget_activated(slot: int, date: pointer) {.exportc: "miqt_exec_callback_QCalendarWidget_activated".} =
+proc miqt_exec_callback_cQCalendarWidget_activated(slot: int, date: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetactivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qdatetime_types.QDate(h: date)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQCalendarWidget_activated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCalendarWidgetactivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactivated*(self: gen_qcalendarwidget_types.QCalendarWidget, slot: QCalendarWidgetactivatedSlot) =
   var tmp = new QCalendarWidgetactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCalendarWidget_connect_activated(self.h, cast[int](addr tmp[]))
+  fcQCalendarWidget_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCalendarWidget_activated, miqt_exec_callback_cQCalendarWidget_activated_release)
 
 proc currentPageChanged*(self: gen_qcalendarwidget_types.QCalendarWidget, year: cint, month: cint): void =
   fcQCalendarWidget_currentPageChanged(self.h, year, month)
 
 type QCalendarWidgetcurrentPageChangedSlot* = proc(year: cint, month: cint)
-proc miqt_exec_callback_cQCalendarWidget_currentPageChanged(slot: int, year: cint, month: cint) {.exportc: "miqt_exec_callback_QCalendarWidget_currentPageChanged".} =
+proc miqt_exec_callback_cQCalendarWidget_currentPageChanged(slot: int, year: cint, month: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCalendarWidgetcurrentPageChangedSlot](cast[pointer](slot))
   let slotval1 = year
 
@@ -479,11 +491,15 @@ proc miqt_exec_callback_cQCalendarWidget_currentPageChanged(slot: int, year: cin
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQCalendarWidget_currentPageChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCalendarWidgetcurrentPageChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentPageChanged*(self: gen_qcalendarwidget_types.QCalendarWidget, slot: QCalendarWidgetcurrentPageChangedSlot) =
   var tmp = new QCalendarWidgetcurrentPageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCalendarWidget_connect_currentPageChanged(self.h, cast[int](addr tmp[]))
+  fcQCalendarWidget_connect_currentPageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCalendarWidget_currentPageChanged, miqt_exec_callback_cQCalendarWidget_currentPageChanged_release)
 
 proc tr*(_: type gen_qcalendarwidget_types.QCalendarWidget, s: cstring, c: cstring): string =
   let v_ms = fcQCalendarWidget_tr2(s, c)

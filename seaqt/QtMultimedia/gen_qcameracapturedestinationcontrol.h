@@ -38,7 +38,7 @@ bool QCameraCaptureDestinationControl_isCaptureDestinationSupported(const QCamer
 int QCameraCaptureDestinationControl_captureDestination(const QCameraCaptureDestinationControl* self);
 void QCameraCaptureDestinationControl_setCaptureDestination(QCameraCaptureDestinationControl* self, int destination);
 void QCameraCaptureDestinationControl_captureDestinationChanged(QCameraCaptureDestinationControl* self, int destination);
-void QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraCaptureDestinationControl* self, intptr_t slot);
+void QCameraCaptureDestinationControl_connect_captureDestinationChanged(QCameraCaptureDestinationControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QCameraCaptureDestinationControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraCaptureDestinationControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraCaptureDestinationControl_trUtf82(const char* s, const char* c);

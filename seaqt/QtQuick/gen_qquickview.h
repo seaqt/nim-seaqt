@@ -143,7 +143,7 @@ void QQuickView_setSource(QQuickView* self, QUrl* source);
 void QQuickView_setInitialProperties(QQuickView* self, struct miqt_map /* of struct miqt_string to QVariant* */  initialProperties);
 void QQuickView_setContent(QQuickView* self, QUrl* url, QQmlComponent* component, QObject* item);
 void QQuickView_statusChanged(QQuickView* self, int param1);
-void QQuickView_connect_statusChanged(QQuickView* self, intptr_t slot);
+void QQuickView_connect_statusChanged(QQuickView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QQuickView_resizeEvent(QQuickView* self, QResizeEvent* param1);
 void QQuickView_timerEvent(QQuickView* self, QTimerEvent* param1);
 void QQuickView_keyPressEvent(QQuickView* self, QKeyEvent* param1);

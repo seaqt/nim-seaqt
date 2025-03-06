@@ -94,7 +94,7 @@ proc fcQGraphicsEffect_isEnabled(self: pointer, ): bool {.importc: "QGraphicsEff
 proc fcQGraphicsEffect_setEnabled(self: pointer, enable: bool): void {.importc: "QGraphicsEffect_setEnabled".}
 proc fcQGraphicsEffect_update(self: pointer, ): void {.importc: "QGraphicsEffect_update".}
 proc fcQGraphicsEffect_enabledChanged(self: pointer, enabled: bool): void {.importc: "QGraphicsEffect_enabledChanged".}
-proc fcQGraphicsEffect_connect_enabledChanged(self: pointer, slot: int) {.importc: "QGraphicsEffect_connect_enabledChanged".}
+proc fcQGraphicsEffect_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int, enabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsEffect_connect_enabledChanged".}
 proc fcQGraphicsEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsEffect_tr2".}
 proc fcQGraphicsEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsEffect_tr3".}
 proc fcQGraphicsEffect_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsEffect_trUtf82".}
@@ -140,9 +140,9 @@ proc fcQGraphicsColorizeEffect_strength(self: pointer, ): float64 {.importc: "QG
 proc fcQGraphicsColorizeEffect_setColor(self: pointer, c: pointer): void {.importc: "QGraphicsColorizeEffect_setColor".}
 proc fcQGraphicsColorizeEffect_setStrength(self: pointer, strength: float64): void {.importc: "QGraphicsColorizeEffect_setStrength".}
 proc fcQGraphicsColorizeEffect_colorChanged(self: pointer, color: pointer): void {.importc: "QGraphicsColorizeEffect_colorChanged".}
-proc fcQGraphicsColorizeEffect_connect_colorChanged(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_connect_colorChanged".}
+proc fcQGraphicsColorizeEffect_connect_colorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsColorizeEffect_connect_colorChanged".}
 proc fcQGraphicsColorizeEffect_strengthChanged(self: pointer, strength: float64): void {.importc: "QGraphicsColorizeEffect_strengthChanged".}
-proc fcQGraphicsColorizeEffect_connect_strengthChanged(self: pointer, slot: int) {.importc: "QGraphicsColorizeEffect_connect_strengthChanged".}
+proc fcQGraphicsColorizeEffect_connect_strengthChanged(self: pointer, slot: int, callback: proc (slot: int, strength: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsColorizeEffect_connect_strengthChanged".}
 proc fcQGraphicsColorizeEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsColorizeEffect_tr2".}
 proc fcQGraphicsColorizeEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsColorizeEffect_tr3".}
 proc fcQGraphicsColorizeEffect_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsColorizeEffect_trUtf82".}
@@ -190,9 +190,9 @@ proc fcQGraphicsBlurEffect_blurHints(self: pointer, ): cint {.importc: "QGraphic
 proc fcQGraphicsBlurEffect_setBlurRadius(self: pointer, blurRadius: float64): void {.importc: "QGraphicsBlurEffect_setBlurRadius".}
 proc fcQGraphicsBlurEffect_setBlurHints(self: pointer, hints: cint): void {.importc: "QGraphicsBlurEffect_setBlurHints".}
 proc fcQGraphicsBlurEffect_blurRadiusChanged(self: pointer, blurRadius: float64): void {.importc: "QGraphicsBlurEffect_blurRadiusChanged".}
-proc fcQGraphicsBlurEffect_connect_blurRadiusChanged(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_connect_blurRadiusChanged".}
+proc fcQGraphicsBlurEffect_connect_blurRadiusChanged(self: pointer, slot: int, callback: proc (slot: int, blurRadius: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsBlurEffect_connect_blurRadiusChanged".}
 proc fcQGraphicsBlurEffect_blurHintsChanged(self: pointer, hints: cint): void {.importc: "QGraphicsBlurEffect_blurHintsChanged".}
-proc fcQGraphicsBlurEffect_connect_blurHintsChanged(self: pointer, slot: int) {.importc: "QGraphicsBlurEffect_connect_blurHintsChanged".}
+proc fcQGraphicsBlurEffect_connect_blurHintsChanged(self: pointer, slot: int, callback: proc (slot: int, hints: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsBlurEffect_connect_blurHintsChanged".}
 proc fcQGraphicsBlurEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsBlurEffect_tr2".}
 proc fcQGraphicsBlurEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsBlurEffect_tr3".}
 proc fcQGraphicsBlurEffect_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsBlurEffect_trUtf82".}
@@ -248,11 +248,11 @@ proc fcQGraphicsDropShadowEffect_setYOffset(self: pointer, dy: float64): void {.
 proc fcQGraphicsDropShadowEffect_setBlurRadius(self: pointer, blurRadius: float64): void {.importc: "QGraphicsDropShadowEffect_setBlurRadius".}
 proc fcQGraphicsDropShadowEffect_setColor(self: pointer, color: pointer): void {.importc: "QGraphicsDropShadowEffect_setColor".}
 proc fcQGraphicsDropShadowEffect_offsetChanged(self: pointer, offset: pointer): void {.importc: "QGraphicsDropShadowEffect_offsetChanged".}
-proc fcQGraphicsDropShadowEffect_connect_offsetChanged(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_connect_offsetChanged".}
+proc fcQGraphicsDropShadowEffect_connect_offsetChanged(self: pointer, slot: int, callback: proc (slot: int, offset: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsDropShadowEffect_connect_offsetChanged".}
 proc fcQGraphicsDropShadowEffect_blurRadiusChanged(self: pointer, blurRadius: float64): void {.importc: "QGraphicsDropShadowEffect_blurRadiusChanged".}
-proc fcQGraphicsDropShadowEffect_connect_blurRadiusChanged(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_connect_blurRadiusChanged".}
+proc fcQGraphicsDropShadowEffect_connect_blurRadiusChanged(self: pointer, slot: int, callback: proc (slot: int, blurRadius: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsDropShadowEffect_connect_blurRadiusChanged".}
 proc fcQGraphicsDropShadowEffect_colorChanged(self: pointer, color: pointer): void {.importc: "QGraphicsDropShadowEffect_colorChanged".}
-proc fcQGraphicsDropShadowEffect_connect_colorChanged(self: pointer, slot: int) {.importc: "QGraphicsDropShadowEffect_connect_colorChanged".}
+proc fcQGraphicsDropShadowEffect_connect_colorChanged(self: pointer, slot: int, callback: proc (slot: int, color: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsDropShadowEffect_connect_colorChanged".}
 proc fcQGraphicsDropShadowEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsDropShadowEffect_tr2".}
 proc fcQGraphicsDropShadowEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsDropShadowEffect_tr3".}
 proc fcQGraphicsDropShadowEffect_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsDropShadowEffect_trUtf82".}
@@ -299,9 +299,9 @@ proc fcQGraphicsOpacityEffect_opacityMask(self: pointer, ): pointer {.importc: "
 proc fcQGraphicsOpacityEffect_setOpacity(self: pointer, opacity: float64): void {.importc: "QGraphicsOpacityEffect_setOpacity".}
 proc fcQGraphicsOpacityEffect_setOpacityMask(self: pointer, mask: pointer): void {.importc: "QGraphicsOpacityEffect_setOpacityMask".}
 proc fcQGraphicsOpacityEffect_opacityChanged(self: pointer, opacity: float64): void {.importc: "QGraphicsOpacityEffect_opacityChanged".}
-proc fcQGraphicsOpacityEffect_connect_opacityChanged(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_connect_opacityChanged".}
+proc fcQGraphicsOpacityEffect_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int, opacity: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsOpacityEffect_connect_opacityChanged".}
 proc fcQGraphicsOpacityEffect_opacityMaskChanged(self: pointer, mask: pointer): void {.importc: "QGraphicsOpacityEffect_opacityMaskChanged".}
-proc fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self: pointer, slot: int) {.importc: "QGraphicsOpacityEffect_connect_opacityMaskChanged".}
+proc fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self: pointer, slot: int, callback: proc (slot: int, mask: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsOpacityEffect_connect_opacityMaskChanged".}
 proc fcQGraphicsOpacityEffect_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsOpacityEffect_tr2".}
 proc fcQGraphicsOpacityEffect_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QGraphicsOpacityEffect_tr3".}
 proc fcQGraphicsOpacityEffect_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QGraphicsOpacityEffect_trUtf82".}
@@ -379,17 +379,21 @@ proc enabledChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, enabled: b
   fcQGraphicsEffect_enabledChanged(self.h, enabled)
 
 type QGraphicsEffectenabledChangedSlot* = proc(enabled: bool)
-proc miqt_exec_callback_cQGraphicsEffect_enabledChanged(slot: int, enabled: bool) {.exportc: "miqt_exec_callback_QGraphicsEffect_enabledChanged".} =
+proc miqt_exec_callback_cQGraphicsEffect_enabledChanged(slot: int, enabled: bool) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsEffectenabledChangedSlot](cast[pointer](slot))
   let slotval1 = enabled
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsEffect_enabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsEffectenabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onenabledChanged*(self: gen_qgraphicseffect_types.QGraphicsEffect, slot: QGraphicsEffectenabledChangedSlot) =
   var tmp = new QGraphicsEffectenabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsEffect_connect_enabledChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsEffect_connect_enabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsEffect_enabledChanged, miqt_exec_callback_cQGraphicsEffect_enabledChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsEffect, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsEffect_tr2(s, c)
@@ -677,33 +681,41 @@ proc colorChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, colo
   fcQGraphicsColorizeEffect_colorChanged(self.h, color.h)
 
 type QGraphicsColorizeEffectcolorChangedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_colorChanged".} =
+proc miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsColorizeEffectcolorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsColorizeEffectcolorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncolorChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectcolorChangedSlot) =
   var tmp = new QGraphicsColorizeEffectcolorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsColorizeEffect_connect_colorChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsColorizeEffect_connect_colorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged, miqt_exec_callback_cQGraphicsColorizeEffect_colorChanged_release)
 
 proc strengthChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, strength: float64): void =
   fcQGraphicsColorizeEffect_strengthChanged(self.h, strength)
 
 type QGraphicsColorizeEffectstrengthChangedSlot* = proc(strength: float64)
-proc miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged(slot: int, strength: float64) {.exportc: "miqt_exec_callback_QGraphicsColorizeEffect_strengthChanged".} =
+proc miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged(slot: int, strength: float64) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsColorizeEffectstrengthChangedSlot](cast[pointer](slot))
   let slotval1 = strength
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsColorizeEffectstrengthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstrengthChanged*(self: gen_qgraphicseffect_types.QGraphicsColorizeEffect, slot: QGraphicsColorizeEffectstrengthChangedSlot) =
   var tmp = new QGraphicsColorizeEffectstrengthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsColorizeEffect_connect_strengthChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsColorizeEffect_connect_strengthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged, miqt_exec_callback_cQGraphicsColorizeEffect_strengthChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsColorizeEffect, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsColorizeEffect_tr2(s, c)
@@ -997,33 +1009,41 @@ proc blurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, blu
   fcQGraphicsBlurEffect_blurRadiusChanged(self.h, blurRadius)
 
 type QGraphicsBlurEffectblurRadiusChangedSlot* = proc(blurRadius: float64)
-proc miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_blurRadiusChanged".} =
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsBlurEffectblurRadiusChangedSlot](cast[pointer](slot))
   let slotval1 = blurRadius
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsBlurEffectblurRadiusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onblurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectblurRadiusChangedSlot) =
   var tmp = new QGraphicsBlurEffectblurRadiusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsBlurEffect_connect_blurRadiusChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsBlurEffect_connect_blurRadiusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged, miqt_exec_callback_cQGraphicsBlurEffect_blurRadiusChanged_release)
 
 proc blurHintsChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, hints: cint): void =
   fcQGraphicsBlurEffect_blurHintsChanged(self.h, cint(hints))
 
 type QGraphicsBlurEffectblurHintsChangedSlot* = proc(hints: cint)
-proc miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged(slot: int, hints: cint) {.exportc: "miqt_exec_callback_QGraphicsBlurEffect_blurHintsChanged".} =
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged(slot: int, hints: cint) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsBlurEffectblurHintsChangedSlot](cast[pointer](slot))
   let slotval1 = cint(hints)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsBlurEffectblurHintsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onblurHintsChanged*(self: gen_qgraphicseffect_types.QGraphicsBlurEffect, slot: QGraphicsBlurEffectblurHintsChangedSlot) =
   var tmp = new QGraphicsBlurEffectblurHintsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsBlurEffect_connect_blurHintsChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsBlurEffect_connect_blurHintsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged, miqt_exec_callback_cQGraphicsBlurEffect_blurHintsChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsBlurEffect, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsBlurEffect_tr2(s, c)
@@ -1341,49 +1361,61 @@ proc offsetChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, o
   fcQGraphicsDropShadowEffect_offsetChanged(self.h, offset.h)
 
 type QGraphicsDropShadowEffectoffsetChangedSlot* = proc(offset: gen_qpoint_types.QPointF)
-proc miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged(slot: int, offset: pointer) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_offsetChanged".} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged(slot: int, offset: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectoffsetChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qpoint_types.QPointF(h: offset)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsDropShadowEffectoffsetChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onoffsetChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectoffsetChangedSlot) =
   var tmp = new QGraphicsDropShadowEffectoffsetChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_connect_offsetChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsDropShadowEffect_connect_offsetChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged, miqt_exec_callback_cQGraphicsDropShadowEffect_offsetChanged_release)
 
 proc blurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, blurRadius: float64): void =
   fcQGraphicsDropShadowEffect_blurRadiusChanged(self.h, blurRadius)
 
 type QGraphicsDropShadowEffectblurRadiusChangedSlot* = proc(blurRadius: float64)
-proc miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_blurRadiusChanged".} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged(slot: int, blurRadius: float64) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectblurRadiusChangedSlot](cast[pointer](slot))
   let slotval1 = blurRadius
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsDropShadowEffectblurRadiusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onblurRadiusChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectblurRadiusChangedSlot) =
   var tmp = new QGraphicsDropShadowEffectblurRadiusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_connect_blurRadiusChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsDropShadowEffect_connect_blurRadiusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged, miqt_exec_callback_cQGraphicsDropShadowEffect_blurRadiusChanged_release)
 
 proc colorChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, color: gen_qcolor_types.QColor): void =
   fcQGraphicsDropShadowEffect_colorChanged(self.h, color.h)
 
 type QGraphicsDropShadowEffectcolorChangedSlot* = proc(color: gen_qcolor_types.QColor)
-proc miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged(slot: int, color: pointer) {.exportc: "miqt_exec_callback_QGraphicsDropShadowEffect_colorChanged".} =
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged(slot: int, color: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsDropShadowEffectcolorChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qcolor_types.QColor(h: color)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsDropShadowEffectcolorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncolorChanged*(self: gen_qgraphicseffect_types.QGraphicsDropShadowEffect, slot: QGraphicsDropShadowEffectcolorChangedSlot) =
   var tmp = new QGraphicsDropShadowEffectcolorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsDropShadowEffect_connect_colorChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsDropShadowEffect_connect_colorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged, miqt_exec_callback_cQGraphicsDropShadowEffect_colorChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsDropShadowEffect, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsDropShadowEffect_tr2(s, c)
@@ -1674,33 +1706,41 @@ proc opacityChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, opa
   fcQGraphicsOpacityEffect_opacityChanged(self.h, opacity)
 
 type QGraphicsOpacityEffectopacityChangedSlot* = proc(opacity: float64)
-proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged(slot: int, opacity: float64) {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_opacityChanged".} =
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged(slot: int, opacity: float64) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsOpacityEffectopacityChangedSlot](cast[pointer](slot))
   let slotval1 = opacity
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsOpacityEffectopacityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onopacityChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectopacityChangedSlot) =
   var tmp = new QGraphicsOpacityEffectopacityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsOpacityEffect_connect_opacityChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsOpacityEffect_connect_opacityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged, miqt_exec_callback_cQGraphicsOpacityEffect_opacityChanged_release)
 
 proc opacityMaskChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, mask: gen_qbrush_types.QBrush): void =
   fcQGraphicsOpacityEffect_opacityMaskChanged(self.h, mask.h)
 
 type QGraphicsOpacityEffectopacityMaskChangedSlot* = proc(mask: gen_qbrush_types.QBrush)
-proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged(slot: int, mask: pointer) {.exportc: "miqt_exec_callback_QGraphicsOpacityEffect_opacityMaskChanged".} =
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged(slot: int, mask: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsOpacityEffectopacityMaskChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qbrush_types.QBrush(h: mask)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QGraphicsOpacityEffectopacityMaskChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onopacityMaskChanged*(self: gen_qgraphicseffect_types.QGraphicsOpacityEffect, slot: QGraphicsOpacityEffectopacityMaskChangedSlot) =
   var tmp = new QGraphicsOpacityEffectopacityMaskChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self.h, cast[int](addr tmp[]))
+  fcQGraphicsOpacityEffect_connect_opacityMaskChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged, miqt_exec_callback_cQGraphicsOpacityEffect_opacityMaskChanged_release)
 
 proc tr*(_: type gen_qgraphicseffect_types.QGraphicsOpacityEffect, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsOpacityEffect_tr2(s, c)

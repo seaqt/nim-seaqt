@@ -13,10 +13,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QCameraControl_stateChanged(intptr_t, int);
-void miqt_exec_callback_QCameraControl_statusChanged(intptr_t, int);
-void miqt_exec_callback_QCameraControl_error(intptr_t, int, struct miqt_string);
-void miqt_exec_callback_QCameraControl_captureModeChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -94,24 +90,34 @@ void QCameraControl_stateChanged(QCameraControl* self, int param1) {
 	self->stateChanged(static_cast<QCamera::State>(param1));
 }
 
-void QCameraControl_connect_stateChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::State)>(&QCameraControl::stateChanged), self, [=](QCamera::State param1) {
-		QCamera::State param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QCameraControl_stateChanged(slot, sigval1);
-	});
+void QCameraControl_connect_stateChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QCamera::State param1) {
+			QCamera::State param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::State)>(&QCameraControl::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraControl_statusChanged(QCameraControl* self, int param1) {
 	self->statusChanged(static_cast<QCamera::Status>(param1));
 }
 
-void QCameraControl_connect_statusChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::Status)>(&QCameraControl::statusChanged), self, [=](QCamera::Status param1) {
-		QCamera::Status param1_ret = param1;
-		int sigval1 = static_cast<int>(param1_ret);
-		miqt_exec_callback_QCameraControl_statusChanged(slot, sigval1);
-	});
+void QCameraControl_connect_statusChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QCamera::Status param1) {
+			QCamera::Status param1_ret = param1;
+			int sigval1 = static_cast<int>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::Status)>(&QCameraControl::statusChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraControl_error(QCameraControl* self, int error, struct miqt_string errorString) {
@@ -119,31 +125,41 @@ void QCameraControl_error(QCameraControl* self, int error, struct miqt_string er
 	self->error(static_cast<int>(error), errorString_QString);
 }
 
-void QCameraControl_connect_error(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(int, const QString&)>(&QCameraControl::error), self, [=](int error, const QString& errorString) {
-		int sigval1 = error;
-		const QString errorString_ret = errorString;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray errorString_b = errorString_ret.toUtf8();
-		struct miqt_string errorString_ms;
-		errorString_ms.len = errorString_b.length();
-		errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
-		memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
-		struct miqt_string sigval2 = errorString_ms;
-		miqt_exec_callback_QCameraControl_error(slot, sigval1, sigval2);
-	});
+void QCameraControl_connect_error(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, struct miqt_string);
+		void operator()(int error, const QString& errorString) {
+			int sigval1 = error;
+			const QString errorString_ret = errorString;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray errorString_b = errorString_ret.toUtf8();
+			struct miqt_string errorString_ms;
+			errorString_ms.len = errorString_b.length();
+			errorString_ms.data = static_cast<char*>(malloc(errorString_ms.len));
+			memcpy(errorString_ms.data, errorString_b.data(), errorString_ms.len);
+			struct miqt_string sigval2 = errorString_ms;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(int, const QString&)>(&QCameraControl::error), self, local_caller{slot, callback, release});
 }
 
 void QCameraControl_captureModeChanged(QCameraControl* self, int mode) {
 	self->captureModeChanged(static_cast<QCamera::CaptureModes>(mode));
 }
 
-void QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot) {
-	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::CaptureModes)>(&QCameraControl::captureModeChanged), self, [=](QCamera::CaptureModes mode) {
-		QCamera::CaptureModes mode_ret = mode;
-		int sigval1 = static_cast<int>(mode_ret);
-		miqt_exec_callback_QCameraControl_captureModeChanged(slot, sigval1);
-	});
+void QCameraControl_connect_captureModeChanged(QCameraControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QCamera::CaptureModes mode) {
+			QCamera::CaptureModes mode_ret = mode;
+			int sigval1 = static_cast<int>(mode_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraControl::connect(self, static_cast<void (QCameraControl::*)(QCamera::CaptureModes)>(&QCameraControl::captureModeChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QCameraControl_tr2(const char* s, const char* c) {

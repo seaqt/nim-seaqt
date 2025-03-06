@@ -158,13 +158,13 @@ QRect* QDesktopWidget_screenGeometryWithPoint(const QDesktopWidget* self, QPoint
 QRect* QDesktopWidget_availableGeometry2(const QDesktopWidget* self);
 QRect* QDesktopWidget_availableGeometryWithPoint(const QDesktopWidget* self, QPoint* point);
 void QDesktopWidget_resized(QDesktopWidget* self, int param1);
-void QDesktopWidget_connect_resized(QDesktopWidget* self, intptr_t slot);
+void QDesktopWidget_connect_resized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDesktopWidget_workAreaResized(QDesktopWidget* self, int param1);
-void QDesktopWidget_connect_workAreaResized(QDesktopWidget* self, intptr_t slot);
+void QDesktopWidget_connect_workAreaResized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDesktopWidget_screenCountChanged(QDesktopWidget* self, int param1);
-void QDesktopWidget_connect_screenCountChanged(QDesktopWidget* self, intptr_t slot);
+void QDesktopWidget_connect_screenCountChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QDesktopWidget_primaryScreenChanged(QDesktopWidget* self);
-void QDesktopWidget_connect_primaryScreenChanged(QDesktopWidget* self, intptr_t slot);
+void QDesktopWidget_connect_primaryScreenChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QDesktopWidget_resizeEvent(QDesktopWidget* self, QResizeEvent* e);
 struct miqt_string QDesktopWidget_tr2(const char* s, const char* c);
 struct miqt_string QDesktopWidget_tr3(const char* s, const char* c, int n);

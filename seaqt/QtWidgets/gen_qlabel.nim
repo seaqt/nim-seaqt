@@ -118,9 +118,9 @@ proc fcQLabel_setNum(self: pointer, num: cint): void {.importc: "QLabel_setNum".
 proc fcQLabel_setNumWithNum(self: pointer, num: float64): void {.importc: "QLabel_setNumWithNum".}
 proc fcQLabel_clear(self: pointer, ): void {.importc: "QLabel_clear".}
 proc fcQLabel_linkActivated(self: pointer, link: struct_miqt_string): void {.importc: "QLabel_linkActivated".}
-proc fcQLabel_connect_linkActivated(self: pointer, slot: int) {.importc: "QLabel_connect_linkActivated".}
+proc fcQLabel_connect_linkActivated(self: pointer, slot: int, callback: proc (slot: int, link: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLabel_connect_linkActivated".}
 proc fcQLabel_linkHovered(self: pointer, link: struct_miqt_string): void {.importc: "QLabel_linkHovered".}
-proc fcQLabel_connect_linkHovered(self: pointer, slot: int) {.importc: "QLabel_connect_linkHovered".}
+proc fcQLabel_connect_linkHovered(self: pointer, slot: int, callback: proc (slot: int, link: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLabel_connect_linkHovered".}
 proc fcQLabel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLabel_tr2".}
 proc fcQLabel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLabel_tr3".}
 proc fcQLabel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLabel_trUtf82".}
@@ -381,7 +381,7 @@ proc linkActivated*(self: gen_qlabel_types.QLabel, link: string): void =
   fcQLabel_linkActivated(self.h, struct_miqt_string(data: link, len: csize_t(len(link))))
 
 type QLabellinkActivatedSlot* = proc(link: string)
-proc miqt_exec_callback_cQLabel_linkActivated(slot: int, link: struct_miqt_string) {.exportc: "miqt_exec_callback_QLabel_linkActivated".} =
+proc miqt_exec_callback_cQLabel_linkActivated(slot: int, link: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QLabellinkActivatedSlot](cast[pointer](slot))
   let vlink_ms = link
   let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
@@ -390,17 +390,21 @@ proc miqt_exec_callback_cQLabel_linkActivated(slot: int, link: struct_miqt_strin
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQLabel_linkActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLabellinkActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkActivated*(self: gen_qlabel_types.QLabel, slot: QLabellinkActivatedSlot) =
   var tmp = new QLabellinkActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLabel_connect_linkActivated(self.h, cast[int](addr tmp[]))
+  fcQLabel_connect_linkActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLabel_linkActivated, miqt_exec_callback_cQLabel_linkActivated_release)
 
 proc linkHovered*(self: gen_qlabel_types.QLabel, link: string): void =
   fcQLabel_linkHovered(self.h, struct_miqt_string(data: link, len: csize_t(len(link))))
 
 type QLabellinkHoveredSlot* = proc(link: string)
-proc miqt_exec_callback_cQLabel_linkHovered(slot: int, link: struct_miqt_string) {.exportc: "miqt_exec_callback_QLabel_linkHovered".} =
+proc miqt_exec_callback_cQLabel_linkHovered(slot: int, link: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QLabellinkHoveredSlot](cast[pointer](slot))
   let vlink_ms = link
   let vlinkx_ret = string.fromBytes(toOpenArrayByte(vlink_ms.data, 0, int(vlink_ms.len)-1))
@@ -409,11 +413,15 @@ proc miqt_exec_callback_cQLabel_linkHovered(slot: int, link: struct_miqt_string)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQLabel_linkHovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLabellinkHoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlinkHovered*(self: gen_qlabel_types.QLabel, slot: QLabellinkHoveredSlot) =
   var tmp = new QLabellinkHoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLabel_connect_linkHovered(self.h, cast[int](addr tmp[]))
+  fcQLabel_connect_linkHovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLabel_linkHovered, miqt_exec_callback_cQLabel_linkHovered_release)
 
 proc tr*(_: type gen_qlabel_types.QLabel, s: cstring, c: cstring): string =
   let v_ms = fcQLabel_tr2(s, c)

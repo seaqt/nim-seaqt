@@ -16,11 +16,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QCameraFocus_opticalZoomChanged(intptr_t, double);
-void miqt_exec_callback_QCameraFocus_digitalZoomChanged(intptr_t, double);
-void miqt_exec_callback_QCameraFocus_focusZonesChanged(intptr_t);
-void miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged(intptr_t, double);
-void miqt_exec_callback_QCameraFocus_maximumDigitalZoomChanged(intptr_t, double);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -191,58 +186,83 @@ void QCameraFocus_opticalZoomChanged(QCameraFocus* self, double param1) {
 	self->opticalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraFocus_connect_opticalZoomChanged(QCameraFocus* self, intptr_t slot) {
-	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::opticalZoomChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraFocus_opticalZoomChanged(slot, sigval1);
-	});
+void QCameraFocus_connect_opticalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::opticalZoomChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraFocus_digitalZoomChanged(QCameraFocus* self, double param1) {
 	self->digitalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraFocus_connect_digitalZoomChanged(QCameraFocus* self, intptr_t slot) {
-	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::digitalZoomChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraFocus_digitalZoomChanged(slot, sigval1);
-	});
+void QCameraFocus_connect_digitalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::digitalZoomChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraFocus_focusZonesChanged(QCameraFocus* self) {
 	self->focusZonesChanged();
 }
 
-void QCameraFocus_connect_focusZonesChanged(QCameraFocus* self, intptr_t slot) {
-	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)()>(&QCameraFocus::focusZonesChanged), self, [=]() {
-		miqt_exec_callback_QCameraFocus_focusZonesChanged(slot);
-	});
+void QCameraFocus_connect_focusZonesChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)()>(&QCameraFocus::focusZonesChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraFocus_maximumOpticalZoomChanged(QCameraFocus* self, double param1) {
 	self->maximumOpticalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraFocus_connect_maximumOpticalZoomChanged(QCameraFocus* self, intptr_t slot) {
-	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::maximumOpticalZoomChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraFocus_maximumOpticalZoomChanged(slot, sigval1);
-	});
+void QCameraFocus_connect_maximumOpticalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::maximumOpticalZoomChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraFocus_maximumDigitalZoomChanged(QCameraFocus* self, double param1) {
 	self->maximumDigitalZoomChanged(static_cast<qreal>(param1));
 }
 
-void QCameraFocus_connect_maximumDigitalZoomChanged(QCameraFocus* self, intptr_t slot) {
-	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::maximumDigitalZoomChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraFocus_maximumDigitalZoomChanged(slot, sigval1);
-	});
+void QCameraFocus_connect_maximumDigitalZoomChanged(QCameraFocus* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraFocus::connect(self, static_cast<void (QCameraFocus::*)(qreal)>(&QCameraFocus::maximumDigitalZoomChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QCameraFocus_tr2(const char* s, const char* c) {

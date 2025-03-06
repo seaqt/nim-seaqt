@@ -89,11 +89,11 @@ proc fcQDialog_isSizeGripEnabled(self: pointer, ): bool {.importc: "QDialog_isSi
 proc fcQDialog_setModal(self: pointer, modal: bool): void {.importc: "QDialog_setModal".}
 proc fcQDialog_setResult(self: pointer, r: cint): void {.importc: "QDialog_setResult".}
 proc fcQDialog_finished(self: pointer, resultVal: cint): void {.importc: "QDialog_finished".}
-proc fcQDialog_connect_finished(self: pointer, slot: int) {.importc: "QDialog_connect_finished".}
+proc fcQDialog_connect_finished(self: pointer, slot: int, callback: proc (slot: int, resultVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDialog_connect_finished".}
 proc fcQDialog_accepted(self: pointer, ): void {.importc: "QDialog_accepted".}
-proc fcQDialog_connect_accepted(self: pointer, slot: int) {.importc: "QDialog_connect_accepted".}
+proc fcQDialog_connect_accepted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDialog_connect_accepted".}
 proc fcQDialog_rejected(self: pointer, ): void {.importc: "QDialog_rejected".}
-proc fcQDialog_connect_rejected(self: pointer, slot: int) {.importc: "QDialog_connect_rejected".}
+proc fcQDialog_connect_rejected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDialog_connect_rejected".}
 proc fcQDialog_open(self: pointer, ): void {.importc: "QDialog_open".}
 proc fcQDialog_exec(self: pointer, ): cint {.importc: "QDialog_exec".}
 proc fcQDialog_done(self: pointer, param1: cint): void {.importc: "QDialog_done".}
@@ -283,45 +283,57 @@ proc finished*(self: gen_qdialog_types.QDialog, resultVal: cint): void =
   fcQDialog_finished(self.h, resultVal)
 
 type QDialogfinishedSlot* = proc(resultVal: cint)
-proc miqt_exec_callback_cQDialog_finished(slot: int, resultVal: cint) {.exportc: "miqt_exec_callback_QDialog_finished".} =
+proc miqt_exec_callback_cQDialog_finished(slot: int, resultVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDialogfinishedSlot](cast[pointer](slot))
   let slotval1 = resultVal
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDialog_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDialogfinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfinished*(self: gen_qdialog_types.QDialog, slot: QDialogfinishedSlot) =
   var tmp = new QDialogfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialog_connect_finished(self.h, cast[int](addr tmp[]))
+  fcQDialog_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDialog_finished, miqt_exec_callback_cQDialog_finished_release)
 
 proc accepted*(self: gen_qdialog_types.QDialog, ): void =
   fcQDialog_accepted(self.h)
 
 type QDialogacceptedSlot* = proc()
-proc miqt_exec_callback_cQDialog_accepted(slot: int) {.exportc: "miqt_exec_callback_QDialog_accepted".} =
+proc miqt_exec_callback_cQDialog_accepted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDialogacceptedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQDialog_accepted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDialogacceptedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaccepted*(self: gen_qdialog_types.QDialog, slot: QDialogacceptedSlot) =
   var tmp = new QDialogacceptedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialog_connect_accepted(self.h, cast[int](addr tmp[]))
+  fcQDialog_connect_accepted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDialog_accepted, miqt_exec_callback_cQDialog_accepted_release)
 
 proc rejected*(self: gen_qdialog_types.QDialog, ): void =
   fcQDialog_rejected(self.h)
 
 type QDialogrejectedSlot* = proc()
-proc miqt_exec_callback_cQDialog_rejected(slot: int) {.exportc: "miqt_exec_callback_QDialog_rejected".} =
+proc miqt_exec_callback_cQDialog_rejected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QDialogrejectedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQDialog_rejected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDialogrejectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrejected*(self: gen_qdialog_types.QDialog, slot: QDialogrejectedSlot) =
   var tmp = new QDialogrejectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDialog_connect_rejected(self.h, cast[int](addr tmp[]))
+  fcQDialog_connect_rejected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDialog_rejected, miqt_exec_callback_cQDialog_rejected_release)
 
 proc open*(self: gen_qdialog_types.QDialog, ): void =
   fcQDialog_open(self.h)

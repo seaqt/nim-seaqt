@@ -43,11 +43,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QDockWidget_featuresChanged(intptr_t, int);
-void miqt_exec_callback_QDockWidget_topLevelChanged(intptr_t, bool);
-void miqt_exec_callback_QDockWidget_allowedAreasChanged(intptr_t, int);
-void miqt_exec_callback_QDockWidget_visibilityChanged(intptr_t, bool);
-void miqt_exec_callback_QDockWidget_dockLocationChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -957,58 +952,83 @@ void QDockWidget_featuresChanged(QDockWidget* self, int features) {
 	self->featuresChanged(static_cast<QDockWidget::DockWidgetFeatures>(features));
 }
 
-void QDockWidget_connect_featuresChanged(QDockWidget* self, intptr_t slot) {
-	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(QDockWidget::DockWidgetFeatures)>(&QDockWidget::featuresChanged), self, [=](QDockWidget::DockWidgetFeatures features) {
-		QDockWidget::DockWidgetFeatures features_ret = features;
-		int sigval1 = static_cast<int>(features_ret);
-		miqt_exec_callback_QDockWidget_featuresChanged(slot, sigval1);
-	});
+void QDockWidget_connect_featuresChanged(QDockWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QDockWidget::DockWidgetFeatures features) {
+			QDockWidget::DockWidgetFeatures features_ret = features;
+			int sigval1 = static_cast<int>(features_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(QDockWidget::DockWidgetFeatures)>(&QDockWidget::featuresChanged), self, local_caller{slot, callback, release});
 }
 
 void QDockWidget_topLevelChanged(QDockWidget* self, bool topLevel) {
 	self->topLevelChanged(topLevel);
 }
 
-void QDockWidget_connect_topLevelChanged(QDockWidget* self, intptr_t slot) {
-	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(bool)>(&QDockWidget::topLevelChanged), self, [=](bool topLevel) {
-		bool sigval1 = topLevel;
-		miqt_exec_callback_QDockWidget_topLevelChanged(slot, sigval1);
-	});
+void QDockWidget_connect_topLevelChanged(QDockWidget* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool topLevel) {
+			bool sigval1 = topLevel;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(bool)>(&QDockWidget::topLevelChanged), self, local_caller{slot, callback, release});
 }
 
 void QDockWidget_allowedAreasChanged(QDockWidget* self, int allowedAreas) {
 	self->allowedAreasChanged(static_cast<Qt::DockWidgetAreas>(allowedAreas));
 }
 
-void QDockWidget_connect_allowedAreasChanged(QDockWidget* self, intptr_t slot) {
-	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(Qt::DockWidgetAreas)>(&QDockWidget::allowedAreasChanged), self, [=](Qt::DockWidgetAreas allowedAreas) {
-		Qt::DockWidgetAreas allowedAreas_ret = allowedAreas;
-		int sigval1 = static_cast<int>(allowedAreas_ret);
-		miqt_exec_callback_QDockWidget_allowedAreasChanged(slot, sigval1);
-	});
+void QDockWidget_connect_allowedAreasChanged(QDockWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::DockWidgetAreas allowedAreas) {
+			Qt::DockWidgetAreas allowedAreas_ret = allowedAreas;
+			int sigval1 = static_cast<int>(allowedAreas_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(Qt::DockWidgetAreas)>(&QDockWidget::allowedAreasChanged), self, local_caller{slot, callback, release});
 }
 
 void QDockWidget_visibilityChanged(QDockWidget* self, bool visible) {
 	self->visibilityChanged(visible);
 }
 
-void QDockWidget_connect_visibilityChanged(QDockWidget* self, intptr_t slot) {
-	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(bool)>(&QDockWidget::visibilityChanged), self, [=](bool visible) {
-		bool sigval1 = visible;
-		miqt_exec_callback_QDockWidget_visibilityChanged(slot, sigval1);
-	});
+void QDockWidget_connect_visibilityChanged(QDockWidget* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool visible) {
+			bool sigval1 = visible;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(bool)>(&QDockWidget::visibilityChanged), self, local_caller{slot, callback, release});
 }
 
 void QDockWidget_dockLocationChanged(QDockWidget* self, int area) {
 	self->dockLocationChanged(static_cast<Qt::DockWidgetArea>(area));
 }
 
-void QDockWidget_connect_dockLocationChanged(QDockWidget* self, intptr_t slot) {
-	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(Qt::DockWidgetArea)>(&QDockWidget::dockLocationChanged), self, [=](Qt::DockWidgetArea area) {
-		Qt::DockWidgetArea area_ret = area;
-		int sigval1 = static_cast<int>(area_ret);
-		miqt_exec_callback_QDockWidget_dockLocationChanged(slot, sigval1);
-	});
+void QDockWidget_connect_dockLocationChanged(QDockWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::DockWidgetArea area) {
+			Qt::DockWidgetArea area_ret = area;
+			int sigval1 = static_cast<int>(area_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDockWidget::connect(self, static_cast<void (QDockWidget::*)(Qt::DockWidgetArea)>(&QDockWidget::dockLocationChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QDockWidget_tr2(const char* s, const char* c) {

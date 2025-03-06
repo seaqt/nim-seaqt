@@ -102,9 +102,9 @@ proc fcQMenuBar_isNativeMenuBar(self: pointer, ): bool {.importc: "QMenuBar_isNa
 proc fcQMenuBar_setNativeMenuBar(self: pointer, nativeMenuBar: bool): void {.importc: "QMenuBar_setNativeMenuBar".}
 proc fcQMenuBar_setVisible(self: pointer, visible: bool): void {.importc: "QMenuBar_setVisible".}
 proc fcQMenuBar_triggered(self: pointer, action: pointer): void {.importc: "QMenuBar_triggered".}
-proc fcQMenuBar_connect_triggered(self: pointer, slot: int) {.importc: "QMenuBar_connect_triggered".}
+proc fcQMenuBar_connect_triggered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenuBar_connect_triggered".}
 proc fcQMenuBar_hovered(self: pointer, action: pointer): void {.importc: "QMenuBar_hovered".}
-proc fcQMenuBar_connect_hovered(self: pointer, slot: int) {.importc: "QMenuBar_connect_hovered".}
+proc fcQMenuBar_connect_hovered(self: pointer, slot: int, callback: proc (slot: int, action: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMenuBar_connect_hovered".}
 proc fcQMenuBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMenuBar_tr2".}
 proc fcQMenuBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMenuBar_tr3".}
 proc fcQMenuBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMenuBar_trUtf82".}
@@ -309,33 +309,41 @@ proc triggered*(self: gen_qmenubar_types.QMenuBar, action: gen_qaction_types.QAc
   fcQMenuBar_triggered(self.h, action.h)
 
 type QMenuBartriggeredSlot* = proc(action: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQMenuBar_triggered(slot: int, action: pointer) {.exportc: "miqt_exec_callback_QMenuBar_triggered".} =
+proc miqt_exec_callback_cQMenuBar_triggered(slot: int, action: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMenuBartriggeredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: action)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMenuBar_triggered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMenuBartriggeredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontriggered*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBartriggeredSlot) =
   var tmp = new QMenuBartriggeredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMenuBar_connect_triggered(self.h, cast[int](addr tmp[]))
+  fcQMenuBar_connect_triggered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMenuBar_triggered, miqt_exec_callback_cQMenuBar_triggered_release)
 
 proc hovered*(self: gen_qmenubar_types.QMenuBar, action: gen_qaction_types.QAction): void =
   fcQMenuBar_hovered(self.h, action.h)
 
 type QMenuBarhoveredSlot* = proc(action: gen_qaction_types.QAction)
-proc miqt_exec_callback_cQMenuBar_hovered(slot: int, action: pointer) {.exportc: "miqt_exec_callback_QMenuBar_hovered".} =
+proc miqt_exec_callback_cQMenuBar_hovered(slot: int, action: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMenuBarhoveredSlot](cast[pointer](slot))
   let slotval1 = gen_qaction_types.QAction(h: action)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMenuBar_hovered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMenuBarhoveredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onhovered*(self: gen_qmenubar_types.QMenuBar, slot: QMenuBarhoveredSlot) =
   var tmp = new QMenuBarhoveredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMenuBar_connect_hovered(self.h, cast[int](addr tmp[]))
+  fcQMenuBar_connect_hovered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMenuBar_hovered, miqt_exec_callback_cQMenuBar_hovered_release)
 
 proc tr*(_: type gen_qmenubar_types.QMenuBar, s: cstring, c: cstring): string =
   let v_ms = fcQMenuBar_tr2(s, c)

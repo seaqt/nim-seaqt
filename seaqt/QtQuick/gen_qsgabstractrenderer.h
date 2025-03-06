@@ -66,7 +66,7 @@ void QSGAbstractRenderer_setClearMode(QSGAbstractRenderer* self, int mode);
 int QSGAbstractRenderer_clearMode(const QSGAbstractRenderer* self);
 void QSGAbstractRenderer_renderScene(QSGAbstractRenderer* self, unsigned int fboId);
 void QSGAbstractRenderer_sceneGraphChanged(QSGAbstractRenderer* self);
-void QSGAbstractRenderer_connect_sceneGraphChanged(QSGAbstractRenderer* self, intptr_t slot);
+void QSGAbstractRenderer_connect_sceneGraphChanged(QSGAbstractRenderer* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QSGAbstractRenderer_nodeChanged(QSGAbstractRenderer* self, QSGNode* node, int state);
 struct miqt_string QSGAbstractRenderer_tr2(const char* s, const char* c);
 struct miqt_string QSGAbstractRenderer_tr3(const char* s, const char* c, int n);

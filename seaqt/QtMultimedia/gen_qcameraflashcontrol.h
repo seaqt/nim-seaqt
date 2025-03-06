@@ -39,7 +39,7 @@ void QCameraFlashControl_setFlashMode(QCameraFlashControl* self, int mode);
 bool QCameraFlashControl_isFlashModeSupported(const QCameraFlashControl* self, int mode);
 bool QCameraFlashControl_isFlashReady(const QCameraFlashControl* self);
 void QCameraFlashControl_flashReady(QCameraFlashControl* self, bool param1);
-void QCameraFlashControl_connect_flashReady(QCameraFlashControl* self, intptr_t slot);
+void QCameraFlashControl_connect_flashReady(QCameraFlashControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 struct miqt_string QCameraFlashControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraFlashControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraFlashControl_trUtf82(const char* s, const char* c);

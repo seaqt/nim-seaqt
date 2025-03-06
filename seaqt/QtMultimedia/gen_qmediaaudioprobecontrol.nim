@@ -54,9 +54,9 @@ proc fcQMediaAudioProbeControl_metacall(self: pointer, param1: cint, param2: cin
 proc fcQMediaAudioProbeControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr".}
 proc fcQMediaAudioProbeControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf8".}
 proc fcQMediaAudioProbeControl_audioBufferProbed(self: pointer, buffer: pointer): void {.importc: "QMediaAudioProbeControl_audioBufferProbed".}
-proc fcQMediaAudioProbeControl_connect_audioBufferProbed(self: pointer, slot: int) {.importc: "QMediaAudioProbeControl_connect_audioBufferProbed".}
+proc fcQMediaAudioProbeControl_connect_audioBufferProbed(self: pointer, slot: int, callback: proc (slot: int, buffer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAudioProbeControl_connect_audioBufferProbed".}
 proc fcQMediaAudioProbeControl_flush(self: pointer, ): void {.importc: "QMediaAudioProbeControl_flush".}
-proc fcQMediaAudioProbeControl_connect_flush(self: pointer, slot: int) {.importc: "QMediaAudioProbeControl_connect_flush".}
+proc fcQMediaAudioProbeControl_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAudioProbeControl_connect_flush".}
 proc fcQMediaAudioProbeControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr2".}
 proc fcQMediaAudioProbeControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAudioProbeControl_tr3".}
 proc fcQMediaAudioProbeControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAudioProbeControl_trUtf82".}
@@ -89,31 +89,39 @@ proc audioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbe
   fcQMediaAudioProbeControl_audioBufferProbed(self.h, buffer.h)
 
 type QMediaAudioProbeControlaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
-proc miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed(slot: int, buffer: pointer) {.exportc: "miqt_exec_callback_QMediaAudioProbeControl_audioBufferProbed".} =
+proc miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaAudioProbeControlaudioBufferProbedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaudioBufferProbed*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlaudioBufferProbedSlot) =
   var tmp = new QMediaAudioProbeControlaudioBufferProbedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAudioProbeControl_connect_audioBufferProbed(self.h, cast[int](addr tmp[]))
+  fcQMediaAudioProbeControl_connect_audioBufferProbed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed, miqt_exec_callback_cQMediaAudioProbeControl_audioBufferProbed_release)
 
 proc flush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, ): void =
   fcQMediaAudioProbeControl_flush(self.h)
 
 type QMediaAudioProbeControlflushSlot* = proc()
-proc miqt_exec_callback_cQMediaAudioProbeControl_flush(slot: int) {.exportc: "miqt_exec_callback_QMediaAudioProbeControl_flush".} =
+proc miqt_exec_callback_cQMediaAudioProbeControl_flush(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAudioProbeControlflushSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaAudioProbeControl_flush_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaAudioProbeControlflushSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onflush*(self: gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, slot: QMediaAudioProbeControlflushSlot) =
   var tmp = new QMediaAudioProbeControlflushSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAudioProbeControl_connect_flush(self.h, cast[int](addr tmp[]))
+  fcQMediaAudioProbeControl_connect_flush(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaAudioProbeControl_flush, miqt_exec_callback_cQMediaAudioProbeControl_flush_release)
 
 proc tr*(_: type gen_qmediaaudioprobecontrol_types.QMediaAudioProbeControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaAudioProbeControl_tr2(s, c)

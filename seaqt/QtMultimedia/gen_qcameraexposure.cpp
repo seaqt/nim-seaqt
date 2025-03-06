@@ -14,13 +14,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QCameraExposure_flashReady(intptr_t, bool);
-void miqt_exec_callback_QCameraExposure_apertureChanged(intptr_t, double);
-void miqt_exec_callback_QCameraExposure_apertureRangeChanged(intptr_t);
-void miqt_exec_callback_QCameraExposure_shutterSpeedChanged(intptr_t, double);
-void miqt_exec_callback_QCameraExposure_shutterSpeedRangeChanged(intptr_t);
-void miqt_exec_callback_QCameraExposure_isoSensitivityChanged(intptr_t, int);
-void miqt_exec_callback_QCameraExposure_exposureCompensationChanged(intptr_t, double);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -222,78 +215,113 @@ void QCameraExposure_flashReady(QCameraExposure* self, bool param1) {
 	self->flashReady(param1);
 }
 
-void QCameraExposure_connect_flashReady(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(bool)>(&QCameraExposure::flashReady), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QCameraExposure_flashReady(slot, sigval1);
-	});
+void QCameraExposure_connect_flashReady(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(bool)>(&QCameraExposure::flashReady), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_apertureChanged(QCameraExposure* self, double param1) {
 	self->apertureChanged(static_cast<qreal>(param1));
 }
 
-void QCameraExposure_connect_apertureChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::apertureChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraExposure_apertureChanged(slot, sigval1);
-	});
+void QCameraExposure_connect_apertureChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::apertureChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_apertureRangeChanged(QCameraExposure* self) {
 	self->apertureRangeChanged();
 }
 
-void QCameraExposure_connect_apertureRangeChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)()>(&QCameraExposure::apertureRangeChanged), self, [=]() {
-		miqt_exec_callback_QCameraExposure_apertureRangeChanged(slot);
-	});
+void QCameraExposure_connect_apertureRangeChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)()>(&QCameraExposure::apertureRangeChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_shutterSpeedChanged(QCameraExposure* self, double speed) {
 	self->shutterSpeedChanged(static_cast<qreal>(speed));
 }
 
-void QCameraExposure_connect_shutterSpeedChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::shutterSpeedChanged), self, [=](qreal speed) {
-		qreal speed_ret = speed;
-		double sigval1 = static_cast<double>(speed_ret);
-		miqt_exec_callback_QCameraExposure_shutterSpeedChanged(slot, sigval1);
-	});
+void QCameraExposure_connect_shutterSpeedChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal speed) {
+			qreal speed_ret = speed;
+			double sigval1 = static_cast<double>(speed_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::shutterSpeedChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_shutterSpeedRangeChanged(QCameraExposure* self) {
 	self->shutterSpeedRangeChanged();
 }
 
-void QCameraExposure_connect_shutterSpeedRangeChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)()>(&QCameraExposure::shutterSpeedRangeChanged), self, [=]() {
-		miqt_exec_callback_QCameraExposure_shutterSpeedRangeChanged(slot);
-	});
+void QCameraExposure_connect_shutterSpeedRangeChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)()>(&QCameraExposure::shutterSpeedRangeChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_isoSensitivityChanged(QCameraExposure* self, int param1) {
 	self->isoSensitivityChanged(static_cast<int>(param1));
 }
 
-void QCameraExposure_connect_isoSensitivityChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(int)>(&QCameraExposure::isoSensitivityChanged), self, [=](int param1) {
-		int sigval1 = param1;
-		miqt_exec_callback_QCameraExposure_isoSensitivityChanged(slot, sigval1);
-	});
+void QCameraExposure_connect_isoSensitivityChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int param1) {
+			int sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(int)>(&QCameraExposure::isoSensitivityChanged), self, local_caller{slot, callback, release});
 }
 
 void QCameraExposure_exposureCompensationChanged(QCameraExposure* self, double param1) {
 	self->exposureCompensationChanged(static_cast<qreal>(param1));
 }
 
-void QCameraExposure_connect_exposureCompensationChanged(QCameraExposure* self, intptr_t slot) {
-	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::exposureCompensationChanged), self, [=](qreal param1) {
-		qreal param1_ret = param1;
-		double sigval1 = static_cast<double>(param1_ret);
-		miqt_exec_callback_QCameraExposure_exposureCompensationChanged(slot, sigval1);
-	});
+void QCameraExposure_connect_exposureCompensationChanged(QCameraExposure* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, double);
+		void operator()(qreal param1) {
+			qreal param1_ret = param1;
+			double sigval1 = static_cast<double>(param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QCameraExposure::connect(self, static_cast<void (QCameraExposure::*)(qreal)>(&QCameraExposure::exposureCompensationChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QCameraExposure_tr2(const char* s, const char* c) {

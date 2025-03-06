@@ -121,27 +121,27 @@ proc fcQRadioTuner_setMuted(self: pointer, muted: bool): void {.importc: "QRadio
 proc fcQRadioTuner_start(self: pointer, ): void {.importc: "QRadioTuner_start".}
 proc fcQRadioTuner_stop(self: pointer, ): void {.importc: "QRadioTuner_stop".}
 proc fcQRadioTuner_stateChanged(self: pointer, state: cint): void {.importc: "QRadioTuner_stateChanged".}
-proc fcQRadioTuner_connect_stateChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_stateChanged".}
+proc fcQRadioTuner_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, state: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_stateChanged".}
 proc fcQRadioTuner_bandChanged(self: pointer, band: cint): void {.importc: "QRadioTuner_bandChanged".}
-proc fcQRadioTuner_connect_bandChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_bandChanged".}
+proc fcQRadioTuner_connect_bandChanged(self: pointer, slot: int, callback: proc (slot: int, band: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_bandChanged".}
 proc fcQRadioTuner_frequencyChanged(self: pointer, frequency: cint): void {.importc: "QRadioTuner_frequencyChanged".}
-proc fcQRadioTuner_connect_frequencyChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_frequencyChanged".}
+proc fcQRadioTuner_connect_frequencyChanged(self: pointer, slot: int, callback: proc (slot: int, frequency: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_frequencyChanged".}
 proc fcQRadioTuner_stereoStatusChanged(self: pointer, stereo: bool): void {.importc: "QRadioTuner_stereoStatusChanged".}
-proc fcQRadioTuner_connect_stereoStatusChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_stereoStatusChanged".}
+proc fcQRadioTuner_connect_stereoStatusChanged(self: pointer, slot: int, callback: proc (slot: int, stereo: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_stereoStatusChanged".}
 proc fcQRadioTuner_searchingChanged(self: pointer, searching: bool): void {.importc: "QRadioTuner_searchingChanged".}
-proc fcQRadioTuner_connect_searchingChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_searchingChanged".}
+proc fcQRadioTuner_connect_searchingChanged(self: pointer, slot: int, callback: proc (slot: int, searching: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_searchingChanged".}
 proc fcQRadioTuner_signalStrengthChanged(self: pointer, signalStrength: cint): void {.importc: "QRadioTuner_signalStrengthChanged".}
-proc fcQRadioTuner_connect_signalStrengthChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_signalStrengthChanged".}
+proc fcQRadioTuner_connect_signalStrengthChanged(self: pointer, slot: int, callback: proc (slot: int, signalStrength: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_signalStrengthChanged".}
 proc fcQRadioTuner_volumeChanged(self: pointer, volume: cint): void {.importc: "QRadioTuner_volumeChanged".}
-proc fcQRadioTuner_connect_volumeChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_volumeChanged".}
+proc fcQRadioTuner_connect_volumeChanged(self: pointer, slot: int, callback: proc (slot: int, volume: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_volumeChanged".}
 proc fcQRadioTuner_mutedChanged(self: pointer, muted: bool): void {.importc: "QRadioTuner_mutedChanged".}
-proc fcQRadioTuner_connect_mutedChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_mutedChanged".}
+proc fcQRadioTuner_connect_mutedChanged(self: pointer, slot: int, callback: proc (slot: int, muted: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_mutedChanged".}
 proc fcQRadioTuner_stationFound(self: pointer, frequency: cint, stationId: struct_miqt_string): void {.importc: "QRadioTuner_stationFound".}
-proc fcQRadioTuner_connect_stationFound(self: pointer, slot: int) {.importc: "QRadioTuner_connect_stationFound".}
+proc fcQRadioTuner_connect_stationFound(self: pointer, slot: int, callback: proc (slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_stationFound".}
 proc fcQRadioTuner_antennaConnectedChanged(self: pointer, connectionStatus: bool): void {.importc: "QRadioTuner_antennaConnectedChanged".}
-proc fcQRadioTuner_connect_antennaConnectedChanged(self: pointer, slot: int) {.importc: "QRadioTuner_connect_antennaConnectedChanged".}
+proc fcQRadioTuner_connect_antennaConnectedChanged(self: pointer, slot: int, callback: proc (slot: int, connectionStatus: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_antennaConnectedChanged".}
 proc fcQRadioTuner_errorWithError(self: pointer, error: cint): void {.importc: "QRadioTuner_errorWithError".}
-proc fcQRadioTuner_connect_errorWithError(self: pointer, slot: int) {.importc: "QRadioTuner_connect_errorWithError".}
+proc fcQRadioTuner_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioTuner_connect_errorWithError".}
 proc fcQRadioTuner_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioTuner_tr2".}
 proc fcQRadioTuner_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioTuner_tr3".}
 proc fcQRadioTuner_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioTuner_trUtf82".}
@@ -303,135 +303,167 @@ proc stateChanged*(self: gen_qradiotuner_types.QRadioTuner, state: cint): void =
   fcQRadioTuner_stateChanged(self.h, cint(state))
 
 type QRadioTunerstateChangedSlot* = proc(state: cint)
-proc miqt_exec_callback_cQRadioTuner_stateChanged(slot: int, state: cint) {.exportc: "miqt_exec_callback_QRadioTuner_stateChanged".} =
+proc miqt_exec_callback_cQRadioTuner_stateChanged(slot: int, state: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(state)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstateChangedSlot) =
   var tmp = new QRadioTunerstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_stateChanged, miqt_exec_callback_cQRadioTuner_stateChanged_release)
 
 proc bandChanged*(self: gen_qradiotuner_types.QRadioTuner, band: cint): void =
   fcQRadioTuner_bandChanged(self.h, cint(band))
 
 type QRadioTunerbandChangedSlot* = proc(band: cint)
-proc miqt_exec_callback_cQRadioTuner_bandChanged(slot: int, band: cint) {.exportc: "miqt_exec_callback_QRadioTuner_bandChanged".} =
+proc miqt_exec_callback_cQRadioTuner_bandChanged(slot: int, band: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerbandChangedSlot](cast[pointer](slot))
   let slotval1 = cint(band)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_bandChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerbandChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbandChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerbandChangedSlot) =
   var tmp = new QRadioTunerbandChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_bandChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_bandChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_bandChanged, miqt_exec_callback_cQRadioTuner_bandChanged_release)
 
 proc frequencyChanged*(self: gen_qradiotuner_types.QRadioTuner, frequency: cint): void =
   fcQRadioTuner_frequencyChanged(self.h, frequency)
 
 type QRadioTunerfrequencyChangedSlot* = proc(frequency: cint)
-proc miqt_exec_callback_cQRadioTuner_frequencyChanged(slot: int, frequency: cint) {.exportc: "miqt_exec_callback_QRadioTuner_frequencyChanged".} =
+proc miqt_exec_callback_cQRadioTuner_frequencyChanged(slot: int, frequency: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerfrequencyChangedSlot](cast[pointer](slot))
   let slotval1 = frequency
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_frequencyChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerfrequencyChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfrequencyChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerfrequencyChangedSlot) =
   var tmp = new QRadioTunerfrequencyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_frequencyChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_frequencyChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_frequencyChanged, miqt_exec_callback_cQRadioTuner_frequencyChanged_release)
 
 proc stereoStatusChanged*(self: gen_qradiotuner_types.QRadioTuner, stereo: bool): void =
   fcQRadioTuner_stereoStatusChanged(self.h, stereo)
 
 type QRadioTunerstereoStatusChangedSlot* = proc(stereo: bool)
-proc miqt_exec_callback_cQRadioTuner_stereoStatusChanged(slot: int, stereo: bool) {.exportc: "miqt_exec_callback_QRadioTuner_stereoStatusChanged".} =
+proc miqt_exec_callback_cQRadioTuner_stereoStatusChanged(slot: int, stereo: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstereoStatusChangedSlot](cast[pointer](slot))
   let slotval1 = stereo
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_stereoStatusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerstereoStatusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstereoStatusChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstereoStatusChangedSlot) =
   var tmp = new QRadioTunerstereoStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_stereoStatusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_stereoStatusChanged, miqt_exec_callback_cQRadioTuner_stereoStatusChanged_release)
 
 proc searchingChanged*(self: gen_qradiotuner_types.QRadioTuner, searching: bool): void =
   fcQRadioTuner_searchingChanged(self.h, searching)
 
 type QRadioTunersearchingChangedSlot* = proc(searching: bool)
-proc miqt_exec_callback_cQRadioTuner_searchingChanged(slot: int, searching: bool) {.exportc: "miqt_exec_callback_QRadioTuner_searchingChanged".} =
+proc miqt_exec_callback_cQRadioTuner_searchingChanged(slot: int, searching: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunersearchingChangedSlot](cast[pointer](slot))
   let slotval1 = searching
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_searchingChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunersearchingChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsearchingChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersearchingChangedSlot) =
   var tmp = new QRadioTunersearchingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_searchingChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_searchingChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_searchingChanged, miqt_exec_callback_cQRadioTuner_searchingChanged_release)
 
 proc signalStrengthChanged*(self: gen_qradiotuner_types.QRadioTuner, signalStrength: cint): void =
   fcQRadioTuner_signalStrengthChanged(self.h, signalStrength)
 
 type QRadioTunersignalStrengthChangedSlot* = proc(signalStrength: cint)
-proc miqt_exec_callback_cQRadioTuner_signalStrengthChanged(slot: int, signalStrength: cint) {.exportc: "miqt_exec_callback_QRadioTuner_signalStrengthChanged".} =
+proc miqt_exec_callback_cQRadioTuner_signalStrengthChanged(slot: int, signalStrength: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunersignalStrengthChangedSlot](cast[pointer](slot))
   let slotval1 = signalStrength
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_signalStrengthChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunersignalStrengthChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onsignalStrengthChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunersignalStrengthChangedSlot) =
   var tmp = new QRadioTunersignalStrengthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_signalStrengthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_signalStrengthChanged, miqt_exec_callback_cQRadioTuner_signalStrengthChanged_release)
 
 proc volumeChanged*(self: gen_qradiotuner_types.QRadioTuner, volume: cint): void =
   fcQRadioTuner_volumeChanged(self.h, volume)
 
 type QRadioTunervolumeChangedSlot* = proc(volume: cint)
-proc miqt_exec_callback_cQRadioTuner_volumeChanged(slot: int, volume: cint) {.exportc: "miqt_exec_callback_QRadioTuner_volumeChanged".} =
+proc miqt_exec_callback_cQRadioTuner_volumeChanged(slot: int, volume: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunervolumeChangedSlot](cast[pointer](slot))
   let slotval1 = volume
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_volumeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunervolumeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvolumeChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunervolumeChangedSlot) =
   var tmp = new QRadioTunervolumeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_volumeChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_volumeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_volumeChanged, miqt_exec_callback_cQRadioTuner_volumeChanged_release)
 
 proc mutedChanged*(self: gen_qradiotuner_types.QRadioTuner, muted: bool): void =
   fcQRadioTuner_mutedChanged(self.h, muted)
 
 type QRadioTunermutedChangedSlot* = proc(muted: bool)
-proc miqt_exec_callback_cQRadioTuner_mutedChanged(slot: int, muted: bool) {.exportc: "miqt_exec_callback_QRadioTuner_mutedChanged".} =
+proc miqt_exec_callback_cQRadioTuner_mutedChanged(slot: int, muted: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunermutedChangedSlot](cast[pointer](slot))
   let slotval1 = muted
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_mutedChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunermutedChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmutedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunermutedChangedSlot) =
   var tmp = new QRadioTunermutedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_mutedChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_mutedChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_mutedChanged, miqt_exec_callback_cQRadioTuner_mutedChanged_release)
 
 proc stationFound*(self: gen_qradiotuner_types.QRadioTuner, frequency: cint, stationId: string): void =
   fcQRadioTuner_stationFound(self.h, frequency, struct_miqt_string(data: stationId, len: csize_t(len(stationId))))
 
 type QRadioTunerstationFoundSlot* = proc(frequency: cint, stationId: string)
-proc miqt_exec_callback_cQRadioTuner_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.exportc: "miqt_exec_callback_QRadioTuner_stationFound".} =
+proc miqt_exec_callback_cQRadioTuner_stationFound(slot: int, frequency: cint, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerstationFoundSlot](cast[pointer](slot))
   let slotval1 = frequency
 
@@ -442,43 +474,55 @@ proc miqt_exec_callback_cQRadioTuner_stationFound(slot: int, frequency: cint, st
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQRadioTuner_stationFound_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerstationFoundSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstationFound*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerstationFoundSlot) =
   var tmp = new QRadioTunerstationFoundSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_stationFound(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_stationFound(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_stationFound, miqt_exec_callback_cQRadioTuner_stationFound_release)
 
 proc antennaConnectedChanged*(self: gen_qradiotuner_types.QRadioTuner, connectionStatus: bool): void =
   fcQRadioTuner_antennaConnectedChanged(self.h, connectionStatus)
 
 type QRadioTunerantennaConnectedChangedSlot* = proc(connectionStatus: bool)
-proc miqt_exec_callback_cQRadioTuner_antennaConnectedChanged(slot: int, connectionStatus: bool) {.exportc: "miqt_exec_callback_QRadioTuner_antennaConnectedChanged".} =
+proc miqt_exec_callback_cQRadioTuner_antennaConnectedChanged(slot: int, connectionStatus: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunerantennaConnectedChangedSlot](cast[pointer](slot))
   let slotval1 = connectionStatus
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_antennaConnectedChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunerantennaConnectedChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onantennaConnectedChanged*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunerantennaConnectedChangedSlot) =
   var tmp = new QRadioTunerantennaConnectedChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_antennaConnectedChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_antennaConnectedChanged, miqt_exec_callback_cQRadioTuner_antennaConnectedChanged_release)
 
 proc error*(self: gen_qradiotuner_types.QRadioTuner, error: cint): void =
   fcQRadioTuner_errorWithError(self.h, cint(error))
 
 type QRadioTunererrorWithErrorSlot* = proc(error: cint)
-proc miqt_exec_callback_cQRadioTuner_errorWithError(slot: int, error: cint) {.exportc: "miqt_exec_callback_QRadioTuner_errorWithError".} =
+proc miqt_exec_callback_cQRadioTuner_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioTunererrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioTuner_errorWithError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioTunererrorWithErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qradiotuner_types.QRadioTuner, slot: QRadioTunererrorWithErrorSlot) =
   var tmp = new QRadioTunererrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioTuner_connect_errorWithError(self.h, cast[int](addr tmp[]))
+  fcQRadioTuner_connect_errorWithError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioTuner_errorWithError, miqt_exec_callback_cQRadioTuner_errorWithError_release)
 
 proc tr*(_: type gen_qradiotuner_types.QRadioTuner, s: cstring, c: cstring): string =
   let v_ms = fcQRadioTuner_tr2(s, c)

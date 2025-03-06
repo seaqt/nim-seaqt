@@ -15,12 +15,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QVideoWindowControl_fullScreenChanged(intptr_t, bool);
-void miqt_exec_callback_QVideoWindowControl_brightnessChanged(intptr_t, int);
-void miqt_exec_callback_QVideoWindowControl_contrastChanged(intptr_t, int);
-void miqt_exec_callback_QVideoWindowControl_hueChanged(intptr_t, int);
-void miqt_exec_callback_QVideoWindowControl_saturationChanged(intptr_t, int);
-void miqt_exec_callback_QVideoWindowControl_nativeSizeChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -141,65 +135,95 @@ void QVideoWindowControl_fullScreenChanged(QVideoWindowControl* self, bool fullS
 	self->fullScreenChanged(fullScreen);
 }
 
-void QVideoWindowControl_connect_fullScreenChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(bool)>(&QVideoWindowControl::fullScreenChanged), self, [=](bool fullScreen) {
-		bool sigval1 = fullScreen;
-		miqt_exec_callback_QVideoWindowControl_fullScreenChanged(slot, sigval1);
-	});
+void QVideoWindowControl_connect_fullScreenChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool fullScreen) {
+			bool sigval1 = fullScreen;
+			callback(slot, sigval1);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(bool)>(&QVideoWindowControl::fullScreenChanged), self, local_caller{slot, callback, release});
 }
 
 void QVideoWindowControl_brightnessChanged(QVideoWindowControl* self, int brightness) {
 	self->brightnessChanged(static_cast<int>(brightness));
 }
 
-void QVideoWindowControl_connect_brightnessChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::brightnessChanged), self, [=](int brightness) {
-		int sigval1 = brightness;
-		miqt_exec_callback_QVideoWindowControl_brightnessChanged(slot, sigval1);
-	});
+void QVideoWindowControl_connect_brightnessChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int brightness) {
+			int sigval1 = brightness;
+			callback(slot, sigval1);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::brightnessChanged), self, local_caller{slot, callback, release});
 }
 
 void QVideoWindowControl_contrastChanged(QVideoWindowControl* self, int contrast) {
 	self->contrastChanged(static_cast<int>(contrast));
 }
 
-void QVideoWindowControl_connect_contrastChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::contrastChanged), self, [=](int contrast) {
-		int sigval1 = contrast;
-		miqt_exec_callback_QVideoWindowControl_contrastChanged(slot, sigval1);
-	});
+void QVideoWindowControl_connect_contrastChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int contrast) {
+			int sigval1 = contrast;
+			callback(slot, sigval1);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::contrastChanged), self, local_caller{slot, callback, release});
 }
 
 void QVideoWindowControl_hueChanged(QVideoWindowControl* self, int hue) {
 	self->hueChanged(static_cast<int>(hue));
 }
 
-void QVideoWindowControl_connect_hueChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::hueChanged), self, [=](int hue) {
-		int sigval1 = hue;
-		miqt_exec_callback_QVideoWindowControl_hueChanged(slot, sigval1);
-	});
+void QVideoWindowControl_connect_hueChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int hue) {
+			int sigval1 = hue;
+			callback(slot, sigval1);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::hueChanged), self, local_caller{slot, callback, release});
 }
 
 void QVideoWindowControl_saturationChanged(QVideoWindowControl* self, int saturation) {
 	self->saturationChanged(static_cast<int>(saturation));
 }
 
-void QVideoWindowControl_connect_saturationChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::saturationChanged), self, [=](int saturation) {
-		int sigval1 = saturation;
-		miqt_exec_callback_QVideoWindowControl_saturationChanged(slot, sigval1);
-	});
+void QVideoWindowControl_connect_saturationChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int saturation) {
+			int sigval1 = saturation;
+			callback(slot, sigval1);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)(int)>(&QVideoWindowControl::saturationChanged), self, local_caller{slot, callback, release});
 }
 
 void QVideoWindowControl_nativeSizeChanged(QVideoWindowControl* self) {
 	self->nativeSizeChanged();
 }
 
-void QVideoWindowControl_connect_nativeSizeChanged(QVideoWindowControl* self, intptr_t slot) {
-	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)()>(&QVideoWindowControl::nativeSizeChanged), self, [=]() {
-		miqt_exec_callback_QVideoWindowControl_nativeSizeChanged(slot);
-	});
+void QVideoWindowControl_connect_nativeSizeChanged(QVideoWindowControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QVideoWindowControl::connect(self, static_cast<void (QVideoWindowControl::*)()>(&QVideoWindowControl::nativeSizeChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QVideoWindowControl_tr2(const char* s, const char* c) {

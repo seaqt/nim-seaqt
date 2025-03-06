@@ -19,7 +19,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QOffscreenSurface_screenChanged(intptr_t, QScreen*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -344,11 +343,16 @@ void QOffscreenSurface_screenChanged(QOffscreenSurface* self, QScreen* screen) {
 	self->screenChanged(screen);
 }
 
-void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot) {
-	VirtualQOffscreenSurface::connect(self, static_cast<void (QOffscreenSurface::*)(QScreen*)>(&QOffscreenSurface::screenChanged), self, [=](QScreen* screen) {
-		QScreen* sigval1 = screen;
-		miqt_exec_callback_QOffscreenSurface_screenChanged(slot, sigval1);
-	});
+void QOffscreenSurface_connect_screenChanged(QOffscreenSurface* self, intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QScreen*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QScreen*);
+		void operator()(QScreen* screen) {
+			QScreen* sigval1 = screen;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQOffscreenSurface::connect(self, static_cast<void (QOffscreenSurface::*)(QScreen*)>(&QOffscreenSurface::screenChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QOffscreenSurface_tr2(const char* s, const char* c) {

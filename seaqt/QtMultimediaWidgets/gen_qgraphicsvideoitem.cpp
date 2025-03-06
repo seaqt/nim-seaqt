@@ -36,7 +36,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QGraphicsVideoItem_nativeSizeChanged(intptr_t, QSizeF*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -887,13 +886,18 @@ void QGraphicsVideoItem_nativeSizeChanged(QGraphicsVideoItem* self, QSizeF* size
 	self->nativeSizeChanged(*size);
 }
 
-void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot) {
-	VirtualQGraphicsVideoItem::connect(self, static_cast<void (QGraphicsVideoItem::*)(const QSizeF&)>(&QGraphicsVideoItem::nativeSizeChanged), self, [=](const QSizeF& size) {
-		const QSizeF& size_ret = size;
-		// Cast returned reference into pointer
-		QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
-		miqt_exec_callback_QGraphicsVideoItem_nativeSizeChanged(slot, sigval1);
-	});
+void QGraphicsVideoItem_connect_nativeSizeChanged(QGraphicsVideoItem* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSizeF*);
+		void operator()(const QSizeF& size) {
+			const QSizeF& size_ret = size;
+			// Cast returned reference into pointer
+			QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGraphicsVideoItem::connect(self, static_cast<void (QGraphicsVideoItem::*)(const QSizeF&)>(&QGraphicsVideoItem::nativeSizeChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QGraphicsVideoItem_tr2(const char* s, const char* c) {

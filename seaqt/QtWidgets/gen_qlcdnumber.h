@@ -170,7 +170,7 @@ void QLCDNumber_setOctMode(QLCDNumber* self);
 void QLCDNumber_setBinMode(QLCDNumber* self);
 void QLCDNumber_setSmallDecimalPoint(QLCDNumber* self, bool smallDecimalPoint);
 void QLCDNumber_overflow(QLCDNumber* self);
-void QLCDNumber_connect_overflow(QLCDNumber* self, intptr_t slot);
+void QLCDNumber_connect_overflow(QLCDNumber* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 bool QLCDNumber_event(QLCDNumber* self, QEvent* e);
 void QLCDNumber_paintEvent(QLCDNumber* self, QPaintEvent* param1);
 struct miqt_string QLCDNumber_tr2(const char* s, const char* c);

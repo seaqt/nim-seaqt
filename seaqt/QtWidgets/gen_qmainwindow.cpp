@@ -47,9 +47,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMainWindow_iconSizeChanged(intptr_t, QSize*);
-void miqt_exec_callback_QMainWindow_toolButtonStyleChanged(intptr_t, int);
-void miqt_exec_callback_QMainWindow_tabifiedDockWidgetActivated(intptr_t, QDockWidget*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1147,36 +1144,51 @@ void QMainWindow_iconSizeChanged(QMainWindow* self, QSize* iconSize) {
 	self->iconSizeChanged(*iconSize);
 }
 
-void QMainWindow_connect_iconSizeChanged(QMainWindow* self, intptr_t slot) {
-	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(const QSize&)>(&QMainWindow::iconSizeChanged), self, [=](const QSize& iconSize) {
-		const QSize& iconSize_ret = iconSize;
-		// Cast returned reference into pointer
-		QSize* sigval1 = const_cast<QSize*>(&iconSize_ret);
-		miqt_exec_callback_QMainWindow_iconSizeChanged(slot, sigval1);
-	});
+void QMainWindow_connect_iconSizeChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSize*);
+		void operator()(const QSize& iconSize) {
+			const QSize& iconSize_ret = iconSize;
+			// Cast returned reference into pointer
+			QSize* sigval1 = const_cast<QSize*>(&iconSize_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(const QSize&)>(&QMainWindow::iconSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QMainWindow_toolButtonStyleChanged(QMainWindow* self, int toolButtonStyle) {
 	self->toolButtonStyleChanged(static_cast<Qt::ToolButtonStyle>(toolButtonStyle));
 }
 
-void QMainWindow_connect_toolButtonStyleChanged(QMainWindow* self, intptr_t slot) {
-	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(Qt::ToolButtonStyle)>(&QMainWindow::toolButtonStyleChanged), self, [=](Qt::ToolButtonStyle toolButtonStyle) {
-		Qt::ToolButtonStyle toolButtonStyle_ret = toolButtonStyle;
-		int sigval1 = static_cast<int>(toolButtonStyle_ret);
-		miqt_exec_callback_QMainWindow_toolButtonStyleChanged(slot, sigval1);
-	});
+void QMainWindow_connect_toolButtonStyleChanged(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(Qt::ToolButtonStyle toolButtonStyle) {
+			Qt::ToolButtonStyle toolButtonStyle_ret = toolButtonStyle;
+			int sigval1 = static_cast<int>(toolButtonStyle_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(Qt::ToolButtonStyle)>(&QMainWindow::toolButtonStyleChanged), self, local_caller{slot, callback, release});
 }
 
 void QMainWindow_tabifiedDockWidgetActivated(QMainWindow* self, QDockWidget* dockWidget) {
 	self->tabifiedDockWidgetActivated(dockWidget);
 }
 
-void QMainWindow_connect_tabifiedDockWidgetActivated(QMainWindow* self, intptr_t slot) {
-	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(QDockWidget*)>(&QMainWindow::tabifiedDockWidgetActivated), self, [=](QDockWidget* dockWidget) {
-		QDockWidget* sigval1 = dockWidget;
-		miqt_exec_callback_QMainWindow_tabifiedDockWidgetActivated(slot, sigval1);
-	});
+void QMainWindow_connect_tabifiedDockWidgetActivated(QMainWindow* self, intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QDockWidget*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QDockWidget*);
+		void operator()(QDockWidget* dockWidget) {
+			QDockWidget* sigval1 = dockWidget;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQMainWindow::connect(self, static_cast<void (QMainWindow::*)(QDockWidget*)>(&QMainWindow::tabifiedDockWidgetActivated), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMainWindow_tr2(const char* s, const char* c) {

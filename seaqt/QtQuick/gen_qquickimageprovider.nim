@@ -118,7 +118,7 @@ proc fcQQuickImageResponse_textureFactory(self: pointer, ): pointer {.importc: "
 proc fcQQuickImageResponse_errorString(self: pointer, ): struct_miqt_string {.importc: "QQuickImageResponse_errorString".}
 proc fcQQuickImageResponse_cancel(self: pointer, ): void {.importc: "QQuickImageResponse_cancel".}
 proc fcQQuickImageResponse_finished(self: pointer, ): void {.importc: "QQuickImageResponse_finished".}
-proc fcQQuickImageResponse_connect_finished(self: pointer, slot: int) {.importc: "QQuickImageResponse_connect_finished".}
+proc fcQQuickImageResponse_connect_finished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickImageResponse_connect_finished".}
 proc fcQQuickImageResponse_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickImageResponse_tr2".}
 proc fcQQuickImageResponse_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickImageResponse_tr3".}
 proc fcQQuickImageResponse_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickImageResponse_trUtf82".}
@@ -485,15 +485,19 @@ proc finished*(self: gen_qquickimageprovider_types.QQuickImageResponse, ): void 
   fcQQuickImageResponse_finished(self.h)
 
 type QQuickImageResponsefinishedSlot* = proc()
-proc miqt_exec_callback_cQQuickImageResponse_finished(slot: int) {.exportc: "miqt_exec_callback_QQuickImageResponse_finished".} =
+proc miqt_exec_callback_cQQuickImageResponse_finished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickImageResponsefinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickImageResponse_finished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickImageResponsefinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfinished*(self: gen_qquickimageprovider_types.QQuickImageResponse, slot: QQuickImageResponsefinishedSlot) =
   var tmp = new QQuickImageResponsefinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickImageResponse_connect_finished(self.h, cast[int](addr tmp[]))
+  fcQQuickImageResponse_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickImageResponse_finished, miqt_exec_callback_cQQuickImageResponse_finished_release)
 
 proc tr*(_: type gen_qquickimageprovider_types.QQuickImageResponse, s: cstring, c: cstring): string =
   let v_ms = fcQQuickImageResponse_tr2(s, c)

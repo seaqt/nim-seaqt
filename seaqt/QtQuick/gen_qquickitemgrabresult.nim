@@ -60,7 +60,7 @@ proc fcQQuickItemGrabResult_url(self: pointer, ): pointer {.importc: "QQuickItem
 proc fcQQuickItemGrabResult_saveToFile(self: pointer, fileName: struct_miqt_string): bool {.importc: "QQuickItemGrabResult_saveToFile".}
 proc fcQQuickItemGrabResult_saveToFileWithFileName(self: pointer, fileName: struct_miqt_string): bool {.importc: "QQuickItemGrabResult_saveToFileWithFileName".}
 proc fcQQuickItemGrabResult_ready(self: pointer, ): void {.importc: "QQuickItemGrabResult_ready".}
-proc fcQQuickItemGrabResult_connect_ready(self: pointer, slot: int) {.importc: "QQuickItemGrabResult_connect_ready".}
+proc fcQQuickItemGrabResult_connect_ready(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItemGrabResult_connect_ready".}
 proc fcQQuickItemGrabResult_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickItemGrabResult_tr2".}
 proc fcQQuickItemGrabResult_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickItemGrabResult_tr3".}
 proc fcQQuickItemGrabResult_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickItemGrabResult_trUtf82".}
@@ -105,15 +105,19 @@ proc ready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, ): void =
   fcQQuickItemGrabResult_ready(self.h)
 
 type QQuickItemGrabResultreadySlot* = proc()
-proc miqt_exec_callback_cQQuickItemGrabResult_ready(slot: int) {.exportc: "miqt_exec_callback_QQuickItemGrabResult_ready".} =
+proc miqt_exec_callback_cQQuickItemGrabResult_ready(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemGrabResultreadySlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickItemGrabResult_ready_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickItemGrabResultreadySlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onready*(self: gen_qquickitemgrabresult_types.QQuickItemGrabResult, slot: QQuickItemGrabResultreadySlot) =
   var tmp = new QQuickItemGrabResultreadySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItemGrabResult_connect_ready(self.h, cast[int](addr tmp[]))
+  fcQQuickItemGrabResult_connect_ready(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItemGrabResult_ready, miqt_exec_callback_cQQuickItemGrabResult_ready_release)
 
 proc tr*(_: type gen_qquickitemgrabresult_types.QQuickItemGrabResult, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItemGrabResult_tr2(s, c)

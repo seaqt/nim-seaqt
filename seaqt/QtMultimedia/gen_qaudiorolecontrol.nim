@@ -55,7 +55,7 @@ proc fcQAudioRoleControl_audioRole(self: pointer, ): cint {.importc: "QAudioRole
 proc fcQAudioRoleControl_setAudioRole(self: pointer, role: cint): void {.importc: "QAudioRoleControl_setAudioRole".}
 proc fcQAudioRoleControl_supportedAudioRoles(self: pointer, ): struct_miqt_array {.importc: "QAudioRoleControl_supportedAudioRoles".}
 proc fcQAudioRoleControl_audioRoleChanged(self: pointer, role: cint): void {.importc: "QAudioRoleControl_audioRoleChanged".}
-proc fcQAudioRoleControl_connect_audioRoleChanged(self: pointer, slot: int) {.importc: "QAudioRoleControl_connect_audioRoleChanged".}
+proc fcQAudioRoleControl_connect_audioRoleChanged(self: pointer, slot: int, callback: proc (slot: int, role: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRoleControl_connect_audioRoleChanged".}
 proc fcQAudioRoleControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRoleControl_tr2".}
 proc fcQAudioRoleControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRoleControl_tr3".}
 proc fcQAudioRoleControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRoleControl_trUtf82".}
@@ -102,17 +102,21 @@ proc audioRoleChanged*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, role
   fcQAudioRoleControl_audioRoleChanged(self.h, cint(role))
 
 type QAudioRoleControlaudioRoleChangedSlot* = proc(role: cint)
-proc miqt_exec_callback_cQAudioRoleControl_audioRoleChanged(slot: int, role: cint) {.exportc: "miqt_exec_callback_QAudioRoleControl_audioRoleChanged".} =
+proc miqt_exec_callback_cQAudioRoleControl_audioRoleChanged(slot: int, role: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRoleControlaudioRoleChangedSlot](cast[pointer](slot))
   let slotval1 = cint(role)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioRoleControl_audioRoleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRoleControlaudioRoleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaudioRoleChanged*(self: gen_qaudiorolecontrol_types.QAudioRoleControl, slot: QAudioRoleControlaudioRoleChangedSlot) =
   var tmp = new QAudioRoleControlaudioRoleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRoleControl_connect_audioRoleChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRoleControl_connect_audioRoleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRoleControl_audioRoleChanged, miqt_exec_callback_cQAudioRoleControl_audioRoleChanged_release)
 
 proc tr*(_: type gen_qaudiorolecontrol_types.QAudioRoleControl, s: cstring, c: cstring): string =
   let v_ms = fcQAudioRoleControl_tr2(s, c)

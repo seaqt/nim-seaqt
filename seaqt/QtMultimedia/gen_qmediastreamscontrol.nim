@@ -67,9 +67,9 @@ proc fcQMediaStreamsControl_metaData(self: pointer, streamNumber: cint, key: str
 proc fcQMediaStreamsControl_isActive(self: pointer, streamNumber: cint): bool {.importc: "QMediaStreamsControl_isActive".}
 proc fcQMediaStreamsControl_setActive(self: pointer, streamNumber: cint, state: bool): void {.importc: "QMediaStreamsControl_setActive".}
 proc fcQMediaStreamsControl_streamsChanged(self: pointer, ): void {.importc: "QMediaStreamsControl_streamsChanged".}
-proc fcQMediaStreamsControl_connect_streamsChanged(self: pointer, slot: int) {.importc: "QMediaStreamsControl_connect_streamsChanged".}
+proc fcQMediaStreamsControl_connect_streamsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaStreamsControl_connect_streamsChanged".}
 proc fcQMediaStreamsControl_activeStreamsChanged(self: pointer, ): void {.importc: "QMediaStreamsControl_activeStreamsChanged".}
-proc fcQMediaStreamsControl_connect_activeStreamsChanged(self: pointer, slot: int) {.importc: "QMediaStreamsControl_connect_activeStreamsChanged".}
+proc fcQMediaStreamsControl_connect_activeStreamsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaStreamsControl_connect_activeStreamsChanged".}
 proc fcQMediaStreamsControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaStreamsControl_tr2".}
 proc fcQMediaStreamsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaStreamsControl_tr3".}
 proc fcQMediaStreamsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaStreamsControl_trUtf82".}
@@ -117,29 +117,37 @@ proc streamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, 
   fcQMediaStreamsControl_streamsChanged(self.h)
 
 type QMediaStreamsControlstreamsChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaStreamsControl_streamsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaStreamsControl_streamsChanged".} =
+proc miqt_exec_callback_cQMediaStreamsControl_streamsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaStreamsControlstreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaStreamsControl_streamsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaStreamsControlstreamsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onstreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlstreamsChangedSlot) =
   var tmp = new QMediaStreamsControlstreamsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaStreamsControl_connect_streamsChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaStreamsControl_connect_streamsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaStreamsControl_streamsChanged, miqt_exec_callback_cQMediaStreamsControl_streamsChanged_release)
 
 proc activeStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, ): void =
   fcQMediaStreamsControl_activeStreamsChanged(self.h)
 
 type QMediaStreamsControlactiveStreamsChangedSlot* = proc()
-proc miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged(slot: int) {.exportc: "miqt_exec_callback_QMediaStreamsControl_activeStreamsChanged".} =
+proc miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaStreamsControlactiveStreamsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaStreamsControlactiveStreamsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactiveStreamsChanged*(self: gen_qmediastreamscontrol_types.QMediaStreamsControl, slot: QMediaStreamsControlactiveStreamsChangedSlot) =
   var tmp = new QMediaStreamsControlactiveStreamsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaStreamsControl_connect_activeStreamsChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaStreamsControl_connect_activeStreamsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged, miqt_exec_callback_cQMediaStreamsControl_activeStreamsChanged_release)
 
 proc tr*(_: type gen_qmediastreamscontrol_types.QMediaStreamsControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaStreamsControl_tr2(s, c)

@@ -65,9 +65,9 @@ proc fcQVideoProbe_setSource(self: pointer, source: pointer): bool {.importc: "Q
 proc fcQVideoProbe_setSourceWithSource(self: pointer, source: pointer): bool {.importc: "QVideoProbe_setSourceWithSource".}
 proc fcQVideoProbe_isActive(self: pointer, ): bool {.importc: "QVideoProbe_isActive".}
 proc fcQVideoProbe_videoFrameProbed(self: pointer, frame: pointer): void {.importc: "QVideoProbe_videoFrameProbed".}
-proc fcQVideoProbe_connect_videoFrameProbed(self: pointer, slot: int) {.importc: "QVideoProbe_connect_videoFrameProbed".}
+proc fcQVideoProbe_connect_videoFrameProbed(self: pointer, slot: int, callback: proc (slot: int, frame: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoProbe_connect_videoFrameProbed".}
 proc fcQVideoProbe_flush(self: pointer, ): void {.importc: "QVideoProbe_flush".}
-proc fcQVideoProbe_connect_flush(self: pointer, slot: int) {.importc: "QVideoProbe_connect_flush".}
+proc fcQVideoProbe_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVideoProbe_connect_flush".}
 proc fcQVideoProbe_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoProbe_tr2".}
 proc fcQVideoProbe_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoProbe_tr3".}
 proc fcQVideoProbe_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoProbe_trUtf82".}
@@ -133,31 +133,39 @@ proc videoFrameProbed*(self: gen_qvideoprobe_types.QVideoProbe, frame: gen_qvide
   fcQVideoProbe_videoFrameProbed(self.h, frame.h)
 
 type QVideoProbevideoFrameProbedSlot* = proc(frame: gen_qvideoframe_types.QVideoFrame)
-proc miqt_exec_callback_cQVideoProbe_videoFrameProbed(slot: int, frame: pointer) {.exportc: "miqt_exec_callback_QVideoProbe_videoFrameProbed".} =
+proc miqt_exec_callback_cQVideoProbe_videoFrameProbed(slot: int, frame: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QVideoProbevideoFrameProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qvideoframe_types.QVideoFrame(h: frame)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVideoProbe_videoFrameProbed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoProbevideoFrameProbedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvideoFrameProbed*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbevideoFrameProbedSlot) =
   var tmp = new QVideoProbevideoFrameProbedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoProbe_connect_videoFrameProbed(self.h, cast[int](addr tmp[]))
+  fcQVideoProbe_connect_videoFrameProbed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoProbe_videoFrameProbed, miqt_exec_callback_cQVideoProbe_videoFrameProbed_release)
 
 proc flush*(self: gen_qvideoprobe_types.QVideoProbe, ): void =
   fcQVideoProbe_flush(self.h)
 
 type QVideoProbeflushSlot* = proc()
-proc miqt_exec_callback_cQVideoProbe_flush(slot: int) {.exportc: "miqt_exec_callback_QVideoProbe_flush".} =
+proc miqt_exec_callback_cQVideoProbe_flush(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QVideoProbeflushSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQVideoProbe_flush_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVideoProbeflushSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onflush*(self: gen_qvideoprobe_types.QVideoProbe, slot: QVideoProbeflushSlot) =
   var tmp = new QVideoProbeflushSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVideoProbe_connect_flush(self.h, cast[int](addr tmp[]))
+  fcQVideoProbe_connect_flush(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVideoProbe_flush, miqt_exec_callback_cQVideoProbe_flush_release)
 
 proc tr*(_: type gen_qvideoprobe_types.QVideoProbe, s: cstring, c: cstring): string =
   let v_ms = fcQVideoProbe_tr2(s, c)

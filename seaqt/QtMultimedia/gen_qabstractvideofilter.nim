@@ -71,7 +71,7 @@ proc fcQAbstractVideoFilter_isActive(self: pointer, ): bool {.importc: "QAbstrac
 proc fcQAbstractVideoFilter_setActive(self: pointer, v: bool): void {.importc: "QAbstractVideoFilter_setActive".}
 proc fcQAbstractVideoFilter_createFilterRunnable(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_createFilterRunnable".}
 proc fcQAbstractVideoFilter_activeChanged(self: pointer, ): void {.importc: "QAbstractVideoFilter_activeChanged".}
-proc fcQAbstractVideoFilter_connect_activeChanged(self: pointer, slot: int) {.importc: "QAbstractVideoFilter_connect_activeChanged".}
+proc fcQAbstractVideoFilter_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractVideoFilter_connect_activeChanged".}
 proc fcQAbstractVideoFilter_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_tr2".}
 proc fcQAbstractVideoFilter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractVideoFilter_tr3".}
 proc fcQAbstractVideoFilter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf82".}
@@ -146,15 +146,19 @@ proc activeChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, )
   fcQAbstractVideoFilter_activeChanged(self.h)
 
 type QAbstractVideoFilteractiveChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractVideoFilter_activeChanged(slot: int) {.exportc: "miqt_exec_callback_QAbstractVideoFilter_activeChanged".} =
+proc miqt_exec_callback_cQAbstractVideoFilter_activeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractVideoFilteractiveChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractVideoFilter_activeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractVideoFilteractiveChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onactiveChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, slot: QAbstractVideoFilteractiveChangedSlot) =
   var tmp = new QAbstractVideoFilteractiveChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractVideoFilter_connect_activeChanged(self.h, cast[int](addr tmp[]))
+  fcQAbstractVideoFilter_connect_activeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractVideoFilter_activeChanged, miqt_exec_callback_cQAbstractVideoFilter_activeChanged_release)
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractVideoFilter_tr2(s, c)

@@ -78,9 +78,9 @@ proc fcQDrag_supportedActions(self: pointer, ): cint {.importc: "QDrag_supported
 proc fcQDrag_defaultAction(self: pointer, ): cint {.importc: "QDrag_defaultAction".}
 proc fcQDrag_cancel(): void {.importc: "QDrag_cancel".}
 proc fcQDrag_actionChanged(self: pointer, action: cint): void {.importc: "QDrag_actionChanged".}
-proc fcQDrag_connect_actionChanged(self: pointer, slot: int) {.importc: "QDrag_connect_actionChanged".}
+proc fcQDrag_connect_actionChanged(self: pointer, slot: int, callback: proc (slot: int, action: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDrag_connect_actionChanged".}
 proc fcQDrag_targetChanged(self: pointer, newTarget: pointer): void {.importc: "QDrag_targetChanged".}
-proc fcQDrag_connect_targetChanged(self: pointer, slot: int) {.importc: "QDrag_connect_targetChanged".}
+proc fcQDrag_connect_targetChanged(self: pointer, slot: int, callback: proc (slot: int, newTarget: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDrag_connect_targetChanged".}
 proc fcQDrag_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDrag_tr2".}
 proc fcQDrag_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDrag_tr3".}
 proc fcQDrag_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDrag_trUtf82".}
@@ -186,33 +186,41 @@ proc actionChanged*(self: gen_qdrag_types.QDrag, action: cint): void =
   fcQDrag_actionChanged(self.h, cint(action))
 
 type QDragactionChangedSlot* = proc(action: cint)
-proc miqt_exec_callback_cQDrag_actionChanged(slot: int, action: cint) {.exportc: "miqt_exec_callback_QDrag_actionChanged".} =
+proc miqt_exec_callback_cQDrag_actionChanged(slot: int, action: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDragactionChangedSlot](cast[pointer](slot))
   let slotval1 = cint(action)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDrag_actionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDragactionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onactionChanged*(self: gen_qdrag_types.QDrag, slot: QDragactionChangedSlot) =
   var tmp = new QDragactionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDrag_connect_actionChanged(self.h, cast[int](addr tmp[]))
+  fcQDrag_connect_actionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDrag_actionChanged, miqt_exec_callback_cQDrag_actionChanged_release)
 
 proc targetChanged*(self: gen_qdrag_types.QDrag, newTarget: gen_qobject_types.QObject): void =
   fcQDrag_targetChanged(self.h, newTarget.h)
 
 type QDragtargetChangedSlot* = proc(newTarget: gen_qobject_types.QObject)
-proc miqt_exec_callback_cQDrag_targetChanged(slot: int, newTarget: pointer) {.exportc: "miqt_exec_callback_QDrag_targetChanged".} =
+proc miqt_exec_callback_cQDrag_targetChanged(slot: int, newTarget: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QDragtargetChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: newTarget)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDrag_targetChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDragtargetChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontargetChanged*(self: gen_qdrag_types.QDrag, slot: QDragtargetChangedSlot) =
   var tmp = new QDragtargetChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDrag_connect_targetChanged(self.h, cast[int](addr tmp[]))
+  fcQDrag_connect_targetChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDrag_targetChanged, miqt_exec_callback_cQDrag_targetChanged_release)
 
 proc tr*(_: type gen_qdrag_types.QDrag, s: cstring, c: cstring): string =
   let v_ms = fcQDrag_tr2(s, c)

@@ -29,11 +29,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QAbstractTextDocumentLayout_update(intptr_t);
-void miqt_exec_callback_QAbstractTextDocumentLayout_updateBlock(intptr_t, QTextBlock*);
-void miqt_exec_callback_QAbstractTextDocumentLayout_documentSizeChanged(intptr_t, QSizeF*);
-void miqt_exec_callback_QAbstractTextDocumentLayout_pageCountChanged(intptr_t, int);
-void miqt_exec_callback_QAbstractTextDocumentLayout_update1(intptr_t, QRectF*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -495,47 +490,67 @@ void QAbstractTextDocumentLayout_update(QAbstractTextDocumentLayout* self) {
 	self->update();
 }
 
-void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [=]() {
-		miqt_exec_callback_QAbstractTextDocumentLayout_update(slot);
-	});
+void QAbstractTextDocumentLayout_connect_update(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, local_caller{slot, callback, release});
 }
 
 void QAbstractTextDocumentLayout_updateBlock(QAbstractTextDocumentLayout* self, QTextBlock* block) {
 	self->updateBlock(*block);
 }
 
-void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QTextBlock&)>(&QAbstractTextDocumentLayout::updateBlock), self, [=](const QTextBlock& block) {
-		const QTextBlock& block_ret = block;
-		// Cast returned reference into pointer
-		QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_updateBlock(slot, sigval1);
-	});
+void QAbstractTextDocumentLayout_connect_updateBlock(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTextBlock*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTextBlock*);
+		void operator()(const QTextBlock& block) {
+			const QTextBlock& block_ret = block;
+			// Cast returned reference into pointer
+			QTextBlock* sigval1 = const_cast<QTextBlock*>(&block_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QTextBlock&)>(&QAbstractTextDocumentLayout::updateBlock), self, local_caller{slot, callback, release});
 }
 
 void QAbstractTextDocumentLayout_documentSizeChanged(QAbstractTextDocumentLayout* self, QSizeF* newSize) {
 	self->documentSizeChanged(*newSize);
 }
 
-void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QSizeF&)>(&QAbstractTextDocumentLayout::documentSizeChanged), self, [=](const QSizeF& newSize) {
-		const QSizeF& newSize_ret = newSize;
-		// Cast returned reference into pointer
-		QSizeF* sigval1 = const_cast<QSizeF*>(&newSize_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_documentSizeChanged(slot, sigval1);
-	});
+void QAbstractTextDocumentLayout_connect_documentSizeChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSizeF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSizeF*);
+		void operator()(const QSizeF& newSize) {
+			const QSizeF& newSize_ret = newSize;
+			// Cast returned reference into pointer
+			QSizeF* sigval1 = const_cast<QSizeF*>(&newSize_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QSizeF&)>(&QAbstractTextDocumentLayout::documentSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QAbstractTextDocumentLayout_pageCountChanged(QAbstractTextDocumentLayout* self, int newPages) {
 	self->pageCountChanged(static_cast<int>(newPages));
 }
 
-void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(int)>(&QAbstractTextDocumentLayout::pageCountChanged), self, [=](int newPages) {
-		int sigval1 = newPages;
-		miqt_exec_callback_QAbstractTextDocumentLayout_pageCountChanged(slot, sigval1);
-	});
+void QAbstractTextDocumentLayout_connect_pageCountChanged(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int newPages) {
+			int sigval1 = newPages;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(int)>(&QAbstractTextDocumentLayout::pageCountChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QAbstractTextDocumentLayout_tr2(const char* s, const char* c) {
@@ -590,13 +605,18 @@ void QAbstractTextDocumentLayout_update1(QAbstractTextDocumentLayout* self, QRec
 	self->update(*param1);
 }
 
-void QAbstractTextDocumentLayout_connect_update1(QAbstractTextDocumentLayout* self, intptr_t slot) {
-	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, [=](const QRectF& param1) {
-		const QRectF& param1_ret = param1;
-		// Cast returned reference into pointer
-		QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
-		miqt_exec_callback_QAbstractTextDocumentLayout_update1(slot, sigval1);
-	});
+void QAbstractTextDocumentLayout_connect_update1(QAbstractTextDocumentLayout* self, intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QRectF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QRectF*);
+		void operator()(const QRectF& param1) {
+			const QRectF& param1_ret = param1;
+			// Cast returned reference into pointer
+			QRectF* sigval1 = const_cast<QRectF*>(&param1_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQAbstractTextDocumentLayout::connect(self, static_cast<void (QAbstractTextDocumentLayout::*)(const QRectF&)>(&QAbstractTextDocumentLayout::update), self, local_caller{slot, callback, release});
 }
 
 QMetaObject* QAbstractTextDocumentLayout_virtualbase_metaObject(const void* self) {

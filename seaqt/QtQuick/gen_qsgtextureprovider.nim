@@ -55,7 +55,7 @@ proc fcQSGTextureProvider_tr(s: cstring): struct_miqt_string {.importc: "QSGText
 proc fcQSGTextureProvider_trUtf8(s: cstring): struct_miqt_string {.importc: "QSGTextureProvider_trUtf8".}
 proc fcQSGTextureProvider_texture(self: pointer, ): pointer {.importc: "QSGTextureProvider_texture".}
 proc fcQSGTextureProvider_textureChanged(self: pointer, ): void {.importc: "QSGTextureProvider_textureChanged".}
-proc fcQSGTextureProvider_connect_textureChanged(self: pointer, slot: int) {.importc: "QSGTextureProvider_connect_textureChanged".}
+proc fcQSGTextureProvider_connect_textureChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSGTextureProvider_connect_textureChanged".}
 proc fcQSGTextureProvider_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGTextureProvider_tr2".}
 proc fcQSGTextureProvider_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGTextureProvider_tr3".}
 proc fcQSGTextureProvider_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGTextureProvider_trUtf82".}
@@ -91,15 +91,19 @@ proc textureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, ): v
   fcQSGTextureProvider_textureChanged(self.h)
 
 type QSGTextureProvidertextureChangedSlot* = proc()
-proc miqt_exec_callback_cQSGTextureProvider_textureChanged(slot: int) {.exportc: "miqt_exec_callback_QSGTextureProvider_textureChanged".} =
+proc miqt_exec_callback_cQSGTextureProvider_textureChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQSGTextureProvider_textureChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSGTextureProvidertextureChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ontextureChanged*(self: gen_qsgtextureprovider_types.QSGTextureProvider, slot: QSGTextureProvidertextureChangedSlot) =
   var tmp = new QSGTextureProvidertextureChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSGTextureProvider_connect_textureChanged(self.h, cast[int](addr tmp[]))
+  fcQSGTextureProvider_connect_textureChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSGTextureProvider_textureChanged, miqt_exec_callback_cQSGTextureProvider_textureChanged_release)
 
 proc tr*(_: type gen_qsgtextureprovider_types.QSGTextureProvider, s: cstring, c: cstring): string =
   let v_ms = fcQSGTextureProvider_tr2(s, c)

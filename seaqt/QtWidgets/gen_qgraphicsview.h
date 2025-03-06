@@ -252,7 +252,7 @@ void QGraphicsView_updateScene(QGraphicsView* self, struct miqt_array /* of QRec
 void QGraphicsView_invalidateScene(QGraphicsView* self);
 void QGraphicsView_updateSceneRect(QGraphicsView* self, QRectF* rect);
 void QGraphicsView_rubberBandChanged(QGraphicsView* self, QRect* viewportRect, QPointF* fromScenePoint, QPointF* toScenePoint);
-void QGraphicsView_connect_rubberBandChanged(QGraphicsView* self, intptr_t slot);
+void QGraphicsView_connect_rubberBandChanged(QGraphicsView* self, intptr_t slot, void (*callback)(intptr_t, QRect*, QPointF*, QPointF*), void (*release)(intptr_t));
 void QGraphicsView_setupViewport(QGraphicsView* self, QWidget* widget);
 bool QGraphicsView_event(QGraphicsView* self, QEvent* event);
 bool QGraphicsView_viewportEvent(QGraphicsView* self, QEvent* event);

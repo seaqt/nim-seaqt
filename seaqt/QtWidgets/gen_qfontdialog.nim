@@ -95,9 +95,9 @@ proc fcQFontDialog_setVisible(self: pointer, visible: bool): void {.importc: "QF
 proc fcQFontDialog_getFont(ok: ptr bool): pointer {.importc: "QFontDialog_getFont".}
 proc fcQFontDialog_getFont2(ok: ptr bool, initial: pointer): pointer {.importc: "QFontDialog_getFont2".}
 proc fcQFontDialog_currentFontChanged(self: pointer, font: pointer): void {.importc: "QFontDialog_currentFontChanged".}
-proc fcQFontDialog_connect_currentFontChanged(self: pointer, slot: int) {.importc: "QFontDialog_connect_currentFontChanged".}
+proc fcQFontDialog_connect_currentFontChanged(self: pointer, slot: int, callback: proc (slot: int, font: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontDialog_connect_currentFontChanged".}
 proc fcQFontDialog_fontSelected(self: pointer, font: pointer): void {.importc: "QFontDialog_fontSelected".}
-proc fcQFontDialog_connect_fontSelected(self: pointer, slot: int) {.importc: "QFontDialog_connect_fontSelected".}
+proc fcQFontDialog_connect_fontSelected(self: pointer, slot: int, callback: proc (slot: int, font: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontDialog_connect_fontSelected".}
 proc fcQFontDialog_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFontDialog_tr2".}
 proc fcQFontDialog_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFontDialog_tr3".}
 proc fcQFontDialog_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFontDialog_trUtf82".}
@@ -281,33 +281,41 @@ proc currentFontChanged*(self: gen_qfontdialog_types.QFontDialog, font: gen_qfon
   fcQFontDialog_currentFontChanged(self.h, font.h)
 
 type QFontDialogcurrentFontChangedSlot* = proc(font: gen_qfont_types.QFont)
-proc miqt_exec_callback_cQFontDialog_currentFontChanged(slot: int, font: pointer) {.exportc: "miqt_exec_callback_QFontDialog_currentFontChanged".} =
+proc miqt_exec_callback_cQFontDialog_currentFontChanged(slot: int, font: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFontDialogcurrentFontChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qfont_types.QFont(h: font)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQFontDialog_currentFontChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFontDialogcurrentFontChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentFontChanged*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogcurrentFontChangedSlot) =
   var tmp = new QFontDialogcurrentFontChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFontDialog_connect_currentFontChanged(self.h, cast[int](addr tmp[]))
+  fcQFontDialog_connect_currentFontChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFontDialog_currentFontChanged, miqt_exec_callback_cQFontDialog_currentFontChanged_release)
 
 proc fontSelected*(self: gen_qfontdialog_types.QFontDialog, font: gen_qfont_types.QFont): void =
   fcQFontDialog_fontSelected(self.h, font.h)
 
 type QFontDialogfontSelectedSlot* = proc(font: gen_qfont_types.QFont)
-proc miqt_exec_callback_cQFontDialog_fontSelected(slot: int, font: pointer) {.exportc: "miqt_exec_callback_QFontDialog_fontSelected".} =
+proc miqt_exec_callback_cQFontDialog_fontSelected(slot: int, font: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFontDialogfontSelectedSlot](cast[pointer](slot))
   let slotval1 = gen_qfont_types.QFont(h: font)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQFontDialog_fontSelected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFontDialogfontSelectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfontSelected*(self: gen_qfontdialog_types.QFontDialog, slot: QFontDialogfontSelectedSlot) =
   var tmp = new QFontDialogfontSelectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFontDialog_connect_fontSelected(self.h, cast[int](addr tmp[]))
+  fcQFontDialog_connect_fontSelected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFontDialog_fontSelected, miqt_exec_callback_cQFontDialog_fontSelected_release)
 
 proc tr*(_: type gen_qfontdialog_types.QFontDialog, s: cstring, c: cstring): string =
   let v_ms = fcQFontDialog_tr2(s, c)

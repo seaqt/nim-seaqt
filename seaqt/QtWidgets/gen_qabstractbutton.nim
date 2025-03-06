@@ -104,20 +104,20 @@ proc fcQAbstractButton_click(self: pointer, ): void {.importc: "QAbstractButton_
 proc fcQAbstractButton_toggle(self: pointer, ): void {.importc: "QAbstractButton_toggle".}
 proc fcQAbstractButton_setChecked(self: pointer, checked: bool): void {.importc: "QAbstractButton_setChecked".}
 proc fcQAbstractButton_pressed(self: pointer, ): void {.importc: "QAbstractButton_pressed".}
-proc fcQAbstractButton_connect_pressed(self: pointer, slot: int) {.importc: "QAbstractButton_connect_pressed".}
+proc fcQAbstractButton_connect_pressed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_pressed".}
 proc fcQAbstractButton_released(self: pointer, ): void {.importc: "QAbstractButton_released".}
-proc fcQAbstractButton_connect_released(self: pointer, slot: int) {.importc: "QAbstractButton_connect_released".}
+proc fcQAbstractButton_connect_released(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_released".}
 proc fcQAbstractButton_clicked(self: pointer, ): void {.importc: "QAbstractButton_clicked".}
-proc fcQAbstractButton_connect_clicked(self: pointer, slot: int) {.importc: "QAbstractButton_connect_clicked".}
+proc fcQAbstractButton_connect_clicked(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked".}
 proc fcQAbstractButton_toggled(self: pointer, checked: bool): void {.importc: "QAbstractButton_toggled".}
-proc fcQAbstractButton_connect_toggled(self: pointer, slot: int) {.importc: "QAbstractButton_connect_toggled".}
+proc fcQAbstractButton_connect_toggled(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_toggled".}
 proc fcQAbstractButton_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractButton_tr2".}
 proc fcQAbstractButton_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractButton_tr3".}
 proc fcQAbstractButton_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractButton_trUtf82".}
 proc fcQAbstractButton_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractButton_trUtf83".}
 proc fcQAbstractButton_animateClick1(self: pointer, msec: cint): void {.importc: "QAbstractButton_animateClick1".}
 proc fcQAbstractButton_clicked1(self: pointer, checked: bool): void {.importc: "QAbstractButton_clicked1".}
-proc fcQAbstractButton_connect_clicked1(self: pointer, slot: int) {.importc: "QAbstractButton_connect_clicked1".}
+proc fcQAbstractButton_connect_clicked1(self: pointer, slot: int, callback: proc (slot: int, checked: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractButton_connect_clicked1".}
 type cQAbstractButtonVTable = object
   destructor*: proc(vtbl: ptr cQAbstractButtonVTable, self: ptr cQAbstractButton) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -336,59 +336,75 @@ proc pressed*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
   fcQAbstractButton_pressed(self.h)
 
 type QAbstractButtonpressedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_pressed(slot: int) {.exportc: "miqt_exec_callback_QAbstractButton_pressed".} =
+proc miqt_exec_callback_cQAbstractButton_pressed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonpressedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractButton_pressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtonpressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpressed*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonpressedSlot) =
   var tmp = new QAbstractButtonpressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_pressed(self.h, cast[int](addr tmp[]))
+  fcQAbstractButton_connect_pressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_pressed, miqt_exec_callback_cQAbstractButton_pressed_release)
 
 proc released*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
   fcQAbstractButton_released(self.h)
 
 type QAbstractButtonreleasedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_released(slot: int) {.exportc: "miqt_exec_callback_QAbstractButton_released".} =
+proc miqt_exec_callback_cQAbstractButton_released(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonreleasedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractButton_released_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtonreleasedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreleased*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonreleasedSlot) =
   var tmp = new QAbstractButtonreleasedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_released(self.h, cast[int](addr tmp[]))
+  fcQAbstractButton_connect_released(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_released, miqt_exec_callback_cQAbstractButton_released_release)
 
 proc clicked*(self: gen_qabstractbutton_types.QAbstractButton, ): void =
   fcQAbstractButton_clicked(self.h)
 
 type QAbstractButtonclickedSlot* = proc()
-proc miqt_exec_callback_cQAbstractButton_clicked(slot: int) {.exportc: "miqt_exec_callback_QAbstractButton_clicked".} =
+proc miqt_exec_callback_cQAbstractButton_clicked(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonclickedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAbstractButton_clicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtonclickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onclicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonclickedSlot) =
   var tmp = new QAbstractButtonclickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_clicked(self.h, cast[int](addr tmp[]))
+  fcQAbstractButton_connect_clicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_clicked, miqt_exec_callback_cQAbstractButton_clicked_release)
 
 proc toggled*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): void =
   fcQAbstractButton_toggled(self.h, checked)
 
 type QAbstractButtontoggledSlot* = proc(checked: bool)
-proc miqt_exec_callback_cQAbstractButton_toggled(slot: int, checked: bool) {.exportc: "miqt_exec_callback_QAbstractButton_toggled".} =
+proc miqt_exec_callback_cQAbstractButton_toggled(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtontoggledSlot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractButton_toggled_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtontoggledSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontoggled*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtontoggledSlot) =
   var tmp = new QAbstractButtontoggledSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_toggled(self.h, cast[int](addr tmp[]))
+  fcQAbstractButton_connect_toggled(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_toggled, miqt_exec_callback_cQAbstractButton_toggled_release)
 
 proc tr*(_: type gen_qabstractbutton_types.QAbstractButton, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractButton_tr2(s, c)
@@ -421,17 +437,21 @@ proc clicked*(self: gen_qabstractbutton_types.QAbstractButton, checked: bool): v
   fcQAbstractButton_clicked1(self.h, checked)
 
 type QAbstractButtonclicked1Slot* = proc(checked: bool)
-proc miqt_exec_callback_cQAbstractButton_clicked1(slot: int, checked: bool) {.exportc: "miqt_exec_callback_QAbstractButton_clicked1".} =
+proc miqt_exec_callback_cQAbstractButton_clicked1(slot: int, checked: bool) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractButtonclicked1Slot](cast[pointer](slot))
   let slotval1 = checked
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAbstractButton_clicked1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAbstractButtonclicked1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onclicked*(self: gen_qabstractbutton_types.QAbstractButton, slot: QAbstractButtonclicked1Slot) =
   var tmp = new QAbstractButtonclicked1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractButton_connect_clicked1(self.h, cast[int](addr tmp[]))
+  fcQAbstractButton_connect_clicked1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractButton_clicked1, miqt_exec_callback_cQAbstractButton_clicked1_release)
 
 type QAbstractButtonmetaObjectProc* = proc(self: QAbstractButton): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractButtonmetacastProc* = proc(self: QAbstractButton, param1: cstring): pointer {.raises: [], gcsafe.}

@@ -40,11 +40,11 @@ bool QMetaDataReaderControl_isMetaDataAvailable(const QMetaDataReaderControl* se
 QVariant* QMetaDataReaderControl_metaData(const QMetaDataReaderControl* self, struct miqt_string key);
 struct miqt_array /* of struct miqt_string */  QMetaDataReaderControl_availableMetaData(const QMetaDataReaderControl* self);
 void QMetaDataReaderControl_metaDataChanged(QMetaDataReaderControl* self);
-void QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot);
+void QMetaDataReaderControl_connect_metaDataChanged(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMetaDataReaderControl_metaDataChanged2(QMetaDataReaderControl* self, struct miqt_string key, QVariant* value);
-void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot);
+void QMetaDataReaderControl_connect_metaDataChanged2(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t));
 void QMetaDataReaderControl_metaDataAvailableChanged(QMetaDataReaderControl* self, bool available);
-void QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot);
+void QMetaDataReaderControl_connect_metaDataAvailableChanged(QMetaDataReaderControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 struct miqt_string QMetaDataReaderControl_tr2(const char* s, const char* c);
 struct miqt_string QMetaDataReaderControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMetaDataReaderControl_trUtf82(const char* s, const char* c);

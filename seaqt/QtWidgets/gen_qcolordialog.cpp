@@ -43,8 +43,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QColorDialog_currentColorChanged(intptr_t, QColor*);
-void miqt_exec_callback_QColorDialog_colorSelected(intptr_t, QColor*);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -1024,26 +1022,36 @@ void QColorDialog_currentColorChanged(QColorDialog* self, QColor* color) {
 	self->currentColorChanged(*color);
 }
 
-void QColorDialog_connect_currentColorChanged(QColorDialog* self, intptr_t slot) {
-	VirtualQColorDialog::connect(self, static_cast<void (QColorDialog::*)(const QColor&)>(&QColorDialog::currentColorChanged), self, [=](const QColor& color) {
-		const QColor& color_ret = color;
-		// Cast returned reference into pointer
-		QColor* sigval1 = const_cast<QColor*>(&color_ret);
-		miqt_exec_callback_QColorDialog_currentColorChanged(slot, sigval1);
-	});
+void QColorDialog_connect_currentColorChanged(QColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QColor*);
+		void operator()(const QColor& color) {
+			const QColor& color_ret = color;
+			// Cast returned reference into pointer
+			QColor* sigval1 = const_cast<QColor*>(&color_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQColorDialog::connect(self, static_cast<void (QColorDialog::*)(const QColor&)>(&QColorDialog::currentColorChanged), self, local_caller{slot, callback, release});
 }
 
 void QColorDialog_colorSelected(QColorDialog* self, QColor* color) {
 	self->colorSelected(*color);
 }
 
-void QColorDialog_connect_colorSelected(QColorDialog* self, intptr_t slot) {
-	VirtualQColorDialog::connect(self, static_cast<void (QColorDialog::*)(const QColor&)>(&QColorDialog::colorSelected), self, [=](const QColor& color) {
-		const QColor& color_ret = color;
-		// Cast returned reference into pointer
-		QColor* sigval1 = const_cast<QColor*>(&color_ret);
-		miqt_exec_callback_QColorDialog_colorSelected(slot, sigval1);
-	});
+void QColorDialog_connect_colorSelected(QColorDialog* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QColor*);
+		void operator()(const QColor& color) {
+			const QColor& color_ret = color;
+			// Cast returned reference into pointer
+			QColor* sigval1 = const_cast<QColor*>(&color_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQColorDialog::connect(self, static_cast<void (QColorDialog::*)(const QColor&)>(&QColorDialog::colorSelected), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QColorDialog_tr2(const char* s, const char* c) {

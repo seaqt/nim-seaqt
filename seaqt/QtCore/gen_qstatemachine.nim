@@ -99,7 +99,7 @@ proc fcQStateMachine_start(self: pointer, ): void {.importc: "QStateMachine_star
 proc fcQStateMachine_stop(self: pointer, ): void {.importc: "QStateMachine_stop".}
 proc fcQStateMachine_setRunning(self: pointer, running: bool): void {.importc: "QStateMachine_setRunning".}
 proc fcQStateMachine_runningChanged(self: pointer, running: bool): void {.importc: "QStateMachine_runningChanged".}
-proc fcQStateMachine_connect_runningChanged(self: pointer, slot: int) {.importc: "QStateMachine_connect_runningChanged".}
+proc fcQStateMachine_connect_runningChanged(self: pointer, slot: int, callback: proc (slot: int, running: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStateMachine_connect_runningChanged".}
 proc fcQStateMachine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStateMachine_tr2".}
 proc fcQStateMachine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStateMachine_tr3".}
 proc fcQStateMachine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QStateMachine_trUtf82".}
@@ -256,17 +256,21 @@ proc runningChanged*(self: gen_qstatemachine_types.QStateMachine, running: bool)
   fcQStateMachine_runningChanged(self.h, running)
 
 type QStateMachinerunningChangedSlot* = proc(running: bool)
-proc miqt_exec_callback_cQStateMachine_runningChanged(slot: int, running: bool) {.exportc: "miqt_exec_callback_QStateMachine_runningChanged".} =
+proc miqt_exec_callback_cQStateMachine_runningChanged(slot: int, running: bool) {.cdecl.} =
   let nimfunc = cast[ptr QStateMachinerunningChangedSlot](cast[pointer](slot))
   let slotval1 = running
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStateMachine_runningChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStateMachinerunningChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onrunningChanged*(self: gen_qstatemachine_types.QStateMachine, slot: QStateMachinerunningChangedSlot) =
   var tmp = new QStateMachinerunningChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStateMachine_connect_runningChanged(self.h, cast[int](addr tmp[]))
+  fcQStateMachine_connect_runningChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStateMachine_runningChanged, miqt_exec_callback_cQStateMachine_runningChanged_release)
 
 proc tr*(_: type gen_qstatemachine_types.QStateMachine, s: cstring, c: cstring): string =
   let v_ms = fcQStateMachine_tr2(s, c)

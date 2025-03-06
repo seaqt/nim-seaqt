@@ -31,16 +31,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared(intptr_t);
-void miqt_exec_callback_QWebFrame_provisionalLoad(intptr_t);
-void miqt_exec_callback_QWebFrame_titleChanged(intptr_t, struct miqt_string);
-void miqt_exec_callback_QWebFrame_urlChanged(intptr_t, QUrl*);
-void miqt_exec_callback_QWebFrame_initialLayoutCompleted(intptr_t);
-void miqt_exec_callback_QWebFrame_iconChanged(intptr_t);
-void miqt_exec_callback_QWebFrame_contentsSizeChanged(intptr_t, QSize*);
-void miqt_exec_callback_QWebFrame_loadStarted(intptr_t);
-void miqt_exec_callback_QWebFrame_loadFinished(intptr_t, bool);
-void miqt_exec_callback_QWebFrame_pageChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -446,20 +436,30 @@ void QWebFrame_javaScriptWindowObjectCleared(QWebFrame* self) {
 	self->javaScriptWindowObjectCleared();
 }
 
-void QWebFrame_connect_javaScriptWindowObjectCleared(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::javaScriptWindowObjectCleared), self, [=]() {
-		miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared(slot);
-	});
+void QWebFrame_connect_javaScriptWindowObjectCleared(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::javaScriptWindowObjectCleared), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_provisionalLoad(QWebFrame* self) {
 	self->provisionalLoad();
 }
 
-void QWebFrame_connect_provisionalLoad(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::provisionalLoad), self, [=]() {
-		miqt_exec_callback_QWebFrame_provisionalLoad(slot);
-	});
+void QWebFrame_connect_provisionalLoad(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::provisionalLoad), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_titleChanged(QWebFrame* self, struct miqt_string title) {
@@ -467,95 +467,135 @@ void QWebFrame_titleChanged(QWebFrame* self, struct miqt_string title) {
 	self->titleChanged(title_QString);
 }
 
-void QWebFrame_connect_titleChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QString&)>(&QWebFrame::titleChanged), self, [=](const QString& title) {
-		const QString title_ret = title;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray title_b = title_ret.toUtf8();
-		struct miqt_string title_ms;
-		title_ms.len = title_b.length();
-		title_ms.data = static_cast<char*>(malloc(title_ms.len));
-		memcpy(title_ms.data, title_b.data(), title_ms.len);
-		struct miqt_string sigval1 = title_ms;
-		miqt_exec_callback_QWebFrame_titleChanged(slot, sigval1);
-	});
+void QWebFrame_connect_titleChanged(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string);
+		void operator()(const QString& title) {
+			const QString title_ret = title;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray title_b = title_ret.toUtf8();
+			struct miqt_string title_ms;
+			title_ms.len = title_b.length();
+			title_ms.data = static_cast<char*>(malloc(title_ms.len));
+			memcpy(title_ms.data, title_b.data(), title_ms.len);
+			struct miqt_string sigval1 = title_ms;
+			callback(slot, sigval1);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QString&)>(&QWebFrame::titleChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_urlChanged(QWebFrame* self, QUrl* url) {
 	self->urlChanged(*url);
 }
 
-void QWebFrame_connect_urlChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QUrl&)>(&QWebFrame::urlChanged), self, [=](const QUrl& url) {
-		const QUrl& url_ret = url;
-		// Cast returned reference into pointer
-		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
-		miqt_exec_callback_QWebFrame_urlChanged(slot, sigval1);
-	});
+void QWebFrame_connect_urlChanged(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QUrl*);
+		void operator()(const QUrl& url) {
+			const QUrl& url_ret = url;
+			// Cast returned reference into pointer
+			QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QUrl&)>(&QWebFrame::urlChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_initialLayoutCompleted(QWebFrame* self) {
 	self->initialLayoutCompleted();
 }
 
-void QWebFrame_connect_initialLayoutCompleted(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::initialLayoutCompleted), self, [=]() {
-		miqt_exec_callback_QWebFrame_initialLayoutCompleted(slot);
-	});
+void QWebFrame_connect_initialLayoutCompleted(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::initialLayoutCompleted), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_iconChanged(QWebFrame* self) {
 	self->iconChanged();
 }
 
-void QWebFrame_connect_iconChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::iconChanged), self, [=]() {
-		miqt_exec_callback_QWebFrame_iconChanged(slot);
-	});
+void QWebFrame_connect_iconChanged(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::iconChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_contentsSizeChanged(QWebFrame* self, QSize* size) {
 	self->contentsSizeChanged(*size);
 }
 
-void QWebFrame_connect_contentsSizeChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QSize&)>(&QWebFrame::contentsSizeChanged), self, [=](const QSize& size) {
-		const QSize& size_ret = size;
-		// Cast returned reference into pointer
-		QSize* sigval1 = const_cast<QSize*>(&size_ret);
-		miqt_exec_callback_QWebFrame_contentsSizeChanged(slot, sigval1);
-	});
+void QWebFrame_connect_contentsSizeChanged(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QSize*);
+		void operator()(const QSize& size) {
+			const QSize& size_ret = size;
+			// Cast returned reference into pointer
+			QSize* sigval1 = const_cast<QSize*>(&size_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(const QSize&)>(&QWebFrame::contentsSizeChanged), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_loadStarted(QWebFrame* self) {
 	self->loadStarted();
 }
 
-void QWebFrame_connect_loadStarted(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::loadStarted), self, [=]() {
-		miqt_exec_callback_QWebFrame_loadStarted(slot);
-	});
+void QWebFrame_connect_loadStarted(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::loadStarted), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_loadFinished(QWebFrame* self, bool ok) {
 	self->loadFinished(ok);
 }
 
-void QWebFrame_connect_loadFinished(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(bool)>(&QWebFrame::loadFinished), self, [=](bool ok) {
-		bool sigval1 = ok;
-		miqt_exec_callback_QWebFrame_loadFinished(slot, sigval1);
-	});
+void QWebFrame_connect_loadFinished(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool ok) {
+			bool sigval1 = ok;
+			callback(slot, sigval1);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)(bool)>(&QWebFrame::loadFinished), self, local_caller{slot, callback, release});
 }
 
 void QWebFrame_pageChanged(QWebFrame* self) {
 	self->pageChanged();
 }
 
-void QWebFrame_connect_pageChanged(QWebFrame* self, intptr_t slot) {
-	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::pageChanged), self, [=]() {
-		miqt_exec_callback_QWebFrame_pageChanged(slot);
-	});
+void QWebFrame_connect_pageChanged(QWebFrame* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QWebFrame::connect(self, static_cast<void (QWebFrame::*)()>(&QWebFrame::pageChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QWebFrame_tr2(const char* s, const char* c) {

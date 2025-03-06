@@ -72,7 +72,7 @@ void QQmlApplicationEngine_loadWithFilePath(QQmlApplicationEngine* self, struct 
 void QQmlApplicationEngine_setInitialProperties(QQmlApplicationEngine* self, struct miqt_map /* of struct miqt_string to QVariant* */  initialProperties);
 void QQmlApplicationEngine_loadData(QQmlApplicationEngine* self, struct miqt_string data);
 void QQmlApplicationEngine_objectCreated(QQmlApplicationEngine* self, QObject* object, QUrl* url);
-void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, intptr_t slot);
+void QQmlApplicationEngine_connect_objectCreated(QQmlApplicationEngine* self, intptr_t slot, void (*callback)(intptr_t, QObject*, QUrl*), void (*release)(intptr_t));
 struct miqt_string QQmlApplicationEngine_tr2(const char* s, const char* c);
 struct miqt_string QQmlApplicationEngine_tr3(const char* s, const char* c, int n);
 struct miqt_string QQmlApplicationEngine_trUtf82(const char* s, const char* c);

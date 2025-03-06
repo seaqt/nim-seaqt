@@ -110,7 +110,7 @@ proc fcQQuickView_setSource(self: pointer, source: pointer): void {.importc: "QQ
 proc fcQQuickView_setInitialProperties(self: pointer, initialProperties: struct_miqt_map): void {.importc: "QQuickView_setInitialProperties".}
 proc fcQQuickView_setContent(self: pointer, url: pointer, component: pointer, item: pointer): void {.importc: "QQuickView_setContent".}
 proc fcQQuickView_statusChanged(self: pointer, param1: cint): void {.importc: "QQuickView_statusChanged".}
-proc fcQQuickView_connect_statusChanged(self: pointer, slot: int) {.importc: "QQuickView_connect_statusChanged".}
+proc fcQQuickView_connect_statusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickView_connect_statusChanged".}
 proc fcQQuickView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickView_tr2".}
 proc fcQQuickView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickView_tr3".}
 proc fcQQuickView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickView_trUtf82".}
@@ -267,17 +267,21 @@ proc statusChanged*(self: gen_qquickview_types.QQuickView, param1: cint): void =
   fcQQuickView_statusChanged(self.h, cint(param1))
 
 type QQuickViewstatusChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQQuickView_statusChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QQuickView_statusChanged".} =
+proc miqt_exec_callback_cQQuickView_statusChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QQuickViewstatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQuickView_statusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickViewstatusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusChanged*(self: gen_qquickview_types.QQuickView, slot: QQuickViewstatusChangedSlot) =
   var tmp = new QQuickViewstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickView_connect_statusChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickView_connect_statusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickView_statusChanged, miqt_exec_callback_cQQuickView_statusChanged_release)
 
 proc tr*(_: type gen_qquickview_types.QQuickView, s: cstring, c: cstring): string =
   let v_ms = fcQQuickView_tr2(s, c)

@@ -107,7 +107,7 @@ proc fcQLCDNumber_setOctMode(self: pointer, ): void {.importc: "QLCDNumber_setOc
 proc fcQLCDNumber_setBinMode(self: pointer, ): void {.importc: "QLCDNumber_setBinMode".}
 proc fcQLCDNumber_setSmallDecimalPoint(self: pointer, smallDecimalPoint: bool): void {.importc: "QLCDNumber_setSmallDecimalPoint".}
 proc fcQLCDNumber_overflow(self: pointer, ): void {.importc: "QLCDNumber_overflow".}
-proc fcQLCDNumber_connect_overflow(self: pointer, slot: int) {.importc: "QLCDNumber_connect_overflow".}
+proc fcQLCDNumber_connect_overflow(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLCDNumber_connect_overflow".}
 proc fcQLCDNumber_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLCDNumber_tr2".}
 proc fcQLCDNumber_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLCDNumber_tr3".}
 proc fcQLCDNumber_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLCDNumber_trUtf82".}
@@ -306,15 +306,19 @@ proc overflow*(self: gen_qlcdnumber_types.QLCDNumber, ): void =
   fcQLCDNumber_overflow(self.h)
 
 type QLCDNumberoverflowSlot* = proc()
-proc miqt_exec_callback_cQLCDNumber_overflow(slot: int) {.exportc: "miqt_exec_callback_QLCDNumber_overflow".} =
+proc miqt_exec_callback_cQLCDNumber_overflow(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QLCDNumberoverflowSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQLCDNumber_overflow_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLCDNumberoverflowSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onoverflow*(self: gen_qlcdnumber_types.QLCDNumber, slot: QLCDNumberoverflowSlot) =
   var tmp = new QLCDNumberoverflowSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLCDNumber_connect_overflow(self.h, cast[int](addr tmp[]))
+  fcQLCDNumber_connect_overflow(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLCDNumber_overflow, miqt_exec_callback_cQLCDNumber_overflow_release)
 
 proc tr*(_: type gen_qlcdnumber_types.QLCDNumber, s: cstring, c: cstring): string =
   let v_ms = fcQLCDNumber_tr2(s, c)

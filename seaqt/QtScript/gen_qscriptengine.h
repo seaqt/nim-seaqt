@@ -128,7 +128,7 @@ QScriptString* QScriptEngine_toStringHandle(QScriptEngine* self, struct miqt_str
 QScriptValue* QScriptEngine_toObject(QScriptEngine* self, QScriptValue* value);
 QScriptValue* QScriptEngine_objectById(const QScriptEngine* self, long long id);
 void QScriptEngine_signalHandlerException(QScriptEngine* self, QScriptValue* exception);
-void QScriptEngine_connect_signalHandlerException(QScriptEngine* self, intptr_t slot);
+void QScriptEngine_connect_signalHandlerException(QScriptEngine* self, intptr_t slot, void (*callback)(intptr_t, QScriptValue*), void (*release)(intptr_t));
 struct miqt_string QScriptEngine_tr2(const char* s, const char* c);
 struct miqt_string QScriptEngine_tr3(const char* s, const char* c, int n);
 struct miqt_string QScriptEngine_trUtf82(const char* s, const char* c);

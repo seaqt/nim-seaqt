@@ -231,35 +231,35 @@ proc fcQTableWidget_removeColumn(self: pointer, column: cint): void {.importc: "
 proc fcQTableWidget_clear(self: pointer, ): void {.importc: "QTableWidget_clear".}
 proc fcQTableWidget_clearContents(self: pointer, ): void {.importc: "QTableWidget_clearContents".}
 proc fcQTableWidget_itemPressed(self: pointer, item: pointer): void {.importc: "QTableWidget_itemPressed".}
-proc fcQTableWidget_connect_itemPressed(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemPressed".}
+proc fcQTableWidget_connect_itemPressed(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemPressed".}
 proc fcQTableWidget_itemClicked(self: pointer, item: pointer): void {.importc: "QTableWidget_itemClicked".}
-proc fcQTableWidget_connect_itemClicked(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemClicked".}
+proc fcQTableWidget_connect_itemClicked(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemClicked".}
 proc fcQTableWidget_itemDoubleClicked(self: pointer, item: pointer): void {.importc: "QTableWidget_itemDoubleClicked".}
-proc fcQTableWidget_connect_itemDoubleClicked(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemDoubleClicked".}
+proc fcQTableWidget_connect_itemDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemDoubleClicked".}
 proc fcQTableWidget_itemActivated(self: pointer, item: pointer): void {.importc: "QTableWidget_itemActivated".}
-proc fcQTableWidget_connect_itemActivated(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemActivated".}
+proc fcQTableWidget_connect_itemActivated(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemActivated".}
 proc fcQTableWidget_itemEntered(self: pointer, item: pointer): void {.importc: "QTableWidget_itemEntered".}
-proc fcQTableWidget_connect_itemEntered(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemEntered".}
+proc fcQTableWidget_connect_itemEntered(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemEntered".}
 proc fcQTableWidget_itemChanged(self: pointer, item: pointer): void {.importc: "QTableWidget_itemChanged".}
-proc fcQTableWidget_connect_itemChanged(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemChanged".}
+proc fcQTableWidget_connect_itemChanged(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemChanged".}
 proc fcQTableWidget_currentItemChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QTableWidget_currentItemChanged".}
-proc fcQTableWidget_connect_currentItemChanged(self: pointer, slot: int) {.importc: "QTableWidget_connect_currentItemChanged".}
+proc fcQTableWidget_connect_currentItemChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_currentItemChanged".}
 proc fcQTableWidget_itemSelectionChanged(self: pointer, ): void {.importc: "QTableWidget_itemSelectionChanged".}
-proc fcQTableWidget_connect_itemSelectionChanged(self: pointer, slot: int) {.importc: "QTableWidget_connect_itemSelectionChanged".}
+proc fcQTableWidget_connect_itemSelectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_itemSelectionChanged".}
 proc fcQTableWidget_cellPressed(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellPressed".}
-proc fcQTableWidget_connect_cellPressed(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellPressed".}
+proc fcQTableWidget_connect_cellPressed(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellPressed".}
 proc fcQTableWidget_cellClicked(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellClicked".}
-proc fcQTableWidget_connect_cellClicked(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellClicked".}
+proc fcQTableWidget_connect_cellClicked(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellClicked".}
 proc fcQTableWidget_cellDoubleClicked(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellDoubleClicked".}
-proc fcQTableWidget_connect_cellDoubleClicked(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellDoubleClicked".}
+proc fcQTableWidget_connect_cellDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellDoubleClicked".}
 proc fcQTableWidget_cellActivated(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellActivated".}
-proc fcQTableWidget_connect_cellActivated(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellActivated".}
+proc fcQTableWidget_connect_cellActivated(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellActivated".}
 proc fcQTableWidget_cellEntered(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellEntered".}
-proc fcQTableWidget_connect_cellEntered(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellEntered".}
+proc fcQTableWidget_connect_cellEntered(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellEntered".}
 proc fcQTableWidget_cellChanged(self: pointer, row: cint, column: cint): void {.importc: "QTableWidget_cellChanged".}
-proc fcQTableWidget_connect_cellChanged(self: pointer, slot: int) {.importc: "QTableWidget_connect_cellChanged".}
+proc fcQTableWidget_connect_cellChanged(self: pointer, slot: int, callback: proc (slot: int, row: cint, column: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_cellChanged".}
 proc fcQTableWidget_currentCellChanged(self: pointer, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint): void {.importc: "QTableWidget_currentCellChanged".}
-proc fcQTableWidget_connect_currentCellChanged(self: pointer, slot: int) {.importc: "QTableWidget_connect_currentCellChanged".}
+proc fcQTableWidget_connect_currentCellChanged(self: pointer, slot: int, callback: proc (slot: int, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTableWidget_connect_currentCellChanged".}
 proc fcQTableWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTableWidget_tr2".}
 proc fcQTableWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTableWidget_tr3".}
 proc fcQTableWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTableWidget_trUtf82".}
@@ -1070,103 +1070,127 @@ proc itemPressed*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewid
   fcQTableWidget_itemPressed(self.h, item.h)
 
 type QTableWidgetitemPressedSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemPressed(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemPressed".} =
+proc miqt_exec_callback_cQTableWidget_itemPressed(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemPressedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemPressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemPressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemPressed*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemPressedSlot) =
   var tmp = new QTableWidgetitemPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemPressed(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemPressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemPressed, miqt_exec_callback_cQTableWidget_itemPressed_release)
 
 proc itemClicked*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_itemClicked(self.h, item.h)
 
 type QTableWidgetitemClickedSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemClicked(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemClicked".} =
+proc miqt_exec_callback_cQTableWidget_itemClicked(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemClicked*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemClickedSlot) =
   var tmp = new QTableWidgetitemClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemClicked(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemClicked, miqt_exec_callback_cQTableWidget_itemClicked_release)
 
 proc itemDoubleClicked*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_itemDoubleClicked(self.h, item.h)
 
 type QTableWidgetitemDoubleClickedSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemDoubleClicked(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemDoubleClicked".} =
+proc miqt_exec_callback_cQTableWidget_itemDoubleClicked(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemDoubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemDoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemDoubleClicked*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemDoubleClickedSlot) =
   var tmp = new QTableWidgetitemDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemDoubleClicked, miqt_exec_callback_cQTableWidget_itemDoubleClicked_release)
 
 proc itemActivated*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_itemActivated(self.h, item.h)
 
 type QTableWidgetitemActivatedSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemActivated(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemActivated".} =
+proc miqt_exec_callback_cQTableWidget_itemActivated(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemActivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemActivated*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemActivatedSlot) =
   var tmp = new QTableWidgetitemActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemActivated(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemActivated, miqt_exec_callback_cQTableWidget_itemActivated_release)
 
 proc itemEntered*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_itemEntered(self.h, item.h)
 
 type QTableWidgetitemEnteredSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemEntered(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemEntered".} =
+proc miqt_exec_callback_cQTableWidget_itemEntered(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemEnteredSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemEntered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemEnteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemEntered*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemEnteredSlot) =
   var tmp = new QTableWidgetitemEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemEntered(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemEntered, miqt_exec_callback_cQTableWidget_itemEntered_release)
 
 proc itemChanged*(self: gen_qtablewidget_types.QTableWidget, item: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_itemChanged(self.h, item.h)
 
 type QTableWidgetitemChangedSlot* = proc(item: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_itemChanged(slot: int, item: pointer) {.exportc: "miqt_exec_callback_QTableWidget_itemChanged".} =
+proc miqt_exec_callback_cQTableWidget_itemChanged(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: item)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTableWidget_itemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onitemChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemChangedSlot) =
   var tmp = new QTableWidgetitemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemChanged(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemChanged, miqt_exec_callback_cQTableWidget_itemChanged_release)
 
 proc currentItemChanged*(self: gen_qtablewidget_types.QTableWidget, current: gen_qtablewidget_types.QTableWidgetItem, previous: gen_qtablewidget_types.QTableWidgetItem): void =
   fcQTableWidget_currentItemChanged(self.h, current.h, previous.h)
 
 type QTableWidgetcurrentItemChangedSlot* = proc(current: gen_qtablewidget_types.QTableWidgetItem, previous: gen_qtablewidget_types.QTableWidgetItem)
-proc miqt_exec_callback_cQTableWidget_currentItemChanged(slot: int, current: pointer, previous: pointer) {.exportc: "miqt_exec_callback_QTableWidget_currentItemChanged".} =
+proc miqt_exec_callback_cQTableWidget_currentItemChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcurrentItemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qtablewidget_types.QTableWidgetItem(h: current)
 
@@ -1174,31 +1198,39 @@ proc miqt_exec_callback_cQTableWidget_currentItemChanged(slot: int, current: poi
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_currentItemChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcurrentItemChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentItemChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcurrentItemChangedSlot) =
   var tmp = new QTableWidgetcurrentItemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_currentItemChanged, miqt_exec_callback_cQTableWidget_currentItemChanged_release)
 
 proc itemSelectionChanged*(self: gen_qtablewidget_types.QTableWidget, ): void =
   fcQTableWidget_itemSelectionChanged(self.h)
 
 type QTableWidgetitemSelectionChangedSlot* = proc()
-proc miqt_exec_callback_cQTableWidget_itemSelectionChanged(slot: int) {.exportc: "miqt_exec_callback_QTableWidget_itemSelectionChanged".} =
+proc miqt_exec_callback_cQTableWidget_itemSelectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetitemSelectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQTableWidget_itemSelectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetitemSelectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onitemSelectionChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetitemSelectionChangedSlot) =
   var tmp = new QTableWidgetitemSelectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_itemSelectionChanged, miqt_exec_callback_cQTableWidget_itemSelectionChanged_release)
 
 proc cellPressed*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellPressed(self.h, row, column)
 
 type QTableWidgetcellPressedSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellPressed(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellPressed".} =
+proc miqt_exec_callback_cQTableWidget_cellPressed(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellPressedSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1206,17 +1238,21 @@ proc miqt_exec_callback_cQTableWidget_cellPressed(slot: int, row: cint, column: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellPressed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellPressedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellPressed*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellPressedSlot) =
   var tmp = new QTableWidgetcellPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellPressed(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellPressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellPressed, miqt_exec_callback_cQTableWidget_cellPressed_release)
 
 proc cellClicked*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellClicked(self.h, row, column)
 
 type QTableWidgetcellClickedSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellClicked(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellClicked".} =
+proc miqt_exec_callback_cQTableWidget_cellClicked(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellClickedSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1224,17 +1260,21 @@ proc miqt_exec_callback_cQTableWidget_cellClicked(slot: int, row: cint, column: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellClicked*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellClickedSlot) =
   var tmp = new QTableWidgetcellClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellClicked(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellClicked, miqt_exec_callback_cQTableWidget_cellClicked_release)
 
 proc cellDoubleClicked*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellDoubleClicked(self.h, row, column)
 
 type QTableWidgetcellDoubleClickedSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellDoubleClicked(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellDoubleClicked".} =
+proc miqt_exec_callback_cQTableWidget_cellDoubleClicked(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1242,17 +1282,21 @@ proc miqt_exec_callback_cQTableWidget_cellDoubleClicked(slot: int, row: cint, co
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellDoubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellDoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellDoubleClicked*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellDoubleClickedSlot) =
   var tmp = new QTableWidgetcellDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellDoubleClicked(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellDoubleClicked, miqt_exec_callback_cQTableWidget_cellDoubleClicked_release)
 
 proc cellActivated*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellActivated(self.h, row, column)
 
 type QTableWidgetcellActivatedSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellActivated(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellActivated".} =
+proc miqt_exec_callback_cQTableWidget_cellActivated(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellActivatedSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1260,17 +1304,21 @@ proc miqt_exec_callback_cQTableWidget_cellActivated(slot: int, row: cint, column
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellActivated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellActivatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellActivated*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellActivatedSlot) =
   var tmp = new QTableWidgetcellActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellActivated(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellActivated, miqt_exec_callback_cQTableWidget_cellActivated_release)
 
 proc cellEntered*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellEntered(self.h, row, column)
 
 type QTableWidgetcellEnteredSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellEntered(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellEntered".} =
+proc miqt_exec_callback_cQTableWidget_cellEntered(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellEnteredSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1278,17 +1326,21 @@ proc miqt_exec_callback_cQTableWidget_cellEntered(slot: int, row: cint, column: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellEntered_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellEnteredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellEntered*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellEnteredSlot) =
   var tmp = new QTableWidgetcellEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellEntered(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellEntered, miqt_exec_callback_cQTableWidget_cellEntered_release)
 
 proc cellChanged*(self: gen_qtablewidget_types.QTableWidget, row: cint, column: cint): void =
   fcQTableWidget_cellChanged(self.h, row, column)
 
 type QTableWidgetcellChangedSlot* = proc(row: cint, column: cint)
-proc miqt_exec_callback_cQTableWidget_cellChanged(slot: int, row: cint, column: cint) {.exportc: "miqt_exec_callback_QTableWidget_cellChanged".} =
+proc miqt_exec_callback_cQTableWidget_cellChanged(slot: int, row: cint, column: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcellChangedSlot](cast[pointer](slot))
   let slotval1 = row
 
@@ -1296,17 +1348,21 @@ proc miqt_exec_callback_cQTableWidget_cellChanged(slot: int, row: cint, column: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQTableWidget_cellChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcellChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncellChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcellChangedSlot) =
   var tmp = new QTableWidgetcellChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_cellChanged(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_cellChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_cellChanged, miqt_exec_callback_cQTableWidget_cellChanged_release)
 
 proc currentCellChanged*(self: gen_qtablewidget_types.QTableWidget, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint): void =
   fcQTableWidget_currentCellChanged(self.h, currentRow, currentColumn, previousRow, previousColumn)
 
 type QTableWidgetcurrentCellChangedSlot* = proc(currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint)
-proc miqt_exec_callback_cQTableWidget_currentCellChanged(slot: int, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint) {.exportc: "miqt_exec_callback_QTableWidget_currentCellChanged".} =
+proc miqt_exec_callback_cQTableWidget_currentCellChanged(slot: int, currentRow: cint, currentColumn: cint, previousRow: cint, previousColumn: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTableWidgetcurrentCellChangedSlot](cast[pointer](slot))
   let slotval1 = currentRow
 
@@ -1318,11 +1374,15 @@ proc miqt_exec_callback_cQTableWidget_currentCellChanged(slot: int, currentRow: 
 
   nimfunc[](slotval1, slotval2, slotval3, slotval4)
 
+proc miqt_exec_callback_cQTableWidget_currentCellChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTableWidgetcurrentCellChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentCellChanged*(self: gen_qtablewidget_types.QTableWidget, slot: QTableWidgetcurrentCellChangedSlot) =
   var tmp = new QTableWidgetcurrentCellChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTableWidget_connect_currentCellChanged(self.h, cast[int](addr tmp[]))
+  fcQTableWidget_connect_currentCellChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTableWidget_currentCellChanged, miqt_exec_callback_cQTableWidget_currentCellChanged_release)
 
 proc tr*(_: type gen_qtablewidget_types.QTableWidget, s: cstring, c: cstring): string =
   let v_ms = fcQTableWidget_tr2(s, c)

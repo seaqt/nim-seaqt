@@ -84,7 +84,7 @@ void QQmlExpression_clearError(QQmlExpression* self);
 QQmlError* QQmlExpression_error(const QQmlExpression* self);
 QVariant* QQmlExpression_evaluate(QQmlExpression* self);
 void QQmlExpression_valueChanged(QQmlExpression* self);
-void QQmlExpression_connect_valueChanged(QQmlExpression* self, intptr_t slot);
+void QQmlExpression_connect_valueChanged(QQmlExpression* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QQmlExpression_tr2(const char* s, const char* c);
 struct miqt_string QQmlExpression_tr3(const char* s, const char* c, int n);
 struct miqt_string QQmlExpression_trUtf82(const char* s, const char* c);

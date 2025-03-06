@@ -56,7 +56,7 @@ proc fcQCameraLocksControl_lockStatus(self: pointer, lock: cint): cint {.importc
 proc fcQCameraLocksControl_searchAndLock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_searchAndLock".}
 proc fcQCameraLocksControl_unlock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_unlock".}
 proc fcQCameraLocksControl_lockStatusChanged(self: pointer, typeVal: cint, status: cint, reason: cint): void {.importc: "QCameraLocksControl_lockStatusChanged".}
-proc fcQCameraLocksControl_connect_lockStatusChanged(self: pointer, slot: int) {.importc: "QCameraLocksControl_connect_lockStatusChanged".}
+proc fcQCameraLocksControl_connect_lockStatusChanged(self: pointer, slot: int, callback: proc (slot: int, typeVal: cint, status: cint, reason: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCameraLocksControl_connect_lockStatusChanged".}
 proc fcQCameraLocksControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraLocksControl_tr2".}
 proc fcQCameraLocksControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraLocksControl_tr3".}
 proc fcQCameraLocksControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraLocksControl_trUtf82".}
@@ -101,7 +101,7 @@ proc lockStatusChanged*(self: gen_qcameralockscontrol_types.QCameraLocksControl,
   fcQCameraLocksControl_lockStatusChanged(self.h, cint(typeVal), cint(status), cint(reason))
 
 type QCameraLocksControllockStatusChangedSlot* = proc(typeVal: cint, status: cint, reason: cint)
-proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged(slot: int, typeVal: cint, status: cint, reason: cint) {.exportc: "miqt_exec_callback_QCameraLocksControl_lockStatusChanged".} =
+proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged(slot: int, typeVal: cint, status: cint, reason: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraLocksControllockStatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(typeVal)
 
@@ -111,11 +111,15 @@ proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged(slot: int, typeVa
 
   nimfunc[](slotval1, slotval2, slotval3)
 
+proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCameraLocksControllockStatusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onlockStatusChanged*(self: gen_qcameralockscontrol_types.QCameraLocksControl, slot: QCameraLocksControllockStatusChangedSlot) =
   var tmp = new QCameraLocksControllockStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraLocksControl_connect_lockStatusChanged(self.h, cast[int](addr tmp[]))
+  fcQCameraLocksControl_connect_lockStatusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraLocksControl_lockStatusChanged, miqt_exec_callback_cQCameraLocksControl_lockStatusChanged_release)
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraLocksControl_tr2(s, c)

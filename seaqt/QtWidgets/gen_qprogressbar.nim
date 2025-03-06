@@ -101,7 +101,7 @@ proc fcQProgressBar_setMaximum(self: pointer, maximum: cint): void {.importc: "Q
 proc fcQProgressBar_setValue(self: pointer, value: cint): void {.importc: "QProgressBar_setValue".}
 proc fcQProgressBar_setOrientation(self: pointer, orientation: cint): void {.importc: "QProgressBar_setOrientation".}
 proc fcQProgressBar_valueChanged(self: pointer, value: cint): void {.importc: "QProgressBar_valueChanged".}
-proc fcQProgressBar_connect_valueChanged(self: pointer, slot: int) {.importc: "QProgressBar_connect_valueChanged".}
+proc fcQProgressBar_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, value: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProgressBar_connect_valueChanged".}
 proc fcQProgressBar_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QProgressBar_tr2".}
 proc fcQProgressBar_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QProgressBar_tr3".}
 proc fcQProgressBar_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QProgressBar_trUtf82".}
@@ -318,17 +318,21 @@ proc valueChanged*(self: gen_qprogressbar_types.QProgressBar, value: cint): void
   fcQProgressBar_valueChanged(self.h, value)
 
 type QProgressBarvalueChangedSlot* = proc(value: cint)
-proc miqt_exec_callback_cQProgressBar_valueChanged(slot: int, value: cint) {.exportc: "miqt_exec_callback_QProgressBar_valueChanged".} =
+proc miqt_exec_callback_cQProgressBar_valueChanged(slot: int, value: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProgressBarvalueChangedSlot](cast[pointer](slot))
   let slotval1 = value
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQProgressBar_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QProgressBarvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qprogressbar_types.QProgressBar, slot: QProgressBarvalueChangedSlot) =
   var tmp = new QProgressBarvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProgressBar_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQProgressBar_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProgressBar_valueChanged, miqt_exec_callback_cQProgressBar_valueChanged_release)
 
 proc tr*(_: type gen_qprogressbar_types.QProgressBar, s: cstring, c: cstring): string =
   let v_ms = fcQProgressBar_tr2(s, c)

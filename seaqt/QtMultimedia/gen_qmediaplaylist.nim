@@ -112,25 +112,25 @@ proc fcQMediaPlaylist_next(self: pointer, ): void {.importc: "QMediaPlaylist_nex
 proc fcQMediaPlaylist_previous(self: pointer, ): void {.importc: "QMediaPlaylist_previous".}
 proc fcQMediaPlaylist_setCurrentIndex(self: pointer, index: cint): void {.importc: "QMediaPlaylist_setCurrentIndex".}
 proc fcQMediaPlaylist_currentIndexChanged(self: pointer, index: cint): void {.importc: "QMediaPlaylist_currentIndexChanged".}
-proc fcQMediaPlaylist_connect_currentIndexChanged(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_currentIndexChanged".}
+proc fcQMediaPlaylist_connect_currentIndexChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_currentIndexChanged".}
 proc fcQMediaPlaylist_playbackModeChanged(self: pointer, mode: cint): void {.importc: "QMediaPlaylist_playbackModeChanged".}
-proc fcQMediaPlaylist_connect_playbackModeChanged(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_playbackModeChanged".}
+proc fcQMediaPlaylist_connect_playbackModeChanged(self: pointer, slot: int, callback: proc (slot: int, mode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_playbackModeChanged".}
 proc fcQMediaPlaylist_currentMediaChanged(self: pointer, param1: pointer): void {.importc: "QMediaPlaylist_currentMediaChanged".}
-proc fcQMediaPlaylist_connect_currentMediaChanged(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_currentMediaChanged".}
+proc fcQMediaPlaylist_connect_currentMediaChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_currentMediaChanged".}
 proc fcQMediaPlaylist_mediaAboutToBeInserted(self: pointer, start: cint, endVal: cint): void {.importc: "QMediaPlaylist_mediaAboutToBeInserted".}
-proc fcQMediaPlaylist_connect_mediaAboutToBeInserted(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_mediaAboutToBeInserted".}
+proc fcQMediaPlaylist_connect_mediaAboutToBeInserted(self: pointer, slot: int, callback: proc (slot: int, start: cint, endVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_mediaAboutToBeInserted".}
 proc fcQMediaPlaylist_mediaInserted(self: pointer, start: cint, endVal: cint): void {.importc: "QMediaPlaylist_mediaInserted".}
-proc fcQMediaPlaylist_connect_mediaInserted(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_mediaInserted".}
+proc fcQMediaPlaylist_connect_mediaInserted(self: pointer, slot: int, callback: proc (slot: int, start: cint, endVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_mediaInserted".}
 proc fcQMediaPlaylist_mediaAboutToBeRemoved(self: pointer, start: cint, endVal: cint): void {.importc: "QMediaPlaylist_mediaAboutToBeRemoved".}
-proc fcQMediaPlaylist_connect_mediaAboutToBeRemoved(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_mediaAboutToBeRemoved".}
+proc fcQMediaPlaylist_connect_mediaAboutToBeRemoved(self: pointer, slot: int, callback: proc (slot: int, start: cint, endVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_mediaAboutToBeRemoved".}
 proc fcQMediaPlaylist_mediaRemoved(self: pointer, start: cint, endVal: cint): void {.importc: "QMediaPlaylist_mediaRemoved".}
-proc fcQMediaPlaylist_connect_mediaRemoved(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_mediaRemoved".}
+proc fcQMediaPlaylist_connect_mediaRemoved(self: pointer, slot: int, callback: proc (slot: int, start: cint, endVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_mediaRemoved".}
 proc fcQMediaPlaylist_mediaChanged(self: pointer, start: cint, endVal: cint): void {.importc: "QMediaPlaylist_mediaChanged".}
-proc fcQMediaPlaylist_connect_mediaChanged(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_mediaChanged".}
+proc fcQMediaPlaylist_connect_mediaChanged(self: pointer, slot: int, callback: proc (slot: int, start: cint, endVal: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_mediaChanged".}
 proc fcQMediaPlaylist_loaded(self: pointer, ): void {.importc: "QMediaPlaylist_loaded".}
-proc fcQMediaPlaylist_connect_loaded(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_loaded".}
+proc fcQMediaPlaylist_connect_loaded(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_loaded".}
 proc fcQMediaPlaylist_loadFailed(self: pointer, ): void {.importc: "QMediaPlaylist_loadFailed".}
-proc fcQMediaPlaylist_connect_loadFailed(self: pointer, slot: int) {.importc: "QMediaPlaylist_connect_loadFailed".}
+proc fcQMediaPlaylist_connect_loadFailed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaPlaylist_connect_loadFailed".}
 proc fcQMediaPlaylist_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaPlaylist_tr2".}
 proc fcQMediaPlaylist_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaPlaylist_tr3".}
 proc fcQMediaPlaylist_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaPlaylist_trUtf82".}
@@ -298,55 +298,67 @@ proc currentIndexChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, index: 
   fcQMediaPlaylist_currentIndexChanged(self.h, index)
 
 type QMediaPlaylistcurrentIndexChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQMediaPlaylist_currentIndexChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_currentIndexChanged".} =
+proc miqt_exec_callback_cQMediaPlaylist_currentIndexChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistcurrentIndexChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMediaPlaylist_currentIndexChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistcurrentIndexChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentIndexChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistcurrentIndexChangedSlot) =
   var tmp = new QMediaPlaylistcurrentIndexChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_currentIndexChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_currentIndexChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_currentIndexChanged, miqt_exec_callback_cQMediaPlaylist_currentIndexChanged_release)
 
 proc playbackModeChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, mode: cint): void =
   fcQMediaPlaylist_playbackModeChanged(self.h, cint(mode))
 
 type QMediaPlaylistplaybackModeChangedSlot* = proc(mode: cint)
-proc miqt_exec_callback_cQMediaPlaylist_playbackModeChanged(slot: int, mode: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_playbackModeChanged".} =
+proc miqt_exec_callback_cQMediaPlaylist_playbackModeChanged(slot: int, mode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistplaybackModeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(mode)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMediaPlaylist_playbackModeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistplaybackModeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onplaybackModeChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistplaybackModeChangedSlot) =
   var tmp = new QMediaPlaylistplaybackModeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_playbackModeChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_playbackModeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_playbackModeChanged, miqt_exec_callback_cQMediaPlaylist_playbackModeChanged_release)
 
 proc currentMediaChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, param1: gen_qmediacontent_types.QMediaContent): void =
   fcQMediaPlaylist_currentMediaChanged(self.h, param1.h)
 
 type QMediaPlaylistcurrentMediaChangedSlot* = proc(param1: gen_qmediacontent_types.QMediaContent)
-proc miqt_exec_callback_cQMediaPlaylist_currentMediaChanged(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QMediaPlaylist_currentMediaChanged".} =
+proc miqt_exec_callback_cQMediaPlaylist_currentMediaChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistcurrentMediaChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qmediacontent_types.QMediaContent(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMediaPlaylist_currentMediaChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistcurrentMediaChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentMediaChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistcurrentMediaChangedSlot) =
   var tmp = new QMediaPlaylistcurrentMediaChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_currentMediaChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_currentMediaChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_currentMediaChanged, miqt_exec_callback_cQMediaPlaylist_currentMediaChanged_release)
 
 proc mediaAboutToBeInserted*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): void =
   fcQMediaPlaylist_mediaAboutToBeInserted(self.h, start, endVal)
 
 type QMediaPlaylistmediaAboutToBeInsertedSlot* = proc(start: cint, endVal: cint)
-proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted(slot: int, start: cint, endVal: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_mediaAboutToBeInserted".} =
+proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted(slot: int, start: cint, endVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistmediaAboutToBeInsertedSlot](cast[pointer](slot))
   let slotval1 = start
 
@@ -354,17 +366,21 @@ proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted(slot: int, start:
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistmediaAboutToBeInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmediaAboutToBeInserted*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistmediaAboutToBeInsertedSlot) =
   var tmp = new QMediaPlaylistmediaAboutToBeInsertedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_mediaAboutToBeInserted(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_mediaAboutToBeInserted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted, miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeInserted_release)
 
 proc mediaInserted*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): void =
   fcQMediaPlaylist_mediaInserted(self.h, start, endVal)
 
 type QMediaPlaylistmediaInsertedSlot* = proc(start: cint, endVal: cint)
-proc miqt_exec_callback_cQMediaPlaylist_mediaInserted(slot: int, start: cint, endVal: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_mediaInserted".} =
+proc miqt_exec_callback_cQMediaPlaylist_mediaInserted(slot: int, start: cint, endVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistmediaInsertedSlot](cast[pointer](slot))
   let slotval1 = start
 
@@ -372,17 +388,21 @@ proc miqt_exec_callback_cQMediaPlaylist_mediaInserted(slot: int, start: cint, en
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMediaPlaylist_mediaInserted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistmediaInsertedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmediaInserted*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistmediaInsertedSlot) =
   var tmp = new QMediaPlaylistmediaInsertedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_mediaInserted(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_mediaInserted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_mediaInserted, miqt_exec_callback_cQMediaPlaylist_mediaInserted_release)
 
 proc mediaAboutToBeRemoved*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): void =
   fcQMediaPlaylist_mediaAboutToBeRemoved(self.h, start, endVal)
 
 type QMediaPlaylistmediaAboutToBeRemovedSlot* = proc(start: cint, endVal: cint)
-proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved(slot: int, start: cint, endVal: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_mediaAboutToBeRemoved".} =
+proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved(slot: int, start: cint, endVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistmediaAboutToBeRemovedSlot](cast[pointer](slot))
   let slotval1 = start
 
@@ -390,17 +410,21 @@ proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved(slot: int, start: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistmediaAboutToBeRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmediaAboutToBeRemoved*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistmediaAboutToBeRemovedSlot) =
   var tmp = new QMediaPlaylistmediaAboutToBeRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_mediaAboutToBeRemoved(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_mediaAboutToBeRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved, miqt_exec_callback_cQMediaPlaylist_mediaAboutToBeRemoved_release)
 
 proc mediaRemoved*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): void =
   fcQMediaPlaylist_mediaRemoved(self.h, start, endVal)
 
 type QMediaPlaylistmediaRemovedSlot* = proc(start: cint, endVal: cint)
-proc miqt_exec_callback_cQMediaPlaylist_mediaRemoved(slot: int, start: cint, endVal: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_mediaRemoved".} =
+proc miqt_exec_callback_cQMediaPlaylist_mediaRemoved(slot: int, start: cint, endVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistmediaRemovedSlot](cast[pointer](slot))
   let slotval1 = start
 
@@ -408,17 +432,21 @@ proc miqt_exec_callback_cQMediaPlaylist_mediaRemoved(slot: int, start: cint, end
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMediaPlaylist_mediaRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistmediaRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmediaRemoved*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistmediaRemovedSlot) =
   var tmp = new QMediaPlaylistmediaRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_mediaRemoved(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_mediaRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_mediaRemoved, miqt_exec_callback_cQMediaPlaylist_mediaRemoved_release)
 
 proc mediaChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, start: cint, endVal: cint): void =
   fcQMediaPlaylist_mediaChanged(self.h, start, endVal)
 
 type QMediaPlaylistmediaChangedSlot* = proc(start: cint, endVal: cint)
-proc miqt_exec_callback_cQMediaPlaylist_mediaChanged(slot: int, start: cint, endVal: cint) {.exportc: "miqt_exec_callback_QMediaPlaylist_mediaChanged".} =
+proc miqt_exec_callback_cQMediaPlaylist_mediaChanged(slot: int, start: cint, endVal: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistmediaChangedSlot](cast[pointer](slot))
   let slotval1 = start
 
@@ -426,39 +454,51 @@ proc miqt_exec_callback_cQMediaPlaylist_mediaChanged(slot: int, start: cint, end
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQMediaPlaylist_mediaChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistmediaChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmediaChanged*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistmediaChangedSlot) =
   var tmp = new QMediaPlaylistmediaChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_mediaChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_mediaChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_mediaChanged, miqt_exec_callback_cQMediaPlaylist_mediaChanged_release)
 
 proc loaded*(self: gen_qmediaplaylist_types.QMediaPlaylist, ): void =
   fcQMediaPlaylist_loaded(self.h)
 
 type QMediaPlaylistloadedSlot* = proc()
-proc miqt_exec_callback_cQMediaPlaylist_loaded(slot: int) {.exportc: "miqt_exec_callback_QMediaPlaylist_loaded".} =
+proc miqt_exec_callback_cQMediaPlaylist_loaded(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistloadedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaPlaylist_loaded_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistloadedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloaded*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistloadedSlot) =
   var tmp = new QMediaPlaylistloadedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_loaded(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_loaded(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_loaded, miqt_exec_callback_cQMediaPlaylist_loaded_release)
 
 proc loadFailed*(self: gen_qmediaplaylist_types.QMediaPlaylist, ): void =
   fcQMediaPlaylist_loadFailed(self.h)
 
 type QMediaPlaylistloadFailedSlot* = proc()
-proc miqt_exec_callback_cQMediaPlaylist_loadFailed(slot: int) {.exportc: "miqt_exec_callback_QMediaPlaylist_loadFailed".} =
+proc miqt_exec_callback_cQMediaPlaylist_loadFailed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QMediaPlaylistloadFailedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQMediaPlaylist_loadFailed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaPlaylistloadFailedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloadFailed*(self: gen_qmediaplaylist_types.QMediaPlaylist, slot: QMediaPlaylistloadFailedSlot) =
   var tmp = new QMediaPlaylistloadFailedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaPlaylist_connect_loadFailed(self.h, cast[int](addr tmp[]))
+  fcQMediaPlaylist_connect_loadFailed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaPlaylist_loadFailed, miqt_exec_callback_cQMediaPlaylist_loadFailed_release)
 
 proc tr*(_: type gen_qmediaplaylist_types.QMediaPlaylist, s: cstring, c: cstring): string =
   let v_ms = fcQMediaPlaylist_tr2(s, c)

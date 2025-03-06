@@ -122,15 +122,15 @@ proc fcQItemSelectionModel_reset(self: pointer, ): void {.importc: "QItemSelecti
 proc fcQItemSelectionModel_clearSelection(self: pointer, ): void {.importc: "QItemSelectionModel_clearSelection".}
 proc fcQItemSelectionModel_clearCurrentIndex(self: pointer, ): void {.importc: "QItemSelectionModel_clearCurrentIndex".}
 proc fcQItemSelectionModel_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.importc: "QItemSelectionModel_selectionChanged".}
-proc fcQItemSelectionModel_connect_selectionChanged(self: pointer, slot: int) {.importc: "QItemSelectionModel_connect_selectionChanged".}
+proc fcQItemSelectionModel_connect_selectionChanged(self: pointer, slot: int, callback: proc (slot: int, selected: pointer, deselected: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QItemSelectionModel_connect_selectionChanged".}
 proc fcQItemSelectionModel_currentChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QItemSelectionModel_currentChanged".}
-proc fcQItemSelectionModel_connect_currentChanged(self: pointer, slot: int) {.importc: "QItemSelectionModel_connect_currentChanged".}
+proc fcQItemSelectionModel_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QItemSelectionModel_connect_currentChanged".}
 proc fcQItemSelectionModel_currentRowChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QItemSelectionModel_currentRowChanged".}
-proc fcQItemSelectionModel_connect_currentRowChanged(self: pointer, slot: int) {.importc: "QItemSelectionModel_connect_currentRowChanged".}
+proc fcQItemSelectionModel_connect_currentRowChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QItemSelectionModel_connect_currentRowChanged".}
 proc fcQItemSelectionModel_currentColumnChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QItemSelectionModel_currentColumnChanged".}
-proc fcQItemSelectionModel_connect_currentColumnChanged(self: pointer, slot: int) {.importc: "QItemSelectionModel_connect_currentColumnChanged".}
+proc fcQItemSelectionModel_connect_currentColumnChanged(self: pointer, slot: int, callback: proc (slot: int, current: pointer, previous: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QItemSelectionModel_connect_currentColumnChanged".}
 proc fcQItemSelectionModel_modelChanged(self: pointer, model: pointer): void {.importc: "QItemSelectionModel_modelChanged".}
-proc fcQItemSelectionModel_connect_modelChanged(self: pointer, slot: int) {.importc: "QItemSelectionModel_connect_modelChanged".}
+proc fcQItemSelectionModel_connect_modelChanged(self: pointer, slot: int, callback: proc (slot: int, model: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QItemSelectionModel_connect_modelChanged".}
 proc fcQItemSelectionModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QItemSelectionModel_tr2".}
 proc fcQItemSelectionModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QItemSelectionModel_tr3".}
 proc fcQItemSelectionModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QItemSelectionModel_trUtf82".}
@@ -381,7 +381,7 @@ proc selectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, 
   fcQItemSelectionModel_selectionChanged(self.h, selected.h, deselected.h)
 
 type QItemSelectionModelselectionChangedSlot* = proc(selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection)
-proc miqt_exec_callback_cQItemSelectionModel_selectionChanged(slot: int, selected: pointer, deselected: pointer) {.exportc: "miqt_exec_callback_QItemSelectionModel_selectionChanged".} =
+proc miqt_exec_callback_cQItemSelectionModel_selectionChanged(slot: int, selected: pointer, deselected: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QItemSelectionModelselectionChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected)
 
@@ -389,17 +389,21 @@ proc miqt_exec_callback_cQItemSelectionModel_selectionChanged(slot: int, selecte
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQItemSelectionModel_selectionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QItemSelectionModelselectionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onselectionChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelselectionChangedSlot) =
   var tmp = new QItemSelectionModelselectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQItemSelectionModel_connect_selectionChanged(self.h, cast[int](addr tmp[]))
+  fcQItemSelectionModel_connect_selectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQItemSelectionModel_selectionChanged, miqt_exec_callback_cQItemSelectionModel_selectionChanged_release)
 
 proc currentChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemSelectionModel_currentChanged(self.h, current.h, previous.h)
 
 type QItemSelectionModelcurrentChangedSlot* = proc(current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQItemSelectionModel_currentChanged(slot: int, current: pointer, previous: pointer) {.exportc: "miqt_exec_callback_QItemSelectionModel_currentChanged".} =
+proc miqt_exec_callback_cQItemSelectionModel_currentChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QItemSelectionModelcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
 
@@ -407,17 +411,21 @@ proc miqt_exec_callback_cQItemSelectionModel_currentChanged(slot: int, current: 
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQItemSelectionModel_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QItemSelectionModelcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentChangedSlot) =
   var tmp = new QItemSelectionModelcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQItemSelectionModel_connect_currentChanged(self.h, cast[int](addr tmp[]))
+  fcQItemSelectionModel_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQItemSelectionModel_currentChanged, miqt_exec_callback_cQItemSelectionModel_currentChanged_release)
 
 proc currentRowChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemSelectionModel_currentRowChanged(self.h, current.h, previous.h)
 
 type QItemSelectionModelcurrentRowChangedSlot* = proc(current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQItemSelectionModel_currentRowChanged(slot: int, current: pointer, previous: pointer) {.exportc: "miqt_exec_callback_QItemSelectionModel_currentRowChanged".} =
+proc miqt_exec_callback_cQItemSelectionModel_currentRowChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QItemSelectionModelcurrentRowChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
 
@@ -425,17 +433,21 @@ proc miqt_exec_callback_cQItemSelectionModel_currentRowChanged(slot: int, curren
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQItemSelectionModel_currentRowChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QItemSelectionModelcurrentRowChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentRowChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentRowChangedSlot) =
   var tmp = new QItemSelectionModelcurrentRowChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQItemSelectionModel_connect_currentRowChanged(self.h, cast[int](addr tmp[]))
+  fcQItemSelectionModel_connect_currentRowChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQItemSelectionModel_currentRowChanged, miqt_exec_callback_cQItemSelectionModel_currentRowChanged_release)
 
 proc currentColumnChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQItemSelectionModel_currentColumnChanged(self.h, current.h, previous.h)
 
 type QItemSelectionModelcurrentColumnChangedSlot* = proc(current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQItemSelectionModel_currentColumnChanged(slot: int, current: pointer, previous: pointer) {.exportc: "miqt_exec_callback_QItemSelectionModel_currentColumnChanged".} =
+proc miqt_exec_callback_cQItemSelectionModel_currentColumnChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QItemSelectionModelcurrentColumnChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current)
 
@@ -443,27 +455,35 @@ proc miqt_exec_callback_cQItemSelectionModel_currentColumnChanged(slot: int, cur
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQItemSelectionModel_currentColumnChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QItemSelectionModelcurrentColumnChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentColumnChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelcurrentColumnChangedSlot) =
   var tmp = new QItemSelectionModelcurrentColumnChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQItemSelectionModel_connect_currentColumnChanged(self.h, cast[int](addr tmp[]))
+  fcQItemSelectionModel_connect_currentColumnChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQItemSelectionModel_currentColumnChanged, miqt_exec_callback_cQItemSelectionModel_currentColumnChanged_release)
 
 proc modelChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, model: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQItemSelectionModel_modelChanged(self.h, model.h)
 
 type QItemSelectionModelmodelChangedSlot* = proc(model: gen_qabstractitemmodel_types.QAbstractItemModel)
-proc miqt_exec_callback_cQItemSelectionModel_modelChanged(slot: int, model: pointer) {.exportc: "miqt_exec_callback_QItemSelectionModel_modelChanged".} =
+proc miqt_exec_callback_cQItemSelectionModel_modelChanged(slot: int, model: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QItemSelectionModelmodelChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QAbstractItemModel(h: model)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQItemSelectionModel_modelChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QItemSelectionModelmodelChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onmodelChanged*(self: gen_qitemselectionmodel_types.QItemSelectionModel, slot: QItemSelectionModelmodelChangedSlot) =
   var tmp = new QItemSelectionModelmodelChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQItemSelectionModel_connect_modelChanged(self.h, cast[int](addr tmp[]))
+  fcQItemSelectionModel_connect_modelChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQItemSelectionModel_modelChanged, miqt_exec_callback_cQItemSelectionModel_modelChanged_release)
 
 proc tr*(_: type gen_qitemselectionmodel_types.QItemSelectionModel, s: cstring, c: cstring): string =
   let v_ms = fcQItemSelectionModel_tr2(s, c)

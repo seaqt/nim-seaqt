@@ -24,7 +24,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QQuickImageResponse_finished(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -759,10 +758,15 @@ void QQuickImageResponse_finished(QQuickImageResponse* self) {
 	self->finished();
 }
 
-void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t slot) {
-	VirtualQQuickImageResponse::connect(self, static_cast<void (QQuickImageResponse::*)()>(&QQuickImageResponse::finished), self, [=]() {
-		miqt_exec_callback_QQuickImageResponse_finished(slot);
-	});
+void QQuickImageResponse_connect_finished(QQuickImageResponse* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQQuickImageResponse::connect(self, static_cast<void (QQuickImageResponse::*)()>(&QQuickImageResponse::finished), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QQuickImageResponse_tr2(const char* s, const char* c) {

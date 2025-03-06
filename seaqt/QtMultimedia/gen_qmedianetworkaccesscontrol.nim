@@ -56,7 +56,7 @@ proc fcQMediaNetworkAccessControl_trUtf8(s: cstring): struct_miqt_string {.impor
 proc fcQMediaNetworkAccessControl_setConfigurations(self: pointer, configuration: struct_miqt_array): void {.importc: "QMediaNetworkAccessControl_setConfigurations".}
 proc fcQMediaNetworkAccessControl_currentConfiguration(self: pointer, ): pointer {.importc: "QMediaNetworkAccessControl_currentConfiguration".}
 proc fcQMediaNetworkAccessControl_configurationChanged(self: pointer, configuration: pointer): void {.importc: "QMediaNetworkAccessControl_configurationChanged".}
-proc fcQMediaNetworkAccessControl_connect_configurationChanged(self: pointer, slot: int) {.importc: "QMediaNetworkAccessControl_connect_configurationChanged".}
+proc fcQMediaNetworkAccessControl_connect_configurationChanged(self: pointer, slot: int, callback: proc (slot: int, configuration: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaNetworkAccessControl_connect_configurationChanged".}
 proc fcQMediaNetworkAccessControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_tr2".}
 proc fcQMediaNetworkAccessControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaNetworkAccessControl_tr3".}
 proc fcQMediaNetworkAccessControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaNetworkAccessControl_trUtf82".}
@@ -99,17 +99,21 @@ proc configurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetw
   fcQMediaNetworkAccessControl_configurationChanged(self.h, configuration.h)
 
 type QMediaNetworkAccessControlconfigurationChangedSlot* = proc(configuration: gen_qnetworkconfiguration_types.QNetworkConfiguration)
-proc miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged(slot: int, configuration: pointer) {.exportc: "miqt_exec_callback_QMediaNetworkAccessControl_configurationChanged".} =
+proc miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged(slot: int, configuration: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qnetworkconfiguration_types.QNetworkConfiguration(h: configuration)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMediaNetworkAccessControlconfigurationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onconfigurationChanged*(self: gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, slot: QMediaNetworkAccessControlconfigurationChangedSlot) =
   var tmp = new QMediaNetworkAccessControlconfigurationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaNetworkAccessControl_connect_configurationChanged(self.h, cast[int](addr tmp[]))
+  fcQMediaNetworkAccessControl_connect_configurationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged, miqt_exec_callback_cQMediaNetworkAccessControl_configurationChanged_release)
 
 proc tr*(_: type gen_qmedianetworkaccesscontrol_types.QMediaNetworkAccessControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaNetworkAccessControl_tr2(s, c)

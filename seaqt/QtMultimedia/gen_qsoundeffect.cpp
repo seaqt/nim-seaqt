@@ -18,15 +18,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QSoundEffect_sourceChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_loopCountChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_loopsRemainingChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_volumeChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_mutedChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_loadedChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_playingChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_statusChanged(intptr_t);
-void miqt_exec_callback_QSoundEffect_categoryChanged(intptr_t);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -350,90 +341,135 @@ void QSoundEffect_sourceChanged(QSoundEffect* self) {
 	self->sourceChanged();
 }
 
-void QSoundEffect_connect_sourceChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::sourceChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_sourceChanged(slot);
-	});
+void QSoundEffect_connect_sourceChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::sourceChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_loopCountChanged(QSoundEffect* self) {
 	self->loopCountChanged();
 }
 
-void QSoundEffect_connect_loopCountChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loopCountChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_loopCountChanged(slot);
-	});
+void QSoundEffect_connect_loopCountChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loopCountChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_loopsRemainingChanged(QSoundEffect* self) {
 	self->loopsRemainingChanged();
 }
 
-void QSoundEffect_connect_loopsRemainingChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loopsRemainingChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_loopsRemainingChanged(slot);
-	});
+void QSoundEffect_connect_loopsRemainingChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loopsRemainingChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_volumeChanged(QSoundEffect* self) {
 	self->volumeChanged();
 }
 
-void QSoundEffect_connect_volumeChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::volumeChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_volumeChanged(slot);
-	});
+void QSoundEffect_connect_volumeChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::volumeChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_mutedChanged(QSoundEffect* self) {
 	self->mutedChanged();
 }
 
-void QSoundEffect_connect_mutedChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::mutedChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_mutedChanged(slot);
-	});
+void QSoundEffect_connect_mutedChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::mutedChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_loadedChanged(QSoundEffect* self) {
 	self->loadedChanged();
 }
 
-void QSoundEffect_connect_loadedChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loadedChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_loadedChanged(slot);
-	});
+void QSoundEffect_connect_loadedChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::loadedChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_playingChanged(QSoundEffect* self) {
 	self->playingChanged();
 }
 
-void QSoundEffect_connect_playingChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::playingChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_playingChanged(slot);
-	});
+void QSoundEffect_connect_playingChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::playingChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_statusChanged(QSoundEffect* self) {
 	self->statusChanged();
 }
 
-void QSoundEffect_connect_statusChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::statusChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_statusChanged(slot);
-	});
+void QSoundEffect_connect_statusChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::statusChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_categoryChanged(QSoundEffect* self) {
 	self->categoryChanged();
 }
 
-void QSoundEffect_connect_categoryChanged(QSoundEffect* self, intptr_t slot) {
-	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::categoryChanged), self, [=]() {
-		miqt_exec_callback_QSoundEffect_categoryChanged(slot);
-	});
+void QSoundEffect_connect_categoryChanged(QSoundEffect* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQSoundEffect::connect(self, static_cast<void (QSoundEffect::*)()>(&QSoundEffect::categoryChanged), self, local_caller{slot, callback, release});
 }
 
 void QSoundEffect_play(QSoundEffect* self) {

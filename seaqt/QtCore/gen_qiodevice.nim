@@ -113,17 +113,17 @@ proc fcQIODevice_putChar(self: pointer, c: cchar): bool {.importc: "QIODevice_pu
 proc fcQIODevice_getChar(self: pointer, c: cstring): bool {.importc: "QIODevice_getChar".}
 proc fcQIODevice_errorString(self: pointer, ): struct_miqt_string {.importc: "QIODevice_errorString".}
 proc fcQIODevice_readyRead(self: pointer, ): void {.importc: "QIODevice_readyRead".}
-proc fcQIODevice_connect_readyRead(self: pointer, slot: int) {.importc: "QIODevice_connect_readyRead".}
+proc fcQIODevice_connect_readyRead(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_readyRead".}
 proc fcQIODevice_channelReadyRead(self: pointer, channel: cint): void {.importc: "QIODevice_channelReadyRead".}
-proc fcQIODevice_connect_channelReadyRead(self: pointer, slot: int) {.importc: "QIODevice_connect_channelReadyRead".}
+proc fcQIODevice_connect_channelReadyRead(self: pointer, slot: int, callback: proc (slot: int, channel: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_channelReadyRead".}
 proc fcQIODevice_bytesWritten(self: pointer, bytes: clonglong): void {.importc: "QIODevice_bytesWritten".}
-proc fcQIODevice_connect_bytesWritten(self: pointer, slot: int) {.importc: "QIODevice_connect_bytesWritten".}
+proc fcQIODevice_connect_bytesWritten(self: pointer, slot: int, callback: proc (slot: int, bytes: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_bytesWritten".}
 proc fcQIODevice_channelBytesWritten(self: pointer, channel: cint, bytes: clonglong): void {.importc: "QIODevice_channelBytesWritten".}
-proc fcQIODevice_connect_channelBytesWritten(self: pointer, slot: int) {.importc: "QIODevice_connect_channelBytesWritten".}
+proc fcQIODevice_connect_channelBytesWritten(self: pointer, slot: int, callback: proc (slot: int, channel: cint, bytes: clonglong) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_channelBytesWritten".}
 proc fcQIODevice_aboutToClose(self: pointer, ): void {.importc: "QIODevice_aboutToClose".}
-proc fcQIODevice_connect_aboutToClose(self: pointer, slot: int) {.importc: "QIODevice_connect_aboutToClose".}
+proc fcQIODevice_connect_aboutToClose(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_aboutToClose".}
 proc fcQIODevice_readChannelFinished(self: pointer, ): void {.importc: "QIODevice_readChannelFinished".}
-proc fcQIODevice_connect_readChannelFinished(self: pointer, slot: int) {.importc: "QIODevice_connect_readChannelFinished".}
+proc fcQIODevice_connect_readChannelFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QIODevice_connect_readChannelFinished".}
 proc fcQIODevice_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QIODevice_tr2".}
 proc fcQIODevice_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QIODevice_tr3".}
 proc fcQIODevice_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QIODevice_trUtf82".}
@@ -358,53 +358,65 @@ proc readyRead*(self: gen_qiodevice_types.QIODevice, ): void =
   fcQIODevice_readyRead(self.h)
 
 type QIODevicereadyReadSlot* = proc()
-proc miqt_exec_callback_cQIODevice_readyRead(slot: int) {.exportc: "miqt_exec_callback_QIODevice_readyRead".} =
+proc miqt_exec_callback_cQIODevice_readyRead(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicereadyReadSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQIODevice_readyRead_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODevicereadyReadSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadyReadSlot) =
   var tmp = new QIODevicereadyReadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_readyRead(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_readyRead(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_readyRead, miqt_exec_callback_cQIODevice_readyRead_release)
 
 proc channelReadyRead*(self: gen_qiodevice_types.QIODevice, channel: cint): void =
   fcQIODevice_channelReadyRead(self.h, channel)
 
 type QIODevicechannelReadyReadSlot* = proc(channel: cint)
-proc miqt_exec_callback_cQIODevice_channelReadyRead(slot: int, channel: cint) {.exportc: "miqt_exec_callback_QIODevice_channelReadyRead".} =
+proc miqt_exec_callback_cQIODevice_channelReadyRead(slot: int, channel: cint) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicechannelReadyReadSlot](cast[pointer](slot))
   let slotval1 = channel
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQIODevice_channelReadyRead_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODevicechannelReadyReadSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onchannelReadyRead*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelReadyReadSlot) =
   var tmp = new QIODevicechannelReadyReadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_channelReadyRead(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_channelReadyRead(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_channelReadyRead, miqt_exec_callback_cQIODevice_channelReadyRead_release)
 
 proc bytesWritten*(self: gen_qiodevice_types.QIODevice, bytes: clonglong): void =
   fcQIODevice_bytesWritten(self.h, bytes)
 
 type QIODevicebytesWrittenSlot* = proc(bytes: clonglong)
-proc miqt_exec_callback_cQIODevice_bytesWritten(slot: int, bytes: clonglong) {.exportc: "miqt_exec_callback_QIODevice_bytesWritten".} =
+proc miqt_exec_callback_cQIODevice_bytesWritten(slot: int, bytes: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicebytesWrittenSlot](cast[pointer](slot))
   let slotval1 = bytes
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQIODevice_bytesWritten_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODevicebytesWrittenSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicebytesWrittenSlot) =
   var tmp = new QIODevicebytesWrittenSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_bytesWritten(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_bytesWritten(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_bytesWritten, miqt_exec_callback_cQIODevice_bytesWritten_release)
 
 proc channelBytesWritten*(self: gen_qiodevice_types.QIODevice, channel: cint, bytes: clonglong): void =
   fcQIODevice_channelBytesWritten(self.h, channel, bytes)
 
 type QIODevicechannelBytesWrittenSlot* = proc(channel: cint, bytes: clonglong)
-proc miqt_exec_callback_cQIODevice_channelBytesWritten(slot: int, channel: cint, bytes: clonglong) {.exportc: "miqt_exec_callback_QIODevice_channelBytesWritten".} =
+proc miqt_exec_callback_cQIODevice_channelBytesWritten(slot: int, channel: cint, bytes: clonglong) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicechannelBytesWrittenSlot](cast[pointer](slot))
   let slotval1 = channel
 
@@ -412,39 +424,51 @@ proc miqt_exec_callback_cQIODevice_channelBytesWritten(slot: int, channel: cint,
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQIODevice_channelBytesWritten_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODevicechannelBytesWrittenSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onchannelBytesWritten*(self: gen_qiodevice_types.QIODevice, slot: QIODevicechannelBytesWrittenSlot) =
   var tmp = new QIODevicechannelBytesWrittenSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_channelBytesWritten(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_channelBytesWritten(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_channelBytesWritten, miqt_exec_callback_cQIODevice_channelBytesWritten_release)
 
 proc aboutToClose*(self: gen_qiodevice_types.QIODevice, ): void =
   fcQIODevice_aboutToClose(self.h)
 
 type QIODeviceaboutToCloseSlot* = proc()
-proc miqt_exec_callback_cQIODevice_aboutToClose(slot: int) {.exportc: "miqt_exec_callback_QIODevice_aboutToClose".} =
+proc miqt_exec_callback_cQIODevice_aboutToClose(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODeviceaboutToCloseSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQIODevice_aboutToClose_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODeviceaboutToCloseSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onaboutToClose*(self: gen_qiodevice_types.QIODevice, slot: QIODeviceaboutToCloseSlot) =
   var tmp = new QIODeviceaboutToCloseSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_aboutToClose(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_aboutToClose(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_aboutToClose, miqt_exec_callback_cQIODevice_aboutToClose_release)
 
 proc readChannelFinished*(self: gen_qiodevice_types.QIODevice, ): void =
   fcQIODevice_readChannelFinished(self.h)
 
 type QIODevicereadChannelFinishedSlot* = proc()
-proc miqt_exec_callback_cQIODevice_readChannelFinished(slot: int) {.exportc: "miqt_exec_callback_QIODevice_readChannelFinished".} =
+proc miqt_exec_callback_cQIODevice_readChannelFinished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QIODevicereadChannelFinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQIODevice_readChannelFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QIODevicereadChannelFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onreadChannelFinished*(self: gen_qiodevice_types.QIODevice, slot: QIODevicereadChannelFinishedSlot) =
   var tmp = new QIODevicereadChannelFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQIODevice_connect_readChannelFinished(self.h, cast[int](addr tmp[]))
+  fcQIODevice_connect_readChannelFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQIODevice_readChannelFinished, miqt_exec_callback_cQIODevice_readChannelFinished_release)
 
 proc tr*(_: type gen_qiodevice_types.QIODevice, s: cstring, c: cstring): string =
   let v_ms = fcQIODevice_tr2(s, c)

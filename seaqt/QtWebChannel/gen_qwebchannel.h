@@ -62,7 +62,7 @@ void QWebChannel_deregisterObject(QWebChannel* self, QObject* object);
 bool QWebChannel_blockUpdates(const QWebChannel* self);
 void QWebChannel_setBlockUpdates(QWebChannel* self, bool block);
 void QWebChannel_blockUpdatesChanged(QWebChannel* self, bool block);
-void QWebChannel_connect_blockUpdatesChanged(QWebChannel* self, intptr_t slot);
+void QWebChannel_connect_blockUpdatesChanged(QWebChannel* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QWebChannel_connectTo(QWebChannel* self, QWebChannelAbstractTransport* transport);
 void QWebChannel_disconnectFrom(QWebChannel* self, QWebChannelAbstractTransport* transport);
 struct miqt_string QWebChannel_tr2(const char* s, const char* c);

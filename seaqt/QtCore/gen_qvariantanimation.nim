@@ -75,7 +75,7 @@ proc fcQVariantAnimation_setDuration(self: pointer, msecs: cint): void {.importc
 proc fcQVariantAnimation_easingCurve(self: pointer, ): pointer {.importc: "QVariantAnimation_easingCurve".}
 proc fcQVariantAnimation_setEasingCurve(self: pointer, easing: pointer): void {.importc: "QVariantAnimation_setEasingCurve".}
 proc fcQVariantAnimation_valueChanged(self: pointer, value: pointer): void {.importc: "QVariantAnimation_valueChanged".}
-proc fcQVariantAnimation_connect_valueChanged(self: pointer, slot: int) {.importc: "QVariantAnimation_connect_valueChanged".}
+proc fcQVariantAnimation_connect_valueChanged(self: pointer, slot: int, callback: proc (slot: int, value: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QVariantAnimation_connect_valueChanged".}
 proc fcQVariantAnimation_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVariantAnimation_tr2".}
 proc fcQVariantAnimation_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVariantAnimation_tr3".}
 proc fcQVariantAnimation_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVariantAnimation_trUtf82".}
@@ -203,17 +203,21 @@ proc valueChanged*(self: gen_qvariantanimation_types.QVariantAnimation, value: g
   fcQVariantAnimation_valueChanged(self.h, value.h)
 
 type QVariantAnimationvalueChangedSlot* = proc(value: gen_qvariant_types.QVariant)
-proc miqt_exec_callback_cQVariantAnimation_valueChanged(slot: int, value: pointer) {.exportc: "miqt_exec_callback_QVariantAnimation_valueChanged".} =
+proc miqt_exec_callback_cQVariantAnimation_valueChanged(slot: int, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QVariantAnimationvalueChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qvariant_types.QVariant(h: value)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQVariantAnimation_valueChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QVariantAnimationvalueChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvalueChanged*(self: gen_qvariantanimation_types.QVariantAnimation, slot: QVariantAnimationvalueChangedSlot) =
   var tmp = new QVariantAnimationvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQVariantAnimation_connect_valueChanged(self.h, cast[int](addr tmp[]))
+  fcQVariantAnimation_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQVariantAnimation_valueChanged, miqt_exec_callback_cQVariantAnimation_valueChanged_release)
 
 proc tr*(_: type gen_qvariantanimation_types.QVariantAnimation, s: cstring, c: cstring): string =
   let v_ms = fcQVariantAnimation_tr2(s, c)

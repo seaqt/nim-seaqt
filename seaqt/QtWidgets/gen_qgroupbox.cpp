@@ -42,9 +42,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QGroupBox_clicked(intptr_t);
-void miqt_exec_callback_QGroupBox_toggled(intptr_t, bool);
-void miqt_exec_callback_QGroupBox_clicked1(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -946,21 +943,31 @@ void QGroupBox_clicked(QGroupBox* self) {
 	self->clicked();
 }
 
-void QGroupBox_connect_clicked(QGroupBox* self, intptr_t slot) {
-	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::clicked), self, [=]() {
-		miqt_exec_callback_QGroupBox_clicked(slot);
-	});
+void QGroupBox_connect_clicked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::clicked), self, local_caller{slot, callback, release});
 }
 
 void QGroupBox_toggled(QGroupBox* self, bool param1) {
 	self->toggled(param1);
 }
 
-void QGroupBox_connect_toggled(QGroupBox* self, intptr_t slot) {
-	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::toggled), self, [=](bool param1) {
-		bool sigval1 = param1;
-		miqt_exec_callback_QGroupBox_toggled(slot, sigval1);
-	});
+void QGroupBox_connect_toggled(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool param1) {
+			bool sigval1 = param1;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::toggled), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QGroupBox_tr2(const char* s, const char* c) {
@@ -1011,11 +1018,16 @@ void QGroupBox_clicked1(QGroupBox* self, bool checked) {
 	self->clicked(checked);
 }
 
-void QGroupBox_connect_clicked1(QGroupBox* self, intptr_t slot) {
-	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::clicked), self, [=](bool checked) {
-		bool sigval1 = checked;
-		miqt_exec_callback_QGroupBox_clicked1(slot, sigval1);
-	});
+void QGroupBox_connect_clicked1(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool checked) {
+			bool sigval1 = checked;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::clicked), self, local_caller{slot, callback, release});
 }
 
 QMetaObject* QGroupBox_virtualbase_metaObject(const void* self) {

@@ -87,9 +87,9 @@ proc fcQStackedLayout_setGeometry(self: pointer, rect: pointer): void {.importc:
 proc fcQStackedLayout_hasHeightForWidth(self: pointer, ): bool {.importc: "QStackedLayout_hasHeightForWidth".}
 proc fcQStackedLayout_heightForWidth(self: pointer, width: cint): cint {.importc: "QStackedLayout_heightForWidth".}
 proc fcQStackedLayout_widgetRemoved(self: pointer, index: cint): void {.importc: "QStackedLayout_widgetRemoved".}
-proc fcQStackedLayout_connect_widgetRemoved(self: pointer, slot: int) {.importc: "QStackedLayout_connect_widgetRemoved".}
+proc fcQStackedLayout_connect_widgetRemoved(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedLayout_connect_widgetRemoved".}
 proc fcQStackedLayout_currentChanged(self: pointer, index: cint): void {.importc: "QStackedLayout_currentChanged".}
-proc fcQStackedLayout_connect_currentChanged(self: pointer, slot: int) {.importc: "QStackedLayout_connect_currentChanged".}
+proc fcQStackedLayout_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedLayout_connect_currentChanged".}
 proc fcQStackedLayout_setCurrentIndex(self: pointer, index: cint): void {.importc: "QStackedLayout_setCurrentIndex".}
 proc fcQStackedLayout_setCurrentWidget(self: pointer, w: pointer): void {.importc: "QStackedLayout_setCurrentWidget".}
 proc fcQStackedLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStackedLayout_tr2".}
@@ -237,33 +237,41 @@ proc widgetRemoved*(self: gen_qstackedlayout_types.QStackedLayout, index: cint):
   fcQStackedLayout_widgetRemoved(self.h, index)
 
 type QStackedLayoutwidgetRemovedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQStackedLayout_widgetRemoved(slot: int, index: cint) {.exportc: "miqt_exec_callback_QStackedLayout_widgetRemoved".} =
+proc miqt_exec_callback_cQStackedLayout_widgetRemoved(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedLayoutwidgetRemovedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStackedLayout_widgetRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStackedLayoutwidgetRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwidgetRemoved*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutwidgetRemovedSlot) =
   var tmp = new QStackedLayoutwidgetRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedLayout_connect_widgetRemoved(self.h, cast[int](addr tmp[]))
+  fcQStackedLayout_connect_widgetRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedLayout_widgetRemoved, miqt_exec_callback_cQStackedLayout_widgetRemoved_release)
 
 proc currentChanged*(self: gen_qstackedlayout_types.QStackedLayout, index: cint): void =
   fcQStackedLayout_currentChanged(self.h, index)
 
 type QStackedLayoutcurrentChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQStackedLayout_currentChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QStackedLayout_currentChanged".} =
+proc miqt_exec_callback_cQStackedLayout_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedLayoutcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStackedLayout_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStackedLayoutcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentChanged*(self: gen_qstackedlayout_types.QStackedLayout, slot: QStackedLayoutcurrentChangedSlot) =
   var tmp = new QStackedLayoutcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedLayout_connect_currentChanged(self.h, cast[int](addr tmp[]))
+  fcQStackedLayout_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedLayout_currentChanged, miqt_exec_callback_cQStackedLayout_currentChanged_release)
 
 proc setCurrentIndex*(self: gen_qstackedlayout_types.QStackedLayout, index: cint): void =
   fcQStackedLayout_setCurrentIndex(self.h, index)

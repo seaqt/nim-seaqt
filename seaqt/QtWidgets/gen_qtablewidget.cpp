@@ -62,21 +62,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QTableWidget_itemPressed(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemClicked(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemDoubleClicked(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemActivated(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemEntered(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemChanged(intptr_t, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_currentItemChanged(intptr_t, QTableWidgetItem*, QTableWidgetItem*);
-void miqt_exec_callback_QTableWidget_itemSelectionChanged(intptr_t);
-void miqt_exec_callback_QTableWidget_cellPressed(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_cellClicked(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_cellDoubleClicked(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_cellActivated(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_cellEntered(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_cellChanged(intptr_t, int, int);
-void miqt_exec_callback_QTableWidget_currentCellChanged(intptr_t, int, int, int, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -2398,174 +2383,249 @@ void QTableWidget_itemPressed(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemPressed(item);
 }
 
-void QTableWidget_connect_itemPressed(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemPressed), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemPressed(slot, sigval1);
-	});
+void QTableWidget_connect_itemPressed(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemPressed), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemClicked(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemClicked(item);
 }
 
-void QTableWidget_connect_itemClicked(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemClicked), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemClicked(slot, sigval1);
-	});
+void QTableWidget_connect_itemClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemClicked), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemDoubleClicked(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemDoubleClicked(item);
 }
 
-void QTableWidget_connect_itemDoubleClicked(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemDoubleClicked), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemDoubleClicked(slot, sigval1);
-	});
+void QTableWidget_connect_itemDoubleClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemDoubleClicked), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemActivated(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemActivated(item);
 }
 
-void QTableWidget_connect_itemActivated(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemActivated), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemActivated(slot, sigval1);
-	});
+void QTableWidget_connect_itemActivated(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemActivated), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemEntered(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemEntered(item);
 }
 
-void QTableWidget_connect_itemEntered(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemEntered), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemEntered(slot, sigval1);
-	});
+void QTableWidget_connect_itemEntered(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemEntered), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemChanged(QTableWidget* self, QTableWidgetItem* item) {
 	self->itemChanged(item);
 }
 
-void QTableWidget_connect_itemChanged(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemChanged), self, [=](QTableWidgetItem* item) {
-		QTableWidgetItem* sigval1 = item;
-		miqt_exec_callback_QTableWidget_itemChanged(slot, sigval1);
-	});
+void QTableWidget_connect_itemChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* item) {
+			QTableWidgetItem* sigval1 = item;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*)>(&QTableWidget::itemChanged), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_currentItemChanged(QTableWidget* self, QTableWidgetItem* current, QTableWidgetItem* previous) {
 	self->currentItemChanged(current, previous);
 }
 
-void QTableWidget_connect_currentItemChanged(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*, QTableWidgetItem*)>(&QTableWidget::currentItemChanged), self, [=](QTableWidgetItem* current, QTableWidgetItem* previous) {
-		QTableWidgetItem* sigval1 = current;
-		QTableWidgetItem* sigval2 = previous;
-		miqt_exec_callback_QTableWidget_currentItemChanged(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_currentItemChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, QTableWidgetItem*, QTableWidgetItem*);
+		void operator()(QTableWidgetItem* current, QTableWidgetItem* previous) {
+			QTableWidgetItem* sigval1 = current;
+			QTableWidgetItem* sigval2 = previous;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(QTableWidgetItem*, QTableWidgetItem*)>(&QTableWidget::currentItemChanged), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_itemSelectionChanged(QTableWidget* self) {
 	self->itemSelectionChanged();
 }
 
-void QTableWidget_connect_itemSelectionChanged(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)()>(&QTableWidget::itemSelectionChanged), self, [=]() {
-		miqt_exec_callback_QTableWidget_itemSelectionChanged(slot);
-	});
+void QTableWidget_connect_itemSelectionChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)()>(&QTableWidget::itemSelectionChanged), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellPressed(QTableWidget* self, int row, int column) {
 	self->cellPressed(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellPressed(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellPressed), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellPressed(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellPressed(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellPressed), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellClicked(QTableWidget* self, int row, int column) {
 	self->cellClicked(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellClicked(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellClicked), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellClicked(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellClicked), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellDoubleClicked(QTableWidget* self, int row, int column) {
 	self->cellDoubleClicked(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellDoubleClicked(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellDoubleClicked), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellDoubleClicked(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellDoubleClicked(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellDoubleClicked), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellActivated(QTableWidget* self, int row, int column) {
 	self->cellActivated(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellActivated(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellActivated), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellActivated(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellActivated(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellActivated), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellEntered(QTableWidget* self, int row, int column) {
 	self->cellEntered(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellEntered(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellEntered), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellEntered(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellEntered(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellEntered), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_cellChanged(QTableWidget* self, int row, int column) {
 	self->cellChanged(static_cast<int>(row), static_cast<int>(column));
 }
 
-void QTableWidget_connect_cellChanged(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellChanged), self, [=](int row, int column) {
-		int sigval1 = row;
-		int sigval2 = column;
-		miqt_exec_callback_QTableWidget_cellChanged(slot, sigval1, sigval2);
-	});
+void QTableWidget_connect_cellChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int);
+		void operator()(int row, int column) {
+			int sigval1 = row;
+			int sigval2 = column;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int)>(&QTableWidget::cellChanged), self, local_caller{slot, callback, release});
 }
 
 void QTableWidget_currentCellChanged(QTableWidget* self, int currentRow, int currentColumn, int previousRow, int previousColumn) {
 	self->currentCellChanged(static_cast<int>(currentRow), static_cast<int>(currentColumn), static_cast<int>(previousRow), static_cast<int>(previousColumn));
 }
 
-void QTableWidget_connect_currentCellChanged(QTableWidget* self, intptr_t slot) {
-	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int, int, int)>(&QTableWidget::currentCellChanged), self, [=](int currentRow, int currentColumn, int previousRow, int previousColumn) {
-		int sigval1 = currentRow;
-		int sigval2 = currentColumn;
-		int sigval3 = previousRow;
-		int sigval4 = previousColumn;
-		miqt_exec_callback_QTableWidget_currentCellChanged(slot, sigval1, sigval2, sigval3, sigval4);
-	});
+void QTableWidget_connect_currentCellChanged(QTableWidget* self, intptr_t slot, void (*callback)(intptr_t, int, int, int, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, int, int, int);
+		void operator()(int currentRow, int currentColumn, int previousRow, int previousColumn) {
+			int sigval1 = currentRow;
+			int sigval2 = currentColumn;
+			int sigval3 = previousRow;
+			int sigval4 = previousColumn;
+			callback(slot, sigval1, sigval2, sigval3, sigval4);
+		}
+	};
+	VirtualQTableWidget::connect(self, static_cast<void (QTableWidget::*)(int, int, int, int)>(&QTableWidget::currentCellChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QTableWidget_tr2(const char* s, const char* c) {

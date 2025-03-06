@@ -16,12 +16,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QMediaObject_notifyIntervalChanged(intptr_t, int);
-void miqt_exec_callback_QMediaObject_metaDataAvailableChanged(intptr_t, bool);
-void miqt_exec_callback_QMediaObject_metaDataChanged(intptr_t);
-void miqt_exec_callback_QMediaObject_metaDataChanged2(intptr_t, struct miqt_string, QVariant*);
-void miqt_exec_callback_QMediaObject_availabilityChanged(intptr_t, bool);
-void miqt_exec_callback_QMediaObject_availabilityChangedWithAvailability(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -126,32 +120,47 @@ void QMediaObject_notifyIntervalChanged(QMediaObject* self, int milliSeconds) {
 	self->notifyIntervalChanged(static_cast<int>(milliSeconds));
 }
 
-void QMediaObject_connect_notifyIntervalChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(int)>(&QMediaObject::notifyIntervalChanged), self, [=](int milliSeconds) {
-		int sigval1 = milliSeconds;
-		miqt_exec_callback_QMediaObject_notifyIntervalChanged(slot, sigval1);
-	});
+void QMediaObject_connect_notifyIntervalChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int milliSeconds) {
+			int sigval1 = milliSeconds;
+			callback(slot, sigval1);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(int)>(&QMediaObject::notifyIntervalChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaObject_metaDataAvailableChanged(QMediaObject* self, bool available) {
 	self->metaDataAvailableChanged(available);
 }
 
-void QMediaObject_connect_metaDataAvailableChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::metaDataAvailableChanged), self, [=](bool available) {
-		bool sigval1 = available;
-		miqt_exec_callback_QMediaObject_metaDataAvailableChanged(slot, sigval1);
-	});
+void QMediaObject_connect_metaDataAvailableChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool available) {
+			bool sigval1 = available;
+			callback(slot, sigval1);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::metaDataAvailableChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaObject_metaDataChanged(QMediaObject* self) {
 	self->metaDataChanged();
 }
 
-void QMediaObject_connect_metaDataChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)()>(&QMediaObject::metaDataChanged), self, [=]() {
-		miqt_exec_callback_QMediaObject_metaDataChanged(slot);
-	});
+void QMediaObject_connect_metaDataChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t);
+		void operator()() {
+			callback(slot);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)()>(&QMediaObject::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaObject_metaDataChanged2(QMediaObject* self, struct miqt_string key, QVariant* value) {
@@ -159,44 +168,59 @@ void QMediaObject_metaDataChanged2(QMediaObject* self, struct miqt_string key, Q
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(const QString&, const QVariant&)>(&QMediaObject::metaDataChanged), self, [=](const QString& key, const QVariant& value) {
-		const QString key_ret = key;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray key_b = key_ret.toUtf8();
-		struct miqt_string key_ms;
-		key_ms.len = key_b.length();
-		key_ms.data = static_cast<char*>(malloc(key_ms.len));
-		memcpy(key_ms.data, key_b.data(), key_ms.len);
-		struct miqt_string sigval1 = key_ms;
-		const QVariant& value_ret = value;
-		// Cast returned reference into pointer
-		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
-		miqt_exec_callback_QMediaObject_metaDataChanged2(slot, sigval1, sigval2);
-	});
+void QMediaObject_connect_metaDataChanged2(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, struct miqt_string, QVariant*);
+		void operator()(const QString& key, const QVariant& value) {
+			const QString key_ret = key;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray key_b = key_ret.toUtf8();
+			struct miqt_string key_ms;
+			key_ms.len = key_b.length();
+			key_ms.data = static_cast<char*>(malloc(key_ms.len));
+			memcpy(key_ms.data, key_b.data(), key_ms.len);
+			struct miqt_string sigval1 = key_ms;
+			const QVariant& value_ret = value;
+			// Cast returned reference into pointer
+			QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(const QString&, const QVariant&)>(&QMediaObject::metaDataChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaObject_availabilityChanged(QMediaObject* self, bool available) {
 	self->availabilityChanged(available);
 }
 
-void QMediaObject_connect_availabilityChanged(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::availabilityChanged), self, [=](bool available) {
-		bool sigval1 = available;
-		miqt_exec_callback_QMediaObject_availabilityChanged(slot, sigval1);
-	});
+void QMediaObject_connect_availabilityChanged(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool available) {
+			bool sigval1 = available;
+			callback(slot, sigval1);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(bool)>(&QMediaObject::availabilityChanged), self, local_caller{slot, callback, release});
 }
 
 void QMediaObject_availabilityChangedWithAvailability(QMediaObject* self, int availability) {
 	self->availabilityChanged(static_cast<QMultimedia::AvailabilityStatus>(availability));
 }
 
-void QMediaObject_connect_availabilityChangedWithAvailability(QMediaObject* self, intptr_t slot) {
-	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(QMultimedia::AvailabilityStatus)>(&QMediaObject::availabilityChanged), self, [=](QMultimedia::AvailabilityStatus availability) {
-		QMultimedia::AvailabilityStatus availability_ret = availability;
-		int sigval1 = static_cast<int>(availability_ret);
-		miqt_exec_callback_QMediaObject_availabilityChangedWithAvailability(slot, sigval1);
-	});
+void QMediaObject_connect_availabilityChangedWithAvailability(QMediaObject* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QMultimedia::AvailabilityStatus availability) {
+			QMultimedia::AvailabilityStatus availability_ret = availability;
+			int sigval1 = static_cast<int>(availability_ret);
+			callback(slot, sigval1);
+		}
+	};
+	QMediaObject::connect(self, static_cast<void (QMediaObject::*)(QMultimedia::AvailabilityStatus)>(&QMediaObject::availabilityChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QMediaObject_tr2(const char* s, const char* c) {

@@ -111,15 +111,15 @@ proc fcQQuickPaintedItem_paint(self: pointer, painter: pointer): void {.importc:
 proc fcQQuickPaintedItem_isTextureProvider(self: pointer, ): bool {.importc: "QQuickPaintedItem_isTextureProvider".}
 proc fcQQuickPaintedItem_textureProvider(self: pointer, ): pointer {.importc: "QQuickPaintedItem_textureProvider".}
 proc fcQQuickPaintedItem_fillColorChanged(self: pointer, ): void {.importc: "QQuickPaintedItem_fillColorChanged".}
-proc fcQQuickPaintedItem_connect_fillColorChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_connect_fillColorChanged".}
+proc fcQQuickPaintedItem_connect_fillColorChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_fillColorChanged".}
 proc fcQQuickPaintedItem_contentsSizeChanged(self: pointer, ): void {.importc: "QQuickPaintedItem_contentsSizeChanged".}
-proc fcQQuickPaintedItem_connect_contentsSizeChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_connect_contentsSizeChanged".}
+proc fcQQuickPaintedItem_connect_contentsSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_contentsSizeChanged".}
 proc fcQQuickPaintedItem_contentsScaleChanged(self: pointer, ): void {.importc: "QQuickPaintedItem_contentsScaleChanged".}
-proc fcQQuickPaintedItem_connect_contentsScaleChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_connect_contentsScaleChanged".}
+proc fcQQuickPaintedItem_connect_contentsScaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_contentsScaleChanged".}
 proc fcQQuickPaintedItem_renderTargetChanged(self: pointer, ): void {.importc: "QQuickPaintedItem_renderTargetChanged".}
-proc fcQQuickPaintedItem_connect_renderTargetChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_connect_renderTargetChanged".}
+proc fcQQuickPaintedItem_connect_renderTargetChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_renderTargetChanged".}
 proc fcQQuickPaintedItem_textureSizeChanged(self: pointer, ): void {.importc: "QQuickPaintedItem_textureSizeChanged".}
-proc fcQQuickPaintedItem_connect_textureSizeChanged(self: pointer, slot: int) {.importc: "QQuickPaintedItem_connect_textureSizeChanged".}
+proc fcQQuickPaintedItem_connect_textureSizeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickPaintedItem_connect_textureSizeChanged".}
 proc fcQQuickPaintedItem_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickPaintedItem_tr2".}
 proc fcQQuickPaintedItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickPaintedItem_tr3".}
 proc fcQQuickPaintedItem_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickPaintedItem_trUtf82".}
@@ -324,71 +324,91 @@ proc fillColorChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): v
   fcQQuickPaintedItem_fillColorChanged(self.h)
 
 type QQuickPaintedItemfillColorChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickPaintedItem_fillColorChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_fillColorChanged".} =
+proc miqt_exec_callback_cQQuickPaintedItem_fillColorChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickPaintedItemfillColorChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickPaintedItem_fillColorChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickPaintedItemfillColorChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onfillColorChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemfillColorChangedSlot) =
   var tmp = new QQuickPaintedItemfillColorChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickPaintedItem_connect_fillColorChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickPaintedItem_connect_fillColorChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickPaintedItem_fillColorChanged, miqt_exec_callback_cQQuickPaintedItem_fillColorChanged_release)
 
 proc contentsSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_contentsSizeChanged(self.h)
 
 type QQuickPaintedItemcontentsSizeChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_contentsSizeChanged".} =
+proc miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickPaintedItemcontentsSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickPaintedItemcontentsSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncontentsSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemcontentsSizeChangedSlot) =
   var tmp = new QQuickPaintedItemcontentsSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickPaintedItem_connect_contentsSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickPaintedItem_connect_contentsSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged, miqt_exec_callback_cQQuickPaintedItem_contentsSizeChanged_release)
 
 proc contentsScaleChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_contentsScaleChanged(self.h)
 
 type QQuickPaintedItemcontentsScaleChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_contentsScaleChanged".} =
+proc miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickPaintedItemcontentsScaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickPaintedItemcontentsScaleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oncontentsScaleChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemcontentsScaleChangedSlot) =
   var tmp = new QQuickPaintedItemcontentsScaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickPaintedItem_connect_contentsScaleChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickPaintedItem_connect_contentsScaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged, miqt_exec_callback_cQQuickPaintedItem_contentsScaleChanged_release)
 
 proc renderTargetChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_renderTargetChanged(self.h)
 
 type QQuickPaintedItemrenderTargetChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_renderTargetChanged".} =
+proc miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickPaintedItemrenderTargetChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickPaintedItemrenderTargetChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onrenderTargetChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemrenderTargetChangedSlot) =
   var tmp = new QQuickPaintedItemrenderTargetChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickPaintedItem_connect_renderTargetChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickPaintedItem_connect_renderTargetChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged, miqt_exec_callback_cQQuickPaintedItem_renderTargetChanged_release)
 
 proc textureSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, ): void =
   fcQQuickPaintedItem_textureSizeChanged(self.h)
 
 type QQuickPaintedItemtextureSizeChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged(slot: int) {.exportc: "miqt_exec_callback_QQuickPaintedItem_textureSizeChanged".} =
+proc miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickPaintedItemtextureSizeChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQuickPaintedItemtextureSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ontextureSizeChanged*(self: gen_qquickpainteditem_types.QQuickPaintedItem, slot: QQuickPaintedItemtextureSizeChangedSlot) =
   var tmp = new QQuickPaintedItemtextureSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickPaintedItem_connect_textureSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQQuickPaintedItem_connect_textureSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged, miqt_exec_callback_cQQuickPaintedItem_textureSizeChanged_release)
 
 proc tr*(_: type gen_qquickpainteditem_types.QQuickPaintedItem, s: cstring, c: cstring): string =
   let v_ms = fcQQuickPaintedItem_tr2(s, c)

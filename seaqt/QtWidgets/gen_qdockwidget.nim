@@ -97,15 +97,15 @@ proc fcQDockWidget_titleBarWidget(self: pointer, ): pointer {.importc: "QDockWid
 proc fcQDockWidget_isAreaAllowed(self: pointer, area: cint): bool {.importc: "QDockWidget_isAreaAllowed".}
 proc fcQDockWidget_toggleViewAction(self: pointer, ): pointer {.importc: "QDockWidget_toggleViewAction".}
 proc fcQDockWidget_featuresChanged(self: pointer, features: cint): void {.importc: "QDockWidget_featuresChanged".}
-proc fcQDockWidget_connect_featuresChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_featuresChanged".}
+proc fcQDockWidget_connect_featuresChanged(self: pointer, slot: int, callback: proc (slot: int, features: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_featuresChanged".}
 proc fcQDockWidget_topLevelChanged(self: pointer, topLevel: bool): void {.importc: "QDockWidget_topLevelChanged".}
-proc fcQDockWidget_connect_topLevelChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_topLevelChanged".}
+proc fcQDockWidget_connect_topLevelChanged(self: pointer, slot: int, callback: proc (slot: int, topLevel: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_topLevelChanged".}
 proc fcQDockWidget_allowedAreasChanged(self: pointer, allowedAreas: cint): void {.importc: "QDockWidget_allowedAreasChanged".}
-proc fcQDockWidget_connect_allowedAreasChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_allowedAreasChanged".}
+proc fcQDockWidget_connect_allowedAreasChanged(self: pointer, slot: int, callback: proc (slot: int, allowedAreas: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_allowedAreasChanged".}
 proc fcQDockWidget_visibilityChanged(self: pointer, visible: bool): void {.importc: "QDockWidget_visibilityChanged".}
-proc fcQDockWidget_connect_visibilityChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_visibilityChanged".}
+proc fcQDockWidget_connect_visibilityChanged(self: pointer, slot: int, callback: proc (slot: int, visible: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_visibilityChanged".}
 proc fcQDockWidget_dockLocationChanged(self: pointer, area: cint): void {.importc: "QDockWidget_dockLocationChanged".}
-proc fcQDockWidget_connect_dockLocationChanged(self: pointer, slot: int) {.importc: "QDockWidget_connect_dockLocationChanged".}
+proc fcQDockWidget_connect_dockLocationChanged(self: pointer, slot: int, callback: proc (slot: int, area: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QDockWidget_connect_dockLocationChanged".}
 proc fcQDockWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QDockWidget_tr2".}
 proc fcQDockWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QDockWidget_tr3".}
 proc fcQDockWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QDockWidget_trUtf82".}
@@ -282,81 +282,101 @@ proc featuresChanged*(self: gen_qdockwidget_types.QDockWidget, features: cint): 
   fcQDockWidget_featuresChanged(self.h, cint(features))
 
 type QDockWidgetfeaturesChangedSlot* = proc(features: cint)
-proc miqt_exec_callback_cQDockWidget_featuresChanged(slot: int, features: cint) {.exportc: "miqt_exec_callback_QDockWidget_featuresChanged".} =
+proc miqt_exec_callback_cQDockWidget_featuresChanged(slot: int, features: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDockWidgetfeaturesChangedSlot](cast[pointer](slot))
   let slotval1 = cint(features)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDockWidget_featuresChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDockWidgetfeaturesChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onfeaturesChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetfeaturesChangedSlot) =
   var tmp = new QDockWidgetfeaturesChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDockWidget_connect_featuresChanged(self.h, cast[int](addr tmp[]))
+  fcQDockWidget_connect_featuresChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDockWidget_featuresChanged, miqt_exec_callback_cQDockWidget_featuresChanged_release)
 
 proc topLevelChanged*(self: gen_qdockwidget_types.QDockWidget, topLevel: bool): void =
   fcQDockWidget_topLevelChanged(self.h, topLevel)
 
 type QDockWidgettopLevelChangedSlot* = proc(topLevel: bool)
-proc miqt_exec_callback_cQDockWidget_topLevelChanged(slot: int, topLevel: bool) {.exportc: "miqt_exec_callback_QDockWidget_topLevelChanged".} =
+proc miqt_exec_callback_cQDockWidget_topLevelChanged(slot: int, topLevel: bool) {.cdecl.} =
   let nimfunc = cast[ptr QDockWidgettopLevelChangedSlot](cast[pointer](slot))
   let slotval1 = topLevel
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDockWidget_topLevelChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDockWidgettopLevelChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontopLevelChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgettopLevelChangedSlot) =
   var tmp = new QDockWidgettopLevelChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDockWidget_connect_topLevelChanged(self.h, cast[int](addr tmp[]))
+  fcQDockWidget_connect_topLevelChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDockWidget_topLevelChanged, miqt_exec_callback_cQDockWidget_topLevelChanged_release)
 
 proc allowedAreasChanged*(self: gen_qdockwidget_types.QDockWidget, allowedAreas: cint): void =
   fcQDockWidget_allowedAreasChanged(self.h, cint(allowedAreas))
 
 type QDockWidgetallowedAreasChangedSlot* = proc(allowedAreas: cint)
-proc miqt_exec_callback_cQDockWidget_allowedAreasChanged(slot: int, allowedAreas: cint) {.exportc: "miqt_exec_callback_QDockWidget_allowedAreasChanged".} =
+proc miqt_exec_callback_cQDockWidget_allowedAreasChanged(slot: int, allowedAreas: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDockWidgetallowedAreasChangedSlot](cast[pointer](slot))
   let slotval1 = cint(allowedAreas)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDockWidget_allowedAreasChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDockWidgetallowedAreasChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onallowedAreasChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetallowedAreasChangedSlot) =
   var tmp = new QDockWidgetallowedAreasChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDockWidget_connect_allowedAreasChanged(self.h, cast[int](addr tmp[]))
+  fcQDockWidget_connect_allowedAreasChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDockWidget_allowedAreasChanged, miqt_exec_callback_cQDockWidget_allowedAreasChanged_release)
 
 proc visibilityChanged*(self: gen_qdockwidget_types.QDockWidget, visible: bool): void =
   fcQDockWidget_visibilityChanged(self.h, visible)
 
 type QDockWidgetvisibilityChangedSlot* = proc(visible: bool)
-proc miqt_exec_callback_cQDockWidget_visibilityChanged(slot: int, visible: bool) {.exportc: "miqt_exec_callback_QDockWidget_visibilityChanged".} =
+proc miqt_exec_callback_cQDockWidget_visibilityChanged(slot: int, visible: bool) {.cdecl.} =
   let nimfunc = cast[ptr QDockWidgetvisibilityChangedSlot](cast[pointer](slot))
   let slotval1 = visible
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDockWidget_visibilityChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDockWidgetvisibilityChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onvisibilityChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetvisibilityChangedSlot) =
   var tmp = new QDockWidgetvisibilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDockWidget_connect_visibilityChanged(self.h, cast[int](addr tmp[]))
+  fcQDockWidget_connect_visibilityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDockWidget_visibilityChanged, miqt_exec_callback_cQDockWidget_visibilityChanged_release)
 
 proc dockLocationChanged*(self: gen_qdockwidget_types.QDockWidget, area: cint): void =
   fcQDockWidget_dockLocationChanged(self.h, cint(area))
 
 type QDockWidgetdockLocationChangedSlot* = proc(area: cint)
-proc miqt_exec_callback_cQDockWidget_dockLocationChanged(slot: int, area: cint) {.exportc: "miqt_exec_callback_QDockWidget_dockLocationChanged".} =
+proc miqt_exec_callback_cQDockWidget_dockLocationChanged(slot: int, area: cint) {.cdecl.} =
   let nimfunc = cast[ptr QDockWidgetdockLocationChangedSlot](cast[pointer](slot))
   let slotval1 = cint(area)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQDockWidget_dockLocationChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QDockWidgetdockLocationChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondockLocationChanged*(self: gen_qdockwidget_types.QDockWidget, slot: QDockWidgetdockLocationChangedSlot) =
   var tmp = new QDockWidgetdockLocationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQDockWidget_connect_dockLocationChanged(self.h, cast[int](addr tmp[]))
+  fcQDockWidget_connect_dockLocationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQDockWidget_dockLocationChanged, miqt_exec_callback_cQDockWidget_dockLocationChanged_release)
 
 proc tr*(_: type gen_qdockwidget_types.QDockWidget, s: cstring, c: cstring): string =
   let v_ms = fcQDockWidget_tr2(s, c)

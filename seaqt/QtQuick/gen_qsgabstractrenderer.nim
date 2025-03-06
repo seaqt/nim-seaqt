@@ -91,7 +91,7 @@ proc fcQSGAbstractRenderer_setClearMode(self: pointer, mode: cint): void {.impor
 proc fcQSGAbstractRenderer_clearMode(self: pointer, ): cint {.importc: "QSGAbstractRenderer_clearMode".}
 proc fcQSGAbstractRenderer_renderScene(self: pointer, fboId: cuint): void {.importc: "QSGAbstractRenderer_renderScene".}
 proc fcQSGAbstractRenderer_sceneGraphChanged(self: pointer, ): void {.importc: "QSGAbstractRenderer_sceneGraphChanged".}
-proc fcQSGAbstractRenderer_connect_sceneGraphChanged(self: pointer, slot: int) {.importc: "QSGAbstractRenderer_connect_sceneGraphChanged".}
+proc fcQSGAbstractRenderer_connect_sceneGraphChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QSGAbstractRenderer_connect_sceneGraphChanged".}
 proc fcQSGAbstractRenderer_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_tr2".}
 proc fcQSGAbstractRenderer_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSGAbstractRenderer_tr3".}
 proc fcQSGAbstractRenderer_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSGAbstractRenderer_trUtf82".}
@@ -181,15 +181,19 @@ proc sceneGraphChanged*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer,
   fcQSGAbstractRenderer_sceneGraphChanged(self.h)
 
 type QSGAbstractRenderersceneGraphChangedSlot* = proc()
-proc miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged(slot: int) {.exportc: "miqt_exec_callback_QSGAbstractRenderer_sceneGraphChanged".} =
+proc miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QSGAbstractRenderersceneGraphChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QSGAbstractRenderersceneGraphChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onsceneGraphChanged*(self: gen_qsgabstractrenderer_types.QSGAbstractRenderer, slot: QSGAbstractRenderersceneGraphChangedSlot) =
   var tmp = new QSGAbstractRenderersceneGraphChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQSGAbstractRenderer_connect_sceneGraphChanged(self.h, cast[int](addr tmp[]))
+  fcQSGAbstractRenderer_connect_sceneGraphChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged, miqt_exec_callback_cQSGAbstractRenderer_sceneGraphChanged_release)
 
 proc tr*(_: type gen_qsgabstractrenderer_types.QSGAbstractRenderer, s: cstring, c: cstring): string =
   let v_ms = fcQSGAbstractRenderer_tr2(s, c)

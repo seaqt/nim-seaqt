@@ -74,7 +74,7 @@ proc fcQOffscreenSurface_setScreen(self: pointer, screen: pointer): void {.impor
 proc fcQOffscreenSurface_nativeHandle(self: pointer, ): pointer {.importc: "QOffscreenSurface_nativeHandle".}
 proc fcQOffscreenSurface_setNativeHandle(self: pointer, handle: pointer): void {.importc: "QOffscreenSurface_setNativeHandle".}
 proc fcQOffscreenSurface_screenChanged(self: pointer, screen: pointer): void {.importc: "QOffscreenSurface_screenChanged".}
-proc fcQOffscreenSurface_connect_screenChanged(self: pointer, slot: int) {.importc: "QOffscreenSurface_connect_screenChanged".}
+proc fcQOffscreenSurface_connect_screenChanged(self: pointer, slot: int, callback: proc (slot: int, screen: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QOffscreenSurface_connect_screenChanged".}
 proc fcQOffscreenSurface_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QOffscreenSurface_tr2".}
 proc fcQOffscreenSurface_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QOffscreenSurface_tr3".}
 proc fcQOffscreenSurface_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QOffscreenSurface_trUtf82".}
@@ -174,17 +174,21 @@ proc screenChanged*(self: gen_qoffscreensurface_types.QOffscreenSurface, screen:
   fcQOffscreenSurface_screenChanged(self.h, screen.h)
 
 type QOffscreenSurfacescreenChangedSlot* = proc(screen: gen_qscreen_types.QScreen)
-proc miqt_exec_callback_cQOffscreenSurface_screenChanged(slot: int, screen: pointer) {.exportc: "miqt_exec_callback_QOffscreenSurface_screenChanged".} =
+proc miqt_exec_callback_cQOffscreenSurface_screenChanged(slot: int, screen: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QOffscreenSurfacescreenChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qscreen_types.QScreen(h: screen)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQOffscreenSurface_screenChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QOffscreenSurfacescreenChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onscreenChanged*(self: gen_qoffscreensurface_types.QOffscreenSurface, slot: QOffscreenSurfacescreenChangedSlot) =
   var tmp = new QOffscreenSurfacescreenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQOffscreenSurface_connect_screenChanged(self.h, cast[int](addr tmp[]))
+  fcQOffscreenSurface_connect_screenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQOffscreenSurface_screenChanged, miqt_exec_callback_cQOffscreenSurface_screenChanged_release)
 
 proc tr*(_: type gen_qoffscreensurface_types.QOffscreenSurface, s: cstring, c: cstring): string =
   let v_ms = fcQOffscreenSurface_tr2(s, c)

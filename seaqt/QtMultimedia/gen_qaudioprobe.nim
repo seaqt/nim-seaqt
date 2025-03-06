@@ -65,9 +65,9 @@ proc fcQAudioProbe_setSource(self: pointer, source: pointer): bool {.importc: "Q
 proc fcQAudioProbe_setSourceWithSource(self: pointer, source: pointer): bool {.importc: "QAudioProbe_setSourceWithSource".}
 proc fcQAudioProbe_isActive(self: pointer, ): bool {.importc: "QAudioProbe_isActive".}
 proc fcQAudioProbe_audioBufferProbed(self: pointer, buffer: pointer): void {.importc: "QAudioProbe_audioBufferProbed".}
-proc fcQAudioProbe_connect_audioBufferProbed(self: pointer, slot: int) {.importc: "QAudioProbe_connect_audioBufferProbed".}
+proc fcQAudioProbe_connect_audioBufferProbed(self: pointer, slot: int, callback: proc (slot: int, buffer: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioProbe_connect_audioBufferProbed".}
 proc fcQAudioProbe_flush(self: pointer, ): void {.importc: "QAudioProbe_flush".}
-proc fcQAudioProbe_connect_flush(self: pointer, slot: int) {.importc: "QAudioProbe_connect_flush".}
+proc fcQAudioProbe_connect_flush(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioProbe_connect_flush".}
 proc fcQAudioProbe_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioProbe_tr2".}
 proc fcQAudioProbe_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioProbe_tr3".}
 proc fcQAudioProbe_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioProbe_trUtf82".}
@@ -133,31 +133,39 @@ proc audioBufferProbed*(self: gen_qaudioprobe_types.QAudioProbe, buffer: gen_qau
   fcQAudioProbe_audioBufferProbed(self.h, buffer.h)
 
 type QAudioProbeaudioBufferProbedSlot* = proc(buffer: gen_qaudiobuffer_types.QAudioBuffer)
-proc miqt_exec_callback_cQAudioProbe_audioBufferProbed(slot: int, buffer: pointer) {.exportc: "miqt_exec_callback_QAudioProbe_audioBufferProbed".} =
+proc miqt_exec_callback_cQAudioProbe_audioBufferProbed(slot: int, buffer: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAudioProbeaudioBufferProbedSlot](cast[pointer](slot))
   let slotval1 = gen_qaudiobuffer_types.QAudioBuffer(h: buffer)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioProbe_audioBufferProbed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioProbeaudioBufferProbedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaudioBufferProbed*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbeaudioBufferProbedSlot) =
   var tmp = new QAudioProbeaudioBufferProbedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioProbe_connect_audioBufferProbed(self.h, cast[int](addr tmp[]))
+  fcQAudioProbe_connect_audioBufferProbed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioProbe_audioBufferProbed, miqt_exec_callback_cQAudioProbe_audioBufferProbed_release)
 
 proc flush*(self: gen_qaudioprobe_types.QAudioProbe, ): void =
   fcQAudioProbe_flush(self.h)
 
 type QAudioProbeflushSlot* = proc()
-proc miqt_exec_callback_cQAudioProbe_flush(slot: int) {.exportc: "miqt_exec_callback_QAudioProbe_flush".} =
+proc miqt_exec_callback_cQAudioProbe_flush(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioProbeflushSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioProbe_flush_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioProbeflushSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onflush*(self: gen_qaudioprobe_types.QAudioProbe, slot: QAudioProbeflushSlot) =
   var tmp = new QAudioProbeflushSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioProbe_connect_flush(self.h, cast[int](addr tmp[]))
+  fcQAudioProbe_connect_flush(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioProbe_flush, miqt_exec_callback_cQAudioProbe_flush_release)
 
 proc tr*(_: type gen_qaudioprobe_types.QAudioProbe, s: cstring, c: cstring): string =
   let v_ms = fcQAudioProbe_tr2(s, c)

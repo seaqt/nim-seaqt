@@ -22,7 +22,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QStateMachine_runningChanged(intptr_t, bool);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -463,11 +462,16 @@ void QStateMachine_runningChanged(QStateMachine* self, bool running) {
 	self->runningChanged(running);
 }
 
-void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot) {
-	VirtualQStateMachine::connect(self, static_cast<void (QStateMachine::*)(bool)>(&QStateMachine::runningChanged), self, [=](bool running) {
-		bool sigval1 = running;
-		miqt_exec_callback_QStateMachine_runningChanged(slot, sigval1);
-	});
+void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool running) {
+			bool sigval1 = running;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQStateMachine::connect(self, static_cast<void (QStateMachine::*)(bool)>(&QStateMachine::runningChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QStateMachine_tr2(const char* s, const char* c) {

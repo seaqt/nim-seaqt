@@ -20,7 +20,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QDataWidgetMapper_currentIndexChanged(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -375,11 +374,16 @@ void QDataWidgetMapper_currentIndexChanged(QDataWidgetMapper* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot) {
-	VirtualQDataWidgetMapper::connect(self, static_cast<void (QDataWidgetMapper::*)(int)>(&QDataWidgetMapper::currentIndexChanged), self, [=](int index) {
-		int sigval1 = index;
-		miqt_exec_callback_QDataWidgetMapper_currentIndexChanged(slot, sigval1);
-	});
+void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int index) {
+			int sigval1 = index;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQDataWidgetMapper::connect(self, static_cast<void (QDataWidgetMapper::*)(int)>(&QDataWidgetMapper::currentIndexChanged), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QDataWidgetMapper_tr2(const char* s, const char* c) {

@@ -190,7 +190,7 @@ proc fcQMessageBox_setWindowTitle(self: pointer, title: struct_miqt_string): voi
 proc fcQMessageBox_setWindowModality(self: pointer, windowModality: cint): void {.importc: "QMessageBox_setWindowModality".}
 proc fcQMessageBox_standardIcon(icon: cint): pointer {.importc: "QMessageBox_standardIcon".}
 proc fcQMessageBox_buttonClicked(self: pointer, button: pointer): void {.importc: "QMessageBox_buttonClicked".}
-proc fcQMessageBox_connect_buttonClicked(self: pointer, slot: int) {.importc: "QMessageBox_connect_buttonClicked".}
+proc fcQMessageBox_connect_buttonClicked(self: pointer, slot: int, callback: proc (slot: int, button: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMessageBox_connect_buttonClicked".}
 proc fcQMessageBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMessageBox_tr2".}
 proc fcQMessageBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMessageBox_tr3".}
 proc fcQMessageBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMessageBox_trUtf82".}
@@ -561,17 +561,21 @@ proc buttonClicked*(self: gen_qmessagebox_types.QMessageBox, button: gen_qabstra
   fcQMessageBox_buttonClicked(self.h, button.h)
 
 type QMessageBoxbuttonClickedSlot* = proc(button: gen_qabstractbutton_types.QAbstractButton)
-proc miqt_exec_callback_cQMessageBox_buttonClicked(slot: int, button: pointer) {.exportc: "miqt_exec_callback_QMessageBox_buttonClicked".} =
+proc miqt_exec_callback_cQMessageBox_buttonClicked(slot: int, button: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QMessageBoxbuttonClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractbutton_types.QAbstractButton(h: button)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQMessageBox_buttonClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QMessageBoxbuttonClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onbuttonClicked*(self: gen_qmessagebox_types.QMessageBox, slot: QMessageBoxbuttonClickedSlot) =
   var tmp = new QMessageBoxbuttonClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]))
+  fcQMessageBox_connect_buttonClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMessageBox_buttonClicked, miqt_exec_callback_cQMessageBox_buttonClicked_release)
 
 proc tr*(_: type gen_qmessagebox_types.QMessageBox, s: cstring, c: cstring): string =
   let v_ms = fcQMessageBox_tr2(s, c)

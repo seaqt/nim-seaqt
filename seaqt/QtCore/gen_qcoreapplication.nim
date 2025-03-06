@@ -112,13 +112,13 @@ proc fcQCoreApplication_isQuitLockEnabled(): bool {.importc: "QCoreApplication_i
 proc fcQCoreApplication_setQuitLockEnabled(enabled: bool): void {.importc: "QCoreApplication_setQuitLockEnabled".}
 proc fcQCoreApplication_quit(): void {.importc: "QCoreApplication_quit".}
 proc fcQCoreApplication_organizationNameChanged(self: pointer, ): void {.importc: "QCoreApplication_organizationNameChanged".}
-proc fcQCoreApplication_connect_organizationNameChanged(self: pointer, slot: int) {.importc: "QCoreApplication_connect_organizationNameChanged".}
+proc fcQCoreApplication_connect_organizationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationNameChanged".}
 proc fcQCoreApplication_organizationDomainChanged(self: pointer, ): void {.importc: "QCoreApplication_organizationDomainChanged".}
-proc fcQCoreApplication_connect_organizationDomainChanged(self: pointer, slot: int) {.importc: "QCoreApplication_connect_organizationDomainChanged".}
+proc fcQCoreApplication_connect_organizationDomainChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_organizationDomainChanged".}
 proc fcQCoreApplication_applicationNameChanged(self: pointer, ): void {.importc: "QCoreApplication_applicationNameChanged".}
-proc fcQCoreApplication_connect_applicationNameChanged(self: pointer, slot: int) {.importc: "QCoreApplication_connect_applicationNameChanged".}
+proc fcQCoreApplication_connect_applicationNameChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationNameChanged".}
 proc fcQCoreApplication_applicationVersionChanged(self: pointer, ): void {.importc: "QCoreApplication_applicationVersionChanged".}
-proc fcQCoreApplication_connect_applicationVersionChanged(self: pointer, slot: int) {.importc: "QCoreApplication_connect_applicationVersionChanged".}
+proc fcQCoreApplication_connect_applicationVersionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QCoreApplication_connect_applicationVersionChanged".}
 proc fcQCoreApplication_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QCoreApplication_tr2".}
 proc fcQCoreApplication_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCoreApplication_tr3".}
 proc fcQCoreApplication_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCoreApplication_trUtf82".}
@@ -359,57 +359,73 @@ proc organizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication,
   fcQCoreApplication_organizationNameChanged(self.h)
 
 type QCoreApplicationorganizationNameChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_organizationNameChanged(slot: int) {.exportc: "miqt_exec_callback_QCoreApplication_organizationNameChanged".} =
+proc miqt_exec_callback_cQCoreApplication_organizationNameChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCoreApplication_organizationNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationorganizationNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onorganizationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationorganizationNameChangedSlot) =
   var tmp = new QCoreApplicationorganizationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_organizationNameChanged(self.h, cast[int](addr tmp[]))
+  fcQCoreApplication_connect_organizationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_organizationNameChanged, miqt_exec_callback_cQCoreApplication_organizationNameChanged_release)
 
 proc organizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
   fcQCoreApplication_organizationDomainChanged(self.h)
 
 type QCoreApplicationorganizationDomainChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_organizationDomainChanged(slot: int) {.exportc: "miqt_exec_callback_QCoreApplication_organizationDomainChanged".} =
+proc miqt_exec_callback_cQCoreApplication_organizationDomainChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCoreApplication_organizationDomainChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationorganizationDomainChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onorganizationDomainChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationorganizationDomainChangedSlot) =
   var tmp = new QCoreApplicationorganizationDomainChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_organizationDomainChanged(self.h, cast[int](addr tmp[]))
+  fcQCoreApplication_connect_organizationDomainChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_organizationDomainChanged, miqt_exec_callback_cQCoreApplication_organizationDomainChanged_release)
 
 proc applicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
   fcQCoreApplication_applicationNameChanged(self.h)
 
 type QCoreApplicationapplicationNameChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_applicationNameChanged(slot: int) {.exportc: "miqt_exec_callback_QCoreApplication_applicationNameChanged".} =
+proc miqt_exec_callback_cQCoreApplication_applicationNameChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCoreApplication_applicationNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationapplicationNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onapplicationNameChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationapplicationNameChangedSlot) =
   var tmp = new QCoreApplicationapplicationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_applicationNameChanged(self.h, cast[int](addr tmp[]))
+  fcQCoreApplication_connect_applicationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_applicationNameChanged, miqt_exec_callback_cQCoreApplication_applicationNameChanged_release)
 
 proc applicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication, ): void =
   fcQCoreApplication_applicationVersionChanged(self.h)
 
 type QCoreApplicationapplicationVersionChangedSlot* = proc()
-proc miqt_exec_callback_cQCoreApplication_applicationVersionChanged(slot: int) {.exportc: "miqt_exec_callback_QCoreApplication_applicationVersionChanged".} =
+proc miqt_exec_callback_cQCoreApplication_applicationVersionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQCoreApplication_applicationVersionChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QCoreApplicationapplicationVersionChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onapplicationVersionChanged*(self: gen_qcoreapplication_types.QCoreApplication, slot: QCoreApplicationapplicationVersionChangedSlot) =
   var tmp = new QCoreApplicationapplicationVersionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]))
+  fcQCoreApplication_connect_applicationVersionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCoreApplication_applicationVersionChanged, miqt_exec_callback_cQCoreApplication_applicationVersionChanged_release)
 
 proc tr*(_: type gen_qcoreapplication_types.QCoreApplication, s: cstring, c: cstring): string =
   let v_ms = fcQCoreApplication_tr2(s, c)

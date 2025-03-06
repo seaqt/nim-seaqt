@@ -65,9 +65,9 @@ proc fcQAudioRecorder_audioInputDescription(self: pointer, name: struct_miqt_str
 proc fcQAudioRecorder_audioInput(self: pointer, ): struct_miqt_string {.importc: "QAudioRecorder_audioInput".}
 proc fcQAudioRecorder_setAudioInput(self: pointer, name: struct_miqt_string): void {.importc: "QAudioRecorder_setAudioInput".}
 proc fcQAudioRecorder_audioInputChanged(self: pointer, name: struct_miqt_string): void {.importc: "QAudioRecorder_audioInputChanged".}
-proc fcQAudioRecorder_connect_audioInputChanged(self: pointer, slot: int) {.importc: "QAudioRecorder_connect_audioInputChanged".}
+proc fcQAudioRecorder_connect_audioInputChanged(self: pointer, slot: int, callback: proc (slot: int, name: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRecorder_connect_audioInputChanged".}
 proc fcQAudioRecorder_availableAudioInputsChanged(self: pointer, ): void {.importc: "QAudioRecorder_availableAudioInputsChanged".}
-proc fcQAudioRecorder_connect_availableAudioInputsChanged(self: pointer, slot: int) {.importc: "QAudioRecorder_connect_availableAudioInputsChanged".}
+proc fcQAudioRecorder_connect_availableAudioInputsChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAudioRecorder_connect_availableAudioInputsChanged".}
 proc fcQAudioRecorder_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRecorder_tr2".}
 proc fcQAudioRecorder_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioRecorder_tr3".}
 proc fcQAudioRecorder_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioRecorder_trUtf82".}
@@ -160,7 +160,7 @@ proc audioInputChanged*(self: gen_qaudiorecorder_types.QAudioRecorder, name: str
   fcQAudioRecorder_audioInputChanged(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
 type QAudioRecorderaudioInputChangedSlot* = proc(name: string)
-proc miqt_exec_callback_cQAudioRecorder_audioInputChanged(slot: int, name: struct_miqt_string) {.exportc: "miqt_exec_callback_QAudioRecorder_audioInputChanged".} =
+proc miqt_exec_callback_cQAudioRecorder_audioInputChanged(slot: int, name: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRecorderaudioInputChangedSlot](cast[pointer](slot))
   let vname_ms = name
   let vnamex_ret = string.fromBytes(toOpenArrayByte(vname_ms.data, 0, int(vname_ms.len)-1))
@@ -169,25 +169,33 @@ proc miqt_exec_callback_cQAudioRecorder_audioInputChanged(slot: int, name: struc
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQAudioRecorder_audioInputChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRecorderaudioInputChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onaudioInputChanged*(self: gen_qaudiorecorder_types.QAudioRecorder, slot: QAudioRecorderaudioInputChangedSlot) =
   var tmp = new QAudioRecorderaudioInputChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRecorder_connect_audioInputChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRecorder_connect_audioInputChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRecorder_audioInputChanged, miqt_exec_callback_cQAudioRecorder_audioInputChanged_release)
 
 proc availableAudioInputsChanged*(self: gen_qaudiorecorder_types.QAudioRecorder, ): void =
   fcQAudioRecorder_availableAudioInputsChanged(self.h)
 
 type QAudioRecorderavailableAudioInputsChangedSlot* = proc()
-proc miqt_exec_callback_cQAudioRecorder_availableAudioInputsChanged(slot: int) {.exportc: "miqt_exec_callback_QAudioRecorder_availableAudioInputsChanged".} =
+proc miqt_exec_callback_cQAudioRecorder_availableAudioInputsChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAudioRecorderavailableAudioInputsChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQAudioRecorder_availableAudioInputsChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QAudioRecorderavailableAudioInputsChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onavailableAudioInputsChanged*(self: gen_qaudiorecorder_types.QAudioRecorder, slot: QAudioRecorderavailableAudioInputsChangedSlot) =
   var tmp = new QAudioRecorderavailableAudioInputsChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAudioRecorder_connect_availableAudioInputsChanged(self.h, cast[int](addr tmp[]))
+  fcQAudioRecorder_connect_availableAudioInputsChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAudioRecorder_availableAudioInputsChanged, miqt_exec_callback_cQAudioRecorder_availableAudioInputsChanged_release)
 
 proc tr*(_: type gen_qaudiorecorder_types.QAudioRecorder, s: cstring, c: cstring): string =
   let v_ms = fcQAudioRecorder_tr2(s, c)

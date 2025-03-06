@@ -84,9 +84,9 @@ proc fcQStackedWidget_count(self: pointer, ): cint {.importc: "QStackedWidget_co
 proc fcQStackedWidget_setCurrentIndex(self: pointer, index: cint): void {.importc: "QStackedWidget_setCurrentIndex".}
 proc fcQStackedWidget_setCurrentWidget(self: pointer, w: pointer): void {.importc: "QStackedWidget_setCurrentWidget".}
 proc fcQStackedWidget_currentChanged(self: pointer, param1: cint): void {.importc: "QStackedWidget_currentChanged".}
-proc fcQStackedWidget_connect_currentChanged(self: pointer, slot: int) {.importc: "QStackedWidget_connect_currentChanged".}
+proc fcQStackedWidget_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedWidget_connect_currentChanged".}
 proc fcQStackedWidget_widgetRemoved(self: pointer, index: cint): void {.importc: "QStackedWidget_widgetRemoved".}
-proc fcQStackedWidget_connect_widgetRemoved(self: pointer, slot: int) {.importc: "QStackedWidget_connect_widgetRemoved".}
+proc fcQStackedWidget_connect_widgetRemoved(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QStackedWidget_connect_widgetRemoved".}
 proc fcQStackedWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QStackedWidget_tr2".}
 proc fcQStackedWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QStackedWidget_tr3".}
 proc fcQStackedWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QStackedWidget_trUtf82".}
@@ -253,33 +253,41 @@ proc currentChanged*(self: gen_qstackedwidget_types.QStackedWidget, param1: cint
   fcQStackedWidget_currentChanged(self.h, param1)
 
 type QStackedWidgetcurrentChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQStackedWidget_currentChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QStackedWidget_currentChanged".} =
+proc miqt_exec_callback_cQStackedWidget_currentChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedWidgetcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStackedWidget_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStackedWidgetcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentChanged*(self: gen_qstackedwidget_types.QStackedWidget, slot: QStackedWidgetcurrentChangedSlot) =
   var tmp = new QStackedWidgetcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedWidget_connect_currentChanged(self.h, cast[int](addr tmp[]))
+  fcQStackedWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedWidget_currentChanged, miqt_exec_callback_cQStackedWidget_currentChanged_release)
 
 proc widgetRemoved*(self: gen_qstackedwidget_types.QStackedWidget, index: cint): void =
   fcQStackedWidget_widgetRemoved(self.h, index)
 
 type QStackedWidgetwidgetRemovedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQStackedWidget_widgetRemoved(slot: int, index: cint) {.exportc: "miqt_exec_callback_QStackedWidget_widgetRemoved".} =
+proc miqt_exec_callback_cQStackedWidget_widgetRemoved(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QStackedWidgetwidgetRemovedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQStackedWidget_widgetRemoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QStackedWidgetwidgetRemovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onwidgetRemoved*(self: gen_qstackedwidget_types.QStackedWidget, slot: QStackedWidgetwidgetRemovedSlot) =
   var tmp = new QStackedWidgetwidgetRemovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQStackedWidget_connect_widgetRemoved(self.h, cast[int](addr tmp[]))
+  fcQStackedWidget_connect_widgetRemoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQStackedWidget_widgetRemoved, miqt_exec_callback_cQStackedWidget_widgetRemoved_release)
 
 proc tr*(_: type gen_qstackedwidget_types.QStackedWidget, s: cstring, c: cstring): string =
   let v_ms = fcQStackedWidget_tr2(s, c)

@@ -127,19 +127,19 @@ proc fcQRadioData_error(self: pointer, ): cint {.importc: "QRadioData_error".}
 proc fcQRadioData_errorString(self: pointer, ): struct_miqt_string {.importc: "QRadioData_errorString".}
 proc fcQRadioData_setAlternativeFrequenciesEnabled(self: pointer, enabled: bool): void {.importc: "QRadioData_setAlternativeFrequenciesEnabled".}
 proc fcQRadioData_stationIdChanged(self: pointer, stationId: struct_miqt_string): void {.importc: "QRadioData_stationIdChanged".}
-proc fcQRadioData_connect_stationIdChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_stationIdChanged".}
+proc fcQRadioData_connect_stationIdChanged(self: pointer, slot: int, callback: proc (slot: int, stationId: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_stationIdChanged".}
 proc fcQRadioData_programTypeChanged(self: pointer, programType: cint): void {.importc: "QRadioData_programTypeChanged".}
-proc fcQRadioData_connect_programTypeChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_programTypeChanged".}
+proc fcQRadioData_connect_programTypeChanged(self: pointer, slot: int, callback: proc (slot: int, programType: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_programTypeChanged".}
 proc fcQRadioData_programTypeNameChanged(self: pointer, programTypeName: struct_miqt_string): void {.importc: "QRadioData_programTypeNameChanged".}
-proc fcQRadioData_connect_programTypeNameChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_programTypeNameChanged".}
+proc fcQRadioData_connect_programTypeNameChanged(self: pointer, slot: int, callback: proc (slot: int, programTypeName: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_programTypeNameChanged".}
 proc fcQRadioData_stationNameChanged(self: pointer, stationName: struct_miqt_string): void {.importc: "QRadioData_stationNameChanged".}
-proc fcQRadioData_connect_stationNameChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_stationNameChanged".}
+proc fcQRadioData_connect_stationNameChanged(self: pointer, slot: int, callback: proc (slot: int, stationName: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_stationNameChanged".}
 proc fcQRadioData_radioTextChanged(self: pointer, radioText: struct_miqt_string): void {.importc: "QRadioData_radioTextChanged".}
-proc fcQRadioData_connect_radioTextChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_radioTextChanged".}
+proc fcQRadioData_connect_radioTextChanged(self: pointer, slot: int, callback: proc (slot: int, radioText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_radioTextChanged".}
 proc fcQRadioData_alternativeFrequenciesEnabledChanged(self: pointer, enabled: bool): void {.importc: "QRadioData_alternativeFrequenciesEnabledChanged".}
-proc fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self: pointer, slot: int) {.importc: "QRadioData_connect_alternativeFrequenciesEnabledChanged".}
+proc fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self: pointer, slot: int, callback: proc (slot: int, enabled: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_alternativeFrequenciesEnabledChanged".}
 proc fcQRadioData_errorWithError(self: pointer, error: cint): void {.importc: "QRadioData_errorWithError".}
-proc fcQRadioData_connect_errorWithError(self: pointer, slot: int) {.importc: "QRadioData_connect_errorWithError".}
+proc fcQRadioData_connect_errorWithError(self: pointer, slot: int, callback: proc (slot: int, error: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_errorWithError".}
 proc fcQRadioData_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioData_tr2".}
 proc fcQRadioData_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioData_tr3".}
 proc fcQRadioData_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioData_trUtf82".}
@@ -248,7 +248,7 @@ proc stationIdChanged*(self: gen_qradiodata_types.QRadioData, stationId: string)
   fcQRadioData_stationIdChanged(self.h, struct_miqt_string(data: stationId, len: csize_t(len(stationId))))
 
 type QRadioDatastationIdChangedSlot* = proc(stationId: string)
-proc miqt_exec_callback_cQRadioData_stationIdChanged(slot: int, stationId: struct_miqt_string) {.exportc: "miqt_exec_callback_QRadioData_stationIdChanged".} =
+proc miqt_exec_callback_cQRadioData_stationIdChanged(slot: int, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDatastationIdChangedSlot](cast[pointer](slot))
   let vstationId_ms = stationId
   let vstationIdx_ret = string.fromBytes(toOpenArrayByte(vstationId_ms.data, 0, int(vstationId_ms.len)-1))
@@ -257,33 +257,41 @@ proc miqt_exec_callback_cQRadioData_stationIdChanged(slot: int, stationId: struc
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_stationIdChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDatastationIdChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstationIdChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDatastationIdChangedSlot) =
   var tmp = new QRadioDatastationIdChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_stationIdChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_stationIdChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_stationIdChanged, miqt_exec_callback_cQRadioData_stationIdChanged_release)
 
 proc programTypeChanged*(self: gen_qradiodata_types.QRadioData, programType: cint): void =
   fcQRadioData_programTypeChanged(self.h, cint(programType))
 
 type QRadioDataprogramTypeChangedSlot* = proc(programType: cint)
-proc miqt_exec_callback_cQRadioData_programTypeChanged(slot: int, programType: cint) {.exportc: "miqt_exec_callback_QRadioData_programTypeChanged".} =
+proc miqt_exec_callback_cQRadioData_programTypeChanged(slot: int, programType: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataprogramTypeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(programType)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_programTypeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataprogramTypeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onprogramTypeChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataprogramTypeChangedSlot) =
   var tmp = new QRadioDataprogramTypeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_programTypeChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_programTypeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_programTypeChanged, miqt_exec_callback_cQRadioData_programTypeChanged_release)
 
 proc programTypeNameChanged*(self: gen_qradiodata_types.QRadioData, programTypeName: string): void =
   fcQRadioData_programTypeNameChanged(self.h, struct_miqt_string(data: programTypeName, len: csize_t(len(programTypeName))))
 
 type QRadioDataprogramTypeNameChangedSlot* = proc(programTypeName: string)
-proc miqt_exec_callback_cQRadioData_programTypeNameChanged(slot: int, programTypeName: struct_miqt_string) {.exportc: "miqt_exec_callback_QRadioData_programTypeNameChanged".} =
+proc miqt_exec_callback_cQRadioData_programTypeNameChanged(slot: int, programTypeName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataprogramTypeNameChangedSlot](cast[pointer](slot))
   let vprogramTypeName_ms = programTypeName
   let vprogramTypeNamex_ret = string.fromBytes(toOpenArrayByte(vprogramTypeName_ms.data, 0, int(vprogramTypeName_ms.len)-1))
@@ -292,17 +300,21 @@ proc miqt_exec_callback_cQRadioData_programTypeNameChanged(slot: int, programTyp
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_programTypeNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataprogramTypeNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onprogramTypeNameChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataprogramTypeNameChangedSlot) =
   var tmp = new QRadioDataprogramTypeNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_programTypeNameChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_programTypeNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_programTypeNameChanged, miqt_exec_callback_cQRadioData_programTypeNameChanged_release)
 
 proc stationNameChanged*(self: gen_qradiodata_types.QRadioData, stationName: string): void =
   fcQRadioData_stationNameChanged(self.h, struct_miqt_string(data: stationName, len: csize_t(len(stationName))))
 
 type QRadioDatastationNameChangedSlot* = proc(stationName: string)
-proc miqt_exec_callback_cQRadioData_stationNameChanged(slot: int, stationName: struct_miqt_string) {.exportc: "miqt_exec_callback_QRadioData_stationNameChanged".} =
+proc miqt_exec_callback_cQRadioData_stationNameChanged(slot: int, stationName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDatastationNameChangedSlot](cast[pointer](slot))
   let vstationName_ms = stationName
   let vstationNamex_ret = string.fromBytes(toOpenArrayByte(vstationName_ms.data, 0, int(vstationName_ms.len)-1))
@@ -311,17 +323,21 @@ proc miqt_exec_callback_cQRadioData_stationNameChanged(slot: int, stationName: s
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_stationNameChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDatastationNameChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstationNameChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDatastationNameChangedSlot) =
   var tmp = new QRadioDatastationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_stationNameChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_stationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_stationNameChanged, miqt_exec_callback_cQRadioData_stationNameChanged_release)
 
 proc radioTextChanged*(self: gen_qradiodata_types.QRadioData, radioText: string): void =
   fcQRadioData_radioTextChanged(self.h, struct_miqt_string(data: radioText, len: csize_t(len(radioText))))
 
 type QRadioDataradioTextChangedSlot* = proc(radioText: string)
-proc miqt_exec_callback_cQRadioData_radioTextChanged(slot: int, radioText: struct_miqt_string) {.exportc: "miqt_exec_callback_QRadioData_radioTextChanged".} =
+proc miqt_exec_callback_cQRadioData_radioTextChanged(slot: int, radioText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataradioTextChangedSlot](cast[pointer](slot))
   let vradioText_ms = radioText
   let vradioTextx_ret = string.fromBytes(toOpenArrayByte(vradioText_ms.data, 0, int(vradioText_ms.len)-1))
@@ -330,43 +346,55 @@ proc miqt_exec_callback_cQRadioData_radioTextChanged(slot: int, radioText: struc
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_radioTextChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataradioTextChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onradioTextChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataradioTextChangedSlot) =
   var tmp = new QRadioDataradioTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_radioTextChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_radioTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_radioTextChanged, miqt_exec_callback_cQRadioData_radioTextChanged_release)
 
 proc alternativeFrequenciesEnabledChanged*(self: gen_qradiodata_types.QRadioData, enabled: bool): void =
   fcQRadioData_alternativeFrequenciesEnabledChanged(self.h, enabled)
 
 type QRadioDataalternativeFrequenciesEnabledChangedSlot* = proc(enabled: bool)
-proc miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged(slot: int, enabled: bool) {.exportc: "miqt_exec_callback_QRadioData_alternativeFrequenciesEnabledChanged".} =
+proc miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged(slot: int, enabled: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataalternativeFrequenciesEnabledChangedSlot](cast[pointer](slot))
   let slotval1 = enabled
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataalternativeFrequenciesEnabledChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onalternativeFrequenciesEnabledChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataalternativeFrequenciesEnabledChangedSlot) =
   var tmp = new QRadioDataalternativeFrequenciesEnabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged, miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged_release)
 
 proc error*(self: gen_qradiodata_types.QRadioData, error: cint): void =
   fcQRadioData_errorWithError(self.h, cint(error))
 
 type QRadioDataerrorWithErrorSlot* = proc(error: cint)
-proc miqt_exec_callback_cQRadioData_errorWithError(slot: int, error: cint) {.exportc: "miqt_exec_callback_QRadioData_errorWithError".} =
+proc miqt_exec_callback_cQRadioData_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataerrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQRadioData_errorWithError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QRadioDataerrorWithErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataerrorWithErrorSlot) =
   var tmp = new QRadioDataerrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_errorWithError(self.h, cast[int](addr tmp[]))
+  fcQRadioData_connect_errorWithError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_errorWithError, miqt_exec_callback_cQRadioData_errorWithError_release)
 
 proc tr*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring): string =
   let v_ms = fcQRadioData_tr2(s, c)

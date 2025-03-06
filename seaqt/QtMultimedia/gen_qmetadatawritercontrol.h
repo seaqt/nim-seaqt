@@ -42,13 +42,13 @@ QVariant* QMetaDataWriterControl_metaData(const QMetaDataWriterControl* self, st
 void QMetaDataWriterControl_setMetaData(QMetaDataWriterControl* self, struct miqt_string key, QVariant* value);
 struct miqt_array /* of struct miqt_string */  QMetaDataWriterControl_availableMetaData(const QMetaDataWriterControl* self);
 void QMetaDataWriterControl_metaDataChanged(QMetaDataWriterControl* self);
-void QMetaDataWriterControl_connect_metaDataChanged(QMetaDataWriterControl* self, intptr_t slot);
+void QMetaDataWriterControl_connect_metaDataChanged(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QMetaDataWriterControl_metaDataChanged2(QMetaDataWriterControl* self, struct miqt_string key, QVariant* value);
-void QMetaDataWriterControl_connect_metaDataChanged2(QMetaDataWriterControl* self, intptr_t slot);
+void QMetaDataWriterControl_connect_metaDataChanged2(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t));
 void QMetaDataWriterControl_writableChanged(QMetaDataWriterControl* self, bool writable);
-void QMetaDataWriterControl_connect_writableChanged(QMetaDataWriterControl* self, intptr_t slot);
+void QMetaDataWriterControl_connect_writableChanged(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QMetaDataWriterControl_metaDataAvailableChanged(QMetaDataWriterControl* self, bool available);
-void QMetaDataWriterControl_connect_metaDataAvailableChanged(QMetaDataWriterControl* self, intptr_t slot);
+void QMetaDataWriterControl_connect_metaDataAvailableChanged(QMetaDataWriterControl* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 struct miqt_string QMetaDataWriterControl_tr2(const char* s, const char* c);
 struct miqt_string QMetaDataWriterControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMetaDataWriterControl_trUtf82(const char* s, const char* c);

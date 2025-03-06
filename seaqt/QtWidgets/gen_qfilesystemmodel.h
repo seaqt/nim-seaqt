@@ -110,11 +110,11 @@ int QFileSystemModel_metacall(QFileSystemModel* self, int param1, int param2, vo
 struct miqt_string QFileSystemModel_tr(const char* s);
 struct miqt_string QFileSystemModel_trUtf8(const char* s);
 void QFileSystemModel_rootPathChanged(QFileSystemModel* self, struct miqt_string newPath);
-void QFileSystemModel_connect_rootPathChanged(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_connect_rootPathChanged(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QFileSystemModel_fileRenamed(QFileSystemModel* self, struct miqt_string path, struct miqt_string oldName, struct miqt_string newName);
-void QFileSystemModel_connect_fileRenamed(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_connect_fileRenamed(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, struct miqt_string, struct miqt_string), void (*release)(intptr_t));
 void QFileSystemModel_directoryLoaded(QFileSystemModel* self, struct miqt_string path);
-void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t slot);
+void QFileSystemModel_connect_directoryLoaded(QFileSystemModel* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 QModelIndex* QFileSystemModel_index(const QFileSystemModel* self, int row, int column, QModelIndex* parent);
 QModelIndex* QFileSystemModel_indexWithPath(const QFileSystemModel* self, struct miqt_string path);
 QModelIndex* QFileSystemModel_parent(const QFileSystemModel* self, QModelIndex* child);

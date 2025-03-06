@@ -20,17 +20,6 @@
 extern "C" {
 #endif
 
-void miqt_exec_callback_QRadioTuner_stateChanged(intptr_t, int);
-void miqt_exec_callback_QRadioTuner_bandChanged(intptr_t, int);
-void miqt_exec_callback_QRadioTuner_frequencyChanged(intptr_t, int);
-void miqt_exec_callback_QRadioTuner_stereoStatusChanged(intptr_t, bool);
-void miqt_exec_callback_QRadioTuner_searchingChanged(intptr_t, bool);
-void miqt_exec_callback_QRadioTuner_signalStrengthChanged(intptr_t, int);
-void miqt_exec_callback_QRadioTuner_volumeChanged(intptr_t, int);
-void miqt_exec_callback_QRadioTuner_mutedChanged(intptr_t, bool);
-void miqt_exec_callback_QRadioTuner_stationFound(intptr_t, int, struct miqt_string);
-void miqt_exec_callback_QRadioTuner_antennaConnectedChanged(intptr_t, bool);
-void miqt_exec_callback_QRadioTuner_errorWithError(intptr_t, int);
 #ifdef __cplusplus
 } /* extern C */
 #endif
@@ -466,90 +455,130 @@ void QRadioTuner_stateChanged(QRadioTuner* self, int state) {
 	self->stateChanged(static_cast<QRadioTuner::State>(state));
 }
 
-void QRadioTuner_connect_stateChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::State)>(&QRadioTuner::stateChanged), self, [=](QRadioTuner::State state) {
-		QRadioTuner::State state_ret = state;
-		int sigval1 = static_cast<int>(state_ret);
-		miqt_exec_callback_QRadioTuner_stateChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_stateChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::State state) {
+			QRadioTuner::State state_ret = state;
+			int sigval1 = static_cast<int>(state_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::State)>(&QRadioTuner::stateChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_bandChanged(QRadioTuner* self, int band) {
 	self->bandChanged(static_cast<QRadioTuner::Band>(band));
 }
 
-void QRadioTuner_connect_bandChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Band)>(&QRadioTuner::bandChanged), self, [=](QRadioTuner::Band band) {
-		QRadioTuner::Band band_ret = band;
-		int sigval1 = static_cast<int>(band_ret);
-		miqt_exec_callback_QRadioTuner_bandChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_bandChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::Band band) {
+			QRadioTuner::Band band_ret = band;
+			int sigval1 = static_cast<int>(band_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Band)>(&QRadioTuner::bandChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_frequencyChanged(QRadioTuner* self, int frequency) {
 	self->frequencyChanged(static_cast<int>(frequency));
 }
 
-void QRadioTuner_connect_frequencyChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::frequencyChanged), self, [=](int frequency) {
-		int sigval1 = frequency;
-		miqt_exec_callback_QRadioTuner_frequencyChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_frequencyChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int frequency) {
+			int sigval1 = frequency;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::frequencyChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_stereoStatusChanged(QRadioTuner* self, bool stereo) {
 	self->stereoStatusChanged(stereo);
 }
 
-void QRadioTuner_connect_stereoStatusChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::stereoStatusChanged), self, [=](bool stereo) {
-		bool sigval1 = stereo;
-		miqt_exec_callback_QRadioTuner_stereoStatusChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_stereoStatusChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool stereo) {
+			bool sigval1 = stereo;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::stereoStatusChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_searchingChanged(QRadioTuner* self, bool searching) {
 	self->searchingChanged(searching);
 }
 
-void QRadioTuner_connect_searchingChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::searchingChanged), self, [=](bool searching) {
-		bool sigval1 = searching;
-		miqt_exec_callback_QRadioTuner_searchingChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_searchingChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool searching) {
+			bool sigval1 = searching;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::searchingChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_signalStrengthChanged(QRadioTuner* self, int signalStrength) {
 	self->signalStrengthChanged(static_cast<int>(signalStrength));
 }
 
-void QRadioTuner_connect_signalStrengthChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::signalStrengthChanged), self, [=](int signalStrength) {
-		int sigval1 = signalStrength;
-		miqt_exec_callback_QRadioTuner_signalStrengthChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_signalStrengthChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int signalStrength) {
+			int sigval1 = signalStrength;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::signalStrengthChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_volumeChanged(QRadioTuner* self, int volume) {
 	self->volumeChanged(static_cast<int>(volume));
 }
 
-void QRadioTuner_connect_volumeChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::volumeChanged), self, [=](int volume) {
-		int sigval1 = volume;
-		miqt_exec_callback_QRadioTuner_volumeChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_volumeChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(int volume) {
+			int sigval1 = volume;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int)>(&QRadioTuner::volumeChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_mutedChanged(QRadioTuner* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QRadioTuner_connect_mutedChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::mutedChanged), self, [=](bool muted) {
-		bool sigval1 = muted;
-		miqt_exec_callback_QRadioTuner_mutedChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_mutedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool muted) {
+			bool sigval1 = muted;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::mutedChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct miqt_string stationId) {
@@ -557,42 +586,57 @@ void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct miqt_stri
 	self->stationFound(static_cast<int>(frequency), stationId_QString);
 }
 
-void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int, QString)>(&QRadioTuner::stationFound), self, [=](int frequency, QString stationId) {
-		int sigval1 = frequency;
-		QString stationId_ret = stationId;
-		// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
-		QByteArray stationId_b = stationId_ret.toUtf8();
-		struct miqt_string stationId_ms;
-		stationId_ms.len = stationId_b.length();
-		stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
-		memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
-		struct miqt_string sigval2 = stationId_ms;
-		miqt_exec_callback_QRadioTuner_stationFound(slot, sigval1, sigval2);
-	});
+void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int, struct miqt_string);
+		void operator()(int frequency, QString stationId) {
+			int sigval1 = frequency;
+			QString stationId_ret = stationId;
+			// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
+			QByteArray stationId_b = stationId_ret.toUtf8();
+			struct miqt_string stationId_ms;
+			stationId_ms.len = stationId_b.length();
+			stationId_ms.data = static_cast<char*>(malloc(stationId_ms.len));
+			memcpy(stationId_ms.data, stationId_b.data(), stationId_ms.len);
+			struct miqt_string sigval2 = stationId_ms;
+			callback(slot, sigval1, sigval2);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(int, QString)>(&QRadioTuner::stationFound), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_antennaConnectedChanged(QRadioTuner* self, bool connectionStatus) {
 	self->antennaConnectedChanged(connectionStatus);
 }
 
-void QRadioTuner_connect_antennaConnectedChanged(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::antennaConnectedChanged), self, [=](bool connectionStatus) {
-		bool sigval1 = connectionStatus;
-		miqt_exec_callback_QRadioTuner_antennaConnectedChanged(slot, sigval1);
-	});
+void QRadioTuner_connect_antennaConnectedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, bool);
+		void operator()(bool connectionStatus) {
+			bool sigval1 = connectionStatus;
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(bool)>(&QRadioTuner::antennaConnectedChanged), self, local_caller{slot, callback, release});
 }
 
 void QRadioTuner_errorWithError(QRadioTuner* self, int error) {
 	self->error(static_cast<QRadioTuner::Error>(error));
 }
 
-void QRadioTuner_connect_errorWithError(QRadioTuner* self, intptr_t slot) {
-	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Error)>(&QRadioTuner::error), self, [=](QRadioTuner::Error error) {
-		QRadioTuner::Error error_ret = error;
-		int sigval1 = static_cast<int>(error_ret);
-		miqt_exec_callback_QRadioTuner_errorWithError(slot, sigval1);
-	});
+void QRadioTuner_connect_errorWithError(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+	struct local_caller : seaqt::caller {
+		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
+		void (*callback)(intptr_t, int);
+		void operator()(QRadioTuner::Error error) {
+			QRadioTuner::Error error_ret = error;
+			int sigval1 = static_cast<int>(error_ret);
+			callback(slot, sigval1);
+		}
+	};
+	VirtualQRadioTuner::connect(self, static_cast<void (QRadioTuner::*)(QRadioTuner::Error)>(&QRadioTuner::error), self, local_caller{slot, callback, release});
 }
 
 struct miqt_string QRadioTuner_tr2(const char* s, const char* c) {

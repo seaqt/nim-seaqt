@@ -104,15 +104,15 @@ proc fcQLocalSocket_waitForConnected(self: pointer, ): bool {.importc: "QLocalSo
 proc fcQLocalSocket_waitForDisconnected(self: pointer, ): bool {.importc: "QLocalSocket_waitForDisconnected".}
 proc fcQLocalSocket_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QLocalSocket_waitForReadyRead".}
 proc fcQLocalSocket_connected(self: pointer, ): void {.importc: "QLocalSocket_connected".}
-proc fcQLocalSocket_connect_connected(self: pointer, slot: int) {.importc: "QLocalSocket_connect_connected".}
+proc fcQLocalSocket_connect_connected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_connected".}
 proc fcQLocalSocket_disconnected(self: pointer, ): void {.importc: "QLocalSocket_disconnected".}
-proc fcQLocalSocket_connect_disconnected(self: pointer, slot: int) {.importc: "QLocalSocket_connect_disconnected".}
+proc fcQLocalSocket_connect_disconnected(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_disconnected".}
 proc fcQLocalSocket_errorWithSocketError(self: pointer, socketError: cint): void {.importc: "QLocalSocket_errorWithSocketError".}
-proc fcQLocalSocket_connect_errorWithSocketError(self: pointer, slot: int) {.importc: "QLocalSocket_connect_errorWithSocketError".}
+proc fcQLocalSocket_connect_errorWithSocketError(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_errorWithSocketError".}
 proc fcQLocalSocket_errorOccurred(self: pointer, socketError: cint): void {.importc: "QLocalSocket_errorOccurred".}
-proc fcQLocalSocket_connect_errorOccurred(self: pointer, slot: int) {.importc: "QLocalSocket_connect_errorOccurred".}
+proc fcQLocalSocket_connect_errorOccurred(self: pointer, slot: int, callback: proc (slot: int, socketError: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_errorOccurred".}
 proc fcQLocalSocket_stateChanged(self: pointer, socketState: cint): void {.importc: "QLocalSocket_stateChanged".}
-proc fcQLocalSocket_connect_stateChanged(self: pointer, slot: int) {.importc: "QLocalSocket_connect_stateChanged".}
+proc fcQLocalSocket_connect_stateChanged(self: pointer, slot: int, callback: proc (slot: int, socketState: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QLocalSocket_connect_stateChanged".}
 proc fcQLocalSocket_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLocalSocket_tr2".}
 proc fcQLocalSocket_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLocalSocket_tr3".}
 proc fcQLocalSocket_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLocalSocket_trUtf82".}
@@ -288,77 +288,97 @@ proc connected*(self: gen_qlocalsocket_types.QLocalSocket, ): void =
   fcQLocalSocket_connected(self.h)
 
 type QLocalSocketconnectedSlot* = proc()
-proc miqt_exec_callback_cQLocalSocket_connected(slot: int) {.exportc: "miqt_exec_callback_QLocalSocket_connected".} =
+proc miqt_exec_callback_cQLocalSocket_connected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QLocalSocketconnectedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQLocalSocket_connected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketconnectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onconnected*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketconnectedSlot) =
   var tmp = new QLocalSocketconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_connected(self.h, cast[int](addr tmp[]))
+  fcQLocalSocket_connect_connected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalSocket_connected, miqt_exec_callback_cQLocalSocket_connected_release)
 
 proc disconnected*(self: gen_qlocalsocket_types.QLocalSocket, ): void =
   fcQLocalSocket_disconnected(self.h)
 
 type QLocalSocketdisconnectedSlot* = proc()
-proc miqt_exec_callback_cQLocalSocket_disconnected(slot: int) {.exportc: "miqt_exec_callback_QLocalSocket_disconnected".} =
+proc miqt_exec_callback_cQLocalSocket_disconnected(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QLocalSocketdisconnectedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQLocalSocket_disconnected_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketdisconnectedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondisconnected*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketdisconnectedSlot) =
   var tmp = new QLocalSocketdisconnectedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_disconnected(self.h, cast[int](addr tmp[]))
+  fcQLocalSocket_connect_disconnected(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalSocket_disconnected, miqt_exec_callback_cQLocalSocket_disconnected_release)
 
 proc error*(self: gen_qlocalsocket_types.QLocalSocket, socketError: cint): void =
   fcQLocalSocket_errorWithSocketError(self.h, cint(socketError))
 
 type QLocalSocketerrorWithSocketErrorSlot* = proc(socketError: cint)
-proc miqt_exec_callback_cQLocalSocket_errorWithSocketError(slot: int, socketError: cint) {.exportc: "miqt_exec_callback_QLocalSocket_errorWithSocketError".} =
+proc miqt_exec_callback_cQLocalSocket_errorWithSocketError(slot: int, socketError: cint) {.cdecl.} =
   let nimfunc = cast[ptr QLocalSocketerrorWithSocketErrorSlot](cast[pointer](slot))
   let slotval1 = cint(socketError)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQLocalSocket_errorWithSocketError_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketerrorWithSocketErrorSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerror*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketerrorWithSocketErrorSlot) =
   var tmp = new QLocalSocketerrorWithSocketErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_errorWithSocketError(self.h, cast[int](addr tmp[]))
+  fcQLocalSocket_connect_errorWithSocketError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalSocket_errorWithSocketError, miqt_exec_callback_cQLocalSocket_errorWithSocketError_release)
 
 proc errorOccurred*(self: gen_qlocalsocket_types.QLocalSocket, socketError: cint): void =
   fcQLocalSocket_errorOccurred(self.h, cint(socketError))
 
 type QLocalSocketerrorOccurredSlot* = proc(socketError: cint)
-proc miqt_exec_callback_cQLocalSocket_errorOccurred(slot: int, socketError: cint) {.exportc: "miqt_exec_callback_QLocalSocket_errorOccurred".} =
+proc miqt_exec_callback_cQLocalSocket_errorOccurred(slot: int, socketError: cint) {.cdecl.} =
   let nimfunc = cast[ptr QLocalSocketerrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(socketError)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQLocalSocket_errorOccurred_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketerrorOccurredSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onerrorOccurred*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketerrorOccurredSlot) =
   var tmp = new QLocalSocketerrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]))
+  fcQLocalSocket_connect_errorOccurred(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalSocket_errorOccurred, miqt_exec_callback_cQLocalSocket_errorOccurred_release)
 
 proc stateChanged*(self: gen_qlocalsocket_types.QLocalSocket, socketState: cint): void =
   fcQLocalSocket_stateChanged(self.h, cint(socketState))
 
 type QLocalSocketstateChangedSlot* = proc(socketState: cint)
-proc miqt_exec_callback_cQLocalSocket_stateChanged(slot: int, socketState: cint) {.exportc: "miqt_exec_callback_QLocalSocket_stateChanged".} =
+proc miqt_exec_callback_cQLocalSocket_stateChanged(slot: int, socketState: cint) {.cdecl.} =
   let nimfunc = cast[ptr QLocalSocketstateChangedSlot](cast[pointer](slot))
   let slotval1 = cint(socketState)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQLocalSocket_stateChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QLocalSocketstateChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstateChanged*(self: gen_qlocalsocket_types.QLocalSocket, slot: QLocalSocketstateChangedSlot) =
   var tmp = new QLocalSocketstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQLocalSocket_connect_stateChanged(self.h, cast[int](addr tmp[]))
+  fcQLocalSocket_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQLocalSocket_stateChanged, miqt_exec_callback_cQLocalSocket_stateChanged_release)
 
 proc tr*(_: type gen_qlocalsocket_types.QLocalSocket, s: cstring, c: cstring): string =
   let v_ms = fcQLocalSocket_tr2(s, c)

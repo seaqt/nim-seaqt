@@ -147,7 +147,7 @@ proc fcQListView_doItemsLayout(self: pointer, ): void {.importc: "QListView_doIt
 proc fcQListView_reset(self: pointer, ): void {.importc: "QListView_reset".}
 proc fcQListView_setRootIndex(self: pointer, index: pointer): void {.importc: "QListView_setRootIndex".}
 proc fcQListView_indexesMoved(self: pointer, indexes: struct_miqt_array): void {.importc: "QListView_indexesMoved".}
-proc fcQListView_connect_indexesMoved(self: pointer, slot: int) {.importc: "QListView_connect_indexesMoved".}
+proc fcQListView_connect_indexesMoved(self: pointer, slot: int, callback: proc (slot: int, indexes: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListView_connect_indexesMoved".}
 proc fcQListView_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QListView_tr2".}
 proc fcQListView_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QListView_tr3".}
 proc fcQListView_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QListView_trUtf82".}
@@ -483,7 +483,7 @@ proc indexesMoved*(self: gen_qlistview_types.QListView, indexes: seq[gen_qabstra
   fcQListView_indexesMoved(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0])))
 
 type QListViewindexesMovedSlot* = proc(indexes: seq[gen_qabstractitemmodel_types.QModelIndex])
-proc miqt_exec_callback_cQListView_indexesMoved(slot: int, indexes: struct_miqt_array) {.exportc: "miqt_exec_callback_QListView_indexesMoved".} =
+proc miqt_exec_callback_cQListView_indexesMoved(slot: int, indexes: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QListViewindexesMovedSlot](cast[pointer](slot))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -494,11 +494,15 @@ proc miqt_exec_callback_cQListView_indexesMoved(slot: int, indexes: struct_miqt_
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQListView_indexesMoved_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QListViewindexesMovedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onindexesMoved*(self: gen_qlistview_types.QListView, slot: QListViewindexesMovedSlot) =
   var tmp = new QListViewindexesMovedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListView_connect_indexesMoved(self.h, cast[int](addr tmp[]))
+  fcQListView_connect_indexesMoved(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListView_indexesMoved, miqt_exec_callback_cQListView_indexesMoved_release)
 
 proc tr*(_: type gen_qlistview_types.QListView, s: cstring, c: cstring): string =
   let v_ms = fcQListView_tr2(s, c)

@@ -69,7 +69,7 @@ proc fcQQmlApplicationEngine_loadWithFilePath(self: pointer, filePath: struct_mi
 proc fcQQmlApplicationEngine_setInitialProperties(self: pointer, initialProperties: struct_miqt_map): void {.importc: "QQmlApplicationEngine_setInitialProperties".}
 proc fcQQmlApplicationEngine_loadData(self: pointer, data: struct_miqt_string): void {.importc: "QQmlApplicationEngine_loadData".}
 proc fcQQmlApplicationEngine_objectCreated(self: pointer, objectVal: pointer, url: pointer): void {.importc: "QQmlApplicationEngine_objectCreated".}
-proc fcQQmlApplicationEngine_connect_objectCreated(self: pointer, slot: int) {.importc: "QQmlApplicationEngine_connect_objectCreated".}
+proc fcQQmlApplicationEngine_connect_objectCreated(self: pointer, slot: int, callback: proc (slot: int, objectVal: pointer, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlApplicationEngine_connect_objectCreated".}
 proc fcQQmlApplicationEngine_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlApplicationEngine_tr2".}
 proc fcQQmlApplicationEngine_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlApplicationEngine_tr3".}
 proc fcQQmlApplicationEngine_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlApplicationEngine_trUtf82".}
@@ -167,7 +167,7 @@ proc objectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine,
   fcQQmlApplicationEngine_objectCreated(self.h, objectVal.h, url.h)
 
 type QQmlApplicationEngineobjectCreatedSlot* = proc(objectVal: gen_qobject_types.QObject, url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQQmlApplicationEngine_objectCreated(slot: int, objectVal: pointer, url: pointer) {.exportc: "miqt_exec_callback_QQmlApplicationEngine_objectCreated".} =
+proc miqt_exec_callback_cQQmlApplicationEngine_objectCreated(slot: int, objectVal: pointer, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQmlApplicationEngineobjectCreatedSlot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: objectVal)
 
@@ -175,11 +175,15 @@ proc miqt_exec_callback_cQQmlApplicationEngine_objectCreated(slot: int, objectVa
 
   nimfunc[](slotval1, slotval2)
 
+proc miqt_exec_callback_cQQmlApplicationEngine_objectCreated_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlApplicationEngineobjectCreatedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onobjectCreated*(self: gen_qqmlapplicationengine_types.QQmlApplicationEngine, slot: QQmlApplicationEngineobjectCreatedSlot) =
   var tmp = new QQmlApplicationEngineobjectCreatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlApplicationEngine_connect_objectCreated(self.h, cast[int](addr tmp[]))
+  fcQQmlApplicationEngine_connect_objectCreated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlApplicationEngine_objectCreated, miqt_exec_callback_cQQmlApplicationEngine_objectCreated_release)
 
 proc tr*(_: type gen_qqmlapplicationengine_types.QQmlApplicationEngine, s: cstring, c: cstring): string =
   let v_ms = fcQQmlApplicationEngine_tr2(s, c)

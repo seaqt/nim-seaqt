@@ -167,25 +167,25 @@ proc fcQWebFrame_securityOrigin(self: pointer, ): pointer {.importc: "QWebFrame_
 proc fcQWebFrame_evaluateJavaScript(self: pointer, scriptSource: struct_miqt_string): pointer {.importc: "QWebFrame_evaluateJavaScript".}
 proc fcQWebFrame_print(self: pointer, printer: pointer): void {.importc: "QWebFrame_print".}
 proc fcQWebFrame_javaScriptWindowObjectCleared(self: pointer, ): void {.importc: "QWebFrame_javaScriptWindowObjectCleared".}
-proc fcQWebFrame_connect_javaScriptWindowObjectCleared(self: pointer, slot: int) {.importc: "QWebFrame_connect_javaScriptWindowObjectCleared".}
+proc fcQWebFrame_connect_javaScriptWindowObjectCleared(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_javaScriptWindowObjectCleared".}
 proc fcQWebFrame_provisionalLoad(self: pointer, ): void {.importc: "QWebFrame_provisionalLoad".}
-proc fcQWebFrame_connect_provisionalLoad(self: pointer, slot: int) {.importc: "QWebFrame_connect_provisionalLoad".}
+proc fcQWebFrame_connect_provisionalLoad(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_provisionalLoad".}
 proc fcQWebFrame_titleChanged(self: pointer, title: struct_miqt_string): void {.importc: "QWebFrame_titleChanged".}
-proc fcQWebFrame_connect_titleChanged(self: pointer, slot: int) {.importc: "QWebFrame_connect_titleChanged".}
+proc fcQWebFrame_connect_titleChanged(self: pointer, slot: int, callback: proc (slot: int, title: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_titleChanged".}
 proc fcQWebFrame_urlChanged(self: pointer, url: pointer): void {.importc: "QWebFrame_urlChanged".}
-proc fcQWebFrame_connect_urlChanged(self: pointer, slot: int) {.importc: "QWebFrame_connect_urlChanged".}
+proc fcQWebFrame_connect_urlChanged(self: pointer, slot: int, callback: proc (slot: int, url: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_urlChanged".}
 proc fcQWebFrame_initialLayoutCompleted(self: pointer, ): void {.importc: "QWebFrame_initialLayoutCompleted".}
-proc fcQWebFrame_connect_initialLayoutCompleted(self: pointer, slot: int) {.importc: "QWebFrame_connect_initialLayoutCompleted".}
+proc fcQWebFrame_connect_initialLayoutCompleted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_initialLayoutCompleted".}
 proc fcQWebFrame_iconChanged(self: pointer, ): void {.importc: "QWebFrame_iconChanged".}
-proc fcQWebFrame_connect_iconChanged(self: pointer, slot: int) {.importc: "QWebFrame_connect_iconChanged".}
+proc fcQWebFrame_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_iconChanged".}
 proc fcQWebFrame_contentsSizeChanged(self: pointer, size: pointer): void {.importc: "QWebFrame_contentsSizeChanged".}
-proc fcQWebFrame_connect_contentsSizeChanged(self: pointer, slot: int) {.importc: "QWebFrame_connect_contentsSizeChanged".}
+proc fcQWebFrame_connect_contentsSizeChanged(self: pointer, slot: int, callback: proc (slot: int, size: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_contentsSizeChanged".}
 proc fcQWebFrame_loadStarted(self: pointer, ): void {.importc: "QWebFrame_loadStarted".}
-proc fcQWebFrame_connect_loadStarted(self: pointer, slot: int) {.importc: "QWebFrame_connect_loadStarted".}
+proc fcQWebFrame_connect_loadStarted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_loadStarted".}
 proc fcQWebFrame_loadFinished(self: pointer, ok: bool): void {.importc: "QWebFrame_loadFinished".}
-proc fcQWebFrame_connect_loadFinished(self: pointer, slot: int) {.importc: "QWebFrame_connect_loadFinished".}
+proc fcQWebFrame_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, ok: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_loadFinished".}
 proc fcQWebFrame_pageChanged(self: pointer, ): void {.importc: "QWebFrame_pageChanged".}
-proc fcQWebFrame_connect_pageChanged(self: pointer, slot: int) {.importc: "QWebFrame_connect_pageChanged".}
+proc fcQWebFrame_connect_pageChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebFrame_connect_pageChanged".}
 proc fcQWebFrame_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebFrame_tr2".}
 proc fcQWebFrame_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebFrame_tr3".}
 proc fcQWebFrame_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebFrame_trUtf82".}
@@ -467,35 +467,43 @@ proc javaScriptWindowObjectCleared*(self: gen_qwebframe_types.QWebFrame, ): void
   fcQWebFrame_javaScriptWindowObjectCleared(self.h)
 
 type QWebFramejavaScriptWindowObjectClearedSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_javaScriptWindowObjectCleared(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_javaScriptWindowObjectCleared".} =
+proc miqt_exec_callback_cQWebFrame_javaScriptWindowObjectCleared(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFramejavaScriptWindowObjectClearedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_javaScriptWindowObjectCleared_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFramejavaScriptWindowObjectClearedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onjavaScriptWindowObjectCleared*(self: gen_qwebframe_types.QWebFrame, slot: QWebFramejavaScriptWindowObjectClearedSlot) =
   var tmp = new QWebFramejavaScriptWindowObjectClearedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_javaScriptWindowObjectCleared(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_javaScriptWindowObjectCleared(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_javaScriptWindowObjectCleared, miqt_exec_callback_cQWebFrame_javaScriptWindowObjectCleared_release)
 
 proc provisionalLoad*(self: gen_qwebframe_types.QWebFrame, ): void =
   fcQWebFrame_provisionalLoad(self.h)
 
 type QWebFrameprovisionalLoadSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_provisionalLoad(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_provisionalLoad".} =
+proc miqt_exec_callback_cQWebFrame_provisionalLoad(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameprovisionalLoadSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_provisionalLoad_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameprovisionalLoadSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onprovisionalLoad*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameprovisionalLoadSlot) =
   var tmp = new QWebFrameprovisionalLoadSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_provisionalLoad(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_provisionalLoad(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_provisionalLoad, miqt_exec_callback_cQWebFrame_provisionalLoad_release)
 
 proc titleChanged*(self: gen_qwebframe_types.QWebFrame, title: string): void =
   fcQWebFrame_titleChanged(self.h, struct_miqt_string(data: title, len: csize_t(len(title))))
 
 type QWebFrametitleChangedSlot* = proc(title: string)
-proc miqt_exec_callback_cQWebFrame_titleChanged(slot: int, title: struct_miqt_string) {.exportc: "miqt_exec_callback_QWebFrame_titleChanged".} =
+proc miqt_exec_callback_cQWebFrame_titleChanged(slot: int, title: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrametitleChangedSlot](cast[pointer](slot))
   let vtitle_ms = title
   let vtitlex_ret = string.fromBytes(toOpenArrayByte(vtitle_ms.data, 0, int(vtitle_ms.len)-1))
@@ -504,115 +512,147 @@ proc miqt_exec_callback_cQWebFrame_titleChanged(slot: int, title: struct_miqt_st
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebFrame_titleChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrametitleChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontitleChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrametitleChangedSlot) =
   var tmp = new QWebFrametitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_titleChanged(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_titleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_titleChanged, miqt_exec_callback_cQWebFrame_titleChanged_release)
 
 proc urlChanged*(self: gen_qwebframe_types.QWebFrame, url: gen_qurl_types.QUrl): void =
   fcQWebFrame_urlChanged(self.h, url.h)
 
 type QWebFrameurlChangedSlot* = proc(url: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQWebFrame_urlChanged(slot: int, url: pointer) {.exportc: "miqt_exec_callback_QWebFrame_urlChanged".} =
+proc miqt_exec_callback_cQWebFrame_urlChanged(slot: int, url: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameurlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: url)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebFrame_urlChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameurlChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onurlChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameurlChangedSlot) =
   var tmp = new QWebFrameurlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_urlChanged(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_urlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_urlChanged, miqt_exec_callback_cQWebFrame_urlChanged_release)
 
 proc initialLayoutCompleted*(self: gen_qwebframe_types.QWebFrame, ): void =
   fcQWebFrame_initialLayoutCompleted(self.h)
 
 type QWebFrameinitialLayoutCompletedSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_initialLayoutCompleted(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_initialLayoutCompleted".} =
+proc miqt_exec_callback_cQWebFrame_initialLayoutCompleted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameinitialLayoutCompletedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_initialLayoutCompleted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameinitialLayoutCompletedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oninitialLayoutCompleted*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameinitialLayoutCompletedSlot) =
   var tmp = new QWebFrameinitialLayoutCompletedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_initialLayoutCompleted(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_initialLayoutCompleted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_initialLayoutCompleted, miqt_exec_callback_cQWebFrame_initialLayoutCompleted_release)
 
 proc iconChanged*(self: gen_qwebframe_types.QWebFrame, ): void =
   fcQWebFrame_iconChanged(self.h)
 
 type QWebFrameiconChangedSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_iconChanged(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_iconChanged".} =
+proc miqt_exec_callback_cQWebFrame_iconChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameiconChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_iconChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameiconChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oniconChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameiconChangedSlot) =
   var tmp = new QWebFrameiconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_iconChanged(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_iconChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_iconChanged, miqt_exec_callback_cQWebFrame_iconChanged_release)
 
 proc contentsSizeChanged*(self: gen_qwebframe_types.QWebFrame, size: gen_qsize_types.QSize): void =
   fcQWebFrame_contentsSizeChanged(self.h, size.h)
 
 type QWebFramecontentsSizeChangedSlot* = proc(size: gen_qsize_types.QSize)
-proc miqt_exec_callback_cQWebFrame_contentsSizeChanged(slot: int, size: pointer) {.exportc: "miqt_exec_callback_QWebFrame_contentsSizeChanged".} =
+proc miqt_exec_callback_cQWebFrame_contentsSizeChanged(slot: int, size: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QWebFramecontentsSizeChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qsize_types.QSize(h: size)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebFrame_contentsSizeChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFramecontentsSizeChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncontentsSizeChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFramecontentsSizeChangedSlot) =
   var tmp = new QWebFramecontentsSizeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_contentsSizeChanged(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_contentsSizeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_contentsSizeChanged, miqt_exec_callback_cQWebFrame_contentsSizeChanged_release)
 
 proc loadStarted*(self: gen_qwebframe_types.QWebFrame, ): void =
   fcQWebFrame_loadStarted(self.h)
 
 type QWebFrameloadStartedSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_loadStarted(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_loadStarted".} =
+proc miqt_exec_callback_cQWebFrame_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_loadStarted_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameloadStartedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onloadStarted*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameloadStartedSlot) =
   var tmp = new QWebFrameloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_loadStarted(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_loadStarted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_loadStarted, miqt_exec_callback_cQWebFrame_loadStarted_release)
 
 proc loadFinished*(self: gen_qwebframe_types.QWebFrame, ok: bool): void =
   fcQWebFrame_loadFinished(self.h, ok)
 
 type QWebFrameloadFinishedSlot* = proc(ok: bool)
-proc miqt_exec_callback_cQWebFrame_loadFinished(slot: int, ok: bool) {.exportc: "miqt_exec_callback_QWebFrame_loadFinished".} =
+proc miqt_exec_callback_cQWebFrame_loadFinished(slot: int, ok: bool) {.cdecl.} =
   let nimfunc = cast[ptr QWebFrameloadFinishedSlot](cast[pointer](slot))
   let slotval1 = ok
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQWebFrame_loadFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFrameloadFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onloadFinished*(self: gen_qwebframe_types.QWebFrame, slot: QWebFrameloadFinishedSlot) =
   var tmp = new QWebFrameloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_loadFinished(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_loadFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_loadFinished, miqt_exec_callback_cQWebFrame_loadFinished_release)
 
 proc pageChanged*(self: gen_qwebframe_types.QWebFrame, ): void =
   fcQWebFrame_pageChanged(self.h)
 
 type QWebFramepageChangedSlot* = proc()
-proc miqt_exec_callback_cQWebFrame_pageChanged(slot: int) {.exportc: "miqt_exec_callback_QWebFrame_pageChanged".} =
+proc miqt_exec_callback_cQWebFrame_pageChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebFramepageChangedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQWebFrame_pageChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QWebFramepageChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc onpageChanged*(self: gen_qwebframe_types.QWebFrame, slot: QWebFramepageChangedSlot) =
   var tmp = new QWebFramepageChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebFrame_connect_pageChanged(self.h, cast[int](addr tmp[]))
+  fcQWebFrame_connect_pageChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebFrame_pageChanged, miqt_exec_callback_cQWebFrame_pageChanged_release)
 
 proc tr*(_: type gen_qwebframe_types.QWebFrame, s: cstring, c: cstring): string =
   let v_ms = fcQWebFrame_tr2(s, c)

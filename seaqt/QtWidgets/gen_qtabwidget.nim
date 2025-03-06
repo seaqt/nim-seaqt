@@ -138,13 +138,13 @@ proc fcQTabWidget_tabBar(self: pointer, ): pointer {.importc: "QTabWidget_tabBar
 proc fcQTabWidget_setCurrentIndex(self: pointer, index: cint): void {.importc: "QTabWidget_setCurrentIndex".}
 proc fcQTabWidget_setCurrentWidget(self: pointer, widget: pointer): void {.importc: "QTabWidget_setCurrentWidget".}
 proc fcQTabWidget_currentChanged(self: pointer, index: cint): void {.importc: "QTabWidget_currentChanged".}
-proc fcQTabWidget_connect_currentChanged(self: pointer, slot: int) {.importc: "QTabWidget_connect_currentChanged".}
+proc fcQTabWidget_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_currentChanged".}
 proc fcQTabWidget_tabCloseRequested(self: pointer, index: cint): void {.importc: "QTabWidget_tabCloseRequested".}
-proc fcQTabWidget_connect_tabCloseRequested(self: pointer, slot: int) {.importc: "QTabWidget_connect_tabCloseRequested".}
+proc fcQTabWidget_connect_tabCloseRequested(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabCloseRequested".}
 proc fcQTabWidget_tabBarClicked(self: pointer, index: cint): void {.importc: "QTabWidget_tabBarClicked".}
-proc fcQTabWidget_connect_tabBarClicked(self: pointer, slot: int) {.importc: "QTabWidget_connect_tabBarClicked".}
+proc fcQTabWidget_connect_tabBarClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarClicked".}
 proc fcQTabWidget_tabBarDoubleClicked(self: pointer, index: cint): void {.importc: "QTabWidget_tabBarDoubleClicked".}
-proc fcQTabWidget_connect_tabBarDoubleClicked(self: pointer, slot: int) {.importc: "QTabWidget_connect_tabBarDoubleClicked".}
+proc fcQTabWidget_connect_tabBarDoubleClicked(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QTabWidget_connect_tabBarDoubleClicked".}
 proc fcQTabWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QTabWidget_tr2".}
 proc fcQTabWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QTabWidget_tr3".}
 proc fcQTabWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QTabWidget_trUtf82".}
@@ -446,65 +446,81 @@ proc currentChanged*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_currentChanged(self.h, index)
 
 type QTabWidgetcurrentChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_currentChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QTabWidget_currentChanged".} =
+proc miqt_exec_callback_cQTabWidget_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgetcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTabWidget_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgetcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentChanged*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgetcurrentChangedSlot) =
   var tmp = new QTabWidgetcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_currentChanged(self.h, cast[int](addr tmp[]))
+  fcQTabWidget_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_currentChanged, miqt_exec_callback_cQTabWidget_currentChanged_release)
 
 proc tabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabCloseRequested(self.h, index)
 
 type QTabWidgettabCloseRequestedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabCloseRequested(slot: int, index: cint) {.exportc: "miqt_exec_callback_QTabWidget_tabCloseRequested".} =
+proc miqt_exec_callback_cQTabWidget_tabCloseRequested(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTabWidget_tabCloseRequested_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabCloseRequestedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontabCloseRequested*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabCloseRequestedSlot) =
   var tmp = new QTabWidgettabCloseRequestedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabCloseRequested(self.h, cast[int](addr tmp[]))
+  fcQTabWidget_connect_tabCloseRequested(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabCloseRequested, miqt_exec_callback_cQTabWidget_tabCloseRequested_release)
 
 proc tabBarClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabBarClicked(self.h, index)
 
 type QTabWidgettabBarClickedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabBarClicked(slot: int, index: cint) {.exportc: "miqt_exec_callback_QTabWidget_tabBarClicked".} =
+proc miqt_exec_callback_cQTabWidget_tabBarClicked(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabBarClickedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTabWidget_tabBarClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabBarClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontabBarClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabBarClickedSlot) =
   var tmp = new QTabWidgettabBarClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabBarClicked(self.h, cast[int](addr tmp[]))
+  fcQTabWidget_connect_tabBarClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabBarClicked, miqt_exec_callback_cQTabWidget_tabBarClicked_release)
 
 proc tabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, index: cint): void =
   fcQTabWidget_tabBarDoubleClicked(self.h, index)
 
 type QTabWidgettabBarDoubleClickedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQTabWidget_tabBarDoubleClicked(slot: int, index: cint) {.exportc: "miqt_exec_callback_QTabWidget_tabBarDoubleClicked".} =
+proc miqt_exec_callback_cQTabWidget_tabBarDoubleClicked(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQTabWidget_tabBarDoubleClicked_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QTabWidgettabBarDoubleClickedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ontabBarDoubleClicked*(self: gen_qtabwidget_types.QTabWidget, slot: QTabWidgettabBarDoubleClickedSlot) =
   var tmp = new QTabWidgettabBarDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]))
+  fcQTabWidget_connect_tabBarDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQTabWidget_tabBarDoubleClicked, miqt_exec_callback_cQTabWidget_tabBarDoubleClicked_release)
 
 proc tr*(_: type gen_qtabwidget_types.QTabWidget, s: cstring, c: cstring): string =
   let v_ms = fcQTabWidget_tr2(s, c)

@@ -109,7 +109,7 @@ proc fcQObject_registerUserData(): cuint {.importc: "QObject_registerUserData".}
 proc fcQObject_setUserData(self: pointer, id: cuint, data: pointer): void {.importc: "QObject_setUserData".}
 proc fcQObject_userData(self: pointer, id: cuint): pointer {.importc: "QObject_userData".}
 proc fcQObject_destroyed(self: pointer, ): void {.importc: "QObject_destroyed".}
-proc fcQObject_connect_destroyed(self: pointer, slot: int) {.importc: "QObject_connect_destroyed".}
+proc fcQObject_connect_destroyed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed".}
 proc fcQObject_parent(self: pointer, ): pointer {.importc: "QObject_parent".}
 proc fcQObject_inherits(self: pointer, classname: cstring): bool {.importc: "QObject_inherits".}
 proc fcQObject_deleteLater(self: pointer, ): void {.importc: "QObject_deleteLater".}
@@ -121,7 +121,7 @@ proc fcQObject_startTimer2(self: pointer, interval: cint, timerType: cint): cint
 proc fcQObject_connect5(sender: pointer, signal: pointer, receiver: pointer, methodVal: pointer, typeVal: cint): pointer {.importc: "QObject_connect5".}
 proc fcQObject_connect4(self: pointer, sender: pointer, signal: cstring, member: cstring, typeVal: cint): pointer {.importc: "QObject_connect4".}
 proc fcQObject_destroyed1(self: pointer, param1: pointer): void {.importc: "QObject_destroyed1".}
-proc fcQObject_connect_destroyed1(self: pointer, slot: int) {.importc: "QObject_connect_destroyed1".}
+proc fcQObject_connect_destroyed1(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed1".}
 type cQObjectVTable = object
   destructor*: proc(vtbl: ptr cQObjectVTable, self: ptr cQObject) {.cdecl, raises:[], gcsafe.}
   metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
@@ -292,15 +292,19 @@ proc destroyed*(self: gen_qobject_types.QObject, ): void =
   fcQObject_destroyed(self.h)
 
 type QObjectdestroyedSlot* = proc()
-proc miqt_exec_callback_cQObject_destroyed(slot: int) {.exportc: "miqt_exec_callback_QObject_destroyed".} =
+proc miqt_exec_callback_cQObject_destroyed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QObjectdestroyedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQObject_destroyed_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QObjectdestroyedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc ondestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyedSlot) =
   var tmp = new QObjectdestroyedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQObject_connect_destroyed(self.h, cast[int](addr tmp[]))
+  fcQObject_connect_destroyed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQObject_destroyed, miqt_exec_callback_cQObject_destroyed_release)
 
 proc parent*(self: gen_qobject_types.QObject, ): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQObject_parent(self.h))
@@ -348,17 +352,21 @@ proc destroyed*(self: gen_qobject_types.QObject, param1: gen_qobject_types.QObje
   fcQObject_destroyed1(self.h, param1.h)
 
 type QObjectdestroyed1Slot* = proc(param1: gen_qobject_types.QObject)
-proc miqt_exec_callback_cQObject_destroyed1(slot: int, param1: pointer) {.exportc: "miqt_exec_callback_QObject_destroyed1".} =
+proc miqt_exec_callback_cQObject_destroyed1(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QObjectdestroyed1Slot](cast[pointer](slot))
   let slotval1 = gen_qobject_types.QObject(h: param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQObject_destroyed1_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QObjectdestroyed1Slot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc ondestroyed*(self: gen_qobject_types.QObject, slot: QObjectdestroyed1Slot) =
   var tmp = new QObjectdestroyed1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQObject_connect_destroyed1(self.h, cast[int](addr tmp[]))
+  fcQObject_connect_destroyed1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQObject_destroyed1, miqt_exec_callback_cQObject_destroyed1_release)
 
 type QObjectmetaObjectProc* = proc(self: QObject): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QObjectmetacastProc* = proc(self: QObject, param1: cstring): pointer {.raises: [], gcsafe.}

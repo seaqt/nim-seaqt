@@ -91,7 +91,7 @@ proc fcQFontComboBox_currentFont(self: pointer, ): pointer {.importc: "QFontComb
 proc fcQFontComboBox_sizeHint(self: pointer, ): pointer {.importc: "QFontComboBox_sizeHint".}
 proc fcQFontComboBox_setCurrentFont(self: pointer, f: pointer): void {.importc: "QFontComboBox_setCurrentFont".}
 proc fcQFontComboBox_currentFontChanged(self: pointer, f: pointer): void {.importc: "QFontComboBox_currentFontChanged".}
-proc fcQFontComboBox_connect_currentFontChanged(self: pointer, slot: int) {.importc: "QFontComboBox_connect_currentFontChanged".}
+proc fcQFontComboBox_connect_currentFontChanged(self: pointer, slot: int, callback: proc (slot: int, f: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QFontComboBox_connect_currentFontChanged".}
 proc fcQFontComboBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QFontComboBox_tr2".}
 proc fcQFontComboBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QFontComboBox_tr3".}
 proc fcQFontComboBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QFontComboBox_trUtf82".}
@@ -253,17 +253,21 @@ proc currentFontChanged*(self: gen_qfontcombobox_types.QFontComboBox, f: gen_qfo
   fcQFontComboBox_currentFontChanged(self.h, f.h)
 
 type QFontComboBoxcurrentFontChangedSlot* = proc(f: gen_qfont_types.QFont)
-proc miqt_exec_callback_cQFontComboBox_currentFontChanged(slot: int, f: pointer) {.exportc: "miqt_exec_callback_QFontComboBox_currentFontChanged".} =
+proc miqt_exec_callback_cQFontComboBox_currentFontChanged(slot: int, f: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QFontComboBoxcurrentFontChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qfont_types.QFont(h: f)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQFontComboBox_currentFontChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QFontComboBoxcurrentFontChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentFontChanged*(self: gen_qfontcombobox_types.QFontComboBox, slot: QFontComboBoxcurrentFontChangedSlot) =
   var tmp = new QFontComboBoxcurrentFontChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQFontComboBox_connect_currentFontChanged(self.h, cast[int](addr tmp[]))
+  fcQFontComboBox_connect_currentFontChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQFontComboBox_currentFontChanged, miqt_exec_callback_cQFontComboBox_currentFontChanged_release)
 
 proc tr*(_: type gen_qfontcombobox_types.QFontComboBox, s: cstring, c: cstring): string =
   let v_ms = fcQFontComboBox_tr2(s, c)

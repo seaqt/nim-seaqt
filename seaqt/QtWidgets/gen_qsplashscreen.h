@@ -165,7 +165,7 @@ struct miqt_string QSplashScreen_message(const QSplashScreen* self);
 void QSplashScreen_showMessage(QSplashScreen* self, struct miqt_string message);
 void QSplashScreen_clearMessage(QSplashScreen* self);
 void QSplashScreen_messageChanged(QSplashScreen* self, struct miqt_string message);
-void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot);
+void QSplashScreen_connect_messageChanged(QSplashScreen* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 bool QSplashScreen_event(QSplashScreen* self, QEvent* e);
 void QSplashScreen_drawContents(QSplashScreen* self, QPainter* painter);
 void QSplashScreen_mousePressEvent(QSplashScreen* self, QMouseEvent* param1);

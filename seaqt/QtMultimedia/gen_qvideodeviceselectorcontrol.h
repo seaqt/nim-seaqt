@@ -41,11 +41,11 @@ int QVideoDeviceSelectorControl_defaultDevice(const QVideoDeviceSelectorControl*
 int QVideoDeviceSelectorControl_selectedDevice(const QVideoDeviceSelectorControl* self);
 void QVideoDeviceSelectorControl_setSelectedDevice(QVideoDeviceSelectorControl* self, int index);
 void QVideoDeviceSelectorControl_selectedDeviceChanged(QVideoDeviceSelectorControl* self, int index);
-void QVideoDeviceSelectorControl_connect_selectedDeviceChanged(QVideoDeviceSelectorControl* self, intptr_t slot);
+void QVideoDeviceSelectorControl_connect_selectedDeviceChanged(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QVideoDeviceSelectorControl_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, struct miqt_string name);
-void QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, intptr_t slot);
+void QVideoDeviceSelectorControl_connect_selectedDeviceChangedWithName(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QVideoDeviceSelectorControl_devicesChanged(QVideoDeviceSelectorControl* self);
-void QVideoDeviceSelectorControl_connect_devicesChanged(QVideoDeviceSelectorControl* self, intptr_t slot);
+void QVideoDeviceSelectorControl_connect_devicesChanged(QVideoDeviceSelectorControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QVideoDeviceSelectorControl_tr2(const char* s, const char* c);
 struct miqt_string QVideoDeviceSelectorControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QVideoDeviceSelectorControl_trUtf82(const char* s, const char* c);

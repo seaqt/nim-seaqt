@@ -105,13 +105,13 @@ struct miqt_array /* of struct miqt_string */  QCompleter_splitPath(const QCompl
 bool QCompleter_eventFilter(QCompleter* self, QObject* o, QEvent* e);
 bool QCompleter_event(QCompleter* self, QEvent* param1);
 void QCompleter_activated(QCompleter* self, struct miqt_string text);
-void QCompleter_connect_activated(QCompleter* self, intptr_t slot);
+void QCompleter_connect_activated(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QCompleter_activatedWithIndex(QCompleter* self, QModelIndex* index);
-void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot);
+void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t));
 void QCompleter_highlighted(QCompleter* self, struct miqt_string text);
-void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot);
+void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QCompleter_highlightedWithIndex(QCompleter* self, QModelIndex* index);
-void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot);
+void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t));
 struct miqt_string QCompleter_tr2(const char* s, const char* c);
 struct miqt_string QCompleter_tr3(const char* s, const char* c, int n);
 struct miqt_string QCompleter_trUtf82(const char* s, const char* c);

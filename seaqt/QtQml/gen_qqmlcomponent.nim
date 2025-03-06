@@ -101,9 +101,9 @@ proc fcQQmlComponent_loadUrl(self: pointer, url: pointer): void {.importc: "QQml
 proc fcQQmlComponent_loadUrl2(self: pointer, url: pointer, mode: cint): void {.importc: "QQmlComponent_loadUrl2".}
 proc fcQQmlComponent_setData(self: pointer, param1: struct_miqt_string, baseUrl: pointer): void {.importc: "QQmlComponent_setData".}
 proc fcQQmlComponent_statusChanged(self: pointer, param1: cint): void {.importc: "QQmlComponent_statusChanged".}
-proc fcQQmlComponent_connect_statusChanged(self: pointer, slot: int) {.importc: "QQmlComponent_connect_statusChanged".}
+proc fcQQmlComponent_connect_statusChanged(self: pointer, slot: int, callback: proc (slot: int, param1: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlComponent_connect_statusChanged".}
 proc fcQQmlComponent_progressChanged(self: pointer, param1: float64): void {.importc: "QQmlComponent_progressChanged".}
-proc fcQQmlComponent_connect_progressChanged(self: pointer, slot: int) {.importc: "QQmlComponent_connect_progressChanged".}
+proc fcQQmlComponent_connect_progressChanged(self: pointer, slot: int, callback: proc (slot: int, param1: float64) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQmlComponent_connect_progressChanged".}
 proc fcQQmlComponent_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlComponent_tr2".}
 proc fcQQmlComponent_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlComponent_tr3".}
 proc fcQQmlComponent_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlComponent_trUtf82".}
@@ -263,33 +263,41 @@ proc statusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, param1: cint): 
   fcQQmlComponent_statusChanged(self.h, cint(param1))
 
 type QQmlComponentstatusChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQQmlComponent_statusChanged(slot: int, param1: cint) {.exportc: "miqt_exec_callback_QQmlComponent_statusChanged".} =
+proc miqt_exec_callback_cQQmlComponent_statusChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QQmlComponentstatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQmlComponent_statusChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlComponentstatusChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onstatusChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentstatusChangedSlot) =
   var tmp = new QQmlComponentstatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlComponent_connect_statusChanged(self.h, cast[int](addr tmp[]))
+  fcQQmlComponent_connect_statusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlComponent_statusChanged, miqt_exec_callback_cQQmlComponent_statusChanged_release)
 
 proc progressChanged*(self: gen_qqmlcomponent_types.QQmlComponent, param1: float64): void =
   fcQQmlComponent_progressChanged(self.h, param1)
 
 type QQmlComponentprogressChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_cQQmlComponent_progressChanged(slot: int, param1: float64) {.exportc: "miqt_exec_callback_QQmlComponent_progressChanged".} =
+proc miqt_exec_callback_cQQmlComponent_progressChanged(slot: int, param1: float64) {.cdecl.} =
   let nimfunc = cast[ptr QQmlComponentprogressChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQQmlComponent_progressChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QQmlComponentprogressChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onprogressChanged*(self: gen_qqmlcomponent_types.QQmlComponent, slot: QQmlComponentprogressChangedSlot) =
   var tmp = new QQmlComponentprogressChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlComponent_connect_progressChanged(self.h, cast[int](addr tmp[]))
+  fcQQmlComponent_connect_progressChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlComponent_progressChanged, miqt_exec_callback_cQQmlComponent_progressChanged_release)
 
 proc tr*(_: type gen_qqmlcomponent_types.QQmlComponent, s: cstring, c: cstring): string =
   let v_ms = fcQQmlComponent_tr2(s, c)

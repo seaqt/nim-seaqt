@@ -96,7 +96,7 @@ proc fcQToolBox_count(self: pointer, ): cint {.importc: "QToolBox_count".}
 proc fcQToolBox_setCurrentIndex(self: pointer, index: cint): void {.importc: "QToolBox_setCurrentIndex".}
 proc fcQToolBox_setCurrentWidget(self: pointer, widget: pointer): void {.importc: "QToolBox_setCurrentWidget".}
 proc fcQToolBox_currentChanged(self: pointer, index: cint): void {.importc: "QToolBox_currentChanged".}
-proc fcQToolBox_connect_currentChanged(self: pointer, slot: int) {.importc: "QToolBox_connect_currentChanged".}
+proc fcQToolBox_connect_currentChanged(self: pointer, slot: int, callback: proc (slot: int, index: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QToolBox_connect_currentChanged".}
 proc fcQToolBox_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolBox_tr2".}
 proc fcQToolBox_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QToolBox_tr3".}
 proc fcQToolBox_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QToolBox_trUtf82".}
@@ -304,17 +304,21 @@ proc currentChanged*(self: gen_qtoolbox_types.QToolBox, index: cint): void =
   fcQToolBox_currentChanged(self.h, index)
 
 type QToolBoxcurrentChangedSlot* = proc(index: cint)
-proc miqt_exec_callback_cQToolBox_currentChanged(slot: int, index: cint) {.exportc: "miqt_exec_callback_QToolBox_currentChanged".} =
+proc miqt_exec_callback_cQToolBox_currentChanged(slot: int, index: cint) {.cdecl.} =
   let nimfunc = cast[ptr QToolBoxcurrentChangedSlot](cast[pointer](slot))
   let slotval1 = index
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQToolBox_currentChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QToolBoxcurrentChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc oncurrentChanged*(self: gen_qtoolbox_types.QToolBox, slot: QToolBoxcurrentChangedSlot) =
   var tmp = new QToolBoxcurrentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQToolBox_connect_currentChanged(self.h, cast[int](addr tmp[]))
+  fcQToolBox_connect_currentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQToolBox_currentChanged, miqt_exec_callback_cQToolBox_currentChanged_release)
 
 proc tr*(_: type gen_qtoolbox_types.QToolBox, s: cstring, c: cstring): string =
   let v_ms = fcQToolBox_tr2(s, c)

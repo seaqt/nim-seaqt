@@ -77,9 +77,9 @@ proc fcQKeySequenceEdit_keySequence(self: pointer, ): pointer {.importc: "QKeySe
 proc fcQKeySequenceEdit_setKeySequence(self: pointer, keySequence: pointer): void {.importc: "QKeySequenceEdit_setKeySequence".}
 proc fcQKeySequenceEdit_clear(self: pointer, ): void {.importc: "QKeySequenceEdit_clear".}
 proc fcQKeySequenceEdit_editingFinished(self: pointer, ): void {.importc: "QKeySequenceEdit_editingFinished".}
-proc fcQKeySequenceEdit_connect_editingFinished(self: pointer, slot: int) {.importc: "QKeySequenceEdit_connect_editingFinished".}
+proc fcQKeySequenceEdit_connect_editingFinished(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QKeySequenceEdit_connect_editingFinished".}
 proc fcQKeySequenceEdit_keySequenceChanged(self: pointer, keySequence: pointer): void {.importc: "QKeySequenceEdit_keySequenceChanged".}
-proc fcQKeySequenceEdit_connect_keySequenceChanged(self: pointer, slot: int) {.importc: "QKeySequenceEdit_connect_keySequenceChanged".}
+proc fcQKeySequenceEdit_connect_keySequenceChanged(self: pointer, slot: int, callback: proc (slot: int, keySequence: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QKeySequenceEdit_connect_keySequenceChanged".}
 proc fcQKeySequenceEdit_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QKeySequenceEdit_tr2".}
 proc fcQKeySequenceEdit_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QKeySequenceEdit_tr3".}
 proc fcQKeySequenceEdit_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QKeySequenceEdit_trUtf82".}
@@ -227,31 +227,39 @@ proc editingFinished*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, ): void
   fcQKeySequenceEdit_editingFinished(self.h)
 
 type QKeySequenceEditeditingFinishedSlot* = proc()
-proc miqt_exec_callback_cQKeySequenceEdit_editingFinished(slot: int) {.exportc: "miqt_exec_callback_QKeySequenceEdit_editingFinished".} =
+proc miqt_exec_callback_cQKeySequenceEdit_editingFinished(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QKeySequenceEditeditingFinishedSlot](cast[pointer](slot))
   nimfunc[]()
+
+proc miqt_exec_callback_cQKeySequenceEdit_editingFinished_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QKeySequenceEditeditingFinishedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
 
 proc oneditingFinished*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, slot: QKeySequenceEditeditingFinishedSlot) =
   var tmp = new QKeySequenceEditeditingFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQKeySequenceEdit_connect_editingFinished(self.h, cast[int](addr tmp[]))
+  fcQKeySequenceEdit_connect_editingFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQKeySequenceEdit_editingFinished, miqt_exec_callback_cQKeySequenceEdit_editingFinished_release)
 
 proc keySequenceChanged*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, keySequence: gen_qkeysequence_types.QKeySequence): void =
   fcQKeySequenceEdit_keySequenceChanged(self.h, keySequence.h)
 
 type QKeySequenceEditkeySequenceChangedSlot* = proc(keySequence: gen_qkeysequence_types.QKeySequence)
-proc miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged(slot: int, keySequence: pointer) {.exportc: "miqt_exec_callback_QKeySequenceEdit_keySequenceChanged".} =
+proc miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged(slot: int, keySequence: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QKeySequenceEditkeySequenceChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qkeysequence_types.QKeySequence(h: keySequence)
 
   nimfunc[](slotval1)
 
+proc miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged_release(slot: int) {.cdecl.} =
+  let nimfunc = cast[ref QKeySequenceEditkeySequenceChangedSlot](cast[pointer](slot))
+  GC_unref(nimfunc)
+
 proc onkeySequenceChanged*(self: gen_qkeysequenceedit_types.QKeySequenceEdit, slot: QKeySequenceEditkeySequenceChangedSlot) =
   var tmp = new QKeySequenceEditkeySequenceChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQKeySequenceEdit_connect_keySequenceChanged(self.h, cast[int](addr tmp[]))
+  fcQKeySequenceEdit_connect_keySequenceChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged, miqt_exec_callback_cQKeySequenceEdit_keySequenceChanged_release)
 
 proc tr*(_: type gen_qkeysequenceedit_types.QKeySequenceEdit, s: cstring, c: cstring): string =
   let v_ms = fcQKeySequenceEdit_tr2(s, c)

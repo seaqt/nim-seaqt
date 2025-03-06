@@ -211,7 +211,7 @@ int QColumnView_metacall(QColumnView* self, int param1, int param2, void** param
 struct miqt_string QColumnView_tr(const char* s);
 struct miqt_string QColumnView_trUtf8(const char* s);
 void QColumnView_updatePreviewWidget(QColumnView* self, QModelIndex* index);
-void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot);
+void QColumnView_connect_updatePreviewWidget(QColumnView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t));
 QModelIndex* QColumnView_indexAt(const QColumnView* self, QPoint* point);
 void QColumnView_scrollTo(QColumnView* self, QModelIndex* index, int hint);
 QSize* QColumnView_sizeHint(const QColumnView* self);
