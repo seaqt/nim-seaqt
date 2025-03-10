@@ -41,6 +41,12 @@ proc delete*(self: sink QObject) =
   wasMoved(self)
   fcQObject_delete(h)
 
+proc fcQObject_deleteLater(self: pointer) {.importc: "QObject_deleteLater".}
+proc deleteLater*(self: sink QObject) =
+  let h = self.h
+  wasMoved(self)
+  fcQObject_deleteLater(h)
+
 type QSignalBlocker* {.inheritable.} = object
   h*: pointer
   owned*: bool

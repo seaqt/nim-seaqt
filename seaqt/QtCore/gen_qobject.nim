@@ -129,7 +129,6 @@ proc fcQObject_destroyed(self: pointer, ): void {.importc: "QObject_destroyed".}
 proc fcQObject_connect_destroyed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QObject_connect_destroyed".}
 proc fcQObject_parent(self: pointer, ): pointer {.importc: "QObject_parent".}
 proc fcQObject_inherits(self: pointer, classname: cstring): bool {.importc: "QObject_inherits".}
-proc fcQObject_deleteLater(self: pointer, ): void {.importc: "QObject_deleteLater".}
 proc fcQObject_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QObject_tr2".}
 proc fcQObject_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QObject_tr3".}
 proc fcQObject_startTimer2(self: pointer, interval: cint, timerType: cint): cint {.importc: "QObject_startTimer2".}
@@ -314,9 +313,6 @@ proc parent*(self: gen_qobject_types.QObject, ): gen_qobject_types.QObject =
 
 proc inherits*(self: gen_qobject_types.QObject, classname: cstring): bool =
   fcQObject_inherits(self.h, classname)
-
-proc deleteLater*(self: gen_qobject_types.QObject, ): void =
-  fcQObject_deleteLater(self.h)
 
 proc tr*(_: type gen_qobject_types.QObject, s: cstring, c: cstring): string =
   let v_ms = fcQObject_tr2(s, c)
