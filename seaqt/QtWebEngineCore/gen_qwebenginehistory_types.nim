@@ -25,7 +25,21 @@ import ../QtCore/gen_qabstractitemmodel_types
 export gen_qabstractitemmodel_types
 
 type QWebEngineHistoryModel* = object of gen_qabstractitemmodel_types.QAbstractListModel
+proc `=copy`(dest: var QWebEngineHistoryModel, source: QWebEngineHistoryModel) {.error.}
+proc `=sink`(dest: var QWebEngineHistoryModel, source: QWebEngineHistoryModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QWebEngineHistory* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebEngineHistory, source: QWebEngineHistory) {.error.}
+proc `=sink`(dest: var QWebEngineHistory, source: QWebEngineHistory) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

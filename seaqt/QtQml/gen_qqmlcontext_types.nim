@@ -2,6 +2,13 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QQmlContext* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QQmlContext, source: QQmlContext) {.error.}
+proc `=sink`(dest: var QQmlContext, source: QQmlContext) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QQmlContextPropertyPair* {.inheritable.} = object
   h*: pointer
   owned*: bool

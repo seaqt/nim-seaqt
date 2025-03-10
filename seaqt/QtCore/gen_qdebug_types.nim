@@ -2,6 +2,13 @@ import ./gen_qiodevicebase_types
 export gen_qiodevicebase_types
 
 type QDebug* = object of gen_qiodevicebase_types.QIODeviceBase
+proc `=copy`(dest: var QDebug, source: QDebug) {.error.}
+proc `=sink`(dest: var QDebug, source: QDebug) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QDebugStateSaver* {.inheritable.} = object
   h*: pointer
   owned*: bool

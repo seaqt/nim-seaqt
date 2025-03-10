@@ -62,8 +62,29 @@ proc delete*(self: sink QGradient) =
   fcQGradient_delete(h)
 
 type QLinearGradient* = object of QGradient
+proc `=copy`(dest: var QLinearGradient, source: QLinearGradient) {.error.}
+proc `=sink`(dest: var QLinearGradient, source: QLinearGradient) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QRadialGradient* = object of QGradient
+proc `=copy`(dest: var QRadialGradient, source: QRadialGradient) {.error.}
+proc `=sink`(dest: var QRadialGradient, source: QRadialGradient) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QConicalGradient* = object of QGradient
+proc `=copy`(dest: var QConicalGradient, source: QConicalGradient) {.error.}
+proc `=sink`(dest: var QConicalGradient, source: QConicalGradient) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QGradientQGradientData* {.inheritable.} = object
   h*: pointer
   owned*: bool

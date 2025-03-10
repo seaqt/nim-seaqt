@@ -22,3 +22,10 @@ proc delete*(self: sink QRandomGenerator) =
   fcQRandomGenerator_delete(h)
 
 type QRandomGenerator64* = object of QRandomGenerator
+proc `=copy`(dest: var QRandomGenerator64, source: QRandomGenerator64) {.error.}
+proc `=sink`(dest: var QRandomGenerator64, source: QRandomGenerator64) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

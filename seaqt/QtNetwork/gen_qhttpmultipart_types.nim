@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QHttpMultiPart* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QHttpMultiPart, source: QHttpMultiPart) {.error.}
+proc `=sink`(dest: var QHttpMultiPart, source: QHttpMultiPart) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

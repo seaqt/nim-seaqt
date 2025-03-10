@@ -25,3 +25,10 @@ import ./gen_qlistview_types
 export gen_qlistview_types
 
 type QListWidget* = object of gen_qlistview_types.QListView
+proc `=copy`(dest: var QListWidget, source: QListWidget) {.error.}
+proc `=sink`(dest: var QListWidget, source: QListWidget) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

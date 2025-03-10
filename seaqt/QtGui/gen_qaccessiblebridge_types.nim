@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QAccessibleBridgePlugin* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAccessibleBridgePlugin, source: QAccessibleBridgePlugin) {.error.}
+proc `=sink`(dest: var QAccessibleBridgePlugin, source: QAccessibleBridgePlugin) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

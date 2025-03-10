@@ -25,3 +25,10 @@ import ../QtCore/gen_qabstractitemmodel_types
 export gen_qabstractitemmodel_types
 
 type QStandardItemModel* = object of gen_qabstractitemmodel_types.QAbstractItemModel
+proc `=copy`(dest: var QStandardItemModel, source: QStandardItemModel) {.error.}
+proc `=sink`(dest: var QStandardItemModel, source: QStandardItemModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

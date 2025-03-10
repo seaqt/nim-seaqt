@@ -25,3 +25,10 @@ import ./gen_qinputdevice_types
 export gen_qinputdevice_types
 
 type QPointingDevice* = object of gen_qinputdevice_types.QInputDevice
+proc `=copy`(dest: var QPointingDevice, source: QPointingDevice) {.error.}
+proc `=sink`(dest: var QPointingDevice, source: QPointingDevice) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

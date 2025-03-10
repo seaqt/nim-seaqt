@@ -2,6 +2,13 @@ import ../QtGui/gen_qwindow_types
 export gen_qwindow_types
 
 type QQuickWindow* = object of gen_qwindow_types.QWindow
+proc `=copy`(dest: var QQuickWindow, source: QQuickWindow) {.error.}
+proc `=sink`(dest: var QQuickWindow, source: QQuickWindow) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QQuickWindowGraphicsStateInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool

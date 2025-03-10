@@ -2,6 +2,13 @@ import ./gen_qlayout_types
 export gen_qlayout_types
 
 type QFormLayout* = object of gen_qlayout_types.QLayout
+proc `=copy`(dest: var QFormLayout, source: QFormLayout) {.error.}
+proc `=sink`(dest: var QFormLayout, source: QFormLayout) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QFormLayoutTakeRowResult* {.inheritable.} = object
   h*: pointer
   owned*: bool

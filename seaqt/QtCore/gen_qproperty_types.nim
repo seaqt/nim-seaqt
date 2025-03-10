@@ -82,7 +82,21 @@ proc delete*(self: sink QPropertyObserverBase) =
   fcQPropertyObserverBase_delete(h)
 
 type QPropertyObserver* = object of QPropertyObserverBase
+proc `=copy`(dest: var QPropertyObserver, source: QPropertyObserver) {.error.}
+proc `=sink`(dest: var QPropertyObserver, source: QPropertyObserver) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QPropertyNotifier* = object of QPropertyObserver
+proc `=copy`(dest: var QPropertyNotifier, source: QPropertyNotifier) {.error.}
+proc `=sink`(dest: var QPropertyNotifier, source: QPropertyNotifier) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QUntypedBindable* {.inheritable.} = object
   h*: pointer
   owned*: bool

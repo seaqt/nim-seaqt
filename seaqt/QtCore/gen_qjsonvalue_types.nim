@@ -42,3 +42,10 @@ proc delete*(self: sink QJsonValueConstRef) =
   fcQJsonValueConstRef_delete(h)
 
 type QJsonValueRef* = object of QJsonValueConstRef
+proc `=copy`(dest: var QJsonValueRef, source: QJsonValueRef) {.error.}
+proc `=sink`(dest: var QJsonValueRef, source: QJsonValueRef) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

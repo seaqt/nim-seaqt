@@ -62,3 +62,10 @@ proc delete*(self: sink QCborValueConstRef) =
   fcQCborValueConstRef_delete(h)
 
 type QCborValueRef* = object of QCborValueConstRef
+proc `=copy`(dest: var QCborValueRef, source: QCborValueRef) {.error.}
+proc `=sink`(dest: var QCborValueRef, source: QCborValueRef) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

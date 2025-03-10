@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QTextDocument* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QTextDocument, source: QTextDocument) {.error.}
+proc `=sink`(dest: var QTextDocument, source: QTextDocument) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

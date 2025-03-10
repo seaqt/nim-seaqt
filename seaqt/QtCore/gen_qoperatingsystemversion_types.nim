@@ -22,3 +22,10 @@ proc delete*(self: sink QOperatingSystemVersionBase) =
   fcQOperatingSystemVersionBase_delete(h)
 
 type QOperatingSystemVersion* = object of QOperatingSystemVersionBase
+proc `=copy`(dest: var QOperatingSystemVersion, source: QOperatingSystemVersion) {.error.}
+proc `=sink`(dest: var QOperatingSystemVersion, source: QOperatingSystemVersion) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

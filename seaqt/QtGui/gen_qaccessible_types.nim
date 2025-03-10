@@ -186,10 +186,66 @@ proc delete*(self: sink QAccessibleEvent) =
   fcQAccessibleEvent_delete(h)
 
 type QAccessibleStateChangeEvent* = object of QAccessibleEvent
+proc `=copy`(dest: var QAccessibleStateChangeEvent, source: QAccessibleStateChangeEvent) {.error.}
+proc `=sink`(dest: var QAccessibleStateChangeEvent, source: QAccessibleStateChangeEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTextCursorEvent* = object of QAccessibleEvent
+proc `=copy`(dest: var QAccessibleTextCursorEvent, source: QAccessibleTextCursorEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTextCursorEvent, source: QAccessibleTextCursorEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTextSelectionEvent* = object of QAccessibleTextCursorEvent
+proc `=copy`(dest: var QAccessibleTextSelectionEvent, source: QAccessibleTextSelectionEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTextSelectionEvent, source: QAccessibleTextSelectionEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTextInsertEvent* = object of QAccessibleTextCursorEvent
+proc `=copy`(dest: var QAccessibleTextInsertEvent, source: QAccessibleTextInsertEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTextInsertEvent, source: QAccessibleTextInsertEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTextRemoveEvent* = object of QAccessibleTextCursorEvent
+proc `=copy`(dest: var QAccessibleTextRemoveEvent, source: QAccessibleTextRemoveEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTextRemoveEvent, source: QAccessibleTextRemoveEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTextUpdateEvent* = object of QAccessibleTextCursorEvent
+proc `=copy`(dest: var QAccessibleTextUpdateEvent, source: QAccessibleTextUpdateEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTextUpdateEvent, source: QAccessibleTextUpdateEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleValueChangeEvent* = object of QAccessibleEvent
+proc `=copy`(dest: var QAccessibleValueChangeEvent, source: QAccessibleValueChangeEvent) {.error.}
+proc `=sink`(dest: var QAccessibleValueChangeEvent, source: QAccessibleValueChangeEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAccessibleTableModelChangeEvent* = object of QAccessibleEvent
+proc `=copy`(dest: var QAccessibleTableModelChangeEvent, source: QAccessibleTableModelChangeEvent) {.error.}
+proc `=sink`(dest: var QAccessibleTableModelChangeEvent, source: QAccessibleTableModelChangeEvent) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

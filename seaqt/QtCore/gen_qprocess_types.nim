@@ -25,3 +25,10 @@ import ./gen_qiodevice_types
 export gen_qiodevice_types
 
 type QProcess* = object of gen_qiodevice_types.QIODevice
+proc `=copy`(dest: var QProcess, source: QProcess) {.error.}
+proc `=sink`(dest: var QProcess, source: QProcess) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

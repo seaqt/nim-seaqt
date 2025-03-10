@@ -22,4 +22,18 @@ proc delete*(self: sink QMetaContainer) =
   fcQMetaContainer_delete(h)
 
 type QMetaSequence* = object of QMetaContainer
+proc `=copy`(dest: var QMetaSequence, source: QMetaSequence) {.error.}
+proc `=sink`(dest: var QMetaSequence, source: QMetaSequence) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QMetaAssociation* = object of QMetaContainer
+proc `=copy`(dest: var QMetaAssociation, source: QMetaAssociation) {.error.}
+proc `=sink`(dest: var QMetaAssociation, source: QMetaAssociation) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

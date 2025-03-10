@@ -105,3 +105,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QDnsLookup* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QDnsLookup, source: QDnsLookup) {.error.}
+proc `=sink`(dest: var QDnsLookup, source: QDnsLookup) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
