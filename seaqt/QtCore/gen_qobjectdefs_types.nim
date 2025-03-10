@@ -22,6 +22,13 @@ proc delete*(self: sink QGenericArgument) =
   fcQGenericArgument_delete(h)
 
 type QGenericReturnArgument* = object of QGenericArgument
+proc `=copy`(dest: var QGenericReturnArgument, source: QGenericReturnArgument) {.error.}
+proc `=sink`(dest: var QGenericReturnArgument, source: QGenericReturnArgument) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QMetaObject* {.inheritable.} = object
   h*: pointer
   owned*: bool

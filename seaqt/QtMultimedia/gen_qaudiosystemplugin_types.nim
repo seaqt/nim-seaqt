@@ -26,3 +26,10 @@ export gen_qobject_types
 
 # TODO Multiple inheritance from QAudioSystemFactoryInterface
 type QAudioSystemPlugin* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAudioSystemPlugin, source: QAudioSystemPlugin) {.error.}
+proc `=sink`(dest: var QAudioSystemPlugin, source: QAudioSystemPlugin) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

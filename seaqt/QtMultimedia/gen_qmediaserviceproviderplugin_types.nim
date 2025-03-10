@@ -146,3 +146,10 @@ export gen_qobject_types
 
 # TODO Multiple inheritance from QMediaServiceProviderFactoryInterface
 type QMediaServiceProviderPlugin* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QMediaServiceProviderPlugin, source: QMediaServiceProviderPlugin) {.error.}
+proc `=sink`(dest: var QMediaServiceProviderPlugin, source: QMediaServiceProviderPlugin) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

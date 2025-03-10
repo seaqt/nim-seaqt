@@ -2,6 +2,13 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 type QAbstractEventDispatcher* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAbstractEventDispatcher, source: QAbstractEventDispatcher) {.error.}
+proc `=sink`(dest: var QAbstractEventDispatcher, source: QAbstractEventDispatcher) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAbstractEventDispatcherTimerInfo* {.inheritable.} = object
   h*: pointer
   owned*: bool

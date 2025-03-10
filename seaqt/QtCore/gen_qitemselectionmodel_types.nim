@@ -25,6 +25,13 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 type QItemSelectionModel* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QItemSelectionModel, source: QItemSelectionModel) {.error.}
+proc `=sink`(dest: var QItemSelectionModel, source: QItemSelectionModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QItemSelection* {.inheritable.} = object
   h*: pointer
   owned*: bool

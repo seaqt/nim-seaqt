@@ -2,6 +2,13 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QAbstractTextDocumentLayout* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAbstractTextDocumentLayout, source: QAbstractTextDocumentLayout) {.error.}
+proc `=sink`(dest: var QAbstractTextDocumentLayout, source: QAbstractTextDocumentLayout) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QTextObjectInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool

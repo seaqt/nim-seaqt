@@ -2,8 +2,22 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QQuickTransform* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QQuickTransform, source: QQuickTransform) {.error.}
+proc `=sink`(dest: var QQuickTransform, source: QQuickTransform) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 # TODO Multiple inheritance from QQmlParserStatus
 type QQuickItem* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QQuickItem, source: QQuickItem) {.error.}
+proc `=sink`(dest: var QQuickItem, source: QQuickItem) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QQuickItemItemChangeData* {.inheritable.} = object
   h*: pointer
   owned*: bool

@@ -25,6 +25,13 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QWebSelectMethod* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebSelectMethod, source: QWebSelectMethod) {.error.}
+proc `=sink`(dest: var QWebSelectMethod, source: QWebSelectMethod) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebNotificationData* {.inheritable.} = object
   h*: pointer
   owned*: bool
@@ -46,9 +53,37 @@ proc delete*(self: sink QWebNotificationData) =
   fcQWebNotificationData_delete(h)
 
 type QWebNotificationPresenter* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebNotificationPresenter, source: QWebNotificationPresenter) {.error.}
+proc `=sink`(dest: var QWebNotificationPresenter, source: QWebNotificationPresenter) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebHapticFeedbackPlayer* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebHapticFeedbackPlayer, source: QWebHapticFeedbackPlayer) {.error.}
+proc `=sink`(dest: var QWebHapticFeedbackPlayer, source: QWebHapticFeedbackPlayer) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebTouchModifier* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebTouchModifier, source: QWebTouchModifier) {.error.}
+proc `=sink`(dest: var QWebTouchModifier, source: QWebTouchModifier) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebSpellChecker* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebSpellChecker, source: QWebSpellChecker) {.error.}
+proc `=sink`(dest: var QWebSpellChecker, source: QWebSpellChecker) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebKitPlatformPlugin* {.inheritable.} = object
   h*: pointer
   owned*: bool

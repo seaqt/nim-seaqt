@@ -22,3 +22,10 @@ proc delete*(self: sink QAbstractVideoBuffer) =
   fcQAbstractVideoBuffer_delete(h)
 
 type QAbstractPlanarVideoBuffer* = object of QAbstractVideoBuffer
+proc `=copy`(dest: var QAbstractPlanarVideoBuffer, source: QAbstractPlanarVideoBuffer) {.error.}
+proc `=sink`(dest: var QAbstractPlanarVideoBuffer, source: QAbstractPlanarVideoBuffer) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

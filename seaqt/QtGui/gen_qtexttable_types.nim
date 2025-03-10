@@ -25,3 +25,10 @@ import ./gen_qtextobject_types
 export gen_qtextobject_types
 
 type QTextTable* = object of gen_qtextobject_types.QTextFrame
+proc `=copy`(dest: var QTextTable, source: QTextTable) {.error.}
+proc `=sink`(dest: var QTextTable, source: QTextTable) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

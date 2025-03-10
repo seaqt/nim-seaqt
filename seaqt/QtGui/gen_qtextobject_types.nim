@@ -2,7 +2,21 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QTextObject* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QTextObject, source: QTextObject) {.error.}
+proc `=sink`(dest: var QTextObject, source: QTextObject) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QTextBlockGroup* = object of QTextObject
+proc `=copy`(dest: var QTextBlockGroup, source: QTextBlockGroup) {.error.}
+proc `=sink`(dest: var QTextBlockGroup, source: QTextBlockGroup) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QTextFrameLayoutData* {.inheritable.} = object
   h*: pointer
   owned*: bool
@@ -27,6 +41,13 @@ proc delete*(self: sink QTextFrameLayoutData) =
   fcQTextFrameLayoutData_delete(h)
 
 type QTextFrame* = object of QTextObject
+proc `=copy`(dest: var QTextFrame, source: QTextFrame) {.error.}
+proc `=sink`(dest: var QTextFrame, source: QTextFrame) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QTextBlockUserData* {.inheritable.} = object
   h*: pointer
   owned*: bool

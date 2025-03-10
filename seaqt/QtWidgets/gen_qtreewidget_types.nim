@@ -25,3 +25,10 @@ import ./gen_qtreeview_types
 export gen_qtreeview_types
 
 type QTreeWidget* = object of gen_qtreeview_types.QTreeView
+proc `=copy`(dest: var QTreeWidget, source: QTreeWidget) {.error.}
+proc `=sink`(dest: var QTreeWidget, source: QTreeWidget) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

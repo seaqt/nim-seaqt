@@ -2,6 +2,13 @@ import ./gen_qmediaobject_types
 export gen_qmediaobject_types
 
 type QCamera* = object of gen_qmediaobject_types.QMediaObject
+proc `=copy`(dest: var QCamera, source: QCamera) {.error.}
+proc `=sink`(dest: var QCamera, source: QCamera) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QCameraFrameRateRange* {.inheritable.} = object
   h*: pointer
   owned*: bool

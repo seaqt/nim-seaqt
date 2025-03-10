@@ -2,6 +2,13 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QWebPage* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebPage, source: QWebPage) {.error.}
+proc `=sink`(dest: var QWebPage, source: QWebPage) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebPageViewportAttributes* {.inheritable.} = object
   h*: pointer
   owned*: bool
@@ -66,6 +73,34 @@ proc delete*(self: sink QWebPageExtensionReturn) =
   fcQWebPageExtensionReturn_delete(h)
 
 type QWebPageChooseMultipleFilesExtensionOption* = object of QWebPageExtensionOption
+proc `=copy`(dest: var QWebPageChooseMultipleFilesExtensionOption, source: QWebPageChooseMultipleFilesExtensionOption) {.error.}
+proc `=sink`(dest: var QWebPageChooseMultipleFilesExtensionOption, source: QWebPageChooseMultipleFilesExtensionOption) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebPageChooseMultipleFilesExtensionReturn* = object of QWebPageExtensionReturn
+proc `=copy`(dest: var QWebPageChooseMultipleFilesExtensionReturn, source: QWebPageChooseMultipleFilesExtensionReturn) {.error.}
+proc `=sink`(dest: var QWebPageChooseMultipleFilesExtensionReturn, source: QWebPageChooseMultipleFilesExtensionReturn) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebPageErrorPageExtensionOption* = object of QWebPageExtensionOption
+proc `=copy`(dest: var QWebPageErrorPageExtensionOption, source: QWebPageErrorPageExtensionOption) {.error.}
+proc `=sink`(dest: var QWebPageErrorPageExtensionOption, source: QWebPageErrorPageExtensionOption) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebPageErrorPageExtensionReturn* = object of QWebPageExtensionReturn
+proc `=copy`(dest: var QWebPageErrorPageExtensionReturn, source: QWebPageErrorPageExtensionReturn) {.error.}
+proc `=sink`(dest: var QWebPageErrorPageExtensionReturn, source: QWebPageErrorPageExtensionReturn) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

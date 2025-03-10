@@ -2,6 +2,13 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 type QEventLoop* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QEventLoop, source: QEventLoop) {.error.}
+proc `=sink`(dest: var QEventLoop, source: QEventLoop) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QEventLoopLocker* {.inheritable.} = object
   h*: pointer
   owned*: bool

@@ -22,5 +22,26 @@ proc delete*(self: sink QLayoutItem) =
   fcQLayoutItem_delete(h)
 
 type QSpacerItem* = object of QLayoutItem
+proc `=copy`(dest: var QSpacerItem, source: QSpacerItem) {.error.}
+proc `=sink`(dest: var QSpacerItem, source: QSpacerItem) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWidgetItem* = object of QLayoutItem
+proc `=copy`(dest: var QWidgetItem, source: QWidgetItem) {.error.}
+proc `=sink`(dest: var QWidgetItem, source: QWidgetItem) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWidgetItemV2* = object of QWidgetItem
+proc `=copy`(dest: var QWidgetItemV2, source: QWidgetItemV2) {.error.}
+proc `=sink`(dest: var QWidgetItemV2, source: QWidgetItemV2) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

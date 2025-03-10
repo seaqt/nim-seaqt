@@ -2,7 +2,21 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QDtlsClientVerifier* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QDtlsClientVerifier, source: QDtlsClientVerifier) {.error.}
+proc `=sink`(dest: var QDtlsClientVerifier, source: QDtlsClientVerifier) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QDtls* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QDtls, source: QDtls) {.error.}
+proc `=sink`(dest: var QDtls, source: QDtls) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QDtlsClientVerifierGeneratorParameters* {.inheritable.} = object
   h*: pointer
   owned*: bool

@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QAbstractNetworkCache* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAbstractNetworkCache, source: QAbstractNetworkCache) {.error.}
+proc `=sink`(dest: var QAbstractNetworkCache, source: QAbstractNetworkCache) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

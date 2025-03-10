@@ -2,6 +2,13 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QWebEngineCookieStore* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QWebEngineCookieStore, source: QWebEngineCookieStore) {.error.}
+proc `=sink`(dest: var QWebEngineCookieStore, source: QWebEngineCookieStore) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QWebEngineCookieStoreFilterRequest* {.inheritable.} = object
   h*: pointer
   owned*: bool

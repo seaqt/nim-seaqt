@@ -2,6 +2,13 @@ import ./gen_qsgmaterialshader_types
 export gen_qsgmaterialshader_types
 
 type QSGMaterialRhiShader* = object of gen_qsgmaterialshader_types.QSGMaterialShader
+proc `=copy`(dest: var QSGMaterialRhiShader, source: QSGMaterialRhiShader) {.error.}
+proc `=sink`(dest: var QSGMaterialRhiShader, source: QSGMaterialRhiShader) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QSGMaterialRhiShaderRenderState* {.inheritable.} = object
   h*: pointer
   owned*: bool

@@ -45,3 +45,10 @@ import ./gen_qtableview_types
 export gen_qtableview_types
 
 type QTableWidget* = object of gen_qtableview_types.QTableView
+proc `=copy`(dest: var QTableWidget, source: QTableWidget) {.error.}
+proc `=sink`(dest: var QTableWidget, source: QTableWidget) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

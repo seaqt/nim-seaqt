@@ -22,6 +22,13 @@ proc delete*(self: sink QQmlTypesExtensionInterface) =
   fcQQmlTypesExtensionInterface_delete(h)
 
 type QQmlExtensionInterface* = object of QQmlTypesExtensionInterface
+proc `=copy`(dest: var QQmlExtensionInterface, source: QQmlExtensionInterface) {.error.}
+proc `=sink`(dest: var QQmlExtensionInterface, source: QQmlExtensionInterface) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QQmlEngineExtensionInterface* {.inheritable.} = object
   h*: pointer
   owned*: bool

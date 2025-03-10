@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QUndoStack* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QUndoStack, source: QUndoStack) {.error.}
+proc `=sink`(dest: var QUndoStack, source: QUndoStack) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

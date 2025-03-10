@@ -25,3 +25,10 @@ import ../QtCore/gen_qobject_types
 export gen_qobject_types
 
 type QAbstractVideoFilter* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAbstractVideoFilter, source: QAbstractVideoFilter) {.error.}
+proc `=sink`(dest: var QAbstractVideoFilter, source: QAbstractVideoFilter) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+

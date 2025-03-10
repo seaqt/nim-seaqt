@@ -22,6 +22,13 @@ proc delete*(self: sink QBasicMutex) =
   fcQBasicMutex_delete(h)
 
 type QMutex* = object of QBasicMutex
+proc `=copy`(dest: var QMutex, source: QMutex) {.error.}
+proc `=sink`(dest: var QMutex, source: QMutex) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QRecursiveMutex* {.inheritable.} = object
   h*: pointer
   owned*: bool

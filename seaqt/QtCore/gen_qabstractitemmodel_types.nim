@@ -45,5 +45,26 @@ import ./gen_qobject_types
 export gen_qobject_types
 
 type QAbstractItemModel* = object of gen_qobject_types.QObject
+proc `=copy`(dest: var QAbstractItemModel, source: QAbstractItemModel) {.error.}
+proc `=sink`(dest: var QAbstractItemModel, source: QAbstractItemModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAbstractTableModel* = object of QAbstractItemModel
+proc `=copy`(dest: var QAbstractTableModel, source: QAbstractTableModel) {.error.}
+proc `=sink`(dest: var QAbstractTableModel, source: QAbstractTableModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
 type QAbstractListModel* = object of QAbstractItemModel
+proc `=copy`(dest: var QAbstractListModel, source: QAbstractListModel) {.error.}
+proc `=sink`(dest: var QAbstractListModel, source: QAbstractListModel) =
+  `=destroy`(dest)
+  wasMoved(dest)
+  dest.h = source.h
+  dest.owned = source.owned
+
