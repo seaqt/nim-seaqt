@@ -39,6 +39,7 @@ QRect* QRect_new2(QPoint* topleft, QPoint* bottomright);
 QRect* QRect_new3(QPoint* topleft, QSize* size);
 QRect* QRect_new4(int left, int top, int width, int height);
 QRect* QRect_new5(QRect* param1);
+
 bool QRect_isNull(const QRect* self);
 bool QRect_isEmpty(const QRect* self);
 bool QRect_isValid(const QRect* self);
@@ -109,6 +110,7 @@ QRect* QRect_operatorPlusAssign(QRect* self, QMargins* margins);
 QRect* QRect_operatorMinusAssign(QRect* self, QMargins* margins);
 bool QRect_contains22(const QRect* self, QRect* r, bool proper);
 bool QRect_contains23(const QRect* self, QPoint* p, bool proper);
+
 void QRect_delete(QRect* self);
 
 QRectF* QRectF_new();
@@ -117,6 +119,7 @@ QRectF* QRectF_new3(QPointF* topleft, QPointF* bottomRight);
 QRectF* QRectF_new4(double left, double top, double width, double height);
 QRectF* QRectF_new5(QRect* rect);
 QRectF* QRectF_new6(QRectF* param1);
+
 bool QRectF_isNull(const QRectF* self);
 bool QRectF_isEmpty(const QRectF* self);
 bool QRectF_isValid(const QRectF* self);
@@ -186,6 +189,7 @@ QRectF* QRectF_operatorPlusAssign(QRectF* self, QMarginsF* margins);
 QRectF* QRectF_operatorMinusAssign(QRectF* self, QMarginsF* margins);
 QRect* QRectF_toRect(const QRectF* self);
 QRect* QRectF_toAlignedRect(const QRectF* self);
+
 void QRectF_delete(QRectF* self);
 
 #ifdef __cplusplus

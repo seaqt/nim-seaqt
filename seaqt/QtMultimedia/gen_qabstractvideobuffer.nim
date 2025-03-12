@@ -60,51 +60,55 @@ export
 type cQAbstractVideoBuffer*{.exportc: "QAbstractVideoBuffer", incompleteStruct.} = object
 type cQAbstractPlanarVideoBuffer*{.exportc: "QAbstractPlanarVideoBuffer", incompleteStruct.} = object
 
-proc fcQAbstractVideoBuffer_release(self: pointer, ): void {.importc: "QAbstractVideoBuffer_release".}
-proc fcQAbstractVideoBuffer_handleType(self: pointer, ): cint {.importc: "QAbstractVideoBuffer_handleType".}
-proc fcQAbstractVideoBuffer_mapMode(self: pointer, ): cint {.importc: "QAbstractVideoBuffer_mapMode".}
+proc fcQAbstractVideoBuffer_release(self: pointer): void {.importc: "QAbstractVideoBuffer_release".}
+proc fcQAbstractVideoBuffer_handleType(self: pointer): cint {.importc: "QAbstractVideoBuffer_handleType".}
+proc fcQAbstractVideoBuffer_mapMode(self: pointer): cint {.importc: "QAbstractVideoBuffer_mapMode".}
 proc fcQAbstractVideoBuffer_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.importc: "QAbstractVideoBuffer_map".}
-proc fcQAbstractVideoBuffer_unmap(self: pointer, ): void {.importc: "QAbstractVideoBuffer_unmap".}
-proc fcQAbstractVideoBuffer_handle(self: pointer, ): pointer {.importc: "QAbstractVideoBuffer_handle".}
+proc fcQAbstractVideoBuffer_unmap(self: pointer): void {.importc: "QAbstractVideoBuffer_unmap".}
+proc fcQAbstractVideoBuffer_handle(self: pointer): pointer {.importc: "QAbstractVideoBuffer_handle".}
+proc fcQAbstractVideoBuffer_vtbl(self: pointer): pointer {.importc: "QAbstractVideoBuffer_vtbl".}
+proc fcQAbstractVideoBuffer_vdata(self: pointer): pointer {.importc: "QAbstractVideoBuffer_vdata".}
 type cQAbstractVideoBufferVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractVideoBufferVTable, self: ptr cQAbstractVideoBuffer) {.cdecl, raises:[], gcsafe.}
-  release*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  mapMode*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  map*: proc(vtbl, self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl, raises: [], gcsafe.}
-  unmap*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  handle*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractVideoBuffer_virtualbase_release(self: pointer, ): void {.importc: "QAbstractVideoBuffer_virtualbase_release".}
-proc fcQAbstractVideoBuffer_virtualbase_handle(self: pointer, ): pointer {.importc: "QAbstractVideoBuffer_virtualbase_handle".}
-proc fcQAbstractVideoBuffer_new(vtbl: pointer, typeVal: cint): ptr cQAbstractVideoBuffer {.importc: "QAbstractVideoBuffer_new".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  release*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  mapMode*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  map*: proc(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl, raises: [], gcsafe.}
+  unmap*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  handle*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractVideoBuffer_virtualbase_release(self: pointer): void {.importc: "QAbstractVideoBuffer_virtualbase_release".}
+proc fcQAbstractVideoBuffer_virtualbase_handle(self: pointer): pointer {.importc: "QAbstractVideoBuffer_virtualbase_handle".}
+proc fcQAbstractVideoBuffer_new(vtbl, vdata: pointer, typeVal: cint): ptr cQAbstractVideoBuffer {.importc: "QAbstractVideoBuffer_new".}
 proc fcQAbstractPlanarVideoBuffer_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.importc: "QAbstractPlanarVideoBuffer_map".}
+proc fcQAbstractPlanarVideoBuffer_vtbl(self: pointer): pointer {.importc: "QAbstractPlanarVideoBuffer_vtbl".}
+proc fcQAbstractPlanarVideoBuffer_vdata(self: pointer): pointer {.importc: "QAbstractPlanarVideoBuffer_vdata".}
 type cQAbstractPlanarVideoBufferVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractPlanarVideoBufferVTable, self: ptr cQAbstractPlanarVideoBuffer) {.cdecl, raises:[], gcsafe.}
-  map*: proc(vtbl, self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl, raises: [], gcsafe.}
-  release*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  mapMode*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  unmap*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  handle*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  map*: proc(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl, raises: [], gcsafe.}
+  release*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  mapMode*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  unmap*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  handle*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
 proc fcQAbstractPlanarVideoBuffer_virtualbase_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.importc: "QAbstractPlanarVideoBuffer_virtualbase_map".}
-proc fcQAbstractPlanarVideoBuffer_virtualbase_release(self: pointer, ): void {.importc: "QAbstractPlanarVideoBuffer_virtualbase_release".}
-proc fcQAbstractPlanarVideoBuffer_virtualbase_handle(self: pointer, ): pointer {.importc: "QAbstractPlanarVideoBuffer_virtualbase_handle".}
-proc fcQAbstractPlanarVideoBuffer_new(vtbl: pointer, typeVal: cint): ptr cQAbstractPlanarVideoBuffer {.importc: "QAbstractPlanarVideoBuffer_new".}
+proc fcQAbstractPlanarVideoBuffer_virtualbase_release(self: pointer): void {.importc: "QAbstractPlanarVideoBuffer_virtualbase_release".}
+proc fcQAbstractPlanarVideoBuffer_virtualbase_handle(self: pointer): pointer {.importc: "QAbstractPlanarVideoBuffer_virtualbase_handle".}
+proc fcQAbstractPlanarVideoBuffer_new(vtbl, vdata: pointer, typeVal: cint): ptr cQAbstractPlanarVideoBuffer {.importc: "QAbstractPlanarVideoBuffer_new".}
 
-proc release*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): void =
+proc release*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): void =
   fcQAbstractVideoBuffer_release(self.h)
 
-proc handleType*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): cint =
+proc handleType*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): cint =
   cint(fcQAbstractVideoBuffer_handleType(self.h))
 
-proc mapMode*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): cint =
+proc mapMode*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): cint =
   cint(fcQAbstractVideoBuffer_mapMode(self.h))
 
 proc map*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 =
   fcQAbstractVideoBuffer_map(self.h, cint(mode), numBytes, bytesPerLine)
 
-proc unmap*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): void =
+proc unmap*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): void =
   fcQAbstractVideoBuffer_unmap(self.h)
 
-proc handle*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): gen_qvariant_types.QVariant =
+proc handle*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractVideoBuffer_handle(self.h), owned: true)
 
 type QAbstractVideoBufferreleaseProc* = proc(self: QAbstractVideoBuffer): void {.raises: [], gcsafe.}
@@ -119,22 +123,22 @@ type QAbstractVideoBufferVTable* {.inheritable, pure.} = object
   map*: QAbstractVideoBuffermapProc
   unmap*: QAbstractVideoBufferunmapProc
   handle*: QAbstractVideoBufferhandleProc
-proc QAbstractVideoBufferrelease*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): void =
+proc QAbstractVideoBufferrelease*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): void =
   fcQAbstractVideoBuffer_virtualbase_release(self.h)
 
-proc miqt_exec_callback_cQAbstractVideoBuffer_release(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoBufferVTable](vtbl)
+proc cQAbstractVideoBuffer_vtable_callback_release(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
   let self = QAbstractVideoBuffer(h: self)
   vtbl[].release(self)
 
-proc miqt_exec_callback_cQAbstractVideoBuffer_mapMode(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoBufferVTable](vtbl)
+proc cQAbstractVideoBuffer_vtable_callback_mapMode(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
   let self = QAbstractVideoBuffer(h: self)
   var virtualReturn = vtbl[].mapMode(self)
   cint(virtualReturn)
 
-proc miqt_exec_callback_cQAbstractVideoBuffer_map(vtbl: pointer, self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoBufferVTable](vtbl)
+proc cQAbstractVideoBuffer_vtable_callback_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
   let self = QAbstractVideoBuffer(h: self)
   let slotval1 = cint(mode)
   let slotval2 = numBytes
@@ -142,16 +146,16 @@ proc miqt_exec_callback_cQAbstractVideoBuffer_map(vtbl: pointer, self: pointer, 
   var virtualReturn = vtbl[].map(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractVideoBuffer_unmap(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoBufferVTable](vtbl)
+proc cQAbstractVideoBuffer_vtable_callback_unmap(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
   let self = QAbstractVideoBuffer(h: self)
   vtbl[].unmap(self)
 
-proc QAbstractVideoBufferhandle*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer, ): gen_qvariant_types.QVariant =
+proc QAbstractVideoBufferhandle*(self: gen_qabstractvideobuffer_types.QAbstractVideoBuffer): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractVideoBuffer_virtualbase_handle(self.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractVideoBuffer_handle(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoBufferVTable](vtbl)
+proc cQAbstractVideoBuffer_vtable_callback_handle(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
   let self = QAbstractVideoBuffer(h: self)
   var virtualReturn = vtbl[].handle(self)
   virtualReturn.owned = false # TODO move?
@@ -161,40 +165,40 @@ proc miqt_exec_callback_cQAbstractVideoBuffer_handle(vtbl: pointer, self: pointe
 
 type VirtualQAbstractVideoBuffer* {.inheritable.} = ref object of QAbstractVideoBuffer
   vtbl*: cQAbstractVideoBufferVTable
-method release*(self: VirtualQAbstractVideoBuffer, ): void {.base.} =
+method release*(self: VirtualQAbstractVideoBuffer): void {.base.} =
   QAbstractVideoBufferrelease(self[])
-proc miqt_exec_method_cQAbstractVideoBuffer_release(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
-  vtbl.release()
+proc cQAbstractVideoBuffer_method_callback_release(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoBuffer](fcQAbstractVideoBuffer_vdata(self))
+  inst.release()
 
-method mapMode*(self: VirtualQAbstractVideoBuffer, ): cint {.base.} =
+method mapMode*(self: VirtualQAbstractVideoBuffer): cint {.base.} =
   raiseAssert("missing implementation of QAbstractVideoBuffer_virtualbase_mapMode")
-proc miqt_exec_method_cQAbstractVideoBuffer_mapMode(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
-  var virtualReturn = vtbl.mapMode()
+proc cQAbstractVideoBuffer_method_callback_mapMode(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoBuffer](fcQAbstractVideoBuffer_vdata(self))
+  var virtualReturn = inst.mapMode()
   cint(virtualReturn)
 
 method map*(self: VirtualQAbstractVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.base.} =
   raiseAssert("missing implementation of QAbstractVideoBuffer_virtualbase_map")
-proc miqt_exec_method_cQAbstractVideoBuffer_map(vtbl: pointer, inst: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
+proc cQAbstractVideoBuffer_method_callback_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoBuffer](fcQAbstractVideoBuffer_vdata(self))
   let slotval1 = cint(mode)
   let slotval2 = numBytes
   let slotval3 = bytesPerLine
-  var virtualReturn = vtbl.map(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.map(slotval1, slotval2, slotval3)
   virtualReturn
 
-method unmap*(self: VirtualQAbstractVideoBuffer, ): void {.base.} =
+method unmap*(self: VirtualQAbstractVideoBuffer): void {.base.} =
   raiseAssert("missing implementation of QAbstractVideoBuffer_virtualbase_unmap")
-proc miqt_exec_method_cQAbstractVideoBuffer_unmap(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
-  vtbl.unmap()
+proc cQAbstractVideoBuffer_method_callback_unmap(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoBuffer](fcQAbstractVideoBuffer_vdata(self))
+  inst.unmap()
 
-method handle*(self: VirtualQAbstractVideoBuffer, ): gen_qvariant_types.QVariant {.base.} =
+method handle*(self: VirtualQAbstractVideoBuffer): gen_qvariant_types.QVariant {.base.} =
   QAbstractVideoBufferhandle(self[])
-proc miqt_exec_method_cQAbstractVideoBuffer_handle(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
-  var virtualReturn = vtbl.handle()
+proc cQAbstractVideoBuffer_method_callback_handle(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoBuffer](fcQAbstractVideoBuffer_vdata(self))
+  var virtualReturn = inst.handle()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -205,37 +209,38 @@ proc create*(T: type gen_qabstractvideobuffer_types.QAbstractVideoBuffer,
     vtbl: ref QAbstractVideoBufferVTable = nil): gen_qabstractvideobuffer_types.QAbstractVideoBuffer =
   let vtbl = if vtbl == nil: new QAbstractVideoBufferVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoBufferVTable, _: ptr cQAbstractVideoBuffer) {.cdecl.} =
-    let vtbl = cast[ref QAbstractVideoBufferVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractVideoBufferVTable](fcQAbstractVideoBuffer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].release):
-    vtbl[].vtbl.release = miqt_exec_callback_cQAbstractVideoBuffer_release
+    vtbl[].vtbl.release = cQAbstractVideoBuffer_vtable_callback_release
   if not isNil(vtbl[].mapMode):
-    vtbl[].vtbl.mapMode = miqt_exec_callback_cQAbstractVideoBuffer_mapMode
+    vtbl[].vtbl.mapMode = cQAbstractVideoBuffer_vtable_callback_mapMode
   if not isNil(vtbl[].map):
-    vtbl[].vtbl.map = miqt_exec_callback_cQAbstractVideoBuffer_map
+    vtbl[].vtbl.map = cQAbstractVideoBuffer_vtable_callback_map
   if not isNil(vtbl[].unmap):
-    vtbl[].vtbl.unmap = miqt_exec_callback_cQAbstractVideoBuffer_unmap
+    vtbl[].vtbl.unmap = cQAbstractVideoBuffer_vtable_callback_unmap
   if not isNil(vtbl[].handle):
-    vtbl[].vtbl.handle = miqt_exec_callback_cQAbstractVideoBuffer_handle
-  gen_qabstractvideobuffer_types.QAbstractVideoBuffer(h: fcQAbstractVideoBuffer_new(addr(vtbl[].vtbl), cint(typeVal)), owned: true)
+    vtbl[].vtbl.handle = cQAbstractVideoBuffer_vtable_callback_handle
+  gen_qabstractvideobuffer_types.QAbstractVideoBuffer(h: fcQAbstractVideoBuffer_new(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal)), owned: true)
 
+const cQAbstractVideoBuffer_mvtbl = cQAbstractVideoBufferVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractVideoBuffer()[])](self.fcQAbstractVideoBuffer_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  release: cQAbstractVideoBuffer_method_callback_release,
+  mapMode: cQAbstractVideoBuffer_method_callback_mapMode,
+  map: cQAbstractVideoBuffer_method_callback_map,
+  unmap: cQAbstractVideoBuffer_method_callback_unmap,
+  handle: cQAbstractVideoBuffer_method_callback_handle,
+)
 proc create*(T: type gen_qabstractvideobuffer_types.QAbstractVideoBuffer,
     typeVal: cint,
-    vtbl: VirtualQAbstractVideoBuffer) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoBufferVTable, _: ptr cQAbstractVideoBuffer) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractVideoBuffer()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoBuffer, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.release = miqt_exec_method_cQAbstractVideoBuffer_release
-  vtbl[].vtbl.mapMode = miqt_exec_method_cQAbstractVideoBuffer_mapMode
-  vtbl[].vtbl.map = miqt_exec_method_cQAbstractVideoBuffer_map
-  vtbl[].vtbl.unmap = miqt_exec_method_cQAbstractVideoBuffer_unmap
-  vtbl[].vtbl.handle = miqt_exec_method_cQAbstractVideoBuffer_handle
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractVideoBuffer_new(addr(vtbl[].vtbl), cint(typeVal))
-  vtbl[].owned = true
+    inst: VirtualQAbstractVideoBuffer) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractVideoBuffer_new(addr(cQAbstractVideoBuffer_mvtbl), addr(inst[]), cint(typeVal))
+  inst[].owned = true
 
 proc map*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 =
   fcQAbstractPlanarVideoBuffer_map(self.h, cint(mode), numBytes, bytesPerLine)
@@ -255,8 +260,8 @@ type QAbstractPlanarVideoBufferVTable* {.inheritable, pure.} = object
 proc QAbstractPlanarVideoBuffermap*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 =
   fcQAbstractPlanarVideoBuffer_virtualbase_map(self.h, cint(mode), numBytes, bytesPerLine)
 
-proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_map(vtbl: pointer, self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
-  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](vtbl)
+proc cQAbstractPlanarVideoBuffer_vtable_callback_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
+  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
   let self = QAbstractPlanarVideoBuffer(h: self)
   let slotval1 = cint(mode)
   let slotval2 = numBytes
@@ -264,30 +269,30 @@ proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_map(vtbl: pointer, self: poi
   var virtualReturn = vtbl[].map(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QAbstractPlanarVideoBufferrelease*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer, ): void =
+proc QAbstractPlanarVideoBufferrelease*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer): void =
   fcQAbstractPlanarVideoBuffer_virtualbase_release(self.h)
 
-proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_release(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](vtbl)
+proc cQAbstractPlanarVideoBuffer_vtable_callback_release(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
   let self = QAbstractPlanarVideoBuffer(h: self)
   vtbl[].release(self)
 
-proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_mapMode(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](vtbl)
+proc cQAbstractPlanarVideoBuffer_vtable_callback_mapMode(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
   let self = QAbstractPlanarVideoBuffer(h: self)
   var virtualReturn = vtbl[].mapMode(self)
   cint(virtualReturn)
 
-proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_unmap(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](vtbl)
+proc cQAbstractPlanarVideoBuffer_vtable_callback_unmap(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
   let self = QAbstractPlanarVideoBuffer(h: self)
   vtbl[].unmap(self)
 
-proc QAbstractPlanarVideoBufferhandle*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer, ): gen_qvariant_types.QVariant =
+proc QAbstractPlanarVideoBufferhandle*(self: gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractPlanarVideoBuffer_virtualbase_handle(self.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractPlanarVideoBuffer_handle(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](vtbl)
+proc cQAbstractPlanarVideoBuffer_vtable_callback_handle(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
   let self = QAbstractPlanarVideoBuffer(h: self)
   var virtualReturn = vtbl[].handle(self)
   virtualReturn.owned = false # TODO move?
@@ -299,38 +304,38 @@ type VirtualQAbstractPlanarVideoBuffer* {.inheritable.} = ref object of QAbstrac
   vtbl*: cQAbstractPlanarVideoBufferVTable
 method map*(self: VirtualQAbstractPlanarVideoBuffer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.base.} =
   QAbstractPlanarVideoBuffermap(self[], mode, numBytes, bytesPerLine)
-proc miqt_exec_method_cQAbstractPlanarVideoBuffer_map(vtbl: pointer, inst: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractPlanarVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
+proc cQAbstractPlanarVideoBuffer_method_callback_map(self: pointer, mode: cint, numBytes: ptr cint, bytesPerLine: ptr cint): ptr uint8 {.cdecl.} =
+  let inst = cast[VirtualQAbstractPlanarVideoBuffer](fcQAbstractPlanarVideoBuffer_vdata(self))
   let slotval1 = cint(mode)
   let slotval2 = numBytes
   let slotval3 = bytesPerLine
-  var virtualReturn = vtbl.map(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.map(slotval1, slotval2, slotval3)
   virtualReturn
 
-method release*(self: VirtualQAbstractPlanarVideoBuffer, ): void {.base.} =
+method release*(self: VirtualQAbstractPlanarVideoBuffer): void {.base.} =
   QAbstractPlanarVideoBufferrelease(self[])
-proc miqt_exec_method_cQAbstractPlanarVideoBuffer_release(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractPlanarVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
-  vtbl.release()
+proc cQAbstractPlanarVideoBuffer_method_callback_release(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractPlanarVideoBuffer](fcQAbstractPlanarVideoBuffer_vdata(self))
+  inst.release()
 
-method mapMode*(self: VirtualQAbstractPlanarVideoBuffer, ): cint {.base.} =
+method mapMode*(self: VirtualQAbstractPlanarVideoBuffer): cint {.base.} =
   raiseAssert("missing implementation of QAbstractPlanarVideoBuffer_virtualbase_mapMode")
-proc miqt_exec_method_cQAbstractPlanarVideoBuffer_mapMode(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractPlanarVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
-  var virtualReturn = vtbl.mapMode()
+proc cQAbstractPlanarVideoBuffer_method_callback_mapMode(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractPlanarVideoBuffer](fcQAbstractPlanarVideoBuffer_vdata(self))
+  var virtualReturn = inst.mapMode()
   cint(virtualReturn)
 
-method unmap*(self: VirtualQAbstractPlanarVideoBuffer, ): void {.base.} =
+method unmap*(self: VirtualQAbstractPlanarVideoBuffer): void {.base.} =
   raiseAssert("missing implementation of QAbstractPlanarVideoBuffer_virtualbase_unmap")
-proc miqt_exec_method_cQAbstractPlanarVideoBuffer_unmap(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractPlanarVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
-  vtbl.unmap()
+proc cQAbstractPlanarVideoBuffer_method_callback_unmap(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractPlanarVideoBuffer](fcQAbstractPlanarVideoBuffer_vdata(self))
+  inst.unmap()
 
-method handle*(self: VirtualQAbstractPlanarVideoBuffer, ): gen_qvariant_types.QVariant {.base.} =
+method handle*(self: VirtualQAbstractPlanarVideoBuffer): gen_qvariant_types.QVariant {.base.} =
   QAbstractPlanarVideoBufferhandle(self[])
-proc miqt_exec_method_cQAbstractPlanarVideoBuffer_handle(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractPlanarVideoBuffer](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
-  var virtualReturn = vtbl.handle()
+proc cQAbstractPlanarVideoBuffer_method_callback_handle(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractPlanarVideoBuffer](fcQAbstractPlanarVideoBuffer_vdata(self))
+  var virtualReturn = inst.handle()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -341,35 +346,36 @@ proc create*(T: type gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer,
     vtbl: ref QAbstractPlanarVideoBufferVTable = nil): gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer =
   let vtbl = if vtbl == nil: new QAbstractPlanarVideoBufferVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractPlanarVideoBufferVTable, _: ptr cQAbstractPlanarVideoBuffer) {.cdecl.} =
-    let vtbl = cast[ref QAbstractPlanarVideoBufferVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractPlanarVideoBufferVTable](fcQAbstractPlanarVideoBuffer_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].map):
-    vtbl[].vtbl.map = miqt_exec_callback_cQAbstractPlanarVideoBuffer_map
+    vtbl[].vtbl.map = cQAbstractPlanarVideoBuffer_vtable_callback_map
   if not isNil(vtbl[].release):
-    vtbl[].vtbl.release = miqt_exec_callback_cQAbstractPlanarVideoBuffer_release
+    vtbl[].vtbl.release = cQAbstractPlanarVideoBuffer_vtable_callback_release
   if not isNil(vtbl[].mapMode):
-    vtbl[].vtbl.mapMode = miqt_exec_callback_cQAbstractPlanarVideoBuffer_mapMode
+    vtbl[].vtbl.mapMode = cQAbstractPlanarVideoBuffer_vtable_callback_mapMode
   if not isNil(vtbl[].unmap):
-    vtbl[].vtbl.unmap = miqt_exec_callback_cQAbstractPlanarVideoBuffer_unmap
+    vtbl[].vtbl.unmap = cQAbstractPlanarVideoBuffer_vtable_callback_unmap
   if not isNil(vtbl[].handle):
-    vtbl[].vtbl.handle = miqt_exec_callback_cQAbstractPlanarVideoBuffer_handle
-  gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer(h: fcQAbstractPlanarVideoBuffer_new(addr(vtbl[].vtbl), cint(typeVal)), owned: true)
+    vtbl[].vtbl.handle = cQAbstractPlanarVideoBuffer_vtable_callback_handle
+  gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer(h: fcQAbstractPlanarVideoBuffer_new(addr(vtbl[].vtbl), addr(vtbl[]), cint(typeVal)), owned: true)
 
+const cQAbstractPlanarVideoBuffer_mvtbl = cQAbstractPlanarVideoBufferVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractPlanarVideoBuffer()[])](self.fcQAbstractPlanarVideoBuffer_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  map: cQAbstractPlanarVideoBuffer_method_callback_map,
+  release: cQAbstractPlanarVideoBuffer_method_callback_release,
+  mapMode: cQAbstractPlanarVideoBuffer_method_callback_mapMode,
+  unmap: cQAbstractPlanarVideoBuffer_method_callback_unmap,
+  handle: cQAbstractPlanarVideoBuffer_method_callback_handle,
+)
 proc create*(T: type gen_qabstractvideobuffer_types.QAbstractPlanarVideoBuffer,
     typeVal: cint,
-    vtbl: VirtualQAbstractPlanarVideoBuffer) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractPlanarVideoBufferVTable, _: ptr cQAbstractPlanarVideoBuffer) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractPlanarVideoBuffer()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractPlanarVideoBuffer, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.map = miqt_exec_method_cQAbstractPlanarVideoBuffer_map
-  vtbl[].vtbl.release = miqt_exec_method_cQAbstractPlanarVideoBuffer_release
-  vtbl[].vtbl.mapMode = miqt_exec_method_cQAbstractPlanarVideoBuffer_mapMode
-  vtbl[].vtbl.unmap = miqt_exec_method_cQAbstractPlanarVideoBuffer_unmap
-  vtbl[].vtbl.handle = miqt_exec_method_cQAbstractPlanarVideoBuffer_handle
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractPlanarVideoBuffer_new(addr(vtbl[].vtbl), cint(typeVal))
-  vtbl[].owned = true
+    inst: VirtualQAbstractPlanarVideoBuffer) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractPlanarVideoBuffer_new(addr(cQAbstractPlanarVideoBuffer_mvtbl), addr(inst[]), cint(typeVal))
+  inst[].owned = true
 

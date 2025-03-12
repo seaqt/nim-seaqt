@@ -2,15 +2,6 @@
 #include <QMarginsF>
 #include <qmargins.h>
 #include "gen_qmargins.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMargins* QMargins_new() {
 	return new QMargins();
 }

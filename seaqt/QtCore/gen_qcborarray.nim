@@ -47,16 +47,16 @@ type cQCborArrayConstIterator*{.exportc: "QCborArray__ConstIterator", incomplete
 
 proc fcQCborArray_operatorAssign(self: pointer, other: pointer): void {.importc: "QCborArray_operatorAssign".}
 proc fcQCborArray_swap(self: pointer, other: pointer): void {.importc: "QCborArray_swap".}
-proc fcQCborArray_toCborValue(self: pointer, ): pointer {.importc: "QCborArray_toCborValue".}
-proc fcQCborArray_size(self: pointer, ): int64 {.importc: "QCborArray_size".}
-proc fcQCborArray_isEmpty(self: pointer, ): bool {.importc: "QCborArray_isEmpty".}
-proc fcQCborArray_clear(self: pointer, ): void {.importc: "QCborArray_clear".}
+proc fcQCborArray_toCborValue(self: pointer): pointer {.importc: "QCborArray_toCborValue".}
+proc fcQCborArray_size(self: pointer): int64 {.importc: "QCborArray_size".}
+proc fcQCborArray_isEmpty(self: pointer): bool {.importc: "QCborArray_isEmpty".}
+proc fcQCborArray_clear(self: pointer): void {.importc: "QCborArray_clear".}
 proc fcQCborArray_at(self: pointer, i: int64): pointer {.importc: "QCborArray_at".}
-proc fcQCborArray_first(self: pointer, ): pointer {.importc: "QCborArray_first".}
-proc fcQCborArray_last(self: pointer, ): pointer {.importc: "QCborArray_last".}
+proc fcQCborArray_first(self: pointer): pointer {.importc: "QCborArray_first".}
+proc fcQCborArray_last(self: pointer): pointer {.importc: "QCborArray_last".}
 proc fcQCborArray_operatorSubscript(self: pointer, i: int64): pointer {.importc: "QCborArray_operatorSubscript".}
-proc fcQCborArray_first2(self: pointer, ): pointer {.importc: "QCborArray_first2".}
-proc fcQCborArray_last2(self: pointer, ): pointer {.importc: "QCborArray_last2".}
+proc fcQCborArray_first2(self: pointer): pointer {.importc: "QCborArray_first2".}
+proc fcQCborArray_last2(self: pointer): pointer {.importc: "QCborArray_last2".}
 proc fcQCborArray_operatorSubscriptWithQsizetype(self: pointer, i: int64): pointer {.importc: "QCborArray_operatorSubscriptWithQsizetype".}
 proc fcQCborArray_insert(self: pointer, i: int64, value: pointer): void {.importc: "QCborArray_insert".}
 proc fcQCborArray_prepend(self: pointer, value: pointer): void {.importc: "QCborArray_prepend".}
@@ -65,43 +65,43 @@ proc fcQCborArray_extract(self: pointer, it: pointer): pointer {.importc: "QCbor
 proc fcQCborArray_extractWithIt(self: pointer, it: pointer): pointer {.importc: "QCborArray_extractWithIt".}
 proc fcQCborArray_removeAt(self: pointer, i: int64): void {.importc: "QCborArray_removeAt".}
 proc fcQCborArray_takeAt(self: pointer, i: int64): pointer {.importc: "QCborArray_takeAt".}
-proc fcQCborArray_removeFirst(self: pointer, ): void {.importc: "QCborArray_removeFirst".}
-proc fcQCborArray_removeLast(self: pointer, ): void {.importc: "QCborArray_removeLast".}
-proc fcQCborArray_takeFirst(self: pointer, ): pointer {.importc: "QCborArray_takeFirst".}
-proc fcQCborArray_takeLast(self: pointer, ): pointer {.importc: "QCborArray_takeLast".}
+proc fcQCborArray_removeFirst(self: pointer): void {.importc: "QCborArray_removeFirst".}
+proc fcQCborArray_removeLast(self: pointer): void {.importc: "QCborArray_removeLast".}
+proc fcQCborArray_takeFirst(self: pointer): pointer {.importc: "QCborArray_takeFirst".}
+proc fcQCborArray_takeLast(self: pointer): pointer {.importc: "QCborArray_takeLast".}
 proc fcQCborArray_contains(self: pointer, value: pointer): bool {.importc: "QCborArray_contains".}
 proc fcQCborArray_compare(self: pointer, other: pointer): cint {.importc: "QCborArray_compare".}
 proc fcQCborArray_operatorEqual(self: pointer, other: pointer): bool {.importc: "QCborArray_operatorEqual".}
 proc fcQCborArray_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QCborArray_operatorNotEqual".}
 proc fcQCborArray_operatorLesser(self: pointer, other: pointer): bool {.importc: "QCborArray_operatorLesser".}
-proc fcQCborArray_begin(self: pointer, ): pointer {.importc: "QCborArray_begin".}
-proc fcQCborArray_constBegin(self: pointer, ): pointer {.importc: "QCborArray_constBegin".}
-proc fcQCborArray_begin2(self: pointer, ): pointer {.importc: "QCborArray_begin2".}
-proc fcQCborArray_cbegin(self: pointer, ): pointer {.importc: "QCborArray_cbegin".}
-proc fcQCborArray_endX(self: pointer, ): pointer {.importc: "QCborArray_end".}
-proc fcQCborArray_constEnd(self: pointer, ): pointer {.importc: "QCborArray_constEnd".}
-proc fcQCborArray_end2(self: pointer, ): pointer {.importc: "QCborArray_end2".}
-proc fcQCborArray_cend(self: pointer, ): pointer {.importc: "QCborArray_cend".}
+proc fcQCborArray_begin(self: pointer): pointer {.importc: "QCborArray_begin".}
+proc fcQCborArray_constBegin(self: pointer): pointer {.importc: "QCborArray_constBegin".}
+proc fcQCborArray_begin2(self: pointer): pointer {.importc: "QCborArray_begin2".}
+proc fcQCborArray_cbegin(self: pointer): pointer {.importc: "QCborArray_cbegin".}
+proc fcQCborArray_endX(self: pointer): pointer {.importc: "QCborArray_end".}
+proc fcQCborArray_constEnd(self: pointer): pointer {.importc: "QCborArray_constEnd".}
+proc fcQCborArray_end2(self: pointer): pointer {.importc: "QCborArray_end2".}
+proc fcQCborArray_cend(self: pointer): pointer {.importc: "QCborArray_cend".}
 proc fcQCborArray_insert2(self: pointer, before: pointer, value: pointer): pointer {.importc: "QCborArray_insert2".}
 proc fcQCborArray_insert3(self: pointer, before: pointer, value: pointer): pointer {.importc: "QCborArray_insert3".}
 proc fcQCborArray_erase(self: pointer, it: pointer): pointer {.importc: "QCborArray_erase".}
 proc fcQCborArray_eraseWithIt(self: pointer, it: pointer): pointer {.importc: "QCborArray_eraseWithIt".}
 proc fcQCborArray_pushBack(self: pointer, t: pointer): void {.importc: "QCborArray_pushBack".}
 proc fcQCborArray_pushFront(self: pointer, t: pointer): void {.importc: "QCborArray_pushFront".}
-proc fcQCborArray_popFront(self: pointer, ): void {.importc: "QCborArray_popFront".}
-proc fcQCborArray_popBack(self: pointer, ): void {.importc: "QCborArray_popBack".}
-proc fcQCborArray_empty(self: pointer, ): bool {.importc: "QCborArray_empty".}
+proc fcQCborArray_popFront(self: pointer): void {.importc: "QCborArray_popFront".}
+proc fcQCborArray_popBack(self: pointer): void {.importc: "QCborArray_popBack".}
+proc fcQCborArray_empty(self: pointer): bool {.importc: "QCborArray_empty".}
 proc fcQCborArray_operatorPlus(self: pointer, v: pointer): pointer {.importc: "QCborArray_operatorPlus".}
 proc fcQCborArray_operatorPlusAssign(self: pointer, v: pointer): pointer {.importc: "QCborArray_operatorPlusAssign".}
 proc fcQCborArray_operatorShiftLeft(self: pointer, v: pointer): pointer {.importc: "QCborArray_operatorShiftLeft".}
 proc fcQCborArray_fromStringList(list: struct_miqt_array): pointer {.importc: "QCborArray_fromStringList".}
 proc fcQCborArray_fromJsonArray(array: pointer): pointer {.importc: "QCborArray_fromJsonArray".}
-proc fcQCborArray_toJsonArray(self: pointer, ): pointer {.importc: "QCborArray_toJsonArray".}
+proc fcQCborArray_toJsonArray(self: pointer): pointer {.importc: "QCborArray_toJsonArray".}
 proc fcQCborArray_new(): ptr cQCborArray {.importc: "QCborArray_new".}
 proc fcQCborArray_new2(other: pointer): ptr cQCborArray {.importc: "QCborArray_new2".}
 proc fcQCborArrayIterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QCborArray__Iterator_operatorAssign".}
-proc fcQCborArrayIterator_operatorMultiply(self: pointer, ): pointer {.importc: "QCborArray__Iterator_operatorMultiply".}
-proc fcQCborArrayIterator_operatorMinusGreater(self: pointer, ): pointer {.importc: "QCborArray__Iterator_operatorMinusGreater".}
+proc fcQCborArrayIterator_operatorMultiply(self: pointer): pointer {.importc: "QCborArray__Iterator_operatorMultiply".}
+proc fcQCborArrayIterator_operatorMinusGreater(self: pointer): pointer {.importc: "QCborArray__Iterator_operatorMinusGreater".}
 proc fcQCborArrayIterator_operatorSubscript(self: pointer, j: int64): pointer {.importc: "QCborArray__Iterator_operatorSubscript".}
 proc fcQCborArrayIterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QCborArray__Iterator_operatorEqual".}
 proc fcQCborArrayIterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QCborArray__Iterator_operatorNotEqual".}
@@ -115,9 +115,9 @@ proc fcQCborArrayIterator_operatorLesserWithOther(self: pointer, other: pointer)
 proc fcQCborArrayIterator_operatorLesserOrEqualWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__Iterator_operatorLesserOrEqualWithOther".}
 proc fcQCborArrayIterator_operatorGreaterWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__Iterator_operatorGreaterWithOther".}
 proc fcQCborArrayIterator_operatorGreaterOrEqualWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__Iterator_operatorGreaterOrEqualWithOther".}
-proc fcQCborArrayIterator_operatorPlusPlus(self: pointer, ): pointer {.importc: "QCborArray__Iterator_operatorPlusPlus".}
+proc fcQCborArrayIterator_operatorPlusPlus(self: pointer): pointer {.importc: "QCborArray__Iterator_operatorPlusPlus".}
 proc fcQCborArrayIterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QCborArray__Iterator_operatorPlusPlusWithInt".}
-proc fcQCborArrayIterator_operatorMinusMinus(self: pointer, ): pointer {.importc: "QCborArray__Iterator_operatorMinusMinus".}
+proc fcQCborArrayIterator_operatorMinusMinus(self: pointer): pointer {.importc: "QCborArray__Iterator_operatorMinusMinus".}
 proc fcQCborArrayIterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QCborArray__Iterator_operatorMinusMinusWithInt".}
 proc fcQCborArrayIterator_operatorPlusAssign(self: pointer, j: int64): pointer {.importc: "QCborArray__Iterator_operatorPlusAssign".}
 proc fcQCborArrayIterator_operatorMinusAssign(self: pointer, j: int64): pointer {.importc: "QCborArray__Iterator_operatorMinusAssign".}
@@ -127,8 +127,8 @@ proc fcQCborArrayIterator_operatorMinusWithQCborArrayIterator(self: pointer, j: 
 proc fcQCborArrayIterator_new(): ptr cQCborArrayIterator {.importc: "QCborArray__Iterator_new".}
 proc fcQCborArrayIterator_new2(param1: pointer): ptr cQCborArrayIterator {.importc: "QCborArray__Iterator_new2".}
 proc fcQCborArrayConstIterator_operatorAssign(self: pointer, other: pointer): void {.importc: "QCborArray__ConstIterator_operatorAssign".}
-proc fcQCborArrayConstIterator_operatorMultiply(self: pointer, ): pointer {.importc: "QCborArray__ConstIterator_operatorMultiply".}
-proc fcQCborArrayConstIterator_operatorMinusGreater(self: pointer, ): pointer {.importc: "QCborArray__ConstIterator_operatorMinusGreater".}
+proc fcQCborArrayConstIterator_operatorMultiply(self: pointer): pointer {.importc: "QCborArray__ConstIterator_operatorMultiply".}
+proc fcQCborArrayConstIterator_operatorMinusGreater(self: pointer): pointer {.importc: "QCborArray__ConstIterator_operatorMinusGreater".}
 proc fcQCborArrayConstIterator_operatorSubscript(self: pointer, j: int64): pointer {.importc: "QCborArray__ConstIterator_operatorSubscript".}
 proc fcQCborArrayConstIterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QCborArray__ConstIterator_operatorEqual".}
 proc fcQCborArrayConstIterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QCborArray__ConstIterator_operatorNotEqual".}
@@ -142,9 +142,9 @@ proc fcQCborArrayConstIterator_operatorLesserWithOther(self: pointer, other: poi
 proc fcQCborArrayConstIterator_operatorLesserOrEqualWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__ConstIterator_operatorLesserOrEqualWithOther".}
 proc fcQCborArrayConstIterator_operatorGreaterWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__ConstIterator_operatorGreaterWithOther".}
 proc fcQCborArrayConstIterator_operatorGreaterOrEqualWithOther(self: pointer, other: pointer): bool {.importc: "QCborArray__ConstIterator_operatorGreaterOrEqualWithOther".}
-proc fcQCborArrayConstIterator_operatorPlusPlus(self: pointer, ): pointer {.importc: "QCborArray__ConstIterator_operatorPlusPlus".}
+proc fcQCborArrayConstIterator_operatorPlusPlus(self: pointer): pointer {.importc: "QCborArray__ConstIterator_operatorPlusPlus".}
 proc fcQCborArrayConstIterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QCborArray__ConstIterator_operatorPlusPlusWithInt".}
-proc fcQCborArrayConstIterator_operatorMinusMinus(self: pointer, ): pointer {.importc: "QCborArray__ConstIterator_operatorMinusMinus".}
+proc fcQCborArrayConstIterator_operatorMinusMinus(self: pointer): pointer {.importc: "QCborArray__ConstIterator_operatorMinusMinus".}
 proc fcQCborArrayConstIterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QCborArray__ConstIterator_operatorMinusMinusWithInt".}
 proc fcQCborArrayConstIterator_operatorPlusAssign(self: pointer, j: int64): pointer {.importc: "QCborArray__ConstIterator_operatorPlusAssign".}
 proc fcQCborArrayConstIterator_operatorMinusAssign(self: pointer, j: int64): pointer {.importc: "QCborArray__ConstIterator_operatorMinusAssign".}
@@ -160,34 +160,34 @@ proc operatorAssign*(self: gen_qcborarray_types.QCborArray, other: gen_qcborarra
 proc swap*(self: gen_qcborarray_types.QCborArray, other: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_swap(self.h, other.h)
 
-proc toCborValue*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValue =
+proc toCborValue*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_toCborValue(self.h), owned: true)
 
-proc size*(self: gen_qcborarray_types.QCborArray, ): int64 =
+proc size*(self: gen_qcborarray_types.QCborArray): int64 =
   fcQCborArray_size(self.h)
 
-proc isEmpty*(self: gen_qcborarray_types.QCborArray, ): bool =
+proc isEmpty*(self: gen_qcborarray_types.QCborArray): bool =
   fcQCborArray_isEmpty(self.h)
 
-proc clear*(self: gen_qcborarray_types.QCborArray, ): void =
+proc clear*(self: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_clear(self.h)
 
 proc at*(self: gen_qcborarray_types.QCborArray, i: int64): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_at(self.h, i), owned: true)
 
-proc first*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValue =
+proc first*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_first(self.h), owned: true)
 
-proc last*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValue =
+proc last*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_last(self.h), owned: true)
 
 proc operatorSubscript*(self: gen_qcborarray_types.QCborArray, i: int64): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_operatorSubscript(self.h, i), owned: true)
 
-proc first2*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValueRef =
+proc first2*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArray_first2(self.h), owned: true)
 
-proc last2*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValueRef =
+proc last2*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArray_last2(self.h), owned: true)
 
 proc operatorSubscript2*(self: gen_qcborarray_types.QCborArray, i: int64): gen_qcborvalue_types.QCborValueRef =
@@ -214,16 +214,16 @@ proc removeAt*(self: gen_qcborarray_types.QCborArray, i: int64): void =
 proc takeAt*(self: gen_qcborarray_types.QCborArray, i: int64): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_takeAt(self.h, i), owned: true)
 
-proc removeFirst*(self: gen_qcborarray_types.QCborArray, ): void =
+proc removeFirst*(self: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_removeFirst(self.h)
 
-proc removeLast*(self: gen_qcborarray_types.QCborArray, ): void =
+proc removeLast*(self: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_removeLast(self.h)
 
-proc takeFirst*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValue =
+proc takeFirst*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_takeFirst(self.h), owned: true)
 
-proc takeLast*(self: gen_qcborarray_types.QCborArray, ): gen_qcborvalue_types.QCborValue =
+proc takeLast*(self: gen_qcborarray_types.QCborArray): gen_qcborvalue_types.QCborValue =
   gen_qcborvalue_types.QCborValue(h: fcQCborArray_takeLast(self.h), owned: true)
 
 proc contains*(self: gen_qcborarray_types.QCborArray, value: gen_qcborvalue_types.QCborValue): bool =
@@ -241,28 +241,28 @@ proc operatorNotEqual*(self: gen_qcborarray_types.QCborArray, other: gen_qcborar
 proc operatorLesser*(self: gen_qcborarray_types.QCborArray, other: gen_qcborarray_types.QCborArray): bool =
   fcQCborArray_operatorLesser(self.h, other.h)
 
-proc begin*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayIterator =
+proc begin*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayIterator =
   gen_qcborarray_types.QCborArrayIterator(h: fcQCborArray_begin(self.h), owned: true)
 
-proc constBegin*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc constBegin*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_constBegin(self.h), owned: true)
 
-proc begin2*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc begin2*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_begin2(self.h), owned: true)
 
-proc cbegin*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc cbegin*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_cbegin(self.h), owned: true)
 
-proc endX*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayIterator =
+proc endX*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayIterator =
   gen_qcborarray_types.QCborArrayIterator(h: fcQCborArray_endX(self.h), owned: true)
 
-proc constEnd*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc constEnd*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_constEnd(self.h), owned: true)
 
-proc endX2*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc endX2*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_end2(self.h), owned: true)
 
-proc cend*(self: gen_qcborarray_types.QCborArray, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc cend*(self: gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArray_cend(self.h), owned: true)
 
 proc insert*(self: gen_qcborarray_types.QCborArray, before: gen_qcborarray_types.QCborArrayIterator, value: gen_qcborvalue_types.QCborValue): gen_qcborarray_types.QCborArrayIterator =
@@ -283,13 +283,13 @@ proc pushBack*(self: gen_qcborarray_types.QCborArray, t: gen_qcborvalue_types.QC
 proc pushFront*(self: gen_qcborarray_types.QCborArray, t: gen_qcborvalue_types.QCborValue): void =
   fcQCborArray_pushFront(self.h, t.h)
 
-proc popFront*(self: gen_qcborarray_types.QCborArray, ): void =
+proc popFront*(self: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_popFront(self.h)
 
-proc popBack*(self: gen_qcborarray_types.QCborArray, ): void =
+proc popBack*(self: gen_qcborarray_types.QCborArray): void =
   fcQCborArray_popBack(self.h)
 
-proc empty*(self: gen_qcborarray_types.QCborArray, ): bool =
+proc empty*(self: gen_qcborarray_types.QCborArray): bool =
   fcQCborArray_empty(self.h)
 
 proc operatorPlus*(self: gen_qcborarray_types.QCborArray, v: gen_qcborvalue_types.QCborValue): gen_qcborarray_types.QCborArray =
@@ -311,7 +311,7 @@ proc fromStringList*(_: type gen_qcborarray_types.QCborArray, list: seq[string])
 proc fromJsonArray*(_: type gen_qcborarray_types.QCborArray, array: gen_qjsonarray_types.QJsonArray): gen_qcborarray_types.QCborArray =
   gen_qcborarray_types.QCborArray(h: fcQCborArray_fromJsonArray(array.h), owned: true)
 
-proc toJsonArray*(self: gen_qcborarray_types.QCborArray, ): gen_qjsonarray_types.QJsonArray =
+proc toJsonArray*(self: gen_qcborarray_types.QCborArray): gen_qjsonarray_types.QJsonArray =
   gen_qjsonarray_types.QJsonArray(h: fcQCborArray_toJsonArray(self.h), owned: true)
 
 proc create*(T: type gen_qcborarray_types.QCborArray): gen_qcborarray_types.QCborArray =
@@ -324,10 +324,10 @@ proc create*(T: type gen_qcborarray_types.QCborArray,
 proc operatorAssign*(self: gen_qcborarray_types.QCborArrayIterator, other: gen_qcborarray_types.QCborArrayIterator): void =
   fcQCborArrayIterator_operatorAssign(self.h, other.h)
 
-proc operatorMultiply*(self: gen_qcborarray_types.QCborArrayIterator, ): gen_qcborvalue_types.QCborValueRef =
+proc operatorMultiply*(self: gen_qcborarray_types.QCborArrayIterator): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArrayIterator_operatorMultiply(self.h), owned: true)
 
-proc operatorMinusGreater*(self: gen_qcborarray_types.QCborArrayIterator, ): gen_qcborvalue_types.QCborValueRef =
+proc operatorMinusGreater*(self: gen_qcborarray_types.QCborArrayIterator): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArrayIterator_operatorMinusGreater(self.h), owned: false)
 
 proc operatorSubscript*(self: gen_qcborarray_types.QCborArrayIterator, j: int64): gen_qcborvalue_types.QCborValueRef =
@@ -369,13 +369,13 @@ proc operatorGreater*(self: gen_qcborarray_types.QCborArrayIterator, other: gen_
 proc operatorGreaterOrEqual*(self: gen_qcborarray_types.QCborArrayIterator, other: gen_qcborarray_types.QCborArrayConstIterator): bool =
   fcQCborArrayIterator_operatorGreaterOrEqualWithOther(self.h, other.h)
 
-proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayIterator, ): gen_qcborarray_types.QCborArrayIterator =
+proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayIterator): gen_qcborarray_types.QCborArrayIterator =
   gen_qcborarray_types.QCborArrayIterator(h: fcQCborArrayIterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayIterator, param1: cint): gen_qcborarray_types.QCborArrayIterator =
   gen_qcborarray_types.QCborArrayIterator(h: fcQCborArrayIterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
-proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayIterator, ): gen_qcborarray_types.QCborArrayIterator =
+proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayIterator): gen_qcborarray_types.QCborArrayIterator =
   gen_qcborarray_types.QCborArrayIterator(h: fcQCborArrayIterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayIterator, param1: cint): gen_qcborarray_types.QCborArrayIterator =
@@ -406,10 +406,10 @@ proc create*(T: type gen_qcborarray_types.QCborArrayIterator,
 proc operatorAssign*(self: gen_qcborarray_types.QCborArrayConstIterator, other: gen_qcborarray_types.QCborArrayConstIterator): void =
   fcQCborArrayConstIterator_operatorAssign(self.h, other.h)
 
-proc operatorMultiply*(self: gen_qcborarray_types.QCborArrayConstIterator, ): gen_qcborvalue_types.QCborValueRef =
+proc operatorMultiply*(self: gen_qcborarray_types.QCborArrayConstIterator): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArrayConstIterator_operatorMultiply(self.h), owned: true)
 
-proc operatorMinusGreater*(self: gen_qcborarray_types.QCborArrayConstIterator, ): gen_qcborvalue_types.QCborValueRef =
+proc operatorMinusGreater*(self: gen_qcborarray_types.QCborArrayConstIterator): gen_qcborvalue_types.QCborValueRef =
   gen_qcborvalue_types.QCborValueRef(h: fcQCborArrayConstIterator_operatorMinusGreater(self.h), owned: false)
 
 proc operatorSubscript*(self: gen_qcborarray_types.QCborArrayConstIterator, j: int64): gen_qcborvalue_types.QCborValueRef =
@@ -451,13 +451,13 @@ proc operatorGreater*(self: gen_qcborarray_types.QCborArrayConstIterator, other:
 proc operatorGreaterOrEqual*(self: gen_qcborarray_types.QCborArrayConstIterator, other: gen_qcborarray_types.QCborArrayConstIterator): bool =
   fcQCborArrayConstIterator_operatorGreaterOrEqualWithOther(self.h, other.h)
 
-proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayConstIterator, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayConstIterator): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArrayConstIterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qcborarray_types.QCborArrayConstIterator, param1: cint): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArrayConstIterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
-proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayConstIterator, ): gen_qcborarray_types.QCborArrayConstIterator =
+proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayConstIterator): gen_qcborarray_types.QCborArrayConstIterator =
   gen_qcborarray_types.QCborArrayConstIterator(h: fcQCborArrayConstIterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qcborarray_types.QCborArrayConstIterator, param1: cint): gen_qcborarray_types.QCborArrayConstIterator =

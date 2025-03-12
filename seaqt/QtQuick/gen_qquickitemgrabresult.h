@@ -49,6 +49,7 @@ struct miqt_string QQuickItemGrabResult_tr2(const char* s, const char* c);
 struct miqt_string QQuickItemGrabResult_tr3(const char* s, const char* c, int n);
 struct miqt_string QQuickItemGrabResult_trUtf82(const char* s, const char* c);
 struct miqt_string QQuickItemGrabResult_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QQuickItemGrabResult_staticMetaObject();
 void QQuickItemGrabResult_delete(QQuickItemGrabResult* self);
 

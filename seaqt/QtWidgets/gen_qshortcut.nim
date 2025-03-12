@@ -54,44 +54,46 @@ export
 
 type cQShortcut*{.exportc: "QShortcut", incompleteStruct.} = object
 
-proc fcQShortcut_metaObject(self: pointer, ): pointer {.importc: "QShortcut_metaObject".}
+proc fcQShortcut_metaObject(self: pointer): pointer {.importc: "QShortcut_metaObject".}
 proc fcQShortcut_metacast(self: pointer, param1: cstring): pointer {.importc: "QShortcut_metacast".}
 proc fcQShortcut_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QShortcut_metacall".}
 proc fcQShortcut_tr(s: cstring): struct_miqt_string {.importc: "QShortcut_tr".}
 proc fcQShortcut_trUtf8(s: cstring): struct_miqt_string {.importc: "QShortcut_trUtf8".}
 proc fcQShortcut_setKey(self: pointer, key: pointer): void {.importc: "QShortcut_setKey".}
-proc fcQShortcut_key(self: pointer, ): pointer {.importc: "QShortcut_key".}
+proc fcQShortcut_key(self: pointer): pointer {.importc: "QShortcut_key".}
 proc fcQShortcut_setEnabled(self: pointer, enable: bool): void {.importc: "QShortcut_setEnabled".}
-proc fcQShortcut_isEnabled(self: pointer, ): bool {.importc: "QShortcut_isEnabled".}
+proc fcQShortcut_isEnabled(self: pointer): bool {.importc: "QShortcut_isEnabled".}
 proc fcQShortcut_setContext(self: pointer, context: cint): void {.importc: "QShortcut_setContext".}
-proc fcQShortcut_context(self: pointer, ): cint {.importc: "QShortcut_context".}
+proc fcQShortcut_context(self: pointer): cint {.importc: "QShortcut_context".}
 proc fcQShortcut_setWhatsThis(self: pointer, text: struct_miqt_string): void {.importc: "QShortcut_setWhatsThis".}
-proc fcQShortcut_whatsThis(self: pointer, ): struct_miqt_string {.importc: "QShortcut_whatsThis".}
+proc fcQShortcut_whatsThis(self: pointer): struct_miqt_string {.importc: "QShortcut_whatsThis".}
 proc fcQShortcut_setAutoRepeat(self: pointer, on: bool): void {.importc: "QShortcut_setAutoRepeat".}
-proc fcQShortcut_autoRepeat(self: pointer, ): bool {.importc: "QShortcut_autoRepeat".}
-proc fcQShortcut_id(self: pointer, ): cint {.importc: "QShortcut_id".}
-proc fcQShortcut_parentWidget(self: pointer, ): pointer {.importc: "QShortcut_parentWidget".}
-proc fcQShortcut_activated(self: pointer, ): void {.importc: "QShortcut_activated".}
+proc fcQShortcut_autoRepeat(self: pointer): bool {.importc: "QShortcut_autoRepeat".}
+proc fcQShortcut_id(self: pointer): cint {.importc: "QShortcut_id".}
+proc fcQShortcut_parentWidget(self: pointer): pointer {.importc: "QShortcut_parentWidget".}
+proc fcQShortcut_activated(self: pointer): void {.importc: "QShortcut_activated".}
 proc fcQShortcut_connect_activated(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activated".}
-proc fcQShortcut_activatedAmbiguously(self: pointer, ): void {.importc: "QShortcut_activatedAmbiguously".}
+proc fcQShortcut_activatedAmbiguously(self: pointer): void {.importc: "QShortcut_activatedAmbiguously".}
 proc fcQShortcut_connect_activatedAmbiguously(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QShortcut_connect_activatedAmbiguously".}
 proc fcQShortcut_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QShortcut_tr2".}
 proc fcQShortcut_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QShortcut_tr3".}
 proc fcQShortcut_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QShortcut_trUtf82".}
 proc fcQShortcut_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QShortcut_trUtf83".}
+proc fcQShortcut_vtbl(self: pointer): pointer {.importc: "QShortcut_vtbl".}
+proc fcQShortcut_vdata(self: pointer): pointer {.importc: "QShortcut_vdata".}
 type cQShortcutVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQShortcutVTable, self: ptr cQShortcut) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQShortcut_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QShortcut_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQShortcut_virtualbase_metaObject(self: pointer): pointer {.importc: "QShortcut_virtualbase_metaObject".}
 proc fcQShortcut_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QShortcut_virtualbase_metacast".}
 proc fcQShortcut_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QShortcut_virtualbase_metacall".}
 proc fcQShortcut_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QShortcut_virtualbase_event".}
@@ -101,18 +103,18 @@ proc fcQShortcut_virtualbase_childEvent(self: pointer, event: pointer): void {.i
 proc fcQShortcut_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QShortcut_virtualbase_customEvent".}
 proc fcQShortcut_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QShortcut_virtualbase_connectNotify".}
 proc fcQShortcut_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QShortcut_virtualbase_disconnectNotify".}
-proc fcQShortcut_protectedbase_sender(self: pointer, ): pointer {.importc: "QShortcut_protectedbase_sender".}
-proc fcQShortcut_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QShortcut_protectedbase_senderSignalIndex".}
+proc fcQShortcut_protectedbase_sender(self: pointer): pointer {.importc: "QShortcut_protectedbase_sender".}
+proc fcQShortcut_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QShortcut_protectedbase_senderSignalIndex".}
 proc fcQShortcut_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QShortcut_protectedbase_receivers".}
 proc fcQShortcut_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QShortcut_protectedbase_isSignalConnected".}
-proc fcQShortcut_new(vtbl: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new".}
-proc fcQShortcut_new2(vtbl: pointer, key: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new2".}
-proc fcQShortcut_new3(vtbl: pointer, key: pointer, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new3".}
-proc fcQShortcut_new4(vtbl: pointer, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new4".}
-proc fcQShortcut_new5(vtbl: pointer, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring, shortcutContext: cint): ptr cQShortcut {.importc: "QShortcut_new5".}
+proc fcQShortcut_new(vtbl, vdata: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new".}
+proc fcQShortcut_new2(vtbl, vdata: pointer, key: pointer, parent: pointer): ptr cQShortcut {.importc: "QShortcut_new2".}
+proc fcQShortcut_new3(vtbl, vdata: pointer, key: pointer, parent: pointer, member: cstring): ptr cQShortcut {.importc: "QShortcut_new3".}
+proc fcQShortcut_new4(vtbl, vdata: pointer, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring): ptr cQShortcut {.importc: "QShortcut_new4".}
+proc fcQShortcut_new5(vtbl, vdata: pointer, key: pointer, parent: pointer, member: cstring, ambiguousMember: cstring, shortcutContext: cint): ptr cQShortcut {.importc: "QShortcut_new5".}
 proc fcQShortcut_staticMetaObject(): pointer {.importc: "QShortcut_staticMetaObject".}
 
-proc metaObject*(self: gen_qshortcut_types.QShortcut, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qshortcut_types.QShortcut): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQShortcut_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qshortcut_types.QShortcut, param1: cstring): pointer =
@@ -136,25 +138,25 @@ proc trUtf8*(_: type gen_qshortcut_types.QShortcut, s: cstring): string =
 proc setKey*(self: gen_qshortcut_types.QShortcut, key: gen_qkeysequence_types.QKeySequence): void =
   fcQShortcut_setKey(self.h, key.h)
 
-proc key*(self: gen_qshortcut_types.QShortcut, ): gen_qkeysequence_types.QKeySequence =
+proc key*(self: gen_qshortcut_types.QShortcut): gen_qkeysequence_types.QKeySequence =
   gen_qkeysequence_types.QKeySequence(h: fcQShortcut_key(self.h), owned: true)
 
 proc setEnabled*(self: gen_qshortcut_types.QShortcut, enable: bool): void =
   fcQShortcut_setEnabled(self.h, enable)
 
-proc isEnabled*(self: gen_qshortcut_types.QShortcut, ): bool =
+proc isEnabled*(self: gen_qshortcut_types.QShortcut): bool =
   fcQShortcut_isEnabled(self.h)
 
 proc setContext*(self: gen_qshortcut_types.QShortcut, context: cint): void =
   fcQShortcut_setContext(self.h, cint(context))
 
-proc context*(self: gen_qshortcut_types.QShortcut, ): cint =
+proc context*(self: gen_qshortcut_types.QShortcut): cint =
   cint(fcQShortcut_context(self.h))
 
 proc setWhatsThis*(self: gen_qshortcut_types.QShortcut, text: string): void =
   fcQShortcut_setWhatsThis(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc whatsThis*(self: gen_qshortcut_types.QShortcut, ): string =
+proc whatsThis*(self: gen_qshortcut_types.QShortcut): string =
   let v_ms = fcQShortcut_whatsThis(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -163,24 +165,24 @@ proc whatsThis*(self: gen_qshortcut_types.QShortcut, ): string =
 proc setAutoRepeat*(self: gen_qshortcut_types.QShortcut, on: bool): void =
   fcQShortcut_setAutoRepeat(self.h, on)
 
-proc autoRepeat*(self: gen_qshortcut_types.QShortcut, ): bool =
+proc autoRepeat*(self: gen_qshortcut_types.QShortcut): bool =
   fcQShortcut_autoRepeat(self.h)
 
-proc id*(self: gen_qshortcut_types.QShortcut, ): cint =
+proc id*(self: gen_qshortcut_types.QShortcut): cint =
   fcQShortcut_id(self.h)
 
-proc parentWidget*(self: gen_qshortcut_types.QShortcut, ): gen_qwidget_types.QWidget =
+proc parentWidget*(self: gen_qshortcut_types.QShortcut): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQShortcut_parentWidget(self.h), owned: false)
 
-proc activated*(self: gen_qshortcut_types.QShortcut, ): void =
+proc activated*(self: gen_qshortcut_types.QShortcut): void =
   fcQShortcut_activated(self.h)
 
 type QShortcutactivatedSlot* = proc()
-proc miqt_exec_callback_cQShortcut_activated(slot: int) {.cdecl.} =
+proc cQShortcut_slot_callback_activated(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QShortcutactivatedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQShortcut_activated_release(slot: int) {.cdecl.} =
+proc cQShortcut_slot_callback_activated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QShortcutactivatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -188,17 +190,17 @@ proc onactivated*(self: gen_qshortcut_types.QShortcut, slot: QShortcutactivatedS
   var tmp = new QShortcutactivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQShortcut_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQShortcut_activated, miqt_exec_callback_cQShortcut_activated_release)
+  fcQShortcut_connect_activated(self.h, cast[int](addr tmp[]), cQShortcut_slot_callback_activated, cQShortcut_slot_callback_activated_release)
 
-proc activatedAmbiguously*(self: gen_qshortcut_types.QShortcut, ): void =
+proc activatedAmbiguously*(self: gen_qshortcut_types.QShortcut): void =
   fcQShortcut_activatedAmbiguously(self.h)
 
 type QShortcutactivatedAmbiguouslySlot* = proc()
-proc miqt_exec_callback_cQShortcut_activatedAmbiguously(slot: int) {.cdecl.} =
+proc cQShortcut_slot_callback_activatedAmbiguously(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QShortcutactivatedAmbiguouslySlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQShortcut_activatedAmbiguously_release(slot: int) {.cdecl.} =
+proc cQShortcut_slot_callback_activatedAmbiguously_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QShortcutactivatedAmbiguouslySlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -206,7 +208,7 @@ proc onactivatedAmbiguously*(self: gen_qshortcut_types.QShortcut, slot: QShortcu
   var tmp = new QShortcutactivatedAmbiguouslySlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQShortcut_connect_activatedAmbiguously(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQShortcut_activatedAmbiguously, miqt_exec_callback_cQShortcut_activatedAmbiguously_release)
+  fcQShortcut_connect_activatedAmbiguously(self.h, cast[int](addr tmp[]), cQShortcut_slot_callback_activatedAmbiguously, cQShortcut_slot_callback_activatedAmbiguously_release)
 
 proc tr*(_: type gen_qshortcut_types.QShortcut, s: cstring, c: cstring): string =
   let v_ms = fcQShortcut_tr2(s, c)
@@ -254,11 +256,11 @@ type QShortcutVTable* {.inheritable, pure.} = object
   customEvent*: QShortcutcustomEventProc
   connectNotify*: QShortcutconnectNotifyProc
   disconnectNotify*: QShortcutdisconnectNotifyProc
-proc QShortcutmetaObject*(self: gen_qshortcut_types.QShortcut, ): gen_qobjectdefs_types.QMetaObject =
+proc QShortcutmetaObject*(self: gen_qshortcut_types.QShortcut): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQShortcut_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQShortcut_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -269,8 +271,8 @@ proc miqt_exec_callback_cQShortcut_metaObject(vtbl: pointer, self: pointer): poi
 proc QShortcutmetacast*(self: gen_qshortcut_types.QShortcut, param1: cstring): pointer =
   fcQShortcut_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQShortcut_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -279,8 +281,8 @@ proc miqt_exec_callback_cQShortcut_metacast(vtbl: pointer, self: pointer, param1
 proc QShortcutmetacall*(self: gen_qshortcut_types.QShortcut, param1: cint, param2: cint, param3: pointer): cint =
   fcQShortcut_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQShortcut_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -291,8 +293,8 @@ proc miqt_exec_callback_cQShortcut_metacall(vtbl: pointer, self: pointer, param1
 proc QShortcutevent*(self: gen_qshortcut_types.QShortcut, e: gen_qcoreevent_types.QEvent): bool =
   fcQShortcut_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQShortcut_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -301,8 +303,8 @@ proc miqt_exec_callback_cQShortcut_event(vtbl: pointer, self: pointer, e: pointe
 proc QShortcuteventFilter*(self: gen_qshortcut_types.QShortcut, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQShortcut_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQShortcut_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -312,8 +314,8 @@ proc miqt_exec_callback_cQShortcut_eventFilter(vtbl: pointer, self: pointer, wat
 proc QShortcuttimerEvent*(self: gen_qshortcut_types.QShortcut, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQShortcut_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQShortcut_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -321,8 +323,8 @@ proc miqt_exec_callback_cQShortcut_timerEvent(vtbl: pointer, self: pointer, even
 proc QShortcutchildEvent*(self: gen_qshortcut_types.QShortcut, event: gen_qcoreevent_types.QChildEvent): void =
   fcQShortcut_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQShortcut_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -330,8 +332,8 @@ proc miqt_exec_callback_cQShortcut_childEvent(vtbl: pointer, self: pointer, even
 proc QShortcutcustomEvent*(self: gen_qshortcut_types.QShortcut, event: gen_qcoreevent_types.QEvent): void =
   fcQShortcut_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQShortcut_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -339,8 +341,8 @@ proc miqt_exec_callback_cQShortcut_customEvent(vtbl: pointer, self: pointer, eve
 proc QShortcutconnectNotify*(self: gen_qshortcut_types.QShortcut, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQShortcut_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQShortcut_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -348,19 +350,19 @@ proc miqt_exec_callback_cQShortcut_connectNotify(vtbl: pointer, self: pointer, s
 proc QShortcutdisconnectNotify*(self: gen_qshortcut_types.QShortcut, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQShortcut_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQShortcut_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QShortcutVTable](vtbl)
+proc cQShortcut_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QShortcutVTable](fcQShortcut_vdata(self))
   let self = QShortcut(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQShortcut* {.inheritable.} = ref object of QShortcut
   vtbl*: cQShortcutVTable
-method metaObject*(self: VirtualQShortcut, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQShortcut): gen_qobjectdefs_types.QMetaObject {.base.} =
   QShortcutmetaObject(self[])
-proc miqt_exec_method_cQShortcut_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQShortcut_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -368,78 +370,78 @@ proc miqt_exec_method_cQShortcut_metaObject(vtbl: pointer, inst: pointer): point
 
 method metacast*(self: VirtualQShortcut, param1: cstring): pointer {.base.} =
   QShortcutmetacast(self[], param1)
-proc miqt_exec_method_cQShortcut_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQShortcut, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QShortcutmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQShortcut_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method event*(self: VirtualQShortcut, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QShortcutevent(self[], e)
-proc miqt_exec_method_cQShortcut_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQShortcut, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QShortcuteventFilter(self[], watched, event)
-proc miqt_exec_method_cQShortcut_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQShortcut, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QShortcuttimerEvent(self[], event)
-proc miqt_exec_method_cQShortcut_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQShortcut, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QShortcutchildEvent(self[], event)
-proc miqt_exec_method_cQShortcut_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQShortcut, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QShortcutcustomEvent(self[], event)
-proc miqt_exec_method_cQShortcut_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQShortcut, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QShortcutconnectNotify(self[], signal)
-proc miqt_exec_method_cQShortcut_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQShortcut, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QShortcutdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQShortcut_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQShortcut](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
+proc cQShortcut_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQShortcut](fcQShortcut_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qshortcut_types.QShortcut, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qshortcut_types.QShortcut): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQShortcut_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qshortcut_types.QShortcut, ): cint =
+proc senderSignalIndex*(self: gen_qshortcut_types.QShortcut): cint =
   fcQShortcut_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qshortcut_types.QShortcut, signal: cstring): cint =
@@ -453,260 +455,201 @@ proc create*(T: type gen_qshortcut_types.QShortcut,
     vtbl: ref QShortcutVTable = nil): gen_qshortcut_types.QShortcut =
   let vtbl = if vtbl == nil: new QShortcutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ref QShortcutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QShortcutVTable](fcQShortcut_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQShortcut_metaObject
+    vtbl[].vtbl.metaObject = cQShortcut_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQShortcut_metacast
+    vtbl[].vtbl.metacast = cQShortcut_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQShortcut_metacall
+    vtbl[].vtbl.metacall = cQShortcut_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQShortcut_event
+    vtbl[].vtbl.event = cQShortcut_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQShortcut_eventFilter
+    vtbl[].vtbl.eventFilter = cQShortcut_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQShortcut_timerEvent
+    vtbl[].vtbl.timerEvent = cQShortcut_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQShortcut_childEvent
+    vtbl[].vtbl.childEvent = cQShortcut_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQShortcut_customEvent
+    vtbl[].vtbl.customEvent = cQShortcut_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQShortcut_connectNotify
+    vtbl[].vtbl.connectNotify = cQShortcut_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQShortcut_disconnectNotify
-  gen_qshortcut_types.QShortcut(h: fcQShortcut_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQShortcut_vtable_callback_disconnectNotify
+  gen_qshortcut_types.QShortcut(h: fcQShortcut_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget,
     vtbl: ref QShortcutVTable = nil): gen_qshortcut_types.QShortcut =
   let vtbl = if vtbl == nil: new QShortcutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ref QShortcutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QShortcutVTable](fcQShortcut_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQShortcut_metaObject
+    vtbl[].vtbl.metaObject = cQShortcut_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQShortcut_metacast
+    vtbl[].vtbl.metacast = cQShortcut_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQShortcut_metacall
+    vtbl[].vtbl.metacall = cQShortcut_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQShortcut_event
+    vtbl[].vtbl.event = cQShortcut_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQShortcut_eventFilter
+    vtbl[].vtbl.eventFilter = cQShortcut_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQShortcut_timerEvent
+    vtbl[].vtbl.timerEvent = cQShortcut_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQShortcut_childEvent
+    vtbl[].vtbl.childEvent = cQShortcut_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQShortcut_customEvent
+    vtbl[].vtbl.customEvent = cQShortcut_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQShortcut_connectNotify
+    vtbl[].vtbl.connectNotify = cQShortcut_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQShortcut_disconnectNotify
-  gen_qshortcut_types.QShortcut(h: fcQShortcut_new2(addr(vtbl[].vtbl), key.h, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQShortcut_vtable_callback_disconnectNotify
+  gen_qshortcut_types.QShortcut(h: fcQShortcut_new2(addr(vtbl[].vtbl), addr(vtbl[]), key.h, parent.h), owned: true)
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring,
     vtbl: ref QShortcutVTable = nil): gen_qshortcut_types.QShortcut =
   let vtbl = if vtbl == nil: new QShortcutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ref QShortcutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QShortcutVTable](fcQShortcut_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQShortcut_metaObject
+    vtbl[].vtbl.metaObject = cQShortcut_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQShortcut_metacast
+    vtbl[].vtbl.metacast = cQShortcut_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQShortcut_metacall
+    vtbl[].vtbl.metacall = cQShortcut_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQShortcut_event
+    vtbl[].vtbl.event = cQShortcut_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQShortcut_eventFilter
+    vtbl[].vtbl.eventFilter = cQShortcut_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQShortcut_timerEvent
+    vtbl[].vtbl.timerEvent = cQShortcut_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQShortcut_childEvent
+    vtbl[].vtbl.childEvent = cQShortcut_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQShortcut_customEvent
+    vtbl[].vtbl.customEvent = cQShortcut_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQShortcut_connectNotify
+    vtbl[].vtbl.connectNotify = cQShortcut_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQShortcut_disconnectNotify
-  gen_qshortcut_types.QShortcut(h: fcQShortcut_new3(addr(vtbl[].vtbl), key.h, parent.h, member), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQShortcut_vtable_callback_disconnectNotify
+  gen_qshortcut_types.QShortcut(h: fcQShortcut_new3(addr(vtbl[].vtbl), addr(vtbl[]), key.h, parent.h, member), owned: true)
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring, ambiguousMember: cstring,
     vtbl: ref QShortcutVTable = nil): gen_qshortcut_types.QShortcut =
   let vtbl = if vtbl == nil: new QShortcutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ref QShortcutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QShortcutVTable](fcQShortcut_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQShortcut_metaObject
+    vtbl[].vtbl.metaObject = cQShortcut_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQShortcut_metacast
+    vtbl[].vtbl.metacast = cQShortcut_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQShortcut_metacall
+    vtbl[].vtbl.metacall = cQShortcut_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQShortcut_event
+    vtbl[].vtbl.event = cQShortcut_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQShortcut_eventFilter
+    vtbl[].vtbl.eventFilter = cQShortcut_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQShortcut_timerEvent
+    vtbl[].vtbl.timerEvent = cQShortcut_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQShortcut_childEvent
+    vtbl[].vtbl.childEvent = cQShortcut_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQShortcut_customEvent
+    vtbl[].vtbl.customEvent = cQShortcut_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQShortcut_connectNotify
+    vtbl[].vtbl.connectNotify = cQShortcut_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQShortcut_disconnectNotify
-  gen_qshortcut_types.QShortcut(h: fcQShortcut_new4(addr(vtbl[].vtbl), key.h, parent.h, member, ambiguousMember), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQShortcut_vtable_callback_disconnectNotify
+  gen_qshortcut_types.QShortcut(h: fcQShortcut_new4(addr(vtbl[].vtbl), addr(vtbl[]), key.h, parent.h, member, ambiguousMember), owned: true)
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring, ambiguousMember: cstring, shortcutContext: cint,
     vtbl: ref QShortcutVTable = nil): gen_qshortcut_types.QShortcut =
   let vtbl = if vtbl == nil: new QShortcutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ref QShortcutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QShortcutVTable](fcQShortcut_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQShortcut_metaObject
+    vtbl[].vtbl.metaObject = cQShortcut_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQShortcut_metacast
+    vtbl[].vtbl.metacast = cQShortcut_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQShortcut_metacall
+    vtbl[].vtbl.metacall = cQShortcut_vtable_callback_metacall
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQShortcut_event
+    vtbl[].vtbl.event = cQShortcut_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQShortcut_eventFilter
+    vtbl[].vtbl.eventFilter = cQShortcut_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQShortcut_timerEvent
+    vtbl[].vtbl.timerEvent = cQShortcut_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQShortcut_childEvent
+    vtbl[].vtbl.childEvent = cQShortcut_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQShortcut_customEvent
+    vtbl[].vtbl.customEvent = cQShortcut_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQShortcut_connectNotify
+    vtbl[].vtbl.connectNotify = cQShortcut_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQShortcut_disconnectNotify
-  gen_qshortcut_types.QShortcut(h: fcQShortcut_new5(addr(vtbl[].vtbl), key.h, parent.h, member, ambiguousMember, cint(shortcutContext)), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQShortcut_vtable_callback_disconnectNotify
+  gen_qshortcut_types.QShortcut(h: fcQShortcut_new5(addr(vtbl[].vtbl), addr(vtbl[]), key.h, parent.h, member, ambiguousMember, cint(shortcutContext)), owned: true)
 
+const cQShortcut_mvtbl = cQShortcutVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQShortcut()[])](self.fcQShortcut_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQShortcut_method_callback_metaObject,
+  metacast: cQShortcut_method_callback_metacast,
+  metacall: cQShortcut_method_callback_metacall,
+  event: cQShortcut_method_callback_event,
+  eventFilter: cQShortcut_method_callback_eventFilter,
+  timerEvent: cQShortcut_method_callback_timerEvent,
+  childEvent: cQShortcut_method_callback_childEvent,
+  customEvent: cQShortcut_method_callback_customEvent,
+  connectNotify: cQShortcut_method_callback_connectNotify,
+  disconnectNotify: cQShortcut_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qshortcut_types.QShortcut,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQShortcut) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQShortcut()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQShortcut_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQShortcut_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQShortcut_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQShortcut_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQShortcut_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQShortcut_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQShortcut_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQShortcut_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQShortcut_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQShortcut_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQShortcut_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQShortcut) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQShortcut_new(addr(cQShortcut_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQShortcut) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQShortcut()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQShortcut_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQShortcut_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQShortcut_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQShortcut_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQShortcut_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQShortcut_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQShortcut_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQShortcut_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQShortcut_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQShortcut_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQShortcut_new2(addr(vtbl[].vtbl), key.h, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQShortcut) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQShortcut_new2(addr(cQShortcut_mvtbl), addr(inst[]), key.h, parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring,
-    vtbl: VirtualQShortcut) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQShortcut()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQShortcut_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQShortcut_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQShortcut_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQShortcut_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQShortcut_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQShortcut_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQShortcut_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQShortcut_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQShortcut_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQShortcut_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQShortcut_new3(addr(vtbl[].vtbl), key.h, parent.h, member)
-  vtbl[].owned = true
+    inst: VirtualQShortcut) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQShortcut_new3(addr(cQShortcut_mvtbl), addr(inst[]), key.h, parent.h, member)
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring, ambiguousMember: cstring,
-    vtbl: VirtualQShortcut) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQShortcut()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQShortcut_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQShortcut_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQShortcut_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQShortcut_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQShortcut_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQShortcut_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQShortcut_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQShortcut_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQShortcut_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQShortcut_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQShortcut_new4(addr(vtbl[].vtbl), key.h, parent.h, member, ambiguousMember)
-  vtbl[].owned = true
+    inst: VirtualQShortcut) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQShortcut_new4(addr(cQShortcut_mvtbl), addr(inst[]), key.h, parent.h, member, ambiguousMember)
+  inst[].owned = true
 
 proc create*(T: type gen_qshortcut_types.QShortcut,
     key: gen_qkeysequence_types.QKeySequence, parent: gen_qwidget_types.QWidget, member: cstring, ambiguousMember: cstring, shortcutContext: cint,
-    vtbl: VirtualQShortcut) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQShortcutVTable, _: ptr cQShortcut) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQShortcut()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQShortcut, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQShortcut_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQShortcut_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQShortcut_metacall
-  vtbl[].vtbl.event = miqt_exec_method_cQShortcut_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQShortcut_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQShortcut_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQShortcut_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQShortcut_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQShortcut_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQShortcut_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQShortcut_new5(addr(vtbl[].vtbl), key.h, parent.h, member, ambiguousMember, cint(shortcutContext))
-  vtbl[].owned = true
+    inst: VirtualQShortcut) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQShortcut_new5(addr(cQShortcut_mvtbl), addr(inst[]), key.h, parent.h, member, ambiguousMember, cint(shortcutContext))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qshortcut_types.QShortcut): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQShortcut_staticMetaObject())

@@ -12,15 +12,6 @@
 #include <QVariant>
 #include <qcameraviewfindersettingscontrol.h>
 #include "gen_qcameraviewfindersettingscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraViewfinderSettingsControl_virtbase(QCameraViewfinderSettingsControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -116,6 +107,7 @@ struct miqt_string QCameraViewfinderSettingsControl_trUtf83(const char* s, const
 }
 
 const QMetaObject* QCameraViewfinderSettingsControl_staticMetaObject() { return &QCameraViewfinderSettingsControl::staticMetaObject; }
+
 void QCameraViewfinderSettingsControl_delete(QCameraViewfinderSettingsControl* self) {
 	delete self;
 }
@@ -224,6 +216,7 @@ struct miqt_string QCameraViewfinderSettingsControl2_trUtf83(const char* s, cons
 }
 
 const QMetaObject* QCameraViewfinderSettingsControl2_staticMetaObject() { return &QCameraViewfinderSettingsControl2::staticMetaObject; }
+
 void QCameraViewfinderSettingsControl2_delete(QCameraViewfinderSettingsControl2* self) {
 	delete self;
 }

@@ -51,6 +51,7 @@ struct miqt_string QMediaGaplessPlaybackControl_tr2(const char* s, const char* c
 struct miqt_string QMediaGaplessPlaybackControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaGaplessPlaybackControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaGaplessPlaybackControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaGaplessPlaybackControl_staticMetaObject();
 void QMediaGaplessPlaybackControl_delete(QMediaGaplessPlaybackControl* self);
 

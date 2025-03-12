@@ -50,12 +50,12 @@ export
 
 type cQCameraLocksControl*{.exportc: "QCameraLocksControl", incompleteStruct.} = object
 
-proc fcQCameraLocksControl_metaObject(self: pointer, ): pointer {.importc: "QCameraLocksControl_metaObject".}
+proc fcQCameraLocksControl_metaObject(self: pointer): pointer {.importc: "QCameraLocksControl_metaObject".}
 proc fcQCameraLocksControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraLocksControl_metacast".}
 proc fcQCameraLocksControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraLocksControl_metacall".}
 proc fcQCameraLocksControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraLocksControl_tr".}
 proc fcQCameraLocksControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QCameraLocksControl_trUtf8".}
-proc fcQCameraLocksControl_supportedLocks(self: pointer, ): cint {.importc: "QCameraLocksControl_supportedLocks".}
+proc fcQCameraLocksControl_supportedLocks(self: pointer): cint {.importc: "QCameraLocksControl_supportedLocks".}
 proc fcQCameraLocksControl_lockStatus(self: pointer, lock: cint): cint {.importc: "QCameraLocksControl_lockStatus".}
 proc fcQCameraLocksControl_searchAndLock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_searchAndLock".}
 proc fcQCameraLocksControl_unlock(self: pointer, locks: cint): void {.importc: "QCameraLocksControl_unlock".}
@@ -65,13 +65,13 @@ proc fcQCameraLocksControl_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQCameraLocksControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraLocksControl_tr3".}
 proc fcQCameraLocksControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraLocksControl_trUtf82".}
 proc fcQCameraLocksControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraLocksControl_trUtf83".}
-proc fcQCameraLocksControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraLocksControl_protectedbase_sender".}
-proc fcQCameraLocksControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraLocksControl_protectedbase_senderSignalIndex".}
+proc fcQCameraLocksControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraLocksControl_protectedbase_sender".}
+proc fcQCameraLocksControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraLocksControl_protectedbase_senderSignalIndex".}
 proc fcQCameraLocksControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraLocksControl_protectedbase_receivers".}
 proc fcQCameraLocksControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraLocksControl_protectedbase_isSignalConnected".}
 proc fcQCameraLocksControl_staticMetaObject(): pointer {.importc: "QCameraLocksControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qcameralockscontrol_types.QCameraLocksControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraLocksControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameralockscontrol_types.QCameraLocksControl, param1: cstring): pointer =
@@ -92,7 +92,7 @@ proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc supportedLocks*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): cint =
+proc supportedLocks*(self: gen_qcameralockscontrol_types.QCameraLocksControl): cint =
   cint(fcQCameraLocksControl_supportedLocks(self.h))
 
 proc lockStatus*(self: gen_qcameralockscontrol_types.QCameraLocksControl, lock: cint): cint =
@@ -108,7 +108,7 @@ proc lockStatusChanged*(self: gen_qcameralockscontrol_types.QCameraLocksControl,
   fcQCameraLocksControl_lockStatusChanged(self.h, cint(typeVal), cint(status), cint(reason))
 
 type QCameraLocksControllockStatusChangedSlot* = proc(typeVal: cint, status: cint, reason: cint)
-proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged(slot: int, typeVal: cint, status: cint, reason: cint) {.cdecl.} =
+proc cQCameraLocksControl_slot_callback_lockStatusChanged(slot: int, typeVal: cint, status: cint, reason: cint) {.cdecl.} =
   let nimfunc = cast[ptr QCameraLocksControllockStatusChangedSlot](cast[pointer](slot))
   let slotval1 = cint(typeVal)
 
@@ -118,7 +118,7 @@ proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged(slot: int, typeVa
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc miqt_exec_callback_cQCameraLocksControl_lockStatusChanged_release(slot: int) {.cdecl.} =
+proc cQCameraLocksControl_slot_callback_lockStatusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCameraLocksControllockStatusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -126,7 +126,7 @@ proc onlockStatusChanged*(self: gen_qcameralockscontrol_types.QCameraLocksContro
   var tmp = new QCameraLocksControllockStatusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCameraLocksControl_connect_lockStatusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCameraLocksControl_lockStatusChanged, miqt_exec_callback_cQCameraLocksControl_lockStatusChanged_release)
+  fcQCameraLocksControl_connect_lockStatusChanged(self.h, cast[int](addr tmp[]), cQCameraLocksControl_slot_callback_lockStatusChanged, cQCameraLocksControl_slot_callback_lockStatusChanged_release)
 
 proc tr*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstring, c: cstring): string =
   let v_ms = fcQCameraLocksControl_tr2(s, c)
@@ -152,10 +152,10 @@ proc trUtf8*(_: type gen_qcameralockscontrol_types.QCameraLocksControl, s: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qcameralockscontrol_types.QCameraLocksControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQCameraLocksControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qcameralockscontrol_types.QCameraLocksControl, ): cint =
+proc senderSignalIndex*(self: gen_qcameralockscontrol_types.QCameraLocksControl): cint =
   fcQCameraLocksControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qcameralockscontrol_types.QCameraLocksControl, signal: cstring): cint =

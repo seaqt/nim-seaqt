@@ -138,6 +138,7 @@ QVariant* QVariant_new41(QJsonArray* jsonArray);
 QVariant* QVariant_new42(QJsonDocument* jsonDocument);
 QVariant* QVariant_new43(QModelIndex* modelIndex);
 QVariant* QVariant_new44(QPersistentModelIndex* modelIndex);
+
 void QVariant_operatorAssign(QVariant* self, QVariant* other);
 void QVariant_swap(QVariant* self, QVariant* other);
 int QVariant_type(const QVariant* self);
@@ -209,15 +210,18 @@ double QVariant_toDouble1(const QVariant* self, bool* ok);
 float QVariant_toFloat1(const QVariant* self, bool* ok);
 double QVariant_toReal1(const QVariant* self, bool* ok);
 QVariant* QVariant_fromValue(QObject* value);
+
 void QVariant_delete(QVariant* self);
 
 QVariantComparisonHelper* QVariantComparisonHelper_new(QVariant* var);
 QVariantComparisonHelper* QVariantComparisonHelper_new2(QVariantComparisonHelper* param1);
+
 void QVariantComparisonHelper_delete(QVariantComparisonHelper* self);
 
 void QVariant__Handler_delete(QVariant__Handler* self);
 
 QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_new(QSequentialIterable__const_iterator* other);
+
 void QSequentialIterable__const_iterator_operatorAssign(QSequentialIterable__const_iterator* self, QSequentialIterable__const_iterator* other);
 QVariant* QSequentialIterable__const_iterator_operatorMultiply(const QSequentialIterable__const_iterator* self);
 bool QSequentialIterable__const_iterator_operatorEqual(const QSequentialIterable__const_iterator* self, QSequentialIterable__const_iterator* o);
@@ -230,9 +234,11 @@ QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_operato
 QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_operatorMinusAssign(QSequentialIterable__const_iterator* self, int j);
 QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_operatorPlus(const QSequentialIterable__const_iterator* self, int j);
 QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_operatorMinus(const QSequentialIterable__const_iterator* self, int j);
+
 void QSequentialIterable__const_iterator_delete(QSequentialIterable__const_iterator* self);
 
 QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_new(QAssociativeIterable__const_iterator* other);
+
 void QAssociativeIterable__const_iterator_operatorAssign(QAssociativeIterable__const_iterator* self, QAssociativeIterable__const_iterator* other);
 QVariant* QAssociativeIterable__const_iterator_key(const QAssociativeIterable__const_iterator* self);
 QVariant* QAssociativeIterable__const_iterator_value(const QAssociativeIterable__const_iterator* self);
@@ -247,6 +253,7 @@ QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_opera
 QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_operatorMinusAssign(QAssociativeIterable__const_iterator* self, int j);
 QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_operatorPlus(const QAssociativeIterable__const_iterator* self, int j);
 QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_operatorMinus(const QAssociativeIterable__const_iterator* self, int j);
+
 void QAssociativeIterable__const_iterator_delete(QAssociativeIterable__const_iterator* self);
 
 #ifdef __cplusplus

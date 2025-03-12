@@ -42,22 +42,29 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QWindow QWindow;
 #endif
 
-struct QQuickRenderControl_VTable {
-	void (*destructor)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self);
-	QMetaObject* (*metaObject)(struct QQuickRenderControl_VTable* vtbl, const QQuickRenderControl* self);
-	void* (*metacast)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, const char* param1);
-	int (*metacall)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, int param1, int param2, void** param3);
-	QWindow* (*renderWindow)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QPoint* offset);
-	bool (*event)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QEvent* event);
-	bool (*eventFilter)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QTimerEvent* event);
-	void (*childEvent)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QChildEvent* event);
-	void (*customEvent)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QEvent* event);
-	void (*connectNotify)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QQuickRenderControl_VTable* vtbl, QQuickRenderControl* self, QMetaMethod* signal);
-};
-QQuickRenderControl* QQuickRenderControl_new(struct QQuickRenderControl_VTable* vtbl);
-QQuickRenderControl* QQuickRenderControl_new2(struct QQuickRenderControl_VTable* vtbl, QObject* parent);
+typedef struct VirtualQQuickRenderControl VirtualQQuickRenderControl;
+typedef struct QQuickRenderControl_VTable{
+	void (*destructor)(VirtualQQuickRenderControl* self);
+	QMetaObject* (*metaObject)(const VirtualQQuickRenderControl* self);
+	void* (*metacast)(VirtualQQuickRenderControl* self, const char* param1);
+	int (*metacall)(VirtualQQuickRenderControl* self, int param1, int param2, void** param3);
+	QWindow* (*renderWindow)(VirtualQQuickRenderControl* self, QPoint* offset);
+	bool (*event)(VirtualQQuickRenderControl* self, QEvent* event);
+	bool (*eventFilter)(VirtualQQuickRenderControl* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQQuickRenderControl* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQQuickRenderControl* self, QChildEvent* event);
+	void (*customEvent)(VirtualQQuickRenderControl* self, QEvent* event);
+	void (*connectNotify)(VirtualQQuickRenderControl* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQQuickRenderControl* self, QMetaMethod* signal);
+}QQuickRenderControl_VTable;
+
+const QQuickRenderControl_VTable* QQuickRenderControl_vtbl(const VirtualQQuickRenderControl* self);
+void* QQuickRenderControl_vdata(const VirtualQQuickRenderControl* self);
+void QQuickRenderControl_setVdata(VirtualQQuickRenderControl* self, void* vdata);
+
+VirtualQQuickRenderControl* QQuickRenderControl_new(const QQuickRenderControl_VTable* vtbl, void* vdata);
+VirtualQQuickRenderControl* QQuickRenderControl_new2(const QQuickRenderControl_VTable* vtbl, void* vdata, QObject* parent);
+
 void QQuickRenderControl_virtbase(QQuickRenderControl* src, QObject** outptr_QObject);
 QMetaObject* QQuickRenderControl_metaObject(const QQuickRenderControl* self);
 void* QQuickRenderControl_metacast(QQuickRenderControl* self, const char* param1);
@@ -73,29 +80,32 @@ QImage* QQuickRenderControl_grab(QQuickRenderControl* self);
 QWindow* QQuickRenderControl_renderWindowFor(QQuickWindow* win);
 QWindow* QQuickRenderControl_renderWindow(QQuickRenderControl* self, QPoint* offset);
 void QQuickRenderControl_renderRequested(QQuickRenderControl* self);
-void QQuickRenderControl_connect_renderRequested(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickRenderControl_connect_renderRequested(VirtualQQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQuickRenderControl_sceneChanged(QQuickRenderControl* self);
-void QQuickRenderControl_connect_sceneChanged(QQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQuickRenderControl_connect_sceneChanged(VirtualQQuickRenderControl* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QQuickRenderControl_tr2(const char* s, const char* c);
 struct miqt_string QQuickRenderControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QQuickRenderControl_trUtf82(const char* s, const char* c);
 struct miqt_string QQuickRenderControl_trUtf83(const char* s, const char* c, int n);
 QWindow* QQuickRenderControl_renderWindowFor2(QQuickWindow* win, QPoint* offset);
-QMetaObject* QQuickRenderControl_virtualbase_metaObject(const void* self);
-void* QQuickRenderControl_virtualbase_metacast(void* self, const char* param1);
-int QQuickRenderControl_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-QWindow* QQuickRenderControl_virtualbase_renderWindow(void* self, QPoint* offset);
-bool QQuickRenderControl_virtualbase_event(void* self, QEvent* event);
-bool QQuickRenderControl_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QQuickRenderControl_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QQuickRenderControl_virtualbase_childEvent(void* self, QChildEvent* event);
-void QQuickRenderControl_virtualbase_customEvent(void* self, QEvent* event);
-void QQuickRenderControl_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QQuickRenderControl_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQuickRenderControl_protectedbase_sender(const void* self);
-int QQuickRenderControl_protectedbase_senderSignalIndex(const void* self);
-int QQuickRenderControl_protectedbase_receivers(const void* self, const char* signal);
-bool QQuickRenderControl_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QQuickRenderControl_virtualbase_metaObject(const VirtualQQuickRenderControl* self);
+void* QQuickRenderControl_virtualbase_metacast(VirtualQQuickRenderControl* self, const char* param1);
+int QQuickRenderControl_virtualbase_metacall(VirtualQQuickRenderControl* self, int param1, int param2, void** param3);
+QWindow* QQuickRenderControl_virtualbase_renderWindow(VirtualQQuickRenderControl* self, QPoint* offset);
+bool QQuickRenderControl_virtualbase_event(VirtualQQuickRenderControl* self, QEvent* event);
+bool QQuickRenderControl_virtualbase_eventFilter(VirtualQQuickRenderControl* self, QObject* watched, QEvent* event);
+void QQuickRenderControl_virtualbase_timerEvent(VirtualQQuickRenderControl* self, QTimerEvent* event);
+void QQuickRenderControl_virtualbase_childEvent(VirtualQQuickRenderControl* self, QChildEvent* event);
+void QQuickRenderControl_virtualbase_customEvent(VirtualQQuickRenderControl* self, QEvent* event);
+void QQuickRenderControl_virtualbase_connectNotify(VirtualQQuickRenderControl* self, QMetaMethod* signal);
+void QQuickRenderControl_virtualbase_disconnectNotify(VirtualQQuickRenderControl* self, QMetaMethod* signal);
+
+QObject* QQuickRenderControl_protectedbase_sender(const VirtualQQuickRenderControl* self);
+int QQuickRenderControl_protectedbase_senderSignalIndex(const VirtualQQuickRenderControl* self);
+int QQuickRenderControl_protectedbase_receivers(const VirtualQQuickRenderControl* self, const char* signal);
+bool QQuickRenderControl_protectedbase_isSignalConnected(const VirtualQQuickRenderControl* self, QMetaMethod* signal);
+
 const QMetaObject* QQuickRenderControl_staticMetaObject();
 void QQuickRenderControl_delete(QQuickRenderControl* self);
 

@@ -11,15 +11,6 @@
 #include <QWebHistoryItem>
 #include <qwebhistory.h>
 #include "gen_qwebhistory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebHistoryItem* QWebHistoryItem_new(QWebHistoryItem* other) {
 	return new QWebHistoryItem(*other);
 }

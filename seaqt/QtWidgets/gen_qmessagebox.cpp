@@ -42,46 +42,39 @@
 #include <QWidget>
 #include <qmessagebox.h>
 #include "gen_qmessagebox.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMessageBox final : public QMessageBox {
-	struct QMessageBox_VTable* vtbl;
+	const QMessageBox_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMessageBox_VTable* QMessageBox_vtbl(const VirtualQMessageBox* self);
+	friend void* QMessageBox_vdata(const VirtualQMessageBox* self);
+	friend void QMessageBox_setVdata(VirtualQMessageBox* self, void* vdata);
 
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, QWidget* parent): QMessageBox(parent), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl): QMessageBox(), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, QMessageBox::Icon icon, const QString& title, const QString& text): QMessageBox(icon, title, text), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2): QMessageBox(title, text, icon, button0, button1, button2), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons): QMessageBox(icon, title, text, buttons), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons, QWidget* parent): QMessageBox(icon, title, text, buttons, parent), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags flags): QMessageBox(icon, title, text, buttons, parent, flags), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2, QWidget* parent): QMessageBox(title, text, icon, button0, button1, button2, parent), vtbl(vtbl) {};
-	VirtualQMessageBox(struct QMessageBox_VTable* vtbl, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2, QWidget* parent, Qt::WindowFlags f): QMessageBox(title, text, icon, button0, button1, button2, parent, f), vtbl(vtbl) {};
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, QWidget* parent): QMessageBox(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata): QMessageBox(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, QMessageBox::Icon icon, const QString& title, const QString& text): QMessageBox(icon, title, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2): QMessageBox(title, text, icon, button0, button1, button2), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons): QMessageBox(icon, title, text, buttons), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons, QWidget* parent): QMessageBox(icon, title, text, buttons, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, QMessageBox::Icon icon, const QString& title, const QString& text, QMessageBox::StandardButtons buttons, QWidget* parent, Qt::WindowFlags flags): QMessageBox(icon, title, text, buttons, parent, flags), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2, QWidget* parent): QMessageBox(title, text, icon, button0, button1, button2, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMessageBox(const QMessageBox_VTable* vtbl, void* vdata, const QString& title, const QString& text, QMessageBox::Icon icon, int button0, int button1, int button2, QWidget* parent, Qt::WindowFlags f): QMessageBox(title, text, icon, button0, button1, button2, parent, f), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMessageBox() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMessageBox() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMessageBox::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMessageBox_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMessageBox_virtualbase_metaObject(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMessageBox::qt_metacast(param1);
@@ -89,14 +82,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMessageBox_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMessageBox_virtualbase_metacast(VirtualQMessageBox* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMessageBox::qt_metacall(param1, param2, param3);
@@ -107,14 +99,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMessageBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMessageBox_virtualbase_metacall(VirtualQMessageBox* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QMessageBox::event(e);
@@ -122,14 +113,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMessageBox_virtualbase_event(void* self, QEvent* e);
+	friend bool QMessageBox_virtualbase_event(VirtualQMessageBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QMessageBox::resizeEvent(event);
@@ -138,13 +128,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QMessageBox_virtualbase_resizeEvent(VirtualQMessageBox* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QMessageBox::showEvent(event);
@@ -153,13 +142,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QMessageBox_virtualbase_showEvent(VirtualQMessageBox* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QMessageBox::closeEvent(event);
@@ -168,13 +156,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QMessageBox_virtualbase_closeEvent(VirtualQMessageBox* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QMessageBox::keyPressEvent(event);
@@ -183,13 +170,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QMessageBox_virtualbase_keyPressEvent(VirtualQMessageBox* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QMessageBox::changeEvent(event);
@@ -198,13 +184,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QMessageBox_virtualbase_changeEvent(VirtualQMessageBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QMessageBox::setVisible(visible);
@@ -213,45 +198,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_setVisible(void* self, bool visible);
+	friend void QMessageBox_virtualbase_setVisible(VirtualQMessageBox* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QMessageBox::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMessageBox_virtualbase_sizeHint(const void* self);
+	friend QSize* QMessageBox_virtualbase_sizeHint(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QMessageBox::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QMessageBox_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QMessageBox_virtualbase_minimumSizeHint(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QMessageBox::open();
@@ -259,27 +241,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QMessageBox_virtualbase_open(void* self);
+	friend void QMessageBox_virtualbase_open(VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QMessageBox::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMessageBox_virtualbase_exec(void* self);
+	friend int QMessageBox_virtualbase_exec(VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int param1) override {
 		if (vtbl->done == 0) {
 			QMessageBox::done(param1);
@@ -288,13 +268,12 @@ public:
 
 		int sigval1 = param1;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_done(void* self, int param1);
+	friend void QMessageBox_virtualbase_done(VirtualQMessageBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QMessageBox::accept();
@@ -302,13 +281,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QMessageBox_virtualbase_accept(void* self);
+	friend void QMessageBox_virtualbase_accept(VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QMessageBox::reject();
@@ -316,13 +294,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QMessageBox_virtualbase_reject(void* self);
+	friend void QMessageBox_virtualbase_reject(VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QMessageBox::contextMenuEvent(param1);
@@ -331,13 +308,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QMessageBox_virtualbase_contextMenuEvent(VirtualQMessageBox* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QMessageBox::eventFilter(param1, param2);
@@ -346,28 +322,26 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMessageBox_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QMessageBox_virtualbase_eventFilter(VirtualQMessageBox* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QMessageBox::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMessageBox_virtualbase_devType(const void* self);
+	friend int QMessageBox_virtualbase_devType(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QMessageBox::heightForWidth(param1);
@@ -375,42 +349,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMessageBox_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QMessageBox_virtualbase_heightForWidth(const VirtualQMessageBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QMessageBox::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QMessageBox_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QMessageBox_virtualbase_hasHeightForWidth(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QMessageBox::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QMessageBox_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QMessageBox_virtualbase_paintEngine(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QMessageBox::mousePressEvent(event);
@@ -419,13 +390,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QMessageBox_virtualbase_mousePressEvent(VirtualQMessageBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QMessageBox::mouseReleaseEvent(event);
@@ -434,13 +404,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QMessageBox_virtualbase_mouseReleaseEvent(VirtualQMessageBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QMessageBox::mouseDoubleClickEvent(event);
@@ -449,13 +418,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QMessageBox_virtualbase_mouseDoubleClickEvent(VirtualQMessageBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QMessageBox::mouseMoveEvent(event);
@@ -464,13 +432,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QMessageBox_virtualbase_mouseMoveEvent(VirtualQMessageBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QMessageBox::wheelEvent(event);
@@ -479,13 +446,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QMessageBox_virtualbase_wheelEvent(VirtualQMessageBox* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QMessageBox::keyReleaseEvent(event);
@@ -494,13 +460,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QMessageBox_virtualbase_keyReleaseEvent(VirtualQMessageBox* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QMessageBox::focusInEvent(event);
@@ -509,13 +474,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QMessageBox_virtualbase_focusInEvent(VirtualQMessageBox* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QMessageBox::focusOutEvent(event);
@@ -524,13 +488,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QMessageBox_virtualbase_focusOutEvent(VirtualQMessageBox* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QMessageBox::enterEvent(event);
@@ -539,13 +502,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QMessageBox_virtualbase_enterEvent(VirtualQMessageBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QMessageBox::leaveEvent(event);
@@ -554,13 +516,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QMessageBox_virtualbase_leaveEvent(VirtualQMessageBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QMessageBox::paintEvent(event);
@@ -569,13 +530,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QMessageBox_virtualbase_paintEvent(VirtualQMessageBox* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QMessageBox::moveEvent(event);
@@ -584,13 +544,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QMessageBox_virtualbase_moveEvent(VirtualQMessageBox* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QMessageBox::tabletEvent(event);
@@ -599,13 +558,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QMessageBox_virtualbase_tabletEvent(VirtualQMessageBox* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QMessageBox::actionEvent(event);
@@ -614,13 +572,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QMessageBox_virtualbase_actionEvent(VirtualQMessageBox* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QMessageBox::dragEnterEvent(event);
@@ -629,13 +586,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QMessageBox_virtualbase_dragEnterEvent(VirtualQMessageBox* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QMessageBox::dragMoveEvent(event);
@@ -644,13 +600,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QMessageBox_virtualbase_dragMoveEvent(VirtualQMessageBox* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QMessageBox::dragLeaveEvent(event);
@@ -659,13 +614,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QMessageBox_virtualbase_dragLeaveEvent(VirtualQMessageBox* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QMessageBox::dropEvent(event);
@@ -674,13 +628,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QMessageBox_virtualbase_dropEvent(VirtualQMessageBox* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QMessageBox::hideEvent(event);
@@ -689,13 +642,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QMessageBox_virtualbase_hideEvent(VirtualQMessageBox* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QMessageBox::nativeEvent(eventType, message, result);
@@ -710,14 +662,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QMessageBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QMessageBox_virtualbase_nativeEvent(VirtualQMessageBox* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QMessageBox::metric(param1);
@@ -726,14 +677,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMessageBox_virtualbase_metric(const void* self, int param1);
+	friend int QMessageBox_virtualbase_metric(const VirtualQMessageBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QMessageBox::initPainter(painter);
@@ -742,13 +692,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QMessageBox_virtualbase_initPainter(const VirtualQMessageBox* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QMessageBox::redirected(offset);
@@ -756,28 +705,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QMessageBox_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QMessageBox_virtualbase_redirected(const VirtualQMessageBox* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QMessageBox::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QMessageBox_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QMessageBox_virtualbase_sharedPainter(const VirtualQMessageBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QMessageBox::inputMethodEvent(param1);
@@ -786,13 +733,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QMessageBox_virtualbase_inputMethodEvent(VirtualQMessageBox* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QMessageBox::inputMethodQuery(param1);
@@ -801,16 +747,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QMessageBox_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QMessageBox_virtualbase_inputMethodQuery(const VirtualQMessageBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QMessageBox::focusNextPrevChild(next);
@@ -818,14 +763,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMessageBox_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QMessageBox_virtualbase_focusNextPrevChild(VirtualQMessageBox* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMessageBox::timerEvent(event);
@@ -834,13 +778,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMessageBox_virtualbase_timerEvent(VirtualQMessageBox* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMessageBox::childEvent(event);
@@ -849,13 +792,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMessageBox_virtualbase_childEvent(VirtualQMessageBox* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMessageBox::customEvent(event);
@@ -864,13 +806,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMessageBox_virtualbase_customEvent(VirtualQMessageBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMessageBox::connectNotify(signal);
@@ -881,13 +822,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMessageBox_virtualbase_connectNotify(VirtualQMessageBox* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMessageBox::disconnectNotify(signal);
@@ -898,73 +838,73 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMessageBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMessageBox_virtualbase_disconnectNotify(VirtualQMessageBox* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QMessageBox_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QMessageBox_protectedbase_updateMicroFocus(void* self);
-	friend void QMessageBox_protectedbase_create(void* self);
-	friend void QMessageBox_protectedbase_destroy(void* self);
-	friend bool QMessageBox_protectedbase_focusNextChild(void* self);
-	friend bool QMessageBox_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QMessageBox_protectedbase_sender(const void* self);
-	friend int QMessageBox_protectedbase_senderSignalIndex(const void* self);
-	friend int QMessageBox_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMessageBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QMessageBox_protectedbase_adjustPosition(VirtualQMessageBox* self, QWidget* param1);
+	friend void QMessageBox_protectedbase_updateMicroFocus(VirtualQMessageBox* self);
+	friend void QMessageBox_protectedbase_create(VirtualQMessageBox* self);
+	friend void QMessageBox_protectedbase_destroy(VirtualQMessageBox* self);
+	friend bool QMessageBox_protectedbase_focusNextChild(VirtualQMessageBox* self);
+	friend bool QMessageBox_protectedbase_focusPreviousChild(VirtualQMessageBox* self);
+	friend QObject* QMessageBox_protectedbase_sender(const VirtualQMessageBox* self);
+	friend int QMessageBox_protectedbase_senderSignalIndex(const VirtualQMessageBox* self);
+	friend int QMessageBox_protectedbase_receivers(const VirtualQMessageBox* self, const char* signal);
+	friend bool QMessageBox_protectedbase_isSignalConnected(const VirtualQMessageBox* self, QMetaMethod* signal);
 };
 
-QMessageBox* QMessageBox_new(struct QMessageBox_VTable* vtbl, QWidget* parent) {
-	return new VirtualQMessageBox(vtbl, parent);
+VirtualQMessageBox* QMessageBox_new(const QMessageBox_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQMessageBox(vtbl, vdata, parent);
 }
 
-QMessageBox* QMessageBox_new2(struct QMessageBox_VTable* vtbl) {
-	return new VirtualQMessageBox(vtbl);
+VirtualQMessageBox* QMessageBox_new2(const QMessageBox_VTable* vtbl, void* vdata) {
+	return new VirtualQMessageBox(vtbl, vdata);
 }
 
-QMessageBox* QMessageBox_new3(struct QMessageBox_VTable* vtbl, int icon, struct miqt_string title, struct miqt_string text) {
+VirtualQMessageBox* QMessageBox_new3(const QMessageBox_VTable* vtbl, void* vdata, int icon, struct miqt_string title, struct miqt_string text) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString);
+	return new VirtualQMessageBox(vtbl, vdata, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString);
 }
 
-QMessageBox* QMessageBox_new4(struct QMessageBox_VTable* vtbl, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2) {
+VirtualQMessageBox* QMessageBox_new4(const QMessageBox_VTable* vtbl, void* vdata, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2));
+	return new VirtualQMessageBox(vtbl, vdata, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2));
 }
 
-QMessageBox* QMessageBox_new5(struct QMessageBox_VTable* vtbl, int icon, struct miqt_string title, struct miqt_string text, int buttons) {
+VirtualQMessageBox* QMessageBox_new5(const QMessageBox_VTable* vtbl, void* vdata, int icon, struct miqt_string title, struct miqt_string text, int buttons) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons));
+	return new VirtualQMessageBox(vtbl, vdata, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons));
 }
 
-QMessageBox* QMessageBox_new6(struct QMessageBox_VTable* vtbl, int icon, struct miqt_string title, struct miqt_string text, int buttons, QWidget* parent) {
+VirtualQMessageBox* QMessageBox_new6(const QMessageBox_VTable* vtbl, void* vdata, int icon, struct miqt_string title, struct miqt_string text, int buttons, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons), parent);
+	return new VirtualQMessageBox(vtbl, vdata, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons), parent);
 }
 
-QMessageBox* QMessageBox_new7(struct QMessageBox_VTable* vtbl, int icon, struct miqt_string title, struct miqt_string text, int buttons, QWidget* parent, int flags) {
+VirtualQMessageBox* QMessageBox_new7(const QMessageBox_VTable* vtbl, void* vdata, int icon, struct miqt_string title, struct miqt_string text, int buttons, QWidget* parent, int flags) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons), parent, static_cast<Qt::WindowFlags>(flags));
+	return new VirtualQMessageBox(vtbl, vdata, static_cast<QMessageBox::Icon>(icon), title_QString, text_QString, static_cast<QMessageBox::StandardButtons>(buttons), parent, static_cast<Qt::WindowFlags>(flags));
 }
 
-QMessageBox* QMessageBox_new8(struct QMessageBox_VTable* vtbl, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2, QWidget* parent) {
+VirtualQMessageBox* QMessageBox_new8(const QMessageBox_VTable* vtbl, void* vdata, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2), parent);
+	return new VirtualQMessageBox(vtbl, vdata, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2), parent);
 }
 
-QMessageBox* QMessageBox_new9(struct QMessageBox_VTable* vtbl, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2, QWidget* parent, int f) {
+VirtualQMessageBox* QMessageBox_new9(const QMessageBox_VTable* vtbl, void* vdata, struct miqt_string title, struct miqt_string text, int icon, int button0, int button1, int button2, QWidget* parent, int f) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQMessageBox(vtbl, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2), parent, static_cast<Qt::WindowFlags>(f));
+	return new VirtualQMessageBox(vtbl, vdata, title_QString, text_QString, static_cast<QMessageBox::Icon>(icon), static_cast<int>(button0), static_cast<int>(button1), static_cast<int>(button2), parent, static_cast<Qt::WindowFlags>(f));
 }
 
 void QMessageBox_virtbase(QMessageBox* src, QDialog** outptr_QDialog) {
@@ -1325,7 +1265,7 @@ void QMessageBox_buttonClicked(QMessageBox* self, QAbstractButton* button) {
 	self->buttonClicked(button);
 }
 
-void QMessageBox_connect_buttonClicked(QMessageBox* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QMessageBox_connect_buttonClicked(VirtualQMessageBox* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -1625,406 +1565,326 @@ int QMessageBox_critical8(QWidget* parent, struct miqt_string title, struct miqt
 	return QMessageBox::critical(parent, title_QString, text_QString, button0Text_QString, button1Text_QString, button2Text_QString, static_cast<int>(defaultButtonNumber), static_cast<int>(escapeButtonNumber));
 }
 
-QMetaObject* QMessageBox_virtualbase_metaObject(const void* self) {
+QMetaObject* QMessageBox_virtualbase_metaObject(const VirtualQMessageBox* self) {
 
-	return (QMetaObject*) ( (const VirtualQMessageBox*)(self) )->QMessageBox::metaObject();
-
+	return (QMetaObject*) self->QMessageBox::metaObject();
 }
 
-void* QMessageBox_virtualbase_metacast(void* self, const char* param1) {
+void* QMessageBox_virtualbase_metacast(VirtualQMessageBox* self, const char* param1) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::qt_metacast(param1);
-
+	return self->QMessageBox::qt_metacast(param1);
 }
 
-int QMessageBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMessageBox_virtualbase_metacall(VirtualQMessageBox* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMessageBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QMessageBox_virtualbase_event(void* self, QEvent* e) {
+bool QMessageBox_virtualbase_event(VirtualQMessageBox* self, QEvent* e) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::event(e);
-
+	return self->QMessageBox::event(e);
 }
 
-void QMessageBox_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QMessageBox_virtualbase_resizeEvent(VirtualQMessageBox* self, QResizeEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::resizeEvent(event);
-
+	self->QMessageBox::resizeEvent(event);
 }
 
-void QMessageBox_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QMessageBox_virtualbase_showEvent(VirtualQMessageBox* self, QShowEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::showEvent(event);
-
+	self->QMessageBox::showEvent(event);
 }
 
-void QMessageBox_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QMessageBox_virtualbase_closeEvent(VirtualQMessageBox* self, QCloseEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::closeEvent(event);
-
+	self->QMessageBox::closeEvent(event);
 }
 
-void QMessageBox_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QMessageBox_virtualbase_keyPressEvent(VirtualQMessageBox* self, QKeyEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::keyPressEvent(event);
-
+	self->QMessageBox::keyPressEvent(event);
 }
 
-void QMessageBox_virtualbase_changeEvent(void* self, QEvent* event) {
+void QMessageBox_virtualbase_changeEvent(VirtualQMessageBox* self, QEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::changeEvent(event);
-
+	self->QMessageBox::changeEvent(event);
 }
 
-void QMessageBox_virtualbase_setVisible(void* self, bool visible) {
+void QMessageBox_virtualbase_setVisible(VirtualQMessageBox* self, bool visible) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::setVisible(visible);
-
+	self->QMessageBox::setVisible(visible);
 }
 
-QSize* QMessageBox_virtualbase_sizeHint(const void* self) {
+QSize* QMessageBox_virtualbase_sizeHint(const VirtualQMessageBox* self) {
 
-	return new QSize(( (const VirtualQMessageBox*)(self) )->QMessageBox::sizeHint());
-
+	return new QSize(self->QMessageBox::sizeHint());
 }
 
-QSize* QMessageBox_virtualbase_minimumSizeHint(const void* self) {
+QSize* QMessageBox_virtualbase_minimumSizeHint(const VirtualQMessageBox* self) {
 
-	return new QSize(( (const VirtualQMessageBox*)(self) )->QMessageBox::minimumSizeHint());
-
+	return new QSize(self->QMessageBox::minimumSizeHint());
 }
 
-void QMessageBox_virtualbase_open(void* self) {
+void QMessageBox_virtualbase_open(VirtualQMessageBox* self) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::open();
-
+	self->QMessageBox::open();
 }
 
-int QMessageBox_virtualbase_exec(void* self) {
+int QMessageBox_virtualbase_exec(VirtualQMessageBox* self) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::exec();
-
+	return self->QMessageBox::exec();
 }
 
-void QMessageBox_virtualbase_done(void* self, int param1) {
+void QMessageBox_virtualbase_done(VirtualQMessageBox* self, int param1) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::done(static_cast<int>(param1));
-
+	self->QMessageBox::done(static_cast<int>(param1));
 }
 
-void QMessageBox_virtualbase_accept(void* self) {
+void QMessageBox_virtualbase_accept(VirtualQMessageBox* self) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::accept();
-
+	self->QMessageBox::accept();
 }
 
-void QMessageBox_virtualbase_reject(void* self) {
+void QMessageBox_virtualbase_reject(VirtualQMessageBox* self) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::reject();
-
+	self->QMessageBox::reject();
 }
 
-void QMessageBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QMessageBox_virtualbase_contextMenuEvent(VirtualQMessageBox* self, QContextMenuEvent* param1) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::contextMenuEvent(param1);
-
+	self->QMessageBox::contextMenuEvent(param1);
 }
 
-bool QMessageBox_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QMessageBox_virtualbase_eventFilter(VirtualQMessageBox* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::eventFilter(param1, param2);
-
+	return self->QMessageBox::eventFilter(param1, param2);
 }
 
-int QMessageBox_virtualbase_devType(const void* self) {
+int QMessageBox_virtualbase_devType(const VirtualQMessageBox* self) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::devType();
-
+	return self->QMessageBox::devType();
 }
 
-int QMessageBox_virtualbase_heightForWidth(const void* self, int param1) {
+int QMessageBox_virtualbase_heightForWidth(const VirtualQMessageBox* self, int param1) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::heightForWidth(static_cast<int>(param1));
-
+	return self->QMessageBox::heightForWidth(static_cast<int>(param1));
 }
 
-bool QMessageBox_virtualbase_hasHeightForWidth(const void* self) {
+bool QMessageBox_virtualbase_hasHeightForWidth(const VirtualQMessageBox* self) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::hasHeightForWidth();
-
+	return self->QMessageBox::hasHeightForWidth();
 }
 
-QPaintEngine* QMessageBox_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QMessageBox_virtualbase_paintEngine(const VirtualQMessageBox* self) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::paintEngine();
-
+	return self->QMessageBox::paintEngine();
 }
 
-void QMessageBox_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QMessageBox_virtualbase_mousePressEvent(VirtualQMessageBox* self, QMouseEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::mousePressEvent(event);
-
+	self->QMessageBox::mousePressEvent(event);
 }
 
-void QMessageBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QMessageBox_virtualbase_mouseReleaseEvent(VirtualQMessageBox* self, QMouseEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::mouseReleaseEvent(event);
-
+	self->QMessageBox::mouseReleaseEvent(event);
 }
 
-void QMessageBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QMessageBox_virtualbase_mouseDoubleClickEvent(VirtualQMessageBox* self, QMouseEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::mouseDoubleClickEvent(event);
-
+	self->QMessageBox::mouseDoubleClickEvent(event);
 }
 
-void QMessageBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QMessageBox_virtualbase_mouseMoveEvent(VirtualQMessageBox* self, QMouseEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::mouseMoveEvent(event);
-
+	self->QMessageBox::mouseMoveEvent(event);
 }
 
-void QMessageBox_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QMessageBox_virtualbase_wheelEvent(VirtualQMessageBox* self, QWheelEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::wheelEvent(event);
-
+	self->QMessageBox::wheelEvent(event);
 }
 
-void QMessageBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QMessageBox_virtualbase_keyReleaseEvent(VirtualQMessageBox* self, QKeyEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::keyReleaseEvent(event);
-
+	self->QMessageBox::keyReleaseEvent(event);
 }
 
-void QMessageBox_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QMessageBox_virtualbase_focusInEvent(VirtualQMessageBox* self, QFocusEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::focusInEvent(event);
-
+	self->QMessageBox::focusInEvent(event);
 }
 
-void QMessageBox_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QMessageBox_virtualbase_focusOutEvent(VirtualQMessageBox* self, QFocusEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::focusOutEvent(event);
-
+	self->QMessageBox::focusOutEvent(event);
 }
 
-void QMessageBox_virtualbase_enterEvent(void* self, QEvent* event) {
+void QMessageBox_virtualbase_enterEvent(VirtualQMessageBox* self, QEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::enterEvent(event);
-
+	self->QMessageBox::enterEvent(event);
 }
 
-void QMessageBox_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QMessageBox_virtualbase_leaveEvent(VirtualQMessageBox* self, QEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::leaveEvent(event);
-
+	self->QMessageBox::leaveEvent(event);
 }
 
-void QMessageBox_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QMessageBox_virtualbase_paintEvent(VirtualQMessageBox* self, QPaintEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::paintEvent(event);
-
+	self->QMessageBox::paintEvent(event);
 }
 
-void QMessageBox_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QMessageBox_virtualbase_moveEvent(VirtualQMessageBox* self, QMoveEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::moveEvent(event);
-
+	self->QMessageBox::moveEvent(event);
 }
 
-void QMessageBox_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QMessageBox_virtualbase_tabletEvent(VirtualQMessageBox* self, QTabletEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::tabletEvent(event);
-
+	self->QMessageBox::tabletEvent(event);
 }
 
-void QMessageBox_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QMessageBox_virtualbase_actionEvent(VirtualQMessageBox* self, QActionEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::actionEvent(event);
-
+	self->QMessageBox::actionEvent(event);
 }
 
-void QMessageBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QMessageBox_virtualbase_dragEnterEvent(VirtualQMessageBox* self, QDragEnterEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::dragEnterEvent(event);
-
+	self->QMessageBox::dragEnterEvent(event);
 }
 
-void QMessageBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QMessageBox_virtualbase_dragMoveEvent(VirtualQMessageBox* self, QDragMoveEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::dragMoveEvent(event);
-
+	self->QMessageBox::dragMoveEvent(event);
 }
 
-void QMessageBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QMessageBox_virtualbase_dragLeaveEvent(VirtualQMessageBox* self, QDragLeaveEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::dragLeaveEvent(event);
-
+	self->QMessageBox::dragLeaveEvent(event);
 }
 
-void QMessageBox_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QMessageBox_virtualbase_dropEvent(VirtualQMessageBox* self, QDropEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::dropEvent(event);
-
+	self->QMessageBox::dropEvent(event);
 }
 
-void QMessageBox_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QMessageBox_virtualbase_hideEvent(VirtualQMessageBox* self, QHideEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::hideEvent(event);
-
+	self->QMessageBox::hideEvent(event);
 }
 
-bool QMessageBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QMessageBox_virtualbase_nativeEvent(VirtualQMessageBox* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QMessageBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QMessageBox_virtualbase_metric(const void* self, int param1) {
+int QMessageBox_virtualbase_metric(const VirtualQMessageBox* self, int param1) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::metric(static_cast<VirtualQMessageBox::PaintDeviceMetric>(param1));
-
+	return self->QMessageBox::metric(static_cast<VirtualQMessageBox::PaintDeviceMetric>(param1));
 }
 
-void QMessageBox_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QMessageBox_virtualbase_initPainter(const VirtualQMessageBox* self, QPainter* painter) {
 
-	( (const VirtualQMessageBox*)(self) )->QMessageBox::initPainter(painter);
-
+	self->QMessageBox::initPainter(painter);
 }
 
-QPaintDevice* QMessageBox_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QMessageBox_virtualbase_redirected(const VirtualQMessageBox* self, QPoint* offset) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::redirected(offset);
-
+	return self->QMessageBox::redirected(offset);
 }
 
-QPainter* QMessageBox_virtualbase_sharedPainter(const void* self) {
+QPainter* QMessageBox_virtualbase_sharedPainter(const VirtualQMessageBox* self) {
 
-	return ( (const VirtualQMessageBox*)(self) )->QMessageBox::sharedPainter();
-
+	return self->QMessageBox::sharedPainter();
 }
 
-void QMessageBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QMessageBox_virtualbase_inputMethodEvent(VirtualQMessageBox* self, QInputMethodEvent* param1) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::inputMethodEvent(param1);
-
+	self->QMessageBox::inputMethodEvent(param1);
 }
 
-QVariant* QMessageBox_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QMessageBox_virtualbase_inputMethodQuery(const VirtualQMessageBox* self, int param1) {
 
-	return new QVariant(( (const VirtualQMessageBox*)(self) )->QMessageBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QMessageBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QMessageBox_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QMessageBox_virtualbase_focusNextPrevChild(VirtualQMessageBox* self, bool next) {
 
-	return ( (VirtualQMessageBox*)(self) )->QMessageBox::focusNextPrevChild(next);
-
+	return self->QMessageBox::focusNextPrevChild(next);
 }
 
-void QMessageBox_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMessageBox_virtualbase_timerEvent(VirtualQMessageBox* self, QTimerEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::timerEvent(event);
-
+	self->QMessageBox::timerEvent(event);
 }
 
-void QMessageBox_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMessageBox_virtualbase_childEvent(VirtualQMessageBox* self, QChildEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::childEvent(event);
-
+	self->QMessageBox::childEvent(event);
 }
 
-void QMessageBox_virtualbase_customEvent(void* self, QEvent* event) {
+void QMessageBox_virtualbase_customEvent(VirtualQMessageBox* self, QEvent* event) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::customEvent(event);
-
+	self->QMessageBox::customEvent(event);
 }
 
-void QMessageBox_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMessageBox_virtualbase_connectNotify(VirtualQMessageBox* self, QMetaMethod* signal) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::connectNotify(*signal);
-
+	self->QMessageBox::connectNotify(*signal);
 }
 
-void QMessageBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMessageBox_virtualbase_disconnectNotify(VirtualQMessageBox* self, QMetaMethod* signal) {
 
-	( (VirtualQMessageBox*)(self) )->QMessageBox::disconnectNotify(*signal);
-
+	self->QMessageBox::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMessageBox_staticMetaObject() { return &QMessageBox::staticMetaObject; }
-void QMessageBox_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	self_cast->adjustPosition(param1);
 
+const QMessageBox_VTable* QMessageBox_vtbl(const VirtualQMessageBox* self) { return self->vtbl; }
+void* QMessageBox_vdata(const VirtualQMessageBox* self) { return self->vdata; }
+void QMessageBox_setVdata(VirtualQMessageBox* self, void* vdata) { self->vdata = vdata; }
+
+void QMessageBox_protectedbase_adjustPosition(VirtualQMessageBox* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QMessageBox_protectedbase_updateMicroFocus(void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QMessageBox_protectedbase_updateMicroFocus(VirtualQMessageBox* self) {
+	self->updateMicroFocus();
 }
 
-void QMessageBox_protectedbase_create(void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	self_cast->create();
-
+void QMessageBox_protectedbase_create(VirtualQMessageBox* self) {
+	self->create();
 }
 
-void QMessageBox_protectedbase_destroy(void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	self_cast->destroy();
-
+void QMessageBox_protectedbase_destroy(VirtualQMessageBox* self) {
+	self->destroy();
 }
 
-bool QMessageBox_protectedbase_focusNextChild(void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QMessageBox_protectedbase_focusNextChild(VirtualQMessageBox* self) {
+	return self->focusNextChild();
 }
 
-bool QMessageBox_protectedbase_focusPreviousChild(void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QMessageBox_protectedbase_focusPreviousChild(VirtualQMessageBox* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QMessageBox_protectedbase_sender(const void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QMessageBox_protectedbase_sender(const VirtualQMessageBox* self) {
+	return self->sender();
 }
 
-int QMessageBox_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMessageBox_protectedbase_senderSignalIndex(const VirtualQMessageBox* self) {
+	return self->senderSignalIndex();
 }
 
-int QMessageBox_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMessageBox_protectedbase_receivers(const VirtualQMessageBox* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMessageBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMessageBox* self_cast = static_cast<VirtualQMessageBox*>( (QMessageBox*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMessageBox_protectedbase_isSignalConnected(const VirtualQMessageBox* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMessageBox_delete(QMessageBox* self) {

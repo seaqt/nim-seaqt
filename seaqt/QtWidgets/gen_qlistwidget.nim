@@ -95,39 +95,39 @@ export
 type cQListWidgetItem*{.exportc: "QListWidgetItem", incompleteStruct.} = object
 type cQListWidget*{.exportc: "QListWidget", incompleteStruct.} = object
 
-proc fcQListWidgetItem_clone(self: pointer, ): pointer {.importc: "QListWidgetItem_clone".}
-proc fcQListWidgetItem_listWidget(self: pointer, ): pointer {.importc: "QListWidgetItem_listWidget".}
+proc fcQListWidgetItem_clone(self: pointer): pointer {.importc: "QListWidgetItem_clone".}
+proc fcQListWidgetItem_listWidget(self: pointer): pointer {.importc: "QListWidgetItem_listWidget".}
 proc fcQListWidgetItem_setSelected(self: pointer, select: bool): void {.importc: "QListWidgetItem_setSelected".}
-proc fcQListWidgetItem_isSelected(self: pointer, ): bool {.importc: "QListWidgetItem_isSelected".}
+proc fcQListWidgetItem_isSelected(self: pointer): bool {.importc: "QListWidgetItem_isSelected".}
 proc fcQListWidgetItem_setHidden(self: pointer, hide: bool): void {.importc: "QListWidgetItem_setHidden".}
-proc fcQListWidgetItem_isHidden(self: pointer, ): bool {.importc: "QListWidgetItem_isHidden".}
-proc fcQListWidgetItem_flags(self: pointer, ): cint {.importc: "QListWidgetItem_flags".}
+proc fcQListWidgetItem_isHidden(self: pointer): bool {.importc: "QListWidgetItem_isHidden".}
+proc fcQListWidgetItem_flags(self: pointer): cint {.importc: "QListWidgetItem_flags".}
 proc fcQListWidgetItem_setFlags(self: pointer, flags: cint): void {.importc: "QListWidgetItem_setFlags".}
-proc fcQListWidgetItem_text(self: pointer, ): struct_miqt_string {.importc: "QListWidgetItem_text".}
+proc fcQListWidgetItem_text(self: pointer): struct_miqt_string {.importc: "QListWidgetItem_text".}
 proc fcQListWidgetItem_setText(self: pointer, text: struct_miqt_string): void {.importc: "QListWidgetItem_setText".}
-proc fcQListWidgetItem_icon(self: pointer, ): pointer {.importc: "QListWidgetItem_icon".}
+proc fcQListWidgetItem_icon(self: pointer): pointer {.importc: "QListWidgetItem_icon".}
 proc fcQListWidgetItem_setIcon(self: pointer, icon: pointer): void {.importc: "QListWidgetItem_setIcon".}
-proc fcQListWidgetItem_statusTip(self: pointer, ): struct_miqt_string {.importc: "QListWidgetItem_statusTip".}
+proc fcQListWidgetItem_statusTip(self: pointer): struct_miqt_string {.importc: "QListWidgetItem_statusTip".}
 proc fcQListWidgetItem_setStatusTip(self: pointer, statusTip: struct_miqt_string): void {.importc: "QListWidgetItem_setStatusTip".}
-proc fcQListWidgetItem_toolTip(self: pointer, ): struct_miqt_string {.importc: "QListWidgetItem_toolTip".}
+proc fcQListWidgetItem_toolTip(self: pointer): struct_miqt_string {.importc: "QListWidgetItem_toolTip".}
 proc fcQListWidgetItem_setToolTip(self: pointer, toolTip: struct_miqt_string): void {.importc: "QListWidgetItem_setToolTip".}
-proc fcQListWidgetItem_whatsThis(self: pointer, ): struct_miqt_string {.importc: "QListWidgetItem_whatsThis".}
+proc fcQListWidgetItem_whatsThis(self: pointer): struct_miqt_string {.importc: "QListWidgetItem_whatsThis".}
 proc fcQListWidgetItem_setWhatsThis(self: pointer, whatsThis: struct_miqt_string): void {.importc: "QListWidgetItem_setWhatsThis".}
-proc fcQListWidgetItem_font(self: pointer, ): pointer {.importc: "QListWidgetItem_font".}
+proc fcQListWidgetItem_font(self: pointer): pointer {.importc: "QListWidgetItem_font".}
 proc fcQListWidgetItem_setFont(self: pointer, font: pointer): void {.importc: "QListWidgetItem_setFont".}
-proc fcQListWidgetItem_textAlignment(self: pointer, ): cint {.importc: "QListWidgetItem_textAlignment".}
+proc fcQListWidgetItem_textAlignment(self: pointer): cint {.importc: "QListWidgetItem_textAlignment".}
 proc fcQListWidgetItem_setTextAlignment(self: pointer, alignment: cint): void {.importc: "QListWidgetItem_setTextAlignment".}
-proc fcQListWidgetItem_backgroundColor(self: pointer, ): pointer {.importc: "QListWidgetItem_backgroundColor".}
+proc fcQListWidgetItem_backgroundColor(self: pointer): pointer {.importc: "QListWidgetItem_backgroundColor".}
 proc fcQListWidgetItem_setBackgroundColor(self: pointer, color: pointer): void {.importc: "QListWidgetItem_setBackgroundColor".}
-proc fcQListWidgetItem_background(self: pointer, ): pointer {.importc: "QListWidgetItem_background".}
+proc fcQListWidgetItem_background(self: pointer): pointer {.importc: "QListWidgetItem_background".}
 proc fcQListWidgetItem_setBackground(self: pointer, brush: pointer): void {.importc: "QListWidgetItem_setBackground".}
-proc fcQListWidgetItem_textColor(self: pointer, ): pointer {.importc: "QListWidgetItem_textColor".}
+proc fcQListWidgetItem_textColor(self: pointer): pointer {.importc: "QListWidgetItem_textColor".}
 proc fcQListWidgetItem_setTextColor(self: pointer, color: pointer): void {.importc: "QListWidgetItem_setTextColor".}
-proc fcQListWidgetItem_foreground(self: pointer, ): pointer {.importc: "QListWidgetItem_foreground".}
+proc fcQListWidgetItem_foreground(self: pointer): pointer {.importc: "QListWidgetItem_foreground".}
 proc fcQListWidgetItem_setForeground(self: pointer, brush: pointer): void {.importc: "QListWidgetItem_setForeground".}
-proc fcQListWidgetItem_checkState(self: pointer, ): cint {.importc: "QListWidgetItem_checkState".}
+proc fcQListWidgetItem_checkState(self: pointer): cint {.importc: "QListWidgetItem_checkState".}
 proc fcQListWidgetItem_setCheckState(self: pointer, state: cint): void {.importc: "QListWidgetItem_setCheckState".}
-proc fcQListWidgetItem_sizeHint(self: pointer, ): pointer {.importc: "QListWidgetItem_sizeHint".}
+proc fcQListWidgetItem_sizeHint(self: pointer): pointer {.importc: "QListWidgetItem_sizeHint".}
 proc fcQListWidgetItem_setSizeHint(self: pointer, size: pointer): void {.importc: "QListWidgetItem_setSizeHint".}
 proc fcQListWidgetItem_data(self: pointer, role: cint): pointer {.importc: "QListWidgetItem_data".}
 proc fcQListWidgetItem_setData(self: pointer, role: cint, value: pointer): void {.importc: "QListWidgetItem_setData".}
@@ -135,34 +135,36 @@ proc fcQListWidgetItem_operatorLesser(self: pointer, other: pointer): bool {.imp
 proc fcQListWidgetItem_read(self: pointer, inVal: pointer): void {.importc: "QListWidgetItem_read".}
 proc fcQListWidgetItem_write(self: pointer, outVal: pointer): void {.importc: "QListWidgetItem_write".}
 proc fcQListWidgetItem_operatorAssign(self: pointer, other: pointer): void {.importc: "QListWidgetItem_operatorAssign".}
-proc fcQListWidgetItem_typeX(self: pointer, ): cint {.importc: "QListWidgetItem_type".}
+proc fcQListWidgetItem_typeX(self: pointer): cint {.importc: "QListWidgetItem_type".}
+proc fcQListWidgetItem_vtbl(self: pointer): pointer {.importc: "QListWidgetItem_vtbl".}
+proc fcQListWidgetItem_vdata(self: pointer): pointer {.importc: "QListWidgetItem_vdata".}
 type cQListWidgetItemVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQListWidgetItemVTable, self: ptr cQListWidgetItem) {.cdecl, raises:[], gcsafe.}
-  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  setBackgroundColor*: proc(vtbl, self: pointer, color: pointer): void {.cdecl, raises: [], gcsafe.}
-  data*: proc(vtbl, self: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setData*: proc(vtbl, self: pointer, role: cint, value: pointer): void {.cdecl, raises: [], gcsafe.}
-  operatorLesser*: proc(vtbl, self: pointer, other: pointer): bool {.cdecl, raises: [], gcsafe.}
-  read*: proc(vtbl, self: pointer, inVal: pointer): void {.cdecl, raises: [], gcsafe.}
-  write*: proc(vtbl, self: pointer, outVal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQListWidgetItem_virtualbase_clone(self: pointer, ): pointer {.importc: "QListWidgetItem_virtualbase_clone".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  setBackgroundColor*: proc(self: pointer, color: pointer): void {.cdecl, raises: [], gcsafe.}
+  data*: proc(self: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(self: pointer, role: cint, value: pointer): void {.cdecl, raises: [], gcsafe.}
+  operatorLesser*: proc(self: pointer, other: pointer): bool {.cdecl, raises: [], gcsafe.}
+  read*: proc(self: pointer, inVal: pointer): void {.cdecl, raises: [], gcsafe.}
+  write*: proc(self: pointer, outVal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQListWidgetItem_virtualbase_clone(self: pointer): pointer {.importc: "QListWidgetItem_virtualbase_clone".}
 proc fcQListWidgetItem_virtualbase_setBackgroundColor(self: pointer, color: pointer): void {.importc: "QListWidgetItem_virtualbase_setBackgroundColor".}
 proc fcQListWidgetItem_virtualbase_data(self: pointer, role: cint): pointer {.importc: "QListWidgetItem_virtualbase_data".}
 proc fcQListWidgetItem_virtualbase_setData(self: pointer, role: cint, value: pointer): void {.importc: "QListWidgetItem_virtualbase_setData".}
 proc fcQListWidgetItem_virtualbase_operatorLesser(self: pointer, other: pointer): bool {.importc: "QListWidgetItem_virtualbase_operatorLesser".}
 proc fcQListWidgetItem_virtualbase_read(self: pointer, inVal: pointer): void {.importc: "QListWidgetItem_virtualbase_read".}
 proc fcQListWidgetItem_virtualbase_write(self: pointer, outVal: pointer): void {.importc: "QListWidgetItem_virtualbase_write".}
-proc fcQListWidgetItem_new(vtbl: pointer, ): ptr cQListWidgetItem {.importc: "QListWidgetItem_new".}
-proc fcQListWidgetItem_new2(vtbl: pointer, text: struct_miqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new2".}
-proc fcQListWidgetItem_new3(vtbl: pointer, icon: pointer, text: struct_miqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new3".}
-proc fcQListWidgetItem_new4(vtbl: pointer, other: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new4".}
-proc fcQListWidgetItem_new5(vtbl: pointer, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new5".}
-proc fcQListWidgetItem_new6(vtbl: pointer, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new6".}
-proc fcQListWidgetItem_new7(vtbl: pointer, text: struct_miqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new7".}
-proc fcQListWidgetItem_new8(vtbl: pointer, text: struct_miqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new8".}
-proc fcQListWidgetItem_new9(vtbl: pointer, icon: pointer, text: struct_miqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new9".}
-proc fcQListWidgetItem_new10(vtbl: pointer, icon: pointer, text: struct_miqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new10".}
-proc fcQListWidget_metaObject(self: pointer, ): pointer {.importc: "QListWidget_metaObject".}
+proc fcQListWidgetItem_new(vtbl, vdata: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new".}
+proc fcQListWidgetItem_new2(vtbl, vdata: pointer, text: struct_miqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new2".}
+proc fcQListWidgetItem_new3(vtbl, vdata: pointer, icon: pointer, text: struct_miqt_string): ptr cQListWidgetItem {.importc: "QListWidgetItem_new3".}
+proc fcQListWidgetItem_new4(vtbl, vdata: pointer, other: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new4".}
+proc fcQListWidgetItem_new5(vtbl, vdata: pointer, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new5".}
+proc fcQListWidgetItem_new6(vtbl, vdata: pointer, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new6".}
+proc fcQListWidgetItem_new7(vtbl, vdata: pointer, text: struct_miqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new7".}
+proc fcQListWidgetItem_new8(vtbl, vdata: pointer, text: struct_miqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new8".}
+proc fcQListWidgetItem_new9(vtbl, vdata: pointer, icon: pointer, text: struct_miqt_string, listview: pointer): ptr cQListWidgetItem {.importc: "QListWidgetItem_new9".}
+proc fcQListWidgetItem_new10(vtbl, vdata: pointer, icon: pointer, text: struct_miqt_string, listview: pointer, typeVal: cint): ptr cQListWidgetItem {.importc: "QListWidgetItem_new10".}
+proc fcQListWidget_metaObject(self: pointer): pointer {.importc: "QListWidget_metaObject".}
 proc fcQListWidget_metacast(self: pointer, param1: cstring): pointer {.importc: "QListWidget_metacast".}
 proc fcQListWidget_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListWidget_metacall".}
 proc fcQListWidget_tr(s: cstring): struct_miqt_string {.importc: "QListWidget_tr".}
@@ -177,19 +179,19 @@ proc fcQListWidget_addItem(self: pointer, label: struct_miqt_string): void {.imp
 proc fcQListWidget_addItemWithItem(self: pointer, item: pointer): void {.importc: "QListWidget_addItemWithItem".}
 proc fcQListWidget_addItems(self: pointer, labels: struct_miqt_array): void {.importc: "QListWidget_addItems".}
 proc fcQListWidget_takeItem(self: pointer, row: cint): pointer {.importc: "QListWidget_takeItem".}
-proc fcQListWidget_count(self: pointer, ): cint {.importc: "QListWidget_count".}
-proc fcQListWidget_currentItem(self: pointer, ): pointer {.importc: "QListWidget_currentItem".}
+proc fcQListWidget_count(self: pointer): cint {.importc: "QListWidget_count".}
+proc fcQListWidget_currentItem(self: pointer): pointer {.importc: "QListWidget_currentItem".}
 proc fcQListWidget_setCurrentItem(self: pointer, item: pointer): void {.importc: "QListWidget_setCurrentItem".}
 proc fcQListWidget_setCurrentItem2(self: pointer, item: pointer, command: cint): void {.importc: "QListWidget_setCurrentItem2".}
-proc fcQListWidget_currentRow(self: pointer, ): cint {.importc: "QListWidget_currentRow".}
+proc fcQListWidget_currentRow(self: pointer): cint {.importc: "QListWidget_currentRow".}
 proc fcQListWidget_setCurrentRow(self: pointer, row: cint): void {.importc: "QListWidget_setCurrentRow".}
 proc fcQListWidget_setCurrentRow2(self: pointer, row: cint, command: cint): void {.importc: "QListWidget_setCurrentRow2".}
 proc fcQListWidget_itemAt(self: pointer, p: pointer): pointer {.importc: "QListWidget_itemAt".}
 proc fcQListWidget_itemAt2(self: pointer, x: cint, y: cint): pointer {.importc: "QListWidget_itemAt2".}
 proc fcQListWidget_visualItemRect(self: pointer, item: pointer): pointer {.importc: "QListWidget_visualItemRect".}
-proc fcQListWidget_sortItems(self: pointer, ): void {.importc: "QListWidget_sortItems".}
+proc fcQListWidget_sortItems(self: pointer): void {.importc: "QListWidget_sortItems".}
 proc fcQListWidget_setSortingEnabled(self: pointer, enable: bool): void {.importc: "QListWidget_setSortingEnabled".}
-proc fcQListWidget_isSortingEnabled(self: pointer, ): bool {.importc: "QListWidget_isSortingEnabled".}
+proc fcQListWidget_isSortingEnabled(self: pointer): bool {.importc: "QListWidget_isSortingEnabled".}
 proc fcQListWidget_editItem(self: pointer, item: pointer): void {.importc: "QListWidget_editItem".}
 proc fcQListWidget_openPersistentEditor(self: pointer, item: pointer): void {.importc: "QListWidget_openPersistentEditor".}
 proc fcQListWidget_closePersistentEditor(self: pointer, item: pointer): void {.importc: "QListWidget_closePersistentEditor".}
@@ -199,13 +201,13 @@ proc fcQListWidget_setItemWidget(self: pointer, item: pointer, widget: pointer):
 proc fcQListWidget_removeItemWidget(self: pointer, item: pointer): void {.importc: "QListWidget_removeItemWidget".}
 proc fcQListWidget_isItemSelected(self: pointer, item: pointer): bool {.importc: "QListWidget_isItemSelected".}
 proc fcQListWidget_setItemSelected(self: pointer, item: pointer, select: bool): void {.importc: "QListWidget_setItemSelected".}
-proc fcQListWidget_selectedItems(self: pointer, ): struct_miqt_array {.importc: "QListWidget_selectedItems".}
+proc fcQListWidget_selectedItems(self: pointer): struct_miqt_array {.importc: "QListWidget_selectedItems".}
 proc fcQListWidget_findItems(self: pointer, text: struct_miqt_string, flags: cint): struct_miqt_array {.importc: "QListWidget_findItems".}
 proc fcQListWidget_isItemHidden(self: pointer, item: pointer): bool {.importc: "QListWidget_isItemHidden".}
 proc fcQListWidget_setItemHidden(self: pointer, item: pointer, hide: bool): void {.importc: "QListWidget_setItemHidden".}
 proc fcQListWidget_dropEvent(self: pointer, event: pointer): void {.importc: "QListWidget_dropEvent".}
 proc fcQListWidget_scrollToItem(self: pointer, item: pointer): void {.importc: "QListWidget_scrollToItem".}
-proc fcQListWidget_clear(self: pointer, ): void {.importc: "QListWidget_clear".}
+proc fcQListWidget_clear(self: pointer): void {.importc: "QListWidget_clear".}
 proc fcQListWidget_itemPressed(self: pointer, item: pointer): void {.importc: "QListWidget_itemPressed".}
 proc fcQListWidget_connect_itemPressed(self: pointer, slot: int, callback: proc (slot: int, item: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_itemPressed".}
 proc fcQListWidget_itemClicked(self: pointer, item: pointer): void {.importc: "QListWidget_itemClicked".}
@@ -224,7 +226,7 @@ proc fcQListWidget_currentTextChanged(self: pointer, currentText: struct_miqt_st
 proc fcQListWidget_connect_currentTextChanged(self: pointer, slot: int, callback: proc (slot: int, currentText: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_currentTextChanged".}
 proc fcQListWidget_currentRowChanged(self: pointer, currentRow: cint): void {.importc: "QListWidget_currentRowChanged".}
 proc fcQListWidget_connect_currentRowChanged(self: pointer, slot: int, callback: proc (slot: int, currentRow: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_currentRowChanged".}
-proc fcQListWidget_itemSelectionChanged(self: pointer, ): void {.importc: "QListWidget_itemSelectionChanged".}
+proc fcQListWidget_itemSelectionChanged(self: pointer): void {.importc: "QListWidget_itemSelectionChanged".}
 proc fcQListWidget_connect_itemSelectionChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QListWidget_connect_itemSelectionChanged".}
 proc fcQListWidget_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QListWidget_tr2".}
 proc fcQListWidget_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QListWidget_tr3".}
@@ -232,118 +234,120 @@ proc fcQListWidget_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQListWidget_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QListWidget_trUtf83".}
 proc fcQListWidget_sortItems1(self: pointer, order: cint): void {.importc: "QListWidget_sortItems1".}
 proc fcQListWidget_scrollToItem2(self: pointer, item: pointer, hint: cint): void {.importc: "QListWidget_scrollToItem2".}
+proc fcQListWidget_vtbl(self: pointer): pointer {.importc: "QListWidget_vtbl".}
+proc fcQListWidget_vdata(self: pointer): pointer {.importc: "QListWidget_vdata".}
 type cQListWidgetVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQListWidgetVTable, self: ptr cQListWidget) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setSelectionModel*: proc(vtbl, self: pointer, selectionModel: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  mimeData*: proc(vtbl, self: pointer, items: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
-  dropMimeData*: proc(vtbl, self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl, raises: [], gcsafe.}
-  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  visualRect*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  scrollTo*: proc(vtbl, self: pointer, index: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
-  indexAt*: proc(vtbl, self: pointer, p: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  doItemsLayout*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  reset*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  setRootIndex*: proc(vtbl, self: pointer, index: pointer): void {.cdecl, raises: [], gcsafe.}
-  scrollContentsBy*: proc(vtbl, self: pointer, dx: cint, dy: cint): void {.cdecl, raises: [], gcsafe.}
-  dataChanged*: proc(vtbl, self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl, raises: [], gcsafe.}
-  rowsInserted*: proc(vtbl, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
-  rowsAboutToBeRemoved*: proc(vtbl, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  startDrag*: proc(vtbl, self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
-  viewOptions*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  paintEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  horizontalOffset*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  verticalOffset*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  moveCursor*: proc(vtbl, self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setSelection*: proc(vtbl, self: pointer, rect: pointer, command: cint): void {.cdecl, raises: [], gcsafe.}
-  visualRegionForSelection*: proc(vtbl, self: pointer, selection: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  selectedIndexes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  updateGeometries*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  isIndexHidden*: proc(vtbl, self: pointer, index: pointer): bool {.cdecl, raises: [], gcsafe.}
-  selectionChanged*: proc(vtbl, self: pointer, selected: pointer, deselected: pointer): void {.cdecl, raises: [], gcsafe.}
-  currentChanged*: proc(vtbl, self: pointer, current: pointer, previous: pointer): void {.cdecl, raises: [], gcsafe.}
-  viewportSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  keyboardSearch*: proc(vtbl, self: pointer, search: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
-  sizeHintForRow*: proc(vtbl, self: pointer, row: cint): cint {.cdecl, raises: [], gcsafe.}
-  sizeHintForColumn*: proc(vtbl, self: pointer, column: cint): cint {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
-  selectAll*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  updateEditorData*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  updateEditorGeometries*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  verticalScrollbarAction*: proc(vtbl, self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
-  horizontalScrollbarAction*: proc(vtbl, self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
-  verticalScrollbarValueChanged*: proc(vtbl, self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
-  horizontalScrollbarValueChanged*: proc(vtbl, self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
-  closeEditor*: proc(vtbl, self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
-  commitData*: proc(vtbl, self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  editorDestroyed*: proc(vtbl, self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
-  edit2*: proc(vtbl, self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  selectionCommand*: proc(vtbl, self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  viewportEvent*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  minimumSizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  setupViewport*: proc(vtbl, self: pointer, viewport: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  devType*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setVisible*: proc(vtbl, self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  paintEngine*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  enterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  leaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  tabletEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  actionEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  nativeEvent*: proc(vtbl, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
-  metric*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  initPainter*: proc(vtbl, self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
-  redirected*: proc(vtbl, self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sharedPainter*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQListWidget_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setSelectionModel*: proc(self: pointer, selectionModel: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(self: pointer, items: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  visualRect*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  scrollTo*: proc(self: pointer, index: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
+  indexAt*: proc(self: pointer, p: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  doItemsLayout*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  reset*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  setRootIndex*: proc(self: pointer, index: pointer): void {.cdecl, raises: [], gcsafe.}
+  scrollContentsBy*: proc(self: pointer, dx: cint, dy: cint): void {.cdecl, raises: [], gcsafe.}
+  dataChanged*: proc(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl, raises: [], gcsafe.}
+  rowsInserted*: proc(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
+  rowsAboutToBeRemoved*: proc(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  startDrag*: proc(self: pointer, supportedActions: cint): void {.cdecl, raises: [], gcsafe.}
+  viewOptions*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  paintEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  horizontalOffset*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  verticalOffset*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  moveCursor*: proc(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setSelection*: proc(self: pointer, rect: pointer, command: cint): void {.cdecl, raises: [], gcsafe.}
+  visualRegionForSelection*: proc(self: pointer, selection: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  selectedIndexes*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  updateGeometries*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  isIndexHidden*: proc(self: pointer, index: pointer): bool {.cdecl, raises: [], gcsafe.}
+  selectionChanged*: proc(self: pointer, selected: pointer, deselected: pointer): void {.cdecl, raises: [], gcsafe.}
+  currentChanged*: proc(self: pointer, current: pointer, previous: pointer): void {.cdecl, raises: [], gcsafe.}
+  viewportSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  keyboardSearch*: proc(self: pointer, search: struct_miqt_string): void {.cdecl, raises: [], gcsafe.}
+  sizeHintForRow*: proc(self: pointer, row: cint): cint {.cdecl, raises: [], gcsafe.}
+  sizeHintForColumn*: proc(self: pointer, column: cint): cint {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  selectAll*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  updateEditorData*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  updateEditorGeometries*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  verticalScrollbarAction*: proc(self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
+  horizontalScrollbarAction*: proc(self: pointer, action: cint): void {.cdecl, raises: [], gcsafe.}
+  verticalScrollbarValueChanged*: proc(self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
+  horizontalScrollbarValueChanged*: proc(self: pointer, value: cint): void {.cdecl, raises: [], gcsafe.}
+  closeEditor*: proc(self: pointer, editor: pointer, hint: cint): void {.cdecl, raises: [], gcsafe.}
+  commitData*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
+  editorDestroyed*: proc(self: pointer, editor: pointer): void {.cdecl, raises: [], gcsafe.}
+  edit2*: proc(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  selectionCommand*: proc(self: pointer, index: pointer, event: pointer): cint {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  viewportEvent*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  minimumSizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  setupViewport*: proc(self: pointer, viewport: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  devType*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setVisible*: proc(self: pointer, visible: bool): void {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  paintEngine*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  enterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  leaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  tabletEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  actionEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  nativeEvent*: proc(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl, raises: [], gcsafe.}
+  metric*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  initPainter*: proc(self: pointer, painter: pointer): void {.cdecl, raises: [], gcsafe.}
+  redirected*: proc(self: pointer, offset: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sharedPainter*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQListWidget_virtualbase_metaObject(self: pointer): pointer {.importc: "QListWidget_virtualbase_metaObject".}
 proc fcQListWidget_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QListWidget_virtualbase_metacast".}
 proc fcQListWidget_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QListWidget_virtualbase_metacall".}
 proc fcQListWidget_virtualbase_setSelectionModel(self: pointer, selectionModel: pointer): void {.importc: "QListWidget_virtualbase_setSelectionModel".}
 proc fcQListWidget_virtualbase_dropEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_dropEvent".}
 proc fcQListWidget_virtualbase_event(self: pointer, e: pointer): bool {.importc: "QListWidget_virtualbase_event".}
-proc fcQListWidget_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QListWidget_virtualbase_mimeTypes".}
+proc fcQListWidget_virtualbase_mimeTypes(self: pointer): struct_miqt_array {.importc: "QListWidget_virtualbase_mimeTypes".}
 proc fcQListWidget_virtualbase_mimeData(self: pointer, items: struct_miqt_array): pointer {.importc: "QListWidget_virtualbase_mimeData".}
 proc fcQListWidget_virtualbase_dropMimeData(self: pointer, index: cint, data: pointer, action: cint): bool {.importc: "QListWidget_virtualbase_dropMimeData".}
-proc fcQListWidget_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QListWidget_virtualbase_supportedDropActions".}
+proc fcQListWidget_virtualbase_supportedDropActions(self: pointer): cint {.importc: "QListWidget_virtualbase_supportedDropActions".}
 proc fcQListWidget_virtualbase_visualRect(self: pointer, index: pointer): pointer {.importc: "QListWidget_virtualbase_visualRect".}
 proc fcQListWidget_virtualbase_scrollTo(self: pointer, index: pointer, hint: cint): void {.importc: "QListWidget_virtualbase_scrollTo".}
 proc fcQListWidget_virtualbase_indexAt(self: pointer, p: pointer): pointer {.importc: "QListWidget_virtualbase_indexAt".}
-proc fcQListWidget_virtualbase_doItemsLayout(self: pointer, ): void {.importc: "QListWidget_virtualbase_doItemsLayout".}
-proc fcQListWidget_virtualbase_reset(self: pointer, ): void {.importc: "QListWidget_virtualbase_reset".}
+proc fcQListWidget_virtualbase_doItemsLayout(self: pointer): void {.importc: "QListWidget_virtualbase_doItemsLayout".}
+proc fcQListWidget_virtualbase_reset(self: pointer): void {.importc: "QListWidget_virtualbase_reset".}
 proc fcQListWidget_virtualbase_setRootIndex(self: pointer, index: pointer): void {.importc: "QListWidget_virtualbase_setRootIndex".}
 proc fcQListWidget_virtualbase_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.importc: "QListWidget_virtualbase_scrollContentsBy".}
 proc fcQListWidget_virtualbase_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.importc: "QListWidget_virtualbase_dataChanged".}
@@ -357,26 +361,26 @@ proc fcQListWidget_virtualbase_resizeEvent(self: pointer, e: pointer): void {.im
 proc fcQListWidget_virtualbase_dragMoveEvent(self: pointer, e: pointer): void {.importc: "QListWidget_virtualbase_dragMoveEvent".}
 proc fcQListWidget_virtualbase_dragLeaveEvent(self: pointer, e: pointer): void {.importc: "QListWidget_virtualbase_dragLeaveEvent".}
 proc fcQListWidget_virtualbase_startDrag(self: pointer, supportedActions: cint): void {.importc: "QListWidget_virtualbase_startDrag".}
-proc fcQListWidget_virtualbase_viewOptions(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_viewOptions".}
+proc fcQListWidget_virtualbase_viewOptions(self: pointer): pointer {.importc: "QListWidget_virtualbase_viewOptions".}
 proc fcQListWidget_virtualbase_paintEvent(self: pointer, e: pointer): void {.importc: "QListWidget_virtualbase_paintEvent".}
-proc fcQListWidget_virtualbase_horizontalOffset(self: pointer, ): cint {.importc: "QListWidget_virtualbase_horizontalOffset".}
-proc fcQListWidget_virtualbase_verticalOffset(self: pointer, ): cint {.importc: "QListWidget_virtualbase_verticalOffset".}
+proc fcQListWidget_virtualbase_horizontalOffset(self: pointer): cint {.importc: "QListWidget_virtualbase_horizontalOffset".}
+proc fcQListWidget_virtualbase_verticalOffset(self: pointer): cint {.importc: "QListWidget_virtualbase_verticalOffset".}
 proc fcQListWidget_virtualbase_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.importc: "QListWidget_virtualbase_moveCursor".}
 proc fcQListWidget_virtualbase_setSelection(self: pointer, rect: pointer, command: cint): void {.importc: "QListWidget_virtualbase_setSelection".}
 proc fcQListWidget_virtualbase_visualRegionForSelection(self: pointer, selection: pointer): pointer {.importc: "QListWidget_virtualbase_visualRegionForSelection".}
-proc fcQListWidget_virtualbase_selectedIndexes(self: pointer, ): struct_miqt_array {.importc: "QListWidget_virtualbase_selectedIndexes".}
-proc fcQListWidget_virtualbase_updateGeometries(self: pointer, ): void {.importc: "QListWidget_virtualbase_updateGeometries".}
+proc fcQListWidget_virtualbase_selectedIndexes(self: pointer): struct_miqt_array {.importc: "QListWidget_virtualbase_selectedIndexes".}
+proc fcQListWidget_virtualbase_updateGeometries(self: pointer): void {.importc: "QListWidget_virtualbase_updateGeometries".}
 proc fcQListWidget_virtualbase_isIndexHidden(self: pointer, index: pointer): bool {.importc: "QListWidget_virtualbase_isIndexHidden".}
 proc fcQListWidget_virtualbase_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.importc: "QListWidget_virtualbase_selectionChanged".}
 proc fcQListWidget_virtualbase_currentChanged(self: pointer, current: pointer, previous: pointer): void {.importc: "QListWidget_virtualbase_currentChanged".}
-proc fcQListWidget_virtualbase_viewportSizeHint(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_viewportSizeHint".}
+proc fcQListWidget_virtualbase_viewportSizeHint(self: pointer): pointer {.importc: "QListWidget_virtualbase_viewportSizeHint".}
 proc fcQListWidget_virtualbase_keyboardSearch(self: pointer, search: struct_miqt_string): void {.importc: "QListWidget_virtualbase_keyboardSearch".}
 proc fcQListWidget_virtualbase_sizeHintForRow(self: pointer, row: cint): cint {.importc: "QListWidget_virtualbase_sizeHintForRow".}
 proc fcQListWidget_virtualbase_sizeHintForColumn(self: pointer, column: cint): cint {.importc: "QListWidget_virtualbase_sizeHintForColumn".}
 proc fcQListWidget_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QListWidget_virtualbase_inputMethodQuery".}
-proc fcQListWidget_virtualbase_selectAll(self: pointer, ): void {.importc: "QListWidget_virtualbase_selectAll".}
-proc fcQListWidget_virtualbase_updateEditorData(self: pointer, ): void {.importc: "QListWidget_virtualbase_updateEditorData".}
-proc fcQListWidget_virtualbase_updateEditorGeometries(self: pointer, ): void {.importc: "QListWidget_virtualbase_updateEditorGeometries".}
+proc fcQListWidget_virtualbase_selectAll(self: pointer): void {.importc: "QListWidget_virtualbase_selectAll".}
+proc fcQListWidget_virtualbase_updateEditorData(self: pointer): void {.importc: "QListWidget_virtualbase_updateEditorData".}
+proc fcQListWidget_virtualbase_updateEditorGeometries(self: pointer): void {.importc: "QListWidget_virtualbase_updateEditorGeometries".}
 proc fcQListWidget_virtualbase_verticalScrollbarAction(self: pointer, action: cint): void {.importc: "QListWidget_virtualbase_verticalScrollbarAction".}
 proc fcQListWidget_virtualbase_horizontalScrollbarAction(self: pointer, action: cint): void {.importc: "QListWidget_virtualbase_horizontalScrollbarAction".}
 proc fcQListWidget_virtualbase_verticalScrollbarValueChanged(self: pointer, value: cint): void {.importc: "QListWidget_virtualbase_verticalScrollbarValueChanged".}
@@ -396,16 +400,16 @@ proc fcQListWidget_virtualbase_focusOutEvent(self: pointer, event: pointer): voi
 proc fcQListWidget_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_keyPressEvent".}
 proc fcQListWidget_virtualbase_inputMethodEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_inputMethodEvent".}
 proc fcQListWidget_virtualbase_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.importc: "QListWidget_virtualbase_eventFilter".}
-proc fcQListWidget_virtualbase_minimumSizeHint(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_minimumSizeHint".}
-proc fcQListWidget_virtualbase_sizeHint(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_sizeHint".}
+proc fcQListWidget_virtualbase_minimumSizeHint(self: pointer): pointer {.importc: "QListWidget_virtualbase_minimumSizeHint".}
+proc fcQListWidget_virtualbase_sizeHint(self: pointer): pointer {.importc: "QListWidget_virtualbase_sizeHint".}
 proc fcQListWidget_virtualbase_setupViewport(self: pointer, viewport: pointer): void {.importc: "QListWidget_virtualbase_setupViewport".}
 proc fcQListWidget_virtualbase_contextMenuEvent(self: pointer, param1: pointer): void {.importc: "QListWidget_virtualbase_contextMenuEvent".}
 proc fcQListWidget_virtualbase_changeEvent(self: pointer, param1: pointer): void {.importc: "QListWidget_virtualbase_changeEvent".}
-proc fcQListWidget_virtualbase_devType(self: pointer, ): cint {.importc: "QListWidget_virtualbase_devType".}
+proc fcQListWidget_virtualbase_devType(self: pointer): cint {.importc: "QListWidget_virtualbase_devType".}
 proc fcQListWidget_virtualbase_setVisible(self: pointer, visible: bool): void {.importc: "QListWidget_virtualbase_setVisible".}
 proc fcQListWidget_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QListWidget_virtualbase_heightForWidth".}
-proc fcQListWidget_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QListWidget_virtualbase_hasHeightForWidth".}
-proc fcQListWidget_virtualbase_paintEngine(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_paintEngine".}
+proc fcQListWidget_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QListWidget_virtualbase_hasHeightForWidth".}
+proc fcQListWidget_virtualbase_paintEngine(self: pointer): pointer {.importc: "QListWidget_virtualbase_paintEngine".}
 proc fcQListWidget_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_keyReleaseEvent".}
 proc fcQListWidget_virtualbase_enterEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_enterEvent".}
 proc fcQListWidget_virtualbase_leaveEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_leaveEvent".}
@@ -419,7 +423,7 @@ proc fcQListWidget_virtualbase_nativeEvent(self: pointer, eventType: struct_miqt
 proc fcQListWidget_virtualbase_metric(self: pointer, param1: cint): cint {.importc: "QListWidget_virtualbase_metric".}
 proc fcQListWidget_virtualbase_initPainter(self: pointer, painter: pointer): void {.importc: "QListWidget_virtualbase_initPainter".}
 proc fcQListWidget_virtualbase_redirected(self: pointer, offset: pointer): pointer {.importc: "QListWidget_virtualbase_redirected".}
-proc fcQListWidget_virtualbase_sharedPainter(self: pointer, ): pointer {.importc: "QListWidget_virtualbase_sharedPainter".}
+proc fcQListWidget_virtualbase_sharedPainter(self: pointer): pointer {.importc: "QListWidget_virtualbase_sharedPainter".}
 proc fcQListWidget_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_childEvent".}
 proc fcQListWidget_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QListWidget_virtualbase_customEvent".}
 proc fcQListWidget_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QListWidget_virtualbase_connectNotify".}
@@ -429,66 +433,66 @@ proc fcQListWidget_protectedbase_indexFromItem(self: pointer, item: pointer): po
 proc fcQListWidget_protectedbase_indexFromItemWithItem(self: pointer, item: pointer): pointer {.importc: "QListWidget_protectedbase_indexFromItemWithItem".}
 proc fcQListWidget_protectedbase_itemFromIndex(self: pointer, index: pointer): pointer {.importc: "QListWidget_protectedbase_itemFromIndex".}
 proc fcQListWidget_protectedbase_resizeContents(self: pointer, width: cint, height: cint): void {.importc: "QListWidget_protectedbase_resizeContents".}
-proc fcQListWidget_protectedbase_contentsSize(self: pointer, ): pointer {.importc: "QListWidget_protectedbase_contentsSize".}
+proc fcQListWidget_protectedbase_contentsSize(self: pointer): pointer {.importc: "QListWidget_protectedbase_contentsSize".}
 proc fcQListWidget_protectedbase_rectForIndex(self: pointer, index: pointer): pointer {.importc: "QListWidget_protectedbase_rectForIndex".}
 proc fcQListWidget_protectedbase_setPositionForIndex(self: pointer, position: pointer, index: pointer): void {.importc: "QListWidget_protectedbase_setPositionForIndex".}
 proc fcQListWidget_protectedbase_setHorizontalStepsPerItem(self: pointer, steps: cint): void {.importc: "QListWidget_protectedbase_setHorizontalStepsPerItem".}
-proc fcQListWidget_protectedbase_horizontalStepsPerItem(self: pointer, ): cint {.importc: "QListWidget_protectedbase_horizontalStepsPerItem".}
+proc fcQListWidget_protectedbase_horizontalStepsPerItem(self: pointer): cint {.importc: "QListWidget_protectedbase_horizontalStepsPerItem".}
 proc fcQListWidget_protectedbase_setVerticalStepsPerItem(self: pointer, steps: cint): void {.importc: "QListWidget_protectedbase_setVerticalStepsPerItem".}
-proc fcQListWidget_protectedbase_verticalStepsPerItem(self: pointer, ): cint {.importc: "QListWidget_protectedbase_verticalStepsPerItem".}
-proc fcQListWidget_protectedbase_state(self: pointer, ): cint {.importc: "QListWidget_protectedbase_state".}
+proc fcQListWidget_protectedbase_verticalStepsPerItem(self: pointer): cint {.importc: "QListWidget_protectedbase_verticalStepsPerItem".}
+proc fcQListWidget_protectedbase_state(self: pointer): cint {.importc: "QListWidget_protectedbase_state".}
 proc fcQListWidget_protectedbase_setState(self: pointer, state: cint): void {.importc: "QListWidget_protectedbase_setState".}
-proc fcQListWidget_protectedbase_scheduleDelayedItemsLayout(self: pointer, ): void {.importc: "QListWidget_protectedbase_scheduleDelayedItemsLayout".}
-proc fcQListWidget_protectedbase_executeDelayedItemsLayout(self: pointer, ): void {.importc: "QListWidget_protectedbase_executeDelayedItemsLayout".}
+proc fcQListWidget_protectedbase_scheduleDelayedItemsLayout(self: pointer): void {.importc: "QListWidget_protectedbase_scheduleDelayedItemsLayout".}
+proc fcQListWidget_protectedbase_executeDelayedItemsLayout(self: pointer): void {.importc: "QListWidget_protectedbase_executeDelayedItemsLayout".}
 proc fcQListWidget_protectedbase_setDirtyRegion(self: pointer, region: pointer): void {.importc: "QListWidget_protectedbase_setDirtyRegion".}
 proc fcQListWidget_protectedbase_scrollDirtyRegion(self: pointer, dx: cint, dy: cint): void {.importc: "QListWidget_protectedbase_scrollDirtyRegion".}
-proc fcQListWidget_protectedbase_dirtyRegionOffset(self: pointer, ): pointer {.importc: "QListWidget_protectedbase_dirtyRegionOffset".}
-proc fcQListWidget_protectedbase_startAutoScroll(self: pointer, ): void {.importc: "QListWidget_protectedbase_startAutoScroll".}
-proc fcQListWidget_protectedbase_stopAutoScroll(self: pointer, ): void {.importc: "QListWidget_protectedbase_stopAutoScroll".}
-proc fcQListWidget_protectedbase_doAutoScroll(self: pointer, ): void {.importc: "QListWidget_protectedbase_doAutoScroll".}
-proc fcQListWidget_protectedbase_dropIndicatorPosition(self: pointer, ): cint {.importc: "QListWidget_protectedbase_dropIndicatorPosition".}
+proc fcQListWidget_protectedbase_dirtyRegionOffset(self: pointer): pointer {.importc: "QListWidget_protectedbase_dirtyRegionOffset".}
+proc fcQListWidget_protectedbase_startAutoScroll(self: pointer): void {.importc: "QListWidget_protectedbase_startAutoScroll".}
+proc fcQListWidget_protectedbase_stopAutoScroll(self: pointer): void {.importc: "QListWidget_protectedbase_stopAutoScroll".}
+proc fcQListWidget_protectedbase_doAutoScroll(self: pointer): void {.importc: "QListWidget_protectedbase_doAutoScroll".}
+proc fcQListWidget_protectedbase_dropIndicatorPosition(self: pointer): cint {.importc: "QListWidget_protectedbase_dropIndicatorPosition".}
 proc fcQListWidget_protectedbase_setViewportMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QListWidget_protectedbase_setViewportMargins".}
-proc fcQListWidget_protectedbase_viewportMargins(self: pointer, ): pointer {.importc: "QListWidget_protectedbase_viewportMargins".}
+proc fcQListWidget_protectedbase_viewportMargins(self: pointer): pointer {.importc: "QListWidget_protectedbase_viewportMargins".}
 proc fcQListWidget_protectedbase_drawFrame(self: pointer, param1: pointer): void {.importc: "QListWidget_protectedbase_drawFrame".}
 proc fcQListWidget_protectedbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QListWidget_protectedbase_initStyleOption".}
-proc fcQListWidget_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QListWidget_protectedbase_updateMicroFocus".}
-proc fcQListWidget_protectedbase_create(self: pointer, ): void {.importc: "QListWidget_protectedbase_create".}
-proc fcQListWidget_protectedbase_destroy(self: pointer, ): void {.importc: "QListWidget_protectedbase_destroy".}
-proc fcQListWidget_protectedbase_focusNextChild(self: pointer, ): bool {.importc: "QListWidget_protectedbase_focusNextChild".}
-proc fcQListWidget_protectedbase_focusPreviousChild(self: pointer, ): bool {.importc: "QListWidget_protectedbase_focusPreviousChild".}
-proc fcQListWidget_protectedbase_sender(self: pointer, ): pointer {.importc: "QListWidget_protectedbase_sender".}
-proc fcQListWidget_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QListWidget_protectedbase_senderSignalIndex".}
+proc fcQListWidget_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QListWidget_protectedbase_updateMicroFocus".}
+proc fcQListWidget_protectedbase_create(self: pointer): void {.importc: "QListWidget_protectedbase_create".}
+proc fcQListWidget_protectedbase_destroy(self: pointer): void {.importc: "QListWidget_protectedbase_destroy".}
+proc fcQListWidget_protectedbase_focusNextChild(self: pointer): bool {.importc: "QListWidget_protectedbase_focusNextChild".}
+proc fcQListWidget_protectedbase_focusPreviousChild(self: pointer): bool {.importc: "QListWidget_protectedbase_focusPreviousChild".}
+proc fcQListWidget_protectedbase_sender(self: pointer): pointer {.importc: "QListWidget_protectedbase_sender".}
+proc fcQListWidget_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QListWidget_protectedbase_senderSignalIndex".}
 proc fcQListWidget_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QListWidget_protectedbase_receivers".}
 proc fcQListWidget_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QListWidget_protectedbase_isSignalConnected".}
-proc fcQListWidget_new(vtbl: pointer, parent: pointer): ptr cQListWidget {.importc: "QListWidget_new".}
-proc fcQListWidget_new2(vtbl: pointer, ): ptr cQListWidget {.importc: "QListWidget_new2".}
+proc fcQListWidget_new(vtbl, vdata: pointer, parent: pointer): ptr cQListWidget {.importc: "QListWidget_new".}
+proc fcQListWidget_new2(vtbl, vdata: pointer): ptr cQListWidget {.importc: "QListWidget_new2".}
 proc fcQListWidget_staticMetaObject(): pointer {.importc: "QListWidget_staticMetaObject".}
 
-proc clone*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qlistwidget_types.QListWidgetItem =
+proc clone*(self: gen_qlistwidget_types.QListWidgetItem): gen_qlistwidget_types.QListWidgetItem =
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_clone(self.h), owned: false)
 
-proc listWidget*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qlistwidget_types.QListWidget =
+proc listWidget*(self: gen_qlistwidget_types.QListWidgetItem): gen_qlistwidget_types.QListWidget =
   gen_qlistwidget_types.QListWidget(h: fcQListWidgetItem_listWidget(self.h), owned: false)
 
 proc setSelected*(self: gen_qlistwidget_types.QListWidgetItem, select: bool): void =
   fcQListWidgetItem_setSelected(self.h, select)
 
-proc isSelected*(self: gen_qlistwidget_types.QListWidgetItem, ): bool =
+proc isSelected*(self: gen_qlistwidget_types.QListWidgetItem): bool =
   fcQListWidgetItem_isSelected(self.h)
 
 proc setHidden*(self: gen_qlistwidget_types.QListWidgetItem, hide: bool): void =
   fcQListWidgetItem_setHidden(self.h, hide)
 
-proc isHidden*(self: gen_qlistwidget_types.QListWidgetItem, ): bool =
+proc isHidden*(self: gen_qlistwidget_types.QListWidgetItem): bool =
   fcQListWidgetItem_isHidden(self.h)
 
-proc flags*(self: gen_qlistwidget_types.QListWidgetItem, ): cint =
+proc flags*(self: gen_qlistwidget_types.QListWidgetItem): cint =
   cint(fcQListWidgetItem_flags(self.h))
 
 proc setFlags*(self: gen_qlistwidget_types.QListWidgetItem, flags: cint): void =
   fcQListWidgetItem_setFlags(self.h, cint(flags))
 
-proc text*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
+proc text*(self: gen_qlistwidget_types.QListWidgetItem): string =
   let v_ms = fcQListWidgetItem_text(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -497,13 +501,13 @@ proc text*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
 proc setText*(self: gen_qlistwidget_types.QListWidgetItem, text: string): void =
   fcQListWidgetItem_setText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc icon*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qicon_types.QIcon =
+proc icon*(self: gen_qlistwidget_types.QListWidgetItem): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQListWidgetItem_icon(self.h), owned: true)
 
 proc setIcon*(self: gen_qlistwidget_types.QListWidgetItem, icon: gen_qicon_types.QIcon): void =
   fcQListWidgetItem_setIcon(self.h, icon.h)
 
-proc statusTip*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
+proc statusTip*(self: gen_qlistwidget_types.QListWidgetItem): string =
   let v_ms = fcQListWidgetItem_statusTip(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -512,7 +516,7 @@ proc statusTip*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
 proc setStatusTip*(self: gen_qlistwidget_types.QListWidgetItem, statusTip: string): void =
   fcQListWidgetItem_setStatusTip(self.h, struct_miqt_string(data: statusTip, len: csize_t(len(statusTip))))
 
-proc toolTip*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
+proc toolTip*(self: gen_qlistwidget_types.QListWidgetItem): string =
   let v_ms = fcQListWidgetItem_toolTip(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -521,7 +525,7 @@ proc toolTip*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
 proc setToolTip*(self: gen_qlistwidget_types.QListWidgetItem, toolTip: string): void =
   fcQListWidgetItem_setToolTip(self.h, struct_miqt_string(data: toolTip, len: csize_t(len(toolTip))))
 
-proc whatsThis*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
+proc whatsThis*(self: gen_qlistwidget_types.QListWidgetItem): string =
   let v_ms = fcQListWidgetItem_whatsThis(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -530,49 +534,49 @@ proc whatsThis*(self: gen_qlistwidget_types.QListWidgetItem, ): string =
 proc setWhatsThis*(self: gen_qlistwidget_types.QListWidgetItem, whatsThis: string): void =
   fcQListWidgetItem_setWhatsThis(self.h, struct_miqt_string(data: whatsThis, len: csize_t(len(whatsThis))))
 
-proc font*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qfont_types.QFont =
+proc font*(self: gen_qlistwidget_types.QListWidgetItem): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQListWidgetItem_font(self.h), owned: true)
 
 proc setFont*(self: gen_qlistwidget_types.QListWidgetItem, font: gen_qfont_types.QFont): void =
   fcQListWidgetItem_setFont(self.h, font.h)
 
-proc textAlignment*(self: gen_qlistwidget_types.QListWidgetItem, ): cint =
+proc textAlignment*(self: gen_qlistwidget_types.QListWidgetItem): cint =
   fcQListWidgetItem_textAlignment(self.h)
 
 proc setTextAlignment*(self: gen_qlistwidget_types.QListWidgetItem, alignment: cint): void =
   fcQListWidgetItem_setTextAlignment(self.h, alignment)
 
-proc backgroundColor*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qcolor_types.QColor =
+proc backgroundColor*(self: gen_qlistwidget_types.QListWidgetItem): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQListWidgetItem_backgroundColor(self.h), owned: true)
 
 proc setBackgroundColor*(self: gen_qlistwidget_types.QListWidgetItem, color: gen_qcolor_types.QColor): void =
   fcQListWidgetItem_setBackgroundColor(self.h, color.h)
 
-proc background*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qbrush_types.QBrush =
+proc background*(self: gen_qlistwidget_types.QListWidgetItem): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQListWidgetItem_background(self.h), owned: true)
 
 proc setBackground*(self: gen_qlistwidget_types.QListWidgetItem, brush: gen_qbrush_types.QBrush): void =
   fcQListWidgetItem_setBackground(self.h, brush.h)
 
-proc textColor*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qcolor_types.QColor =
+proc textColor*(self: gen_qlistwidget_types.QListWidgetItem): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQListWidgetItem_textColor(self.h), owned: true)
 
 proc setTextColor*(self: gen_qlistwidget_types.QListWidgetItem, color: gen_qcolor_types.QColor): void =
   fcQListWidgetItem_setTextColor(self.h, color.h)
 
-proc foreground*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qbrush_types.QBrush =
+proc foreground*(self: gen_qlistwidget_types.QListWidgetItem): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQListWidgetItem_foreground(self.h), owned: true)
 
 proc setForeground*(self: gen_qlistwidget_types.QListWidgetItem, brush: gen_qbrush_types.QBrush): void =
   fcQListWidgetItem_setForeground(self.h, brush.h)
 
-proc checkState*(self: gen_qlistwidget_types.QListWidgetItem, ): cint =
+proc checkState*(self: gen_qlistwidget_types.QListWidgetItem): cint =
   cint(fcQListWidgetItem_checkState(self.h))
 
 proc setCheckState*(self: gen_qlistwidget_types.QListWidgetItem, state: cint): void =
   fcQListWidgetItem_setCheckState(self.h, cint(state))
 
-proc sizeHint*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qsize_types.QSize =
+proc sizeHint*(self: gen_qlistwidget_types.QListWidgetItem): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQListWidgetItem_sizeHint(self.h), owned: true)
 
 proc setSizeHint*(self: gen_qlistwidget_types.QListWidgetItem, size: gen_qsize_types.QSize): void =
@@ -596,7 +600,7 @@ proc write*(self: gen_qlistwidget_types.QListWidgetItem, outVal: gen_qdatastream
 proc operatorAssign*(self: gen_qlistwidget_types.QListWidgetItem, other: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidgetItem_operatorAssign(self.h, other.h)
 
-proc typeX*(self: gen_qlistwidget_types.QListWidgetItem, ): cint =
+proc typeX*(self: gen_qlistwidget_types.QListWidgetItem): cint =
   fcQListWidgetItem_typeX(self.h)
 
 type QListWidgetItemcloneProc* = proc(self: QListWidgetItem): gen_qlistwidget_types.QListWidgetItem {.raises: [], gcsafe.}
@@ -615,11 +619,11 @@ type QListWidgetItemVTable* {.inheritable, pure.} = object
   operatorLesser*: QListWidgetItemoperatorLesserProc
   read*: QListWidgetItemreadProc
   write*: QListWidgetItemwriteProc
-proc QListWidgetItemclone*(self: gen_qlistwidget_types.QListWidgetItem, ): gen_qlistwidget_types.QListWidgetItem =
+proc QListWidgetItemclone*(self: gen_qlistwidget_types.QListWidgetItem): gen_qlistwidget_types.QListWidgetItem =
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_virtualbase_clone(self.h), owned: false)
 
-proc miqt_exec_callback_cQListWidgetItem_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   var virtualReturn = vtbl[].clone(self)
   virtualReturn.owned = false # TODO move?
@@ -630,8 +634,8 @@ proc miqt_exec_callback_cQListWidgetItem_clone(vtbl: pointer, self: pointer): po
 proc QListWidgetItemsetBackgroundColor*(self: gen_qlistwidget_types.QListWidgetItem, color: gen_qcolor_types.QColor): void =
   fcQListWidgetItem_virtualbase_setBackgroundColor(self.h, color.h)
 
-proc miqt_exec_callback_cQListWidgetItem_setBackgroundColor(vtbl: pointer, self: pointer, color: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_setBackgroundColor(self: pointer, color: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = gen_qcolor_types.QColor(h: color, owned: false)
   vtbl[].setBackgroundColor(self, slotval1)
@@ -639,8 +643,8 @@ proc miqt_exec_callback_cQListWidgetItem_setBackgroundColor(vtbl: pointer, self:
 proc QListWidgetItemdata*(self: gen_qlistwidget_types.QListWidgetItem, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQListWidgetItem_virtualbase_data(self.h, role), owned: true)
 
-proc miqt_exec_callback_cQListWidgetItem_data(vtbl: pointer, self: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_data(self: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = role
   var virtualReturn = vtbl[].data(self, slotval1)
@@ -652,8 +656,8 @@ proc miqt_exec_callback_cQListWidgetItem_data(vtbl: pointer, self: pointer, role
 proc QListWidgetItemsetData*(self: gen_qlistwidget_types.QListWidgetItem, role: cint, value: gen_qvariant_types.QVariant): void =
   fcQListWidgetItem_virtualbase_setData(self.h, role, value.h)
 
-proc miqt_exec_callback_cQListWidgetItem_setData(vtbl: pointer, self: pointer, role: cint, value: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_setData(self: pointer, role: cint, value: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = role
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -662,8 +666,8 @@ proc miqt_exec_callback_cQListWidgetItem_setData(vtbl: pointer, self: pointer, r
 proc QListWidgetItemoperatorLesser*(self: gen_qlistwidget_types.QListWidgetItem, other: gen_qlistwidget_types.QListWidgetItem): bool =
   fcQListWidgetItem_virtualbase_operatorLesser(self.h, other.h)
 
-proc miqt_exec_callback_cQListWidgetItem_operatorLesser(vtbl: pointer, self: pointer, other: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: other, owned: false)
   var virtualReturn = vtbl[].operatorLesser(self, slotval1)
@@ -672,8 +676,8 @@ proc miqt_exec_callback_cQListWidgetItem_operatorLesser(vtbl: pointer, self: poi
 proc QListWidgetItemread*(self: gen_qlistwidget_types.QListWidgetItem, inVal: gen_qdatastream_types.QDataStream): void =
   fcQListWidgetItem_virtualbase_read(self.h, inVal.h)
 
-proc miqt_exec_callback_cQListWidgetItem_read(vtbl: pointer, self: pointer, inVal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   vtbl[].read(self, slotval1)
@@ -681,19 +685,19 @@ proc miqt_exec_callback_cQListWidgetItem_read(vtbl: pointer, self: pointer, inVa
 proc QListWidgetItemwrite*(self: gen_qlistwidget_types.QListWidgetItem, outVal: gen_qdatastream_types.QDataStream): void =
   fcQListWidgetItem_virtualbase_write(self.h, outVal.h)
 
-proc miqt_exec_callback_cQListWidgetItem_write(vtbl: pointer, self: pointer, outVal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetItemVTable](vtbl)
+proc cQListWidgetItem_vtable_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
   let self = QListWidgetItem(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
   vtbl[].write(self, slotval1)
 
 type VirtualQListWidgetItem* {.inheritable.} = ref object of QListWidgetItem
   vtbl*: cQListWidgetItemVTable
-method clone*(self: VirtualQListWidgetItem, ): gen_qlistwidget_types.QListWidgetItem {.base.} =
+method clone*(self: VirtualQListWidgetItem): gen_qlistwidget_types.QListWidgetItem {.base.} =
   QListWidgetItemclone(self[])
-proc miqt_exec_method_cQListWidgetItem_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-  var virtualReturn = vtbl.clone()
+proc cQListWidgetItem_method_callback_clone(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
+  var virtualReturn = inst.clone()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -701,17 +705,17 @@ proc miqt_exec_method_cQListWidgetItem_clone(vtbl: pointer, inst: pointer): poin
 
 method setBackgroundColor*(self: VirtualQListWidgetItem, color: gen_qcolor_types.QColor): void {.base.} =
   QListWidgetItemsetBackgroundColor(self[], color)
-proc miqt_exec_method_cQListWidgetItem_setBackgroundColor(vtbl: pointer, inst: pointer, color: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_setBackgroundColor(self: pointer, color: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = gen_qcolor_types.QColor(h: color, owned: false)
-  vtbl.setBackgroundColor(slotval1)
+  inst.setBackgroundColor(slotval1)
 
 method data*(self: VirtualQListWidgetItem, role: cint): gen_qvariant_types.QVariant {.base.} =
   QListWidgetItemdata(self[], role)
-proc miqt_exec_method_cQListWidgetItem_data(vtbl: pointer, inst: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_data(self: pointer, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = role
-  var virtualReturn = vtbl.data(slotval1)
+  var virtualReturn = inst.data(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -719,463 +723,356 @@ proc miqt_exec_method_cQListWidgetItem_data(vtbl: pointer, inst: pointer, role: 
 
 method setData*(self: VirtualQListWidgetItem, role: cint, value: gen_qvariant_types.QVariant): void {.base.} =
   QListWidgetItemsetData(self[], role, value)
-proc miqt_exec_method_cQListWidgetItem_setData(vtbl: pointer, inst: pointer, role: cint, value: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_setData(self: pointer, role: cint, value: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = role
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  vtbl.setData(slotval1, slotval2)
+  inst.setData(slotval1, slotval2)
 
 method operatorLesser*(self: VirtualQListWidgetItem, other: gen_qlistwidget_types.QListWidgetItem): bool {.base.} =
   QListWidgetItemoperatorLesser(self[], other)
-proc miqt_exec_method_cQListWidgetItem_operatorLesser(vtbl: pointer, inst: pointer, other: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_operatorLesser(self: pointer, other: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: other, owned: false)
-  var virtualReturn = vtbl.operatorLesser(slotval1)
+  var virtualReturn = inst.operatorLesser(slotval1)
   virtualReturn
 
 method read*(self: VirtualQListWidgetItem, inVal: gen_qdatastream_types.QDataStream): void {.base.} =
   QListWidgetItemread(self[], inVal)
-proc miqt_exec_method_cQListWidgetItem_read(vtbl: pointer, inst: pointer, inVal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_read(self: pointer, inVal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
-  vtbl.read(slotval1)
+  inst.read(slotval1)
 
 method write*(self: VirtualQListWidgetItem, outVal: gen_qdatastream_types.QDataStream): void {.base.} =
   QListWidgetItemwrite(self[], outVal)
-proc miqt_exec_method_cQListWidgetItem_write(vtbl: pointer, inst: pointer, outVal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidgetItem](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
+proc cQListWidgetItem_method_callback_write(self: pointer, outVal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidgetItem](fcQListWidgetItem_vdata(self))
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
-  vtbl.write(slotval1)
+  inst.write(slotval1)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new3(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new3(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text)))), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     other: gen_qlistwidget_types.QListWidgetItem,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new4(addr(vtbl[].vtbl), other.h), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new4(addr(vtbl[].vtbl), addr(vtbl[]), other.h), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new5(addr(vtbl[].vtbl), listview.h), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new5(addr(vtbl[].vtbl), addr(vtbl[]), listview.h), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new6(addr(vtbl[].vtbl), listview.h, typeVal), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new6(addr(vtbl[].vtbl), addr(vtbl[]), listview.h, typeVal), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string, listview: gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new7(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new7(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new8(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new8(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new9(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new9(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
     vtbl: ref QListWidgetItemVTable = nil): gen_qlistwidget_types.QListWidgetItem =
   let vtbl = if vtbl == nil: new QListWidgetItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetItemVTable](fcQListWidgetItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQListWidgetItem_clone
+    vtbl[].vtbl.clone = cQListWidgetItem_vtable_callback_clone
   if not isNil(vtbl[].setBackgroundColor):
-    vtbl[].vtbl.setBackgroundColor = miqt_exec_callback_cQListWidgetItem_setBackgroundColor
+    vtbl[].vtbl.setBackgroundColor = cQListWidgetItem_vtable_callback_setBackgroundColor
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQListWidgetItem_data
+    vtbl[].vtbl.data = cQListWidgetItem_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQListWidgetItem_setData
+    vtbl[].vtbl.setData = cQListWidgetItem_vtable_callback_setData
   if not isNil(vtbl[].operatorLesser):
-    vtbl[].vtbl.operatorLesser = miqt_exec_callback_cQListWidgetItem_operatorLesser
+    vtbl[].vtbl.operatorLesser = cQListWidgetItem_vtable_callback_operatorLesser
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQListWidgetItem_read
+    vtbl[].vtbl.read = cQListWidgetItem_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQListWidgetItem_write
-  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new10(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal), owned: true)
+    vtbl[].vtbl.write = cQListWidgetItem_vtable_callback_write
+  gen_qlistwidget_types.QListWidgetItem(h: fcQListWidgetItem_new10(addr(vtbl[].vtbl), addr(vtbl[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal), owned: true)
 
+const cQListWidgetItem_mvtbl = cQListWidgetItemVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQListWidgetItem()[])](self.fcQListWidgetItem_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  clone: cQListWidgetItem_method_callback_clone,
+  setBackgroundColor: cQListWidgetItem_method_callback_setBackgroundColor,
+  data: cQListWidgetItem_method_callback_data,
+  setData: cQListWidgetItem_method_callback_setData,
+  operatorLesser: cQListWidgetItem_method_callback_operatorLesser,
+  read: cQListWidgetItem_method_callback_read,
+  write: cQListWidgetItem_method_callback_write,
+)
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new(addr(cQListWidgetItem_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new2(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))))
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new2(addr(cQListWidgetItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new3(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))))
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new3(addr(cQListWidgetItem_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))))
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     other: gen_qlistwidget_types.QListWidgetItem,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new4(addr(vtbl[].vtbl), other.h)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new4(addr(cQListWidgetItem_mvtbl), addr(inst[]), other.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new5(addr(vtbl[].vtbl), listview.h)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new5(addr(cQListWidgetItem_mvtbl), addr(inst[]), listview.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new6(addr(vtbl[].vtbl), listview.h, typeVal)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new6(addr(cQListWidgetItem_mvtbl), addr(inst[]), listview.h, typeVal)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string, listview: gen_qlistwidget_types.QListWidget,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new7(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new7(addr(cQListWidgetItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new8(addr(vtbl[].vtbl), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new8(addr(cQListWidgetItem_mvtbl), addr(inst[]), struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget,
-    vtbl: VirtualQListWidgetItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new9(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h)
-  vtbl[].owned = true
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new9(addr(cQListWidgetItem_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidgetItem,
     icon: gen_qicon_types.QIcon, text: string, listview: gen_qlistwidget_types.QListWidget, typeVal: cint,
-    vtbl: VirtualQListWidgetItem) =
+    inst: VirtualQListWidgetItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidgetItem_new10(addr(cQListWidgetItem_mvtbl), addr(inst[]), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal)
+  inst[].owned = true
 
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetItemVTable, _: ptr cQListWidgetItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidgetItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidgetItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.clone = miqt_exec_method_cQListWidgetItem_clone
-  vtbl[].vtbl.setBackgroundColor = miqt_exec_method_cQListWidgetItem_setBackgroundColor
-  vtbl[].vtbl.data = miqt_exec_method_cQListWidgetItem_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQListWidgetItem_setData
-  vtbl[].vtbl.operatorLesser = miqt_exec_method_cQListWidgetItem_operatorLesser
-  vtbl[].vtbl.read = miqt_exec_method_cQListWidgetItem_read
-  vtbl[].vtbl.write = miqt_exec_method_cQListWidgetItem_write
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidgetItem_new10(addr(vtbl[].vtbl), icon.h, struct_miqt_string(data: text, len: csize_t(len(text))), listview.h, typeVal)
-  vtbl[].owned = true
-
-proc metaObject*(self: gen_qlistwidget_types.QListWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qlistwidget_types.QListWidget, param1: cstring): pointer =
@@ -1234,10 +1131,10 @@ proc addItems*(self: gen_qlistwidget_types.QListWidget, labels: seq[string]): vo
 proc takeItem*(self: gen_qlistwidget_types.QListWidget, row: cint): gen_qlistwidget_types.QListWidgetItem =
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_takeItem(self.h, row), owned: false)
 
-proc count*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc count*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_count(self.h)
 
-proc currentItem*(self: gen_qlistwidget_types.QListWidget, ): gen_qlistwidget_types.QListWidgetItem =
+proc currentItem*(self: gen_qlistwidget_types.QListWidget): gen_qlistwidget_types.QListWidgetItem =
   gen_qlistwidget_types.QListWidgetItem(h: fcQListWidget_currentItem(self.h), owned: false)
 
 proc setCurrentItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
@@ -1246,7 +1143,7 @@ proc setCurrentItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwid
 proc setCurrentItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem, command: cint): void =
   fcQListWidget_setCurrentItem2(self.h, item.h, cint(command))
 
-proc currentRow*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc currentRow*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_currentRow(self.h)
 
 proc setCurrentRow*(self: gen_qlistwidget_types.QListWidget, row: cint): void =
@@ -1264,13 +1161,13 @@ proc itemAt*(self: gen_qlistwidget_types.QListWidget, x: cint, y: cint): gen_qli
 proc visualItemRect*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQListWidget_visualItemRect(self.h, item.h), owned: true)
 
-proc sortItems*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc sortItems*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_sortItems(self.h)
 
 proc setSortingEnabled*(self: gen_qlistwidget_types.QListWidget, enable: bool): void =
   fcQListWidget_setSortingEnabled(self.h, enable)
 
-proc isSortingEnabled*(self: gen_qlistwidget_types.QListWidget, ): bool =
+proc isSortingEnabled*(self: gen_qlistwidget_types.QListWidget): bool =
   fcQListWidget_isSortingEnabled(self.h)
 
 proc editItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
@@ -1300,7 +1197,7 @@ proc isItemSelected*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwid
 proc setItemSelected*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem, select: bool): void =
   fcQListWidget_setItemSelected(self.h, item.h, select)
 
-proc selectedItems*(self: gen_qlistwidget_types.QListWidget, ): seq[gen_qlistwidget_types.QListWidgetItem] =
+proc selectedItems*(self: gen_qlistwidget_types.QListWidget): seq[gen_qlistwidget_types.QListWidgetItem] =
   var v_ma = fcQListWidget_selectedItems(self.h)
   var vx_ret = newSeq[gen_qlistwidget_types.QListWidgetItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -1330,20 +1227,20 @@ proc dropEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types
 proc scrollToItem*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_scrollToItem(self.h, item.h)
 
-proc clear*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc clear*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_clear(self.h)
 
 proc itemPressed*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemPressed(self.h, item.h)
 
 type QListWidgetitemPressedSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemPressed(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemPressed(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemPressedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemPressed_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemPressed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemPressedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1351,19 +1248,19 @@ proc onitemPressed*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetit
   var tmp = new QListWidgetitemPressedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemPressed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemPressed, miqt_exec_callback_cQListWidget_itemPressed_release)
+  fcQListWidget_connect_itemPressed(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemPressed, cQListWidget_slot_callback_itemPressed_release)
 
 proc itemClicked*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemClicked(self.h, item.h)
 
 type QListWidgetitemClickedSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemClicked(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemClicked(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemClicked_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1371,19 +1268,19 @@ proc onitemClicked*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetit
   var tmp = new QListWidgetitemClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemClicked, miqt_exec_callback_cQListWidget_itemClicked_release)
+  fcQListWidget_connect_itemClicked(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemClicked, cQListWidget_slot_callback_itemClicked_release)
 
 proc itemDoubleClicked*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemDoubleClicked(self.h, item.h)
 
 type QListWidgetitemDoubleClickedSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemDoubleClicked(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemDoubleClicked(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemDoubleClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemDoubleClicked_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemDoubleClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemDoubleClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1391,19 +1288,19 @@ proc onitemDoubleClicked*(self: gen_qlistwidget_types.QListWidget, slot: QListWi
   var tmp = new QListWidgetitemDoubleClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemDoubleClicked, miqt_exec_callback_cQListWidget_itemDoubleClicked_release)
+  fcQListWidget_connect_itemDoubleClicked(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemDoubleClicked, cQListWidget_slot_callback_itemDoubleClicked_release)
 
 proc itemActivated*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemActivated(self.h, item.h)
 
 type QListWidgetitemActivatedSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemActivated(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemActivated(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemActivatedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemActivated_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemActivated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemActivatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1411,19 +1308,19 @@ proc onitemActivated*(self: gen_qlistwidget_types.QListWidget, slot: QListWidget
   var tmp = new QListWidgetitemActivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemActivated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemActivated, miqt_exec_callback_cQListWidget_itemActivated_release)
+  fcQListWidget_connect_itemActivated(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemActivated, cQListWidget_slot_callback_itemActivated_release)
 
 proc itemEntered*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemEntered(self.h, item.h)
 
 type QListWidgetitemEnteredSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemEntered(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemEntered(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemEnteredSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemEntered_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemEntered_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemEnteredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1431,19 +1328,19 @@ proc onitemEntered*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetit
   var tmp = new QListWidgetitemEnteredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemEntered(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemEntered, miqt_exec_callback_cQListWidget_itemEntered_release)
+  fcQListWidget_connect_itemEntered(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemEntered, cQListWidget_slot_callback_itemEntered_release)
 
 proc itemChanged*(self: gen_qlistwidget_types.QListWidget, item: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_itemChanged(self.h, item.h)
 
 type QListWidgetitemChangedSlot* = proc(item: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_itemChanged(slot: int, item: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_itemChanged(slot: int, item: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: item, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_itemChanged_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1451,13 +1348,13 @@ proc onitemChanged*(self: gen_qlistwidget_types.QListWidget, slot: QListWidgetit
   var tmp = new QListWidgetitemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemChanged, miqt_exec_callback_cQListWidget_itemChanged_release)
+  fcQListWidget_connect_itemChanged(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemChanged, cQListWidget_slot_callback_itemChanged_release)
 
 proc currentItemChanged*(self: gen_qlistwidget_types.QListWidget, current: gen_qlistwidget_types.QListWidgetItem, previous: gen_qlistwidget_types.QListWidgetItem): void =
   fcQListWidget_currentItemChanged(self.h, current.h, previous.h)
 
 type QListWidgetcurrentItemChangedSlot* = proc(current: gen_qlistwidget_types.QListWidgetItem, previous: gen_qlistwidget_types.QListWidgetItem)
-proc miqt_exec_callback_cQListWidget_currentItemChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
+proc cQListWidget_slot_callback_currentItemChanged(slot: int, current: pointer, previous: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetcurrentItemChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qlistwidget_types.QListWidgetItem(h: current, owned: false)
 
@@ -1465,7 +1362,7 @@ proc miqt_exec_callback_cQListWidget_currentItemChanged(slot: int, current: poin
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQListWidget_currentItemChanged_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_currentItemChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetcurrentItemChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1473,13 +1370,13 @@ proc oncurrentItemChanged*(self: gen_qlistwidget_types.QListWidget, slot: QListW
   var tmp = new QListWidgetcurrentItemChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_currentItemChanged, miqt_exec_callback_cQListWidget_currentItemChanged_release)
+  fcQListWidget_connect_currentItemChanged(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_currentItemChanged, cQListWidget_slot_callback_currentItemChanged_release)
 
 proc currentTextChanged*(self: gen_qlistwidget_types.QListWidget, currentText: string): void =
   fcQListWidget_currentTextChanged(self.h, struct_miqt_string(data: currentText, len: csize_t(len(currentText))))
 
 type QListWidgetcurrentTextChangedSlot* = proc(currentText: string)
-proc miqt_exec_callback_cQListWidget_currentTextChanged(slot: int, currentText: struct_miqt_string) {.cdecl.} =
+proc cQListWidget_slot_callback_currentTextChanged(slot: int, currentText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetcurrentTextChangedSlot](cast[pointer](slot))
   let vcurrentText_ms = currentText
   let vcurrentTextx_ret = string.fromBytes(toOpenArrayByte(vcurrentText_ms.data, 0, int(vcurrentText_ms.len)-1))
@@ -1488,7 +1385,7 @@ proc miqt_exec_callback_cQListWidget_currentTextChanged(slot: int, currentText: 
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_currentTextChanged_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_currentTextChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetcurrentTextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1496,19 +1393,19 @@ proc oncurrentTextChanged*(self: gen_qlistwidget_types.QListWidget, slot: QListW
   var tmp = new QListWidgetcurrentTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_currentTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_currentTextChanged, miqt_exec_callback_cQListWidget_currentTextChanged_release)
+  fcQListWidget_connect_currentTextChanged(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_currentTextChanged, cQListWidget_slot_callback_currentTextChanged_release)
 
 proc currentRowChanged*(self: gen_qlistwidget_types.QListWidget, currentRow: cint): void =
   fcQListWidget_currentRowChanged(self.h, currentRow)
 
 type QListWidgetcurrentRowChangedSlot* = proc(currentRow: cint)
-proc miqt_exec_callback_cQListWidget_currentRowChanged(slot: int, currentRow: cint) {.cdecl.} =
+proc cQListWidget_slot_callback_currentRowChanged(slot: int, currentRow: cint) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetcurrentRowChangedSlot](cast[pointer](slot))
   let slotval1 = currentRow
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQListWidget_currentRowChanged_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_currentRowChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetcurrentRowChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1516,17 +1413,17 @@ proc oncurrentRowChanged*(self: gen_qlistwidget_types.QListWidget, slot: QListWi
   var tmp = new QListWidgetcurrentRowChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_currentRowChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_currentRowChanged, miqt_exec_callback_cQListWidget_currentRowChanged_release)
+  fcQListWidget_connect_currentRowChanged(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_currentRowChanged, cQListWidget_slot_callback_currentRowChanged_release)
 
-proc itemSelectionChanged*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc itemSelectionChanged*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_itemSelectionChanged(self.h)
 
 type QListWidgetitemSelectionChangedSlot* = proc()
-proc miqt_exec_callback_cQListWidget_itemSelectionChanged(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemSelectionChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QListWidgetitemSelectionChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQListWidget_itemSelectionChanged_release(slot: int) {.cdecl.} =
+proc cQListWidget_slot_callback_itemSelectionChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QListWidgetitemSelectionChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1534,7 +1431,7 @@ proc onitemSelectionChanged*(self: gen_qlistwidget_types.QListWidget, slot: QLis
   var tmp = new QListWidgetitemSelectionChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQListWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQListWidget_itemSelectionChanged, miqt_exec_callback_cQListWidget_itemSelectionChanged_release)
+  fcQListWidget_connect_itemSelectionChanged(self.h, cast[int](addr tmp[]), cQListWidget_slot_callback_itemSelectionChanged, cQListWidget_slot_callback_itemSelectionChanged_release)
 
 proc tr*(_: type gen_qlistwidget_types.QListWidget, s: cstring, c: cstring): string =
   let v_ms = fcQListWidget_tr2(s, c)
@@ -1758,11 +1655,11 @@ type QListWidgetVTable* {.inheritable, pure.} = object
   customEvent*: QListWidgetcustomEventProc
   connectNotify*: QListWidgetconnectNotifyProc
   disconnectNotify*: QListWidgetdisconnectNotifyProc
-proc QListWidgetmetaObject*(self: gen_qlistwidget_types.QListWidget, ): gen_qobjectdefs_types.QMetaObject =
+proc QListWidgetmetaObject*(self: gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQListWidget_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -1773,8 +1670,8 @@ proc miqt_exec_callback_cQListWidget_metaObject(vtbl: pointer, self: pointer): p
 proc QListWidgetmetacast*(self: gen_qlistwidget_types.QListWidget, param1: cstring): pointer =
   fcQListWidget_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQListWidget_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -1783,8 +1680,8 @@ proc miqt_exec_callback_cQListWidget_metacast(vtbl: pointer, self: pointer, para
 proc QListWidgetmetacall*(self: gen_qlistwidget_types.QListWidget, param1: cint, param2: cint, param3: pointer): cint =
   fcQListWidget_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQListWidget_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1795,8 +1692,8 @@ proc miqt_exec_callback_cQListWidget_metacall(vtbl: pointer, self: pointer, para
 proc QListWidgetsetSelectionModel*(self: gen_qlistwidget_types.QListWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void =
   fcQListWidget_virtualbase_setSelectionModel(self.h, selectionModel.h)
 
-proc miqt_exec_callback_cQListWidget_setSelectionModel(vtbl: pointer, self: pointer, selectionModel: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
   vtbl[].setSelectionModel(self, slotval1)
@@ -1804,8 +1701,8 @@ proc miqt_exec_callback_cQListWidget_setSelectionModel(vtbl: pointer, self: poin
 proc QListWidgetdropEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QDropEvent): void =
   fcQListWidget_virtualbase_dropEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_dropEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -1813,14 +1710,14 @@ proc miqt_exec_callback_cQListWidget_dropEvent(vtbl: pointer, self: pointer, eve
 proc QListWidgetevent*(self: gen_qlistwidget_types.QListWidget, e: gen_qcoreevent_types.QEvent): bool =
   fcQListWidget_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
   virtualReturn
 
-proc QListWidgetmimeTypes*(self: gen_qlistwidget_types.QListWidget, ): seq[string] =
+proc QListWidgetmimeTypes*(self: gen_qlistwidget_types.QListWidget): seq[string] =
   var v_ma = fcQListWidget_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -1832,8 +1729,8 @@ proc QListWidgetmimeTypes*(self: gen_qlistwidget_types.QListWidget, ): seq[strin
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQListWidget_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -1851,8 +1748,8 @@ proc QListWidgetmimeData*(self: gen_qlistwidget_types.QListWidget, items: seq[ge
 
   gen_qmimedata_types.QMimeData(h: fcQListWidget_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(items)), data: if len(items) == 0: nil else: addr(items_CArray[0]))), owned: false)
 
-proc miqt_exec_callback_cQListWidget_mimeData(vtbl: pointer, self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var vitems_ma = items
   var vitemsx_ret = newSeq[gen_qlistwidget_types.QListWidgetItem](int(vitems_ma.len))
@@ -1870,8 +1767,8 @@ proc miqt_exec_callback_cQListWidget_mimeData(vtbl: pointer, self: pointer, item
 proc QListWidgetdropMimeData*(self: gen_qlistwidget_types.QListWidget, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool =
   fcQListWidget_virtualbase_dropMimeData(self.h, index, data.h, cint(action))
 
-proc miqt_exec_callback_cQListWidget_dropMimeData(vtbl: pointer, self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dropMimeData(self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = index
   let slotval2 = gen_qmimedata_types.QMimeData(h: data, owned: false)
@@ -1879,11 +1776,11 @@ proc miqt_exec_callback_cQListWidget_dropMimeData(vtbl: pointer, self: pointer, 
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QListWidgetsupportedDropActions*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc QListWidgetsupportedDropActions*(self: gen_qlistwidget_types.QListWidget): cint =
   cint(fcQListWidget_virtualbase_supportedDropActions(self.h))
 
-proc miqt_exec_callback_cQListWidget_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
@@ -1891,8 +1788,8 @@ proc miqt_exec_callback_cQListWidget_supportedDropActions(vtbl: pointer, self: p
 proc QListWidgetvisualRect*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQListWidget_virtualbase_visualRect(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_visualRect(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].visualRect(self, slotval1)
@@ -1904,8 +1801,8 @@ proc miqt_exec_callback_cQListWidget_visualRect(vtbl: pointer, self: pointer, in
 proc QListWidgetscrollTo*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void =
   fcQListWidget_virtualbase_scrollTo(self.h, index.h, cint(hint))
 
-proc miqt_exec_callback_cQListWidget_scrollTo(vtbl: pointer, self: pointer, index: pointer, hint: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
@@ -1914,8 +1811,8 @@ proc miqt_exec_callback_cQListWidget_scrollTo(vtbl: pointer, self: pointer, inde
 proc QListWidgetindexAt*(self: gen_qlistwidget_types.QListWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_virtualbase_indexAt(self.h, p.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_indexAt(vtbl: pointer, self: pointer, p: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
   var virtualReturn = vtbl[].indexAt(self, slotval1)
@@ -1924,27 +1821,27 @@ proc miqt_exec_callback_cQListWidget_indexAt(vtbl: pointer, self: pointer, p: po
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetdoItemsLayout*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetdoItemsLayout*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_doItemsLayout(self.h)
 
-proc miqt_exec_callback_cQListWidget_doItemsLayout(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].doItemsLayout(self)
 
-proc QListWidgetreset*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetreset*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_reset(self.h)
 
-proc miqt_exec_callback_cQListWidget_reset(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_reset(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].reset(self)
 
 proc QListWidgetsetRootIndex*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQListWidget_virtualbase_setRootIndex(self.h, index.h)
 
-proc miqt_exec_callback_cQListWidget_setRootIndex(vtbl: pointer, self: pointer, index: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   vtbl[].setRootIndex(self, slotval1)
@@ -1952,8 +1849,8 @@ proc miqt_exec_callback_cQListWidget_setRootIndex(vtbl: pointer, self: pointer, 
 proc QListWidgetscrollContentsBy*(self: gen_qlistwidget_types.QListWidget, dx: cint, dy: cint): void =
   fcQListWidget_virtualbase_scrollContentsBy(self.h, dx, dy)
 
-proc miqt_exec_callback_cQListWidget_scrollContentsBy(vtbl: pointer, self: pointer, dx: cint, dy: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = dx
   let slotval2 = dy
@@ -1966,8 +1863,8 @@ proc QListWidgetdataChanged*(self: gen_qlistwidget_types.QListWidget, topLeft: g
 
   fcQListWidget_virtualbase_dataChanged(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
-proc miqt_exec_callback_cQListWidget_dataChanged(vtbl: pointer, self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
@@ -1983,8 +1880,8 @@ proc miqt_exec_callback_cQListWidget_dataChanged(vtbl: pointer, self: pointer, t
 proc QListWidgetrowsInserted*(self: gen_qlistwidget_types.QListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
   fcQListWidget_virtualbase_rowsInserted(self.h, parent.h, start, endVal)
 
-proc miqt_exec_callback_cQListWidget_rowsInserted(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
@@ -1994,8 +1891,8 @@ proc miqt_exec_callback_cQListWidget_rowsInserted(vtbl: pointer, self: pointer, 
 proc QListWidgetrowsAboutToBeRemoved*(self: gen_qlistwidget_types.QListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void =
   fcQListWidget_virtualbase_rowsAboutToBeRemoved(self.h, parent.h, start, endVal)
 
-proc miqt_exec_callback_cQListWidget_rowsAboutToBeRemoved(vtbl: pointer, self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
@@ -2005,8 +1902,8 @@ proc miqt_exec_callback_cQListWidget_rowsAboutToBeRemoved(vtbl: pointer, self: p
 proc QListWidgetmouseMoveEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QMouseEvent): void =
   fcQListWidget_virtualbase_mouseMoveEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_mouseMoveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -2014,8 +1911,8 @@ proc miqt_exec_callback_cQListWidget_mouseMoveEvent(vtbl: pointer, self: pointer
 proc QListWidgetmouseReleaseEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QMouseEvent): void =
   fcQListWidget_virtualbase_mouseReleaseEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_mouseReleaseEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -2023,8 +1920,8 @@ proc miqt_exec_callback_cQListWidget_mouseReleaseEvent(vtbl: pointer, self: poin
 proc QListWidgetwheelEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QWheelEvent): void =
   fcQListWidget_virtualbase_wheelEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_wheelEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -2032,8 +1929,8 @@ proc miqt_exec_callback_cQListWidget_wheelEvent(vtbl: pointer, self: pointer, e:
 proc QListWidgettimerEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qcoreevent_types.QTimerEvent): void =
   fcQListWidget_virtualbase_timerEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_timerEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -2041,8 +1938,8 @@ proc miqt_exec_callback_cQListWidget_timerEvent(vtbl: pointer, self: pointer, e:
 proc QListWidgetresizeEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QResizeEvent): void =
   fcQListWidget_virtualbase_resizeEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_resizeEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -2050,8 +1947,8 @@ proc miqt_exec_callback_cQListWidget_resizeEvent(vtbl: pointer, self: pointer, e
 proc QListWidgetdragMoveEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QDragMoveEvent): void =
   fcQListWidget_virtualbase_dragMoveEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_dragMoveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -2059,8 +1956,8 @@ proc miqt_exec_callback_cQListWidget_dragMoveEvent(vtbl: pointer, self: pointer,
 proc QListWidgetdragLeaveEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QDragLeaveEvent): void =
   fcQListWidget_virtualbase_dragLeaveEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_dragLeaveEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -2068,17 +1965,17 @@ proc miqt_exec_callback_cQListWidget_dragLeaveEvent(vtbl: pointer, self: pointer
 proc QListWidgetstartDrag*(self: gen_qlistwidget_types.QListWidget, supportedActions: cint): void =
   fcQListWidget_virtualbase_startDrag(self.h, cint(supportedActions))
 
-proc miqt_exec_callback_cQListWidget_startDrag(vtbl: pointer, self: pointer, supportedActions: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = cint(supportedActions)
   vtbl[].startDrag(self, slotval1)
 
-proc QListWidgetviewOptions*(self: gen_qlistwidget_types.QListWidget, ): gen_qstyleoption_types.QStyleOptionViewItem =
+proc QListWidgetviewOptions*(self: gen_qlistwidget_types.QListWidget): gen_qstyleoption_types.QStyleOptionViewItem =
   gen_qstyleoption_types.QStyleOptionViewItem(h: fcQListWidget_virtualbase_viewOptions(self.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_viewOptions(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].viewOptions(self)
   virtualReturn.owned = false # TODO move?
@@ -2089,26 +1986,26 @@ proc miqt_exec_callback_cQListWidget_viewOptions(vtbl: pointer, self: pointer): 
 proc QListWidgetpaintEvent*(self: gen_qlistwidget_types.QListWidget, e: gen_qevent_types.QPaintEvent): void =
   fcQListWidget_virtualbase_paintEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQListWidget_paintEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
   vtbl[].paintEvent(self, slotval1)
 
-proc QListWidgethorizontalOffset*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc QListWidgethorizontalOffset*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_virtualbase_horizontalOffset(self.h)
 
-proc miqt_exec_callback_cQListWidget_horizontalOffset(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].horizontalOffset(self)
   virtualReturn
 
-proc QListWidgetverticalOffset*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc QListWidgetverticalOffset*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_virtualbase_verticalOffset(self.h)
 
-proc miqt_exec_callback_cQListWidget_verticalOffset(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].verticalOffset(self)
   virtualReturn
@@ -2116,8 +2013,8 @@ proc miqt_exec_callback_cQListWidget_verticalOffset(vtbl: pointer, self: pointer
 proc QListWidgetmoveCursor*(self: gen_qlistwidget_types.QListWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQListWidget_virtualbase_moveCursor(self.h, cint(cursorAction), cint(modifiers)), owned: true)
 
-proc miqt_exec_callback_cQListWidget_moveCursor(vtbl: pointer, self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
@@ -2130,8 +2027,8 @@ proc miqt_exec_callback_cQListWidget_moveCursor(vtbl: pointer, self: pointer, cu
 proc QListWidgetsetSelection*(self: gen_qlistwidget_types.QListWidget, rect: gen_qrect_types.QRect, command: cint): void =
   fcQListWidget_virtualbase_setSelection(self.h, rect.h, cint(command))
 
-proc miqt_exec_callback_cQListWidget_setSelection(vtbl: pointer, self: pointer, rect: pointer, command: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
@@ -2140,8 +2037,8 @@ proc miqt_exec_callback_cQListWidget_setSelection(vtbl: pointer, self: pointer, 
 proc QListWidgetvisualRegionForSelection*(self: gen_qlistwidget_types.QListWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQListWidget_virtualbase_visualRegionForSelection(self.h, selection.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_visualRegionForSelection(vtbl: pointer, self: pointer, selection: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
   var virtualReturn = vtbl[].visualRegionForSelection(self, slotval1)
@@ -2150,7 +2047,7 @@ proc miqt_exec_callback_cQListWidget_visualRegionForSelection(vtbl: pointer, sel
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetselectedIndexes*(self: gen_qlistwidget_types.QListWidget, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+proc QListWidgetselectedIndexes*(self: gen_qlistwidget_types.QListWidget): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQListWidget_virtualbase_selectedIndexes(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -2159,8 +2056,8 @@ proc QListWidgetselectedIndexes*(self: gen_qlistwidget_types.QListWidget, ): seq
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQListWidget_selectedIndexes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].selectedIndexes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
@@ -2172,19 +2069,19 @@ proc miqt_exec_callback_cQListWidget_selectedIndexes(vtbl: pointer, self: pointe
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QListWidgetupdateGeometries*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetupdateGeometries*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_updateGeometries(self.h)
 
-proc miqt_exec_callback_cQListWidget_updateGeometries(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_updateGeometries(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].updateGeometries(self)
 
 proc QListWidgetisIndexHidden*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQListWidget_virtualbase_isIndexHidden(self.h, index.h)
 
-proc miqt_exec_callback_cQListWidget_isIndexHidden(vtbl: pointer, self: pointer, index: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].isIndexHidden(self, slotval1)
@@ -2193,8 +2090,8 @@ proc miqt_exec_callback_cQListWidget_isIndexHidden(vtbl: pointer, self: pointer,
 proc QListWidgetselectionChanged*(self: gen_qlistwidget_types.QListWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void =
   fcQListWidget_virtualbase_selectionChanged(self.h, selected.h, deselected.h)
 
-proc miqt_exec_callback_cQListWidget_selectionChanged(vtbl: pointer, self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
@@ -2203,18 +2100,18 @@ proc miqt_exec_callback_cQListWidget_selectionChanged(vtbl: pointer, self: point
 proc QListWidgetcurrentChanged*(self: gen_qlistwidget_types.QListWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQListWidget_virtualbase_currentChanged(self.h, current.h, previous.h)
 
-proc miqt_exec_callback_cQListWidget_currentChanged(vtbl: pointer, self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
   vtbl[].currentChanged(self, slotval1, slotval2)
 
-proc QListWidgetviewportSizeHint*(self: gen_qlistwidget_types.QListWidget, ): gen_qsize_types.QSize =
+proc QListWidgetviewportSizeHint*(self: gen_qlistwidget_types.QListWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQListWidget_virtualbase_viewportSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_viewportSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].viewportSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -2225,8 +2122,8 @@ proc miqt_exec_callback_cQListWidget_viewportSizeHint(vtbl: pointer, self: point
 proc QListWidgetkeyboardSearch*(self: gen_qlistwidget_types.QListWidget, search: string): void =
   fcQListWidget_virtualbase_keyboardSearch(self.h, struct_miqt_string(data: search, len: csize_t(len(search))))
 
-proc miqt_exec_callback_cQListWidget_keyboardSearch(vtbl: pointer, self: pointer, search: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let vsearch_ms = search
   let vsearchx_ret = string.fromBytes(toOpenArrayByte(vsearch_ms.data, 0, int(vsearch_ms.len)-1))
@@ -2237,8 +2134,8 @@ proc miqt_exec_callback_cQListWidget_keyboardSearch(vtbl: pointer, self: pointer
 proc QListWidgetsizeHintForRow*(self: gen_qlistwidget_types.QListWidget, row: cint): cint =
   fcQListWidget_virtualbase_sizeHintForRow(self.h, row)
 
-proc miqt_exec_callback_cQListWidget_sizeHintForRow(vtbl: pointer, self: pointer, row: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = row
   var virtualReturn = vtbl[].sizeHintForRow(self, slotval1)
@@ -2247,8 +2144,8 @@ proc miqt_exec_callback_cQListWidget_sizeHintForRow(vtbl: pointer, self: pointer
 proc QListWidgetsizeHintForColumn*(self: gen_qlistwidget_types.QListWidget, column: cint): cint =
   fcQListWidget_virtualbase_sizeHintForColumn(self.h, column)
 
-proc miqt_exec_callback_cQListWidget_sizeHintForColumn(vtbl: pointer, self: pointer, column: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = column
   var virtualReturn = vtbl[].sizeHintForColumn(self, slotval1)
@@ -2257,8 +2154,8 @@ proc miqt_exec_callback_cQListWidget_sizeHintForColumn(vtbl: pointer, self: poin
 proc QListWidgetinputMethodQuery*(self: gen_qlistwidget_types.QListWidget, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQListWidget_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
-proc miqt_exec_callback_cQListWidget_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -2267,35 +2164,35 @@ proc miqt_exec_callback_cQListWidget_inputMethodQuery(vtbl: pointer, self: point
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetselectAll*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetselectAll*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_selectAll(self.h)
 
-proc miqt_exec_callback_cQListWidget_selectAll(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_selectAll(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].selectAll(self)
 
-proc QListWidgetupdateEditorData*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetupdateEditorData*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_updateEditorData(self.h)
 
-proc miqt_exec_callback_cQListWidget_updateEditorData(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_updateEditorData(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].updateEditorData(self)
 
-proc QListWidgetupdateEditorGeometries*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc QListWidgetupdateEditorGeometries*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_virtualbase_updateEditorGeometries(self.h)
 
-proc miqt_exec_callback_cQListWidget_updateEditorGeometries(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   vtbl[].updateEditorGeometries(self)
 
 proc QListWidgetverticalScrollbarAction*(self: gen_qlistwidget_types.QListWidget, action: cint): void =
   fcQListWidget_virtualbase_verticalScrollbarAction(self.h, action)
 
-proc miqt_exec_callback_cQListWidget_verticalScrollbarAction(vtbl: pointer, self: pointer, action: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = action
   vtbl[].verticalScrollbarAction(self, slotval1)
@@ -2303,8 +2200,8 @@ proc miqt_exec_callback_cQListWidget_verticalScrollbarAction(vtbl: pointer, self
 proc QListWidgethorizontalScrollbarAction*(self: gen_qlistwidget_types.QListWidget, action: cint): void =
   fcQListWidget_virtualbase_horizontalScrollbarAction(self.h, action)
 
-proc miqt_exec_callback_cQListWidget_horizontalScrollbarAction(vtbl: pointer, self: pointer, action: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = action
   vtbl[].horizontalScrollbarAction(self, slotval1)
@@ -2312,8 +2209,8 @@ proc miqt_exec_callback_cQListWidget_horizontalScrollbarAction(vtbl: pointer, se
 proc QListWidgetverticalScrollbarValueChanged*(self: gen_qlistwidget_types.QListWidget, value: cint): void =
   fcQListWidget_virtualbase_verticalScrollbarValueChanged(self.h, value)
 
-proc miqt_exec_callback_cQListWidget_verticalScrollbarValueChanged(vtbl: pointer, self: pointer, value: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = value
   vtbl[].verticalScrollbarValueChanged(self, slotval1)
@@ -2321,8 +2218,8 @@ proc miqt_exec_callback_cQListWidget_verticalScrollbarValueChanged(vtbl: pointer
 proc QListWidgethorizontalScrollbarValueChanged*(self: gen_qlistwidget_types.QListWidget, value: cint): void =
   fcQListWidget_virtualbase_horizontalScrollbarValueChanged(self.h, value)
 
-proc miqt_exec_callback_cQListWidget_horizontalScrollbarValueChanged(vtbl: pointer, self: pointer, value: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = value
   vtbl[].horizontalScrollbarValueChanged(self, slotval1)
@@ -2330,8 +2227,8 @@ proc miqt_exec_callback_cQListWidget_horizontalScrollbarValueChanged(vtbl: point
 proc QListWidgetcloseEditor*(self: gen_qlistwidget_types.QListWidget, editor: gen_qwidget_types.QWidget, hint: cint): void =
   fcQListWidget_virtualbase_closeEditor(self.h, editor.h, cint(hint))
 
-proc miqt_exec_callback_cQListWidget_closeEditor(vtbl: pointer, self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
@@ -2340,8 +2237,8 @@ proc miqt_exec_callback_cQListWidget_closeEditor(vtbl: pointer, self: pointer, e
 proc QListWidgetcommitData*(self: gen_qlistwidget_types.QListWidget, editor: gen_qwidget_types.QWidget): void =
   fcQListWidget_virtualbase_commitData(self.h, editor.h)
 
-proc miqt_exec_callback_cQListWidget_commitData(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   vtbl[].commitData(self, slotval1)
@@ -2349,8 +2246,8 @@ proc miqt_exec_callback_cQListWidget_commitData(vtbl: pointer, self: pointer, ed
 proc QListWidgeteditorDestroyed*(self: gen_qlistwidget_types.QListWidget, editor: gen_qobject_types.QObject): void =
   fcQListWidget_virtualbase_editorDestroyed(self.h, editor.h)
 
-proc miqt_exec_callback_cQListWidget_editorDestroyed(vtbl: pointer, self: pointer, editor: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
   vtbl[].editorDestroyed(self, slotval1)
@@ -2358,8 +2255,8 @@ proc miqt_exec_callback_cQListWidget_editorDestroyed(vtbl: pointer, self: pointe
 proc QListWidgetedit*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool =
   fcQListWidget_virtualbase_edit2(self.h, index.h, cint(trigger), event.h)
 
-proc miqt_exec_callback_cQListWidget_edit2(vtbl: pointer, self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
@@ -2370,8 +2267,8 @@ proc miqt_exec_callback_cQListWidget_edit2(vtbl: pointer, self: pointer, index: 
 proc QListWidgetselectionCommand*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint =
   cint(fcQListWidget_virtualbase_selectionCommand(self.h, index.h, event.h))
 
-proc miqt_exec_callback_cQListWidget_selectionCommand(vtbl: pointer, self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -2381,8 +2278,8 @@ proc miqt_exec_callback_cQListWidget_selectionCommand(vtbl: pointer, self: point
 proc QListWidgetfocusNextPrevChild*(self: gen_qlistwidget_types.QListWidget, next: bool): bool =
   fcQListWidget_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQListWidget_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -2391,8 +2288,8 @@ proc miqt_exec_callback_cQListWidget_focusNextPrevChild(vtbl: pointer, self: poi
 proc QListWidgetviewportEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qcoreevent_types.QEvent): bool =
   fcQListWidget_virtualbase_viewportEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_viewportEvent(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].viewportEvent(self, slotval1)
@@ -2401,8 +2298,8 @@ proc miqt_exec_callback_cQListWidget_viewportEvent(vtbl: pointer, self: pointer,
 proc QListWidgetmousePressEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQListWidget_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -2410,8 +2307,8 @@ proc miqt_exec_callback_cQListWidget_mousePressEvent(vtbl: pointer, self: pointe
 proc QListWidgetmouseDoubleClickEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QMouseEvent): void =
   fcQListWidget_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -2419,8 +2316,8 @@ proc miqt_exec_callback_cQListWidget_mouseDoubleClickEvent(vtbl: pointer, self: 
 proc QListWidgetdragEnterEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QDragEnterEvent): void =
   fcQListWidget_virtualbase_dragEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_dragEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -2428,8 +2325,8 @@ proc miqt_exec_callback_cQListWidget_dragEnterEvent(vtbl: pointer, self: pointer
 proc QListWidgetfocusInEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQListWidget_virtualbase_focusInEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_focusInEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -2437,8 +2334,8 @@ proc miqt_exec_callback_cQListWidget_focusInEvent(vtbl: pointer, self: pointer, 
 proc QListWidgetfocusOutEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QFocusEvent): void =
   fcQListWidget_virtualbase_focusOutEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_focusOutEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -2446,8 +2343,8 @@ proc miqt_exec_callback_cQListWidget_focusOutEvent(vtbl: pointer, self: pointer,
 proc QListWidgetkeyPressEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QKeyEvent): void =
   fcQListWidget_virtualbase_keyPressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -2455,8 +2352,8 @@ proc miqt_exec_callback_cQListWidget_keyPressEvent(vtbl: pointer, self: pointer,
 proc QListWidgetinputMethodEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QInputMethodEvent): void =
   fcQListWidget_virtualbase_inputMethodEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_inputMethodEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -2464,19 +2361,19 @@ proc miqt_exec_callback_cQListWidget_inputMethodEvent(vtbl: pointer, self: point
 proc QListWidgeteventFilter*(self: gen_qlistwidget_types.QListWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQListWidget_virtualbase_eventFilter(self.h, objectVal.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_eventFilter(vtbl: pointer, self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QListWidgetminimumSizeHint*(self: gen_qlistwidget_types.QListWidget, ): gen_qsize_types.QSize =
+proc QListWidgetminimumSizeHint*(self: gen_qlistwidget_types.QListWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQListWidget_virtualbase_minimumSizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_minimumSizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].minimumSizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -2484,11 +2381,11 @@ proc miqt_exec_callback_cQListWidget_minimumSizeHint(vtbl: pointer, self: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetsizeHint*(self: gen_qlistwidget_types.QListWidget, ): gen_qsize_types.QSize =
+proc QListWidgetsizeHint*(self: gen_qlistwidget_types.QListWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQListWidget_virtualbase_sizeHint(self.h), owned: true)
 
-proc miqt_exec_callback_cQListWidget_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -2499,8 +2396,8 @@ proc miqt_exec_callback_cQListWidget_sizeHint(vtbl: pointer, self: pointer): poi
 proc QListWidgetsetupViewport*(self: gen_qlistwidget_types.QListWidget, viewport: gen_qwidget_types.QWidget): void =
   fcQListWidget_virtualbase_setupViewport(self.h, viewport.h)
 
-proc miqt_exec_callback_cQListWidget_setupViewport(vtbl: pointer, self: pointer, viewport: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
   vtbl[].setupViewport(self, slotval1)
@@ -2508,8 +2405,8 @@ proc miqt_exec_callback_cQListWidget_setupViewport(vtbl: pointer, self: pointer,
 proc QListWidgetcontextMenuEvent*(self: gen_qlistwidget_types.QListWidget, param1: gen_qevent_types.QContextMenuEvent): void =
   fcQListWidget_virtualbase_contextMenuEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQListWidget_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -2517,17 +2414,17 @@ proc miqt_exec_callback_cQListWidget_contextMenuEvent(vtbl: pointer, self: point
 proc QListWidgetchangeEvent*(self: gen_qlistwidget_types.QListWidget, param1: gen_qcoreevent_types.QEvent): void =
   fcQListWidget_virtualbase_changeEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQListWidget_changeEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   vtbl[].changeEvent(self, slotval1)
 
-proc QListWidgetdevType*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc QListWidgetdevType*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_virtualbase_devType(self.h)
 
-proc miqt_exec_callback_cQListWidget_devType(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_devType(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].devType(self)
   virtualReturn
@@ -2535,8 +2432,8 @@ proc miqt_exec_callback_cQListWidget_devType(vtbl: pointer, self: pointer): cint
 proc QListWidgetsetVisible*(self: gen_qlistwidget_types.QListWidget, visible: bool): void =
   fcQListWidget_virtualbase_setVisible(self.h, visible)
 
-proc miqt_exec_callback_cQListWidget_setVisible(vtbl: pointer, self: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = visible
   vtbl[].setVisible(self, slotval1)
@@ -2544,27 +2441,27 @@ proc miqt_exec_callback_cQListWidget_setVisible(vtbl: pointer, self: pointer, vi
 proc QListWidgetheightForWidth*(self: gen_qlistwidget_types.QListWidget, param1: cint): cint =
   fcQListWidget_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQListWidget_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
   virtualReturn
 
-proc QListWidgethasHeightForWidth*(self: gen_qlistwidget_types.QListWidget, ): bool =
+proc QListWidgethasHeightForWidth*(self: gen_qlistwidget_types.QListWidget): bool =
   fcQListWidget_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQListWidget_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
 
-proc QListWidgetpaintEngine*(self: gen_qlistwidget_types.QListWidget, ): gen_qpaintengine_types.QPaintEngine =
+proc QListWidgetpaintEngine*(self: gen_qlistwidget_types.QListWidget): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQListWidget_virtualbase_paintEngine(self.h), owned: false)
 
-proc miqt_exec_callback_cQListWidget_paintEngine(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].paintEngine(self)
   virtualReturn.owned = false # TODO move?
@@ -2575,8 +2472,8 @@ proc miqt_exec_callback_cQListWidget_paintEngine(vtbl: pointer, self: pointer): 
 proc QListWidgetkeyReleaseEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QKeyEvent): void =
   fcQListWidget_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -2584,8 +2481,8 @@ proc miqt_exec_callback_cQListWidget_keyReleaseEvent(vtbl: pointer, self: pointe
 proc QListWidgetenterEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQListWidget_virtualbase_enterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_enterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].enterEvent(self, slotval1)
@@ -2593,8 +2490,8 @@ proc miqt_exec_callback_cQListWidget_enterEvent(vtbl: pointer, self: pointer, ev
 proc QListWidgetleaveEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQListWidget_virtualbase_leaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_leaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].leaveEvent(self, slotval1)
@@ -2602,8 +2499,8 @@ proc miqt_exec_callback_cQListWidget_leaveEvent(vtbl: pointer, self: pointer, ev
 proc QListWidgetmoveEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QMoveEvent): void =
   fcQListWidget_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
@@ -2611,8 +2508,8 @@ proc miqt_exec_callback_cQListWidget_moveEvent(vtbl: pointer, self: pointer, eve
 proc QListWidgetcloseEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QCloseEvent): void =
   fcQListWidget_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -2620,8 +2517,8 @@ proc miqt_exec_callback_cQListWidget_closeEvent(vtbl: pointer, self: pointer, ev
 proc QListWidgettabletEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QTabletEvent): void =
   fcQListWidget_virtualbase_tabletEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_tabletEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
   vtbl[].tabletEvent(self, slotval1)
@@ -2629,8 +2526,8 @@ proc miqt_exec_callback_cQListWidget_tabletEvent(vtbl: pointer, self: pointer, e
 proc QListWidgetactionEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QActionEvent): void =
   fcQListWidget_virtualbase_actionEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_actionEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
   vtbl[].actionEvent(self, slotval1)
@@ -2638,8 +2535,8 @@ proc miqt_exec_callback_cQListWidget_actionEvent(vtbl: pointer, self: pointer, e
 proc QListWidgetshowEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QShowEvent): void =
   fcQListWidget_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -2647,8 +2544,8 @@ proc miqt_exec_callback_cQListWidget_showEvent(vtbl: pointer, self: pointer, eve
 proc QListWidgethideEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qevent_types.QHideEvent): void =
   fcQListWidget_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -2656,8 +2553,8 @@ proc miqt_exec_callback_cQListWidget_hideEvent(vtbl: pointer, self: pointer, eve
 proc QListWidgetnativeEvent*(self: gen_qlistwidget_types.QListWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool =
   fcQListWidget_virtualbase_nativeEvent(self.h, struct_miqt_string(data: cast[cstring](if len(eventType) == 0: nil else: unsafeAddr eventType[0]), len: csize_t(len(eventType))), message, resultVal)
 
-proc miqt_exec_callback_cQListWidget_nativeEvent(vtbl: pointer, self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
@@ -2671,8 +2568,8 @@ proc miqt_exec_callback_cQListWidget_nativeEvent(vtbl: pointer, self: pointer, e
 proc QListWidgetmetric*(self: gen_qlistwidget_types.QListWidget, param1: cint): cint =
   fcQListWidget_virtualbase_metric(self.h, cint(param1))
 
-proc miqt_exec_callback_cQListWidget_metric(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = cint(param1)
   var virtualReturn = vtbl[].metric(self, slotval1)
@@ -2681,8 +2578,8 @@ proc miqt_exec_callback_cQListWidget_metric(vtbl: pointer, self: pointer, param1
 proc QListWidgetinitPainter*(self: gen_qlistwidget_types.QListWidget, painter: gen_qpainter_types.QPainter): void =
   fcQListWidget_virtualbase_initPainter(self.h, painter.h)
 
-proc miqt_exec_callback_cQListWidget_initPainter(vtbl: pointer, self: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   vtbl[].initPainter(self, slotval1)
@@ -2690,8 +2587,8 @@ proc miqt_exec_callback_cQListWidget_initPainter(vtbl: pointer, self: pointer, p
 proc QListWidgetredirected*(self: gen_qlistwidget_types.QListWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQListWidget_virtualbase_redirected(self.h, offset.h), owned: false)
 
-proc miqt_exec_callback_cQListWidget_redirected(vtbl: pointer, self: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
   var virtualReturn = vtbl[].redirected(self, slotval1)
@@ -2700,11 +2597,11 @@ proc miqt_exec_callback_cQListWidget_redirected(vtbl: pointer, self: pointer, of
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QListWidgetsharedPainter*(self: gen_qlistwidget_types.QListWidget, ): gen_qpainter_types.QPainter =
+proc QListWidgetsharedPainter*(self: gen_qlistwidget_types.QListWidget): gen_qpainter_types.QPainter =
   gen_qpainter_types.QPainter(h: fcQListWidget_virtualbase_sharedPainter(self.h), owned: false)
 
-proc miqt_exec_callback_cQListWidget_sharedPainter(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   var virtualReturn = vtbl[].sharedPainter(self)
   virtualReturn.owned = false # TODO move?
@@ -2715,8 +2612,8 @@ proc miqt_exec_callback_cQListWidget_sharedPainter(vtbl: pointer, self: pointer)
 proc QListWidgetchildEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qcoreevent_types.QChildEvent): void =
   fcQListWidget_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -2724,8 +2621,8 @@ proc miqt_exec_callback_cQListWidget_childEvent(vtbl: pointer, self: pointer, ev
 proc QListWidgetcustomEvent*(self: gen_qlistwidget_types.QListWidget, event: gen_qcoreevent_types.QEvent): void =
   fcQListWidget_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQListWidget_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -2733,8 +2630,8 @@ proc miqt_exec_callback_cQListWidget_customEvent(vtbl: pointer, self: pointer, e
 proc QListWidgetconnectNotify*(self: gen_qlistwidget_types.QListWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQListWidget_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQListWidget_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -2742,19 +2639,19 @@ proc miqt_exec_callback_cQListWidget_connectNotify(vtbl: pointer, self: pointer,
 proc QListWidgetdisconnectNotify*(self: gen_qlistwidget_types.QListWidget, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQListWidget_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQListWidget_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QListWidgetVTable](vtbl)
+proc cQListWidget_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QListWidgetVTable](fcQListWidget_vdata(self))
   let self = QListWidget(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQListWidget* {.inheritable.} = ref object of QListWidget
   vtbl*: cQListWidgetVTable
-method metaObject*(self: VirtualQListWidget, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQListWidget): gen_qobjectdefs_types.QMetaObject {.base.} =
   QListWidgetmetaObject(self[])
-proc miqt_exec_method_cQListWidget_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQListWidget_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2762,49 +2659,49 @@ proc miqt_exec_method_cQListWidget_metaObject(vtbl: pointer, inst: pointer): poi
 
 method metacast*(self: VirtualQListWidget, param1: cstring): pointer {.base.} =
   QListWidgetmetacast(self[], param1)
-proc miqt_exec_method_cQListWidget_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQListWidget, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QListWidgetmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQListWidget_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method setSelectionModel*(self: VirtualQListWidget, selectionModel: gen_qitemselectionmodel_types.QItemSelectionModel): void {.base.} =
   QListWidgetsetSelectionModel(self[], selectionModel)
-proc miqt_exec_method_cQListWidget_setSelectionModel(vtbl: pointer, inst: pointer, selectionModel: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_setSelectionModel(self: pointer, selectionModel: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelectionModel(h: selectionModel, owned: false)
-  vtbl.setSelectionModel(slotval1)
+  inst.setSelectionModel(slotval1)
 
 method dropEvent*(self: VirtualQListWidget, event: gen_qevent_types.QDropEvent): void {.base.} =
   QListWidgetdropEvent(self[], event)
-proc miqt_exec_method_cQListWidget_dropEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dropEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: event, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method event*(self: VirtualQListWidget, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QListWidgetevent(self[], e)
-proc miqt_exec_method_cQListWidget_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
-method mimeTypes*(self: VirtualQListWidget, ): seq[string] {.base.} =
+method mimeTypes*(self: VirtualQListWidget): seq[string] {.base.} =
   QListWidgetmimeTypes(self[])
-proc miqt_exec_method_cQListWidget_mimeTypes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.mimeTypes()
+proc cQListWidget_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
@@ -2815,8 +2712,8 @@ proc miqt_exec_method_cQListWidget_mimeTypes(vtbl: pointer, inst: pointer): stru
 
 method mimeData*(self: VirtualQListWidget, items: seq[gen_qlistwidget_types.QListWidgetItem]): gen_qmimedata_types.QMimeData {.base.} =
   QListWidgetmimeData(self[], items)
-proc miqt_exec_method_cQListWidget_mimeData(vtbl: pointer, inst: pointer, items: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_mimeData(self: pointer, items: struct_miqt_array): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   var vitems_ma = items
   var vitemsx_ret = newSeq[gen_qlistwidget_types.QListWidgetItem](int(vitems_ma.len))
   let vitems_outCast = cast[ptr UncheckedArray[pointer]](vitems_ma.data)
@@ -2824,7 +2721,7 @@ proc miqt_exec_method_cQListWidget_mimeData(vtbl: pointer, inst: pointer, items:
     vitemsx_ret[i] = gen_qlistwidget_types.QListWidgetItem(h: vitems_outCast[i], owned: false)
   c_free(vitems_ma.data)
   let slotval1 = vitemsx_ret
-  var virtualReturn = vtbl.mimeData(slotval1)
+  var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2832,27 +2729,27 @@ proc miqt_exec_method_cQListWidget_mimeData(vtbl: pointer, inst: pointer, items:
 
 method dropMimeData*(self: VirtualQListWidget, index: cint, data: gen_qmimedata_types.QMimeData, action: cint): bool {.base.} =
   QListWidgetdropMimeData(self[], index, data, action)
-proc miqt_exec_method_cQListWidget_dropMimeData(vtbl: pointer, inst: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dropMimeData(self: pointer, index: cint, data: pointer, action: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = index
   let slotval2 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval3 = cint(action)
-  var virtualReturn = vtbl.dropMimeData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQListWidget, ): cint {.base.} =
+method supportedDropActions*(self: VirtualQListWidget): cint {.base.} =
   QListWidgetsupportedDropActions(self[])
-proc miqt_exec_method_cQListWidget_supportedDropActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.supportedDropActions()
+proc cQListWidget_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
 method visualRect*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect {.base.} =
   QListWidgetvisualRect(self[], index)
-proc miqt_exec_method_cQListWidget_visualRect(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_visualRect(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.visualRect(slotval1)
+  var virtualReturn = inst.visualRect(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2860,54 +2757,54 @@ proc miqt_exec_method_cQListWidget_visualRect(vtbl: pointer, inst: pointer, inde
 
 method scrollTo*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex, hint: cint): void {.base.} =
   QListWidgetscrollTo(self[], index, hint)
-proc miqt_exec_method_cQListWidget_scrollTo(vtbl: pointer, inst: pointer, index: pointer, hint: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_scrollTo(self: pointer, index: pointer, hint: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(hint)
-  vtbl.scrollTo(slotval1, slotval2)
+  inst.scrollTo(slotval1, slotval2)
 
 method indexAt*(self: VirtualQListWidget, p: gen_qpoint_types.QPoint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QListWidgetindexAt(self[], p)
-proc miqt_exec_method_cQListWidget_indexAt(vtbl: pointer, inst: pointer, p: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_indexAt(self: pointer, p: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: p, owned: false)
-  var virtualReturn = vtbl.indexAt(slotval1)
+  var virtualReturn = inst.indexAt(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method doItemsLayout*(self: VirtualQListWidget, ): void {.base.} =
+method doItemsLayout*(self: VirtualQListWidget): void {.base.} =
   QListWidgetdoItemsLayout(self[])
-proc miqt_exec_method_cQListWidget_doItemsLayout(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.doItemsLayout()
+proc cQListWidget_method_callback_doItemsLayout(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.doItemsLayout()
 
-method reset*(self: VirtualQListWidget, ): void {.base.} =
+method reset*(self: VirtualQListWidget): void {.base.} =
   QListWidgetreset(self[])
-proc miqt_exec_method_cQListWidget_reset(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.reset()
+proc cQListWidget_method_callback_reset(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.reset()
 
 method setRootIndex*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QListWidgetsetRootIndex(self[], index)
-proc miqt_exec_method_cQListWidget_setRootIndex(vtbl: pointer, inst: pointer, index: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_setRootIndex(self: pointer, index: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  vtbl.setRootIndex(slotval1)
+  inst.setRootIndex(slotval1)
 
 method scrollContentsBy*(self: VirtualQListWidget, dx: cint, dy: cint): void {.base.} =
   QListWidgetscrollContentsBy(self[], dx, dy)
-proc miqt_exec_method_cQListWidget_scrollContentsBy(vtbl: pointer, inst: pointer, dx: cint, dy: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_scrollContentsBy(self: pointer, dx: cint, dy: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = dx
   let slotval2 = dy
-  vtbl.scrollContentsBy(slotval1, slotval2)
+  inst.scrollContentsBy(slotval1, slotval2)
 
 method dataChanged*(self: VirtualQListWidget, topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint]): void {.base.} =
   QListWidgetdataChanged(self[], topLeft, bottomRight, roles)
-proc miqt_exec_method_cQListWidget_dataChanged(vtbl: pointer, inst: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: bottomRight, owned: false)
   var vroles_ma = roles
@@ -2917,87 +2814,87 @@ proc miqt_exec_method_cQListWidget_dataChanged(vtbl: pointer, inst: pointer, top
     vrolesx_ret[i] = vroles_outCast[i]
   c_free(vroles_ma.data)
   let slotval3 = vrolesx_ret
-  vtbl.dataChanged(slotval1, slotval2, slotval3)
+  inst.dataChanged(slotval1, slotval2, slotval3)
 
 method rowsInserted*(self: VirtualQListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
   QListWidgetrowsInserted(self[], parent, start, endVal)
-proc miqt_exec_method_cQListWidget_rowsInserted(vtbl: pointer, inst: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_rowsInserted(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
-  vtbl.rowsInserted(slotval1, slotval2, slotval3)
+  inst.rowsInserted(slotval1, slotval2, slotval3)
 
 method rowsAboutToBeRemoved*(self: VirtualQListWidget, parent: gen_qabstractitemmodel_types.QModelIndex, start: cint, endVal: cint): void {.base.} =
   QListWidgetrowsAboutToBeRemoved(self[], parent, start, endVal)
-proc miqt_exec_method_cQListWidget_rowsAboutToBeRemoved(vtbl: pointer, inst: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_rowsAboutToBeRemoved(self: pointer, parent: pointer, start: cint, endVal: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   let slotval2 = start
   let slotval3 = endVal
-  vtbl.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
+  inst.rowsAboutToBeRemoved(slotval1, slotval2, slotval3)
 
 method mouseMoveEvent*(self: VirtualQListWidget, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QListWidgetmouseMoveEvent(self[], e)
-proc miqt_exec_method_cQListWidget_mouseMoveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_mouseMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQListWidget, e: gen_qevent_types.QMouseEvent): void {.base.} =
   QListWidgetmouseReleaseEvent(self[], e)
-proc miqt_exec_method_cQListWidget_mouseReleaseEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_mouseReleaseEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: e, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method wheelEvent*(self: VirtualQListWidget, e: gen_qevent_types.QWheelEvent): void {.base.} =
   QListWidgetwheelEvent(self[], e)
-proc miqt_exec_method_cQListWidget_wheelEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_wheelEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: e, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method timerEvent*(self: VirtualQListWidget, e: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QListWidgettimerEvent(self[], e)
-proc miqt_exec_method_cQListWidget_timerEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_timerEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: e, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method resizeEvent*(self: VirtualQListWidget, e: gen_qevent_types.QResizeEvent): void {.base.} =
   QListWidgetresizeEvent(self[], e)
-proc miqt_exec_method_cQListWidget_resizeEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_resizeEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QResizeEvent(h: e, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQListWidget, e: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QListWidgetdragMoveEvent(self[], e)
-proc miqt_exec_method_cQListWidget_dragMoveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dragMoveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: e, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQListWidget, e: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QListWidgetdragLeaveEvent(self[], e)
-proc miqt_exec_method_cQListWidget_dragLeaveEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dragLeaveEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: e, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method startDrag*(self: VirtualQListWidget, supportedActions: cint): void {.base.} =
   QListWidgetstartDrag(self[], supportedActions)
-proc miqt_exec_method_cQListWidget_startDrag(vtbl: pointer, inst: pointer, supportedActions: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_startDrag(self: pointer, supportedActions: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = cint(supportedActions)
-  vtbl.startDrag(slotval1)
+  inst.startDrag(slotval1)
 
-method viewOptions*(self: VirtualQListWidget, ): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
+method viewOptions*(self: VirtualQListWidget): gen_qstyleoption_types.QStyleOptionViewItem {.base.} =
   QListWidgetviewOptions(self[])
-proc miqt_exec_method_cQListWidget_viewOptions(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.viewOptions()
+proc cQListWidget_method_callback_viewOptions(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.viewOptions()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3005,32 +2902,32 @@ proc miqt_exec_method_cQListWidget_viewOptions(vtbl: pointer, inst: pointer): po
 
 method paintEvent*(self: VirtualQListWidget, e: gen_qevent_types.QPaintEvent): void {.base.} =
   QListWidgetpaintEvent(self[], e)
-proc miqt_exec_method_cQListWidget_paintEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_paintEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QPaintEvent(h: e, owned: false)
-  vtbl.paintEvent(slotval1)
+  inst.paintEvent(slotval1)
 
-method horizontalOffset*(self: VirtualQListWidget, ): cint {.base.} =
+method horizontalOffset*(self: VirtualQListWidget): cint {.base.} =
   QListWidgethorizontalOffset(self[])
-proc miqt_exec_method_cQListWidget_horizontalOffset(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.horizontalOffset()
+proc cQListWidget_method_callback_horizontalOffset(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.horizontalOffset()
   virtualReturn
 
-method verticalOffset*(self: VirtualQListWidget, ): cint {.base.} =
+method verticalOffset*(self: VirtualQListWidget): cint {.base.} =
   QListWidgetverticalOffset(self[])
-proc miqt_exec_method_cQListWidget_verticalOffset(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.verticalOffset()
+proc cQListWidget_method_callback_verticalOffset(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.verticalOffset()
   virtualReturn
 
 method moveCursor*(self: VirtualQListWidget, cursorAction: cint, modifiers: cint): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QListWidgetmoveCursor(self[], cursorAction, modifiers)
-proc miqt_exec_method_cQListWidget_moveCursor(vtbl: pointer, inst: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_moveCursor(self: pointer, cursorAction: cint, modifiers: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = cint(cursorAction)
   let slotval2 = cint(modifiers)
-  var virtualReturn = vtbl.moveCursor(slotval1, slotval2)
+  var virtualReturn = inst.moveCursor(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3038,28 +2935,28 @@ proc miqt_exec_method_cQListWidget_moveCursor(vtbl: pointer, inst: pointer, curs
 
 method setSelection*(self: VirtualQListWidget, rect: gen_qrect_types.QRect, command: cint): void {.base.} =
   QListWidgetsetSelection(self[], rect, command)
-proc miqt_exec_method_cQListWidget_setSelection(vtbl: pointer, inst: pointer, rect: pointer, command: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_setSelection(self: pointer, rect: pointer, command: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval2 = cint(command)
-  vtbl.setSelection(slotval1, slotval2)
+  inst.setSelection(slotval1, slotval2)
 
 method visualRegionForSelection*(self: VirtualQListWidget, selection: gen_qitemselectionmodel_types.QItemSelection): gen_qregion_types.QRegion {.base.} =
   QListWidgetvisualRegionForSelection(self[], selection)
-proc miqt_exec_method_cQListWidget_visualRegionForSelection(vtbl: pointer, inst: pointer, selection: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_visualRegionForSelection(self: pointer, selection: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selection, owned: false)
-  var virtualReturn = vtbl.visualRegionForSelection(slotval1)
+  var virtualReturn = inst.visualRegionForSelection(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method selectedIndexes*(self: VirtualQListWidget, ): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
+method selectedIndexes*(self: VirtualQListWidget): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
   QListWidgetselectedIndexes(self[])
-proc miqt_exec_method_cQListWidget_selectedIndexes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.selectedIndexes()
+proc cQListWidget_method_callback_selectedIndexes(self: pointer): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.selectedIndexes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -3069,41 +2966,41 @@ proc miqt_exec_method_cQListWidget_selectedIndexes(vtbl: pointer, inst: pointer)
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method updateGeometries*(self: VirtualQListWidget, ): void {.base.} =
+method updateGeometries*(self: VirtualQListWidget): void {.base.} =
   QListWidgetupdateGeometries(self[])
-proc miqt_exec_method_cQListWidget_updateGeometries(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.updateGeometries()
+proc cQListWidget_method_callback_updateGeometries(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.updateGeometries()
 
 method isIndexHidden*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QListWidgetisIndexHidden(self[], index)
-proc miqt_exec_method_cQListWidget_isIndexHidden(vtbl: pointer, inst: pointer, index: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_isIndexHidden(self: pointer, index: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.isIndexHidden(slotval1)
+  var virtualReturn = inst.isIndexHidden(slotval1)
   virtualReturn
 
 method selectionChanged*(self: VirtualQListWidget, selected: gen_qitemselectionmodel_types.QItemSelection, deselected: gen_qitemselectionmodel_types.QItemSelection): void {.base.} =
   QListWidgetselectionChanged(self[], selected, deselected)
-proc miqt_exec_method_cQListWidget_selectionChanged(vtbl: pointer, inst: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_selectionChanged(self: pointer, selected: pointer, deselected: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qitemselectionmodel_types.QItemSelection(h: selected, owned: false)
   let slotval2 = gen_qitemselectionmodel_types.QItemSelection(h: deselected, owned: false)
-  vtbl.selectionChanged(slotval1, slotval2)
+  inst.selectionChanged(slotval1, slotval2)
 
 method currentChanged*(self: VirtualQListWidget, current: gen_qabstractitemmodel_types.QModelIndex, previous: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QListWidgetcurrentChanged(self[], current, previous)
-proc miqt_exec_method_cQListWidget_currentChanged(vtbl: pointer, inst: pointer, current: pointer, previous: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_currentChanged(self: pointer, current: pointer, previous: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: current, owned: false)
   let slotval2 = gen_qabstractitemmodel_types.QModelIndex(h: previous, owned: false)
-  vtbl.currentChanged(slotval1, slotval2)
+  inst.currentChanged(slotval1, slotval2)
 
-method viewportSizeHint*(self: VirtualQListWidget, ): gen_qsize_types.QSize {.base.} =
+method viewportSizeHint*(self: VirtualQListWidget): gen_qsize_types.QSize {.base.} =
   QListWidgetviewportSizeHint(self[])
-proc miqt_exec_method_cQListWidget_viewportSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.viewportSizeHint()
+proc cQListWidget_method_callback_viewportSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.viewportSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3111,217 +3008,217 @@ proc miqt_exec_method_cQListWidget_viewportSizeHint(vtbl: pointer, inst: pointer
 
 method keyboardSearch*(self: VirtualQListWidget, search: string): void {.base.} =
   QListWidgetkeyboardSearch(self[], search)
-proc miqt_exec_method_cQListWidget_keyboardSearch(vtbl: pointer, inst: pointer, search: struct_miqt_string): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_keyboardSearch(self: pointer, search: struct_miqt_string): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let vsearch_ms = search
   let vsearchx_ret = string.fromBytes(toOpenArrayByte(vsearch_ms.data, 0, int(vsearch_ms.len)-1))
   c_free(vsearch_ms.data)
   let slotval1 = vsearchx_ret
-  vtbl.keyboardSearch(slotval1)
+  inst.keyboardSearch(slotval1)
 
 method sizeHintForRow*(self: VirtualQListWidget, row: cint): cint {.base.} =
   QListWidgetsizeHintForRow(self[], row)
-proc miqt_exec_method_cQListWidget_sizeHintForRow(vtbl: pointer, inst: pointer, row: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_sizeHintForRow(self: pointer, row: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = row
-  var virtualReturn = vtbl.sizeHintForRow(slotval1)
+  var virtualReturn = inst.sizeHintForRow(slotval1)
   virtualReturn
 
 method sizeHintForColumn*(self: VirtualQListWidget, column: cint): cint {.base.} =
   QListWidgetsizeHintForColumn(self[], column)
-proc miqt_exec_method_cQListWidget_sizeHintForColumn(vtbl: pointer, inst: pointer, column: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_sizeHintForColumn(self: pointer, column: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = column
-  var virtualReturn = vtbl.sizeHintForColumn(slotval1)
+  var virtualReturn = inst.sizeHintForColumn(slotval1)
   virtualReturn
 
 method inputMethodQuery*(self: VirtualQListWidget, query: cint): gen_qvariant_types.QVariant {.base.} =
   QListWidgetinputMethodQuery(self[], query)
-proc miqt_exec_method_cQListWidget_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = cint(query)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method selectAll*(self: VirtualQListWidget, ): void {.base.} =
+method selectAll*(self: VirtualQListWidget): void {.base.} =
   QListWidgetselectAll(self[])
-proc miqt_exec_method_cQListWidget_selectAll(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.selectAll()
+proc cQListWidget_method_callback_selectAll(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.selectAll()
 
-method updateEditorData*(self: VirtualQListWidget, ): void {.base.} =
+method updateEditorData*(self: VirtualQListWidget): void {.base.} =
   QListWidgetupdateEditorData(self[])
-proc miqt_exec_method_cQListWidget_updateEditorData(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.updateEditorData()
+proc cQListWidget_method_callback_updateEditorData(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.updateEditorData()
 
-method updateEditorGeometries*(self: VirtualQListWidget, ): void {.base.} =
+method updateEditorGeometries*(self: VirtualQListWidget): void {.base.} =
   QListWidgetupdateEditorGeometries(self[])
-proc miqt_exec_method_cQListWidget_updateEditorGeometries(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  vtbl.updateEditorGeometries()
+proc cQListWidget_method_callback_updateEditorGeometries(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  inst.updateEditorGeometries()
 
 method verticalScrollbarAction*(self: VirtualQListWidget, action: cint): void {.base.} =
   QListWidgetverticalScrollbarAction(self[], action)
-proc miqt_exec_method_cQListWidget_verticalScrollbarAction(vtbl: pointer, inst: pointer, action: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_verticalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = action
-  vtbl.verticalScrollbarAction(slotval1)
+  inst.verticalScrollbarAction(slotval1)
 
 method horizontalScrollbarAction*(self: VirtualQListWidget, action: cint): void {.base.} =
   QListWidgethorizontalScrollbarAction(self[], action)
-proc miqt_exec_method_cQListWidget_horizontalScrollbarAction(vtbl: pointer, inst: pointer, action: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_horizontalScrollbarAction(self: pointer, action: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = action
-  vtbl.horizontalScrollbarAction(slotval1)
+  inst.horizontalScrollbarAction(slotval1)
 
 method verticalScrollbarValueChanged*(self: VirtualQListWidget, value: cint): void {.base.} =
   QListWidgetverticalScrollbarValueChanged(self[], value)
-proc miqt_exec_method_cQListWidget_verticalScrollbarValueChanged(vtbl: pointer, inst: pointer, value: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_verticalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = value
-  vtbl.verticalScrollbarValueChanged(slotval1)
+  inst.verticalScrollbarValueChanged(slotval1)
 
 method horizontalScrollbarValueChanged*(self: VirtualQListWidget, value: cint): void {.base.} =
   QListWidgethorizontalScrollbarValueChanged(self[], value)
-proc miqt_exec_method_cQListWidget_horizontalScrollbarValueChanged(vtbl: pointer, inst: pointer, value: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_horizontalScrollbarValueChanged(self: pointer, value: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = value
-  vtbl.horizontalScrollbarValueChanged(slotval1)
+  inst.horizontalScrollbarValueChanged(slotval1)
 
 method closeEditor*(self: VirtualQListWidget, editor: gen_qwidget_types.QWidget, hint: cint): void {.base.} =
   QListWidgetcloseEditor(self[], editor, hint)
-proc miqt_exec_method_cQListWidget_closeEditor(vtbl: pointer, inst: pointer, editor: pointer, hint: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_closeEditor(self: pointer, editor: pointer, hint: cint): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
   let slotval2 = cint(hint)
-  vtbl.closeEditor(slotval1, slotval2)
+  inst.closeEditor(slotval1, slotval2)
 
 method commitData*(self: VirtualQListWidget, editor: gen_qwidget_types.QWidget): void {.base.} =
   QListWidgetcommitData(self[], editor)
-proc miqt_exec_method_cQListWidget_commitData(vtbl: pointer, inst: pointer, editor: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_commitData(self: pointer, editor: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: editor, owned: false)
-  vtbl.commitData(slotval1)
+  inst.commitData(slotval1)
 
 method editorDestroyed*(self: VirtualQListWidget, editor: gen_qobject_types.QObject): void {.base.} =
   QListWidgeteditorDestroyed(self[], editor)
-proc miqt_exec_method_cQListWidget_editorDestroyed(vtbl: pointer, inst: pointer, editor: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_editorDestroyed(self: pointer, editor: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: editor, owned: false)
-  vtbl.editorDestroyed(slotval1)
+  inst.editorDestroyed(slotval1)
 
 method edit*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex, trigger: cint, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QListWidgetedit(self[], index, trigger, event)
-proc miqt_exec_method_cQListWidget_edit2(vtbl: pointer, inst: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_edit2(self: pointer, index: pointer, trigger: cint, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = cint(trigger)
   let slotval3 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.edit(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.edit(slotval1, slotval2, slotval3)
   virtualReturn
 
 method selectionCommand*(self: VirtualQListWidget, index: gen_qabstractitemmodel_types.QModelIndex, event: gen_qcoreevent_types.QEvent): cint {.base.} =
   QListWidgetselectionCommand(self[], index, event)
-proc miqt_exec_method_cQListWidget_selectionCommand(vtbl: pointer, inst: pointer, index: pointer, event: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_selectionCommand(self: pointer, index: pointer, event: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.selectionCommand(slotval1, slotval2)
+  var virtualReturn = inst.selectionCommand(slotval1, slotval2)
   cint(virtualReturn)
 
 method focusNextPrevChild*(self: VirtualQListWidget, next: bool): bool {.base.} =
   QListWidgetfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQListWidget_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method viewportEvent*(self: VirtualQListWidget, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QListWidgetviewportEvent(self[], event)
-proc miqt_exec_method_cQListWidget_viewportEvent(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_viewportEvent(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.viewportEvent(slotval1)
+  var virtualReturn = inst.viewportEvent(slotval1)
   virtualReturn
 
 method mousePressEvent*(self: VirtualQListWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QListWidgetmousePressEvent(self[], event)
-proc miqt_exec_method_cQListWidget_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQListWidget, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QListWidgetmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQListWidget_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQListWidget, event: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QListWidgetdragEnterEvent(self[], event)
-proc miqt_exec_method_cQListWidget_dragEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_dragEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: event, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method focusInEvent*(self: VirtualQListWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QListWidgetfocusInEvent(self[], event)
-proc miqt_exec_method_cQListWidget_focusInEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_focusInEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQListWidget, event: gen_qevent_types.QFocusEvent): void {.base.} =
   QListWidgetfocusOutEvent(self[], event)
-proc miqt_exec_method_cQListWidget_focusOutEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_focusOutEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: event, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQListWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QListWidgetkeyPressEvent(self[], event)
-proc miqt_exec_method_cQListWidget_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQListWidget, event: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QListWidgetinputMethodEvent(self[], event)
-proc miqt_exec_method_cQListWidget_inputMethodEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_inputMethodEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: event, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method eventFilter*(self: VirtualQListWidget, objectVal: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QListWidgeteventFilter(self[], objectVal, event)
-proc miqt_exec_method_cQListWidget_eventFilter(vtbl: pointer, inst: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_eventFilter(self: pointer, objectVal: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: objectVal, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
-method minimumSizeHint*(self: VirtualQListWidget, ): gen_qsize_types.QSize {.base.} =
+method minimumSizeHint*(self: VirtualQListWidget): gen_qsize_types.QSize {.base.} =
   QListWidgetminimumSizeHint(self[])
-proc miqt_exec_method_cQListWidget_minimumSizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.minimumSizeHint()
+proc cQListWidget_method_callback_minimumSizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.minimumSizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sizeHint*(self: VirtualQListWidget, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQListWidget): gen_qsize_types.QSize {.base.} =
   QListWidgetsizeHint(self[])
-proc miqt_exec_method_cQListWidget_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQListWidget_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3329,59 +3226,59 @@ proc miqt_exec_method_cQListWidget_sizeHint(vtbl: pointer, inst: pointer): point
 
 method setupViewport*(self: VirtualQListWidget, viewport: gen_qwidget_types.QWidget): void {.base.} =
   QListWidgetsetupViewport(self[], viewport)
-proc miqt_exec_method_cQListWidget_setupViewport(vtbl: pointer, inst: pointer, viewport: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_setupViewport(self: pointer, viewport: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: viewport, owned: false)
-  vtbl.setupViewport(slotval1)
+  inst.setupViewport(slotval1)
 
 method contextMenuEvent*(self: VirtualQListWidget, param1: gen_qevent_types.QContextMenuEvent): void {.base.} =
   QListWidgetcontextMenuEvent(self[], param1)
-proc miqt_exec_method_cQListWidget_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QContextMenuEvent(h: param1, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method changeEvent*(self: VirtualQListWidget, param1: gen_qcoreevent_types.QEvent): void {.base.} =
   QListWidgetchangeEvent(self[], param1)
-proc miqt_exec_method_cQListWidget_changeEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_changeEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
-method devType*(self: VirtualQListWidget, ): cint {.base.} =
+method devType*(self: VirtualQListWidget): cint {.base.} =
   QListWidgetdevType(self[])
-proc miqt_exec_method_cQListWidget_devType(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.devType()
+proc cQListWidget_method_callback_devType(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.devType()
   virtualReturn
 
 method setVisible*(self: VirtualQListWidget, visible: bool): void {.base.} =
   QListWidgetsetVisible(self[], visible)
-proc miqt_exec_method_cQListWidget_setVisible(vtbl: pointer, inst: pointer, visible: bool): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_setVisible(self: pointer, visible: bool): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = visible
-  vtbl.setVisible(slotval1)
+  inst.setVisible(slotval1)
 
 method heightForWidth*(self: VirtualQListWidget, param1: cint): cint {.base.} =
   QListWidgetheightForWidth(self[], param1)
-proc miqt_exec_method_cQListWidget_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
-method hasHeightForWidth*(self: VirtualQListWidget, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQListWidget): bool {.base.} =
   QListWidgethasHeightForWidth(self[])
-proc miqt_exec_method_cQListWidget_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQListWidget_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
-method paintEngine*(self: VirtualQListWidget, ): gen_qpaintengine_types.QPaintEngine {.base.} =
+method paintEngine*(self: VirtualQListWidget): gen_qpaintengine_types.QPaintEngine {.base.} =
   QListWidgetpaintEngine(self[])
-proc miqt_exec_method_cQListWidget_paintEngine(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.paintEngine()
+proc cQListWidget_method_callback_paintEngine(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.paintEngine()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3389,111 +3286,111 @@ proc miqt_exec_method_cQListWidget_paintEngine(vtbl: pointer, inst: pointer): po
 
 method keyReleaseEvent*(self: VirtualQListWidget, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QListWidgetkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQListWidget_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method enterEvent*(self: VirtualQListWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QListWidgetenterEvent(self[], event)
-proc miqt_exec_method_cQListWidget_enterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_enterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.enterEvent(slotval1)
+  inst.enterEvent(slotval1)
 
 method leaveEvent*(self: VirtualQListWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QListWidgetleaveEvent(self[], event)
-proc miqt_exec_method_cQListWidget_leaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_leaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.leaveEvent(slotval1)
+  inst.leaveEvent(slotval1)
 
 method moveEvent*(self: VirtualQListWidget, event: gen_qevent_types.QMoveEvent): void {.base.} =
   QListWidgetmoveEvent(self[], event)
-proc miqt_exec_method_cQListWidget_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
 method closeEvent*(self: VirtualQListWidget, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QListWidgetcloseEvent(self[], event)
-proc miqt_exec_method_cQListWidget_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method tabletEvent*(self: VirtualQListWidget, event: gen_qevent_types.QTabletEvent): void {.base.} =
   QListWidgettabletEvent(self[], event)
-proc miqt_exec_method_cQListWidget_tabletEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_tabletEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QTabletEvent(h: event, owned: false)
-  vtbl.tabletEvent(slotval1)
+  inst.tabletEvent(slotval1)
 
 method actionEvent*(self: VirtualQListWidget, event: gen_qevent_types.QActionEvent): void {.base.} =
   QListWidgetactionEvent(self[], event)
-proc miqt_exec_method_cQListWidget_actionEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_actionEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QActionEvent(h: event, owned: false)
-  vtbl.actionEvent(slotval1)
+  inst.actionEvent(slotval1)
 
 method showEvent*(self: VirtualQListWidget, event: gen_qevent_types.QShowEvent): void {.base.} =
   QListWidgetshowEvent(self[], event)
-proc miqt_exec_method_cQListWidget_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method hideEvent*(self: VirtualQListWidget, event: gen_qevent_types.QHideEvent): void {.base.} =
   QListWidgethideEvent(self[], event)
-proc miqt_exec_method_cQListWidget_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method nativeEvent*(self: VirtualQListWidget, eventType: seq[byte], message: pointer, resultVal: ptr clong): bool {.base.} =
   QListWidgetnativeEvent(self[], eventType, message, resultVal)
-proc miqt_exec_method_cQListWidget_nativeEvent(vtbl: pointer, inst: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_nativeEvent(self: pointer, eventType: struct_miqt_string, message: pointer, resultVal: ptr clong): bool {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   var veventType_bytearray = eventType
   var veventTypex_ret = @(toOpenArrayByte(veventType_bytearray.data, 0, int(veventType_bytearray.len)-1))
   c_free(veventType_bytearray.data)
   let slotval1 = veventTypex_ret
   let slotval2 = message
   let slotval3 = resultVal
-  var virtualReturn = vtbl.nativeEvent(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.nativeEvent(slotval1, slotval2, slotval3)
   virtualReturn
 
 method metric*(self: VirtualQListWidget, param1: cint): cint {.base.} =
   QListWidgetmetric(self[], param1)
-proc miqt_exec_method_cQListWidget_metric(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_metric(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = cint(param1)
-  var virtualReturn = vtbl.metric(slotval1)
+  var virtualReturn = inst.metric(slotval1)
   virtualReturn
 
 method initPainter*(self: VirtualQListWidget, painter: gen_qpainter_types.QPainter): void {.base.} =
   QListWidgetinitPainter(self[], painter)
-proc miqt_exec_method_cQListWidget_initPainter(vtbl: pointer, inst: pointer, painter: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_initPainter(self: pointer, painter: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
-  vtbl.initPainter(slotval1)
+  inst.initPainter(slotval1)
 
 method redirected*(self: VirtualQListWidget, offset: gen_qpoint_types.QPoint): gen_qpaintdevice_types.QPaintDevice {.base.} =
   QListWidgetredirected(self[], offset)
-proc miqt_exec_method_cQListWidget_redirected(vtbl: pointer, inst: pointer, offset: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_redirected(self: pointer, offset: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qpoint_types.QPoint(h: offset, owned: false)
-  var virtualReturn = vtbl.redirected(slotval1)
+  var virtualReturn = inst.redirected(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method sharedPainter*(self: VirtualQListWidget, ): gen_qpainter_types.QPainter {.base.} =
+method sharedPainter*(self: VirtualQListWidget): gen_qpainter_types.QPainter {.base.} =
   QListWidgetsharedPainter(self[])
-proc miqt_exec_method_cQListWidget_sharedPainter(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-  var virtualReturn = vtbl.sharedPainter()
+proc cQListWidget_method_callback_sharedPainter(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
+  var virtualReturn = inst.sharedPainter()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3501,31 +3398,31 @@ proc miqt_exec_method_cQListWidget_sharedPainter(vtbl: pointer, inst: pointer): 
 
 method childEvent*(self: VirtualQListWidget, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QListWidgetchildEvent(self[], event)
-proc miqt_exec_method_cQListWidget_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQListWidget, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QListWidgetcustomEvent(self[], event)
-proc miqt_exec_method_cQListWidget_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQListWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QListWidgetconnectNotify(self[], signal)
-proc miqt_exec_method_cQListWidget_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQListWidget, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QListWidgetdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQListWidget_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQListWidget](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
+proc cQListWidget_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQListWidget](fcQListWidget_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc items*(self: gen_qlistwidget_types.QListWidget, data: gen_qmimedata_types.QMimeData): seq[gen_qlistwidget_types.QListWidgetItem] =
   var v_ma = fcQListWidget_protectedbase_items(self.h, data.h)
@@ -3548,7 +3445,7 @@ proc itemFromIndex*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstrac
 proc resizeContents*(self: gen_qlistwidget_types.QListWidget, width: cint, height: cint): void =
   fcQListWidget_protectedbase_resizeContents(self.h, width, height)
 
-proc contentsSize*(self: gen_qlistwidget_types.QListWidget, ): gen_qsize_types.QSize =
+proc contentsSize*(self: gen_qlistwidget_types.QListWidget): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQListWidget_protectedbase_contentsSize(self.h), owned: true)
 
 proc rectForIndex*(self: gen_qlistwidget_types.QListWidget, index: gen_qabstractitemmodel_types.QModelIndex): gen_qrect_types.QRect =
@@ -3560,25 +3457,25 @@ proc setPositionForIndex*(self: gen_qlistwidget_types.QListWidget, position: gen
 proc setHorizontalStepsPerItem*(self: gen_qlistwidget_types.QListWidget, steps: cint): void =
   fcQListWidget_protectedbase_setHorizontalStepsPerItem(self.h, steps)
 
-proc horizontalStepsPerItem*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc horizontalStepsPerItem*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_protectedbase_horizontalStepsPerItem(self.h)
 
 proc setVerticalStepsPerItem*(self: gen_qlistwidget_types.QListWidget, steps: cint): void =
   fcQListWidget_protectedbase_setVerticalStepsPerItem(self.h, steps)
 
-proc verticalStepsPerItem*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc verticalStepsPerItem*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_protectedbase_verticalStepsPerItem(self.h)
 
-proc state*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc state*(self: gen_qlistwidget_types.QListWidget): cint =
   cint(fcQListWidget_protectedbase_state(self.h))
 
 proc setState*(self: gen_qlistwidget_types.QListWidget, state: cint): void =
   fcQListWidget_protectedbase_setState(self.h, cint(state))
 
-proc scheduleDelayedItemsLayout*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc scheduleDelayedItemsLayout*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_scheduleDelayedItemsLayout(self.h)
 
-proc executeDelayedItemsLayout*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc executeDelayedItemsLayout*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_executeDelayedItemsLayout(self.h)
 
 proc setDirtyRegion*(self: gen_qlistwidget_types.QListWidget, region: gen_qregion_types.QRegion): void =
@@ -3587,25 +3484,25 @@ proc setDirtyRegion*(self: gen_qlistwidget_types.QListWidget, region: gen_qregio
 proc scrollDirtyRegion*(self: gen_qlistwidget_types.QListWidget, dx: cint, dy: cint): void =
   fcQListWidget_protectedbase_scrollDirtyRegion(self.h, dx, dy)
 
-proc dirtyRegionOffset*(self: gen_qlistwidget_types.QListWidget, ): gen_qpoint_types.QPoint =
+proc dirtyRegionOffset*(self: gen_qlistwidget_types.QListWidget): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQListWidget_protectedbase_dirtyRegionOffset(self.h), owned: true)
 
-proc startAutoScroll*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc startAutoScroll*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_startAutoScroll(self.h)
 
-proc stopAutoScroll*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc stopAutoScroll*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_stopAutoScroll(self.h)
 
-proc doAutoScroll*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc doAutoScroll*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_doAutoScroll(self.h)
 
-proc dropIndicatorPosition*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc dropIndicatorPosition*(self: gen_qlistwidget_types.QListWidget): cint =
   cint(fcQListWidget_protectedbase_dropIndicatorPosition(self.h))
 
 proc setViewportMargins*(self: gen_qlistwidget_types.QListWidget, left: cint, top: cint, right: cint, bottom: cint): void =
   fcQListWidget_protectedbase_setViewportMargins(self.h, left, top, right, bottom)
 
-proc viewportMargins*(self: gen_qlistwidget_types.QListWidget, ): gen_qmargins_types.QMargins =
+proc viewportMargins*(self: gen_qlistwidget_types.QListWidget): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQListWidget_protectedbase_viewportMargins(self.h), owned: true)
 
 proc drawFrame*(self: gen_qlistwidget_types.QListWidget, param1: gen_qpainter_types.QPainter): void =
@@ -3614,25 +3511,25 @@ proc drawFrame*(self: gen_qlistwidget_types.QListWidget, param1: gen_qpainter_ty
 proc initStyleOption*(self: gen_qlistwidget_types.QListWidget, option: gen_qstyleoption_types.QStyleOptionFrame): void =
   fcQListWidget_protectedbase_initStyleOption(self.h, option.h)
 
-proc updateMicroFocus*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc updateMicroFocus*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_updateMicroFocus(self.h)
 
-proc create*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc create*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_create(self.h)
 
-proc destroy*(self: gen_qlistwidget_types.QListWidget, ): void =
+proc destroy*(self: gen_qlistwidget_types.QListWidget): void =
   fcQListWidget_protectedbase_destroy(self.h)
 
-proc focusNextChild*(self: gen_qlistwidget_types.QListWidget, ): bool =
+proc focusNextChild*(self: gen_qlistwidget_types.QListWidget): bool =
   fcQListWidget_protectedbase_focusNextChild(self.h)
 
-proc focusPreviousChild*(self: gen_qlistwidget_types.QListWidget, ): bool =
+proc focusPreviousChild*(self: gen_qlistwidget_types.QListWidget): bool =
   fcQListWidget_protectedbase_focusPreviousChild(self.h)
 
-proc sender*(self: gen_qlistwidget_types.QListWidget, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qlistwidget_types.QListWidget): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQListWidget_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qlistwidget_types.QListWidget, ): cint =
+proc senderSignalIndex*(self: gen_qlistwidget_types.QListWidget): cint =
   fcQListWidget_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qlistwidget_types.QListWidget, signal: cstring): cint =
@@ -3646,612 +3543,513 @@ proc create*(T: type gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetVTable = nil): gen_qlistwidget_types.QListWidget =
   let vtbl = if vtbl == nil: new QListWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetVTable, _: ptr cQListWidget) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetVTable](fcQListWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQListWidget_metaObject
+    vtbl[].vtbl.metaObject = cQListWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQListWidget_metacast
+    vtbl[].vtbl.metacast = cQListWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQListWidget_metacall
+    vtbl[].vtbl.metacall = cQListWidget_vtable_callback_metacall
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQListWidget_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = cQListWidget_vtable_callback_setSelectionModel
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQListWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQListWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQListWidget_event
+    vtbl[].vtbl.event = cQListWidget_vtable_callback_event
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQListWidget_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQListWidget_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQListWidget_mimeData
+    vtbl[].vtbl.mimeData = cQListWidget_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQListWidget_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQListWidget_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQListWidget_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQListWidget_vtable_callback_supportedDropActions
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = miqt_exec_callback_cQListWidget_visualRect
+    vtbl[].vtbl.visualRect = cQListWidget_vtable_callback_visualRect
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = miqt_exec_callback_cQListWidget_scrollTo
+    vtbl[].vtbl.scrollTo = cQListWidget_vtable_callback_scrollTo
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = miqt_exec_callback_cQListWidget_indexAt
+    vtbl[].vtbl.indexAt = cQListWidget_vtable_callback_indexAt
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQListWidget_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = cQListWidget_vtable_callback_doItemsLayout
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQListWidget_reset
+    vtbl[].vtbl.reset = cQListWidget_vtable_callback_reset
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQListWidget_setRootIndex
+    vtbl[].vtbl.setRootIndex = cQListWidget_vtable_callback_setRootIndex
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQListWidget_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = cQListWidget_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = miqt_exec_callback_cQListWidget_dataChanged
+    vtbl[].vtbl.dataChanged = cQListWidget_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQListWidget_rowsInserted
+    vtbl[].vtbl.rowsInserted = cQListWidget_vtable_callback_rowsInserted
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQListWidget_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = cQListWidget_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQListWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQListWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQListWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQListWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQListWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQListWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQListWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQListWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQListWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQListWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQListWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQListWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQListWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQListWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = miqt_exec_callback_cQListWidget_startDrag
+    vtbl[].vtbl.startDrag = cQListWidget_vtable_callback_startDrag
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = miqt_exec_callback_cQListWidget_viewOptions
+    vtbl[].vtbl.viewOptions = cQListWidget_vtable_callback_viewOptions
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQListWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQListWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQListWidget_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = cQListWidget_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQListWidget_verticalOffset
+    vtbl[].vtbl.verticalOffset = cQListWidget_vtable_callback_verticalOffset
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = miqt_exec_callback_cQListWidget_moveCursor
+    vtbl[].vtbl.moveCursor = cQListWidget_vtable_callback_moveCursor
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = miqt_exec_callback_cQListWidget_setSelection
+    vtbl[].vtbl.setSelection = cQListWidget_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQListWidget_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = cQListWidget_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQListWidget_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = cQListWidget_vtable_callback_selectedIndexes
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQListWidget_updateGeometries
+    vtbl[].vtbl.updateGeometries = cQListWidget_vtable_callback_updateGeometries
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQListWidget_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = cQListWidget_vtable_callback_isIndexHidden
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQListWidget_selectionChanged
+    vtbl[].vtbl.selectionChanged = cQListWidget_vtable_callback_selectionChanged
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = miqt_exec_callback_cQListWidget_currentChanged
+    vtbl[].vtbl.currentChanged = cQListWidget_vtable_callback_currentChanged
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQListWidget_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = cQListWidget_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQListWidget_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = cQListWidget_vtable_callback_keyboardSearch
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQListWidget_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = cQListWidget_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQListWidget_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = cQListWidget_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQListWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQListWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = miqt_exec_callback_cQListWidget_selectAll
+    vtbl[].vtbl.selectAll = cQListWidget_vtable_callback_selectAll
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQListWidget_updateEditorData
+    vtbl[].vtbl.updateEditorData = cQListWidget_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQListWidget_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = cQListWidget_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQListWidget_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = cQListWidget_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQListWidget_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = cQListWidget_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQListWidget_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = cQListWidget_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQListWidget_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = cQListWidget_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = miqt_exec_callback_cQListWidget_closeEditor
+    vtbl[].vtbl.closeEditor = cQListWidget_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = miqt_exec_callback_cQListWidget_commitData
+    vtbl[].vtbl.commitData = cQListWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQListWidget_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = cQListWidget_vtable_callback_editorDestroyed
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = miqt_exec_callback_cQListWidget_edit2
+    vtbl[].vtbl.edit2 = cQListWidget_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQListWidget_selectionCommand
+    vtbl[].vtbl.selectionCommand = cQListWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQListWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQListWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQListWidget_viewportEvent
+    vtbl[].vtbl.viewportEvent = cQListWidget_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQListWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQListWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQListWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQListWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQListWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQListWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQListWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQListWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQListWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQListWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQListWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQListWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQListWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQListWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQListWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQListWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQListWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQListWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQListWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQListWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = miqt_exec_callback_cQListWidget_setupViewport
+    vtbl[].vtbl.setupViewport = cQListWidget_vtable_callback_setupViewport
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQListWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQListWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQListWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQListWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQListWidget_devType
+    vtbl[].vtbl.devType = cQListWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQListWidget_setVisible
+    vtbl[].vtbl.setVisible = cQListWidget_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQListWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQListWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQListWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQListWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQListWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQListWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQListWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQListWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQListWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQListWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQListWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQListWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQListWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQListWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQListWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQListWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQListWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQListWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQListWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQListWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQListWidget_showEvent
+    vtbl[].vtbl.showEvent = cQListWidget_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQListWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQListWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQListWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQListWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQListWidget_metric
+    vtbl[].vtbl.metric = cQListWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQListWidget_initPainter
+    vtbl[].vtbl.initPainter = cQListWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQListWidget_redirected
+    vtbl[].vtbl.redirected = cQListWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQListWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQListWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQListWidget_childEvent
+    vtbl[].vtbl.childEvent = cQListWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQListWidget_customEvent
+    vtbl[].vtbl.customEvent = cQListWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQListWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQListWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQListWidget_disconnectNotify
-  gen_qlistwidget_types.QListWidget(h: fcQListWidget_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQListWidget_vtable_callback_disconnectNotify
+  gen_qlistwidget_types.QListWidget(h: fcQListWidget_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qlistwidget_types.QListWidget,
     vtbl: ref QListWidgetVTable = nil): gen_qlistwidget_types.QListWidget =
   let vtbl = if vtbl == nil: new QListWidgetVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetVTable, _: ptr cQListWidget) {.cdecl.} =
-    let vtbl = cast[ref QListWidgetVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QListWidgetVTable](fcQListWidget_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQListWidget_metaObject
+    vtbl[].vtbl.metaObject = cQListWidget_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQListWidget_metacast
+    vtbl[].vtbl.metacast = cQListWidget_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQListWidget_metacall
+    vtbl[].vtbl.metacall = cQListWidget_vtable_callback_metacall
   if not isNil(vtbl[].setSelectionModel):
-    vtbl[].vtbl.setSelectionModel = miqt_exec_callback_cQListWidget_setSelectionModel
+    vtbl[].vtbl.setSelectionModel = cQListWidget_vtable_callback_setSelectionModel
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQListWidget_dropEvent
+    vtbl[].vtbl.dropEvent = cQListWidget_vtable_callback_dropEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQListWidget_event
+    vtbl[].vtbl.event = cQListWidget_vtable_callback_event
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQListWidget_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQListWidget_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQListWidget_mimeData
+    vtbl[].vtbl.mimeData = cQListWidget_vtable_callback_mimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQListWidget_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQListWidget_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQListWidget_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQListWidget_vtable_callback_supportedDropActions
   if not isNil(vtbl[].visualRect):
-    vtbl[].vtbl.visualRect = miqt_exec_callback_cQListWidget_visualRect
+    vtbl[].vtbl.visualRect = cQListWidget_vtable_callback_visualRect
   if not isNil(vtbl[].scrollTo):
-    vtbl[].vtbl.scrollTo = miqt_exec_callback_cQListWidget_scrollTo
+    vtbl[].vtbl.scrollTo = cQListWidget_vtable_callback_scrollTo
   if not isNil(vtbl[].indexAt):
-    vtbl[].vtbl.indexAt = miqt_exec_callback_cQListWidget_indexAt
+    vtbl[].vtbl.indexAt = cQListWidget_vtable_callback_indexAt
   if not isNil(vtbl[].doItemsLayout):
-    vtbl[].vtbl.doItemsLayout = miqt_exec_callback_cQListWidget_doItemsLayout
+    vtbl[].vtbl.doItemsLayout = cQListWidget_vtable_callback_doItemsLayout
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQListWidget_reset
+    vtbl[].vtbl.reset = cQListWidget_vtable_callback_reset
   if not isNil(vtbl[].setRootIndex):
-    vtbl[].vtbl.setRootIndex = miqt_exec_callback_cQListWidget_setRootIndex
+    vtbl[].vtbl.setRootIndex = cQListWidget_vtable_callback_setRootIndex
   if not isNil(vtbl[].scrollContentsBy):
-    vtbl[].vtbl.scrollContentsBy = miqt_exec_callback_cQListWidget_scrollContentsBy
+    vtbl[].vtbl.scrollContentsBy = cQListWidget_vtable_callback_scrollContentsBy
   if not isNil(vtbl[].dataChanged):
-    vtbl[].vtbl.dataChanged = miqt_exec_callback_cQListWidget_dataChanged
+    vtbl[].vtbl.dataChanged = cQListWidget_vtable_callback_dataChanged
   if not isNil(vtbl[].rowsInserted):
-    vtbl[].vtbl.rowsInserted = miqt_exec_callback_cQListWidget_rowsInserted
+    vtbl[].vtbl.rowsInserted = cQListWidget_vtable_callback_rowsInserted
   if not isNil(vtbl[].rowsAboutToBeRemoved):
-    vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_callback_cQListWidget_rowsAboutToBeRemoved
+    vtbl[].vtbl.rowsAboutToBeRemoved = cQListWidget_vtable_callback_rowsAboutToBeRemoved
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQListWidget_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQListWidget_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQListWidget_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQListWidget_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQListWidget_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQListWidget_vtable_callback_wheelEvent
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQListWidget_timerEvent
+    vtbl[].vtbl.timerEvent = cQListWidget_vtable_callback_timerEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQListWidget_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQListWidget_vtable_callback_resizeEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQListWidget_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQListWidget_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQListWidget_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQListWidget_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].startDrag):
-    vtbl[].vtbl.startDrag = miqt_exec_callback_cQListWidget_startDrag
+    vtbl[].vtbl.startDrag = cQListWidget_vtable_callback_startDrag
   if not isNil(vtbl[].viewOptions):
-    vtbl[].vtbl.viewOptions = miqt_exec_callback_cQListWidget_viewOptions
+    vtbl[].vtbl.viewOptions = cQListWidget_vtable_callback_viewOptions
   if not isNil(vtbl[].paintEvent):
-    vtbl[].vtbl.paintEvent = miqt_exec_callback_cQListWidget_paintEvent
+    vtbl[].vtbl.paintEvent = cQListWidget_vtable_callback_paintEvent
   if not isNil(vtbl[].horizontalOffset):
-    vtbl[].vtbl.horizontalOffset = miqt_exec_callback_cQListWidget_horizontalOffset
+    vtbl[].vtbl.horizontalOffset = cQListWidget_vtable_callback_horizontalOffset
   if not isNil(vtbl[].verticalOffset):
-    vtbl[].vtbl.verticalOffset = miqt_exec_callback_cQListWidget_verticalOffset
+    vtbl[].vtbl.verticalOffset = cQListWidget_vtable_callback_verticalOffset
   if not isNil(vtbl[].moveCursor):
-    vtbl[].vtbl.moveCursor = miqt_exec_callback_cQListWidget_moveCursor
+    vtbl[].vtbl.moveCursor = cQListWidget_vtable_callback_moveCursor
   if not isNil(vtbl[].setSelection):
-    vtbl[].vtbl.setSelection = miqt_exec_callback_cQListWidget_setSelection
+    vtbl[].vtbl.setSelection = cQListWidget_vtable_callback_setSelection
   if not isNil(vtbl[].visualRegionForSelection):
-    vtbl[].vtbl.visualRegionForSelection = miqt_exec_callback_cQListWidget_visualRegionForSelection
+    vtbl[].vtbl.visualRegionForSelection = cQListWidget_vtable_callback_visualRegionForSelection
   if not isNil(vtbl[].selectedIndexes):
-    vtbl[].vtbl.selectedIndexes = miqt_exec_callback_cQListWidget_selectedIndexes
+    vtbl[].vtbl.selectedIndexes = cQListWidget_vtable_callback_selectedIndexes
   if not isNil(vtbl[].updateGeometries):
-    vtbl[].vtbl.updateGeometries = miqt_exec_callback_cQListWidget_updateGeometries
+    vtbl[].vtbl.updateGeometries = cQListWidget_vtable_callback_updateGeometries
   if not isNil(vtbl[].isIndexHidden):
-    vtbl[].vtbl.isIndexHidden = miqt_exec_callback_cQListWidget_isIndexHidden
+    vtbl[].vtbl.isIndexHidden = cQListWidget_vtable_callback_isIndexHidden
   if not isNil(vtbl[].selectionChanged):
-    vtbl[].vtbl.selectionChanged = miqt_exec_callback_cQListWidget_selectionChanged
+    vtbl[].vtbl.selectionChanged = cQListWidget_vtable_callback_selectionChanged
   if not isNil(vtbl[].currentChanged):
-    vtbl[].vtbl.currentChanged = miqt_exec_callback_cQListWidget_currentChanged
+    vtbl[].vtbl.currentChanged = cQListWidget_vtable_callback_currentChanged
   if not isNil(vtbl[].viewportSizeHint):
-    vtbl[].vtbl.viewportSizeHint = miqt_exec_callback_cQListWidget_viewportSizeHint
+    vtbl[].vtbl.viewportSizeHint = cQListWidget_vtable_callback_viewportSizeHint
   if not isNil(vtbl[].keyboardSearch):
-    vtbl[].vtbl.keyboardSearch = miqt_exec_callback_cQListWidget_keyboardSearch
+    vtbl[].vtbl.keyboardSearch = cQListWidget_vtable_callback_keyboardSearch
   if not isNil(vtbl[].sizeHintForRow):
-    vtbl[].vtbl.sizeHintForRow = miqt_exec_callback_cQListWidget_sizeHintForRow
+    vtbl[].vtbl.sizeHintForRow = cQListWidget_vtable_callback_sizeHintForRow
   if not isNil(vtbl[].sizeHintForColumn):
-    vtbl[].vtbl.sizeHintForColumn = miqt_exec_callback_cQListWidget_sizeHintForColumn
+    vtbl[].vtbl.sizeHintForColumn = cQListWidget_vtable_callback_sizeHintForColumn
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQListWidget_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQListWidget_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].selectAll):
-    vtbl[].vtbl.selectAll = miqt_exec_callback_cQListWidget_selectAll
+    vtbl[].vtbl.selectAll = cQListWidget_vtable_callback_selectAll
   if not isNil(vtbl[].updateEditorData):
-    vtbl[].vtbl.updateEditorData = miqt_exec_callback_cQListWidget_updateEditorData
+    vtbl[].vtbl.updateEditorData = cQListWidget_vtable_callback_updateEditorData
   if not isNil(vtbl[].updateEditorGeometries):
-    vtbl[].vtbl.updateEditorGeometries = miqt_exec_callback_cQListWidget_updateEditorGeometries
+    vtbl[].vtbl.updateEditorGeometries = cQListWidget_vtable_callback_updateEditorGeometries
   if not isNil(vtbl[].verticalScrollbarAction):
-    vtbl[].vtbl.verticalScrollbarAction = miqt_exec_callback_cQListWidget_verticalScrollbarAction
+    vtbl[].vtbl.verticalScrollbarAction = cQListWidget_vtable_callback_verticalScrollbarAction
   if not isNil(vtbl[].horizontalScrollbarAction):
-    vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_callback_cQListWidget_horizontalScrollbarAction
+    vtbl[].vtbl.horizontalScrollbarAction = cQListWidget_vtable_callback_horizontalScrollbarAction
   if not isNil(vtbl[].verticalScrollbarValueChanged):
-    vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_callback_cQListWidget_verticalScrollbarValueChanged
+    vtbl[].vtbl.verticalScrollbarValueChanged = cQListWidget_vtable_callback_verticalScrollbarValueChanged
   if not isNil(vtbl[].horizontalScrollbarValueChanged):
-    vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_callback_cQListWidget_horizontalScrollbarValueChanged
+    vtbl[].vtbl.horizontalScrollbarValueChanged = cQListWidget_vtable_callback_horizontalScrollbarValueChanged
   if not isNil(vtbl[].closeEditor):
-    vtbl[].vtbl.closeEditor = miqt_exec_callback_cQListWidget_closeEditor
+    vtbl[].vtbl.closeEditor = cQListWidget_vtable_callback_closeEditor
   if not isNil(vtbl[].commitData):
-    vtbl[].vtbl.commitData = miqt_exec_callback_cQListWidget_commitData
+    vtbl[].vtbl.commitData = cQListWidget_vtable_callback_commitData
   if not isNil(vtbl[].editorDestroyed):
-    vtbl[].vtbl.editorDestroyed = miqt_exec_callback_cQListWidget_editorDestroyed
+    vtbl[].vtbl.editorDestroyed = cQListWidget_vtable_callback_editorDestroyed
   if not isNil(vtbl[].edit2):
-    vtbl[].vtbl.edit2 = miqt_exec_callback_cQListWidget_edit2
+    vtbl[].vtbl.edit2 = cQListWidget_vtable_callback_edit2
   if not isNil(vtbl[].selectionCommand):
-    vtbl[].vtbl.selectionCommand = miqt_exec_callback_cQListWidget_selectionCommand
+    vtbl[].vtbl.selectionCommand = cQListWidget_vtable_callback_selectionCommand
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQListWidget_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQListWidget_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].viewportEvent):
-    vtbl[].vtbl.viewportEvent = miqt_exec_callback_cQListWidget_viewportEvent
+    vtbl[].vtbl.viewportEvent = cQListWidget_vtable_callback_viewportEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQListWidget_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQListWidget_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQListWidget_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQListWidget_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQListWidget_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQListWidget_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQListWidget_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQListWidget_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQListWidget_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQListWidget_vtable_callback_focusOutEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQListWidget_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQListWidget_vtable_callback_keyPressEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQListWidget_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQListWidget_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQListWidget_eventFilter
+    vtbl[].vtbl.eventFilter = cQListWidget_vtable_callback_eventFilter
   if not isNil(vtbl[].minimumSizeHint):
-    vtbl[].vtbl.minimumSizeHint = miqt_exec_callback_cQListWidget_minimumSizeHint
+    vtbl[].vtbl.minimumSizeHint = cQListWidget_vtable_callback_minimumSizeHint
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQListWidget_sizeHint
+    vtbl[].vtbl.sizeHint = cQListWidget_vtable_callback_sizeHint
   if not isNil(vtbl[].setupViewport):
-    vtbl[].vtbl.setupViewport = miqt_exec_callback_cQListWidget_setupViewport
+    vtbl[].vtbl.setupViewport = cQListWidget_vtable_callback_setupViewport
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQListWidget_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQListWidget_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQListWidget_changeEvent
+    vtbl[].vtbl.changeEvent = cQListWidget_vtable_callback_changeEvent
   if not isNil(vtbl[].devType):
-    vtbl[].vtbl.devType = miqt_exec_callback_cQListWidget_devType
+    vtbl[].vtbl.devType = cQListWidget_vtable_callback_devType
   if not isNil(vtbl[].setVisible):
-    vtbl[].vtbl.setVisible = miqt_exec_callback_cQListWidget_setVisible
+    vtbl[].vtbl.setVisible = cQListWidget_vtable_callback_setVisible
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQListWidget_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQListWidget_vtable_callback_heightForWidth
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQListWidget_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQListWidget_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].paintEngine):
-    vtbl[].vtbl.paintEngine = miqt_exec_callback_cQListWidget_paintEngine
+    vtbl[].vtbl.paintEngine = cQListWidget_vtable_callback_paintEngine
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQListWidget_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQListWidget_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].enterEvent):
-    vtbl[].vtbl.enterEvent = miqt_exec_callback_cQListWidget_enterEvent
+    vtbl[].vtbl.enterEvent = cQListWidget_vtable_callback_enterEvent
   if not isNil(vtbl[].leaveEvent):
-    vtbl[].vtbl.leaveEvent = miqt_exec_callback_cQListWidget_leaveEvent
+    vtbl[].vtbl.leaveEvent = cQListWidget_vtable_callback_leaveEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQListWidget_moveEvent
+    vtbl[].vtbl.moveEvent = cQListWidget_vtable_callback_moveEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQListWidget_closeEvent
+    vtbl[].vtbl.closeEvent = cQListWidget_vtable_callback_closeEvent
   if not isNil(vtbl[].tabletEvent):
-    vtbl[].vtbl.tabletEvent = miqt_exec_callback_cQListWidget_tabletEvent
+    vtbl[].vtbl.tabletEvent = cQListWidget_vtable_callback_tabletEvent
   if not isNil(vtbl[].actionEvent):
-    vtbl[].vtbl.actionEvent = miqt_exec_callback_cQListWidget_actionEvent
+    vtbl[].vtbl.actionEvent = cQListWidget_vtable_callback_actionEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQListWidget_showEvent
+    vtbl[].vtbl.showEvent = cQListWidget_vtable_callback_showEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQListWidget_hideEvent
+    vtbl[].vtbl.hideEvent = cQListWidget_vtable_callback_hideEvent
   if not isNil(vtbl[].nativeEvent):
-    vtbl[].vtbl.nativeEvent = miqt_exec_callback_cQListWidget_nativeEvent
+    vtbl[].vtbl.nativeEvent = cQListWidget_vtable_callback_nativeEvent
   if not isNil(vtbl[].metric):
-    vtbl[].vtbl.metric = miqt_exec_callback_cQListWidget_metric
+    vtbl[].vtbl.metric = cQListWidget_vtable_callback_metric
   if not isNil(vtbl[].initPainter):
-    vtbl[].vtbl.initPainter = miqt_exec_callback_cQListWidget_initPainter
+    vtbl[].vtbl.initPainter = cQListWidget_vtable_callback_initPainter
   if not isNil(vtbl[].redirected):
-    vtbl[].vtbl.redirected = miqt_exec_callback_cQListWidget_redirected
+    vtbl[].vtbl.redirected = cQListWidget_vtable_callback_redirected
   if not isNil(vtbl[].sharedPainter):
-    vtbl[].vtbl.sharedPainter = miqt_exec_callback_cQListWidget_sharedPainter
+    vtbl[].vtbl.sharedPainter = cQListWidget_vtable_callback_sharedPainter
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQListWidget_childEvent
+    vtbl[].vtbl.childEvent = cQListWidget_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQListWidget_customEvent
+    vtbl[].vtbl.customEvent = cQListWidget_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQListWidget_connectNotify
+    vtbl[].vtbl.connectNotify = cQListWidget_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQListWidget_disconnectNotify
-  gen_qlistwidget_types.QListWidget(h: fcQListWidget_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQListWidget_vtable_callback_disconnectNotify
+  gen_qlistwidget_types.QListWidget(h: fcQListWidget_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQListWidget_mvtbl = cQListWidgetVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQListWidget()[])](self.fcQListWidget_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQListWidget_method_callback_metaObject,
+  metacast: cQListWidget_method_callback_metacast,
+  metacall: cQListWidget_method_callback_metacall,
+  setSelectionModel: cQListWidget_method_callback_setSelectionModel,
+  dropEvent: cQListWidget_method_callback_dropEvent,
+  event: cQListWidget_method_callback_event,
+  mimeTypes: cQListWidget_method_callback_mimeTypes,
+  mimeData: cQListWidget_method_callback_mimeData,
+  dropMimeData: cQListWidget_method_callback_dropMimeData,
+  supportedDropActions: cQListWidget_method_callback_supportedDropActions,
+  visualRect: cQListWidget_method_callback_visualRect,
+  scrollTo: cQListWidget_method_callback_scrollTo,
+  indexAt: cQListWidget_method_callback_indexAt,
+  doItemsLayout: cQListWidget_method_callback_doItemsLayout,
+  reset: cQListWidget_method_callback_reset,
+  setRootIndex: cQListWidget_method_callback_setRootIndex,
+  scrollContentsBy: cQListWidget_method_callback_scrollContentsBy,
+  dataChanged: cQListWidget_method_callback_dataChanged,
+  rowsInserted: cQListWidget_method_callback_rowsInserted,
+  rowsAboutToBeRemoved: cQListWidget_method_callback_rowsAboutToBeRemoved,
+  mouseMoveEvent: cQListWidget_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: cQListWidget_method_callback_mouseReleaseEvent,
+  wheelEvent: cQListWidget_method_callback_wheelEvent,
+  timerEvent: cQListWidget_method_callback_timerEvent,
+  resizeEvent: cQListWidget_method_callback_resizeEvent,
+  dragMoveEvent: cQListWidget_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQListWidget_method_callback_dragLeaveEvent,
+  startDrag: cQListWidget_method_callback_startDrag,
+  viewOptions: cQListWidget_method_callback_viewOptions,
+  paintEvent: cQListWidget_method_callback_paintEvent,
+  horizontalOffset: cQListWidget_method_callback_horizontalOffset,
+  verticalOffset: cQListWidget_method_callback_verticalOffset,
+  moveCursor: cQListWidget_method_callback_moveCursor,
+  setSelection: cQListWidget_method_callback_setSelection,
+  visualRegionForSelection: cQListWidget_method_callback_visualRegionForSelection,
+  selectedIndexes: cQListWidget_method_callback_selectedIndexes,
+  updateGeometries: cQListWidget_method_callback_updateGeometries,
+  isIndexHidden: cQListWidget_method_callback_isIndexHidden,
+  selectionChanged: cQListWidget_method_callback_selectionChanged,
+  currentChanged: cQListWidget_method_callback_currentChanged,
+  viewportSizeHint: cQListWidget_method_callback_viewportSizeHint,
+  keyboardSearch: cQListWidget_method_callback_keyboardSearch,
+  sizeHintForRow: cQListWidget_method_callback_sizeHintForRow,
+  sizeHintForColumn: cQListWidget_method_callback_sizeHintForColumn,
+  inputMethodQuery: cQListWidget_method_callback_inputMethodQuery,
+  selectAll: cQListWidget_method_callback_selectAll,
+  updateEditorData: cQListWidget_method_callback_updateEditorData,
+  updateEditorGeometries: cQListWidget_method_callback_updateEditorGeometries,
+  verticalScrollbarAction: cQListWidget_method_callback_verticalScrollbarAction,
+  horizontalScrollbarAction: cQListWidget_method_callback_horizontalScrollbarAction,
+  verticalScrollbarValueChanged: cQListWidget_method_callback_verticalScrollbarValueChanged,
+  horizontalScrollbarValueChanged: cQListWidget_method_callback_horizontalScrollbarValueChanged,
+  closeEditor: cQListWidget_method_callback_closeEditor,
+  commitData: cQListWidget_method_callback_commitData,
+  editorDestroyed: cQListWidget_method_callback_editorDestroyed,
+  edit2: cQListWidget_method_callback_edit2,
+  selectionCommand: cQListWidget_method_callback_selectionCommand,
+  focusNextPrevChild: cQListWidget_method_callback_focusNextPrevChild,
+  viewportEvent: cQListWidget_method_callback_viewportEvent,
+  mousePressEvent: cQListWidget_method_callback_mousePressEvent,
+  mouseDoubleClickEvent: cQListWidget_method_callback_mouseDoubleClickEvent,
+  dragEnterEvent: cQListWidget_method_callback_dragEnterEvent,
+  focusInEvent: cQListWidget_method_callback_focusInEvent,
+  focusOutEvent: cQListWidget_method_callback_focusOutEvent,
+  keyPressEvent: cQListWidget_method_callback_keyPressEvent,
+  inputMethodEvent: cQListWidget_method_callback_inputMethodEvent,
+  eventFilter: cQListWidget_method_callback_eventFilter,
+  minimumSizeHint: cQListWidget_method_callback_minimumSizeHint,
+  sizeHint: cQListWidget_method_callback_sizeHint,
+  setupViewport: cQListWidget_method_callback_setupViewport,
+  contextMenuEvent: cQListWidget_method_callback_contextMenuEvent,
+  changeEvent: cQListWidget_method_callback_changeEvent,
+  devType: cQListWidget_method_callback_devType,
+  setVisible: cQListWidget_method_callback_setVisible,
+  heightForWidth: cQListWidget_method_callback_heightForWidth,
+  hasHeightForWidth: cQListWidget_method_callback_hasHeightForWidth,
+  paintEngine: cQListWidget_method_callback_paintEngine,
+  keyReleaseEvent: cQListWidget_method_callback_keyReleaseEvent,
+  enterEvent: cQListWidget_method_callback_enterEvent,
+  leaveEvent: cQListWidget_method_callback_leaveEvent,
+  moveEvent: cQListWidget_method_callback_moveEvent,
+  closeEvent: cQListWidget_method_callback_closeEvent,
+  tabletEvent: cQListWidget_method_callback_tabletEvent,
+  actionEvent: cQListWidget_method_callback_actionEvent,
+  showEvent: cQListWidget_method_callback_showEvent,
+  hideEvent: cQListWidget_method_callback_hideEvent,
+  nativeEvent: cQListWidget_method_callback_nativeEvent,
+  metric: cQListWidget_method_callback_metric,
+  initPainter: cQListWidget_method_callback_initPainter,
+  redirected: cQListWidget_method_callback_redirected,
+  sharedPainter: cQListWidget_method_callback_sharedPainter,
+  childEvent: cQListWidget_method_callback_childEvent,
+  customEvent: cQListWidget_method_callback_customEvent,
+  connectNotify: cQListWidget_method_callback_connectNotify,
+  disconnectNotify: cQListWidget_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qlistwidget_types.QListWidget,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQListWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetVTable, _: ptr cQListWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQListWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQListWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQListWidget_metacall
-  vtbl[].vtbl.setSelectionModel = miqt_exec_method_cQListWidget_setSelectionModel
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQListWidget_dropEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQListWidget_event
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQListWidget_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQListWidget_mimeData
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQListWidget_dropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQListWidget_supportedDropActions
-  vtbl[].vtbl.visualRect = miqt_exec_method_cQListWidget_visualRect
-  vtbl[].vtbl.scrollTo = miqt_exec_method_cQListWidget_scrollTo
-  vtbl[].vtbl.indexAt = miqt_exec_method_cQListWidget_indexAt
-  vtbl[].vtbl.doItemsLayout = miqt_exec_method_cQListWidget_doItemsLayout
-  vtbl[].vtbl.reset = miqt_exec_method_cQListWidget_reset
-  vtbl[].vtbl.setRootIndex = miqt_exec_method_cQListWidget_setRootIndex
-  vtbl[].vtbl.scrollContentsBy = miqt_exec_method_cQListWidget_scrollContentsBy
-  vtbl[].vtbl.dataChanged = miqt_exec_method_cQListWidget_dataChanged
-  vtbl[].vtbl.rowsInserted = miqt_exec_method_cQListWidget_rowsInserted
-  vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_method_cQListWidget_rowsAboutToBeRemoved
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQListWidget_mouseMoveEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQListWidget_mouseReleaseEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQListWidget_wheelEvent
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQListWidget_timerEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQListWidget_resizeEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQListWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQListWidget_dragLeaveEvent
-  vtbl[].vtbl.startDrag = miqt_exec_method_cQListWidget_startDrag
-  vtbl[].vtbl.viewOptions = miqt_exec_method_cQListWidget_viewOptions
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQListWidget_paintEvent
-  vtbl[].vtbl.horizontalOffset = miqt_exec_method_cQListWidget_horizontalOffset
-  vtbl[].vtbl.verticalOffset = miqt_exec_method_cQListWidget_verticalOffset
-  vtbl[].vtbl.moveCursor = miqt_exec_method_cQListWidget_moveCursor
-  vtbl[].vtbl.setSelection = miqt_exec_method_cQListWidget_setSelection
-  vtbl[].vtbl.visualRegionForSelection = miqt_exec_method_cQListWidget_visualRegionForSelection
-  vtbl[].vtbl.selectedIndexes = miqt_exec_method_cQListWidget_selectedIndexes
-  vtbl[].vtbl.updateGeometries = miqt_exec_method_cQListWidget_updateGeometries
-  vtbl[].vtbl.isIndexHidden = miqt_exec_method_cQListWidget_isIndexHidden
-  vtbl[].vtbl.selectionChanged = miqt_exec_method_cQListWidget_selectionChanged
-  vtbl[].vtbl.currentChanged = miqt_exec_method_cQListWidget_currentChanged
-  vtbl[].vtbl.viewportSizeHint = miqt_exec_method_cQListWidget_viewportSizeHint
-  vtbl[].vtbl.keyboardSearch = miqt_exec_method_cQListWidget_keyboardSearch
-  vtbl[].vtbl.sizeHintForRow = miqt_exec_method_cQListWidget_sizeHintForRow
-  vtbl[].vtbl.sizeHintForColumn = miqt_exec_method_cQListWidget_sizeHintForColumn
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQListWidget_inputMethodQuery
-  vtbl[].vtbl.selectAll = miqt_exec_method_cQListWidget_selectAll
-  vtbl[].vtbl.updateEditorData = miqt_exec_method_cQListWidget_updateEditorData
-  vtbl[].vtbl.updateEditorGeometries = miqt_exec_method_cQListWidget_updateEditorGeometries
-  vtbl[].vtbl.verticalScrollbarAction = miqt_exec_method_cQListWidget_verticalScrollbarAction
-  vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_method_cQListWidget_horizontalScrollbarAction
-  vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_method_cQListWidget_verticalScrollbarValueChanged
-  vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_method_cQListWidget_horizontalScrollbarValueChanged
-  vtbl[].vtbl.closeEditor = miqt_exec_method_cQListWidget_closeEditor
-  vtbl[].vtbl.commitData = miqt_exec_method_cQListWidget_commitData
-  vtbl[].vtbl.editorDestroyed = miqt_exec_method_cQListWidget_editorDestroyed
-  vtbl[].vtbl.edit = miqt_exec_method_cQListWidget_edit2
-  vtbl[].vtbl.selectionCommand = miqt_exec_method_cQListWidget_selectionCommand
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQListWidget_focusNextPrevChild
-  vtbl[].vtbl.viewportEvent = miqt_exec_method_cQListWidget_viewportEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQListWidget_mousePressEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQListWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQListWidget_dragEnterEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQListWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQListWidget_focusOutEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQListWidget_keyPressEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQListWidget_inputMethodEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQListWidget_eventFilter
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQListWidget_minimumSizeHint
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQListWidget_sizeHint
-  vtbl[].vtbl.setupViewport = miqt_exec_method_cQListWidget_setupViewport
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQListWidget_contextMenuEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQListWidget_changeEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQListWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQListWidget_setVisible
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQListWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQListWidget_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQListWidget_paintEngine
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQListWidget_keyReleaseEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQListWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQListWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQListWidget_moveEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQListWidget_closeEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQListWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQListWidget_actionEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQListWidget_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQListWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQListWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQListWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQListWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQListWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQListWidget_sharedPainter
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQListWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQListWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQListWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQListWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidget_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQListWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidget_new(addr(cQListWidget_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlistwidget_types.QListWidget,
-    vtbl: VirtualQListWidget) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQListWidgetVTable, _: ptr cQListWidget) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQListWidget()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQListWidget, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQListWidget_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQListWidget_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQListWidget_metacall
-  vtbl[].vtbl.setSelectionModel = miqt_exec_method_cQListWidget_setSelectionModel
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQListWidget_dropEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQListWidget_event
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQListWidget_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQListWidget_mimeData
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQListWidget_dropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQListWidget_supportedDropActions
-  vtbl[].vtbl.visualRect = miqt_exec_method_cQListWidget_visualRect
-  vtbl[].vtbl.scrollTo = miqt_exec_method_cQListWidget_scrollTo
-  vtbl[].vtbl.indexAt = miqt_exec_method_cQListWidget_indexAt
-  vtbl[].vtbl.doItemsLayout = miqt_exec_method_cQListWidget_doItemsLayout
-  vtbl[].vtbl.reset = miqt_exec_method_cQListWidget_reset
-  vtbl[].vtbl.setRootIndex = miqt_exec_method_cQListWidget_setRootIndex
-  vtbl[].vtbl.scrollContentsBy = miqt_exec_method_cQListWidget_scrollContentsBy
-  vtbl[].vtbl.dataChanged = miqt_exec_method_cQListWidget_dataChanged
-  vtbl[].vtbl.rowsInserted = miqt_exec_method_cQListWidget_rowsInserted
-  vtbl[].vtbl.rowsAboutToBeRemoved = miqt_exec_method_cQListWidget_rowsAboutToBeRemoved
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQListWidget_mouseMoveEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQListWidget_mouseReleaseEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQListWidget_wheelEvent
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQListWidget_timerEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQListWidget_resizeEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQListWidget_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQListWidget_dragLeaveEvent
-  vtbl[].vtbl.startDrag = miqt_exec_method_cQListWidget_startDrag
-  vtbl[].vtbl.viewOptions = miqt_exec_method_cQListWidget_viewOptions
-  vtbl[].vtbl.paintEvent = miqt_exec_method_cQListWidget_paintEvent
-  vtbl[].vtbl.horizontalOffset = miqt_exec_method_cQListWidget_horizontalOffset
-  vtbl[].vtbl.verticalOffset = miqt_exec_method_cQListWidget_verticalOffset
-  vtbl[].vtbl.moveCursor = miqt_exec_method_cQListWidget_moveCursor
-  vtbl[].vtbl.setSelection = miqt_exec_method_cQListWidget_setSelection
-  vtbl[].vtbl.visualRegionForSelection = miqt_exec_method_cQListWidget_visualRegionForSelection
-  vtbl[].vtbl.selectedIndexes = miqt_exec_method_cQListWidget_selectedIndexes
-  vtbl[].vtbl.updateGeometries = miqt_exec_method_cQListWidget_updateGeometries
-  vtbl[].vtbl.isIndexHidden = miqt_exec_method_cQListWidget_isIndexHidden
-  vtbl[].vtbl.selectionChanged = miqt_exec_method_cQListWidget_selectionChanged
-  vtbl[].vtbl.currentChanged = miqt_exec_method_cQListWidget_currentChanged
-  vtbl[].vtbl.viewportSizeHint = miqt_exec_method_cQListWidget_viewportSizeHint
-  vtbl[].vtbl.keyboardSearch = miqt_exec_method_cQListWidget_keyboardSearch
-  vtbl[].vtbl.sizeHintForRow = miqt_exec_method_cQListWidget_sizeHintForRow
-  vtbl[].vtbl.sizeHintForColumn = miqt_exec_method_cQListWidget_sizeHintForColumn
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQListWidget_inputMethodQuery
-  vtbl[].vtbl.selectAll = miqt_exec_method_cQListWidget_selectAll
-  vtbl[].vtbl.updateEditorData = miqt_exec_method_cQListWidget_updateEditorData
-  vtbl[].vtbl.updateEditorGeometries = miqt_exec_method_cQListWidget_updateEditorGeometries
-  vtbl[].vtbl.verticalScrollbarAction = miqt_exec_method_cQListWidget_verticalScrollbarAction
-  vtbl[].vtbl.horizontalScrollbarAction = miqt_exec_method_cQListWidget_horizontalScrollbarAction
-  vtbl[].vtbl.verticalScrollbarValueChanged = miqt_exec_method_cQListWidget_verticalScrollbarValueChanged
-  vtbl[].vtbl.horizontalScrollbarValueChanged = miqt_exec_method_cQListWidget_horizontalScrollbarValueChanged
-  vtbl[].vtbl.closeEditor = miqt_exec_method_cQListWidget_closeEditor
-  vtbl[].vtbl.commitData = miqt_exec_method_cQListWidget_commitData
-  vtbl[].vtbl.editorDestroyed = miqt_exec_method_cQListWidget_editorDestroyed
-  vtbl[].vtbl.edit = miqt_exec_method_cQListWidget_edit2
-  vtbl[].vtbl.selectionCommand = miqt_exec_method_cQListWidget_selectionCommand
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQListWidget_focusNextPrevChild
-  vtbl[].vtbl.viewportEvent = miqt_exec_method_cQListWidget_viewportEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQListWidget_mousePressEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQListWidget_mouseDoubleClickEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQListWidget_dragEnterEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQListWidget_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQListWidget_focusOutEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQListWidget_keyPressEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQListWidget_inputMethodEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQListWidget_eventFilter
-  vtbl[].vtbl.minimumSizeHint = miqt_exec_method_cQListWidget_minimumSizeHint
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQListWidget_sizeHint
-  vtbl[].vtbl.setupViewport = miqt_exec_method_cQListWidget_setupViewport
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQListWidget_contextMenuEvent
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQListWidget_changeEvent
-  vtbl[].vtbl.devType = miqt_exec_method_cQListWidget_devType
-  vtbl[].vtbl.setVisible = miqt_exec_method_cQListWidget_setVisible
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQListWidget_heightForWidth
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQListWidget_hasHeightForWidth
-  vtbl[].vtbl.paintEngine = miqt_exec_method_cQListWidget_paintEngine
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQListWidget_keyReleaseEvent
-  vtbl[].vtbl.enterEvent = miqt_exec_method_cQListWidget_enterEvent
-  vtbl[].vtbl.leaveEvent = miqt_exec_method_cQListWidget_leaveEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQListWidget_moveEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQListWidget_closeEvent
-  vtbl[].vtbl.tabletEvent = miqt_exec_method_cQListWidget_tabletEvent
-  vtbl[].vtbl.actionEvent = miqt_exec_method_cQListWidget_actionEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQListWidget_showEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQListWidget_hideEvent
-  vtbl[].vtbl.nativeEvent = miqt_exec_method_cQListWidget_nativeEvent
-  vtbl[].vtbl.metric = miqt_exec_method_cQListWidget_metric
-  vtbl[].vtbl.initPainter = miqt_exec_method_cQListWidget_initPainter
-  vtbl[].vtbl.redirected = miqt_exec_method_cQListWidget_redirected
-  vtbl[].vtbl.sharedPainter = miqt_exec_method_cQListWidget_sharedPainter
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQListWidget_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQListWidget_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQListWidget_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQListWidget_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQListWidget_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQListWidget) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQListWidget_new2(addr(cQListWidget_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlistwidget_types.QListWidget): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQListWidget_staticMetaObject())

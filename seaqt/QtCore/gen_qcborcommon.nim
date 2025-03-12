@@ -96,14 +96,14 @@ export
 
 type cQCborError*{.exportc: "QCborError", incompleteStruct.} = object
 
-proc fcQCborError_ToQCborError__Code(self: pointer, ): cint {.importc: "QCborError_ToQCborError__Code".}
-proc fcQCborError_toString(self: pointer, ): struct_miqt_string {.importc: "QCborError_toString".}
+proc fcQCborError_ToQCborError__Code(self: pointer): cint {.importc: "QCborError_ToQCborError__Code".}
+proc fcQCborError_toString(self: pointer): struct_miqt_string {.importc: "QCborError_toString".}
 proc fcQCborError_staticMetaObject(): pointer {.importc: "QCborError_staticMetaObject".}
 
-proc ToQCborError__Code*(self: gen_qcborcommon_types.QCborError, ): cint =
+proc ToQCborError__Code*(self: gen_qcborcommon_types.QCborError): cint =
   cint(fcQCborError_ToQCborError__Code(self.h))
 
-proc toString*(self: gen_qcborcommon_types.QCborError, ): string =
+proc toString*(self: gen_qcborcommon_types.QCborError): string =
   let v_ms = fcQCborError_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

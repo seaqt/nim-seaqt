@@ -23,6 +23,7 @@ typedef struct QIODevice QIODevice;
 #endif
 
 QCborStreamWriter* QCborStreamWriter_new(QIODevice* device);
+
 void QCborStreamWriter_setDevice(QCborStreamWriter* self, QIODevice* device);
 QIODevice* QCborStreamWriter_device(const QCborStreamWriter* self);
 void QCborStreamWriter_append(QCborStreamWriter* self, unsigned long long u);
@@ -49,6 +50,7 @@ void QCborStreamWriter_startMap(QCborStreamWriter* self);
 void QCborStreamWriter_startMapWithCount(QCborStreamWriter* self, unsigned long long count);
 bool QCborStreamWriter_endMap(QCborStreamWriter* self);
 void QCborStreamWriter_append22(QCborStreamWriter* self, const char* str, ptrdiff_t size);
+
 void QCborStreamWriter_delete(QCborStreamWriter* self);
 
 #ifdef __cplusplus

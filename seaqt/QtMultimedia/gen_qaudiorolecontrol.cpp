@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qaudiorolecontrol.h>
 #include "gen_qaudiorolecontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAudioRoleControl_virtbase(QAudioRoleControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -141,6 +132,7 @@ struct miqt_string QAudioRoleControl_trUtf83(const char* s, const char* c, int n
 }
 
 const QMetaObject* QAudioRoleControl_staticMetaObject() { return &QAudioRoleControl::staticMetaObject; }
+
 void QAudioRoleControl_delete(QAudioRoleControl* self) {
 	delete self;
 }

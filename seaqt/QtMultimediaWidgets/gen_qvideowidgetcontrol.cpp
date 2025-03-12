@@ -9,15 +9,6 @@
 #include <QWidget>
 #include <qvideowidgetcontrol.h>
 #include "gen_qvideowidgetcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QVideoWidgetControl_virtbase(QVideoWidgetControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -234,6 +225,7 @@ struct miqt_string QVideoWidgetControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QVideoWidgetControl_staticMetaObject() { return &QVideoWidgetControl::staticMetaObject; }
+
 void QVideoWidgetControl_delete(QVideoWidgetControl* self) {
 	delete self;
 }

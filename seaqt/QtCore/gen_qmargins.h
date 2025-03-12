@@ -25,6 +25,7 @@ typedef struct QMarginsF QMarginsF;
 QMargins* QMargins_new();
 QMargins* QMargins_new2(int left, int top, int right, int bottom);
 QMargins* QMargins_new3(QMargins* param1);
+
 bool QMargins_isNull(const QMargins* self);
 int QMargins_left(const QMargins* self);
 int QMargins_top(const QMargins* self);
@@ -42,12 +43,14 @@ QMargins* QMargins_operatorMultiplyAssign(QMargins* self, int param1);
 QMargins* QMargins_operatorDivideAssign(QMargins* self, int param1);
 QMargins* QMargins_operatorMultiplyAssignWithQreal(QMargins* self, double param1);
 QMargins* QMargins_operatorDivideAssignWithQreal(QMargins* self, double param1);
+
 void QMargins_delete(QMargins* self);
 
 QMarginsF* QMarginsF_new();
 QMarginsF* QMarginsF_new2(double left, double top, double right, double bottom);
 QMarginsF* QMarginsF_new3(QMargins* margins);
 QMarginsF* QMarginsF_new4(QMarginsF* param1);
+
 bool QMarginsF_isNull(const QMarginsF* self);
 double QMarginsF_left(const QMarginsF* self);
 double QMarginsF_top(const QMarginsF* self);
@@ -64,6 +67,7 @@ QMarginsF* QMarginsF_operatorMinusAssignWithSubtrahend(QMarginsF* self, double s
 QMarginsF* QMarginsF_operatorMultiplyAssign(QMarginsF* self, double factor);
 QMarginsF* QMarginsF_operatorDivideAssign(QMarginsF* self, double divisor);
 QMargins* QMarginsF_toMargins(const QMarginsF* self);
+
 void QMarginsF_delete(QMarginsF* self);
 
 #ifdef __cplusplus

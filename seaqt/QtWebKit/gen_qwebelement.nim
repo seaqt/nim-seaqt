@@ -57,15 +57,15 @@ type cQWebElementCollectioniterator*{.exportc: "QWebElementCollection__iterator"
 proc fcQWebElement_operatorAssign(self: pointer, param1: pointer): void {.importc: "QWebElement_operatorAssign".}
 proc fcQWebElement_operatorEqual(self: pointer, o: pointer): bool {.importc: "QWebElement_operatorEqual".}
 proc fcQWebElement_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QWebElement_operatorNotEqual".}
-proc fcQWebElement_isNull(self: pointer, ): bool {.importc: "QWebElement_isNull".}
+proc fcQWebElement_isNull(self: pointer): bool {.importc: "QWebElement_isNull".}
 proc fcQWebElement_findAll(self: pointer, selectorQuery: struct_miqt_string): pointer {.importc: "QWebElement_findAll".}
 proc fcQWebElement_findFirst(self: pointer, selectorQuery: struct_miqt_string): pointer {.importc: "QWebElement_findFirst".}
 proc fcQWebElement_setPlainText(self: pointer, text: struct_miqt_string): void {.importc: "QWebElement_setPlainText".}
-proc fcQWebElement_toPlainText(self: pointer, ): struct_miqt_string {.importc: "QWebElement_toPlainText".}
+proc fcQWebElement_toPlainText(self: pointer): struct_miqt_string {.importc: "QWebElement_toPlainText".}
 proc fcQWebElement_setOuterXml(self: pointer, markup: struct_miqt_string): void {.importc: "QWebElement_setOuterXml".}
-proc fcQWebElement_toOuterXml(self: pointer, ): struct_miqt_string {.importc: "QWebElement_toOuterXml".}
+proc fcQWebElement_toOuterXml(self: pointer): struct_miqt_string {.importc: "QWebElement_toOuterXml".}
 proc fcQWebElement_setInnerXml(self: pointer, markup: struct_miqt_string): void {.importc: "QWebElement_setInnerXml".}
-proc fcQWebElement_toInnerXml(self: pointer, ): struct_miqt_string {.importc: "QWebElement_toInnerXml".}
+proc fcQWebElement_toInnerXml(self: pointer): struct_miqt_string {.importc: "QWebElement_toInnerXml".}
 proc fcQWebElement_setAttribute(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebElement_setAttribute".}
 proc fcQWebElement_setAttributeNS(self: pointer, namespaceUri: struct_miqt_string, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebElement_setAttributeNS".}
 proc fcQWebElement_attribute(self: pointer, name: struct_miqt_string): struct_miqt_string {.importc: "QWebElement_attribute".}
@@ -74,26 +74,26 @@ proc fcQWebElement_hasAttribute(self: pointer, name: struct_miqt_string): bool {
 proc fcQWebElement_hasAttributeNS(self: pointer, namespaceUri: struct_miqt_string, name: struct_miqt_string): bool {.importc: "QWebElement_hasAttributeNS".}
 proc fcQWebElement_removeAttribute(self: pointer, name: struct_miqt_string): void {.importc: "QWebElement_removeAttribute".}
 proc fcQWebElement_removeAttributeNS(self: pointer, namespaceUri: struct_miqt_string, name: struct_miqt_string): void {.importc: "QWebElement_removeAttributeNS".}
-proc fcQWebElement_hasAttributes(self: pointer, ): bool {.importc: "QWebElement_hasAttributes".}
-proc fcQWebElement_attributeNames(self: pointer, ): struct_miqt_array {.importc: "QWebElement_attributeNames".}
-proc fcQWebElement_classes(self: pointer, ): struct_miqt_array {.importc: "QWebElement_classes".}
+proc fcQWebElement_hasAttributes(self: pointer): bool {.importc: "QWebElement_hasAttributes".}
+proc fcQWebElement_attributeNames(self: pointer): struct_miqt_array {.importc: "QWebElement_attributeNames".}
+proc fcQWebElement_classes(self: pointer): struct_miqt_array {.importc: "QWebElement_classes".}
 proc fcQWebElement_hasClass(self: pointer, name: struct_miqt_string): bool {.importc: "QWebElement_hasClass".}
 proc fcQWebElement_addClass(self: pointer, name: struct_miqt_string): void {.importc: "QWebElement_addClass".}
 proc fcQWebElement_removeClass(self: pointer, name: struct_miqt_string): void {.importc: "QWebElement_removeClass".}
 proc fcQWebElement_toggleClass(self: pointer, name: struct_miqt_string): void {.importc: "QWebElement_toggleClass".}
-proc fcQWebElement_hasFocus(self: pointer, ): bool {.importc: "QWebElement_hasFocus".}
-proc fcQWebElement_setFocus(self: pointer, ): void {.importc: "QWebElement_setFocus".}
-proc fcQWebElement_geometry(self: pointer, ): pointer {.importc: "QWebElement_geometry".}
-proc fcQWebElement_tagName(self: pointer, ): struct_miqt_string {.importc: "QWebElement_tagName".}
-proc fcQWebElement_prefix(self: pointer, ): struct_miqt_string {.importc: "QWebElement_prefix".}
-proc fcQWebElement_localName(self: pointer, ): struct_miqt_string {.importc: "QWebElement_localName".}
-proc fcQWebElement_namespaceUri(self: pointer, ): struct_miqt_string {.importc: "QWebElement_namespaceUri".}
-proc fcQWebElement_parent(self: pointer, ): pointer {.importc: "QWebElement_parent".}
-proc fcQWebElement_firstChild(self: pointer, ): pointer {.importc: "QWebElement_firstChild".}
-proc fcQWebElement_lastChild(self: pointer, ): pointer {.importc: "QWebElement_lastChild".}
-proc fcQWebElement_nextSibling(self: pointer, ): pointer {.importc: "QWebElement_nextSibling".}
-proc fcQWebElement_previousSibling(self: pointer, ): pointer {.importc: "QWebElement_previousSibling".}
-proc fcQWebElement_document(self: pointer, ): pointer {.importc: "QWebElement_document".}
+proc fcQWebElement_hasFocus(self: pointer): bool {.importc: "QWebElement_hasFocus".}
+proc fcQWebElement_setFocus(self: pointer): void {.importc: "QWebElement_setFocus".}
+proc fcQWebElement_geometry(self: pointer): pointer {.importc: "QWebElement_geometry".}
+proc fcQWebElement_tagName(self: pointer): struct_miqt_string {.importc: "QWebElement_tagName".}
+proc fcQWebElement_prefix(self: pointer): struct_miqt_string {.importc: "QWebElement_prefix".}
+proc fcQWebElement_localName(self: pointer): struct_miqt_string {.importc: "QWebElement_localName".}
+proc fcQWebElement_namespaceUri(self: pointer): struct_miqt_string {.importc: "QWebElement_namespaceUri".}
+proc fcQWebElement_parent(self: pointer): pointer {.importc: "QWebElement_parent".}
+proc fcQWebElement_firstChild(self: pointer): pointer {.importc: "QWebElement_firstChild".}
+proc fcQWebElement_lastChild(self: pointer): pointer {.importc: "QWebElement_lastChild".}
+proc fcQWebElement_nextSibling(self: pointer): pointer {.importc: "QWebElement_nextSibling".}
+proc fcQWebElement_previousSibling(self: pointer): pointer {.importc: "QWebElement_previousSibling".}
+proc fcQWebElement_document(self: pointer): pointer {.importc: "QWebElement_document".}
 proc fcQWebElement_appendInside(self: pointer, markup: struct_miqt_string): void {.importc: "QWebElement_appendInside".}
 proc fcQWebElement_appendInsideWithElement(self: pointer, element: pointer): void {.importc: "QWebElement_appendInsideWithElement".}
 proc fcQWebElement_prependInside(self: pointer, markup: struct_miqt_string): void {.importc: "QWebElement_prependInside".}
@@ -108,10 +108,10 @@ proc fcQWebElement_encloseWith(self: pointer, markup: struct_miqt_string): void 
 proc fcQWebElement_encloseWithWithElement(self: pointer, element: pointer): void {.importc: "QWebElement_encloseWithWithElement".}
 proc fcQWebElement_replace(self: pointer, markup: struct_miqt_string): void {.importc: "QWebElement_replace".}
 proc fcQWebElement_replaceWithElement(self: pointer, element: pointer): void {.importc: "QWebElement_replaceWithElement".}
-proc fcQWebElement_clone(self: pointer, ): pointer {.importc: "QWebElement_clone".}
-proc fcQWebElement_takeFromDocument(self: pointer, ): pointer {.importc: "QWebElement_takeFromDocument".}
-proc fcQWebElement_removeFromDocument(self: pointer, ): void {.importc: "QWebElement_removeFromDocument".}
-proc fcQWebElement_removeAllChildren(self: pointer, ): void {.importc: "QWebElement_removeAllChildren".}
+proc fcQWebElement_clone(self: pointer): pointer {.importc: "QWebElement_clone".}
+proc fcQWebElement_takeFromDocument(self: pointer): pointer {.importc: "QWebElement_takeFromDocument".}
+proc fcQWebElement_removeFromDocument(self: pointer): void {.importc: "QWebElement_removeFromDocument".}
+proc fcQWebElement_removeAllChildren(self: pointer): void {.importc: "QWebElement_removeAllChildren".}
 proc fcQWebElement_evaluateJavaScript(self: pointer, scriptSource: struct_miqt_string): pointer {.importc: "QWebElement_evaluateJavaScript".}
 proc fcQWebElement_styleProperty(self: pointer, name: struct_miqt_string, strategy: cint): struct_miqt_string {.importc: "QWebElement_styleProperty".}
 proc fcQWebElement_setStyleProperty(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebElement_setStyleProperty".}
@@ -126,31 +126,31 @@ proc fcQWebElementCollection_operatorAssign(self: pointer, param1: pointer): voi
 proc fcQWebElementCollection_operatorPlus(self: pointer, other: pointer): pointer {.importc: "QWebElementCollection_operatorPlus".}
 proc fcQWebElementCollection_operatorPlusAssign(self: pointer, other: pointer): pointer {.importc: "QWebElementCollection_operatorPlusAssign".}
 proc fcQWebElementCollection_append(self: pointer, collection: pointer): void {.importc: "QWebElementCollection_append".}
-proc fcQWebElementCollection_count(self: pointer, ): cint {.importc: "QWebElementCollection_count".}
+proc fcQWebElementCollection_count(self: pointer): cint {.importc: "QWebElementCollection_count".}
 proc fcQWebElementCollection_at(self: pointer, i: cint): pointer {.importc: "QWebElementCollection_at".}
 proc fcQWebElementCollection_operatorSubscript(self: pointer, i: cint): pointer {.importc: "QWebElementCollection_operatorSubscript".}
-proc fcQWebElementCollection_first(self: pointer, ): pointer {.importc: "QWebElementCollection_first".}
-proc fcQWebElementCollection_last(self: pointer, ): pointer {.importc: "QWebElementCollection_last".}
-proc fcQWebElementCollection_toList(self: pointer, ): struct_miqt_array {.importc: "QWebElementCollection_toList".}
-proc fcQWebElementCollection_begin(self: pointer, ): pointer {.importc: "QWebElementCollection_begin".}
-proc fcQWebElementCollection_endX(self: pointer, ): pointer {.importc: "QWebElementCollection_end".}
-proc fcQWebElementCollection_constBegin(self: pointer, ): pointer {.importc: "QWebElementCollection_constBegin".}
-proc fcQWebElementCollection_constEnd(self: pointer, ): pointer {.importc: "QWebElementCollection_constEnd".}
-proc fcQWebElementCollection_begin2(self: pointer, ): pointer {.importc: "QWebElementCollection_begin2".}
-proc fcQWebElementCollection_end2(self: pointer, ): pointer {.importc: "QWebElementCollection_end2".}
+proc fcQWebElementCollection_first(self: pointer): pointer {.importc: "QWebElementCollection_first".}
+proc fcQWebElementCollection_last(self: pointer): pointer {.importc: "QWebElementCollection_last".}
+proc fcQWebElementCollection_toList(self: pointer): struct_miqt_array {.importc: "QWebElementCollection_toList".}
+proc fcQWebElementCollection_begin(self: pointer): pointer {.importc: "QWebElementCollection_begin".}
+proc fcQWebElementCollection_endX(self: pointer): pointer {.importc: "QWebElementCollection_end".}
+proc fcQWebElementCollection_constBegin(self: pointer): pointer {.importc: "QWebElementCollection_constBegin".}
+proc fcQWebElementCollection_constEnd(self: pointer): pointer {.importc: "QWebElementCollection_constEnd".}
+proc fcQWebElementCollection_begin2(self: pointer): pointer {.importc: "QWebElementCollection_begin2".}
+proc fcQWebElementCollection_end2(self: pointer): pointer {.importc: "QWebElementCollection_end2".}
 proc fcQWebElementCollection_new(): ptr cQWebElementCollection {.importc: "QWebElementCollection_new".}
 proc fcQWebElementCollection_new2(contextElement: pointer, query: struct_miqt_string): ptr cQWebElementCollection {.importc: "QWebElementCollection_new2".}
 proc fcQWebElementCollection_new3(param1: pointer): ptr cQWebElementCollection {.importc: "QWebElementCollection_new3".}
-proc fcQWebElementCollectionconst_iterator_operatorMultiply(self: pointer, ): pointer {.importc: "QWebElementCollection__const_iterator_operatorMultiply".}
+proc fcQWebElementCollectionconst_iterator_operatorMultiply(self: pointer): pointer {.importc: "QWebElementCollection__const_iterator_operatorMultiply".}
 proc fcQWebElementCollectionconst_iterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorEqual".}
 proc fcQWebElementCollectionconst_iterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorNotEqual".}
 proc fcQWebElementCollectionconst_iterator_operatorLesser(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorLesser".}
 proc fcQWebElementCollectionconst_iterator_operatorLesserOrEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorLesserOrEqual".}
 proc fcQWebElementCollectionconst_iterator_operatorGreater(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorGreater".}
 proc fcQWebElementCollectionconst_iterator_operatorGreaterOrEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__const_iterator_operatorGreaterOrEqual".}
-proc fcQWebElementCollectionconst_iterator_operatorPlusPlus(self: pointer, ): pointer {.importc: "QWebElementCollection__const_iterator_operatorPlusPlus".}
+proc fcQWebElementCollectionconst_iterator_operatorPlusPlus(self: pointer): pointer {.importc: "QWebElementCollection__const_iterator_operatorPlusPlus".}
 proc fcQWebElementCollectionconst_iterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QWebElementCollection__const_iterator_operatorPlusPlusWithInt".}
-proc fcQWebElementCollectionconst_iterator_operatorMinusMinus(self: pointer, ): pointer {.importc: "QWebElementCollection__const_iterator_operatorMinusMinus".}
+proc fcQWebElementCollectionconst_iterator_operatorMinusMinus(self: pointer): pointer {.importc: "QWebElementCollection__const_iterator_operatorMinusMinus".}
 proc fcQWebElementCollectionconst_iterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QWebElementCollection__const_iterator_operatorMinusMinusWithInt".}
 proc fcQWebElementCollectionconst_iterator_operatorPlusAssign(self: pointer, j: cint): pointer {.importc: "QWebElementCollection__const_iterator_operatorPlusAssign".}
 proc fcQWebElementCollectionconst_iterator_operatorMinusAssign(self: pointer, j: cint): pointer {.importc: "QWebElementCollection__const_iterator_operatorMinusAssign".}
@@ -159,16 +159,16 @@ proc fcQWebElementCollectionconst_iterator_operatorMinus(self: pointer, j: cint)
 proc fcQWebElementCollectionconst_iterator_operatorMinusWithQWebElementCollectionconstIterator(self: pointer, j: pointer): cint {.importc: "QWebElementCollection__const_iterator_operatorMinusWithQWebElementCollectionconstIterator".}
 proc fcQWebElementCollectionconst_iterator_new(collection_x: pointer, index: cint): ptr cQWebElementCollectionconst_iterator {.importc: "QWebElementCollection__const_iterator_new".}
 proc fcQWebElementCollectionconst_iterator_new2(o: pointer): ptr cQWebElementCollectionconst_iterator {.importc: "QWebElementCollection__const_iterator_new2".}
-proc fcQWebElementCollectioniterator_operatorMultiply(self: pointer, ): pointer {.importc: "QWebElementCollection__iterator_operatorMultiply".}
+proc fcQWebElementCollectioniterator_operatorMultiply(self: pointer): pointer {.importc: "QWebElementCollection__iterator_operatorMultiply".}
 proc fcQWebElementCollectioniterator_operatorEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorEqual".}
 proc fcQWebElementCollectioniterator_operatorNotEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorNotEqual".}
 proc fcQWebElementCollectioniterator_operatorLesser(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorLesser".}
 proc fcQWebElementCollectioniterator_operatorLesserOrEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorLesserOrEqual".}
 proc fcQWebElementCollectioniterator_operatorGreater(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorGreater".}
 proc fcQWebElementCollectioniterator_operatorGreaterOrEqual(self: pointer, o: pointer): bool {.importc: "QWebElementCollection__iterator_operatorGreaterOrEqual".}
-proc fcQWebElementCollectioniterator_operatorPlusPlus(self: pointer, ): pointer {.importc: "QWebElementCollection__iterator_operatorPlusPlus".}
+proc fcQWebElementCollectioniterator_operatorPlusPlus(self: pointer): pointer {.importc: "QWebElementCollection__iterator_operatorPlusPlus".}
 proc fcQWebElementCollectioniterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QWebElementCollection__iterator_operatorPlusPlusWithInt".}
-proc fcQWebElementCollectioniterator_operatorMinusMinus(self: pointer, ): pointer {.importc: "QWebElementCollection__iterator_operatorMinusMinus".}
+proc fcQWebElementCollectioniterator_operatorMinusMinus(self: pointer): pointer {.importc: "QWebElementCollection__iterator_operatorMinusMinus".}
 proc fcQWebElementCollectioniterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QWebElementCollection__iterator_operatorMinusMinusWithInt".}
 proc fcQWebElementCollectioniterator_operatorPlusAssign(self: pointer, j: cint): pointer {.importc: "QWebElementCollection__iterator_operatorPlusAssign".}
 proc fcQWebElementCollectioniterator_operatorMinusAssign(self: pointer, j: cint): pointer {.importc: "QWebElementCollection__iterator_operatorMinusAssign".}
@@ -187,7 +187,7 @@ proc operatorEqual*(self: gen_qwebelement_types.QWebElement, o: gen_qwebelement_
 proc operatorNotEqual*(self: gen_qwebelement_types.QWebElement, o: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_operatorNotEqual(self.h, o.h)
 
-proc isNull*(self: gen_qwebelement_types.QWebElement, ): bool =
+proc isNull*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_isNull(self.h)
 
 proc findAll*(self: gen_qwebelement_types.QWebElement, selectorQuery: string): gen_qwebelement_types.QWebElementCollection =
@@ -199,7 +199,7 @@ proc findFirst*(self: gen_qwebelement_types.QWebElement, selectorQuery: string):
 proc setPlainText*(self: gen_qwebelement_types.QWebElement, text: string): void =
   fcQWebElement_setPlainText(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
-proc toPlainText*(self: gen_qwebelement_types.QWebElement, ): string =
+proc toPlainText*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toPlainText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -208,7 +208,7 @@ proc toPlainText*(self: gen_qwebelement_types.QWebElement, ): string =
 proc setOuterXml*(self: gen_qwebelement_types.QWebElement, markup: string): void =
   fcQWebElement_setOuterXml(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
 
-proc toOuterXml*(self: gen_qwebelement_types.QWebElement, ): string =
+proc toOuterXml*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toOuterXml(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -217,7 +217,7 @@ proc toOuterXml*(self: gen_qwebelement_types.QWebElement, ): string =
 proc setInnerXml*(self: gen_qwebelement_types.QWebElement, markup: string): void =
   fcQWebElement_setInnerXml(self.h, struct_miqt_string(data: markup, len: csize_t(len(markup))))
 
-proc toInnerXml*(self: gen_qwebelement_types.QWebElement, ): string =
+proc toInnerXml*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_toInnerXml(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -253,10 +253,10 @@ proc removeAttribute*(self: gen_qwebelement_types.QWebElement, name: string): vo
 proc removeAttributeNS*(self: gen_qwebelement_types.QWebElement, namespaceUri: string, name: string): void =
   fcQWebElement_removeAttributeNS(self.h, struct_miqt_string(data: namespaceUri, len: csize_t(len(namespaceUri))), struct_miqt_string(data: name, len: csize_t(len(name))))
 
-proc hasAttributes*(self: gen_qwebelement_types.QWebElement, ): bool =
+proc hasAttributes*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_hasAttributes(self.h)
 
-proc attributeNames*(self: gen_qwebelement_types.QWebElement, ): seq[string] =
+proc attributeNames*(self: gen_qwebelement_types.QWebElement): seq[string] =
   var v_ma = fcQWebElement_attributeNames(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -268,7 +268,7 @@ proc attributeNames*(self: gen_qwebelement_types.QWebElement, ): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc classes*(self: gen_qwebelement_types.QWebElement, ): seq[string] =
+proc classes*(self: gen_qwebelement_types.QWebElement): seq[string] =
   var v_ma = fcQWebElement_classes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -292,55 +292,55 @@ proc removeClass*(self: gen_qwebelement_types.QWebElement, name: string): void =
 proc toggleClass*(self: gen_qwebelement_types.QWebElement, name: string): void =
   fcQWebElement_toggleClass(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
-proc hasFocus*(self: gen_qwebelement_types.QWebElement, ): bool =
+proc hasFocus*(self: gen_qwebelement_types.QWebElement): bool =
   fcQWebElement_hasFocus(self.h)
 
-proc setFocus*(self: gen_qwebelement_types.QWebElement, ): void =
+proc setFocus*(self: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_setFocus(self.h)
 
-proc geometry*(self: gen_qwebelement_types.QWebElement, ): gen_qrect_types.QRect =
+proc geometry*(self: gen_qwebelement_types.QWebElement): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQWebElement_geometry(self.h), owned: true)
 
-proc tagName*(self: gen_qwebelement_types.QWebElement, ): string =
+proc tagName*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_tagName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc prefix*(self: gen_qwebelement_types.QWebElement, ): string =
+proc prefix*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_prefix(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc localName*(self: gen_qwebelement_types.QWebElement, ): string =
+proc localName*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_localName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc namespaceUri*(self: gen_qwebelement_types.QWebElement, ): string =
+proc namespaceUri*(self: gen_qwebelement_types.QWebElement): string =
   let v_ms = fcQWebElement_namespaceUri(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc parent*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc parent*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_parent(self.h), owned: true)
 
-proc firstChild*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc firstChild*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_firstChild(self.h), owned: true)
 
-proc lastChild*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc lastChild*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_lastChild(self.h), owned: true)
 
-proc nextSibling*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc nextSibling*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_nextSibling(self.h), owned: true)
 
-proc previousSibling*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc previousSibling*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_previousSibling(self.h), owned: true)
 
-proc document*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc document*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_document(self.h), owned: true)
 
 proc appendInside*(self: gen_qwebelement_types.QWebElement, markup: string): void =
@@ -385,16 +385,16 @@ proc replace*(self: gen_qwebelement_types.QWebElement, markup: string): void =
 proc replace*(self: gen_qwebelement_types.QWebElement, element: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_replaceWithElement(self.h, element.h)
 
-proc clone*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc clone*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_clone(self.h), owned: true)
 
-proc takeFromDocument*(self: gen_qwebelement_types.QWebElement, ): gen_qwebelement_types.QWebElement =
+proc takeFromDocument*(self: gen_qwebelement_types.QWebElement): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElement_takeFromDocument(self.h), owned: false)
 
-proc removeFromDocument*(self: gen_qwebelement_types.QWebElement, ): void =
+proc removeFromDocument*(self: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_removeFromDocument(self.h)
 
-proc removeAllChildren*(self: gen_qwebelement_types.QWebElement, ): void =
+proc removeAllChildren*(self: gen_qwebelement_types.QWebElement): void =
   fcQWebElement_removeAllChildren(self.h)
 
 proc evaluateJavaScript*(self: gen_qwebelement_types.QWebElement, scriptSource: string): gen_qvariant_types.QVariant =
@@ -458,7 +458,7 @@ proc operatorPlusAssign*(self: gen_qwebelement_types.QWebElementCollection, othe
 proc append*(self: gen_qwebelement_types.QWebElementCollection, collection: gen_qwebelement_types.QWebElementCollection): void =
   fcQWebElementCollection_append(self.h, collection.h)
 
-proc count*(self: gen_qwebelement_types.QWebElementCollection, ): cint =
+proc count*(self: gen_qwebelement_types.QWebElementCollection): cint =
   fcQWebElementCollection_count(self.h)
 
 proc at*(self: gen_qwebelement_types.QWebElementCollection, i: cint): gen_qwebelement_types.QWebElement =
@@ -467,13 +467,13 @@ proc at*(self: gen_qwebelement_types.QWebElementCollection, i: cint): gen_qwebel
 proc operatorSubscript*(self: gen_qwebelement_types.QWebElementCollection, i: cint): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElementCollection_operatorSubscript(self.h, i), owned: true)
 
-proc first*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElement =
+proc first*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElementCollection_first(self.h), owned: true)
 
-proc last*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElement =
+proc last*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElementCollection_last(self.h), owned: true)
 
-proc toList*(self: gen_qwebelement_types.QWebElementCollection, ): seq[gen_qwebelement_types.QWebElement] =
+proc toList*(self: gen_qwebelement_types.QWebElementCollection): seq[gen_qwebelement_types.QWebElement] =
   var v_ma = fcQWebElementCollection_toList(self.h)
   var vx_ret = newSeq[gen_qwebelement_types.QWebElement](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -482,22 +482,22 @@ proc toList*(self: gen_qwebelement_types.QWebElementCollection, ): seq[gen_qwebe
   c_free(v_ma.data)
   vx_ret
 
-proc begin*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc begin*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollection_begin(self.h), owned: true)
 
-proc endX*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc endX*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollection_endX(self.h), owned: true)
 
-proc constBegin*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc constBegin*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollection_constBegin(self.h), owned: true)
 
-proc constEnd*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc constEnd*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollection_constEnd(self.h), owned: true)
 
-proc begin2*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectioniterator =
+proc begin2*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectioniterator =
   gen_qwebelement_types.QWebElementCollectioniterator(h: fcQWebElementCollection_begin2(self.h), owned: true)
 
-proc endX2*(self: gen_qwebelement_types.QWebElementCollection, ): gen_qwebelement_types.QWebElementCollectioniterator =
+proc endX2*(self: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollectioniterator =
   gen_qwebelement_types.QWebElementCollectioniterator(h: fcQWebElementCollection_end2(self.h), owned: true)
 
 proc create*(T: type gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollection =
@@ -511,7 +511,7 @@ proc create*(T: type gen_qwebelement_types.QWebElementCollection,
     param1: gen_qwebelement_types.QWebElementCollection): gen_qwebelement_types.QWebElementCollection =
   gen_qwebelement_types.QWebElementCollection(h: fcQWebElementCollection_new3(param1.h), owned: true)
 
-proc operatorMultiply*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, ): gen_qwebelement_types.QWebElement =
+proc operatorMultiply*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElementCollectionconst_iterator_operatorMultiply(self.h), owned: true)
 
 proc operatorEqual*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, o: gen_qwebelement_types.QWebElementCollectionconst_iterator): bool =
@@ -532,13 +532,13 @@ proc operatorGreater*(self: gen_qwebelement_types.QWebElementCollectionconst_ite
 proc operatorGreaterOrEqual*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, o: gen_qwebelement_types.QWebElementCollectionconst_iterator): bool =
   fcQWebElementCollectionconst_iterator_operatorGreaterOrEqual(self.h, o.h)
 
-proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollectionconst_iterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, param1: cint): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollectionconst_iterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
-proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, ): gen_qwebelement_types.QWebElementCollectionconst_iterator =
+proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollectionconst_iterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectionconst_iterator, param1: cint): gen_qwebelement_types.QWebElementCollectionconst_iterator =
@@ -567,7 +567,7 @@ proc create*(T: type gen_qwebelement_types.QWebElementCollectionconst_iterator,
     o: gen_qwebelement_types.QWebElementCollectionconst_iterator): gen_qwebelement_types.QWebElementCollectionconst_iterator =
   gen_qwebelement_types.QWebElementCollectionconst_iterator(h: fcQWebElementCollectionconst_iterator_new2(o.h), owned: true)
 
-proc operatorMultiply*(self: gen_qwebelement_types.QWebElementCollectioniterator, ): gen_qwebelement_types.QWebElement =
+proc operatorMultiply*(self: gen_qwebelement_types.QWebElementCollectioniterator): gen_qwebelement_types.QWebElement =
   gen_qwebelement_types.QWebElement(h: fcQWebElementCollectioniterator_operatorMultiply(self.h), owned: true)
 
 proc operatorEqual*(self: gen_qwebelement_types.QWebElementCollectioniterator, o: gen_qwebelement_types.QWebElementCollectioniterator): bool =
@@ -588,13 +588,13 @@ proc operatorGreater*(self: gen_qwebelement_types.QWebElementCollectioniterator,
 proc operatorGreaterOrEqual*(self: gen_qwebelement_types.QWebElementCollectioniterator, o: gen_qwebelement_types.QWebElementCollectioniterator): bool =
   fcQWebElementCollectioniterator_operatorGreaterOrEqual(self.h, o.h)
 
-proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectioniterator, ): gen_qwebelement_types.QWebElementCollectioniterator =
+proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectioniterator): gen_qwebelement_types.QWebElementCollectioniterator =
   gen_qwebelement_types.QWebElementCollectioniterator(h: fcQWebElementCollectioniterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qwebelement_types.QWebElementCollectioniterator, param1: cint): gen_qwebelement_types.QWebElementCollectioniterator =
   gen_qwebelement_types.QWebElementCollectioniterator(h: fcQWebElementCollectioniterator_operatorPlusPlusWithInt(self.h, param1), owned: true)
 
-proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectioniterator, ): gen_qwebelement_types.QWebElementCollectioniterator =
+proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectioniterator): gen_qwebelement_types.QWebElementCollectioniterator =
   gen_qwebelement_types.QWebElementCollectioniterator(h: fcQWebElementCollectioniterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qwebelement_types.QWebElementCollectioniterator, param1: cint): gen_qwebelement_types.QWebElementCollectioniterator =

@@ -54,34 +54,36 @@ export
 
 type cQSignalTransition*{.exportc: "QSignalTransition", incompleteStruct.} = object
 
-proc fcQSignalTransition_metaObject(self: pointer, ): pointer {.importc: "QSignalTransition_metaObject".}
+proc fcQSignalTransition_metaObject(self: pointer): pointer {.importc: "QSignalTransition_metaObject".}
 proc fcQSignalTransition_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalTransition_metacast".}
 proc fcQSignalTransition_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalTransition_metacall".}
 proc fcQSignalTransition_tr(s: cstring): struct_miqt_string {.importc: "QSignalTransition_tr".}
 proc fcQSignalTransition_trUtf8(s: cstring): struct_miqt_string {.importc: "QSignalTransition_trUtf8".}
-proc fcQSignalTransition_senderObject(self: pointer, ): pointer {.importc: "QSignalTransition_senderObject".}
+proc fcQSignalTransition_senderObject(self: pointer): pointer {.importc: "QSignalTransition_senderObject".}
 proc fcQSignalTransition_setSenderObject(self: pointer, sender: pointer): void {.importc: "QSignalTransition_setSenderObject".}
-proc fcQSignalTransition_signal(self: pointer, ): struct_miqt_string {.importc: "QSignalTransition_signal".}
+proc fcQSignalTransition_signal(self: pointer): struct_miqt_string {.importc: "QSignalTransition_signal".}
 proc fcQSignalTransition_setSignal(self: pointer, signal: struct_miqt_string): void {.importc: "QSignalTransition_setSignal".}
 proc fcQSignalTransition_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSignalTransition_tr2".}
 proc fcQSignalTransition_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSignalTransition_tr3".}
 proc fcQSignalTransition_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSignalTransition_trUtf82".}
 proc fcQSignalTransition_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSignalTransition_trUtf83".}
+proc fcQSignalTransition_vtbl(self: pointer): pointer {.importc: "QSignalTransition_vtbl".}
+proc fcQSignalTransition_vdata(self: pointer): pointer {.importc: "QSignalTransition_vdata".}
 type cQSignalTransitionVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQSignalTransitionVTable, self: ptr cQSignalTransition) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  eventTest*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  onTransition*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQSignalTransition_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSignalTransition_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  eventTest*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  onTransition*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSignalTransition_virtualbase_metaObject(self: pointer): pointer {.importc: "QSignalTransition_virtualbase_metaObject".}
 proc fcQSignalTransition_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSignalTransition_virtualbase_metacast".}
 proc fcQSignalTransition_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSignalTransition_virtualbase_metacall".}
 proc fcQSignalTransition_virtualbase_eventTest(self: pointer, event: pointer): bool {.importc: "QSignalTransition_virtualbase_eventTest".}
@@ -93,17 +95,17 @@ proc fcQSignalTransition_virtualbase_childEvent(self: pointer, event: pointer): 
 proc fcQSignalTransition_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QSignalTransition_virtualbase_customEvent".}
 proc fcQSignalTransition_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QSignalTransition_virtualbase_connectNotify".}
 proc fcQSignalTransition_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSignalTransition_virtualbase_disconnectNotify".}
-proc fcQSignalTransition_protectedbase_sender(self: pointer, ): pointer {.importc: "QSignalTransition_protectedbase_sender".}
-proc fcQSignalTransition_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSignalTransition_protectedbase_senderSignalIndex".}
+proc fcQSignalTransition_protectedbase_sender(self: pointer): pointer {.importc: "QSignalTransition_protectedbase_sender".}
+proc fcQSignalTransition_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSignalTransition_protectedbase_senderSignalIndex".}
 proc fcQSignalTransition_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSignalTransition_protectedbase_receivers".}
 proc fcQSignalTransition_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSignalTransition_protectedbase_isSignalConnected".}
-proc fcQSignalTransition_new(vtbl: pointer, ): ptr cQSignalTransition {.importc: "QSignalTransition_new".}
-proc fcQSignalTransition_new2(vtbl: pointer, sender: pointer, signal: cstring): ptr cQSignalTransition {.importc: "QSignalTransition_new2".}
-proc fcQSignalTransition_new3(vtbl: pointer, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new3".}
-proc fcQSignalTransition_new4(vtbl: pointer, sender: pointer, signal: cstring, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new4".}
+proc fcQSignalTransition_new(vtbl, vdata: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new".}
+proc fcQSignalTransition_new2(vtbl, vdata: pointer, sender: pointer, signal: cstring): ptr cQSignalTransition {.importc: "QSignalTransition_new2".}
+proc fcQSignalTransition_new3(vtbl, vdata: pointer, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new3".}
+proc fcQSignalTransition_new4(vtbl, vdata: pointer, sender: pointer, signal: cstring, sourceState: pointer): ptr cQSignalTransition {.importc: "QSignalTransition_new4".}
 proc fcQSignalTransition_staticMetaObject(): pointer {.importc: "QSignalTransition_staticMetaObject".}
 
-proc metaObject*(self: gen_qsignaltransition_types.QSignalTransition, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsignaltransition_types.QSignalTransition, param1: cstring): pointer =
@@ -124,13 +126,13 @@ proc trUtf8*(_: type gen_qsignaltransition_types.QSignalTransition, s: cstring):
   c_free(v_ms.data)
   vx_ret
 
-proc senderObject*(self: gen_qsignaltransition_types.QSignalTransition, ): gen_qobject_types.QObject =
+proc senderObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSignalTransition_senderObject(self.h), owned: false)
 
 proc setSenderObject*(self: gen_qsignaltransition_types.QSignalTransition, sender: gen_qobject_types.QObject): void =
   fcQSignalTransition_setSenderObject(self.h, sender.h)
 
-proc signal*(self: gen_qsignaltransition_types.QSignalTransition, ): seq[byte] =
+proc signal*(self: gen_qsignaltransition_types.QSignalTransition): seq[byte] =
   var v_bytearray = fcQSignalTransition_signal(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -189,11 +191,11 @@ type QSignalTransitionVTable* {.inheritable, pure.} = object
   customEvent*: QSignalTransitioncustomEventProc
   connectNotify*: QSignalTransitionconnectNotifyProc
   disconnectNotify*: QSignalTransitiondisconnectNotifyProc
-proc QSignalTransitionmetaObject*(self: gen_qsignaltransition_types.QSignalTransition, ): gen_qobjectdefs_types.QMetaObject =
+proc QSignalTransitionmetaObject*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQSignalTransition_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -204,8 +206,8 @@ proc miqt_exec_callback_cQSignalTransition_metaObject(vtbl: pointer, self: point
 proc QSignalTransitionmetacast*(self: gen_qsignaltransition_types.QSignalTransition, param1: cstring): pointer =
   fcQSignalTransition_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQSignalTransition_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -214,8 +216,8 @@ proc miqt_exec_callback_cQSignalTransition_metacast(vtbl: pointer, self: pointer
 proc QSignalTransitionmetacall*(self: gen_qsignaltransition_types.QSignalTransition, param1: cint, param2: cint, param3: pointer): cint =
   fcQSignalTransition_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQSignalTransition_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -226,8 +228,8 @@ proc miqt_exec_callback_cQSignalTransition_metacall(vtbl: pointer, self: pointer
 proc QSignalTransitioneventTest*(self: gen_qsignaltransition_types.QSignalTransition, event: gen_qcoreevent_types.QEvent): bool =
   fcQSignalTransition_virtualbase_eventTest(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_eventTest(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].eventTest(self, slotval1)
@@ -236,8 +238,8 @@ proc miqt_exec_callback_cQSignalTransition_eventTest(vtbl: pointer, self: pointe
 proc QSignalTransitiononTransition*(self: gen_qsignaltransition_types.QSignalTransition, event: gen_qcoreevent_types.QEvent): void =
   fcQSignalTransition_virtualbase_onTransition(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_onTransition(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].onTransition(self, slotval1)
@@ -245,8 +247,8 @@ proc miqt_exec_callback_cQSignalTransition_onTransition(vtbl: pointer, self: poi
 proc QSignalTransitionevent*(self: gen_qsignaltransition_types.QSignalTransition, e: gen_qcoreevent_types.QEvent): bool =
   fcQSignalTransition_virtualbase_event(self.h, e.h)
 
-proc miqt_exec_callback_cQSignalTransition_event(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -255,8 +257,8 @@ proc miqt_exec_callback_cQSignalTransition_event(vtbl: pointer, self: pointer, e
 proc QSignalTransitioneventFilter*(self: gen_qsignaltransition_types.QSignalTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQSignalTransition_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -266,8 +268,8 @@ proc miqt_exec_callback_cQSignalTransition_eventFilter(vtbl: pointer, self: poin
 proc QSignalTransitiontimerEvent*(self: gen_qsignaltransition_types.QSignalTransition, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQSignalTransition_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -275,8 +277,8 @@ proc miqt_exec_callback_cQSignalTransition_timerEvent(vtbl: pointer, self: point
 proc QSignalTransitionchildEvent*(self: gen_qsignaltransition_types.QSignalTransition, event: gen_qcoreevent_types.QChildEvent): void =
   fcQSignalTransition_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -284,8 +286,8 @@ proc miqt_exec_callback_cQSignalTransition_childEvent(vtbl: pointer, self: point
 proc QSignalTransitioncustomEvent*(self: gen_qsignaltransition_types.QSignalTransition, event: gen_qcoreevent_types.QEvent): void =
   fcQSignalTransition_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSignalTransition_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -293,8 +295,8 @@ proc miqt_exec_callback_cQSignalTransition_customEvent(vtbl: pointer, self: poin
 proc QSignalTransitionconnectNotify*(self: gen_qsignaltransition_types.QSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSignalTransition_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSignalTransition_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -302,19 +304,19 @@ proc miqt_exec_callback_cQSignalTransition_connectNotify(vtbl: pointer, self: po
 proc QSignalTransitiondisconnectNotify*(self: gen_qsignaltransition_types.QSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSignalTransition_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSignalTransition_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSignalTransitionVTable](vtbl)
+proc cQSignalTransition_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSignalTransitionVTable](fcQSignalTransition_vdata(self))
   let self = QSignalTransition(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSignalTransition* {.inheritable.} = ref object of QSignalTransition
   vtbl*: cQSignalTransitionVTable
-method metaObject*(self: VirtualQSignalTransition, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQSignalTransition): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSignalTransitionmetaObject(self[])
-proc miqt_exec_method_cQSignalTransition_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQSignalTransition_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -322,93 +324,93 @@ proc miqt_exec_method_cQSignalTransition_metaObject(vtbl: pointer, inst: pointer
 
 method metacast*(self: VirtualQSignalTransition, param1: cstring): pointer {.base.} =
   QSignalTransitionmetacast(self[], param1)
-proc miqt_exec_method_cQSignalTransition_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQSignalTransition, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QSignalTransitionmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQSignalTransition_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method eventTest*(self: VirtualQSignalTransition, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSignalTransitioneventTest(self[], event)
-proc miqt_exec_method_cQSignalTransition_eventTest(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_eventTest(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventTest(slotval1)
+  var virtualReturn = inst.eventTest(slotval1)
   virtualReturn
 
 method onTransition*(self: VirtualQSignalTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSignalTransitiononTransition(self[], event)
-proc miqt_exec_method_cQSignalTransition_onTransition(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_onTransition(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.onTransition(slotval1)
+  inst.onTransition(slotval1)
 
 method event*(self: VirtualQSignalTransition, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSignalTransitionevent(self[], e)
-proc miqt_exec_method_cQSignalTransition_event(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_event(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQSignalTransition, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSignalTransitioneventFilter(self[], watched, event)
-proc miqt_exec_method_cQSignalTransition_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQSignalTransition, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QSignalTransitiontimerEvent(self[], event)
-proc miqt_exec_method_cQSignalTransition_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSignalTransition, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSignalTransitionchildEvent(self[], event)
-proc miqt_exec_method_cQSignalTransition_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSignalTransition, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSignalTransitioncustomEvent(self[], event)
-proc miqt_exec_method_cQSignalTransition_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSignalTransitionconnectNotify(self[], signal)
-proc miqt_exec_method_cQSignalTransition_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSignalTransition, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSignalTransitiondisconnectNotify(self[], signal)
-proc miqt_exec_method_cQSignalTransition_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSignalTransition](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
+proc cQSignalTransition_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSignalTransition](fcQSignalTransition_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qsignaltransition_types.QSignalTransition, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qsignaltransition_types.QSignalTransition): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSignalTransition_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qsignaltransition_types.QSignalTransition, ): cint =
+proc senderSignalIndex*(self: gen_qsignaltransition_types.QSignalTransition): cint =
   fcQSignalTransition_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qsignaltransition_types.QSignalTransition, signal: cstring): cint =
@@ -421,231 +423,181 @@ proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     vtbl: ref QSignalTransitionVTable = nil): gen_qsignaltransition_types.QSignalTransition =
   let vtbl = if vtbl == nil: new QSignalTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ref QSignalTransitionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalTransitionVTable](fcQSignalTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalTransition_metaObject
+    vtbl[].vtbl.metaObject = cQSignalTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalTransition_metacast
+    vtbl[].vtbl.metacast = cQSignalTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalTransition_metacall
+    vtbl[].vtbl.metacall = cQSignalTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = miqt_exec_callback_cQSignalTransition_eventTest
+    vtbl[].vtbl.eventTest = cQSignalTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = miqt_exec_callback_cQSignalTransition_onTransition
+    vtbl[].vtbl.onTransition = cQSignalTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalTransition_event
+    vtbl[].vtbl.event = cQSignalTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalTransition_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalTransition_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalTransition_childEvent
+    vtbl[].vtbl.childEvent = cQSignalTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalTransition_customEvent
+    vtbl[].vtbl.customEvent = cQSignalTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalTransition_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalTransition_disconnectNotify
-  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalTransition_vtable_callback_disconnectNotify
+  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sender: gen_qobject_types.QObject, signal: cstring,
     vtbl: ref QSignalTransitionVTable = nil): gen_qsignaltransition_types.QSignalTransition =
   let vtbl = if vtbl == nil: new QSignalTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ref QSignalTransitionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalTransitionVTable](fcQSignalTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalTransition_metaObject
+    vtbl[].vtbl.metaObject = cQSignalTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalTransition_metacast
+    vtbl[].vtbl.metacast = cQSignalTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalTransition_metacall
+    vtbl[].vtbl.metacall = cQSignalTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = miqt_exec_callback_cQSignalTransition_eventTest
+    vtbl[].vtbl.eventTest = cQSignalTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = miqt_exec_callback_cQSignalTransition_onTransition
+    vtbl[].vtbl.onTransition = cQSignalTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalTransition_event
+    vtbl[].vtbl.event = cQSignalTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalTransition_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalTransition_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalTransition_childEvent
+    vtbl[].vtbl.childEvent = cQSignalTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalTransition_customEvent
+    vtbl[].vtbl.customEvent = cQSignalTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalTransition_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalTransition_disconnectNotify
-  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new2(addr(vtbl[].vtbl), sender.h, signal), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalTransition_vtable_callback_disconnectNotify
+  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new2(addr(vtbl[].vtbl), addr(vtbl[]), sender.h, signal), owned: true)
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sourceState: gen_qstate_types.QState,
     vtbl: ref QSignalTransitionVTable = nil): gen_qsignaltransition_types.QSignalTransition =
   let vtbl = if vtbl == nil: new QSignalTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ref QSignalTransitionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalTransitionVTable](fcQSignalTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalTransition_metaObject
+    vtbl[].vtbl.metaObject = cQSignalTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalTransition_metacast
+    vtbl[].vtbl.metacast = cQSignalTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalTransition_metacall
+    vtbl[].vtbl.metacall = cQSignalTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = miqt_exec_callback_cQSignalTransition_eventTest
+    vtbl[].vtbl.eventTest = cQSignalTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = miqt_exec_callback_cQSignalTransition_onTransition
+    vtbl[].vtbl.onTransition = cQSignalTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalTransition_event
+    vtbl[].vtbl.event = cQSignalTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalTransition_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalTransition_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalTransition_childEvent
+    vtbl[].vtbl.childEvent = cQSignalTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalTransition_customEvent
+    vtbl[].vtbl.customEvent = cQSignalTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalTransition_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalTransition_disconnectNotify
-  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new3(addr(vtbl[].vtbl), sourceState.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalTransition_vtable_callback_disconnectNotify
+  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new3(addr(vtbl[].vtbl), addr(vtbl[]), sourceState.h), owned: true)
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sender: gen_qobject_types.QObject, signal: cstring, sourceState: gen_qstate_types.QState,
     vtbl: ref QSignalTransitionVTable = nil): gen_qsignaltransition_types.QSignalTransition =
   let vtbl = if vtbl == nil: new QSignalTransitionVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ref QSignalTransitionVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSignalTransitionVTable](fcQSignalTransition_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSignalTransition_metaObject
+    vtbl[].vtbl.metaObject = cQSignalTransition_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSignalTransition_metacast
+    vtbl[].vtbl.metacast = cQSignalTransition_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSignalTransition_metacall
+    vtbl[].vtbl.metacall = cQSignalTransition_vtable_callback_metacall
   if not isNil(vtbl[].eventTest):
-    vtbl[].vtbl.eventTest = miqt_exec_callback_cQSignalTransition_eventTest
+    vtbl[].vtbl.eventTest = cQSignalTransition_vtable_callback_eventTest
   if not isNil(vtbl[].onTransition):
-    vtbl[].vtbl.onTransition = miqt_exec_callback_cQSignalTransition_onTransition
+    vtbl[].vtbl.onTransition = cQSignalTransition_vtable_callback_onTransition
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSignalTransition_event
+    vtbl[].vtbl.event = cQSignalTransition_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSignalTransition_eventFilter
+    vtbl[].vtbl.eventFilter = cQSignalTransition_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSignalTransition_timerEvent
+    vtbl[].vtbl.timerEvent = cQSignalTransition_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSignalTransition_childEvent
+    vtbl[].vtbl.childEvent = cQSignalTransition_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSignalTransition_customEvent
+    vtbl[].vtbl.customEvent = cQSignalTransition_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSignalTransition_connectNotify
+    vtbl[].vtbl.connectNotify = cQSignalTransition_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSignalTransition_disconnectNotify
-  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new4(addr(vtbl[].vtbl), sender.h, signal, sourceState.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSignalTransition_vtable_callback_disconnectNotify
+  gen_qsignaltransition_types.QSignalTransition(h: fcQSignalTransition_new4(addr(vtbl[].vtbl), addr(vtbl[]), sender.h, signal, sourceState.h), owned: true)
 
+const cQSignalTransition_mvtbl = cQSignalTransitionVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQSignalTransition()[])](self.fcQSignalTransition_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQSignalTransition_method_callback_metaObject,
+  metacast: cQSignalTransition_method_callback_metacast,
+  metacall: cQSignalTransition_method_callback_metacall,
+  eventTest: cQSignalTransition_method_callback_eventTest,
+  onTransition: cQSignalTransition_method_callback_onTransition,
+  event: cQSignalTransition_method_callback_event,
+  eventFilter: cQSignalTransition_method_callback_eventFilter,
+  timerEvent: cQSignalTransition_method_callback_timerEvent,
+  childEvent: cQSignalTransition_method_callback_childEvent,
+  customEvent: cQSignalTransition_method_callback_customEvent,
+  connectNotify: cQSignalTransition_method_callback_connectNotify,
+  disconnectNotify: cQSignalTransition_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
-    vtbl: VirtualQSignalTransition) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalTransition_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalTransition_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalTransition_metacall
-  vtbl[].vtbl.eventTest = miqt_exec_method_cQSignalTransition_eventTest
-  vtbl[].vtbl.onTransition = miqt_exec_method_cQSignalTransition_onTransition
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalTransition_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalTransition_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalTransition_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalTransition_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalTransition_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalTransition_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalTransition_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalTransition_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQSignalTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalTransition_new(addr(cQSignalTransition_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sender: gen_qobject_types.QObject, signal: cstring,
-    vtbl: VirtualQSignalTransition) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalTransition_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalTransition_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalTransition_metacall
-  vtbl[].vtbl.eventTest = miqt_exec_method_cQSignalTransition_eventTest
-  vtbl[].vtbl.onTransition = miqt_exec_method_cQSignalTransition_onTransition
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalTransition_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalTransition_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalTransition_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalTransition_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalTransition_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalTransition_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalTransition_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalTransition_new2(addr(vtbl[].vtbl), sender.h, signal)
-  vtbl[].owned = true
+    inst: VirtualQSignalTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalTransition_new2(addr(cQSignalTransition_mvtbl), addr(inst[]), sender.h, signal)
+  inst[].owned = true
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sourceState: gen_qstate_types.QState,
-    vtbl: VirtualQSignalTransition) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalTransition_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalTransition_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalTransition_metacall
-  vtbl[].vtbl.eventTest = miqt_exec_method_cQSignalTransition_eventTest
-  vtbl[].vtbl.onTransition = miqt_exec_method_cQSignalTransition_onTransition
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalTransition_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalTransition_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalTransition_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalTransition_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalTransition_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalTransition_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalTransition_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalTransition_new3(addr(vtbl[].vtbl), sourceState.h)
-  vtbl[].owned = true
+    inst: VirtualQSignalTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalTransition_new3(addr(cQSignalTransition_mvtbl), addr(inst[]), sourceState.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qsignaltransition_types.QSignalTransition,
     sender: gen_qobject_types.QObject, signal: cstring, sourceState: gen_qstate_types.QState,
-    vtbl: VirtualQSignalTransition) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSignalTransitionVTable, _: ptr cQSignalTransition) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSignalTransition()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSignalTransition, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSignalTransition_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSignalTransition_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSignalTransition_metacall
-  vtbl[].vtbl.eventTest = miqt_exec_method_cQSignalTransition_eventTest
-  vtbl[].vtbl.onTransition = miqt_exec_method_cQSignalTransition_onTransition
-  vtbl[].vtbl.event = miqt_exec_method_cQSignalTransition_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSignalTransition_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSignalTransition_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSignalTransition_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSignalTransition_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSignalTransition_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSignalTransition_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSignalTransition_new4(addr(vtbl[].vtbl), sender.h, signal, sourceState.h)
-  vtbl[].owned = true
+    inst: VirtualQSignalTransition) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSignalTransition_new4(addr(cQSignalTransition_mvtbl), addr(inst[]), sender.h, signal, sourceState.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsignaltransition_types.QSignalTransition): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSignalTransition_staticMetaObject())

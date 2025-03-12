@@ -56,68 +56,68 @@ export
 
 type cQPaintDevice*{.exportc: "QPaintDevice", incompleteStruct.} = object
 
-proc fcQPaintDevice_devType(self: pointer, ): cint {.importc: "QPaintDevice_devType".}
-proc fcQPaintDevice_paintingActive(self: pointer, ): bool {.importc: "QPaintDevice_paintingActive".}
-proc fcQPaintDevice_paintEngine(self: pointer, ): pointer {.importc: "QPaintDevice_paintEngine".}
-proc fcQPaintDevice_width(self: pointer, ): cint {.importc: "QPaintDevice_width".}
-proc fcQPaintDevice_height(self: pointer, ): cint {.importc: "QPaintDevice_height".}
-proc fcQPaintDevice_widthMM(self: pointer, ): cint {.importc: "QPaintDevice_widthMM".}
-proc fcQPaintDevice_heightMM(self: pointer, ): cint {.importc: "QPaintDevice_heightMM".}
-proc fcQPaintDevice_logicalDpiX(self: pointer, ): cint {.importc: "QPaintDevice_logicalDpiX".}
-proc fcQPaintDevice_logicalDpiY(self: pointer, ): cint {.importc: "QPaintDevice_logicalDpiY".}
-proc fcQPaintDevice_physicalDpiX(self: pointer, ): cint {.importc: "QPaintDevice_physicalDpiX".}
-proc fcQPaintDevice_physicalDpiY(self: pointer, ): cint {.importc: "QPaintDevice_physicalDpiY".}
-proc fcQPaintDevice_devicePixelRatio(self: pointer, ): cint {.importc: "QPaintDevice_devicePixelRatio".}
-proc fcQPaintDevice_devicePixelRatioF(self: pointer, ): float64 {.importc: "QPaintDevice_devicePixelRatioF".}
-proc fcQPaintDevice_colorCount(self: pointer, ): cint {.importc: "QPaintDevice_colorCount".}
-proc fcQPaintDevice_depth(self: pointer, ): cint {.importc: "QPaintDevice_depth".}
+proc fcQPaintDevice_devType(self: pointer): cint {.importc: "QPaintDevice_devType".}
+proc fcQPaintDevice_paintingActive(self: pointer): bool {.importc: "QPaintDevice_paintingActive".}
+proc fcQPaintDevice_paintEngine(self: pointer): pointer {.importc: "QPaintDevice_paintEngine".}
+proc fcQPaintDevice_width(self: pointer): cint {.importc: "QPaintDevice_width".}
+proc fcQPaintDevice_height(self: pointer): cint {.importc: "QPaintDevice_height".}
+proc fcQPaintDevice_widthMM(self: pointer): cint {.importc: "QPaintDevice_widthMM".}
+proc fcQPaintDevice_heightMM(self: pointer): cint {.importc: "QPaintDevice_heightMM".}
+proc fcQPaintDevice_logicalDpiX(self: pointer): cint {.importc: "QPaintDevice_logicalDpiX".}
+proc fcQPaintDevice_logicalDpiY(self: pointer): cint {.importc: "QPaintDevice_logicalDpiY".}
+proc fcQPaintDevice_physicalDpiX(self: pointer): cint {.importc: "QPaintDevice_physicalDpiX".}
+proc fcQPaintDevice_physicalDpiY(self: pointer): cint {.importc: "QPaintDevice_physicalDpiY".}
+proc fcQPaintDevice_devicePixelRatio(self: pointer): cint {.importc: "QPaintDevice_devicePixelRatio".}
+proc fcQPaintDevice_devicePixelRatioF(self: pointer): float64 {.importc: "QPaintDevice_devicePixelRatioF".}
+proc fcQPaintDevice_colorCount(self: pointer): cint {.importc: "QPaintDevice_colorCount".}
+proc fcQPaintDevice_depth(self: pointer): cint {.importc: "QPaintDevice_depth".}
 proc fcQPaintDevice_devicePixelRatioFScale(): float64 {.importc: "QPaintDevice_devicePixelRatioFScale".}
 
-proc devType*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc devType*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_devType(self.h)
 
-proc paintingActive*(self: gen_qpaintdevice_types.QPaintDevice, ): bool =
+proc paintingActive*(self: gen_qpaintdevice_types.QPaintDevice): bool =
   fcQPaintDevice_paintingActive(self.h)
 
-proc paintEngine*(self: gen_qpaintdevice_types.QPaintDevice, ): gen_qpaintengine_types.QPaintEngine =
+proc paintEngine*(self: gen_qpaintdevice_types.QPaintDevice): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQPaintDevice_paintEngine(self.h), owned: false)
 
-proc width*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc width*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_width(self.h)
 
-proc height*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc height*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_height(self.h)
 
-proc widthMM*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc widthMM*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_widthMM(self.h)
 
-proc heightMM*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc heightMM*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_heightMM(self.h)
 
-proc logicalDpiX*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc logicalDpiX*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_logicalDpiX(self.h)
 
-proc logicalDpiY*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc logicalDpiY*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_logicalDpiY(self.h)
 
-proc physicalDpiX*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc physicalDpiX*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_physicalDpiX(self.h)
 
-proc physicalDpiY*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc physicalDpiY*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_physicalDpiY(self.h)
 
-proc devicePixelRatio*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc devicePixelRatio*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_devicePixelRatio(self.h)
 
-proc devicePixelRatioF*(self: gen_qpaintdevice_types.QPaintDevice, ): float64 =
+proc devicePixelRatioF*(self: gen_qpaintdevice_types.QPaintDevice): float64 =
   fcQPaintDevice_devicePixelRatioF(self.h)
 
-proc colorCount*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc colorCount*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_colorCount(self.h)
 
-proc depth*(self: gen_qpaintdevice_types.QPaintDevice, ): cint =
+proc depth*(self: gen_qpaintdevice_types.QPaintDevice): cint =
   fcQPaintDevice_depth(self.h)
 
-proc devicePixelRatioFScale*(_: type gen_qpaintdevice_types.QPaintDevice, ): float64 =
+proc devicePixelRatioFScale*(_: type gen_qpaintdevice_types.QPaintDevice): float64 =
   fcQPaintDevice_devicePixelRatioFScale()
 

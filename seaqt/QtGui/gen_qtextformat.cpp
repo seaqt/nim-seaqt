@@ -20,15 +20,6 @@
 #include <QVariant>
 #include <qtextformat.h>
 #include "gen_qtextformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextLength* QTextLength_new() {
 	return new QTextLength();
 }
@@ -327,6 +318,7 @@ void QTextFormat_clearForeground(QTextFormat* self) {
 }
 
 const QMetaObject* QTextFormat_staticMetaObject() { return &QTextFormat::staticMetaObject; }
+
 void QTextFormat_delete(QTextFormat* self) {
 	delete self;
 }

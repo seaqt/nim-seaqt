@@ -39,43 +39,36 @@
 #include <QWidget>
 #include <qcommandlinkbutton.h>
 #include "gen_qcommandlinkbutton.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQCommandLinkButton final : public QCommandLinkButton {
-	struct QCommandLinkButton_VTable* vtbl;
+	const QCommandLinkButton_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QCommandLinkButton_VTable* QCommandLinkButton_vtbl(const VirtualQCommandLinkButton* self);
+	friend void* QCommandLinkButton_vdata(const VirtualQCommandLinkButton* self);
+	friend void QCommandLinkButton_setVdata(VirtualQCommandLinkButton* self, void* vdata);
 
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl, QWidget* parent): QCommandLinkButton(parent), vtbl(vtbl) {};
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl): QCommandLinkButton(), vtbl(vtbl) {};
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl, const QString& text): QCommandLinkButton(text), vtbl(vtbl) {};
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl, const QString& text, const QString& description): QCommandLinkButton(text, description), vtbl(vtbl) {};
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl, const QString& text, QWidget* parent): QCommandLinkButton(text, parent), vtbl(vtbl) {};
-	VirtualQCommandLinkButton(struct QCommandLinkButton_VTable* vtbl, const QString& text, const QString& description, QWidget* parent): QCommandLinkButton(text, description, parent), vtbl(vtbl) {};
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata, QWidget* parent): QCommandLinkButton(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata): QCommandLinkButton(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata, const QString& text): QCommandLinkButton(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata, const QString& text, const QString& description): QCommandLinkButton(text, description), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata, const QString& text, QWidget* parent): QCommandLinkButton(text, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCommandLinkButton(const QCommandLinkButton_VTable* vtbl, void* vdata, const QString& text, const QString& description, QWidget* parent): QCommandLinkButton(text, description, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQCommandLinkButton() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQCommandLinkButton() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QCommandLinkButton::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QCommandLinkButton_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QCommandLinkButton_virtualbase_metaObject(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QCommandLinkButton::qt_metacast(param1);
@@ -83,14 +76,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QCommandLinkButton_virtualbase_metacast(void* self, const char* param1);
+	friend void* QCommandLinkButton_virtualbase_metacast(VirtualQCommandLinkButton* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QCommandLinkButton::qt_metacall(param1, param2, param3);
@@ -101,30 +93,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCommandLinkButton_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QCommandLinkButton_virtualbase_metacall(VirtualQCommandLinkButton* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QCommandLinkButton::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QCommandLinkButton_virtualbase_sizeHint(const void* self);
+	friend QSize* QCommandLinkButton_virtualbase_sizeHint(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QCommandLinkButton::heightForWidth(param1);
@@ -132,30 +122,28 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCommandLinkButton_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QCommandLinkButton_virtualbase_heightForWidth(const VirtualQCommandLinkButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QCommandLinkButton::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QCommandLinkButton_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QCommandLinkButton_virtualbase_minimumSizeHint(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QCommandLinkButton::event(e);
@@ -163,14 +151,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_event(void* self, QEvent* e);
+	friend bool QCommandLinkButton_virtualbase_event(VirtualQCommandLinkButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QCommandLinkButton::paintEvent(param1);
@@ -179,13 +166,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QCommandLinkButton_virtualbase_paintEvent(VirtualQCommandLinkButton* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QCommandLinkButton::keyPressEvent(param1);
@@ -194,13 +180,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QCommandLinkButton_virtualbase_keyPressEvent(VirtualQCommandLinkButton* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QCommandLinkButton::focusInEvent(param1);
@@ -209,13 +194,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QCommandLinkButton_virtualbase_focusInEvent(VirtualQCommandLinkButton* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QCommandLinkButton::focusOutEvent(param1);
@@ -224,13 +208,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QCommandLinkButton_virtualbase_focusOutEvent(VirtualQCommandLinkButton* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hitButton(const QPoint& pos) const override {
 		if (vtbl->hitButton == 0) {
 			return QCommandLinkButton::hitButton(pos);
@@ -240,14 +223,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
 
-		bool callback_return_value = vtbl->hitButton(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hitButton(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_hitButton(const void* self, QPoint* pos);
+	friend bool QCommandLinkButton_virtualbase_hitButton(const VirtualQCommandLinkButton* self, QPoint* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void checkStateSet() override {
 		if (vtbl->checkStateSet == 0) {
 			QCommandLinkButton::checkStateSet();
@@ -255,13 +237,12 @@ public:
 		}
 
 
-		vtbl->checkStateSet(vtbl, this);
+		vtbl->checkStateSet(this);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_checkStateSet(void* self);
+	friend void QCommandLinkButton_virtualbase_checkStateSet(VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void nextCheckState() override {
 		if (vtbl->nextCheckState == 0) {
 			QCommandLinkButton::nextCheckState();
@@ -269,13 +250,12 @@ public:
 		}
 
 
-		vtbl->nextCheckState(vtbl, this);
+		vtbl->nextCheckState(this);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_nextCheckState(void* self);
+	friend void QCommandLinkButton_virtualbase_nextCheckState(VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QCommandLinkButton::keyReleaseEvent(e);
@@ -284,13 +264,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QCommandLinkButton_virtualbase_keyReleaseEvent(VirtualQCommandLinkButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QCommandLinkButton::mousePressEvent(e);
@@ -299,13 +278,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QCommandLinkButton_virtualbase_mousePressEvent(VirtualQCommandLinkButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QCommandLinkButton::mouseReleaseEvent(e);
@@ -314,13 +292,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QCommandLinkButton_virtualbase_mouseReleaseEvent(VirtualQCommandLinkButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QCommandLinkButton::mouseMoveEvent(e);
@@ -329,13 +306,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
+	friend void QCommandLinkButton_virtualbase_mouseMoveEvent(VirtualQCommandLinkButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QCommandLinkButton::changeEvent(e);
@@ -344,13 +320,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QCommandLinkButton_virtualbase_changeEvent(VirtualQCommandLinkButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QCommandLinkButton::timerEvent(e);
@@ -359,27 +334,25 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QCommandLinkButton_virtualbase_timerEvent(VirtualQCommandLinkButton* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QCommandLinkButton::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCommandLinkButton_virtualbase_devType(const void* self);
+	friend int QCommandLinkButton_virtualbase_devType(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QCommandLinkButton::setVisible(visible);
@@ -388,41 +361,38 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_setVisible(void* self, bool visible);
+	friend void QCommandLinkButton_virtualbase_setVisible(VirtualQCommandLinkButton* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QCommandLinkButton::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QCommandLinkButton_virtualbase_hasHeightForWidth(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QCommandLinkButton::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QCommandLinkButton_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QCommandLinkButton_virtualbase_paintEngine(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QCommandLinkButton::mouseDoubleClickEvent(event);
@@ -431,13 +401,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QCommandLinkButton_virtualbase_mouseDoubleClickEvent(VirtualQCommandLinkButton* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QCommandLinkButton::wheelEvent(event);
@@ -446,13 +415,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QCommandLinkButton_virtualbase_wheelEvent(VirtualQCommandLinkButton* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QCommandLinkButton::enterEvent(event);
@@ -461,13 +429,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QCommandLinkButton_virtualbase_enterEvent(VirtualQCommandLinkButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QCommandLinkButton::leaveEvent(event);
@@ -476,13 +443,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QCommandLinkButton_virtualbase_leaveEvent(VirtualQCommandLinkButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QCommandLinkButton::moveEvent(event);
@@ -491,13 +457,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QCommandLinkButton_virtualbase_moveEvent(VirtualQCommandLinkButton* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QCommandLinkButton::resizeEvent(event);
@@ -506,13 +471,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QCommandLinkButton_virtualbase_resizeEvent(VirtualQCommandLinkButton* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QCommandLinkButton::closeEvent(event);
@@ -521,13 +485,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QCommandLinkButton_virtualbase_closeEvent(VirtualQCommandLinkButton* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QCommandLinkButton::contextMenuEvent(event);
@@ -536,13 +499,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QCommandLinkButton_virtualbase_contextMenuEvent(VirtualQCommandLinkButton* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QCommandLinkButton::tabletEvent(event);
@@ -551,13 +513,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QCommandLinkButton_virtualbase_tabletEvent(VirtualQCommandLinkButton* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QCommandLinkButton::actionEvent(event);
@@ -566,13 +527,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QCommandLinkButton_virtualbase_actionEvent(VirtualQCommandLinkButton* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QCommandLinkButton::dragEnterEvent(event);
@@ -581,13 +541,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QCommandLinkButton_virtualbase_dragEnterEvent(VirtualQCommandLinkButton* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QCommandLinkButton::dragMoveEvent(event);
@@ -596,13 +555,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QCommandLinkButton_virtualbase_dragMoveEvent(VirtualQCommandLinkButton* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QCommandLinkButton::dragLeaveEvent(event);
@@ -611,13 +569,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QCommandLinkButton_virtualbase_dragLeaveEvent(VirtualQCommandLinkButton* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QCommandLinkButton::dropEvent(event);
@@ -626,13 +583,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QCommandLinkButton_virtualbase_dropEvent(VirtualQCommandLinkButton* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QCommandLinkButton::showEvent(event);
@@ -641,13 +597,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QCommandLinkButton_virtualbase_showEvent(VirtualQCommandLinkButton* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QCommandLinkButton::hideEvent(event);
@@ -656,13 +611,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QCommandLinkButton_virtualbase_hideEvent(VirtualQCommandLinkButton* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QCommandLinkButton::nativeEvent(eventType, message, result);
@@ -677,14 +631,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QCommandLinkButton_virtualbase_nativeEvent(VirtualQCommandLinkButton* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QCommandLinkButton::metric(param1);
@@ -693,14 +646,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCommandLinkButton_virtualbase_metric(const void* self, int param1);
+	friend int QCommandLinkButton_virtualbase_metric(const VirtualQCommandLinkButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QCommandLinkButton::initPainter(painter);
@@ -709,13 +661,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QCommandLinkButton_virtualbase_initPainter(const VirtualQCommandLinkButton* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QCommandLinkButton::redirected(offset);
@@ -723,28 +674,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QCommandLinkButton_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QCommandLinkButton_virtualbase_redirected(const VirtualQCommandLinkButton* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QCommandLinkButton::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QCommandLinkButton_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QCommandLinkButton_virtualbase_sharedPainter(const VirtualQCommandLinkButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QCommandLinkButton::inputMethodEvent(param1);
@@ -753,13 +702,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QCommandLinkButton_virtualbase_inputMethodEvent(VirtualQCommandLinkButton* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QCommandLinkButton::inputMethodQuery(param1);
@@ -768,16 +716,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QCommandLinkButton_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QCommandLinkButton_virtualbase_inputMethodQuery(const VirtualQCommandLinkButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QCommandLinkButton::focusNextPrevChild(next);
@@ -785,14 +732,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QCommandLinkButton_virtualbase_focusNextPrevChild(VirtualQCommandLinkButton* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QCommandLinkButton::eventFilter(watched, event);
@@ -801,14 +747,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QCommandLinkButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QCommandLinkButton_virtualbase_eventFilter(VirtualQCommandLinkButton* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QCommandLinkButton::childEvent(event);
@@ -817,13 +762,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QCommandLinkButton_virtualbase_childEvent(VirtualQCommandLinkButton* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QCommandLinkButton::customEvent(event);
@@ -832,13 +776,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QCommandLinkButton_virtualbase_customEvent(VirtualQCommandLinkButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QCommandLinkButton::connectNotify(signal);
@@ -849,13 +792,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QCommandLinkButton_virtualbase_connectNotify(VirtualQCommandLinkButton* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QCommandLinkButton::disconnectNotify(signal);
@@ -866,53 +808,53 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QCommandLinkButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QCommandLinkButton_virtualbase_disconnectNotify(VirtualQCommandLinkButton* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QCommandLinkButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option);
-	friend void QCommandLinkButton_protectedbase_updateMicroFocus(void* self);
-	friend void QCommandLinkButton_protectedbase_create(void* self);
-	friend void QCommandLinkButton_protectedbase_destroy(void* self);
-	friend bool QCommandLinkButton_protectedbase_focusNextChild(void* self);
-	friend bool QCommandLinkButton_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QCommandLinkButton_protectedbase_sender(const void* self);
-	friend int QCommandLinkButton_protectedbase_senderSignalIndex(const void* self);
-	friend int QCommandLinkButton_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QCommandLinkButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QCommandLinkButton_protectedbase_initStyleOption(const VirtualQCommandLinkButton* self, QStyleOptionButton* option);
+	friend void QCommandLinkButton_protectedbase_updateMicroFocus(VirtualQCommandLinkButton* self);
+	friend void QCommandLinkButton_protectedbase_create(VirtualQCommandLinkButton* self);
+	friend void QCommandLinkButton_protectedbase_destroy(VirtualQCommandLinkButton* self);
+	friend bool QCommandLinkButton_protectedbase_focusNextChild(VirtualQCommandLinkButton* self);
+	friend bool QCommandLinkButton_protectedbase_focusPreviousChild(VirtualQCommandLinkButton* self);
+	friend QObject* QCommandLinkButton_protectedbase_sender(const VirtualQCommandLinkButton* self);
+	friend int QCommandLinkButton_protectedbase_senderSignalIndex(const VirtualQCommandLinkButton* self);
+	friend int QCommandLinkButton_protectedbase_receivers(const VirtualQCommandLinkButton* self, const char* signal);
+	friend bool QCommandLinkButton_protectedbase_isSignalConnected(const VirtualQCommandLinkButton* self, QMetaMethod* signal);
 };
 
-QCommandLinkButton* QCommandLinkButton_new(struct QCommandLinkButton_VTable* vtbl, QWidget* parent) {
-	return new VirtualQCommandLinkButton(vtbl, parent);
+VirtualQCommandLinkButton* QCommandLinkButton_new(const QCommandLinkButton_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQCommandLinkButton(vtbl, vdata, parent);
 }
 
-QCommandLinkButton* QCommandLinkButton_new2(struct QCommandLinkButton_VTable* vtbl) {
-	return new VirtualQCommandLinkButton(vtbl);
+VirtualQCommandLinkButton* QCommandLinkButton_new2(const QCommandLinkButton_VTable* vtbl, void* vdata) {
+	return new VirtualQCommandLinkButton(vtbl, vdata);
 }
 
-QCommandLinkButton* QCommandLinkButton_new3(struct QCommandLinkButton_VTable* vtbl, struct miqt_string text) {
+VirtualQCommandLinkButton* QCommandLinkButton_new3(const QCommandLinkButton_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQCommandLinkButton(vtbl, text_QString);
+	return new VirtualQCommandLinkButton(vtbl, vdata, text_QString);
 }
 
-QCommandLinkButton* QCommandLinkButton_new4(struct QCommandLinkButton_VTable* vtbl, struct miqt_string text, struct miqt_string description) {
-	QString text_QString = QString::fromUtf8(text.data, text.len);
-	QString description_QString = QString::fromUtf8(description.data, description.len);
-	return new VirtualQCommandLinkButton(vtbl, text_QString, description_QString);
-}
-
-QCommandLinkButton* QCommandLinkButton_new5(struct QCommandLinkButton_VTable* vtbl, struct miqt_string text, QWidget* parent) {
-	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQCommandLinkButton(vtbl, text_QString, parent);
-}
-
-QCommandLinkButton* QCommandLinkButton_new6(struct QCommandLinkButton_VTable* vtbl, struct miqt_string text, struct miqt_string description, QWidget* parent) {
+VirtualQCommandLinkButton* QCommandLinkButton_new4(const QCommandLinkButton_VTable* vtbl, void* vdata, struct miqt_string text, struct miqt_string description) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QString description_QString = QString::fromUtf8(description.data, description.len);
-	return new VirtualQCommandLinkButton(vtbl, text_QString, description_QString, parent);
+	return new VirtualQCommandLinkButton(vtbl, vdata, text_QString, description_QString);
+}
+
+VirtualQCommandLinkButton* QCommandLinkButton_new5(const QCommandLinkButton_VTable* vtbl, void* vdata, struct miqt_string text, QWidget* parent) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	return new VirtualQCommandLinkButton(vtbl, vdata, text_QString, parent);
+}
+
+VirtualQCommandLinkButton* QCommandLinkButton_new6(const QCommandLinkButton_VTable* vtbl, void* vdata, struct miqt_string text, struct miqt_string description, QWidget* parent) {
+	QString text_QString = QString::fromUtf8(text.data, text.len);
+	QString description_QString = QString::fromUtf8(description.data, description.len);
+	return new VirtualQCommandLinkButton(vtbl, vdata, text_QString, description_QString, parent);
 }
 
 void QCommandLinkButton_virtbase(QCommandLinkButton* src, QPushButton** outptr_QPushButton) {
@@ -1013,394 +955,316 @@ struct miqt_string QCommandLinkButton_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
-QMetaObject* QCommandLinkButton_virtualbase_metaObject(const void* self) {
+QMetaObject* QCommandLinkButton_virtualbase_metaObject(const VirtualQCommandLinkButton* self) {
 
-	return (QMetaObject*) ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::metaObject();
-
+	return (QMetaObject*) self->QCommandLinkButton::metaObject();
 }
 
-void* QCommandLinkButton_virtualbase_metacast(void* self, const char* param1) {
+void* QCommandLinkButton_virtualbase_metacast(VirtualQCommandLinkButton* self, const char* param1) {
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::qt_metacast(param1);
-
+	return self->QCommandLinkButton::qt_metacast(param1);
 }
 
-int QCommandLinkButton_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QCommandLinkButton_virtualbase_metacall(VirtualQCommandLinkButton* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QCommandLinkButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QCommandLinkButton_virtualbase_sizeHint(const void* self) {
+QSize* QCommandLinkButton_virtualbase_sizeHint(const VirtualQCommandLinkButton* self) {
 
-	return new QSize(( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::sizeHint());
-
+	return new QSize(self->QCommandLinkButton::sizeHint());
 }
 
-int QCommandLinkButton_virtualbase_heightForWidth(const void* self, int param1) {
+int QCommandLinkButton_virtualbase_heightForWidth(const VirtualQCommandLinkButton* self, int param1) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::heightForWidth(static_cast<int>(param1));
-
+	return self->QCommandLinkButton::heightForWidth(static_cast<int>(param1));
 }
 
-QSize* QCommandLinkButton_virtualbase_minimumSizeHint(const void* self) {
+QSize* QCommandLinkButton_virtualbase_minimumSizeHint(const VirtualQCommandLinkButton* self) {
 
-	return new QSize(( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::minimumSizeHint());
-
+	return new QSize(self->QCommandLinkButton::minimumSizeHint());
 }
 
-bool QCommandLinkButton_virtualbase_event(void* self, QEvent* e) {
+bool QCommandLinkButton_virtualbase_event(VirtualQCommandLinkButton* self, QEvent* e) {
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::event(e);
-
+	return self->QCommandLinkButton::event(e);
 }
 
-void QCommandLinkButton_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QCommandLinkButton_virtualbase_paintEvent(VirtualQCommandLinkButton* self, QPaintEvent* param1) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::paintEvent(param1);
-
+	self->QCommandLinkButton::paintEvent(param1);
 }
 
-void QCommandLinkButton_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QCommandLinkButton_virtualbase_keyPressEvent(VirtualQCommandLinkButton* self, QKeyEvent* param1) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::keyPressEvent(param1);
-
+	self->QCommandLinkButton::keyPressEvent(param1);
 }
 
-void QCommandLinkButton_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QCommandLinkButton_virtualbase_focusInEvent(VirtualQCommandLinkButton* self, QFocusEvent* param1) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::focusInEvent(param1);
-
+	self->QCommandLinkButton::focusInEvent(param1);
 }
 
-void QCommandLinkButton_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QCommandLinkButton_virtualbase_focusOutEvent(VirtualQCommandLinkButton* self, QFocusEvent* param1) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::focusOutEvent(param1);
-
+	self->QCommandLinkButton::focusOutEvent(param1);
 }
 
-bool QCommandLinkButton_virtualbase_hitButton(const void* self, QPoint* pos) {
+bool QCommandLinkButton_virtualbase_hitButton(const VirtualQCommandLinkButton* self, QPoint* pos) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::hitButton(*pos);
-
+	return self->QCommandLinkButton::hitButton(*pos);
 }
 
-void QCommandLinkButton_virtualbase_checkStateSet(void* self) {
+void QCommandLinkButton_virtualbase_checkStateSet(VirtualQCommandLinkButton* self) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::checkStateSet();
-
+	self->QCommandLinkButton::checkStateSet();
 }
 
-void QCommandLinkButton_virtualbase_nextCheckState(void* self) {
+void QCommandLinkButton_virtualbase_nextCheckState(VirtualQCommandLinkButton* self) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::nextCheckState();
-
+	self->QCommandLinkButton::nextCheckState();
 }
 
-void QCommandLinkButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QCommandLinkButton_virtualbase_keyReleaseEvent(VirtualQCommandLinkButton* self, QKeyEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::keyReleaseEvent(e);
-
+	self->QCommandLinkButton::keyReleaseEvent(e);
 }
 
-void QCommandLinkButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QCommandLinkButton_virtualbase_mousePressEvent(VirtualQCommandLinkButton* self, QMouseEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::mousePressEvent(e);
-
+	self->QCommandLinkButton::mousePressEvent(e);
 }
 
-void QCommandLinkButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QCommandLinkButton_virtualbase_mouseReleaseEvent(VirtualQCommandLinkButton* self, QMouseEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::mouseReleaseEvent(e);
-
+	self->QCommandLinkButton::mouseReleaseEvent(e);
 }
 
-void QCommandLinkButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
+void QCommandLinkButton_virtualbase_mouseMoveEvent(VirtualQCommandLinkButton* self, QMouseEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::mouseMoveEvent(e);
-
+	self->QCommandLinkButton::mouseMoveEvent(e);
 }
 
-void QCommandLinkButton_virtualbase_changeEvent(void* self, QEvent* e) {
+void QCommandLinkButton_virtualbase_changeEvent(VirtualQCommandLinkButton* self, QEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::changeEvent(e);
-
+	self->QCommandLinkButton::changeEvent(e);
 }
 
-void QCommandLinkButton_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QCommandLinkButton_virtualbase_timerEvent(VirtualQCommandLinkButton* self, QTimerEvent* e) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::timerEvent(e);
-
+	self->QCommandLinkButton::timerEvent(e);
 }
 
-int QCommandLinkButton_virtualbase_devType(const void* self) {
+int QCommandLinkButton_virtualbase_devType(const VirtualQCommandLinkButton* self) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::devType();
-
+	return self->QCommandLinkButton::devType();
 }
 
-void QCommandLinkButton_virtualbase_setVisible(void* self, bool visible) {
+void QCommandLinkButton_virtualbase_setVisible(VirtualQCommandLinkButton* self, bool visible) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::setVisible(visible);
-
+	self->QCommandLinkButton::setVisible(visible);
 }
 
-bool QCommandLinkButton_virtualbase_hasHeightForWidth(const void* self) {
+bool QCommandLinkButton_virtualbase_hasHeightForWidth(const VirtualQCommandLinkButton* self) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::hasHeightForWidth();
-
+	return self->QCommandLinkButton::hasHeightForWidth();
 }
 
-QPaintEngine* QCommandLinkButton_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QCommandLinkButton_virtualbase_paintEngine(const VirtualQCommandLinkButton* self) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::paintEngine();
-
+	return self->QCommandLinkButton::paintEngine();
 }
 
-void QCommandLinkButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QCommandLinkButton_virtualbase_mouseDoubleClickEvent(VirtualQCommandLinkButton* self, QMouseEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::mouseDoubleClickEvent(event);
-
+	self->QCommandLinkButton::mouseDoubleClickEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QCommandLinkButton_virtualbase_wheelEvent(VirtualQCommandLinkButton* self, QWheelEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::wheelEvent(event);
-
+	self->QCommandLinkButton::wheelEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_enterEvent(void* self, QEvent* event) {
+void QCommandLinkButton_virtualbase_enterEvent(VirtualQCommandLinkButton* self, QEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::enterEvent(event);
-
+	self->QCommandLinkButton::enterEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QCommandLinkButton_virtualbase_leaveEvent(VirtualQCommandLinkButton* self, QEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::leaveEvent(event);
-
+	self->QCommandLinkButton::leaveEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QCommandLinkButton_virtualbase_moveEvent(VirtualQCommandLinkButton* self, QMoveEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::moveEvent(event);
-
+	self->QCommandLinkButton::moveEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QCommandLinkButton_virtualbase_resizeEvent(VirtualQCommandLinkButton* self, QResizeEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::resizeEvent(event);
-
+	self->QCommandLinkButton::resizeEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QCommandLinkButton_virtualbase_closeEvent(VirtualQCommandLinkButton* self, QCloseEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::closeEvent(event);
-
+	self->QCommandLinkButton::closeEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QCommandLinkButton_virtualbase_contextMenuEvent(VirtualQCommandLinkButton* self, QContextMenuEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::contextMenuEvent(event);
-
+	self->QCommandLinkButton::contextMenuEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QCommandLinkButton_virtualbase_tabletEvent(VirtualQCommandLinkButton* self, QTabletEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::tabletEvent(event);
-
+	self->QCommandLinkButton::tabletEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QCommandLinkButton_virtualbase_actionEvent(VirtualQCommandLinkButton* self, QActionEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::actionEvent(event);
-
+	self->QCommandLinkButton::actionEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QCommandLinkButton_virtualbase_dragEnterEvent(VirtualQCommandLinkButton* self, QDragEnterEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::dragEnterEvent(event);
-
+	self->QCommandLinkButton::dragEnterEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QCommandLinkButton_virtualbase_dragMoveEvent(VirtualQCommandLinkButton* self, QDragMoveEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::dragMoveEvent(event);
-
+	self->QCommandLinkButton::dragMoveEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QCommandLinkButton_virtualbase_dragLeaveEvent(VirtualQCommandLinkButton* self, QDragLeaveEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::dragLeaveEvent(event);
-
+	self->QCommandLinkButton::dragLeaveEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QCommandLinkButton_virtualbase_dropEvent(VirtualQCommandLinkButton* self, QDropEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::dropEvent(event);
-
+	self->QCommandLinkButton::dropEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QCommandLinkButton_virtualbase_showEvent(VirtualQCommandLinkButton* self, QShowEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::showEvent(event);
-
+	self->QCommandLinkButton::showEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QCommandLinkButton_virtualbase_hideEvent(VirtualQCommandLinkButton* self, QHideEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::hideEvent(event);
-
+	self->QCommandLinkButton::hideEvent(event);
 }
 
-bool QCommandLinkButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QCommandLinkButton_virtualbase_nativeEvent(VirtualQCommandLinkButton* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QCommandLinkButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QCommandLinkButton_virtualbase_metric(const void* self, int param1) {
+int QCommandLinkButton_virtualbase_metric(const VirtualQCommandLinkButton* self, int param1) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::metric(static_cast<VirtualQCommandLinkButton::PaintDeviceMetric>(param1));
-
+	return self->QCommandLinkButton::metric(static_cast<VirtualQCommandLinkButton::PaintDeviceMetric>(param1));
 }
 
-void QCommandLinkButton_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QCommandLinkButton_virtualbase_initPainter(const VirtualQCommandLinkButton* self, QPainter* painter) {
 
-	( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::initPainter(painter);
-
+	self->QCommandLinkButton::initPainter(painter);
 }
 
-QPaintDevice* QCommandLinkButton_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QCommandLinkButton_virtualbase_redirected(const VirtualQCommandLinkButton* self, QPoint* offset) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::redirected(offset);
-
+	return self->QCommandLinkButton::redirected(offset);
 }
 
-QPainter* QCommandLinkButton_virtualbase_sharedPainter(const void* self) {
+QPainter* QCommandLinkButton_virtualbase_sharedPainter(const VirtualQCommandLinkButton* self) {
 
-	return ( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::sharedPainter();
-
+	return self->QCommandLinkButton::sharedPainter();
 }
 
-void QCommandLinkButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QCommandLinkButton_virtualbase_inputMethodEvent(VirtualQCommandLinkButton* self, QInputMethodEvent* param1) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::inputMethodEvent(param1);
-
+	self->QCommandLinkButton::inputMethodEvent(param1);
 }
 
-QVariant* QCommandLinkButton_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QCommandLinkButton_virtualbase_inputMethodQuery(const VirtualQCommandLinkButton* self, int param1) {
 
-	return new QVariant(( (const VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QCommandLinkButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QCommandLinkButton_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QCommandLinkButton_virtualbase_focusNextPrevChild(VirtualQCommandLinkButton* self, bool next) {
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::focusNextPrevChild(next);
-
+	return self->QCommandLinkButton::focusNextPrevChild(next);
 }
 
-bool QCommandLinkButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QCommandLinkButton_virtualbase_eventFilter(VirtualQCommandLinkButton* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::eventFilter(watched, event);
-
+	return self->QCommandLinkButton::eventFilter(watched, event);
 }
 
-void QCommandLinkButton_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QCommandLinkButton_virtualbase_childEvent(VirtualQCommandLinkButton* self, QChildEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::childEvent(event);
-
+	self->QCommandLinkButton::childEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_customEvent(void* self, QEvent* event) {
+void QCommandLinkButton_virtualbase_customEvent(VirtualQCommandLinkButton* self, QEvent* event) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::customEvent(event);
-
+	self->QCommandLinkButton::customEvent(event);
 }
 
-void QCommandLinkButton_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QCommandLinkButton_virtualbase_connectNotify(VirtualQCommandLinkButton* self, QMetaMethod* signal) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::connectNotify(*signal);
-
+	self->QCommandLinkButton::connectNotify(*signal);
 }
 
-void QCommandLinkButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QCommandLinkButton_virtualbase_disconnectNotify(VirtualQCommandLinkButton* self, QMetaMethod* signal) {
 
-	( (VirtualQCommandLinkButton*)(self) )->QCommandLinkButton::disconnectNotify(*signal);
-
+	self->QCommandLinkButton::disconnectNotify(*signal);
 }
 
 const QMetaObject* QCommandLinkButton_staticMetaObject() { return &QCommandLinkButton::staticMetaObject; }
-void QCommandLinkButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QCommandLinkButton_VTable* QCommandLinkButton_vtbl(const VirtualQCommandLinkButton* self) { return self->vtbl; }
+void* QCommandLinkButton_vdata(const VirtualQCommandLinkButton* self) { return self->vdata; }
+void QCommandLinkButton_setVdata(VirtualQCommandLinkButton* self, void* vdata) { self->vdata = vdata; }
+
+void QCommandLinkButton_protectedbase_initStyleOption(const VirtualQCommandLinkButton* self, QStyleOptionButton* option) {
+	self->initStyleOption(option);
 }
 
-void QCommandLinkButton_protectedbase_updateMicroFocus(void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QCommandLinkButton_protectedbase_updateMicroFocus(VirtualQCommandLinkButton* self) {
+	self->updateMicroFocus();
 }
 
-void QCommandLinkButton_protectedbase_create(void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	self_cast->create();
-
+void QCommandLinkButton_protectedbase_create(VirtualQCommandLinkButton* self) {
+	self->create();
 }
 
-void QCommandLinkButton_protectedbase_destroy(void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	self_cast->destroy();
-
+void QCommandLinkButton_protectedbase_destroy(VirtualQCommandLinkButton* self) {
+	self->destroy();
 }
 
-bool QCommandLinkButton_protectedbase_focusNextChild(void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QCommandLinkButton_protectedbase_focusNextChild(VirtualQCommandLinkButton* self) {
+	return self->focusNextChild();
 }
 
-bool QCommandLinkButton_protectedbase_focusPreviousChild(void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QCommandLinkButton_protectedbase_focusPreviousChild(VirtualQCommandLinkButton* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QCommandLinkButton_protectedbase_sender(const void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QCommandLinkButton_protectedbase_sender(const VirtualQCommandLinkButton* self) {
+	return self->sender();
 }
 
-int QCommandLinkButton_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QCommandLinkButton_protectedbase_senderSignalIndex(const VirtualQCommandLinkButton* self) {
+	return self->senderSignalIndex();
 }
 
-int QCommandLinkButton_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QCommandLinkButton_protectedbase_receivers(const VirtualQCommandLinkButton* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QCommandLinkButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQCommandLinkButton* self_cast = static_cast<VirtualQCommandLinkButton*>( (QCommandLinkButton*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QCommandLinkButton_protectedbase_isSignalConnected(const VirtualQCommandLinkButton* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QCommandLinkButton_delete(QCommandLinkButton* self) {

@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qaudiodecodercontrol.h>
 #include "gen_qaudiodecodercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAudioDecoderControl_virtbase(QAudioDecoderControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -321,6 +312,7 @@ struct miqt_string QAudioDecoderControl_trUtf83(const char* s, const char* c, in
 }
 
 const QMetaObject* QAudioDecoderControl_staticMetaObject() { return &QAudioDecoderControl::staticMetaObject; }
+
 void QAudioDecoderControl_delete(QAudioDecoderControl* self) {
 	delete self;
 }

@@ -28,16 +28,23 @@ typedef struct QSizeF QSizeF;
 typedef struct QSizePolicy QSizePolicy;
 #endif
 
-struct QGraphicsLayoutItem_VTable {
-	void (*destructor)(struct QGraphicsLayoutItem_VTable* vtbl, QGraphicsLayoutItem* self);
-	void (*setGeometry)(struct QGraphicsLayoutItem_VTable* vtbl, QGraphicsLayoutItem* self, QRectF* rect);
-	void (*getContentsMargins)(struct QGraphicsLayoutItem_VTable* vtbl, const QGraphicsLayoutItem* self, double* left, double* top, double* right, double* bottom);
-	void (*updateGeometry)(struct QGraphicsLayoutItem_VTable* vtbl, QGraphicsLayoutItem* self);
-	QSizeF* (*sizeHint)(struct QGraphicsLayoutItem_VTable* vtbl, const QGraphicsLayoutItem* self, int which, QSizeF* constraint);
-};
-QGraphicsLayoutItem* QGraphicsLayoutItem_new(struct QGraphicsLayoutItem_VTable* vtbl);
-QGraphicsLayoutItem* QGraphicsLayoutItem_new2(struct QGraphicsLayoutItem_VTable* vtbl, QGraphicsLayoutItem* parent);
-QGraphicsLayoutItem* QGraphicsLayoutItem_new3(struct QGraphicsLayoutItem_VTable* vtbl, QGraphicsLayoutItem* parent, bool isLayout);
+typedef struct VirtualQGraphicsLayoutItem VirtualQGraphicsLayoutItem;
+typedef struct QGraphicsLayoutItem_VTable{
+	void (*destructor)(VirtualQGraphicsLayoutItem* self);
+	void (*setGeometry)(VirtualQGraphicsLayoutItem* self, QRectF* rect);
+	void (*getContentsMargins)(const VirtualQGraphicsLayoutItem* self, double* left, double* top, double* right, double* bottom);
+	void (*updateGeometry)(VirtualQGraphicsLayoutItem* self);
+	QSizeF* (*sizeHint)(const VirtualQGraphicsLayoutItem* self, int which, QSizeF* constraint);
+}QGraphicsLayoutItem_VTable;
+
+const QGraphicsLayoutItem_VTable* QGraphicsLayoutItem_vtbl(const VirtualQGraphicsLayoutItem* self);
+void* QGraphicsLayoutItem_vdata(const VirtualQGraphicsLayoutItem* self);
+void QGraphicsLayoutItem_setVdata(VirtualQGraphicsLayoutItem* self, void* vdata);
+
+VirtualQGraphicsLayoutItem* QGraphicsLayoutItem_new(const QGraphicsLayoutItem_VTable* vtbl, void* vdata);
+VirtualQGraphicsLayoutItem* QGraphicsLayoutItem_new2(const QGraphicsLayoutItem_VTable* vtbl, void* vdata, QGraphicsLayoutItem* parent);
+VirtualQGraphicsLayoutItem* QGraphicsLayoutItem_new3(const QGraphicsLayoutItem_VTable* vtbl, void* vdata, QGraphicsLayoutItem* parent, bool isLayout);
+
 void QGraphicsLayoutItem_setSizePolicy(QGraphicsLayoutItem* self, QSizePolicy* policy);
 void QGraphicsLayoutItem_setSizePolicy2(QGraphicsLayoutItem* self, int hPolicy, int vPolicy);
 QSizePolicy* QGraphicsLayoutItem_sizePolicy(const QGraphicsLayoutItem* self);
@@ -76,12 +83,15 @@ bool QGraphicsLayoutItem_ownedByLayout(const QGraphicsLayoutItem* self);
 QSizeF* QGraphicsLayoutItem_sizeHint(const QGraphicsLayoutItem* self, int which, QSizeF* constraint);
 void QGraphicsLayoutItem_setSizePolicy3(QGraphicsLayoutItem* self, int hPolicy, int vPolicy, int controlType);
 QSizeF* QGraphicsLayoutItem_effectiveSizeHint2(const QGraphicsLayoutItem* self, int which, QSizeF* constraint);
-void QGraphicsLayoutItem_virtualbase_setGeometry(void* self, QRectF* rect);
-void QGraphicsLayoutItem_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
-void QGraphicsLayoutItem_virtualbase_updateGeometry(void* self);
-QSizeF* QGraphicsLayoutItem_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
-void QGraphicsLayoutItem_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
-void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
+
+void QGraphicsLayoutItem_virtualbase_setGeometry(VirtualQGraphicsLayoutItem* self, QRectF* rect);
+void QGraphicsLayoutItem_virtualbase_getContentsMargins(const VirtualQGraphicsLayoutItem* self, double* left, double* top, double* right, double* bottom);
+void QGraphicsLayoutItem_virtualbase_updateGeometry(VirtualQGraphicsLayoutItem* self);
+QSizeF* QGraphicsLayoutItem_virtualbase_sizeHint(const VirtualQGraphicsLayoutItem* self, int which, QSizeF* constraint);
+
+void QGraphicsLayoutItem_protectedbase_setGraphicsItem(VirtualQGraphicsLayoutItem* self, QGraphicsItem* item);
+void QGraphicsLayoutItem_protectedbase_setOwnedByLayout(VirtualQGraphicsLayoutItem* self, bool ownedByLayout);
+
 void QGraphicsLayoutItem_delete(QGraphicsLayoutItem* self);
 
 #ifdef __cplusplus

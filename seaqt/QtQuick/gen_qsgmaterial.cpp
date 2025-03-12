@@ -3,48 +3,40 @@
 #include <QSGMaterialType>
 #include <qsgmaterial.h>
 #include "gen_qsgmaterial.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGMaterial final : public QSGMaterial {
-	struct QSGMaterial_VTable* vtbl;
+	const QSGMaterial_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGMaterial_VTable* QSGMaterial_vtbl(const VirtualQSGMaterial* self);
+	friend void* QSGMaterial_vdata(const VirtualQSGMaterial* self);
+	friend void QSGMaterial_setVdata(VirtualQSGMaterial* self, void* vdata);
 
-	VirtualQSGMaterial(struct QSGMaterial_VTable* vtbl): QSGMaterial(), vtbl(vtbl) {};
+	VirtualQSGMaterial(const QSGMaterial_VTable* vtbl, void* vdata): QSGMaterial(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGMaterial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialType* type() const override {
 		if (vtbl->type == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 
-		QSGMaterialType* callback_return_value = vtbl->type(vtbl, this);
+		QSGMaterialType* callback_return_value = vtbl->type(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialShader* createShader() const override {
 		if (vtbl->createShader == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 
-		QSGMaterialShader* callback_return_value = vtbl->createShader(vtbl, this);
+		QSGMaterialShader* callback_return_value = vtbl->createShader(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int compare(const QSGMaterial* other) const override {
 		if (vtbl->compare == 0) {
 			return QSGMaterial::compare(other);
@@ -52,17 +44,17 @@ public:
 
 		QSGMaterial* sigval1 = (QSGMaterial*) other;
 
-		int callback_return_value = vtbl->compare(vtbl, this, sigval1);
+		int callback_return_value = vtbl->compare(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+	friend int QSGMaterial_virtualbase_compare(const VirtualQSGMaterial* self, QSGMaterial* other);
 
 };
 
-QSGMaterial* QSGMaterial_new(struct QSGMaterial_VTable* vtbl) {
-	return new VirtualQSGMaterial(vtbl);
+VirtualQSGMaterial* QSGMaterial_new(const QSGMaterial_VTable* vtbl, void* vdata) {
+	return new VirtualQSGMaterial(vtbl, vdata);
 }
 
 QSGMaterialType* QSGMaterial_type(const QSGMaterial* self) {
@@ -90,11 +82,14 @@ void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on) {
 	self->setFlag(static_cast<QSGMaterial::Flags>(flags), on);
 }
 
-int QSGMaterial_virtualbase_compare(const void* self, QSGMaterial* other) {
+int QSGMaterial_virtualbase_compare(const VirtualQSGMaterial* self, QSGMaterial* other) {
 
-	return ( (const VirtualQSGMaterial*)(self) )->QSGMaterial::compare(other);
-
+	return self->QSGMaterial::compare(other);
 }
+
+const QSGMaterial_VTable* QSGMaterial_vtbl(const VirtualQSGMaterial* self) { return self->vtbl; }
+void* QSGMaterial_vdata(const VirtualQSGMaterial* self) { return self->vdata; }
+void QSGMaterial_setVdata(VirtualQSGMaterial* self, void* vdata) { self->vdata = vdata; }
 
 void QSGMaterial_delete(QSGMaterial* self) {
 	delete self;

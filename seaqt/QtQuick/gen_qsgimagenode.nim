@@ -58,20 +58,20 @@ type cQSGImageNode*{.exportc: "QSGImageNode", incompleteStruct.} = object
 
 proc fcQSGImageNode_setRect(self: pointer, rect: pointer): void {.importc: "QSGImageNode_setRect".}
 proc fcQSGImageNode_setRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setRect2".}
-proc fcQSGImageNode_rect(self: pointer, ): pointer {.importc: "QSGImageNode_rect".}
+proc fcQSGImageNode_rect(self: pointer): pointer {.importc: "QSGImageNode_rect".}
 proc fcQSGImageNode_setSourceRect(self: pointer, r: pointer): void {.importc: "QSGImageNode_setSourceRect".}
 proc fcQSGImageNode_setSourceRect2(self: pointer, x: float64, y: float64, w: float64, h: float64): void {.importc: "QSGImageNode_setSourceRect2".}
-proc fcQSGImageNode_sourceRect(self: pointer, ): pointer {.importc: "QSGImageNode_sourceRect".}
+proc fcQSGImageNode_sourceRect(self: pointer): pointer {.importc: "QSGImageNode_sourceRect".}
 proc fcQSGImageNode_setTexture(self: pointer, texture: pointer): void {.importc: "QSGImageNode_setTexture".}
-proc fcQSGImageNode_texture(self: pointer, ): pointer {.importc: "QSGImageNode_texture".}
+proc fcQSGImageNode_texture(self: pointer): pointer {.importc: "QSGImageNode_texture".}
 proc fcQSGImageNode_setFiltering(self: pointer, filtering: cint): void {.importc: "QSGImageNode_setFiltering".}
-proc fcQSGImageNode_filtering(self: pointer, ): cint {.importc: "QSGImageNode_filtering".}
+proc fcQSGImageNode_filtering(self: pointer): cint {.importc: "QSGImageNode_filtering".}
 proc fcQSGImageNode_setMipmapFiltering(self: pointer, filtering: cint): void {.importc: "QSGImageNode_setMipmapFiltering".}
-proc fcQSGImageNode_mipmapFiltering(self: pointer, ): cint {.importc: "QSGImageNode_mipmapFiltering".}
+proc fcQSGImageNode_mipmapFiltering(self: pointer): cint {.importc: "QSGImageNode_mipmapFiltering".}
 proc fcQSGImageNode_setTextureCoordinatesTransform(self: pointer, mode: cint): void {.importc: "QSGImageNode_setTextureCoordinatesTransform".}
-proc fcQSGImageNode_textureCoordinatesTransform(self: pointer, ): cint {.importc: "QSGImageNode_textureCoordinatesTransform".}
+proc fcQSGImageNode_textureCoordinatesTransform(self: pointer): cint {.importc: "QSGImageNode_textureCoordinatesTransform".}
 proc fcQSGImageNode_setOwnsTexture(self: pointer, owns: bool): void {.importc: "QSGImageNode_setOwnsTexture".}
-proc fcQSGImageNode_ownsTexture(self: pointer, ): bool {.importc: "QSGImageNode_ownsTexture".}
+proc fcQSGImageNode_ownsTexture(self: pointer): bool {.importc: "QSGImageNode_ownsTexture".}
 proc fcQSGImageNode_rebuildGeometry(g: pointer, texture: pointer, rect: pointer, sourceRect: pointer, texCoordMode: cint): void {.importc: "QSGImageNode_rebuildGeometry".}
 
 proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, rect: gen_qrect_types.QRectF): void =
@@ -80,7 +80,7 @@ proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, rect: gen_qrect_types.Q
 proc setRect*(self: gen_qsgimagenode_types.QSGImageNode, x: float64, y: float64, w: float64, h: float64): void =
   fcQSGImageNode_setRect2(self.h, x, y, w, h)
 
-proc rect*(self: gen_qsgimagenode_types.QSGImageNode, ): gen_qrect_types.QRectF =
+proc rect*(self: gen_qsgimagenode_types.QSGImageNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGImageNode_rect(self.h), owned: true)
 
 proc setSourceRect*(self: gen_qsgimagenode_types.QSGImageNode, r: gen_qrect_types.QRectF): void =
@@ -89,37 +89,37 @@ proc setSourceRect*(self: gen_qsgimagenode_types.QSGImageNode, r: gen_qrect_type
 proc setSourceRect*(self: gen_qsgimagenode_types.QSGImageNode, x: float64, y: float64, w: float64, h: float64): void =
   fcQSGImageNode_setSourceRect2(self.h, x, y, w, h)
 
-proc sourceRect*(self: gen_qsgimagenode_types.QSGImageNode, ): gen_qrect_types.QRectF =
+proc sourceRect*(self: gen_qsgimagenode_types.QSGImageNode): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQSGImageNode_sourceRect(self.h), owned: true)
 
 proc setTexture*(self: gen_qsgimagenode_types.QSGImageNode, texture: gen_qsgtexture_types.QSGTexture): void =
   fcQSGImageNode_setTexture(self.h, texture.h)
 
-proc texture*(self: gen_qsgimagenode_types.QSGImageNode, ): gen_qsgtexture_types.QSGTexture =
+proc texture*(self: gen_qsgimagenode_types.QSGImageNode): gen_qsgtexture_types.QSGTexture =
   gen_qsgtexture_types.QSGTexture(h: fcQSGImageNode_texture(self.h), owned: false)
 
 proc setFiltering*(self: gen_qsgimagenode_types.QSGImageNode, filtering: cint): void =
   fcQSGImageNode_setFiltering(self.h, cint(filtering))
 
-proc filtering*(self: gen_qsgimagenode_types.QSGImageNode, ): cint =
+proc filtering*(self: gen_qsgimagenode_types.QSGImageNode): cint =
   cint(fcQSGImageNode_filtering(self.h))
 
 proc setMipmapFiltering*(self: gen_qsgimagenode_types.QSGImageNode, filtering: cint): void =
   fcQSGImageNode_setMipmapFiltering(self.h, cint(filtering))
 
-proc mipmapFiltering*(self: gen_qsgimagenode_types.QSGImageNode, ): cint =
+proc mipmapFiltering*(self: gen_qsgimagenode_types.QSGImageNode): cint =
   cint(fcQSGImageNode_mipmapFiltering(self.h))
 
 proc setTextureCoordinatesTransform*(self: gen_qsgimagenode_types.QSGImageNode, mode: cint): void =
   fcQSGImageNode_setTextureCoordinatesTransform(self.h, cint(mode))
 
-proc textureCoordinatesTransform*(self: gen_qsgimagenode_types.QSGImageNode, ): cint =
+proc textureCoordinatesTransform*(self: gen_qsgimagenode_types.QSGImageNode): cint =
   cint(fcQSGImageNode_textureCoordinatesTransform(self.h))
 
 proc setOwnsTexture*(self: gen_qsgimagenode_types.QSGImageNode, owns: bool): void =
   fcQSGImageNode_setOwnsTexture(self.h, owns)
 
-proc ownsTexture*(self: gen_qsgimagenode_types.QSGImageNode, ): bool =
+proc ownsTexture*(self: gen_qsgimagenode_types.QSGImageNode): bool =
   fcQSGImageNode_ownsTexture(self.h)
 
 proc rebuildGeometry*(_: type gen_qsgimagenode_types.QSGImageNode, g: gen_qsggeometry_types.QSGGeometry, texture: gen_qsgtexture_types.QSGTexture, rect: gen_qrect_types.QRectF, sourceRect: gen_qrect_types.QRectF, texCoordMode: cint): void =

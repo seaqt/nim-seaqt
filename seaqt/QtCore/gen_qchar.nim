@@ -362,48 +362,48 @@ export gen_qchar_types
 type cQLatin1Char*{.exportc: "QLatin1Char", incompleteStruct.} = object
 type cQChar*{.exportc: "QChar", incompleteStruct.} = object
 
-proc fcQLatin1Char_toLatin1(self: pointer, ): cchar {.importc: "QLatin1Char_toLatin1".}
-proc fcQLatin1Char_unicode(self: pointer, ): cushort {.importc: "QLatin1Char_unicode".}
+proc fcQLatin1Char_toLatin1(self: pointer): cchar {.importc: "QLatin1Char_toLatin1".}
+proc fcQLatin1Char_unicode(self: pointer): cushort {.importc: "QLatin1Char_unicode".}
 proc fcQLatin1Char_new(c: cchar): ptr cQLatin1Char {.importc: "QLatin1Char_new".}
 proc fcQLatin1Char_new2(param1: pointer): ptr cQLatin1Char {.importc: "QLatin1Char_new2".}
-proc fcQChar_category(self: pointer, ): cint {.importc: "QChar_category".}
-proc fcQChar_direction(self: pointer, ): cint {.importc: "QChar_direction".}
-proc fcQChar_joiningType(self: pointer, ): cint {.importc: "QChar_joiningType".}
-proc fcQChar_joining(self: pointer, ): cint {.importc: "QChar_joining".}
-proc fcQChar_combiningClass(self: pointer, ): uint8 {.importc: "QChar_combiningClass".}
-proc fcQChar_mirroredChar(self: pointer, ): pointer {.importc: "QChar_mirroredChar".}
-proc fcQChar_hasMirrored(self: pointer, ): bool {.importc: "QChar_hasMirrored".}
-proc fcQChar_decomposition(self: pointer, ): struct_miqt_string {.importc: "QChar_decomposition".}
-proc fcQChar_decompositionTag(self: pointer, ): cint {.importc: "QChar_decompositionTag".}
-proc fcQChar_digitValue(self: pointer, ): cint {.importc: "QChar_digitValue".}
-proc fcQChar_toLower(self: pointer, ): pointer {.importc: "QChar_toLower".}
-proc fcQChar_toUpper(self: pointer, ): pointer {.importc: "QChar_toUpper".}
-proc fcQChar_toTitleCase(self: pointer, ): pointer {.importc: "QChar_toTitleCase".}
-proc fcQChar_toCaseFolded(self: pointer, ): pointer {.importc: "QChar_toCaseFolded".}
-proc fcQChar_script(self: pointer, ): cint {.importc: "QChar_script".}
-proc fcQChar_unicodeVersion(self: pointer, ): cint {.importc: "QChar_unicodeVersion".}
-proc fcQChar_toLatin1(self: pointer, ): cchar {.importc: "QChar_toLatin1".}
-proc fcQChar_unicode(self: pointer, ): cushort {.importc: "QChar_unicode".}
+proc fcQChar_category(self: pointer): cint {.importc: "QChar_category".}
+proc fcQChar_direction(self: pointer): cint {.importc: "QChar_direction".}
+proc fcQChar_joiningType(self: pointer): cint {.importc: "QChar_joiningType".}
+proc fcQChar_joining(self: pointer): cint {.importc: "QChar_joining".}
+proc fcQChar_combiningClass(self: pointer): uint8 {.importc: "QChar_combiningClass".}
+proc fcQChar_mirroredChar(self: pointer): pointer {.importc: "QChar_mirroredChar".}
+proc fcQChar_hasMirrored(self: pointer): bool {.importc: "QChar_hasMirrored".}
+proc fcQChar_decomposition(self: pointer): struct_miqt_string {.importc: "QChar_decomposition".}
+proc fcQChar_decompositionTag(self: pointer): cint {.importc: "QChar_decompositionTag".}
+proc fcQChar_digitValue(self: pointer): cint {.importc: "QChar_digitValue".}
+proc fcQChar_toLower(self: pointer): pointer {.importc: "QChar_toLower".}
+proc fcQChar_toUpper(self: pointer): pointer {.importc: "QChar_toUpper".}
+proc fcQChar_toTitleCase(self: pointer): pointer {.importc: "QChar_toTitleCase".}
+proc fcQChar_toCaseFolded(self: pointer): pointer {.importc: "QChar_toCaseFolded".}
+proc fcQChar_script(self: pointer): cint {.importc: "QChar_script".}
+proc fcQChar_unicodeVersion(self: pointer): cint {.importc: "QChar_unicodeVersion".}
+proc fcQChar_toLatin1(self: pointer): cchar {.importc: "QChar_toLatin1".}
+proc fcQChar_unicode(self: pointer): cushort {.importc: "QChar_unicode".}
 proc fcQChar_fromLatin1(c: cchar): pointer {.importc: "QChar_fromLatin1".}
-proc fcQChar_isNull(self: pointer, ): bool {.importc: "QChar_isNull".}
-proc fcQChar_isPrint(self: pointer, ): bool {.importc: "QChar_isPrint".}
-proc fcQChar_isSpace(self: pointer, ): bool {.importc: "QChar_isSpace".}
-proc fcQChar_isMark(self: pointer, ): bool {.importc: "QChar_isMark".}
-proc fcQChar_isPunct(self: pointer, ): bool {.importc: "QChar_isPunct".}
-proc fcQChar_isSymbol(self: pointer, ): bool {.importc: "QChar_isSymbol".}
-proc fcQChar_isLetter(self: pointer, ): bool {.importc: "QChar_isLetter".}
-proc fcQChar_isNumber(self: pointer, ): bool {.importc: "QChar_isNumber".}
-proc fcQChar_isLetterOrNumber(self: pointer, ): bool {.importc: "QChar_isLetterOrNumber".}
-proc fcQChar_isDigit(self: pointer, ): bool {.importc: "QChar_isDigit".}
-proc fcQChar_isLower(self: pointer, ): bool {.importc: "QChar_isLower".}
-proc fcQChar_isUpper(self: pointer, ): bool {.importc: "QChar_isUpper".}
-proc fcQChar_isTitleCase(self: pointer, ): bool {.importc: "QChar_isTitleCase".}
-proc fcQChar_isNonCharacter(self: pointer, ): bool {.importc: "QChar_isNonCharacter".}
-proc fcQChar_isHighSurrogate(self: pointer, ): bool {.importc: "QChar_isHighSurrogate".}
-proc fcQChar_isLowSurrogate(self: pointer, ): bool {.importc: "QChar_isLowSurrogate".}
-proc fcQChar_isSurrogate(self: pointer, ): bool {.importc: "QChar_isSurrogate".}
-proc fcQChar_cell(self: pointer, ): uint8 {.importc: "QChar_cell".}
-proc fcQChar_row(self: pointer, ): uint8 {.importc: "QChar_row".}
+proc fcQChar_isNull(self: pointer): bool {.importc: "QChar_isNull".}
+proc fcQChar_isPrint(self: pointer): bool {.importc: "QChar_isPrint".}
+proc fcQChar_isSpace(self: pointer): bool {.importc: "QChar_isSpace".}
+proc fcQChar_isMark(self: pointer): bool {.importc: "QChar_isMark".}
+proc fcQChar_isPunct(self: pointer): bool {.importc: "QChar_isPunct".}
+proc fcQChar_isSymbol(self: pointer): bool {.importc: "QChar_isSymbol".}
+proc fcQChar_isLetter(self: pointer): bool {.importc: "QChar_isLetter".}
+proc fcQChar_isNumber(self: pointer): bool {.importc: "QChar_isNumber".}
+proc fcQChar_isLetterOrNumber(self: pointer): bool {.importc: "QChar_isLetterOrNumber".}
+proc fcQChar_isDigit(self: pointer): bool {.importc: "QChar_isDigit".}
+proc fcQChar_isLower(self: pointer): bool {.importc: "QChar_isLower".}
+proc fcQChar_isUpper(self: pointer): bool {.importc: "QChar_isUpper".}
+proc fcQChar_isTitleCase(self: pointer): bool {.importc: "QChar_isTitleCase".}
+proc fcQChar_isNonCharacter(self: pointer): bool {.importc: "QChar_isNonCharacter".}
+proc fcQChar_isHighSurrogate(self: pointer): bool {.importc: "QChar_isHighSurrogate".}
+proc fcQChar_isLowSurrogate(self: pointer): bool {.importc: "QChar_isLowSurrogate".}
+proc fcQChar_isSurrogate(self: pointer): bool {.importc: "QChar_isSurrogate".}
+proc fcQChar_cell(self: pointer): uint8 {.importc: "QChar_cell".}
+proc fcQChar_row(self: pointer): uint8 {.importc: "QChar_row".}
 proc fcQChar_setCell(self: pointer, acell: uint8): void {.importc: "QChar_setCell".}
 proc fcQChar_setRow(self: pointer, arow: uint8): void {.importc: "QChar_setRow".}
 proc fcQChar_isNonCharacterWithUcs4(ucs4: cuint): bool {.importc: "QChar_isNonCharacterWithUcs4".}
@@ -456,10 +456,10 @@ proc fcQChar_new9(c: cchar): ptr cQChar {.importc: "QChar_new9".}
 proc fcQChar_new10(c: uint8): ptr cQChar {.importc: "QChar_new10".}
 proc fcQChar_new11(param1: pointer): ptr cQChar {.importc: "QChar_new11".}
 
-proc toLatin1*(self: gen_qchar_types.QLatin1Char, ): cchar =
+proc toLatin1*(self: gen_qchar_types.QLatin1Char): cchar =
   fcQLatin1Char_toLatin1(self.h)
 
-proc unicode*(self: gen_qchar_types.QLatin1Char, ): cushort =
+proc unicode*(self: gen_qchar_types.QLatin1Char): cushort =
   fcQLatin1Char_unicode(self.h)
 
 proc create*(T: type gen_qchar_types.QLatin1Char,
@@ -470,121 +470,121 @@ proc create*(T: type gen_qchar_types.QLatin1Char,
     param1: gen_qchar_types.QLatin1Char): gen_qchar_types.QLatin1Char =
   gen_qchar_types.QLatin1Char(h: fcQLatin1Char_new2(param1.h), owned: true)
 
-proc category*(self: gen_qchar_types.QChar, ): cint =
+proc category*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_category(self.h))
 
-proc direction*(self: gen_qchar_types.QChar, ): cint =
+proc direction*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_direction(self.h))
 
-proc joiningType*(self: gen_qchar_types.QChar, ): cint =
+proc joiningType*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_joiningType(self.h))
 
-proc joining*(self: gen_qchar_types.QChar, ): cint =
+proc joining*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_joining(self.h))
 
-proc combiningClass*(self: gen_qchar_types.QChar, ): uint8 =
+proc combiningClass*(self: gen_qchar_types.QChar): uint8 =
   fcQChar_combiningClass(self.h)
 
-proc mirroredChar*(self: gen_qchar_types.QChar, ): gen_qchar_types.QChar =
+proc mirroredChar*(self: gen_qchar_types.QChar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_mirroredChar(self.h), owned: true)
 
-proc hasMirrored*(self: gen_qchar_types.QChar, ): bool =
+proc hasMirrored*(self: gen_qchar_types.QChar): bool =
   fcQChar_hasMirrored(self.h)
 
-proc decomposition*(self: gen_qchar_types.QChar, ): string =
+proc decomposition*(self: gen_qchar_types.QChar): string =
   let v_ms = fcQChar_decomposition(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc decompositionTag*(self: gen_qchar_types.QChar, ): cint =
+proc decompositionTag*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_decompositionTag(self.h))
 
-proc digitValue*(self: gen_qchar_types.QChar, ): cint =
+proc digitValue*(self: gen_qchar_types.QChar): cint =
   fcQChar_digitValue(self.h)
 
-proc toLower*(self: gen_qchar_types.QChar, ): gen_qchar_types.QChar =
+proc toLower*(self: gen_qchar_types.QChar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_toLower(self.h), owned: true)
 
-proc toUpper*(self: gen_qchar_types.QChar, ): gen_qchar_types.QChar =
+proc toUpper*(self: gen_qchar_types.QChar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_toUpper(self.h), owned: true)
 
-proc toTitleCase*(self: gen_qchar_types.QChar, ): gen_qchar_types.QChar =
+proc toTitleCase*(self: gen_qchar_types.QChar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_toTitleCase(self.h), owned: true)
 
-proc toCaseFolded*(self: gen_qchar_types.QChar, ): gen_qchar_types.QChar =
+proc toCaseFolded*(self: gen_qchar_types.QChar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_toCaseFolded(self.h), owned: true)
 
-proc script*(self: gen_qchar_types.QChar, ): cint =
+proc script*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_script(self.h))
 
-proc unicodeVersion*(self: gen_qchar_types.QChar, ): cint =
+proc unicodeVersion*(self: gen_qchar_types.QChar): cint =
   cint(fcQChar_unicodeVersion(self.h))
 
-proc toLatin1*(self: gen_qchar_types.QChar, ): cchar =
+proc toLatin1*(self: gen_qchar_types.QChar): cchar =
   fcQChar_toLatin1(self.h)
 
-proc unicode*(self: gen_qchar_types.QChar, ): cushort =
+proc unicode*(self: gen_qchar_types.QChar): cushort =
   fcQChar_unicode(self.h)
 
 proc fromLatin1*(_: type gen_qchar_types.QChar, c: cchar): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQChar_fromLatin1(c), owned: true)
 
-proc isNull*(self: gen_qchar_types.QChar, ): bool =
+proc isNull*(self: gen_qchar_types.QChar): bool =
   fcQChar_isNull(self.h)
 
-proc isPrint*(self: gen_qchar_types.QChar, ): bool =
+proc isPrint*(self: gen_qchar_types.QChar): bool =
   fcQChar_isPrint(self.h)
 
-proc isSpace*(self: gen_qchar_types.QChar, ): bool =
+proc isSpace*(self: gen_qchar_types.QChar): bool =
   fcQChar_isSpace(self.h)
 
-proc isMark*(self: gen_qchar_types.QChar, ): bool =
+proc isMark*(self: gen_qchar_types.QChar): bool =
   fcQChar_isMark(self.h)
 
-proc isPunct*(self: gen_qchar_types.QChar, ): bool =
+proc isPunct*(self: gen_qchar_types.QChar): bool =
   fcQChar_isPunct(self.h)
 
-proc isSymbol*(self: gen_qchar_types.QChar, ): bool =
+proc isSymbol*(self: gen_qchar_types.QChar): bool =
   fcQChar_isSymbol(self.h)
 
-proc isLetter*(self: gen_qchar_types.QChar, ): bool =
+proc isLetter*(self: gen_qchar_types.QChar): bool =
   fcQChar_isLetter(self.h)
 
-proc isNumber*(self: gen_qchar_types.QChar, ): bool =
+proc isNumber*(self: gen_qchar_types.QChar): bool =
   fcQChar_isNumber(self.h)
 
-proc isLetterOrNumber*(self: gen_qchar_types.QChar, ): bool =
+proc isLetterOrNumber*(self: gen_qchar_types.QChar): bool =
   fcQChar_isLetterOrNumber(self.h)
 
-proc isDigit*(self: gen_qchar_types.QChar, ): bool =
+proc isDigit*(self: gen_qchar_types.QChar): bool =
   fcQChar_isDigit(self.h)
 
-proc isLower*(self: gen_qchar_types.QChar, ): bool =
+proc isLower*(self: gen_qchar_types.QChar): bool =
   fcQChar_isLower(self.h)
 
-proc isUpper*(self: gen_qchar_types.QChar, ): bool =
+proc isUpper*(self: gen_qchar_types.QChar): bool =
   fcQChar_isUpper(self.h)
 
-proc isTitleCase*(self: gen_qchar_types.QChar, ): bool =
+proc isTitleCase*(self: gen_qchar_types.QChar): bool =
   fcQChar_isTitleCase(self.h)
 
-proc isNonCharacter*(self: gen_qchar_types.QChar, ): bool =
+proc isNonCharacter*(self: gen_qchar_types.QChar): bool =
   fcQChar_isNonCharacter(self.h)
 
-proc isHighSurrogate*(self: gen_qchar_types.QChar, ): bool =
+proc isHighSurrogate*(self: gen_qchar_types.QChar): bool =
   fcQChar_isHighSurrogate(self.h)
 
-proc isLowSurrogate*(self: gen_qchar_types.QChar, ): bool =
+proc isLowSurrogate*(self: gen_qchar_types.QChar): bool =
   fcQChar_isLowSurrogate(self.h)
 
-proc isSurrogate*(self: gen_qchar_types.QChar, ): bool =
+proc isSurrogate*(self: gen_qchar_types.QChar): bool =
   fcQChar_isSurrogate(self.h)
 
-proc cell*(self: gen_qchar_types.QChar, ): uint8 =
+proc cell*(self: gen_qchar_types.QChar): uint8 =
   fcQChar_cell(self.h)
 
-proc row*(self: gen_qchar_types.QChar, ): uint8 =
+proc row*(self: gen_qchar_types.QChar): uint8 =
   fcQChar_row(self.h)
 
 proc setCell*(self: gen_qchar_types.QChar, acell: uint8): void =
@@ -671,7 +671,7 @@ proc script*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
 proc unicodeVersion*(_: type gen_qchar_types.QChar, ucs4: cuint): cint =
   cint(fcQChar_unicodeVersionWithUcs4(ucs4))
 
-proc currentUnicodeVersion*(_: type gen_qchar_types.QChar, ): cint =
+proc currentUnicodeVersion*(_: type gen_qchar_types.QChar): cint =
   cint(fcQChar_currentUnicodeVersion())
 
 proc isPrint*(_: type gen_qchar_types.QChar, ucs4: cuint): bool =

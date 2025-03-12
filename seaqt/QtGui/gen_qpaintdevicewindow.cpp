@@ -15,15 +15,6 @@
 #include <QWindow>
 #include <qpaintdevicewindow.h>
 #include "gen_qpaintdevicewindow.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QPaintDeviceWindow_virtbase(QPaintDeviceWindow* src, QWindow** outptr_QWindow, QPaintDevice** outptr_QPaintDevice) {
 	*outptr_QWindow = static_cast<QWindow*>(src);
 	*outptr_QPaintDevice = static_cast<QPaintDevice*>(src);
@@ -120,6 +111,7 @@ struct miqt_string QPaintDeviceWindow_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QPaintDeviceWindow_staticMetaObject() { return &QPaintDeviceWindow::staticMetaObject; }
+
 void QPaintDeviceWindow_delete(QPaintDeviceWindow* self) {
 	delete self;
 }

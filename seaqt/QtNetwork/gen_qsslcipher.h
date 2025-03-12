@@ -24,6 +24,7 @@ QSslCipher* QSslCipher_new();
 QSslCipher* QSslCipher_new2(struct miqt_string name);
 QSslCipher* QSslCipher_new3(struct miqt_string name, int protocol);
 QSslCipher* QSslCipher_new4(QSslCipher* other);
+
 void QSslCipher_operatorAssign(QSslCipher* self, QSslCipher* other);
 void QSslCipher_swap(QSslCipher* self, QSslCipher* other);
 bool QSslCipher_operatorEqual(const QSslCipher* self, QSslCipher* other);
@@ -37,6 +38,7 @@ struct miqt_string QSslCipher_authenticationMethod(const QSslCipher* self);
 struct miqt_string QSslCipher_encryptionMethod(const QSslCipher* self);
 struct miqt_string QSslCipher_protocolString(const QSslCipher* self);
 int QSslCipher_protocol(const QSslCipher* self);
+
 void QSslCipher_delete(QSslCipher* self);
 
 #ifdef __cplusplus

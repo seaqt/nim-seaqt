@@ -1,15 +1,6 @@
 #include <QWebEngineFindTextResult>
 #include <qwebenginefindtextresult.h>
 #include "gen_qwebenginefindtextresult.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineFindTextResult* QWebEngineFindTextResult_new() {
 	return new QWebEngineFindTextResult();
 }
@@ -31,6 +22,7 @@ void QWebEngineFindTextResult_operatorAssign(QWebEngineFindTextResult* self, QWe
 }
 
 const QMetaObject* QWebEngineFindTextResult_staticMetaObject() { return &QWebEngineFindTextResult::staticMetaObject; }
+
 void QWebEngineFindTextResult_delete(QWebEngineFindTextResult* self) {
 	delete self;
 }

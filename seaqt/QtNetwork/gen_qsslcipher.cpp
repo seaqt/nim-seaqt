@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qsslcipher.h>
 #include "gen_qsslcipher.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslCipher* QSslCipher_new() {
 	return new QSslCipher();
 }

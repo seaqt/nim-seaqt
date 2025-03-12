@@ -25,6 +25,7 @@ typedef struct QIODevice QIODevice;
 QDataStream* QDataStream_new();
 QDataStream* QDataStream_new2(QIODevice* param1);
 QDataStream* QDataStream_new3(struct miqt_string param1);
+
 QIODevice* QDataStream_device(const QDataStream* self);
 void QDataStream_setDevice(QDataStream* self, QIODevice* device);
 void QDataStream_unsetDevice(QDataStream* self);
@@ -71,6 +72,7 @@ void QDataStream_startTransaction(QDataStream* self);
 bool QDataStream_commitTransaction(QDataStream* self);
 void QDataStream_rollbackTransaction(QDataStream* self);
 void QDataStream_abortTransaction(QDataStream* self);
+
 void QDataStream_delete(QDataStream* self);
 
 #ifdef __cplusplus

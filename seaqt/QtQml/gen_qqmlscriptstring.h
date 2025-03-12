@@ -22,6 +22,7 @@ typedef struct QQmlScriptString QQmlScriptString;
 
 QQmlScriptString* QQmlScriptString_new();
 QQmlScriptString* QQmlScriptString_new2(QQmlScriptString* param1);
+
 void QQmlScriptString_operatorAssign(QQmlScriptString* self, QQmlScriptString* param1);
 bool QQmlScriptString_operatorEqual(const QQmlScriptString* self, QQmlScriptString* param1);
 bool QQmlScriptString_operatorNotEqual(const QQmlScriptString* self, QQmlScriptString* param1);
@@ -31,6 +32,7 @@ bool QQmlScriptString_isNullLiteral(const QQmlScriptString* self);
 struct miqt_string QQmlScriptString_stringLiteral(const QQmlScriptString* self);
 double QQmlScriptString_numberLiteral(const QQmlScriptString* self, bool* ok);
 bool QQmlScriptString_booleanLiteral(const QQmlScriptString* self, bool* ok);
+
 void QQmlScriptString_delete(QQmlScriptString* self);
 
 #ifdef __cplusplus

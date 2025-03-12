@@ -9,15 +9,6 @@
 #include <QVariant>
 #include <qcameraimageprocessingcontrol.h>
 #include "gen_qcameraimageprocessingcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraImageProcessingControl_virtbase(QCameraImageProcessingControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -117,6 +108,7 @@ struct miqt_string QCameraImageProcessingControl_trUtf83(const char* s, const ch
 }
 
 const QMetaObject* QCameraImageProcessingControl_staticMetaObject() { return &QCameraImageProcessingControl::staticMetaObject; }
+
 void QCameraImageProcessingControl_delete(QCameraImageProcessingControl* self) {
 	delete self;
 }

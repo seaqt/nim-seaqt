@@ -13,15 +13,6 @@
 #include <QTransform>
 #include <qrawfont.h>
 #include "gen_qrawfont.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRawFont* QRawFont_new() {
 	return new QRawFont();
 }

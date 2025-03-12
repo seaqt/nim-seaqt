@@ -5,15 +5,6 @@
 #include <QVariant>
 #include <qpen.h>
 #include "gen_qpen.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPen* QPen_new() {
 	return new QPen();
 }

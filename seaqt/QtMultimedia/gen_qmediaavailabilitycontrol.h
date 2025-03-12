@@ -41,6 +41,7 @@ struct miqt_string QMediaAvailabilityControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaAvailabilityControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaAvailabilityControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaAvailabilityControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaAvailabilityControl_staticMetaObject();
 void QMediaAvailabilityControl_delete(QMediaAvailabilityControl* self);
 

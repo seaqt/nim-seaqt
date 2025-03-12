@@ -36,21 +36,28 @@ typedef struct QVariant QVariant;
 typedef struct QWebChannel QWebChannel;
 #endif
 
-struct QQmlWebChannel_VTable {
-	void (*destructor)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self);
-	QMetaObject* (*metaObject)(struct QQmlWebChannel_VTable* vtbl, const QQmlWebChannel* self);
-	void* (*metacast)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, const char* param1);
-	int (*metacall)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, int param1, int param2, void** param3);
-	bool (*event)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QEvent* event);
-	bool (*eventFilter)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QTimerEvent* event);
-	void (*childEvent)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QChildEvent* event);
-	void (*customEvent)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QEvent* event);
-	void (*connectNotify)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QQmlWebChannel_VTable* vtbl, QQmlWebChannel* self, QMetaMethod* signal);
-};
-QQmlWebChannel* QQmlWebChannel_new(struct QQmlWebChannel_VTable* vtbl);
-QQmlWebChannel* QQmlWebChannel_new2(struct QQmlWebChannel_VTable* vtbl, QObject* parent);
+typedef struct VirtualQQmlWebChannel VirtualQQmlWebChannel;
+typedef struct QQmlWebChannel_VTable{
+	void (*destructor)(VirtualQQmlWebChannel* self);
+	QMetaObject* (*metaObject)(const VirtualQQmlWebChannel* self);
+	void* (*metacast)(VirtualQQmlWebChannel* self, const char* param1);
+	int (*metacall)(VirtualQQmlWebChannel* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQQmlWebChannel* self, QEvent* event);
+	bool (*eventFilter)(VirtualQQmlWebChannel* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQQmlWebChannel* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQQmlWebChannel* self, QChildEvent* event);
+	void (*customEvent)(VirtualQQmlWebChannel* self, QEvent* event);
+	void (*connectNotify)(VirtualQQmlWebChannel* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQQmlWebChannel* self, QMetaMethod* signal);
+}QQmlWebChannel_VTable;
+
+const QQmlWebChannel_VTable* QQmlWebChannel_vtbl(const VirtualQQmlWebChannel* self);
+void* QQmlWebChannel_vdata(const VirtualQQmlWebChannel* self);
+void QQmlWebChannel_setVdata(VirtualQQmlWebChannel* self, void* vdata);
+
+VirtualQQmlWebChannel* QQmlWebChannel_new(const QQmlWebChannel_VTable* vtbl, void* vdata);
+VirtualQQmlWebChannel* QQmlWebChannel_new2(const QQmlWebChannel_VTable* vtbl, void* vdata, QObject* parent);
+
 void QQmlWebChannel_virtbase(QQmlWebChannel* src, QWebChannel** outptr_QWebChannel);
 QMetaObject* QQmlWebChannel_metaObject(const QQmlWebChannel* self);
 void* QQmlWebChannel_metacast(QQmlWebChannel* self, const char* param1);
@@ -64,20 +71,23 @@ struct miqt_string QQmlWebChannel_tr2(const char* s, const char* c);
 struct miqt_string QQmlWebChannel_tr3(const char* s, const char* c, int n);
 struct miqt_string QQmlWebChannel_trUtf82(const char* s, const char* c);
 struct miqt_string QQmlWebChannel_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QQmlWebChannel_virtualbase_metaObject(const void* self);
-void* QQmlWebChannel_virtualbase_metacast(void* self, const char* param1);
-int QQmlWebChannel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QQmlWebChannel_virtualbase_event(void* self, QEvent* event);
-bool QQmlWebChannel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QQmlWebChannel_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QQmlWebChannel_virtualbase_childEvent(void* self, QChildEvent* event);
-void QQmlWebChannel_virtualbase_customEvent(void* self, QEvent* event);
-void QQmlWebChannel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QQmlWebChannel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlWebChannel_protectedbase_sender(const void* self);
-int QQmlWebChannel_protectedbase_senderSignalIndex(const void* self);
-int QQmlWebChannel_protectedbase_receivers(const void* self, const char* signal);
-bool QQmlWebChannel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QQmlWebChannel_virtualbase_metaObject(const VirtualQQmlWebChannel* self);
+void* QQmlWebChannel_virtualbase_metacast(VirtualQQmlWebChannel* self, const char* param1);
+int QQmlWebChannel_virtualbase_metacall(VirtualQQmlWebChannel* self, int param1, int param2, void** param3);
+bool QQmlWebChannel_virtualbase_event(VirtualQQmlWebChannel* self, QEvent* event);
+bool QQmlWebChannel_virtualbase_eventFilter(VirtualQQmlWebChannel* self, QObject* watched, QEvent* event);
+void QQmlWebChannel_virtualbase_timerEvent(VirtualQQmlWebChannel* self, QTimerEvent* event);
+void QQmlWebChannel_virtualbase_childEvent(VirtualQQmlWebChannel* self, QChildEvent* event);
+void QQmlWebChannel_virtualbase_customEvent(VirtualQQmlWebChannel* self, QEvent* event);
+void QQmlWebChannel_virtualbase_connectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal);
+void QQmlWebChannel_virtualbase_disconnectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal);
+
+QObject* QQmlWebChannel_protectedbase_sender(const VirtualQQmlWebChannel* self);
+int QQmlWebChannel_protectedbase_senderSignalIndex(const VirtualQQmlWebChannel* self);
+int QQmlWebChannel_protectedbase_receivers(const VirtualQQmlWebChannel* self, const char* signal);
+bool QQmlWebChannel_protectedbase_isSignalConnected(const VirtualQQmlWebChannel* self, QMetaMethod* signal);
+
 const QMetaObject* QQmlWebChannel_staticMetaObject();
 void QQmlWebChannel_delete(QQmlWebChannel* self);
 

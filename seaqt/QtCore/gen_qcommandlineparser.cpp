@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qcommandlineparser.h>
 #include "gen_qcommandlineparser.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCommandLineParser* QCommandLineParser_new() {
 	return new QCommandLineParser();
 }

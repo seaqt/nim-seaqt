@@ -94,6 +94,7 @@ struct miqt_string QTextObject_tr2(const char* s, const char* c);
 struct miqt_string QTextObject_tr3(const char* s, const char* c, int n);
 struct miqt_string QTextObject_trUtf82(const char* s, const char* c);
 struct miqt_string QTextObject_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QTextObject_staticMetaObject();
 
 void QTextBlockGroup_virtbase(QTextBlockGroup* src, QTextObject** outptr_QTextObject);
@@ -109,25 +110,34 @@ struct miqt_string QTextBlockGroup_tr2(const char* s, const char* c);
 struct miqt_string QTextBlockGroup_tr3(const char* s, const char* c, int n);
 struct miqt_string QTextBlockGroup_trUtf82(const char* s, const char* c);
 struct miqt_string QTextBlockGroup_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QTextBlockGroup_staticMetaObject();
 
 void QTextFrameLayoutData_operatorAssign(QTextFrameLayoutData* self, QTextFrameLayoutData* param1);
+
 void QTextFrameLayoutData_delete(QTextFrameLayoutData* self);
 
-struct QTextFrame_VTable {
-	void (*destructor)(struct QTextFrame_VTable* vtbl, QTextFrame* self);
-	QMetaObject* (*metaObject)(struct QTextFrame_VTable* vtbl, const QTextFrame* self);
-	void* (*metacast)(struct QTextFrame_VTable* vtbl, QTextFrame* self, const char* param1);
-	int (*metacall)(struct QTextFrame_VTable* vtbl, QTextFrame* self, int param1, int param2, void** param3);
-	bool (*event)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QEvent* event);
-	bool (*eventFilter)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QTimerEvent* event);
-	void (*childEvent)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QChildEvent* event);
-	void (*customEvent)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QEvent* event);
-	void (*connectNotify)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QTextFrame_VTable* vtbl, QTextFrame* self, QMetaMethod* signal);
-};
-QTextFrame* QTextFrame_new(struct QTextFrame_VTable* vtbl, QTextDocument* doc);
+typedef struct VirtualQTextFrame VirtualQTextFrame;
+typedef struct QTextFrame_VTable{
+	void (*destructor)(VirtualQTextFrame* self);
+	QMetaObject* (*metaObject)(const VirtualQTextFrame* self);
+	void* (*metacast)(VirtualQTextFrame* self, const char* param1);
+	int (*metacall)(VirtualQTextFrame* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQTextFrame* self, QEvent* event);
+	bool (*eventFilter)(VirtualQTextFrame* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQTextFrame* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQTextFrame* self, QChildEvent* event);
+	void (*customEvent)(VirtualQTextFrame* self, QEvent* event);
+	void (*connectNotify)(VirtualQTextFrame* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQTextFrame* self, QMetaMethod* signal);
+}QTextFrame_VTable;
+
+const QTextFrame_VTable* QTextFrame_vtbl(const VirtualQTextFrame* self);
+void* QTextFrame_vdata(const VirtualQTextFrame* self);
+void QTextFrame_setVdata(VirtualQTextFrame* self, void* vdata);
+
+VirtualQTextFrame* QTextFrame_new(const QTextFrame_VTable* vtbl, void* vdata, QTextDocument* doc);
+
 void QTextFrame_virtbase(QTextFrame* src, QTextObject** outptr_QTextObject);
 QMetaObject* QTextFrame_metaObject(const QTextFrame* self);
 void* QTextFrame_metacast(QTextFrame* self, const char* param1);
@@ -150,29 +160,34 @@ struct miqt_string QTextFrame_tr2(const char* s, const char* c);
 struct miqt_string QTextFrame_tr3(const char* s, const char* c, int n);
 struct miqt_string QTextFrame_trUtf82(const char* s, const char* c);
 struct miqt_string QTextFrame_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QTextFrame_virtualbase_metaObject(const void* self);
-void* QTextFrame_virtualbase_metacast(void* self, const char* param1);
-int QTextFrame_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QTextFrame_virtualbase_event(void* self, QEvent* event);
-bool QTextFrame_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QTextFrame_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QTextFrame_virtualbase_childEvent(void* self, QChildEvent* event);
-void QTextFrame_virtualbase_customEvent(void* self, QEvent* event);
-void QTextFrame_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QTextFrame_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-void QTextFrame_protectedbase_setFormat(void* self, QTextFormat* format);
-QObject* QTextFrame_protectedbase_sender(const void* self);
-int QTextFrame_protectedbase_senderSignalIndex(const void* self);
-int QTextFrame_protectedbase_receivers(const void* self, const char* signal);
-bool QTextFrame_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QTextFrame_virtualbase_metaObject(const VirtualQTextFrame* self);
+void* QTextFrame_virtualbase_metacast(VirtualQTextFrame* self, const char* param1);
+int QTextFrame_virtualbase_metacall(VirtualQTextFrame* self, int param1, int param2, void** param3);
+bool QTextFrame_virtualbase_event(VirtualQTextFrame* self, QEvent* event);
+bool QTextFrame_virtualbase_eventFilter(VirtualQTextFrame* self, QObject* watched, QEvent* event);
+void QTextFrame_virtualbase_timerEvent(VirtualQTextFrame* self, QTimerEvent* event);
+void QTextFrame_virtualbase_childEvent(VirtualQTextFrame* self, QChildEvent* event);
+void QTextFrame_virtualbase_customEvent(VirtualQTextFrame* self, QEvent* event);
+void QTextFrame_virtualbase_connectNotify(VirtualQTextFrame* self, QMetaMethod* signal);
+void QTextFrame_virtualbase_disconnectNotify(VirtualQTextFrame* self, QMetaMethod* signal);
+
+void QTextFrame_protectedbase_setFormat(VirtualQTextFrame* self, QTextFormat* format);
+QObject* QTextFrame_protectedbase_sender(const VirtualQTextFrame* self);
+int QTextFrame_protectedbase_senderSignalIndex(const VirtualQTextFrame* self);
+int QTextFrame_protectedbase_receivers(const VirtualQTextFrame* self, const char* signal);
+bool QTextFrame_protectedbase_isSignalConnected(const VirtualQTextFrame* self, QMetaMethod* signal);
+
 const QMetaObject* QTextFrame_staticMetaObject();
 void QTextFrame_delete(QTextFrame* self);
 
 void QTextBlockUserData_operatorAssign(QTextBlockUserData* self, QTextBlockUserData* param1);
+
 void QTextBlockUserData_delete(QTextBlockUserData* self);
 
 QTextBlock* QTextBlock_new();
 QTextBlock* QTextBlock_new2(QTextBlock* o);
+
 void QTextBlock_operatorAssign(QTextBlock* self, QTextBlock* o);
 bool QTextBlock_isValid(const QTextBlock* self);
 bool QTextBlock_operatorEqual(const QTextBlock* self, QTextBlock* o);
@@ -209,10 +224,12 @@ QTextBlock__iterator* QTextBlock_end(const QTextBlock* self);
 QTextBlock* QTextBlock_next(const QTextBlock* self);
 QTextBlock* QTextBlock_previous(const QTextBlock* self);
 int QTextBlock_fragmentIndex(const QTextBlock* self);
+
 void QTextBlock_delete(QTextBlock* self);
 
 QTextFragment* QTextFragment_new();
 QTextFragment* QTextFragment_new2(QTextFragment* o);
+
 void QTextFragment_operatorAssign(QTextFragment* self, QTextFragment* o);
 bool QTextFragment_isValid(const QTextFragment* self);
 bool QTextFragment_operatorEqual(const QTextFragment* self, QTextFragment* o);
@@ -227,10 +244,12 @@ struct miqt_string QTextFragment_text(const QTextFragment* self);
 struct miqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns(const QTextFragment* self);
 struct miqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns1(const QTextFragment* self, int from);
 struct miqt_array /* of QGlyphRun* */  QTextFragment_glyphRuns2(const QTextFragment* self, int from, int length);
+
 void QTextFragment_delete(QTextFragment* self);
 
 QTextFrame__iterator* QTextFrame__iterator_new();
 QTextFrame__iterator* QTextFrame__iterator_new2(QTextFrame__iterator* o);
+
 void QTextFrame__iterator_operatorAssign(QTextFrame__iterator* self, QTextFrame__iterator* o);
 QTextFrame* QTextFrame__iterator_parentFrame(const QTextFrame__iterator* self);
 QTextFrame* QTextFrame__iterator_currentFrame(const QTextFrame__iterator* self);
@@ -242,10 +261,12 @@ QTextFrame__iterator* QTextFrame__iterator_operatorPlusPlus(QTextFrame__iterator
 QTextFrame__iterator* QTextFrame__iterator_operatorPlusPlusWithInt(QTextFrame__iterator* self, int param1);
 QTextFrame__iterator* QTextFrame__iterator_operatorMinusMinus(QTextFrame__iterator* self);
 QTextFrame__iterator* QTextFrame__iterator_operatorMinusMinusWithInt(QTextFrame__iterator* self, int param1);
+
 void QTextFrame__iterator_delete(QTextFrame__iterator* self);
 
 QTextBlock__iterator* QTextBlock__iterator_new();
 QTextBlock__iterator* QTextBlock__iterator_new2(QTextBlock__iterator* o);
+
 void QTextBlock__iterator_operatorAssign(QTextBlock__iterator* self, QTextBlock__iterator* o);
 QTextFragment* QTextBlock__iterator_fragment(const QTextBlock__iterator* self);
 bool QTextBlock__iterator_atEnd(const QTextBlock__iterator* self);
@@ -255,6 +276,7 @@ QTextBlock__iterator* QTextBlock__iterator_operatorPlusPlus(QTextBlock__iterator
 QTextBlock__iterator* QTextBlock__iterator_operatorPlusPlusWithInt(QTextBlock__iterator* self, int param1);
 QTextBlock__iterator* QTextBlock__iterator_operatorMinusMinus(QTextBlock__iterator* self);
 QTextBlock__iterator* QTextBlock__iterator_operatorMinusMinusWithInt(QTextBlock__iterator* self, int param1);
+
 void QTextBlock__iterator_delete(QTextBlock__iterator* self);
 
 #ifdef __cplusplus

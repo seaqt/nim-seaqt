@@ -20,13 +20,22 @@ class QAbstractNativeEventFilter;
 typedef struct QAbstractNativeEventFilter QAbstractNativeEventFilter;
 #endif
 
-struct QAbstractNativeEventFilter_VTable {
-	void (*destructor)(struct QAbstractNativeEventFilter_VTable* vtbl, QAbstractNativeEventFilter* self);
-	bool (*nativeEventFilter)(struct QAbstractNativeEventFilter_VTable* vtbl, QAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
-};
-QAbstractNativeEventFilter* QAbstractNativeEventFilter_new(struct QAbstractNativeEventFilter_VTable* vtbl);
+typedef struct VirtualQAbstractNativeEventFilter VirtualQAbstractNativeEventFilter;
+typedef struct QAbstractNativeEventFilter_VTable{
+	void (*destructor)(VirtualQAbstractNativeEventFilter* self);
+	bool (*nativeEventFilter)(VirtualQAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
+}QAbstractNativeEventFilter_VTable;
+
+const QAbstractNativeEventFilter_VTable* QAbstractNativeEventFilter_vtbl(const VirtualQAbstractNativeEventFilter* self);
+void* QAbstractNativeEventFilter_vdata(const VirtualQAbstractNativeEventFilter* self);
+void QAbstractNativeEventFilter_setVdata(VirtualQAbstractNativeEventFilter* self, void* vdata);
+
+VirtualQAbstractNativeEventFilter* QAbstractNativeEventFilter_new(const QAbstractNativeEventFilter_VTable* vtbl, void* vdata);
+
 bool QAbstractNativeEventFilter_nativeEventFilter(QAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
-bool QAbstractNativeEventFilter_virtualbase_nativeEventFilter(void* self, struct miqt_string eventType, void* message, long* result);
+
+bool QAbstractNativeEventFilter_virtualbase_nativeEventFilter(VirtualQAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result);
+
 void QAbstractNativeEventFilter_delete(QAbstractNativeEventFilter* self);
 
 #ifdef __cplusplus

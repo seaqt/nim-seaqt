@@ -21,39 +21,32 @@
 #include <QTimerEvent>
 #include <qgraphicseffect.h>
 #include "gen_qgraphicseffect.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGraphicsEffect final : public QGraphicsEffect {
-	struct QGraphicsEffect_VTable* vtbl;
+	const QGraphicsEffect_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsEffect_VTable* QGraphicsEffect_vtbl(const VirtualQGraphicsEffect* self);
+	friend void* QGraphicsEffect_vdata(const VirtualQGraphicsEffect* self);
+	friend void QGraphicsEffect_setVdata(VirtualQGraphicsEffect* self, void* vdata);
 
-	VirtualQGraphicsEffect(struct QGraphicsEffect_VTable* vtbl): QGraphicsEffect(), vtbl(vtbl) {};
-	VirtualQGraphicsEffect(struct QGraphicsEffect_VTable* vtbl, QObject* parent): QGraphicsEffect(parent), vtbl(vtbl) {};
+	VirtualQGraphicsEffect(const QGraphicsEffect_VTable* vtbl, void* vdata): QGraphicsEffect(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsEffect(const QGraphicsEffect_VTable* vtbl, void* vdata, QObject* parent): QGraphicsEffect(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsEffect() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsEffect() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsEffect::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsEffect_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsEffect_virtualbase_metaObject(const VirtualQGraphicsEffect* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsEffect::qt_metacast(param1);
@@ -61,14 +54,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsEffect_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsEffect_virtualbase_metacast(VirtualQGraphicsEffect* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsEffect::qt_metacall(param1, param2, param3);
@@ -79,14 +71,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsEffect_virtualbase_metacall(VirtualQGraphicsEffect* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
 		if (vtbl->boundingRectFor == 0) {
 			return QGraphicsEffect::boundingRectFor(sourceRect);
@@ -96,16 +87,15 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 
-		QRectF* callback_return_value = vtbl->boundingRectFor(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->boundingRectFor(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
+	friend QRectF* QGraphicsEffect_virtualbase_boundingRectFor(const VirtualQGraphicsEffect* self, QRectF* sourceRect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter) override {
 		if (vtbl->draw == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -113,11 +103,10 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->draw(vtbl, this, sigval1);
+		vtbl->draw(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void sourceChanged(QGraphicsEffect::ChangeFlags flags) override {
 		if (vtbl->sourceChanged == 0) {
 			QGraphicsEffect::sourceChanged(flags);
@@ -127,13 +116,12 @@ public:
 		QGraphicsEffect::ChangeFlags flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
 
-		vtbl->sourceChanged(vtbl, this, sigval1);
+		vtbl->sourceChanged(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_sourceChanged(void* self, int flags);
+	friend void QGraphicsEffect_virtualbase_sourceChanged(VirtualQGraphicsEffect* self, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsEffect::event(event);
@@ -141,14 +129,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEffect_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsEffect_virtualbase_event(VirtualQGraphicsEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsEffect::eventFilter(watched, event);
@@ -157,14 +144,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsEffect_virtualbase_eventFilter(VirtualQGraphicsEffect* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsEffect::timerEvent(event);
@@ -173,13 +159,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsEffect_virtualbase_timerEvent(VirtualQGraphicsEffect* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsEffect::childEvent(event);
@@ -188,13 +173,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsEffect_virtualbase_childEvent(VirtualQGraphicsEffect* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsEffect::customEvent(event);
@@ -203,13 +187,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsEffect_virtualbase_customEvent(VirtualQGraphicsEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsEffect::connectNotify(signal);
@@ -220,13 +203,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsEffect_virtualbase_connectNotify(VirtualQGraphicsEffect* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsEffect::disconnectNotify(signal);
@@ -237,34 +219,34 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsEffect_virtualbase_disconnectNotify(VirtualQGraphicsEffect* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsEffect_protectedbase_updateBoundingRect(void* self);
-	friend bool QGraphicsEffect_protectedbase_sourceIsPixmap(const void* self);
-	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const void* self);
-	friend void QGraphicsEffect_protectedbase_drawSource(void* self, QPainter* painter);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const void* self);
-	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect1(const void* self, int system);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap1(const void* self, int system);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const void* self, int system, QPoint* offset);
-	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const void* self, int system, QPoint* offset, int mode);
-	friend QObject* QGraphicsEffect_protectedbase_sender(const void* self);
-	friend int QGraphicsEffect_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsEffect_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsEffect_protectedbase_updateBoundingRect(VirtualQGraphicsEffect* self);
+	friend bool QGraphicsEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsEffect* self);
+	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsEffect* self);
+	friend void QGraphicsEffect_protectedbase_drawSource(VirtualQGraphicsEffect* self, QPainter* painter);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect* self);
+	friend QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect1(const VirtualQGraphicsEffect* self, int system);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap1(const VirtualQGraphicsEffect* self, int system);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const VirtualQGraphicsEffect* self, int system, QPoint* offset);
+	friend QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode);
+	friend QObject* QGraphicsEffect_protectedbase_sender(const VirtualQGraphicsEffect* self);
+	friend int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect* self);
+	friend int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal);
+	friend bool QGraphicsEffect_protectedbase_isSignalConnected(const VirtualQGraphicsEffect* self, QMetaMethod* signal);
 };
 
-QGraphicsEffect* QGraphicsEffect_new(struct QGraphicsEffect_VTable* vtbl) {
-	return new VirtualQGraphicsEffect(vtbl);
+VirtualQGraphicsEffect* QGraphicsEffect_new(const QGraphicsEffect_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsEffect(vtbl, vdata);
 }
 
-QGraphicsEffect* QGraphicsEffect_new2(struct QGraphicsEffect_VTable* vtbl, QObject* parent) {
-	return new VirtualQGraphicsEffect(vtbl, parent);
+VirtualQGraphicsEffect* QGraphicsEffect_new2(const QGraphicsEffect_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQGraphicsEffect(vtbl, vdata, parent);
 }
 
 void QGraphicsEffect_virtbase(QGraphicsEffect* src, QObject** outptr_QObject) {
@@ -329,7 +311,7 @@ void QGraphicsEffect_enabledChanged(QGraphicsEffect* self, bool enabled) {
 	self->enabledChanged(enabled);
 }
 
-void QGraphicsEffect_connect_enabledChanged(QGraphicsEffect* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QGraphicsEffect_connect_enabledChanged(VirtualQGraphicsEffect* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -385,168 +367,122 @@ struct miqt_string QGraphicsEffect_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QGraphicsEffect_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsEffect_virtualbase_metaObject(const VirtualQGraphicsEffect* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::metaObject();
-
+	return (QMetaObject*) self->QGraphicsEffect::metaObject();
 }
 
-void* QGraphicsEffect_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsEffect_virtualbase_metacast(VirtualQGraphicsEffect* self, const char* param1) {
 
-	return ( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::qt_metacast(param1);
-
+	return self->QGraphicsEffect::qt_metacast(param1);
 }
 
-int QGraphicsEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsEffect_virtualbase_metacall(VirtualQGraphicsEffect* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QGraphicsEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect) {
+QRectF* QGraphicsEffect_virtualbase_boundingRectFor(const VirtualQGraphicsEffect* self, QRectF* sourceRect) {
 
-	return new QRectF(( (const VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::boundingRectFor(*sourceRect));
-
+	return new QRectF(self->QGraphicsEffect::boundingRectFor(*sourceRect));
 }
 
-void QGraphicsEffect_virtualbase_sourceChanged(void* self, int flags) {
+void QGraphicsEffect_virtualbase_sourceChanged(VirtualQGraphicsEffect* self, int flags) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::sourceChanged(static_cast<VirtualQGraphicsEffect::ChangeFlags>(flags));
-
+	self->QGraphicsEffect::sourceChanged(static_cast<VirtualQGraphicsEffect::ChangeFlags>(flags));
 }
 
-bool QGraphicsEffect_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsEffect_virtualbase_event(VirtualQGraphicsEffect* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::event(event);
-
+	return self->QGraphicsEffect::event(event);
 }
 
-bool QGraphicsEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsEffect_virtualbase_eventFilter(VirtualQGraphicsEffect* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::eventFilter(watched, event);
-
+	return self->QGraphicsEffect::eventFilter(watched, event);
 }
 
-void QGraphicsEffect_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsEffect_virtualbase_timerEvent(VirtualQGraphicsEffect* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::timerEvent(event);
-
+	self->QGraphicsEffect::timerEvent(event);
 }
 
-void QGraphicsEffect_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsEffect_virtualbase_childEvent(VirtualQGraphicsEffect* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::childEvent(event);
-
+	self->QGraphicsEffect::childEvent(event);
 }
 
-void QGraphicsEffect_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsEffect_virtualbase_customEvent(VirtualQGraphicsEffect* self, QEvent* event) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::customEvent(event);
-
+	self->QGraphicsEffect::customEvent(event);
 }
 
-void QGraphicsEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsEffect_virtualbase_connectNotify(VirtualQGraphicsEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::connectNotify(*signal);
-
+	self->QGraphicsEffect::connectNotify(*signal);
 }
 
-void QGraphicsEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsEffect_virtualbase_disconnectNotify(VirtualQGraphicsEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsEffect*)(self) )->QGraphicsEffect::disconnectNotify(*signal);
-
+	self->QGraphicsEffect::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGraphicsEffect_staticMetaObject() { return &QGraphicsEffect::staticMetaObject; }
-void QGraphicsEffect_protectedbase_updateBoundingRect(void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	self_cast->updateBoundingRect();
 
+const QGraphicsEffect_VTable* QGraphicsEffect_vtbl(const VirtualQGraphicsEffect* self) { return self->vtbl; }
+void* QGraphicsEffect_vdata(const VirtualQGraphicsEffect* self) { return self->vdata; }
+void QGraphicsEffect_setVdata(VirtualQGraphicsEffect* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsEffect_protectedbase_updateBoundingRect(VirtualQGraphicsEffect* self) {
+	self->updateBoundingRect();
 }
 
-bool QGraphicsEffect_protectedbase_sourceIsPixmap(const void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return self_cast->sourceIsPixmap();
-
+bool QGraphicsEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsEffect* self) {
+	return self->sourceIsPixmap();
 }
 
-QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect());
-
+QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsEffect* self) {
+	return new QRectF(self->sourceBoundingRect());
 }
 
-void QGraphicsEffect_protectedbase_drawSource(void* self, QPainter* painter) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	self_cast->drawSource(painter);
-
+void QGraphicsEffect_protectedbase_drawSource(VirtualQGraphicsEffect* self, QPainter* painter) {
+	self->drawSource(painter);
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap());
-
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap(const VirtualQGraphicsEffect* self) {
+	return new QPixmap(self->sourcePixmap());
 }
 
-QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect1(const void* self, int system) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect(static_cast<Qt::CoordinateSystem>(system)));
-
+QRectF* QGraphicsEffect_protectedbase_sourceBoundingRect1(const VirtualQGraphicsEffect* self, int system) {
+	return new QRectF(self->sourceBoundingRect(static_cast<Qt::CoordinateSystem>(system)));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap1(const void* self, int system) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap(static_cast<Qt::CoordinateSystem>(system)));
-
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap1(const VirtualQGraphicsEffect* self, int system) {
+	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system)));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const void* self, int system, QPoint* offset) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset));
-
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap2(const VirtualQGraphicsEffect* self, int system, QPoint* offset) {
+	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset));
 }
 
-QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const void* self, int system, QPoint* offset, int mode) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset, static_cast<VirtualQGraphicsEffect::PixmapPadMode>(mode)));
-
+QPixmap* QGraphicsEffect_protectedbase_sourcePixmap3(const VirtualQGraphicsEffect* self, int system, QPoint* offset, int mode) {
+	return new QPixmap(self->sourcePixmap(static_cast<Qt::CoordinateSystem>(system), offset, static_cast<VirtualQGraphicsEffect::PixmapPadMode>(mode)));
 }
 
-QObject* QGraphicsEffect_protectedbase_sender(const void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsEffect_protectedbase_sender(const VirtualQGraphicsEffect* self) {
+	return self->sender();
 }
 
-int QGraphicsEffect_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsEffect* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsEffect_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsEffect_protectedbase_receivers(const VirtualQGraphicsEffect* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsEffect* self_cast = static_cast<VirtualQGraphicsEffect*>( (QGraphicsEffect*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsEffect_protectedbase_isSignalConnected(const VirtualQGraphicsEffect* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGraphicsEffect_delete(QGraphicsEffect* self) {
@@ -554,29 +490,31 @@ void QGraphicsEffect_delete(QGraphicsEffect* self) {
 }
 
 class VirtualQGraphicsColorizeEffect final : public QGraphicsColorizeEffect {
-	struct QGraphicsColorizeEffect_VTable* vtbl;
+	const QGraphicsColorizeEffect_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsColorizeEffect_VTable* QGraphicsColorizeEffect_vtbl(const VirtualQGraphicsColorizeEffect* self);
+	friend void* QGraphicsColorizeEffect_vdata(const VirtualQGraphicsColorizeEffect* self);
+	friend void QGraphicsColorizeEffect_setVdata(VirtualQGraphicsColorizeEffect* self, void* vdata);
 
-	VirtualQGraphicsColorizeEffect(struct QGraphicsColorizeEffect_VTable* vtbl): QGraphicsColorizeEffect(), vtbl(vtbl) {};
-	VirtualQGraphicsColorizeEffect(struct QGraphicsColorizeEffect_VTable* vtbl, QObject* parent): QGraphicsColorizeEffect(parent), vtbl(vtbl) {};
+	VirtualQGraphicsColorizeEffect(const QGraphicsColorizeEffect_VTable* vtbl, void* vdata): QGraphicsColorizeEffect(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsColorizeEffect(const QGraphicsColorizeEffect_VTable* vtbl, void* vdata, QObject* parent): QGraphicsColorizeEffect(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsColorizeEffect() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsColorizeEffect() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsColorizeEffect::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsColorizeEffect_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsColorizeEffect_virtualbase_metaObject(const VirtualQGraphicsColorizeEffect* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsColorizeEffect::qt_metacast(param1);
@@ -584,14 +522,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsColorizeEffect_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsColorizeEffect_virtualbase_metacast(VirtualQGraphicsColorizeEffect* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsColorizeEffect::qt_metacall(param1, param2, param3);
@@ -602,14 +539,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsColorizeEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsColorizeEffect_virtualbase_metacall(VirtualQGraphicsColorizeEffect* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter) override {
 		if (vtbl->draw == 0) {
 			QGraphicsColorizeEffect::draw(painter);
@@ -618,13 +554,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->draw(vtbl, this, sigval1);
+		vtbl->draw(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_draw(void* self, QPainter* painter);
+	friend void QGraphicsColorizeEffect_virtualbase_draw(VirtualQGraphicsColorizeEffect* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
 		if (vtbl->boundingRectFor == 0) {
 			return QGraphicsColorizeEffect::boundingRectFor(sourceRect);
@@ -634,16 +569,15 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 
-		QRectF* callback_return_value = vtbl->boundingRectFor(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->boundingRectFor(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsColorizeEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
+	friend QRectF* QGraphicsColorizeEffect_virtualbase_boundingRectFor(const VirtualQGraphicsColorizeEffect* self, QRectF* sourceRect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sourceChanged(QGraphicsEffect::ChangeFlags flags) override {
 		if (vtbl->sourceChanged == 0) {
 			QGraphicsColorizeEffect::sourceChanged(flags);
@@ -653,13 +587,12 @@ public:
 		QGraphicsEffect::ChangeFlags flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
 
-		vtbl->sourceChanged(vtbl, this, sigval1);
+		vtbl->sourceChanged(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_sourceChanged(void* self, int flags);
+	friend void QGraphicsColorizeEffect_virtualbase_sourceChanged(VirtualQGraphicsColorizeEffect* self, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsColorizeEffect::event(event);
@@ -667,14 +600,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsColorizeEffect_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsColorizeEffect_virtualbase_event(VirtualQGraphicsColorizeEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsColorizeEffect::eventFilter(watched, event);
@@ -683,14 +615,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsColorizeEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsColorizeEffect_virtualbase_eventFilter(VirtualQGraphicsColorizeEffect* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsColorizeEffect::timerEvent(event);
@@ -699,13 +630,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsColorizeEffect_virtualbase_timerEvent(VirtualQGraphicsColorizeEffect* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsColorizeEffect::childEvent(event);
@@ -714,13 +644,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsColorizeEffect_virtualbase_childEvent(VirtualQGraphicsColorizeEffect* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsColorizeEffect::customEvent(event);
@@ -729,13 +658,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsColorizeEffect_virtualbase_customEvent(VirtualQGraphicsColorizeEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsColorizeEffect::connectNotify(signal);
@@ -746,13 +674,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsColorizeEffect_virtualbase_connectNotify(VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsColorizeEffect::disconnectNotify(signal);
@@ -763,30 +690,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsColorizeEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsColorizeEffect_virtualbase_disconnectNotify(VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsColorizeEffect_protectedbase_updateBoundingRect(void* self);
-	friend bool QGraphicsColorizeEffect_protectedbase_sourceIsPixmap(const void* self);
-	friend QRectF* QGraphicsColorizeEffect_protectedbase_sourceBoundingRect(const void* self);
-	friend void QGraphicsColorizeEffect_protectedbase_drawSource(void* self, QPainter* painter);
-	friend QPixmap* QGraphicsColorizeEffect_protectedbase_sourcePixmap(const void* self);
-	friend QObject* QGraphicsColorizeEffect_protectedbase_sender(const void* self);
-	friend int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsColorizeEffect_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsColorizeEffect_protectedbase_updateBoundingRect(VirtualQGraphicsColorizeEffect* self);
+	friend bool QGraphicsColorizeEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsColorizeEffect* self);
+	friend QRectF* QGraphicsColorizeEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsColorizeEffect* self);
+	friend void QGraphicsColorizeEffect_protectedbase_drawSource(VirtualQGraphicsColorizeEffect* self, QPainter* painter);
+	friend QPixmap* QGraphicsColorizeEffect_protectedbase_sourcePixmap(const VirtualQGraphicsColorizeEffect* self);
+	friend QObject* QGraphicsColorizeEffect_protectedbase_sender(const VirtualQGraphicsColorizeEffect* self);
+	friend int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsColorizeEffect* self);
+	friend int QGraphicsColorizeEffect_protectedbase_receivers(const VirtualQGraphicsColorizeEffect* self, const char* signal);
+	friend bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal);
 };
 
-QGraphicsColorizeEffect* QGraphicsColorizeEffect_new(struct QGraphicsColorizeEffect_VTable* vtbl) {
-	return new VirtualQGraphicsColorizeEffect(vtbl);
+VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new(const QGraphicsColorizeEffect_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsColorizeEffect(vtbl, vdata);
 }
 
-QGraphicsColorizeEffect* QGraphicsColorizeEffect_new2(struct QGraphicsColorizeEffect_VTable* vtbl, QObject* parent) {
-	return new VirtualQGraphicsColorizeEffect(vtbl, parent);
+VirtualQGraphicsColorizeEffect* QGraphicsColorizeEffect_new2(const QGraphicsColorizeEffect_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQGraphicsColorizeEffect(vtbl, vdata, parent);
 }
 
 void QGraphicsColorizeEffect_virtbase(QGraphicsColorizeEffect* src, QGraphicsEffect** outptr_QGraphicsEffect) {
@@ -848,7 +775,7 @@ void QGraphicsColorizeEffect_colorChanged(QGraphicsColorizeEffect* self, QColor*
 	self->colorChanged(*color);
 }
 
-void QGraphicsColorizeEffect_connect_colorChanged(QGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+void QGraphicsColorizeEffect_connect_colorChanged(VirtualQGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QColor*);
@@ -866,7 +793,7 @@ void QGraphicsColorizeEffect_strengthChanged(QGraphicsColorizeEffect* self, doub
 	self->strengthChanged(static_cast<qreal>(strength));
 }
 
-void QGraphicsColorizeEffect_connect_strengthChanged(QGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QGraphicsColorizeEffect_connect_strengthChanged(VirtualQGraphicsColorizeEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -923,146 +850,111 @@ struct miqt_string QGraphicsColorizeEffect_trUtf83(const char* s, const char* c,
 	return _ms;
 }
 
-QMetaObject* QGraphicsColorizeEffect_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsColorizeEffect_virtualbase_metaObject(const VirtualQGraphicsColorizeEffect* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::metaObject();
-
+	return (QMetaObject*) self->QGraphicsColorizeEffect::metaObject();
 }
 
-void* QGraphicsColorizeEffect_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsColorizeEffect_virtualbase_metacast(VirtualQGraphicsColorizeEffect* self, const char* param1) {
 
-	return ( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::qt_metacast(param1);
-
+	return self->QGraphicsColorizeEffect::qt_metacast(param1);
 }
 
-int QGraphicsColorizeEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsColorizeEffect_virtualbase_metacall(VirtualQGraphicsColorizeEffect* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsColorizeEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QGraphicsColorizeEffect_virtualbase_draw(void* self, QPainter* painter) {
+void QGraphicsColorizeEffect_virtualbase_draw(VirtualQGraphicsColorizeEffect* self, QPainter* painter) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::draw(painter);
-
+	self->QGraphicsColorizeEffect::draw(painter);
 }
 
-QRectF* QGraphicsColorizeEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect) {
+QRectF* QGraphicsColorizeEffect_virtualbase_boundingRectFor(const VirtualQGraphicsColorizeEffect* self, QRectF* sourceRect) {
 
-	return new QRectF(( (const VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::boundingRectFor(*sourceRect));
-
+	return new QRectF(self->QGraphicsColorizeEffect::boundingRectFor(*sourceRect));
 }
 
-void QGraphicsColorizeEffect_virtualbase_sourceChanged(void* self, int flags) {
+void QGraphicsColorizeEffect_virtualbase_sourceChanged(VirtualQGraphicsColorizeEffect* self, int flags) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::sourceChanged(static_cast<VirtualQGraphicsColorizeEffect::ChangeFlags>(flags));
-
+	self->QGraphicsColorizeEffect::sourceChanged(static_cast<VirtualQGraphicsColorizeEffect::ChangeFlags>(flags));
 }
 
-bool QGraphicsColorizeEffect_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsColorizeEffect_virtualbase_event(VirtualQGraphicsColorizeEffect* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::event(event);
-
+	return self->QGraphicsColorizeEffect::event(event);
 }
 
-bool QGraphicsColorizeEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsColorizeEffect_virtualbase_eventFilter(VirtualQGraphicsColorizeEffect* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::eventFilter(watched, event);
-
+	return self->QGraphicsColorizeEffect::eventFilter(watched, event);
 }
 
-void QGraphicsColorizeEffect_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsColorizeEffect_virtualbase_timerEvent(VirtualQGraphicsColorizeEffect* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::timerEvent(event);
-
+	self->QGraphicsColorizeEffect::timerEvent(event);
 }
 
-void QGraphicsColorizeEffect_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsColorizeEffect_virtualbase_childEvent(VirtualQGraphicsColorizeEffect* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::childEvent(event);
-
+	self->QGraphicsColorizeEffect::childEvent(event);
 }
 
-void QGraphicsColorizeEffect_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsColorizeEffect_virtualbase_customEvent(VirtualQGraphicsColorizeEffect* self, QEvent* event) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::customEvent(event);
-
+	self->QGraphicsColorizeEffect::customEvent(event);
 }
 
-void QGraphicsColorizeEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsColorizeEffect_virtualbase_connectNotify(VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::connectNotify(*signal);
-
+	self->QGraphicsColorizeEffect::connectNotify(*signal);
 }
 
-void QGraphicsColorizeEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsColorizeEffect_virtualbase_disconnectNotify(VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsColorizeEffect*)(self) )->QGraphicsColorizeEffect::disconnectNotify(*signal);
-
+	self->QGraphicsColorizeEffect::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGraphicsColorizeEffect_staticMetaObject() { return &QGraphicsColorizeEffect::staticMetaObject; }
-void QGraphicsColorizeEffect_protectedbase_updateBoundingRect(void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	self_cast->updateBoundingRect();
 
+const QGraphicsColorizeEffect_VTable* QGraphicsColorizeEffect_vtbl(const VirtualQGraphicsColorizeEffect* self) { return self->vtbl; }
+void* QGraphicsColorizeEffect_vdata(const VirtualQGraphicsColorizeEffect* self) { return self->vdata; }
+void QGraphicsColorizeEffect_setVdata(VirtualQGraphicsColorizeEffect* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsColorizeEffect_protectedbase_updateBoundingRect(VirtualQGraphicsColorizeEffect* self) {
+	self->updateBoundingRect();
 }
 
-bool QGraphicsColorizeEffect_protectedbase_sourceIsPixmap(const void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return self_cast->sourceIsPixmap();
-
+bool QGraphicsColorizeEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsColorizeEffect* self) {
+	return self->sourceIsPixmap();
 }
 
-QRectF* QGraphicsColorizeEffect_protectedbase_sourceBoundingRect(const void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect());
-
+QRectF* QGraphicsColorizeEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsColorizeEffect* self) {
+	return new QRectF(self->sourceBoundingRect());
 }
 
-void QGraphicsColorizeEffect_protectedbase_drawSource(void* self, QPainter* painter) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	self_cast->drawSource(painter);
-
+void QGraphicsColorizeEffect_protectedbase_drawSource(VirtualQGraphicsColorizeEffect* self, QPainter* painter) {
+	self->drawSource(painter);
 }
 
-QPixmap* QGraphicsColorizeEffect_protectedbase_sourcePixmap(const void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap());
-
+QPixmap* QGraphicsColorizeEffect_protectedbase_sourcePixmap(const VirtualQGraphicsColorizeEffect* self) {
+	return new QPixmap(self->sourcePixmap());
 }
 
-QObject* QGraphicsColorizeEffect_protectedbase_sender(const void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsColorizeEffect_protectedbase_sender(const VirtualQGraphicsColorizeEffect* self) {
+	return self->sender();
 }
 
-int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsColorizeEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsColorizeEffect* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsColorizeEffect_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsColorizeEffect_protectedbase_receivers(const VirtualQGraphicsColorizeEffect* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsColorizeEffect* self_cast = static_cast<VirtualQGraphicsColorizeEffect*>( (QGraphicsColorizeEffect*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsColorizeEffect_protectedbase_isSignalConnected(const VirtualQGraphicsColorizeEffect* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGraphicsColorizeEffect_delete(QGraphicsColorizeEffect* self) {
@@ -1070,29 +962,31 @@ void QGraphicsColorizeEffect_delete(QGraphicsColorizeEffect* self) {
 }
 
 class VirtualQGraphicsBlurEffect final : public QGraphicsBlurEffect {
-	struct QGraphicsBlurEffect_VTable* vtbl;
+	const QGraphicsBlurEffect_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsBlurEffect_VTable* QGraphicsBlurEffect_vtbl(const VirtualQGraphicsBlurEffect* self);
+	friend void* QGraphicsBlurEffect_vdata(const VirtualQGraphicsBlurEffect* self);
+	friend void QGraphicsBlurEffect_setVdata(VirtualQGraphicsBlurEffect* self, void* vdata);
 
-	VirtualQGraphicsBlurEffect(struct QGraphicsBlurEffect_VTable* vtbl): QGraphicsBlurEffect(), vtbl(vtbl) {};
-	VirtualQGraphicsBlurEffect(struct QGraphicsBlurEffect_VTable* vtbl, QObject* parent): QGraphicsBlurEffect(parent), vtbl(vtbl) {};
+	VirtualQGraphicsBlurEffect(const QGraphicsBlurEffect_VTable* vtbl, void* vdata): QGraphicsBlurEffect(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsBlurEffect(const QGraphicsBlurEffect_VTable* vtbl, void* vdata, QObject* parent): QGraphicsBlurEffect(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsBlurEffect() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsBlurEffect() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsBlurEffect::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsBlurEffect_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsBlurEffect_virtualbase_metaObject(const VirtualQGraphicsBlurEffect* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsBlurEffect::qt_metacast(param1);
@@ -1100,14 +994,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsBlurEffect_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsBlurEffect_virtualbase_metacast(VirtualQGraphicsBlurEffect* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsBlurEffect::qt_metacall(param1, param2, param3);
@@ -1118,14 +1011,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsBlurEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsBlurEffect_virtualbase_metacall(VirtualQGraphicsBlurEffect* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& rect) const override {
 		if (vtbl->boundingRectFor == 0) {
 			return QGraphicsBlurEffect::boundingRectFor(rect);
@@ -1135,16 +1027,15 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		QRectF* callback_return_value = vtbl->boundingRectFor(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->boundingRectFor(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsBlurEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect);
+	friend QRectF* QGraphicsBlurEffect_virtualbase_boundingRectFor(const VirtualQGraphicsBlurEffect* self, QRectF* rect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter) override {
 		if (vtbl->draw == 0) {
 			QGraphicsBlurEffect::draw(painter);
@@ -1153,13 +1044,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->draw(vtbl, this, sigval1);
+		vtbl->draw(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_draw(void* self, QPainter* painter);
+	friend void QGraphicsBlurEffect_virtualbase_draw(VirtualQGraphicsBlurEffect* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sourceChanged(QGraphicsEffect::ChangeFlags flags) override {
 		if (vtbl->sourceChanged == 0) {
 			QGraphicsBlurEffect::sourceChanged(flags);
@@ -1169,13 +1059,12 @@ public:
 		QGraphicsEffect::ChangeFlags flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
 
-		vtbl->sourceChanged(vtbl, this, sigval1);
+		vtbl->sourceChanged(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_sourceChanged(void* self, int flags);
+	friend void QGraphicsBlurEffect_virtualbase_sourceChanged(VirtualQGraphicsBlurEffect* self, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsBlurEffect::event(event);
@@ -1183,14 +1072,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsBlurEffect_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsBlurEffect_virtualbase_event(VirtualQGraphicsBlurEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsBlurEffect::eventFilter(watched, event);
@@ -1199,14 +1087,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsBlurEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsBlurEffect_virtualbase_eventFilter(VirtualQGraphicsBlurEffect* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsBlurEffect::timerEvent(event);
@@ -1215,13 +1102,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsBlurEffect_virtualbase_timerEvent(VirtualQGraphicsBlurEffect* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsBlurEffect::childEvent(event);
@@ -1230,13 +1116,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsBlurEffect_virtualbase_childEvent(VirtualQGraphicsBlurEffect* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsBlurEffect::customEvent(event);
@@ -1245,13 +1130,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsBlurEffect_virtualbase_customEvent(VirtualQGraphicsBlurEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsBlurEffect::connectNotify(signal);
@@ -1262,13 +1146,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsBlurEffect_virtualbase_connectNotify(VirtualQGraphicsBlurEffect* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsBlurEffect::disconnectNotify(signal);
@@ -1279,30 +1162,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsBlurEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsBlurEffect_virtualbase_disconnectNotify(VirtualQGraphicsBlurEffect* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsBlurEffect_protectedbase_updateBoundingRect(void* self);
-	friend bool QGraphicsBlurEffect_protectedbase_sourceIsPixmap(const void* self);
-	friend QRectF* QGraphicsBlurEffect_protectedbase_sourceBoundingRect(const void* self);
-	friend void QGraphicsBlurEffect_protectedbase_drawSource(void* self, QPainter* painter);
-	friend QPixmap* QGraphicsBlurEffect_protectedbase_sourcePixmap(const void* self);
-	friend QObject* QGraphicsBlurEffect_protectedbase_sender(const void* self);
-	friend int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsBlurEffect_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsBlurEffect_protectedbase_updateBoundingRect(VirtualQGraphicsBlurEffect* self);
+	friend bool QGraphicsBlurEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsBlurEffect* self);
+	friend QRectF* QGraphicsBlurEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsBlurEffect* self);
+	friend void QGraphicsBlurEffect_protectedbase_drawSource(VirtualQGraphicsBlurEffect* self, QPainter* painter);
+	friend QPixmap* QGraphicsBlurEffect_protectedbase_sourcePixmap(const VirtualQGraphicsBlurEffect* self);
+	friend QObject* QGraphicsBlurEffect_protectedbase_sender(const VirtualQGraphicsBlurEffect* self);
+	friend int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsBlurEffect* self);
+	friend int QGraphicsBlurEffect_protectedbase_receivers(const VirtualQGraphicsBlurEffect* self, const char* signal);
+	friend bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const VirtualQGraphicsBlurEffect* self, QMetaMethod* signal);
 };
 
-QGraphicsBlurEffect* QGraphicsBlurEffect_new(struct QGraphicsBlurEffect_VTable* vtbl) {
-	return new VirtualQGraphicsBlurEffect(vtbl);
+VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new(const QGraphicsBlurEffect_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsBlurEffect(vtbl, vdata);
 }
 
-QGraphicsBlurEffect* QGraphicsBlurEffect_new2(struct QGraphicsBlurEffect_VTable* vtbl, QObject* parent) {
-	return new VirtualQGraphicsBlurEffect(vtbl, parent);
+VirtualQGraphicsBlurEffect* QGraphicsBlurEffect_new2(const QGraphicsBlurEffect_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQGraphicsBlurEffect(vtbl, vdata, parent);
 }
 
 void QGraphicsBlurEffect_virtbase(QGraphicsBlurEffect* src, QGraphicsEffect** outptr_QGraphicsEffect) {
@@ -1369,7 +1252,7 @@ void QGraphicsBlurEffect_blurRadiusChanged(QGraphicsBlurEffect* self, double blu
 	self->blurRadiusChanged(static_cast<qreal>(blurRadius));
 }
 
-void QGraphicsBlurEffect_connect_blurRadiusChanged(QGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QGraphicsBlurEffect_connect_blurRadiusChanged(VirtualQGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -1386,7 +1269,7 @@ void QGraphicsBlurEffect_blurHintsChanged(QGraphicsBlurEffect* self, int hints) 
 	self->blurHintsChanged(static_cast<QGraphicsBlurEffect::BlurHints>(hints));
 }
 
-void QGraphicsBlurEffect_connect_blurHintsChanged(QGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QGraphicsBlurEffect_connect_blurHintsChanged(VirtualQGraphicsBlurEffect* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1443,146 +1326,111 @@ struct miqt_string QGraphicsBlurEffect_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
-QMetaObject* QGraphicsBlurEffect_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsBlurEffect_virtualbase_metaObject(const VirtualQGraphicsBlurEffect* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::metaObject();
-
+	return (QMetaObject*) self->QGraphicsBlurEffect::metaObject();
 }
 
-void* QGraphicsBlurEffect_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsBlurEffect_virtualbase_metacast(VirtualQGraphicsBlurEffect* self, const char* param1) {
 
-	return ( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::qt_metacast(param1);
-
+	return self->QGraphicsBlurEffect::qt_metacast(param1);
 }
 
-int QGraphicsBlurEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsBlurEffect_virtualbase_metacall(VirtualQGraphicsBlurEffect* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsBlurEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QGraphicsBlurEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect) {
+QRectF* QGraphicsBlurEffect_virtualbase_boundingRectFor(const VirtualQGraphicsBlurEffect* self, QRectF* rect) {
 
-	return new QRectF(( (const VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::boundingRectFor(*rect));
-
+	return new QRectF(self->QGraphicsBlurEffect::boundingRectFor(*rect));
 }
 
-void QGraphicsBlurEffect_virtualbase_draw(void* self, QPainter* painter) {
+void QGraphicsBlurEffect_virtualbase_draw(VirtualQGraphicsBlurEffect* self, QPainter* painter) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::draw(painter);
-
+	self->QGraphicsBlurEffect::draw(painter);
 }
 
-void QGraphicsBlurEffect_virtualbase_sourceChanged(void* self, int flags) {
+void QGraphicsBlurEffect_virtualbase_sourceChanged(VirtualQGraphicsBlurEffect* self, int flags) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::sourceChanged(static_cast<VirtualQGraphicsBlurEffect::ChangeFlags>(flags));
-
+	self->QGraphicsBlurEffect::sourceChanged(static_cast<VirtualQGraphicsBlurEffect::ChangeFlags>(flags));
 }
 
-bool QGraphicsBlurEffect_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsBlurEffect_virtualbase_event(VirtualQGraphicsBlurEffect* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::event(event);
-
+	return self->QGraphicsBlurEffect::event(event);
 }
 
-bool QGraphicsBlurEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsBlurEffect_virtualbase_eventFilter(VirtualQGraphicsBlurEffect* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::eventFilter(watched, event);
-
+	return self->QGraphicsBlurEffect::eventFilter(watched, event);
 }
 
-void QGraphicsBlurEffect_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsBlurEffect_virtualbase_timerEvent(VirtualQGraphicsBlurEffect* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::timerEvent(event);
-
+	self->QGraphicsBlurEffect::timerEvent(event);
 }
 
-void QGraphicsBlurEffect_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsBlurEffect_virtualbase_childEvent(VirtualQGraphicsBlurEffect* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::childEvent(event);
-
+	self->QGraphicsBlurEffect::childEvent(event);
 }
 
-void QGraphicsBlurEffect_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsBlurEffect_virtualbase_customEvent(VirtualQGraphicsBlurEffect* self, QEvent* event) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::customEvent(event);
-
+	self->QGraphicsBlurEffect::customEvent(event);
 }
 
-void QGraphicsBlurEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsBlurEffect_virtualbase_connectNotify(VirtualQGraphicsBlurEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::connectNotify(*signal);
-
+	self->QGraphicsBlurEffect::connectNotify(*signal);
 }
 
-void QGraphicsBlurEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsBlurEffect_virtualbase_disconnectNotify(VirtualQGraphicsBlurEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsBlurEffect*)(self) )->QGraphicsBlurEffect::disconnectNotify(*signal);
-
+	self->QGraphicsBlurEffect::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGraphicsBlurEffect_staticMetaObject() { return &QGraphicsBlurEffect::staticMetaObject; }
-void QGraphicsBlurEffect_protectedbase_updateBoundingRect(void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	self_cast->updateBoundingRect();
 
+const QGraphicsBlurEffect_VTable* QGraphicsBlurEffect_vtbl(const VirtualQGraphicsBlurEffect* self) { return self->vtbl; }
+void* QGraphicsBlurEffect_vdata(const VirtualQGraphicsBlurEffect* self) { return self->vdata; }
+void QGraphicsBlurEffect_setVdata(VirtualQGraphicsBlurEffect* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsBlurEffect_protectedbase_updateBoundingRect(VirtualQGraphicsBlurEffect* self) {
+	self->updateBoundingRect();
 }
 
-bool QGraphicsBlurEffect_protectedbase_sourceIsPixmap(const void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return self_cast->sourceIsPixmap();
-
+bool QGraphicsBlurEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsBlurEffect* self) {
+	return self->sourceIsPixmap();
 }
 
-QRectF* QGraphicsBlurEffect_protectedbase_sourceBoundingRect(const void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect());
-
+QRectF* QGraphicsBlurEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsBlurEffect* self) {
+	return new QRectF(self->sourceBoundingRect());
 }
 
-void QGraphicsBlurEffect_protectedbase_drawSource(void* self, QPainter* painter) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	self_cast->drawSource(painter);
-
+void QGraphicsBlurEffect_protectedbase_drawSource(VirtualQGraphicsBlurEffect* self, QPainter* painter) {
+	self->drawSource(painter);
 }
 
-QPixmap* QGraphicsBlurEffect_protectedbase_sourcePixmap(const void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap());
-
+QPixmap* QGraphicsBlurEffect_protectedbase_sourcePixmap(const VirtualQGraphicsBlurEffect* self) {
+	return new QPixmap(self->sourcePixmap());
 }
 
-QObject* QGraphicsBlurEffect_protectedbase_sender(const void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsBlurEffect_protectedbase_sender(const VirtualQGraphicsBlurEffect* self) {
+	return self->sender();
 }
 
-int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsBlurEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsBlurEffect* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsBlurEffect_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsBlurEffect_protectedbase_receivers(const VirtualQGraphicsBlurEffect* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsBlurEffect* self_cast = static_cast<VirtualQGraphicsBlurEffect*>( (QGraphicsBlurEffect*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsBlurEffect_protectedbase_isSignalConnected(const VirtualQGraphicsBlurEffect* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGraphicsBlurEffect_delete(QGraphicsBlurEffect* self) {
@@ -1590,29 +1438,31 @@ void QGraphicsBlurEffect_delete(QGraphicsBlurEffect* self) {
 }
 
 class VirtualQGraphicsDropShadowEffect final : public QGraphicsDropShadowEffect {
-	struct QGraphicsDropShadowEffect_VTable* vtbl;
+	const QGraphicsDropShadowEffect_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsDropShadowEffect_VTable* QGraphicsDropShadowEffect_vtbl(const VirtualQGraphicsDropShadowEffect* self);
+	friend void* QGraphicsDropShadowEffect_vdata(const VirtualQGraphicsDropShadowEffect* self);
+	friend void QGraphicsDropShadowEffect_setVdata(VirtualQGraphicsDropShadowEffect* self, void* vdata);
 
-	VirtualQGraphicsDropShadowEffect(struct QGraphicsDropShadowEffect_VTable* vtbl): QGraphicsDropShadowEffect(), vtbl(vtbl) {};
-	VirtualQGraphicsDropShadowEffect(struct QGraphicsDropShadowEffect_VTable* vtbl, QObject* parent): QGraphicsDropShadowEffect(parent), vtbl(vtbl) {};
+	VirtualQGraphicsDropShadowEffect(const QGraphicsDropShadowEffect_VTable* vtbl, void* vdata): QGraphicsDropShadowEffect(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsDropShadowEffect(const QGraphicsDropShadowEffect_VTable* vtbl, void* vdata, QObject* parent): QGraphicsDropShadowEffect(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsDropShadowEffect() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsDropShadowEffect() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsDropShadowEffect::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsDropShadowEffect_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsDropShadowEffect_virtualbase_metaObject(const VirtualQGraphicsDropShadowEffect* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsDropShadowEffect::qt_metacast(param1);
@@ -1620,14 +1470,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsDropShadowEffect_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsDropShadowEffect_virtualbase_metacast(VirtualQGraphicsDropShadowEffect* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsDropShadowEffect::qt_metacall(param1, param2, param3);
@@ -1638,14 +1487,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsDropShadowEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsDropShadowEffect_virtualbase_metacall(VirtualQGraphicsDropShadowEffect* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& rect) const override {
 		if (vtbl->boundingRectFor == 0) {
 			return QGraphicsDropShadowEffect::boundingRectFor(rect);
@@ -1655,16 +1503,15 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		QRectF* callback_return_value = vtbl->boundingRectFor(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->boundingRectFor(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsDropShadowEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect);
+	friend QRectF* QGraphicsDropShadowEffect_virtualbase_boundingRectFor(const VirtualQGraphicsDropShadowEffect* self, QRectF* rect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter) override {
 		if (vtbl->draw == 0) {
 			QGraphicsDropShadowEffect::draw(painter);
@@ -1673,13 +1520,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->draw(vtbl, this, sigval1);
+		vtbl->draw(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_draw(void* self, QPainter* painter);
+	friend void QGraphicsDropShadowEffect_virtualbase_draw(VirtualQGraphicsDropShadowEffect* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sourceChanged(QGraphicsEffect::ChangeFlags flags) override {
 		if (vtbl->sourceChanged == 0) {
 			QGraphicsDropShadowEffect::sourceChanged(flags);
@@ -1689,13 +1535,12 @@ public:
 		QGraphicsEffect::ChangeFlags flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
 
-		vtbl->sourceChanged(vtbl, this, sigval1);
+		vtbl->sourceChanged(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_sourceChanged(void* self, int flags);
+	friend void QGraphicsDropShadowEffect_virtualbase_sourceChanged(VirtualQGraphicsDropShadowEffect* self, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsDropShadowEffect::event(event);
@@ -1703,14 +1548,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsDropShadowEffect_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsDropShadowEffect_virtualbase_event(VirtualQGraphicsDropShadowEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsDropShadowEffect::eventFilter(watched, event);
@@ -1719,14 +1563,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsDropShadowEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsDropShadowEffect_virtualbase_eventFilter(VirtualQGraphicsDropShadowEffect* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsDropShadowEffect::timerEvent(event);
@@ -1735,13 +1578,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsDropShadowEffect_virtualbase_timerEvent(VirtualQGraphicsDropShadowEffect* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsDropShadowEffect::childEvent(event);
@@ -1750,13 +1592,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsDropShadowEffect_virtualbase_childEvent(VirtualQGraphicsDropShadowEffect* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsDropShadowEffect::customEvent(event);
@@ -1765,13 +1606,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsDropShadowEffect_virtualbase_customEvent(VirtualQGraphicsDropShadowEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsDropShadowEffect::connectNotify(signal);
@@ -1782,13 +1622,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsDropShadowEffect_virtualbase_connectNotify(VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsDropShadowEffect::disconnectNotify(signal);
@@ -1799,30 +1638,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsDropShadowEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsDropShadowEffect_virtualbase_disconnectNotify(VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsDropShadowEffect_protectedbase_updateBoundingRect(void* self);
-	friend bool QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(const void* self);
-	friend QRectF* QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(const void* self);
-	friend void QGraphicsDropShadowEffect_protectedbase_drawSource(void* self, QPainter* painter);
-	friend QPixmap* QGraphicsDropShadowEffect_protectedbase_sourcePixmap(const void* self);
-	friend QObject* QGraphicsDropShadowEffect_protectedbase_sender(const void* self);
-	friend int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsDropShadowEffect_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsDropShadowEffect_protectedbase_updateBoundingRect(VirtualQGraphicsDropShadowEffect* self);
+	friend bool QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsDropShadowEffect* self);
+	friend QRectF* QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsDropShadowEffect* self);
+	friend void QGraphicsDropShadowEffect_protectedbase_drawSource(VirtualQGraphicsDropShadowEffect* self, QPainter* painter);
+	friend QPixmap* QGraphicsDropShadowEffect_protectedbase_sourcePixmap(const VirtualQGraphicsDropShadowEffect* self);
+	friend QObject* QGraphicsDropShadowEffect_protectedbase_sender(const VirtualQGraphicsDropShadowEffect* self);
+	friend int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsDropShadowEffect* self);
+	friend int QGraphicsDropShadowEffect_protectedbase_receivers(const VirtualQGraphicsDropShadowEffect* self, const char* signal);
+	friend bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal);
 };
 
-QGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new(struct QGraphicsDropShadowEffect_VTable* vtbl) {
-	return new VirtualQGraphicsDropShadowEffect(vtbl);
+VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new(const QGraphicsDropShadowEffect_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsDropShadowEffect(vtbl, vdata);
 }
 
-QGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new2(struct QGraphicsDropShadowEffect_VTable* vtbl, QObject* parent) {
-	return new VirtualQGraphicsDropShadowEffect(vtbl, parent);
+VirtualQGraphicsDropShadowEffect* QGraphicsDropShadowEffect_new2(const QGraphicsDropShadowEffect_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQGraphicsDropShadowEffect(vtbl, vdata, parent);
 }
 
 void QGraphicsDropShadowEffect_virtbase(QGraphicsDropShadowEffect* src, QGraphicsEffect** outptr_QGraphicsEffect) {
@@ -1922,7 +1761,7 @@ void QGraphicsDropShadowEffect_offsetChanged(QGraphicsDropShadowEffect* self, QP
 	self->offsetChanged(*offset);
 }
 
-void QGraphicsDropShadowEffect_connect_offsetChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
+void QGraphicsDropShadowEffect_connect_offsetChanged(VirtualQGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QPointF*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QPointF*);
@@ -1940,7 +1779,7 @@ void QGraphicsDropShadowEffect_blurRadiusChanged(QGraphicsDropShadowEffect* self
 	self->blurRadiusChanged(static_cast<qreal>(blurRadius));
 }
 
-void QGraphicsDropShadowEffect_connect_blurRadiusChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QGraphicsDropShadowEffect_connect_blurRadiusChanged(VirtualQGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -1957,7 +1796,7 @@ void QGraphicsDropShadowEffect_colorChanged(QGraphicsDropShadowEffect* self, QCo
 	self->colorChanged(*color);
 }
 
-void QGraphicsDropShadowEffect_connect_colorChanged(QGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
+void QGraphicsDropShadowEffect_connect_colorChanged(VirtualQGraphicsDropShadowEffect* self, intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QColor*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QColor*);
@@ -2015,146 +1854,111 @@ struct miqt_string QGraphicsDropShadowEffect_trUtf83(const char* s, const char* 
 	return _ms;
 }
 
-QMetaObject* QGraphicsDropShadowEffect_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsDropShadowEffect_virtualbase_metaObject(const VirtualQGraphicsDropShadowEffect* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::metaObject();
-
+	return (QMetaObject*) self->QGraphicsDropShadowEffect::metaObject();
 }
 
-void* QGraphicsDropShadowEffect_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsDropShadowEffect_virtualbase_metacast(VirtualQGraphicsDropShadowEffect* self, const char* param1) {
 
-	return ( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::qt_metacast(param1);
-
+	return self->QGraphicsDropShadowEffect::qt_metacast(param1);
 }
 
-int QGraphicsDropShadowEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsDropShadowEffect_virtualbase_metacall(VirtualQGraphicsDropShadowEffect* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsDropShadowEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QRectF* QGraphicsDropShadowEffect_virtualbase_boundingRectFor(const void* self, QRectF* rect) {
+QRectF* QGraphicsDropShadowEffect_virtualbase_boundingRectFor(const VirtualQGraphicsDropShadowEffect* self, QRectF* rect) {
 
-	return new QRectF(( (const VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::boundingRectFor(*rect));
-
+	return new QRectF(self->QGraphicsDropShadowEffect::boundingRectFor(*rect));
 }
 
-void QGraphicsDropShadowEffect_virtualbase_draw(void* self, QPainter* painter) {
+void QGraphicsDropShadowEffect_virtualbase_draw(VirtualQGraphicsDropShadowEffect* self, QPainter* painter) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::draw(painter);
-
+	self->QGraphicsDropShadowEffect::draw(painter);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_sourceChanged(void* self, int flags) {
+void QGraphicsDropShadowEffect_virtualbase_sourceChanged(VirtualQGraphicsDropShadowEffect* self, int flags) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::sourceChanged(static_cast<VirtualQGraphicsDropShadowEffect::ChangeFlags>(flags));
-
+	self->QGraphicsDropShadowEffect::sourceChanged(static_cast<VirtualQGraphicsDropShadowEffect::ChangeFlags>(flags));
 }
 
-bool QGraphicsDropShadowEffect_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsDropShadowEffect_virtualbase_event(VirtualQGraphicsDropShadowEffect* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::event(event);
-
+	return self->QGraphicsDropShadowEffect::event(event);
 }
 
-bool QGraphicsDropShadowEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsDropShadowEffect_virtualbase_eventFilter(VirtualQGraphicsDropShadowEffect* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::eventFilter(watched, event);
-
+	return self->QGraphicsDropShadowEffect::eventFilter(watched, event);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsDropShadowEffect_virtualbase_timerEvent(VirtualQGraphicsDropShadowEffect* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::timerEvent(event);
-
+	self->QGraphicsDropShadowEffect::timerEvent(event);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsDropShadowEffect_virtualbase_childEvent(VirtualQGraphicsDropShadowEffect* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::childEvent(event);
-
+	self->QGraphicsDropShadowEffect::childEvent(event);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsDropShadowEffect_virtualbase_customEvent(VirtualQGraphicsDropShadowEffect* self, QEvent* event) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::customEvent(event);
-
+	self->QGraphicsDropShadowEffect::customEvent(event);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsDropShadowEffect_virtualbase_connectNotify(VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::connectNotify(*signal);
-
+	self->QGraphicsDropShadowEffect::connectNotify(*signal);
 }
 
-void QGraphicsDropShadowEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsDropShadowEffect_virtualbase_disconnectNotify(VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsDropShadowEffect*)(self) )->QGraphicsDropShadowEffect::disconnectNotify(*signal);
-
+	self->QGraphicsDropShadowEffect::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGraphicsDropShadowEffect_staticMetaObject() { return &QGraphicsDropShadowEffect::staticMetaObject; }
-void QGraphicsDropShadowEffect_protectedbase_updateBoundingRect(void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	self_cast->updateBoundingRect();
 
+const QGraphicsDropShadowEffect_VTable* QGraphicsDropShadowEffect_vtbl(const VirtualQGraphicsDropShadowEffect* self) { return self->vtbl; }
+void* QGraphicsDropShadowEffect_vdata(const VirtualQGraphicsDropShadowEffect* self) { return self->vdata; }
+void QGraphicsDropShadowEffect_setVdata(VirtualQGraphicsDropShadowEffect* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsDropShadowEffect_protectedbase_updateBoundingRect(VirtualQGraphicsDropShadowEffect* self) {
+	self->updateBoundingRect();
 }
 
-bool QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(const void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return self_cast->sourceIsPixmap();
-
+bool QGraphicsDropShadowEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsDropShadowEffect* self) {
+	return self->sourceIsPixmap();
 }
 
-QRectF* QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(const void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect());
-
+QRectF* QGraphicsDropShadowEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsDropShadowEffect* self) {
+	return new QRectF(self->sourceBoundingRect());
 }
 
-void QGraphicsDropShadowEffect_protectedbase_drawSource(void* self, QPainter* painter) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	self_cast->drawSource(painter);
-
+void QGraphicsDropShadowEffect_protectedbase_drawSource(VirtualQGraphicsDropShadowEffect* self, QPainter* painter) {
+	self->drawSource(painter);
 }
 
-QPixmap* QGraphicsDropShadowEffect_protectedbase_sourcePixmap(const void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap());
-
+QPixmap* QGraphicsDropShadowEffect_protectedbase_sourcePixmap(const VirtualQGraphicsDropShadowEffect* self) {
+	return new QPixmap(self->sourcePixmap());
 }
 
-QObject* QGraphicsDropShadowEffect_protectedbase_sender(const void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsDropShadowEffect_protectedbase_sender(const VirtualQGraphicsDropShadowEffect* self) {
+	return self->sender();
 }
 
-int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsDropShadowEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsDropShadowEffect* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsDropShadowEffect_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsDropShadowEffect_protectedbase_receivers(const VirtualQGraphicsDropShadowEffect* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsDropShadowEffect* self_cast = static_cast<VirtualQGraphicsDropShadowEffect*>( (QGraphicsDropShadowEffect*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsDropShadowEffect_protectedbase_isSignalConnected(const VirtualQGraphicsDropShadowEffect* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGraphicsDropShadowEffect_delete(QGraphicsDropShadowEffect* self) {
@@ -2162,29 +1966,31 @@ void QGraphicsDropShadowEffect_delete(QGraphicsDropShadowEffect* self) {
 }
 
 class VirtualQGraphicsOpacityEffect final : public QGraphicsOpacityEffect {
-	struct QGraphicsOpacityEffect_VTable* vtbl;
+	const QGraphicsOpacityEffect_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsOpacityEffect_VTable* QGraphicsOpacityEffect_vtbl(const VirtualQGraphicsOpacityEffect* self);
+	friend void* QGraphicsOpacityEffect_vdata(const VirtualQGraphicsOpacityEffect* self);
+	friend void QGraphicsOpacityEffect_setVdata(VirtualQGraphicsOpacityEffect* self, void* vdata);
 
-	VirtualQGraphicsOpacityEffect(struct QGraphicsOpacityEffect_VTable* vtbl): QGraphicsOpacityEffect(), vtbl(vtbl) {};
-	VirtualQGraphicsOpacityEffect(struct QGraphicsOpacityEffect_VTable* vtbl, QObject* parent): QGraphicsOpacityEffect(parent), vtbl(vtbl) {};
+	VirtualQGraphicsOpacityEffect(const QGraphicsOpacityEffect_VTable* vtbl, void* vdata): QGraphicsOpacityEffect(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsOpacityEffect(const QGraphicsOpacityEffect_VTable* vtbl, void* vdata, QObject* parent): QGraphicsOpacityEffect(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsOpacityEffect() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsOpacityEffect() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsOpacityEffect::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsOpacityEffect_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsOpacityEffect_virtualbase_metaObject(const VirtualQGraphicsOpacityEffect* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsOpacityEffect::qt_metacast(param1);
@@ -2192,14 +1998,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsOpacityEffect_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsOpacityEffect_virtualbase_metacast(VirtualQGraphicsOpacityEffect* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsOpacityEffect::qt_metacall(param1, param2, param3);
@@ -2210,14 +2015,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsOpacityEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsOpacityEffect_virtualbase_metacall(VirtualQGraphicsOpacityEffect* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void draw(QPainter* painter) override {
 		if (vtbl->draw == 0) {
 			QGraphicsOpacityEffect::draw(painter);
@@ -2226,13 +2030,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->draw(vtbl, this, sigval1);
+		vtbl->draw(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_draw(void* self, QPainter* painter);
+	friend void QGraphicsOpacityEffect_virtualbase_draw(VirtualQGraphicsOpacityEffect* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRectFor(const QRectF& sourceRect) const override {
 		if (vtbl->boundingRectFor == 0) {
 			return QGraphicsOpacityEffect::boundingRectFor(sourceRect);
@@ -2242,16 +2045,15 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&sourceRect_ret);
 
-		QRectF* callback_return_value = vtbl->boundingRectFor(vtbl, this, sigval1);
+		QRectF* callback_return_value = vtbl->boundingRectFor(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsOpacityEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect);
+	friend QRectF* QGraphicsOpacityEffect_virtualbase_boundingRectFor(const VirtualQGraphicsOpacityEffect* self, QRectF* sourceRect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sourceChanged(QGraphicsEffect::ChangeFlags flags) override {
 		if (vtbl->sourceChanged == 0) {
 			QGraphicsOpacityEffect::sourceChanged(flags);
@@ -2261,13 +2063,12 @@ public:
 		QGraphicsEffect::ChangeFlags flags_ret = flags;
 		int sigval1 = static_cast<int>(flags_ret);
 
-		vtbl->sourceChanged(vtbl, this, sigval1);
+		vtbl->sourceChanged(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_sourceChanged(void* self, int flags);
+	friend void QGraphicsOpacityEffect_virtualbase_sourceChanged(VirtualQGraphicsOpacityEffect* self, int flags);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGraphicsOpacityEffect::event(event);
@@ -2275,14 +2076,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsOpacityEffect_virtualbase_event(void* self, QEvent* event);
+	friend bool QGraphicsOpacityEffect_virtualbase_event(VirtualQGraphicsOpacityEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsOpacityEffect::eventFilter(watched, event);
@@ -2291,14 +2091,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsOpacityEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsOpacityEffect_virtualbase_eventFilter(VirtualQGraphicsOpacityEffect* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsOpacityEffect::timerEvent(event);
@@ -2307,13 +2106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsOpacityEffect_virtualbase_timerEvent(VirtualQGraphicsOpacityEffect* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsOpacityEffect::childEvent(event);
@@ -2322,13 +2120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsOpacityEffect_virtualbase_childEvent(VirtualQGraphicsOpacityEffect* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsOpacityEffect::customEvent(event);
@@ -2337,13 +2134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsOpacityEffect_virtualbase_customEvent(VirtualQGraphicsOpacityEffect* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsOpacityEffect::connectNotify(signal);
@@ -2354,13 +2150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsOpacityEffect_virtualbase_connectNotify(VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsOpacityEffect::disconnectNotify(signal);
@@ -2371,30 +2166,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsOpacityEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsOpacityEffect_virtualbase_disconnectNotify(VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsOpacityEffect_protectedbase_updateBoundingRect(void* self);
-	friend bool QGraphicsOpacityEffect_protectedbase_sourceIsPixmap(const void* self);
-	friend QRectF* QGraphicsOpacityEffect_protectedbase_sourceBoundingRect(const void* self);
-	friend void QGraphicsOpacityEffect_protectedbase_drawSource(void* self, QPainter* painter);
-	friend QPixmap* QGraphicsOpacityEffect_protectedbase_sourcePixmap(const void* self);
-	friend QObject* QGraphicsOpacityEffect_protectedbase_sender(const void* self);
-	friend int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsOpacityEffect_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGraphicsOpacityEffect_protectedbase_updateBoundingRect(VirtualQGraphicsOpacityEffect* self);
+	friend bool QGraphicsOpacityEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsOpacityEffect* self);
+	friend QRectF* QGraphicsOpacityEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsOpacityEffect* self);
+	friend void QGraphicsOpacityEffect_protectedbase_drawSource(VirtualQGraphicsOpacityEffect* self, QPainter* painter);
+	friend QPixmap* QGraphicsOpacityEffect_protectedbase_sourcePixmap(const VirtualQGraphicsOpacityEffect* self);
+	friend QObject* QGraphicsOpacityEffect_protectedbase_sender(const VirtualQGraphicsOpacityEffect* self);
+	friend int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsOpacityEffect* self);
+	friend int QGraphicsOpacityEffect_protectedbase_receivers(const VirtualQGraphicsOpacityEffect* self, const char* signal);
+	friend bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal);
 };
 
-QGraphicsOpacityEffect* QGraphicsOpacityEffect_new(struct QGraphicsOpacityEffect_VTable* vtbl) {
-	return new VirtualQGraphicsOpacityEffect(vtbl);
+VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new(const QGraphicsOpacityEffect_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsOpacityEffect(vtbl, vdata);
 }
 
-QGraphicsOpacityEffect* QGraphicsOpacityEffect_new2(struct QGraphicsOpacityEffect_VTable* vtbl, QObject* parent) {
-	return new VirtualQGraphicsOpacityEffect(vtbl, parent);
+VirtualQGraphicsOpacityEffect* QGraphicsOpacityEffect_new2(const QGraphicsOpacityEffect_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQGraphicsOpacityEffect(vtbl, vdata, parent);
 }
 
 void QGraphicsOpacityEffect_virtbase(QGraphicsOpacityEffect* src, QGraphicsEffect** outptr_QGraphicsEffect) {
@@ -2456,7 +2251,7 @@ void QGraphicsOpacityEffect_opacityChanged(QGraphicsOpacityEffect* self, double 
 	self->opacityChanged(static_cast<qreal>(opacity));
 }
 
-void QGraphicsOpacityEffect_connect_opacityChanged(QGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QGraphicsOpacityEffect_connect_opacityChanged(VirtualQGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -2473,7 +2268,7 @@ void QGraphicsOpacityEffect_opacityMaskChanged(QGraphicsOpacityEffect* self, QBr
 	self->opacityMaskChanged(*mask);
 }
 
-void QGraphicsOpacityEffect_connect_opacityMaskChanged(QGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t)) {
+void QGraphicsOpacityEffect_connect_opacityMaskChanged(VirtualQGraphicsOpacityEffect* self, intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QBrush*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QBrush*);
@@ -2531,146 +2326,111 @@ struct miqt_string QGraphicsOpacityEffect_trUtf83(const char* s, const char* c, 
 	return _ms;
 }
 
-QMetaObject* QGraphicsOpacityEffect_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsOpacityEffect_virtualbase_metaObject(const VirtualQGraphicsOpacityEffect* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::metaObject();
-
+	return (QMetaObject*) self->QGraphicsOpacityEffect::metaObject();
 }
 
-void* QGraphicsOpacityEffect_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsOpacityEffect_virtualbase_metacast(VirtualQGraphicsOpacityEffect* self, const char* param1) {
 
-	return ( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::qt_metacast(param1);
-
+	return self->QGraphicsOpacityEffect::qt_metacast(param1);
 }
 
-int QGraphicsOpacityEffect_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsOpacityEffect_virtualbase_metacall(VirtualQGraphicsOpacityEffect* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsOpacityEffect::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QGraphicsOpacityEffect_virtualbase_draw(void* self, QPainter* painter) {
+void QGraphicsOpacityEffect_virtualbase_draw(VirtualQGraphicsOpacityEffect* self, QPainter* painter) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::draw(painter);
-
+	self->QGraphicsOpacityEffect::draw(painter);
 }
 
-QRectF* QGraphicsOpacityEffect_virtualbase_boundingRectFor(const void* self, QRectF* sourceRect) {
+QRectF* QGraphicsOpacityEffect_virtualbase_boundingRectFor(const VirtualQGraphicsOpacityEffect* self, QRectF* sourceRect) {
 
-	return new QRectF(( (const VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::boundingRectFor(*sourceRect));
-
+	return new QRectF(self->QGraphicsOpacityEffect::boundingRectFor(*sourceRect));
 }
 
-void QGraphicsOpacityEffect_virtualbase_sourceChanged(void* self, int flags) {
+void QGraphicsOpacityEffect_virtualbase_sourceChanged(VirtualQGraphicsOpacityEffect* self, int flags) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::sourceChanged(static_cast<VirtualQGraphicsOpacityEffect::ChangeFlags>(flags));
-
+	self->QGraphicsOpacityEffect::sourceChanged(static_cast<VirtualQGraphicsOpacityEffect::ChangeFlags>(flags));
 }
 
-bool QGraphicsOpacityEffect_virtualbase_event(void* self, QEvent* event) {
+bool QGraphicsOpacityEffect_virtualbase_event(VirtualQGraphicsOpacityEffect* self, QEvent* event) {
 
-	return ( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::event(event);
-
+	return self->QGraphicsOpacityEffect::event(event);
 }
 
-bool QGraphicsOpacityEffect_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsOpacityEffect_virtualbase_eventFilter(VirtualQGraphicsOpacityEffect* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::eventFilter(watched, event);
-
+	return self->QGraphicsOpacityEffect::eventFilter(watched, event);
 }
 
-void QGraphicsOpacityEffect_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsOpacityEffect_virtualbase_timerEvent(VirtualQGraphicsOpacityEffect* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::timerEvent(event);
-
+	self->QGraphicsOpacityEffect::timerEvent(event);
 }
 
-void QGraphicsOpacityEffect_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsOpacityEffect_virtualbase_childEvent(VirtualQGraphicsOpacityEffect* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::childEvent(event);
-
+	self->QGraphicsOpacityEffect::childEvent(event);
 }
 
-void QGraphicsOpacityEffect_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsOpacityEffect_virtualbase_customEvent(VirtualQGraphicsOpacityEffect* self, QEvent* event) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::customEvent(event);
-
+	self->QGraphicsOpacityEffect::customEvent(event);
 }
 
-void QGraphicsOpacityEffect_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsOpacityEffect_virtualbase_connectNotify(VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::connectNotify(*signal);
-
+	self->QGraphicsOpacityEffect::connectNotify(*signal);
 }
 
-void QGraphicsOpacityEffect_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsOpacityEffect_virtualbase_disconnectNotify(VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsOpacityEffect*)(self) )->QGraphicsOpacityEffect::disconnectNotify(*signal);
-
+	self->QGraphicsOpacityEffect::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGraphicsOpacityEffect_staticMetaObject() { return &QGraphicsOpacityEffect::staticMetaObject; }
-void QGraphicsOpacityEffect_protectedbase_updateBoundingRect(void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	self_cast->updateBoundingRect();
 
+const QGraphicsOpacityEffect_VTable* QGraphicsOpacityEffect_vtbl(const VirtualQGraphicsOpacityEffect* self) { return self->vtbl; }
+void* QGraphicsOpacityEffect_vdata(const VirtualQGraphicsOpacityEffect* self) { return self->vdata; }
+void QGraphicsOpacityEffect_setVdata(VirtualQGraphicsOpacityEffect* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsOpacityEffect_protectedbase_updateBoundingRect(VirtualQGraphicsOpacityEffect* self) {
+	self->updateBoundingRect();
 }
 
-bool QGraphicsOpacityEffect_protectedbase_sourceIsPixmap(const void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return self_cast->sourceIsPixmap();
-
+bool QGraphicsOpacityEffect_protectedbase_sourceIsPixmap(const VirtualQGraphicsOpacityEffect* self) {
+	return self->sourceIsPixmap();
 }
 
-QRectF* QGraphicsOpacityEffect_protectedbase_sourceBoundingRect(const void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return new QRectF(self_cast->sourceBoundingRect());
-
+QRectF* QGraphicsOpacityEffect_protectedbase_sourceBoundingRect(const VirtualQGraphicsOpacityEffect* self) {
+	return new QRectF(self->sourceBoundingRect());
 }
 
-void QGraphicsOpacityEffect_protectedbase_drawSource(void* self, QPainter* painter) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	self_cast->drawSource(painter);
-
+void QGraphicsOpacityEffect_protectedbase_drawSource(VirtualQGraphicsOpacityEffect* self, QPainter* painter) {
+	self->drawSource(painter);
 }
 
-QPixmap* QGraphicsOpacityEffect_protectedbase_sourcePixmap(const void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return new QPixmap(self_cast->sourcePixmap());
-
+QPixmap* QGraphicsOpacityEffect_protectedbase_sourcePixmap(const VirtualQGraphicsOpacityEffect* self) {
+	return new QPixmap(self->sourcePixmap());
 }
 
-QObject* QGraphicsOpacityEffect_protectedbase_sender(const void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsOpacityEffect_protectedbase_sender(const VirtualQGraphicsOpacityEffect* self) {
+	return self->sender();
 }
 
-int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsOpacityEffect_protectedbase_senderSignalIndex(const VirtualQGraphicsOpacityEffect* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsOpacityEffect_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsOpacityEffect_protectedbase_receivers(const VirtualQGraphicsOpacityEffect* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsOpacityEffect* self_cast = static_cast<VirtualQGraphicsOpacityEffect*>( (QGraphicsOpacityEffect*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsOpacityEffect_protectedbase_isSignalConnected(const VirtualQGraphicsOpacityEffect* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGraphicsOpacityEffect_delete(QGraphicsOpacityEffect* self) {

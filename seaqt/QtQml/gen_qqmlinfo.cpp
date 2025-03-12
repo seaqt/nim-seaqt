@@ -8,15 +8,6 @@
 #include <QUrl>
 #include <qqmlinfo.h>
 #include "gen_qqmlinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlInfo* QQmlInfo_new(QQmlInfo* param1) {
 	return new QQmlInfo(*param1);
 }

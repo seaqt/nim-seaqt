@@ -5,15 +5,6 @@
 #include <QVariant>
 #include <qsslcertificateextension.h>
 #include "gen_qsslcertificateextension.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslCertificateExtension* QSslCertificateExtension_new() {
 	return new QSslCertificateExtension();
 }

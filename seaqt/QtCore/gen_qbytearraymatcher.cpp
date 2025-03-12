@@ -3,15 +3,6 @@
 #include <QStaticByteArrayMatcherBase>
 #include <qbytearraymatcher.h>
 #include "gen_qbytearraymatcher.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QByteArrayMatcher* QByteArrayMatcher_new() {
 	return new QByteArrayMatcher();
 }

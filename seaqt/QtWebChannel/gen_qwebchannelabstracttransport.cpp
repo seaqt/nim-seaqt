@@ -11,39 +11,32 @@
 #include <QWebChannelAbstractTransport>
 #include <qwebchannelabstracttransport.h>
 #include "gen_qwebchannelabstracttransport.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQWebChannelAbstractTransport final : public QWebChannelAbstractTransport {
-	struct QWebChannelAbstractTransport_VTable* vtbl;
+	const QWebChannelAbstractTransport_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWebChannelAbstractTransport_VTable* QWebChannelAbstractTransport_vtbl(const VirtualQWebChannelAbstractTransport* self);
+	friend void* QWebChannelAbstractTransport_vdata(const VirtualQWebChannelAbstractTransport* self);
+	friend void QWebChannelAbstractTransport_setVdata(VirtualQWebChannelAbstractTransport* self, void* vdata);
 
-	VirtualQWebChannelAbstractTransport(struct QWebChannelAbstractTransport_VTable* vtbl): QWebChannelAbstractTransport(), vtbl(vtbl) {};
-	VirtualQWebChannelAbstractTransport(struct QWebChannelAbstractTransport_VTable* vtbl, QObject* parent): QWebChannelAbstractTransport(parent), vtbl(vtbl) {};
+	VirtualQWebChannelAbstractTransport(const QWebChannelAbstractTransport_VTable* vtbl, void* vdata): QWebChannelAbstractTransport(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebChannelAbstractTransport(const QWebChannelAbstractTransport_VTable* vtbl, void* vdata, QObject* parent): QWebChannelAbstractTransport(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWebChannelAbstractTransport() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWebChannelAbstractTransport() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QWebChannelAbstractTransport::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const VirtualQWebChannelAbstractTransport* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QWebChannelAbstractTransport::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QWebChannelAbstractTransport_virtualbase_metacast(void* self, const char* param1);
+	friend void* QWebChannelAbstractTransport_virtualbase_metacast(VirtualQWebChannelAbstractTransport* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QWebChannelAbstractTransport::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebChannelAbstractTransport_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QWebChannelAbstractTransport_virtualbase_metacall(VirtualQWebChannelAbstractTransport* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sendMessage(const QJsonObject& message) override {
 		if (vtbl->sendMessage == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -86,11 +77,10 @@ public:
 		// Cast returned reference into pointer
 		QJsonObject* sigval1 = const_cast<QJsonObject*>(&message_ret);
 
-		vtbl->sendMessage(vtbl, this, sigval1);
+		vtbl->sendMessage(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QWebChannelAbstractTransport::event(event);
@@ -98,14 +88,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebChannelAbstractTransport_virtualbase_event(void* self, QEvent* event);
+	friend bool QWebChannelAbstractTransport_virtualbase_event(VirtualQWebChannelAbstractTransport* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QWebChannelAbstractTransport::eventFilter(watched, event);
@@ -114,14 +103,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebChannelAbstractTransport_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QWebChannelAbstractTransport_virtualbase_eventFilter(VirtualQWebChannelAbstractTransport* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QWebChannelAbstractTransport::timerEvent(event);
@@ -130,13 +118,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QWebChannelAbstractTransport_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QWebChannelAbstractTransport_virtualbase_timerEvent(VirtualQWebChannelAbstractTransport* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QWebChannelAbstractTransport::childEvent(event);
@@ -145,13 +132,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QWebChannelAbstractTransport_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QWebChannelAbstractTransport_virtualbase_childEvent(VirtualQWebChannelAbstractTransport* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QWebChannelAbstractTransport::customEvent(event);
@@ -160,13 +146,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QWebChannelAbstractTransport_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QWebChannelAbstractTransport_virtualbase_customEvent(VirtualQWebChannelAbstractTransport* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QWebChannelAbstractTransport::connectNotify(signal);
@@ -177,13 +162,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QWebChannelAbstractTransport_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QWebChannelAbstractTransport_virtualbase_connectNotify(VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QWebChannelAbstractTransport::disconnectNotify(signal);
@@ -194,25 +178,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QWebChannelAbstractTransport_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QWebChannelAbstractTransport_virtualbase_disconnectNotify(VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebChannelAbstractTransport_protectedbase_sender(const void* self);
-	friend int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const void* self);
-	friend int QWebChannelAbstractTransport_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QWebChannelAbstractTransport_protectedbase_sender(const VirtualQWebChannelAbstractTransport* self);
+	friend int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const VirtualQWebChannelAbstractTransport* self);
+	friend int QWebChannelAbstractTransport_protectedbase_receivers(const VirtualQWebChannelAbstractTransport* self, const char* signal);
+	friend bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal);
 };
 
-QWebChannelAbstractTransport* QWebChannelAbstractTransport_new(struct QWebChannelAbstractTransport_VTable* vtbl) {
-	return new VirtualQWebChannelAbstractTransport(vtbl);
+VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new(const QWebChannelAbstractTransport_VTable* vtbl, void* vdata) {
+	return new VirtualQWebChannelAbstractTransport(vtbl, vdata);
 }
 
-QWebChannelAbstractTransport* QWebChannelAbstractTransport_new2(struct QWebChannelAbstractTransport_VTable* vtbl, QObject* parent) {
-	return new VirtualQWebChannelAbstractTransport(vtbl, parent);
+VirtualQWebChannelAbstractTransport* QWebChannelAbstractTransport_new2(const QWebChannelAbstractTransport_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQWebChannelAbstractTransport(vtbl, vdata, parent);
 }
 
 void QWebChannelAbstractTransport_virtbase(QWebChannelAbstractTransport* src, QObject** outptr_QObject) {
@@ -261,7 +245,7 @@ void QWebChannelAbstractTransport_messageReceived(QWebChannelAbstractTransport* 
 	self->messageReceived(*message, transport);
 }
 
-void QWebChannelAbstractTransport_connect_messageReceived(QWebChannelAbstractTransport* self, intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t)) {
+void QWebChannelAbstractTransport_connect_messageReceived(VirtualQWebChannelAbstractTransport* self, intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QJsonObject*, QWebChannelAbstractTransport*);
@@ -320,93 +304,76 @@ struct miqt_string QWebChannelAbstractTransport_trUtf83(const char* s, const cha
 	return _ms;
 }
 
-QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const void* self) {
+QMetaObject* QWebChannelAbstractTransport_virtualbase_metaObject(const VirtualQWebChannelAbstractTransport* self) {
 
-	return (QMetaObject*) ( (const VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::metaObject();
-
+	return (QMetaObject*) self->QWebChannelAbstractTransport::metaObject();
 }
 
-void* QWebChannelAbstractTransport_virtualbase_metacast(void* self, const char* param1) {
+void* QWebChannelAbstractTransport_virtualbase_metacast(VirtualQWebChannelAbstractTransport* self, const char* param1) {
 
-	return ( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::qt_metacast(param1);
-
+	return self->QWebChannelAbstractTransport::qt_metacast(param1);
 }
 
-int QWebChannelAbstractTransport_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QWebChannelAbstractTransport_virtualbase_metacall(VirtualQWebChannelAbstractTransport* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QWebChannelAbstractTransport::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QWebChannelAbstractTransport_virtualbase_event(void* self, QEvent* event) {
+bool QWebChannelAbstractTransport_virtualbase_event(VirtualQWebChannelAbstractTransport* self, QEvent* event) {
 
-	return ( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::event(event);
-
+	return self->QWebChannelAbstractTransport::event(event);
 }
 
-bool QWebChannelAbstractTransport_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QWebChannelAbstractTransport_virtualbase_eventFilter(VirtualQWebChannelAbstractTransport* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::eventFilter(watched, event);
-
+	return self->QWebChannelAbstractTransport::eventFilter(watched, event);
 }
 
-void QWebChannelAbstractTransport_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QWebChannelAbstractTransport_virtualbase_timerEvent(VirtualQWebChannelAbstractTransport* self, QTimerEvent* event) {
 
-	( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::timerEvent(event);
-
+	self->QWebChannelAbstractTransport::timerEvent(event);
 }
 
-void QWebChannelAbstractTransport_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QWebChannelAbstractTransport_virtualbase_childEvent(VirtualQWebChannelAbstractTransport* self, QChildEvent* event) {
 
-	( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::childEvent(event);
-
+	self->QWebChannelAbstractTransport::childEvent(event);
 }
 
-void QWebChannelAbstractTransport_virtualbase_customEvent(void* self, QEvent* event) {
+void QWebChannelAbstractTransport_virtualbase_customEvent(VirtualQWebChannelAbstractTransport* self, QEvent* event) {
 
-	( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::customEvent(event);
-
+	self->QWebChannelAbstractTransport::customEvent(event);
 }
 
-void QWebChannelAbstractTransport_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QWebChannelAbstractTransport_virtualbase_connectNotify(VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal) {
 
-	( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::connectNotify(*signal);
-
+	self->QWebChannelAbstractTransport::connectNotify(*signal);
 }
 
-void QWebChannelAbstractTransport_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QWebChannelAbstractTransport_virtualbase_disconnectNotify(VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal) {
 
-	( (VirtualQWebChannelAbstractTransport*)(self) )->QWebChannelAbstractTransport::disconnectNotify(*signal);
-
+	self->QWebChannelAbstractTransport::disconnectNotify(*signal);
 }
 
 const QMetaObject* QWebChannelAbstractTransport_staticMetaObject() { return &QWebChannelAbstractTransport::staticMetaObject; }
-QObject* QWebChannelAbstractTransport_protectedbase_sender(const void* self) {
-	VirtualQWebChannelAbstractTransport* self_cast = static_cast<VirtualQWebChannelAbstractTransport*>( (QWebChannelAbstractTransport*)(self) );
-	
-	return self_cast->sender();
 
+const QWebChannelAbstractTransport_VTable* QWebChannelAbstractTransport_vtbl(const VirtualQWebChannelAbstractTransport* self) { return self->vtbl; }
+void* QWebChannelAbstractTransport_vdata(const VirtualQWebChannelAbstractTransport* self) { return self->vdata; }
+void QWebChannelAbstractTransport_setVdata(VirtualQWebChannelAbstractTransport* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QWebChannelAbstractTransport_protectedbase_sender(const VirtualQWebChannelAbstractTransport* self) {
+	return self->sender();
 }
 
-int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQWebChannelAbstractTransport* self_cast = static_cast<VirtualQWebChannelAbstractTransport*>( (QWebChannelAbstractTransport*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QWebChannelAbstractTransport_protectedbase_senderSignalIndex(const VirtualQWebChannelAbstractTransport* self) {
+	return self->senderSignalIndex();
 }
 
-int QWebChannelAbstractTransport_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQWebChannelAbstractTransport* self_cast = static_cast<VirtualQWebChannelAbstractTransport*>( (QWebChannelAbstractTransport*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QWebChannelAbstractTransport_protectedbase_receivers(const VirtualQWebChannelAbstractTransport* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQWebChannelAbstractTransport* self_cast = static_cast<VirtualQWebChannelAbstractTransport*>( (QWebChannelAbstractTransport*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QWebChannelAbstractTransport_protectedbase_isSignalConnected(const VirtualQWebChannelAbstractTransport* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QWebChannelAbstractTransport_delete(QWebChannelAbstractTransport* self) {

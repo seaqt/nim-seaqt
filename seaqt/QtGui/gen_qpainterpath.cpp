@@ -12,15 +12,6 @@
 #include <cstring>
 #include <qpainterpath.h>
 #include "gen_qpainterpath.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPainterPath* QPainterPath_new() {
 	return new QPainterPath();
 }

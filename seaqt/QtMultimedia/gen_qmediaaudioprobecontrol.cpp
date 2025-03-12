@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qmediaaudioprobecontrol.h>
 #include "gen_qmediaaudioprobecontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaAudioProbeControl_virtbase(QMediaAudioProbeControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -134,6 +125,7 @@ struct miqt_string QMediaAudioProbeControl_trUtf83(const char* s, const char* c,
 }
 
 const QMetaObject* QMediaAudioProbeControl_staticMetaObject() { return &QMediaAudioProbeControl::staticMetaObject; }
+
 void QMediaAudioProbeControl_delete(QMediaAudioProbeControl* self) {
 	delete self;
 }

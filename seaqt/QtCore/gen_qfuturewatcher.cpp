@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qfuturewatcher.h>
 #include "gen_qfuturewatcher.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QFutureWatcherBase_virtbase(QFutureWatcherBase* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -340,6 +331,7 @@ struct miqt_string QFutureWatcherBase_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QFutureWatcherBase_staticMetaObject() { return &QFutureWatcherBase::staticMetaObject; }
+
 void QFutureWatcherBase_delete(QFutureWatcherBase* self) {
 	delete self;
 }

@@ -50,25 +50,25 @@ export
 
 type cQMediaAvailabilityControl*{.exportc: "QMediaAvailabilityControl", incompleteStruct.} = object
 
-proc fcQMediaAvailabilityControl_metaObject(self: pointer, ): pointer {.importc: "QMediaAvailabilityControl_metaObject".}
+proc fcQMediaAvailabilityControl_metaObject(self: pointer): pointer {.importc: "QMediaAvailabilityControl_metaObject".}
 proc fcQMediaAvailabilityControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaAvailabilityControl_metacast".}
 proc fcQMediaAvailabilityControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaAvailabilityControl_metacall".}
 proc fcQMediaAvailabilityControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaAvailabilityControl_tr".}
 proc fcQMediaAvailabilityControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QMediaAvailabilityControl_trUtf8".}
-proc fcQMediaAvailabilityControl_availability(self: pointer, ): cint {.importc: "QMediaAvailabilityControl_availability".}
+proc fcQMediaAvailabilityControl_availability(self: pointer): cint {.importc: "QMediaAvailabilityControl_availability".}
 proc fcQMediaAvailabilityControl_availabilityChanged(self: pointer, availability: cint): void {.importc: "QMediaAvailabilityControl_availabilityChanged".}
 proc fcQMediaAvailabilityControl_connect_availabilityChanged(self: pointer, slot: int, callback: proc (slot: int, availability: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QMediaAvailabilityControl_connect_availabilityChanged".}
 proc fcQMediaAvailabilityControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAvailabilityControl_tr2".}
 proc fcQMediaAvailabilityControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAvailabilityControl_tr3".}
 proc fcQMediaAvailabilityControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaAvailabilityControl_trUtf82".}
 proc fcQMediaAvailabilityControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaAvailabilityControl_trUtf83".}
-proc fcQMediaAvailabilityControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaAvailabilityControl_protectedbase_sender".}
-proc fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaAvailabilityControl_protectedbase_senderSignalIndex".}
+proc fcQMediaAvailabilityControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaAvailabilityControl_protectedbase_sender".}
+proc fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaAvailabilityControl_protectedbase_senderSignalIndex".}
 proc fcQMediaAvailabilityControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaAvailabilityControl_protectedbase_receivers".}
 proc fcQMediaAvailabilityControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaAvailabilityControl_protectedbase_isSignalConnected".}
 proc fcQMediaAvailabilityControl_staticMetaObject(): pointer {.importc: "QMediaAvailabilityControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaAvailabilityControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, param1: cstring): pointer =
@@ -89,20 +89,20 @@ proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityContr
   c_free(v_ms.data)
   vx_ret
 
-proc availability*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): cint =
+proc availability*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): cint =
   cint(fcQMediaAvailabilityControl_availability(self.h))
 
 proc availabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, availability: cint): void =
   fcQMediaAvailabilityControl_availabilityChanged(self.h, cint(availability))
 
 type QMediaAvailabilityControlavailabilityChangedSlot* = proc(availability: cint)
-proc miqt_exec_callback_cQMediaAvailabilityControl_availabilityChanged(slot: int, availability: cint) {.cdecl.} =
+proc cQMediaAvailabilityControl_slot_callback_availabilityChanged(slot: int, availability: cint) {.cdecl.} =
   let nimfunc = cast[ptr QMediaAvailabilityControlavailabilityChangedSlot](cast[pointer](slot))
   let slotval1 = cint(availability)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQMediaAvailabilityControl_availabilityChanged_release(slot: int) {.cdecl.} =
+proc cQMediaAvailabilityControl_slot_callback_availabilityChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QMediaAvailabilityControlavailabilityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -110,7 +110,7 @@ proc onavailabilityChanged*(self: gen_qmediaavailabilitycontrol_types.QMediaAvai
   var tmp = new QMediaAvailabilityControlavailabilityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQMediaAvailabilityControl_connect_availabilityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQMediaAvailabilityControl_availabilityChanged, miqt_exec_callback_cQMediaAvailabilityControl_availabilityChanged_release)
+  fcQMediaAvailabilityControl_connect_availabilityChanged(self.h, cast[int](addr tmp[]), cQMediaAvailabilityControl_slot_callback_availabilityChanged, cQMediaAvailabilityControl_slot_callback_availabilityChanged_release)
 
 proc tr*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, s: cstring, c: cstring): string =
   let v_ms = fcQMediaAvailabilityControl_tr2(s, c)
@@ -136,10 +136,10 @@ proc trUtf8*(_: type gen_qmediaavailabilitycontrol_types.QMediaAvailabilityContr
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaAvailabilityControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, ): cint =
+proc senderSignalIndex*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl): cint =
   fcQMediaAvailabilityControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qmediaavailabilitycontrol_types.QMediaAvailabilityControl, signal: cstring): cint =

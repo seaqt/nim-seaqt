@@ -14,41 +14,34 @@
 #include <QTimerEvent>
 #include <qmouseeventtransition.h>
 #include "gen_qmouseeventtransition.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMouseEventTransition final : public QMouseEventTransition {
-	struct QMouseEventTransition_VTable* vtbl;
+	const QMouseEventTransition_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMouseEventTransition_VTable* QMouseEventTransition_vtbl(const VirtualQMouseEventTransition* self);
+	friend void* QMouseEventTransition_vdata(const VirtualQMouseEventTransition* self);
+	friend void QMouseEventTransition_setVdata(VirtualQMouseEventTransition* self, void* vdata);
 
-	VirtualQMouseEventTransition(struct QMouseEventTransition_VTable* vtbl): QMouseEventTransition(), vtbl(vtbl) {};
-	VirtualQMouseEventTransition(struct QMouseEventTransition_VTable* vtbl, QObject* object, QEvent::Type type, Qt::MouseButton button): QMouseEventTransition(object, type, button), vtbl(vtbl) {};
-	VirtualQMouseEventTransition(struct QMouseEventTransition_VTable* vtbl, QState* sourceState): QMouseEventTransition(sourceState), vtbl(vtbl) {};
-	VirtualQMouseEventTransition(struct QMouseEventTransition_VTable* vtbl, QObject* object, QEvent::Type type, Qt::MouseButton button, QState* sourceState): QMouseEventTransition(object, type, button, sourceState), vtbl(vtbl) {};
+	VirtualQMouseEventTransition(const QMouseEventTransition_VTable* vtbl, void* vdata): QMouseEventTransition(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEventTransition(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, QEvent::Type type, Qt::MouseButton button): QMouseEventTransition(object, type, button), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEventTransition(const QMouseEventTransition_VTable* vtbl, void* vdata, QState* sourceState): QMouseEventTransition(sourceState), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMouseEventTransition(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, QEvent::Type type, Qt::MouseButton button, QState* sourceState): QMouseEventTransition(object, type, button, sourceState), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMouseEventTransition() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMouseEventTransition() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMouseEventTransition::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMouseEventTransition_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMouseEventTransition_virtualbase_metaObject(const VirtualQMouseEventTransition* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMouseEventTransition::qt_metacast(param1);
@@ -56,14 +49,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMouseEventTransition_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMouseEventTransition_virtualbase_metacast(VirtualQMouseEventTransition* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMouseEventTransition::qt_metacall(param1, param2, param3);
@@ -74,14 +66,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMouseEventTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMouseEventTransition_virtualbase_metacall(VirtualQMouseEventTransition* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onTransition(QEvent* event) override {
 		if (vtbl->onTransition == 0) {
 			QMouseEventTransition::onTransition(event);
@@ -90,13 +81,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onTransition(vtbl, this, sigval1);
+		vtbl->onTransition(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_onTransition(void* self, QEvent* event);
+	friend void QMouseEventTransition_virtualbase_onTransition(VirtualQMouseEventTransition* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventTest(QEvent* event) override {
 		if (vtbl->eventTest == 0) {
 			return QMouseEventTransition::eventTest(event);
@@ -104,14 +94,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->eventTest(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->eventTest(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEventTransition_virtualbase_eventTest(void* self, QEvent* event);
+	friend bool QMouseEventTransition_virtualbase_eventTest(VirtualQMouseEventTransition* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QMouseEventTransition::event(e);
@@ -119,14 +108,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEventTransition_virtualbase_event(void* self, QEvent* e);
+	friend bool QMouseEventTransition_virtualbase_event(VirtualQMouseEventTransition* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMouseEventTransition::eventFilter(watched, event);
@@ -135,14 +123,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMouseEventTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QMouseEventTransition_virtualbase_eventFilter(VirtualQMouseEventTransition* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMouseEventTransition::timerEvent(event);
@@ -151,13 +138,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMouseEventTransition_virtualbase_timerEvent(VirtualQMouseEventTransition* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMouseEventTransition::childEvent(event);
@@ -166,13 +152,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMouseEventTransition_virtualbase_childEvent(VirtualQMouseEventTransition* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMouseEventTransition::customEvent(event);
@@ -181,13 +166,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMouseEventTransition_virtualbase_customEvent(VirtualQMouseEventTransition* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMouseEventTransition::connectNotify(signal);
@@ -198,13 +182,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMouseEventTransition_virtualbase_connectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMouseEventTransition::disconnectNotify(signal);
@@ -215,33 +198,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMouseEventTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMouseEventTransition_virtualbase_disconnectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMouseEventTransition_protectedbase_sender(const void* self);
-	friend int QMouseEventTransition_protectedbase_senderSignalIndex(const void* self);
-	friend int QMouseEventTransition_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMouseEventTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QMouseEventTransition_protectedbase_sender(const VirtualQMouseEventTransition* self);
+	friend int QMouseEventTransition_protectedbase_senderSignalIndex(const VirtualQMouseEventTransition* self);
+	friend int QMouseEventTransition_protectedbase_receivers(const VirtualQMouseEventTransition* self, const char* signal);
+	friend bool QMouseEventTransition_protectedbase_isSignalConnected(const VirtualQMouseEventTransition* self, QMetaMethod* signal);
 };
 
-QMouseEventTransition* QMouseEventTransition_new(struct QMouseEventTransition_VTable* vtbl) {
-	return new VirtualQMouseEventTransition(vtbl);
+VirtualQMouseEventTransition* QMouseEventTransition_new(const QMouseEventTransition_VTable* vtbl, void* vdata) {
+	return new VirtualQMouseEventTransition(vtbl, vdata);
 }
 
-QMouseEventTransition* QMouseEventTransition_new2(struct QMouseEventTransition_VTable* vtbl, QObject* object, int type, int button) {
-	return new VirtualQMouseEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button));
+VirtualQMouseEventTransition* QMouseEventTransition_new2(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, int type, int button) {
+	return new VirtualQMouseEventTransition(vtbl, vdata, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button));
 }
 
-QMouseEventTransition* QMouseEventTransition_new3(struct QMouseEventTransition_VTable* vtbl, QState* sourceState) {
-	return new VirtualQMouseEventTransition(vtbl, sourceState);
+VirtualQMouseEventTransition* QMouseEventTransition_new3(const QMouseEventTransition_VTable* vtbl, void* vdata, QState* sourceState) {
+	return new VirtualQMouseEventTransition(vtbl, vdata, sourceState);
 }
 
-QMouseEventTransition* QMouseEventTransition_new4(struct QMouseEventTransition_VTable* vtbl, QObject* object, int type, int button, QState* sourceState) {
-	return new VirtualQMouseEventTransition(vtbl, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button), sourceState);
+VirtualQMouseEventTransition* QMouseEventTransition_new4(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, int type, int button, QState* sourceState) {
+	return new VirtualQMouseEventTransition(vtbl, vdata, object, static_cast<QEvent::Type>(type), static_cast<Qt::MouseButton>(button), sourceState);
 }
 
 void QMouseEventTransition_virtbase(QMouseEventTransition* src, QEventTransition** outptr_QEventTransition) {
@@ -352,105 +335,86 @@ struct miqt_string QMouseEventTransition_trUtf83(const char* s, const char* c, i
 	return _ms;
 }
 
-QMetaObject* QMouseEventTransition_virtualbase_metaObject(const void* self) {
+QMetaObject* QMouseEventTransition_virtualbase_metaObject(const VirtualQMouseEventTransition* self) {
 
-	return (QMetaObject*) ( (const VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::metaObject();
-
+	return (QMetaObject*) self->QMouseEventTransition::metaObject();
 }
 
-void* QMouseEventTransition_virtualbase_metacast(void* self, const char* param1) {
+void* QMouseEventTransition_virtualbase_metacast(VirtualQMouseEventTransition* self, const char* param1) {
 
-	return ( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::qt_metacast(param1);
-
+	return self->QMouseEventTransition::qt_metacast(param1);
 }
 
-int QMouseEventTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMouseEventTransition_virtualbase_metacall(VirtualQMouseEventTransition* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMouseEventTransition::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QMouseEventTransition_virtualbase_onTransition(void* self, QEvent* event) {
+void QMouseEventTransition_virtualbase_onTransition(VirtualQMouseEventTransition* self, QEvent* event) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::onTransition(event);
-
+	self->QMouseEventTransition::onTransition(event);
 }
 
-bool QMouseEventTransition_virtualbase_eventTest(void* self, QEvent* event) {
+bool QMouseEventTransition_virtualbase_eventTest(VirtualQMouseEventTransition* self, QEvent* event) {
 
-	return ( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::eventTest(event);
-
+	return self->QMouseEventTransition::eventTest(event);
 }
 
-bool QMouseEventTransition_virtualbase_event(void* self, QEvent* e) {
+bool QMouseEventTransition_virtualbase_event(VirtualQMouseEventTransition* self, QEvent* e) {
 
-	return ( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::event(e);
-
+	return self->QMouseEventTransition::event(e);
 }
 
-bool QMouseEventTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QMouseEventTransition_virtualbase_eventFilter(VirtualQMouseEventTransition* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::eventFilter(watched, event);
-
+	return self->QMouseEventTransition::eventFilter(watched, event);
 }
 
-void QMouseEventTransition_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMouseEventTransition_virtualbase_timerEvent(VirtualQMouseEventTransition* self, QTimerEvent* event) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::timerEvent(event);
-
+	self->QMouseEventTransition::timerEvent(event);
 }
 
-void QMouseEventTransition_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMouseEventTransition_virtualbase_childEvent(VirtualQMouseEventTransition* self, QChildEvent* event) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::childEvent(event);
-
+	self->QMouseEventTransition::childEvent(event);
 }
 
-void QMouseEventTransition_virtualbase_customEvent(void* self, QEvent* event) {
+void QMouseEventTransition_virtualbase_customEvent(VirtualQMouseEventTransition* self, QEvent* event) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::customEvent(event);
-
+	self->QMouseEventTransition::customEvent(event);
 }
 
-void QMouseEventTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMouseEventTransition_virtualbase_connectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::connectNotify(*signal);
-
+	self->QMouseEventTransition::connectNotify(*signal);
 }
 
-void QMouseEventTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMouseEventTransition_virtualbase_disconnectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal) {
 
-	( (VirtualQMouseEventTransition*)(self) )->QMouseEventTransition::disconnectNotify(*signal);
-
+	self->QMouseEventTransition::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMouseEventTransition_staticMetaObject() { return &QMouseEventTransition::staticMetaObject; }
-QObject* QMouseEventTransition_protectedbase_sender(const void* self) {
-	VirtualQMouseEventTransition* self_cast = static_cast<VirtualQMouseEventTransition*>( (QMouseEventTransition*)(self) );
-	
-	return self_cast->sender();
 
+const QMouseEventTransition_VTable* QMouseEventTransition_vtbl(const VirtualQMouseEventTransition* self) { return self->vtbl; }
+void* QMouseEventTransition_vdata(const VirtualQMouseEventTransition* self) { return self->vdata; }
+void QMouseEventTransition_setVdata(VirtualQMouseEventTransition* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QMouseEventTransition_protectedbase_sender(const VirtualQMouseEventTransition* self) {
+	return self->sender();
 }
 
-int QMouseEventTransition_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMouseEventTransition* self_cast = static_cast<VirtualQMouseEventTransition*>( (QMouseEventTransition*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMouseEventTransition_protectedbase_senderSignalIndex(const VirtualQMouseEventTransition* self) {
+	return self->senderSignalIndex();
 }
 
-int QMouseEventTransition_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMouseEventTransition* self_cast = static_cast<VirtualQMouseEventTransition*>( (QMouseEventTransition*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMouseEventTransition_protectedbase_receivers(const VirtualQMouseEventTransition* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMouseEventTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMouseEventTransition* self_cast = static_cast<VirtualQMouseEventTransition*>( (QMouseEventTransition*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMouseEventTransition_protectedbase_isSignalConnected(const VirtualQMouseEventTransition* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMouseEventTransition_delete(QMouseEventTransition* self) {

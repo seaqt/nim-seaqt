@@ -70,41 +70,41 @@ export
 
 type cQCompleter*{.exportc: "QCompleter", incompleteStruct.} = object
 
-proc fcQCompleter_metaObject(self: pointer, ): pointer {.importc: "QCompleter_metaObject".}
+proc fcQCompleter_metaObject(self: pointer): pointer {.importc: "QCompleter_metaObject".}
 proc fcQCompleter_metacast(self: pointer, param1: cstring): pointer {.importc: "QCompleter_metacast".}
 proc fcQCompleter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCompleter_metacall".}
 proc fcQCompleter_tr(s: cstring): struct_miqt_string {.importc: "QCompleter_tr".}
 proc fcQCompleter_trUtf8(s: cstring): struct_miqt_string {.importc: "QCompleter_trUtf8".}
 proc fcQCompleter_setWidget(self: pointer, widget: pointer): void {.importc: "QCompleter_setWidget".}
-proc fcQCompleter_widget(self: pointer, ): pointer {.importc: "QCompleter_widget".}
+proc fcQCompleter_widget(self: pointer): pointer {.importc: "QCompleter_widget".}
 proc fcQCompleter_setModel(self: pointer, c: pointer): void {.importc: "QCompleter_setModel".}
-proc fcQCompleter_model(self: pointer, ): pointer {.importc: "QCompleter_model".}
+proc fcQCompleter_model(self: pointer): pointer {.importc: "QCompleter_model".}
 proc fcQCompleter_setCompletionMode(self: pointer, mode: cint): void {.importc: "QCompleter_setCompletionMode".}
-proc fcQCompleter_completionMode(self: pointer, ): cint {.importc: "QCompleter_completionMode".}
+proc fcQCompleter_completionMode(self: pointer): cint {.importc: "QCompleter_completionMode".}
 proc fcQCompleter_setFilterMode(self: pointer, filterMode: cint): void {.importc: "QCompleter_setFilterMode".}
-proc fcQCompleter_filterMode(self: pointer, ): cint {.importc: "QCompleter_filterMode".}
-proc fcQCompleter_popup(self: pointer, ): pointer {.importc: "QCompleter_popup".}
+proc fcQCompleter_filterMode(self: pointer): cint {.importc: "QCompleter_filterMode".}
+proc fcQCompleter_popup(self: pointer): pointer {.importc: "QCompleter_popup".}
 proc fcQCompleter_setPopup(self: pointer, popup: pointer): void {.importc: "QCompleter_setPopup".}
 proc fcQCompleter_setCaseSensitivity(self: pointer, caseSensitivity: cint): void {.importc: "QCompleter_setCaseSensitivity".}
-proc fcQCompleter_caseSensitivity(self: pointer, ): cint {.importc: "QCompleter_caseSensitivity".}
+proc fcQCompleter_caseSensitivity(self: pointer): cint {.importc: "QCompleter_caseSensitivity".}
 proc fcQCompleter_setModelSorting(self: pointer, sorting: cint): void {.importc: "QCompleter_setModelSorting".}
-proc fcQCompleter_modelSorting(self: pointer, ): cint {.importc: "QCompleter_modelSorting".}
+proc fcQCompleter_modelSorting(self: pointer): cint {.importc: "QCompleter_modelSorting".}
 proc fcQCompleter_setCompletionColumn(self: pointer, column: cint): void {.importc: "QCompleter_setCompletionColumn".}
-proc fcQCompleter_completionColumn(self: pointer, ): cint {.importc: "QCompleter_completionColumn".}
+proc fcQCompleter_completionColumn(self: pointer): cint {.importc: "QCompleter_completionColumn".}
 proc fcQCompleter_setCompletionRole(self: pointer, role: cint): void {.importc: "QCompleter_setCompletionRole".}
-proc fcQCompleter_completionRole(self: pointer, ): cint {.importc: "QCompleter_completionRole".}
-proc fcQCompleter_wrapAround(self: pointer, ): bool {.importc: "QCompleter_wrapAround".}
-proc fcQCompleter_maxVisibleItems(self: pointer, ): cint {.importc: "QCompleter_maxVisibleItems".}
+proc fcQCompleter_completionRole(self: pointer): cint {.importc: "QCompleter_completionRole".}
+proc fcQCompleter_wrapAround(self: pointer): bool {.importc: "QCompleter_wrapAround".}
+proc fcQCompleter_maxVisibleItems(self: pointer): cint {.importc: "QCompleter_maxVisibleItems".}
 proc fcQCompleter_setMaxVisibleItems(self: pointer, maxItems: cint): void {.importc: "QCompleter_setMaxVisibleItems".}
-proc fcQCompleter_completionCount(self: pointer, ): cint {.importc: "QCompleter_completionCount".}
+proc fcQCompleter_completionCount(self: pointer): cint {.importc: "QCompleter_completionCount".}
 proc fcQCompleter_setCurrentRow(self: pointer, row: cint): bool {.importc: "QCompleter_setCurrentRow".}
-proc fcQCompleter_currentRow(self: pointer, ): cint {.importc: "QCompleter_currentRow".}
-proc fcQCompleter_currentIndex(self: pointer, ): pointer {.importc: "QCompleter_currentIndex".}
-proc fcQCompleter_currentCompletion(self: pointer, ): struct_miqt_string {.importc: "QCompleter_currentCompletion".}
-proc fcQCompleter_completionModel(self: pointer, ): pointer {.importc: "QCompleter_completionModel".}
-proc fcQCompleter_completionPrefix(self: pointer, ): struct_miqt_string {.importc: "QCompleter_completionPrefix".}
+proc fcQCompleter_currentRow(self: pointer): cint {.importc: "QCompleter_currentRow".}
+proc fcQCompleter_currentIndex(self: pointer): pointer {.importc: "QCompleter_currentIndex".}
+proc fcQCompleter_currentCompletion(self: pointer): struct_miqt_string {.importc: "QCompleter_currentCompletion".}
+proc fcQCompleter_completionModel(self: pointer): pointer {.importc: "QCompleter_completionModel".}
+proc fcQCompleter_completionPrefix(self: pointer): struct_miqt_string {.importc: "QCompleter_completionPrefix".}
 proc fcQCompleter_setCompletionPrefix(self: pointer, prefix: struct_miqt_string): void {.importc: "QCompleter_setCompletionPrefix".}
-proc fcQCompleter_complete(self: pointer, ): void {.importc: "QCompleter_complete".}
+proc fcQCompleter_complete(self: pointer): void {.importc: "QCompleter_complete".}
 proc fcQCompleter_setWrapAround(self: pointer, wrap: bool): void {.importc: "QCompleter_setWrapAround".}
 proc fcQCompleter_pathFromIndex(self: pointer, index: pointer): struct_miqt_string {.importc: "QCompleter_pathFromIndex".}
 proc fcQCompleter_splitPath(self: pointer, path: struct_miqt_string): struct_miqt_array {.importc: "QCompleter_splitPath".}
@@ -121,21 +121,23 @@ proc fcQCompleter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.imp
 proc fcQCompleter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCompleter_trUtf82".}
 proc fcQCompleter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCompleter_trUtf83".}
 proc fcQCompleter_complete1(self: pointer, rect: pointer): void {.importc: "QCompleter_complete1".}
+proc fcQCompleter_vtbl(self: pointer): pointer {.importc: "QCompleter_vtbl".}
+proc fcQCompleter_vdata(self: pointer): pointer {.importc: "QCompleter_vdata".}
 type cQCompleterVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQCompleterVTable, self: ptr cQCompleter) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  pathFromIndex*: proc(vtbl, self: pointer, index: pointer): struct_miqt_string {.cdecl, raises: [], gcsafe.}
-  splitPath*: proc(vtbl, self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, o: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQCompleter_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QCompleter_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  pathFromIndex*: proc(self: pointer, index: pointer): struct_miqt_string {.cdecl, raises: [], gcsafe.}
+  splitPath*: proc(self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, o: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQCompleter_virtualbase_metaObject(self: pointer): pointer {.importc: "QCompleter_virtualbase_metaObject".}
 proc fcQCompleter_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QCompleter_virtualbase_metacast".}
 proc fcQCompleter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCompleter_virtualbase_metacall".}
 proc fcQCompleter_virtualbase_pathFromIndex(self: pointer, index: pointer): struct_miqt_string {.importc: "QCompleter_virtualbase_pathFromIndex".}
@@ -147,19 +149,19 @@ proc fcQCompleter_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQCompleter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QCompleter_virtualbase_customEvent".}
 proc fcQCompleter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QCompleter_virtualbase_connectNotify".}
 proc fcQCompleter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QCompleter_virtualbase_disconnectNotify".}
-proc fcQCompleter_protectedbase_sender(self: pointer, ): pointer {.importc: "QCompleter_protectedbase_sender".}
-proc fcQCompleter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCompleter_protectedbase_senderSignalIndex".}
+proc fcQCompleter_protectedbase_sender(self: pointer): pointer {.importc: "QCompleter_protectedbase_sender".}
+proc fcQCompleter_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCompleter_protectedbase_senderSignalIndex".}
 proc fcQCompleter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCompleter_protectedbase_receivers".}
 proc fcQCompleter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCompleter_protectedbase_isSignalConnected".}
-proc fcQCompleter_new(vtbl: pointer, ): ptr cQCompleter {.importc: "QCompleter_new".}
-proc fcQCompleter_new2(vtbl: pointer, model: pointer): ptr cQCompleter {.importc: "QCompleter_new2".}
-proc fcQCompleter_new3(vtbl: pointer, completions: struct_miqt_array): ptr cQCompleter {.importc: "QCompleter_new3".}
-proc fcQCompleter_new4(vtbl: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new4".}
-proc fcQCompleter_new5(vtbl: pointer, model: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new5".}
-proc fcQCompleter_new6(vtbl: pointer, completions: struct_miqt_array, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new6".}
+proc fcQCompleter_new(vtbl, vdata: pointer): ptr cQCompleter {.importc: "QCompleter_new".}
+proc fcQCompleter_new2(vtbl, vdata: pointer, model: pointer): ptr cQCompleter {.importc: "QCompleter_new2".}
+proc fcQCompleter_new3(vtbl, vdata: pointer, completions: struct_miqt_array): ptr cQCompleter {.importc: "QCompleter_new3".}
+proc fcQCompleter_new4(vtbl, vdata: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new4".}
+proc fcQCompleter_new5(vtbl, vdata: pointer, model: pointer, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new5".}
+proc fcQCompleter_new6(vtbl, vdata: pointer, completions: struct_miqt_array, parent: pointer): ptr cQCompleter {.importc: "QCompleter_new6".}
 proc fcQCompleter_staticMetaObject(): pointer {.importc: "QCompleter_staticMetaObject".}
 
-proc metaObject*(self: gen_qcompleter_types.QCompleter, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qcompleter_types.QCompleter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCompleter_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcompleter_types.QCompleter, param1: cstring): pointer =
@@ -183,28 +185,28 @@ proc trUtf8*(_: type gen_qcompleter_types.QCompleter, s: cstring): string =
 proc setWidget*(self: gen_qcompleter_types.QCompleter, widget: gen_qwidget_types.QWidget): void =
   fcQCompleter_setWidget(self.h, widget.h)
 
-proc widget*(self: gen_qcompleter_types.QCompleter, ): gen_qwidget_types.QWidget =
+proc widget*(self: gen_qcompleter_types.QCompleter): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQCompleter_widget(self.h), owned: false)
 
 proc setModel*(self: gen_qcompleter_types.QCompleter, c: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQCompleter_setModel(self.h, c.h)
 
-proc model*(self: gen_qcompleter_types.QCompleter, ): gen_qabstractitemmodel_types.QAbstractItemModel =
+proc model*(self: gen_qcompleter_types.QCompleter): gen_qabstractitemmodel_types.QAbstractItemModel =
   gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQCompleter_model(self.h), owned: false)
 
 proc setCompletionMode*(self: gen_qcompleter_types.QCompleter, mode: cint): void =
   fcQCompleter_setCompletionMode(self.h, cint(mode))
 
-proc completionMode*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc completionMode*(self: gen_qcompleter_types.QCompleter): cint =
   cint(fcQCompleter_completionMode(self.h))
 
 proc setFilterMode*(self: gen_qcompleter_types.QCompleter, filterMode: cint): void =
   fcQCompleter_setFilterMode(self.h, cint(filterMode))
 
-proc filterMode*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc filterMode*(self: gen_qcompleter_types.QCompleter): cint =
   cint(fcQCompleter_filterMode(self.h))
 
-proc popup*(self: gen_qcompleter_types.QCompleter, ): gen_qabstractitemview_types.QAbstractItemView =
+proc popup*(self: gen_qcompleter_types.QCompleter): gen_qabstractitemview_types.QAbstractItemView =
   gen_qabstractitemview_types.QAbstractItemView(h: fcQCompleter_popup(self.h), owned: false)
 
 proc setPopup*(self: gen_qcompleter_types.QCompleter, popup: gen_qabstractitemview_types.QAbstractItemView): void =
@@ -213,58 +215,58 @@ proc setPopup*(self: gen_qcompleter_types.QCompleter, popup: gen_qabstractitemvi
 proc setCaseSensitivity*(self: gen_qcompleter_types.QCompleter, caseSensitivity: cint): void =
   fcQCompleter_setCaseSensitivity(self.h, cint(caseSensitivity))
 
-proc caseSensitivity*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc caseSensitivity*(self: gen_qcompleter_types.QCompleter): cint =
   cint(fcQCompleter_caseSensitivity(self.h))
 
 proc setModelSorting*(self: gen_qcompleter_types.QCompleter, sorting: cint): void =
   fcQCompleter_setModelSorting(self.h, cint(sorting))
 
-proc modelSorting*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc modelSorting*(self: gen_qcompleter_types.QCompleter): cint =
   cint(fcQCompleter_modelSorting(self.h))
 
 proc setCompletionColumn*(self: gen_qcompleter_types.QCompleter, column: cint): void =
   fcQCompleter_setCompletionColumn(self.h, column)
 
-proc completionColumn*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc completionColumn*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_completionColumn(self.h)
 
 proc setCompletionRole*(self: gen_qcompleter_types.QCompleter, role: cint): void =
   fcQCompleter_setCompletionRole(self.h, role)
 
-proc completionRole*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc completionRole*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_completionRole(self.h)
 
-proc wrapAround*(self: gen_qcompleter_types.QCompleter, ): bool =
+proc wrapAround*(self: gen_qcompleter_types.QCompleter): bool =
   fcQCompleter_wrapAround(self.h)
 
-proc maxVisibleItems*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc maxVisibleItems*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_maxVisibleItems(self.h)
 
 proc setMaxVisibleItems*(self: gen_qcompleter_types.QCompleter, maxItems: cint): void =
   fcQCompleter_setMaxVisibleItems(self.h, maxItems)
 
-proc completionCount*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc completionCount*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_completionCount(self.h)
 
 proc setCurrentRow*(self: gen_qcompleter_types.QCompleter, row: cint): bool =
   fcQCompleter_setCurrentRow(self.h, row)
 
-proc currentRow*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc currentRow*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_currentRow(self.h)
 
-proc currentIndex*(self: gen_qcompleter_types.QCompleter, ): gen_qabstractitemmodel_types.QModelIndex =
+proc currentIndex*(self: gen_qcompleter_types.QCompleter): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQCompleter_currentIndex(self.h), owned: true)
 
-proc currentCompletion*(self: gen_qcompleter_types.QCompleter, ): string =
+proc currentCompletion*(self: gen_qcompleter_types.QCompleter): string =
   let v_ms = fcQCompleter_currentCompletion(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc completionModel*(self: gen_qcompleter_types.QCompleter, ): gen_qabstractitemmodel_types.QAbstractItemModel =
+proc completionModel*(self: gen_qcompleter_types.QCompleter): gen_qabstractitemmodel_types.QAbstractItemModel =
   gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQCompleter_completionModel(self.h), owned: false)
 
-proc completionPrefix*(self: gen_qcompleter_types.QCompleter, ): string =
+proc completionPrefix*(self: gen_qcompleter_types.QCompleter): string =
   let v_ms = fcQCompleter_completionPrefix(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -273,7 +275,7 @@ proc completionPrefix*(self: gen_qcompleter_types.QCompleter, ): string =
 proc setCompletionPrefix*(self: gen_qcompleter_types.QCompleter, prefix: string): void =
   fcQCompleter_setCompletionPrefix(self.h, struct_miqt_string(data: prefix, len: csize_t(len(prefix))))
 
-proc complete*(self: gen_qcompleter_types.QCompleter, ): void =
+proc complete*(self: gen_qcompleter_types.QCompleter): void =
   fcQCompleter_complete(self.h)
 
 proc setWrapAround*(self: gen_qcompleter_types.QCompleter, wrap: bool): void =
@@ -301,7 +303,7 @@ proc activated*(self: gen_qcompleter_types.QCompleter, text: string): void =
   fcQCompleter_activated(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QCompleteractivatedSlot* = proc(text: string)
-proc miqt_exec_callback_cQCompleter_activated(slot: int, text: struct_miqt_string) {.cdecl.} =
+proc cQCompleter_slot_callback_activated(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCompleteractivatedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -310,7 +312,7 @@ proc miqt_exec_callback_cQCompleter_activated(slot: int, text: struct_miqt_strin
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCompleter_activated_release(slot: int) {.cdecl.} =
+proc cQCompleter_slot_callback_activated_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCompleteractivatedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -318,19 +320,19 @@ proc onactivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivat
   var tmp = new QCompleteractivatedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activated(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_activated, miqt_exec_callback_cQCompleter_activated_release)
+  fcQCompleter_connect_activated(self.h, cast[int](addr tmp[]), cQCompleter_slot_callback_activated, cQCompleter_slot_callback_activated_release)
 
 proc activated*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQCompleter_activatedWithIndex(self.h, index.h)
 
 type QCompleteractivatedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQCompleter_activatedWithIndex(slot: int, index: pointer) {.cdecl.} =
+proc cQCompleter_slot_callback_activatedWithIndex(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCompleteractivatedWithIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCompleter_activatedWithIndex_release(slot: int) {.cdecl.} =
+proc cQCompleter_slot_callback_activatedWithIndex_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCompleteractivatedWithIndexSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -338,13 +340,13 @@ proc onactivated*(self: gen_qcompleter_types.QCompleter, slot: QCompleteractivat
   var tmp = new QCompleteractivatedWithIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_activatedWithIndex(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_activatedWithIndex, miqt_exec_callback_cQCompleter_activatedWithIndex_release)
+  fcQCompleter_connect_activatedWithIndex(self.h, cast[int](addr tmp[]), cQCompleter_slot_callback_activatedWithIndex, cQCompleter_slot_callback_activatedWithIndex_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, text: string): void =
   fcQCompleter_highlighted(self.h, struct_miqt_string(data: text, len: csize_t(len(text))))
 
 type QCompleterhighlightedSlot* = proc(text: string)
-proc miqt_exec_callback_cQCompleter_highlighted(slot: int, text: struct_miqt_string) {.cdecl.} =
+proc cQCompleter_slot_callback_highlighted(slot: int, text: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QCompleterhighlightedSlot](cast[pointer](slot))
   let vtext_ms = text
   let vtextx_ret = string.fromBytes(toOpenArrayByte(vtext_ms.data, 0, int(vtext_ms.len)-1))
@@ -353,7 +355,7 @@ proc miqt_exec_callback_cQCompleter_highlighted(slot: int, text: struct_miqt_str
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCompleter_highlighted_release(slot: int) {.cdecl.} =
+proc cQCompleter_slot_callback_highlighted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCompleterhighlightedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -361,19 +363,19 @@ proc onhighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighl
   var tmp = new QCompleterhighlightedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlighted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_highlighted, miqt_exec_callback_cQCompleter_highlighted_release)
+  fcQCompleter_connect_highlighted(self.h, cast[int](addr tmp[]), cQCompleter_slot_callback_highlighted, cQCompleter_slot_callback_highlighted_release)
 
 proc highlighted*(self: gen_qcompleter_types.QCompleter, index: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQCompleter_highlightedWithIndex(self.h, index.h)
 
 type QCompleterhighlightedWithIndexSlot* = proc(index: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQCompleter_highlightedWithIndex(slot: int, index: pointer) {.cdecl.} =
+proc cQCompleter_slot_callback_highlightedWithIndex(slot: int, index: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQCompleter_highlightedWithIndex_release(slot: int) {.cdecl.} =
+proc cQCompleter_slot_callback_highlightedWithIndex_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QCompleterhighlightedWithIndexSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -381,7 +383,7 @@ proc onhighlighted*(self: gen_qcompleter_types.QCompleter, slot: QCompleterhighl
   var tmp = new QCompleterhighlightedWithIndexSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQCompleter_connect_highlightedWithIndex(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQCompleter_highlightedWithIndex, miqt_exec_callback_cQCompleter_highlightedWithIndex_release)
+  fcQCompleter_connect_highlightedWithIndex(self.h, cast[int](addr tmp[]), cQCompleter_slot_callback_highlightedWithIndex, cQCompleter_slot_callback_highlightedWithIndex_release)
 
 proc tr*(_: type gen_qcompleter_types.QCompleter, s: cstring, c: cstring): string =
   let v_ms = fcQCompleter_tr2(s, c)
@@ -436,11 +438,11 @@ type QCompleterVTable* {.inheritable, pure.} = object
   customEvent*: QCompletercustomEventProc
   connectNotify*: QCompleterconnectNotifyProc
   disconnectNotify*: QCompleterdisconnectNotifyProc
-proc QCompletermetaObject*(self: gen_qcompleter_types.QCompleter, ): gen_qobjectdefs_types.QMetaObject =
+proc QCompletermetaObject*(self: gen_qcompleter_types.QCompleter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCompleter_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQCompleter_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -451,8 +453,8 @@ proc miqt_exec_callback_cQCompleter_metaObject(vtbl: pointer, self: pointer): po
 proc QCompletermetacast*(self: gen_qcompleter_types.QCompleter, param1: cstring): pointer =
   fcQCompleter_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQCompleter_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -461,8 +463,8 @@ proc miqt_exec_callback_cQCompleter_metacast(vtbl: pointer, self: pointer, param
 proc QCompletermetacall*(self: gen_qcompleter_types.QCompleter, param1: cint, param2: cint, param3: pointer): cint =
   fcQCompleter_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQCompleter_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -476,8 +478,8 @@ proc QCompleterpathFromIndex*(self: gen_qcompleter_types.QCompleter, index: gen_
   c_free(v_ms.data)
   vx_ret
 
-proc miqt_exec_callback_cQCompleter_pathFromIndex(vtbl: pointer, self: pointer, index: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_pathFromIndex(self: pointer, index: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].pathFromIndex(self, slotval1)
@@ -497,8 +499,8 @@ proc QCompletersplitPath*(self: gen_qcompleter_types.QCompleter, path: string): 
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQCompleter_splitPath(vtbl: pointer, self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_splitPath(self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let vpath_ms = path
   let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
@@ -516,8 +518,8 @@ proc miqt_exec_callback_cQCompleter_splitPath(vtbl: pointer, self: pointer, path
 proc QCompletereventFilter*(self: gen_qcompleter_types.QCompleter, o: gen_qobject_types.QObject, e: gen_qcoreevent_types.QEvent): bool =
   fcQCompleter_virtualbase_eventFilter(self.h, o.h, e.h)
 
-proc miqt_exec_callback_cQCompleter_eventFilter(vtbl: pointer, self: pointer, o: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_eventFilter(self: pointer, o: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qobject_types.QObject(h: o, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: e, owned: false)
@@ -527,8 +529,8 @@ proc miqt_exec_callback_cQCompleter_eventFilter(vtbl: pointer, self: pointer, o:
 proc QCompleterevent*(self: gen_qcompleter_types.QCompleter, param1: gen_qcoreevent_types.QEvent): bool =
   fcQCompleter_virtualbase_event(self.h, param1.h)
 
-proc miqt_exec_callback_cQCompleter_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -537,8 +539,8 @@ proc miqt_exec_callback_cQCompleter_event(vtbl: pointer, self: pointer, param1: 
 proc QCompletertimerEvent*(self: gen_qcompleter_types.QCompleter, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQCompleter_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCompleter_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -546,8 +548,8 @@ proc miqt_exec_callback_cQCompleter_timerEvent(vtbl: pointer, self: pointer, eve
 proc QCompleterchildEvent*(self: gen_qcompleter_types.QCompleter, event: gen_qcoreevent_types.QChildEvent): void =
   fcQCompleter_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCompleter_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -555,8 +557,8 @@ proc miqt_exec_callback_cQCompleter_childEvent(vtbl: pointer, self: pointer, eve
 proc QCompletercustomEvent*(self: gen_qcompleter_types.QCompleter, event: gen_qcoreevent_types.QEvent): void =
   fcQCompleter_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQCompleter_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -564,8 +566,8 @@ proc miqt_exec_callback_cQCompleter_customEvent(vtbl: pointer, self: pointer, ev
 proc QCompleterconnectNotify*(self: gen_qcompleter_types.QCompleter, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQCompleter_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQCompleter_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -573,19 +575,19 @@ proc miqt_exec_callback_cQCompleter_connectNotify(vtbl: pointer, self: pointer, 
 proc QCompleterdisconnectNotify*(self: gen_qcompleter_types.QCompleter, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQCompleter_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQCompleter_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QCompleterVTable](vtbl)
+proc cQCompleter_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QCompleterVTable](fcQCompleter_vdata(self))
   let self = QCompleter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQCompleter* {.inheritable.} = ref object of QCompleter
   vtbl*: cQCompleterVTable
-method metaObject*(self: VirtualQCompleter, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQCompleter): gen_qobjectdefs_types.QMetaObject {.base.} =
   QCompletermetaObject(self[])
-proc miqt_exec_method_cQCompleter_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQCompleter_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -593,41 +595,41 @@ proc miqt_exec_method_cQCompleter_metaObject(vtbl: pointer, inst: pointer): poin
 
 method metacast*(self: VirtualQCompleter, param1: cstring): pointer {.base.} =
   QCompletermetacast(self[], param1)
-proc miqt_exec_method_cQCompleter_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQCompleter, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QCompletermetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQCompleter_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method pathFromIndex*(self: VirtualQCompleter, index: gen_qabstractitemmodel_types.QModelIndex): string {.base.} =
   QCompleterpathFromIndex(self[], index)
-proc miqt_exec_method_cQCompleter_pathFromIndex(vtbl: pointer, inst: pointer, index: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_pathFromIndex(self: pointer, index: pointer): struct_miqt_string {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.pathFromIndex(slotval1)
+  var virtualReturn = inst.pathFromIndex(slotval1)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 method splitPath*(self: VirtualQCompleter, path: string): seq[string] {.base.} =
   QCompletersplitPath(self[], path)
-proc miqt_exec_method_cQCompleter_splitPath(vtbl: pointer, inst: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_splitPath(self: pointer, path: struct_miqt_string): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let vpath_ms = path
   let vpathx_ret = string.fromBytes(toOpenArrayByte(vpath_ms.data, 0, int(vpath_ms.len)-1))
   c_free(vpath_ms.data)
   let slotval1 = vpathx_ret
-  var virtualReturn = vtbl.splitPath(slotval1)
+  var virtualReturn = inst.splitPath(slotval1)
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
@@ -638,60 +640,60 @@ proc miqt_exec_method_cQCompleter_splitPath(vtbl: pointer, inst: pointer, path: 
 
 method eventFilter*(self: VirtualQCompleter, o: gen_qobject_types.QObject, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QCompletereventFilter(self[], o, e)
-proc miqt_exec_method_cQCompleter_eventFilter(vtbl: pointer, inst: pointer, o: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_eventFilter(self: pointer, o: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: o, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method event*(self: VirtualQCompleter, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QCompleterevent(self[], param1)
-proc miqt_exec_method_cQCompleter_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method timerEvent*(self: VirtualQCompleter, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QCompletertimerEvent(self[], event)
-proc miqt_exec_method_cQCompleter_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQCompleter, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QCompleterchildEvent(self[], event)
-proc miqt_exec_method_cQCompleter_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQCompleter, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QCompletercustomEvent(self[], event)
-proc miqt_exec_method_cQCompleter_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQCompleter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QCompleterconnectNotify(self[], signal)
-proc miqt_exec_method_cQCompleter_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQCompleter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QCompleterdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQCompleter_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQCompleter](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
+proc cQCompleter_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQCompleter](fcQCompleter_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qcompleter_types.QCompleter, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qcompleter_types.QCompleter): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQCompleter_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qcompleter_types.QCompleter, ): cint =
+proc senderSignalIndex*(self: gen_qcompleter_types.QCompleter): cint =
   fcQCompleter_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qcompleter_types.QCompleter, signal: cstring): cint =
@@ -704,68 +706,68 @@ proc create*(T: type gen_qcompleter_types.QCompleter,
     vtbl: ref QCompleterVTable = nil): gen_qcompleter_types.QCompleter =
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     model: gen_qabstractitemmodel_types.QAbstractItemModel,
     vtbl: ref QCompleterVTable = nil): gen_qcompleter_types.QCompleter =
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new2(addr(vtbl[].vtbl), model.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new2(addr(vtbl[].vtbl), addr(vtbl[]), model.h), owned: true)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     completions: seq[string],
@@ -776,102 +778,102 @@ proc create*(T: type gen_qcompleter_types.QCompleter,
 
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new3(addr(vtbl[].vtbl), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0]))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0]))), owned: true)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     parent: gen_qobject_types.QObject,
     vtbl: ref QCompleterVTable = nil): gen_qcompleter_types.QCompleter =
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new4(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     model: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qobject_types.QObject,
     vtbl: ref QCompleterVTable = nil): gen_qcompleter_types.QCompleter =
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new5(addr(vtbl[].vtbl), model.h, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new5(addr(vtbl[].vtbl), addr(vtbl[]), model.h, parent.h), owned: true)
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     completions: seq[string], parent: gen_qobject_types.QObject,
@@ -882,185 +884,101 @@ proc create*(T: type gen_qcompleter_types.QCompleter,
 
   let vtbl = if vtbl == nil: new QCompleterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ref QCompleterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QCompleterVTable](fcQCompleter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQCompleter_metaObject
+    vtbl[].vtbl.metaObject = cQCompleter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQCompleter_metacast
+    vtbl[].vtbl.metacast = cQCompleter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQCompleter_metacall
+    vtbl[].vtbl.metacall = cQCompleter_vtable_callback_metacall
   if not isNil(vtbl[].pathFromIndex):
-    vtbl[].vtbl.pathFromIndex = miqt_exec_callback_cQCompleter_pathFromIndex
+    vtbl[].vtbl.pathFromIndex = cQCompleter_vtable_callback_pathFromIndex
   if not isNil(vtbl[].splitPath):
-    vtbl[].vtbl.splitPath = miqt_exec_callback_cQCompleter_splitPath
+    vtbl[].vtbl.splitPath = cQCompleter_vtable_callback_splitPath
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQCompleter_eventFilter
+    vtbl[].vtbl.eventFilter = cQCompleter_vtable_callback_eventFilter
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQCompleter_event
+    vtbl[].vtbl.event = cQCompleter_vtable_callback_event
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQCompleter_timerEvent
+    vtbl[].vtbl.timerEvent = cQCompleter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQCompleter_childEvent
+    vtbl[].vtbl.childEvent = cQCompleter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQCompleter_customEvent
+    vtbl[].vtbl.customEvent = cQCompleter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQCompleter_connectNotify
+    vtbl[].vtbl.connectNotify = cQCompleter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQCompleter_disconnectNotify
-  gen_qcompleter_types.QCompleter(h: fcQCompleter_new6(addr(vtbl[].vtbl), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQCompleter_vtable_callback_disconnectNotify
+  gen_qcompleter_types.QCompleter(h: fcQCompleter_new6(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])), parent.h), owned: true)
 
+const cQCompleter_mvtbl = cQCompleterVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQCompleter()[])](self.fcQCompleter_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQCompleter_method_callback_metaObject,
+  metacast: cQCompleter_method_callback_metacast,
+  metacall: cQCompleter_method_callback_metacall,
+  pathFromIndex: cQCompleter_method_callback_pathFromIndex,
+  splitPath: cQCompleter_method_callback_splitPath,
+  eventFilter: cQCompleter_method_callback_eventFilter,
+  event: cQCompleter_method_callback_event,
+  timerEvent: cQCompleter_method_callback_timerEvent,
+  childEvent: cQCompleter_method_callback_childEvent,
+  customEvent: cQCompleter_method_callback_customEvent,
+  connectNotify: cQCompleter_method_callback_connectNotify,
+  disconnectNotify: cQCompleter_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qcompleter_types.QCompleter,
-    vtbl: VirtualQCompleter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQCompleter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new(addr(cQCompleter_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     model: gen_qabstractitemmodel_types.QAbstractItemModel,
-    vtbl: VirtualQCompleter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new2(addr(vtbl[].vtbl), model.h)
-  vtbl[].owned = true
+    inst: VirtualQCompleter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new2(addr(cQCompleter_mvtbl), addr(inst[]), model.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     completions: seq[string],
-    vtbl: VirtualQCompleter) =
+    inst: VirtualQCompleter) =
   var completions_CArray = newSeq[struct_miqt_string](len(completions))
   for i in 0..<len(completions):
     completions_CArray[i] = struct_miqt_string(data: completions[i], len: csize_t(len(completions[i])))
 
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new3(addr(vtbl[].vtbl), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])))
-  vtbl[].owned = true
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new3(addr(cQCompleter_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])))
+  inst[].owned = true
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQCompleter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new4(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQCompleter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new4(addr(cQCompleter_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     model: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQCompleter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new5(addr(vtbl[].vtbl), model.h, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQCompleter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new5(addr(cQCompleter_mvtbl), addr(inst[]), model.h, parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qcompleter_types.QCompleter,
     completions: seq[string], parent: gen_qobject_types.QObject,
-    vtbl: VirtualQCompleter) =
+    inst: VirtualQCompleter) =
   var completions_CArray = newSeq[struct_miqt_string](len(completions))
   for i in 0..<len(completions):
     completions_CArray[i] = struct_miqt_string(data: completions[i], len: csize_t(len(completions[i])))
 
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQCompleterVTable, _: ptr cQCompleter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQCompleter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQCompleter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQCompleter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQCompleter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQCompleter_metacall
-  vtbl[].vtbl.pathFromIndex = miqt_exec_method_cQCompleter_pathFromIndex
-  vtbl[].vtbl.splitPath = miqt_exec_method_cQCompleter_splitPath
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQCompleter_eventFilter
-  vtbl[].vtbl.event = miqt_exec_method_cQCompleter_event
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQCompleter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQCompleter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQCompleter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQCompleter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQCompleter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQCompleter_new6(addr(vtbl[].vtbl), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])), parent.h)
-  vtbl[].owned = true
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQCompleter_new6(addr(cQCompleter_mvtbl), addr(inst[]), struct_miqt_array(len: csize_t(len(completions)), data: if len(completions) == 0: nil else: addr(completions_CArray[0])), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qcompleter_types.QCompleter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCompleter_staticMetaObject())

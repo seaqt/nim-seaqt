@@ -7,15 +7,6 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QSGGeometry__TexturedPoint2D
 #include <qsggeometry.h>
 #include "gen_qsggeometry.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSGGeometry* QSGGeometry_new(QSGGeometry__AttributeSet* attribs, int vertexCount) {
 	return new QSGGeometry(*attribs, static_cast<int>(vertexCount));
 }

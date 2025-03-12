@@ -59,26 +59,26 @@ proc fcQCommandLineParser_setSingleDashWordOptionMode(self: pointer, parsingMode
 proc fcQCommandLineParser_setOptionsAfterPositionalArgumentsMode(self: pointer, mode: cint): void {.importc: "QCommandLineParser_setOptionsAfterPositionalArgumentsMode".}
 proc fcQCommandLineParser_addOption(self: pointer, commandLineOption: pointer): bool {.importc: "QCommandLineParser_addOption".}
 proc fcQCommandLineParser_addOptions(self: pointer, options: struct_miqt_array): bool {.importc: "QCommandLineParser_addOptions".}
-proc fcQCommandLineParser_addVersionOption(self: pointer, ): pointer {.importc: "QCommandLineParser_addVersionOption".}
-proc fcQCommandLineParser_addHelpOption(self: pointer, ): pointer {.importc: "QCommandLineParser_addHelpOption".}
+proc fcQCommandLineParser_addVersionOption(self: pointer): pointer {.importc: "QCommandLineParser_addVersionOption".}
+proc fcQCommandLineParser_addHelpOption(self: pointer): pointer {.importc: "QCommandLineParser_addHelpOption".}
 proc fcQCommandLineParser_setApplicationDescription(self: pointer, description: struct_miqt_string): void {.importc: "QCommandLineParser_setApplicationDescription".}
-proc fcQCommandLineParser_applicationDescription(self: pointer, ): struct_miqt_string {.importc: "QCommandLineParser_applicationDescription".}
+proc fcQCommandLineParser_applicationDescription(self: pointer): struct_miqt_string {.importc: "QCommandLineParser_applicationDescription".}
 proc fcQCommandLineParser_addPositionalArgument(self: pointer, name: struct_miqt_string, description: struct_miqt_string): void {.importc: "QCommandLineParser_addPositionalArgument".}
-proc fcQCommandLineParser_clearPositionalArguments(self: pointer, ): void {.importc: "QCommandLineParser_clearPositionalArguments".}
+proc fcQCommandLineParser_clearPositionalArguments(self: pointer): void {.importc: "QCommandLineParser_clearPositionalArguments".}
 proc fcQCommandLineParser_process(self: pointer, arguments: struct_miqt_array): void {.importc: "QCommandLineParser_process".}
 proc fcQCommandLineParser_processWithApp(self: pointer, app: pointer): void {.importc: "QCommandLineParser_processWithApp".}
 proc fcQCommandLineParser_parse(self: pointer, arguments: struct_miqt_array): bool {.importc: "QCommandLineParser_parse".}
-proc fcQCommandLineParser_errorText(self: pointer, ): struct_miqt_string {.importc: "QCommandLineParser_errorText".}
+proc fcQCommandLineParser_errorText(self: pointer): struct_miqt_string {.importc: "QCommandLineParser_errorText".}
 proc fcQCommandLineParser_isSet(self: pointer, name: struct_miqt_string): bool {.importc: "QCommandLineParser_isSet".}
 proc fcQCommandLineParser_value(self: pointer, name: struct_miqt_string): struct_miqt_string {.importc: "QCommandLineParser_value".}
 proc fcQCommandLineParser_values(self: pointer, name: struct_miqt_string): struct_miqt_array {.importc: "QCommandLineParser_values".}
 proc fcQCommandLineParser_isSetWithOption(self: pointer, option: pointer): bool {.importc: "QCommandLineParser_isSetWithOption".}
 proc fcQCommandLineParser_valueWithOption(self: pointer, option: pointer): struct_miqt_string {.importc: "QCommandLineParser_valueWithOption".}
 proc fcQCommandLineParser_valuesWithOption(self: pointer, option: pointer): struct_miqt_array {.importc: "QCommandLineParser_valuesWithOption".}
-proc fcQCommandLineParser_positionalArguments(self: pointer, ): struct_miqt_array {.importc: "QCommandLineParser_positionalArguments".}
-proc fcQCommandLineParser_optionNames(self: pointer, ): struct_miqt_array {.importc: "QCommandLineParser_optionNames".}
-proc fcQCommandLineParser_unknownOptionNames(self: pointer, ): struct_miqt_array {.importc: "QCommandLineParser_unknownOptionNames".}
-proc fcQCommandLineParser_helpText(self: pointer, ): struct_miqt_string {.importc: "QCommandLineParser_helpText".}
+proc fcQCommandLineParser_positionalArguments(self: pointer): struct_miqt_array {.importc: "QCommandLineParser_positionalArguments".}
+proc fcQCommandLineParser_optionNames(self: pointer): struct_miqt_array {.importc: "QCommandLineParser_optionNames".}
+proc fcQCommandLineParser_unknownOptionNames(self: pointer): struct_miqt_array {.importc: "QCommandLineParser_unknownOptionNames".}
+proc fcQCommandLineParser_helpText(self: pointer): struct_miqt_string {.importc: "QCommandLineParser_helpText".}
 proc fcQCommandLineParser_tr2(sourceText: cstring, disambiguation: cstring): struct_miqt_string {.importc: "QCommandLineParser_tr2".}
 proc fcQCommandLineParser_tr3(sourceText: cstring, disambiguation: cstring, n: cint): struct_miqt_string {.importc: "QCommandLineParser_tr3".}
 proc fcQCommandLineParser_trUtf82(sourceText: cstring, disambiguation: cstring): struct_miqt_string {.importc: "QCommandLineParser_trUtf82".}
@@ -114,16 +114,16 @@ proc addOptions*(self: gen_qcommandlineparser_types.QCommandLineParser, options:
 
   fcQCommandLineParser_addOptions(self.h, struct_miqt_array(len: csize_t(len(options)), data: if len(options) == 0: nil else: addr(options_CArray[0])))
 
-proc addVersionOption*(self: gen_qcommandlineparser_types.QCommandLineParser, ): gen_qcommandlineoption_types.QCommandLineOption =
+proc addVersionOption*(self: gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineoption_types.QCommandLineOption =
   gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addVersionOption(self.h), owned: true)
 
-proc addHelpOption*(self: gen_qcommandlineparser_types.QCommandLineParser, ): gen_qcommandlineoption_types.QCommandLineOption =
+proc addHelpOption*(self: gen_qcommandlineparser_types.QCommandLineParser): gen_qcommandlineoption_types.QCommandLineOption =
   gen_qcommandlineoption_types.QCommandLineOption(h: fcQCommandLineParser_addHelpOption(self.h), owned: true)
 
 proc setApplicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser, description: string): void =
   fcQCommandLineParser_setApplicationDescription(self.h, struct_miqt_string(data: description, len: csize_t(len(description))))
 
-proc applicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser, ): string =
+proc applicationDescription*(self: gen_qcommandlineparser_types.QCommandLineParser): string =
   let v_ms = fcQCommandLineParser_applicationDescription(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -132,7 +132,7 @@ proc applicationDescription*(self: gen_qcommandlineparser_types.QCommandLinePars
 proc addPositionalArgument*(self: gen_qcommandlineparser_types.QCommandLineParser, name: string, description: string): void =
   fcQCommandLineParser_addPositionalArgument(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_string(data: description, len: csize_t(len(description))))
 
-proc clearPositionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser, ): void =
+proc clearPositionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser): void =
   fcQCommandLineParser_clearPositionalArguments(self.h)
 
 proc process*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: seq[string]): void =
@@ -152,7 +152,7 @@ proc parse*(self: gen_qcommandlineparser_types.QCommandLineParser, arguments: se
 
   fcQCommandLineParser_parse(self.h, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
-proc errorText*(self: gen_qcommandlineparser_types.QCommandLineParser, ): string =
+proc errorText*(self: gen_qcommandlineparser_types.QCommandLineParser): string =
   let v_ms = fcQCommandLineParser_errorText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -200,7 +200,7 @@ proc values*(self: gen_qcommandlineparser_types.QCommandLineParser, option: gen_
   c_free(v_ma.data)
   vx_ret
 
-proc positionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
+proc positionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser): seq[string] =
   var v_ma = fcQCommandLineParser_positionalArguments(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -212,7 +212,7 @@ proc positionalArguments*(self: gen_qcommandlineparser_types.QCommandLineParser,
   c_free(v_ma.data)
   vx_ret
 
-proc optionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
+proc optionNames*(self: gen_qcommandlineparser_types.QCommandLineParser): seq[string] =
   var v_ma = fcQCommandLineParser_optionNames(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -224,7 +224,7 @@ proc optionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc unknownOptionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, ): seq[string] =
+proc unknownOptionNames*(self: gen_qcommandlineparser_types.QCommandLineParser): seq[string] =
   var v_ma = fcQCommandLineParser_unknownOptionNames(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -236,7 +236,7 @@ proc unknownOptionNames*(self: gen_qcommandlineparser_types.QCommandLineParser, 
   c_free(v_ma.data)
   vx_ret
 
-proc helpText*(self: gen_qcommandlineparser_types.QCommandLineParser, ): string =
+proc helpText*(self: gen_qcommandlineparser_types.QCommandLineParser): string =
   let v_ms = fcQCommandLineParser_helpText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

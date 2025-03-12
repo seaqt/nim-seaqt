@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qimageencodercontrol.h>
 #include "gen_qimageencodercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QImageEncoderControl_virtbase(QImageEncoderControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -156,6 +147,7 @@ struct miqt_string QImageEncoderControl_trUtf83(const char* s, const char* c, in
 }
 
 const QMetaObject* QImageEncoderControl_staticMetaObject() { return &QImageEncoderControl::staticMetaObject; }
+
 void QImageEncoderControl_delete(QImageEncoderControl* self) {
 	delete self;
 }

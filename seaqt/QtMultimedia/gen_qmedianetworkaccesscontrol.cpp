@@ -10,15 +10,6 @@
 #include <cstring>
 #include <qmedianetworkaccesscontrol.h>
 #include "gen_qmedianetworkaccesscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaNetworkAccessControl_virtbase(QMediaNetworkAccessControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -134,6 +125,7 @@ struct miqt_string QMediaNetworkAccessControl_trUtf83(const char* s, const char*
 }
 
 const QMetaObject* QMediaNetworkAccessControl_staticMetaObject() { return &QMediaNetworkAccessControl::staticMetaObject; }
+
 void QMediaNetworkAccessControl_delete(QMediaNetworkAccessControl* self) {
 	delete self;
 }

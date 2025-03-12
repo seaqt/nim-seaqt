@@ -21,58 +21,50 @@
 #include <QVariant>
 #include <qpixmap.h>
 #include "gen_qpixmap.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPixmap final : public QPixmap {
-	struct QPixmap_VTable* vtbl;
+	const QPixmap_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPixmap_VTable* QPixmap_vtbl(const VirtualQPixmap* self);
+	friend void* QPixmap_vdata(const VirtualQPixmap* self);
+	friend void QPixmap_setVdata(VirtualQPixmap* self, void* vdata);
 
-	VirtualQPixmap(struct QPixmap_VTable* vtbl): QPixmap(), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, int w, int h): QPixmap(w, h), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, const QSize& param1): QPixmap(param1), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, const QString& fileName): QPixmap(fileName), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, const QPixmap& param1): QPixmap(param1), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, const QString& fileName, const char* format): QPixmap(fileName, format), vtbl(vtbl) {};
-	VirtualQPixmap(struct QPixmap_VTable* vtbl, const QString& fileName, const char* format, Qt::ImageConversionFlags flags): QPixmap(fileName, format, flags), vtbl(vtbl) {};
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata): QPixmap(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, int w, int h): QPixmap(w, h), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, const QSize& param1): QPixmap(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, const QString& fileName): QPixmap(fileName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, const QPixmap& param1): QPixmap(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, const QString& fileName, const char* format): QPixmap(fileName, format), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPixmap(const QPixmap_VTable* vtbl, void* vdata, const QString& fileName, const char* format, Qt::ImageConversionFlags flags): QPixmap(fileName, format, flags), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPixmap() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPixmap() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPixmap::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPixmap_virtualbase_devType(const void* self);
+	friend int QPixmap_virtualbase_devType(const VirtualQPixmap* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QPixmap::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QPixmap_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QPixmap_virtualbase_paintEngine(const VirtualQPixmap* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QPixmap::metric(param1);
@@ -81,14 +73,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPixmap_virtualbase_metric(const void* self, int param1);
+	friend int QPixmap_virtualbase_metric(const VirtualQPixmap* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPixmap::initPainter(painter);
@@ -97,13 +88,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPixmap_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPixmap_virtualbase_initPainter(const VirtualQPixmap* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPixmap::redirected(offset);
@@ -111,58 +101,57 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPixmap_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPixmap_virtualbase_redirected(const VirtualQPixmap* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPixmap::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPixmap_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPixmap_virtualbase_sharedPainter(const VirtualQPixmap* self);
 
 };
 
-QPixmap* QPixmap_new(struct QPixmap_VTable* vtbl) {
-	return new VirtualQPixmap(vtbl);
+VirtualQPixmap* QPixmap_new(const QPixmap_VTable* vtbl, void* vdata) {
+	return new VirtualQPixmap(vtbl, vdata);
 }
 
-QPixmap* QPixmap_new2(struct QPixmap_VTable* vtbl, int w, int h) {
-	return new VirtualQPixmap(vtbl, static_cast<int>(w), static_cast<int>(h));
+VirtualQPixmap* QPixmap_new2(const QPixmap_VTable* vtbl, void* vdata, int w, int h) {
+	return new VirtualQPixmap(vtbl, vdata, static_cast<int>(w), static_cast<int>(h));
 }
 
-QPixmap* QPixmap_new3(struct QPixmap_VTable* vtbl, QSize* param1) {
-	return new VirtualQPixmap(vtbl, *param1);
+VirtualQPixmap* QPixmap_new3(const QPixmap_VTable* vtbl, void* vdata, QSize* param1) {
+	return new VirtualQPixmap(vtbl, vdata, *param1);
 }
 
-QPixmap* QPixmap_new4(struct QPixmap_VTable* vtbl, struct miqt_string fileName) {
+VirtualQPixmap* QPixmap_new4(const QPixmap_VTable* vtbl, void* vdata, struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQPixmap(vtbl, fileName_QString);
+	return new VirtualQPixmap(vtbl, vdata, fileName_QString);
 }
 
-QPixmap* QPixmap_new5(struct QPixmap_VTable* vtbl, QPixmap* param1) {
-	return new VirtualQPixmap(vtbl, *param1);
+VirtualQPixmap* QPixmap_new5(const QPixmap_VTable* vtbl, void* vdata, QPixmap* param1) {
+	return new VirtualQPixmap(vtbl, vdata, *param1);
 }
 
-QPixmap* QPixmap_new6(struct QPixmap_VTable* vtbl, struct miqt_string fileName, const char* format) {
+VirtualQPixmap* QPixmap_new6(const QPixmap_VTable* vtbl, void* vdata, struct miqt_string fileName, const char* format) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQPixmap(vtbl, fileName_QString, format);
+	return new VirtualQPixmap(vtbl, vdata, fileName_QString, format);
 }
 
-QPixmap* QPixmap_new7(struct QPixmap_VTable* vtbl, struct miqt_string fileName, const char* format, int flags) {
+VirtualQPixmap* QPixmap_new7(const QPixmap_VTable* vtbl, void* vdata, struct miqt_string fileName, const char* format, int flags) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQPixmap(vtbl, fileName_QString, format, static_cast<Qt::ImageConversionFlags>(flags));
+	return new VirtualQPixmap(vtbl, vdata, fileName_QString, format, static_cast<Qt::ImageConversionFlags>(flags));
 }
 
 void QPixmap_virtbase(QPixmap* src, QPaintDevice** outptr_QPaintDevice) {
@@ -528,41 +517,39 @@ void QPixmap_scroll4(QPixmap* self, int dx, int dy, QRect* rect, QRegion* expose
 	self->scroll(static_cast<int>(dx), static_cast<int>(dy), *rect, exposed);
 }
 
-int QPixmap_virtualbase_devType(const void* self) {
+int QPixmap_virtualbase_devType(const VirtualQPixmap* self) {
 
-	return ( (const VirtualQPixmap*)(self) )->QPixmap::devType();
-
+	return self->QPixmap::devType();
 }
 
-QPaintEngine* QPixmap_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QPixmap_virtualbase_paintEngine(const VirtualQPixmap* self) {
 
-	return ( (const VirtualQPixmap*)(self) )->QPixmap::paintEngine();
-
+	return self->QPixmap::paintEngine();
 }
 
-int QPixmap_virtualbase_metric(const void* self, int param1) {
+int QPixmap_virtualbase_metric(const VirtualQPixmap* self, int param1) {
 
-	return ( (const VirtualQPixmap*)(self) )->QPixmap::metric(static_cast<VirtualQPixmap::PaintDeviceMetric>(param1));
-
+	return self->QPixmap::metric(static_cast<VirtualQPixmap::PaintDeviceMetric>(param1));
 }
 
-void QPixmap_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPixmap_virtualbase_initPainter(const VirtualQPixmap* self, QPainter* painter) {
 
-	( (const VirtualQPixmap*)(self) )->QPixmap::initPainter(painter);
-
+	self->QPixmap::initPainter(painter);
 }
 
-QPaintDevice* QPixmap_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPixmap_virtualbase_redirected(const VirtualQPixmap* self, QPoint* offset) {
 
-	return ( (const VirtualQPixmap*)(self) )->QPixmap::redirected(offset);
-
+	return self->QPixmap::redirected(offset);
 }
 
-QPainter* QPixmap_virtualbase_sharedPainter(const void* self) {
+QPainter* QPixmap_virtualbase_sharedPainter(const VirtualQPixmap* self) {
 
-	return ( (const VirtualQPixmap*)(self) )->QPixmap::sharedPainter();
-
+	return self->QPixmap::sharedPainter();
 }
+
+const QPixmap_VTable* QPixmap_vtbl(const VirtualQPixmap* self) { return self->vtbl; }
+void* QPixmap_vdata(const VirtualQPixmap* self) { return self->vdata; }
+void QPixmap_setVdata(VirtualQPixmap* self, void* vdata) { self->vdata = vdata; }
 
 void QPixmap_delete(QPixmap* self) {
 	delete self;

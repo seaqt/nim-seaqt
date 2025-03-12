@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qdir.h>
 #include "gen_qdir.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDir* QDir_new(QDir* param1) {
 	return new QDir(*param1);
 }

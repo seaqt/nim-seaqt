@@ -3,15 +3,6 @@
 #include <QQmlNetworkAccessManagerFactory>
 #include <qqmlnetworkaccessmanagerfactory.h>
 #include "gen_qqmlnetworkaccessmanagerfactory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkAccessManager* QQmlNetworkAccessManagerFactory_create(QQmlNetworkAccessManagerFactory* self, QObject* parent) {
 	return self->create(parent);
 }

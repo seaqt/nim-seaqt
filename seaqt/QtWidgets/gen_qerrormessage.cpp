@@ -37,39 +37,32 @@
 #include <QWidget>
 #include <qerrormessage.h>
 #include "gen_qerrormessage.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQErrorMessage final : public QErrorMessage {
-	struct QErrorMessage_VTable* vtbl;
+	const QErrorMessage_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QErrorMessage_VTable* QErrorMessage_vtbl(const VirtualQErrorMessage* self);
+	friend void* QErrorMessage_vdata(const VirtualQErrorMessage* self);
+	friend void QErrorMessage_setVdata(VirtualQErrorMessage* self, void* vdata);
 
-	VirtualQErrorMessage(struct QErrorMessage_VTable* vtbl, QWidget* parent): QErrorMessage(parent), vtbl(vtbl) {};
-	VirtualQErrorMessage(struct QErrorMessage_VTable* vtbl): QErrorMessage(), vtbl(vtbl) {};
+	VirtualQErrorMessage(const QErrorMessage_VTable* vtbl, void* vdata, QWidget* parent): QErrorMessage(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQErrorMessage(const QErrorMessage_VTable* vtbl, void* vdata): QErrorMessage(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQErrorMessage() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQErrorMessage() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QErrorMessage::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QErrorMessage_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QErrorMessage_virtualbase_metaObject(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QErrorMessage::qt_metacast(param1);
@@ -77,14 +70,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QErrorMessage_virtualbase_metacast(void* self, const char* param1);
+	friend void* QErrorMessage_virtualbase_metacast(VirtualQErrorMessage* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QErrorMessage::qt_metacall(param1, param2, param3);
@@ -95,14 +87,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QErrorMessage_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QErrorMessage_virtualbase_metacall(VirtualQErrorMessage* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int param1) override {
 		if (vtbl->done == 0) {
 			QErrorMessage::done(param1);
@@ -111,13 +102,12 @@ public:
 
 		int sigval1 = param1;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_done(void* self, int param1);
+	friend void QErrorMessage_virtualbase_done(VirtualQErrorMessage* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QErrorMessage::changeEvent(e);
@@ -126,13 +116,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QErrorMessage_virtualbase_changeEvent(VirtualQErrorMessage* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QErrorMessage::setVisible(visible);
@@ -141,45 +130,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_setVisible(void* self, bool visible);
+	friend void QErrorMessage_virtualbase_setVisible(VirtualQErrorMessage* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QErrorMessage::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QErrorMessage_virtualbase_sizeHint(const void* self);
+	friend QSize* QErrorMessage_virtualbase_sizeHint(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QErrorMessage::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QErrorMessage_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QErrorMessage_virtualbase_minimumSizeHint(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QErrorMessage::open();
@@ -187,27 +173,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QErrorMessage_virtualbase_open(void* self);
+	friend void QErrorMessage_virtualbase_open(VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QErrorMessage::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QErrorMessage_virtualbase_exec(void* self);
+	friend int QErrorMessage_virtualbase_exec(VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QErrorMessage::accept();
@@ -215,13 +199,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QErrorMessage_virtualbase_accept(void* self);
+	friend void QErrorMessage_virtualbase_accept(VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QErrorMessage::reject();
@@ -229,13 +212,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QErrorMessage_virtualbase_reject(void* self);
+	friend void QErrorMessage_virtualbase_reject(VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QErrorMessage::keyPressEvent(param1);
@@ -244,13 +226,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QErrorMessage_virtualbase_keyPressEvent(VirtualQErrorMessage* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* param1) override {
 		if (vtbl->closeEvent == 0) {
 			QErrorMessage::closeEvent(param1);
@@ -259,13 +240,12 @@ public:
 
 		QCloseEvent* sigval1 = param1;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_closeEvent(void* self, QCloseEvent* param1);
+	friend void QErrorMessage_virtualbase_closeEvent(VirtualQErrorMessage* self, QCloseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QErrorMessage::showEvent(param1);
@@ -274,13 +254,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QErrorMessage_virtualbase_showEvent(VirtualQErrorMessage* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QErrorMessage::resizeEvent(param1);
@@ -289,13 +268,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QErrorMessage_virtualbase_resizeEvent(VirtualQErrorMessage* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QErrorMessage::contextMenuEvent(param1);
@@ -304,13 +282,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QErrorMessage_virtualbase_contextMenuEvent(VirtualQErrorMessage* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QErrorMessage::eventFilter(param1, param2);
@@ -319,28 +296,26 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QErrorMessage_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QErrorMessage_virtualbase_eventFilter(VirtualQErrorMessage* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QErrorMessage::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QErrorMessage_virtualbase_devType(const void* self);
+	friend int QErrorMessage_virtualbase_devType(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QErrorMessage::heightForWidth(param1);
@@ -348,42 +323,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QErrorMessage_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QErrorMessage_virtualbase_heightForWidth(const VirtualQErrorMessage* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QErrorMessage::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QErrorMessage_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QErrorMessage_virtualbase_hasHeightForWidth(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QErrorMessage::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QErrorMessage_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QErrorMessage_virtualbase_paintEngine(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QErrorMessage::event(event);
@@ -391,14 +363,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QErrorMessage_virtualbase_event(void* self, QEvent* event);
+	friend bool QErrorMessage_virtualbase_event(VirtualQErrorMessage* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QErrorMessage::mousePressEvent(event);
@@ -407,13 +378,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QErrorMessage_virtualbase_mousePressEvent(VirtualQErrorMessage* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QErrorMessage::mouseReleaseEvent(event);
@@ -422,13 +392,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QErrorMessage_virtualbase_mouseReleaseEvent(VirtualQErrorMessage* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QErrorMessage::mouseDoubleClickEvent(event);
@@ -437,13 +406,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QErrorMessage_virtualbase_mouseDoubleClickEvent(VirtualQErrorMessage* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QErrorMessage::mouseMoveEvent(event);
@@ -452,13 +420,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QErrorMessage_virtualbase_mouseMoveEvent(VirtualQErrorMessage* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QErrorMessage::wheelEvent(event);
@@ -467,13 +434,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QErrorMessage_virtualbase_wheelEvent(VirtualQErrorMessage* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QErrorMessage::keyReleaseEvent(event);
@@ -482,13 +448,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QErrorMessage_virtualbase_keyReleaseEvent(VirtualQErrorMessage* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QErrorMessage::focusInEvent(event);
@@ -497,13 +462,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QErrorMessage_virtualbase_focusInEvent(VirtualQErrorMessage* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QErrorMessage::focusOutEvent(event);
@@ -512,13 +476,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QErrorMessage_virtualbase_focusOutEvent(VirtualQErrorMessage* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QErrorMessage::enterEvent(event);
@@ -527,13 +490,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QErrorMessage_virtualbase_enterEvent(VirtualQErrorMessage* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QErrorMessage::leaveEvent(event);
@@ -542,13 +504,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QErrorMessage_virtualbase_leaveEvent(VirtualQErrorMessage* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QErrorMessage::paintEvent(event);
@@ -557,13 +518,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QErrorMessage_virtualbase_paintEvent(VirtualQErrorMessage* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QErrorMessage::moveEvent(event);
@@ -572,13 +532,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QErrorMessage_virtualbase_moveEvent(VirtualQErrorMessage* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QErrorMessage::tabletEvent(event);
@@ -587,13 +546,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QErrorMessage_virtualbase_tabletEvent(VirtualQErrorMessage* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QErrorMessage::actionEvent(event);
@@ -602,13 +560,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QErrorMessage_virtualbase_actionEvent(VirtualQErrorMessage* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QErrorMessage::dragEnterEvent(event);
@@ -617,13 +574,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QErrorMessage_virtualbase_dragEnterEvent(VirtualQErrorMessage* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QErrorMessage::dragMoveEvent(event);
@@ -632,13 +588,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QErrorMessage_virtualbase_dragMoveEvent(VirtualQErrorMessage* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QErrorMessage::dragLeaveEvent(event);
@@ -647,13 +602,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QErrorMessage_virtualbase_dragLeaveEvent(VirtualQErrorMessage* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QErrorMessage::dropEvent(event);
@@ -662,13 +616,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QErrorMessage_virtualbase_dropEvent(VirtualQErrorMessage* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QErrorMessage::hideEvent(event);
@@ -677,13 +630,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QErrorMessage_virtualbase_hideEvent(VirtualQErrorMessage* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QErrorMessage::nativeEvent(eventType, message, result);
@@ -698,14 +650,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QErrorMessage_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QErrorMessage_virtualbase_nativeEvent(VirtualQErrorMessage* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QErrorMessage::metric(param1);
@@ -714,14 +665,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QErrorMessage_virtualbase_metric(const void* self, int param1);
+	friend int QErrorMessage_virtualbase_metric(const VirtualQErrorMessage* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QErrorMessage::initPainter(painter);
@@ -730,13 +680,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QErrorMessage_virtualbase_initPainter(const VirtualQErrorMessage* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QErrorMessage::redirected(offset);
@@ -744,28 +693,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QErrorMessage_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QErrorMessage_virtualbase_redirected(const VirtualQErrorMessage* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QErrorMessage::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QErrorMessage_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QErrorMessage_virtualbase_sharedPainter(const VirtualQErrorMessage* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QErrorMessage::inputMethodEvent(param1);
@@ -774,13 +721,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QErrorMessage_virtualbase_inputMethodEvent(VirtualQErrorMessage* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QErrorMessage::inputMethodQuery(param1);
@@ -789,16 +735,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QErrorMessage_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QErrorMessage_virtualbase_inputMethodQuery(const VirtualQErrorMessage* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QErrorMessage::focusNextPrevChild(next);
@@ -806,14 +751,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QErrorMessage_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QErrorMessage_virtualbase_focusNextPrevChild(VirtualQErrorMessage* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QErrorMessage::timerEvent(event);
@@ -822,13 +766,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QErrorMessage_virtualbase_timerEvent(VirtualQErrorMessage* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QErrorMessage::childEvent(event);
@@ -837,13 +780,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QErrorMessage_virtualbase_childEvent(VirtualQErrorMessage* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QErrorMessage::customEvent(event);
@@ -852,13 +794,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QErrorMessage_virtualbase_customEvent(VirtualQErrorMessage* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QErrorMessage::connectNotify(signal);
@@ -869,13 +810,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QErrorMessage_virtualbase_connectNotify(VirtualQErrorMessage* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QErrorMessage::disconnectNotify(signal);
@@ -886,31 +826,31 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QErrorMessage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QErrorMessage_virtualbase_disconnectNotify(VirtualQErrorMessage* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QErrorMessage_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QErrorMessage_protectedbase_updateMicroFocus(void* self);
-	friend void QErrorMessage_protectedbase_create(void* self);
-	friend void QErrorMessage_protectedbase_destroy(void* self);
-	friend bool QErrorMessage_protectedbase_focusNextChild(void* self);
-	friend bool QErrorMessage_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QErrorMessage_protectedbase_sender(const void* self);
-	friend int QErrorMessage_protectedbase_senderSignalIndex(const void* self);
-	friend int QErrorMessage_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QErrorMessage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QErrorMessage_protectedbase_adjustPosition(VirtualQErrorMessage* self, QWidget* param1);
+	friend void QErrorMessage_protectedbase_updateMicroFocus(VirtualQErrorMessage* self);
+	friend void QErrorMessage_protectedbase_create(VirtualQErrorMessage* self);
+	friend void QErrorMessage_protectedbase_destroy(VirtualQErrorMessage* self);
+	friend bool QErrorMessage_protectedbase_focusNextChild(VirtualQErrorMessage* self);
+	friend bool QErrorMessage_protectedbase_focusPreviousChild(VirtualQErrorMessage* self);
+	friend QObject* QErrorMessage_protectedbase_sender(const VirtualQErrorMessage* self);
+	friend int QErrorMessage_protectedbase_senderSignalIndex(const VirtualQErrorMessage* self);
+	friend int QErrorMessage_protectedbase_receivers(const VirtualQErrorMessage* self, const char* signal);
+	friend bool QErrorMessage_protectedbase_isSignalConnected(const VirtualQErrorMessage* self, QMetaMethod* signal);
 };
 
-QErrorMessage* QErrorMessage_new(struct QErrorMessage_VTable* vtbl, QWidget* parent) {
-	return new VirtualQErrorMessage(vtbl, parent);
+VirtualQErrorMessage* QErrorMessage_new(const QErrorMessage_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQErrorMessage(vtbl, vdata, parent);
 }
 
-QErrorMessage* QErrorMessage_new2(struct QErrorMessage_VTable* vtbl) {
-	return new VirtualQErrorMessage(vtbl);
+VirtualQErrorMessage* QErrorMessage_new2(const QErrorMessage_VTable* vtbl, void* vdata) {
+	return new VirtualQErrorMessage(vtbl, vdata);
 }
 
 void QErrorMessage_virtbase(QErrorMessage* src, QDialog** outptr_QDialog) {
@@ -1010,406 +950,326 @@ struct miqt_string QErrorMessage_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QErrorMessage_virtualbase_metaObject(const void* self) {
+QMetaObject* QErrorMessage_virtualbase_metaObject(const VirtualQErrorMessage* self) {
 
-	return (QMetaObject*) ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::metaObject();
-
+	return (QMetaObject*) self->QErrorMessage::metaObject();
 }
 
-void* QErrorMessage_virtualbase_metacast(void* self, const char* param1) {
+void* QErrorMessage_virtualbase_metacast(VirtualQErrorMessage* self, const char* param1) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::qt_metacast(param1);
-
+	return self->QErrorMessage::qt_metacast(param1);
 }
 
-int QErrorMessage_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QErrorMessage_virtualbase_metacall(VirtualQErrorMessage* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QErrorMessage::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QErrorMessage_virtualbase_done(void* self, int param1) {
+void QErrorMessage_virtualbase_done(VirtualQErrorMessage* self, int param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::done(static_cast<int>(param1));
-
+	self->QErrorMessage::done(static_cast<int>(param1));
 }
 
-void QErrorMessage_virtualbase_changeEvent(void* self, QEvent* e) {
+void QErrorMessage_virtualbase_changeEvent(VirtualQErrorMessage* self, QEvent* e) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::changeEvent(e);
-
+	self->QErrorMessage::changeEvent(e);
 }
 
-void QErrorMessage_virtualbase_setVisible(void* self, bool visible) {
+void QErrorMessage_virtualbase_setVisible(VirtualQErrorMessage* self, bool visible) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::setVisible(visible);
-
+	self->QErrorMessage::setVisible(visible);
 }
 
-QSize* QErrorMessage_virtualbase_sizeHint(const void* self) {
+QSize* QErrorMessage_virtualbase_sizeHint(const VirtualQErrorMessage* self) {
 
-	return new QSize(( (const VirtualQErrorMessage*)(self) )->QErrorMessage::sizeHint());
-
+	return new QSize(self->QErrorMessage::sizeHint());
 }
 
-QSize* QErrorMessage_virtualbase_minimumSizeHint(const void* self) {
+QSize* QErrorMessage_virtualbase_minimumSizeHint(const VirtualQErrorMessage* self) {
 
-	return new QSize(( (const VirtualQErrorMessage*)(self) )->QErrorMessage::minimumSizeHint());
-
+	return new QSize(self->QErrorMessage::minimumSizeHint());
 }
 
-void QErrorMessage_virtualbase_open(void* self) {
+void QErrorMessage_virtualbase_open(VirtualQErrorMessage* self) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::open();
-
+	self->QErrorMessage::open();
 }
 
-int QErrorMessage_virtualbase_exec(void* self) {
+int QErrorMessage_virtualbase_exec(VirtualQErrorMessage* self) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::exec();
-
+	return self->QErrorMessage::exec();
 }
 
-void QErrorMessage_virtualbase_accept(void* self) {
+void QErrorMessage_virtualbase_accept(VirtualQErrorMessage* self) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::accept();
-
+	self->QErrorMessage::accept();
 }
 
-void QErrorMessage_virtualbase_reject(void* self) {
+void QErrorMessage_virtualbase_reject(VirtualQErrorMessage* self) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::reject();
-
+	self->QErrorMessage::reject();
 }
 
-void QErrorMessage_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QErrorMessage_virtualbase_keyPressEvent(VirtualQErrorMessage* self, QKeyEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::keyPressEvent(param1);
-
+	self->QErrorMessage::keyPressEvent(param1);
 }
 
-void QErrorMessage_virtualbase_closeEvent(void* self, QCloseEvent* param1) {
+void QErrorMessage_virtualbase_closeEvent(VirtualQErrorMessage* self, QCloseEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::closeEvent(param1);
-
+	self->QErrorMessage::closeEvent(param1);
 }
 
-void QErrorMessage_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QErrorMessage_virtualbase_showEvent(VirtualQErrorMessage* self, QShowEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::showEvent(param1);
-
+	self->QErrorMessage::showEvent(param1);
 }
 
-void QErrorMessage_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QErrorMessage_virtualbase_resizeEvent(VirtualQErrorMessage* self, QResizeEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::resizeEvent(param1);
-
+	self->QErrorMessage::resizeEvent(param1);
 }
 
-void QErrorMessage_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QErrorMessage_virtualbase_contextMenuEvent(VirtualQErrorMessage* self, QContextMenuEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::contextMenuEvent(param1);
-
+	self->QErrorMessage::contextMenuEvent(param1);
 }
 
-bool QErrorMessage_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QErrorMessage_virtualbase_eventFilter(VirtualQErrorMessage* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::eventFilter(param1, param2);
-
+	return self->QErrorMessage::eventFilter(param1, param2);
 }
 
-int QErrorMessage_virtualbase_devType(const void* self) {
+int QErrorMessage_virtualbase_devType(const VirtualQErrorMessage* self) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::devType();
-
+	return self->QErrorMessage::devType();
 }
 
-int QErrorMessage_virtualbase_heightForWidth(const void* self, int param1) {
+int QErrorMessage_virtualbase_heightForWidth(const VirtualQErrorMessage* self, int param1) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::heightForWidth(static_cast<int>(param1));
-
+	return self->QErrorMessage::heightForWidth(static_cast<int>(param1));
 }
 
-bool QErrorMessage_virtualbase_hasHeightForWidth(const void* self) {
+bool QErrorMessage_virtualbase_hasHeightForWidth(const VirtualQErrorMessage* self) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::hasHeightForWidth();
-
+	return self->QErrorMessage::hasHeightForWidth();
 }
 
-QPaintEngine* QErrorMessage_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QErrorMessage_virtualbase_paintEngine(const VirtualQErrorMessage* self) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::paintEngine();
-
+	return self->QErrorMessage::paintEngine();
 }
 
-bool QErrorMessage_virtualbase_event(void* self, QEvent* event) {
+bool QErrorMessage_virtualbase_event(VirtualQErrorMessage* self, QEvent* event) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::event(event);
-
+	return self->QErrorMessage::event(event);
 }
 
-void QErrorMessage_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QErrorMessage_virtualbase_mousePressEvent(VirtualQErrorMessage* self, QMouseEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::mousePressEvent(event);
-
+	self->QErrorMessage::mousePressEvent(event);
 }
 
-void QErrorMessage_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QErrorMessage_virtualbase_mouseReleaseEvent(VirtualQErrorMessage* self, QMouseEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::mouseReleaseEvent(event);
-
+	self->QErrorMessage::mouseReleaseEvent(event);
 }
 
-void QErrorMessage_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QErrorMessage_virtualbase_mouseDoubleClickEvent(VirtualQErrorMessage* self, QMouseEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::mouseDoubleClickEvent(event);
-
+	self->QErrorMessage::mouseDoubleClickEvent(event);
 }
 
-void QErrorMessage_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QErrorMessage_virtualbase_mouseMoveEvent(VirtualQErrorMessage* self, QMouseEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::mouseMoveEvent(event);
-
+	self->QErrorMessage::mouseMoveEvent(event);
 }
 
-void QErrorMessage_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QErrorMessage_virtualbase_wheelEvent(VirtualQErrorMessage* self, QWheelEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::wheelEvent(event);
-
+	self->QErrorMessage::wheelEvent(event);
 }
 
-void QErrorMessage_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QErrorMessage_virtualbase_keyReleaseEvent(VirtualQErrorMessage* self, QKeyEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::keyReleaseEvent(event);
-
+	self->QErrorMessage::keyReleaseEvent(event);
 }
 
-void QErrorMessage_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QErrorMessage_virtualbase_focusInEvent(VirtualQErrorMessage* self, QFocusEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::focusInEvent(event);
-
+	self->QErrorMessage::focusInEvent(event);
 }
 
-void QErrorMessage_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QErrorMessage_virtualbase_focusOutEvent(VirtualQErrorMessage* self, QFocusEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::focusOutEvent(event);
-
+	self->QErrorMessage::focusOutEvent(event);
 }
 
-void QErrorMessage_virtualbase_enterEvent(void* self, QEvent* event) {
+void QErrorMessage_virtualbase_enterEvent(VirtualQErrorMessage* self, QEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::enterEvent(event);
-
+	self->QErrorMessage::enterEvent(event);
 }
 
-void QErrorMessage_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QErrorMessage_virtualbase_leaveEvent(VirtualQErrorMessage* self, QEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::leaveEvent(event);
-
+	self->QErrorMessage::leaveEvent(event);
 }
 
-void QErrorMessage_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QErrorMessage_virtualbase_paintEvent(VirtualQErrorMessage* self, QPaintEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::paintEvent(event);
-
+	self->QErrorMessage::paintEvent(event);
 }
 
-void QErrorMessage_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QErrorMessage_virtualbase_moveEvent(VirtualQErrorMessage* self, QMoveEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::moveEvent(event);
-
+	self->QErrorMessage::moveEvent(event);
 }
 
-void QErrorMessage_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QErrorMessage_virtualbase_tabletEvent(VirtualQErrorMessage* self, QTabletEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::tabletEvent(event);
-
+	self->QErrorMessage::tabletEvent(event);
 }
 
-void QErrorMessage_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QErrorMessage_virtualbase_actionEvent(VirtualQErrorMessage* self, QActionEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::actionEvent(event);
-
+	self->QErrorMessage::actionEvent(event);
 }
 
-void QErrorMessage_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QErrorMessage_virtualbase_dragEnterEvent(VirtualQErrorMessage* self, QDragEnterEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::dragEnterEvent(event);
-
+	self->QErrorMessage::dragEnterEvent(event);
 }
 
-void QErrorMessage_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QErrorMessage_virtualbase_dragMoveEvent(VirtualQErrorMessage* self, QDragMoveEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::dragMoveEvent(event);
-
+	self->QErrorMessage::dragMoveEvent(event);
 }
 
-void QErrorMessage_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QErrorMessage_virtualbase_dragLeaveEvent(VirtualQErrorMessage* self, QDragLeaveEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::dragLeaveEvent(event);
-
+	self->QErrorMessage::dragLeaveEvent(event);
 }
 
-void QErrorMessage_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QErrorMessage_virtualbase_dropEvent(VirtualQErrorMessage* self, QDropEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::dropEvent(event);
-
+	self->QErrorMessage::dropEvent(event);
 }
 
-void QErrorMessage_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QErrorMessage_virtualbase_hideEvent(VirtualQErrorMessage* self, QHideEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::hideEvent(event);
-
+	self->QErrorMessage::hideEvent(event);
 }
 
-bool QErrorMessage_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QErrorMessage_virtualbase_nativeEvent(VirtualQErrorMessage* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QErrorMessage::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QErrorMessage_virtualbase_metric(const void* self, int param1) {
+int QErrorMessage_virtualbase_metric(const VirtualQErrorMessage* self, int param1) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::metric(static_cast<VirtualQErrorMessage::PaintDeviceMetric>(param1));
-
+	return self->QErrorMessage::metric(static_cast<VirtualQErrorMessage::PaintDeviceMetric>(param1));
 }
 
-void QErrorMessage_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QErrorMessage_virtualbase_initPainter(const VirtualQErrorMessage* self, QPainter* painter) {
 
-	( (const VirtualQErrorMessage*)(self) )->QErrorMessage::initPainter(painter);
-
+	self->QErrorMessage::initPainter(painter);
 }
 
-QPaintDevice* QErrorMessage_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QErrorMessage_virtualbase_redirected(const VirtualQErrorMessage* self, QPoint* offset) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::redirected(offset);
-
+	return self->QErrorMessage::redirected(offset);
 }
 
-QPainter* QErrorMessage_virtualbase_sharedPainter(const void* self) {
+QPainter* QErrorMessage_virtualbase_sharedPainter(const VirtualQErrorMessage* self) {
 
-	return ( (const VirtualQErrorMessage*)(self) )->QErrorMessage::sharedPainter();
-
+	return self->QErrorMessage::sharedPainter();
 }
 
-void QErrorMessage_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QErrorMessage_virtualbase_inputMethodEvent(VirtualQErrorMessage* self, QInputMethodEvent* param1) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::inputMethodEvent(param1);
-
+	self->QErrorMessage::inputMethodEvent(param1);
 }
 
-QVariant* QErrorMessage_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QErrorMessage_virtualbase_inputMethodQuery(const VirtualQErrorMessage* self, int param1) {
 
-	return new QVariant(( (const VirtualQErrorMessage*)(self) )->QErrorMessage::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QErrorMessage::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QErrorMessage_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QErrorMessage_virtualbase_focusNextPrevChild(VirtualQErrorMessage* self, bool next) {
 
-	return ( (VirtualQErrorMessage*)(self) )->QErrorMessage::focusNextPrevChild(next);
-
+	return self->QErrorMessage::focusNextPrevChild(next);
 }
 
-void QErrorMessage_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QErrorMessage_virtualbase_timerEvent(VirtualQErrorMessage* self, QTimerEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::timerEvent(event);
-
+	self->QErrorMessage::timerEvent(event);
 }
 
-void QErrorMessage_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QErrorMessage_virtualbase_childEvent(VirtualQErrorMessage* self, QChildEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::childEvent(event);
-
+	self->QErrorMessage::childEvent(event);
 }
 
-void QErrorMessage_virtualbase_customEvent(void* self, QEvent* event) {
+void QErrorMessage_virtualbase_customEvent(VirtualQErrorMessage* self, QEvent* event) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::customEvent(event);
-
+	self->QErrorMessage::customEvent(event);
 }
 
-void QErrorMessage_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QErrorMessage_virtualbase_connectNotify(VirtualQErrorMessage* self, QMetaMethod* signal) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::connectNotify(*signal);
-
+	self->QErrorMessage::connectNotify(*signal);
 }
 
-void QErrorMessage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QErrorMessage_virtualbase_disconnectNotify(VirtualQErrorMessage* self, QMetaMethod* signal) {
 
-	( (VirtualQErrorMessage*)(self) )->QErrorMessage::disconnectNotify(*signal);
-
+	self->QErrorMessage::disconnectNotify(*signal);
 }
 
 const QMetaObject* QErrorMessage_staticMetaObject() { return &QErrorMessage::staticMetaObject; }
-void QErrorMessage_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	self_cast->adjustPosition(param1);
 
+const QErrorMessage_VTable* QErrorMessage_vtbl(const VirtualQErrorMessage* self) { return self->vtbl; }
+void* QErrorMessage_vdata(const VirtualQErrorMessage* self) { return self->vdata; }
+void QErrorMessage_setVdata(VirtualQErrorMessage* self, void* vdata) { self->vdata = vdata; }
+
+void QErrorMessage_protectedbase_adjustPosition(VirtualQErrorMessage* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QErrorMessage_protectedbase_updateMicroFocus(void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QErrorMessage_protectedbase_updateMicroFocus(VirtualQErrorMessage* self) {
+	self->updateMicroFocus();
 }
 
-void QErrorMessage_protectedbase_create(void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	self_cast->create();
-
+void QErrorMessage_protectedbase_create(VirtualQErrorMessage* self) {
+	self->create();
 }
 
-void QErrorMessage_protectedbase_destroy(void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	self_cast->destroy();
-
+void QErrorMessage_protectedbase_destroy(VirtualQErrorMessage* self) {
+	self->destroy();
 }
 
-bool QErrorMessage_protectedbase_focusNextChild(void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QErrorMessage_protectedbase_focusNextChild(VirtualQErrorMessage* self) {
+	return self->focusNextChild();
 }
 
-bool QErrorMessage_protectedbase_focusPreviousChild(void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QErrorMessage_protectedbase_focusPreviousChild(VirtualQErrorMessage* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QErrorMessage_protectedbase_sender(const void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QErrorMessage_protectedbase_sender(const VirtualQErrorMessage* self) {
+	return self->sender();
 }
 
-int QErrorMessage_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QErrorMessage_protectedbase_senderSignalIndex(const VirtualQErrorMessage* self) {
+	return self->senderSignalIndex();
 }
 
-int QErrorMessage_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QErrorMessage_protectedbase_receivers(const VirtualQErrorMessage* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QErrorMessage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQErrorMessage* self_cast = static_cast<VirtualQErrorMessage*>( (QErrorMessage*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QErrorMessage_protectedbase_isSignalConnected(const VirtualQErrorMessage* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QErrorMessage_delete(QErrorMessage* self) {

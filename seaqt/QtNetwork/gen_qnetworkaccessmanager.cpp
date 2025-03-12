@@ -26,39 +26,32 @@
 #include <QTimerEvent>
 #include <qnetworkaccessmanager.h>
 #include "gen_qnetworkaccessmanager.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQNetworkAccessManager final : public QNetworkAccessManager {
-	struct QNetworkAccessManager_VTable* vtbl;
+	const QNetworkAccessManager_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QNetworkAccessManager_VTable* QNetworkAccessManager_vtbl(const VirtualQNetworkAccessManager* self);
+	friend void* QNetworkAccessManager_vdata(const VirtualQNetworkAccessManager* self);
+	friend void QNetworkAccessManager_setVdata(VirtualQNetworkAccessManager* self, void* vdata);
 
-	VirtualQNetworkAccessManager(struct QNetworkAccessManager_VTable* vtbl): QNetworkAccessManager(), vtbl(vtbl) {};
-	VirtualQNetworkAccessManager(struct QNetworkAccessManager_VTable* vtbl, QObject* parent): QNetworkAccessManager(parent), vtbl(vtbl) {};
+	VirtualQNetworkAccessManager(const QNetworkAccessManager_VTable* vtbl, void* vdata): QNetworkAccessManager(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQNetworkAccessManager(const QNetworkAccessManager_VTable* vtbl, void* vdata, QObject* parent): QNetworkAccessManager(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQNetworkAccessManager() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQNetworkAccessManager() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QNetworkAccessManager::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const VirtualQNetworkAccessManager* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QNetworkAccessManager::qt_metacast(param1);
@@ -66,14 +59,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QNetworkAccessManager_virtualbase_metacast(void* self, const char* param1);
+	friend void* QNetworkAccessManager_virtualbase_metacast(VirtualQNetworkAccessManager* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QNetworkAccessManager::qt_metacall(param1, param2, param3);
@@ -84,14 +76,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QNetworkAccessManager_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QNetworkAccessManager_virtualbase_metacall(VirtualQNetworkAccessManager* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QNetworkReply* createRequest(QNetworkAccessManager::Operation op, const QNetworkRequest& request, QIODevice* outgoingData) override {
 		if (vtbl->createRequest == 0) {
 			return QNetworkAccessManager::createRequest(op, request, outgoingData);
@@ -104,14 +95,13 @@ public:
 		QNetworkRequest* sigval2 = const_cast<QNetworkRequest*>(&request_ret);
 		QIODevice* sigval3 = outgoingData;
 
-		QNetworkReply* callback_return_value = vtbl->createRequest(vtbl, this, sigval1, sigval2, sigval3);
+		QNetworkReply* callback_return_value = vtbl->createRequest(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(void* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
+	friend QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(VirtualQNetworkAccessManager* self, int op, QNetworkRequest* request, QIODevice* outgoingData);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QNetworkAccessManager::event(event);
@@ -119,14 +109,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkAccessManager_virtualbase_event(void* self, QEvent* event);
+	friend bool QNetworkAccessManager_virtualbase_event(VirtualQNetworkAccessManager* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QNetworkAccessManager::eventFilter(watched, event);
@@ -135,14 +124,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkAccessManager_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QNetworkAccessManager_virtualbase_eventFilter(VirtualQNetworkAccessManager* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QNetworkAccessManager::timerEvent(event);
@@ -151,13 +139,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkAccessManager_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QNetworkAccessManager_virtualbase_timerEvent(VirtualQNetworkAccessManager* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QNetworkAccessManager::childEvent(event);
@@ -166,13 +153,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkAccessManager_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QNetworkAccessManager_virtualbase_childEvent(VirtualQNetworkAccessManager* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QNetworkAccessManager::customEvent(event);
@@ -181,13 +167,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkAccessManager_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QNetworkAccessManager_virtualbase_customEvent(VirtualQNetworkAccessManager* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QNetworkAccessManager::connectNotify(signal);
@@ -198,13 +183,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QNetworkAccessManager_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QNetworkAccessManager_virtualbase_connectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QNetworkAccessManager::disconnectNotify(signal);
@@ -215,26 +199,26 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QNetworkAccessManager_virtualbase_disconnectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const void* self);
-	friend QObject* QNetworkAccessManager_protectedbase_sender(const void* self);
-	friend int QNetworkAccessManager_protectedbase_senderSignalIndex(const void* self);
-	friend int QNetworkAccessManager_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QNetworkAccessManager_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const VirtualQNetworkAccessManager* self);
+	friend QObject* QNetworkAccessManager_protectedbase_sender(const VirtualQNetworkAccessManager* self);
+	friend int QNetworkAccessManager_protectedbase_senderSignalIndex(const VirtualQNetworkAccessManager* self);
+	friend int QNetworkAccessManager_protectedbase_receivers(const VirtualQNetworkAccessManager* self, const char* signal);
+	friend bool QNetworkAccessManager_protectedbase_isSignalConnected(const VirtualQNetworkAccessManager* self, QMetaMethod* signal);
 };
 
-QNetworkAccessManager* QNetworkAccessManager_new(struct QNetworkAccessManager_VTable* vtbl) {
-	return new VirtualQNetworkAccessManager(vtbl);
+VirtualQNetworkAccessManager* QNetworkAccessManager_new(const QNetworkAccessManager_VTable* vtbl, void* vdata) {
+	return new VirtualQNetworkAccessManager(vtbl, vdata);
 }
 
-QNetworkAccessManager* QNetworkAccessManager_new2(struct QNetworkAccessManager_VTable* vtbl, QObject* parent) {
-	return new VirtualQNetworkAccessManager(vtbl, parent);
+VirtualQNetworkAccessManager* QNetworkAccessManager_new2(const QNetworkAccessManager_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQNetworkAccessManager(vtbl, vdata, parent);
 }
 
 void QNetworkAccessManager_virtbase(QNetworkAccessManager* src, QObject** outptr_QObject) {
@@ -494,7 +478,7 @@ void QNetworkAccessManager_proxyAuthenticationRequired(QNetworkAccessManager* se
 	self->proxyAuthenticationRequired(*proxy, authenticator);
 }
 
-void QNetworkAccessManager_connect_proxyAuthenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_proxyAuthenticationRequired(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*);
@@ -513,7 +497,7 @@ void QNetworkAccessManager_authenticationRequired(QNetworkAccessManager* self, Q
 	self->authenticationRequired(reply, authenticator);
 }
 
-void QNetworkAccessManager_connect_authenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QAuthenticator*), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_authenticationRequired(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkReply*, QAuthenticator*);
@@ -530,7 +514,7 @@ void QNetworkAccessManager_finished(QNetworkAccessManager* self, QNetworkReply* 
 	self->finished(reply);
 }
 
-void QNetworkAccessManager_connect_finished(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_finished(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkReply*);
@@ -546,7 +530,7 @@ void QNetworkAccessManager_encrypted(QNetworkAccessManager* self, QNetworkReply*
 	self->encrypted(reply);
 }
 
-void QNetworkAccessManager_connect_encrypted(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_encrypted(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkReply*);
@@ -568,7 +552,7 @@ void QNetworkAccessManager_sslErrors(QNetworkAccessManager* self, QNetworkReply*
 	self->sslErrors(reply, errors_QList);
 }
 
-void QNetworkAccessManager_connect_sslErrors(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_sslErrors(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, struct miqt_array /* of QSslError* */ ), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkReply*, struct miqt_array /* of QSslError* */ );
@@ -594,7 +578,7 @@ void QNetworkAccessManager_preSharedKeyAuthenticationRequired(QNetworkAccessMana
 	self->preSharedKeyAuthenticationRequired(reply, authenticator);
 }
 
-void QNetworkAccessManager_connect_preSharedKeyAuthenticationRequired(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_preSharedKeyAuthenticationRequired(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkReply*, QSslPreSharedKeyAuthenticator*);
@@ -611,7 +595,7 @@ void QNetworkAccessManager_networkSessionConnected(QNetworkAccessManager* self) 
 	self->networkSessionConnected();
 }
 
-void QNetworkAccessManager_connect_networkSessionConnected(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_networkSessionConnected(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -626,7 +610,7 @@ void QNetworkAccessManager_networkAccessibleChanged(QNetworkAccessManager* self,
 	self->networkAccessibleChanged(static_cast<QNetworkAccessManager::NetworkAccessibility>(accessible));
 }
 
-void QNetworkAccessManager_connect_networkAccessibleChanged(QNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QNetworkAccessManager_connect_networkAccessibleChanged(VirtualQNetworkAccessManager* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -712,77 +696,69 @@ void QNetworkAccessManager_setTransferTimeout1(QNetworkAccessManager* self, int 
 	self->setTransferTimeout(static_cast<int>(timeout));
 }
 
-QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const void* self) {
+QMetaObject* QNetworkAccessManager_virtualbase_metaObject(const VirtualQNetworkAccessManager* self) {
 
-	return (QMetaObject*) ( (const VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::metaObject();
-
+	return (QMetaObject*) self->QNetworkAccessManager::metaObject();
 }
 
-void* QNetworkAccessManager_virtualbase_metacast(void* self, const char* param1) {
+void* QNetworkAccessManager_virtualbase_metacast(VirtualQNetworkAccessManager* self, const char* param1) {
 
-	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::qt_metacast(param1);
-
+	return self->QNetworkAccessManager::qt_metacast(param1);
 }
 
-int QNetworkAccessManager_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QNetworkAccessManager_virtualbase_metacall(VirtualQNetworkAccessManager* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QNetworkAccessManager::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(void* self, int op, QNetworkRequest* request, QIODevice* outgoingData) {
+QNetworkReply* QNetworkAccessManager_virtualbase_createRequest(VirtualQNetworkAccessManager* self, int op, QNetworkRequest* request, QIODevice* outgoingData) {
 
-	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::createRequest(static_cast<VirtualQNetworkAccessManager::Operation>(op), *request, outgoingData);
-
+	return self->QNetworkAccessManager::createRequest(static_cast<VirtualQNetworkAccessManager::Operation>(op), *request, outgoingData);
 }
 
-bool QNetworkAccessManager_virtualbase_event(void* self, QEvent* event) {
+bool QNetworkAccessManager_virtualbase_event(VirtualQNetworkAccessManager* self, QEvent* event) {
 
-	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::event(event);
-
+	return self->QNetworkAccessManager::event(event);
 }
 
-bool QNetworkAccessManager_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QNetworkAccessManager_virtualbase_eventFilter(VirtualQNetworkAccessManager* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::eventFilter(watched, event);
-
+	return self->QNetworkAccessManager::eventFilter(watched, event);
 }
 
-void QNetworkAccessManager_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QNetworkAccessManager_virtualbase_timerEvent(VirtualQNetworkAccessManager* self, QTimerEvent* event) {
 
-	( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::timerEvent(event);
-
+	self->QNetworkAccessManager::timerEvent(event);
 }
 
-void QNetworkAccessManager_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QNetworkAccessManager_virtualbase_childEvent(VirtualQNetworkAccessManager* self, QChildEvent* event) {
 
-	( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::childEvent(event);
-
+	self->QNetworkAccessManager::childEvent(event);
 }
 
-void QNetworkAccessManager_virtualbase_customEvent(void* self, QEvent* event) {
+void QNetworkAccessManager_virtualbase_customEvent(VirtualQNetworkAccessManager* self, QEvent* event) {
 
-	( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::customEvent(event);
-
+	self->QNetworkAccessManager::customEvent(event);
 }
 
-void QNetworkAccessManager_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QNetworkAccessManager_virtualbase_connectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal) {
 
-	( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::connectNotify(*signal);
-
+	self->QNetworkAccessManager::connectNotify(*signal);
 }
 
-void QNetworkAccessManager_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QNetworkAccessManager_virtualbase_disconnectNotify(VirtualQNetworkAccessManager* self, QMetaMethod* signal) {
 
-	( (VirtualQNetworkAccessManager*)(self) )->QNetworkAccessManager::disconnectNotify(*signal);
-
+	self->QNetworkAccessManager::disconnectNotify(*signal);
 }
 
 const QMetaObject* QNetworkAccessManager_staticMetaObject() { return &QNetworkAccessManager::staticMetaObject; }
-struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const void* self) {
-	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	
-	QStringList _ret = self_cast->supportedSchemesImplementation();
+
+const QNetworkAccessManager_VTable* QNetworkAccessManager_vtbl(const VirtualQNetworkAccessManager* self) { return self->vtbl; }
+void* QNetworkAccessManager_vdata(const VirtualQNetworkAccessManager* self) { return self->vdata; }
+void QNetworkAccessManager_setVdata(VirtualQNetworkAccessManager* self, void* vdata) { self->vdata = vdata; }
+
+struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedbase_supportedSchemesImplementation(const VirtualQNetworkAccessManager* self) {
+	QStringList _ret = self->supportedSchemesImplementation();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct miqt_string* _arr = static_cast<struct miqt_string*>(malloc(sizeof(struct miqt_string) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -799,35 +775,22 @@ struct miqt_array /* of struct miqt_string */  QNetworkAccessManager_protectedba
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-QObject* QNetworkAccessManager_protectedbase_sender(const void* self) {
-	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QNetworkAccessManager_protectedbase_sender(const VirtualQNetworkAccessManager* self) {
+	return self->sender();
 }
 
-int QNetworkAccessManager_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QNetworkAccessManager_protectedbase_senderSignalIndex(const VirtualQNetworkAccessManager* self) {
+	return self->senderSignalIndex();
 }
 
-int QNetworkAccessManager_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QNetworkAccessManager_protectedbase_receivers(const VirtualQNetworkAccessManager* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QNetworkAccessManager_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQNetworkAccessManager* self_cast = static_cast<VirtualQNetworkAccessManager*>( (QNetworkAccessManager*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QNetworkAccessManager_protectedbase_isSignalConnected(const VirtualQNetworkAccessManager* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QNetworkAccessManager_delete(QNetworkAccessManager* self) {

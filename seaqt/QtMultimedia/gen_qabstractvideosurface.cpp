@@ -14,39 +14,32 @@
 #include <QVideoSurfaceFormat>
 #include <qabstractvideosurface.h>
 #include "gen_qabstractvideosurface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractVideoSurface final : public QAbstractVideoSurface {
-	struct QAbstractVideoSurface_VTable* vtbl;
+	const QAbstractVideoSurface_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractVideoSurface_VTable* QAbstractVideoSurface_vtbl(const VirtualQAbstractVideoSurface* self);
+	friend void* QAbstractVideoSurface_vdata(const VirtualQAbstractVideoSurface* self);
+	friend void QAbstractVideoSurface_setVdata(VirtualQAbstractVideoSurface* self, void* vdata);
 
-	VirtualQAbstractVideoSurface(struct QAbstractVideoSurface_VTable* vtbl): QAbstractVideoSurface(), vtbl(vtbl) {};
-	VirtualQAbstractVideoSurface(struct QAbstractVideoSurface_VTable* vtbl, QObject* parent): QAbstractVideoSurface(parent), vtbl(vtbl) {};
+	VirtualQAbstractVideoSurface(const QAbstractVideoSurface_VTable* vtbl, void* vdata): QAbstractVideoSurface(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractVideoSurface(const QAbstractVideoSurface_VTable* vtbl, void* vdata, QObject* parent): QAbstractVideoSurface(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractVideoSurface() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractVideoSurface() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractVideoSurface::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const VirtualQAbstractVideoSurface* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractVideoSurface::qt_metacast(param1);
@@ -54,14 +47,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractVideoSurface_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractVideoSurface_virtualbase_metacast(VirtualQAbstractVideoSurface* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractVideoSurface::qt_metacall(param1, param2, param3);
@@ -72,14 +64,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractVideoSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractVideoSurface_virtualbase_metacall(VirtualQAbstractVideoSurface* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<QVideoFrame::PixelFormat> supportedPixelFormats(QAbstractVideoBuffer::HandleType type) const override {
 		if (vtbl->supportedPixelFormats == 0) {
 			return QList<QVideoFrame::PixelFormat>(); // Pure virtual, there is no base we can call
@@ -88,7 +79,7 @@ public:
 		QAbstractVideoBuffer::HandleType type_ret = type;
 		int sigval1 = static_cast<int>(type_ret);
 
-		struct miqt_array /* of int */  callback_return_value = vtbl->supportedPixelFormats(vtbl, this, sigval1);
+		struct miqt_array /* of int */  callback_return_value = vtbl->supportedPixelFormats(this, sigval1);
 		QList<QVideoFrame::PixelFormat> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		int* callback_return_value_arr = static_cast<int*>(callback_return_value.data);
@@ -100,7 +91,6 @@ public:
 		return callback_return_value_QList;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isFormatSupported(const QVideoSurfaceFormat& format) const override {
 		if (vtbl->isFormatSupported == 0) {
 			return QAbstractVideoSurface::isFormatSupported(format);
@@ -110,14 +100,13 @@ public:
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
 
-		bool callback_return_value = vtbl->isFormatSupported(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isFormatSupported(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractVideoSurface_virtualbase_isFormatSupported(const void* self, QVideoSurfaceFormat* format);
+	friend bool QAbstractVideoSurface_virtualbase_isFormatSupported(const VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVideoSurfaceFormat nearestFormat(const QVideoSurfaceFormat& format) const override {
 		if (vtbl->nearestFormat == 0) {
 			return QAbstractVideoSurface::nearestFormat(format);
@@ -127,16 +116,15 @@ public:
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
 
-		QVideoSurfaceFormat* callback_return_value = vtbl->nearestFormat(vtbl, this, sigval1);
+		QVideoSurfaceFormat* callback_return_value = vtbl->nearestFormat(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const void* self, QVideoSurfaceFormat* format);
+	friend QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool start(const QVideoSurfaceFormat& format) override {
 		if (vtbl->start == 0) {
 			return QAbstractVideoSurface::start(format);
@@ -146,14 +134,13 @@ public:
 		// Cast returned reference into pointer
 		QVideoSurfaceFormat* sigval1 = const_cast<QVideoSurfaceFormat*>(&format_ret);
 
-		bool callback_return_value = vtbl->start(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->start(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractVideoSurface_virtualbase_start(void* self, QVideoSurfaceFormat* format);
+	friend bool QAbstractVideoSurface_virtualbase_start(VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format);
 
-	// Subclass to allow providing a Go implementation
 	virtual void stop() override {
 		if (vtbl->stop == 0) {
 			QAbstractVideoSurface::stop();
@@ -161,13 +148,12 @@ public:
 		}
 
 
-		vtbl->stop(vtbl, this);
+		vtbl->stop(this);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_stop(void* self);
+	friend void QAbstractVideoSurface_virtualbase_stop(VirtualQAbstractVideoSurface* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool present(const QVideoFrame& frame) override {
 		if (vtbl->present == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -177,12 +163,11 @@ public:
 		// Cast returned reference into pointer
 		QVideoFrame* sigval1 = const_cast<QVideoFrame*>(&frame_ret);
 
-		bool callback_return_value = vtbl->present(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->present(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAbstractVideoSurface::event(event);
@@ -190,14 +175,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractVideoSurface_virtualbase_event(void* self, QEvent* event);
+	friend bool QAbstractVideoSurface_virtualbase_event(VirtualQAbstractVideoSurface* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractVideoSurface::eventFilter(watched, event);
@@ -206,14 +190,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractVideoSurface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractVideoSurface_virtualbase_eventFilter(VirtualQAbstractVideoSurface* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractVideoSurface::timerEvent(event);
@@ -222,13 +205,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractVideoSurface_virtualbase_timerEvent(VirtualQAbstractVideoSurface* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractVideoSurface::childEvent(event);
@@ -237,13 +219,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractVideoSurface_virtualbase_childEvent(VirtualQAbstractVideoSurface* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractVideoSurface::customEvent(event);
@@ -252,13 +233,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractVideoSurface_virtualbase_customEvent(VirtualQAbstractVideoSurface* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractVideoSurface::connectNotify(signal);
@@ -269,13 +249,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractVideoSurface_virtualbase_connectNotify(VirtualQAbstractVideoSurface* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractVideoSurface::disconnectNotify(signal);
@@ -286,27 +265,27 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractVideoSurface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractVideoSurface_virtualbase_disconnectNotify(VirtualQAbstractVideoSurface* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractVideoSurface_protectedbase_setError(void* self, int error);
-	friend void QAbstractVideoSurface_protectedbase_setNativeResolution(void* self, QSize* resolution);
-	friend QObject* QAbstractVideoSurface_protectedbase_sender(const void* self);
-	friend int QAbstractVideoSurface_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractVideoSurface_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractVideoSurface_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QAbstractVideoSurface_protectedbase_setError(VirtualQAbstractVideoSurface* self, int error);
+	friend void QAbstractVideoSurface_protectedbase_setNativeResolution(VirtualQAbstractVideoSurface* self, QSize* resolution);
+	friend QObject* QAbstractVideoSurface_protectedbase_sender(const VirtualQAbstractVideoSurface* self);
+	friend int QAbstractVideoSurface_protectedbase_senderSignalIndex(const VirtualQAbstractVideoSurface* self);
+	friend int QAbstractVideoSurface_protectedbase_receivers(const VirtualQAbstractVideoSurface* self, const char* signal);
+	friend bool QAbstractVideoSurface_protectedbase_isSignalConnected(const VirtualQAbstractVideoSurface* self, QMetaMethod* signal);
 };
 
-QAbstractVideoSurface* QAbstractVideoSurface_new(struct QAbstractVideoSurface_VTable* vtbl) {
-	return new VirtualQAbstractVideoSurface(vtbl);
+VirtualQAbstractVideoSurface* QAbstractVideoSurface_new(const QAbstractVideoSurface_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractVideoSurface(vtbl, vdata);
 }
 
-QAbstractVideoSurface* QAbstractVideoSurface_new2(struct QAbstractVideoSurface_VTable* vtbl, QObject* parent) {
-	return new VirtualQAbstractVideoSurface(vtbl, parent);
+VirtualQAbstractVideoSurface* QAbstractVideoSurface_new2(const QAbstractVideoSurface_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAbstractVideoSurface(vtbl, vdata, parent);
 }
 
 void QAbstractVideoSurface_virtbase(QAbstractVideoSurface* src, QObject** outptr_QObject) {
@@ -402,7 +381,7 @@ void QAbstractVideoSurface_activeChanged(QAbstractVideoSurface* self, bool activ
 	self->activeChanged(active);
 }
 
-void QAbstractVideoSurface_connect_activeChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAbstractVideoSurface_connect_activeChanged(VirtualQAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -418,7 +397,7 @@ void QAbstractVideoSurface_surfaceFormatChanged(QAbstractVideoSurface* self, QVi
 	self->surfaceFormatChanged(*format);
 }
 
-void QAbstractVideoSurface_connect_surfaceFormatChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, QVideoSurfaceFormat*), void (*release)(intptr_t)) {
+void QAbstractVideoSurface_connect_surfaceFormatChanged(VirtualQAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, QVideoSurfaceFormat*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoSurfaceFormat*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QVideoSurfaceFormat*);
@@ -436,7 +415,7 @@ void QAbstractVideoSurface_supportedFormatsChanged(QAbstractVideoSurface* self) 
 	self->supportedFormatsChanged();
 }
 
-void QAbstractVideoSurface_connect_supportedFormatsChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractVideoSurface_connect_supportedFormatsChanged(VirtualQAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -451,7 +430,7 @@ void QAbstractVideoSurface_nativeResolutionChanged(QAbstractVideoSurface* self, 
 	self->nativeResolutionChanged(*resolution);
 }
 
-void QAbstractVideoSurface_connect_nativeResolutionChanged(QAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+void QAbstractVideoSurface_connect_nativeResolutionChanged(VirtualQAbstractVideoSurface* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSize*);
@@ -509,131 +488,104 @@ struct miqt_string QAbstractVideoSurface_trUtf83(const char* s, const char* c, i
 	return _ms;
 }
 
-QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractVideoSurface_virtualbase_metaObject(const VirtualQAbstractVideoSurface* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::metaObject();
-
+	return (QMetaObject*) self->QAbstractVideoSurface::metaObject();
 }
 
-void* QAbstractVideoSurface_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractVideoSurface_virtualbase_metacast(VirtualQAbstractVideoSurface* self, const char* param1) {
 
-	return ( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::qt_metacast(param1);
-
+	return self->QAbstractVideoSurface::qt_metacast(param1);
 }
 
-int QAbstractVideoSurface_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractVideoSurface_virtualbase_metacall(VirtualQAbstractVideoSurface* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractVideoSurface::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAbstractVideoSurface_virtualbase_isFormatSupported(const void* self, QVideoSurfaceFormat* format) {
+bool QAbstractVideoSurface_virtualbase_isFormatSupported(const VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format) {
 
-	return ( (const VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::isFormatSupported(*format);
-
+	return self->QAbstractVideoSurface::isFormatSupported(*format);
 }
 
-QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const void* self, QVideoSurfaceFormat* format) {
+QVideoSurfaceFormat* QAbstractVideoSurface_virtualbase_nearestFormat(const VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format) {
 
-	return new QVideoSurfaceFormat(( (const VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::nearestFormat(*format));
-
+	return new QVideoSurfaceFormat(self->QAbstractVideoSurface::nearestFormat(*format));
 }
 
-bool QAbstractVideoSurface_virtualbase_start(void* self, QVideoSurfaceFormat* format) {
+bool QAbstractVideoSurface_virtualbase_start(VirtualQAbstractVideoSurface* self, QVideoSurfaceFormat* format) {
 
-	return ( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::start(*format);
-
+	return self->QAbstractVideoSurface::start(*format);
 }
 
-void QAbstractVideoSurface_virtualbase_stop(void* self) {
+void QAbstractVideoSurface_virtualbase_stop(VirtualQAbstractVideoSurface* self) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::stop();
-
+	self->QAbstractVideoSurface::stop();
 }
 
-bool QAbstractVideoSurface_virtualbase_event(void* self, QEvent* event) {
+bool QAbstractVideoSurface_virtualbase_event(VirtualQAbstractVideoSurface* self, QEvent* event) {
 
-	return ( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::event(event);
-
+	return self->QAbstractVideoSurface::event(event);
 }
 
-bool QAbstractVideoSurface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractVideoSurface_virtualbase_eventFilter(VirtualQAbstractVideoSurface* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::eventFilter(watched, event);
-
+	return self->QAbstractVideoSurface::eventFilter(watched, event);
 }
 
-void QAbstractVideoSurface_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractVideoSurface_virtualbase_timerEvent(VirtualQAbstractVideoSurface* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::timerEvent(event);
-
+	self->QAbstractVideoSurface::timerEvent(event);
 }
 
-void QAbstractVideoSurface_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractVideoSurface_virtualbase_childEvent(VirtualQAbstractVideoSurface* self, QChildEvent* event) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::childEvent(event);
-
+	self->QAbstractVideoSurface::childEvent(event);
 }
 
-void QAbstractVideoSurface_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractVideoSurface_virtualbase_customEvent(VirtualQAbstractVideoSurface* self, QEvent* event) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::customEvent(event);
-
+	self->QAbstractVideoSurface::customEvent(event);
 }
 
-void QAbstractVideoSurface_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractVideoSurface_virtualbase_connectNotify(VirtualQAbstractVideoSurface* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::connectNotify(*signal);
-
+	self->QAbstractVideoSurface::connectNotify(*signal);
 }
 
-void QAbstractVideoSurface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractVideoSurface_virtualbase_disconnectNotify(VirtualQAbstractVideoSurface* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractVideoSurface*)(self) )->QAbstractVideoSurface::disconnectNotify(*signal);
-
+	self->QAbstractVideoSurface::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractVideoSurface_staticMetaObject() { return &QAbstractVideoSurface::staticMetaObject; }
-void QAbstractVideoSurface_protectedbase_setError(void* self, int error) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	self_cast->setError(static_cast<VirtualQAbstractVideoSurface::Error>(error));
 
+const QAbstractVideoSurface_VTable* QAbstractVideoSurface_vtbl(const VirtualQAbstractVideoSurface* self) { return self->vtbl; }
+void* QAbstractVideoSurface_vdata(const VirtualQAbstractVideoSurface* self) { return self->vdata; }
+void QAbstractVideoSurface_setVdata(VirtualQAbstractVideoSurface* self, void* vdata) { self->vdata = vdata; }
+
+void QAbstractVideoSurface_protectedbase_setError(VirtualQAbstractVideoSurface* self, int error) {
+	self->setError(static_cast<VirtualQAbstractVideoSurface::Error>(error));
 }
 
-void QAbstractVideoSurface_protectedbase_setNativeResolution(void* self, QSize* resolution) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	self_cast->setNativeResolution(*resolution);
-
+void QAbstractVideoSurface_protectedbase_setNativeResolution(VirtualQAbstractVideoSurface* self, QSize* resolution) {
+	self->setNativeResolution(*resolution);
 }
 
-QObject* QAbstractVideoSurface_protectedbase_sender(const void* self) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractVideoSurface_protectedbase_sender(const VirtualQAbstractVideoSurface* self) {
+	return self->sender();
 }
 
-int QAbstractVideoSurface_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractVideoSurface_protectedbase_senderSignalIndex(const VirtualQAbstractVideoSurface* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractVideoSurface_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractVideoSurface_protectedbase_receivers(const VirtualQAbstractVideoSurface* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractVideoSurface_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractVideoSurface* self_cast = static_cast<VirtualQAbstractVideoSurface*>( (QAbstractVideoSurface*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractVideoSurface_protectedbase_isSignalConnected(const VirtualQAbstractVideoSurface* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractVideoSurface_delete(QAbstractVideoSurface* self) {

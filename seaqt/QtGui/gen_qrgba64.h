@@ -22,6 +22,7 @@ typedef struct QRgba64 QRgba64;
 
 QRgba64* QRgba64_new();
 QRgba64* QRgba64_new2(QRgba64* param1);
+
 QRgba64* QRgba64_fromRgba64(unsigned long long c);
 QRgba64* QRgba64_fromRgba642(uint16_t red, uint16_t green, uint16_t blue, uint16_t alpha);
 QRgba64* QRgba64_fromRgba(unsigned char red, unsigned char green, unsigned char blue, unsigned char alpha);
@@ -46,6 +47,7 @@ QRgba64* QRgba64_premultiplied(const QRgba64* self);
 QRgba64* QRgba64_unpremultiplied(const QRgba64* self);
 unsigned long long QRgba64_ToUnsignedLongLong(const QRgba64* self);
 void QRgba64_operatorAssign(QRgba64* self, unsigned long long _rgba);
+
 void QRgba64_delete(QRgba64* self);
 
 #ifdef __cplusplus

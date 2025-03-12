@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qscroller.h>
 #include "gen_qscroller.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QScroller_virtbase(QScroller* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -271,3 +262,4 @@ bool QScroller_handleInput3(QScroller* self, int input, QPointF* position, long 
 }
 
 const QMetaObject* QScroller_staticMetaObject() { return &QScroller::staticMetaObject; }
+

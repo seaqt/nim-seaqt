@@ -13,38 +13,31 @@
 #include <QTimerEvent>
 #include <qdrag.h>
 #include "gen_qdrag.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDrag final : public QDrag {
-	struct QDrag_VTable* vtbl;
+	const QDrag_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDrag_VTable* QDrag_vtbl(const VirtualQDrag* self);
+	friend void* QDrag_vdata(const VirtualQDrag* self);
+	friend void QDrag_setVdata(VirtualQDrag* self, void* vdata);
 
-	VirtualQDrag(struct QDrag_VTable* vtbl, QObject* dragSource): QDrag(dragSource), vtbl(vtbl) {};
+	VirtualQDrag(const QDrag_VTable* vtbl, void* vdata, QObject* dragSource): QDrag(dragSource), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDrag() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDrag() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDrag::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDrag_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDrag_virtualbase_metaObject(const VirtualQDrag* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDrag::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDrag_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDrag_virtualbase_metacast(VirtualQDrag* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDrag::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDrag_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDrag_virtualbase_metacall(VirtualQDrag* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDrag::event(event);
@@ -85,14 +76,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDrag_virtualbase_event(void* self, QEvent* event);
+	friend bool QDrag_virtualbase_event(VirtualQDrag* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDrag::eventFilter(watched, event);
@@ -101,14 +91,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDrag_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDrag_virtualbase_eventFilter(VirtualQDrag* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDrag::timerEvent(event);
@@ -117,13 +106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDrag_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDrag_virtualbase_timerEvent(VirtualQDrag* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDrag::childEvent(event);
@@ -132,13 +120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDrag_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDrag_virtualbase_childEvent(VirtualQDrag* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDrag::customEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDrag_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDrag_virtualbase_customEvent(VirtualQDrag* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDrag::connectNotify(signal);
@@ -164,13 +150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDrag_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDrag_virtualbase_connectNotify(VirtualQDrag* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDrag::disconnectNotify(signal);
@@ -181,21 +166,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDrag_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDrag_virtualbase_disconnectNotify(VirtualQDrag* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QDrag_protectedbase_sender(const void* self);
-	friend int QDrag_protectedbase_senderSignalIndex(const void* self);
-	friend int QDrag_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDrag_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QDrag_protectedbase_sender(const VirtualQDrag* self);
+	friend int QDrag_protectedbase_senderSignalIndex(const VirtualQDrag* self);
+	friend int QDrag_protectedbase_receivers(const VirtualQDrag* self, const char* signal);
+	friend bool QDrag_protectedbase_isSignalConnected(const VirtualQDrag* self, QMetaMethod* signal);
 };
 
-QDrag* QDrag_new(struct QDrag_VTable* vtbl, QObject* dragSource) {
-	return new VirtualQDrag(vtbl, dragSource);
+VirtualQDrag* QDrag_new(const QDrag_VTable* vtbl, void* vdata, QObject* dragSource) {
+	return new VirtualQDrag(vtbl, vdata, dragSource);
 }
 
 void QDrag_virtbase(QDrag* src, QObject** outptr_QObject) {
@@ -309,7 +294,7 @@ void QDrag_actionChanged(QDrag* self, int action) {
 	self->actionChanged(static_cast<Qt::DropAction>(action));
 }
 
-void QDrag_connect_actionChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QDrag_connect_actionChanged(VirtualQDrag* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -326,7 +311,7 @@ void QDrag_targetChanged(QDrag* self, QObject* newTarget) {
 	self->targetChanged(newTarget);
 }
 
-void QDrag_connect_targetChanged(QDrag* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
+void QDrag_connect_targetChanged(VirtualQDrag* self, intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QObject*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QObject*);
@@ -392,93 +377,76 @@ int QDrag_exec1(QDrag* self, int supportedActions) {
 	return static_cast<int>(_ret);
 }
 
-QMetaObject* QDrag_virtualbase_metaObject(const void* self) {
+QMetaObject* QDrag_virtualbase_metaObject(const VirtualQDrag* self) {
 
-	return (QMetaObject*) ( (const VirtualQDrag*)(self) )->QDrag::metaObject();
-
+	return (QMetaObject*) self->QDrag::metaObject();
 }
 
-void* QDrag_virtualbase_metacast(void* self, const char* param1) {
+void* QDrag_virtualbase_metacast(VirtualQDrag* self, const char* param1) {
 
-	return ( (VirtualQDrag*)(self) )->QDrag::qt_metacast(param1);
-
+	return self->QDrag::qt_metacast(param1);
 }
 
-int QDrag_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDrag_virtualbase_metacall(VirtualQDrag* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDrag*)(self) )->QDrag::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDrag::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QDrag_virtualbase_event(void* self, QEvent* event) {
+bool QDrag_virtualbase_event(VirtualQDrag* self, QEvent* event) {
 
-	return ( (VirtualQDrag*)(self) )->QDrag::event(event);
-
+	return self->QDrag::event(event);
 }
 
-bool QDrag_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDrag_virtualbase_eventFilter(VirtualQDrag* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDrag*)(self) )->QDrag::eventFilter(watched, event);
-
+	return self->QDrag::eventFilter(watched, event);
 }
 
-void QDrag_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDrag_virtualbase_timerEvent(VirtualQDrag* self, QTimerEvent* event) {
 
-	( (VirtualQDrag*)(self) )->QDrag::timerEvent(event);
-
+	self->QDrag::timerEvent(event);
 }
 
-void QDrag_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDrag_virtualbase_childEvent(VirtualQDrag* self, QChildEvent* event) {
 
-	( (VirtualQDrag*)(self) )->QDrag::childEvent(event);
-
+	self->QDrag::childEvent(event);
 }
 
-void QDrag_virtualbase_customEvent(void* self, QEvent* event) {
+void QDrag_virtualbase_customEvent(VirtualQDrag* self, QEvent* event) {
 
-	( (VirtualQDrag*)(self) )->QDrag::customEvent(event);
-
+	self->QDrag::customEvent(event);
 }
 
-void QDrag_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDrag_virtualbase_connectNotify(VirtualQDrag* self, QMetaMethod* signal) {
 
-	( (VirtualQDrag*)(self) )->QDrag::connectNotify(*signal);
-
+	self->QDrag::connectNotify(*signal);
 }
 
-void QDrag_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDrag_virtualbase_disconnectNotify(VirtualQDrag* self, QMetaMethod* signal) {
 
-	( (VirtualQDrag*)(self) )->QDrag::disconnectNotify(*signal);
-
+	self->QDrag::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDrag_staticMetaObject() { return &QDrag::staticMetaObject; }
-QObject* QDrag_protectedbase_sender(const void* self) {
-	VirtualQDrag* self_cast = static_cast<VirtualQDrag*>( (QDrag*)(self) );
-	
-	return self_cast->sender();
 
+const QDrag_VTable* QDrag_vtbl(const VirtualQDrag* self) { return self->vtbl; }
+void* QDrag_vdata(const VirtualQDrag* self) { return self->vdata; }
+void QDrag_setVdata(VirtualQDrag* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QDrag_protectedbase_sender(const VirtualQDrag* self) {
+	return self->sender();
 }
 
-int QDrag_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDrag* self_cast = static_cast<VirtualQDrag*>( (QDrag*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDrag_protectedbase_senderSignalIndex(const VirtualQDrag* self) {
+	return self->senderSignalIndex();
 }
 
-int QDrag_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDrag* self_cast = static_cast<VirtualQDrag*>( (QDrag*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDrag_protectedbase_receivers(const VirtualQDrag* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDrag_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDrag* self_cast = static_cast<VirtualQDrag*>( (QDrag*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDrag_protectedbase_isSignalConnected(const VirtualQDrag* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDrag_delete(QDrag* self) {

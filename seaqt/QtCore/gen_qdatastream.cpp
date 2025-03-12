@@ -3,15 +3,6 @@
 #include <QIODevice>
 #include <qdatastream.h>
 #include "gen_qdatastream.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDataStream* QDataStream_new() {
 	return new QDataStream();
 }

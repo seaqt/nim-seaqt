@@ -11,15 +11,6 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QWebElementCollection__iterator
 #include <qwebelement.h>
 #include "gen_qwebelement.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebElement* QWebElement_new() {
 	return new QWebElement();
 }
@@ -563,11 +554,11 @@ void QWebElementCollection_delete(QWebElementCollection* self) {
 }
 
 QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new(QWebElementCollection* collection_, int index) {
-	return new QWebElementCollection::const_iterator(collection_, static_cast<int>(index));
+	return new QWebElementCollection__const_iterator(collection_, static_cast<int>(index));
 }
 
 QWebElementCollection__const_iterator* QWebElementCollection__const_iterator_new2(QWebElementCollection__const_iterator* o) {
-	return new QWebElementCollection::const_iterator(*o);
+	return new QWebElementCollection__const_iterator(*o);
 }
 
 QWebElement* QWebElementCollection__const_iterator_operatorMultiply(const QWebElementCollection__const_iterator* self) {
@@ -647,11 +638,11 @@ void QWebElementCollection__const_iterator_delete(QWebElementCollection__const_i
 }
 
 QWebElementCollection__iterator* QWebElementCollection__iterator_new(QWebElementCollection* collection_, int index) {
-	return new QWebElementCollection::iterator(collection_, static_cast<int>(index));
+	return new QWebElementCollection__iterator(collection_, static_cast<int>(index));
 }
 
 QWebElementCollection__iterator* QWebElementCollection__iterator_new2(QWebElementCollection__iterator* o) {
-	return new QWebElementCollection::iterator(*o);
+	return new QWebElementCollection__iterator(*o);
 }
 
 QWebElement* QWebElementCollection__iterator_operatorMultiply(const QWebElementCollection__iterator* self) {

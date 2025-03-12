@@ -53,6 +53,7 @@ struct miqt_string QCameraControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraControl_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QCameraControl_staticMetaObject();
 void QCameraControl_delete(QCameraControl* self);
 

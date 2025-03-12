@@ -13,40 +13,33 @@
 #include <cstring>
 #include <qpicture.h>
 #include "gen_qpicture.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPicture final : public QPicture {
-	struct QPicture_VTable* vtbl;
+	const QPicture_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPicture_VTable* QPicture_vtbl(const VirtualQPicture* self);
+	friend void* QPicture_vdata(const VirtualQPicture* self);
+	friend void QPicture_setVdata(VirtualQPicture* self, void* vdata);
 
-	VirtualQPicture(struct QPicture_VTable* vtbl): QPicture(), vtbl(vtbl) {};
-	VirtualQPicture(struct QPicture_VTable* vtbl, const QPicture& param1): QPicture(param1), vtbl(vtbl) {};
-	VirtualQPicture(struct QPicture_VTable* vtbl, int formatVersion): QPicture(formatVersion), vtbl(vtbl) {};
+	VirtualQPicture(const QPicture_VTable* vtbl, void* vdata): QPicture(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPicture(const QPicture_VTable* vtbl, void* vdata, const QPicture& param1): QPicture(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPicture(const QPicture_VTable* vtbl, void* vdata, int formatVersion): QPicture(formatVersion), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPicture() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPicture() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPicture::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPicture_virtualbase_devType(const void* self);
+	friend int QPicture_virtualbase_devType(const VirtualQPicture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setData(const char* data, uint size) override {
 		if (vtbl->setData == 0) {
 			QPicture::setData(data, size);
@@ -57,27 +50,25 @@ public:
 		uint size_ret = size;
 		unsigned int sigval2 = static_cast<unsigned int>(size_ret);
 
-		vtbl->setData(vtbl, this, sigval1, sigval2);
+		vtbl->setData(this, sigval1, sigval2);
 
 	}
 
-	friend void QPicture_virtualbase_setData(void* self, const char* data, unsigned int size);
+	friend void QPicture_virtualbase_setData(VirtualQPicture* self, const char* data, unsigned int size);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QPicture::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QPicture_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QPicture_virtualbase_paintEngine(const VirtualQPicture* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric m) const override {
 		if (vtbl->metric == 0) {
 			return QPicture::metric(m);
@@ -86,14 +77,13 @@ public:
 		QPaintDevice::PaintDeviceMetric m_ret = m;
 		int sigval1 = static_cast<int>(m_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPicture_virtualbase_metric(const void* self, int m);
+	friend int QPicture_virtualbase_metric(const VirtualQPicture* self, int m);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPicture::initPainter(painter);
@@ -102,13 +92,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPicture_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPicture_virtualbase_initPainter(const VirtualQPicture* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPicture::redirected(offset);
@@ -116,39 +105,38 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPicture_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPicture_virtualbase_redirected(const VirtualQPicture* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPicture::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPicture_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPicture_virtualbase_sharedPainter(const VirtualQPicture* self);
 
 };
 
-QPicture* QPicture_new(struct QPicture_VTable* vtbl) {
-	return new VirtualQPicture(vtbl);
+VirtualQPicture* QPicture_new(const QPicture_VTable* vtbl, void* vdata) {
+	return new VirtualQPicture(vtbl, vdata);
 }
 
-QPicture* QPicture_new2(struct QPicture_VTable* vtbl, QPicture* param1) {
-	return new VirtualQPicture(vtbl, *param1);
+VirtualQPicture* QPicture_new2(const QPicture_VTable* vtbl, void* vdata, QPicture* param1) {
+	return new VirtualQPicture(vtbl, vdata, *param1);
 }
 
-QPicture* QPicture_new3(struct QPicture_VTable* vtbl, int formatVersion) {
-	return new VirtualQPicture(vtbl, static_cast<int>(formatVersion));
+VirtualQPicture* QPicture_new3(const QPicture_VTable* vtbl, void* vdata, int formatVersion) {
+	return new VirtualQPicture(vtbl, vdata, static_cast<int>(formatVersion));
 }
 
 void QPicture_virtbase(QPicture* src, QPaintDevice** outptr_QPaintDevice) {
@@ -325,47 +313,44 @@ bool QPicture_save22(QPicture* self, struct miqt_string fileName, const char* fo
 	return self->save(fileName_QString, format);
 }
 
-int QPicture_virtualbase_devType(const void* self) {
+int QPicture_virtualbase_devType(const VirtualQPicture* self) {
 
-	return ( (const VirtualQPicture*)(self) )->QPicture::devType();
-
+	return self->QPicture::devType();
 }
 
-void QPicture_virtualbase_setData(void* self, const char* data, unsigned int size) {
+void QPicture_virtualbase_setData(VirtualQPicture* self, const char* data, unsigned int size) {
 
-	( (VirtualQPicture*)(self) )->QPicture::setData(data, static_cast<uint>(size));
-
+	self->QPicture::setData(data, static_cast<uint>(size));
 }
 
-QPaintEngine* QPicture_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QPicture_virtualbase_paintEngine(const VirtualQPicture* self) {
 
-	return ( (const VirtualQPicture*)(self) )->QPicture::paintEngine();
-
+	return self->QPicture::paintEngine();
 }
 
-int QPicture_virtualbase_metric(const void* self, int m) {
+int QPicture_virtualbase_metric(const VirtualQPicture* self, int m) {
 
-	return ( (const VirtualQPicture*)(self) )->QPicture::metric(static_cast<VirtualQPicture::PaintDeviceMetric>(m));
-
+	return self->QPicture::metric(static_cast<VirtualQPicture::PaintDeviceMetric>(m));
 }
 
-void QPicture_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPicture_virtualbase_initPainter(const VirtualQPicture* self, QPainter* painter) {
 
-	( (const VirtualQPicture*)(self) )->QPicture::initPainter(painter);
-
+	self->QPicture::initPainter(painter);
 }
 
-QPaintDevice* QPicture_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPicture_virtualbase_redirected(const VirtualQPicture* self, QPoint* offset) {
 
-	return ( (const VirtualQPicture*)(self) )->QPicture::redirected(offset);
-
+	return self->QPicture::redirected(offset);
 }
 
-QPainter* QPicture_virtualbase_sharedPainter(const void* self) {
+QPainter* QPicture_virtualbase_sharedPainter(const VirtualQPicture* self) {
 
-	return ( (const VirtualQPicture*)(self) )->QPicture::sharedPainter();
-
+	return self->QPicture::sharedPainter();
 }
+
+const QPicture_VTable* QPicture_vtbl(const VirtualQPicture* self) { return self->vtbl; }
+void* QPicture_vdata(const VirtualQPicture* self) { return self->vdata; }
+void QPicture_setVdata(VirtualQPicture* self, void* vdata) { self->vdata = vdata; }
 
 void QPicture_delete(QPicture* self) {
 	delete self;

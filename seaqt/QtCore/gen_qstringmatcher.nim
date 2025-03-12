@@ -46,8 +46,8 @@ proc fcQStringMatcher_setPattern(self: pointer, pattern: struct_miqt_string): vo
 proc fcQStringMatcher_setCaseSensitivity(self: pointer, cs: cint): void {.importc: "QStringMatcher_setCaseSensitivity".}
 proc fcQStringMatcher_indexIn(self: pointer, str: struct_miqt_string): cint {.importc: "QStringMatcher_indexIn".}
 proc fcQStringMatcher_indexIn2(self: pointer, str: pointer, length: cint): cint {.importc: "QStringMatcher_indexIn2".}
-proc fcQStringMatcher_pattern(self: pointer, ): struct_miqt_string {.importc: "QStringMatcher_pattern".}
-proc fcQStringMatcher_caseSensitivity(self: pointer, ): cint {.importc: "QStringMatcher_caseSensitivity".}
+proc fcQStringMatcher_pattern(self: pointer): struct_miqt_string {.importc: "QStringMatcher_pattern".}
+proc fcQStringMatcher_caseSensitivity(self: pointer): cint {.importc: "QStringMatcher_caseSensitivity".}
 proc fcQStringMatcher_indexIn22(self: pointer, str: struct_miqt_string, fromVal: cint): cint {.importc: "QStringMatcher_indexIn22".}
 proc fcQStringMatcher_indexIn3(self: pointer, str: pointer, length: cint, fromVal: cint): cint {.importc: "QStringMatcher_indexIn3".}
 proc fcQStringMatcher_new(): ptr cQStringMatcher {.importc: "QStringMatcher_new".}
@@ -72,13 +72,13 @@ proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string): cint 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: gen_qchar_types.QChar, length: cint): cint =
   fcQStringMatcher_indexIn2(self.h, str.h, length)
 
-proc pattern*(self: gen_qstringmatcher_types.QStringMatcher, ): string =
+proc pattern*(self: gen_qstringmatcher_types.QStringMatcher): string =
   let v_ms = fcQStringMatcher_pattern(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc caseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher, ): cint =
+proc caseSensitivity*(self: gen_qstringmatcher_types.QStringMatcher): cint =
   cint(fcQStringMatcher_caseSensitivity(self.h))
 
 proc indexIn*(self: gen_qstringmatcher_types.QStringMatcher, str: string, fromVal: cint): cint =

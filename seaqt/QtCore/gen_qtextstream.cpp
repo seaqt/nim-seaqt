@@ -9,15 +9,6 @@
 #include <QTextStream>
 #include <qtextstream.h>
 #include "gen_qtextstream.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextStream* QTextStream_new() {
 	return new QTextStream();
 }

@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qresource.h>
 #include "gen_qresource.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QResource* QResource_new() {
 	return new QResource();
 }

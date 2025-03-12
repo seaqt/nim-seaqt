@@ -48,7 +48,7 @@ export
 
 type cQMediaControl*{.exportc: "QMediaControl", incompleteStruct.} = object
 
-proc fcQMediaControl_metaObject(self: pointer, ): pointer {.importc: "QMediaControl_metaObject".}
+proc fcQMediaControl_metaObject(self: pointer): pointer {.importc: "QMediaControl_metaObject".}
 proc fcQMediaControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaControl_metacast".}
 proc fcQMediaControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaControl_metacall".}
 proc fcQMediaControl_tr(s: cstring): struct_miqt_string {.importc: "QMediaControl_tr".}
@@ -57,13 +57,13 @@ proc fcQMediaControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: 
 proc fcQMediaControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaControl_tr3".}
 proc fcQMediaControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaControl_trUtf82".}
 proc fcQMediaControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaControl_trUtf83".}
-proc fcQMediaControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaControl_protectedbase_sender".}
-proc fcQMediaControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaControl_protectedbase_senderSignalIndex".}
+proc fcQMediaControl_protectedbase_sender(self: pointer): pointer {.importc: "QMediaControl_protectedbase_sender".}
+proc fcQMediaControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaControl_protectedbase_senderSignalIndex".}
 proc fcQMediaControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaControl_protectedbase_receivers".}
 proc fcQMediaControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaControl_protectedbase_isSignalConnected".}
 proc fcQMediaControl_staticMetaObject(): pointer {.importc: "QMediaControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qmediacontrol_types.QMediaControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qmediacontrol_types.QMediaControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediacontrol_types.QMediaControl, param1: cstring): pointer =
@@ -108,10 +108,10 @@ proc trUtf8*(_: type gen_qmediacontrol_types.QMediaControl, s: cstring, c: cstri
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qmediacontrol_types.QMediaControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qmediacontrol_types.QMediaControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qmediacontrol_types.QMediaControl, ): cint =
+proc senderSignalIndex*(self: gen_qmediacontrol_types.QMediaControl): cint =
   fcQMediaControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qmediacontrol_types.QMediaControl, signal: cstring): cint =

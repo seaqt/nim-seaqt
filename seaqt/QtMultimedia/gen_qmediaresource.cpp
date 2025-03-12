@@ -7,15 +7,6 @@
 #include <QUrl>
 #include <qmediaresource.h>
 #include "gen_qmediaresource.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaResource* QMediaResource_new() {
 	return new QMediaResource();
 }

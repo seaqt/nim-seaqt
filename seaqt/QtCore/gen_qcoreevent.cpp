@@ -6,15 +6,6 @@
 #include <QTimerEvent>
 #include <qcoreevent.h>
 #include "gen_qcoreevent.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QEvent* QEvent_new(int type) {
 	return new QEvent(static_cast<QEvent::Type>(type));
 }
@@ -61,6 +52,7 @@ int QEvent_registerEventType1(int hint) {
 }
 
 const QMetaObject* QEvent_staticMetaObject() { return &QEvent::staticMetaObject; }
+
 void QEvent_delete(QEvent* self) {
 	delete self;
 }

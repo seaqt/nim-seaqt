@@ -13,15 +13,6 @@
 #include <QVariant>
 #include <qcbormap.h>
 #include "gen_qcbormap.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCborMap* QCborMap_new() {
 	return new QCborMap();
 }
@@ -361,11 +352,11 @@ void QCborMap_delete(QCborMap* self) {
 }
 
 QCborMap__Iterator* QCborMap__Iterator_new() {
-	return new QCborMap::Iterator();
+	return new QCborMap__Iterator();
 }
 
 QCborMap__Iterator* QCborMap__Iterator_new2(QCborMap__Iterator* param1) {
-	return new QCborMap::Iterator(*param1);
+	return new QCborMap__Iterator(*param1);
 }
 
 void QCborMap__Iterator_operatorAssign(QCborMap__Iterator* self, QCborMap__Iterator* other) {
@@ -496,11 +487,11 @@ void QCborMap__Iterator_delete(QCborMap__Iterator* self) {
 }
 
 QCborMap__ConstIterator* QCborMap__ConstIterator_new() {
-	return new QCborMap::ConstIterator();
+	return new QCborMap__ConstIterator();
 }
 
 QCborMap__ConstIterator* QCborMap__ConstIterator_new2(QCborMap__ConstIterator* param1) {
-	return new QCborMap::ConstIterator(*param1);
+	return new QCborMap__ConstIterator(*param1);
 }
 
 void QCborMap__ConstIterator_operatorAssign(QCborMap__ConstIterator* self, QCborMap__ConstIterator* other) {

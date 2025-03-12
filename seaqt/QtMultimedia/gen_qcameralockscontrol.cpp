@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcameralockscontrol.h>
 #include "gen_qcameralockscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraLocksControl_virtbase(QCameraLocksControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -139,6 +130,7 @@ struct miqt_string QCameraLocksControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QCameraLocksControl_staticMetaObject() { return &QCameraLocksControl::staticMetaObject; }
+
 void QCameraLocksControl_delete(QCameraLocksControl* self) {
 	delete self;
 }

@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qdiriterator.h>
 #include "gen_qdiriterator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDirIterator* QDirIterator_new(QDir* dir) {
 	return new QDirIterator(*dir);
 }

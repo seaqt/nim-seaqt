@@ -11,25 +11,19 @@
 #include <QVariant>
 #include <qqmlincubator.h>
 #include "gen_qqmlincubator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQmlIncubator final : public QQmlIncubator {
-	struct QQmlIncubator_VTable* vtbl;
+	const QQmlIncubator_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlIncubator_VTable* QQmlIncubator_vtbl(const VirtualQQmlIncubator* self);
+	friend void* QQmlIncubator_vdata(const VirtualQQmlIncubator* self);
+	friend void QQmlIncubator_setVdata(VirtualQQmlIncubator* self, void* vdata);
 
-	VirtualQQmlIncubator(struct QQmlIncubator_VTable* vtbl): QQmlIncubator(), vtbl(vtbl) {};
-	VirtualQQmlIncubator(struct QQmlIncubator_VTable* vtbl, QQmlIncubator::IncubationMode param1): QQmlIncubator(param1), vtbl(vtbl) {};
+	VirtualQQmlIncubator(const QQmlIncubator_VTable* vtbl, void* vdata): QQmlIncubator(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQmlIncubator(const QQmlIncubator_VTable* vtbl, void* vdata, QQmlIncubator::IncubationMode param1): QQmlIncubator(param1), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlIncubator() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlIncubator() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void statusChanged(QQmlIncubator::Status param1) override {
 		if (vtbl->statusChanged == 0) {
 			QQmlIncubator::statusChanged(param1);
@@ -39,13 +33,12 @@ public:
 		QQmlIncubator::Status param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		vtbl->statusChanged(vtbl, this, sigval1);
+		vtbl->statusChanged(this, sigval1);
 
 	}
 
-	friend void QQmlIncubator_virtualbase_statusChanged(void* self, int param1);
+	friend void QQmlIncubator_virtualbase_statusChanged(VirtualQQmlIncubator* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setInitialState(QObject* initialState) override {
 		if (vtbl->setInitialState == 0) {
 			QQmlIncubator::setInitialState(initialState);
@@ -54,20 +47,20 @@ public:
 
 		QObject* sigval1 = initialState;
 
-		vtbl->setInitialState(vtbl, this, sigval1);
+		vtbl->setInitialState(this, sigval1);
 
 	}
 
-	friend void QQmlIncubator_virtualbase_setInitialState(void* self, QObject* initialState);
+	friend void QQmlIncubator_virtualbase_setInitialState(VirtualQQmlIncubator* self, QObject* initialState);
 
 };
 
-QQmlIncubator* QQmlIncubator_new(struct QQmlIncubator_VTable* vtbl) {
-	return new VirtualQQmlIncubator(vtbl);
+VirtualQQmlIncubator* QQmlIncubator_new(const QQmlIncubator_VTable* vtbl, void* vdata) {
+	return new VirtualQQmlIncubator(vtbl, vdata);
 }
 
-QQmlIncubator* QQmlIncubator_new2(struct QQmlIncubator_VTable* vtbl, int param1) {
-	return new VirtualQQmlIncubator(vtbl, static_cast<QQmlIncubator::IncubationMode>(param1));
+VirtualQQmlIncubator* QQmlIncubator_new2(const QQmlIncubator_VTable* vtbl, void* vdata, int param1) {
+	return new VirtualQQmlIncubator(vtbl, vdata, static_cast<QQmlIncubator::IncubationMode>(param1));
 }
 
 void QQmlIncubator_clear(QQmlIncubator* self) {
@@ -132,31 +125,36 @@ void QQmlIncubator_setInitialProperties(QQmlIncubator* self, struct miqt_map /* 
 	self->setInitialProperties(initialProperties_QMap);
 }
 
-void QQmlIncubator_virtualbase_statusChanged(void* self, int param1) {
+void QQmlIncubator_virtualbase_statusChanged(VirtualQQmlIncubator* self, int param1) {
 
-	( (VirtualQQmlIncubator*)(self) )->QQmlIncubator::statusChanged(static_cast<VirtualQQmlIncubator::Status>(param1));
-
+	self->QQmlIncubator::statusChanged(static_cast<VirtualQQmlIncubator::Status>(param1));
 }
 
-void QQmlIncubator_virtualbase_setInitialState(void* self, QObject* initialState) {
+void QQmlIncubator_virtualbase_setInitialState(VirtualQQmlIncubator* self, QObject* initialState) {
 
-	( (VirtualQQmlIncubator*)(self) )->QQmlIncubator::setInitialState(initialState);
-
+	self->QQmlIncubator::setInitialState(initialState);
 }
+
+const QQmlIncubator_VTable* QQmlIncubator_vtbl(const VirtualQQmlIncubator* self) { return self->vtbl; }
+void* QQmlIncubator_vdata(const VirtualQQmlIncubator* self) { return self->vdata; }
+void QQmlIncubator_setVdata(VirtualQQmlIncubator* self, void* vdata) { self->vdata = vdata; }
 
 void QQmlIncubator_delete(QQmlIncubator* self) {
 	delete self;
 }
 
 class VirtualQQmlIncubationController final : public QQmlIncubationController {
-	struct QQmlIncubationController_VTable* vtbl;
+	const QQmlIncubationController_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlIncubationController_VTable* QQmlIncubationController_vtbl(const VirtualQQmlIncubationController* self);
+	friend void* QQmlIncubationController_vdata(const VirtualQQmlIncubationController* self);
+	friend void QQmlIncubationController_setVdata(VirtualQQmlIncubationController* self, void* vdata);
 
-	VirtualQQmlIncubationController(struct QQmlIncubationController_VTable* vtbl): QQmlIncubationController(), vtbl(vtbl) {};
+	VirtualQQmlIncubationController(const QQmlIncubationController_VTable* vtbl, void* vdata): QQmlIncubationController(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlIncubationController() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlIncubationController() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void incubatingObjectCountChanged(int param1) override {
 		if (vtbl->incubatingObjectCountChanged == 0) {
 			QQmlIncubationController::incubatingObjectCountChanged(param1);
@@ -165,16 +163,16 @@ public:
 
 		int sigval1 = param1;
 
-		vtbl->incubatingObjectCountChanged(vtbl, this, sigval1);
+		vtbl->incubatingObjectCountChanged(this, sigval1);
 
 	}
 
-	friend void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(void* self, int param1);
+	friend void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(VirtualQQmlIncubationController* self, int param1);
 
 };
 
-QQmlIncubationController* QQmlIncubationController_new(struct QQmlIncubationController_VTable* vtbl) {
-	return new VirtualQQmlIncubationController(vtbl);
+VirtualQQmlIncubationController* QQmlIncubationController_new(const QQmlIncubationController_VTable* vtbl, void* vdata) {
+	return new VirtualQQmlIncubationController(vtbl, vdata);
 }
 
 QQmlEngine* QQmlIncubationController_engine(const QQmlIncubationController* self) {
@@ -197,11 +195,14 @@ void QQmlIncubationController_incubateWhile2(QQmlIncubationController* self, vol
 	self->incubateWhile(flag, static_cast<int>(msecs));
 }
 
-void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(void* self, int param1) {
+void QQmlIncubationController_virtualbase_incubatingObjectCountChanged(VirtualQQmlIncubationController* self, int param1) {
 
-	( (VirtualQQmlIncubationController*)(self) )->QQmlIncubationController::incubatingObjectCountChanged(static_cast<int>(param1));
-
+	self->QQmlIncubationController::incubatingObjectCountChanged(static_cast<int>(param1));
 }
+
+const QQmlIncubationController_VTable* QQmlIncubationController_vtbl(const VirtualQQmlIncubationController* self) { return self->vtbl; }
+void* QQmlIncubationController_vdata(const VirtualQQmlIncubationController* self) { return self->vdata; }
+void QQmlIncubationController_setVdata(VirtualQQmlIncubationController* self, void* vdata) { self->vdata = vdata; }
 
 void QQmlIncubationController_delete(QQmlIncubationController* self) {
 	delete self;

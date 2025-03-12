@@ -16,15 +16,6 @@
 #include <QVariant>
 #include <qabstractnetworkcache.h>
 #include "gen_qabstractnetworkcache.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkCacheMetaData* QNetworkCacheMetaData_new() {
 	return new QNetworkCacheMetaData();
 }
@@ -285,6 +276,7 @@ struct miqt_string QAbstractNetworkCache_trUtf83(const char* s, const char* c, i
 }
 
 const QMetaObject* QAbstractNetworkCache_staticMetaObject() { return &QAbstractNetworkCache::staticMetaObject; }
+
 void QAbstractNetworkCache_delete(QAbstractNetworkCache* self) {
 	delete self;
 }

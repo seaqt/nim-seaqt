@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcalendar.h>
 #include "gen_qcalendar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCalendar* QCalendar_new() {
 	return new QCalendar();
 }
@@ -247,24 +238,25 @@ struct miqt_string QCalendar_standaloneWeekDayName3(const QCalendar* self, QLoca
 }
 
 const QMetaObject* QCalendar_staticMetaObject() { return &QCalendar::staticMetaObject; }
+
 void QCalendar_delete(QCalendar* self) {
 	delete self;
 }
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new() {
-	return new QCalendar::YearMonthDay();
+	return new QCalendar__YearMonthDay();
 }
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new2(int y) {
-	return new QCalendar::YearMonthDay(static_cast<int>(y));
+	return new QCalendar__YearMonthDay(static_cast<int>(y));
 }
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new3(int y, int m) {
-	return new QCalendar::YearMonthDay(static_cast<int>(y), static_cast<int>(m));
+	return new QCalendar__YearMonthDay(static_cast<int>(y), static_cast<int>(m));
 }
 
 QCalendar__YearMonthDay* QCalendar__YearMonthDay_new4(int y, int m, int d) {
-	return new QCalendar::YearMonthDay(static_cast<int>(y), static_cast<int>(m), static_cast<int>(d));
+	return new QCalendar__YearMonthDay(static_cast<int>(y), static_cast<int>(m), static_cast<int>(d));
 }
 
 bool QCalendar__YearMonthDay_isValid(const QCalendar__YearMonthDay* self) {

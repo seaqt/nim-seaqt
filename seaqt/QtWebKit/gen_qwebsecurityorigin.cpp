@@ -7,15 +7,6 @@
 #include <QWebSecurityOrigin>
 #include <qwebsecurityorigin.h>
 #include "gen_qwebsecurityorigin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebSecurityOrigin* QWebSecurityOrigin_new(QUrl* url) {
 	return new QWebSecurityOrigin(*url);
 }

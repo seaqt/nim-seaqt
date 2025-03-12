@@ -24,6 +24,7 @@ typedef struct QVariant QVariant;
 
 QQmlDebuggingEnabler* QQmlDebuggingEnabler_new();
 QQmlDebuggingEnabler* QQmlDebuggingEnabler_new2(bool printWarning);
+
 struct miqt_array /* of struct miqt_string */  QQmlDebuggingEnabler_debuggerServices();
 struct miqt_array /* of struct miqt_string */  QQmlDebuggingEnabler_inspectorServices();
 struct miqt_array /* of struct miqt_string */  QQmlDebuggingEnabler_profilerServices();
@@ -36,6 +37,7 @@ bool QQmlDebuggingEnabler_startTcpDebugServer2(int port, int mode);
 bool QQmlDebuggingEnabler_startTcpDebugServer3(int port, int mode, struct miqt_string hostName);
 bool QQmlDebuggingEnabler_connectToLocalDebugger2(struct miqt_string socketFileName, int mode);
 bool QQmlDebuggingEnabler_startDebugConnector2(struct miqt_string pluginName, struct miqt_map /* of struct miqt_string to QVariant* */  configuration);
+
 void QQmlDebuggingEnabler_delete(QQmlDebuggingEnabler* self);
 
 #ifdef __cplusplus

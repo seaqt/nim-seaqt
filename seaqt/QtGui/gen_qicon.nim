@@ -67,25 +67,25 @@ type cQIcon*{.exportc: "QIcon", incompleteStruct.} = object
 
 proc fcQIcon_operatorAssign(self: pointer, other: pointer): void {.importc: "QIcon_operatorAssign".}
 proc fcQIcon_swap(self: pointer, other: pointer): void {.importc: "QIcon_swap".}
-proc fcQIcon_ToQVariant(self: pointer, ): pointer {.importc: "QIcon_ToQVariant".}
+proc fcQIcon_ToQVariant(self: pointer): pointer {.importc: "QIcon_ToQVariant".}
 proc fcQIcon_pixmap(self: pointer, size: pointer): pointer {.importc: "QIcon_pixmap".}
 proc fcQIcon_pixmap2(self: pointer, w: cint, h: cint): pointer {.importc: "QIcon_pixmap2".}
 proc fcQIcon_pixmapWithExtent(self: pointer, extent: cint): pointer {.importc: "QIcon_pixmapWithExtent".}
 proc fcQIcon_pixmap3(self: pointer, window: pointer, size: pointer): pointer {.importc: "QIcon_pixmap3".}
 proc fcQIcon_actualSize(self: pointer, size: pointer): pointer {.importc: "QIcon_actualSize".}
 proc fcQIcon_actualSize2(self: pointer, window: pointer, size: pointer): pointer {.importc: "QIcon_actualSize2".}
-proc fcQIcon_name(self: pointer, ): struct_miqt_string {.importc: "QIcon_name".}
+proc fcQIcon_name(self: pointer): struct_miqt_string {.importc: "QIcon_name".}
 proc fcQIcon_paint(self: pointer, painter: pointer, rect: pointer): void {.importc: "QIcon_paint".}
 proc fcQIcon_paint2(self: pointer, painter: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QIcon_paint2".}
-proc fcQIcon_isNull(self: pointer, ): bool {.importc: "QIcon_isNull".}
-proc fcQIcon_isDetached(self: pointer, ): bool {.importc: "QIcon_isDetached".}
-proc fcQIcon_detach(self: pointer, ): void {.importc: "QIcon_detach".}
-proc fcQIcon_cacheKey(self: pointer, ): clonglong {.importc: "QIcon_cacheKey".}
+proc fcQIcon_isNull(self: pointer): bool {.importc: "QIcon_isNull".}
+proc fcQIcon_isDetached(self: pointer): bool {.importc: "QIcon_isDetached".}
+proc fcQIcon_detach(self: pointer): void {.importc: "QIcon_detach".}
+proc fcQIcon_cacheKey(self: pointer): clonglong {.importc: "QIcon_cacheKey".}
 proc fcQIcon_addPixmap(self: pointer, pixmap: pointer): void {.importc: "QIcon_addPixmap".}
 proc fcQIcon_addFile(self: pointer, fileName: struct_miqt_string): void {.importc: "QIcon_addFile".}
-proc fcQIcon_availableSizes(self: pointer, ): struct_miqt_array {.importc: "QIcon_availableSizes".}
+proc fcQIcon_availableSizes(self: pointer): struct_miqt_array {.importc: "QIcon_availableSizes".}
 proc fcQIcon_setIsMask(self: pointer, isMask: bool): void {.importc: "QIcon_setIsMask".}
-proc fcQIcon_isMask(self: pointer, ): bool {.importc: "QIcon_isMask".}
+proc fcQIcon_isMask(self: pointer): bool {.importc: "QIcon_isMask".}
 proc fcQIcon_fromTheme(name: struct_miqt_string): pointer {.importc: "QIcon_fromTheme".}
 proc fcQIcon_fromTheme2(name: struct_miqt_string, fallback: pointer): pointer {.importc: "QIcon_fromTheme2".}
 proc fcQIcon_hasThemeIcon(name: struct_miqt_string): bool {.importc: "QIcon_hasThemeIcon".}
@@ -134,7 +134,7 @@ proc operatorAssign*(self: gen_qicon_types.QIcon, other: gen_qicon_types.QIcon):
 proc swap*(self: gen_qicon_types.QIcon, other: gen_qicon_types.QIcon): void =
   fcQIcon_swap(self.h, other.h)
 
-proc ToQVariant*(self: gen_qicon_types.QIcon, ): gen_qvariant_types.QVariant =
+proc ToQVariant*(self: gen_qicon_types.QIcon): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQIcon_ToQVariant(self.h), owned: true)
 
 proc pixmap*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize): gen_qpixmap_types.QPixmap =
@@ -155,7 +155,7 @@ proc actualSize*(self: gen_qicon_types.QIcon, size: gen_qsize_types.QSize): gen_
 proc actualSize*(self: gen_qicon_types.QIcon, window: gen_qwindow_types.QWindow, size: gen_qsize_types.QSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQIcon_actualSize2(self.h, window.h, size.h), owned: true)
 
-proc name*(self: gen_qicon_types.QIcon, ): string =
+proc name*(self: gen_qicon_types.QIcon): string =
   let v_ms = fcQIcon_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -167,16 +167,16 @@ proc paint*(self: gen_qicon_types.QIcon, painter: gen_qpainter_types.QPainter, r
 proc paint*(self: gen_qicon_types.QIcon, painter: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
   fcQIcon_paint2(self.h, painter.h, x, y, w, h)
 
-proc isNull*(self: gen_qicon_types.QIcon, ): bool =
+proc isNull*(self: gen_qicon_types.QIcon): bool =
   fcQIcon_isNull(self.h)
 
-proc isDetached*(self: gen_qicon_types.QIcon, ): bool =
+proc isDetached*(self: gen_qicon_types.QIcon): bool =
   fcQIcon_isDetached(self.h)
 
-proc detach*(self: gen_qicon_types.QIcon, ): void =
+proc detach*(self: gen_qicon_types.QIcon): void =
   fcQIcon_detach(self.h)
 
-proc cacheKey*(self: gen_qicon_types.QIcon, ): clonglong =
+proc cacheKey*(self: gen_qicon_types.QIcon): clonglong =
   fcQIcon_cacheKey(self.h)
 
 proc addPixmap*(self: gen_qicon_types.QIcon, pixmap: gen_qpixmap_types.QPixmap): void =
@@ -185,7 +185,7 @@ proc addPixmap*(self: gen_qicon_types.QIcon, pixmap: gen_qpixmap_types.QPixmap):
 proc addFile*(self: gen_qicon_types.QIcon, fileName: string): void =
   fcQIcon_addFile(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
 
-proc availableSizes*(self: gen_qicon_types.QIcon, ): seq[gen_qsize_types.QSize] =
+proc availableSizes*(self: gen_qicon_types.QIcon): seq[gen_qsize_types.QSize] =
   var v_ma = fcQIcon_availableSizes(self.h)
   var vx_ret = newSeq[gen_qsize_types.QSize](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -197,7 +197,7 @@ proc availableSizes*(self: gen_qicon_types.QIcon, ): seq[gen_qsize_types.QSize] 
 proc setIsMask*(self: gen_qicon_types.QIcon, isMask: bool): void =
   fcQIcon_setIsMask(self.h, isMask)
 
-proc isMask*(self: gen_qicon_types.QIcon, ): bool =
+proc isMask*(self: gen_qicon_types.QIcon): bool =
   fcQIcon_isMask(self.h)
 
 proc fromTheme*(_: type gen_qicon_types.QIcon, name: string): gen_qicon_types.QIcon =
@@ -209,7 +209,7 @@ proc fromTheme*(_: type gen_qicon_types.QIcon, name: string, fallback: gen_qicon
 proc hasThemeIcon*(_: type gen_qicon_types.QIcon, name: string): bool =
   fcQIcon_hasThemeIcon(struct_miqt_string(data: name, len: csize_t(len(name))))
 
-proc themeSearchPaths*(_: type gen_qicon_types.QIcon, ): seq[string] =
+proc themeSearchPaths*(_: type gen_qicon_types.QIcon): seq[string] =
   var v_ma = fcQIcon_themeSearchPaths()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -228,7 +228,7 @@ proc setThemeSearchPaths*(_: type gen_qicon_types.QIcon, searchpath: seq[string]
 
   fcQIcon_setThemeSearchPaths(struct_miqt_array(len: csize_t(len(searchpath)), data: if len(searchpath) == 0: nil else: addr(searchpath_CArray[0])))
 
-proc fallbackSearchPaths*(_: type gen_qicon_types.QIcon, ): seq[string] =
+proc fallbackSearchPaths*(_: type gen_qicon_types.QIcon): seq[string] =
   var v_ma = fcQIcon_fallbackSearchPaths()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -247,7 +247,7 @@ proc setFallbackSearchPaths*(_: type gen_qicon_types.QIcon, paths: seq[string]):
 
   fcQIcon_setFallbackSearchPaths(struct_miqt_array(len: csize_t(len(paths)), data: if len(paths) == 0: nil else: addr(paths_CArray[0])))
 
-proc themeName*(_: type gen_qicon_types.QIcon, ): string =
+proc themeName*(_: type gen_qicon_types.QIcon): string =
   let v_ms = fcQIcon_themeName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -256,7 +256,7 @@ proc themeName*(_: type gen_qicon_types.QIcon, ): string =
 proc setThemeName*(_: type gen_qicon_types.QIcon, path: string): void =
   fcQIcon_setThemeName(struct_miqt_string(data: path, len: csize_t(len(path))))
 
-proc fallbackThemeName*(_: type gen_qicon_types.QIcon, ): string =
+proc fallbackThemeName*(_: type gen_qicon_types.QIcon): string =
   let v_ms = fcQIcon_fallbackThemeName()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

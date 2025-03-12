@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qcamerafocuscontrol.h>
 #include "gen_qcamerafocuscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraFocusControl_virtbase(QCameraFocusControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -217,6 +208,7 @@ struct miqt_string QCameraFocusControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QCameraFocusControl_staticMetaObject() { return &QCameraFocusControl::staticMetaObject; }
+
 void QCameraFocusControl_delete(QCameraFocusControl* self) {
 	delete self;
 }

@@ -36,6 +36,7 @@ QColor* QColor_new9(QColor* color);
 QColor* QColor_new10(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4);
 QColor* QColor_new11(int r, int g, int b, int a);
 QColor* QColor_new12(int spec, uint16_t a1, uint16_t a2, uint16_t a3, uint16_t a4, uint16_t a5);
+
 void QColor_operatorAssign(QColor* self, QColor* param1);
 void QColor_operatorAssignWithColor(QColor* self, int color);
 bool QColor_isValid(const QColor* self);
@@ -165,6 +166,7 @@ QColor* QColor_light1(const QColor* self, int f);
 QColor* QColor_dark1(const QColor* self, int f);
 QColor* QColor_lighter1(const QColor* self, int f);
 QColor* QColor_darker1(const QColor* self, int f);
+
 void QColor_delete(QColor* self);
 
 #ifdef __cplusplus

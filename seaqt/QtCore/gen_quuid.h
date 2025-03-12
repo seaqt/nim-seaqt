@@ -26,6 +26,7 @@ QUuid* QUuid_new3(struct miqt_string param1);
 QUuid* QUuid_new4(const char* param1);
 QUuid* QUuid_new5(struct miqt_string param1);
 QUuid* QUuid_new6(QUuid* param1);
+
 struct miqt_string QUuid_toString(const QUuid* self);
 struct miqt_string QUuid_toStringWithMode(const QUuid* self, int mode);
 struct miqt_string QUuid_toByteArray(const QUuid* self);
@@ -44,6 +45,7 @@ QUuid* QUuid_createUuidV32(QUuid* ns, struct miqt_string baseData);
 QUuid* QUuid_createUuidV52(QUuid* ns, struct miqt_string baseData);
 int QUuid_variant(const QUuid* self);
 int QUuid_version(const QUuid* self);
+
 void QUuid_delete(QUuid* self);
 
 #ifdef __cplusplus

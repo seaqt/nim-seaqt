@@ -58,34 +58,36 @@ type cQAbstractVideoFilter*{.exportc: "QAbstractVideoFilter", incompleteStruct.}
 
 proc fcQVideoFilterRunnable_run(self: pointer, input: pointer, surfaceFormat: pointer, flags: cint): pointer {.importc: "QVideoFilterRunnable_run".}
 proc fcQVideoFilterRunnable_operatorAssign(self: pointer, param1: pointer): void {.importc: "QVideoFilterRunnable_operatorAssign".}
-proc fcQAbstractVideoFilter_metaObject(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_metaObject".}
+proc fcQAbstractVideoFilter_metaObject(self: pointer): pointer {.importc: "QAbstractVideoFilter_metaObject".}
 proc fcQAbstractVideoFilter_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractVideoFilter_metacast".}
 proc fcQAbstractVideoFilter_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractVideoFilter_metacall".}
 proc fcQAbstractVideoFilter_tr(s: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_tr".}
 proc fcQAbstractVideoFilter_trUtf8(s: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf8".}
-proc fcQAbstractVideoFilter_isActive(self: pointer, ): bool {.importc: "QAbstractVideoFilter_isActive".}
+proc fcQAbstractVideoFilter_isActive(self: pointer): bool {.importc: "QAbstractVideoFilter_isActive".}
 proc fcQAbstractVideoFilter_setActive(self: pointer, v: bool): void {.importc: "QAbstractVideoFilter_setActive".}
-proc fcQAbstractVideoFilter_createFilterRunnable(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_createFilterRunnable".}
-proc fcQAbstractVideoFilter_activeChanged(self: pointer, ): void {.importc: "QAbstractVideoFilter_activeChanged".}
+proc fcQAbstractVideoFilter_createFilterRunnable(self: pointer): pointer {.importc: "QAbstractVideoFilter_createFilterRunnable".}
+proc fcQAbstractVideoFilter_activeChanged(self: pointer): void {.importc: "QAbstractVideoFilter_activeChanged".}
 proc fcQAbstractVideoFilter_connect_activeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractVideoFilter_connect_activeChanged".}
 proc fcQAbstractVideoFilter_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_tr2".}
 proc fcQAbstractVideoFilter_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractVideoFilter_tr3".}
 proc fcQAbstractVideoFilter_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf82".}
 proc fcQAbstractVideoFilter_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractVideoFilter_trUtf83".}
+proc fcQAbstractVideoFilter_vtbl(self: pointer): pointer {.importc: "QAbstractVideoFilter_vtbl".}
+proc fcQAbstractVideoFilter_vdata(self: pointer): pointer {.importc: "QAbstractVideoFilter_vdata".}
 type cQAbstractVideoFilterVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractVideoFilterVTable, self: ptr cQAbstractVideoFilter) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  createFilterRunnable*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractVideoFilter_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  createFilterRunnable*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractVideoFilter_virtualbase_metaObject(self: pointer): pointer {.importc: "QAbstractVideoFilter_virtualbase_metaObject".}
 proc fcQAbstractVideoFilter_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractVideoFilter_virtualbase_metacast".}
 proc fcQAbstractVideoFilter_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractVideoFilter_virtualbase_metacall".}
 proc fcQAbstractVideoFilter_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QAbstractVideoFilter_virtualbase_event".}
@@ -95,12 +97,12 @@ proc fcQAbstractVideoFilter_virtualbase_childEvent(self: pointer, event: pointer
 proc fcQAbstractVideoFilter_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_customEvent".}
 proc fcQAbstractVideoFilter_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_connectNotify".}
 proc fcQAbstractVideoFilter_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractVideoFilter_virtualbase_disconnectNotify".}
-proc fcQAbstractVideoFilter_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractVideoFilter_protectedbase_sender".}
-proc fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractVideoFilter_protectedbase_senderSignalIndex".}
+proc fcQAbstractVideoFilter_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractVideoFilter_protectedbase_sender".}
+proc fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractVideoFilter_protectedbase_senderSignalIndex".}
 proc fcQAbstractVideoFilter_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractVideoFilter_protectedbase_receivers".}
 proc fcQAbstractVideoFilter_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractVideoFilter_protectedbase_isSignalConnected".}
-proc fcQAbstractVideoFilter_new(vtbl: pointer, ): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new".}
-proc fcQAbstractVideoFilter_new2(vtbl: pointer, parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new2".}
+proc fcQAbstractVideoFilter_new(vtbl, vdata: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new".}
+proc fcQAbstractVideoFilter_new2(vtbl, vdata: pointer, parent: pointer): ptr cQAbstractVideoFilter {.importc: "QAbstractVideoFilter_new2".}
 proc fcQAbstractVideoFilter_staticMetaObject(): pointer {.importc: "QAbstractVideoFilter_staticMetaObject".}
 
 proc run*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, input: gen_qvideoframe_types.QVideoFrame, surfaceFormat: gen_qvideosurfaceformat_types.QVideoSurfaceFormat, flags: cint): gen_qvideoframe_types.QVideoFrame =
@@ -109,7 +111,7 @@ proc run*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, input: gen_
 proc operatorAssign*(self: gen_qabstractvideofilter_types.QVideoFilterRunnable, param1: gen_qabstractvideofilter_types.QVideoFilterRunnable): void =
   fcQVideoFilterRunnable_operatorAssign(self.h, param1.h)
 
-proc metaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractVideoFilter_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cstring): pointer =
@@ -130,24 +132,24 @@ proc trUtf8*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cst
   c_free(v_ms.data)
   vx_ret
 
-proc isActive*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): bool =
+proc isActive*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): bool =
   fcQAbstractVideoFilter_isActive(self.h)
 
 proc setActive*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, v: bool): void =
   fcQAbstractVideoFilter_setActive(self.h, v)
 
-proc createFilterRunnable*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qabstractvideofilter_types.QVideoFilterRunnable =
+proc createFilterRunnable*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qabstractvideofilter_types.QVideoFilterRunnable =
   gen_qabstractvideofilter_types.QVideoFilterRunnable(h: fcQAbstractVideoFilter_createFilterRunnable(self.h), owned: false)
 
-proc activeChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): void =
+proc activeChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): void =
   fcQAbstractVideoFilter_activeChanged(self.h)
 
 type QAbstractVideoFilteractiveChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractVideoFilter_activeChanged(slot: int) {.cdecl.} =
+proc cQAbstractVideoFilter_slot_callback_activeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractVideoFilteractiveChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractVideoFilter_activeChanged_release(slot: int) {.cdecl.} =
+proc cQAbstractVideoFilter_slot_callback_activeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractVideoFilteractiveChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -155,7 +157,7 @@ proc onactiveChanged*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter,
   var tmp = new QAbstractVideoFilteractiveChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractVideoFilter_connect_activeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractVideoFilter_activeChanged, miqt_exec_callback_cQAbstractVideoFilter_activeChanged_release)
+  fcQAbstractVideoFilter_connect_activeChanged(self.h, cast[int](addr tmp[]), cQAbstractVideoFilter_slot_callback_activeChanged, cQAbstractVideoFilter_slot_callback_activeChanged_release)
 
 proc tr*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter, s: cstring, c: cstring): string =
   let v_ms = fcQAbstractVideoFilter_tr2(s, c)
@@ -205,11 +207,11 @@ type QAbstractVideoFilterVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractVideoFiltercustomEventProc
   connectNotify*: QAbstractVideoFilterconnectNotifyProc
   disconnectNotify*: QAbstractVideoFilterdisconnectNotifyProc
-proc QAbstractVideoFiltermetaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qobjectdefs_types.QMetaObject =
+proc QAbstractVideoFiltermetaObject*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractVideoFilter_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -220,8 +222,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_metaObject(vtbl: pointer, self: po
 proc QAbstractVideoFiltermetacast*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cstring): pointer =
   fcQAbstractVideoFilter_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -230,8 +232,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_metacast(vtbl: pointer, self: poin
 proc QAbstractVideoFiltermetacall*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, param1: cint, param2: cint, param3: pointer): cint =
   fcQAbstractVideoFilter_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -239,8 +241,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_metacall(vtbl: pointer, self: poin
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractVideoFilter_createFilterRunnable(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_createFilterRunnable(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   var virtualReturn = vtbl[].createFilterRunnable(self)
   virtualReturn.owned = false # TODO move?
@@ -251,8 +253,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_createFilterRunnable(vtbl: pointer
 proc QAbstractVideoFilterevent*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractVideoFilter_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -261,8 +263,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_event(vtbl: pointer, self: pointer
 proc QAbstractVideoFiltereventFilter*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractVideoFilter_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -272,8 +274,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_eventFilter(vtbl: pointer, self: p
 proc QAbstractVideoFiltertimerEvent*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQAbstractVideoFilter_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -281,8 +283,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_timerEvent(vtbl: pointer, self: po
 proc QAbstractVideoFilterchildEvent*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAbstractVideoFilter_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -290,8 +292,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_childEvent(vtbl: pointer, self: po
 proc QAbstractVideoFiltercustomEvent*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractVideoFilter_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -299,8 +301,8 @@ proc miqt_exec_callback_cQAbstractVideoFilter_customEvent(vtbl: pointer, self: p
 proc QAbstractVideoFilterconnectNotify*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractVideoFilter_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -308,19 +310,19 @@ proc miqt_exec_callback_cQAbstractVideoFilter_connectNotify(vtbl: pointer, self:
 proc QAbstractVideoFilterdisconnectNotify*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractVideoFilter_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractVideoFilter_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractVideoFilterVTable](vtbl)
+proc cQAbstractVideoFilter_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
   let self = QAbstractVideoFilter(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractVideoFilter* {.inheritable.} = ref object of QAbstractVideoFilter
   vtbl*: cQAbstractVideoFilterVTable
-method metaObject*(self: VirtualQAbstractVideoFilter, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractVideoFiltermetaObject(self[])
-proc miqt_exec_method_cQAbstractVideoFilter_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAbstractVideoFilter_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -328,27 +330,27 @@ proc miqt_exec_method_cQAbstractVideoFilter_metaObject(vtbl: pointer, inst: poin
 
 method metacast*(self: VirtualQAbstractVideoFilter, param1: cstring): pointer {.base.} =
   QAbstractVideoFiltermetacast(self[], param1)
-proc miqt_exec_method_cQAbstractVideoFilter_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAbstractVideoFilter, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAbstractVideoFiltermetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAbstractVideoFilter_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method createFilterRunnable*(self: VirtualQAbstractVideoFilter, ): gen_qabstractvideofilter_types.QVideoFilterRunnable {.base.} =
+method createFilterRunnable*(self: VirtualQAbstractVideoFilter): gen_qabstractvideofilter_types.QVideoFilterRunnable {.base.} =
   raiseAssert("missing implementation of QAbstractVideoFilter_virtualbase_createFilterRunnable")
-proc miqt_exec_method_cQAbstractVideoFilter_createFilterRunnable(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
-  var virtualReturn = vtbl.createFilterRunnable()
+proc cQAbstractVideoFilter_method_callback_createFilterRunnable(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
+  var virtualReturn = inst.createFilterRunnable()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -356,60 +358,60 @@ proc miqt_exec_method_cQAbstractVideoFilter_createFilterRunnable(vtbl: pointer, 
 
 method event*(self: VirtualQAbstractVideoFilter, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractVideoFilterevent(self[], event)
-proc miqt_exec_method_cQAbstractVideoFilter_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAbstractVideoFilter, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractVideoFiltereventFilter(self[], watched, event)
-proc miqt_exec_method_cQAbstractVideoFilter_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQAbstractVideoFilter, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAbstractVideoFiltertimerEvent(self[], event)
-proc miqt_exec_method_cQAbstractVideoFilter_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAbstractVideoFilter, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractVideoFilterchildEvent(self[], event)
-proc miqt_exec_method_cQAbstractVideoFilter_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractVideoFilter, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractVideoFiltercustomEvent(self[], event)
-proc miqt_exec_method_cQAbstractVideoFilter_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractVideoFilter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractVideoFilterconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractVideoFilter_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractVideoFilter, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractVideoFilterdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractVideoFilter_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractVideoFilter](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
+proc cQAbstractVideoFilter_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractVideoFilter](fcQAbstractVideoFilter_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractVideoFilter_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, ): cint =
+proc senderSignalIndex*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter): cint =
   fcQAbstractVideoFilter_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstractvideofilter_types.QAbstractVideoFilter, signal: cstring): cint =
@@ -422,109 +424,94 @@ proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
     vtbl: ref QAbstractVideoFilterVTable = nil): gen_qabstractvideofilter_types.QAbstractVideoFilter =
   let vtbl = if vtbl == nil: new QAbstractVideoFilterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoFilterVTable, _: ptr cQAbstractVideoFilter) {.cdecl.} =
-    let vtbl = cast[ref QAbstractVideoFilterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractVideoFilter_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractVideoFilter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractVideoFilter_metacast
+    vtbl[].vtbl.metacast = cQAbstractVideoFilter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractVideoFilter_metacall
+    vtbl[].vtbl.metacall = cQAbstractVideoFilter_vtable_callback_metacall
   if not isNil(vtbl[].createFilterRunnable):
-    vtbl[].vtbl.createFilterRunnable = miqt_exec_callback_cQAbstractVideoFilter_createFilterRunnable
+    vtbl[].vtbl.createFilterRunnable = cQAbstractVideoFilter_vtable_callback_createFilterRunnable
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractVideoFilter_event
+    vtbl[].vtbl.event = cQAbstractVideoFilter_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractVideoFilter_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractVideoFilter_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractVideoFilter_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractVideoFilter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractVideoFilter_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractVideoFilter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractVideoFilter_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractVideoFilter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractVideoFilter_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractVideoFilter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractVideoFilter_disconnectNotify
-  gen_qabstractvideofilter_types.QAbstractVideoFilter(h: fcQAbstractVideoFilter_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractVideoFilter_vtable_callback_disconnectNotify
+  gen_qabstractvideofilter_types.QAbstractVideoFilter(h: fcQAbstractVideoFilter_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAbstractVideoFilterVTable = nil): gen_qabstractvideofilter_types.QAbstractVideoFilter =
   let vtbl = if vtbl == nil: new QAbstractVideoFilterVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoFilterVTable, _: ptr cQAbstractVideoFilter) {.cdecl.} =
-    let vtbl = cast[ref QAbstractVideoFilterVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractVideoFilterVTable](fcQAbstractVideoFilter_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractVideoFilter_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractVideoFilter_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractVideoFilter_metacast
+    vtbl[].vtbl.metacast = cQAbstractVideoFilter_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractVideoFilter_metacall
+    vtbl[].vtbl.metacall = cQAbstractVideoFilter_vtable_callback_metacall
   if not isNil(vtbl[].createFilterRunnable):
-    vtbl[].vtbl.createFilterRunnable = miqt_exec_callback_cQAbstractVideoFilter_createFilterRunnable
+    vtbl[].vtbl.createFilterRunnable = cQAbstractVideoFilter_vtable_callback_createFilterRunnable
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractVideoFilter_event
+    vtbl[].vtbl.event = cQAbstractVideoFilter_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractVideoFilter_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractVideoFilter_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractVideoFilter_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractVideoFilter_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractVideoFilter_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractVideoFilter_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractVideoFilter_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractVideoFilter_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractVideoFilter_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractVideoFilter_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractVideoFilter_disconnectNotify
-  gen_qabstractvideofilter_types.QAbstractVideoFilter(h: fcQAbstractVideoFilter_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractVideoFilter_vtable_callback_disconnectNotify
+  gen_qabstractvideofilter_types.QAbstractVideoFilter(h: fcQAbstractVideoFilter_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQAbstractVideoFilter_mvtbl = cQAbstractVideoFilterVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractVideoFilter()[])](self.fcQAbstractVideoFilter_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAbstractVideoFilter_method_callback_metaObject,
+  metacast: cQAbstractVideoFilter_method_callback_metacast,
+  metacall: cQAbstractVideoFilter_method_callback_metacall,
+  createFilterRunnable: cQAbstractVideoFilter_method_callback_createFilterRunnable,
+  event: cQAbstractVideoFilter_method_callback_event,
+  eventFilter: cQAbstractVideoFilter_method_callback_eventFilter,
+  timerEvent: cQAbstractVideoFilter_method_callback_timerEvent,
+  childEvent: cQAbstractVideoFilter_method_callback_childEvent,
+  customEvent: cQAbstractVideoFilter_method_callback_customEvent,
+  connectNotify: cQAbstractVideoFilter_method_callback_connectNotify,
+  disconnectNotify: cQAbstractVideoFilter_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
-    vtbl: VirtualQAbstractVideoFilter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoFilterVTable, _: ptr cQAbstractVideoFilter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractVideoFilter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractVideoFilter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractVideoFilter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractVideoFilter_metacall
-  vtbl[].vtbl.createFilterRunnable = miqt_exec_method_cQAbstractVideoFilter_createFilterRunnable
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractVideoFilter_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractVideoFilter_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractVideoFilter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractVideoFilter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractVideoFilter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractVideoFilter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractVideoFilter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractVideoFilter_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAbstractVideoFilter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractVideoFilter_new(addr(cQAbstractVideoFilter_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractvideofilter_types.QAbstractVideoFilter,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAbstractVideoFilter) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractVideoFilterVTable, _: ptr cQAbstractVideoFilter) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractVideoFilter()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractVideoFilter, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractVideoFilter_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractVideoFilter_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractVideoFilter_metacall
-  vtbl[].vtbl.createFilterRunnable = miqt_exec_method_cQAbstractVideoFilter_createFilterRunnable
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractVideoFilter_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractVideoFilter_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractVideoFilter_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractVideoFilter_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractVideoFilter_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractVideoFilter_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractVideoFilter_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractVideoFilter_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAbstractVideoFilter) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractVideoFilter_new2(addr(cQAbstractVideoFilter_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractvideofilter_types.QAbstractVideoFilter): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractVideoFilter_staticMetaObject())

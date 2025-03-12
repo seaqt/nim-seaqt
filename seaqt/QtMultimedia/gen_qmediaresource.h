@@ -32,6 +32,7 @@ QMediaResource* QMediaResource_new3(QNetworkRequest* request);
 QMediaResource* QMediaResource_new4(QMediaResource* other);
 QMediaResource* QMediaResource_new5(QUrl* url, struct miqt_string mimeType);
 QMediaResource* QMediaResource_new6(QNetworkRequest* request, struct miqt_string mimeType);
+
 void QMediaResource_operatorAssign(QMediaResource* self, QMediaResource* other);
 bool QMediaResource_isNull(const QMediaResource* self);
 bool QMediaResource_operatorEqual(const QMediaResource* self, QMediaResource* other);
@@ -58,6 +59,7 @@ void QMediaResource_setVideoBitRate(QMediaResource* self, int rate);
 QSize* QMediaResource_resolution(const QMediaResource* self);
 void QMediaResource_setResolution(QMediaResource* self, QSize* resolution);
 void QMediaResource_setResolution2(QMediaResource* self, int width, int height);
+
 void QMediaResource_delete(QMediaResource* self);
 
 #ifdef __cplusplus

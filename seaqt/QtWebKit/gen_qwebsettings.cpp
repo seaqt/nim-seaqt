@@ -8,15 +8,6 @@
 #include <QWebSettings>
 #include <qwebsettings.h>
 #include "gen_qwebsettings.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebSettings* QWebSettings_globalSettings() {
 	return QWebSettings::globalSettings();
 }

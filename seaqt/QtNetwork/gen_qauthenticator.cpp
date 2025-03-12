@@ -6,15 +6,6 @@
 #include <QVariant>
 #include <qauthenticator.h>
 #include "gen_qauthenticator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAuthenticator* QAuthenticator_new() {
 	return new QAuthenticator();
 }

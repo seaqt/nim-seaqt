@@ -69,6 +69,7 @@ void QWebSettings_setCSSMediaType(QWebSettings* self, struct miqt_string cSSMedi
 struct miqt_string QWebSettings_cssMediaType(const QWebSettings* self);
 void QWebSettings_enablePersistentStorage1(struct miqt_string path);
 
+
 #ifdef __cplusplus
 } /* extern C */
 #endif

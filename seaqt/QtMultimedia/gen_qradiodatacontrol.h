@@ -61,6 +61,7 @@ struct miqt_string QRadioDataControl_tr2(const char* s, const char* c);
 struct miqt_string QRadioDataControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QRadioDataControl_trUtf82(const char* s, const char* c);
 struct miqt_string QRadioDataControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QRadioDataControl_staticMetaObject();
 void QRadioDataControl_delete(QRadioDataControl* self);
 

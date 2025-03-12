@@ -10,15 +10,6 @@
 #include <QTextEncoder>
 #include <qtextcodec.h>
 #include "gen_qtextcodec.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextCodec* QTextCodec_codecForName(struct miqt_string name) {
 	QByteArray name_QByteArray(name.data, name.len);
 	return QTextCodec::codecForName(name_QByteArray);
@@ -299,11 +290,11 @@ void QTextDecoder_delete(QTextDecoder* self) {
 }
 
 QTextCodec__ConverterState* QTextCodec__ConverterState_new() {
-	return new QTextCodec::ConverterState();
+	return new QTextCodec__ConverterState();
 }
 
 QTextCodec__ConverterState* QTextCodec__ConverterState_new2(int f) {
-	return new QTextCodec::ConverterState(static_cast<QTextCodec::ConversionFlags>(f));
+	return new QTextCodec__ConverterState(static_cast<QTextCodec::ConversionFlags>(f));
 }
 
 void QTextCodec__ConverterState_delete(QTextCodec__ConverterState* self) {

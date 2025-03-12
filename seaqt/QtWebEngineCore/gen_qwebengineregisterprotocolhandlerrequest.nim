@@ -43,26 +43,26 @@ export
 
 type cQWebEngineRegisterProtocolHandlerRequest*{.exportc: "QWebEngineRegisterProtocolHandlerRequest", incompleteStruct.} = object
 
-proc fcQWebEngineRegisterProtocolHandlerRequest_accept(self: pointer, ): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_accept".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_reject(self: pointer, ): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_reject".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_origin(self: pointer, ): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_origin".}
-proc fcQWebEngineRegisterProtocolHandlerRequest_scheme(self: pointer, ): struct_miqt_string {.importc: "QWebEngineRegisterProtocolHandlerRequest_scheme".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_accept(self: pointer): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_accept".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_reject(self: pointer): void {.importc: "QWebEngineRegisterProtocolHandlerRequest_reject".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_origin(self: pointer): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_origin".}
+proc fcQWebEngineRegisterProtocolHandlerRequest_scheme(self: pointer): struct_miqt_string {.importc: "QWebEngineRegisterProtocolHandlerRequest_scheme".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorEqual".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineRegisterProtocolHandlerRequest_operatorNotEqual".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_new(): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_new2(param1: pointer): ptr cQWebEngineRegisterProtocolHandlerRequest {.importc: "QWebEngineRegisterProtocolHandlerRequest_new2".}
 proc fcQWebEngineRegisterProtocolHandlerRequest_staticMetaObject(): pointer {.importc: "QWebEngineRegisterProtocolHandlerRequest_staticMetaObject".}
 
-proc accept*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, ): void =
+proc accept*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
   fcQWebEngineRegisterProtocolHandlerRequest_accept(self.h)
 
-proc reject*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, ): void =
+proc reject*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): void =
   fcQWebEngineRegisterProtocolHandlerRequest_reject(self.h)
 
-proc origin*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, ): gen_qurl_types.QUrl =
+proc origin*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineRegisterProtocolHandlerRequest_origin(self.h), owned: true)
 
-proc scheme*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest, ): string =
+proc scheme*(self: gen_qwebengineregisterprotocolhandlerrequest_types.QWebEngineRegisterProtocolHandlerRequest): string =
   let v_ms = fcQWebEngineRegisterProtocolHandlerRequest_scheme(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

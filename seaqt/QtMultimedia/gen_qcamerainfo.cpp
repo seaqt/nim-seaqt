@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qcamerainfo.h>
 #include "gen_qcamerainfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCameraInfo* QCameraInfo_new() {
 	return new QCameraInfo();
 }

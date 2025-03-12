@@ -1,15 +1,6 @@
 #include <QArrayData>
 #include <qarraydata.h>
 #include "gen_qarraydata.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void* QArrayData_data(QArrayData* self) {
 	return self->data();
 }

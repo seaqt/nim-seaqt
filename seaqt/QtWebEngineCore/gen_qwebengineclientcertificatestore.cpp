@@ -4,15 +4,6 @@
 #include <QWebEngineClientCertificateStore>
 #include <qwebengineclientcertificatestore.h>
 #include "gen_qwebengineclientcertificatestore.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineClientCertificateStore_add(QWebEngineClientCertificateStore* self, QSslCertificate* certificate, QSslKey* privateKey) {
 	self->add(*certificate, *privateKey);
 }

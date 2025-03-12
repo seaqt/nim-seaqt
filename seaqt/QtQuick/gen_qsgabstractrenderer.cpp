@@ -14,15 +14,6 @@
 #include <cstring>
 #include <qsgabstractrenderer.h>
 #include "gen_qsgabstractrenderer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSGAbstractRenderer_virtbase(QSGAbstractRenderer* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -198,6 +189,7 @@ struct miqt_string QSGAbstractRenderer_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QSGAbstractRenderer_staticMetaObject() { return &QSGAbstractRenderer::staticMetaObject; }
+
 void QSGAbstractRenderer_delete(QSGAbstractRenderer* self) {
 	delete self;
 }

@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qmediagaplessplaybackcontrol.h>
 #include "gen_qmediagaplessplaybackcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaGaplessPlaybackControl_virtbase(QMediaGaplessPlaybackControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -172,6 +163,7 @@ struct miqt_string QMediaGaplessPlaybackControl_trUtf83(const char* s, const cha
 }
 
 const QMetaObject* QMediaGaplessPlaybackControl_staticMetaObject() { return &QMediaGaplessPlaybackControl::staticMetaObject; }
+
 void QMediaGaplessPlaybackControl_delete(QMediaGaplessPlaybackControl* self) {
 	delete self;
 }

@@ -43,14 +43,14 @@ type cQSslKey*{.exportc: "QSslKey", incompleteStruct.} = object
 
 proc fcQSslKey_operatorAssign(self: pointer, other: pointer): void {.importc: "QSslKey_operatorAssign".}
 proc fcQSslKey_swap(self: pointer, other: pointer): void {.importc: "QSslKey_swap".}
-proc fcQSslKey_isNull(self: pointer, ): bool {.importc: "QSslKey_isNull".}
-proc fcQSslKey_clear(self: pointer, ): void {.importc: "QSslKey_clear".}
-proc fcQSslKey_length(self: pointer, ): cint {.importc: "QSslKey_length".}
-proc fcQSslKey_typeX(self: pointer, ): cint {.importc: "QSslKey_type".}
-proc fcQSslKey_algorithm(self: pointer, ): cint {.importc: "QSslKey_algorithm".}
-proc fcQSslKey_toPem(self: pointer, ): struct_miqt_string {.importc: "QSslKey_toPem".}
-proc fcQSslKey_toDer(self: pointer, ): struct_miqt_string {.importc: "QSslKey_toDer".}
-proc fcQSslKey_handle(self: pointer, ): pointer {.importc: "QSslKey_handle".}
+proc fcQSslKey_isNull(self: pointer): bool {.importc: "QSslKey_isNull".}
+proc fcQSslKey_clear(self: pointer): void {.importc: "QSslKey_clear".}
+proc fcQSslKey_length(self: pointer): cint {.importc: "QSslKey_length".}
+proc fcQSslKey_typeX(self: pointer): cint {.importc: "QSslKey_type".}
+proc fcQSslKey_algorithm(self: pointer): cint {.importc: "QSslKey_algorithm".}
+proc fcQSslKey_toPem(self: pointer): struct_miqt_string {.importc: "QSslKey_toPem".}
+proc fcQSslKey_toDer(self: pointer): struct_miqt_string {.importc: "QSslKey_toDer".}
+proc fcQSslKey_handle(self: pointer): pointer {.importc: "QSslKey_handle".}
 proc fcQSslKey_operatorEqual(self: pointer, key: pointer): bool {.importc: "QSslKey_operatorEqual".}
 proc fcQSslKey_operatorNotEqual(self: pointer, key: pointer): bool {.importc: "QSslKey_operatorNotEqual".}
 proc fcQSslKey_toPem1(self: pointer, passPhrase: struct_miqt_string): struct_miqt_string {.importc: "QSslKey_toPem1".}
@@ -74,34 +74,34 @@ proc operatorAssign*(self: gen_qsslkey_types.QSslKey, other: gen_qsslkey_types.Q
 proc swap*(self: gen_qsslkey_types.QSslKey, other: gen_qsslkey_types.QSslKey): void =
   fcQSslKey_swap(self.h, other.h)
 
-proc isNull*(self: gen_qsslkey_types.QSslKey, ): bool =
+proc isNull*(self: gen_qsslkey_types.QSslKey): bool =
   fcQSslKey_isNull(self.h)
 
-proc clear*(self: gen_qsslkey_types.QSslKey, ): void =
+proc clear*(self: gen_qsslkey_types.QSslKey): void =
   fcQSslKey_clear(self.h)
 
-proc length*(self: gen_qsslkey_types.QSslKey, ): cint =
+proc length*(self: gen_qsslkey_types.QSslKey): cint =
   fcQSslKey_length(self.h)
 
-proc typeX*(self: gen_qsslkey_types.QSslKey, ): cint =
+proc typeX*(self: gen_qsslkey_types.QSslKey): cint =
   cint(fcQSslKey_typeX(self.h))
 
-proc algorithm*(self: gen_qsslkey_types.QSslKey, ): cint =
+proc algorithm*(self: gen_qsslkey_types.QSslKey): cint =
   cint(fcQSslKey_algorithm(self.h))
 
-proc toPem*(self: gen_qsslkey_types.QSslKey, ): seq[byte] =
+proc toPem*(self: gen_qsslkey_types.QSslKey): seq[byte] =
   var v_bytearray = fcQSslKey_toPem(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc toDer*(self: gen_qsslkey_types.QSslKey, ): seq[byte] =
+proc toDer*(self: gen_qsslkey_types.QSslKey): seq[byte] =
   var v_bytearray = fcQSslKey_toDer(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc handle*(self: gen_qsslkey_types.QSslKey, ): pointer =
+proc handle*(self: gen_qsslkey_types.QSslKey): pointer =
   fcQSslKey_handle(self.h)
 
 proc operatorEqual*(self: gen_qsslkey_types.QSslKey, key: gen_qsslkey_types.QSslKey): bool =

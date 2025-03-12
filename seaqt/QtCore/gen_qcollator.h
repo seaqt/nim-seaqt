@@ -27,14 +27,17 @@ typedef struct QLocale QLocale;
 #endif
 
 QCollatorSortKey* QCollatorSortKey_new(QCollatorSortKey* other);
+
 void QCollatorSortKey_operatorAssign(QCollatorSortKey* self, QCollatorSortKey* other);
 void QCollatorSortKey_swap(QCollatorSortKey* self, QCollatorSortKey* other);
 int QCollatorSortKey_compare(const QCollatorSortKey* self, QCollatorSortKey* key);
+
 void QCollatorSortKey_delete(QCollatorSortKey* self);
 
 QCollator* QCollator_new();
 QCollator* QCollator_new2(QLocale* locale);
 QCollator* QCollator_new3(QCollator* param1);
+
 void QCollator_operatorAssign(QCollator* self, QCollator* param1);
 void QCollator_swap(QCollator* self, QCollator* other);
 void QCollator_setLocale(QCollator* self, QLocale* locale);
@@ -49,6 +52,7 @@ int QCollator_compare(const QCollator* self, struct miqt_string s1, struct miqt_
 int QCollator_compare3(const QCollator* self, QChar* s1, int len1, QChar* s2, int len2);
 bool QCollator_operatorCall(const QCollator* self, struct miqt_string s1, struct miqt_string s2);
 QCollatorSortKey* QCollator_sortKey(const QCollator* self, struct miqt_string string);
+
 void QCollator_delete(QCollator* self);
 
 #ifdef __cplusplus

@@ -50,29 +50,36 @@ typedef struct QStateMachine__WrappedEvent QStateMachine__WrappedEvent;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QStateMachine_VTable {
-	void (*destructor)(struct QStateMachine_VTable* vtbl, QStateMachine* self);
-	QMetaObject* (*metaObject)(struct QStateMachine_VTable* vtbl, const QStateMachine* self);
-	void* (*metacast)(struct QStateMachine_VTable* vtbl, QStateMachine* self, const char* param1);
-	int (*metacall)(struct QStateMachine_VTable* vtbl, QStateMachine* self, int param1, int param2, void** param3);
-	bool (*eventFilter)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QObject* watched, QEvent* event);
-	void (*onEntry)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*onExit)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*beginSelectTransitions)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*endSelectTransitions)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*beginMicrostep)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*endMicrostep)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	bool (*event)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* e);
-	void (*timerEvent)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QTimerEvent* event);
-	void (*childEvent)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QChildEvent* event);
-	void (*customEvent)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QEvent* event);
-	void (*connectNotify)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QStateMachine_VTable* vtbl, QStateMachine* self, QMetaMethod* signal);
-};
-QStateMachine* QStateMachine_new(struct QStateMachine_VTable* vtbl);
-QStateMachine* QStateMachine_new2(struct QStateMachine_VTable* vtbl, int childMode);
-QStateMachine* QStateMachine_new3(struct QStateMachine_VTable* vtbl, QObject* parent);
-QStateMachine* QStateMachine_new4(struct QStateMachine_VTable* vtbl, int childMode, QObject* parent);
+typedef struct VirtualQStateMachine VirtualQStateMachine;
+typedef struct QStateMachine_VTable{
+	void (*destructor)(VirtualQStateMachine* self);
+	QMetaObject* (*metaObject)(const VirtualQStateMachine* self);
+	void* (*metacast)(VirtualQStateMachine* self, const char* param1);
+	int (*metacall)(VirtualQStateMachine* self, int param1, int param2, void** param3);
+	bool (*eventFilter)(VirtualQStateMachine* self, QObject* watched, QEvent* event);
+	void (*onEntry)(VirtualQStateMachine* self, QEvent* event);
+	void (*onExit)(VirtualQStateMachine* self, QEvent* event);
+	void (*beginSelectTransitions)(VirtualQStateMachine* self, QEvent* event);
+	void (*endSelectTransitions)(VirtualQStateMachine* self, QEvent* event);
+	void (*beginMicrostep)(VirtualQStateMachine* self, QEvent* event);
+	void (*endMicrostep)(VirtualQStateMachine* self, QEvent* event);
+	bool (*event)(VirtualQStateMachine* self, QEvent* e);
+	void (*timerEvent)(VirtualQStateMachine* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQStateMachine* self, QChildEvent* event);
+	void (*customEvent)(VirtualQStateMachine* self, QEvent* event);
+	void (*connectNotify)(VirtualQStateMachine* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQStateMachine* self, QMetaMethod* signal);
+}QStateMachine_VTable;
+
+const QStateMachine_VTable* QStateMachine_vtbl(const VirtualQStateMachine* self);
+void* QStateMachine_vdata(const VirtualQStateMachine* self);
+void QStateMachine_setVdata(VirtualQStateMachine* self, void* vdata);
+
+VirtualQStateMachine* QStateMachine_new(const QStateMachine_VTable* vtbl, void* vdata);
+VirtualQStateMachine* QStateMachine_new2(const QStateMachine_VTable* vtbl, void* vdata, int childMode);
+VirtualQStateMachine* QStateMachine_new3(const QStateMachine_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQStateMachine* QStateMachine_new4(const QStateMachine_VTable* vtbl, void* vdata, int childMode, QObject* parent);
+
 void QStateMachine_virtbase(QStateMachine* src, QState** outptr_QState);
 QMetaObject* QStateMachine_metaObject(const QStateMachine* self);
 void* QStateMachine_metacast(QStateMachine* self, const char* param1);
@@ -101,7 +108,7 @@ void QStateMachine_start(QStateMachine* self);
 void QStateMachine_stop(QStateMachine* self);
 void QStateMachine_setRunning(QStateMachine* self, bool running);
 void QStateMachine_runningChanged(QStateMachine* self, bool running);
-void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QStateMachine_connect_runningChanged(VirtualQStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QStateMachine_onEntry(QStateMachine* self, QEvent* event);
 void QStateMachine_onExit(QStateMachine* self, QEvent* event);
 void QStateMachine_beginSelectTransitions(QStateMachine* self, QEvent* event);
@@ -114,40 +121,47 @@ struct miqt_string QStateMachine_tr3(const char* s, const char* c, int n);
 struct miqt_string QStateMachine_trUtf82(const char* s, const char* c);
 struct miqt_string QStateMachine_trUtf83(const char* s, const char* c, int n);
 void QStateMachine_postEvent2(QStateMachine* self, QEvent* event, int priority);
-QMetaObject* QStateMachine_virtualbase_metaObject(const void* self);
-void* QStateMachine_virtualbase_metacast(void* self, const char* param1);
-int QStateMachine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QStateMachine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QStateMachine_virtualbase_onEntry(void* self, QEvent* event);
-void QStateMachine_virtualbase_onExit(void* self, QEvent* event);
-void QStateMachine_virtualbase_beginSelectTransitions(void* self, QEvent* event);
-void QStateMachine_virtualbase_endSelectTransitions(void* self, QEvent* event);
-void QStateMachine_virtualbase_beginMicrostep(void* self, QEvent* event);
-void QStateMachine_virtualbase_endMicrostep(void* self, QEvent* event);
-bool QStateMachine_virtualbase_event(void* self, QEvent* e);
-void QStateMachine_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QStateMachine_virtualbase_childEvent(void* self, QChildEvent* event);
-void QStateMachine_virtualbase_customEvent(void* self, QEvent* event);
-void QStateMachine_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QStateMachine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QStateMachine_protectedbase_sender(const void* self);
-int QStateMachine_protectedbase_senderSignalIndex(const void* self);
-int QStateMachine_protectedbase_receivers(const void* self, const char* signal);
-bool QStateMachine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QStateMachine_virtualbase_metaObject(const VirtualQStateMachine* self);
+void* QStateMachine_virtualbase_metacast(VirtualQStateMachine* self, const char* param1);
+int QStateMachine_virtualbase_metacall(VirtualQStateMachine* self, int param1, int param2, void** param3);
+bool QStateMachine_virtualbase_eventFilter(VirtualQStateMachine* self, QObject* watched, QEvent* event);
+void QStateMachine_virtualbase_onEntry(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_onExit(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_beginSelectTransitions(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_endSelectTransitions(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_beginMicrostep(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_endMicrostep(VirtualQStateMachine* self, QEvent* event);
+bool QStateMachine_virtualbase_event(VirtualQStateMachine* self, QEvent* e);
+void QStateMachine_virtualbase_timerEvent(VirtualQStateMachine* self, QTimerEvent* event);
+void QStateMachine_virtualbase_childEvent(VirtualQStateMachine* self, QChildEvent* event);
+void QStateMachine_virtualbase_customEvent(VirtualQStateMachine* self, QEvent* event);
+void QStateMachine_virtualbase_connectNotify(VirtualQStateMachine* self, QMetaMethod* signal);
+void QStateMachine_virtualbase_disconnectNotify(VirtualQStateMachine* self, QMetaMethod* signal);
+
+QObject* QStateMachine_protectedbase_sender(const VirtualQStateMachine* self);
+int QStateMachine_protectedbase_senderSignalIndex(const VirtualQStateMachine* self);
+int QStateMachine_protectedbase_receivers(const VirtualQStateMachine* self, const char* signal);
+bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* self, QMetaMethod* signal);
+
 const QMetaObject* QStateMachine_staticMetaObject();
 void QStateMachine_delete(QStateMachine* self);
 
 QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QStateMachine__SignalEvent* param1);
+
 void QStateMachine__SignalEvent_virtbase(QStateMachine__SignalEvent* src, QEvent** outptr_QEvent);
 QObject* QStateMachine__SignalEvent_sender(const QStateMachine__SignalEvent* self);
 int QStateMachine__SignalEvent_signalIndex(const QStateMachine__SignalEvent* self);
+
 void QStateMachine__SignalEvent_delete(QStateMachine__SignalEvent* self);
 
 QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new(QObject* object, QEvent* event);
 QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new2(QStateMachine__WrappedEvent* param1);
+
 void QStateMachine__WrappedEvent_virtbase(QStateMachine__WrappedEvent* src, QEvent** outptr_QEvent);
 QObject* QStateMachine__WrappedEvent_object(const QStateMachine__WrappedEvent* self);
 QEvent* QStateMachine__WrappedEvent_event(const QStateMachine__WrappedEvent* self);
+
 void QStateMachine__WrappedEvent_delete(QStateMachine__WrappedEvent* self);
 
 #ifdef __cplusplus

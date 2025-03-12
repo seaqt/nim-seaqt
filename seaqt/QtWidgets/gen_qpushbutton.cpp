@@ -40,43 +40,36 @@
 #include <QWidget>
 #include <qpushbutton.h>
 #include "gen_qpushbutton.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPushButton final : public QPushButton {
-	struct QPushButton_VTable* vtbl;
+	const QPushButton_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPushButton_VTable* QPushButton_vtbl(const VirtualQPushButton* self);
+	friend void* QPushButton_vdata(const VirtualQPushButton* self);
+	friend void QPushButton_setVdata(VirtualQPushButton* self, void* vdata);
 
-	VirtualQPushButton(struct QPushButton_VTable* vtbl, QWidget* parent): QPushButton(parent), vtbl(vtbl) {};
-	VirtualQPushButton(struct QPushButton_VTable* vtbl): QPushButton(), vtbl(vtbl) {};
-	VirtualQPushButton(struct QPushButton_VTable* vtbl, const QString& text): QPushButton(text), vtbl(vtbl) {};
-	VirtualQPushButton(struct QPushButton_VTable* vtbl, const QIcon& icon, const QString& text): QPushButton(icon, text), vtbl(vtbl) {};
-	VirtualQPushButton(struct QPushButton_VTable* vtbl, const QString& text, QWidget* parent): QPushButton(text, parent), vtbl(vtbl) {};
-	VirtualQPushButton(struct QPushButton_VTable* vtbl, const QIcon& icon, const QString& text, QWidget* parent): QPushButton(icon, text, parent), vtbl(vtbl) {};
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata, QWidget* parent): QPushButton(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata): QPushButton(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata, const QString& text): QPushButton(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text): QPushButton(icon, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata, const QString& text, QWidget* parent): QPushButton(text, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPushButton(const QPushButton_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text, QWidget* parent): QPushButton(icon, text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPushButton() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPushButton() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPushButton::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPushButton_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPushButton_virtualbase_metaObject(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPushButton::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPushButton_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPushButton_virtualbase_metacast(VirtualQPushButton* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPushButton::qt_metacall(param1, param2, param3);
@@ -102,46 +94,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPushButton_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPushButton_virtualbase_metacall(VirtualQPushButton* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QPushButton::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPushButton_virtualbase_sizeHint(const void* self);
+	friend QSize* QPushButton_virtualbase_sizeHint(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QPushButton::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QPushButton_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QPushButton_virtualbase_minimumSizeHint(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QPushButton::event(e);
@@ -149,14 +138,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_event(void* self, QEvent* e);
+	friend bool QPushButton_virtualbase_event(VirtualQPushButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QPushButton::paintEvent(param1);
@@ -165,13 +153,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QPushButton_virtualbase_paintEvent(VirtualQPushButton* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QPushButton::keyPressEvent(param1);
@@ -180,13 +167,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QPushButton_virtualbase_keyPressEvent(VirtualQPushButton* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QPushButton::focusInEvent(param1);
@@ -195,13 +181,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QPushButton_virtualbase_focusInEvent(VirtualQPushButton* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QPushButton::focusOutEvent(param1);
@@ -210,13 +195,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QPushButton_virtualbase_focusOutEvent(VirtualQPushButton* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hitButton(const QPoint& pos) const override {
 		if (vtbl->hitButton == 0) {
 			return QPushButton::hitButton(pos);
@@ -226,14 +210,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&pos_ret);
 
-		bool callback_return_value = vtbl->hitButton(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hitButton(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_hitButton(const void* self, QPoint* pos);
+	friend bool QPushButton_virtualbase_hitButton(const VirtualQPushButton* self, QPoint* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void checkStateSet() override {
 		if (vtbl->checkStateSet == 0) {
 			QPushButton::checkStateSet();
@@ -241,13 +224,12 @@ public:
 		}
 
 
-		vtbl->checkStateSet(vtbl, this);
+		vtbl->checkStateSet(this);
 
 	}
 
-	friend void QPushButton_virtualbase_checkStateSet(void* self);
+	friend void QPushButton_virtualbase_checkStateSet(VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void nextCheckState() override {
 		if (vtbl->nextCheckState == 0) {
 			QPushButton::nextCheckState();
@@ -255,13 +237,12 @@ public:
 		}
 
 
-		vtbl->nextCheckState(vtbl, this);
+		vtbl->nextCheckState(this);
 
 	}
 
-	friend void QPushButton_virtualbase_nextCheckState(void* self);
+	friend void QPushButton_virtualbase_nextCheckState(VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QPushButton::keyReleaseEvent(e);
@@ -270,13 +251,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QPushButton_virtualbase_keyReleaseEvent(VirtualQPushButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QPushButton::mousePressEvent(e);
@@ -285,13 +265,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QPushButton_virtualbase_mousePressEvent(VirtualQPushButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QPushButton::mouseReleaseEvent(e);
@@ -300,13 +279,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QPushButton_virtualbase_mouseReleaseEvent(VirtualQPushButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* e) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QPushButton::mouseMoveEvent(e);
@@ -315,13 +293,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e);
+	friend void QPushButton_virtualbase_mouseMoveEvent(VirtualQPushButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QPushButton::changeEvent(e);
@@ -330,13 +307,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QPushButton_virtualbase_changeEvent(VirtualQPushButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QPushButton::timerEvent(e);
@@ -345,27 +321,25 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QPushButton_virtualbase_timerEvent(VirtualQPushButton* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPushButton::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPushButton_virtualbase_devType(const void* self);
+	friend int QPushButton_virtualbase_devType(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QPushButton::setVisible(visible);
@@ -374,13 +348,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_setVisible(void* self, bool visible);
+	friend void QPushButton_virtualbase_setVisible(VirtualQPushButton* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QPushButton::heightForWidth(param1);
@@ -388,42 +361,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPushButton_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QPushButton_virtualbase_heightForWidth(const VirtualQPushButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QPushButton::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QPushButton_virtualbase_hasHeightForWidth(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QPushButton::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QPushButton_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QPushButton_virtualbase_paintEngine(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QPushButton::mouseDoubleClickEvent(event);
@@ -432,13 +402,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QPushButton_virtualbase_mouseDoubleClickEvent(VirtualQPushButton* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QPushButton::wheelEvent(event);
@@ -447,13 +416,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QPushButton_virtualbase_wheelEvent(VirtualQPushButton* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QPushButton::enterEvent(event);
@@ -462,13 +430,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QPushButton_virtualbase_enterEvent(VirtualQPushButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QPushButton::leaveEvent(event);
@@ -477,13 +444,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QPushButton_virtualbase_leaveEvent(VirtualQPushButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QPushButton::moveEvent(event);
@@ -492,13 +458,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QPushButton_virtualbase_moveEvent(VirtualQPushButton* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QPushButton::resizeEvent(event);
@@ -507,13 +472,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QPushButton_virtualbase_resizeEvent(VirtualQPushButton* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QPushButton::closeEvent(event);
@@ -522,13 +486,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QPushButton_virtualbase_closeEvent(VirtualQPushButton* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QPushButton::contextMenuEvent(event);
@@ -537,13 +500,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QPushButton_virtualbase_contextMenuEvent(VirtualQPushButton* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QPushButton::tabletEvent(event);
@@ -552,13 +514,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QPushButton_virtualbase_tabletEvent(VirtualQPushButton* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QPushButton::actionEvent(event);
@@ -567,13 +528,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QPushButton_virtualbase_actionEvent(VirtualQPushButton* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QPushButton::dragEnterEvent(event);
@@ -582,13 +542,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QPushButton_virtualbase_dragEnterEvent(VirtualQPushButton* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QPushButton::dragMoveEvent(event);
@@ -597,13 +556,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QPushButton_virtualbase_dragMoveEvent(VirtualQPushButton* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QPushButton::dragLeaveEvent(event);
@@ -612,13 +570,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QPushButton_virtualbase_dragLeaveEvent(VirtualQPushButton* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QPushButton::dropEvent(event);
@@ -627,13 +584,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QPushButton_virtualbase_dropEvent(VirtualQPushButton* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QPushButton::showEvent(event);
@@ -642,13 +598,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QPushButton_virtualbase_showEvent(VirtualQPushButton* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QPushButton::hideEvent(event);
@@ -657,13 +612,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QPushButton_virtualbase_hideEvent(VirtualQPushButton* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QPushButton::nativeEvent(eventType, message, result);
@@ -678,14 +632,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QPushButton_virtualbase_nativeEvent(VirtualQPushButton* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QPushButton::metric(param1);
@@ -694,14 +647,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPushButton_virtualbase_metric(const void* self, int param1);
+	friend int QPushButton_virtualbase_metric(const VirtualQPushButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPushButton::initPainter(painter);
@@ -710,13 +662,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPushButton_virtualbase_initPainter(const VirtualQPushButton* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPushButton::redirected(offset);
@@ -724,28 +675,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPushButton_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPushButton_virtualbase_redirected(const VirtualQPushButton* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPushButton::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPushButton_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPushButton_virtualbase_sharedPainter(const VirtualQPushButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QPushButton::inputMethodEvent(param1);
@@ -754,13 +703,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QPushButton_virtualbase_inputMethodEvent(VirtualQPushButton* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QPushButton::inputMethodQuery(param1);
@@ -769,16 +717,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QPushButton_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QPushButton_virtualbase_inputMethodQuery(const VirtualQPushButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QPushButton::focusNextPrevChild(next);
@@ -786,14 +733,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QPushButton_virtualbase_focusNextPrevChild(VirtualQPushButton* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QPushButton::eventFilter(watched, event);
@@ -802,14 +748,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPushButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QPushButton_virtualbase_eventFilter(VirtualQPushButton* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPushButton::childEvent(event);
@@ -818,13 +763,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPushButton_virtualbase_childEvent(VirtualQPushButton* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPushButton::customEvent(event);
@@ -833,13 +777,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPushButton_virtualbase_customEvent(VirtualQPushButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPushButton::connectNotify(signal);
@@ -850,13 +793,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPushButton_virtualbase_connectNotify(VirtualQPushButton* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPushButton::disconnectNotify(signal);
@@ -867,51 +809,51 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPushButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPushButton_virtualbase_disconnectNotify(VirtualQPushButton* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QPushButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option);
-	friend void QPushButton_protectedbase_updateMicroFocus(void* self);
-	friend void QPushButton_protectedbase_create(void* self);
-	friend void QPushButton_protectedbase_destroy(void* self);
-	friend bool QPushButton_protectedbase_focusNextChild(void* self);
-	friend bool QPushButton_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QPushButton_protectedbase_sender(const void* self);
-	friend int QPushButton_protectedbase_senderSignalIndex(const void* self);
-	friend int QPushButton_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPushButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QPushButton_protectedbase_initStyleOption(const VirtualQPushButton* self, QStyleOptionButton* option);
+	friend void QPushButton_protectedbase_updateMicroFocus(VirtualQPushButton* self);
+	friend void QPushButton_protectedbase_create(VirtualQPushButton* self);
+	friend void QPushButton_protectedbase_destroy(VirtualQPushButton* self);
+	friend bool QPushButton_protectedbase_focusNextChild(VirtualQPushButton* self);
+	friend bool QPushButton_protectedbase_focusPreviousChild(VirtualQPushButton* self);
+	friend QObject* QPushButton_protectedbase_sender(const VirtualQPushButton* self);
+	friend int QPushButton_protectedbase_senderSignalIndex(const VirtualQPushButton* self);
+	friend int QPushButton_protectedbase_receivers(const VirtualQPushButton* self, const char* signal);
+	friend bool QPushButton_protectedbase_isSignalConnected(const VirtualQPushButton* self, QMetaMethod* signal);
 };
 
-QPushButton* QPushButton_new(struct QPushButton_VTable* vtbl, QWidget* parent) {
-	return new VirtualQPushButton(vtbl, parent);
+VirtualQPushButton* QPushButton_new(const QPushButton_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQPushButton(vtbl, vdata, parent);
 }
 
-QPushButton* QPushButton_new2(struct QPushButton_VTable* vtbl) {
-	return new VirtualQPushButton(vtbl);
+VirtualQPushButton* QPushButton_new2(const QPushButton_VTable* vtbl, void* vdata) {
+	return new VirtualQPushButton(vtbl, vdata);
 }
 
-QPushButton* QPushButton_new3(struct QPushButton_VTable* vtbl, struct miqt_string text) {
+VirtualQPushButton* QPushButton_new3(const QPushButton_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPushButton(vtbl, text_QString);
+	return new VirtualQPushButton(vtbl, vdata, text_QString);
 }
 
-QPushButton* QPushButton_new4(struct QPushButton_VTable* vtbl, QIcon* icon, struct miqt_string text) {
+VirtualQPushButton* QPushButton_new4(const QPushButton_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPushButton(vtbl, *icon, text_QString);
+	return new VirtualQPushButton(vtbl, vdata, *icon, text_QString);
 }
 
-QPushButton* QPushButton_new5(struct QPushButton_VTable* vtbl, struct miqt_string text, QWidget* parent) {
+VirtualQPushButton* QPushButton_new5(const QPushButton_VTable* vtbl, void* vdata, struct miqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPushButton(vtbl, text_QString, parent);
+	return new VirtualQPushButton(vtbl, vdata, text_QString, parent);
 }
 
-QPushButton* QPushButton_new6(struct QPushButton_VTable* vtbl, QIcon* icon, struct miqt_string text, QWidget* parent) {
+VirtualQPushButton* QPushButton_new6(const QPushButton_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQPushButton(vtbl, *icon, text_QString, parent);
+	return new VirtualQPushButton(vtbl, vdata, *icon, text_QString, parent);
 }
 
 void QPushButton_virtbase(QPushButton* src, QAbstractButton** outptr_QAbstractButton) {
@@ -1040,394 +982,316 @@ struct miqt_string QPushButton_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QPushButton_virtualbase_metaObject(const void* self) {
+QMetaObject* QPushButton_virtualbase_metaObject(const VirtualQPushButton* self) {
 
-	return (QMetaObject*) ( (const VirtualQPushButton*)(self) )->QPushButton::metaObject();
-
+	return (QMetaObject*) self->QPushButton::metaObject();
 }
 
-void* QPushButton_virtualbase_metacast(void* self, const char* param1) {
+void* QPushButton_virtualbase_metacast(VirtualQPushButton* self, const char* param1) {
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::qt_metacast(param1);
-
+	return self->QPushButton::qt_metacast(param1);
 }
 
-int QPushButton_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPushButton_virtualbase_metacall(VirtualQPushButton* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPushButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QPushButton_virtualbase_sizeHint(const void* self) {
+QSize* QPushButton_virtualbase_sizeHint(const VirtualQPushButton* self) {
 
-	return new QSize(( (const VirtualQPushButton*)(self) )->QPushButton::sizeHint());
-
+	return new QSize(self->QPushButton::sizeHint());
 }
 
-QSize* QPushButton_virtualbase_minimumSizeHint(const void* self) {
+QSize* QPushButton_virtualbase_minimumSizeHint(const VirtualQPushButton* self) {
 
-	return new QSize(( (const VirtualQPushButton*)(self) )->QPushButton::minimumSizeHint());
-
+	return new QSize(self->QPushButton::minimumSizeHint());
 }
 
-bool QPushButton_virtualbase_event(void* self, QEvent* e) {
+bool QPushButton_virtualbase_event(VirtualQPushButton* self, QEvent* e) {
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::event(e);
-
+	return self->QPushButton::event(e);
 }
 
-void QPushButton_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QPushButton_virtualbase_paintEvent(VirtualQPushButton* self, QPaintEvent* param1) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::paintEvent(param1);
-
+	self->QPushButton::paintEvent(param1);
 }
 
-void QPushButton_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QPushButton_virtualbase_keyPressEvent(VirtualQPushButton* self, QKeyEvent* param1) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::keyPressEvent(param1);
-
+	self->QPushButton::keyPressEvent(param1);
 }
 
-void QPushButton_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QPushButton_virtualbase_focusInEvent(VirtualQPushButton* self, QFocusEvent* param1) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::focusInEvent(param1);
-
+	self->QPushButton::focusInEvent(param1);
 }
 
-void QPushButton_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QPushButton_virtualbase_focusOutEvent(VirtualQPushButton* self, QFocusEvent* param1) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::focusOutEvent(param1);
-
+	self->QPushButton::focusOutEvent(param1);
 }
 
-bool QPushButton_virtualbase_hitButton(const void* self, QPoint* pos) {
+bool QPushButton_virtualbase_hitButton(const VirtualQPushButton* self, QPoint* pos) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::hitButton(*pos);
-
+	return self->QPushButton::hitButton(*pos);
 }
 
-void QPushButton_virtualbase_checkStateSet(void* self) {
+void QPushButton_virtualbase_checkStateSet(VirtualQPushButton* self) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::checkStateSet();
-
+	self->QPushButton::checkStateSet();
 }
 
-void QPushButton_virtualbase_nextCheckState(void* self) {
+void QPushButton_virtualbase_nextCheckState(VirtualQPushButton* self) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::nextCheckState();
-
+	self->QPushButton::nextCheckState();
 }
 
-void QPushButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QPushButton_virtualbase_keyReleaseEvent(VirtualQPushButton* self, QKeyEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::keyReleaseEvent(e);
-
+	self->QPushButton::keyReleaseEvent(e);
 }
 
-void QPushButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QPushButton_virtualbase_mousePressEvent(VirtualQPushButton* self, QMouseEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::mousePressEvent(e);
-
+	self->QPushButton::mousePressEvent(e);
 }
 
-void QPushButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QPushButton_virtualbase_mouseReleaseEvent(VirtualQPushButton* self, QMouseEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::mouseReleaseEvent(e);
-
+	self->QPushButton::mouseReleaseEvent(e);
 }
 
-void QPushButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* e) {
+void QPushButton_virtualbase_mouseMoveEvent(VirtualQPushButton* self, QMouseEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::mouseMoveEvent(e);
-
+	self->QPushButton::mouseMoveEvent(e);
 }
 
-void QPushButton_virtualbase_changeEvent(void* self, QEvent* e) {
+void QPushButton_virtualbase_changeEvent(VirtualQPushButton* self, QEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::changeEvent(e);
-
+	self->QPushButton::changeEvent(e);
 }
 
-void QPushButton_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QPushButton_virtualbase_timerEvent(VirtualQPushButton* self, QTimerEvent* e) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::timerEvent(e);
-
+	self->QPushButton::timerEvent(e);
 }
 
-int QPushButton_virtualbase_devType(const void* self) {
+int QPushButton_virtualbase_devType(const VirtualQPushButton* self) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::devType();
-
+	return self->QPushButton::devType();
 }
 
-void QPushButton_virtualbase_setVisible(void* self, bool visible) {
+void QPushButton_virtualbase_setVisible(VirtualQPushButton* self, bool visible) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::setVisible(visible);
-
+	self->QPushButton::setVisible(visible);
 }
 
-int QPushButton_virtualbase_heightForWidth(const void* self, int param1) {
+int QPushButton_virtualbase_heightForWidth(const VirtualQPushButton* self, int param1) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::heightForWidth(static_cast<int>(param1));
-
+	return self->QPushButton::heightForWidth(static_cast<int>(param1));
 }
 
-bool QPushButton_virtualbase_hasHeightForWidth(const void* self) {
+bool QPushButton_virtualbase_hasHeightForWidth(const VirtualQPushButton* self) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::hasHeightForWidth();
-
+	return self->QPushButton::hasHeightForWidth();
 }
 
-QPaintEngine* QPushButton_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QPushButton_virtualbase_paintEngine(const VirtualQPushButton* self) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::paintEngine();
-
+	return self->QPushButton::paintEngine();
 }
 
-void QPushButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QPushButton_virtualbase_mouseDoubleClickEvent(VirtualQPushButton* self, QMouseEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::mouseDoubleClickEvent(event);
-
+	self->QPushButton::mouseDoubleClickEvent(event);
 }
 
-void QPushButton_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QPushButton_virtualbase_wheelEvent(VirtualQPushButton* self, QWheelEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::wheelEvent(event);
-
+	self->QPushButton::wheelEvent(event);
 }
 
-void QPushButton_virtualbase_enterEvent(void* self, QEvent* event) {
+void QPushButton_virtualbase_enterEvent(VirtualQPushButton* self, QEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::enterEvent(event);
-
+	self->QPushButton::enterEvent(event);
 }
 
-void QPushButton_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QPushButton_virtualbase_leaveEvent(VirtualQPushButton* self, QEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::leaveEvent(event);
-
+	self->QPushButton::leaveEvent(event);
 }
 
-void QPushButton_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QPushButton_virtualbase_moveEvent(VirtualQPushButton* self, QMoveEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::moveEvent(event);
-
+	self->QPushButton::moveEvent(event);
 }
 
-void QPushButton_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QPushButton_virtualbase_resizeEvent(VirtualQPushButton* self, QResizeEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::resizeEvent(event);
-
+	self->QPushButton::resizeEvent(event);
 }
 
-void QPushButton_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QPushButton_virtualbase_closeEvent(VirtualQPushButton* self, QCloseEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::closeEvent(event);
-
+	self->QPushButton::closeEvent(event);
 }
 
-void QPushButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QPushButton_virtualbase_contextMenuEvent(VirtualQPushButton* self, QContextMenuEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::contextMenuEvent(event);
-
+	self->QPushButton::contextMenuEvent(event);
 }
 
-void QPushButton_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QPushButton_virtualbase_tabletEvent(VirtualQPushButton* self, QTabletEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::tabletEvent(event);
-
+	self->QPushButton::tabletEvent(event);
 }
 
-void QPushButton_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QPushButton_virtualbase_actionEvent(VirtualQPushButton* self, QActionEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::actionEvent(event);
-
+	self->QPushButton::actionEvent(event);
 }
 
-void QPushButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QPushButton_virtualbase_dragEnterEvent(VirtualQPushButton* self, QDragEnterEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::dragEnterEvent(event);
-
+	self->QPushButton::dragEnterEvent(event);
 }
 
-void QPushButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QPushButton_virtualbase_dragMoveEvent(VirtualQPushButton* self, QDragMoveEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::dragMoveEvent(event);
-
+	self->QPushButton::dragMoveEvent(event);
 }
 
-void QPushButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QPushButton_virtualbase_dragLeaveEvent(VirtualQPushButton* self, QDragLeaveEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::dragLeaveEvent(event);
-
+	self->QPushButton::dragLeaveEvent(event);
 }
 
-void QPushButton_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QPushButton_virtualbase_dropEvent(VirtualQPushButton* self, QDropEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::dropEvent(event);
-
+	self->QPushButton::dropEvent(event);
 }
 
-void QPushButton_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QPushButton_virtualbase_showEvent(VirtualQPushButton* self, QShowEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::showEvent(event);
-
+	self->QPushButton::showEvent(event);
 }
 
-void QPushButton_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QPushButton_virtualbase_hideEvent(VirtualQPushButton* self, QHideEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::hideEvent(event);
-
+	self->QPushButton::hideEvent(event);
 }
 
-bool QPushButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QPushButton_virtualbase_nativeEvent(VirtualQPushButton* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QPushButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QPushButton_virtualbase_metric(const void* self, int param1) {
+int QPushButton_virtualbase_metric(const VirtualQPushButton* self, int param1) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::metric(static_cast<VirtualQPushButton::PaintDeviceMetric>(param1));
-
+	return self->QPushButton::metric(static_cast<VirtualQPushButton::PaintDeviceMetric>(param1));
 }
 
-void QPushButton_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPushButton_virtualbase_initPainter(const VirtualQPushButton* self, QPainter* painter) {
 
-	( (const VirtualQPushButton*)(self) )->QPushButton::initPainter(painter);
-
+	self->QPushButton::initPainter(painter);
 }
 
-QPaintDevice* QPushButton_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPushButton_virtualbase_redirected(const VirtualQPushButton* self, QPoint* offset) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::redirected(offset);
-
+	return self->QPushButton::redirected(offset);
 }
 
-QPainter* QPushButton_virtualbase_sharedPainter(const void* self) {
+QPainter* QPushButton_virtualbase_sharedPainter(const VirtualQPushButton* self) {
 
-	return ( (const VirtualQPushButton*)(self) )->QPushButton::sharedPainter();
-
+	return self->QPushButton::sharedPainter();
 }
 
-void QPushButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QPushButton_virtualbase_inputMethodEvent(VirtualQPushButton* self, QInputMethodEvent* param1) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::inputMethodEvent(param1);
-
+	self->QPushButton::inputMethodEvent(param1);
 }
 
-QVariant* QPushButton_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QPushButton_virtualbase_inputMethodQuery(const VirtualQPushButton* self, int param1) {
 
-	return new QVariant(( (const VirtualQPushButton*)(self) )->QPushButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QPushButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QPushButton_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QPushButton_virtualbase_focusNextPrevChild(VirtualQPushButton* self, bool next) {
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::focusNextPrevChild(next);
-
+	return self->QPushButton::focusNextPrevChild(next);
 }
 
-bool QPushButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QPushButton_virtualbase_eventFilter(VirtualQPushButton* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQPushButton*)(self) )->QPushButton::eventFilter(watched, event);
-
+	return self->QPushButton::eventFilter(watched, event);
 }
 
-void QPushButton_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPushButton_virtualbase_childEvent(VirtualQPushButton* self, QChildEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::childEvent(event);
-
+	self->QPushButton::childEvent(event);
 }
 
-void QPushButton_virtualbase_customEvent(void* self, QEvent* event) {
+void QPushButton_virtualbase_customEvent(VirtualQPushButton* self, QEvent* event) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::customEvent(event);
-
+	self->QPushButton::customEvent(event);
 }
 
-void QPushButton_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPushButton_virtualbase_connectNotify(VirtualQPushButton* self, QMetaMethod* signal) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::connectNotify(*signal);
-
+	self->QPushButton::connectNotify(*signal);
 }
 
-void QPushButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPushButton_virtualbase_disconnectNotify(VirtualQPushButton* self, QMetaMethod* signal) {
 
-	( (VirtualQPushButton*)(self) )->QPushButton::disconnectNotify(*signal);
-
+	self->QPushButton::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPushButton_staticMetaObject() { return &QPushButton::staticMetaObject; }
-void QPushButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* option) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QPushButton_VTable* QPushButton_vtbl(const VirtualQPushButton* self) { return self->vtbl; }
+void* QPushButton_vdata(const VirtualQPushButton* self) { return self->vdata; }
+void QPushButton_setVdata(VirtualQPushButton* self, void* vdata) { self->vdata = vdata; }
+
+void QPushButton_protectedbase_initStyleOption(const VirtualQPushButton* self, QStyleOptionButton* option) {
+	self->initStyleOption(option);
 }
 
-void QPushButton_protectedbase_updateMicroFocus(void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QPushButton_protectedbase_updateMicroFocus(VirtualQPushButton* self) {
+	self->updateMicroFocus();
 }
 
-void QPushButton_protectedbase_create(void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	self_cast->create();
-
+void QPushButton_protectedbase_create(VirtualQPushButton* self) {
+	self->create();
 }
 
-void QPushButton_protectedbase_destroy(void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	self_cast->destroy();
-
+void QPushButton_protectedbase_destroy(VirtualQPushButton* self) {
+	self->destroy();
 }
 
-bool QPushButton_protectedbase_focusNextChild(void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QPushButton_protectedbase_focusNextChild(VirtualQPushButton* self) {
+	return self->focusNextChild();
 }
 
-bool QPushButton_protectedbase_focusPreviousChild(void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QPushButton_protectedbase_focusPreviousChild(VirtualQPushButton* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QPushButton_protectedbase_sender(const void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QPushButton_protectedbase_sender(const VirtualQPushButton* self) {
+	return self->sender();
 }
 
-int QPushButton_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPushButton_protectedbase_senderSignalIndex(const VirtualQPushButton* self) {
+	return self->senderSignalIndex();
 }
 
-int QPushButton_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPushButton_protectedbase_receivers(const VirtualQPushButton* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPushButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPushButton* self_cast = static_cast<VirtualQPushButton*>( (QPushButton*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPushButton_protectedbase_isSignalConnected(const VirtualQPushButton* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPushButton_delete(QPushButton* self) {

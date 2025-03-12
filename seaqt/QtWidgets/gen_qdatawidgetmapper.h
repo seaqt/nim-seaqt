@@ -40,22 +40,29 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QWidget QWidget;
 #endif
 
-struct QDataWidgetMapper_VTable {
-	void (*destructor)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self);
-	QMetaObject* (*metaObject)(struct QDataWidgetMapper_VTable* vtbl, const QDataWidgetMapper* self);
-	void* (*metacast)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, const char* param1);
-	int (*metacall)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, int param1, int param2, void** param3);
-	void (*setCurrentIndex)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, int index);
-	bool (*event)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QEvent* event);
-	bool (*eventFilter)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QTimerEvent* event);
-	void (*childEvent)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QChildEvent* event);
-	void (*customEvent)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QEvent* event);
-	void (*connectNotify)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QDataWidgetMapper_VTable* vtbl, QDataWidgetMapper* self, QMetaMethod* signal);
-};
-QDataWidgetMapper* QDataWidgetMapper_new(struct QDataWidgetMapper_VTable* vtbl);
-QDataWidgetMapper* QDataWidgetMapper_new2(struct QDataWidgetMapper_VTable* vtbl, QObject* parent);
+typedef struct VirtualQDataWidgetMapper VirtualQDataWidgetMapper;
+typedef struct QDataWidgetMapper_VTable{
+	void (*destructor)(VirtualQDataWidgetMapper* self);
+	QMetaObject* (*metaObject)(const VirtualQDataWidgetMapper* self);
+	void* (*metacast)(VirtualQDataWidgetMapper* self, const char* param1);
+	int (*metacall)(VirtualQDataWidgetMapper* self, int param1, int param2, void** param3);
+	void (*setCurrentIndex)(VirtualQDataWidgetMapper* self, int index);
+	bool (*event)(VirtualQDataWidgetMapper* self, QEvent* event);
+	bool (*eventFilter)(VirtualQDataWidgetMapper* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQDataWidgetMapper* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQDataWidgetMapper* self, QChildEvent* event);
+	void (*customEvent)(VirtualQDataWidgetMapper* self, QEvent* event);
+	void (*connectNotify)(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
+}QDataWidgetMapper_VTable;
+
+const QDataWidgetMapper_VTable* QDataWidgetMapper_vtbl(const VirtualQDataWidgetMapper* self);
+void* QDataWidgetMapper_vdata(const VirtualQDataWidgetMapper* self);
+void QDataWidgetMapper_setVdata(VirtualQDataWidgetMapper* self, void* vdata);
+
+VirtualQDataWidgetMapper* QDataWidgetMapper_new(const QDataWidgetMapper_VTable* vtbl, void* vdata);
+VirtualQDataWidgetMapper* QDataWidgetMapper_new2(const QDataWidgetMapper_VTable* vtbl, void* vdata, QObject* parent);
+
 void QDataWidgetMapper_virtbase(QDataWidgetMapper* src, QObject** outptr_QObject);
 QMetaObject* QDataWidgetMapper_metaObject(const QDataWidgetMapper* self);
 void* QDataWidgetMapper_metacast(QDataWidgetMapper* self, const char* param1);
@@ -89,26 +96,29 @@ void QDataWidgetMapper_toPrevious(QDataWidgetMapper* self);
 void QDataWidgetMapper_setCurrentIndex(QDataWidgetMapper* self, int index);
 void QDataWidgetMapper_setCurrentModelIndex(QDataWidgetMapper* self, QModelIndex* index);
 void QDataWidgetMapper_currentIndexChanged(QDataWidgetMapper* self, int index);
-void QDataWidgetMapper_connect_currentIndexChanged(QDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QDataWidgetMapper_connect_currentIndexChanged(VirtualQDataWidgetMapper* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 struct miqt_string QDataWidgetMapper_tr2(const char* s, const char* c);
 struct miqt_string QDataWidgetMapper_tr3(const char* s, const char* c, int n);
 struct miqt_string QDataWidgetMapper_trUtf82(const char* s, const char* c);
 struct miqt_string QDataWidgetMapper_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const void* self);
-void* QDataWidgetMapper_virtualbase_metacast(void* self, const char* param1);
-int QDataWidgetMapper_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-void QDataWidgetMapper_virtualbase_setCurrentIndex(void* self, int index);
-bool QDataWidgetMapper_virtualbase_event(void* self, QEvent* event);
-bool QDataWidgetMapper_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QDataWidgetMapper_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QDataWidgetMapper_virtualbase_childEvent(void* self, QChildEvent* event);
-void QDataWidgetMapper_virtualbase_customEvent(void* self, QEvent* event);
-void QDataWidgetMapper_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QDataWidgetMapper_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QDataWidgetMapper_protectedbase_sender(const void* self);
-int QDataWidgetMapper_protectedbase_senderSignalIndex(const void* self);
-int QDataWidgetMapper_protectedbase_receivers(const void* self, const char* signal);
-bool QDataWidgetMapper_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QDataWidgetMapper_virtualbase_metaObject(const VirtualQDataWidgetMapper* self);
+void* QDataWidgetMapper_virtualbase_metacast(VirtualQDataWidgetMapper* self, const char* param1);
+int QDataWidgetMapper_virtualbase_metacall(VirtualQDataWidgetMapper* self, int param1, int param2, void** param3);
+void QDataWidgetMapper_virtualbase_setCurrentIndex(VirtualQDataWidgetMapper* self, int index);
+bool QDataWidgetMapper_virtualbase_event(VirtualQDataWidgetMapper* self, QEvent* event);
+bool QDataWidgetMapper_virtualbase_eventFilter(VirtualQDataWidgetMapper* self, QObject* watched, QEvent* event);
+void QDataWidgetMapper_virtualbase_timerEvent(VirtualQDataWidgetMapper* self, QTimerEvent* event);
+void QDataWidgetMapper_virtualbase_childEvent(VirtualQDataWidgetMapper* self, QChildEvent* event);
+void QDataWidgetMapper_virtualbase_customEvent(VirtualQDataWidgetMapper* self, QEvent* event);
+void QDataWidgetMapper_virtualbase_connectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
+void QDataWidgetMapper_virtualbase_disconnectNotify(VirtualQDataWidgetMapper* self, QMetaMethod* signal);
+
+QObject* QDataWidgetMapper_protectedbase_sender(const VirtualQDataWidgetMapper* self);
+int QDataWidgetMapper_protectedbase_senderSignalIndex(const VirtualQDataWidgetMapper* self);
+int QDataWidgetMapper_protectedbase_receivers(const VirtualQDataWidgetMapper* self, const char* signal);
+bool QDataWidgetMapper_protectedbase_isSignalConnected(const VirtualQDataWidgetMapper* self, QMetaMethod* signal);
+
 const QMetaObject* QDataWidgetMapper_staticMetaObject();
 void QDataWidgetMapper_delete(QDataWidgetMapper* self);
 

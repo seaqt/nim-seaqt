@@ -34,21 +34,28 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QJSEngine_VTable {
-	void (*destructor)(struct QJSEngine_VTable* vtbl, QJSEngine* self);
-	QMetaObject* (*metaObject)(struct QJSEngine_VTable* vtbl, const QJSEngine* self);
-	void* (*metacast)(struct QJSEngine_VTable* vtbl, QJSEngine* self, const char* param1);
-	int (*metacall)(struct QJSEngine_VTable* vtbl, QJSEngine* self, int param1, int param2, void** param3);
-	bool (*event)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QEvent* event);
-	bool (*eventFilter)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QTimerEvent* event);
-	void (*childEvent)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QChildEvent* event);
-	void (*customEvent)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QEvent* event);
-	void (*connectNotify)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QJSEngine_VTable* vtbl, QJSEngine* self, QMetaMethod* signal);
-};
-QJSEngine* QJSEngine_new(struct QJSEngine_VTable* vtbl);
-QJSEngine* QJSEngine_new2(struct QJSEngine_VTable* vtbl, QObject* parent);
+typedef struct VirtualQJSEngine VirtualQJSEngine;
+typedef struct QJSEngine_VTable{
+	void (*destructor)(VirtualQJSEngine* self);
+	QMetaObject* (*metaObject)(const VirtualQJSEngine* self);
+	void* (*metacast)(VirtualQJSEngine* self, const char* param1);
+	int (*metacall)(VirtualQJSEngine* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQJSEngine* self, QEvent* event);
+	bool (*eventFilter)(VirtualQJSEngine* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQJSEngine* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQJSEngine* self, QChildEvent* event);
+	void (*customEvent)(VirtualQJSEngine* self, QEvent* event);
+	void (*connectNotify)(VirtualQJSEngine* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQJSEngine* self, QMetaMethod* signal);
+}QJSEngine_VTable;
+
+const QJSEngine_VTable* QJSEngine_vtbl(const VirtualQJSEngine* self);
+void* QJSEngine_vdata(const VirtualQJSEngine* self);
+void QJSEngine_setVdata(VirtualQJSEngine* self, void* vdata);
+
+VirtualQJSEngine* QJSEngine_new(const QJSEngine_VTable* vtbl, void* vdata);
+VirtualQJSEngine* QJSEngine_new2(const QJSEngine_VTable* vtbl, void* vdata, QObject* parent);
+
 void QJSEngine_virtbase(QJSEngine* src, QObject** outptr_QObject);
 QMetaObject* QJSEngine_metaObject(const QJSEngine* self);
 void* QJSEngine_metacast(QJSEngine* self, const char* param1);
@@ -73,7 +80,7 @@ void QJSEngine_throwErrorWithErrorType(QJSEngine* self, int errorType);
 struct miqt_string QJSEngine_uiLanguage(const QJSEngine* self);
 void QJSEngine_setUiLanguage(QJSEngine* self, struct miqt_string language);
 void QJSEngine_uiLanguageChanged(QJSEngine* self);
-void QJSEngine_connect_uiLanguageChanged(QJSEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QJSEngine_connect_uiLanguageChanged(VirtualQJSEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QJSEngine_tr2(const char* s, const char* c);
 struct miqt_string QJSEngine_tr3(const char* s, const char* c, int n);
 struct miqt_string QJSEngine_trUtf82(const char* s, const char* c);
@@ -85,20 +92,23 @@ QJSValue* QJSEngine_newErrorObject2(QJSEngine* self, int errorType, struct miqt_
 void QJSEngine_installTranslatorFunctions1(QJSEngine* self, QJSValue* object);
 void QJSEngine_installExtensions2(QJSEngine* self, int extensions, QJSValue* object);
 void QJSEngine_throwError2(QJSEngine* self, int errorType, struct miqt_string message);
-QMetaObject* QJSEngine_virtualbase_metaObject(const void* self);
-void* QJSEngine_virtualbase_metacast(void* self, const char* param1);
-int QJSEngine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QJSEngine_virtualbase_event(void* self, QEvent* event);
-bool QJSEngine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QJSEngine_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QJSEngine_virtualbase_childEvent(void* self, QChildEvent* event);
-void QJSEngine_virtualbase_customEvent(void* self, QEvent* event);
-void QJSEngine_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QJSEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QJSEngine_protectedbase_sender(const void* self);
-int QJSEngine_protectedbase_senderSignalIndex(const void* self);
-int QJSEngine_protectedbase_receivers(const void* self, const char* signal);
-bool QJSEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QJSEngine_virtualbase_metaObject(const VirtualQJSEngine* self);
+void* QJSEngine_virtualbase_metacast(VirtualQJSEngine* self, const char* param1);
+int QJSEngine_virtualbase_metacall(VirtualQJSEngine* self, int param1, int param2, void** param3);
+bool QJSEngine_virtualbase_event(VirtualQJSEngine* self, QEvent* event);
+bool QJSEngine_virtualbase_eventFilter(VirtualQJSEngine* self, QObject* watched, QEvent* event);
+void QJSEngine_virtualbase_timerEvent(VirtualQJSEngine* self, QTimerEvent* event);
+void QJSEngine_virtualbase_childEvent(VirtualQJSEngine* self, QChildEvent* event);
+void QJSEngine_virtualbase_customEvent(VirtualQJSEngine* self, QEvent* event);
+void QJSEngine_virtualbase_connectNotify(VirtualQJSEngine* self, QMetaMethod* signal);
+void QJSEngine_virtualbase_disconnectNotify(VirtualQJSEngine* self, QMetaMethod* signal);
+
+QObject* QJSEngine_protectedbase_sender(const VirtualQJSEngine* self);
+int QJSEngine_protectedbase_senderSignalIndex(const VirtualQJSEngine* self);
+int QJSEngine_protectedbase_receivers(const VirtualQJSEngine* self, const char* signal);
+bool QJSEngine_protectedbase_isSignalConnected(const VirtualQJSEngine* self, QMetaMethod* signal);
+
 const QMetaObject* QJSEngine_staticMetaObject();
 void QJSEngine_delete(QJSEngine* self);
 

@@ -44,6 +44,7 @@ struct miqt_string QMediaAudioProbeControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaAudioProbeControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaAudioProbeControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaAudioProbeControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaAudioProbeControl_staticMetaObject();
 void QMediaAudioProbeControl_delete(QMediaAudioProbeControl* self);
 

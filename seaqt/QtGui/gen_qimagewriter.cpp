@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qimagewriter.h>
 #include "gen_qimagewriter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QImageWriter* QImageWriter_new() {
 	return new QImageWriter();
 }

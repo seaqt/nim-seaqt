@@ -45,17 +45,17 @@ type cQAuthenticator*{.exportc: "QAuthenticator", incompleteStruct.} = object
 proc fcQAuthenticator_operatorAssign(self: pointer, other: pointer): void {.importc: "QAuthenticator_operatorAssign".}
 proc fcQAuthenticator_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorEqual".}
 proc fcQAuthenticator_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAuthenticator_operatorNotEqual".}
-proc fcQAuthenticator_user(self: pointer, ): struct_miqt_string {.importc: "QAuthenticator_user".}
+proc fcQAuthenticator_user(self: pointer): struct_miqt_string {.importc: "QAuthenticator_user".}
 proc fcQAuthenticator_setUser(self: pointer, user: struct_miqt_string): void {.importc: "QAuthenticator_setUser".}
-proc fcQAuthenticator_password(self: pointer, ): struct_miqt_string {.importc: "QAuthenticator_password".}
+proc fcQAuthenticator_password(self: pointer): struct_miqt_string {.importc: "QAuthenticator_password".}
 proc fcQAuthenticator_setPassword(self: pointer, password: struct_miqt_string): void {.importc: "QAuthenticator_setPassword".}
-proc fcQAuthenticator_realm(self: pointer, ): struct_miqt_string {.importc: "QAuthenticator_realm".}
+proc fcQAuthenticator_realm(self: pointer): struct_miqt_string {.importc: "QAuthenticator_realm".}
 proc fcQAuthenticator_setRealm(self: pointer, realm: struct_miqt_string): void {.importc: "QAuthenticator_setRealm".}
 proc fcQAuthenticator_option(self: pointer, opt: struct_miqt_string): pointer {.importc: "QAuthenticator_option".}
-proc fcQAuthenticator_options(self: pointer, ): struct_miqt_map {.importc: "QAuthenticator_options".}
+proc fcQAuthenticator_options(self: pointer): struct_miqt_map {.importc: "QAuthenticator_options".}
 proc fcQAuthenticator_setOption(self: pointer, opt: struct_miqt_string, value: pointer): void {.importc: "QAuthenticator_setOption".}
-proc fcQAuthenticator_isNull(self: pointer, ): bool {.importc: "QAuthenticator_isNull".}
-proc fcQAuthenticator_detach(self: pointer, ): void {.importc: "QAuthenticator_detach".}
+proc fcQAuthenticator_isNull(self: pointer): bool {.importc: "QAuthenticator_isNull".}
+proc fcQAuthenticator_detach(self: pointer): void {.importc: "QAuthenticator_detach".}
 proc fcQAuthenticator_new(): ptr cQAuthenticator {.importc: "QAuthenticator_new".}
 proc fcQAuthenticator_new2(other: pointer): ptr cQAuthenticator {.importc: "QAuthenticator_new2".}
 
@@ -68,7 +68,7 @@ proc operatorEqual*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qa
 proc operatorNotEqual*(self: gen_qauthenticator_types.QAuthenticator, other: gen_qauthenticator_types.QAuthenticator): bool =
   fcQAuthenticator_operatorNotEqual(self.h, other.h)
 
-proc user*(self: gen_qauthenticator_types.QAuthenticator, ): string =
+proc user*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_user(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -77,7 +77,7 @@ proc user*(self: gen_qauthenticator_types.QAuthenticator, ): string =
 proc setUser*(self: gen_qauthenticator_types.QAuthenticator, user: string): void =
   fcQAuthenticator_setUser(self.h, struct_miqt_string(data: user, len: csize_t(len(user))))
 
-proc password*(self: gen_qauthenticator_types.QAuthenticator, ): string =
+proc password*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_password(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -86,7 +86,7 @@ proc password*(self: gen_qauthenticator_types.QAuthenticator, ): string =
 proc setPassword*(self: gen_qauthenticator_types.QAuthenticator, password: string): void =
   fcQAuthenticator_setPassword(self.h, struct_miqt_string(data: password, len: csize_t(len(password))))
 
-proc realm*(self: gen_qauthenticator_types.QAuthenticator, ): string =
+proc realm*(self: gen_qauthenticator_types.QAuthenticator): string =
   let v_ms = fcQAuthenticator_realm(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -98,7 +98,7 @@ proc setRealm*(self: gen_qauthenticator_types.QAuthenticator, realm: string): vo
 proc option*(self: gen_qauthenticator_types.QAuthenticator, opt: string): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAuthenticator_option(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt)))), owned: true)
 
-proc options*(self: gen_qauthenticator_types.QAuthenticator, ): Table[string,gen_qvariant_types.QVariant] =
+proc options*(self: gen_qauthenticator_types.QAuthenticator): Table[string,gen_qvariant_types.QVariant] =
   var v_mm = fcQAuthenticator_options(self.h)
   var vx_ret: Table[string, gen_qvariant_types.QVariant]
   var v_Keys = cast[ptr UncheckedArray[struct_miqt_string]](v_mm.keys)
@@ -119,10 +119,10 @@ proc options*(self: gen_qauthenticator_types.QAuthenticator, ): Table[string,gen
 proc setOption*(self: gen_qauthenticator_types.QAuthenticator, opt: string, value: gen_qvariant_types.QVariant): void =
   fcQAuthenticator_setOption(self.h, struct_miqt_string(data: opt, len: csize_t(len(opt))), value.h)
 
-proc isNull*(self: gen_qauthenticator_types.QAuthenticator, ): bool =
+proc isNull*(self: gen_qauthenticator_types.QAuthenticator): bool =
   fcQAuthenticator_isNull(self.h)
 
-proc detach*(self: gen_qauthenticator_types.QAuthenticator, ): void =
+proc detach*(self: gen_qauthenticator_types.QAuthenticator): void =
   fcQAuthenticator_detach(self.h)
 
 proc create*(T: type gen_qauthenticator_types.QAuthenticator): gen_qauthenticator_types.QAuthenticator =

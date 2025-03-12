@@ -3,15 +3,6 @@
 #include <QWebFullScreenRequest>
 #include <qwebfullscreenrequest.h>
 #include "gen_qwebfullscreenrequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebFullScreenRequest* QWebFullScreenRequest_new() {
 	return new QWebFullScreenRequest();
 }

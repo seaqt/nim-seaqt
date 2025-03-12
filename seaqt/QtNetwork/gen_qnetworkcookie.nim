@@ -52,22 +52,22 @@ proc fcQNetworkCookie_operatorAssign(self: pointer, other: pointer): void {.impo
 proc fcQNetworkCookie_swap(self: pointer, other: pointer): void {.importc: "QNetworkCookie_swap".}
 proc fcQNetworkCookie_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_operatorEqual".}
 proc fcQNetworkCookie_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_operatorNotEqual".}
-proc fcQNetworkCookie_isSecure(self: pointer, ): bool {.importc: "QNetworkCookie_isSecure".}
+proc fcQNetworkCookie_isSecure(self: pointer): bool {.importc: "QNetworkCookie_isSecure".}
 proc fcQNetworkCookie_setSecure(self: pointer, enable: bool): void {.importc: "QNetworkCookie_setSecure".}
-proc fcQNetworkCookie_isHttpOnly(self: pointer, ): bool {.importc: "QNetworkCookie_isHttpOnly".}
+proc fcQNetworkCookie_isHttpOnly(self: pointer): bool {.importc: "QNetworkCookie_isHttpOnly".}
 proc fcQNetworkCookie_setHttpOnly(self: pointer, enable: bool): void {.importc: "QNetworkCookie_setHttpOnly".}
-proc fcQNetworkCookie_isSessionCookie(self: pointer, ): bool {.importc: "QNetworkCookie_isSessionCookie".}
-proc fcQNetworkCookie_expirationDate(self: pointer, ): pointer {.importc: "QNetworkCookie_expirationDate".}
+proc fcQNetworkCookie_isSessionCookie(self: pointer): bool {.importc: "QNetworkCookie_isSessionCookie".}
+proc fcQNetworkCookie_expirationDate(self: pointer): pointer {.importc: "QNetworkCookie_expirationDate".}
 proc fcQNetworkCookie_setExpirationDate(self: pointer, date: pointer): void {.importc: "QNetworkCookie_setExpirationDate".}
-proc fcQNetworkCookie_domain(self: pointer, ): struct_miqt_string {.importc: "QNetworkCookie_domain".}
+proc fcQNetworkCookie_domain(self: pointer): struct_miqt_string {.importc: "QNetworkCookie_domain".}
 proc fcQNetworkCookie_setDomain(self: pointer, domain: struct_miqt_string): void {.importc: "QNetworkCookie_setDomain".}
-proc fcQNetworkCookie_path(self: pointer, ): struct_miqt_string {.importc: "QNetworkCookie_path".}
+proc fcQNetworkCookie_path(self: pointer): struct_miqt_string {.importc: "QNetworkCookie_path".}
 proc fcQNetworkCookie_setPath(self: pointer, path: struct_miqt_string): void {.importc: "QNetworkCookie_setPath".}
-proc fcQNetworkCookie_name(self: pointer, ): struct_miqt_string {.importc: "QNetworkCookie_name".}
+proc fcQNetworkCookie_name(self: pointer): struct_miqt_string {.importc: "QNetworkCookie_name".}
 proc fcQNetworkCookie_setName(self: pointer, cookieName: struct_miqt_string): void {.importc: "QNetworkCookie_setName".}
-proc fcQNetworkCookie_value(self: pointer, ): struct_miqt_string {.importc: "QNetworkCookie_value".}
+proc fcQNetworkCookie_value(self: pointer): struct_miqt_string {.importc: "QNetworkCookie_value".}
 proc fcQNetworkCookie_setValue(self: pointer, value: struct_miqt_string): void {.importc: "QNetworkCookie_setValue".}
-proc fcQNetworkCookie_toRawForm(self: pointer, ): struct_miqt_string {.importc: "QNetworkCookie_toRawForm".}
+proc fcQNetworkCookie_toRawForm(self: pointer): struct_miqt_string {.importc: "QNetworkCookie_toRawForm".}
 proc fcQNetworkCookie_hasSameIdentifier(self: pointer, other: pointer): bool {.importc: "QNetworkCookie_hasSameIdentifier".}
 proc fcQNetworkCookie_normalize(self: pointer, url: pointer): void {.importc: "QNetworkCookie_normalize".}
 proc fcQNetworkCookie_parseCookies(cookieString: struct_miqt_string): struct_miqt_array {.importc: "QNetworkCookie_parseCookies".}
@@ -89,28 +89,28 @@ proc operatorEqual*(self: gen_qnetworkcookie_types.QNetworkCookie, other: gen_qn
 proc operatorNotEqual*(self: gen_qnetworkcookie_types.QNetworkCookie, other: gen_qnetworkcookie_types.QNetworkCookie): bool =
   fcQNetworkCookie_operatorNotEqual(self.h, other.h)
 
-proc isSecure*(self: gen_qnetworkcookie_types.QNetworkCookie, ): bool =
+proc isSecure*(self: gen_qnetworkcookie_types.QNetworkCookie): bool =
   fcQNetworkCookie_isSecure(self.h)
 
 proc setSecure*(self: gen_qnetworkcookie_types.QNetworkCookie, enable: bool): void =
   fcQNetworkCookie_setSecure(self.h, enable)
 
-proc isHttpOnly*(self: gen_qnetworkcookie_types.QNetworkCookie, ): bool =
+proc isHttpOnly*(self: gen_qnetworkcookie_types.QNetworkCookie): bool =
   fcQNetworkCookie_isHttpOnly(self.h)
 
 proc setHttpOnly*(self: gen_qnetworkcookie_types.QNetworkCookie, enable: bool): void =
   fcQNetworkCookie_setHttpOnly(self.h, enable)
 
-proc isSessionCookie*(self: gen_qnetworkcookie_types.QNetworkCookie, ): bool =
+proc isSessionCookie*(self: gen_qnetworkcookie_types.QNetworkCookie): bool =
   fcQNetworkCookie_isSessionCookie(self.h)
 
-proc expirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie, ): gen_qdatetime_types.QDateTime =
+proc expirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie): gen_qdatetime_types.QDateTime =
   gen_qdatetime_types.QDateTime(h: fcQNetworkCookie_expirationDate(self.h), owned: true)
 
 proc setExpirationDate*(self: gen_qnetworkcookie_types.QNetworkCookie, date: gen_qdatetime_types.QDateTime): void =
   fcQNetworkCookie_setExpirationDate(self.h, date.h)
 
-proc domain*(self: gen_qnetworkcookie_types.QNetworkCookie, ): string =
+proc domain*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   let v_ms = fcQNetworkCookie_domain(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -119,7 +119,7 @@ proc domain*(self: gen_qnetworkcookie_types.QNetworkCookie, ): string =
 proc setDomain*(self: gen_qnetworkcookie_types.QNetworkCookie, domain: string): void =
   fcQNetworkCookie_setDomain(self.h, struct_miqt_string(data: domain, len: csize_t(len(domain))))
 
-proc path*(self: gen_qnetworkcookie_types.QNetworkCookie, ): string =
+proc path*(self: gen_qnetworkcookie_types.QNetworkCookie): string =
   let v_ms = fcQNetworkCookie_path(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -128,7 +128,7 @@ proc path*(self: gen_qnetworkcookie_types.QNetworkCookie, ): string =
 proc setPath*(self: gen_qnetworkcookie_types.QNetworkCookie, path: string): void =
   fcQNetworkCookie_setPath(self.h, struct_miqt_string(data: path, len: csize_t(len(path))))
 
-proc name*(self: gen_qnetworkcookie_types.QNetworkCookie, ): seq[byte] =
+proc name*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_name(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -137,7 +137,7 @@ proc name*(self: gen_qnetworkcookie_types.QNetworkCookie, ): seq[byte] =
 proc setName*(self: gen_qnetworkcookie_types.QNetworkCookie, cookieName: seq[byte]): void =
   fcQNetworkCookie_setName(self.h, struct_miqt_string(data: cast[cstring](if len(cookieName) == 0: nil else: unsafeAddr cookieName[0]), len: csize_t(len(cookieName))))
 
-proc value*(self: gen_qnetworkcookie_types.QNetworkCookie, ): seq[byte] =
+proc value*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_value(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -146,7 +146,7 @@ proc value*(self: gen_qnetworkcookie_types.QNetworkCookie, ): seq[byte] =
 proc setValue*(self: gen_qnetworkcookie_types.QNetworkCookie, value: seq[byte]): void =
   fcQNetworkCookie_setValue(self.h, struct_miqt_string(data: cast[cstring](if len(value) == 0: nil else: unsafeAddr value[0]), len: csize_t(len(value))))
 
-proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie, ): seq[byte] =
+proc toRawForm*(self: gen_qnetworkcookie_types.QNetworkCookie): seq[byte] =
   var v_bytearray = fcQNetworkCookie_toRawForm(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)

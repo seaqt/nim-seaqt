@@ -41,17 +41,17 @@ export
 
 type cQMessageAuthenticationCode*{.exportc: "QMessageAuthenticationCode", incompleteStruct.} = object
 
-proc fcQMessageAuthenticationCode_reset(self: pointer, ): void {.importc: "QMessageAuthenticationCode_reset".}
+proc fcQMessageAuthenticationCode_reset(self: pointer): void {.importc: "QMessageAuthenticationCode_reset".}
 proc fcQMessageAuthenticationCode_setKey(self: pointer, key: struct_miqt_string): void {.importc: "QMessageAuthenticationCode_setKey".}
 proc fcQMessageAuthenticationCode_addData(self: pointer, data: cstring, length: cint): void {.importc: "QMessageAuthenticationCode_addData".}
 proc fcQMessageAuthenticationCode_addDataWithData(self: pointer, data: struct_miqt_string): void {.importc: "QMessageAuthenticationCode_addDataWithData".}
 proc fcQMessageAuthenticationCode_addDataWithDevice(self: pointer, device: pointer): bool {.importc: "QMessageAuthenticationCode_addDataWithDevice".}
-proc fcQMessageAuthenticationCode_resultX(self: pointer, ): struct_miqt_string {.importc: "QMessageAuthenticationCode_result".}
+proc fcQMessageAuthenticationCode_resultX(self: pointer): struct_miqt_string {.importc: "QMessageAuthenticationCode_result".}
 proc fcQMessageAuthenticationCode_hash(message: struct_miqt_string, key: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QMessageAuthenticationCode_hash".}
 proc fcQMessageAuthenticationCode_new(methodVal: cint): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new".}
 proc fcQMessageAuthenticationCode_new2(methodVal: cint, key: struct_miqt_string): ptr cQMessageAuthenticationCode {.importc: "QMessageAuthenticationCode_new2".}
 
-proc reset*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, ): void =
+proc reset*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode): void =
   fcQMessageAuthenticationCode_reset(self.h)
 
 proc setKey*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, key: seq[byte]): void =
@@ -66,7 +66,7 @@ proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationC
 proc addData*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, device: gen_qiodevice_types.QIODevice): bool =
   fcQMessageAuthenticationCode_addDataWithDevice(self.h, device.h)
 
-proc resultX*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode, ): seq[byte] =
+proc resultX*(self: gen_qmessageauthenticationcode_types.QMessageAuthenticationCode): seq[byte] =
   var v_bytearray = fcQMessageAuthenticationCode_resultX(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)

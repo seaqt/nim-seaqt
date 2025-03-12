@@ -57,6 +57,7 @@ struct miqt_string QCameraZoomControl_tr2(const char* s, const char* c);
 struct miqt_string QCameraZoomControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraZoomControl_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraZoomControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QCameraZoomControl_staticMetaObject();
 void QCameraZoomControl_delete(QCameraZoomControl* self);
 

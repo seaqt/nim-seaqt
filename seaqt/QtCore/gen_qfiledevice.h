@@ -62,6 +62,7 @@ struct miqt_string QFileDevice_tr3(const char* s, const char* c, int n);
 struct miqt_string QFileDevice_trUtf82(const char* s, const char* c);
 struct miqt_string QFileDevice_trUtf83(const char* s, const char* c, int n);
 unsigned char* QFileDevice_map3(QFileDevice* self, long long offset, long long size, int flags);
+
 const QMetaObject* QFileDevice_staticMetaObject();
 void QFileDevice_delete(QFileDevice* self);
 

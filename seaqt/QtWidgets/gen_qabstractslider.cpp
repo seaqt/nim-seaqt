@@ -36,39 +36,32 @@
 #include <QWidget>
 #include <qabstractslider.h>
 #include "gen_qabstractslider.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractSlider final : public QAbstractSlider {
-	struct QAbstractSlider_VTable* vtbl;
+	const QAbstractSlider_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractSlider_VTable* QAbstractSlider_vtbl(const VirtualQAbstractSlider* self);
+	friend void* QAbstractSlider_vdata(const VirtualQAbstractSlider* self);
+	friend void QAbstractSlider_setVdata(VirtualQAbstractSlider* self, void* vdata);
 
-	VirtualQAbstractSlider(struct QAbstractSlider_VTable* vtbl, QWidget* parent): QAbstractSlider(parent), vtbl(vtbl) {};
-	VirtualQAbstractSlider(struct QAbstractSlider_VTable* vtbl): QAbstractSlider(), vtbl(vtbl) {};
+	VirtualQAbstractSlider(const QAbstractSlider_VTable* vtbl, void* vdata, QWidget* parent): QAbstractSlider(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractSlider(const QAbstractSlider_VTable* vtbl, void* vdata): QAbstractSlider(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractSlider() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractSlider() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractSlider::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractSlider_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractSlider_virtualbase_metaObject(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractSlider::qt_metacast(param1);
@@ -76,14 +69,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractSlider_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractSlider_virtualbase_metacast(VirtualQAbstractSlider* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractSlider::qt_metacall(param1, param2, param3);
@@ -94,14 +86,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractSlider_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractSlider_virtualbase_metacall(VirtualQAbstractSlider* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QAbstractSlider::event(e);
@@ -109,14 +100,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSlider_virtualbase_event(void* self, QEvent* e);
+	friend bool QAbstractSlider_virtualbase_event(VirtualQAbstractSlider* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void sliderChange(QAbstractSlider::SliderChange change) override {
 		if (vtbl->sliderChange == 0) {
 			QAbstractSlider::sliderChange(change);
@@ -126,13 +116,12 @@ public:
 		QAbstractSlider::SliderChange change_ret = change;
 		int sigval1 = static_cast<int>(change_ret);
 
-		vtbl->sliderChange(vtbl, this, sigval1);
+		vtbl->sliderChange(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_sliderChange(void* self, int change);
+	friend void QAbstractSlider_virtualbase_sliderChange(VirtualQAbstractSlider* self, int change);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* ev) override {
 		if (vtbl->keyPressEvent == 0) {
 			QAbstractSlider::keyPressEvent(ev);
@@ -141,13 +130,12 @@ public:
 
 		QKeyEvent* sigval1 = ev;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_keyPressEvent(void* self, QKeyEvent* ev);
+	friend void QAbstractSlider_virtualbase_keyPressEvent(VirtualQAbstractSlider* self, QKeyEvent* ev);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractSlider::timerEvent(param1);
@@ -156,13 +144,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QAbstractSlider_virtualbase_timerEvent(VirtualQAbstractSlider* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QAbstractSlider::wheelEvent(e);
@@ -171,13 +158,12 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QAbstractSlider_virtualbase_wheelEvent(VirtualQAbstractSlider* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QAbstractSlider::changeEvent(e);
@@ -186,27 +172,25 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QAbstractSlider_virtualbase_changeEvent(VirtualQAbstractSlider* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QAbstractSlider::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractSlider_virtualbase_devType(const void* self);
+	friend int QAbstractSlider_virtualbase_devType(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QAbstractSlider::setVisible(visible);
@@ -215,45 +199,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_setVisible(void* self, bool visible);
+	friend void QAbstractSlider_virtualbase_setVisible(VirtualQAbstractSlider* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QAbstractSlider::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractSlider_virtualbase_sizeHint(const void* self);
+	friend QSize* QAbstractSlider_virtualbase_sizeHint(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QAbstractSlider::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractSlider_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QAbstractSlider_virtualbase_minimumSizeHint(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QAbstractSlider::heightForWidth(param1);
@@ -261,42 +242,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractSlider_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QAbstractSlider_virtualbase_heightForWidth(const VirtualQAbstractSlider* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QAbstractSlider::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSlider_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QAbstractSlider_virtualbase_hasHeightForWidth(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QAbstractSlider::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QAbstractSlider_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QAbstractSlider_virtualbase_paintEngine(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QAbstractSlider::mousePressEvent(event);
@@ -305,13 +283,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QAbstractSlider_virtualbase_mousePressEvent(VirtualQAbstractSlider* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QAbstractSlider::mouseReleaseEvent(event);
@@ -320,13 +297,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QAbstractSlider_virtualbase_mouseReleaseEvent(VirtualQAbstractSlider* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QAbstractSlider::mouseDoubleClickEvent(event);
@@ -335,13 +311,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QAbstractSlider_virtualbase_mouseDoubleClickEvent(VirtualQAbstractSlider* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QAbstractSlider::mouseMoveEvent(event);
@@ -350,13 +325,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QAbstractSlider_virtualbase_mouseMoveEvent(VirtualQAbstractSlider* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QAbstractSlider::keyReleaseEvent(event);
@@ -365,13 +339,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QAbstractSlider_virtualbase_keyReleaseEvent(VirtualQAbstractSlider* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QAbstractSlider::focusInEvent(event);
@@ -380,13 +353,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QAbstractSlider_virtualbase_focusInEvent(VirtualQAbstractSlider* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QAbstractSlider::focusOutEvent(event);
@@ -395,13 +367,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QAbstractSlider_virtualbase_focusOutEvent(VirtualQAbstractSlider* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QAbstractSlider::enterEvent(event);
@@ -410,13 +381,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QAbstractSlider_virtualbase_enterEvent(VirtualQAbstractSlider* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QAbstractSlider::leaveEvent(event);
@@ -425,13 +395,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QAbstractSlider_virtualbase_leaveEvent(VirtualQAbstractSlider* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QAbstractSlider::paintEvent(event);
@@ -440,13 +409,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QAbstractSlider_virtualbase_paintEvent(VirtualQAbstractSlider* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QAbstractSlider::moveEvent(event);
@@ -455,13 +423,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QAbstractSlider_virtualbase_moveEvent(VirtualQAbstractSlider* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QAbstractSlider::resizeEvent(event);
@@ -470,13 +437,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QAbstractSlider_virtualbase_resizeEvent(VirtualQAbstractSlider* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QAbstractSlider::closeEvent(event);
@@ -485,13 +451,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QAbstractSlider_virtualbase_closeEvent(VirtualQAbstractSlider* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QAbstractSlider::contextMenuEvent(event);
@@ -500,13 +465,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QAbstractSlider_virtualbase_contextMenuEvent(VirtualQAbstractSlider* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QAbstractSlider::tabletEvent(event);
@@ -515,13 +479,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QAbstractSlider_virtualbase_tabletEvent(VirtualQAbstractSlider* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QAbstractSlider::actionEvent(event);
@@ -530,13 +493,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QAbstractSlider_virtualbase_actionEvent(VirtualQAbstractSlider* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QAbstractSlider::dragEnterEvent(event);
@@ -545,13 +507,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QAbstractSlider_virtualbase_dragEnterEvent(VirtualQAbstractSlider* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QAbstractSlider::dragMoveEvent(event);
@@ -560,13 +521,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QAbstractSlider_virtualbase_dragMoveEvent(VirtualQAbstractSlider* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QAbstractSlider::dragLeaveEvent(event);
@@ -575,13 +535,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QAbstractSlider_virtualbase_dragLeaveEvent(VirtualQAbstractSlider* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QAbstractSlider::dropEvent(event);
@@ -590,13 +549,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QAbstractSlider_virtualbase_dropEvent(VirtualQAbstractSlider* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QAbstractSlider::showEvent(event);
@@ -605,13 +563,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QAbstractSlider_virtualbase_showEvent(VirtualQAbstractSlider* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QAbstractSlider::hideEvent(event);
@@ -620,13 +577,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QAbstractSlider_virtualbase_hideEvent(VirtualQAbstractSlider* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QAbstractSlider::nativeEvent(eventType, message, result);
@@ -641,14 +597,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSlider_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QAbstractSlider_virtualbase_nativeEvent(VirtualQAbstractSlider* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QAbstractSlider::metric(param1);
@@ -657,14 +612,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractSlider_virtualbase_metric(const void* self, int param1);
+	friend int QAbstractSlider_virtualbase_metric(const VirtualQAbstractSlider* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QAbstractSlider::initPainter(painter);
@@ -673,13 +627,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QAbstractSlider_virtualbase_initPainter(const VirtualQAbstractSlider* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QAbstractSlider::redirected(offset);
@@ -687,28 +640,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QAbstractSlider_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QAbstractSlider_virtualbase_redirected(const VirtualQAbstractSlider* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QAbstractSlider::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QAbstractSlider_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QAbstractSlider_virtualbase_sharedPainter(const VirtualQAbstractSlider* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QAbstractSlider::inputMethodEvent(param1);
@@ -717,13 +668,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QAbstractSlider_virtualbase_inputMethodEvent(VirtualQAbstractSlider* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QAbstractSlider::inputMethodQuery(param1);
@@ -732,16 +682,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractSlider_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QAbstractSlider_virtualbase_inputMethodQuery(const VirtualQAbstractSlider* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QAbstractSlider::focusNextPrevChild(next);
@@ -749,14 +698,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSlider_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QAbstractSlider_virtualbase_focusNextPrevChild(VirtualQAbstractSlider* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractSlider::eventFilter(watched, event);
@@ -765,14 +713,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSlider_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractSlider_virtualbase_eventFilter(VirtualQAbstractSlider* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractSlider::childEvent(event);
@@ -781,13 +728,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractSlider_virtualbase_childEvent(VirtualQAbstractSlider* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractSlider::customEvent(event);
@@ -796,13 +742,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractSlider_virtualbase_customEvent(VirtualQAbstractSlider* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractSlider::connectNotify(signal);
@@ -813,13 +758,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractSlider_virtualbase_connectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractSlider::disconnectNotify(signal);
@@ -830,34 +774,34 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractSlider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractSlider_protectedbase_setRepeatAction(void* self, int action);
-	friend int QAbstractSlider_protectedbase_repeatAction(const void* self);
-	friend void QAbstractSlider_protectedbase_setRepeatAction2(void* self, int action, int thresholdTime);
-	friend void QAbstractSlider_protectedbase_setRepeatAction3(void* self, int action, int thresholdTime, int repeatTime);
-	friend void QAbstractSlider_protectedbase_updateMicroFocus(void* self);
-	friend void QAbstractSlider_protectedbase_create(void* self);
-	friend void QAbstractSlider_protectedbase_destroy(void* self);
-	friend bool QAbstractSlider_protectedbase_focusNextChild(void* self);
-	friend bool QAbstractSlider_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QAbstractSlider_protectedbase_sender(const void* self);
-	friend int QAbstractSlider_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractSlider_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractSlider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QAbstractSlider_protectedbase_setRepeatAction(VirtualQAbstractSlider* self, int action);
+	friend int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* self);
+	friend void QAbstractSlider_protectedbase_setRepeatAction2(VirtualQAbstractSlider* self, int action, int thresholdTime);
+	friend void QAbstractSlider_protectedbase_setRepeatAction3(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime);
+	friend void QAbstractSlider_protectedbase_updateMicroFocus(VirtualQAbstractSlider* self);
+	friend void QAbstractSlider_protectedbase_create(VirtualQAbstractSlider* self);
+	friend void QAbstractSlider_protectedbase_destroy(VirtualQAbstractSlider* self);
+	friend bool QAbstractSlider_protectedbase_focusNextChild(VirtualQAbstractSlider* self);
+	friend bool QAbstractSlider_protectedbase_focusPreviousChild(VirtualQAbstractSlider* self);
+	friend QObject* QAbstractSlider_protectedbase_sender(const VirtualQAbstractSlider* self);
+	friend int QAbstractSlider_protectedbase_senderSignalIndex(const VirtualQAbstractSlider* self);
+	friend int QAbstractSlider_protectedbase_receivers(const VirtualQAbstractSlider* self, const char* signal);
+	friend bool QAbstractSlider_protectedbase_isSignalConnected(const VirtualQAbstractSlider* self, QMetaMethod* signal);
 };
 
-QAbstractSlider* QAbstractSlider_new(struct QAbstractSlider_VTable* vtbl, QWidget* parent) {
-	return new VirtualQAbstractSlider(vtbl, parent);
+VirtualQAbstractSlider* QAbstractSlider_new(const QAbstractSlider_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQAbstractSlider(vtbl, vdata, parent);
 }
 
-QAbstractSlider* QAbstractSlider_new2(struct QAbstractSlider_VTable* vtbl) {
-	return new VirtualQAbstractSlider(vtbl);
+VirtualQAbstractSlider* QAbstractSlider_new2(const QAbstractSlider_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractSlider(vtbl, vdata);
 }
 
 void QAbstractSlider_virtbase(QAbstractSlider* src, QWidget** outptr_QWidget) {
@@ -999,7 +943,7 @@ void QAbstractSlider_valueChanged(QAbstractSlider* self, int value) {
 	self->valueChanged(static_cast<int>(value));
 }
 
-void QAbstractSlider_connect_valueChanged(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_valueChanged(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1015,7 +959,7 @@ void QAbstractSlider_sliderPressed(QAbstractSlider* self) {
 	self->sliderPressed();
 }
 
-void QAbstractSlider_connect_sliderPressed(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_sliderPressed(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1030,7 +974,7 @@ void QAbstractSlider_sliderMoved(QAbstractSlider* self, int position) {
 	self->sliderMoved(static_cast<int>(position));
 }
 
-void QAbstractSlider_connect_sliderMoved(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_sliderMoved(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1046,7 +990,7 @@ void QAbstractSlider_sliderReleased(QAbstractSlider* self) {
 	self->sliderReleased();
 }
 
-void QAbstractSlider_connect_sliderReleased(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_sliderReleased(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1061,7 +1005,7 @@ void QAbstractSlider_rangeChanged(QAbstractSlider* self, int min, int max) {
 	self->rangeChanged(static_cast<int>(min), static_cast<int>(max));
 }
 
-void QAbstractSlider_connect_rangeChanged(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_rangeChanged(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -1078,7 +1022,7 @@ void QAbstractSlider_actionTriggered(QAbstractSlider* self, int action) {
 	self->actionTriggered(static_cast<int>(action));
 }
 
-void QAbstractSlider_connect_actionTriggered(QAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSlider_connect_actionTriggered(VirtualQAbstractSlider* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1134,404 +1078,319 @@ struct miqt_string QAbstractSlider_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QAbstractSlider_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractSlider_virtualbase_metaObject(const VirtualQAbstractSlider* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::metaObject();
-
+	return (QMetaObject*) self->QAbstractSlider::metaObject();
 }
 
-void* QAbstractSlider_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractSlider_virtualbase_metacast(VirtualQAbstractSlider* self, const char* param1) {
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::qt_metacast(param1);
-
+	return self->QAbstractSlider::qt_metacast(param1);
 }
 
-int QAbstractSlider_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractSlider_virtualbase_metacall(VirtualQAbstractSlider* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractSlider::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAbstractSlider_virtualbase_event(void* self, QEvent* e) {
+bool QAbstractSlider_virtualbase_event(VirtualQAbstractSlider* self, QEvent* e) {
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::event(e);
-
+	return self->QAbstractSlider::event(e);
 }
 
-void QAbstractSlider_virtualbase_sliderChange(void* self, int change) {
+void QAbstractSlider_virtualbase_sliderChange(VirtualQAbstractSlider* self, int change) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::sliderChange(static_cast<VirtualQAbstractSlider::SliderChange>(change));
-
+	self->QAbstractSlider::sliderChange(static_cast<VirtualQAbstractSlider::SliderChange>(change));
 }
 
-void QAbstractSlider_virtualbase_keyPressEvent(void* self, QKeyEvent* ev) {
+void QAbstractSlider_virtualbase_keyPressEvent(VirtualQAbstractSlider* self, QKeyEvent* ev) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::keyPressEvent(ev);
-
+	self->QAbstractSlider::keyPressEvent(ev);
 }
 
-void QAbstractSlider_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QAbstractSlider_virtualbase_timerEvent(VirtualQAbstractSlider* self, QTimerEvent* param1) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::timerEvent(param1);
-
+	self->QAbstractSlider::timerEvent(param1);
 }
 
-void QAbstractSlider_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QAbstractSlider_virtualbase_wheelEvent(VirtualQAbstractSlider* self, QWheelEvent* e) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::wheelEvent(e);
-
+	self->QAbstractSlider::wheelEvent(e);
 }
 
-void QAbstractSlider_virtualbase_changeEvent(void* self, QEvent* e) {
+void QAbstractSlider_virtualbase_changeEvent(VirtualQAbstractSlider* self, QEvent* e) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::changeEvent(e);
-
+	self->QAbstractSlider::changeEvent(e);
 }
 
-int QAbstractSlider_virtualbase_devType(const void* self) {
+int QAbstractSlider_virtualbase_devType(const VirtualQAbstractSlider* self) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::devType();
-
+	return self->QAbstractSlider::devType();
 }
 
-void QAbstractSlider_virtualbase_setVisible(void* self, bool visible) {
+void QAbstractSlider_virtualbase_setVisible(VirtualQAbstractSlider* self, bool visible) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::setVisible(visible);
-
+	self->QAbstractSlider::setVisible(visible);
 }
 
-QSize* QAbstractSlider_virtualbase_sizeHint(const void* self) {
+QSize* QAbstractSlider_virtualbase_sizeHint(const VirtualQAbstractSlider* self) {
 
-	return new QSize(( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::sizeHint());
-
+	return new QSize(self->QAbstractSlider::sizeHint());
 }
 
-QSize* QAbstractSlider_virtualbase_minimumSizeHint(const void* self) {
+QSize* QAbstractSlider_virtualbase_minimumSizeHint(const VirtualQAbstractSlider* self) {
 
-	return new QSize(( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::minimumSizeHint());
-
+	return new QSize(self->QAbstractSlider::minimumSizeHint());
 }
 
-int QAbstractSlider_virtualbase_heightForWidth(const void* self, int param1) {
+int QAbstractSlider_virtualbase_heightForWidth(const VirtualQAbstractSlider* self, int param1) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::heightForWidth(static_cast<int>(param1));
-
+	return self->QAbstractSlider::heightForWidth(static_cast<int>(param1));
 }
 
-bool QAbstractSlider_virtualbase_hasHeightForWidth(const void* self) {
+bool QAbstractSlider_virtualbase_hasHeightForWidth(const VirtualQAbstractSlider* self) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::hasHeightForWidth();
-
+	return self->QAbstractSlider::hasHeightForWidth();
 }
 
-QPaintEngine* QAbstractSlider_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QAbstractSlider_virtualbase_paintEngine(const VirtualQAbstractSlider* self) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::paintEngine();
-
+	return self->QAbstractSlider::paintEngine();
 }
 
-void QAbstractSlider_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QAbstractSlider_virtualbase_mousePressEvent(VirtualQAbstractSlider* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::mousePressEvent(event);
-
+	self->QAbstractSlider::mousePressEvent(event);
 }
 
-void QAbstractSlider_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QAbstractSlider_virtualbase_mouseReleaseEvent(VirtualQAbstractSlider* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::mouseReleaseEvent(event);
-
+	self->QAbstractSlider::mouseReleaseEvent(event);
 }
 
-void QAbstractSlider_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QAbstractSlider_virtualbase_mouseDoubleClickEvent(VirtualQAbstractSlider* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::mouseDoubleClickEvent(event);
-
+	self->QAbstractSlider::mouseDoubleClickEvent(event);
 }
 
-void QAbstractSlider_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QAbstractSlider_virtualbase_mouseMoveEvent(VirtualQAbstractSlider* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::mouseMoveEvent(event);
-
+	self->QAbstractSlider::mouseMoveEvent(event);
 }
 
-void QAbstractSlider_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QAbstractSlider_virtualbase_keyReleaseEvent(VirtualQAbstractSlider* self, QKeyEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::keyReleaseEvent(event);
-
+	self->QAbstractSlider::keyReleaseEvent(event);
 }
 
-void QAbstractSlider_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QAbstractSlider_virtualbase_focusInEvent(VirtualQAbstractSlider* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::focusInEvent(event);
-
+	self->QAbstractSlider::focusInEvent(event);
 }
 
-void QAbstractSlider_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QAbstractSlider_virtualbase_focusOutEvent(VirtualQAbstractSlider* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::focusOutEvent(event);
-
+	self->QAbstractSlider::focusOutEvent(event);
 }
 
-void QAbstractSlider_virtualbase_enterEvent(void* self, QEvent* event) {
+void QAbstractSlider_virtualbase_enterEvent(VirtualQAbstractSlider* self, QEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::enterEvent(event);
-
+	self->QAbstractSlider::enterEvent(event);
 }
 
-void QAbstractSlider_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QAbstractSlider_virtualbase_leaveEvent(VirtualQAbstractSlider* self, QEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::leaveEvent(event);
-
+	self->QAbstractSlider::leaveEvent(event);
 }
 
-void QAbstractSlider_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QAbstractSlider_virtualbase_paintEvent(VirtualQAbstractSlider* self, QPaintEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::paintEvent(event);
-
+	self->QAbstractSlider::paintEvent(event);
 }
 
-void QAbstractSlider_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QAbstractSlider_virtualbase_moveEvent(VirtualQAbstractSlider* self, QMoveEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::moveEvent(event);
-
+	self->QAbstractSlider::moveEvent(event);
 }
 
-void QAbstractSlider_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QAbstractSlider_virtualbase_resizeEvent(VirtualQAbstractSlider* self, QResizeEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::resizeEvent(event);
-
+	self->QAbstractSlider::resizeEvent(event);
 }
 
-void QAbstractSlider_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QAbstractSlider_virtualbase_closeEvent(VirtualQAbstractSlider* self, QCloseEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::closeEvent(event);
-
+	self->QAbstractSlider::closeEvent(event);
 }
 
-void QAbstractSlider_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QAbstractSlider_virtualbase_contextMenuEvent(VirtualQAbstractSlider* self, QContextMenuEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::contextMenuEvent(event);
-
+	self->QAbstractSlider::contextMenuEvent(event);
 }
 
-void QAbstractSlider_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QAbstractSlider_virtualbase_tabletEvent(VirtualQAbstractSlider* self, QTabletEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::tabletEvent(event);
-
+	self->QAbstractSlider::tabletEvent(event);
 }
 
-void QAbstractSlider_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QAbstractSlider_virtualbase_actionEvent(VirtualQAbstractSlider* self, QActionEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::actionEvent(event);
-
+	self->QAbstractSlider::actionEvent(event);
 }
 
-void QAbstractSlider_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QAbstractSlider_virtualbase_dragEnterEvent(VirtualQAbstractSlider* self, QDragEnterEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::dragEnterEvent(event);
-
+	self->QAbstractSlider::dragEnterEvent(event);
 }
 
-void QAbstractSlider_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QAbstractSlider_virtualbase_dragMoveEvent(VirtualQAbstractSlider* self, QDragMoveEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::dragMoveEvent(event);
-
+	self->QAbstractSlider::dragMoveEvent(event);
 }
 
-void QAbstractSlider_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QAbstractSlider_virtualbase_dragLeaveEvent(VirtualQAbstractSlider* self, QDragLeaveEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::dragLeaveEvent(event);
-
+	self->QAbstractSlider::dragLeaveEvent(event);
 }
 
-void QAbstractSlider_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QAbstractSlider_virtualbase_dropEvent(VirtualQAbstractSlider* self, QDropEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::dropEvent(event);
-
+	self->QAbstractSlider::dropEvent(event);
 }
 
-void QAbstractSlider_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QAbstractSlider_virtualbase_showEvent(VirtualQAbstractSlider* self, QShowEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::showEvent(event);
-
+	self->QAbstractSlider::showEvent(event);
 }
 
-void QAbstractSlider_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QAbstractSlider_virtualbase_hideEvent(VirtualQAbstractSlider* self, QHideEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::hideEvent(event);
-
+	self->QAbstractSlider::hideEvent(event);
 }
 
-bool QAbstractSlider_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QAbstractSlider_virtualbase_nativeEvent(VirtualQAbstractSlider* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QAbstractSlider::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QAbstractSlider_virtualbase_metric(const void* self, int param1) {
+int QAbstractSlider_virtualbase_metric(const VirtualQAbstractSlider* self, int param1) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::metric(static_cast<VirtualQAbstractSlider::PaintDeviceMetric>(param1));
-
+	return self->QAbstractSlider::metric(static_cast<VirtualQAbstractSlider::PaintDeviceMetric>(param1));
 }
 
-void QAbstractSlider_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QAbstractSlider_virtualbase_initPainter(const VirtualQAbstractSlider* self, QPainter* painter) {
 
-	( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::initPainter(painter);
-
+	self->QAbstractSlider::initPainter(painter);
 }
 
-QPaintDevice* QAbstractSlider_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QAbstractSlider_virtualbase_redirected(const VirtualQAbstractSlider* self, QPoint* offset) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::redirected(offset);
-
+	return self->QAbstractSlider::redirected(offset);
 }
 
-QPainter* QAbstractSlider_virtualbase_sharedPainter(const void* self) {
+QPainter* QAbstractSlider_virtualbase_sharedPainter(const VirtualQAbstractSlider* self) {
 
-	return ( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::sharedPainter();
-
+	return self->QAbstractSlider::sharedPainter();
 }
 
-void QAbstractSlider_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QAbstractSlider_virtualbase_inputMethodEvent(VirtualQAbstractSlider* self, QInputMethodEvent* param1) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::inputMethodEvent(param1);
-
+	self->QAbstractSlider::inputMethodEvent(param1);
 }
 
-QVariant* QAbstractSlider_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QAbstractSlider_virtualbase_inputMethodQuery(const VirtualQAbstractSlider* self, int param1) {
 
-	return new QVariant(( (const VirtualQAbstractSlider*)(self) )->QAbstractSlider::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QAbstractSlider::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QAbstractSlider_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QAbstractSlider_virtualbase_focusNextPrevChild(VirtualQAbstractSlider* self, bool next) {
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::focusNextPrevChild(next);
-
+	return self->QAbstractSlider::focusNextPrevChild(next);
 }
 
-bool QAbstractSlider_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractSlider_virtualbase_eventFilter(VirtualQAbstractSlider* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::eventFilter(watched, event);
-
+	return self->QAbstractSlider::eventFilter(watched, event);
 }
 
-void QAbstractSlider_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractSlider_virtualbase_childEvent(VirtualQAbstractSlider* self, QChildEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::childEvent(event);
-
+	self->QAbstractSlider::childEvent(event);
 }
 
-void QAbstractSlider_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractSlider_virtualbase_customEvent(VirtualQAbstractSlider* self, QEvent* event) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::customEvent(event);
-
+	self->QAbstractSlider::customEvent(event);
 }
 
-void QAbstractSlider_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractSlider_virtualbase_connectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::connectNotify(*signal);
-
+	self->QAbstractSlider::connectNotify(*signal);
 }
 
-void QAbstractSlider_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractSlider_virtualbase_disconnectNotify(VirtualQAbstractSlider* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractSlider*)(self) )->QAbstractSlider::disconnectNotify(*signal);
-
+	self->QAbstractSlider::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractSlider_staticMetaObject() { return &QAbstractSlider::staticMetaObject; }
-void QAbstractSlider_protectedbase_setRepeatAction(void* self, int action) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action));
 
+const QAbstractSlider_VTable* QAbstractSlider_vtbl(const VirtualQAbstractSlider* self) { return self->vtbl; }
+void* QAbstractSlider_vdata(const VirtualQAbstractSlider* self) { return self->vdata; }
+void QAbstractSlider_setVdata(VirtualQAbstractSlider* self, void* vdata) { self->vdata = vdata; }
+
+void QAbstractSlider_protectedbase_setRepeatAction(VirtualQAbstractSlider* self, int action) {
+	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action));
 }
 
-int QAbstractSlider_protectedbase_repeatAction(const void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	VirtualQAbstractSlider::SliderAction _ret = self_cast->repeatAction();
+int QAbstractSlider_protectedbase_repeatAction(const VirtualQAbstractSlider* self) {
+	VirtualQAbstractSlider::SliderAction _ret = self->repeatAction();
 	return static_cast<int>(_ret);
-
 }
 
-void QAbstractSlider_protectedbase_setRepeatAction2(void* self, int action, int thresholdTime) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime));
-
+void QAbstractSlider_protectedbase_setRepeatAction2(VirtualQAbstractSlider* self, int action, int thresholdTime) {
+	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime));
 }
 
-void QAbstractSlider_protectedbase_setRepeatAction3(void* self, int action, int thresholdTime, int repeatTime) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime), static_cast<int>(repeatTime));
-
+void QAbstractSlider_protectedbase_setRepeatAction3(VirtualQAbstractSlider* self, int action, int thresholdTime, int repeatTime) {
+	self->setRepeatAction(static_cast<VirtualQAbstractSlider::SliderAction>(action), static_cast<int>(thresholdTime), static_cast<int>(repeatTime));
 }
 
-void QAbstractSlider_protectedbase_updateMicroFocus(void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QAbstractSlider_protectedbase_updateMicroFocus(VirtualQAbstractSlider* self) {
+	self->updateMicroFocus();
 }
 
-void QAbstractSlider_protectedbase_create(void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->create();
-
+void QAbstractSlider_protectedbase_create(VirtualQAbstractSlider* self) {
+	self->create();
 }
 
-void QAbstractSlider_protectedbase_destroy(void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	self_cast->destroy();
-
+void QAbstractSlider_protectedbase_destroy(VirtualQAbstractSlider* self) {
+	self->destroy();
 }
 
-bool QAbstractSlider_protectedbase_focusNextChild(void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QAbstractSlider_protectedbase_focusNextChild(VirtualQAbstractSlider* self) {
+	return self->focusNextChild();
 }
 
-bool QAbstractSlider_protectedbase_focusPreviousChild(void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QAbstractSlider_protectedbase_focusPreviousChild(VirtualQAbstractSlider* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QAbstractSlider_protectedbase_sender(const void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractSlider_protectedbase_sender(const VirtualQAbstractSlider* self) {
+	return self->sender();
 }
 
-int QAbstractSlider_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractSlider_protectedbase_senderSignalIndex(const VirtualQAbstractSlider* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractSlider_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractSlider_protectedbase_receivers(const VirtualQAbstractSlider* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractSlider_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractSlider* self_cast = static_cast<VirtualQAbstractSlider*>( (QAbstractSlider*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractSlider_protectedbase_isSignalConnected(const VirtualQAbstractSlider* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractSlider_delete(QAbstractSlider* self) {

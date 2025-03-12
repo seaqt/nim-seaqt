@@ -15,39 +15,32 @@
 #include <QTimerEvent>
 #include <qabstracttransition.h>
 #include "gen_qabstracttransition.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractTransition final : public QAbstractTransition {
-	struct QAbstractTransition_VTable* vtbl;
+	const QAbstractTransition_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractTransition_VTable* QAbstractTransition_vtbl(const VirtualQAbstractTransition* self);
+	friend void* QAbstractTransition_vdata(const VirtualQAbstractTransition* self);
+	friend void QAbstractTransition_setVdata(VirtualQAbstractTransition* self, void* vdata);
 
-	VirtualQAbstractTransition(struct QAbstractTransition_VTable* vtbl): QAbstractTransition(), vtbl(vtbl) {};
-	VirtualQAbstractTransition(struct QAbstractTransition_VTable* vtbl, QState* sourceState): QAbstractTransition(sourceState), vtbl(vtbl) {};
+	VirtualQAbstractTransition(const QAbstractTransition_VTable* vtbl, void* vdata): QAbstractTransition(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractTransition(const QAbstractTransition_VTable* vtbl, void* vdata, QState* sourceState): QAbstractTransition(sourceState), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractTransition() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractTransition() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractTransition::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractTransition_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractTransition_virtualbase_metaObject(const VirtualQAbstractTransition* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractTransition::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractTransition_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractTransition_virtualbase_metacast(VirtualQAbstractTransition* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractTransition::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractTransition_virtualbase_metacall(VirtualQAbstractTransition* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventTest(QEvent* event) override {
 		if (vtbl->eventTest == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -88,12 +79,11 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->eventTest(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->eventTest(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void onTransition(QEvent* event) override {
 		if (vtbl->onTransition == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -101,11 +91,10 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onTransition(vtbl, this, sigval1);
+		vtbl->onTransition(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QAbstractTransition::event(e);
@@ -113,14 +102,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractTransition_virtualbase_event(void* self, QEvent* e);
+	friend bool QAbstractTransition_virtualbase_event(VirtualQAbstractTransition* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractTransition::eventFilter(watched, event);
@@ -129,14 +117,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractTransition_virtualbase_eventFilter(VirtualQAbstractTransition* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractTransition::timerEvent(event);
@@ -145,13 +132,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTransition_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractTransition_virtualbase_timerEvent(VirtualQAbstractTransition* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractTransition::childEvent(event);
@@ -160,13 +146,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTransition_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractTransition_virtualbase_childEvent(VirtualQAbstractTransition* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractTransition::customEvent(event);
@@ -175,13 +160,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractTransition_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractTransition_virtualbase_customEvent(VirtualQAbstractTransition* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractTransition::connectNotify(signal);
@@ -192,13 +176,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractTransition_virtualbase_connectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractTransition::disconnectNotify(signal);
@@ -209,25 +192,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractTransition_virtualbase_disconnectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAbstractTransition_protectedbase_sender(const void* self);
-	friend int QAbstractTransition_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractTransition_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAbstractTransition_protectedbase_sender(const VirtualQAbstractTransition* self);
+	friend int QAbstractTransition_protectedbase_senderSignalIndex(const VirtualQAbstractTransition* self);
+	friend int QAbstractTransition_protectedbase_receivers(const VirtualQAbstractTransition* self, const char* signal);
+	friend bool QAbstractTransition_protectedbase_isSignalConnected(const VirtualQAbstractTransition* self, QMetaMethod* signal);
 };
 
-QAbstractTransition* QAbstractTransition_new(struct QAbstractTransition_VTable* vtbl) {
-	return new VirtualQAbstractTransition(vtbl);
+VirtualQAbstractTransition* QAbstractTransition_new(const QAbstractTransition_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractTransition(vtbl, vdata);
 }
 
-QAbstractTransition* QAbstractTransition_new2(struct QAbstractTransition_VTable* vtbl, QState* sourceState) {
-	return new VirtualQAbstractTransition(vtbl, sourceState);
+VirtualQAbstractTransition* QAbstractTransition_new2(const QAbstractTransition_VTable* vtbl, void* vdata, QState* sourceState) {
+	return new VirtualQAbstractTransition(vtbl, vdata, sourceState);
 }
 
 void QAbstractTransition_virtbase(QAbstractTransition* src, QObject** outptr_QObject) {
@@ -381,93 +364,76 @@ struct miqt_string QAbstractTransition_trUtf83(const char* s, const char* c, int
 	return _ms;
 }
 
-QMetaObject* QAbstractTransition_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractTransition_virtualbase_metaObject(const VirtualQAbstractTransition* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractTransition*)(self) )->QAbstractTransition::metaObject();
-
+	return (QMetaObject*) self->QAbstractTransition::metaObject();
 }
 
-void* QAbstractTransition_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractTransition_virtualbase_metacast(VirtualQAbstractTransition* self, const char* param1) {
 
-	return ( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::qt_metacast(param1);
-
+	return self->QAbstractTransition::qt_metacast(param1);
 }
 
-int QAbstractTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractTransition_virtualbase_metacall(VirtualQAbstractTransition* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractTransition::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAbstractTransition_virtualbase_event(void* self, QEvent* e) {
+bool QAbstractTransition_virtualbase_event(VirtualQAbstractTransition* self, QEvent* e) {
 
-	return ( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::event(e);
-
+	return self->QAbstractTransition::event(e);
 }
 
-bool QAbstractTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractTransition_virtualbase_eventFilter(VirtualQAbstractTransition* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::eventFilter(watched, event);
-
+	return self->QAbstractTransition::eventFilter(watched, event);
 }
 
-void QAbstractTransition_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractTransition_virtualbase_timerEvent(VirtualQAbstractTransition* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::timerEvent(event);
-
+	self->QAbstractTransition::timerEvent(event);
 }
 
-void QAbstractTransition_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractTransition_virtualbase_childEvent(VirtualQAbstractTransition* self, QChildEvent* event) {
 
-	( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::childEvent(event);
-
+	self->QAbstractTransition::childEvent(event);
 }
 
-void QAbstractTransition_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractTransition_virtualbase_customEvent(VirtualQAbstractTransition* self, QEvent* event) {
 
-	( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::customEvent(event);
-
+	self->QAbstractTransition::customEvent(event);
 }
 
-void QAbstractTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractTransition_virtualbase_connectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::connectNotify(*signal);
-
+	self->QAbstractTransition::connectNotify(*signal);
 }
 
-void QAbstractTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractTransition_virtualbase_disconnectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractTransition*)(self) )->QAbstractTransition::disconnectNotify(*signal);
-
+	self->QAbstractTransition::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractTransition_staticMetaObject() { return &QAbstractTransition::staticMetaObject; }
-QObject* QAbstractTransition_protectedbase_sender(const void* self) {
-	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	
-	return self_cast->sender();
 
+const QAbstractTransition_VTable* QAbstractTransition_vtbl(const VirtualQAbstractTransition* self) { return self->vtbl; }
+void* QAbstractTransition_vdata(const VirtualQAbstractTransition* self) { return self->vdata; }
+void QAbstractTransition_setVdata(VirtualQAbstractTransition* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAbstractTransition_protectedbase_sender(const VirtualQAbstractTransition* self) {
+	return self->sender();
 }
 
-int QAbstractTransition_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractTransition_protectedbase_senderSignalIndex(const VirtualQAbstractTransition* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractTransition_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractTransition_protectedbase_receivers(const VirtualQAbstractTransition* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractTransition* self_cast = static_cast<VirtualQAbstractTransition*>( (QAbstractTransition*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractTransition_protectedbase_isSignalConnected(const VirtualQAbstractTransition* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractTransition_delete(QAbstractTransition* self) {

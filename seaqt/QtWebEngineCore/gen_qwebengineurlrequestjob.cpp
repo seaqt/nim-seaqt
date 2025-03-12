@@ -10,15 +10,6 @@
 #include <QWebEngineUrlRequestJob>
 #include <qwebengineurlrequestjob.h>
 #include "gen_qwebengineurlrequestjob.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWebEngineUrlRequestJob_virtbase(QWebEngineUrlRequestJob* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -132,6 +123,7 @@ struct miqt_string QWebEngineUrlRequestJob_trUtf83(const char* s, const char* c,
 }
 
 const QMetaObject* QWebEngineUrlRequestJob_staticMetaObject() { return &QWebEngineUrlRequestJob::staticMetaObject; }
+
 void QWebEngineUrlRequestJob_delete(QWebEngineUrlRequestJob* self) {
 	delete self;
 }

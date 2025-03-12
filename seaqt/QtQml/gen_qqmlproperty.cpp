@@ -10,15 +10,6 @@
 #include <QVariant>
 #include <qqmlproperty.h>
 #include "gen_qqmlproperty.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlProperty* QQmlProperty_new() {
 	return new QQmlProperty();
 }

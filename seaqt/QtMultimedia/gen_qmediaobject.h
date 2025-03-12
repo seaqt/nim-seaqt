@@ -62,6 +62,7 @@ struct miqt_string QMediaObject_tr2(const char* s, const char* c);
 struct miqt_string QMediaObject_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaObject_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaObject_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaObject_staticMetaObject();
 void QMediaObject_delete(QMediaObject* self);
 

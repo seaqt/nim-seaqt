@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qssldiffiehellmanparameters.h>
 #include "gen_qssldiffiehellmanparameters.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslDiffieHellmanParameters* QSslDiffieHellmanParameters_new() {
 	return new QSslDiffieHellmanParameters();
 }

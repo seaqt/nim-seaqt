@@ -18,39 +18,32 @@
 #include <QVideoEncoderSettings>
 #include <qmediarecorder.h>
 #include "gen_qmediarecorder.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMediaRecorder final : public QMediaRecorder {
-	struct QMediaRecorder_VTable* vtbl;
+	const QMediaRecorder_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMediaRecorder_VTable* QMediaRecorder_vtbl(const VirtualQMediaRecorder* self);
+	friend void* QMediaRecorder_vdata(const VirtualQMediaRecorder* self);
+	friend void QMediaRecorder_setVdata(VirtualQMediaRecorder* self, void* vdata);
 
-	VirtualQMediaRecorder(struct QMediaRecorder_VTable* vtbl, QMediaObject* mediaObject): QMediaRecorder(mediaObject), vtbl(vtbl) {};
-	VirtualQMediaRecorder(struct QMediaRecorder_VTable* vtbl, QMediaObject* mediaObject, QObject* parent): QMediaRecorder(mediaObject, parent), vtbl(vtbl) {};
+	VirtualQMediaRecorder(const QMediaRecorder_VTable* vtbl, void* vdata, QMediaObject* mediaObject): QMediaRecorder(mediaObject), vtbl(vtbl), vdata(vdata) {}
+	VirtualQMediaRecorder(const QMediaRecorder_VTable* vtbl, void* vdata, QMediaObject* mediaObject, QObject* parent): QMediaRecorder(mediaObject, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMediaRecorder() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMediaRecorder() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMediaRecorder::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMediaRecorder_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMediaRecorder_virtualbase_metaObject(const VirtualQMediaRecorder* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMediaRecorder::qt_metacast(param1);
@@ -58,14 +51,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMediaRecorder_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMediaRecorder_virtualbase_metacast(VirtualQMediaRecorder* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMediaRecorder::qt_metacall(param1, param2, param3);
@@ -76,28 +68,26 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMediaRecorder_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMediaRecorder_virtualbase_metacall(VirtualQMediaRecorder* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMediaObject* mediaObject() const override {
 		if (vtbl->mediaObject == 0) {
 			return QMediaRecorder::mediaObject();
 		}
 
 
-		QMediaObject* callback_return_value = vtbl->mediaObject(vtbl, this);
+		QMediaObject* callback_return_value = vtbl->mediaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMediaObject* QMediaRecorder_virtualbase_mediaObject(const void* self);
+	friend QMediaObject* QMediaRecorder_virtualbase_mediaObject(const VirtualQMediaRecorder* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool setMediaObject(QMediaObject* object) override {
 		if (vtbl->setMediaObject == 0) {
 			return QMediaRecorder::setMediaObject(object);
@@ -105,14 +95,13 @@ public:
 
 		QMediaObject* sigval1 = object;
 
-		bool callback_return_value = vtbl->setMediaObject(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->setMediaObject(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMediaRecorder_virtualbase_setMediaObject(void* self, QMediaObject* object);
+	friend bool QMediaRecorder_virtualbase_setMediaObject(VirtualQMediaRecorder* self, QMediaObject* object);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QMediaRecorder::event(event);
@@ -120,14 +109,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMediaRecorder_virtualbase_event(void* self, QEvent* event);
+	friend bool QMediaRecorder_virtualbase_event(VirtualQMediaRecorder* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMediaRecorder::eventFilter(watched, event);
@@ -136,14 +124,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMediaRecorder_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QMediaRecorder_virtualbase_eventFilter(VirtualQMediaRecorder* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMediaRecorder::timerEvent(event);
@@ -152,13 +139,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMediaRecorder_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMediaRecorder_virtualbase_timerEvent(VirtualQMediaRecorder* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMediaRecorder::childEvent(event);
@@ -167,13 +153,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMediaRecorder_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMediaRecorder_virtualbase_childEvent(VirtualQMediaRecorder* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMediaRecorder::customEvent(event);
@@ -182,13 +167,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMediaRecorder_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMediaRecorder_virtualbase_customEvent(VirtualQMediaRecorder* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMediaRecorder::connectNotify(signal);
@@ -199,13 +183,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMediaRecorder_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMediaRecorder_virtualbase_connectNotify(VirtualQMediaRecorder* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMediaRecorder::disconnectNotify(signal);
@@ -216,25 +199,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMediaRecorder_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMediaRecorder_virtualbase_disconnectNotify(VirtualQMediaRecorder* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMediaRecorder_protectedbase_sender(const void* self);
-	friend int QMediaRecorder_protectedbase_senderSignalIndex(const void* self);
-	friend int QMediaRecorder_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMediaRecorder_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QMediaRecorder_protectedbase_sender(const VirtualQMediaRecorder* self);
+	friend int QMediaRecorder_protectedbase_senderSignalIndex(const VirtualQMediaRecorder* self);
+	friend int QMediaRecorder_protectedbase_receivers(const VirtualQMediaRecorder* self, const char* signal);
+	friend bool QMediaRecorder_protectedbase_isSignalConnected(const VirtualQMediaRecorder* self, QMetaMethod* signal);
 };
 
-QMediaRecorder* QMediaRecorder_new(struct QMediaRecorder_VTable* vtbl, QMediaObject* mediaObject) {
-	return new VirtualQMediaRecorder(vtbl, mediaObject);
+VirtualQMediaRecorder* QMediaRecorder_new(const QMediaRecorder_VTable* vtbl, void* vdata, QMediaObject* mediaObject) {
+	return new VirtualQMediaRecorder(vtbl, vdata, mediaObject);
 }
 
-QMediaRecorder* QMediaRecorder_new2(struct QMediaRecorder_VTable* vtbl, QMediaObject* mediaObject, QObject* parent) {
-	return new VirtualQMediaRecorder(vtbl, mediaObject, parent);
+VirtualQMediaRecorder* QMediaRecorder_new2(const QMediaRecorder_VTable* vtbl, void* vdata, QMediaObject* mediaObject, QObject* parent) {
+	return new VirtualQMediaRecorder(vtbl, vdata, mediaObject, parent);
 }
 
 void QMediaRecorder_virtbase(QMediaRecorder* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface) {
@@ -574,7 +557,7 @@ void QMediaRecorder_stateChanged(QMediaRecorder* self, int state) {
 	self->stateChanged(static_cast<QMediaRecorder::State>(state));
 }
 
-void QMediaRecorder_connect_stateChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_stateChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -591,7 +574,7 @@ void QMediaRecorder_statusChanged(QMediaRecorder* self, int status) {
 	self->statusChanged(static_cast<QMediaRecorder::Status>(status));
 }
 
-void QMediaRecorder_connect_statusChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_statusChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -608,7 +591,7 @@ void QMediaRecorder_durationChanged(QMediaRecorder* self, long long duration) {
 	self->durationChanged(static_cast<qint64>(duration));
 }
 
-void QMediaRecorder_connect_durationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_durationChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, long long), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, long long);
@@ -625,7 +608,7 @@ void QMediaRecorder_mutedChanged(QMediaRecorder* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QMediaRecorder_connect_mutedChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_mutedChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -641,7 +624,7 @@ void QMediaRecorder_volumeChanged(QMediaRecorder* self, double volume) {
 	self->volumeChanged(static_cast<qreal>(volume));
 }
 
-void QMediaRecorder_connect_volumeChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_volumeChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, double), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, double);
@@ -658,7 +641,7 @@ void QMediaRecorder_actualLocationChanged(QMediaRecorder* self, QUrl* location) 
 	self->actualLocationChanged(*location);
 }
 
-void QMediaRecorder_connect_actualLocationChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_actualLocationChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QUrl*);
@@ -676,7 +659,7 @@ void QMediaRecorder_errorWithError(QMediaRecorder* self, int error) {
 	self->error(static_cast<QMediaRecorder::Error>(error));
 }
 
-void QMediaRecorder_connect_errorWithError(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_errorWithError(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -693,7 +676,7 @@ void QMediaRecorder_metaDataAvailableChanged(QMediaRecorder* self, bool availabl
 	self->metaDataAvailableChanged(available);
 }
 
-void QMediaRecorder_connect_metaDataAvailableChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_metaDataAvailableChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -709,7 +692,7 @@ void QMediaRecorder_metaDataWritableChanged(QMediaRecorder* self, bool writable)
 	self->metaDataWritableChanged(writable);
 }
 
-void QMediaRecorder_connect_metaDataWritableChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_metaDataWritableChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -725,7 +708,7 @@ void QMediaRecorder_metaDataChanged(QMediaRecorder* self) {
 	self->metaDataChanged();
 }
 
-void QMediaRecorder_connect_metaDataChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_metaDataChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -741,7 +724,7 @@ void QMediaRecorder_metaDataChanged2(QMediaRecorder* self, struct miqt_string ke
 	self->metaDataChanged(key_QString, *value);
 }
 
-void QMediaRecorder_connect_metaDataChanged2(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_metaDataChanged2(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string, QVariant*);
@@ -767,7 +750,7 @@ void QMediaRecorder_availabilityChanged(QMediaRecorder* self, bool available) {
 	self->availabilityChanged(available);
 }
 
-void QMediaRecorder_connect_availabilityChanged(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_availabilityChanged(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -783,7 +766,7 @@ void QMediaRecorder_availabilityChangedWithAvailability(QMediaRecorder* self, in
 	self->availabilityChanged(static_cast<QMultimedia::AvailabilityStatus>(availability));
 }
 
-void QMediaRecorder_connect_availabilityChangedWithAvailability(QMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QMediaRecorder_connect_availabilityChangedWithAvailability(VirtualQMediaRecorder* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -927,105 +910,86 @@ void QMediaRecorder_setEncodingSettings3(QMediaRecorder* self, QAudioEncoderSett
 	self->setEncodingSettings(*audioSettings, *videoSettings, containerMimeType_QString);
 }
 
-QMetaObject* QMediaRecorder_virtualbase_metaObject(const void* self) {
+QMetaObject* QMediaRecorder_virtualbase_metaObject(const VirtualQMediaRecorder* self) {
 
-	return (QMetaObject*) ( (const VirtualQMediaRecorder*)(self) )->QMediaRecorder::metaObject();
-
+	return (QMetaObject*) self->QMediaRecorder::metaObject();
 }
 
-void* QMediaRecorder_virtualbase_metacast(void* self, const char* param1) {
+void* QMediaRecorder_virtualbase_metacast(VirtualQMediaRecorder* self, const char* param1) {
 
-	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::qt_metacast(param1);
-
+	return self->QMediaRecorder::qt_metacast(param1);
 }
 
-int QMediaRecorder_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMediaRecorder_virtualbase_metacall(VirtualQMediaRecorder* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMediaRecorder::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QMediaObject* QMediaRecorder_virtualbase_mediaObject(const void* self) {
+QMediaObject* QMediaRecorder_virtualbase_mediaObject(const VirtualQMediaRecorder* self) {
 
-	return ( (const VirtualQMediaRecorder*)(self) )->QMediaRecorder::mediaObject();
-
+	return self->QMediaRecorder::mediaObject();
 }
 
-bool QMediaRecorder_virtualbase_setMediaObject(void* self, QMediaObject* object) {
+bool QMediaRecorder_virtualbase_setMediaObject(VirtualQMediaRecorder* self, QMediaObject* object) {
 
-	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::setMediaObject(object);
-
+	return self->QMediaRecorder::setMediaObject(object);
 }
 
-bool QMediaRecorder_virtualbase_event(void* self, QEvent* event) {
+bool QMediaRecorder_virtualbase_event(VirtualQMediaRecorder* self, QEvent* event) {
 
-	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::event(event);
-
+	return self->QMediaRecorder::event(event);
 }
 
-bool QMediaRecorder_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QMediaRecorder_virtualbase_eventFilter(VirtualQMediaRecorder* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::eventFilter(watched, event);
-
+	return self->QMediaRecorder::eventFilter(watched, event);
 }
 
-void QMediaRecorder_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMediaRecorder_virtualbase_timerEvent(VirtualQMediaRecorder* self, QTimerEvent* event) {
 
-	( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::timerEvent(event);
-
+	self->QMediaRecorder::timerEvent(event);
 }
 
-void QMediaRecorder_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMediaRecorder_virtualbase_childEvent(VirtualQMediaRecorder* self, QChildEvent* event) {
 
-	( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::childEvent(event);
-
+	self->QMediaRecorder::childEvent(event);
 }
 
-void QMediaRecorder_virtualbase_customEvent(void* self, QEvent* event) {
+void QMediaRecorder_virtualbase_customEvent(VirtualQMediaRecorder* self, QEvent* event) {
 
-	( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::customEvent(event);
-
+	self->QMediaRecorder::customEvent(event);
 }
 
-void QMediaRecorder_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMediaRecorder_virtualbase_connectNotify(VirtualQMediaRecorder* self, QMetaMethod* signal) {
 
-	( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::connectNotify(*signal);
-
+	self->QMediaRecorder::connectNotify(*signal);
 }
 
-void QMediaRecorder_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMediaRecorder_virtualbase_disconnectNotify(VirtualQMediaRecorder* self, QMetaMethod* signal) {
 
-	( (VirtualQMediaRecorder*)(self) )->QMediaRecorder::disconnectNotify(*signal);
-
+	self->QMediaRecorder::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMediaRecorder_staticMetaObject() { return &QMediaRecorder::staticMetaObject; }
-QObject* QMediaRecorder_protectedbase_sender(const void* self) {
-	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	
-	return self_cast->sender();
 
+const QMediaRecorder_VTable* QMediaRecorder_vtbl(const VirtualQMediaRecorder* self) { return self->vtbl; }
+void* QMediaRecorder_vdata(const VirtualQMediaRecorder* self) { return self->vdata; }
+void QMediaRecorder_setVdata(VirtualQMediaRecorder* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QMediaRecorder_protectedbase_sender(const VirtualQMediaRecorder* self) {
+	return self->sender();
 }
 
-int QMediaRecorder_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMediaRecorder_protectedbase_senderSignalIndex(const VirtualQMediaRecorder* self) {
+	return self->senderSignalIndex();
 }
 
-int QMediaRecorder_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMediaRecorder_protectedbase_receivers(const VirtualQMediaRecorder* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMediaRecorder_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMediaRecorder* self_cast = static_cast<VirtualQMediaRecorder*>( (QMediaRecorder*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMediaRecorder_protectedbase_isSignalConnected(const VirtualQMediaRecorder* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMediaRecorder_delete(QMediaRecorder* self) {

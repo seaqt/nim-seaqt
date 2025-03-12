@@ -38,25 +38,32 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QAudioOutput_VTable {
-	void (*destructor)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self);
-	QMetaObject* (*metaObject)(struct QAudioOutput_VTable* vtbl, const QAudioOutput* self);
-	void* (*metacast)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, const char* param1);
-	int (*metacall)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, int param1, int param2, void** param3);
-	bool (*event)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QEvent* event);
-	bool (*eventFilter)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QTimerEvent* event);
-	void (*childEvent)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QChildEvent* event);
-	void (*customEvent)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QEvent* event);
-	void (*connectNotify)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QAudioOutput_VTable* vtbl, QAudioOutput* self, QMetaMethod* signal);
-};
-QAudioOutput* QAudioOutput_new(struct QAudioOutput_VTable* vtbl);
-QAudioOutput* QAudioOutput_new2(struct QAudioOutput_VTable* vtbl, QAudioDeviceInfo* audioDeviceInfo);
-QAudioOutput* QAudioOutput_new3(struct QAudioOutput_VTable* vtbl, QAudioFormat* format);
-QAudioOutput* QAudioOutput_new4(struct QAudioOutput_VTable* vtbl, QAudioFormat* format, QObject* parent);
-QAudioOutput* QAudioOutput_new5(struct QAudioOutput_VTable* vtbl, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format);
-QAudioOutput* QAudioOutput_new6(struct QAudioOutput_VTable* vtbl, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format, QObject* parent);
+typedef struct VirtualQAudioOutput VirtualQAudioOutput;
+typedef struct QAudioOutput_VTable{
+	void (*destructor)(VirtualQAudioOutput* self);
+	QMetaObject* (*metaObject)(const VirtualQAudioOutput* self);
+	void* (*metacast)(VirtualQAudioOutput* self, const char* param1);
+	int (*metacall)(VirtualQAudioOutput* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQAudioOutput* self, QEvent* event);
+	bool (*eventFilter)(VirtualQAudioOutput* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQAudioOutput* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQAudioOutput* self, QChildEvent* event);
+	void (*customEvent)(VirtualQAudioOutput* self, QEvent* event);
+	void (*connectNotify)(VirtualQAudioOutput* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQAudioOutput* self, QMetaMethod* signal);
+}QAudioOutput_VTable;
+
+const QAudioOutput_VTable* QAudioOutput_vtbl(const VirtualQAudioOutput* self);
+void* QAudioOutput_vdata(const VirtualQAudioOutput* self);
+void QAudioOutput_setVdata(VirtualQAudioOutput* self, void* vdata);
+
+VirtualQAudioOutput* QAudioOutput_new(const QAudioOutput_VTable* vtbl, void* vdata);
+VirtualQAudioOutput* QAudioOutput_new2(const QAudioOutput_VTable* vtbl, void* vdata, QAudioDeviceInfo* audioDeviceInfo);
+VirtualQAudioOutput* QAudioOutput_new3(const QAudioOutput_VTable* vtbl, void* vdata, QAudioFormat* format);
+VirtualQAudioOutput* QAudioOutput_new4(const QAudioOutput_VTable* vtbl, void* vdata, QAudioFormat* format, QObject* parent);
+VirtualQAudioOutput* QAudioOutput_new5(const QAudioOutput_VTable* vtbl, void* vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format);
+VirtualQAudioOutput* QAudioOutput_new6(const QAudioOutput_VTable* vtbl, void* vdata, QAudioDeviceInfo* audioDeviceInfo, QAudioFormat* format, QObject* parent);
+
 void QAudioOutput_virtbase(QAudioOutput* src, QObject** outptr_QObject);
 QMetaObject* QAudioOutput_metaObject(const QAudioOutput* self);
 void* QAudioOutput_metacast(QAudioOutput* self, const char* param1);
@@ -85,27 +92,30 @@ double QAudioOutput_volume(const QAudioOutput* self);
 struct miqt_string QAudioOutput_category(const QAudioOutput* self);
 void QAudioOutput_setCategory(QAudioOutput* self, struct miqt_string category);
 void QAudioOutput_stateChanged(QAudioOutput* self, int state);
-void QAudioOutput_connect_stateChanged(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QAudioOutput_connect_stateChanged(VirtualQAudioOutput* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QAudioOutput_notify(QAudioOutput* self);
-void QAudioOutput_connect_notify(QAudioOutput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QAudioOutput_connect_notify(VirtualQAudioOutput* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 struct miqt_string QAudioOutput_tr2(const char* s, const char* c);
 struct miqt_string QAudioOutput_tr3(const char* s, const char* c, int n);
 struct miqt_string QAudioOutput_trUtf82(const char* s, const char* c);
 struct miqt_string QAudioOutput_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QAudioOutput_virtualbase_metaObject(const void* self);
-void* QAudioOutput_virtualbase_metacast(void* self, const char* param1);
-int QAudioOutput_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QAudioOutput_virtualbase_event(void* self, QEvent* event);
-bool QAudioOutput_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QAudioOutput_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QAudioOutput_virtualbase_childEvent(void* self, QChildEvent* event);
-void QAudioOutput_virtualbase_customEvent(void* self, QEvent* event);
-void QAudioOutput_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QAudioOutput_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QAudioOutput_protectedbase_sender(const void* self);
-int QAudioOutput_protectedbase_senderSignalIndex(const void* self);
-int QAudioOutput_protectedbase_receivers(const void* self, const char* signal);
-bool QAudioOutput_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QAudioOutput_virtualbase_metaObject(const VirtualQAudioOutput* self);
+void* QAudioOutput_virtualbase_metacast(VirtualQAudioOutput* self, const char* param1);
+int QAudioOutput_virtualbase_metacall(VirtualQAudioOutput* self, int param1, int param2, void** param3);
+bool QAudioOutput_virtualbase_event(VirtualQAudioOutput* self, QEvent* event);
+bool QAudioOutput_virtualbase_eventFilter(VirtualQAudioOutput* self, QObject* watched, QEvent* event);
+void QAudioOutput_virtualbase_timerEvent(VirtualQAudioOutput* self, QTimerEvent* event);
+void QAudioOutput_virtualbase_childEvent(VirtualQAudioOutput* self, QChildEvent* event);
+void QAudioOutput_virtualbase_customEvent(VirtualQAudioOutput* self, QEvent* event);
+void QAudioOutput_virtualbase_connectNotify(VirtualQAudioOutput* self, QMetaMethod* signal);
+void QAudioOutput_virtualbase_disconnectNotify(VirtualQAudioOutput* self, QMetaMethod* signal);
+
+QObject* QAudioOutput_protectedbase_sender(const VirtualQAudioOutput* self);
+int QAudioOutput_protectedbase_senderSignalIndex(const VirtualQAudioOutput* self);
+int QAudioOutput_protectedbase_receivers(const VirtualQAudioOutput* self, const char* signal);
+bool QAudioOutput_protectedbase_isSignalConnected(const VirtualQAudioOutput* self, QMetaMethod* signal);
+
 const QMetaObject* QAudioOutput_staticMetaObject();
 void QAudioOutput_delete(QAudioOutput* self);
 

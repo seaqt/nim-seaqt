@@ -59,13 +59,13 @@ proc fcQMatrix4x4_column(self: pointer, index: cint): pointer {.importc: "QMatri
 proc fcQMatrix4x4_setColumn(self: pointer, index: cint, value: pointer): void {.importc: "QMatrix4x4_setColumn".}
 proc fcQMatrix4x4_row(self: pointer, index: cint): pointer {.importc: "QMatrix4x4_row".}
 proc fcQMatrix4x4_setRow(self: pointer, index: cint, value: pointer): void {.importc: "QMatrix4x4_setRow".}
-proc fcQMatrix4x4_isAffine(self: pointer, ): bool {.importc: "QMatrix4x4_isAffine".}
-proc fcQMatrix4x4_isIdentity(self: pointer, ): bool {.importc: "QMatrix4x4_isIdentity".}
-proc fcQMatrix4x4_setToIdentity(self: pointer, ): void {.importc: "QMatrix4x4_setToIdentity".}
+proc fcQMatrix4x4_isAffine(self: pointer): bool {.importc: "QMatrix4x4_isAffine".}
+proc fcQMatrix4x4_isIdentity(self: pointer): bool {.importc: "QMatrix4x4_isIdentity".}
+proc fcQMatrix4x4_setToIdentity(self: pointer): void {.importc: "QMatrix4x4_setToIdentity".}
 proc fcQMatrix4x4_fill(self: pointer, value: float32): void {.importc: "QMatrix4x4_fill".}
-proc fcQMatrix4x4_determinant(self: pointer, ): float64 {.importc: "QMatrix4x4_determinant".}
-proc fcQMatrix4x4_inverted(self: pointer, ): pointer {.importc: "QMatrix4x4_inverted".}
-proc fcQMatrix4x4_transposed(self: pointer, ): pointer {.importc: "QMatrix4x4_transposed".}
+proc fcQMatrix4x4_determinant(self: pointer): float64 {.importc: "QMatrix4x4_determinant".}
+proc fcQMatrix4x4_inverted(self: pointer): pointer {.importc: "QMatrix4x4_inverted".}
+proc fcQMatrix4x4_transposed(self: pointer): pointer {.importc: "QMatrix4x4_transposed".}
 proc fcQMatrix4x4_operatorPlusAssign(self: pointer, other: pointer): pointer {.importc: "QMatrix4x4_operatorPlusAssign".}
 proc fcQMatrix4x4_operatorMinusAssign(self: pointer, other: pointer): pointer {.importc: "QMatrix4x4_operatorMinusAssign".}
 proc fcQMatrix4x4_operatorMultiplyAssign(self: pointer, other: pointer): pointer {.importc: "QMatrix4x4_operatorMultiplyAssign".}
@@ -91,10 +91,10 @@ proc fcQMatrix4x4_perspective(self: pointer, verticalAngle: float32, aspectRatio
 proc fcQMatrix4x4_lookAt(self: pointer, eye: pointer, center: pointer, up: pointer): void {.importc: "QMatrix4x4_lookAt".}
 proc fcQMatrix4x4_viewport(self: pointer, rect: pointer): void {.importc: "QMatrix4x4_viewport".}
 proc fcQMatrix4x4_viewport2(self: pointer, left: float32, bottom: float32, width: float32, height: float32): void {.importc: "QMatrix4x4_viewport2".}
-proc fcQMatrix4x4_flipCoordinates(self: pointer, ): void {.importc: "QMatrix4x4_flipCoordinates".}
+proc fcQMatrix4x4_flipCoordinates(self: pointer): void {.importc: "QMatrix4x4_flipCoordinates".}
 proc fcQMatrix4x4_copyDataTo(self: pointer, values: ptr float32): void {.importc: "QMatrix4x4_copyDataTo".}
-proc fcQMatrix4x4_toAffine(self: pointer, ): pointer {.importc: "QMatrix4x4_toAffine".}
-proc fcQMatrix4x4_toTransform(self: pointer, ): pointer {.importc: "QMatrix4x4_toTransform".}
+proc fcQMatrix4x4_toAffine(self: pointer): pointer {.importc: "QMatrix4x4_toAffine".}
+proc fcQMatrix4x4_toTransform(self: pointer): pointer {.importc: "QMatrix4x4_toTransform".}
 proc fcQMatrix4x4_toTransformWithDistanceToPlane(self: pointer, distanceToPlane: float32): pointer {.importc: "QMatrix4x4_toTransformWithDistanceToPlane".}
 proc fcQMatrix4x4_map(self: pointer, point: pointer): pointer {.importc: "QMatrix4x4_map".}
 proc fcQMatrix4x4_mapWithPoint(self: pointer, point: pointer): pointer {.importc: "QMatrix4x4_mapWithPoint".}
@@ -103,11 +103,11 @@ proc fcQMatrix4x4_mapVector(self: pointer, vector: pointer): pointer {.importc: 
 proc fcQMatrix4x4_map3(self: pointer, point: pointer): pointer {.importc: "QMatrix4x4_map3".}
 proc fcQMatrix4x4_mapRect(self: pointer, rect: pointer): pointer {.importc: "QMatrix4x4_mapRect".}
 proc fcQMatrix4x4_mapRectWithRect(self: pointer, rect: pointer): pointer {.importc: "QMatrix4x4_mapRectWithRect".}
-proc fcQMatrix4x4_data(self: pointer, ): ptr float32 {.importc: "QMatrix4x4_data".}
-proc fcQMatrix4x4_data2(self: pointer, ): ptr float32 {.importc: "QMatrix4x4_data2".}
-proc fcQMatrix4x4_constData(self: pointer, ): ptr float32 {.importc: "QMatrix4x4_constData".}
-proc fcQMatrix4x4_optimize(self: pointer, ): void {.importc: "QMatrix4x4_optimize".}
-proc fcQMatrix4x4_ToQVariant(self: pointer, ): pointer {.importc: "QMatrix4x4_ToQVariant".}
+proc fcQMatrix4x4_data(self: pointer): ptr float32 {.importc: "QMatrix4x4_data".}
+proc fcQMatrix4x4_data2(self: pointer): ptr float32 {.importc: "QMatrix4x4_data2".}
+proc fcQMatrix4x4_constData(self: pointer): ptr float32 {.importc: "QMatrix4x4_constData".}
+proc fcQMatrix4x4_optimize(self: pointer): void {.importc: "QMatrix4x4_optimize".}
+proc fcQMatrix4x4_ToQVariant(self: pointer): pointer {.importc: "QMatrix4x4_ToQVariant".}
 proc fcQMatrix4x4_inverted1(self: pointer, invertible: ptr bool): pointer {.importc: "QMatrix4x4_inverted1".}
 proc fcQMatrix4x4_rotate4(self: pointer, angle: float32, x: float32, y: float32, z: float32): void {.importc: "QMatrix4x4_rotate4".}
 proc fcQMatrix4x4_viewport5(self: pointer, left: float32, bottom: float32, width: float32, height: float32, nearPlane: float32): void {.importc: "QMatrix4x4_viewport5".}
@@ -133,25 +133,25 @@ proc row*(self: gen_qmatrix4x4_types.QMatrix4x4, index: cint): gen_qvector4d_typ
 proc setRow*(self: gen_qmatrix4x4_types.QMatrix4x4, index: cint, value: gen_qvector4d_types.QVector4D): void =
   fcQMatrix4x4_setRow(self.h, index, value.h)
 
-proc isAffine*(self: gen_qmatrix4x4_types.QMatrix4x4, ): bool =
+proc isAffine*(self: gen_qmatrix4x4_types.QMatrix4x4): bool =
   fcQMatrix4x4_isAffine(self.h)
 
-proc isIdentity*(self: gen_qmatrix4x4_types.QMatrix4x4, ): bool =
+proc isIdentity*(self: gen_qmatrix4x4_types.QMatrix4x4): bool =
   fcQMatrix4x4_isIdentity(self.h)
 
-proc setToIdentity*(self: gen_qmatrix4x4_types.QMatrix4x4, ): void =
+proc setToIdentity*(self: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQMatrix4x4_setToIdentity(self.h)
 
 proc fill*(self: gen_qmatrix4x4_types.QMatrix4x4, value: float32): void =
   fcQMatrix4x4_fill(self.h, value)
 
-proc determinant*(self: gen_qmatrix4x4_types.QMatrix4x4, ): float64 =
+proc determinant*(self: gen_qmatrix4x4_types.QMatrix4x4): float64 =
   fcQMatrix4x4_determinant(self.h)
 
-proc inverted*(self: gen_qmatrix4x4_types.QMatrix4x4, ): gen_qmatrix4x4_types.QMatrix4x4 =
+proc inverted*(self: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
   gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_inverted(self.h), owned: true)
 
-proc transposed*(self: gen_qmatrix4x4_types.QMatrix4x4, ): gen_qmatrix4x4_types.QMatrix4x4 =
+proc transposed*(self: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
   gen_qmatrix4x4_types.QMatrix4x4(h: fcQMatrix4x4_transposed(self.h), owned: true)
 
 proc operatorPlusAssign*(self: gen_qmatrix4x4_types.QMatrix4x4, other: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix4x4_types.QMatrix4x4 =
@@ -229,16 +229,16 @@ proc viewport*(self: gen_qmatrix4x4_types.QMatrix4x4, rect: gen_qrect_types.QRec
 proc viewport*(self: gen_qmatrix4x4_types.QMatrix4x4, left: float32, bottom: float32, width: float32, height: float32): void =
   fcQMatrix4x4_viewport2(self.h, left, bottom, width, height)
 
-proc flipCoordinates*(self: gen_qmatrix4x4_types.QMatrix4x4, ): void =
+proc flipCoordinates*(self: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQMatrix4x4_flipCoordinates(self.h)
 
 proc copyDataTo*(self: gen_qmatrix4x4_types.QMatrix4x4, values: ptr float32): void =
   fcQMatrix4x4_copyDataTo(self.h, values)
 
-proc toAffine*(self: gen_qmatrix4x4_types.QMatrix4x4, ): gen_qmatrix_types.QMatrix =
+proc toAffine*(self: gen_qmatrix4x4_types.QMatrix4x4): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQMatrix4x4_toAffine(self.h), owned: true)
 
-proc toTransform*(self: gen_qmatrix4x4_types.QMatrix4x4, ): gen_qtransform_types.QTransform =
+proc toTransform*(self: gen_qmatrix4x4_types.QMatrix4x4): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQMatrix4x4_toTransform(self.h), owned: true)
 
 proc toTransform*(self: gen_qmatrix4x4_types.QMatrix4x4, distanceToPlane: float32): gen_qtransform_types.QTransform =
@@ -265,19 +265,19 @@ proc mapRect*(self: gen_qmatrix4x4_types.QMatrix4x4, rect: gen_qrect_types.QRect
 proc mapRect*(self: gen_qmatrix4x4_types.QMatrix4x4, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQMatrix4x4_mapRectWithRect(self.h, rect.h), owned: true)
 
-proc data*(self: gen_qmatrix4x4_types.QMatrix4x4, ): ptr float32 =
+proc data*(self: gen_qmatrix4x4_types.QMatrix4x4): ptr float32 =
   fcQMatrix4x4_data(self.h)
 
-proc data2*(self: gen_qmatrix4x4_types.QMatrix4x4, ): ptr float32 =
+proc data2*(self: gen_qmatrix4x4_types.QMatrix4x4): ptr float32 =
   fcQMatrix4x4_data2(self.h)
 
-proc constData*(self: gen_qmatrix4x4_types.QMatrix4x4, ): ptr float32 =
+proc constData*(self: gen_qmatrix4x4_types.QMatrix4x4): ptr float32 =
   fcQMatrix4x4_constData(self.h)
 
-proc optimize*(self: gen_qmatrix4x4_types.QMatrix4x4, ): void =
+proc optimize*(self: gen_qmatrix4x4_types.QMatrix4x4): void =
   fcQMatrix4x4_optimize(self.h)
 
-proc ToQVariant*(self: gen_qmatrix4x4_types.QMatrix4x4, ): gen_qvariant_types.QVariant =
+proc ToQVariant*(self: gen_qmatrix4x4_types.QMatrix4x4): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQMatrix4x4_ToQVariant(self.h), owned: true)
 
 proc inverted*(self: gen_qmatrix4x4_types.QMatrix4x4, invertible: ptr bool): gen_qmatrix4x4_types.QMatrix4x4 =

@@ -15,39 +15,32 @@
 #include <QTimerEvent>
 #include <qradiotuner.h>
 #include "gen_qradiotuner.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQRadioTuner final : public QRadioTuner {
-	struct QRadioTuner_VTable* vtbl;
+	const QRadioTuner_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QRadioTuner_VTable* QRadioTuner_vtbl(const VirtualQRadioTuner* self);
+	friend void* QRadioTuner_vdata(const VirtualQRadioTuner* self);
+	friend void QRadioTuner_setVdata(VirtualQRadioTuner* self, void* vdata);
 
-	VirtualQRadioTuner(struct QRadioTuner_VTable* vtbl): QRadioTuner(), vtbl(vtbl) {};
-	VirtualQRadioTuner(struct QRadioTuner_VTable* vtbl, QObject* parent): QRadioTuner(parent), vtbl(vtbl) {};
+	VirtualQRadioTuner(const QRadioTuner_VTable* vtbl, void* vdata): QRadioTuner(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQRadioTuner(const QRadioTuner_VTable* vtbl, void* vdata, QObject* parent): QRadioTuner(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQRadioTuner() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQRadioTuner() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QRadioTuner::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QRadioTuner_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QRadioTuner_virtualbase_metaObject(const VirtualQRadioTuner* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QRadioTuner::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QRadioTuner_virtualbase_metacast(void* self, const char* param1);
+	friend void* QRadioTuner_virtualbase_metacast(VirtualQRadioTuner* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QRadioTuner::qt_metacall(param1, param2, param3);
@@ -73,56 +65,52 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRadioTuner_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QRadioTuner_virtualbase_metacall(VirtualQRadioTuner* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMultimedia::AvailabilityStatus availability() const override {
 		if (vtbl->availability == 0) {
 			return QRadioTuner::availability();
 		}
 
 
-		int callback_return_value = vtbl->availability(vtbl, this);
+		int callback_return_value = vtbl->availability(this);
 
 		return static_cast<QMultimedia::AvailabilityStatus>(callback_return_value);
 	}
 
-	friend int QRadioTuner_virtualbase_availability(const void* self);
+	friend int QRadioTuner_virtualbase_availability(const VirtualQRadioTuner* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isAvailable() const override {
 		if (vtbl->isAvailable == 0) {
 			return QRadioTuner::isAvailable();
 		}
 
 
-		bool callback_return_value = vtbl->isAvailable(vtbl, this);
+		bool callback_return_value = vtbl->isAvailable(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioTuner_virtualbase_isAvailable(const void* self);
+	friend bool QRadioTuner_virtualbase_isAvailable(const VirtualQRadioTuner* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMediaService* service() const override {
 		if (vtbl->service == 0) {
 			return QRadioTuner::service();
 		}
 
 
-		QMediaService* callback_return_value = vtbl->service(vtbl, this);
+		QMediaService* callback_return_value = vtbl->service(this);
 
 		return callback_return_value;
 	}
 
-	friend QMediaService* QRadioTuner_virtualbase_service(const void* self);
+	friend QMediaService* QRadioTuner_virtualbase_service(const VirtualQRadioTuner* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool bind(QObject* param1) override {
 		if (vtbl->bind == 0) {
 			return QRadioTuner::bind(param1);
@@ -130,14 +118,13 @@ public:
 
 		QObject* sigval1 = param1;
 
-		bool callback_return_value = vtbl->bind(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->bind(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioTuner_virtualbase_bind(void* self, QObject* param1);
+	friend bool QRadioTuner_virtualbase_bind(VirtualQRadioTuner* self, QObject* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void unbind(QObject* param1) override {
 		if (vtbl->unbind == 0) {
 			QRadioTuner::unbind(param1);
@@ -146,13 +133,12 @@ public:
 
 		QObject* sigval1 = param1;
 
-		vtbl->unbind(vtbl, this, sigval1);
+		vtbl->unbind(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_unbind(void* self, QObject* param1);
+	friend void QRadioTuner_virtualbase_unbind(VirtualQRadioTuner* self, QObject* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QRadioTuner::event(event);
@@ -160,14 +146,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioTuner_virtualbase_event(void* self, QEvent* event);
+	friend bool QRadioTuner_virtualbase_event(VirtualQRadioTuner* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QRadioTuner::eventFilter(watched, event);
@@ -176,14 +161,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioTuner_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QRadioTuner_virtualbase_eventFilter(VirtualQRadioTuner* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QRadioTuner::timerEvent(event);
@@ -192,13 +176,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QRadioTuner_virtualbase_timerEvent(VirtualQRadioTuner* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QRadioTuner::childEvent(event);
@@ -207,13 +190,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QRadioTuner_virtualbase_childEvent(VirtualQRadioTuner* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QRadioTuner::customEvent(event);
@@ -222,13 +204,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QRadioTuner_virtualbase_customEvent(VirtualQRadioTuner* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QRadioTuner::connectNotify(signal);
@@ -239,13 +220,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QRadioTuner_virtualbase_connectNotify(VirtualQRadioTuner* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QRadioTuner::disconnectNotify(signal);
@@ -256,27 +236,27 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QRadioTuner_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QRadioTuner_virtualbase_disconnectNotify(VirtualQRadioTuner* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QRadioTuner_protectedbase_addPropertyWatch(void* self, struct miqt_string name);
-	friend void QRadioTuner_protectedbase_removePropertyWatch(void* self, struct miqt_string name);
-	friend QObject* QRadioTuner_protectedbase_sender(const void* self);
-	friend int QRadioTuner_protectedbase_senderSignalIndex(const void* self);
-	friend int QRadioTuner_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QRadioTuner_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QRadioTuner_protectedbase_addPropertyWatch(VirtualQRadioTuner* self, struct miqt_string name);
+	friend void QRadioTuner_protectedbase_removePropertyWatch(VirtualQRadioTuner* self, struct miqt_string name);
+	friend QObject* QRadioTuner_protectedbase_sender(const VirtualQRadioTuner* self);
+	friend int QRadioTuner_protectedbase_senderSignalIndex(const VirtualQRadioTuner* self);
+	friend int QRadioTuner_protectedbase_receivers(const VirtualQRadioTuner* self, const char* signal);
+	friend bool QRadioTuner_protectedbase_isSignalConnected(const VirtualQRadioTuner* self, QMetaMethod* signal);
 };
 
-QRadioTuner* QRadioTuner_new(struct QRadioTuner_VTable* vtbl) {
-	return new VirtualQRadioTuner(vtbl);
+VirtualQRadioTuner* QRadioTuner_new(const QRadioTuner_VTable* vtbl, void* vdata) {
+	return new VirtualQRadioTuner(vtbl, vdata);
 }
 
-QRadioTuner* QRadioTuner_new2(struct QRadioTuner_VTable* vtbl, QObject* parent) {
-	return new VirtualQRadioTuner(vtbl, parent);
+VirtualQRadioTuner* QRadioTuner_new2(const QRadioTuner_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQRadioTuner(vtbl, vdata, parent);
 }
 
 void QRadioTuner_virtbase(QRadioTuner* src, QMediaObject** outptr_QMediaObject) {
@@ -455,7 +435,7 @@ void QRadioTuner_stateChanged(QRadioTuner* self, int state) {
 	self->stateChanged(static_cast<QRadioTuner::State>(state));
 }
 
-void QRadioTuner_connect_stateChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_stateChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -472,7 +452,7 @@ void QRadioTuner_bandChanged(QRadioTuner* self, int band) {
 	self->bandChanged(static_cast<QRadioTuner::Band>(band));
 }
 
-void QRadioTuner_connect_bandChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_bandChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -489,7 +469,7 @@ void QRadioTuner_frequencyChanged(QRadioTuner* self, int frequency) {
 	self->frequencyChanged(static_cast<int>(frequency));
 }
 
-void QRadioTuner_connect_frequencyChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_frequencyChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -505,7 +485,7 @@ void QRadioTuner_stereoStatusChanged(QRadioTuner* self, bool stereo) {
 	self->stereoStatusChanged(stereo);
 }
 
-void QRadioTuner_connect_stereoStatusChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QRadioTuner_connect_stereoStatusChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -521,7 +501,7 @@ void QRadioTuner_searchingChanged(QRadioTuner* self, bool searching) {
 	self->searchingChanged(searching);
 }
 
-void QRadioTuner_connect_searchingChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QRadioTuner_connect_searchingChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -537,7 +517,7 @@ void QRadioTuner_signalStrengthChanged(QRadioTuner* self, int signalStrength) {
 	self->signalStrengthChanged(static_cast<int>(signalStrength));
 }
 
-void QRadioTuner_connect_signalStrengthChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_signalStrengthChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -553,7 +533,7 @@ void QRadioTuner_volumeChanged(QRadioTuner* self, int volume) {
 	self->volumeChanged(static_cast<int>(volume));
 }
 
-void QRadioTuner_connect_volumeChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_volumeChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -569,7 +549,7 @@ void QRadioTuner_mutedChanged(QRadioTuner* self, bool muted) {
 	self->mutedChanged(muted);
 }
 
-void QRadioTuner_connect_mutedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QRadioTuner_connect_mutedChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -586,7 +566,7 @@ void QRadioTuner_stationFound(QRadioTuner* self, int frequency, struct miqt_stri
 	self->stationFound(static_cast<int>(frequency), stationId_QString);
 }
 
-void QRadioTuner_connect_stationFound(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
+void QRadioTuner_connect_stationFound(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, struct miqt_string);
@@ -610,7 +590,7 @@ void QRadioTuner_antennaConnectedChanged(QRadioTuner* self, bool connectionStatu
 	self->antennaConnectedChanged(connectionStatus);
 }
 
-void QRadioTuner_connect_antennaConnectedChanged(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QRadioTuner_connect_antennaConnectedChanged(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -626,7 +606,7 @@ void QRadioTuner_errorWithError(QRadioTuner* self, int error) {
 	self->error(static_cast<QRadioTuner::Error>(error));
 }
 
-void QRadioTuner_connect_errorWithError(QRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QRadioTuner_connect_errorWithError(VirtualQRadioTuner* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -687,140 +667,112 @@ void QRadioTuner_searchAllStations1(QRadioTuner* self, int searchMode) {
 	self->searchAllStations(static_cast<QRadioTuner::SearchMode>(searchMode));
 }
 
-QMetaObject* QRadioTuner_virtualbase_metaObject(const void* self) {
+QMetaObject* QRadioTuner_virtualbase_metaObject(const VirtualQRadioTuner* self) {
 
-	return (QMetaObject*) ( (const VirtualQRadioTuner*)(self) )->QRadioTuner::metaObject();
-
+	return (QMetaObject*) self->QRadioTuner::metaObject();
 }
 
-void* QRadioTuner_virtualbase_metacast(void* self, const char* param1) {
+void* QRadioTuner_virtualbase_metacast(VirtualQRadioTuner* self, const char* param1) {
 
-	return ( (VirtualQRadioTuner*)(self) )->QRadioTuner::qt_metacast(param1);
-
+	return self->QRadioTuner::qt_metacast(param1);
 }
 
-int QRadioTuner_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QRadioTuner_virtualbase_metacall(VirtualQRadioTuner* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQRadioTuner*)(self) )->QRadioTuner::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QRadioTuner::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-int QRadioTuner_virtualbase_availability(const void* self) {
+int QRadioTuner_virtualbase_availability(const VirtualQRadioTuner* self) {
 
-	QMultimedia::AvailabilityStatus _ret = ( (const VirtualQRadioTuner*)(self) )->QRadioTuner::availability();
+	QMultimedia::AvailabilityStatus _ret = self->QRadioTuner::availability();
 	return static_cast<int>(_ret);
-
 }
 
-bool QRadioTuner_virtualbase_isAvailable(const void* self) {
+bool QRadioTuner_virtualbase_isAvailable(const VirtualQRadioTuner* self) {
 
-	return ( (const VirtualQRadioTuner*)(self) )->QRadioTuner::isAvailable();
-
+	return self->QRadioTuner::isAvailable();
 }
 
-QMediaService* QRadioTuner_virtualbase_service(const void* self) {
+QMediaService* QRadioTuner_virtualbase_service(const VirtualQRadioTuner* self) {
 
-	return ( (const VirtualQRadioTuner*)(self) )->QRadioTuner::service();
-
+	return self->QRadioTuner::service();
 }
 
-bool QRadioTuner_virtualbase_bind(void* self, QObject* param1) {
+bool QRadioTuner_virtualbase_bind(VirtualQRadioTuner* self, QObject* param1) {
 
-	return ( (VirtualQRadioTuner*)(self) )->QRadioTuner::bind(param1);
-
+	return self->QRadioTuner::bind(param1);
 }
 
-void QRadioTuner_virtualbase_unbind(void* self, QObject* param1) {
+void QRadioTuner_virtualbase_unbind(VirtualQRadioTuner* self, QObject* param1) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::unbind(param1);
-
+	self->QRadioTuner::unbind(param1);
 }
 
-bool QRadioTuner_virtualbase_event(void* self, QEvent* event) {
+bool QRadioTuner_virtualbase_event(VirtualQRadioTuner* self, QEvent* event) {
 
-	return ( (VirtualQRadioTuner*)(self) )->QRadioTuner::event(event);
-
+	return self->QRadioTuner::event(event);
 }
 
-bool QRadioTuner_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QRadioTuner_virtualbase_eventFilter(VirtualQRadioTuner* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQRadioTuner*)(self) )->QRadioTuner::eventFilter(watched, event);
-
+	return self->QRadioTuner::eventFilter(watched, event);
 }
 
-void QRadioTuner_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QRadioTuner_virtualbase_timerEvent(VirtualQRadioTuner* self, QTimerEvent* event) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::timerEvent(event);
-
+	self->QRadioTuner::timerEvent(event);
 }
 
-void QRadioTuner_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QRadioTuner_virtualbase_childEvent(VirtualQRadioTuner* self, QChildEvent* event) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::childEvent(event);
-
+	self->QRadioTuner::childEvent(event);
 }
 
-void QRadioTuner_virtualbase_customEvent(void* self, QEvent* event) {
+void QRadioTuner_virtualbase_customEvent(VirtualQRadioTuner* self, QEvent* event) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::customEvent(event);
-
+	self->QRadioTuner::customEvent(event);
 }
 
-void QRadioTuner_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QRadioTuner_virtualbase_connectNotify(VirtualQRadioTuner* self, QMetaMethod* signal) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::connectNotify(*signal);
-
+	self->QRadioTuner::connectNotify(*signal);
 }
 
-void QRadioTuner_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QRadioTuner_virtualbase_disconnectNotify(VirtualQRadioTuner* self, QMetaMethod* signal) {
 
-	( (VirtualQRadioTuner*)(self) )->QRadioTuner::disconnectNotify(*signal);
-
+	self->QRadioTuner::disconnectNotify(*signal);
 }
 
 const QMetaObject* QRadioTuner_staticMetaObject() { return &QRadioTuner::staticMetaObject; }
-void QRadioTuner_protectedbase_addPropertyWatch(void* self, struct miqt_string name) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-			QByteArray name_QByteArray(name.data, name.len);
 
-	self_cast->addPropertyWatch(name_QByteArray);
+const QRadioTuner_VTable* QRadioTuner_vtbl(const VirtualQRadioTuner* self) { return self->vtbl; }
+void* QRadioTuner_vdata(const VirtualQRadioTuner* self) { return self->vdata; }
+void QRadioTuner_setVdata(VirtualQRadioTuner* self, void* vdata) { self->vdata = vdata; }
 
+void QRadioTuner_protectedbase_addPropertyWatch(VirtualQRadioTuner* self, struct miqt_string name) {
+		QByteArray name_QByteArray(name.data, name.len);
+	self->addPropertyWatch(name_QByteArray);
 }
 
-void QRadioTuner_protectedbase_removePropertyWatch(void* self, struct miqt_string name) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-			QByteArray name_QByteArray(name.data, name.len);
-
-	self_cast->removePropertyWatch(name_QByteArray);
-
+void QRadioTuner_protectedbase_removePropertyWatch(VirtualQRadioTuner* self, struct miqt_string name) {
+		QByteArray name_QByteArray(name.data, name.len);
+	self->removePropertyWatch(name_QByteArray);
 }
 
-QObject* QRadioTuner_protectedbase_sender(const void* self) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QRadioTuner_protectedbase_sender(const VirtualQRadioTuner* self) {
+	return self->sender();
 }
 
-int QRadioTuner_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QRadioTuner_protectedbase_senderSignalIndex(const VirtualQRadioTuner* self) {
+	return self->senderSignalIndex();
 }
 
-int QRadioTuner_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QRadioTuner_protectedbase_receivers(const VirtualQRadioTuner* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QRadioTuner_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQRadioTuner* self_cast = static_cast<VirtualQRadioTuner*>( (QRadioTuner*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QRadioTuner_protectedbase_isSignalConnected(const VirtualQRadioTuner* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QRadioTuner_delete(QRadioTuner* self) {

@@ -4,15 +4,6 @@
 #include <QQmlListReference>
 #include <qqmllist.h>
 #include "gen_qqmllist.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlListReference* QQmlListReference_new() {
 	return new QQmlListReference();
 }

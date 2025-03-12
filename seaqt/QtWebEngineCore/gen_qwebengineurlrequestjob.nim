@@ -61,14 +61,14 @@ export
 
 type cQWebEngineUrlRequestJob*{.exportc: "QWebEngineUrlRequestJob", incompleteStruct.} = object
 
-proc fcQWebEngineUrlRequestJob_metaObject(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_metaObject".}
+proc fcQWebEngineUrlRequestJob_metaObject(self: pointer): pointer {.importc: "QWebEngineUrlRequestJob_metaObject".}
 proc fcQWebEngineUrlRequestJob_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineUrlRequestJob_metacast".}
 proc fcQWebEngineUrlRequestJob_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineUrlRequestJob_metacall".}
 proc fcQWebEngineUrlRequestJob_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_tr".}
 proc fcQWebEngineUrlRequestJob_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf8".}
-proc fcQWebEngineUrlRequestJob_requestUrl(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_requestUrl".}
-proc fcQWebEngineUrlRequestJob_requestMethod(self: pointer, ): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_requestMethod".}
-proc fcQWebEngineUrlRequestJob_initiator(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_initiator".}
+proc fcQWebEngineUrlRequestJob_requestUrl(self: pointer): pointer {.importc: "QWebEngineUrlRequestJob_requestUrl".}
+proc fcQWebEngineUrlRequestJob_requestMethod(self: pointer): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_requestMethod".}
+proc fcQWebEngineUrlRequestJob_initiator(self: pointer): pointer {.importc: "QWebEngineUrlRequestJob_initiator".}
 proc fcQWebEngineUrlRequestJob_reply(self: pointer, contentType: struct_miqt_string, device: pointer): void {.importc: "QWebEngineUrlRequestJob_reply".}
 proc fcQWebEngineUrlRequestJob_fail(self: pointer, error: cint): void {.importc: "QWebEngineUrlRequestJob_fail".}
 proc fcQWebEngineUrlRequestJob_redirect(self: pointer, url: pointer): void {.importc: "QWebEngineUrlRequestJob_redirect".}
@@ -76,13 +76,13 @@ proc fcQWebEngineUrlRequestJob_tr2(s: cstring, c: cstring): struct_miqt_string {
 proc fcQWebEngineUrlRequestJob_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_tr3".}
 proc fcQWebEngineUrlRequestJob_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf82".}
 proc fcQWebEngineUrlRequestJob_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineUrlRequestJob_trUtf83".}
-proc fcQWebEngineUrlRequestJob_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestJob_protectedbase_sender".}
-proc fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_senderSignalIndex".}
+proc fcQWebEngineUrlRequestJob_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineUrlRequestJob_protectedbase_sender".}
+proc fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_senderSignalIndex".}
 proc fcQWebEngineUrlRequestJob_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineUrlRequestJob_protectedbase_receivers".}
 proc fcQWebEngineUrlRequestJob_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineUrlRequestJob_protectedbase_isSignalConnected".}
 proc fcQWebEngineUrlRequestJob_staticMetaObject(): pointer {.importc: "QWebEngineUrlRequestJob_staticMetaObject".}
 
-proc metaObject*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineUrlRequestJob_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, param1: cstring): pointer =
@@ -103,16 +103,16 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   c_free(v_ms.data)
   vx_ret
 
-proc requestUrl*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qurl_types.QUrl =
+proc requestUrl*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_requestUrl(self.h), owned: true)
 
-proc requestMethod*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): seq[byte] =
+proc requestMethod*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): seq[byte] =
   var v_bytearray = fcQWebEngineUrlRequestJob_requestMethod(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc initiator*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qurl_types.QUrl =
+proc initiator*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestJob_initiator(self.h), owned: true)
 
 proc reply*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, contentType: seq[byte], device: gen_qiodevice_types.QIODevice): void =
@@ -148,10 +148,10 @@ proc trUtf8*(_: type gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, 
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineUrlRequestJob_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, ): cint =
+proc senderSignalIndex*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob): cint =
   fcQWebEngineUrlRequestJob_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qwebengineurlrequestjob_types.QWebEngineUrlRequestJob, signal: cstring): cint =

@@ -64,7 +64,7 @@ export
 
 type cQCameraFeedbackControl*{.exportc: "QCameraFeedbackControl", incompleteStruct.} = object
 
-proc fcQCameraFeedbackControl_metaObject(self: pointer, ): pointer {.importc: "QCameraFeedbackControl_metaObject".}
+proc fcQCameraFeedbackControl_metaObject(self: pointer): pointer {.importc: "QCameraFeedbackControl_metaObject".}
 proc fcQCameraFeedbackControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraFeedbackControl_metacast".}
 proc fcQCameraFeedbackControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraFeedbackControl_metacall".}
 proc fcQCameraFeedbackControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraFeedbackControl_tr".}
@@ -78,13 +78,13 @@ proc fcQCameraFeedbackControl_tr2(s: cstring, c: cstring): struct_miqt_string {.
 proc fcQCameraFeedbackControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFeedbackControl_tr3".}
 proc fcQCameraFeedbackControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraFeedbackControl_trUtf82".}
 proc fcQCameraFeedbackControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraFeedbackControl_trUtf83".}
-proc fcQCameraFeedbackControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraFeedbackControl_protectedbase_sender".}
-proc fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraFeedbackControl_protectedbase_senderSignalIndex".}
+proc fcQCameraFeedbackControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraFeedbackControl_protectedbase_sender".}
+proc fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraFeedbackControl_protectedbase_senderSignalIndex".}
 proc fcQCameraFeedbackControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraFeedbackControl_protectedbase_receivers".}
 proc fcQCameraFeedbackControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraFeedbackControl_protectedbase_isSignalConnected".}
 proc fcQCameraFeedbackControl_staticMetaObject(): pointer {.importc: "QCameraFeedbackControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraFeedbackControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, param1: cstring): pointer =
@@ -144,10 +144,10 @@ proc trUtf8*(_: type gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, s:
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQCameraFeedbackControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, ): cint =
+proc senderSignalIndex*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl): cint =
   fcQCameraFeedbackControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qcamerafeedbackcontrol_types.QCameraFeedbackControl, signal: cstring): cint =

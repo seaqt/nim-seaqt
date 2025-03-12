@@ -52,7 +52,7 @@ export
 
 type cQQmlPropertyMap*{.exportc: "QQmlPropertyMap", incompleteStruct.} = object
 
-proc fcQQmlPropertyMap_metaObject(self: pointer, ): pointer {.importc: "QQmlPropertyMap_metaObject".}
+proc fcQQmlPropertyMap_metaObject(self: pointer): pointer {.importc: "QQmlPropertyMap_metaObject".}
 proc fcQQmlPropertyMap_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlPropertyMap_metacast".}
 proc fcQQmlPropertyMap_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlPropertyMap_metacall".}
 proc fcQQmlPropertyMap_tr(s: cstring): struct_miqt_string {.importc: "QQmlPropertyMap_tr".}
@@ -60,10 +60,10 @@ proc fcQQmlPropertyMap_trUtf8(s: cstring): struct_miqt_string {.importc: "QQmlPr
 proc fcQQmlPropertyMap_value(self: pointer, key: struct_miqt_string): pointer {.importc: "QQmlPropertyMap_value".}
 proc fcQQmlPropertyMap_insert(self: pointer, key: struct_miqt_string, value: pointer): void {.importc: "QQmlPropertyMap_insert".}
 proc fcQQmlPropertyMap_clear(self: pointer, key: struct_miqt_string): void {.importc: "QQmlPropertyMap_clear".}
-proc fcQQmlPropertyMap_keys(self: pointer, ): struct_miqt_array {.importc: "QQmlPropertyMap_keys".}
-proc fcQQmlPropertyMap_count(self: pointer, ): cint {.importc: "QQmlPropertyMap_count".}
-proc fcQQmlPropertyMap_size(self: pointer, ): cint {.importc: "QQmlPropertyMap_size".}
-proc fcQQmlPropertyMap_isEmpty(self: pointer, ): bool {.importc: "QQmlPropertyMap_isEmpty".}
+proc fcQQmlPropertyMap_keys(self: pointer): struct_miqt_array {.importc: "QQmlPropertyMap_keys".}
+proc fcQQmlPropertyMap_count(self: pointer): cint {.importc: "QQmlPropertyMap_count".}
+proc fcQQmlPropertyMap_size(self: pointer): cint {.importc: "QQmlPropertyMap_size".}
+proc fcQQmlPropertyMap_isEmpty(self: pointer): bool {.importc: "QQmlPropertyMap_isEmpty".}
 proc fcQQmlPropertyMap_contains(self: pointer, key: struct_miqt_string): bool {.importc: "QQmlPropertyMap_contains".}
 proc fcQQmlPropertyMap_operatorSubscript(self: pointer, key: struct_miqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscript".}
 proc fcQQmlPropertyMap_operatorSubscriptWithKey(self: pointer, key: struct_miqt_string): pointer {.importc: "QQmlPropertyMap_operatorSubscriptWithKey".}
@@ -73,20 +73,22 @@ proc fcQQmlPropertyMap_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQQmlPropertyMap_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlPropertyMap_tr3".}
 proc fcQQmlPropertyMap_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQmlPropertyMap_trUtf82".}
 proc fcQQmlPropertyMap_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQmlPropertyMap_trUtf83".}
+proc fcQQmlPropertyMap_vtbl(self: pointer): pointer {.importc: "QQmlPropertyMap_vtbl".}
+proc fcQQmlPropertyMap_vdata(self: pointer): pointer {.importc: "QQmlPropertyMap_vdata".}
 type cQQmlPropertyMapVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQQmlPropertyMapVTable, self: ptr cQQmlPropertyMap) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  updateValue*: proc(vtbl, self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQQmlPropertyMap_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQmlPropertyMap_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  updateValue*: proc(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQmlPropertyMap_virtualbase_metaObject(self: pointer): pointer {.importc: "QQmlPropertyMap_virtualbase_metaObject".}
 proc fcQQmlPropertyMap_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQmlPropertyMap_virtualbase_metacast".}
 proc fcQQmlPropertyMap_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQmlPropertyMap_virtualbase_metacall".}
 proc fcQQmlPropertyMap_virtualbase_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.importc: "QQmlPropertyMap_virtualbase_updateValue".}
@@ -97,15 +99,15 @@ proc fcQQmlPropertyMap_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQQmlPropertyMap_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQmlPropertyMap_virtualbase_customEvent".}
 proc fcQQmlPropertyMap_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQmlPropertyMap_virtualbase_connectNotify".}
 proc fcQQmlPropertyMap_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQmlPropertyMap_virtualbase_disconnectNotify".}
-proc fcQQmlPropertyMap_protectedbase_sender(self: pointer, ): pointer {.importc: "QQmlPropertyMap_protectedbase_sender".}
-proc fcQQmlPropertyMap_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQmlPropertyMap_protectedbase_senderSignalIndex".}
+proc fcQQmlPropertyMap_protectedbase_sender(self: pointer): pointer {.importc: "QQmlPropertyMap_protectedbase_sender".}
+proc fcQQmlPropertyMap_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQmlPropertyMap_protectedbase_senderSignalIndex".}
 proc fcQQmlPropertyMap_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQmlPropertyMap_protectedbase_receivers".}
 proc fcQQmlPropertyMap_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQmlPropertyMap_protectedbase_isSignalConnected".}
-proc fcQQmlPropertyMap_new(vtbl: pointer, ): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new".}
-proc fcQQmlPropertyMap_new2(vtbl: pointer, parent: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new2".}
+proc fcQQmlPropertyMap_new(vtbl, vdata: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new".}
+proc fcQQmlPropertyMap_new2(vtbl, vdata: pointer, parent: pointer): ptr cQQmlPropertyMap {.importc: "QQmlPropertyMap_new2".}
 proc fcQQmlPropertyMap_staticMetaObject(): pointer {.importc: "QQmlPropertyMap_staticMetaObject".}
 
-proc metaObject*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlPropertyMap_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, param1: cstring): pointer =
@@ -135,7 +137,7 @@ proc insert*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, value
 proc clear*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): void =
   fcQQmlPropertyMap_clear(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
 
-proc keys*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): seq[string] =
+proc keys*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): seq[string] =
   var v_ma = fcQQmlPropertyMap_keys(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -147,13 +149,13 @@ proc keys*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc count*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): cint =
+proc count*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): cint =
   fcQQmlPropertyMap_count(self.h)
 
-proc size*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): cint =
+proc size*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): cint =
   fcQQmlPropertyMap_size(self.h)
 
-proc isEmpty*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): bool =
+proc isEmpty*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): bool =
   fcQQmlPropertyMap_isEmpty(self.h)
 
 proc contains*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string): bool =
@@ -169,7 +171,7 @@ proc valueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string,
   fcQQmlPropertyMap_valueChanged(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), value.h)
 
 type QQmlPropertyMapvalueChangedSlot* = proc(key: string, value: gen_qvariant_types.QVariant)
-proc miqt_exec_callback_cQQmlPropertyMap_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
+proc cQQmlPropertyMap_slot_callback_valueChanged(slot: int, key: struct_miqt_string, value: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
@@ -180,7 +182,7 @@ proc miqt_exec_callback_cQQmlPropertyMap_valueChanged(slot: int, key: struct_miq
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQQmlPropertyMap_valueChanged_release(slot: int) {.cdecl.} =
+proc cQQmlPropertyMap_slot_callback_valueChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQmlPropertyMapvalueChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -188,7 +190,7 @@ proc onvalueChanged*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, slot: QQml
   var tmp = new QQmlPropertyMapvalueChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQmlPropertyMap_connect_valueChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQmlPropertyMap_valueChanged, miqt_exec_callback_cQQmlPropertyMap_valueChanged_release)
+  fcQQmlPropertyMap_connect_valueChanged(self.h, cast[int](addr tmp[]), cQQmlPropertyMap_slot_callback_valueChanged, cQQmlPropertyMap_slot_callback_valueChanged_release)
 
 proc tr*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap, s: cstring, c: cstring): string =
   let v_ms = fcQQmlPropertyMap_tr2(s, c)
@@ -238,11 +240,11 @@ type QQmlPropertyMapVTable* {.inheritable, pure.} = object
   customEvent*: QQmlPropertyMapcustomEventProc
   connectNotify*: QQmlPropertyMapconnectNotifyProc
   disconnectNotify*: QQmlPropertyMapdisconnectNotifyProc
-proc QQmlPropertyMapmetaObject*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): gen_qobjectdefs_types.QMetaObject =
+proc QQmlPropertyMapmetaObject*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlPropertyMap_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQQmlPropertyMap_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -253,8 +255,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_metaObject(vtbl: pointer, self: pointer
 proc QQmlPropertyMapmetacast*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, param1: cstring): pointer =
   fcQQmlPropertyMap_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQQmlPropertyMap_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -263,8 +265,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_metacast(vtbl: pointer, self: pointer, 
 proc QQmlPropertyMapmetacall*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, param1: cint, param2: cint, param3: pointer): cint =
   fcQQmlPropertyMap_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQQmlPropertyMap_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -275,8 +277,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_metacall(vtbl: pointer, self: pointer, 
 proc QQmlPropertyMapupdateValue*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQmlPropertyMap_virtualbase_updateValue(self.h, struct_miqt_string(data: key, len: csize_t(len(key))), input.h), owned: true)
 
-proc miqt_exec_callback_cQQmlPropertyMap_updateValue(vtbl: pointer, self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
@@ -292,8 +294,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_updateValue(vtbl: pointer, self: pointe
 proc QQmlPropertyMapevent*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, event: gen_qcoreevent_types.QEvent): bool =
   fcQQmlPropertyMap_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -302,8 +304,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_event(vtbl: pointer, self: pointer, eve
 proc QQmlPropertyMapeventFilter*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQQmlPropertyMap_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -313,8 +315,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_eventFilter(vtbl: pointer, self: pointe
 proc QQmlPropertyMaptimerEvent*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQQmlPropertyMap_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -322,8 +324,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_timerEvent(vtbl: pointer, self: pointer
 proc QQmlPropertyMapchildEvent*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, event: gen_qcoreevent_types.QChildEvent): void =
   fcQQmlPropertyMap_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -331,8 +333,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_childEvent(vtbl: pointer, self: pointer
 proc QQmlPropertyMapcustomEvent*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, event: gen_qcoreevent_types.QEvent): void =
   fcQQmlPropertyMap_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -340,8 +342,8 @@ proc miqt_exec_callback_cQQmlPropertyMap_customEvent(vtbl: pointer, self: pointe
 proc QQmlPropertyMapconnectNotify*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQmlPropertyMap_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -349,19 +351,19 @@ proc miqt_exec_callback_cQQmlPropertyMap_connectNotify(vtbl: pointer, self: poin
 proc QQmlPropertyMapdisconnectNotify*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQmlPropertyMap_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQmlPropertyMap_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQmlPropertyMapVTable](vtbl)
+proc cQQmlPropertyMap_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
   let self = QQmlPropertyMap(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQmlPropertyMap* {.inheritable.} = ref object of QQmlPropertyMap
   vtbl*: cQQmlPropertyMapVTable
-method metaObject*(self: VirtualQQmlPropertyMap, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQQmlPropertyMap): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQmlPropertyMapmetaObject(self[])
-proc miqt_exec_method_cQQmlPropertyMap_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQQmlPropertyMap_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -369,32 +371,32 @@ proc miqt_exec_method_cQQmlPropertyMap_metaObject(vtbl: pointer, inst: pointer):
 
 method metacast*(self: VirtualQQmlPropertyMap, param1: cstring): pointer {.base.} =
   QQmlPropertyMapmetacast(self[], param1)
-proc miqt_exec_method_cQQmlPropertyMap_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQQmlPropertyMap, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QQmlPropertyMapmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQQmlPropertyMap_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method updateValue*(self: VirtualQQmlPropertyMap, key: string, input: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QQmlPropertyMapupdateValue(self[], key, input)
-proc miqt_exec_method_cQQmlPropertyMap_updateValue(vtbl: pointer, inst: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_updateValue(self: pointer, key: struct_miqt_string, input: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let vkey_ms = key
   let vkeyx_ret = string.fromBytes(toOpenArrayByte(vkey_ms.data, 0, int(vkey_ms.len)-1))
   c_free(vkey_ms.data)
   let slotval1 = vkeyx_ret
   let slotval2 = gen_qvariant_types.QVariant(h: input, owned: false)
-  var virtualReturn = vtbl.updateValue(slotval1, slotval2)
+  var virtualReturn = inst.updateValue(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -402,60 +404,60 @@ proc miqt_exec_method_cQQmlPropertyMap_updateValue(vtbl: pointer, inst: pointer,
 
 method event*(self: VirtualQQmlPropertyMap, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQmlPropertyMapevent(self[], event)
-proc miqt_exec_method_cQQmlPropertyMap_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQQmlPropertyMap, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQmlPropertyMapeventFilter(self[], watched, event)
-proc miqt_exec_method_cQQmlPropertyMap_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQQmlPropertyMap, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QQmlPropertyMaptimerEvent(self[], event)
-proc miqt_exec_method_cQQmlPropertyMap_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQmlPropertyMap, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQmlPropertyMapchildEvent(self[], event)
-proc miqt_exec_method_cQQmlPropertyMap_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQmlPropertyMap, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQmlPropertyMapcustomEvent(self[], event)
-proc miqt_exec_method_cQQmlPropertyMap_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQmlPropertyMap, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlPropertyMapconnectNotify(self[], signal)
-proc miqt_exec_method_cQQmlPropertyMap_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQmlPropertyMap, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQmlPropertyMapdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQQmlPropertyMap_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQmlPropertyMap](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
+proc cQQmlPropertyMap_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQmlPropertyMap](fcQQmlPropertyMap_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQmlPropertyMap_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, ): cint =
+proc senderSignalIndex*(self: gen_qqmlpropertymap_types.QQmlPropertyMap): cint =
   fcQQmlPropertyMap_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qqmlpropertymap_types.QQmlPropertyMap, signal: cstring): cint =
@@ -468,109 +470,94 @@ proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
     vtbl: ref QQmlPropertyMapVTable = nil): gen_qqmlpropertymap_types.QQmlPropertyMap =
   let vtbl = if vtbl == nil: new QQmlPropertyMapVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlPropertyMapVTable, _: ptr cQQmlPropertyMap) {.cdecl.} =
-    let vtbl = cast[ref QQmlPropertyMapVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlPropertyMap_metaObject
+    vtbl[].vtbl.metaObject = cQQmlPropertyMap_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlPropertyMap_metacast
+    vtbl[].vtbl.metacast = cQQmlPropertyMap_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlPropertyMap_metacall
+    vtbl[].vtbl.metacall = cQQmlPropertyMap_vtable_callback_metacall
   if not isNil(vtbl[].updateValue):
-    vtbl[].vtbl.updateValue = miqt_exec_callback_cQQmlPropertyMap_updateValue
+    vtbl[].vtbl.updateValue = cQQmlPropertyMap_vtable_callback_updateValue
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQmlPropertyMap_event
+    vtbl[].vtbl.event = cQQmlPropertyMap_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlPropertyMap_eventFilter
+    vtbl[].vtbl.eventFilter = cQQmlPropertyMap_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlPropertyMap_timerEvent
+    vtbl[].vtbl.timerEvent = cQQmlPropertyMap_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlPropertyMap_childEvent
+    vtbl[].vtbl.childEvent = cQQmlPropertyMap_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlPropertyMap_customEvent
+    vtbl[].vtbl.customEvent = cQQmlPropertyMap_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlPropertyMap_connectNotify
+    vtbl[].vtbl.connectNotify = cQQmlPropertyMap_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlPropertyMap_disconnectNotify
-  gen_qqmlpropertymap_types.QQmlPropertyMap(h: fcQQmlPropertyMap_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQmlPropertyMap_vtable_callback_disconnectNotify
+  gen_qqmlpropertymap_types.QQmlPropertyMap(h: fcQQmlPropertyMap_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
     parent: gen_qobject_types.QObject,
     vtbl: ref QQmlPropertyMapVTable = nil): gen_qqmlpropertymap_types.QQmlPropertyMap =
   let vtbl = if vtbl == nil: new QQmlPropertyMapVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlPropertyMapVTable, _: ptr cQQmlPropertyMap) {.cdecl.} =
-    let vtbl = cast[ref QQmlPropertyMapVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQmlPropertyMapVTable](fcQQmlPropertyMap_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQmlPropertyMap_metaObject
+    vtbl[].vtbl.metaObject = cQQmlPropertyMap_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQmlPropertyMap_metacast
+    vtbl[].vtbl.metacast = cQQmlPropertyMap_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQmlPropertyMap_metacall
+    vtbl[].vtbl.metacall = cQQmlPropertyMap_vtable_callback_metacall
   if not isNil(vtbl[].updateValue):
-    vtbl[].vtbl.updateValue = miqt_exec_callback_cQQmlPropertyMap_updateValue
+    vtbl[].vtbl.updateValue = cQQmlPropertyMap_vtable_callback_updateValue
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQmlPropertyMap_event
+    vtbl[].vtbl.event = cQQmlPropertyMap_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQmlPropertyMap_eventFilter
+    vtbl[].vtbl.eventFilter = cQQmlPropertyMap_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQmlPropertyMap_timerEvent
+    vtbl[].vtbl.timerEvent = cQQmlPropertyMap_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQmlPropertyMap_childEvent
+    vtbl[].vtbl.childEvent = cQQmlPropertyMap_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQmlPropertyMap_customEvent
+    vtbl[].vtbl.customEvent = cQQmlPropertyMap_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQmlPropertyMap_connectNotify
+    vtbl[].vtbl.connectNotify = cQQmlPropertyMap_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQmlPropertyMap_disconnectNotify
-  gen_qqmlpropertymap_types.QQmlPropertyMap(h: fcQQmlPropertyMap_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQmlPropertyMap_vtable_callback_disconnectNotify
+  gen_qqmlpropertymap_types.QQmlPropertyMap(h: fcQQmlPropertyMap_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQQmlPropertyMap_mvtbl = cQQmlPropertyMapVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQQmlPropertyMap()[])](self.fcQQmlPropertyMap_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQQmlPropertyMap_method_callback_metaObject,
+  metacast: cQQmlPropertyMap_method_callback_metacast,
+  metacall: cQQmlPropertyMap_method_callback_metacall,
+  updateValue: cQQmlPropertyMap_method_callback_updateValue,
+  event: cQQmlPropertyMap_method_callback_event,
+  eventFilter: cQQmlPropertyMap_method_callback_eventFilter,
+  timerEvent: cQQmlPropertyMap_method_callback_timerEvent,
+  childEvent: cQQmlPropertyMap_method_callback_childEvent,
+  customEvent: cQQmlPropertyMap_method_callback_customEvent,
+  connectNotify: cQQmlPropertyMap_method_callback_connectNotify,
+  disconnectNotify: cQQmlPropertyMap_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
-    vtbl: VirtualQQmlPropertyMap) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlPropertyMapVTable, _: ptr cQQmlPropertyMap) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQmlPropertyMap()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlPropertyMap_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlPropertyMap_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlPropertyMap_metacall
-  vtbl[].vtbl.updateValue = miqt_exec_method_cQQmlPropertyMap_updateValue
-  vtbl[].vtbl.event = miqt_exec_method_cQQmlPropertyMap_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlPropertyMap_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlPropertyMap_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlPropertyMap_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlPropertyMap_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlPropertyMap_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlPropertyMap_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQmlPropertyMap_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQQmlPropertyMap) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQmlPropertyMap_new(addr(cQQmlPropertyMap_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qqmlpropertymap_types.QQmlPropertyMap,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQQmlPropertyMap) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQmlPropertyMapVTable, _: ptr cQQmlPropertyMap) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQmlPropertyMap()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQmlPropertyMap, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQmlPropertyMap_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQmlPropertyMap_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQmlPropertyMap_metacall
-  vtbl[].vtbl.updateValue = miqt_exec_method_cQQmlPropertyMap_updateValue
-  vtbl[].vtbl.event = miqt_exec_method_cQQmlPropertyMap_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQmlPropertyMap_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQmlPropertyMap_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQmlPropertyMap_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQmlPropertyMap_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQmlPropertyMap_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQmlPropertyMap_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQmlPropertyMap_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQQmlPropertyMap) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQmlPropertyMap_new2(addr(cQQmlPropertyMap_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qqmlpropertymap_types.QQmlPropertyMap): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQmlPropertyMap_staticMetaObject())

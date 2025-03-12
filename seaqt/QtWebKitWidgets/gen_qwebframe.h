@@ -62,6 +62,7 @@ typedef struct QWebSecurityOrigin QWebSecurityOrigin;
 
 QWebHitTestResult* QWebHitTestResult_new();
 QWebHitTestResult* QWebHitTestResult_new2(QWebHitTestResult* other);
+
 void QWebHitTestResult_operatorAssign(QWebHitTestResult* self, QWebHitTestResult* other);
 bool QWebHitTestResult_isNull(const QWebHitTestResult* self);
 QPoint* QWebHitTestResult_pos(const QWebHitTestResult* self);
@@ -82,6 +83,7 @@ bool QWebHitTestResult_isContentEditable(const QWebHitTestResult* self);
 bool QWebHitTestResult_isContentSelected(const QWebHitTestResult* self);
 QWebElement* QWebHitTestResult_element(const QWebHitTestResult* self);
 QWebFrame* QWebHitTestResult_frame(const QWebHitTestResult* self);
+
 void QWebHitTestResult_delete(QWebHitTestResult* self);
 
 void QWebFrame_virtbase(QWebFrame* src, QObject** outptr_QObject);
@@ -170,6 +172,7 @@ void QWebFrame_setContent3(QWebFrame* self, struct miqt_string data, struct miqt
 void QWebFrame_addToJavaScriptWindowObject3(QWebFrame* self, struct miqt_string name, QObject* object, int ownership);
 void QWebFrame_render22(QWebFrame* self, QPainter* param1, QRegion* clip);
 void QWebFrame_render3(QWebFrame* self, QPainter* param1, int layer, QRegion* clip);
+
 const QMetaObject* QWebFrame_staticMetaObject();
 
 #ifdef __cplusplus

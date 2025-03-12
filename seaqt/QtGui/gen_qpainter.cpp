@@ -31,15 +31,6 @@
 #include <QTransform>
 #include <qpainter.h>
 #include "gen_qpainter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPainter* QPainter_new() {
 	return new QPainter();
 }
@@ -1107,6 +1098,7 @@ QPaintDevice* QPainter_redirected2(QPaintDevice* device, QPoint* offset) {
 }
 
 const QMetaObject* QPainter_staticMetaObject() { return &QPainter::staticMetaObject; }
+
 void QPainter_delete(QPainter* self) {
 	delete self;
 }

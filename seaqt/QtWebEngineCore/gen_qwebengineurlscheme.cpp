@@ -2,15 +2,6 @@
 #include <QWebEngineUrlScheme>
 #include <qwebengineurlscheme.h>
 #include "gen_qwebengineurlscheme.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineUrlScheme* QWebEngineUrlScheme_new() {
 	return new QWebEngineUrlScheme();
 }
@@ -86,6 +77,7 @@ QWebEngineUrlScheme* QWebEngineUrlScheme_schemeByName(struct miqt_string name) {
 }
 
 const QMetaObject* QWebEngineUrlScheme_staticMetaObject() { return &QWebEngineUrlScheme::staticMetaObject; }
+
 void QWebEngineUrlScheme_delete(QWebEngineUrlScheme* self) {
 	delete self;
 }

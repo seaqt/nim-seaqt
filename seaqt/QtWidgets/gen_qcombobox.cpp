@@ -46,39 +46,32 @@
 #include <QWidget>
 #include <qcombobox.h>
 #include "gen_qcombobox.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQComboBox final : public QComboBox {
-	struct QComboBox_VTable* vtbl;
+	const QComboBox_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QComboBox_VTable* QComboBox_vtbl(const VirtualQComboBox* self);
+	friend void* QComboBox_vdata(const VirtualQComboBox* self);
+	friend void QComboBox_setVdata(VirtualQComboBox* self, void* vdata);
 
-	VirtualQComboBox(struct QComboBox_VTable* vtbl, QWidget* parent): QComboBox(parent), vtbl(vtbl) {};
-	VirtualQComboBox(struct QComboBox_VTable* vtbl): QComboBox(), vtbl(vtbl) {};
+	VirtualQComboBox(const QComboBox_VTable* vtbl, void* vdata, QWidget* parent): QComboBox(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQComboBox(const QComboBox_VTable* vtbl, void* vdata): QComboBox(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQComboBox() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQComboBox() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QComboBox::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QComboBox_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QComboBox_virtualbase_metaObject(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QComboBox::qt_metacast(param1);
@@ -86,14 +79,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QComboBox_virtualbase_metacast(void* self, const char* param1);
+	friend void* QComboBox_virtualbase_metacast(VirtualQComboBox* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QComboBox::qt_metacall(param1, param2, param3);
@@ -104,46 +96,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QComboBox_virtualbase_metacall(VirtualQComboBox* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QComboBox::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QComboBox_virtualbase_sizeHint(const void* self);
+	friend QSize* QComboBox_virtualbase_sizeHint(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QComboBox::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QComboBox_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QComboBox_virtualbase_minimumSizeHint(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showPopup() override {
 		if (vtbl->showPopup == 0) {
 			QComboBox::showPopup();
@@ -151,13 +140,12 @@ public:
 		}
 
 
-		vtbl->showPopup(vtbl, this);
+		vtbl->showPopup(this);
 
 	}
 
-	friend void QComboBox_virtualbase_showPopup(void* self);
+	friend void QComboBox_virtualbase_showPopup(VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hidePopup() override {
 		if (vtbl->hidePopup == 0) {
 			QComboBox::hidePopup();
@@ -165,13 +153,12 @@ public:
 		}
 
 
-		vtbl->hidePopup(vtbl, this);
+		vtbl->hidePopup(this);
 
 	}
 
-	friend void QComboBox_virtualbase_hidePopup(void* self);
+	friend void QComboBox_virtualbase_hidePopup(VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QComboBox::event(event);
@@ -179,14 +166,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QComboBox_virtualbase_event(void* self, QEvent* event);
+	friend bool QComboBox_virtualbase_event(VirtualQComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QComboBox::inputMethodQuery(param1);
@@ -195,16 +181,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QComboBox_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QComboBox_virtualbase_inputMethodQuery(const VirtualQComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QComboBox::focusInEvent(e);
@@ -213,13 +198,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QComboBox_virtualbase_focusInEvent(VirtualQComboBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QComboBox::focusOutEvent(e);
@@ -228,13 +212,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QComboBox_virtualbase_focusOutEvent(VirtualQComboBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QComboBox::changeEvent(e);
@@ -243,13 +226,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QComboBox_virtualbase_changeEvent(VirtualQComboBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
 		if (vtbl->resizeEvent == 0) {
 			QComboBox::resizeEvent(e);
@@ -258,13 +240,12 @@ public:
 
 		QResizeEvent* sigval1 = e;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_resizeEvent(void* self, QResizeEvent* e);
+	friend void QComboBox_virtualbase_resizeEvent(VirtualQComboBox* self, QResizeEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			QComboBox::paintEvent(e);
@@ -273,13 +254,12 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_paintEvent(void* self, QPaintEvent* e);
+	friend void QComboBox_virtualbase_paintEvent(VirtualQComboBox* self, QPaintEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* e) override {
 		if (vtbl->showEvent == 0) {
 			QComboBox::showEvent(e);
@@ -288,13 +268,12 @@ public:
 
 		QShowEvent* sigval1 = e;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_showEvent(void* self, QShowEvent* e);
+	friend void QComboBox_virtualbase_showEvent(VirtualQComboBox* self, QShowEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* e) override {
 		if (vtbl->hideEvent == 0) {
 			QComboBox::hideEvent(e);
@@ -303,13 +282,12 @@ public:
 
 		QHideEvent* sigval1 = e;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_hideEvent(void* self, QHideEvent* e);
+	friend void QComboBox_virtualbase_hideEvent(VirtualQComboBox* self, QHideEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QComboBox::mousePressEvent(e);
@@ -318,13 +296,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QComboBox_virtualbase_mousePressEvent(VirtualQComboBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QComboBox::mouseReleaseEvent(e);
@@ -333,13 +310,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QComboBox_virtualbase_mouseReleaseEvent(VirtualQComboBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QComboBox::keyPressEvent(e);
@@ -348,13 +324,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QComboBox_virtualbase_keyPressEvent(VirtualQComboBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QComboBox::keyReleaseEvent(e);
@@ -363,13 +338,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QComboBox_virtualbase_keyReleaseEvent(VirtualQComboBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QComboBox::wheelEvent(e);
@@ -378,13 +352,12 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QComboBox_virtualbase_wheelEvent(VirtualQComboBox* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* e) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QComboBox::contextMenuEvent(e);
@@ -393,13 +366,12 @@ public:
 
 		QContextMenuEvent* sigval1 = e;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e);
+	friend void QComboBox_virtualbase_contextMenuEvent(VirtualQComboBox* self, QContextMenuEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QComboBox::inputMethodEvent(param1);
@@ -408,27 +380,25 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QComboBox_virtualbase_inputMethodEvent(VirtualQComboBox* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QComboBox::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QComboBox_virtualbase_devType(const void* self);
+	friend int QComboBox_virtualbase_devType(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QComboBox::setVisible(visible);
@@ -437,13 +407,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_setVisible(void* self, bool visible);
+	friend void QComboBox_virtualbase_setVisible(VirtualQComboBox* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QComboBox::heightForWidth(param1);
@@ -451,42 +420,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QComboBox_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QComboBox_virtualbase_heightForWidth(const VirtualQComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QComboBox::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QComboBox_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QComboBox_virtualbase_hasHeightForWidth(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QComboBox::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QComboBox_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QComboBox_virtualbase_paintEngine(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QComboBox::mouseDoubleClickEvent(event);
@@ -495,13 +461,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QComboBox_virtualbase_mouseDoubleClickEvent(VirtualQComboBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QComboBox::mouseMoveEvent(event);
@@ -510,13 +475,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QComboBox_virtualbase_mouseMoveEvent(VirtualQComboBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QComboBox::enterEvent(event);
@@ -525,13 +489,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QComboBox_virtualbase_enterEvent(VirtualQComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QComboBox::leaveEvent(event);
@@ -540,13 +503,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QComboBox_virtualbase_leaveEvent(VirtualQComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QComboBox::moveEvent(event);
@@ -555,13 +517,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QComboBox_virtualbase_moveEvent(VirtualQComboBox* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QComboBox::closeEvent(event);
@@ -570,13 +531,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QComboBox_virtualbase_closeEvent(VirtualQComboBox* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QComboBox::tabletEvent(event);
@@ -585,13 +545,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QComboBox_virtualbase_tabletEvent(VirtualQComboBox* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QComboBox::actionEvent(event);
@@ -600,13 +559,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QComboBox_virtualbase_actionEvent(VirtualQComboBox* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QComboBox::dragEnterEvent(event);
@@ -615,13 +573,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QComboBox_virtualbase_dragEnterEvent(VirtualQComboBox* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QComboBox::dragMoveEvent(event);
@@ -630,13 +587,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QComboBox_virtualbase_dragMoveEvent(VirtualQComboBox* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QComboBox::dragLeaveEvent(event);
@@ -645,13 +601,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QComboBox_virtualbase_dragLeaveEvent(VirtualQComboBox* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QComboBox::dropEvent(event);
@@ -660,13 +615,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QComboBox_virtualbase_dropEvent(VirtualQComboBox* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QComboBox::nativeEvent(eventType, message, result);
@@ -681,14 +635,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QComboBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QComboBox_virtualbase_nativeEvent(VirtualQComboBox* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QComboBox::metric(param1);
@@ -697,14 +650,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QComboBox_virtualbase_metric(const void* self, int param1);
+	friend int QComboBox_virtualbase_metric(const VirtualQComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QComboBox::initPainter(painter);
@@ -713,13 +665,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QComboBox_virtualbase_initPainter(const VirtualQComboBox* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QComboBox::redirected(offset);
@@ -727,28 +678,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QComboBox_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QComboBox_virtualbase_redirected(const VirtualQComboBox* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QComboBox::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QComboBox_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QComboBox_virtualbase_sharedPainter(const VirtualQComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QComboBox::focusNextPrevChild(next);
@@ -756,14 +705,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QComboBox_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QComboBox_virtualbase_focusNextPrevChild(VirtualQComboBox* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QComboBox::eventFilter(watched, event);
@@ -772,14 +720,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QComboBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QComboBox_virtualbase_eventFilter(VirtualQComboBox* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QComboBox::timerEvent(event);
@@ -788,13 +735,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QComboBox_virtualbase_timerEvent(VirtualQComboBox* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QComboBox::childEvent(event);
@@ -803,13 +749,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QComboBox_virtualbase_childEvent(VirtualQComboBox* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QComboBox::customEvent(event);
@@ -818,13 +763,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QComboBox_virtualbase_customEvent(VirtualQComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QComboBox::connectNotify(signal);
@@ -835,13 +779,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QComboBox_virtualbase_connectNotify(VirtualQComboBox* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QComboBox::disconnectNotify(signal);
@@ -852,31 +795,31 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QComboBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QComboBox_virtualbase_disconnectNotify(VirtualQComboBox* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QComboBox_protectedbase_initStyleOption(const void* self, QStyleOptionComboBox* option);
-	friend void QComboBox_protectedbase_updateMicroFocus(void* self);
-	friend void QComboBox_protectedbase_create(void* self);
-	friend void QComboBox_protectedbase_destroy(void* self);
-	friend bool QComboBox_protectedbase_focusNextChild(void* self);
-	friend bool QComboBox_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QComboBox_protectedbase_sender(const void* self);
-	friend int QComboBox_protectedbase_senderSignalIndex(const void* self);
-	friend int QComboBox_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QComboBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QComboBox_protectedbase_initStyleOption(const VirtualQComboBox* self, QStyleOptionComboBox* option);
+	friend void QComboBox_protectedbase_updateMicroFocus(VirtualQComboBox* self);
+	friend void QComboBox_protectedbase_create(VirtualQComboBox* self);
+	friend void QComboBox_protectedbase_destroy(VirtualQComboBox* self);
+	friend bool QComboBox_protectedbase_focusNextChild(VirtualQComboBox* self);
+	friend bool QComboBox_protectedbase_focusPreviousChild(VirtualQComboBox* self);
+	friend QObject* QComboBox_protectedbase_sender(const VirtualQComboBox* self);
+	friend int QComboBox_protectedbase_senderSignalIndex(const VirtualQComboBox* self);
+	friend int QComboBox_protectedbase_receivers(const VirtualQComboBox* self, const char* signal);
+	friend bool QComboBox_protectedbase_isSignalConnected(const VirtualQComboBox* self, QMetaMethod* signal);
 };
 
-QComboBox* QComboBox_new(struct QComboBox_VTable* vtbl, QWidget* parent) {
-	return new VirtualQComboBox(vtbl, parent);
+VirtualQComboBox* QComboBox_new(const QComboBox_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQComboBox(vtbl, vdata, parent);
 }
 
-QComboBox* QComboBox_new2(struct QComboBox_VTable* vtbl) {
-	return new VirtualQComboBox(vtbl);
+VirtualQComboBox* QComboBox_new2(const QComboBox_VTable* vtbl, void* vdata) {
+	return new VirtualQComboBox(vtbl, vdata);
 }
 
 void QComboBox_virtbase(QComboBox* src, QWidget** outptr_QWidget) {
@@ -1257,7 +1200,7 @@ void QComboBox_editTextChanged(QComboBox* self, struct miqt_string param1) {
 	self->editTextChanged(param1_QString);
 }
 
-void QComboBox_connect_editTextChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_editTextChanged(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1280,7 +1223,7 @@ void QComboBox_activated(QComboBox* self, int index) {
 	self->activated(static_cast<int>(index));
 }
 
-void QComboBox_connect_activated(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_activated(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1297,7 +1240,7 @@ void QComboBox_textActivated(QComboBox* self, struct miqt_string param1) {
 	self->textActivated(param1_QString);
 }
 
-void QComboBox_connect_textActivated(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_textActivated(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1320,7 +1263,7 @@ void QComboBox_highlighted(QComboBox* self, int index) {
 	self->highlighted(static_cast<int>(index));
 }
 
-void QComboBox_connect_highlighted(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_highlighted(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1337,7 +1280,7 @@ void QComboBox_textHighlighted(QComboBox* self, struct miqt_string param1) {
 	self->textHighlighted(param1_QString);
 }
 
-void QComboBox_connect_textHighlighted(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_textHighlighted(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1360,7 +1303,7 @@ void QComboBox_currentIndexChanged(QComboBox* self, int index) {
 	self->currentIndexChanged(static_cast<int>(index));
 }
 
-void QComboBox_connect_currentIndexChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QComboBox_connect_currentIndexChanged(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1377,7 +1320,7 @@ void QComboBox_currentIndexChangedWithQString(QComboBox* self, struct miqt_strin
 	self->currentIndexChanged(param1_QString);
 }
 
-void QComboBox_connect_currentIndexChangedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_currentIndexChangedWithQString(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1401,7 +1344,7 @@ void QComboBox_currentTextChanged(QComboBox* self, struct miqt_string param1) {
 	self->currentTextChanged(param1_QString);
 }
 
-void QComboBox_connect_currentTextChanged(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_currentTextChanged(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1425,7 +1368,7 @@ void QComboBox_activatedWithQString(QComboBox* self, struct miqt_string param1) 
 	self->activated(param1_QString);
 }
 
-void QComboBox_connect_activatedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_activatedWithQString(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1449,7 +1392,7 @@ void QComboBox_highlightedWithQString(QComboBox* self, struct miqt_string param1
 	self->highlighted(param1_QString);
 }
 
-void QComboBox_connect_highlightedWithQString(QComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QComboBox_connect_highlightedWithQString(VirtualQComboBox* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1557,388 +1500,311 @@ void QComboBox_setItemData3(QComboBox* self, int index, QVariant* value, int rol
 	self->setItemData(static_cast<int>(index), *value, static_cast<int>(role));
 }
 
-QMetaObject* QComboBox_virtualbase_metaObject(const void* self) {
+QMetaObject* QComboBox_virtualbase_metaObject(const VirtualQComboBox* self) {
 
-	return (QMetaObject*) ( (const VirtualQComboBox*)(self) )->QComboBox::metaObject();
-
+	return (QMetaObject*) self->QComboBox::metaObject();
 }
 
-void* QComboBox_virtualbase_metacast(void* self, const char* param1) {
+void* QComboBox_virtualbase_metacast(VirtualQComboBox* self, const char* param1) {
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::qt_metacast(param1);
-
+	return self->QComboBox::qt_metacast(param1);
 }
 
-int QComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QComboBox_virtualbase_metacall(VirtualQComboBox* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QComboBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QComboBox_virtualbase_sizeHint(const void* self) {
+QSize* QComboBox_virtualbase_sizeHint(const VirtualQComboBox* self) {
 
-	return new QSize(( (const VirtualQComboBox*)(self) )->QComboBox::sizeHint());
-
+	return new QSize(self->QComboBox::sizeHint());
 }
 
-QSize* QComboBox_virtualbase_minimumSizeHint(const void* self) {
+QSize* QComboBox_virtualbase_minimumSizeHint(const VirtualQComboBox* self) {
 
-	return new QSize(( (const VirtualQComboBox*)(self) )->QComboBox::minimumSizeHint());
-
+	return new QSize(self->QComboBox::minimumSizeHint());
 }
 
-void QComboBox_virtualbase_showPopup(void* self) {
+void QComboBox_virtualbase_showPopup(VirtualQComboBox* self) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::showPopup();
-
+	self->QComboBox::showPopup();
 }
 
-void QComboBox_virtualbase_hidePopup(void* self) {
+void QComboBox_virtualbase_hidePopup(VirtualQComboBox* self) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::hidePopup();
-
+	self->QComboBox::hidePopup();
 }
 
-bool QComboBox_virtualbase_event(void* self, QEvent* event) {
+bool QComboBox_virtualbase_event(VirtualQComboBox* self, QEvent* event) {
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::event(event);
-
+	return self->QComboBox::event(event);
 }
 
-QVariant* QComboBox_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QComboBox_virtualbase_inputMethodQuery(const VirtualQComboBox* self, int param1) {
 
-	return new QVariant(( (const VirtualQComboBox*)(self) )->QComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-void QComboBox_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QComboBox_virtualbase_focusInEvent(VirtualQComboBox* self, QFocusEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::focusInEvent(e);
-
+	self->QComboBox::focusInEvent(e);
 }
 
-void QComboBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QComboBox_virtualbase_focusOutEvent(VirtualQComboBox* self, QFocusEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::focusOutEvent(e);
-
+	self->QComboBox::focusOutEvent(e);
 }
 
-void QComboBox_virtualbase_changeEvent(void* self, QEvent* e) {
+void QComboBox_virtualbase_changeEvent(VirtualQComboBox* self, QEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::changeEvent(e);
-
+	self->QComboBox::changeEvent(e);
 }
 
-void QComboBox_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
+void QComboBox_virtualbase_resizeEvent(VirtualQComboBox* self, QResizeEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::resizeEvent(e);
-
+	self->QComboBox::resizeEvent(e);
 }
 
-void QComboBox_virtualbase_paintEvent(void* self, QPaintEvent* e) {
+void QComboBox_virtualbase_paintEvent(VirtualQComboBox* self, QPaintEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::paintEvent(e);
-
+	self->QComboBox::paintEvent(e);
 }
 
-void QComboBox_virtualbase_showEvent(void* self, QShowEvent* e) {
+void QComboBox_virtualbase_showEvent(VirtualQComboBox* self, QShowEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::showEvent(e);
-
+	self->QComboBox::showEvent(e);
 }
 
-void QComboBox_virtualbase_hideEvent(void* self, QHideEvent* e) {
+void QComboBox_virtualbase_hideEvent(VirtualQComboBox* self, QHideEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::hideEvent(e);
-
+	self->QComboBox::hideEvent(e);
 }
 
-void QComboBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QComboBox_virtualbase_mousePressEvent(VirtualQComboBox* self, QMouseEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::mousePressEvent(e);
-
+	self->QComboBox::mousePressEvent(e);
 }
 
-void QComboBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QComboBox_virtualbase_mouseReleaseEvent(VirtualQComboBox* self, QMouseEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::mouseReleaseEvent(e);
-
+	self->QComboBox::mouseReleaseEvent(e);
 }
 
-void QComboBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QComboBox_virtualbase_keyPressEvent(VirtualQComboBox* self, QKeyEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::keyPressEvent(e);
-
+	self->QComboBox::keyPressEvent(e);
 }
 
-void QComboBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QComboBox_virtualbase_keyReleaseEvent(VirtualQComboBox* self, QKeyEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::keyReleaseEvent(e);
-
+	self->QComboBox::keyReleaseEvent(e);
 }
 
-void QComboBox_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QComboBox_virtualbase_wheelEvent(VirtualQComboBox* self, QWheelEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::wheelEvent(e);
-
+	self->QComboBox::wheelEvent(e);
 }
 
-void QComboBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e) {
+void QComboBox_virtualbase_contextMenuEvent(VirtualQComboBox* self, QContextMenuEvent* e) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::contextMenuEvent(e);
-
+	self->QComboBox::contextMenuEvent(e);
 }
 
-void QComboBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QComboBox_virtualbase_inputMethodEvent(VirtualQComboBox* self, QInputMethodEvent* param1) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::inputMethodEvent(param1);
-
+	self->QComboBox::inputMethodEvent(param1);
 }
 
-int QComboBox_virtualbase_devType(const void* self) {
+int QComboBox_virtualbase_devType(const VirtualQComboBox* self) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::devType();
-
+	return self->QComboBox::devType();
 }
 
-void QComboBox_virtualbase_setVisible(void* self, bool visible) {
+void QComboBox_virtualbase_setVisible(VirtualQComboBox* self, bool visible) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::setVisible(visible);
-
+	self->QComboBox::setVisible(visible);
 }
 
-int QComboBox_virtualbase_heightForWidth(const void* self, int param1) {
+int QComboBox_virtualbase_heightForWidth(const VirtualQComboBox* self, int param1) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::heightForWidth(static_cast<int>(param1));
-
+	return self->QComboBox::heightForWidth(static_cast<int>(param1));
 }
 
-bool QComboBox_virtualbase_hasHeightForWidth(const void* self) {
+bool QComboBox_virtualbase_hasHeightForWidth(const VirtualQComboBox* self) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::hasHeightForWidth();
-
+	return self->QComboBox::hasHeightForWidth();
 }
 
-QPaintEngine* QComboBox_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QComboBox_virtualbase_paintEngine(const VirtualQComboBox* self) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::paintEngine();
-
+	return self->QComboBox::paintEngine();
 }
 
-void QComboBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QComboBox_virtualbase_mouseDoubleClickEvent(VirtualQComboBox* self, QMouseEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::mouseDoubleClickEvent(event);
-
+	self->QComboBox::mouseDoubleClickEvent(event);
 }
 
-void QComboBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QComboBox_virtualbase_mouseMoveEvent(VirtualQComboBox* self, QMouseEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::mouseMoveEvent(event);
-
+	self->QComboBox::mouseMoveEvent(event);
 }
 
-void QComboBox_virtualbase_enterEvent(void* self, QEvent* event) {
+void QComboBox_virtualbase_enterEvent(VirtualQComboBox* self, QEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::enterEvent(event);
-
+	self->QComboBox::enterEvent(event);
 }
 
-void QComboBox_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QComboBox_virtualbase_leaveEvent(VirtualQComboBox* self, QEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::leaveEvent(event);
-
+	self->QComboBox::leaveEvent(event);
 }
 
-void QComboBox_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QComboBox_virtualbase_moveEvent(VirtualQComboBox* self, QMoveEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::moveEvent(event);
-
+	self->QComboBox::moveEvent(event);
 }
 
-void QComboBox_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QComboBox_virtualbase_closeEvent(VirtualQComboBox* self, QCloseEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::closeEvent(event);
-
+	self->QComboBox::closeEvent(event);
 }
 
-void QComboBox_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QComboBox_virtualbase_tabletEvent(VirtualQComboBox* self, QTabletEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::tabletEvent(event);
-
+	self->QComboBox::tabletEvent(event);
 }
 
-void QComboBox_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QComboBox_virtualbase_actionEvent(VirtualQComboBox* self, QActionEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::actionEvent(event);
-
+	self->QComboBox::actionEvent(event);
 }
 
-void QComboBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QComboBox_virtualbase_dragEnterEvent(VirtualQComboBox* self, QDragEnterEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::dragEnterEvent(event);
-
+	self->QComboBox::dragEnterEvent(event);
 }
 
-void QComboBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QComboBox_virtualbase_dragMoveEvent(VirtualQComboBox* self, QDragMoveEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::dragMoveEvent(event);
-
+	self->QComboBox::dragMoveEvent(event);
 }
 
-void QComboBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QComboBox_virtualbase_dragLeaveEvent(VirtualQComboBox* self, QDragLeaveEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::dragLeaveEvent(event);
-
+	self->QComboBox::dragLeaveEvent(event);
 }
 
-void QComboBox_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QComboBox_virtualbase_dropEvent(VirtualQComboBox* self, QDropEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::dropEvent(event);
-
+	self->QComboBox::dropEvent(event);
 }
 
-bool QComboBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QComboBox_virtualbase_nativeEvent(VirtualQComboBox* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QComboBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QComboBox_virtualbase_metric(const void* self, int param1) {
+int QComboBox_virtualbase_metric(const VirtualQComboBox* self, int param1) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::metric(static_cast<VirtualQComboBox::PaintDeviceMetric>(param1));
-
+	return self->QComboBox::metric(static_cast<VirtualQComboBox::PaintDeviceMetric>(param1));
 }
 
-void QComboBox_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QComboBox_virtualbase_initPainter(const VirtualQComboBox* self, QPainter* painter) {
 
-	( (const VirtualQComboBox*)(self) )->QComboBox::initPainter(painter);
-
+	self->QComboBox::initPainter(painter);
 }
 
-QPaintDevice* QComboBox_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QComboBox_virtualbase_redirected(const VirtualQComboBox* self, QPoint* offset) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::redirected(offset);
-
+	return self->QComboBox::redirected(offset);
 }
 
-QPainter* QComboBox_virtualbase_sharedPainter(const void* self) {
+QPainter* QComboBox_virtualbase_sharedPainter(const VirtualQComboBox* self) {
 
-	return ( (const VirtualQComboBox*)(self) )->QComboBox::sharedPainter();
-
+	return self->QComboBox::sharedPainter();
 }
 
-bool QComboBox_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QComboBox_virtualbase_focusNextPrevChild(VirtualQComboBox* self, bool next) {
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::focusNextPrevChild(next);
-
+	return self->QComboBox::focusNextPrevChild(next);
 }
 
-bool QComboBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QComboBox_virtualbase_eventFilter(VirtualQComboBox* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQComboBox*)(self) )->QComboBox::eventFilter(watched, event);
-
+	return self->QComboBox::eventFilter(watched, event);
 }
 
-void QComboBox_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QComboBox_virtualbase_timerEvent(VirtualQComboBox* self, QTimerEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::timerEvent(event);
-
+	self->QComboBox::timerEvent(event);
 }
 
-void QComboBox_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QComboBox_virtualbase_childEvent(VirtualQComboBox* self, QChildEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::childEvent(event);
-
+	self->QComboBox::childEvent(event);
 }
 
-void QComboBox_virtualbase_customEvent(void* self, QEvent* event) {
+void QComboBox_virtualbase_customEvent(VirtualQComboBox* self, QEvent* event) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::customEvent(event);
-
+	self->QComboBox::customEvent(event);
 }
 
-void QComboBox_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QComboBox_virtualbase_connectNotify(VirtualQComboBox* self, QMetaMethod* signal) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::connectNotify(*signal);
-
+	self->QComboBox::connectNotify(*signal);
 }
 
-void QComboBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QComboBox_virtualbase_disconnectNotify(VirtualQComboBox* self, QMetaMethod* signal) {
 
-	( (VirtualQComboBox*)(self) )->QComboBox::disconnectNotify(*signal);
-
+	self->QComboBox::disconnectNotify(*signal);
 }
 
 const QMetaObject* QComboBox_staticMetaObject() { return &QComboBox::staticMetaObject; }
-void QComboBox_protectedbase_initStyleOption(const void* self, QStyleOptionComboBox* option) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QComboBox_VTable* QComboBox_vtbl(const VirtualQComboBox* self) { return self->vtbl; }
+void* QComboBox_vdata(const VirtualQComboBox* self) { return self->vdata; }
+void QComboBox_setVdata(VirtualQComboBox* self, void* vdata) { self->vdata = vdata; }
+
+void QComboBox_protectedbase_initStyleOption(const VirtualQComboBox* self, QStyleOptionComboBox* option) {
+	self->initStyleOption(option);
 }
 
-void QComboBox_protectedbase_updateMicroFocus(void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QComboBox_protectedbase_updateMicroFocus(VirtualQComboBox* self) {
+	self->updateMicroFocus();
 }
 
-void QComboBox_protectedbase_create(void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	self_cast->create();
-
+void QComboBox_protectedbase_create(VirtualQComboBox* self) {
+	self->create();
 }
 
-void QComboBox_protectedbase_destroy(void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	self_cast->destroy();
-
+void QComboBox_protectedbase_destroy(VirtualQComboBox* self) {
+	self->destroy();
 }
 
-bool QComboBox_protectedbase_focusNextChild(void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QComboBox_protectedbase_focusNextChild(VirtualQComboBox* self) {
+	return self->focusNextChild();
 }
 
-bool QComboBox_protectedbase_focusPreviousChild(void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QComboBox_protectedbase_focusPreviousChild(VirtualQComboBox* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QComboBox_protectedbase_sender(const void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QComboBox_protectedbase_sender(const VirtualQComboBox* self) {
+	return self->sender();
 }
 
-int QComboBox_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QComboBox_protectedbase_senderSignalIndex(const VirtualQComboBox* self) {
+	return self->senderSignalIndex();
 }
 
-int QComboBox_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QComboBox_protectedbase_receivers(const VirtualQComboBox* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QComboBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQComboBox* self_cast = static_cast<VirtualQComboBox*>( (QComboBox*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QComboBox_protectedbase_isSignalConnected(const VirtualQComboBox* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QComboBox_delete(QComboBox* self) {

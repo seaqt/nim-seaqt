@@ -10,45 +10,38 @@
 #include <QTimerEvent>
 #include <qlibrary.h>
 #include "gen_qlibrary.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQLibrary final : public QLibrary {
-	struct QLibrary_VTable* vtbl;
+	const QLibrary_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QLibrary_VTable* QLibrary_vtbl(const VirtualQLibrary* self);
+	friend void* QLibrary_vdata(const VirtualQLibrary* self);
+	friend void QLibrary_setVdata(VirtualQLibrary* self, void* vdata);
 
-	VirtualQLibrary(struct QLibrary_VTable* vtbl): QLibrary(), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName): QLibrary(fileName), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName, int verNum): QLibrary(fileName, verNum), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName, const QString& version): QLibrary(fileName, version), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, QObject* parent): QLibrary(parent), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName, QObject* parent): QLibrary(fileName, parent), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName, int verNum, QObject* parent): QLibrary(fileName, verNum, parent), vtbl(vtbl) {};
-	VirtualQLibrary(struct QLibrary_VTable* vtbl, const QString& fileName, const QString& version, QObject* parent): QLibrary(fileName, version, parent), vtbl(vtbl) {};
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata): QLibrary(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName): QLibrary(fileName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName, int verNum): QLibrary(fileName, verNum), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName, const QString& version): QLibrary(fileName, version), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, QObject* parent): QLibrary(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName, QObject* parent): QLibrary(fileName, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName, int verNum, QObject* parent): QLibrary(fileName, verNum, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLibrary(const QLibrary_VTable* vtbl, void* vdata, const QString& fileName, const QString& version, QObject* parent): QLibrary(fileName, version, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQLibrary() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQLibrary() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QLibrary::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QLibrary_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QLibrary_virtualbase_metaObject(const VirtualQLibrary* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QLibrary::qt_metacast(param1);
@@ -56,14 +49,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QLibrary_virtualbase_metacast(void* self, const char* param1);
+	friend void* QLibrary_virtualbase_metacast(VirtualQLibrary* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QLibrary::qt_metacall(param1, param2, param3);
@@ -74,14 +66,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLibrary_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QLibrary_virtualbase_metacall(VirtualQLibrary* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QLibrary::event(event);
@@ -89,14 +80,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLibrary_virtualbase_event(void* self, QEvent* event);
+	friend bool QLibrary_virtualbase_event(VirtualQLibrary* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QLibrary::eventFilter(watched, event);
@@ -105,14 +95,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QLibrary_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QLibrary_virtualbase_eventFilter(VirtualQLibrary* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QLibrary::timerEvent(event);
@@ -121,13 +110,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QLibrary_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QLibrary_virtualbase_timerEvent(VirtualQLibrary* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QLibrary::childEvent(event);
@@ -136,13 +124,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QLibrary_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QLibrary_virtualbase_childEvent(VirtualQLibrary* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QLibrary::customEvent(event);
@@ -151,13 +138,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QLibrary_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QLibrary_virtualbase_customEvent(VirtualQLibrary* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QLibrary::connectNotify(signal);
@@ -168,13 +154,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QLibrary_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QLibrary_virtualbase_connectNotify(VirtualQLibrary* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QLibrary::disconnectNotify(signal);
@@ -185,57 +170,57 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QLibrary_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QLibrary_virtualbase_disconnectNotify(VirtualQLibrary* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QLibrary_protectedbase_sender(const void* self);
-	friend int QLibrary_protectedbase_senderSignalIndex(const void* self);
-	friend int QLibrary_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QLibrary_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QLibrary_protectedbase_sender(const VirtualQLibrary* self);
+	friend int QLibrary_protectedbase_senderSignalIndex(const VirtualQLibrary* self);
+	friend int QLibrary_protectedbase_receivers(const VirtualQLibrary* self, const char* signal);
+	friend bool QLibrary_protectedbase_isSignalConnected(const VirtualQLibrary* self, QMetaMethod* signal);
 };
 
-QLibrary* QLibrary_new(struct QLibrary_VTable* vtbl) {
-	return new VirtualQLibrary(vtbl);
+VirtualQLibrary* QLibrary_new(const QLibrary_VTable* vtbl, void* vdata) {
+	return new VirtualQLibrary(vtbl, vdata);
 }
 
-QLibrary* QLibrary_new2(struct QLibrary_VTable* vtbl, struct miqt_string fileName) {
+VirtualQLibrary* QLibrary_new2(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQLibrary(vtbl, fileName_QString);
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString);
 }
 
-QLibrary* QLibrary_new3(struct QLibrary_VTable* vtbl, struct miqt_string fileName, int verNum) {
+VirtualQLibrary* QLibrary_new3(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, int verNum) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQLibrary(vtbl, fileName_QString, static_cast<int>(verNum));
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString, static_cast<int>(verNum));
 }
 
-QLibrary* QLibrary_new4(struct QLibrary_VTable* vtbl, struct miqt_string fileName, struct miqt_string version) {
-	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	QString version_QString = QString::fromUtf8(version.data, version.len);
-	return new VirtualQLibrary(vtbl, fileName_QString, version_QString);
-}
-
-QLibrary* QLibrary_new5(struct QLibrary_VTable* vtbl, QObject* parent) {
-	return new VirtualQLibrary(vtbl, parent);
-}
-
-QLibrary* QLibrary_new6(struct QLibrary_VTable* vtbl, struct miqt_string fileName, QObject* parent) {
-	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQLibrary(vtbl, fileName_QString, parent);
-}
-
-QLibrary* QLibrary_new7(struct QLibrary_VTable* vtbl, struct miqt_string fileName, int verNum, QObject* parent) {
-	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
-	return new VirtualQLibrary(vtbl, fileName_QString, static_cast<int>(verNum), parent);
-}
-
-QLibrary* QLibrary_new8(struct QLibrary_VTable* vtbl, struct miqt_string fileName, struct miqt_string version, QObject* parent) {
+VirtualQLibrary* QLibrary_new4(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, struct miqt_string version) {
 	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
 	QString version_QString = QString::fromUtf8(version.data, version.len);
-	return new VirtualQLibrary(vtbl, fileName_QString, version_QString, parent);
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString, version_QString);
+}
+
+VirtualQLibrary* QLibrary_new5(const QLibrary_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQLibrary(vtbl, vdata, parent);
+}
+
+VirtualQLibrary* QLibrary_new6(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, QObject* parent) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString, parent);
+}
+
+VirtualQLibrary* QLibrary_new7(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, int verNum, QObject* parent) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString, static_cast<int>(verNum), parent);
+}
+
+VirtualQLibrary* QLibrary_new8(const QLibrary_VTable* vtbl, void* vdata, struct miqt_string fileName, struct miqt_string version, QObject* parent) {
+	QString fileName_QString = QString::fromUtf8(fileName.data, fileName.len);
+	QString version_QString = QString::fromUtf8(version.data, version.len);
+	return new VirtualQLibrary(vtbl, vdata, fileName_QString, version_QString, parent);
 }
 
 void QLibrary_virtbase(QLibrary* src, QObject** outptr_QObject) {
@@ -384,93 +369,76 @@ struct miqt_string QLibrary_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QLibrary_virtualbase_metaObject(const void* self) {
+QMetaObject* QLibrary_virtualbase_metaObject(const VirtualQLibrary* self) {
 
-	return (QMetaObject*) ( (const VirtualQLibrary*)(self) )->QLibrary::metaObject();
-
+	return (QMetaObject*) self->QLibrary::metaObject();
 }
 
-void* QLibrary_virtualbase_metacast(void* self, const char* param1) {
+void* QLibrary_virtualbase_metacast(VirtualQLibrary* self, const char* param1) {
 
-	return ( (VirtualQLibrary*)(self) )->QLibrary::qt_metacast(param1);
-
+	return self->QLibrary::qt_metacast(param1);
 }
 
-int QLibrary_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QLibrary_virtualbase_metacall(VirtualQLibrary* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQLibrary*)(self) )->QLibrary::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QLibrary::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QLibrary_virtualbase_event(void* self, QEvent* event) {
+bool QLibrary_virtualbase_event(VirtualQLibrary* self, QEvent* event) {
 
-	return ( (VirtualQLibrary*)(self) )->QLibrary::event(event);
-
+	return self->QLibrary::event(event);
 }
 
-bool QLibrary_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QLibrary_virtualbase_eventFilter(VirtualQLibrary* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQLibrary*)(self) )->QLibrary::eventFilter(watched, event);
-
+	return self->QLibrary::eventFilter(watched, event);
 }
 
-void QLibrary_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QLibrary_virtualbase_timerEvent(VirtualQLibrary* self, QTimerEvent* event) {
 
-	( (VirtualQLibrary*)(self) )->QLibrary::timerEvent(event);
-
+	self->QLibrary::timerEvent(event);
 }
 
-void QLibrary_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QLibrary_virtualbase_childEvent(VirtualQLibrary* self, QChildEvent* event) {
 
-	( (VirtualQLibrary*)(self) )->QLibrary::childEvent(event);
-
+	self->QLibrary::childEvent(event);
 }
 
-void QLibrary_virtualbase_customEvent(void* self, QEvent* event) {
+void QLibrary_virtualbase_customEvent(VirtualQLibrary* self, QEvent* event) {
 
-	( (VirtualQLibrary*)(self) )->QLibrary::customEvent(event);
-
+	self->QLibrary::customEvent(event);
 }
 
-void QLibrary_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QLibrary_virtualbase_connectNotify(VirtualQLibrary* self, QMetaMethod* signal) {
 
-	( (VirtualQLibrary*)(self) )->QLibrary::connectNotify(*signal);
-
+	self->QLibrary::connectNotify(*signal);
 }
 
-void QLibrary_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QLibrary_virtualbase_disconnectNotify(VirtualQLibrary* self, QMetaMethod* signal) {
 
-	( (VirtualQLibrary*)(self) )->QLibrary::disconnectNotify(*signal);
-
+	self->QLibrary::disconnectNotify(*signal);
 }
 
 const QMetaObject* QLibrary_staticMetaObject() { return &QLibrary::staticMetaObject; }
-QObject* QLibrary_protectedbase_sender(const void* self) {
-	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	
-	return self_cast->sender();
 
+const QLibrary_VTable* QLibrary_vtbl(const VirtualQLibrary* self) { return self->vtbl; }
+void* QLibrary_vdata(const VirtualQLibrary* self) { return self->vdata; }
+void QLibrary_setVdata(VirtualQLibrary* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QLibrary_protectedbase_sender(const VirtualQLibrary* self) {
+	return self->sender();
 }
 
-int QLibrary_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QLibrary_protectedbase_senderSignalIndex(const VirtualQLibrary* self) {
+	return self->senderSignalIndex();
 }
 
-int QLibrary_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QLibrary_protectedbase_receivers(const VirtualQLibrary* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QLibrary_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQLibrary* self_cast = static_cast<VirtualQLibrary*>( (QLibrary*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QLibrary_protectedbase_isSignalConnected(const VirtualQLibrary* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QLibrary_delete(QLibrary* self) {

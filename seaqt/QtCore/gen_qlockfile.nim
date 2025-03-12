@@ -44,39 +44,39 @@ export gen_qlockfile_types
 
 type cQLockFile*{.exportc: "QLockFile", incompleteStruct.} = object
 
-proc fcQLockFile_lock(self: pointer, ): bool {.importc: "QLockFile_lock".}
-proc fcQLockFile_tryLock(self: pointer, ): bool {.importc: "QLockFile_tryLock".}
-proc fcQLockFile_unlock(self: pointer, ): void {.importc: "QLockFile_unlock".}
+proc fcQLockFile_lock(self: pointer): bool {.importc: "QLockFile_lock".}
+proc fcQLockFile_tryLock(self: pointer): bool {.importc: "QLockFile_tryLock".}
+proc fcQLockFile_unlock(self: pointer): void {.importc: "QLockFile_unlock".}
 proc fcQLockFile_setStaleLockTime(self: pointer, staleLockTime: cint): void {.importc: "QLockFile_setStaleLockTime".}
-proc fcQLockFile_staleLockTime(self: pointer, ): cint {.importc: "QLockFile_staleLockTime".}
-proc fcQLockFile_isLocked(self: pointer, ): bool {.importc: "QLockFile_isLocked".}
-proc fcQLockFile_removeStaleLockFile(self: pointer, ): bool {.importc: "QLockFile_removeStaleLockFile".}
-proc fcQLockFile_error(self: pointer, ): cint {.importc: "QLockFile_error".}
+proc fcQLockFile_staleLockTime(self: pointer): cint {.importc: "QLockFile_staleLockTime".}
+proc fcQLockFile_isLocked(self: pointer): bool {.importc: "QLockFile_isLocked".}
+proc fcQLockFile_removeStaleLockFile(self: pointer): bool {.importc: "QLockFile_removeStaleLockFile".}
+proc fcQLockFile_error(self: pointer): cint {.importc: "QLockFile_error".}
 proc fcQLockFile_tryLock1(self: pointer, timeout: cint): bool {.importc: "QLockFile_tryLock1".}
 proc fcQLockFile_new(fileName: struct_miqt_string): ptr cQLockFile {.importc: "QLockFile_new".}
 
-proc lock*(self: gen_qlockfile_types.QLockFile, ): bool =
+proc lock*(self: gen_qlockfile_types.QLockFile): bool =
   fcQLockFile_lock(self.h)
 
-proc tryLock*(self: gen_qlockfile_types.QLockFile, ): bool =
+proc tryLock*(self: gen_qlockfile_types.QLockFile): bool =
   fcQLockFile_tryLock(self.h)
 
-proc unlock*(self: gen_qlockfile_types.QLockFile, ): void =
+proc unlock*(self: gen_qlockfile_types.QLockFile): void =
   fcQLockFile_unlock(self.h)
 
 proc setStaleLockTime*(self: gen_qlockfile_types.QLockFile, staleLockTime: cint): void =
   fcQLockFile_setStaleLockTime(self.h, staleLockTime)
 
-proc staleLockTime*(self: gen_qlockfile_types.QLockFile, ): cint =
+proc staleLockTime*(self: gen_qlockfile_types.QLockFile): cint =
   fcQLockFile_staleLockTime(self.h)
 
-proc isLocked*(self: gen_qlockfile_types.QLockFile, ): bool =
+proc isLocked*(self: gen_qlockfile_types.QLockFile): bool =
   fcQLockFile_isLocked(self.h)
 
-proc removeStaleLockFile*(self: gen_qlockfile_types.QLockFile, ): bool =
+proc removeStaleLockFile*(self: gen_qlockfile_types.QLockFile): bool =
   fcQLockFile_removeStaleLockFile(self.h)
 
-proc error*(self: gen_qlockfile_types.QLockFile, ): cint =
+proc error*(self: gen_qlockfile_types.QLockFile): cint =
   cint(fcQLockFile_error(self.h))
 
 proc tryLock*(self: gen_qlockfile_types.QLockFile, timeout: cint): bool =

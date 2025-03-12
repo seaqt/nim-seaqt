@@ -1,15 +1,6 @@
 #include <QHttp2Configuration>
 #include <qhttp2configuration.h>
 #include "gen_qhttp2configuration.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QHttp2Configuration* QHttp2Configuration_new() {
 	return new QHttp2Configuration();
 }

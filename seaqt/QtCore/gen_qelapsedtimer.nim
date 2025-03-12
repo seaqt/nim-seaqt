@@ -47,48 +47,48 @@ type cQElapsedTimer*{.exportc: "QElapsedTimer", incompleteStruct.} = object
 
 proc fcQElapsedTimer_clockType(): cint {.importc: "QElapsedTimer_clockType".}
 proc fcQElapsedTimer_isMonotonic(): bool {.importc: "QElapsedTimer_isMonotonic".}
-proc fcQElapsedTimer_start(self: pointer, ): void {.importc: "QElapsedTimer_start".}
-proc fcQElapsedTimer_restart(self: pointer, ): clonglong {.importc: "QElapsedTimer_restart".}
-proc fcQElapsedTimer_invalidate(self: pointer, ): void {.importc: "QElapsedTimer_invalidate".}
-proc fcQElapsedTimer_isValid(self: pointer, ): bool {.importc: "QElapsedTimer_isValid".}
-proc fcQElapsedTimer_nsecsElapsed(self: pointer, ): clonglong {.importc: "QElapsedTimer_nsecsElapsed".}
-proc fcQElapsedTimer_elapsed(self: pointer, ): clonglong {.importc: "QElapsedTimer_elapsed".}
+proc fcQElapsedTimer_start(self: pointer): void {.importc: "QElapsedTimer_start".}
+proc fcQElapsedTimer_restart(self: pointer): clonglong {.importc: "QElapsedTimer_restart".}
+proc fcQElapsedTimer_invalidate(self: pointer): void {.importc: "QElapsedTimer_invalidate".}
+proc fcQElapsedTimer_isValid(self: pointer): bool {.importc: "QElapsedTimer_isValid".}
+proc fcQElapsedTimer_nsecsElapsed(self: pointer): clonglong {.importc: "QElapsedTimer_nsecsElapsed".}
+proc fcQElapsedTimer_elapsed(self: pointer): clonglong {.importc: "QElapsedTimer_elapsed".}
 proc fcQElapsedTimer_hasExpired(self: pointer, timeout: clonglong): bool {.importc: "QElapsedTimer_hasExpired".}
-proc fcQElapsedTimer_msecsSinceReference(self: pointer, ): clonglong {.importc: "QElapsedTimer_msecsSinceReference".}
+proc fcQElapsedTimer_msecsSinceReference(self: pointer): clonglong {.importc: "QElapsedTimer_msecsSinceReference".}
 proc fcQElapsedTimer_msecsTo(self: pointer, other: pointer): clonglong {.importc: "QElapsedTimer_msecsTo".}
 proc fcQElapsedTimer_secsTo(self: pointer, other: pointer): clonglong {.importc: "QElapsedTimer_secsTo".}
 proc fcQElapsedTimer_operatorEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorEqual".}
 proc fcQElapsedTimer_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QElapsedTimer_operatorNotEqual".}
 proc fcQElapsedTimer_new(): ptr cQElapsedTimer {.importc: "QElapsedTimer_new".}
 
-proc clockType*(_: type gen_qelapsedtimer_types.QElapsedTimer, ): cint =
+proc clockType*(_: type gen_qelapsedtimer_types.QElapsedTimer): cint =
   cint(fcQElapsedTimer_clockType())
 
-proc isMonotonic*(_: type gen_qelapsedtimer_types.QElapsedTimer, ): bool =
+proc isMonotonic*(_: type gen_qelapsedtimer_types.QElapsedTimer): bool =
   fcQElapsedTimer_isMonotonic()
 
-proc start*(self: gen_qelapsedtimer_types.QElapsedTimer, ): void =
+proc start*(self: gen_qelapsedtimer_types.QElapsedTimer): void =
   fcQElapsedTimer_start(self.h)
 
-proc restart*(self: gen_qelapsedtimer_types.QElapsedTimer, ): clonglong =
+proc restart*(self: gen_qelapsedtimer_types.QElapsedTimer): clonglong =
   fcQElapsedTimer_restart(self.h)
 
-proc invalidate*(self: gen_qelapsedtimer_types.QElapsedTimer, ): void =
+proc invalidate*(self: gen_qelapsedtimer_types.QElapsedTimer): void =
   fcQElapsedTimer_invalidate(self.h)
 
-proc isValid*(self: gen_qelapsedtimer_types.QElapsedTimer, ): bool =
+proc isValid*(self: gen_qelapsedtimer_types.QElapsedTimer): bool =
   fcQElapsedTimer_isValid(self.h)
 
-proc nsecsElapsed*(self: gen_qelapsedtimer_types.QElapsedTimer, ): clonglong =
+proc nsecsElapsed*(self: gen_qelapsedtimer_types.QElapsedTimer): clonglong =
   fcQElapsedTimer_nsecsElapsed(self.h)
 
-proc elapsed*(self: gen_qelapsedtimer_types.QElapsedTimer, ): clonglong =
+proc elapsed*(self: gen_qelapsedtimer_types.QElapsedTimer): clonglong =
   fcQElapsedTimer_elapsed(self.h)
 
 proc hasExpired*(self: gen_qelapsedtimer_types.QElapsedTimer, timeout: clonglong): bool =
   fcQElapsedTimer_hasExpired(self.h, timeout)
 
-proc msecsSinceReference*(self: gen_qelapsedtimer_types.QElapsedTimer, ): clonglong =
+proc msecsSinceReference*(self: gen_qelapsedtimer_types.QElapsedTimer): clonglong =
   fcQElapsedTimer_msecsSinceReference(self.h)
 
 proc msecsTo*(self: gen_qelapsedtimer_types.QElapsedTimer, other: gen_qelapsedtimer_types.QElapsedTimer): clonglong =

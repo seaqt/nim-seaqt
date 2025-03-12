@@ -38,15 +38,6 @@
 #include <QVariantComparisonHelper>
 #include <qvariant.h>
 #include "gen_qvariant.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVariant* QVariant_new() {
 	return new QVariant();
 }
@@ -632,7 +623,7 @@ void QVariant__Handler_delete(QVariant__Handler* self) {
 }
 
 QSequentialIterable__const_iterator* QSequentialIterable__const_iterator_new(QSequentialIterable__const_iterator* other) {
-	return new QSequentialIterable::const_iterator(*other);
+	return new QSequentialIterable__const_iterator(*other);
 }
 
 void QSequentialIterable__const_iterator_operatorAssign(QSequentialIterable__const_iterator* self, QSequentialIterable__const_iterator* other) {
@@ -696,7 +687,7 @@ void QSequentialIterable__const_iterator_delete(QSequentialIterable__const_itera
 }
 
 QAssociativeIterable__const_iterator* QAssociativeIterable__const_iterator_new(QAssociativeIterable__const_iterator* other) {
-	return new QAssociativeIterable::const_iterator(*other);
+	return new QAssociativeIterable__const_iterator(*other);
 }
 
 void QAssociativeIterable__const_iterator_operatorAssign(QAssociativeIterable__const_iterator* self, QAssociativeIterable__const_iterator* other) {

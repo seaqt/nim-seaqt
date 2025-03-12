@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qsgtextureprovider.h>
 #include "gen_qsgtextureprovider.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSGTextureProvider_virtbase(QSGTextureProvider* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -119,6 +110,7 @@ struct miqt_string QSGTextureProvider_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QSGTextureProvider_staticMetaObject() { return &QSGTextureProvider::staticMetaObject; }
+
 void QSGTextureProvider_delete(QSGTextureProvider* self) {
 	delete self;
 }

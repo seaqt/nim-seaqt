@@ -23,6 +23,7 @@ typedef struct QStringView QStringView;
 #endif
 
 QStringView* QStringView_new();
+
 struct miqt_string QStringView_toString(const QStringView* self);
 ptrdiff_t QStringView_size(const QStringView* self);
 QChar* QStringView_data(const QStringView* self);
@@ -92,6 +93,7 @@ unsigned long long QStringView_toULongLong1(const QStringView* self, bool* ok);
 unsigned long long QStringView_toULongLong2(const QStringView* self, bool* ok, int base);
 float QStringView_toFloat1(const QStringView* self, bool* ok);
 double QStringView_toDouble1(const QStringView* self, bool* ok);
+
 void QStringView_delete(QStringView* self);
 
 #ifdef __cplusplus

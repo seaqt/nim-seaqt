@@ -42,12 +42,12 @@ export
 type cQWebDatabase*{.exportc: "QWebDatabase", incompleteStruct.} = object
 
 proc fcQWebDatabase_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebDatabase_operatorAssign".}
-proc fcQWebDatabase_name(self: pointer, ): struct_miqt_string {.importc: "QWebDatabase_name".}
-proc fcQWebDatabase_displayName(self: pointer, ): struct_miqt_string {.importc: "QWebDatabase_displayName".}
-proc fcQWebDatabase_expectedSize(self: pointer, ): clonglong {.importc: "QWebDatabase_expectedSize".}
-proc fcQWebDatabase_size(self: pointer, ): clonglong {.importc: "QWebDatabase_size".}
-proc fcQWebDatabase_fileName(self: pointer, ): struct_miqt_string {.importc: "QWebDatabase_fileName".}
-proc fcQWebDatabase_origin(self: pointer, ): pointer {.importc: "QWebDatabase_origin".}
+proc fcQWebDatabase_name(self: pointer): struct_miqt_string {.importc: "QWebDatabase_name".}
+proc fcQWebDatabase_displayName(self: pointer): struct_miqt_string {.importc: "QWebDatabase_displayName".}
+proc fcQWebDatabase_expectedSize(self: pointer): clonglong {.importc: "QWebDatabase_expectedSize".}
+proc fcQWebDatabase_size(self: pointer): clonglong {.importc: "QWebDatabase_size".}
+proc fcQWebDatabase_fileName(self: pointer): struct_miqt_string {.importc: "QWebDatabase_fileName".}
+proc fcQWebDatabase_origin(self: pointer): pointer {.importc: "QWebDatabase_origin".}
 proc fcQWebDatabase_removeDatabase(param1: pointer): void {.importc: "QWebDatabase_removeDatabase".}
 proc fcQWebDatabase_removeAllDatabases(): void {.importc: "QWebDatabase_removeAllDatabases".}
 proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatabase_new".}
@@ -55,37 +55,37 @@ proc fcQWebDatabase_new(other: pointer): ptr cQWebDatabase {.importc: "QWebDatab
 proc operatorAssign*(self: gen_qwebdatabase_types.QWebDatabase, other: gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_operatorAssign(self.h, other.h)
 
-proc name*(self: gen_qwebdatabase_types.QWebDatabase, ): string =
+proc name*(self: gen_qwebdatabase_types.QWebDatabase): string =
   let v_ms = fcQWebDatabase_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc displayName*(self: gen_qwebdatabase_types.QWebDatabase, ): string =
+proc displayName*(self: gen_qwebdatabase_types.QWebDatabase): string =
   let v_ms = fcQWebDatabase_displayName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc expectedSize*(self: gen_qwebdatabase_types.QWebDatabase, ): clonglong =
+proc expectedSize*(self: gen_qwebdatabase_types.QWebDatabase): clonglong =
   fcQWebDatabase_expectedSize(self.h)
 
-proc size*(self: gen_qwebdatabase_types.QWebDatabase, ): clonglong =
+proc size*(self: gen_qwebdatabase_types.QWebDatabase): clonglong =
   fcQWebDatabase_size(self.h)
 
-proc fileName*(self: gen_qwebdatabase_types.QWebDatabase, ): string =
+proc fileName*(self: gen_qwebdatabase_types.QWebDatabase): string =
   let v_ms = fcQWebDatabase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc origin*(self: gen_qwebdatabase_types.QWebDatabase, ): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
+proc origin*(self: gen_qwebdatabase_types.QWebDatabase): gen_qwebsecurityorigin_types.QWebSecurityOrigin =
   gen_qwebsecurityorigin_types.QWebSecurityOrigin(h: fcQWebDatabase_origin(self.h), owned: true)
 
 proc removeDatabase*(_: type gen_qwebdatabase_types.QWebDatabase, param1: gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_removeDatabase(param1.h)
 
-proc removeAllDatabases*(_: type gen_qwebdatabase_types.QWebDatabase, ): void =
+proc removeAllDatabases*(_: type gen_qwebdatabase_types.QWebDatabase): void =
   fcQWebDatabase_removeAllDatabases()
 
 proc create*(T: type gen_qwebdatabase_types.QWebDatabase,

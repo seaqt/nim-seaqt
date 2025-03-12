@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qbuffer.h>
 #include "gen_qbuffer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQBuffer final : public QBuffer {
-	struct QBuffer_VTable* vtbl;
+	const QBuffer_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QBuffer_VTable* QBuffer_vtbl(const VirtualQBuffer* self);
+	friend void* QBuffer_vdata(const VirtualQBuffer* self);
+	friend void QBuffer_setVdata(VirtualQBuffer* self, void* vdata);
 
-	VirtualQBuffer(struct QBuffer_VTable* vtbl): QBuffer(), vtbl(vtbl) {};
-	VirtualQBuffer(struct QBuffer_VTable* vtbl, QObject* parent): QBuffer(parent), vtbl(vtbl) {};
+	VirtualQBuffer(const QBuffer_VTable* vtbl, void* vdata): QBuffer(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQBuffer(const QBuffer_VTable* vtbl, void* vdata, QObject* parent): QBuffer(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQBuffer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQBuffer() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QBuffer::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QBuffer_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QBuffer_virtualbase_metaObject(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QBuffer::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QBuffer_virtualbase_metacast(void* self, const char* param1);
+	friend void* QBuffer_virtualbase_metacast(VirtualQBuffer* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QBuffer::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QBuffer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QBuffer_virtualbase_metacall(VirtualQBuffer* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODevice::OpenMode openMode) override {
 		if (vtbl->open == 0) {
 			return QBuffer::open(openMode);
@@ -86,14 +77,13 @@ public:
 		QIODevice::OpenMode openMode_ret = openMode;
 		int sigval1 = static_cast<int>(openMode_ret);
 
-		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->open(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_open(void* self, int openMode);
+	friend bool QBuffer_virtualbase_open(VirtualQBuffer* self, int openMode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void close() override {
 		if (vtbl->close == 0) {
 			QBuffer::close();
@@ -101,41 +91,38 @@ public:
 		}
 
 
-		vtbl->close(vtbl, this);
+		vtbl->close(this);
 
 	}
 
-	friend void QBuffer_virtualbase_close(void* self);
+	friend void QBuffer_virtualbase_close(VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
 			return QBuffer::size();
 		}
 
 
-		long long callback_return_value = vtbl->size(vtbl, this);
+		long long callback_return_value = vtbl->size(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_size(const void* self);
+	friend long long QBuffer_virtualbase_size(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
 		if (vtbl->pos == 0) {
 			return QBuffer::pos();
 		}
 
 
-		long long callback_return_value = vtbl->pos(vtbl, this);
+		long long callback_return_value = vtbl->pos(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_pos(const void* self);
+	friend long long QBuffer_virtualbase_pos(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 off) override {
 		if (vtbl->seek == 0) {
 			return QBuffer::seek(off);
@@ -144,42 +131,39 @@ public:
 		qint64 off_ret = off;
 		long long sigval1 = static_cast<long long>(off_ret);
 
-		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->seek(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_seek(void* self, long long off);
+	friend bool QBuffer_virtualbase_seek(VirtualQBuffer* self, long long off);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
 		if (vtbl->atEnd == 0) {
 			return QBuffer::atEnd();
 		}
 
 
-		bool callback_return_value = vtbl->atEnd(vtbl, this);
+		bool callback_return_value = vtbl->atEnd(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_atEnd(const void* self);
+	friend bool QBuffer_virtualbase_atEnd(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
 		if (vtbl->canReadLine == 0) {
 			return QBuffer::canReadLine();
 		}
 
 
-		bool callback_return_value = vtbl->canReadLine(vtbl, this);
+		bool callback_return_value = vtbl->canReadLine(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_canReadLine(const void* self);
+	friend bool QBuffer_virtualbase_canReadLine(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& param1) override {
 		if (vtbl->connectNotify == 0) {
 			QBuffer::connectNotify(param1);
@@ -190,13 +174,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&param1_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QBuffer_virtualbase_connectNotify(void* self, QMetaMethod* param1);
+	friend void QBuffer_virtualbase_connectNotify(VirtualQBuffer* self, QMetaMethod* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& param1) override {
 		if (vtbl->disconnectNotify == 0) {
 			QBuffer::disconnectNotify(param1);
@@ -207,13 +190,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&param1_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QBuffer_virtualbase_disconnectNotify(void* self, QMetaMethod* param1);
+	friend void QBuffer_virtualbase_disconnectNotify(VirtualQBuffer* self, QMetaMethod* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
 		if (vtbl->readData == 0) {
 			return QBuffer::readData(data, maxlen);
@@ -223,14 +205,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_readData(void* self, char* data, long long maxlen);
+	friend long long QBuffer_virtualbase_readData(VirtualQBuffer* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
 		if (vtbl->writeData == 0) {
 			return QBuffer::writeData(data, len);
@@ -240,70 +221,65 @@ public:
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
 
-		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_writeData(void* self, const char* data, long long len);
+	friend long long QBuffer_virtualbase_writeData(VirtualQBuffer* self, const char* data, long long len);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
 		if (vtbl->isSequential == 0) {
 			return QBuffer::isSequential();
 		}
 
 
-		bool callback_return_value = vtbl->isSequential(vtbl, this);
+		bool callback_return_value = vtbl->isSequential(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_isSequential(const void* self);
+	friend bool QBuffer_virtualbase_isSequential(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
 		if (vtbl->reset == 0) {
 			return QBuffer::reset();
 		}
 
 
-		bool callback_return_value = vtbl->reset(vtbl, this);
+		bool callback_return_value = vtbl->reset(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_reset(void* self);
+	friend bool QBuffer_virtualbase_reset(VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
 		if (vtbl->bytesAvailable == 0) {
 			return QBuffer::bytesAvailable();
 		}
 
 
-		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
+		long long callback_return_value = vtbl->bytesAvailable(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_bytesAvailable(const void* self);
+	friend long long QBuffer_virtualbase_bytesAvailable(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
 		if (vtbl->bytesToWrite == 0) {
 			return QBuffer::bytesToWrite();
 		}
 
 
-		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
+		long long callback_return_value = vtbl->bytesToWrite(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_bytesToWrite(const void* self);
+	friend long long QBuffer_virtualbase_bytesToWrite(const VirtualQBuffer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
 		if (vtbl->waitForReadyRead == 0) {
 			return QBuffer::waitForReadyRead(msecs);
@@ -311,14 +287,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_waitForReadyRead(void* self, int msecs);
+	friend bool QBuffer_virtualbase_waitForReadyRead(VirtualQBuffer* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
 		if (vtbl->waitForBytesWritten == 0) {
 			return QBuffer::waitForBytesWritten(msecs);
@@ -326,14 +301,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_waitForBytesWritten(void* self, int msecs);
+	friend bool QBuffer_virtualbase_waitForBytesWritten(VirtualQBuffer* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
 		if (vtbl->readLineData == 0) {
 			return QBuffer::readLineData(data, maxlen);
@@ -343,14 +317,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QBuffer_virtualbase_readLineData(void* self, char* data, long long maxlen);
+	friend long long QBuffer_virtualbase_readLineData(VirtualQBuffer* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QBuffer::event(event);
@@ -358,14 +331,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_event(void* self, QEvent* event);
+	friend bool QBuffer_virtualbase_event(VirtualQBuffer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QBuffer::eventFilter(watched, event);
@@ -374,14 +346,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QBuffer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QBuffer_virtualbase_eventFilter(VirtualQBuffer* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QBuffer::timerEvent(event);
@@ -390,13 +361,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QBuffer_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QBuffer_virtualbase_timerEvent(VirtualQBuffer* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QBuffer::childEvent(event);
@@ -405,13 +375,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QBuffer_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QBuffer_virtualbase_childEvent(VirtualQBuffer* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QBuffer::customEvent(event);
@@ -420,27 +389,27 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QBuffer_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QBuffer_virtualbase_customEvent(VirtualQBuffer* self, QEvent* event);
 
 	// Wrappers to allow calling protected methods:
-	friend void QBuffer_protectedbase_setOpenMode(void* self, int openMode);
-	friend void QBuffer_protectedbase_setErrorString(void* self, struct miqt_string errorString);
-	friend QObject* QBuffer_protectedbase_sender(const void* self);
-	friend int QBuffer_protectedbase_senderSignalIndex(const void* self);
-	friend int QBuffer_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QBuffer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QBuffer_protectedbase_setOpenMode(VirtualQBuffer* self, int openMode);
+	friend void QBuffer_protectedbase_setErrorString(VirtualQBuffer* self, struct miqt_string errorString);
+	friend QObject* QBuffer_protectedbase_sender(const VirtualQBuffer* self);
+	friend int QBuffer_protectedbase_senderSignalIndex(const VirtualQBuffer* self);
+	friend int QBuffer_protectedbase_receivers(const VirtualQBuffer* self, const char* signal);
+	friend bool QBuffer_protectedbase_isSignalConnected(const VirtualQBuffer* self, QMetaMethod* signal);
 };
 
-QBuffer* QBuffer_new(struct QBuffer_VTable* vtbl) {
-	return new VirtualQBuffer(vtbl);
+VirtualQBuffer* QBuffer_new(const QBuffer_VTable* vtbl, void* vdata) {
+	return new VirtualQBuffer(vtbl, vdata);
 }
 
-QBuffer* QBuffer_new2(struct QBuffer_VTable* vtbl, QObject* parent) {
-	return new VirtualQBuffer(vtbl, parent);
+VirtualQBuffer* QBuffer_new2(const QBuffer_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQBuffer(vtbl, vdata, parent);
 }
 
 void QBuffer_virtbase(QBuffer* src, QIODevice** outptr_QIODevice) {
@@ -591,211 +560,172 @@ struct miqt_string QBuffer_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QBuffer_virtualbase_metaObject(const void* self) {
+QMetaObject* QBuffer_virtualbase_metaObject(const VirtualQBuffer* self) {
 
-	return (QMetaObject*) ( (const VirtualQBuffer*)(self) )->QBuffer::metaObject();
-
+	return (QMetaObject*) self->QBuffer::metaObject();
 }
 
-void* QBuffer_virtualbase_metacast(void* self, const char* param1) {
+void* QBuffer_virtualbase_metacast(VirtualQBuffer* self, const char* param1) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::qt_metacast(param1);
-
+	return self->QBuffer::qt_metacast(param1);
 }
 
-int QBuffer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QBuffer_virtualbase_metacall(VirtualQBuffer* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QBuffer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QBuffer_virtualbase_open(void* self, int openMode) {
+bool QBuffer_virtualbase_open(VirtualQBuffer* self, int openMode) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::open(static_cast<VirtualQBuffer::OpenMode>(openMode));
-
+	return self->QBuffer::open(static_cast<VirtualQBuffer::OpenMode>(openMode));
 }
 
-void QBuffer_virtualbase_close(void* self) {
+void QBuffer_virtualbase_close(VirtualQBuffer* self) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::close();
-
+	self->QBuffer::close();
 }
 
-long long QBuffer_virtualbase_size(const void* self) {
+long long QBuffer_virtualbase_size(const VirtualQBuffer* self) {
 
-	qint64 _ret = ( (const VirtualQBuffer*)(self) )->QBuffer::size();
+	qint64 _ret = self->QBuffer::size();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QBuffer_virtualbase_pos(const void* self) {
+long long QBuffer_virtualbase_pos(const VirtualQBuffer* self) {
 
-	qint64 _ret = ( (const VirtualQBuffer*)(self) )->QBuffer::pos();
+	qint64 _ret = self->QBuffer::pos();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QBuffer_virtualbase_seek(void* self, long long off) {
+bool QBuffer_virtualbase_seek(VirtualQBuffer* self, long long off) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::seek(static_cast<qint64>(off));
-
+	return self->QBuffer::seek(static_cast<qint64>(off));
 }
 
-bool QBuffer_virtualbase_atEnd(const void* self) {
+bool QBuffer_virtualbase_atEnd(const VirtualQBuffer* self) {
 
-	return ( (const VirtualQBuffer*)(self) )->QBuffer::atEnd();
-
+	return self->QBuffer::atEnd();
 }
 
-bool QBuffer_virtualbase_canReadLine(const void* self) {
+bool QBuffer_virtualbase_canReadLine(const VirtualQBuffer* self) {
 
-	return ( (const VirtualQBuffer*)(self) )->QBuffer::canReadLine();
-
+	return self->QBuffer::canReadLine();
 }
 
-void QBuffer_virtualbase_connectNotify(void* self, QMetaMethod* param1) {
+void QBuffer_virtualbase_connectNotify(VirtualQBuffer* self, QMetaMethod* param1) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::connectNotify(*param1);
-
+	self->QBuffer::connectNotify(*param1);
 }
 
-void QBuffer_virtualbase_disconnectNotify(void* self, QMetaMethod* param1) {
+void QBuffer_virtualbase_disconnectNotify(VirtualQBuffer* self, QMetaMethod* param1) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::disconnectNotify(*param1);
-
+	self->QBuffer::disconnectNotify(*param1);
 }
 
-long long QBuffer_virtualbase_readData(void* self, char* data, long long maxlen) {
+long long QBuffer_virtualbase_readData(VirtualQBuffer* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQBuffer*)(self) )->QBuffer::readData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QBuffer::readData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QBuffer_virtualbase_writeData(void* self, const char* data, long long len) {
+long long QBuffer_virtualbase_writeData(VirtualQBuffer* self, const char* data, long long len) {
 
-	qint64 _ret = ( (VirtualQBuffer*)(self) )->QBuffer::writeData(data, static_cast<qint64>(len));
+	qint64 _ret = self->QBuffer::writeData(data, static_cast<qint64>(len));
 	return static_cast<long long>(_ret);
-
 }
 
-bool QBuffer_virtualbase_isSequential(const void* self) {
+bool QBuffer_virtualbase_isSequential(const VirtualQBuffer* self) {
 
-	return ( (const VirtualQBuffer*)(self) )->QBuffer::isSequential();
-
+	return self->QBuffer::isSequential();
 }
 
-bool QBuffer_virtualbase_reset(void* self) {
+bool QBuffer_virtualbase_reset(VirtualQBuffer* self) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::reset();
-
+	return self->QBuffer::reset();
 }
 
-long long QBuffer_virtualbase_bytesAvailable(const void* self) {
+long long QBuffer_virtualbase_bytesAvailable(const VirtualQBuffer* self) {
 
-	qint64 _ret = ( (const VirtualQBuffer*)(self) )->QBuffer::bytesAvailable();
+	qint64 _ret = self->QBuffer::bytesAvailable();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QBuffer_virtualbase_bytesToWrite(const void* self) {
+long long QBuffer_virtualbase_bytesToWrite(const VirtualQBuffer* self) {
 
-	qint64 _ret = ( (const VirtualQBuffer*)(self) )->QBuffer::bytesToWrite();
+	qint64 _ret = self->QBuffer::bytesToWrite();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QBuffer_virtualbase_waitForReadyRead(void* self, int msecs) {
+bool QBuffer_virtualbase_waitForReadyRead(VirtualQBuffer* self, int msecs) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::waitForReadyRead(static_cast<int>(msecs));
-
+	return self->QBuffer::waitForReadyRead(static_cast<int>(msecs));
 }
 
-bool QBuffer_virtualbase_waitForBytesWritten(void* self, int msecs) {
+bool QBuffer_virtualbase_waitForBytesWritten(VirtualQBuffer* self, int msecs) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::waitForBytesWritten(static_cast<int>(msecs));
-
+	return self->QBuffer::waitForBytesWritten(static_cast<int>(msecs));
 }
 
-long long QBuffer_virtualbase_readLineData(void* self, char* data, long long maxlen) {
+long long QBuffer_virtualbase_readLineData(VirtualQBuffer* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQBuffer*)(self) )->QBuffer::readLineData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QBuffer::readLineData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-bool QBuffer_virtualbase_event(void* self, QEvent* event) {
+bool QBuffer_virtualbase_event(VirtualQBuffer* self, QEvent* event) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::event(event);
-
+	return self->QBuffer::event(event);
 }
 
-bool QBuffer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QBuffer_virtualbase_eventFilter(VirtualQBuffer* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQBuffer*)(self) )->QBuffer::eventFilter(watched, event);
-
+	return self->QBuffer::eventFilter(watched, event);
 }
 
-void QBuffer_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QBuffer_virtualbase_timerEvent(VirtualQBuffer* self, QTimerEvent* event) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::timerEvent(event);
-
+	self->QBuffer::timerEvent(event);
 }
 
-void QBuffer_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QBuffer_virtualbase_childEvent(VirtualQBuffer* self, QChildEvent* event) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::childEvent(event);
-
+	self->QBuffer::childEvent(event);
 }
 
-void QBuffer_virtualbase_customEvent(void* self, QEvent* event) {
+void QBuffer_virtualbase_customEvent(VirtualQBuffer* self, QEvent* event) {
 
-	( (VirtualQBuffer*)(self) )->QBuffer::customEvent(event);
-
+	self->QBuffer::customEvent(event);
 }
 
 const QMetaObject* QBuffer_staticMetaObject() { return &QBuffer::staticMetaObject; }
-void QBuffer_protectedbase_setOpenMode(void* self, int openMode) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-	
-	self_cast->setOpenMode(static_cast<VirtualQBuffer::OpenMode>(openMode));
 
+const QBuffer_VTable* QBuffer_vtbl(const VirtualQBuffer* self) { return self->vtbl; }
+void* QBuffer_vdata(const VirtualQBuffer* self) { return self->vdata; }
+void QBuffer_setVdata(VirtualQBuffer* self, void* vdata) { self->vdata = vdata; }
+
+void QBuffer_protectedbase_setOpenMode(VirtualQBuffer* self, int openMode) {
+	self->setOpenMode(static_cast<VirtualQBuffer::OpenMode>(openMode));
 }
 
-void QBuffer_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-
-	self_cast->setErrorString(errorString_QString);
-
+void QBuffer_protectedbase_setErrorString(VirtualQBuffer* self, struct miqt_string errorString) {
+		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
+	self->setErrorString(errorString_QString);
 }
 
-QObject* QBuffer_protectedbase_sender(const void* self) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QBuffer_protectedbase_sender(const VirtualQBuffer* self) {
+	return self->sender();
 }
 
-int QBuffer_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QBuffer_protectedbase_senderSignalIndex(const VirtualQBuffer* self) {
+	return self->senderSignalIndex();
 }
 
-int QBuffer_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QBuffer_protectedbase_receivers(const VirtualQBuffer* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QBuffer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQBuffer* self_cast = static_cast<VirtualQBuffer*>( (QBuffer*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QBuffer_protectedbase_isSignalConnected(const VirtualQBuffer* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QBuffer_delete(QBuffer* self) {

@@ -22,6 +22,7 @@ typedef struct QNetworkConfiguration QNetworkConfiguration;
 
 QNetworkConfiguration* QNetworkConfiguration_new();
 QNetworkConfiguration* QNetworkConfiguration_new2(QNetworkConfiguration* other);
+
 void QNetworkConfiguration_operatorAssign(QNetworkConfiguration* self, QNetworkConfiguration* other);
 void QNetworkConfiguration_swap(QNetworkConfiguration* self, QNetworkConfiguration* other);
 bool QNetworkConfiguration_operatorEqual(const QNetworkConfiguration* self, QNetworkConfiguration* other);
@@ -39,6 +40,7 @@ struct miqt_string QNetworkConfiguration_name(const QNetworkConfiguration* self)
 bool QNetworkConfiguration_isValid(const QNetworkConfiguration* self);
 int QNetworkConfiguration_connectTimeout(const QNetworkConfiguration* self);
 bool QNetworkConfiguration_setConnectTimeout(QNetworkConfiguration* self, int timeout);
+
 void QNetworkConfiguration_delete(QNetworkConfiguration* self);
 
 #ifdef __cplusplus

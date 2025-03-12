@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qbuttongroup.h>
 #include "gen_qbuttongroup.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQButtonGroup final : public QButtonGroup {
-	struct QButtonGroup_VTable* vtbl;
+	const QButtonGroup_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QButtonGroup_VTable* QButtonGroup_vtbl(const VirtualQButtonGroup* self);
+	friend void* QButtonGroup_vdata(const VirtualQButtonGroup* self);
+	friend void QButtonGroup_setVdata(VirtualQButtonGroup* self, void* vdata);
 
-	VirtualQButtonGroup(struct QButtonGroup_VTable* vtbl): QButtonGroup(), vtbl(vtbl) {};
-	VirtualQButtonGroup(struct QButtonGroup_VTable* vtbl, QObject* parent): QButtonGroup(parent), vtbl(vtbl) {};
+	VirtualQButtonGroup(const QButtonGroup_VTable* vtbl, void* vdata): QButtonGroup(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQButtonGroup(const QButtonGroup_VTable* vtbl, void* vdata, QObject* parent): QButtonGroup(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQButtonGroup() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQButtonGroup() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QButtonGroup::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QButtonGroup_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QButtonGroup_virtualbase_metaObject(const VirtualQButtonGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QButtonGroup::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QButtonGroup_virtualbase_metacast(void* self, const char* param1);
+	friend void* QButtonGroup_virtualbase_metacast(VirtualQButtonGroup* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QButtonGroup::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QButtonGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QButtonGroup_virtualbase_metacall(VirtualQButtonGroup* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QButtonGroup::event(event);
@@ -85,14 +76,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QButtonGroup_virtualbase_event(void* self, QEvent* event);
+	friend bool QButtonGroup_virtualbase_event(VirtualQButtonGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QButtonGroup::eventFilter(watched, event);
@@ -101,14 +91,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QButtonGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QButtonGroup_virtualbase_eventFilter(VirtualQButtonGroup* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QButtonGroup::timerEvent(event);
@@ -117,13 +106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QButtonGroup_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QButtonGroup_virtualbase_timerEvent(VirtualQButtonGroup* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QButtonGroup::childEvent(event);
@@ -132,13 +120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QButtonGroup_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QButtonGroup_virtualbase_childEvent(VirtualQButtonGroup* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QButtonGroup::customEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QButtonGroup_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QButtonGroup_virtualbase_customEvent(VirtualQButtonGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QButtonGroup::connectNotify(signal);
@@ -164,13 +150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QButtonGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QButtonGroup_virtualbase_connectNotify(VirtualQButtonGroup* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QButtonGroup::disconnectNotify(signal);
@@ -181,25 +166,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QButtonGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QButtonGroup_virtualbase_disconnectNotify(VirtualQButtonGroup* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QButtonGroup_protectedbase_sender(const void* self);
-	friend int QButtonGroup_protectedbase_senderSignalIndex(const void* self);
-	friend int QButtonGroup_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QButtonGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QButtonGroup_protectedbase_sender(const VirtualQButtonGroup* self);
+	friend int QButtonGroup_protectedbase_senderSignalIndex(const VirtualQButtonGroup* self);
+	friend int QButtonGroup_protectedbase_receivers(const VirtualQButtonGroup* self, const char* signal);
+	friend bool QButtonGroup_protectedbase_isSignalConnected(const VirtualQButtonGroup* self, QMetaMethod* signal);
 };
 
-QButtonGroup* QButtonGroup_new(struct QButtonGroup_VTable* vtbl) {
-	return new VirtualQButtonGroup(vtbl);
+VirtualQButtonGroup* QButtonGroup_new(const QButtonGroup_VTable* vtbl, void* vdata) {
+	return new VirtualQButtonGroup(vtbl, vdata);
 }
 
-QButtonGroup* QButtonGroup_new2(struct QButtonGroup_VTable* vtbl, QObject* parent) {
-	return new VirtualQButtonGroup(vtbl, parent);
+VirtualQButtonGroup* QButtonGroup_new2(const QButtonGroup_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQButtonGroup(vtbl, vdata, parent);
 }
 
 void QButtonGroup_virtbase(QButtonGroup* src, QObject** outptr_QObject) {
@@ -293,7 +278,7 @@ void QButtonGroup_buttonClicked(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonClicked(param1);
 }
 
-void QButtonGroup_connect_buttonClicked(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonClicked(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -309,7 +294,7 @@ void QButtonGroup_buttonPressed(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonPressed(param1);
 }
 
-void QButtonGroup_connect_buttonPressed(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonPressed(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -325,7 +310,7 @@ void QButtonGroup_buttonReleased(QButtonGroup* self, QAbstractButton* param1) {
 	self->buttonReleased(param1);
 }
 
-void QButtonGroup_connect_buttonReleased(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonReleased(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*);
@@ -341,7 +326,7 @@ void QButtonGroup_buttonToggled(QButtonGroup* self, QAbstractButton* param1, boo
 	self->buttonToggled(param1, param2);
 }
 
-void QButtonGroup_connect_buttonToggled(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonToggled(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAbstractButton*, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAbstractButton*, bool);
@@ -358,7 +343,7 @@ void QButtonGroup_idClicked(QButtonGroup* self, int param1) {
 	self->idClicked(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_idClicked(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_idClicked(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -374,7 +359,7 @@ void QButtonGroup_idPressed(QButtonGroup* self, int param1) {
 	self->idPressed(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_idPressed(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_idPressed(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -390,7 +375,7 @@ void QButtonGroup_idReleased(QButtonGroup* self, int param1) {
 	self->idReleased(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_idReleased(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_idReleased(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -406,7 +391,7 @@ void QButtonGroup_idToggled(QButtonGroup* self, int param1, bool param2) {
 	self->idToggled(static_cast<int>(param1), param2);
 }
 
-void QButtonGroup_connect_idToggled(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
+void QButtonGroup_connect_idToggled(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, bool);
@@ -423,7 +408,7 @@ void QButtonGroup_buttonClickedWithInt(QButtonGroup* self, int param1) {
 	self->buttonClicked(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonClickedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonClickedWithInt(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -439,7 +424,7 @@ void QButtonGroup_buttonPressedWithInt(QButtonGroup* self, int param1) {
 	self->buttonPressed(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonPressedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonPressedWithInt(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -455,7 +440,7 @@ void QButtonGroup_buttonReleasedWithInt(QButtonGroup* self, int param1) {
 	self->buttonReleased(static_cast<int>(param1));
 }
 
-void QButtonGroup_connect_buttonReleasedWithInt(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonReleasedWithInt(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -471,7 +456,7 @@ void QButtonGroup_buttonToggled2(QButtonGroup* self, int param1, bool param2) {
 	self->buttonToggled(static_cast<int>(param1), param2);
 }
 
-void QButtonGroup_connect_buttonToggled2(QButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
+void QButtonGroup_connect_buttonToggled2(VirtualQButtonGroup* self, intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, bool);
@@ -532,93 +517,76 @@ void QButtonGroup_addButton2(QButtonGroup* self, QAbstractButton* param1, int id
 	self->addButton(param1, static_cast<int>(id));
 }
 
-QMetaObject* QButtonGroup_virtualbase_metaObject(const void* self) {
+QMetaObject* QButtonGroup_virtualbase_metaObject(const VirtualQButtonGroup* self) {
 
-	return (QMetaObject*) ( (const VirtualQButtonGroup*)(self) )->QButtonGroup::metaObject();
-
+	return (QMetaObject*) self->QButtonGroup::metaObject();
 }
 
-void* QButtonGroup_virtualbase_metacast(void* self, const char* param1) {
+void* QButtonGroup_virtualbase_metacast(VirtualQButtonGroup* self, const char* param1) {
 
-	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::qt_metacast(param1);
-
+	return self->QButtonGroup::qt_metacast(param1);
 }
 
-int QButtonGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QButtonGroup_virtualbase_metacall(VirtualQButtonGroup* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QButtonGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QButtonGroup_virtualbase_event(void* self, QEvent* event) {
+bool QButtonGroup_virtualbase_event(VirtualQButtonGroup* self, QEvent* event) {
 
-	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::event(event);
-
+	return self->QButtonGroup::event(event);
 }
 
-bool QButtonGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QButtonGroup_virtualbase_eventFilter(VirtualQButtonGroup* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQButtonGroup*)(self) )->QButtonGroup::eventFilter(watched, event);
-
+	return self->QButtonGroup::eventFilter(watched, event);
 }
 
-void QButtonGroup_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QButtonGroup_virtualbase_timerEvent(VirtualQButtonGroup* self, QTimerEvent* event) {
 
-	( (VirtualQButtonGroup*)(self) )->QButtonGroup::timerEvent(event);
-
+	self->QButtonGroup::timerEvent(event);
 }
 
-void QButtonGroup_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QButtonGroup_virtualbase_childEvent(VirtualQButtonGroup* self, QChildEvent* event) {
 
-	( (VirtualQButtonGroup*)(self) )->QButtonGroup::childEvent(event);
-
+	self->QButtonGroup::childEvent(event);
 }
 
-void QButtonGroup_virtualbase_customEvent(void* self, QEvent* event) {
+void QButtonGroup_virtualbase_customEvent(VirtualQButtonGroup* self, QEvent* event) {
 
-	( (VirtualQButtonGroup*)(self) )->QButtonGroup::customEvent(event);
-
+	self->QButtonGroup::customEvent(event);
 }
 
-void QButtonGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QButtonGroup_virtualbase_connectNotify(VirtualQButtonGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQButtonGroup*)(self) )->QButtonGroup::connectNotify(*signal);
-
+	self->QButtonGroup::connectNotify(*signal);
 }
 
-void QButtonGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QButtonGroup_virtualbase_disconnectNotify(VirtualQButtonGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQButtonGroup*)(self) )->QButtonGroup::disconnectNotify(*signal);
-
+	self->QButtonGroup::disconnectNotify(*signal);
 }
 
 const QMetaObject* QButtonGroup_staticMetaObject() { return &QButtonGroup::staticMetaObject; }
-QObject* QButtonGroup_protectedbase_sender(const void* self) {
-	VirtualQButtonGroup* self_cast = static_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
-	
-	return self_cast->sender();
 
+const QButtonGroup_VTable* QButtonGroup_vtbl(const VirtualQButtonGroup* self) { return self->vtbl; }
+void* QButtonGroup_vdata(const VirtualQButtonGroup* self) { return self->vdata; }
+void QButtonGroup_setVdata(VirtualQButtonGroup* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QButtonGroup_protectedbase_sender(const VirtualQButtonGroup* self) {
+	return self->sender();
 }
 
-int QButtonGroup_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQButtonGroup* self_cast = static_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QButtonGroup_protectedbase_senderSignalIndex(const VirtualQButtonGroup* self) {
+	return self->senderSignalIndex();
 }
 
-int QButtonGroup_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQButtonGroup* self_cast = static_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QButtonGroup_protectedbase_receivers(const VirtualQButtonGroup* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QButtonGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQButtonGroup* self_cast = static_cast<VirtualQButtonGroup*>( (QButtonGroup*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QButtonGroup_protectedbase_isSignalConnected(const VirtualQButtonGroup* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QButtonGroup_delete(QButtonGroup* self) {

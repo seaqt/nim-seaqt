@@ -32,6 +32,7 @@ QDate* QDate_new();
 QDate* QDate_new2(int y, int m, int d);
 QDate* QDate_new3(int y, int m, int d, QCalendar* cal);
 QDate* QDate_new4(QDate* param1);
+
 bool QDate_isNull(const QDate* self);
 bool QDate_isValid(const QDate* self);
 int QDate_year(const QDate* self);
@@ -96,6 +97,7 @@ struct miqt_string QDate_longMonthName2(int month, int type);
 struct miqt_string QDate_longDayName2(int weekday, int type);
 struct miqt_string QDate_toString1(const QDate* self, int format);
 QDate* QDate_fromString22(struct miqt_string s, int f);
+
 void QDate_delete(QDate* self);
 
 QTime* QTime_new();
@@ -103,6 +105,7 @@ QTime* QTime_new2(int h, int m);
 QTime* QTime_new3(QTime* param1);
 QTime* QTime_new4(int h, int m, int s);
 QTime* QTime_new5(int h, int m, int s, int ms);
+
 bool QTime_isNull(const QTime* self);
 bool QTime_isValid(const QTime* self);
 int QTime_hour(const QTime* self);
@@ -135,6 +138,7 @@ struct miqt_string QTime_toString1(const QTime* self, int f);
 bool QTime_setHMS4(QTime* self, int h, int m, int s, int ms);
 QTime* QTime_fromString22(struct miqt_string s, int f);
 bool QTime_isValid4(int h, int m, int s, int ms);
+
 void QTime_delete(QTime* self);
 
 QDateTime* QDateTime_new(QDate* param1);
@@ -143,6 +147,7 @@ QDateTime* QDateTime_new3(QDate* date, QTime* time, int spec, int offsetSeconds)
 QDateTime* QDateTime_new4(QDate* date, QTime* time, QTimeZone* timeZone);
 QDateTime* QDateTime_new5(QDateTime* other);
 QDateTime* QDateTime_new6(QDate* param1, QTime* param2, int spec);
+
 void QDateTime_operatorAssign(QDateTime* self, QDateTime* other);
 void QDateTime_swap(QDateTime* self, QDateTime* other);
 bool QDateTime_isNull(const QDateTime* self);
@@ -210,6 +215,7 @@ QDateTime* QDateTime_fromTimeT32(unsigned int secsSince1Jan1970UTC, int spec, in
 QDateTime* QDateTime_fromMSecsSinceEpoch32(long long msecs, int spec, int offsetFromUtc);
 QDateTime* QDateTime_fromSecsSinceEpoch22(long long secs, int spe);
 QDateTime* QDateTime_fromSecsSinceEpoch3(long long secs, int spe, int offsetFromUtc);
+
 void QDateTime_delete(QDateTime* self);
 
 #ifdef __cplusplus

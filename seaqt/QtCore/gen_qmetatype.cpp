@@ -5,15 +5,6 @@
 #include <QMetaType>
 #include <qmetatype.h>
 #include "gen_qmetatype.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMetaType* QMetaType_new() {
 	return new QMetaType();
 }

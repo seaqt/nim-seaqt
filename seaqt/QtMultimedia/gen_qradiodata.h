@@ -36,23 +36,30 @@ typedef struct QRadioData QRadioData;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QRadioData_VTable {
-	void (*destructor)(struct QRadioData_VTable* vtbl, QRadioData* self);
-	QMetaObject* (*metaObject)(struct QRadioData_VTable* vtbl, const QRadioData* self);
-	void* (*metacast)(struct QRadioData_VTable* vtbl, QRadioData* self, const char* param1);
-	int (*metacall)(struct QRadioData_VTable* vtbl, QRadioData* self, int param1, int param2, void** param3);
-	QMediaObject* (*mediaObject)(struct QRadioData_VTable* vtbl, const QRadioData* self);
-	bool (*setMediaObject)(struct QRadioData_VTable* vtbl, QRadioData* self, QMediaObject* mediaObject);
-	bool (*event)(struct QRadioData_VTable* vtbl, QRadioData* self, QEvent* event);
-	bool (*eventFilter)(struct QRadioData_VTable* vtbl, QRadioData* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QRadioData_VTable* vtbl, QRadioData* self, QTimerEvent* event);
-	void (*childEvent)(struct QRadioData_VTable* vtbl, QRadioData* self, QChildEvent* event);
-	void (*customEvent)(struct QRadioData_VTable* vtbl, QRadioData* self, QEvent* event);
-	void (*connectNotify)(struct QRadioData_VTable* vtbl, QRadioData* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QRadioData_VTable* vtbl, QRadioData* self, QMetaMethod* signal);
-};
-QRadioData* QRadioData_new(struct QRadioData_VTable* vtbl, QMediaObject* mediaObject);
-QRadioData* QRadioData_new2(struct QRadioData_VTable* vtbl, QMediaObject* mediaObject, QObject* parent);
+typedef struct VirtualQRadioData VirtualQRadioData;
+typedef struct QRadioData_VTable{
+	void (*destructor)(VirtualQRadioData* self);
+	QMetaObject* (*metaObject)(const VirtualQRadioData* self);
+	void* (*metacast)(VirtualQRadioData* self, const char* param1);
+	int (*metacall)(VirtualQRadioData* self, int param1, int param2, void** param3);
+	QMediaObject* (*mediaObject)(const VirtualQRadioData* self);
+	bool (*setMediaObject)(VirtualQRadioData* self, QMediaObject* mediaObject);
+	bool (*event)(VirtualQRadioData* self, QEvent* event);
+	bool (*eventFilter)(VirtualQRadioData* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQRadioData* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQRadioData* self, QChildEvent* event);
+	void (*customEvent)(VirtualQRadioData* self, QEvent* event);
+	void (*connectNotify)(VirtualQRadioData* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQRadioData* self, QMetaMethod* signal);
+}QRadioData_VTable;
+
+const QRadioData_VTable* QRadioData_vtbl(const VirtualQRadioData* self);
+void* QRadioData_vdata(const VirtualQRadioData* self);
+void QRadioData_setVdata(VirtualQRadioData* self, void* vdata);
+
+VirtualQRadioData* QRadioData_new(const QRadioData_VTable* vtbl, void* vdata, QMediaObject* mediaObject);
+VirtualQRadioData* QRadioData_new2(const QRadioData_VTable* vtbl, void* vdata, QMediaObject* mediaObject, QObject* parent);
+
 void QRadioData_virtbase(QRadioData* src, QObject** outptr_QObject, QMediaBindableInterface** outptr_QMediaBindableInterface);
 QMetaObject* QRadioData_metaObject(const QRadioData* self);
 void* QRadioData_metacast(QRadioData* self, const char* param1);
@@ -71,40 +78,43 @@ int QRadioData_error(const QRadioData* self);
 struct miqt_string QRadioData_errorString(const QRadioData* self);
 void QRadioData_setAlternativeFrequenciesEnabled(QRadioData* self, bool enabled);
 void QRadioData_stationIdChanged(QRadioData* self, struct miqt_string stationId);
-void QRadioData_connect_stationIdChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QRadioData_connect_stationIdChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QRadioData_programTypeChanged(QRadioData* self, int programType);
-void QRadioData_connect_programTypeChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QRadioData_connect_programTypeChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QRadioData_programTypeNameChanged(QRadioData* self, struct miqt_string programTypeName);
-void QRadioData_connect_programTypeNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QRadioData_connect_programTypeNameChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QRadioData_stationNameChanged(QRadioData* self, struct miqt_string stationName);
-void QRadioData_connect_stationNameChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QRadioData_connect_stationNameChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QRadioData_radioTextChanged(QRadioData* self, struct miqt_string radioText);
-void QRadioData_connect_radioTextChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QRadioData_connect_radioTextChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QRadioData_alternativeFrequenciesEnabledChanged(QRadioData* self, bool enabled);
-void QRadioData_connect_alternativeFrequenciesEnabledChanged(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QRadioData_connect_alternativeFrequenciesEnabledChanged(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QRadioData_errorWithError(QRadioData* self, int error);
-void QRadioData_connect_errorWithError(QRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QRadioData_connect_errorWithError(VirtualQRadioData* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 bool QRadioData_setMediaObject(QRadioData* self, QMediaObject* mediaObject);
 struct miqt_string QRadioData_tr2(const char* s, const char* c);
 struct miqt_string QRadioData_tr3(const char* s, const char* c, int n);
 struct miqt_string QRadioData_trUtf82(const char* s, const char* c);
 struct miqt_string QRadioData_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QRadioData_virtualbase_metaObject(const void* self);
-void* QRadioData_virtualbase_metacast(void* self, const char* param1);
-int QRadioData_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-QMediaObject* QRadioData_virtualbase_mediaObject(const void* self);
-bool QRadioData_virtualbase_setMediaObject(void* self, QMediaObject* mediaObject);
-bool QRadioData_virtualbase_event(void* self, QEvent* event);
-bool QRadioData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QRadioData_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QRadioData_virtualbase_childEvent(void* self, QChildEvent* event);
-void QRadioData_virtualbase_customEvent(void* self, QEvent* event);
-void QRadioData_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QRadioData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QRadioData_protectedbase_sender(const void* self);
-int QRadioData_protectedbase_senderSignalIndex(const void* self);
-int QRadioData_protectedbase_receivers(const void* self, const char* signal);
-bool QRadioData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QRadioData_virtualbase_metaObject(const VirtualQRadioData* self);
+void* QRadioData_virtualbase_metacast(VirtualQRadioData* self, const char* param1);
+int QRadioData_virtualbase_metacall(VirtualQRadioData* self, int param1, int param2, void** param3);
+QMediaObject* QRadioData_virtualbase_mediaObject(const VirtualQRadioData* self);
+bool QRadioData_virtualbase_setMediaObject(VirtualQRadioData* self, QMediaObject* mediaObject);
+bool QRadioData_virtualbase_event(VirtualQRadioData* self, QEvent* event);
+bool QRadioData_virtualbase_eventFilter(VirtualQRadioData* self, QObject* watched, QEvent* event);
+void QRadioData_virtualbase_timerEvent(VirtualQRadioData* self, QTimerEvent* event);
+void QRadioData_virtualbase_childEvent(VirtualQRadioData* self, QChildEvent* event);
+void QRadioData_virtualbase_customEvent(VirtualQRadioData* self, QEvent* event);
+void QRadioData_virtualbase_connectNotify(VirtualQRadioData* self, QMetaMethod* signal);
+void QRadioData_virtualbase_disconnectNotify(VirtualQRadioData* self, QMetaMethod* signal);
+
+QObject* QRadioData_protectedbase_sender(const VirtualQRadioData* self);
+int QRadioData_protectedbase_senderSignalIndex(const VirtualQRadioData* self);
+int QRadioData_protectedbase_receivers(const VirtualQRadioData* self, const char* signal);
+bool QRadioData_protectedbase_isSignalConnected(const VirtualQRadioData* self, QMetaMethod* signal);
+
 const QMetaObject* QRadioData_staticMetaObject();
 void QRadioData_delete(QRadioData* self);
 

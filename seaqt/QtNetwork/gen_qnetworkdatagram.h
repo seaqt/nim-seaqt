@@ -27,6 +27,7 @@ QNetworkDatagram* QNetworkDatagram_new2(struct miqt_string data);
 QNetworkDatagram* QNetworkDatagram_new3(QNetworkDatagram* other);
 QNetworkDatagram* QNetworkDatagram_new4(struct miqt_string data, QHostAddress* destinationAddress);
 QNetworkDatagram* QNetworkDatagram_new5(struct miqt_string data, QHostAddress* destinationAddress, uint16_t port);
+
 void QNetworkDatagram_operatorAssign(QNetworkDatagram* self, QNetworkDatagram* other);
 void QNetworkDatagram_swap(QNetworkDatagram* self, QNetworkDatagram* other);
 void QNetworkDatagram_clear(QNetworkDatagram* self);
@@ -46,6 +47,7 @@ struct miqt_string QNetworkDatagram_data(const QNetworkDatagram* self);
 void QNetworkDatagram_setData(QNetworkDatagram* self, struct miqt_string data);
 QNetworkDatagram* QNetworkDatagram_makeReply(const QNetworkDatagram* self, struct miqt_string payload);
 void QNetworkDatagram_setSender2(QNetworkDatagram* self, QHostAddress* address, uint16_t port);
+
 void QNetworkDatagram_delete(QNetworkDatagram* self);
 
 #ifdef __cplusplus

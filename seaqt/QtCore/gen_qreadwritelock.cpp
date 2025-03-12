@@ -3,15 +3,6 @@
 #include <QWriteLocker>
 #include <qreadwritelock.h>
 #include "gen_qreadwritelock.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QReadWriteLock* QReadWriteLock_new() {
 	return new QReadWriteLock();
 }

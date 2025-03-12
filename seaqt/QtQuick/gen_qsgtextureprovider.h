@@ -41,6 +41,7 @@ struct miqt_string QSGTextureProvider_tr2(const char* s, const char* c);
 struct miqt_string QSGTextureProvider_tr3(const char* s, const char* c, int n);
 struct miqt_string QSGTextureProvider_trUtf82(const char* s, const char* c);
 struct miqt_string QSGTextureProvider_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QSGTextureProvider_staticMetaObject();
 void QSGTextureProvider_delete(QSGTextureProvider* self);
 

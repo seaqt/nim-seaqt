@@ -69,105 +69,107 @@ export
 
 type cQLayout*{.exportc: "QLayout", incompleteStruct.} = object
 
-proc fcQLayout_metaObject(self: pointer, ): pointer {.importc: "QLayout_metaObject".}
+proc fcQLayout_metaObject(self: pointer): pointer {.importc: "QLayout_metaObject".}
 proc fcQLayout_metacast(self: pointer, param1: cstring): pointer {.importc: "QLayout_metacast".}
 proc fcQLayout_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLayout_metacall".}
 proc fcQLayout_tr(s: cstring): struct_miqt_string {.importc: "QLayout_tr".}
 proc fcQLayout_trUtf8(s: cstring): struct_miqt_string {.importc: "QLayout_trUtf8".}
-proc fcQLayout_margin(self: pointer, ): cint {.importc: "QLayout_margin".}
+proc fcQLayout_margin(self: pointer): cint {.importc: "QLayout_margin".}
 proc fcQLayout_setMargin(self: pointer, margin: cint): void {.importc: "QLayout_setMargin".}
-proc fcQLayout_spacing(self: pointer, ): cint {.importc: "QLayout_spacing".}
+proc fcQLayout_spacing(self: pointer): cint {.importc: "QLayout_spacing".}
 proc fcQLayout_setSpacing(self: pointer, spacing: cint): void {.importc: "QLayout_setSpacing".}
 proc fcQLayout_setContentsMargins(self: pointer, left: cint, top: cint, right: cint, bottom: cint): void {.importc: "QLayout_setContentsMargins".}
 proc fcQLayout_setContentsMarginsWithMargins(self: pointer, margins: pointer): void {.importc: "QLayout_setContentsMarginsWithMargins".}
 proc fcQLayout_getContentsMargins(self: pointer, left: ptr cint, top: ptr cint, right: ptr cint, bottom: ptr cint): void {.importc: "QLayout_getContentsMargins".}
-proc fcQLayout_contentsMargins(self: pointer, ): pointer {.importc: "QLayout_contentsMargins".}
-proc fcQLayout_contentsRect(self: pointer, ): pointer {.importc: "QLayout_contentsRect".}
+proc fcQLayout_contentsMargins(self: pointer): pointer {.importc: "QLayout_contentsMargins".}
+proc fcQLayout_contentsRect(self: pointer): pointer {.importc: "QLayout_contentsRect".}
 proc fcQLayout_setAlignment(self: pointer, w: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment".}
 proc fcQLayout_setAlignment2(self: pointer, l: pointer, alignment: cint): bool {.importc: "QLayout_setAlignment2".}
 proc fcQLayout_setSizeConstraint(self: pointer, sizeConstraint: cint): void {.importc: "QLayout_setSizeConstraint".}
-proc fcQLayout_sizeConstraint(self: pointer, ): cint {.importc: "QLayout_sizeConstraint".}
+proc fcQLayout_sizeConstraint(self: pointer): cint {.importc: "QLayout_sizeConstraint".}
 proc fcQLayout_setMenuBar(self: pointer, w: pointer): void {.importc: "QLayout_setMenuBar".}
-proc fcQLayout_menuBar(self: pointer, ): pointer {.importc: "QLayout_menuBar".}
-proc fcQLayout_parentWidget(self: pointer, ): pointer {.importc: "QLayout_parentWidget".}
-proc fcQLayout_invalidate(self: pointer, ): void {.importc: "QLayout_invalidate".}
-proc fcQLayout_geometry(self: pointer, ): pointer {.importc: "QLayout_geometry".}
-proc fcQLayout_activate(self: pointer, ): bool {.importc: "QLayout_activate".}
-proc fcQLayout_update(self: pointer, ): void {.importc: "QLayout_update".}
+proc fcQLayout_menuBar(self: pointer): pointer {.importc: "QLayout_menuBar".}
+proc fcQLayout_parentWidget(self: pointer): pointer {.importc: "QLayout_parentWidget".}
+proc fcQLayout_invalidate(self: pointer): void {.importc: "QLayout_invalidate".}
+proc fcQLayout_geometry(self: pointer): pointer {.importc: "QLayout_geometry".}
+proc fcQLayout_activate(self: pointer): bool {.importc: "QLayout_activate".}
+proc fcQLayout_update(self: pointer): void {.importc: "QLayout_update".}
 proc fcQLayout_addWidget(self: pointer, w: pointer): void {.importc: "QLayout_addWidget".}
 proc fcQLayout_addItem(self: pointer, param1: pointer): void {.importc: "QLayout_addItem".}
 proc fcQLayout_removeWidget(self: pointer, w: pointer): void {.importc: "QLayout_removeWidget".}
 proc fcQLayout_removeItem(self: pointer, param1: pointer): void {.importc: "QLayout_removeItem".}
-proc fcQLayout_expandingDirections(self: pointer, ): cint {.importc: "QLayout_expandingDirections".}
-proc fcQLayout_minimumSize(self: pointer, ): pointer {.importc: "QLayout_minimumSize".}
-proc fcQLayout_maximumSize(self: pointer, ): pointer {.importc: "QLayout_maximumSize".}
+proc fcQLayout_expandingDirections(self: pointer): cint {.importc: "QLayout_expandingDirections".}
+proc fcQLayout_minimumSize(self: pointer): pointer {.importc: "QLayout_minimumSize".}
+proc fcQLayout_maximumSize(self: pointer): pointer {.importc: "QLayout_maximumSize".}
 proc fcQLayout_setGeometry(self: pointer, geometry: pointer): void {.importc: "QLayout_setGeometry".}
 proc fcQLayout_itemAt(self: pointer, index: cint): pointer {.importc: "QLayout_itemAt".}
 proc fcQLayout_takeAt(self: pointer, index: cint): pointer {.importc: "QLayout_takeAt".}
 proc fcQLayout_indexOf(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOf".}
 proc fcQLayout_indexOfWithQLayoutItem(self: pointer, param1: pointer): cint {.importc: "QLayout_indexOfWithQLayoutItem".}
-proc fcQLayout_count(self: pointer, ): cint {.importc: "QLayout_count".}
-proc fcQLayout_isEmpty(self: pointer, ): bool {.importc: "QLayout_isEmpty".}
-proc fcQLayout_controlTypes(self: pointer, ): cint {.importc: "QLayout_controlTypes".}
+proc fcQLayout_count(self: pointer): cint {.importc: "QLayout_count".}
+proc fcQLayout_isEmpty(self: pointer): bool {.importc: "QLayout_isEmpty".}
+proc fcQLayout_controlTypes(self: pointer): cint {.importc: "QLayout_controlTypes".}
 proc fcQLayout_replaceWidget(self: pointer, fromVal: pointer, to: pointer): pointer {.importc: "QLayout_replaceWidget".}
 proc fcQLayout_totalHeightForWidth(self: pointer, w: cint): cint {.importc: "QLayout_totalHeightForWidth".}
-proc fcQLayout_totalMinimumSize(self: pointer, ): pointer {.importc: "QLayout_totalMinimumSize".}
-proc fcQLayout_totalMaximumSize(self: pointer, ): pointer {.importc: "QLayout_totalMaximumSize".}
-proc fcQLayout_totalSizeHint(self: pointer, ): pointer {.importc: "QLayout_totalSizeHint".}
-proc fcQLayout_layout(self: pointer, ): pointer {.importc: "QLayout_layout".}
+proc fcQLayout_totalMinimumSize(self: pointer): pointer {.importc: "QLayout_totalMinimumSize".}
+proc fcQLayout_totalMaximumSize(self: pointer): pointer {.importc: "QLayout_totalMaximumSize".}
+proc fcQLayout_totalSizeHint(self: pointer): pointer {.importc: "QLayout_totalSizeHint".}
+proc fcQLayout_layout(self: pointer): pointer {.importc: "QLayout_layout".}
 proc fcQLayout_setEnabled(self: pointer, enabled: bool): void {.importc: "QLayout_setEnabled".}
-proc fcQLayout_isEnabled(self: pointer, ): bool {.importc: "QLayout_isEnabled".}
+proc fcQLayout_isEnabled(self: pointer): bool {.importc: "QLayout_isEnabled".}
 proc fcQLayout_closestAcceptableSize(w: pointer, s: pointer): pointer {.importc: "QLayout_closestAcceptableSize".}
 proc fcQLayout_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QLayout_tr2".}
 proc fcQLayout_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLayout_tr3".}
 proc fcQLayout_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QLayout_trUtf82".}
 proc fcQLayout_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QLayout_trUtf83".}
 proc fcQLayout_replaceWidget3(self: pointer, fromVal: pointer, to: pointer, options: cint): pointer {.importc: "QLayout_replaceWidget3".}
+proc fcQLayout_vtbl(self: pointer): pointer {.importc: "QLayout_vtbl".}
+proc fcQLayout_vdata(self: pointer): pointer {.importc: "QLayout_vdata".}
 type cQLayoutVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQLayoutVTable, self: ptr cQLayout) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  invalidate*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  geometry*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  addItem*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  expandingDirections*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  minimumSize*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  maximumSize*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  setGeometry*: proc(vtbl, self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
-  itemAt*: proc(vtbl, self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
-  takeAt*: proc(vtbl, self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
-  indexOf*: proc(vtbl, self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
-  count*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  isEmpty*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  controlTypes*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  layout*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  hasHeightForWidth*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  heightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  minimumHeightForWidth*: proc(vtbl, self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
-  widget*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  spacerItem*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-proc fcQLayout_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QLayout_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  invalidate*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  geometry*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  addItem*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  expandingDirections*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  minimumSize*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  maximumSize*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  setGeometry*: proc(self: pointer, geometry: pointer): void {.cdecl, raises: [], gcsafe.}
+  itemAt*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
+  takeAt*: proc(self: pointer, index: cint): pointer {.cdecl, raises: [], gcsafe.}
+  indexOf*: proc(self: pointer, param1: pointer): cint {.cdecl, raises: [], gcsafe.}
+  count*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  isEmpty*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  controlTypes*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  layout*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, e: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  hasHeightForWidth*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  heightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  minimumHeightForWidth*: proc(self: pointer, param1: cint): cint {.cdecl, raises: [], gcsafe.}
+  widget*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  spacerItem*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQLayout_virtualbase_metaObject(self: pointer): pointer {.importc: "QLayout_virtualbase_metaObject".}
 proc fcQLayout_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QLayout_virtualbase_metacast".}
 proc fcQLayout_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QLayout_virtualbase_metacall".}
-proc fcQLayout_virtualbase_invalidate(self: pointer, ): void {.importc: "QLayout_virtualbase_invalidate".}
-proc fcQLayout_virtualbase_geometry(self: pointer, ): pointer {.importc: "QLayout_virtualbase_geometry".}
-proc fcQLayout_virtualbase_expandingDirections(self: pointer, ): cint {.importc: "QLayout_virtualbase_expandingDirections".}
-proc fcQLayout_virtualbase_minimumSize(self: pointer, ): pointer {.importc: "QLayout_virtualbase_minimumSize".}
-proc fcQLayout_virtualbase_maximumSize(self: pointer, ): pointer {.importc: "QLayout_virtualbase_maximumSize".}
+proc fcQLayout_virtualbase_invalidate(self: pointer): void {.importc: "QLayout_virtualbase_invalidate".}
+proc fcQLayout_virtualbase_geometry(self: pointer): pointer {.importc: "QLayout_virtualbase_geometry".}
+proc fcQLayout_virtualbase_expandingDirections(self: pointer): cint {.importc: "QLayout_virtualbase_expandingDirections".}
+proc fcQLayout_virtualbase_minimumSize(self: pointer): pointer {.importc: "QLayout_virtualbase_minimumSize".}
+proc fcQLayout_virtualbase_maximumSize(self: pointer): pointer {.importc: "QLayout_virtualbase_maximumSize".}
 proc fcQLayout_virtualbase_setGeometry(self: pointer, geometry: pointer): void {.importc: "QLayout_virtualbase_setGeometry".}
 proc fcQLayout_virtualbase_indexOf(self: pointer, param1: pointer): cint {.importc: "QLayout_virtualbase_indexOf".}
-proc fcQLayout_virtualbase_isEmpty(self: pointer, ): bool {.importc: "QLayout_virtualbase_isEmpty".}
-proc fcQLayout_virtualbase_controlTypes(self: pointer, ): cint {.importc: "QLayout_virtualbase_controlTypes".}
-proc fcQLayout_virtualbase_layout(self: pointer, ): pointer {.importc: "QLayout_virtualbase_layout".}
+proc fcQLayout_virtualbase_isEmpty(self: pointer): bool {.importc: "QLayout_virtualbase_isEmpty".}
+proc fcQLayout_virtualbase_controlTypes(self: pointer): cint {.importc: "QLayout_virtualbase_controlTypes".}
+proc fcQLayout_virtualbase_layout(self: pointer): pointer {.importc: "QLayout_virtualbase_layout".}
 proc fcQLayout_virtualbase_childEvent(self: pointer, e: pointer): void {.importc: "QLayout_virtualbase_childEvent".}
 proc fcQLayout_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QLayout_virtualbase_event".}
 proc fcQLayout_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QLayout_virtualbase_eventFilter".}
@@ -175,25 +177,25 @@ proc fcQLayout_virtualbase_timerEvent(self: pointer, event: pointer): void {.imp
 proc fcQLayout_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QLayout_virtualbase_customEvent".}
 proc fcQLayout_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QLayout_virtualbase_connectNotify".}
 proc fcQLayout_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QLayout_virtualbase_disconnectNotify".}
-proc fcQLayout_virtualbase_hasHeightForWidth(self: pointer, ): bool {.importc: "QLayout_virtualbase_hasHeightForWidth".}
+proc fcQLayout_virtualbase_hasHeightForWidth(self: pointer): bool {.importc: "QLayout_virtualbase_hasHeightForWidth".}
 proc fcQLayout_virtualbase_heightForWidth(self: pointer, param1: cint): cint {.importc: "QLayout_virtualbase_heightForWidth".}
 proc fcQLayout_virtualbase_minimumHeightForWidth(self: pointer, param1: cint): cint {.importc: "QLayout_virtualbase_minimumHeightForWidth".}
-proc fcQLayout_virtualbase_widget(self: pointer, ): pointer {.importc: "QLayout_virtualbase_widget".}
-proc fcQLayout_virtualbase_spacerItem(self: pointer, ): pointer {.importc: "QLayout_virtualbase_spacerItem".}
+proc fcQLayout_virtualbase_widget(self: pointer): pointer {.importc: "QLayout_virtualbase_widget".}
+proc fcQLayout_virtualbase_spacerItem(self: pointer): pointer {.importc: "QLayout_virtualbase_spacerItem".}
 proc fcQLayout_protectedbase_widgetEvent(self: pointer, param1: pointer): void {.importc: "QLayout_protectedbase_widgetEvent".}
 proc fcQLayout_protectedbase_addChildLayout(self: pointer, l: pointer): void {.importc: "QLayout_protectedbase_addChildLayout".}
 proc fcQLayout_protectedbase_addChildWidget(self: pointer, w: pointer): void {.importc: "QLayout_protectedbase_addChildWidget".}
 proc fcQLayout_protectedbase_adoptLayout(self: pointer, layout: pointer): bool {.importc: "QLayout_protectedbase_adoptLayout".}
 proc fcQLayout_protectedbase_alignmentRect(self: pointer, param1: pointer): pointer {.importc: "QLayout_protectedbase_alignmentRect".}
-proc fcQLayout_protectedbase_sender(self: pointer, ): pointer {.importc: "QLayout_protectedbase_sender".}
-proc fcQLayout_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QLayout_protectedbase_senderSignalIndex".}
+proc fcQLayout_protectedbase_sender(self: pointer): pointer {.importc: "QLayout_protectedbase_sender".}
+proc fcQLayout_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QLayout_protectedbase_senderSignalIndex".}
 proc fcQLayout_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QLayout_protectedbase_receivers".}
 proc fcQLayout_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QLayout_protectedbase_isSignalConnected".}
-proc fcQLayout_new(vtbl: pointer, parent: pointer): ptr cQLayout {.importc: "QLayout_new".}
-proc fcQLayout_new2(vtbl: pointer, ): ptr cQLayout {.importc: "QLayout_new2".}
+proc fcQLayout_new(vtbl, vdata: pointer, parent: pointer): ptr cQLayout {.importc: "QLayout_new".}
+proc fcQLayout_new2(vtbl, vdata: pointer): ptr cQLayout {.importc: "QLayout_new2".}
 proc fcQLayout_staticMetaObject(): pointer {.importc: "QLayout_staticMetaObject".}
 
-proc metaObject*(self: gen_qlayout_types.QLayout, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLayout_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qlayout_types.QLayout, param1: cstring): pointer =
@@ -214,13 +216,13 @@ proc trUtf8*(_: type gen_qlayout_types.QLayout, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc margin*(self: gen_qlayout_types.QLayout, ): cint =
+proc margin*(self: gen_qlayout_types.QLayout): cint =
   fcQLayout_margin(self.h)
 
 proc setMargin*(self: gen_qlayout_types.QLayout, margin: cint): void =
   fcQLayout_setMargin(self.h, margin)
 
-proc spacing*(self: gen_qlayout_types.QLayout, ): cint =
+proc spacing*(self: gen_qlayout_types.QLayout): cint =
   fcQLayout_spacing(self.h)
 
 proc setSpacing*(self: gen_qlayout_types.QLayout, spacing: cint): void =
@@ -235,10 +237,10 @@ proc setContentsMargins*(self: gen_qlayout_types.QLayout, margins: gen_qmargins_
 proc getContentsMargins*(self: gen_qlayout_types.QLayout, left: ptr cint, top: ptr cint, right: ptr cint, bottom: ptr cint): void =
   fcQLayout_getContentsMargins(self.h, left, top, right, bottom)
 
-proc contentsMargins*(self: gen_qlayout_types.QLayout, ): gen_qmargins_types.QMargins =
+proc contentsMargins*(self: gen_qlayout_types.QLayout): gen_qmargins_types.QMargins =
   gen_qmargins_types.QMargins(h: fcQLayout_contentsMargins(self.h), owned: true)
 
-proc contentsRect*(self: gen_qlayout_types.QLayout, ): gen_qrect_types.QRect =
+proc contentsRect*(self: gen_qlayout_types.QLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQLayout_contentsRect(self.h), owned: true)
 
 proc setAlignment*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget, alignment: cint): bool =
@@ -250,28 +252,28 @@ proc setAlignment*(self: gen_qlayout_types.QLayout, l: gen_qlayout_types.QLayout
 proc setSizeConstraint*(self: gen_qlayout_types.QLayout, sizeConstraint: cint): void =
   fcQLayout_setSizeConstraint(self.h, cint(sizeConstraint))
 
-proc sizeConstraint*(self: gen_qlayout_types.QLayout, ): cint =
+proc sizeConstraint*(self: gen_qlayout_types.QLayout): cint =
   cint(fcQLayout_sizeConstraint(self.h))
 
 proc setMenuBar*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget): void =
   fcQLayout_setMenuBar(self.h, w.h)
 
-proc menuBar*(self: gen_qlayout_types.QLayout, ): gen_qwidget_types.QWidget =
+proc menuBar*(self: gen_qlayout_types.QLayout): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQLayout_menuBar(self.h), owned: false)
 
-proc parentWidget*(self: gen_qlayout_types.QLayout, ): gen_qwidget_types.QWidget =
+proc parentWidget*(self: gen_qlayout_types.QLayout): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQLayout_parentWidget(self.h), owned: false)
 
-proc invalidate*(self: gen_qlayout_types.QLayout, ): void =
+proc invalidate*(self: gen_qlayout_types.QLayout): void =
   fcQLayout_invalidate(self.h)
 
-proc geometry*(self: gen_qlayout_types.QLayout, ): gen_qrect_types.QRect =
+proc geometry*(self: gen_qlayout_types.QLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQLayout_geometry(self.h), owned: true)
 
-proc activate*(self: gen_qlayout_types.QLayout, ): bool =
+proc activate*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_activate(self.h)
 
-proc update*(self: gen_qlayout_types.QLayout, ): void =
+proc update*(self: gen_qlayout_types.QLayout): void =
   fcQLayout_update(self.h)
 
 proc addWidget*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget): void =
@@ -286,13 +288,13 @@ proc removeWidget*(self: gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget
 proc removeItem*(self: gen_qlayout_types.QLayout, param1: gen_qlayoutitem_types.QLayoutItem): void =
   fcQLayout_removeItem(self.h, param1.h)
 
-proc expandingDirections*(self: gen_qlayout_types.QLayout, ): cint =
+proc expandingDirections*(self: gen_qlayout_types.QLayout): cint =
   cint(fcQLayout_expandingDirections(self.h))
 
-proc minimumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc minimumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_minimumSize(self.h), owned: true)
 
-proc maximumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc maximumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_maximumSize(self.h), owned: true)
 
 proc setGeometry*(self: gen_qlayout_types.QLayout, geometry: gen_qrect_types.QRect): void =
@@ -310,13 +312,13 @@ proc indexOf*(self: gen_qlayout_types.QLayout, param1: gen_qwidget_types.QWidget
 proc indexOf*(self: gen_qlayout_types.QLayout, param1: gen_qlayoutitem_types.QLayoutItem): cint =
   fcQLayout_indexOfWithQLayoutItem(self.h, param1.h)
 
-proc count*(self: gen_qlayout_types.QLayout, ): cint =
+proc count*(self: gen_qlayout_types.QLayout): cint =
   fcQLayout_count(self.h)
 
-proc isEmpty*(self: gen_qlayout_types.QLayout, ): bool =
+proc isEmpty*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_isEmpty(self.h)
 
-proc controlTypes*(self: gen_qlayout_types.QLayout, ): cint =
+proc controlTypes*(self: gen_qlayout_types.QLayout): cint =
   cint(fcQLayout_controlTypes(self.h))
 
 proc replaceWidget*(self: gen_qlayout_types.QLayout, fromVal: gen_qwidget_types.QWidget, to: gen_qwidget_types.QWidget): gen_qlayoutitem_types.QLayoutItem =
@@ -325,22 +327,22 @@ proc replaceWidget*(self: gen_qlayout_types.QLayout, fromVal: gen_qwidget_types.
 proc totalHeightForWidth*(self: gen_qlayout_types.QLayout, w: cint): cint =
   fcQLayout_totalHeightForWidth(self.h, w)
 
-proc totalMinimumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc totalMinimumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_totalMinimumSize(self.h), owned: true)
 
-proc totalMaximumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc totalMaximumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_totalMaximumSize(self.h), owned: true)
 
-proc totalSizeHint*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc totalSizeHint*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_totalSizeHint(self.h), owned: true)
 
-proc layout*(self: gen_qlayout_types.QLayout, ): gen_qlayout_types.QLayout =
+proc layout*(self: gen_qlayout_types.QLayout): gen_qlayout_types.QLayout =
   gen_qlayout_types.QLayout(h: fcQLayout_layout(self.h), owned: false)
 
 proc setEnabled*(self: gen_qlayout_types.QLayout, enabled: bool): void =
   fcQLayout_setEnabled(self.h, enabled)
 
-proc isEnabled*(self: gen_qlayout_types.QLayout, ): bool =
+proc isEnabled*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_isEnabled(self.h)
 
 proc closestAcceptableSize*(_: type gen_qlayout_types.QLayout, w: gen_qwidget_types.QWidget, s: gen_qsize_types.QSize): gen_qsize_types.QSize =
@@ -435,11 +437,11 @@ type QLayoutVTable* {.inheritable, pure.} = object
   minimumHeightForWidth*: QLayoutminimumHeightForWidthProc
   widget*: QLayoutwidgetProc
   spacerItem*: QLayoutspacerItemProc
-proc QLayoutmetaObject*(self: gen_qlayout_types.QLayout, ): gen_qobjectdefs_types.QMetaObject =
+proc QLayoutmetaObject*(self: gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLayout_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQLayout_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -450,8 +452,8 @@ proc miqt_exec_callback_cQLayout_metaObject(vtbl: pointer, self: pointer): point
 proc QLayoutmetacast*(self: gen_qlayout_types.QLayout, param1: cstring): pointer =
   fcQLayout_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQLayout_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -460,8 +462,8 @@ proc miqt_exec_callback_cQLayout_metacast(vtbl: pointer, self: pointer, param1: 
 proc QLayoutmetacall*(self: gen_qlayout_types.QLayout, param1: cint, param2: cint, param3: pointer): cint =
   fcQLayout_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQLayout_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -469,19 +471,19 @@ proc miqt_exec_callback_cQLayout_metacall(vtbl: pointer, self: pointer, param1: 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QLayoutinvalidate*(self: gen_qlayout_types.QLayout, ): void =
+proc QLayoutinvalidate*(self: gen_qlayout_types.QLayout): void =
   fcQLayout_virtualbase_invalidate(self.h)
 
-proc miqt_exec_callback_cQLayout_invalidate(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_invalidate(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   vtbl[].invalidate(self)
 
-proc QLayoutgeometry*(self: gen_qlayout_types.QLayout, ): gen_qrect_types.QRect =
+proc QLayoutgeometry*(self: gen_qlayout_types.QLayout): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQLayout_virtualbase_geometry(self.h), owned: true)
 
-proc miqt_exec_callback_cQLayout_geometry(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_geometry(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].geometry(self)
   virtualReturn.owned = false # TODO move?
@@ -489,26 +491,26 @@ proc miqt_exec_callback_cQLayout_geometry(vtbl: pointer, self: pointer): pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc miqt_exec_callback_cQLayout_addItem(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_addItem(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
   vtbl[].addItem(self, slotval1)
 
-proc QLayoutexpandingDirections*(self: gen_qlayout_types.QLayout, ): cint =
+proc QLayoutexpandingDirections*(self: gen_qlayout_types.QLayout): cint =
   cint(fcQLayout_virtualbase_expandingDirections(self.h))
 
-proc miqt_exec_callback_cQLayout_expandingDirections(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].expandingDirections(self)
   cint(virtualReturn)
 
-proc QLayoutminimumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc QLayoutminimumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_virtualbase_minimumSize(self.h), owned: true)
 
-proc miqt_exec_callback_cQLayout_minimumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].minimumSize(self)
   virtualReturn.owned = false # TODO move?
@@ -516,11 +518,11 @@ proc miqt_exec_callback_cQLayout_minimumSize(vtbl: pointer, self: pointer): poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLayoutmaximumSize*(self: gen_qlayout_types.QLayout, ): gen_qsize_types.QSize =
+proc QLayoutmaximumSize*(self: gen_qlayout_types.QLayout): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQLayout_virtualbase_maximumSize(self.h), owned: true)
 
-proc miqt_exec_callback_cQLayout_maximumSize(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].maximumSize(self)
   virtualReturn.owned = false # TODO move?
@@ -531,14 +533,14 @@ proc miqt_exec_callback_cQLayout_maximumSize(vtbl: pointer, self: pointer): poin
 proc QLayoutsetGeometry*(self: gen_qlayout_types.QLayout, geometry: gen_qrect_types.QRect): void =
   fcQLayout_virtualbase_setGeometry(self.h, geometry.h)
 
-proc miqt_exec_callback_cQLayout_setGeometry(vtbl: pointer, self: pointer, geometry: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
-proc miqt_exec_callback_cQLayout_itemAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_itemAt(self: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].itemAt(self, slotval1)
@@ -547,8 +549,8 @@ proc miqt_exec_callback_cQLayout_itemAt(vtbl: pointer, self: pointer, index: cin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc miqt_exec_callback_cQLayout_takeAt(vtbl: pointer, self: pointer, index: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = index
   var virtualReturn = vtbl[].takeAt(self, slotval1)
@@ -560,42 +562,42 @@ proc miqt_exec_callback_cQLayout_takeAt(vtbl: pointer, self: pointer, index: cin
 proc QLayoutindexOf*(self: gen_qlayout_types.QLayout, param1: gen_qwidget_types.QWidget): cint =
   fcQLayout_virtualbase_indexOf(self.h, param1.h)
 
-proc miqt_exec_callback_cQLayout_indexOf(vtbl: pointer, self: pointer, param1: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
   var virtualReturn = vtbl[].indexOf(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQLayout_count(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_count(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].count(self)
   virtualReturn
 
-proc QLayoutisEmpty*(self: gen_qlayout_types.QLayout, ): bool =
+proc QLayoutisEmpty*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_virtualbase_isEmpty(self.h)
 
-proc miqt_exec_callback_cQLayout_isEmpty(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_isEmpty(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].isEmpty(self)
   virtualReturn
 
-proc QLayoutcontrolTypes*(self: gen_qlayout_types.QLayout, ): cint =
+proc QLayoutcontrolTypes*(self: gen_qlayout_types.QLayout): cint =
   cint(fcQLayout_virtualbase_controlTypes(self.h))
 
-proc miqt_exec_callback_cQLayout_controlTypes(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_controlTypes(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].controlTypes(self)
   cint(virtualReturn)
 
-proc QLayoutlayout*(self: gen_qlayout_types.QLayout, ): gen_qlayout_types.QLayout =
+proc QLayoutlayout*(self: gen_qlayout_types.QLayout): gen_qlayout_types.QLayout =
   gen_qlayout_types.QLayout(h: fcQLayout_virtualbase_layout(self.h), owned: false)
 
-proc miqt_exec_callback_cQLayout_layout(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_layout(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].layout(self)
   virtualReturn.owned = false # TODO move?
@@ -606,8 +608,8 @@ proc miqt_exec_callback_cQLayout_layout(vtbl: pointer, self: pointer): pointer {
 proc QLayoutchildEvent*(self: gen_qlayout_types.QLayout, e: gen_qcoreevent_types.QChildEvent): void =
   fcQLayout_virtualbase_childEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQLayout_childEvent(vtbl: pointer, self: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -615,8 +617,8 @@ proc miqt_exec_callback_cQLayout_childEvent(vtbl: pointer, self: pointer, e: poi
 proc QLayoutevent*(self: gen_qlayout_types.QLayout, event: gen_qcoreevent_types.QEvent): bool =
   fcQLayout_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQLayout_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -625,8 +627,8 @@ proc miqt_exec_callback_cQLayout_event(vtbl: pointer, self: pointer, event: poin
 proc QLayouteventFilter*(self: gen_qlayout_types.QLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQLayout_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQLayout_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -636,8 +638,8 @@ proc miqt_exec_callback_cQLayout_eventFilter(vtbl: pointer, self: pointer, watch
 proc QLayouttimerEvent*(self: gen_qlayout_types.QLayout, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQLayout_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQLayout_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -645,8 +647,8 @@ proc miqt_exec_callback_cQLayout_timerEvent(vtbl: pointer, self: pointer, event:
 proc QLayoutcustomEvent*(self: gen_qlayout_types.QLayout, event: gen_qcoreevent_types.QEvent): void =
   fcQLayout_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQLayout_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -654,8 +656,8 @@ proc miqt_exec_callback_cQLayout_customEvent(vtbl: pointer, self: pointer, event
 proc QLayoutconnectNotify*(self: gen_qlayout_types.QLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQLayout_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQLayout_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -663,14 +665,14 @@ proc miqt_exec_callback_cQLayout_connectNotify(vtbl: pointer, self: pointer, sig
 proc QLayoutdisconnectNotify*(self: gen_qlayout_types.QLayout, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQLayout_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQLayout_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
-proc miqt_exec_callback_cQLayout_sizeHint(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].sizeHint(self)
   virtualReturn.owned = false # TODO move?
@@ -678,11 +680,11 @@ proc miqt_exec_callback_cQLayout_sizeHint(vtbl: pointer, self: pointer): pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLayouthasHeightForWidth*(self: gen_qlayout_types.QLayout, ): bool =
+proc QLayouthasHeightForWidth*(self: gen_qlayout_types.QLayout): bool =
   fcQLayout_virtualbase_hasHeightForWidth(self.h)
 
-proc miqt_exec_callback_cQLayout_hasHeightForWidth(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].hasHeightForWidth(self)
   virtualReturn
@@ -690,8 +692,8 @@ proc miqt_exec_callback_cQLayout_hasHeightForWidth(vtbl: pointer, self: pointer)
 proc QLayoutheightForWidth*(self: gen_qlayout_types.QLayout, param1: cint): cint =
   fcQLayout_virtualbase_heightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQLayout_heightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].heightForWidth(self, slotval1)
@@ -700,18 +702,18 @@ proc miqt_exec_callback_cQLayout_heightForWidth(vtbl: pointer, self: pointer, pa
 proc QLayoutminimumHeightForWidth*(self: gen_qlayout_types.QLayout, param1: cint): cint =
   fcQLayout_virtualbase_minimumHeightForWidth(self.h, param1)
 
-proc miqt_exec_callback_cQLayout_minimumHeightForWidth(vtbl: pointer, self: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   let slotval1 = param1
   var virtualReturn = vtbl[].minimumHeightForWidth(self, slotval1)
   virtualReturn
 
-proc QLayoutwidget*(self: gen_qlayout_types.QLayout, ): gen_qwidget_types.QWidget =
+proc QLayoutwidget*(self: gen_qlayout_types.QLayout): gen_qwidget_types.QWidget =
   gen_qwidget_types.QWidget(h: fcQLayout_virtualbase_widget(self.h), owned: false)
 
-proc miqt_exec_callback_cQLayout_widget(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_widget(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].widget(self)
   virtualReturn.owned = false # TODO move?
@@ -719,11 +721,11 @@ proc miqt_exec_callback_cQLayout_widget(vtbl: pointer, self: pointer): pointer {
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QLayoutspacerItem*(self: gen_qlayout_types.QLayout, ): gen_qlayoutitem_types.QSpacerItem =
+proc QLayoutspacerItem*(self: gen_qlayout_types.QLayout): gen_qlayoutitem_types.QSpacerItem =
   gen_qlayoutitem_types.QSpacerItem(h: fcQLayout_virtualbase_spacerItem(self.h), owned: false)
 
-proc miqt_exec_callback_cQLayout_spacerItem(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QLayoutVTable](vtbl)
+proc cQLayout_vtable_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QLayoutVTable](fcQLayout_vdata(self))
   let self = QLayout(h: self)
   var virtualReturn = vtbl[].spacerItem(self)
   virtualReturn.owned = false # TODO move?
@@ -733,11 +735,11 @@ proc miqt_exec_callback_cQLayout_spacerItem(vtbl: pointer, self: pointer): point
 
 type VirtualQLayout* {.inheritable.} = ref object of QLayout
   vtbl*: cQLayoutVTable
-method metaObject*(self: VirtualQLayout, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQLayout): gen_qobjectdefs_types.QMetaObject {.base.} =
   QLayoutmetaObject(self[])
-proc miqt_exec_method_cQLayout_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQLayout_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -745,33 +747,33 @@ proc miqt_exec_method_cQLayout_metaObject(vtbl: pointer, inst: pointer): pointer
 
 method metacast*(self: VirtualQLayout, param1: cstring): pointer {.base.} =
   QLayoutmetacast(self[], param1)
-proc miqt_exec_method_cQLayout_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQLayout, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QLayoutmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQLayout_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method invalidate*(self: VirtualQLayout, ): void {.base.} =
+method invalidate*(self: VirtualQLayout): void {.base.} =
   QLayoutinvalidate(self[])
-proc miqt_exec_method_cQLayout_invalidate(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  vtbl.invalidate()
+proc cQLayout_method_callback_invalidate(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  inst.invalidate()
 
-method geometry*(self: VirtualQLayout, ): gen_qrect_types.QRect {.base.} =
+method geometry*(self: VirtualQLayout): gen_qrect_types.QRect {.base.} =
   QLayoutgeometry(self[])
-proc miqt_exec_method_cQLayout_geometry(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.geometry()
+proc cQLayout_method_callback_geometry(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.geometry()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -779,33 +781,33 @@ proc miqt_exec_method_cQLayout_geometry(vtbl: pointer, inst: pointer): pointer {
 
 method addItem*(self: VirtualQLayout, param1: gen_qlayoutitem_types.QLayoutItem): void {.base.} =
   raiseAssert("missing implementation of QLayout_virtualbase_addItem")
-proc miqt_exec_method_cQLayout_addItem(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_addItem(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qlayoutitem_types.QLayoutItem(h: param1, owned: false)
-  vtbl.addItem(slotval1)
+  inst.addItem(slotval1)
 
-method expandingDirections*(self: VirtualQLayout, ): cint {.base.} =
+method expandingDirections*(self: VirtualQLayout): cint {.base.} =
   QLayoutexpandingDirections(self[])
-proc miqt_exec_method_cQLayout_expandingDirections(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.expandingDirections()
+proc cQLayout_method_callback_expandingDirections(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.expandingDirections()
   cint(virtualReturn)
 
-method minimumSize*(self: VirtualQLayout, ): gen_qsize_types.QSize {.base.} =
+method minimumSize*(self: VirtualQLayout): gen_qsize_types.QSize {.base.} =
   QLayoutminimumSize(self[])
-proc miqt_exec_method_cQLayout_minimumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.minimumSize()
+proc cQLayout_method_callback_minimumSize(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.minimumSize()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method maximumSize*(self: VirtualQLayout, ): gen_qsize_types.QSize {.base.} =
+method maximumSize*(self: VirtualQLayout): gen_qsize_types.QSize {.base.} =
   QLayoutmaximumSize(self[])
-proc miqt_exec_method_cQLayout_maximumSize(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.maximumSize()
+proc cQLayout_method_callback_maximumSize(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.maximumSize()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -813,17 +815,17 @@ proc miqt_exec_method_cQLayout_maximumSize(vtbl: pointer, inst: pointer): pointe
 
 method setGeometry*(self: VirtualQLayout, geometry: gen_qrect_types.QRect): void {.base.} =
   QLayoutsetGeometry(self[], geometry)
-proc miqt_exec_method_cQLayout_setGeometry(vtbl: pointer, inst: pointer, geometry: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_setGeometry(self: pointer, geometry: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qrect_types.QRect(h: geometry, owned: false)
-  vtbl.setGeometry(slotval1)
+  inst.setGeometry(slotval1)
 
 method itemAt*(self: VirtualQLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
   raiseAssert("missing implementation of QLayout_virtualbase_itemAt")
-proc miqt_exec_method_cQLayout_itemAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_itemAt(self: pointer, index: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = index
-  var virtualReturn = vtbl.itemAt(slotval1)
+  var virtualReturn = inst.itemAt(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -831,10 +833,10 @@ proc miqt_exec_method_cQLayout_itemAt(vtbl: pointer, inst: pointer, index: cint)
 
 method takeAt*(self: VirtualQLayout, index: cint): gen_qlayoutitem_types.QLayoutItem {.base.} =
   raiseAssert("missing implementation of QLayout_virtualbase_takeAt")
-proc miqt_exec_method_cQLayout_takeAt(vtbl: pointer, inst: pointer, index: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_takeAt(self: pointer, index: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = index
-  var virtualReturn = vtbl.takeAt(slotval1)
+  var virtualReturn = inst.takeAt(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -842,38 +844,38 @@ proc miqt_exec_method_cQLayout_takeAt(vtbl: pointer, inst: pointer, index: cint)
 
 method indexOf*(self: VirtualQLayout, param1: gen_qwidget_types.QWidget): cint {.base.} =
   QLayoutindexOf(self[], param1)
-proc miqt_exec_method_cQLayout_indexOf(vtbl: pointer, inst: pointer, param1: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_indexOf(self: pointer, param1: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qwidget_types.QWidget(h: param1, owned: false)
-  var virtualReturn = vtbl.indexOf(slotval1)
+  var virtualReturn = inst.indexOf(slotval1)
   virtualReturn
 
-method count*(self: VirtualQLayout, ): cint {.base.} =
+method count*(self: VirtualQLayout): cint {.base.} =
   raiseAssert("missing implementation of QLayout_virtualbase_count")
-proc miqt_exec_method_cQLayout_count(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.count()
+proc cQLayout_method_callback_count(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.count()
   virtualReturn
 
-method isEmpty*(self: VirtualQLayout, ): bool {.base.} =
+method isEmpty*(self: VirtualQLayout): bool {.base.} =
   QLayoutisEmpty(self[])
-proc miqt_exec_method_cQLayout_isEmpty(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.isEmpty()
+proc cQLayout_method_callback_isEmpty(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.isEmpty()
   virtualReturn
 
-method controlTypes*(self: VirtualQLayout, ): cint {.base.} =
+method controlTypes*(self: VirtualQLayout): cint {.base.} =
   QLayoutcontrolTypes(self[])
-proc miqt_exec_method_cQLayout_controlTypes(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.controlTypes()
+proc cQLayout_method_callback_controlTypes(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.controlTypes()
   cint(virtualReturn)
 
-method layout*(self: VirtualQLayout, ): gen_qlayout_types.QLayout {.base.} =
+method layout*(self: VirtualQLayout): gen_qlayout_types.QLayout {.base.} =
   QLayoutlayout(self[])
-proc miqt_exec_method_cQLayout_layout(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.layout()
+proc cQLayout_method_callback_layout(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.layout()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -881,104 +883,104 @@ proc miqt_exec_method_cQLayout_layout(vtbl: pointer, inst: pointer): pointer {.c
 
 method childEvent*(self: VirtualQLayout, e: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QLayoutchildEvent(self[], e)
-proc miqt_exec_method_cQLayout_childEvent(vtbl: pointer, inst: pointer, e: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_childEvent(self: pointer, e: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: e, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method event*(self: VirtualQLayout, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QLayoutevent(self[], event)
-proc miqt_exec_method_cQLayout_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQLayout, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QLayouteventFilter(self[], watched, event)
-proc miqt_exec_method_cQLayout_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQLayout, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QLayouttimerEvent(self[], event)
-proc miqt_exec_method_cQLayout_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method customEvent*(self: VirtualQLayout, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QLayoutcustomEvent(self[], event)
-proc miqt_exec_method_cQLayout_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLayoutconnectNotify(self[], signal)
-proc miqt_exec_method_cQLayout_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQLayout, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QLayoutdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQLayout_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-method sizeHint*(self: VirtualQLayout, ): gen_qsize_types.QSize {.base.} =
+method sizeHint*(self: VirtualQLayout): gen_qsize_types.QSize {.base.} =
   raiseAssert("missing implementation of QLayout_virtualbase_sizeHint")
-proc miqt_exec_method_cQLayout_sizeHint(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.sizeHint()
+proc cQLayout_method_callback_sizeHint(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.sizeHint()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method hasHeightForWidth*(self: VirtualQLayout, ): bool {.base.} =
+method hasHeightForWidth*(self: VirtualQLayout): bool {.base.} =
   QLayouthasHeightForWidth(self[])
-proc miqt_exec_method_cQLayout_hasHeightForWidth(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.hasHeightForWidth()
+proc cQLayout_method_callback_hasHeightForWidth(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.hasHeightForWidth()
   virtualReturn
 
 method heightForWidth*(self: VirtualQLayout, param1: cint): cint {.base.} =
   QLayoutheightForWidth(self[], param1)
-proc miqt_exec_method_cQLayout_heightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_heightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.heightForWidth(slotval1)
+  var virtualReturn = inst.heightForWidth(slotval1)
   virtualReturn
 
 method minimumHeightForWidth*(self: VirtualQLayout, param1: cint): cint {.base.} =
   QLayoutminimumHeightForWidth(self[], param1)
-proc miqt_exec_method_cQLayout_minimumHeightForWidth(vtbl: pointer, inst: pointer, param1: cint): cint {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
+proc cQLayout_method_callback_minimumHeightForWidth(self: pointer, param1: cint): cint {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
   let slotval1 = param1
-  var virtualReturn = vtbl.minimumHeightForWidth(slotval1)
+  var virtualReturn = inst.minimumHeightForWidth(slotval1)
   virtualReturn
 
-method widget*(self: VirtualQLayout, ): gen_qwidget_types.QWidget {.base.} =
+method widget*(self: VirtualQLayout): gen_qwidget_types.QWidget {.base.} =
   QLayoutwidget(self[])
-proc miqt_exec_method_cQLayout_widget(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.widget()
+proc cQLayout_method_callback_widget(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.widget()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method spacerItem*(self: VirtualQLayout, ): gen_qlayoutitem_types.QSpacerItem {.base.} =
+method spacerItem*(self: VirtualQLayout): gen_qlayoutitem_types.QSpacerItem {.base.} =
   QLayoutspacerItem(self[])
-proc miqt_exec_method_cQLayout_spacerItem(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQLayout](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-  var virtualReturn = vtbl.spacerItem()
+proc cQLayout_method_callback_spacerItem(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQLayout](fcQLayout_vdata(self))
+  var virtualReturn = inst.spacerItem()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -999,10 +1001,10 @@ proc adoptLayout*(self: gen_qlayout_types.QLayout, layout: gen_qlayout_types.QLa
 proc alignmentRect*(self: gen_qlayout_types.QLayout, param1: gen_qrect_types.QRect): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQLayout_protectedbase_alignmentRect(self.h, param1.h), owned: true)
 
-proc sender*(self: gen_qlayout_types.QLayout, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qlayout_types.QLayout): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQLayout_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qlayout_types.QLayout, ): cint =
+proc senderSignalIndex*(self: gen_qlayout_types.QLayout): cint =
   fcQLayout_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qlayout_types.QLayout, signal: cstring): cint =
@@ -1016,222 +1018,188 @@ proc create*(T: type gen_qlayout_types.QLayout,
     vtbl: ref QLayoutVTable = nil): gen_qlayout_types.QLayout =
   let vtbl = if vtbl == nil: new QLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLayoutVTable, _: ptr cQLayout) {.cdecl.} =
-    let vtbl = cast[ref QLayoutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QLayoutVTable](fcQLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLayout_metaObject
+    vtbl[].vtbl.metaObject = cQLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQLayout_metacast
+    vtbl[].vtbl.metacast = cQLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQLayout_metacall
+    vtbl[].vtbl.metacall = cQLayout_vtable_callback_metacall
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = miqt_exec_callback_cQLayout_invalidate
+    vtbl[].vtbl.invalidate = cQLayout_vtable_callback_invalidate
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = miqt_exec_callback_cQLayout_geometry
+    vtbl[].vtbl.geometry = cQLayout_vtable_callback_geometry
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = miqt_exec_callback_cQLayout_addItem
+    vtbl[].vtbl.addItem = cQLayout_vtable_callback_addItem
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQLayout_expandingDirections
+    vtbl[].vtbl.expandingDirections = cQLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = miqt_exec_callback_cQLayout_minimumSize
+    vtbl[].vtbl.minimumSize = cQLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = miqt_exec_callback_cQLayout_maximumSize
+    vtbl[].vtbl.maximumSize = cQLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQLayout_setGeometry
+    vtbl[].vtbl.setGeometry = cQLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].itemAt):
-    vtbl[].vtbl.itemAt = miqt_exec_callback_cQLayout_itemAt
+    vtbl[].vtbl.itemAt = cQLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = miqt_exec_callback_cQLayout_takeAt
+    vtbl[].vtbl.takeAt = cQLayout_vtable_callback_takeAt
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = miqt_exec_callback_cQLayout_indexOf
+    vtbl[].vtbl.indexOf = cQLayout_vtable_callback_indexOf
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = miqt_exec_callback_cQLayout_count
+    vtbl[].vtbl.count = cQLayout_vtable_callback_count
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = miqt_exec_callback_cQLayout_isEmpty
+    vtbl[].vtbl.isEmpty = cQLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = miqt_exec_callback_cQLayout_controlTypes
+    vtbl[].vtbl.controlTypes = cQLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = miqt_exec_callback_cQLayout_layout
+    vtbl[].vtbl.layout = cQLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLayout_childEvent
+    vtbl[].vtbl.childEvent = cQLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQLayout_event
+    vtbl[].vtbl.event = cQLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLayout_eventFilter
+    vtbl[].vtbl.eventFilter = cQLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLayout_timerEvent
+    vtbl[].vtbl.timerEvent = cQLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLayout_customEvent
+    vtbl[].vtbl.customEvent = cQLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLayout_connectNotify
+    vtbl[].vtbl.connectNotify = cQLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLayout_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = cQLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLayout_sizeHint
+    vtbl[].vtbl.sizeHint = cQLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLayout_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLayout_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQLayout_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = cQLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = miqt_exec_callback_cQLayout_widget
+    vtbl[].vtbl.widget = cQLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = miqt_exec_callback_cQLayout_spacerItem
-  gen_qlayout_types.QLayout(h: fcQLayout_new(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.spacerItem = cQLayout_vtable_callback_spacerItem
+  gen_qlayout_types.QLayout(h: fcQLayout_new(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
 proc create*(T: type gen_qlayout_types.QLayout,
     vtbl: ref QLayoutVTable = nil): gen_qlayout_types.QLayout =
   let vtbl = if vtbl == nil: new QLayoutVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLayoutVTable, _: ptr cQLayout) {.cdecl.} =
-    let vtbl = cast[ref QLayoutVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QLayoutVTable](fcQLayout_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQLayout_metaObject
+    vtbl[].vtbl.metaObject = cQLayout_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQLayout_metacast
+    vtbl[].vtbl.metacast = cQLayout_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQLayout_metacall
+    vtbl[].vtbl.metacall = cQLayout_vtable_callback_metacall
   if not isNil(vtbl[].invalidate):
-    vtbl[].vtbl.invalidate = miqt_exec_callback_cQLayout_invalidate
+    vtbl[].vtbl.invalidate = cQLayout_vtable_callback_invalidate
   if not isNil(vtbl[].geometry):
-    vtbl[].vtbl.geometry = miqt_exec_callback_cQLayout_geometry
+    vtbl[].vtbl.geometry = cQLayout_vtable_callback_geometry
   if not isNil(vtbl[].addItem):
-    vtbl[].vtbl.addItem = miqt_exec_callback_cQLayout_addItem
+    vtbl[].vtbl.addItem = cQLayout_vtable_callback_addItem
   if not isNil(vtbl[].expandingDirections):
-    vtbl[].vtbl.expandingDirections = miqt_exec_callback_cQLayout_expandingDirections
+    vtbl[].vtbl.expandingDirections = cQLayout_vtable_callback_expandingDirections
   if not isNil(vtbl[].minimumSize):
-    vtbl[].vtbl.minimumSize = miqt_exec_callback_cQLayout_minimumSize
+    vtbl[].vtbl.minimumSize = cQLayout_vtable_callback_minimumSize
   if not isNil(vtbl[].maximumSize):
-    vtbl[].vtbl.maximumSize = miqt_exec_callback_cQLayout_maximumSize
+    vtbl[].vtbl.maximumSize = cQLayout_vtable_callback_maximumSize
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQLayout_setGeometry
+    vtbl[].vtbl.setGeometry = cQLayout_vtable_callback_setGeometry
   if not isNil(vtbl[].itemAt):
-    vtbl[].vtbl.itemAt = miqt_exec_callback_cQLayout_itemAt
+    vtbl[].vtbl.itemAt = cQLayout_vtable_callback_itemAt
   if not isNil(vtbl[].takeAt):
-    vtbl[].vtbl.takeAt = miqt_exec_callback_cQLayout_takeAt
+    vtbl[].vtbl.takeAt = cQLayout_vtable_callback_takeAt
   if not isNil(vtbl[].indexOf):
-    vtbl[].vtbl.indexOf = miqt_exec_callback_cQLayout_indexOf
+    vtbl[].vtbl.indexOf = cQLayout_vtable_callback_indexOf
   if not isNil(vtbl[].count):
-    vtbl[].vtbl.count = miqt_exec_callback_cQLayout_count
+    vtbl[].vtbl.count = cQLayout_vtable_callback_count
   if not isNil(vtbl[].isEmpty):
-    vtbl[].vtbl.isEmpty = miqt_exec_callback_cQLayout_isEmpty
+    vtbl[].vtbl.isEmpty = cQLayout_vtable_callback_isEmpty
   if not isNil(vtbl[].controlTypes):
-    vtbl[].vtbl.controlTypes = miqt_exec_callback_cQLayout_controlTypes
+    vtbl[].vtbl.controlTypes = cQLayout_vtable_callback_controlTypes
   if not isNil(vtbl[].layout):
-    vtbl[].vtbl.layout = miqt_exec_callback_cQLayout_layout
+    vtbl[].vtbl.layout = cQLayout_vtable_callback_layout
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQLayout_childEvent
+    vtbl[].vtbl.childEvent = cQLayout_vtable_callback_childEvent
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQLayout_event
+    vtbl[].vtbl.event = cQLayout_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQLayout_eventFilter
+    vtbl[].vtbl.eventFilter = cQLayout_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQLayout_timerEvent
+    vtbl[].vtbl.timerEvent = cQLayout_vtable_callback_timerEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQLayout_customEvent
+    vtbl[].vtbl.customEvent = cQLayout_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQLayout_connectNotify
+    vtbl[].vtbl.connectNotify = cQLayout_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQLayout_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = cQLayout_vtable_callback_disconnectNotify
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQLayout_sizeHint
+    vtbl[].vtbl.sizeHint = cQLayout_vtable_callback_sizeHint
   if not isNil(vtbl[].hasHeightForWidth):
-    vtbl[].vtbl.hasHeightForWidth = miqt_exec_callback_cQLayout_hasHeightForWidth
+    vtbl[].vtbl.hasHeightForWidth = cQLayout_vtable_callback_hasHeightForWidth
   if not isNil(vtbl[].heightForWidth):
-    vtbl[].vtbl.heightForWidth = miqt_exec_callback_cQLayout_heightForWidth
+    vtbl[].vtbl.heightForWidth = cQLayout_vtable_callback_heightForWidth
   if not isNil(vtbl[].minimumHeightForWidth):
-    vtbl[].vtbl.minimumHeightForWidth = miqt_exec_callback_cQLayout_minimumHeightForWidth
+    vtbl[].vtbl.minimumHeightForWidth = cQLayout_vtable_callback_minimumHeightForWidth
   if not isNil(vtbl[].widget):
-    vtbl[].vtbl.widget = miqt_exec_callback_cQLayout_widget
+    vtbl[].vtbl.widget = cQLayout_vtable_callback_widget
   if not isNil(vtbl[].spacerItem):
-    vtbl[].vtbl.spacerItem = miqt_exec_callback_cQLayout_spacerItem
-  gen_qlayout_types.QLayout(h: fcQLayout_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.spacerItem = cQLayout_vtable_callback_spacerItem
+  gen_qlayout_types.QLayout(h: fcQLayout_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
+const cQLayout_mvtbl = cQLayoutVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQLayout()[])](self.fcQLayout_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQLayout_method_callback_metaObject,
+  metacast: cQLayout_method_callback_metacast,
+  metacall: cQLayout_method_callback_metacall,
+  invalidate: cQLayout_method_callback_invalidate,
+  geometry: cQLayout_method_callback_geometry,
+  addItem: cQLayout_method_callback_addItem,
+  expandingDirections: cQLayout_method_callback_expandingDirections,
+  minimumSize: cQLayout_method_callback_minimumSize,
+  maximumSize: cQLayout_method_callback_maximumSize,
+  setGeometry: cQLayout_method_callback_setGeometry,
+  itemAt: cQLayout_method_callback_itemAt,
+  takeAt: cQLayout_method_callback_takeAt,
+  indexOf: cQLayout_method_callback_indexOf,
+  count: cQLayout_method_callback_count,
+  isEmpty: cQLayout_method_callback_isEmpty,
+  controlTypes: cQLayout_method_callback_controlTypes,
+  layout: cQLayout_method_callback_layout,
+  childEvent: cQLayout_method_callback_childEvent,
+  event: cQLayout_method_callback_event,
+  eventFilter: cQLayout_method_callback_eventFilter,
+  timerEvent: cQLayout_method_callback_timerEvent,
+  customEvent: cQLayout_method_callback_customEvent,
+  connectNotify: cQLayout_method_callback_connectNotify,
+  disconnectNotify: cQLayout_method_callback_disconnectNotify,
+  sizeHint: cQLayout_method_callback_sizeHint,
+  hasHeightForWidth: cQLayout_method_callback_hasHeightForWidth,
+  heightForWidth: cQLayout_method_callback_heightForWidth,
+  minimumHeightForWidth: cQLayout_method_callback_minimumHeightForWidth,
+  widget: cQLayout_method_callback_widget,
+  spacerItem: cQLayout_method_callback_spacerItem,
+)
 proc create*(T: type gen_qlayout_types.QLayout,
     parent: gen_qwidget_types.QWidget,
-    vtbl: VirtualQLayout) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLayoutVTable, _: ptr cQLayout) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQLayout_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQLayout_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQLayout_metacall
-  vtbl[].vtbl.invalidate = miqt_exec_method_cQLayout_invalidate
-  vtbl[].vtbl.geometry = miqt_exec_method_cQLayout_geometry
-  vtbl[].vtbl.addItem = miqt_exec_method_cQLayout_addItem
-  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQLayout_expandingDirections
-  vtbl[].vtbl.minimumSize = miqt_exec_method_cQLayout_minimumSize
-  vtbl[].vtbl.maximumSize = miqt_exec_method_cQLayout_maximumSize
-  vtbl[].vtbl.setGeometry = miqt_exec_method_cQLayout_setGeometry
-  vtbl[].vtbl.itemAt = miqt_exec_method_cQLayout_itemAt
-  vtbl[].vtbl.takeAt = miqt_exec_method_cQLayout_takeAt
-  vtbl[].vtbl.indexOf = miqt_exec_method_cQLayout_indexOf
-  vtbl[].vtbl.count = miqt_exec_method_cQLayout_count
-  vtbl[].vtbl.isEmpty = miqt_exec_method_cQLayout_isEmpty
-  vtbl[].vtbl.controlTypes = miqt_exec_method_cQLayout_controlTypes
-  vtbl[].vtbl.layout = miqt_exec_method_cQLayout_layout
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQLayout_childEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQLayout_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLayout_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLayout_timerEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQLayout_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLayout_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLayout_disconnectNotify
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLayout_sizeHint
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLayout_hasHeightForWidth
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLayout_heightForWidth
-  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQLayout_minimumHeightForWidth
-  vtbl[].vtbl.widget = miqt_exec_method_cQLayout_widget
-  vtbl[].vtbl.spacerItem = miqt_exec_method_cQLayout_spacerItem
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQLayout_new(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQLayout) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQLayout_new(addr(cQLayout_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qlayout_types.QLayout,
-    vtbl: VirtualQLayout) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQLayoutVTable, _: ptr cQLayout) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQLayout()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQLayout, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQLayout_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQLayout_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQLayout_metacall
-  vtbl[].vtbl.invalidate = miqt_exec_method_cQLayout_invalidate
-  vtbl[].vtbl.geometry = miqt_exec_method_cQLayout_geometry
-  vtbl[].vtbl.addItem = miqt_exec_method_cQLayout_addItem
-  vtbl[].vtbl.expandingDirections = miqt_exec_method_cQLayout_expandingDirections
-  vtbl[].vtbl.minimumSize = miqt_exec_method_cQLayout_minimumSize
-  vtbl[].vtbl.maximumSize = miqt_exec_method_cQLayout_maximumSize
-  vtbl[].vtbl.setGeometry = miqt_exec_method_cQLayout_setGeometry
-  vtbl[].vtbl.itemAt = miqt_exec_method_cQLayout_itemAt
-  vtbl[].vtbl.takeAt = miqt_exec_method_cQLayout_takeAt
-  vtbl[].vtbl.indexOf = miqt_exec_method_cQLayout_indexOf
-  vtbl[].vtbl.count = miqt_exec_method_cQLayout_count
-  vtbl[].vtbl.isEmpty = miqt_exec_method_cQLayout_isEmpty
-  vtbl[].vtbl.controlTypes = miqt_exec_method_cQLayout_controlTypes
-  vtbl[].vtbl.layout = miqt_exec_method_cQLayout_layout
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQLayout_childEvent
-  vtbl[].vtbl.event = miqt_exec_method_cQLayout_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQLayout_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQLayout_timerEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQLayout_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQLayout_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQLayout_disconnectNotify
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQLayout_sizeHint
-  vtbl[].vtbl.hasHeightForWidth = miqt_exec_method_cQLayout_hasHeightForWidth
-  vtbl[].vtbl.heightForWidth = miqt_exec_method_cQLayout_heightForWidth
-  vtbl[].vtbl.minimumHeightForWidth = miqt_exec_method_cQLayout_minimumHeightForWidth
-  vtbl[].vtbl.widget = miqt_exec_method_cQLayout_widget
-  vtbl[].vtbl.spacerItem = miqt_exec_method_cQLayout_spacerItem
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQLayout_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQLayout) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQLayout_new2(addr(cQLayout_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qlayout_types.QLayout): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQLayout_staticMetaObject())

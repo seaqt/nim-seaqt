@@ -68,23 +68,23 @@ type cQTextOptionTab*{.exportc: "QTextOption__Tab", incompleteStruct.} = object
 
 proc fcQTextOption_operatorAssign(self: pointer, o: pointer): void {.importc: "QTextOption_operatorAssign".}
 proc fcQTextOption_setAlignment(self: pointer, alignment: cint): void {.importc: "QTextOption_setAlignment".}
-proc fcQTextOption_alignment(self: pointer, ): cint {.importc: "QTextOption_alignment".}
+proc fcQTextOption_alignment(self: pointer): cint {.importc: "QTextOption_alignment".}
 proc fcQTextOption_setTextDirection(self: pointer, aDirection: cint): void {.importc: "QTextOption_setTextDirection".}
-proc fcQTextOption_textDirection(self: pointer, ): cint {.importc: "QTextOption_textDirection".}
+proc fcQTextOption_textDirection(self: pointer): cint {.importc: "QTextOption_textDirection".}
 proc fcQTextOption_setWrapMode(self: pointer, wrap: cint): void {.importc: "QTextOption_setWrapMode".}
-proc fcQTextOption_wrapMode(self: pointer, ): cint {.importc: "QTextOption_wrapMode".}
+proc fcQTextOption_wrapMode(self: pointer): cint {.importc: "QTextOption_wrapMode".}
 proc fcQTextOption_setFlags(self: pointer, flags: cint): void {.importc: "QTextOption_setFlags".}
-proc fcQTextOption_flags(self: pointer, ): cint {.importc: "QTextOption_flags".}
+proc fcQTextOption_flags(self: pointer): cint {.importc: "QTextOption_flags".}
 proc fcQTextOption_setTabStop(self: pointer, tabStop: float64): void {.importc: "QTextOption_setTabStop".}
-proc fcQTextOption_tabStop(self: pointer, ): float64 {.importc: "QTextOption_tabStop".}
+proc fcQTextOption_tabStop(self: pointer): float64 {.importc: "QTextOption_tabStop".}
 proc fcQTextOption_setTabStopDistance(self: pointer, tabStopDistance: float64): void {.importc: "QTextOption_setTabStopDistance".}
-proc fcQTextOption_tabStopDistance(self: pointer, ): float64 {.importc: "QTextOption_tabStopDistance".}
+proc fcQTextOption_tabStopDistance(self: pointer): float64 {.importc: "QTextOption_tabStopDistance".}
 proc fcQTextOption_setTabArray(self: pointer, tabStops: struct_miqt_array): void {.importc: "QTextOption_setTabArray".}
-proc fcQTextOption_tabArray(self: pointer, ): struct_miqt_array {.importc: "QTextOption_tabArray".}
+proc fcQTextOption_tabArray(self: pointer): struct_miqt_array {.importc: "QTextOption_tabArray".}
 proc fcQTextOption_setTabs(self: pointer, tabStops: struct_miqt_array): void {.importc: "QTextOption_setTabs".}
-proc fcQTextOption_tabs(self: pointer, ): struct_miqt_array {.importc: "QTextOption_tabs".}
+proc fcQTextOption_tabs(self: pointer): struct_miqt_array {.importc: "QTextOption_tabs".}
 proc fcQTextOption_setUseDesignMetrics(self: pointer, b: bool): void {.importc: "QTextOption_setUseDesignMetrics".}
-proc fcQTextOption_useDesignMetrics(self: pointer, ): bool {.importc: "QTextOption_useDesignMetrics".}
+proc fcQTextOption_useDesignMetrics(self: pointer): bool {.importc: "QTextOption_useDesignMetrics".}
 proc fcQTextOption_new(): ptr cQTextOption {.importc: "QTextOption_new".}
 proc fcQTextOption_new2(alignment: cint): ptr cQTextOption {.importc: "QTextOption_new2".}
 proc fcQTextOption_new3(o: pointer): ptr cQTextOption {.importc: "QTextOption_new3".}
@@ -101,37 +101,37 @@ proc operatorAssign*(self: gen_qtextoption_types.QTextOption, o: gen_qtextoption
 proc setAlignment*(self: gen_qtextoption_types.QTextOption, alignment: cint): void =
   fcQTextOption_setAlignment(self.h, cint(alignment))
 
-proc alignment*(self: gen_qtextoption_types.QTextOption, ): cint =
+proc alignment*(self: gen_qtextoption_types.QTextOption): cint =
   cint(fcQTextOption_alignment(self.h))
 
 proc setTextDirection*(self: gen_qtextoption_types.QTextOption, aDirection: cint): void =
   fcQTextOption_setTextDirection(self.h, cint(aDirection))
 
-proc textDirection*(self: gen_qtextoption_types.QTextOption, ): cint =
+proc textDirection*(self: gen_qtextoption_types.QTextOption): cint =
   cint(fcQTextOption_textDirection(self.h))
 
 proc setWrapMode*(self: gen_qtextoption_types.QTextOption, wrap: cint): void =
   fcQTextOption_setWrapMode(self.h, cint(wrap))
 
-proc wrapMode*(self: gen_qtextoption_types.QTextOption, ): cint =
+proc wrapMode*(self: gen_qtextoption_types.QTextOption): cint =
   cint(fcQTextOption_wrapMode(self.h))
 
 proc setFlags*(self: gen_qtextoption_types.QTextOption, flags: cint): void =
   fcQTextOption_setFlags(self.h, cint(flags))
 
-proc flags*(self: gen_qtextoption_types.QTextOption, ): cint =
+proc flags*(self: gen_qtextoption_types.QTextOption): cint =
   cint(fcQTextOption_flags(self.h))
 
 proc setTabStop*(self: gen_qtextoption_types.QTextOption, tabStop: float64): void =
   fcQTextOption_setTabStop(self.h, tabStop)
 
-proc tabStop*(self: gen_qtextoption_types.QTextOption, ): float64 =
+proc tabStop*(self: gen_qtextoption_types.QTextOption): float64 =
   fcQTextOption_tabStop(self.h)
 
 proc setTabStopDistance*(self: gen_qtextoption_types.QTextOption, tabStopDistance: float64): void =
   fcQTextOption_setTabStopDistance(self.h, tabStopDistance)
 
-proc tabStopDistance*(self: gen_qtextoption_types.QTextOption, ): float64 =
+proc tabStopDistance*(self: gen_qtextoption_types.QTextOption): float64 =
   fcQTextOption_tabStopDistance(self.h)
 
 proc setTabArray*(self: gen_qtextoption_types.QTextOption, tabStops: seq[float64]): void =
@@ -141,7 +141,7 @@ proc setTabArray*(self: gen_qtextoption_types.QTextOption, tabStops: seq[float64
 
   fcQTextOption_setTabArray(self.h, struct_miqt_array(len: csize_t(len(tabStops)), data: if len(tabStops) == 0: nil else: addr(tabStops_CArray[0])))
 
-proc tabArray*(self: gen_qtextoption_types.QTextOption, ): seq[float64] =
+proc tabArray*(self: gen_qtextoption_types.QTextOption): seq[float64] =
   var v_ma = fcQTextOption_tabArray(self.h)
   var vx_ret = newSeq[float64](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[float64]](v_ma.data)
@@ -157,7 +157,7 @@ proc setTabs*(self: gen_qtextoption_types.QTextOption, tabStops: seq[gen_qtextop
 
   fcQTextOption_setTabs(self.h, struct_miqt_array(len: csize_t(len(tabStops)), data: if len(tabStops) == 0: nil else: addr(tabStops_CArray[0])))
 
-proc tabs*(self: gen_qtextoption_types.QTextOption, ): seq[gen_qtextoption_types.QTextOptionTab] =
+proc tabs*(self: gen_qtextoption_types.QTextOption): seq[gen_qtextoption_types.QTextOptionTab] =
   var v_ma = fcQTextOption_tabs(self.h)
   var vx_ret = newSeq[gen_qtextoption_types.QTextOptionTab](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -169,7 +169,7 @@ proc tabs*(self: gen_qtextoption_types.QTextOption, ): seq[gen_qtextoption_types
 proc setUseDesignMetrics*(self: gen_qtextoption_types.QTextOption, b: bool): void =
   fcQTextOption_setUseDesignMetrics(self.h, b)
 
-proc useDesignMetrics*(self: gen_qtextoption_types.QTextOption, ): bool =
+proc useDesignMetrics*(self: gen_qtextoption_types.QTextOption): bool =
   fcQTextOption_useDesignMetrics(self.h)
 
 proc create*(T: type gen_qtextoption_types.QTextOption): gen_qtextoption_types.QTextOption =

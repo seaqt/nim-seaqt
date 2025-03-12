@@ -6,15 +6,6 @@
 #include <QVector4D>
 #include <qvector4d.h>
 #include "gen_qvector4d.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVector4D* QVector4D_new() {
 	return new QVector4D();
 }

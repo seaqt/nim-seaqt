@@ -44,18 +44,18 @@ type cQAudioDeviceInfo*{.exportc: "QAudioDeviceInfo", incompleteStruct.} = objec
 proc fcQAudioDeviceInfo_operatorAssign(self: pointer, other: pointer): void {.importc: "QAudioDeviceInfo_operatorAssign".}
 proc fcQAudioDeviceInfo_operatorEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorEqual".}
 proc fcQAudioDeviceInfo_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QAudioDeviceInfo_operatorNotEqual".}
-proc fcQAudioDeviceInfo_isNull(self: pointer, ): bool {.importc: "QAudioDeviceInfo_isNull".}
-proc fcQAudioDeviceInfo_deviceName(self: pointer, ): struct_miqt_string {.importc: "QAudioDeviceInfo_deviceName".}
+proc fcQAudioDeviceInfo_isNull(self: pointer): bool {.importc: "QAudioDeviceInfo_isNull".}
+proc fcQAudioDeviceInfo_deviceName(self: pointer): struct_miqt_string {.importc: "QAudioDeviceInfo_deviceName".}
 proc fcQAudioDeviceInfo_isFormatSupported(self: pointer, format: pointer): bool {.importc: "QAudioDeviceInfo_isFormatSupported".}
-proc fcQAudioDeviceInfo_preferredFormat(self: pointer, ): pointer {.importc: "QAudioDeviceInfo_preferredFormat".}
+proc fcQAudioDeviceInfo_preferredFormat(self: pointer): pointer {.importc: "QAudioDeviceInfo_preferredFormat".}
 proc fcQAudioDeviceInfo_nearestFormat(self: pointer, format: pointer): pointer {.importc: "QAudioDeviceInfo_nearestFormat".}
-proc fcQAudioDeviceInfo_supportedCodecs(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedCodecs".}
-proc fcQAudioDeviceInfo_supportedSampleRates(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleRates".}
-proc fcQAudioDeviceInfo_supportedChannelCounts(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedChannelCounts".}
-proc fcQAudioDeviceInfo_supportedSampleSizes(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleSizes".}
-proc fcQAudioDeviceInfo_supportedByteOrders(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedByteOrders".}
-proc fcQAudioDeviceInfo_supportedSampleTypes(self: pointer, ): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleTypes".}
-proc fcQAudioDeviceInfo_realm(self: pointer, ): struct_miqt_string {.importc: "QAudioDeviceInfo_realm".}
+proc fcQAudioDeviceInfo_supportedCodecs(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedCodecs".}
+proc fcQAudioDeviceInfo_supportedSampleRates(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleRates".}
+proc fcQAudioDeviceInfo_supportedChannelCounts(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedChannelCounts".}
+proc fcQAudioDeviceInfo_supportedSampleSizes(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleSizes".}
+proc fcQAudioDeviceInfo_supportedByteOrders(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedByteOrders".}
+proc fcQAudioDeviceInfo_supportedSampleTypes(self: pointer): struct_miqt_array {.importc: "QAudioDeviceInfo_supportedSampleTypes".}
+proc fcQAudioDeviceInfo_realm(self: pointer): struct_miqt_string {.importc: "QAudioDeviceInfo_realm".}
 proc fcQAudioDeviceInfo_defaultInputDevice(): pointer {.importc: "QAudioDeviceInfo_defaultInputDevice".}
 proc fcQAudioDeviceInfo_defaultOutputDevice(): pointer {.importc: "QAudioDeviceInfo_defaultOutputDevice".}
 proc fcQAudioDeviceInfo_availableDevices(mode: cint): struct_miqt_array {.importc: "QAudioDeviceInfo_availableDevices".}
@@ -71,10 +71,10 @@ proc operatorEqual*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: ge
 proc operatorNotEqual*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, other: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): bool =
   fcQAudioDeviceInfo_operatorNotEqual(self.h, other.h)
 
-proc isNull*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): bool =
+proc isNull*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): bool =
   fcQAudioDeviceInfo_isNull(self.h)
 
-proc deviceName*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): string =
+proc deviceName*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): string =
   let v_ms = fcQAudioDeviceInfo_deviceName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -83,13 +83,13 @@ proc deviceName*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): string =
 proc isFormatSupported*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, format: gen_qaudioformat_types.QAudioFormat): bool =
   fcQAudioDeviceInfo_isFormatSupported(self.h, format.h)
 
-proc preferredFormat*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): gen_qaudioformat_types.QAudioFormat =
+proc preferredFormat*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudioformat_types.QAudioFormat =
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioDeviceInfo_preferredFormat(self.h), owned: true)
 
 proc nearestFormat*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, format: gen_qaudioformat_types.QAudioFormat): gen_qaudioformat_types.QAudioFormat =
   gen_qaudioformat_types.QAudioFormat(h: fcQAudioDeviceInfo_nearestFormat(self.h, format.h), owned: true)
 
-proc supportedCodecs*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[string] =
+proc supportedCodecs*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[string] =
   var v_ma = fcQAudioDeviceInfo_supportedCodecs(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -101,7 +101,7 @@ proc supportedCodecs*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[
   c_free(v_ma.data)
   vx_ret
 
-proc supportedSampleRates*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
+proc supportedSampleRates*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[cint] =
   var v_ma = fcQAudioDeviceInfo_supportedSampleRates(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -110,7 +110,7 @@ proc supportedSampleRates*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   c_free(v_ma.data)
   vx_ret
 
-proc supportedChannelCounts*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
+proc supportedChannelCounts*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[cint] =
   var v_ma = fcQAudioDeviceInfo_supportedChannelCounts(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -119,7 +119,7 @@ proc supportedChannelCounts*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, 
   c_free(v_ma.data)
   vx_ret
 
-proc supportedSampleSizes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
+proc supportedSampleSizes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[cint] =
   var v_ma = fcQAudioDeviceInfo_supportedSampleSizes(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -128,7 +128,7 @@ proc supportedSampleSizes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   c_free(v_ma.data)
   vx_ret
 
-proc supportedByteOrders*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
+proc supportedByteOrders*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[cint] =
   var v_ma = fcQAudioDeviceInfo_supportedByteOrders(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -137,7 +137,7 @@ proc supportedByteOrders*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): 
   c_free(v_ma.data)
   vx_ret
 
-proc supportedSampleTypes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): seq[cint] =
+proc supportedSampleTypes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): seq[cint] =
   var v_ma = fcQAudioDeviceInfo_supportedSampleTypes(self.h)
   var vx_ret = newSeq[cint](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[cint]](v_ma.data)
@@ -146,16 +146,16 @@ proc supportedSampleTypes*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ):
   c_free(v_ma.data)
   vx_ret
 
-proc realm*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): string =
+proc realm*(self: gen_qaudiodeviceinfo_types.QAudioDeviceInfo): string =
   let v_ms = fcQAudioDeviceInfo_realm(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc defaultInputDevice*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
+proc defaultInputDevice*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
   gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_defaultInputDevice(), owned: true)
 
-proc defaultOutputDevice*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, ): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
+proc defaultOutputDevice*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo): gen_qaudiodeviceinfo_types.QAudioDeviceInfo =
   gen_qaudiodeviceinfo_types.QAudioDeviceInfo(h: fcQAudioDeviceInfo_defaultOutputDevice(), owned: true)
 
 proc availableDevices*(_: type gen_qaudiodeviceinfo_types.QAudioDeviceInfo, mode: cint): seq[gen_qaudiodeviceinfo_types.QAudioDeviceInfo] =

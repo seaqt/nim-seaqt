@@ -2,15 +2,6 @@
 #include <QPointF>
 #include <qpoint.h>
 #include "gen_qpoint.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPoint* QPoint_new() {
 	return new QPoint();
 }

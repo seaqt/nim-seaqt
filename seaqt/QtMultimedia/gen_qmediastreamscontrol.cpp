@@ -9,15 +9,6 @@
 #include <QVariant>
 #include <qmediastreamscontrol.h>
 #include "gen_qmediastreamscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaStreamsControl_virtbase(QMediaStreamsControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -153,6 +144,7 @@ struct miqt_string QMediaStreamsControl_trUtf83(const char* s, const char* c, in
 }
 
 const QMetaObject* QMediaStreamsControl_staticMetaObject() { return &QMediaStreamsControl::staticMetaObject; }
+
 void QMediaStreamsControl_delete(QMediaStreamsControl* self) {
 	delete self;
 }

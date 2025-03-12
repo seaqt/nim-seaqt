@@ -30,6 +30,7 @@ typedef struct QVideoEncoderSettings QVideoEncoderSettings;
 
 QAudioEncoderSettings* QAudioEncoderSettings_new();
 QAudioEncoderSettings* QAudioEncoderSettings_new2(QAudioEncoderSettings* other);
+
 void QAudioEncoderSettings_operatorAssign(QAudioEncoderSettings* self, QAudioEncoderSettings* other);
 bool QAudioEncoderSettings_operatorEqual(const QAudioEncoderSettings* self, QAudioEncoderSettings* other);
 bool QAudioEncoderSettings_operatorNotEqual(const QAudioEncoderSettings* self, QAudioEncoderSettings* other);
@@ -50,10 +51,12 @@ QVariant* QAudioEncoderSettings_encodingOption(const QAudioEncoderSettings* self
 struct miqt_map /* of struct miqt_string to QVariant* */  QAudioEncoderSettings_encodingOptions(const QAudioEncoderSettings* self);
 void QAudioEncoderSettings_setEncodingOption(QAudioEncoderSettings* self, struct miqt_string option, QVariant* value);
 void QAudioEncoderSettings_setEncodingOptions(QAudioEncoderSettings* self, struct miqt_map /* of struct miqt_string to QVariant* */  options);
+
 void QAudioEncoderSettings_delete(QAudioEncoderSettings* self);
 
 QVideoEncoderSettings* QVideoEncoderSettings_new();
 QVideoEncoderSettings* QVideoEncoderSettings_new2(QVideoEncoderSettings* other);
+
 void QVideoEncoderSettings_operatorAssign(QVideoEncoderSettings* self, QVideoEncoderSettings* other);
 bool QVideoEncoderSettings_operatorEqual(const QVideoEncoderSettings* self, QVideoEncoderSettings* other);
 bool QVideoEncoderSettings_operatorNotEqual(const QVideoEncoderSettings* self, QVideoEncoderSettings* other);
@@ -75,10 +78,12 @@ QVariant* QVideoEncoderSettings_encodingOption(const QVideoEncoderSettings* self
 struct miqt_map /* of struct miqt_string to QVariant* */  QVideoEncoderSettings_encodingOptions(const QVideoEncoderSettings* self);
 void QVideoEncoderSettings_setEncodingOption(QVideoEncoderSettings* self, struct miqt_string option, QVariant* value);
 void QVideoEncoderSettings_setEncodingOptions(QVideoEncoderSettings* self, struct miqt_map /* of struct miqt_string to QVariant* */  options);
+
 void QVideoEncoderSettings_delete(QVideoEncoderSettings* self);
 
 QImageEncoderSettings* QImageEncoderSettings_new();
 QImageEncoderSettings* QImageEncoderSettings_new2(QImageEncoderSettings* other);
+
 void QImageEncoderSettings_operatorAssign(QImageEncoderSettings* self, QImageEncoderSettings* other);
 bool QImageEncoderSettings_operatorEqual(const QImageEncoderSettings* self, QImageEncoderSettings* other);
 bool QImageEncoderSettings_operatorNotEqual(const QImageEncoderSettings* self, QImageEncoderSettings* other);
@@ -94,6 +99,7 @@ QVariant* QImageEncoderSettings_encodingOption(const QImageEncoderSettings* self
 struct miqt_map /* of struct miqt_string to QVariant* */  QImageEncoderSettings_encodingOptions(const QImageEncoderSettings* self);
 void QImageEncoderSettings_setEncodingOption(QImageEncoderSettings* self, struct miqt_string option, QVariant* value);
 void QImageEncoderSettings_setEncodingOptions(QImageEncoderSettings* self, struct miqt_map /* of struct miqt_string to QVariant* */  options);
+
 void QImageEncoderSettings_delete(QImageEncoderSettings* self);
 
 #ifdef __cplusplus

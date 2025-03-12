@@ -140,7 +140,7 @@ proc enableTestMode*(_: type gen_qstandardpaths_types.QStandardPaths, testMode: 
 proc setTestModeEnabled*(_: type gen_qstandardpaths_types.QStandardPaths, testMode: bool): void =
   fcQStandardPaths_setTestModeEnabled(testMode)
 
-proc isTestModeEnabled*(_: type gen_qstandardpaths_types.QStandardPaths, ): bool =
+proc isTestModeEnabled*(_: type gen_qstandardpaths_types.QStandardPaths): bool =
   fcQStandardPaths_isTestModeEnabled()
 
 proc locate*(_: type gen_qstandardpaths_types.QStandardPaths, typeVal: cint, fileName: string, options: cint): string =

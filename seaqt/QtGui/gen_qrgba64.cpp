@@ -1,15 +1,6 @@
 #include <QRgba64>
 #include <qrgba64.h>
 #include "gen_qrgba64.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRgba64* QRgba64_new() {
 	return new QRgba64();
 }

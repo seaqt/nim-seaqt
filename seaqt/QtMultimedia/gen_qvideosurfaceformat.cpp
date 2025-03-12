@@ -6,15 +6,6 @@
 #include <QVideoSurfaceFormat>
 #include <qvideosurfaceformat.h>
 #include "gen_qvideosurfaceformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVideoSurfaceFormat* QVideoSurfaceFormat_new() {
 	return new QVideoSurfaceFormat();
 }

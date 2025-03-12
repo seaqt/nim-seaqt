@@ -9,15 +9,6 @@
 #include <QVariant>
 #include <qcameraexposurecontrol.h>
 #include "gen_qcameraexposurecontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraExposureControl_virtbase(QCameraExposureControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -165,6 +156,7 @@ struct miqt_string QCameraExposureControl_trUtf83(const char* s, const char* c, 
 }
 
 const QMetaObject* QCameraExposureControl_staticMetaObject() { return &QCameraExposureControl::staticMetaObject; }
+
 void QCameraExposureControl_delete(QCameraExposureControl* self) {
 	delete self;
 }

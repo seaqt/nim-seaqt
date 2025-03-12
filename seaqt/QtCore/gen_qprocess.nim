@@ -92,71 +92,71 @@ proc fcQProcessEnvironment_operatorAssign(self: pointer, other: pointer): void {
 proc fcQProcessEnvironment_swap(self: pointer, other: pointer): void {.importc: "QProcessEnvironment_swap".}
 proc fcQProcessEnvironment_operatorEqual(self: pointer, other: pointer): bool {.importc: "QProcessEnvironment_operatorEqual".}
 proc fcQProcessEnvironment_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QProcessEnvironment_operatorNotEqual".}
-proc fcQProcessEnvironment_isEmpty(self: pointer, ): bool {.importc: "QProcessEnvironment_isEmpty".}
-proc fcQProcessEnvironment_clear(self: pointer, ): void {.importc: "QProcessEnvironment_clear".}
+proc fcQProcessEnvironment_isEmpty(self: pointer): bool {.importc: "QProcessEnvironment_isEmpty".}
+proc fcQProcessEnvironment_clear(self: pointer): void {.importc: "QProcessEnvironment_clear".}
 proc fcQProcessEnvironment_contains(self: pointer, name: struct_miqt_string): bool {.importc: "QProcessEnvironment_contains".}
 proc fcQProcessEnvironment_insert(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QProcessEnvironment_insert".}
 proc fcQProcessEnvironment_remove(self: pointer, name: struct_miqt_string): void {.importc: "QProcessEnvironment_remove".}
 proc fcQProcessEnvironment_value(self: pointer, name: struct_miqt_string): struct_miqt_string {.importc: "QProcessEnvironment_value".}
-proc fcQProcessEnvironment_toStringList(self: pointer, ): struct_miqt_array {.importc: "QProcessEnvironment_toStringList".}
-proc fcQProcessEnvironment_keys(self: pointer, ): struct_miqt_array {.importc: "QProcessEnvironment_keys".}
+proc fcQProcessEnvironment_toStringList(self: pointer): struct_miqt_array {.importc: "QProcessEnvironment_toStringList".}
+proc fcQProcessEnvironment_keys(self: pointer): struct_miqt_array {.importc: "QProcessEnvironment_keys".}
 proc fcQProcessEnvironment_insertWithQProcessEnvironment(self: pointer, e: pointer): void {.importc: "QProcessEnvironment_insertWithQProcessEnvironment".}
 proc fcQProcessEnvironment_systemEnvironment(): pointer {.importc: "QProcessEnvironment_systemEnvironment".}
 proc fcQProcessEnvironment_value2(self: pointer, name: struct_miqt_string, defaultValue: struct_miqt_string): struct_miqt_string {.importc: "QProcessEnvironment_value2".}
 proc fcQProcessEnvironment_new(): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new".}
 proc fcQProcessEnvironment_new2(other: pointer): ptr cQProcessEnvironment {.importc: "QProcessEnvironment_new2".}
-proc fcQProcess_metaObject(self: pointer, ): pointer {.importc: "QProcess_metaObject".}
+proc fcQProcess_metaObject(self: pointer): pointer {.importc: "QProcess_metaObject".}
 proc fcQProcess_metacast(self: pointer, param1: cstring): pointer {.importc: "QProcess_metacast".}
 proc fcQProcess_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProcess_metacall".}
 proc fcQProcess_tr(s: cstring): struct_miqt_string {.importc: "QProcess_tr".}
 proc fcQProcess_trUtf8(s: cstring): struct_miqt_string {.importc: "QProcess_trUtf8".}
 proc fcQProcess_start(self: pointer, program: struct_miqt_string, arguments: struct_miqt_array): void {.importc: "QProcess_start".}
 proc fcQProcess_startWithCommand(self: pointer, command: struct_miqt_string): void {.importc: "QProcess_startWithCommand".}
-proc fcQProcess_start2(self: pointer, ): void {.importc: "QProcess_start2".}
-proc fcQProcess_startDetached(self: pointer, ): bool {.importc: "QProcess_startDetached".}
+proc fcQProcess_start2(self: pointer): void {.importc: "QProcess_start2".}
+proc fcQProcess_startDetached(self: pointer): bool {.importc: "QProcess_startDetached".}
 proc fcQProcess_open(self: pointer, mode: cint): bool {.importc: "QProcess_open".}
-proc fcQProcess_program(self: pointer, ): struct_miqt_string {.importc: "QProcess_program".}
+proc fcQProcess_program(self: pointer): struct_miqt_string {.importc: "QProcess_program".}
 proc fcQProcess_setProgram(self: pointer, program: struct_miqt_string): void {.importc: "QProcess_setProgram".}
-proc fcQProcess_arguments(self: pointer, ): struct_miqt_array {.importc: "QProcess_arguments".}
+proc fcQProcess_arguments(self: pointer): struct_miqt_array {.importc: "QProcess_arguments".}
 proc fcQProcess_setArguments(self: pointer, arguments: struct_miqt_array): void {.importc: "QProcess_setArguments".}
-proc fcQProcess_readChannelMode(self: pointer, ): cint {.importc: "QProcess_readChannelMode".}
+proc fcQProcess_readChannelMode(self: pointer): cint {.importc: "QProcess_readChannelMode".}
 proc fcQProcess_setReadChannelMode(self: pointer, mode: cint): void {.importc: "QProcess_setReadChannelMode".}
-proc fcQProcess_processChannelMode(self: pointer, ): cint {.importc: "QProcess_processChannelMode".}
+proc fcQProcess_processChannelMode(self: pointer): cint {.importc: "QProcess_processChannelMode".}
 proc fcQProcess_setProcessChannelMode(self: pointer, mode: cint): void {.importc: "QProcess_setProcessChannelMode".}
-proc fcQProcess_inputChannelMode(self: pointer, ): cint {.importc: "QProcess_inputChannelMode".}
+proc fcQProcess_inputChannelMode(self: pointer): cint {.importc: "QProcess_inputChannelMode".}
 proc fcQProcess_setInputChannelMode(self: pointer, mode: cint): void {.importc: "QProcess_setInputChannelMode".}
-proc fcQProcess_readChannel(self: pointer, ): cint {.importc: "QProcess_readChannel".}
+proc fcQProcess_readChannel(self: pointer): cint {.importc: "QProcess_readChannel".}
 proc fcQProcess_setReadChannel(self: pointer, channel: cint): void {.importc: "QProcess_setReadChannel".}
 proc fcQProcess_closeReadChannel(self: pointer, channel: cint): void {.importc: "QProcess_closeReadChannel".}
-proc fcQProcess_closeWriteChannel(self: pointer, ): void {.importc: "QProcess_closeWriteChannel".}
+proc fcQProcess_closeWriteChannel(self: pointer): void {.importc: "QProcess_closeWriteChannel".}
 proc fcQProcess_setStandardInputFile(self: pointer, fileName: struct_miqt_string): void {.importc: "QProcess_setStandardInputFile".}
 proc fcQProcess_setStandardOutputFile(self: pointer, fileName: struct_miqt_string): void {.importc: "QProcess_setStandardOutputFile".}
 proc fcQProcess_setStandardErrorFile(self: pointer, fileName: struct_miqt_string): void {.importc: "QProcess_setStandardErrorFile".}
 proc fcQProcess_setStandardOutputProcess(self: pointer, destination: pointer): void {.importc: "QProcess_setStandardOutputProcess".}
-proc fcQProcess_workingDirectory(self: pointer, ): struct_miqt_string {.importc: "QProcess_workingDirectory".}
+proc fcQProcess_workingDirectory(self: pointer): struct_miqt_string {.importc: "QProcess_workingDirectory".}
 proc fcQProcess_setWorkingDirectory(self: pointer, dir: struct_miqt_string): void {.importc: "QProcess_setWorkingDirectory".}
 proc fcQProcess_setEnvironment(self: pointer, environment: struct_miqt_array): void {.importc: "QProcess_setEnvironment".}
-proc fcQProcess_environment(self: pointer, ): struct_miqt_array {.importc: "QProcess_environment".}
+proc fcQProcess_environment(self: pointer): struct_miqt_array {.importc: "QProcess_environment".}
 proc fcQProcess_setProcessEnvironment(self: pointer, environment: pointer): void {.importc: "QProcess_setProcessEnvironment".}
-proc fcQProcess_processEnvironment(self: pointer, ): pointer {.importc: "QProcess_processEnvironment".}
-proc fcQProcess_error(self: pointer, ): cint {.importc: "QProcess_error".}
-proc fcQProcess_state(self: pointer, ): cint {.importc: "QProcess_state".}
-proc fcQProcess_pid(self: pointer, ): clonglong {.importc: "QProcess_pid".}
-proc fcQProcess_processId(self: pointer, ): clonglong {.importc: "QProcess_processId".}
-proc fcQProcess_waitForStarted(self: pointer, ): bool {.importc: "QProcess_waitForStarted".}
+proc fcQProcess_processEnvironment(self: pointer): pointer {.importc: "QProcess_processEnvironment".}
+proc fcQProcess_error(self: pointer): cint {.importc: "QProcess_error".}
+proc fcQProcess_state(self: pointer): cint {.importc: "QProcess_state".}
+proc fcQProcess_pid(self: pointer): clonglong {.importc: "QProcess_pid".}
+proc fcQProcess_processId(self: pointer): clonglong {.importc: "QProcess_processId".}
+proc fcQProcess_waitForStarted(self: pointer): bool {.importc: "QProcess_waitForStarted".}
 proc fcQProcess_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForReadyRead".}
 proc fcQProcess_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForBytesWritten".}
-proc fcQProcess_waitForFinished(self: pointer, ): bool {.importc: "QProcess_waitForFinished".}
-proc fcQProcess_readAllStandardOutput(self: pointer, ): struct_miqt_string {.importc: "QProcess_readAllStandardOutput".}
-proc fcQProcess_readAllStandardError(self: pointer, ): struct_miqt_string {.importc: "QProcess_readAllStandardError".}
-proc fcQProcess_exitCode(self: pointer, ): cint {.importc: "QProcess_exitCode".}
-proc fcQProcess_exitStatus(self: pointer, ): cint {.importc: "QProcess_exitStatus".}
-proc fcQProcess_bytesAvailable(self: pointer, ): clonglong {.importc: "QProcess_bytesAvailable".}
-proc fcQProcess_bytesToWrite(self: pointer, ): clonglong {.importc: "QProcess_bytesToWrite".}
-proc fcQProcess_isSequential(self: pointer, ): bool {.importc: "QProcess_isSequential".}
-proc fcQProcess_canReadLine(self: pointer, ): bool {.importc: "QProcess_canReadLine".}
-proc fcQProcess_close(self: pointer, ): void {.importc: "QProcess_close".}
-proc fcQProcess_atEnd(self: pointer, ): bool {.importc: "QProcess_atEnd".}
+proc fcQProcess_waitForFinished(self: pointer): bool {.importc: "QProcess_waitForFinished".}
+proc fcQProcess_readAllStandardOutput(self: pointer): struct_miqt_string {.importc: "QProcess_readAllStandardOutput".}
+proc fcQProcess_readAllStandardError(self: pointer): struct_miqt_string {.importc: "QProcess_readAllStandardError".}
+proc fcQProcess_exitCode(self: pointer): cint {.importc: "QProcess_exitCode".}
+proc fcQProcess_exitStatus(self: pointer): cint {.importc: "QProcess_exitStatus".}
+proc fcQProcess_bytesAvailable(self: pointer): clonglong {.importc: "QProcess_bytesAvailable".}
+proc fcQProcess_bytesToWrite(self: pointer): clonglong {.importc: "QProcess_bytesToWrite".}
+proc fcQProcess_isSequential(self: pointer): bool {.importc: "QProcess_isSequential".}
+proc fcQProcess_canReadLine(self: pointer): bool {.importc: "QProcess_canReadLine".}
+proc fcQProcess_close(self: pointer): void {.importc: "QProcess_close".}
+proc fcQProcess_atEnd(self: pointer): bool {.importc: "QProcess_atEnd".}
 proc fcQProcess_execute(program: struct_miqt_string, arguments: struct_miqt_array): cint {.importc: "QProcess_execute".}
 proc fcQProcess_executeWithCommand(command: struct_miqt_string): cint {.importc: "QProcess_executeWithCommand".}
 proc fcQProcess_startDetached2(program: struct_miqt_string, arguments: struct_miqt_array, workingDirectory: struct_miqt_string): bool {.importc: "QProcess_startDetached2".}
@@ -164,8 +164,8 @@ proc fcQProcess_startDetached3(program: struct_miqt_string, arguments: struct_mi
 proc fcQProcess_startDetachedWithCommand(command: struct_miqt_string): bool {.importc: "QProcess_startDetachedWithCommand".}
 proc fcQProcess_systemEnvironment(): struct_miqt_array {.importc: "QProcess_systemEnvironment".}
 proc fcQProcess_nullDevice(): struct_miqt_string {.importc: "QProcess_nullDevice".}
-proc fcQProcess_terminate(self: pointer, ): void {.importc: "QProcess_terminate".}
-proc fcQProcess_kill(self: pointer, ): void {.importc: "QProcess_kill".}
+proc fcQProcess_terminate(self: pointer): void {.importc: "QProcess_terminate".}
+proc fcQProcess_kill(self: pointer): void {.importc: "QProcess_kill".}
 proc fcQProcess_finished(self: pointer, exitCode: cint): void {.importc: "QProcess_finished".}
 proc fcQProcess_connect_finished(self: pointer, slot: int, callback: proc (slot: int, exitCode: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QProcess_connect_finished".}
 proc fcQProcess_finished2(self: pointer, exitCode: cint, exitStatus: cint): void {.importc: "QProcess_finished2".}
@@ -187,54 +187,56 @@ proc fcQProcess_setStandardErrorFile2(self: pointer, fileName: struct_miqt_strin
 proc fcQProcess_waitForStarted1(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForStarted1".}
 proc fcQProcess_waitForFinished1(self: pointer, msecs: cint): bool {.importc: "QProcess_waitForFinished1".}
 proc fcQProcess_startDetached4(program: struct_miqt_string, arguments: struct_miqt_array, workingDirectory: struct_miqt_string, pid: ptr clonglong): bool {.importc: "QProcess_startDetached4".}
+proc fcQProcess_vtbl(self: pointer): pointer {.importc: "QProcess_vtbl".}
+proc fcQProcess_vdata(self: pointer): pointer {.importc: "QProcess_vdata".}
 type cQProcessVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQProcessVTable, self: ptr cQProcess) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  open*: proc(vtbl, self: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
-  waitForReadyRead*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
-  waitForBytesWritten*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
-  bytesAvailable*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  bytesToWrite*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  isSequential*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  canReadLine*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  close*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  atEnd*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  setupChildProcess*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  readData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  writeData*: proc(vtbl, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  pos*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  size*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  seek*: proc(vtbl, self: pointer, pos: clonglong): bool {.cdecl, raises: [], gcsafe.}
-  reset*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  readLineData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQProcess_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QProcess_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  open*: proc(self: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForReadyRead*: proc(self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForBytesWritten*: proc(self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  bytesAvailable*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  bytesToWrite*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  isSequential*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  canReadLine*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  close*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  atEnd*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  setupChildProcess*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  readData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  writeData*: proc(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  pos*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  size*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  seek*: proc(self: pointer, pos: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  reset*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  readLineData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQProcess_virtualbase_metaObject(self: pointer): pointer {.importc: "QProcess_virtualbase_metaObject".}
 proc fcQProcess_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QProcess_virtualbase_metacast".}
 proc fcQProcess_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QProcess_virtualbase_metacall".}
 proc fcQProcess_virtualbase_open(self: pointer, mode: cint): bool {.importc: "QProcess_virtualbase_open".}
 proc fcQProcess_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QProcess_virtualbase_waitForReadyRead".}
 proc fcQProcess_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QProcess_virtualbase_waitForBytesWritten".}
-proc fcQProcess_virtualbase_bytesAvailable(self: pointer, ): clonglong {.importc: "QProcess_virtualbase_bytesAvailable".}
-proc fcQProcess_virtualbase_bytesToWrite(self: pointer, ): clonglong {.importc: "QProcess_virtualbase_bytesToWrite".}
-proc fcQProcess_virtualbase_isSequential(self: pointer, ): bool {.importc: "QProcess_virtualbase_isSequential".}
-proc fcQProcess_virtualbase_canReadLine(self: pointer, ): bool {.importc: "QProcess_virtualbase_canReadLine".}
-proc fcQProcess_virtualbase_close(self: pointer, ): void {.importc: "QProcess_virtualbase_close".}
-proc fcQProcess_virtualbase_atEnd(self: pointer, ): bool {.importc: "QProcess_virtualbase_atEnd".}
-proc fcQProcess_virtualbase_setupChildProcess(self: pointer, ): void {.importc: "QProcess_virtualbase_setupChildProcess".}
+proc fcQProcess_virtualbase_bytesAvailable(self: pointer): clonglong {.importc: "QProcess_virtualbase_bytesAvailable".}
+proc fcQProcess_virtualbase_bytesToWrite(self: pointer): clonglong {.importc: "QProcess_virtualbase_bytesToWrite".}
+proc fcQProcess_virtualbase_isSequential(self: pointer): bool {.importc: "QProcess_virtualbase_isSequential".}
+proc fcQProcess_virtualbase_canReadLine(self: pointer): bool {.importc: "QProcess_virtualbase_canReadLine".}
+proc fcQProcess_virtualbase_close(self: pointer): void {.importc: "QProcess_virtualbase_close".}
+proc fcQProcess_virtualbase_atEnd(self: pointer): bool {.importc: "QProcess_virtualbase_atEnd".}
+proc fcQProcess_virtualbase_setupChildProcess(self: pointer): void {.importc: "QProcess_virtualbase_setupChildProcess".}
 proc fcQProcess_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QProcess_virtualbase_readData".}
 proc fcQProcess_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QProcess_virtualbase_writeData".}
-proc fcQProcess_virtualbase_pos(self: pointer, ): clonglong {.importc: "QProcess_virtualbase_pos".}
-proc fcQProcess_virtualbase_size(self: pointer, ): clonglong {.importc: "QProcess_virtualbase_size".}
+proc fcQProcess_virtualbase_pos(self: pointer): clonglong {.importc: "QProcess_virtualbase_pos".}
+proc fcQProcess_virtualbase_size(self: pointer): clonglong {.importc: "QProcess_virtualbase_size".}
 proc fcQProcess_virtualbase_seek(self: pointer, pos: clonglong): bool {.importc: "QProcess_virtualbase_seek".}
-proc fcQProcess_virtualbase_reset(self: pointer, ): bool {.importc: "QProcess_virtualbase_reset".}
+proc fcQProcess_virtualbase_reset(self: pointer): bool {.importc: "QProcess_virtualbase_reset".}
 proc fcQProcess_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QProcess_virtualbase_readLineData".}
 proc fcQProcess_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QProcess_virtualbase_event".}
 proc fcQProcess_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QProcess_virtualbase_eventFilter".}
@@ -246,12 +248,12 @@ proc fcQProcess_virtualbase_disconnectNotify(self: pointer, signal: pointer): vo
 proc fcQProcess_protectedbase_setProcessState(self: pointer, state: cint): void {.importc: "QProcess_protectedbase_setProcessState".}
 proc fcQProcess_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QProcess_protectedbase_setOpenMode".}
 proc fcQProcess_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QProcess_protectedbase_setErrorString".}
-proc fcQProcess_protectedbase_sender(self: pointer, ): pointer {.importc: "QProcess_protectedbase_sender".}
-proc fcQProcess_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QProcess_protectedbase_senderSignalIndex".}
+proc fcQProcess_protectedbase_sender(self: pointer): pointer {.importc: "QProcess_protectedbase_sender".}
+proc fcQProcess_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QProcess_protectedbase_senderSignalIndex".}
 proc fcQProcess_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QProcess_protectedbase_receivers".}
 proc fcQProcess_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QProcess_protectedbase_isSignalConnected".}
-proc fcQProcess_new(vtbl: pointer, ): ptr cQProcess {.importc: "QProcess_new".}
-proc fcQProcess_new2(vtbl: pointer, parent: pointer): ptr cQProcess {.importc: "QProcess_new2".}
+proc fcQProcess_new(vtbl, vdata: pointer): ptr cQProcess {.importc: "QProcess_new".}
+proc fcQProcess_new2(vtbl, vdata: pointer, parent: pointer): ptr cQProcess {.importc: "QProcess_new2".}
 proc fcQProcess_staticMetaObject(): pointer {.importc: "QProcess_staticMetaObject".}
 
 proc operatorAssign*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qprocess_types.QProcessEnvironment): void =
@@ -266,10 +268,10 @@ proc operatorEqual*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qpr
 proc operatorNotEqual*(self: gen_qprocess_types.QProcessEnvironment, other: gen_qprocess_types.QProcessEnvironment): bool =
   fcQProcessEnvironment_operatorNotEqual(self.h, other.h)
 
-proc isEmpty*(self: gen_qprocess_types.QProcessEnvironment, ): bool =
+proc isEmpty*(self: gen_qprocess_types.QProcessEnvironment): bool =
   fcQProcessEnvironment_isEmpty(self.h)
 
-proc clear*(self: gen_qprocess_types.QProcessEnvironment, ): void =
+proc clear*(self: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcessEnvironment_clear(self.h)
 
 proc contains*(self: gen_qprocess_types.QProcessEnvironment, name: string): bool =
@@ -287,7 +289,7 @@ proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string): string 
   c_free(v_ms.data)
   vx_ret
 
-proc toStringList*(self: gen_qprocess_types.QProcessEnvironment, ): seq[string] =
+proc toStringList*(self: gen_qprocess_types.QProcessEnvironment): seq[string] =
   var v_ma = fcQProcessEnvironment_toStringList(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -299,7 +301,7 @@ proc toStringList*(self: gen_qprocess_types.QProcessEnvironment, ): seq[string] 
   c_free(v_ma.data)
   vx_ret
 
-proc keys*(self: gen_qprocess_types.QProcessEnvironment, ): seq[string] =
+proc keys*(self: gen_qprocess_types.QProcessEnvironment): seq[string] =
   var v_ma = fcQProcessEnvironment_keys(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -314,7 +316,7 @@ proc keys*(self: gen_qprocess_types.QProcessEnvironment, ): seq[string] =
 proc insert*(self: gen_qprocess_types.QProcessEnvironment, e: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcessEnvironment_insertWithQProcessEnvironment(self.h, e.h)
 
-proc systemEnvironment*(_: type gen_qprocess_types.QProcessEnvironment, ): gen_qprocess_types.QProcessEnvironment =
+proc systemEnvironment*(_: type gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
   gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_systemEnvironment(), owned: true)
 
 proc value*(self: gen_qprocess_types.QProcessEnvironment, name: string, defaultValue: string): string =
@@ -330,7 +332,7 @@ proc create*(T: type gen_qprocess_types.QProcessEnvironment,
     other: gen_qprocess_types.QProcessEnvironment): gen_qprocess_types.QProcessEnvironment =
   gen_qprocess_types.QProcessEnvironment(h: fcQProcessEnvironment_new2(other.h), owned: true)
 
-proc metaObject*(self: gen_qprocess_types.QProcess, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qprocess_types.QProcess, param1: cstring): pointer =
@@ -361,16 +363,16 @@ proc start*(self: gen_qprocess_types.QProcess, program: string, arguments: seq[s
 proc start*(self: gen_qprocess_types.QProcess, command: string): void =
   fcQProcess_startWithCommand(self.h, struct_miqt_string(data: command, len: csize_t(len(command))))
 
-proc start*(self: gen_qprocess_types.QProcess, ): void =
+proc start*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_start2(self.h)
 
-proc startDetached*(self: gen_qprocess_types.QProcess, ): bool =
+proc startDetached*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_startDetached(self.h)
 
 proc open*(self: gen_qprocess_types.QProcess, mode: cint): bool =
   fcQProcess_open(self.h, cint(mode))
 
-proc program*(self: gen_qprocess_types.QProcess, ): string =
+proc program*(self: gen_qprocess_types.QProcess): string =
   let v_ms = fcQProcess_program(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -379,7 +381,7 @@ proc program*(self: gen_qprocess_types.QProcess, ): string =
 proc setProgram*(self: gen_qprocess_types.QProcess, program: string): void =
   fcQProcess_setProgram(self.h, struct_miqt_string(data: program, len: csize_t(len(program))))
 
-proc arguments*(self: gen_qprocess_types.QProcess, ): seq[string] =
+proc arguments*(self: gen_qprocess_types.QProcess): seq[string] =
   var v_ma = fcQProcess_arguments(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -398,25 +400,25 @@ proc setArguments*(self: gen_qprocess_types.QProcess, arguments: seq[string]): v
 
   fcQProcess_setArguments(self.h, struct_miqt_array(len: csize_t(len(arguments)), data: if len(arguments) == 0: nil else: addr(arguments_CArray[0])))
 
-proc readChannelMode*(self: gen_qprocess_types.QProcess, ): cint =
+proc readChannelMode*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_readChannelMode(self.h))
 
 proc setReadChannelMode*(self: gen_qprocess_types.QProcess, mode: cint): void =
   fcQProcess_setReadChannelMode(self.h, cint(mode))
 
-proc processChannelMode*(self: gen_qprocess_types.QProcess, ): cint =
+proc processChannelMode*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_processChannelMode(self.h))
 
 proc setProcessChannelMode*(self: gen_qprocess_types.QProcess, mode: cint): void =
   fcQProcess_setProcessChannelMode(self.h, cint(mode))
 
-proc inputChannelMode*(self: gen_qprocess_types.QProcess, ): cint =
+proc inputChannelMode*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_inputChannelMode(self.h))
 
 proc setInputChannelMode*(self: gen_qprocess_types.QProcess, mode: cint): void =
   fcQProcess_setInputChannelMode(self.h, cint(mode))
 
-proc readChannel*(self: gen_qprocess_types.QProcess, ): cint =
+proc readChannel*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_readChannel(self.h))
 
 proc setReadChannel*(self: gen_qprocess_types.QProcess, channel: cint): void =
@@ -425,7 +427,7 @@ proc setReadChannel*(self: gen_qprocess_types.QProcess, channel: cint): void =
 proc closeReadChannel*(self: gen_qprocess_types.QProcess, channel: cint): void =
   fcQProcess_closeReadChannel(self.h, cint(channel))
 
-proc closeWriteChannel*(self: gen_qprocess_types.QProcess, ): void =
+proc closeWriteChannel*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_closeWriteChannel(self.h)
 
 proc setStandardInputFile*(self: gen_qprocess_types.QProcess, fileName: string): void =
@@ -440,7 +442,7 @@ proc setStandardErrorFile*(self: gen_qprocess_types.QProcess, fileName: string):
 proc setStandardOutputProcess*(self: gen_qprocess_types.QProcess, destination: gen_qprocess_types.QProcess): void =
   fcQProcess_setStandardOutputProcess(self.h, destination.h)
 
-proc workingDirectory*(self: gen_qprocess_types.QProcess, ): string =
+proc workingDirectory*(self: gen_qprocess_types.QProcess): string =
   let v_ms = fcQProcess_workingDirectory(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -456,7 +458,7 @@ proc setEnvironment*(self: gen_qprocess_types.QProcess, environment: seq[string]
 
   fcQProcess_setEnvironment(self.h, struct_miqt_array(len: csize_t(len(environment)), data: if len(environment) == 0: nil else: addr(environment_CArray[0])))
 
-proc environment*(self: gen_qprocess_types.QProcess, ): seq[string] =
+proc environment*(self: gen_qprocess_types.QProcess): seq[string] =
   var v_ma = fcQProcess_environment(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -471,22 +473,22 @@ proc environment*(self: gen_qprocess_types.QProcess, ): seq[string] =
 proc setProcessEnvironment*(self: gen_qprocess_types.QProcess, environment: gen_qprocess_types.QProcessEnvironment): void =
   fcQProcess_setProcessEnvironment(self.h, environment.h)
 
-proc processEnvironment*(self: gen_qprocess_types.QProcess, ): gen_qprocess_types.QProcessEnvironment =
+proc processEnvironment*(self: gen_qprocess_types.QProcess): gen_qprocess_types.QProcessEnvironment =
   gen_qprocess_types.QProcessEnvironment(h: fcQProcess_processEnvironment(self.h), owned: true)
 
-proc error*(self: gen_qprocess_types.QProcess, ): cint =
+proc error*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_error(self.h))
 
-proc state*(self: gen_qprocess_types.QProcess, ): cint =
+proc state*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_state(self.h))
 
-proc pid*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc pid*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_pid(self.h)
 
-proc processId*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc processId*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_processId(self.h)
 
-proc waitForStarted*(self: gen_qprocess_types.QProcess, ): bool =
+proc waitForStarted*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_waitForStarted(self.h)
 
 proc waitForReadyRead*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
@@ -495,43 +497,43 @@ proc waitForReadyRead*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
 proc waitForBytesWritten*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
   fcQProcess_waitForBytesWritten(self.h, msecs)
 
-proc waitForFinished*(self: gen_qprocess_types.QProcess, ): bool =
+proc waitForFinished*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_waitForFinished(self.h)
 
-proc readAllStandardOutput*(self: gen_qprocess_types.QProcess, ): seq[byte] =
+proc readAllStandardOutput*(self: gen_qprocess_types.QProcess): seq[byte] =
   var v_bytearray = fcQProcess_readAllStandardOutput(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc readAllStandardError*(self: gen_qprocess_types.QProcess, ): seq[byte] =
+proc readAllStandardError*(self: gen_qprocess_types.QProcess): seq[byte] =
   var v_bytearray = fcQProcess_readAllStandardError(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc exitCode*(self: gen_qprocess_types.QProcess, ): cint =
+proc exitCode*(self: gen_qprocess_types.QProcess): cint =
   fcQProcess_exitCode(self.h)
 
-proc exitStatus*(self: gen_qprocess_types.QProcess, ): cint =
+proc exitStatus*(self: gen_qprocess_types.QProcess): cint =
   cint(fcQProcess_exitStatus(self.h))
 
-proc bytesAvailable*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc bytesAvailable*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_bytesAvailable(self.h)
 
-proc bytesToWrite*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc bytesToWrite*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_bytesToWrite(self.h)
 
-proc isSequential*(self: gen_qprocess_types.QProcess, ): bool =
+proc isSequential*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_isSequential(self.h)
 
-proc canReadLine*(self: gen_qprocess_types.QProcess, ): bool =
+proc canReadLine*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_canReadLine(self.h)
 
-proc close*(self: gen_qprocess_types.QProcess, ): void =
+proc close*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_close(self.h)
 
-proc atEnd*(self: gen_qprocess_types.QProcess, ): bool =
+proc atEnd*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_atEnd(self.h)
 
 proc execute*(_: type gen_qprocess_types.QProcess, program: string, arguments: seq[string]): cint =
@@ -561,7 +563,7 @@ proc startDetached*(_: type gen_qprocess_types.QProcess, program: string, argume
 proc startDetached*(_: type gen_qprocess_types.QProcess, command: string): bool =
   fcQProcess_startDetachedWithCommand(struct_miqt_string(data: command, len: csize_t(len(command))))
 
-proc systemEnvironment*(_: type gen_qprocess_types.QProcess, ): seq[string] =
+proc systemEnvironment*(_: type gen_qprocess_types.QProcess): seq[string] =
   var v_ma = fcQProcess_systemEnvironment()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -573,29 +575,29 @@ proc systemEnvironment*(_: type gen_qprocess_types.QProcess, ): seq[string] =
   c_free(v_ma.data)
   vx_ret
 
-proc nullDevice*(_: type gen_qprocess_types.QProcess, ): string =
+proc nullDevice*(_: type gen_qprocess_types.QProcess): string =
   let v_ms = fcQProcess_nullDevice()
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc terminate*(self: gen_qprocess_types.QProcess, ): void =
+proc terminate*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_terminate(self.h)
 
-proc kill*(self: gen_qprocess_types.QProcess, ): void =
+proc kill*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_kill(self.h)
 
 proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint): void =
   fcQProcess_finished(self.h, exitCode)
 
 type QProcessfinishedSlot* = proc(exitCode: cint)
-proc miqt_exec_callback_cQProcess_finished(slot: int, exitCode: cint) {.cdecl.} =
+proc cQProcess_slot_callback_finished(slot: int, exitCode: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcessfinishedSlot](cast[pointer](slot))
   let slotval1 = exitCode
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQProcess_finished_release(slot: int) {.cdecl.} =
+proc cQProcess_slot_callback_finished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QProcessfinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -603,13 +605,13 @@ proc onfinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinishedSlot) 
   var tmp = new QProcessfinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_finished, miqt_exec_callback_cQProcess_finished_release)
+  fcQProcess_connect_finished(self.h, cast[int](addr tmp[]), cQProcess_slot_callback_finished, cQProcess_slot_callback_finished_release)
 
 proc finished*(self: gen_qprocess_types.QProcess, exitCode: cint, exitStatus: cint): void =
   fcQProcess_finished2(self.h, exitCode, cint(exitStatus))
 
 type QProcessfinished2Slot* = proc(exitCode: cint, exitStatus: cint)
-proc miqt_exec_callback_cQProcess_finished2(slot: int, exitCode: cint, exitStatus: cint) {.cdecl.} =
+proc cQProcess_slot_callback_finished2(slot: int, exitCode: cint, exitStatus: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcessfinished2Slot](cast[pointer](slot))
   let slotval1 = exitCode
 
@@ -617,7 +619,7 @@ proc miqt_exec_callback_cQProcess_finished2(slot: int, exitCode: cint, exitStatu
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQProcess_finished2_release(slot: int) {.cdecl.} =
+proc cQProcess_slot_callback_finished2_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QProcessfinished2Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -625,19 +627,19 @@ proc onfinished*(self: gen_qprocess_types.QProcess, slot: QProcessfinished2Slot)
   var tmp = new QProcessfinished2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_finished2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_finished2, miqt_exec_callback_cQProcess_finished2_release)
+  fcQProcess_connect_finished2(self.h, cast[int](addr tmp[]), cQProcess_slot_callback_finished2, cQProcess_slot_callback_finished2_release)
 
 proc error*(self: gen_qprocess_types.QProcess, error: cint): void =
   fcQProcess_errorWithError(self.h, cint(error))
 
 type QProcesserrorWithErrorSlot* = proc(error: cint)
-proc miqt_exec_callback_cQProcess_errorWithError(slot: int, error: cint) {.cdecl.} =
+proc cQProcess_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcesserrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQProcess_errorWithError_release(slot: int) {.cdecl.} =
+proc cQProcess_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QProcesserrorWithErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -645,19 +647,19 @@ proc onerror*(self: gen_qprocess_types.QProcess, slot: QProcesserrorWithErrorSlo
   var tmp = new QProcesserrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_errorWithError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_errorWithError, miqt_exec_callback_cQProcess_errorWithError_release)
+  fcQProcess_connect_errorWithError(self.h, cast[int](addr tmp[]), cQProcess_slot_callback_errorWithError, cQProcess_slot_callback_errorWithError_release)
 
 proc errorOccurred*(self: gen_qprocess_types.QProcess, error: cint): void =
   fcQProcess_errorOccurred(self.h, cint(error))
 
 type QProcesserrorOccurredSlot* = proc(error: cint)
-proc miqt_exec_callback_cQProcess_errorOccurred(slot: int, error: cint) {.cdecl.} =
+proc cQProcess_slot_callback_errorOccurred(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QProcesserrorOccurredSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQProcess_errorOccurred_release(slot: int) {.cdecl.} =
+proc cQProcess_slot_callback_errorOccurred_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QProcesserrorOccurredSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -665,7 +667,7 @@ proc onerrorOccurred*(self: gen_qprocess_types.QProcess, slot: QProcesserrorOccu
   var tmp = new QProcesserrorOccurredSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQProcess_connect_errorOccurred(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQProcess_errorOccurred, miqt_exec_callback_cQProcess_errorOccurred_release)
+  fcQProcess_connect_errorOccurred(self.h, cast[int](addr tmp[]), cQProcess_slot_callback_errorOccurred, cQProcess_slot_callback_errorOccurred_release)
 
 proc tr*(_: type gen_qprocess_types.QProcess, s: cstring, c: cstring): string =
   let v_ms = fcQProcess_tr2(s, c)
@@ -782,11 +784,11 @@ type QProcessVTable* {.inheritable, pure.} = object
   customEvent*: QProcesscustomEventProc
   connectNotify*: QProcessconnectNotifyProc
   disconnectNotify*: QProcessdisconnectNotifyProc
-proc QProcessmetaObject*(self: gen_qprocess_types.QProcess, ): gen_qobjectdefs_types.QMetaObject =
+proc QProcessmetaObject*(self: gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQProcess_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -797,8 +799,8 @@ proc miqt_exec_callback_cQProcess_metaObject(vtbl: pointer, self: pointer): poin
 proc QProcessmetacast*(self: gen_qprocess_types.QProcess, param1: cstring): pointer =
   fcQProcess_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQProcess_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -807,8 +809,8 @@ proc miqt_exec_callback_cQProcess_metacast(vtbl: pointer, self: pointer, param1:
 proc QProcessmetacall*(self: gen_qprocess_types.QProcess, param1: cint, param2: cint, param3: pointer): cint =
   fcQProcess_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQProcess_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -819,8 +821,8 @@ proc miqt_exec_callback_cQProcess_metacall(vtbl: pointer, self: pointer, param1:
 proc QProcessopen*(self: gen_qprocess_types.QProcess, mode: cint): bool =
   fcQProcess_virtualbase_open(self.h, cint(mode))
 
-proc miqt_exec_callback_cQProcess_open(vtbl: pointer, self: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = cint(mode)
   var virtualReturn = vtbl[].open(self, slotval1)
@@ -829,8 +831,8 @@ proc miqt_exec_callback_cQProcess_open(vtbl: pointer, self: pointer, mode: cint)
 proc QProcesswaitForReadyRead*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
   fcQProcess_virtualbase_waitForReadyRead(self.h, msecs)
 
-proc miqt_exec_callback_cQProcess_waitForReadyRead(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
@@ -839,79 +841,79 @@ proc miqt_exec_callback_cQProcess_waitForReadyRead(vtbl: pointer, self: pointer,
 proc QProcesswaitForBytesWritten*(self: gen_qprocess_types.QProcess, msecs: cint): bool =
   fcQProcess_virtualbase_waitForBytesWritten(self.h, msecs)
 
-proc miqt_exec_callback_cQProcess_waitForBytesWritten(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
   virtualReturn
 
-proc QProcessbytesAvailable*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc QProcessbytesAvailable*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_virtualbase_bytesAvailable(self.h)
 
-proc miqt_exec_callback_cQProcess_bytesAvailable(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
 
-proc QProcessbytesToWrite*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc QProcessbytesToWrite*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_virtualbase_bytesToWrite(self.h)
 
-proc miqt_exec_callback_cQProcess_bytesToWrite(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QProcessisSequential*(self: gen_qprocess_types.QProcess, ): bool =
+proc QProcessisSequential*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_virtualbase_isSequential(self.h)
 
-proc miqt_exec_callback_cQProcess_isSequential(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
 
-proc QProcesscanReadLine*(self: gen_qprocess_types.QProcess, ): bool =
+proc QProcesscanReadLine*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_virtualbase_canReadLine(self.h)
 
-proc miqt_exec_callback_cQProcess_canReadLine(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
 
-proc QProcessclose*(self: gen_qprocess_types.QProcess, ): void =
+proc QProcessclose*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_virtualbase_close(self.h)
 
-proc miqt_exec_callback_cQProcess_close(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_close(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   vtbl[].close(self)
 
-proc QProcessatEnd*(self: gen_qprocess_types.QProcess, ): bool =
+proc QProcessatEnd*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_virtualbase_atEnd(self.h)
 
-proc miqt_exec_callback_cQProcess_atEnd(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
 
-proc QProcesssetupChildProcess*(self: gen_qprocess_types.QProcess, ): void =
+proc QProcesssetupChildProcess*(self: gen_qprocess_types.QProcess): void =
   fcQProcess_virtualbase_setupChildProcess(self.h)
 
-proc miqt_exec_callback_cQProcess_setupChildProcess(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_setupChildProcess(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   vtbl[].setupChildProcess(self)
 
 proc QProcessreadData*(self: gen_qprocess_types.QProcess, data: cstring, maxlen: clonglong): clonglong =
   fcQProcess_virtualbase_readData(self.h, data, maxlen)
 
-proc miqt_exec_callback_cQProcess_readData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = (data)
   let slotval2 = maxlen
@@ -921,28 +923,28 @@ proc miqt_exec_callback_cQProcess_readData(vtbl: pointer, self: pointer, data: c
 proc QProcesswriteData*(self: gen_qprocess_types.QProcess, data: cstring, len: clonglong): clonglong =
   fcQProcess_virtualbase_writeData(self.h, data, len)
 
-proc miqt_exec_callback_cQProcess_writeData(vtbl: pointer, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = (data)
   let slotval2 = len
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
 
-proc QProcesspos*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc QProcesspos*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_virtualbase_pos(self.h)
 
-proc miqt_exec_callback_cQProcess_pos(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
 
-proc QProcesssize*(self: gen_qprocess_types.QProcess, ): clonglong =
+proc QProcesssize*(self: gen_qprocess_types.QProcess): clonglong =
   fcQProcess_virtualbase_size(self.h)
 
-proc miqt_exec_callback_cQProcess_size(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
@@ -950,18 +952,18 @@ proc miqt_exec_callback_cQProcess_size(vtbl: pointer, self: pointer): clonglong 
 proc QProcessseek*(self: gen_qprocess_types.QProcess, pos: clonglong): bool =
   fcQProcess_virtualbase_seek(self.h, pos)
 
-proc miqt_exec_callback_cQProcess_seek(vtbl: pointer, self: pointer, pos: clonglong): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = pos
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QProcessreset*(self: gen_qprocess_types.QProcess, ): bool =
+proc QProcessreset*(self: gen_qprocess_types.QProcess): bool =
   fcQProcess_virtualbase_reset(self.h)
 
-proc miqt_exec_callback_cQProcess_reset(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_reset(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
@@ -969,8 +971,8 @@ proc miqt_exec_callback_cQProcess_reset(vtbl: pointer, self: pointer): bool {.cd
 proc QProcessreadLineData*(self: gen_qprocess_types.QProcess, data: cstring, maxlen: clonglong): clonglong =
   fcQProcess_virtualbase_readLineData(self.h, data, maxlen)
 
-proc miqt_exec_callback_cQProcess_readLineData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = (data)
   let slotval2 = maxlen
@@ -980,8 +982,8 @@ proc miqt_exec_callback_cQProcess_readLineData(vtbl: pointer, self: pointer, dat
 proc QProcessevent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QEvent): bool =
   fcQProcess_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQProcess_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -990,8 +992,8 @@ proc miqt_exec_callback_cQProcess_event(vtbl: pointer, self: pointer, event: poi
 proc QProcesseventFilter*(self: gen_qprocess_types.QProcess, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQProcess_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQProcess_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1001,8 +1003,8 @@ proc miqt_exec_callback_cQProcess_eventFilter(vtbl: pointer, self: pointer, watc
 proc QProcesstimerEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQProcess_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQProcess_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1010,8 +1012,8 @@ proc miqt_exec_callback_cQProcess_timerEvent(vtbl: pointer, self: pointer, event
 proc QProcesschildEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QChildEvent): void =
   fcQProcess_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQProcess_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1019,8 +1021,8 @@ proc miqt_exec_callback_cQProcess_childEvent(vtbl: pointer, self: pointer, event
 proc QProcesscustomEvent*(self: gen_qprocess_types.QProcess, event: gen_qcoreevent_types.QEvent): void =
   fcQProcess_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQProcess_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1028,8 +1030,8 @@ proc miqt_exec_callback_cQProcess_customEvent(vtbl: pointer, self: pointer, even
 proc QProcessconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQProcess_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQProcess_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1037,19 +1039,19 @@ proc miqt_exec_callback_cQProcess_connectNotify(vtbl: pointer, self: pointer, si
 proc QProcessdisconnectNotify*(self: gen_qprocess_types.QProcess, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQProcess_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQProcess_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QProcessVTable](vtbl)
+proc cQProcess_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QProcessVTable](fcQProcess_vdata(self))
   let self = QProcess(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQProcess* {.inheritable.} = ref object of QProcess
   vtbl*: cQProcessVTable
-method metaObject*(self: VirtualQProcess, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQProcess): gen_qobjectdefs_types.QMetaObject {.base.} =
   QProcessmetaObject(self[])
-proc miqt_exec_method_cQProcess_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQProcess_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1057,200 +1059,200 @@ proc miqt_exec_method_cQProcess_metaObject(vtbl: pointer, inst: pointer): pointe
 
 method metacast*(self: VirtualQProcess, param1: cstring): pointer {.base.} =
   QProcessmetacast(self[], param1)
-proc miqt_exec_method_cQProcess_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQProcess, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QProcessmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQProcess_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method open*(self: VirtualQProcess, mode: cint): bool {.base.} =
   QProcessopen(self[], mode)
-proc miqt_exec_method_cQProcess_open(vtbl: pointer, inst: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_open(self: pointer, mode: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = cint(mode)
-  var virtualReturn = vtbl.open(slotval1)
+  var virtualReturn = inst.open(slotval1)
   virtualReturn
 
 method waitForReadyRead*(self: VirtualQProcess, msecs: cint): bool {.base.} =
   QProcesswaitForReadyRead(self[], msecs)
-proc miqt_exec_method_cQProcess_waitForReadyRead(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = msecs
-  var virtualReturn = vtbl.waitForReadyRead(slotval1)
+  var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
 method waitForBytesWritten*(self: VirtualQProcess, msecs: cint): bool {.base.} =
   QProcesswaitForBytesWritten(self[], msecs)
-proc miqt_exec_method_cQProcess_waitForBytesWritten(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = msecs
-  var virtualReturn = vtbl.waitForBytesWritten(slotval1)
+  var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
-method bytesAvailable*(self: VirtualQProcess, ): clonglong {.base.} =
+method bytesAvailable*(self: VirtualQProcess): clonglong {.base.} =
   QProcessbytesAvailable(self[])
-proc miqt_exec_method_cQProcess_bytesAvailable(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.bytesAvailable()
+proc cQProcess_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQProcess, ): clonglong {.base.} =
+method bytesToWrite*(self: VirtualQProcess): clonglong {.base.} =
   QProcessbytesToWrite(self[])
-proc miqt_exec_method_cQProcess_bytesToWrite(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.bytesToWrite()
+proc cQProcess_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method isSequential*(self: VirtualQProcess, ): bool {.base.} =
+method isSequential*(self: VirtualQProcess): bool {.base.} =
   QProcessisSequential(self[])
-proc miqt_exec_method_cQProcess_isSequential(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.isSequential()
+proc cQProcess_method_callback_isSequential(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.isSequential()
   virtualReturn
 
-method canReadLine*(self: VirtualQProcess, ): bool {.base.} =
+method canReadLine*(self: VirtualQProcess): bool {.base.} =
   QProcesscanReadLine(self[])
-proc miqt_exec_method_cQProcess_canReadLine(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.canReadLine()
+proc cQProcess_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.canReadLine()
   virtualReturn
 
-method close*(self: VirtualQProcess, ): void {.base.} =
+method close*(self: VirtualQProcess): void {.base.} =
   QProcessclose(self[])
-proc miqt_exec_method_cQProcess_close(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  vtbl.close()
+proc cQProcess_method_callback_close(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  inst.close()
 
-method atEnd*(self: VirtualQProcess, ): bool {.base.} =
+method atEnd*(self: VirtualQProcess): bool {.base.} =
   QProcessatEnd(self[])
-proc miqt_exec_method_cQProcess_atEnd(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.atEnd()
+proc cQProcess_method_callback_atEnd(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.atEnd()
   virtualReturn
 
-method setupChildProcess*(self: VirtualQProcess, ): void {.base.} =
+method setupChildProcess*(self: VirtualQProcess): void {.base.} =
   QProcesssetupChildProcess(self[])
-proc miqt_exec_method_cQProcess_setupChildProcess(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  vtbl.setupChildProcess()
+proc cQProcess_method_callback_setupChildProcess(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  inst.setupChildProcess()
 
 method readData*(self: VirtualQProcess, data: cstring, maxlen: clonglong): clonglong {.base.} =
   QProcessreadData(self[], data, maxlen)
-proc miqt_exec_method_cQProcess_readData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
-  var virtualReturn = vtbl.readData(slotval1, slotval2)
+  var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
 method writeData*(self: VirtualQProcess, data: cstring, len: clonglong): clonglong {.base.} =
   QProcesswriteData(self[], data, len)
-proc miqt_exec_method_cQProcess_writeData(vtbl: pointer, inst: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = (data)
   let slotval2 = len
-  var virtualReturn = vtbl.writeData(slotval1, slotval2)
+  var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method pos*(self: VirtualQProcess, ): clonglong {.base.} =
+method pos*(self: VirtualQProcess): clonglong {.base.} =
   QProcesspos(self[])
-proc miqt_exec_method_cQProcess_pos(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.pos()
+proc cQProcess_method_callback_pos(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.pos()
   virtualReturn
 
-method size*(self: VirtualQProcess, ): clonglong {.base.} =
+method size*(self: VirtualQProcess): clonglong {.base.} =
   QProcesssize(self[])
-proc miqt_exec_method_cQProcess_size(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.size()
+proc cQProcess_method_callback_size(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.size()
   virtualReturn
 
 method seek*(self: VirtualQProcess, pos: clonglong): bool {.base.} =
   QProcessseek(self[], pos)
-proc miqt_exec_method_cQProcess_seek(vtbl: pointer, inst: pointer, pos: clonglong): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_seek(self: pointer, pos: clonglong): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = pos
-  var virtualReturn = vtbl.seek(slotval1)
+  var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method reset*(self: VirtualQProcess, ): bool {.base.} =
+method reset*(self: VirtualQProcess): bool {.base.} =
   QProcessreset(self[])
-proc miqt_exec_method_cQProcess_reset(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-  var virtualReturn = vtbl.reset()
+proc cQProcess_method_callback_reset(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
+  var virtualReturn = inst.reset()
   virtualReturn
 
 method readLineData*(self: VirtualQProcess, data: cstring, maxlen: clonglong): clonglong {.base.} =
   QProcessreadLineData(self[], data, maxlen)
-proc miqt_exec_method_cQProcess_readLineData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
-  var virtualReturn = vtbl.readLineData(slotval1, slotval2)
+  var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
 method event*(self: VirtualQProcess, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QProcessevent(self[], event)
-proc miqt_exec_method_cQProcess_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQProcess, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QProcesseventFilter(self[], watched, event)
-proc miqt_exec_method_cQProcess_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QProcesstimerEvent(self[], event)
-proc miqt_exec_method_cQProcess_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QProcesschildEvent(self[], event)
-proc miqt_exec_method_cQProcess_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQProcess, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QProcesscustomEvent(self[], event)
-proc miqt_exec_method_cQProcess_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QProcessconnectNotify(self[], signal)
-proc miqt_exec_method_cQProcess_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQProcess, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QProcessdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQProcess_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQProcess](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
+proc cQProcess_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQProcess](fcQProcess_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc setProcessState*(self: gen_qprocess_types.QProcess, state: cint): void =
   fcQProcess_protectedbase_setProcessState(self.h, cint(state))
@@ -1261,10 +1263,10 @@ proc setOpenMode*(self: gen_qprocess_types.QProcess, openMode: cint): void =
 proc setErrorString*(self: gen_qprocess_types.QProcess, errorString: string): void =
   fcQProcess_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
-proc sender*(self: gen_qprocess_types.QProcess, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qprocess_types.QProcess): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQProcess_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qprocess_types.QProcess, ): cint =
+proc senderSignalIndex*(self: gen_qprocess_types.QProcess): cint =
   fcQProcess_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qprocess_types.QProcess, signal: cstring): cint =
@@ -1277,205 +1279,174 @@ proc create*(T: type gen_qprocess_types.QProcess,
     vtbl: ref QProcessVTable = nil): gen_qprocess_types.QProcess =
   let vtbl = if vtbl == nil: new QProcessVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProcessVTable, _: ptr cQProcess) {.cdecl.} =
-    let vtbl = cast[ref QProcessVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QProcessVTable](fcQProcess_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQProcess_metaObject
+    vtbl[].vtbl.metaObject = cQProcess_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQProcess_metacast
+    vtbl[].vtbl.metacast = cQProcess_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQProcess_metacall
+    vtbl[].vtbl.metacall = cQProcess_vtable_callback_metacall
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQProcess_open
+    vtbl[].vtbl.open = cQProcess_vtable_callback_open
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQProcess_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQProcess_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQProcess_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQProcess_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQProcess_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQProcess_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQProcess_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQProcess_vtable_callback_bytesToWrite
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQProcess_isSequential
+    vtbl[].vtbl.isSequential = cQProcess_vtable_callback_isSequential
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQProcess_canReadLine
+    vtbl[].vtbl.canReadLine = cQProcess_vtable_callback_canReadLine
   if not isNil(vtbl[].close):
-    vtbl[].vtbl.close = miqt_exec_callback_cQProcess_close
+    vtbl[].vtbl.close = cQProcess_vtable_callback_close
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQProcess_atEnd
+    vtbl[].vtbl.atEnd = cQProcess_vtable_callback_atEnd
   if not isNil(vtbl[].setupChildProcess):
-    vtbl[].vtbl.setupChildProcess = miqt_exec_callback_cQProcess_setupChildProcess
+    vtbl[].vtbl.setupChildProcess = cQProcess_vtable_callback_setupChildProcess
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQProcess_readData
+    vtbl[].vtbl.readData = cQProcess_vtable_callback_readData
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQProcess_writeData
+    vtbl[].vtbl.writeData = cQProcess_vtable_callback_writeData
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQProcess_pos
+    vtbl[].vtbl.pos = cQProcess_vtable_callback_pos
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQProcess_size
+    vtbl[].vtbl.size = cQProcess_vtable_callback_size
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQProcess_seek
+    vtbl[].vtbl.seek = cQProcess_vtable_callback_seek
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQProcess_reset
+    vtbl[].vtbl.reset = cQProcess_vtable_callback_reset
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQProcess_readLineData
+    vtbl[].vtbl.readLineData = cQProcess_vtable_callback_readLineData
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQProcess_event
+    vtbl[].vtbl.event = cQProcess_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProcess_eventFilter
+    vtbl[].vtbl.eventFilter = cQProcess_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProcess_timerEvent
+    vtbl[].vtbl.timerEvent = cQProcess_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQProcess_childEvent
+    vtbl[].vtbl.childEvent = cQProcess_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQProcess_customEvent
+    vtbl[].vtbl.customEvent = cQProcess_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProcess_connectNotify
+    vtbl[].vtbl.connectNotify = cQProcess_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProcess_disconnectNotify
-  gen_qprocess_types.QProcess(h: fcQProcess_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQProcess_vtable_callback_disconnectNotify
+  gen_qprocess_types.QProcess(h: fcQProcess_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qprocess_types.QProcess,
     parent: gen_qobject_types.QObject,
     vtbl: ref QProcessVTable = nil): gen_qprocess_types.QProcess =
   let vtbl = if vtbl == nil: new QProcessVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProcessVTable, _: ptr cQProcess) {.cdecl.} =
-    let vtbl = cast[ref QProcessVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QProcessVTable](fcQProcess_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQProcess_metaObject
+    vtbl[].vtbl.metaObject = cQProcess_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQProcess_metacast
+    vtbl[].vtbl.metacast = cQProcess_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQProcess_metacall
+    vtbl[].vtbl.metacall = cQProcess_vtable_callback_metacall
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQProcess_open
+    vtbl[].vtbl.open = cQProcess_vtable_callback_open
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQProcess_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQProcess_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQProcess_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQProcess_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQProcess_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQProcess_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQProcess_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQProcess_vtable_callback_bytesToWrite
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQProcess_isSequential
+    vtbl[].vtbl.isSequential = cQProcess_vtable_callback_isSequential
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQProcess_canReadLine
+    vtbl[].vtbl.canReadLine = cQProcess_vtable_callback_canReadLine
   if not isNil(vtbl[].close):
-    vtbl[].vtbl.close = miqt_exec_callback_cQProcess_close
+    vtbl[].vtbl.close = cQProcess_vtable_callback_close
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQProcess_atEnd
+    vtbl[].vtbl.atEnd = cQProcess_vtable_callback_atEnd
   if not isNil(vtbl[].setupChildProcess):
-    vtbl[].vtbl.setupChildProcess = miqt_exec_callback_cQProcess_setupChildProcess
+    vtbl[].vtbl.setupChildProcess = cQProcess_vtable_callback_setupChildProcess
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQProcess_readData
+    vtbl[].vtbl.readData = cQProcess_vtable_callback_readData
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQProcess_writeData
+    vtbl[].vtbl.writeData = cQProcess_vtable_callback_writeData
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQProcess_pos
+    vtbl[].vtbl.pos = cQProcess_vtable_callback_pos
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQProcess_size
+    vtbl[].vtbl.size = cQProcess_vtable_callback_size
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQProcess_seek
+    vtbl[].vtbl.seek = cQProcess_vtable_callback_seek
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQProcess_reset
+    vtbl[].vtbl.reset = cQProcess_vtable_callback_reset
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQProcess_readLineData
+    vtbl[].vtbl.readLineData = cQProcess_vtable_callback_readLineData
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQProcess_event
+    vtbl[].vtbl.event = cQProcess_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQProcess_eventFilter
+    vtbl[].vtbl.eventFilter = cQProcess_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQProcess_timerEvent
+    vtbl[].vtbl.timerEvent = cQProcess_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQProcess_childEvent
+    vtbl[].vtbl.childEvent = cQProcess_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQProcess_customEvent
+    vtbl[].vtbl.customEvent = cQProcess_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQProcess_connectNotify
+    vtbl[].vtbl.connectNotify = cQProcess_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQProcess_disconnectNotify
-  gen_qprocess_types.QProcess(h: fcQProcess_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQProcess_vtable_callback_disconnectNotify
+  gen_qprocess_types.QProcess(h: fcQProcess_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQProcess_mvtbl = cQProcessVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQProcess()[])](self.fcQProcess_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQProcess_method_callback_metaObject,
+  metacast: cQProcess_method_callback_metacast,
+  metacall: cQProcess_method_callback_metacall,
+  open: cQProcess_method_callback_open,
+  waitForReadyRead: cQProcess_method_callback_waitForReadyRead,
+  waitForBytesWritten: cQProcess_method_callback_waitForBytesWritten,
+  bytesAvailable: cQProcess_method_callback_bytesAvailable,
+  bytesToWrite: cQProcess_method_callback_bytesToWrite,
+  isSequential: cQProcess_method_callback_isSequential,
+  canReadLine: cQProcess_method_callback_canReadLine,
+  close: cQProcess_method_callback_close,
+  atEnd: cQProcess_method_callback_atEnd,
+  setupChildProcess: cQProcess_method_callback_setupChildProcess,
+  readData: cQProcess_method_callback_readData,
+  writeData: cQProcess_method_callback_writeData,
+  pos: cQProcess_method_callback_pos,
+  size: cQProcess_method_callback_size,
+  seek: cQProcess_method_callback_seek,
+  reset: cQProcess_method_callback_reset,
+  readLineData: cQProcess_method_callback_readLineData,
+  event: cQProcess_method_callback_event,
+  eventFilter: cQProcess_method_callback_eventFilter,
+  timerEvent: cQProcess_method_callback_timerEvent,
+  childEvent: cQProcess_method_callback_childEvent,
+  customEvent: cQProcess_method_callback_customEvent,
+  connectNotify: cQProcess_method_callback_connectNotify,
+  disconnectNotify: cQProcess_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qprocess_types.QProcess,
-    vtbl: VirtualQProcess) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProcessVTable, _: ptr cQProcess) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQProcess()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQProcess_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQProcess_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQProcess_metacall
-  vtbl[].vtbl.open = miqt_exec_method_cQProcess_open
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQProcess_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQProcess_waitForBytesWritten
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQProcess_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQProcess_bytesToWrite
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQProcess_isSequential
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQProcess_canReadLine
-  vtbl[].vtbl.close = miqt_exec_method_cQProcess_close
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQProcess_atEnd
-  vtbl[].vtbl.setupChildProcess = miqt_exec_method_cQProcess_setupChildProcess
-  vtbl[].vtbl.readData = miqt_exec_method_cQProcess_readData
-  vtbl[].vtbl.writeData = miqt_exec_method_cQProcess_writeData
-  vtbl[].vtbl.pos = miqt_exec_method_cQProcess_pos
-  vtbl[].vtbl.size = miqt_exec_method_cQProcess_size
-  vtbl[].vtbl.seek = miqt_exec_method_cQProcess_seek
-  vtbl[].vtbl.reset = miqt_exec_method_cQProcess_reset
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQProcess_readLineData
-  vtbl[].vtbl.event = miqt_exec_method_cQProcess_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQProcess_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQProcess_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQProcess_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQProcess_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQProcess_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQProcess_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQProcess_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQProcess) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQProcess_new(addr(cQProcess_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qprocess_types.QProcess,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQProcess) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQProcessVTable, _: ptr cQProcess) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQProcess()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQProcess, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQProcess_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQProcess_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQProcess_metacall
-  vtbl[].vtbl.open = miqt_exec_method_cQProcess_open
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQProcess_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQProcess_waitForBytesWritten
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQProcess_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQProcess_bytesToWrite
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQProcess_isSequential
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQProcess_canReadLine
-  vtbl[].vtbl.close = miqt_exec_method_cQProcess_close
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQProcess_atEnd
-  vtbl[].vtbl.setupChildProcess = miqt_exec_method_cQProcess_setupChildProcess
-  vtbl[].vtbl.readData = miqt_exec_method_cQProcess_readData
-  vtbl[].vtbl.writeData = miqt_exec_method_cQProcess_writeData
-  vtbl[].vtbl.pos = miqt_exec_method_cQProcess_pos
-  vtbl[].vtbl.size = miqt_exec_method_cQProcess_size
-  vtbl[].vtbl.seek = miqt_exec_method_cQProcess_seek
-  vtbl[].vtbl.reset = miqt_exec_method_cQProcess_reset
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQProcess_readLineData
-  vtbl[].vtbl.event = miqt_exec_method_cQProcess_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQProcess_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQProcess_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQProcess_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQProcess_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQProcess_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQProcess_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQProcess_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQProcess) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQProcess_new2(addr(cQProcess_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qprocess_types.QProcess): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQProcess_staticMetaObject())

@@ -52,23 +52,31 @@ typedef struct QUrl QUrl;
 
 int QQmlImageProviderBase_imageType(const QQmlImageProviderBase* self);
 int QQmlImageProviderBase_flags(const QQmlImageProviderBase* self);
+
 void QQmlImageProviderBase_delete(QQmlImageProviderBase* self);
 
-struct QQmlEngine_VTable {
-	void (*destructor)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self);
-	QMetaObject* (*metaObject)(struct QQmlEngine_VTable* vtbl, const QQmlEngine* self);
-	void* (*metacast)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, const char* param1);
-	int (*metacall)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, int param1, int param2, void** param3);
-	bool (*event)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QEvent* param1);
-	bool (*eventFilter)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QTimerEvent* event);
-	void (*childEvent)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QChildEvent* event);
-	void (*customEvent)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QEvent* event);
-	void (*connectNotify)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QQmlEngine_VTable* vtbl, QQmlEngine* self, QMetaMethod* signal);
-};
-QQmlEngine* QQmlEngine_new(struct QQmlEngine_VTable* vtbl);
-QQmlEngine* QQmlEngine_new2(struct QQmlEngine_VTable* vtbl, QObject* p);
+typedef struct VirtualQQmlEngine VirtualQQmlEngine;
+typedef struct QQmlEngine_VTable{
+	void (*destructor)(VirtualQQmlEngine* self);
+	QMetaObject* (*metaObject)(const VirtualQQmlEngine* self);
+	void* (*metacast)(VirtualQQmlEngine* self, const char* param1);
+	int (*metacall)(VirtualQQmlEngine* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQQmlEngine* self, QEvent* param1);
+	bool (*eventFilter)(VirtualQQmlEngine* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQQmlEngine* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQQmlEngine* self, QChildEvent* event);
+	void (*customEvent)(VirtualQQmlEngine* self, QEvent* event);
+	void (*connectNotify)(VirtualQQmlEngine* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQQmlEngine* self, QMetaMethod* signal);
+}QQmlEngine_VTable;
+
+const QQmlEngine_VTable* QQmlEngine_vtbl(const VirtualQQmlEngine* self);
+void* QQmlEngine_vdata(const VirtualQQmlEngine* self);
+void QQmlEngine_setVdata(VirtualQQmlEngine* self, void* vdata);
+
+VirtualQQmlEngine* QQmlEngine_new(const QQmlEngine_VTable* vtbl, void* vdata);
+VirtualQQmlEngine* QQmlEngine_new2(const QQmlEngine_VTable* vtbl, void* vdata, QObject* p);
+
 void QQmlEngine_virtbase(QQmlEngine* src, QJSEngine** outptr_QJSEngine);
 QMetaObject* QQmlEngine_metaObject(const QQmlEngine* self);
 void* QQmlEngine_metacast(QQmlEngine* self, const char* param1);
@@ -110,29 +118,32 @@ void QQmlEngine_setObjectOwnership(QObject* param1, int param2);
 int QQmlEngine_objectOwnership(QObject* param1);
 bool QQmlEngine_event(QQmlEngine* self, QEvent* param1);
 void QQmlEngine_quit(QQmlEngine* self);
-void QQmlEngine_connect_quit(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QQmlEngine_connect_quit(VirtualQQmlEngine* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QQmlEngine_exit(QQmlEngine* self, int retCode);
-void QQmlEngine_connect_exit(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QQmlEngine_connect_exit(VirtualQQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QQmlEngine_warnings(QQmlEngine* self, struct miqt_array /* of QQmlError* */  warnings);
-void QQmlEngine_connect_warnings(QQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QQmlError* */ ), void (*release)(intptr_t));
+void QQmlEngine_connect_warnings(VirtualQQmlEngine* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_array /* of QQmlError* */ ), void (*release)(intptr_t));
 struct miqt_string QQmlEngine_tr2(const char* s, const char* c);
 struct miqt_string QQmlEngine_tr3(const char* s, const char* c, int n);
 struct miqt_string QQmlEngine_trUtf82(const char* s, const char* c);
 struct miqt_string QQmlEngine_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QQmlEngine_virtualbase_metaObject(const void* self);
-void* QQmlEngine_virtualbase_metacast(void* self, const char* param1);
-int QQmlEngine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QQmlEngine_virtualbase_event(void* self, QEvent* param1);
-bool QQmlEngine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QQmlEngine_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QQmlEngine_virtualbase_childEvent(void* self, QChildEvent* event);
-void QQmlEngine_virtualbase_customEvent(void* self, QEvent* event);
-void QQmlEngine_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QQmlEngine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QQmlEngine_protectedbase_sender(const void* self);
-int QQmlEngine_protectedbase_senderSignalIndex(const void* self);
-int QQmlEngine_protectedbase_receivers(const void* self, const char* signal);
-bool QQmlEngine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QQmlEngine_virtualbase_metaObject(const VirtualQQmlEngine* self);
+void* QQmlEngine_virtualbase_metacast(VirtualQQmlEngine* self, const char* param1);
+int QQmlEngine_virtualbase_metacall(VirtualQQmlEngine* self, int param1, int param2, void** param3);
+bool QQmlEngine_virtualbase_event(VirtualQQmlEngine* self, QEvent* param1);
+bool QQmlEngine_virtualbase_eventFilter(VirtualQQmlEngine* self, QObject* watched, QEvent* event);
+void QQmlEngine_virtualbase_timerEvent(VirtualQQmlEngine* self, QTimerEvent* event);
+void QQmlEngine_virtualbase_childEvent(VirtualQQmlEngine* self, QChildEvent* event);
+void QQmlEngine_virtualbase_customEvent(VirtualQQmlEngine* self, QEvent* event);
+void QQmlEngine_virtualbase_connectNotify(VirtualQQmlEngine* self, QMetaMethod* signal);
+void QQmlEngine_virtualbase_disconnectNotify(VirtualQQmlEngine* self, QMetaMethod* signal);
+
+QObject* QQmlEngine_protectedbase_sender(const VirtualQQmlEngine* self);
+int QQmlEngine_protectedbase_senderSignalIndex(const VirtualQQmlEngine* self);
+int QQmlEngine_protectedbase_receivers(const VirtualQQmlEngine* self, const char* signal);
+bool QQmlEngine_protectedbase_isSignalConnected(const VirtualQQmlEngine* self, QMetaMethod* signal);
+
 const QMetaObject* QQmlEngine_staticMetaObject();
 void QQmlEngine_delete(QQmlEngine* self);
 

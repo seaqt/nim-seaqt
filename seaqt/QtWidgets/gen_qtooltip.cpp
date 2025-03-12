@@ -9,15 +9,6 @@
 #include <QWidget>
 #include <qtooltip.h>
 #include "gen_qtooltip.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QToolTip_showText(QPoint* pos, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 	QToolTip::showText(*pos, text_QString);

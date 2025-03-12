@@ -40,25 +40,32 @@ typedef struct QState QState;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QMouseEventTransition_VTable {
-	void (*destructor)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self);
-	QMetaObject* (*metaObject)(struct QMouseEventTransition_VTable* vtbl, const QMouseEventTransition* self);
-	void* (*metacast)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, const char* param1);
-	int (*metacall)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, int param1, int param2, void** param3);
-	void (*onTransition)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QEvent* event);
-	bool (*eventTest)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QEvent* event);
-	bool (*event)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QEvent* e);
-	bool (*eventFilter)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QTimerEvent* event);
-	void (*childEvent)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QChildEvent* event);
-	void (*customEvent)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QEvent* event);
-	void (*connectNotify)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QMouseEventTransition_VTable* vtbl, QMouseEventTransition* self, QMetaMethod* signal);
-};
-QMouseEventTransition* QMouseEventTransition_new(struct QMouseEventTransition_VTable* vtbl);
-QMouseEventTransition* QMouseEventTransition_new2(struct QMouseEventTransition_VTable* vtbl, QObject* object, int type, int button);
-QMouseEventTransition* QMouseEventTransition_new3(struct QMouseEventTransition_VTable* vtbl, QState* sourceState);
-QMouseEventTransition* QMouseEventTransition_new4(struct QMouseEventTransition_VTable* vtbl, QObject* object, int type, int button, QState* sourceState);
+typedef struct VirtualQMouseEventTransition VirtualQMouseEventTransition;
+typedef struct QMouseEventTransition_VTable{
+	void (*destructor)(VirtualQMouseEventTransition* self);
+	QMetaObject* (*metaObject)(const VirtualQMouseEventTransition* self);
+	void* (*metacast)(VirtualQMouseEventTransition* self, const char* param1);
+	int (*metacall)(VirtualQMouseEventTransition* self, int param1, int param2, void** param3);
+	void (*onTransition)(VirtualQMouseEventTransition* self, QEvent* event);
+	bool (*eventTest)(VirtualQMouseEventTransition* self, QEvent* event);
+	bool (*event)(VirtualQMouseEventTransition* self, QEvent* e);
+	bool (*eventFilter)(VirtualQMouseEventTransition* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQMouseEventTransition* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQMouseEventTransition* self, QChildEvent* event);
+	void (*customEvent)(VirtualQMouseEventTransition* self, QEvent* event);
+	void (*connectNotify)(VirtualQMouseEventTransition* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQMouseEventTransition* self, QMetaMethod* signal);
+}QMouseEventTransition_VTable;
+
+const QMouseEventTransition_VTable* QMouseEventTransition_vtbl(const VirtualQMouseEventTransition* self);
+void* QMouseEventTransition_vdata(const VirtualQMouseEventTransition* self);
+void QMouseEventTransition_setVdata(VirtualQMouseEventTransition* self, void* vdata);
+
+VirtualQMouseEventTransition* QMouseEventTransition_new(const QMouseEventTransition_VTable* vtbl, void* vdata);
+VirtualQMouseEventTransition* QMouseEventTransition_new2(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, int type, int button);
+VirtualQMouseEventTransition* QMouseEventTransition_new3(const QMouseEventTransition_VTable* vtbl, void* vdata, QState* sourceState);
+VirtualQMouseEventTransition* QMouseEventTransition_new4(const QMouseEventTransition_VTable* vtbl, void* vdata, QObject* object, int type, int button, QState* sourceState);
+
 void QMouseEventTransition_virtbase(QMouseEventTransition* src, QEventTransition** outptr_QEventTransition);
 QMetaObject* QMouseEventTransition_metaObject(const QMouseEventTransition* self);
 void* QMouseEventTransition_metacast(QMouseEventTransition* self, const char* param1);
@@ -77,22 +84,25 @@ struct miqt_string QMouseEventTransition_tr2(const char* s, const char* c);
 struct miqt_string QMouseEventTransition_tr3(const char* s, const char* c, int n);
 struct miqt_string QMouseEventTransition_trUtf82(const char* s, const char* c);
 struct miqt_string QMouseEventTransition_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QMouseEventTransition_virtualbase_metaObject(const void* self);
-void* QMouseEventTransition_virtualbase_metacast(void* self, const char* param1);
-int QMouseEventTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-void QMouseEventTransition_virtualbase_onTransition(void* self, QEvent* event);
-bool QMouseEventTransition_virtualbase_eventTest(void* self, QEvent* event);
-bool QMouseEventTransition_virtualbase_event(void* self, QEvent* e);
-bool QMouseEventTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QMouseEventTransition_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QMouseEventTransition_virtualbase_childEvent(void* self, QChildEvent* event);
-void QMouseEventTransition_virtualbase_customEvent(void* self, QEvent* event);
-void QMouseEventTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QMouseEventTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QMouseEventTransition_protectedbase_sender(const void* self);
-int QMouseEventTransition_protectedbase_senderSignalIndex(const void* self);
-int QMouseEventTransition_protectedbase_receivers(const void* self, const char* signal);
-bool QMouseEventTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QMouseEventTransition_virtualbase_metaObject(const VirtualQMouseEventTransition* self);
+void* QMouseEventTransition_virtualbase_metacast(VirtualQMouseEventTransition* self, const char* param1);
+int QMouseEventTransition_virtualbase_metacall(VirtualQMouseEventTransition* self, int param1, int param2, void** param3);
+void QMouseEventTransition_virtualbase_onTransition(VirtualQMouseEventTransition* self, QEvent* event);
+bool QMouseEventTransition_virtualbase_eventTest(VirtualQMouseEventTransition* self, QEvent* event);
+bool QMouseEventTransition_virtualbase_event(VirtualQMouseEventTransition* self, QEvent* e);
+bool QMouseEventTransition_virtualbase_eventFilter(VirtualQMouseEventTransition* self, QObject* watched, QEvent* event);
+void QMouseEventTransition_virtualbase_timerEvent(VirtualQMouseEventTransition* self, QTimerEvent* event);
+void QMouseEventTransition_virtualbase_childEvent(VirtualQMouseEventTransition* self, QChildEvent* event);
+void QMouseEventTransition_virtualbase_customEvent(VirtualQMouseEventTransition* self, QEvent* event);
+void QMouseEventTransition_virtualbase_connectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal);
+void QMouseEventTransition_virtualbase_disconnectNotify(VirtualQMouseEventTransition* self, QMetaMethod* signal);
+
+QObject* QMouseEventTransition_protectedbase_sender(const VirtualQMouseEventTransition* self);
+int QMouseEventTransition_protectedbase_senderSignalIndex(const VirtualQMouseEventTransition* self);
+int QMouseEventTransition_protectedbase_receivers(const VirtualQMouseEventTransition* self, const char* signal);
+bool QMouseEventTransition_protectedbase_isSignalConnected(const VirtualQMouseEventTransition* self, QMetaMethod* signal);
+
 const QMetaObject* QMouseEventTransition_staticMetaObject();
 void QMouseEventTransition_delete(QMouseEventTransition* self);
 

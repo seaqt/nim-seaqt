@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qaudiooutputselectorcontrol.h>
 #include "gen_qaudiooutputselectorcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAudioOutputSelectorControl_virtbase(QAudioOutputSelectorControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -199,6 +190,7 @@ struct miqt_string QAudioOutputSelectorControl_trUtf83(const char* s, const char
 }
 
 const QMetaObject* QAudioOutputSelectorControl_staticMetaObject() { return &QAudioOutputSelectorControl::staticMetaObject; }
+
 void QAudioOutputSelectorControl_delete(QAudioOutputSelectorControl* self) {
 	delete self;
 }

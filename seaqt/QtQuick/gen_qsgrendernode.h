@@ -38,17 +38,24 @@ typedef struct QSGRenderNode QSGRenderNode;
 typedef struct QSGRenderNode__RenderState QSGRenderNode__RenderState;
 #endif
 
-struct QSGRenderNode_VTable {
-	void (*destructor)(struct QSGRenderNode_VTable* vtbl, QSGRenderNode* self);
-	int (*changedStates)(struct QSGRenderNode_VTable* vtbl, const QSGRenderNode* self);
-	void (*render)(struct QSGRenderNode_VTable* vtbl, QSGRenderNode* self, QSGRenderNode__RenderState* state);
-	void (*releaseResources)(struct QSGRenderNode_VTable* vtbl, QSGRenderNode* self);
-	int (*flags)(struct QSGRenderNode_VTable* vtbl, const QSGRenderNode* self);
-	QRectF* (*rect)(struct QSGRenderNode_VTable* vtbl, const QSGRenderNode* self);
-	bool (*isSubtreeBlocked)(struct QSGRenderNode_VTable* vtbl, const QSGRenderNode* self);
-	void (*preprocess)(struct QSGRenderNode_VTable* vtbl, QSGRenderNode* self);
-};
-QSGRenderNode* QSGRenderNode_new(struct QSGRenderNode_VTable* vtbl);
+typedef struct VirtualQSGRenderNode VirtualQSGRenderNode;
+typedef struct QSGRenderNode_VTable{
+	void (*destructor)(VirtualQSGRenderNode* self);
+	int (*changedStates)(const VirtualQSGRenderNode* self);
+	void (*render)(VirtualQSGRenderNode* self, QSGRenderNode__RenderState* state);
+	void (*releaseResources)(VirtualQSGRenderNode* self);
+	int (*flags)(const VirtualQSGRenderNode* self);
+	QRectF* (*rect)(const VirtualQSGRenderNode* self);
+	bool (*isSubtreeBlocked)(const VirtualQSGRenderNode* self);
+	void (*preprocess)(VirtualQSGRenderNode* self);
+}QSGRenderNode_VTable;
+
+const QSGRenderNode_VTable* QSGRenderNode_vtbl(const VirtualQSGRenderNode* self);
+void* QSGRenderNode_vdata(const VirtualQSGRenderNode* self);
+void QSGRenderNode_setVdata(VirtualQSGRenderNode* self, void* vdata);
+
+VirtualQSGRenderNode* QSGRenderNode_new(const QSGRenderNode_VTable* vtbl, void* vdata);
+
 void QSGRenderNode_virtbase(QSGRenderNode* src, QSGNode** outptr_QSGNode);
 int QSGRenderNode_changedStates(const QSGRenderNode* self);
 void QSGRenderNode_render(QSGRenderNode* self, QSGRenderNode__RenderState* state);
@@ -58,13 +65,15 @@ QRectF* QSGRenderNode_rect(const QSGRenderNode* self);
 QMatrix4x4* QSGRenderNode_matrix(const QSGRenderNode* self);
 QSGClipNode* QSGRenderNode_clipList(const QSGRenderNode* self);
 double QSGRenderNode_inheritedOpacity(const QSGRenderNode* self);
-int QSGRenderNode_virtualbase_changedStates(const void* self);
-void QSGRenderNode_virtualbase_render(void* self, QSGRenderNode__RenderState* state);
-void QSGRenderNode_virtualbase_releaseResources(void* self);
-int QSGRenderNode_virtualbase_flags(const void* self);
-QRectF* QSGRenderNode_virtualbase_rect(const void* self);
-bool QSGRenderNode_virtualbase_isSubtreeBlocked(const void* self);
-void QSGRenderNode_virtualbase_preprocess(void* self);
+
+int QSGRenderNode_virtualbase_changedStates(const VirtualQSGRenderNode* self);
+void QSGRenderNode_virtualbase_render(VirtualQSGRenderNode* self, QSGRenderNode__RenderState* state);
+void QSGRenderNode_virtualbase_releaseResources(VirtualQSGRenderNode* self);
+int QSGRenderNode_virtualbase_flags(const VirtualQSGRenderNode* self);
+QRectF* QSGRenderNode_virtualbase_rect(const VirtualQSGRenderNode* self);
+bool QSGRenderNode_virtualbase_isSubtreeBlocked(const VirtualQSGRenderNode* self);
+void QSGRenderNode_virtualbase_preprocess(VirtualQSGRenderNode* self);
+
 void QSGRenderNode_delete(QSGRenderNode* self);
 
 QMatrix4x4* QSGRenderNode__RenderState_projectionMatrix(const QSGRenderNode__RenderState* self);
@@ -75,6 +84,7 @@ bool QSGRenderNode__RenderState_stencilEnabled(const QSGRenderNode__RenderState*
 QRegion* QSGRenderNode__RenderState_clipRegion(const QSGRenderNode__RenderState* self);
 void* QSGRenderNode__RenderState_get(const QSGRenderNode__RenderState* self, const char* state);
 void QSGRenderNode__RenderState_operatorAssign(QSGRenderNode__RenderState* self, QSGRenderNode__RenderState* param1);
+
 void QSGRenderNode__RenderState_delete(QSGRenderNode__RenderState* self);
 
 #ifdef __cplusplus

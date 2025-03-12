@@ -48,6 +48,7 @@ QMediaServiceProviderHint* QMediaServiceProviderHint_new3(struct miqt_string dev
 QMediaServiceProviderHint* QMediaServiceProviderHint_new4(int position);
 QMediaServiceProviderHint* QMediaServiceProviderHint_new5(int features);
 QMediaServiceProviderHint* QMediaServiceProviderHint_new6(QMediaServiceProviderHint* other);
+
 void QMediaServiceProviderHint_operatorAssign(QMediaServiceProviderHint* self, QMediaServiceProviderHint* other);
 bool QMediaServiceProviderHint_operatorEqual(const QMediaServiceProviderHint* self, QMediaServiceProviderHint* other);
 bool QMediaServiceProviderHint_operatorNotEqual(const QMediaServiceProviderHint* self, QMediaServiceProviderHint* other);
@@ -58,34 +59,41 @@ struct miqt_array /* of struct miqt_string */  QMediaServiceProviderHint_codecs(
 struct miqt_string QMediaServiceProviderHint_device(const QMediaServiceProviderHint* self);
 int QMediaServiceProviderHint_cameraPosition(const QMediaServiceProviderHint* self);
 int QMediaServiceProviderHint_features(const QMediaServiceProviderHint* self);
+
 void QMediaServiceProviderHint_delete(QMediaServiceProviderHint* self);
 
 QMediaService* QMediaServiceProviderFactoryInterface_create(QMediaServiceProviderFactoryInterface* self, struct miqt_string key);
 void QMediaServiceProviderFactoryInterface_release(QMediaServiceProviderFactoryInterface* self, QMediaService* service);
 void QMediaServiceProviderFactoryInterface_operatorAssign(QMediaServiceProviderFactoryInterface* self, QMediaServiceProviderFactoryInterface* param1);
+
 void QMediaServiceProviderFactoryInterface_delete(QMediaServiceProviderFactoryInterface* self);
 
 int QMediaServiceSupportedFormatsInterface_hasSupport(const QMediaServiceSupportedFormatsInterface* self, struct miqt_string mimeType, struct miqt_array /* of struct miqt_string */  codecs);
 struct miqt_array /* of struct miqt_string */  QMediaServiceSupportedFormatsInterface_supportedMimeTypes(const QMediaServiceSupportedFormatsInterface* self);
 void QMediaServiceSupportedFormatsInterface_operatorAssign(QMediaServiceSupportedFormatsInterface* self, QMediaServiceSupportedFormatsInterface* param1);
+
 void QMediaServiceSupportedFormatsInterface_delete(QMediaServiceSupportedFormatsInterface* self);
 
 struct miqt_array /* of struct miqt_string */  QMediaServiceSupportedDevicesInterface_devices(const QMediaServiceSupportedDevicesInterface* self, struct miqt_string service);
 struct miqt_string QMediaServiceSupportedDevicesInterface_deviceDescription(QMediaServiceSupportedDevicesInterface* self, struct miqt_string service, struct miqt_string device);
 void QMediaServiceSupportedDevicesInterface_operatorAssign(QMediaServiceSupportedDevicesInterface* self, QMediaServiceSupportedDevicesInterface* param1);
+
 void QMediaServiceSupportedDevicesInterface_delete(QMediaServiceSupportedDevicesInterface* self);
 
 struct miqt_string QMediaServiceDefaultDeviceInterface_defaultDevice(const QMediaServiceDefaultDeviceInterface* self, struct miqt_string service);
 void QMediaServiceDefaultDeviceInterface_operatorAssign(QMediaServiceDefaultDeviceInterface* self, QMediaServiceDefaultDeviceInterface* param1);
+
 void QMediaServiceDefaultDeviceInterface_delete(QMediaServiceDefaultDeviceInterface* self);
 
 int QMediaServiceCameraInfoInterface_cameraPosition(const QMediaServiceCameraInfoInterface* self, struct miqt_string device);
 int QMediaServiceCameraInfoInterface_cameraOrientation(const QMediaServiceCameraInfoInterface* self, struct miqt_string device);
 void QMediaServiceCameraInfoInterface_operatorAssign(QMediaServiceCameraInfoInterface* self, QMediaServiceCameraInfoInterface* param1);
+
 void QMediaServiceCameraInfoInterface_delete(QMediaServiceCameraInfoInterface* self);
 
 int QMediaServiceFeaturesInterface_supportedFeatures(const QMediaServiceFeaturesInterface* self, struct miqt_string service);
 void QMediaServiceFeaturesInterface_operatorAssign(QMediaServiceFeaturesInterface* self, QMediaServiceFeaturesInterface* param1);
+
 void QMediaServiceFeaturesInterface_delete(QMediaServiceFeaturesInterface* self);
 
 void QMediaServiceProviderPlugin_virtbase(QMediaServiceProviderPlugin* src, QObject** outptr_QObject, QMediaServiceProviderFactoryInterface** outptr_QMediaServiceProviderFactoryInterface);
@@ -100,6 +108,7 @@ struct miqt_string QMediaServiceProviderPlugin_tr2(const char* s, const char* c)
 struct miqt_string QMediaServiceProviderPlugin_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaServiceProviderPlugin_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaServiceProviderPlugin_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaServiceProviderPlugin_staticMetaObject();
 void QMediaServiceProviderPlugin_delete(QMediaServiceProviderPlugin* self);
 

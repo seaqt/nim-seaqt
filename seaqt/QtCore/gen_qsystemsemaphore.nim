@@ -53,11 +53,11 @@ export gen_qsystemsemaphore_types
 type cQSystemSemaphore*{.exportc: "QSystemSemaphore", incompleteStruct.} = object
 
 proc fcQSystemSemaphore_setKey(self: pointer, key: struct_miqt_string): void {.importc: "QSystemSemaphore_setKey".}
-proc fcQSystemSemaphore_key(self: pointer, ): struct_miqt_string {.importc: "QSystemSemaphore_key".}
-proc fcQSystemSemaphore_acquire(self: pointer, ): bool {.importc: "QSystemSemaphore_acquire".}
-proc fcQSystemSemaphore_release(self: pointer, ): bool {.importc: "QSystemSemaphore_release".}
-proc fcQSystemSemaphore_error(self: pointer, ): cint {.importc: "QSystemSemaphore_error".}
-proc fcQSystemSemaphore_errorString(self: pointer, ): struct_miqt_string {.importc: "QSystemSemaphore_errorString".}
+proc fcQSystemSemaphore_key(self: pointer): struct_miqt_string {.importc: "QSystemSemaphore_key".}
+proc fcQSystemSemaphore_acquire(self: pointer): bool {.importc: "QSystemSemaphore_acquire".}
+proc fcQSystemSemaphore_release(self: pointer): bool {.importc: "QSystemSemaphore_release".}
+proc fcQSystemSemaphore_error(self: pointer): cint {.importc: "QSystemSemaphore_error".}
+proc fcQSystemSemaphore_errorString(self: pointer): struct_miqt_string {.importc: "QSystemSemaphore_errorString".}
 proc fcQSystemSemaphore_setKey2(self: pointer, key: struct_miqt_string, initialValue: cint): void {.importc: "QSystemSemaphore_setKey2".}
 proc fcQSystemSemaphore_setKey3(self: pointer, key: struct_miqt_string, initialValue: cint, mode: cint): void {.importc: "QSystemSemaphore_setKey3".}
 proc fcQSystemSemaphore_release1(self: pointer, n: cint): bool {.importc: "QSystemSemaphore_release1".}
@@ -68,22 +68,22 @@ proc fcQSystemSemaphore_new3(key: struct_miqt_string, initialValue: cint, mode: 
 proc setKey*(self: gen_qsystemsemaphore_types.QSystemSemaphore, key: string): void =
   fcQSystemSemaphore_setKey(self.h, struct_miqt_string(data: key, len: csize_t(len(key))))
 
-proc key*(self: gen_qsystemsemaphore_types.QSystemSemaphore, ): string =
+proc key*(self: gen_qsystemsemaphore_types.QSystemSemaphore): string =
   let v_ms = fcQSystemSemaphore_key(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc acquire*(self: gen_qsystemsemaphore_types.QSystemSemaphore, ): bool =
+proc acquire*(self: gen_qsystemsemaphore_types.QSystemSemaphore): bool =
   fcQSystemSemaphore_acquire(self.h)
 
-proc release*(self: gen_qsystemsemaphore_types.QSystemSemaphore, ): bool =
+proc release*(self: gen_qsystemsemaphore_types.QSystemSemaphore): bool =
   fcQSystemSemaphore_release(self.h)
 
-proc error*(self: gen_qsystemsemaphore_types.QSystemSemaphore, ): cint =
+proc error*(self: gen_qsystemsemaphore_types.QSystemSemaphore): cint =
   cint(fcQSystemSemaphore_error(self.h))
 
-proc errorString*(self: gen_qsystemsemaphore_types.QSystemSemaphore, ): string =
+proc errorString*(self: gen_qsystemsemaphore_types.QSystemSemaphore): string =
   let v_ms = fcQSystemSemaphore_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

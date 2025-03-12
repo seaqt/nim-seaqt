@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qimagereader.h>
 #include "gen_qimagereader.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QImageReader* QImageReader_new() {
 	return new QImageReader();
 }

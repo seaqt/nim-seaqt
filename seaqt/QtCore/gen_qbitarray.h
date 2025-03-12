@@ -26,6 +26,7 @@ QBitArray* QBitArray_new();
 QBitArray* QBitArray_new2(int size);
 QBitArray* QBitArray_new3(QBitArray* other);
 QBitArray* QBitArray_new4(int size, bool val);
+
 void QBitArray_operatorAssign(QBitArray* self, QBitArray* other);
 void QBitArray_swap(QBitArray* self, QBitArray* other);
 int QBitArray_size(const QBitArray* self);
@@ -58,13 +59,16 @@ void QBitArray_truncate(QBitArray* self, int pos);
 const char* QBitArray_bits(const QBitArray* self);
 QBitArray* QBitArray_fromBits(const char* data, ptrdiff_t len);
 bool QBitArray_fill22(QBitArray* self, bool val, int size);
+
 void QBitArray_delete(QBitArray* self);
 
 QBitRef* QBitRef_new(QBitRef* param1);
+
 bool QBitRef_ToBool(const QBitRef* self);
 bool QBitRef_operatorNot(const QBitRef* self);
 void QBitRef_operatorAssign(QBitRef* self, QBitRef* val);
 void QBitRef_operatorAssignWithVal(QBitRef* self, bool val);
+
 void QBitRef_delete(QBitRef* self);
 
 #ifdef __cplusplus

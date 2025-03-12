@@ -5,52 +5,44 @@
 #include <QSGMaterialType>
 #include <qsgflatcolormaterial.h>
 #include "gen_qsgflatcolormaterial.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGFlatColorMaterial final : public QSGFlatColorMaterial {
-	struct QSGFlatColorMaterial_VTable* vtbl;
+	const QSGFlatColorMaterial_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGFlatColorMaterial_VTable* QSGFlatColorMaterial_vtbl(const VirtualQSGFlatColorMaterial* self);
+	friend void* QSGFlatColorMaterial_vdata(const VirtualQSGFlatColorMaterial* self);
+	friend void QSGFlatColorMaterial_setVdata(VirtualQSGFlatColorMaterial* self, void* vdata);
 
-	VirtualQSGFlatColorMaterial(struct QSGFlatColorMaterial_VTable* vtbl): QSGFlatColorMaterial(), vtbl(vtbl) {};
+	VirtualQSGFlatColorMaterial(const QSGFlatColorMaterial_VTable* vtbl, void* vdata): QSGFlatColorMaterial(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGFlatColorMaterial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGFlatColorMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialType* type() const override {
 		if (vtbl->type == 0) {
 			return QSGFlatColorMaterial::type();
 		}
 
 
-		QSGMaterialType* callback_return_value = vtbl->type(vtbl, this);
+		QSGMaterialType* callback_return_value = vtbl->type(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialType* QSGFlatColorMaterial_virtualbase_type(const void* self);
+	friend QSGMaterialType* QSGFlatColorMaterial_virtualbase_type(const VirtualQSGFlatColorMaterial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialShader* createShader() const override {
 		if (vtbl->createShader == 0) {
 			return QSGFlatColorMaterial::createShader();
 		}
 
 
-		QSGMaterialShader* callback_return_value = vtbl->createShader(vtbl, this);
+		QSGMaterialShader* callback_return_value = vtbl->createShader(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialShader* QSGFlatColorMaterial_virtualbase_createShader(const void* self);
+	friend QSGMaterialShader* QSGFlatColorMaterial_virtualbase_createShader(const VirtualQSGFlatColorMaterial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int compare(const QSGMaterial* other) const override {
 		if (vtbl->compare == 0) {
 			return QSGFlatColorMaterial::compare(other);
@@ -58,17 +50,17 @@ public:
 
 		QSGMaterial* sigval1 = (QSGMaterial*) other;
 
-		int callback_return_value = vtbl->compare(vtbl, this, sigval1);
+		int callback_return_value = vtbl->compare(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGFlatColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+	friend int QSGFlatColorMaterial_virtualbase_compare(const VirtualQSGFlatColorMaterial* self, QSGMaterial* other);
 
 };
 
-QSGFlatColorMaterial* QSGFlatColorMaterial_new(struct QSGFlatColorMaterial_VTable* vtbl) {
-	return new VirtualQSGFlatColorMaterial(vtbl);
+VirtualQSGFlatColorMaterial* QSGFlatColorMaterial_new(const QSGFlatColorMaterial_VTable* vtbl, void* vdata) {
+	return new VirtualQSGFlatColorMaterial(vtbl, vdata);
 }
 
 void QSGFlatColorMaterial_virtbase(QSGFlatColorMaterial* src, QSGMaterial** outptr_QSGMaterial) {
@@ -97,23 +89,24 @@ int QSGFlatColorMaterial_compare(const QSGFlatColorMaterial* self, QSGMaterial* 
 	return self->compare(other);
 }
 
-QSGMaterialType* QSGFlatColorMaterial_virtualbase_type(const void* self) {
+QSGMaterialType* QSGFlatColorMaterial_virtualbase_type(const VirtualQSGFlatColorMaterial* self) {
 
-	return ( (const VirtualQSGFlatColorMaterial*)(self) )->QSGFlatColorMaterial::type();
-
+	return self->QSGFlatColorMaterial::type();
 }
 
-QSGMaterialShader* QSGFlatColorMaterial_virtualbase_createShader(const void* self) {
+QSGMaterialShader* QSGFlatColorMaterial_virtualbase_createShader(const VirtualQSGFlatColorMaterial* self) {
 
-	return ( (const VirtualQSGFlatColorMaterial*)(self) )->QSGFlatColorMaterial::createShader();
-
+	return self->QSGFlatColorMaterial::createShader();
 }
 
-int QSGFlatColorMaterial_virtualbase_compare(const void* self, QSGMaterial* other) {
+int QSGFlatColorMaterial_virtualbase_compare(const VirtualQSGFlatColorMaterial* self, QSGMaterial* other) {
 
-	return ( (const VirtualQSGFlatColorMaterial*)(self) )->QSGFlatColorMaterial::compare(other);
-
+	return self->QSGFlatColorMaterial::compare(other);
 }
+
+const QSGFlatColorMaterial_VTable* QSGFlatColorMaterial_vtbl(const VirtualQSGFlatColorMaterial* self) { return self->vtbl; }
+void* QSGFlatColorMaterial_vdata(const VirtualQSGFlatColorMaterial* self) { return self->vdata; }
+void QSGFlatColorMaterial_setVdata(VirtualQSGFlatColorMaterial* self, void* vdata) { self->vdata = vdata; }
 
 void QSGFlatColorMaterial_delete(QSGFlatColorMaterial* self) {
 	delete self;

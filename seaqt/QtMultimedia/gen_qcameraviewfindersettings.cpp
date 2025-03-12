@@ -2,15 +2,6 @@
 #include <QSize>
 #include <qcameraviewfindersettings.h>
 #include "gen_qcameraviewfindersettings.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCameraViewfinderSettings* QCameraViewfinderSettings_new() {
 	return new QCameraViewfinderSettings();
 }

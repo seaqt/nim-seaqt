@@ -11,15 +11,6 @@
 #include <QVideoEncoderSettingsControl>
 #include <qvideoencodersettingscontrol.h>
 #include "gen_qvideoencodersettingscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QVideoEncoderSettingsControl_virtbase(QVideoEncoderSettingsControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -169,6 +160,7 @@ struct miqt_string QVideoEncoderSettingsControl_trUtf83(const char* s, const cha
 }
 
 const QMetaObject* QVideoEncoderSettingsControl_staticMetaObject() { return &QVideoEncoderSettingsControl::staticMetaObject; }
+
 void QVideoEncoderSettingsControl_delete(QVideoEncoderSettingsControl* self) {
 	delete self;
 }

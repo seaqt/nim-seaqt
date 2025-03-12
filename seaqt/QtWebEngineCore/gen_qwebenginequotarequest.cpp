@@ -2,15 +2,6 @@
 #include <QWebEngineQuotaRequest>
 #include <qwebenginequotarequest.h>
 #include "gen_qwebenginequotarequest.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebEngineQuotaRequest* QWebEngineQuotaRequest_new() {
 	return new QWebEngineQuotaRequest();
 }
@@ -45,6 +36,7 @@ bool QWebEngineQuotaRequest_operatorNotEqual(const QWebEngineQuotaRequest* self,
 }
 
 const QMetaObject* QWebEngineQuotaRequest_staticMetaObject() { return &QWebEngineQuotaRequest::staticMetaObject; }
+
 void QWebEngineQuotaRequest_delete(QWebEngineQuotaRequest* self) {
 	delete self;
 }

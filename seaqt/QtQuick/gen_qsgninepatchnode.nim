@@ -56,7 +56,7 @@ proc fcQSGNinePatchNode_setTexture(self: pointer, texture: pointer): void {.impo
 proc fcQSGNinePatchNode_setBounds(self: pointer, bounds: pointer): void {.importc: "QSGNinePatchNode_setBounds".}
 proc fcQSGNinePatchNode_setDevicePixelRatio(self: pointer, ratio: float64): void {.importc: "QSGNinePatchNode_setDevicePixelRatio".}
 proc fcQSGNinePatchNode_setPadding(self: pointer, left: float64, top: float64, right: float64, bottom: float64): void {.importc: "QSGNinePatchNode_setPadding".}
-proc fcQSGNinePatchNode_update(self: pointer, ): void {.importc: "QSGNinePatchNode_update".}
+proc fcQSGNinePatchNode_update(self: pointer): void {.importc: "QSGNinePatchNode_update".}
 proc fcQSGNinePatchNode_rebuildGeometry(texture: pointer, geometry: pointer, padding: pointer, bounds: pointer, dpr: float64): void {.importc: "QSGNinePatchNode_rebuildGeometry".}
 
 proc setTexture*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, texture: gen_qsgtexture_types.QSGTexture): void =
@@ -71,7 +71,7 @@ proc setDevicePixelRatio*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, rat
 proc setPadding*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, left: float64, top: float64, right: float64, bottom: float64): void =
   fcQSGNinePatchNode_setPadding(self.h, left, top, right, bottom)
 
-proc update*(self: gen_qsgninepatchnode_types.QSGNinePatchNode, ): void =
+proc update*(self: gen_qsgninepatchnode_types.QSGNinePatchNode): void =
   fcQSGNinePatchNode_update(self.h)
 
 proc rebuildGeometry*(_: type gen_qsgninepatchnode_types.QSGNinePatchNode, texture: gen_qsgtexture_types.QSGTexture, geometry: gen_qsggeometry_types.QSGGeometry, padding: gen_qvector4d_types.QVector4D, bounds: gen_qrect_types.QRectF, dpr: float64): void =

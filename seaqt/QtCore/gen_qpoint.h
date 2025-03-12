@@ -25,6 +25,7 @@ typedef struct QPointF QPointF;
 QPoint* QPoint_new();
 QPoint* QPoint_new2(int xpos, int ypos);
 QPoint* QPoint_new3(QPoint* param1);
+
 bool QPoint_isNull(const QPoint* self);
 int QPoint_x(const QPoint* self);
 int QPoint_y(const QPoint* self);
@@ -39,12 +40,14 @@ QPoint* QPoint_operatorMultiplyAssignWithFactor(QPoint* self, double factor);
 QPoint* QPoint_operatorMultiplyAssign2(QPoint* self, int factor);
 QPoint* QPoint_operatorDivideAssign(QPoint* self, double divisor);
 int QPoint_dotProduct(QPoint* p1, QPoint* p2);
+
 void QPoint_delete(QPoint* self);
 
 QPointF* QPointF_new();
 QPointF* QPointF_new2(QPoint* p);
 QPointF* QPointF_new3(double xpos, double ypos);
 QPointF* QPointF_new4(QPointF* param1);
+
 double QPointF_manhattanLength(const QPointF* self);
 bool QPointF_isNull(const QPointF* self);
 double QPointF_x(const QPointF* self);
@@ -58,6 +61,7 @@ QPointF* QPointF_operatorMultiplyAssign(QPointF* self, double c);
 QPointF* QPointF_operatorDivideAssign(QPointF* self, double c);
 double QPointF_dotProduct(QPointF* p1, QPointF* p2);
 QPoint* QPointF_toPoint(const QPointF* self);
+
 void QPointF_delete(QPointF* self);
 
 #ifdef __cplusplus

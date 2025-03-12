@@ -37,39 +37,32 @@
 #include <QWidget>
 #include <qwebinspector.h>
 #include "gen_qwebinspector.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQWebInspector final : public QWebInspector {
-	struct QWebInspector_VTable* vtbl;
+	const QWebInspector_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWebInspector_VTable* QWebInspector_vtbl(const VirtualQWebInspector* self);
+	friend void* QWebInspector_vdata(const VirtualQWebInspector* self);
+	friend void QWebInspector_setVdata(VirtualQWebInspector* self, void* vdata);
 
-	VirtualQWebInspector(struct QWebInspector_VTable* vtbl, QWidget* parent): QWebInspector(parent), vtbl(vtbl) {};
-	VirtualQWebInspector(struct QWebInspector_VTable* vtbl): QWebInspector(), vtbl(vtbl) {};
+	VirtualQWebInspector(const QWebInspector_VTable* vtbl, void* vdata, QWidget* parent): QWebInspector(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebInspector(const QWebInspector_VTable* vtbl, void* vdata): QWebInspector(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWebInspector() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWebInspector() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QWebInspector::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QWebInspector_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QWebInspector_virtualbase_metaObject(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QWebInspector::qt_metacast(param1);
@@ -77,14 +70,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QWebInspector_virtualbase_metacast(void* self, const char* param1);
+	friend void* QWebInspector_virtualbase_metacast(VirtualQWebInspector* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QWebInspector::qt_metacall(param1, param2, param3);
@@ -95,30 +87,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebInspector_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QWebInspector_virtualbase_metacall(VirtualQWebInspector* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QWebInspector::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWebInspector_virtualbase_sizeHint(const void* self);
+	friend QSize* QWebInspector_virtualbase_sizeHint(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QWebInspector::event(param1);
@@ -126,14 +116,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebInspector_virtualbase_event(void* self, QEvent* param1);
+	friend bool QWebInspector_virtualbase_event(VirtualQWebInspector* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QWebInspector::resizeEvent(event);
@@ -142,13 +131,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QWebInspector_virtualbase_resizeEvent(VirtualQWebInspector* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QWebInspector::showEvent(event);
@@ -157,13 +145,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QWebInspector_virtualbase_showEvent(VirtualQWebInspector* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QWebInspector::hideEvent(event);
@@ -172,13 +159,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QWebInspector_virtualbase_hideEvent(VirtualQWebInspector* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QWebInspector::closeEvent(event);
@@ -187,27 +173,25 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QWebInspector_virtualbase_closeEvent(VirtualQWebInspector* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QWebInspector::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebInspector_virtualbase_devType(const void* self);
+	friend int QWebInspector_virtualbase_devType(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QWebInspector::setVisible(visible);
@@ -216,29 +200,27 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_setVisible(void* self, bool visible);
+	friend void QWebInspector_virtualbase_setVisible(VirtualQWebInspector* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QWebInspector::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QWebInspector_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QWebInspector_virtualbase_minimumSizeHint(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QWebInspector::heightForWidth(param1);
@@ -246,42 +228,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebInspector_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QWebInspector_virtualbase_heightForWidth(const VirtualQWebInspector* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QWebInspector::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebInspector_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QWebInspector_virtualbase_hasHeightForWidth(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QWebInspector::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QWebInspector_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QWebInspector_virtualbase_paintEngine(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QWebInspector::mousePressEvent(event);
@@ -290,13 +269,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QWebInspector_virtualbase_mousePressEvent(VirtualQWebInspector* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QWebInspector::mouseReleaseEvent(event);
@@ -305,13 +283,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QWebInspector_virtualbase_mouseReleaseEvent(VirtualQWebInspector* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QWebInspector::mouseDoubleClickEvent(event);
@@ -320,13 +297,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QWebInspector_virtualbase_mouseDoubleClickEvent(VirtualQWebInspector* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QWebInspector::mouseMoveEvent(event);
@@ -335,13 +311,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QWebInspector_virtualbase_mouseMoveEvent(VirtualQWebInspector* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QWebInspector::wheelEvent(event);
@@ -350,13 +325,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QWebInspector_virtualbase_wheelEvent(VirtualQWebInspector* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QWebInspector::keyPressEvent(event);
@@ -365,13 +339,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QWebInspector_virtualbase_keyPressEvent(VirtualQWebInspector* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QWebInspector::keyReleaseEvent(event);
@@ -380,13 +353,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QWebInspector_virtualbase_keyReleaseEvent(VirtualQWebInspector* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QWebInspector::focusInEvent(event);
@@ -395,13 +367,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QWebInspector_virtualbase_focusInEvent(VirtualQWebInspector* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QWebInspector::focusOutEvent(event);
@@ -410,13 +381,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QWebInspector_virtualbase_focusOutEvent(VirtualQWebInspector* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QWebInspector::enterEvent(event);
@@ -425,13 +395,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QWebInspector_virtualbase_enterEvent(VirtualQWebInspector* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QWebInspector::leaveEvent(event);
@@ -440,13 +409,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QWebInspector_virtualbase_leaveEvent(VirtualQWebInspector* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QWebInspector::paintEvent(event);
@@ -455,13 +423,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QWebInspector_virtualbase_paintEvent(VirtualQWebInspector* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QWebInspector::moveEvent(event);
@@ -470,13 +437,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QWebInspector_virtualbase_moveEvent(VirtualQWebInspector* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QWebInspector::contextMenuEvent(event);
@@ -485,13 +451,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QWebInspector_virtualbase_contextMenuEvent(VirtualQWebInspector* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QWebInspector::tabletEvent(event);
@@ -500,13 +465,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QWebInspector_virtualbase_tabletEvent(VirtualQWebInspector* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QWebInspector::actionEvent(event);
@@ -515,13 +479,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QWebInspector_virtualbase_actionEvent(VirtualQWebInspector* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QWebInspector::dragEnterEvent(event);
@@ -530,13 +493,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QWebInspector_virtualbase_dragEnterEvent(VirtualQWebInspector* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QWebInspector::dragMoveEvent(event);
@@ -545,13 +507,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QWebInspector_virtualbase_dragMoveEvent(VirtualQWebInspector* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QWebInspector::dragLeaveEvent(event);
@@ -560,13 +521,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QWebInspector_virtualbase_dragLeaveEvent(VirtualQWebInspector* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QWebInspector::dropEvent(event);
@@ -575,13 +535,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QWebInspector_virtualbase_dropEvent(VirtualQWebInspector* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QWebInspector::nativeEvent(eventType, message, result);
@@ -596,14 +555,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebInspector_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QWebInspector_virtualbase_nativeEvent(VirtualQWebInspector* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QWebInspector::changeEvent(param1);
@@ -612,13 +570,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QWebInspector_virtualbase_changeEvent(VirtualQWebInspector* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QWebInspector::metric(param1);
@@ -627,14 +584,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebInspector_virtualbase_metric(const void* self, int param1);
+	friend int QWebInspector_virtualbase_metric(const VirtualQWebInspector* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QWebInspector::initPainter(painter);
@@ -643,13 +599,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QWebInspector_virtualbase_initPainter(const VirtualQWebInspector* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QWebInspector::redirected(offset);
@@ -657,28 +612,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QWebInspector_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QWebInspector_virtualbase_redirected(const VirtualQWebInspector* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QWebInspector::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QWebInspector_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QWebInspector_virtualbase_sharedPainter(const VirtualQWebInspector* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QWebInspector::inputMethodEvent(param1);
@@ -687,13 +640,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QWebInspector_virtualbase_inputMethodEvent(VirtualQWebInspector* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QWebInspector::inputMethodQuery(param1);
@@ -702,16 +654,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QWebInspector_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QWebInspector_virtualbase_inputMethodQuery(const VirtualQWebInspector* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QWebInspector::focusNextPrevChild(next);
@@ -719,14 +670,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebInspector_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QWebInspector_virtualbase_focusNextPrevChild(VirtualQWebInspector* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QWebInspector::eventFilter(watched, event);
@@ -735,14 +685,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebInspector_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QWebInspector_virtualbase_eventFilter(VirtualQWebInspector* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QWebInspector::timerEvent(event);
@@ -751,13 +700,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QWebInspector_virtualbase_timerEvent(VirtualQWebInspector* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QWebInspector::childEvent(event);
@@ -766,13 +714,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QWebInspector_virtualbase_childEvent(VirtualQWebInspector* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QWebInspector::customEvent(event);
@@ -781,13 +728,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QWebInspector_virtualbase_customEvent(VirtualQWebInspector* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QWebInspector::connectNotify(signal);
@@ -798,13 +744,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QWebInspector_virtualbase_connectNotify(VirtualQWebInspector* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QWebInspector::disconnectNotify(signal);
@@ -815,30 +760,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QWebInspector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QWebInspector_virtualbase_disconnectNotify(VirtualQWebInspector* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QWebInspector_protectedbase_updateMicroFocus(void* self);
-	friend void QWebInspector_protectedbase_create(void* self);
-	friend void QWebInspector_protectedbase_destroy(void* self);
-	friend bool QWebInspector_protectedbase_focusNextChild(void* self);
-	friend bool QWebInspector_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QWebInspector_protectedbase_sender(const void* self);
-	friend int QWebInspector_protectedbase_senderSignalIndex(const void* self);
-	friend int QWebInspector_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QWebInspector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QWebInspector_protectedbase_updateMicroFocus(VirtualQWebInspector* self);
+	friend void QWebInspector_protectedbase_create(VirtualQWebInspector* self);
+	friend void QWebInspector_protectedbase_destroy(VirtualQWebInspector* self);
+	friend bool QWebInspector_protectedbase_focusNextChild(VirtualQWebInspector* self);
+	friend bool QWebInspector_protectedbase_focusPreviousChild(VirtualQWebInspector* self);
+	friend QObject* QWebInspector_protectedbase_sender(const VirtualQWebInspector* self);
+	friend int QWebInspector_protectedbase_senderSignalIndex(const VirtualQWebInspector* self);
+	friend int QWebInspector_protectedbase_receivers(const VirtualQWebInspector* self, const char* signal);
+	friend bool QWebInspector_protectedbase_isSignalConnected(const VirtualQWebInspector* self, QMetaMethod* signal);
 };
 
-QWebInspector* QWebInspector_new(struct QWebInspector_VTable* vtbl, QWidget* parent) {
-	return new VirtualQWebInspector(vtbl, parent);
+VirtualQWebInspector* QWebInspector_new(const QWebInspector_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQWebInspector(vtbl, vdata, parent);
 }
 
-QWebInspector* QWebInspector_new2(struct QWebInspector_VTable* vtbl) {
-	return new VirtualQWebInspector(vtbl);
+VirtualQWebInspector* QWebInspector_new2(const QWebInspector_VTable* vtbl, void* vdata) {
+	return new VirtualQWebInspector(vtbl, vdata);
 }
 
 void QWebInspector_virtbase(QWebInspector* src, QWidget** outptr_QWidget) {
@@ -939,369 +884,297 @@ struct miqt_string QWebInspector_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QWebInspector_virtualbase_metaObject(const void* self) {
+QMetaObject* QWebInspector_virtualbase_metaObject(const VirtualQWebInspector* self) {
 
-	return (QMetaObject*) ( (const VirtualQWebInspector*)(self) )->QWebInspector::metaObject();
-
+	return (QMetaObject*) self->QWebInspector::metaObject();
 }
 
-void* QWebInspector_virtualbase_metacast(void* self, const char* param1) {
+void* QWebInspector_virtualbase_metacast(VirtualQWebInspector* self, const char* param1) {
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::qt_metacast(param1);
-
+	return self->QWebInspector::qt_metacast(param1);
 }
 
-int QWebInspector_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QWebInspector_virtualbase_metacall(VirtualQWebInspector* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QWebInspector::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QWebInspector_virtualbase_sizeHint(const void* self) {
+QSize* QWebInspector_virtualbase_sizeHint(const VirtualQWebInspector* self) {
 
-	return new QSize(( (const VirtualQWebInspector*)(self) )->QWebInspector::sizeHint());
-
+	return new QSize(self->QWebInspector::sizeHint());
 }
 
-bool QWebInspector_virtualbase_event(void* self, QEvent* param1) {
+bool QWebInspector_virtualbase_event(VirtualQWebInspector* self, QEvent* param1) {
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::event(param1);
-
+	return self->QWebInspector::event(param1);
 }
 
-void QWebInspector_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QWebInspector_virtualbase_resizeEvent(VirtualQWebInspector* self, QResizeEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::resizeEvent(event);
-
+	self->QWebInspector::resizeEvent(event);
 }
 
-void QWebInspector_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QWebInspector_virtualbase_showEvent(VirtualQWebInspector* self, QShowEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::showEvent(event);
-
+	self->QWebInspector::showEvent(event);
 }
 
-void QWebInspector_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QWebInspector_virtualbase_hideEvent(VirtualQWebInspector* self, QHideEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::hideEvent(event);
-
+	self->QWebInspector::hideEvent(event);
 }
 
-void QWebInspector_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QWebInspector_virtualbase_closeEvent(VirtualQWebInspector* self, QCloseEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::closeEvent(event);
-
+	self->QWebInspector::closeEvent(event);
 }
 
-int QWebInspector_virtualbase_devType(const void* self) {
+int QWebInspector_virtualbase_devType(const VirtualQWebInspector* self) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::devType();
-
+	return self->QWebInspector::devType();
 }
 
-void QWebInspector_virtualbase_setVisible(void* self, bool visible) {
+void QWebInspector_virtualbase_setVisible(VirtualQWebInspector* self, bool visible) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::setVisible(visible);
-
+	self->QWebInspector::setVisible(visible);
 }
 
-QSize* QWebInspector_virtualbase_minimumSizeHint(const void* self) {
+QSize* QWebInspector_virtualbase_minimumSizeHint(const VirtualQWebInspector* self) {
 
-	return new QSize(( (const VirtualQWebInspector*)(self) )->QWebInspector::minimumSizeHint());
-
+	return new QSize(self->QWebInspector::minimumSizeHint());
 }
 
-int QWebInspector_virtualbase_heightForWidth(const void* self, int param1) {
+int QWebInspector_virtualbase_heightForWidth(const VirtualQWebInspector* self, int param1) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::heightForWidth(static_cast<int>(param1));
-
+	return self->QWebInspector::heightForWidth(static_cast<int>(param1));
 }
 
-bool QWebInspector_virtualbase_hasHeightForWidth(const void* self) {
+bool QWebInspector_virtualbase_hasHeightForWidth(const VirtualQWebInspector* self) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::hasHeightForWidth();
-
+	return self->QWebInspector::hasHeightForWidth();
 }
 
-QPaintEngine* QWebInspector_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QWebInspector_virtualbase_paintEngine(const VirtualQWebInspector* self) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::paintEngine();
-
+	return self->QWebInspector::paintEngine();
 }
 
-void QWebInspector_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QWebInspector_virtualbase_mousePressEvent(VirtualQWebInspector* self, QMouseEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::mousePressEvent(event);
-
+	self->QWebInspector::mousePressEvent(event);
 }
 
-void QWebInspector_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QWebInspector_virtualbase_mouseReleaseEvent(VirtualQWebInspector* self, QMouseEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::mouseReleaseEvent(event);
-
+	self->QWebInspector::mouseReleaseEvent(event);
 }
 
-void QWebInspector_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QWebInspector_virtualbase_mouseDoubleClickEvent(VirtualQWebInspector* self, QMouseEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::mouseDoubleClickEvent(event);
-
+	self->QWebInspector::mouseDoubleClickEvent(event);
 }
 
-void QWebInspector_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QWebInspector_virtualbase_mouseMoveEvent(VirtualQWebInspector* self, QMouseEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::mouseMoveEvent(event);
-
+	self->QWebInspector::mouseMoveEvent(event);
 }
 
-void QWebInspector_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QWebInspector_virtualbase_wheelEvent(VirtualQWebInspector* self, QWheelEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::wheelEvent(event);
-
+	self->QWebInspector::wheelEvent(event);
 }
 
-void QWebInspector_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QWebInspector_virtualbase_keyPressEvent(VirtualQWebInspector* self, QKeyEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::keyPressEvent(event);
-
+	self->QWebInspector::keyPressEvent(event);
 }
 
-void QWebInspector_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QWebInspector_virtualbase_keyReleaseEvent(VirtualQWebInspector* self, QKeyEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::keyReleaseEvent(event);
-
+	self->QWebInspector::keyReleaseEvent(event);
 }
 
-void QWebInspector_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QWebInspector_virtualbase_focusInEvent(VirtualQWebInspector* self, QFocusEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::focusInEvent(event);
-
+	self->QWebInspector::focusInEvent(event);
 }
 
-void QWebInspector_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QWebInspector_virtualbase_focusOutEvent(VirtualQWebInspector* self, QFocusEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::focusOutEvent(event);
-
+	self->QWebInspector::focusOutEvent(event);
 }
 
-void QWebInspector_virtualbase_enterEvent(void* self, QEvent* event) {
+void QWebInspector_virtualbase_enterEvent(VirtualQWebInspector* self, QEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::enterEvent(event);
-
+	self->QWebInspector::enterEvent(event);
 }
 
-void QWebInspector_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QWebInspector_virtualbase_leaveEvent(VirtualQWebInspector* self, QEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::leaveEvent(event);
-
+	self->QWebInspector::leaveEvent(event);
 }
 
-void QWebInspector_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QWebInspector_virtualbase_paintEvent(VirtualQWebInspector* self, QPaintEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::paintEvent(event);
-
+	self->QWebInspector::paintEvent(event);
 }
 
-void QWebInspector_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QWebInspector_virtualbase_moveEvent(VirtualQWebInspector* self, QMoveEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::moveEvent(event);
-
+	self->QWebInspector::moveEvent(event);
 }
 
-void QWebInspector_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QWebInspector_virtualbase_contextMenuEvent(VirtualQWebInspector* self, QContextMenuEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::contextMenuEvent(event);
-
+	self->QWebInspector::contextMenuEvent(event);
 }
 
-void QWebInspector_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QWebInspector_virtualbase_tabletEvent(VirtualQWebInspector* self, QTabletEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::tabletEvent(event);
-
+	self->QWebInspector::tabletEvent(event);
 }
 
-void QWebInspector_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QWebInspector_virtualbase_actionEvent(VirtualQWebInspector* self, QActionEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::actionEvent(event);
-
+	self->QWebInspector::actionEvent(event);
 }
 
-void QWebInspector_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QWebInspector_virtualbase_dragEnterEvent(VirtualQWebInspector* self, QDragEnterEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::dragEnterEvent(event);
-
+	self->QWebInspector::dragEnterEvent(event);
 }
 
-void QWebInspector_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QWebInspector_virtualbase_dragMoveEvent(VirtualQWebInspector* self, QDragMoveEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::dragMoveEvent(event);
-
+	self->QWebInspector::dragMoveEvent(event);
 }
 
-void QWebInspector_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QWebInspector_virtualbase_dragLeaveEvent(VirtualQWebInspector* self, QDragLeaveEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::dragLeaveEvent(event);
-
+	self->QWebInspector::dragLeaveEvent(event);
 }
 
-void QWebInspector_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QWebInspector_virtualbase_dropEvent(VirtualQWebInspector* self, QDropEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::dropEvent(event);
-
+	self->QWebInspector::dropEvent(event);
 }
 
-bool QWebInspector_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QWebInspector_virtualbase_nativeEvent(VirtualQWebInspector* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QWebInspector::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-void QWebInspector_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QWebInspector_virtualbase_changeEvent(VirtualQWebInspector* self, QEvent* param1) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::changeEvent(param1);
-
+	self->QWebInspector::changeEvent(param1);
 }
 
-int QWebInspector_virtualbase_metric(const void* self, int param1) {
+int QWebInspector_virtualbase_metric(const VirtualQWebInspector* self, int param1) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::metric(static_cast<VirtualQWebInspector::PaintDeviceMetric>(param1));
-
+	return self->QWebInspector::metric(static_cast<VirtualQWebInspector::PaintDeviceMetric>(param1));
 }
 
-void QWebInspector_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QWebInspector_virtualbase_initPainter(const VirtualQWebInspector* self, QPainter* painter) {
 
-	( (const VirtualQWebInspector*)(self) )->QWebInspector::initPainter(painter);
-
+	self->QWebInspector::initPainter(painter);
 }
 
-QPaintDevice* QWebInspector_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QWebInspector_virtualbase_redirected(const VirtualQWebInspector* self, QPoint* offset) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::redirected(offset);
-
+	return self->QWebInspector::redirected(offset);
 }
 
-QPainter* QWebInspector_virtualbase_sharedPainter(const void* self) {
+QPainter* QWebInspector_virtualbase_sharedPainter(const VirtualQWebInspector* self) {
 
-	return ( (const VirtualQWebInspector*)(self) )->QWebInspector::sharedPainter();
-
+	return self->QWebInspector::sharedPainter();
 }
 
-void QWebInspector_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QWebInspector_virtualbase_inputMethodEvent(VirtualQWebInspector* self, QInputMethodEvent* param1) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::inputMethodEvent(param1);
-
+	self->QWebInspector::inputMethodEvent(param1);
 }
 
-QVariant* QWebInspector_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QWebInspector_virtualbase_inputMethodQuery(const VirtualQWebInspector* self, int param1) {
 
-	return new QVariant(( (const VirtualQWebInspector*)(self) )->QWebInspector::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QWebInspector::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QWebInspector_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QWebInspector_virtualbase_focusNextPrevChild(VirtualQWebInspector* self, bool next) {
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::focusNextPrevChild(next);
-
+	return self->QWebInspector::focusNextPrevChild(next);
 }
 
-bool QWebInspector_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QWebInspector_virtualbase_eventFilter(VirtualQWebInspector* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQWebInspector*)(self) )->QWebInspector::eventFilter(watched, event);
-
+	return self->QWebInspector::eventFilter(watched, event);
 }
 
-void QWebInspector_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QWebInspector_virtualbase_timerEvent(VirtualQWebInspector* self, QTimerEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::timerEvent(event);
-
+	self->QWebInspector::timerEvent(event);
 }
 
-void QWebInspector_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QWebInspector_virtualbase_childEvent(VirtualQWebInspector* self, QChildEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::childEvent(event);
-
+	self->QWebInspector::childEvent(event);
 }
 
-void QWebInspector_virtualbase_customEvent(void* self, QEvent* event) {
+void QWebInspector_virtualbase_customEvent(VirtualQWebInspector* self, QEvent* event) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::customEvent(event);
-
+	self->QWebInspector::customEvent(event);
 }
 
-void QWebInspector_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QWebInspector_virtualbase_connectNotify(VirtualQWebInspector* self, QMetaMethod* signal) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::connectNotify(*signal);
-
+	self->QWebInspector::connectNotify(*signal);
 }
 
-void QWebInspector_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QWebInspector_virtualbase_disconnectNotify(VirtualQWebInspector* self, QMetaMethod* signal) {
 
-	( (VirtualQWebInspector*)(self) )->QWebInspector::disconnectNotify(*signal);
-
+	self->QWebInspector::disconnectNotify(*signal);
 }
 
 const QMetaObject* QWebInspector_staticMetaObject() { return &QWebInspector::staticMetaObject; }
-void QWebInspector_protectedbase_updateMicroFocus(void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QWebInspector_VTable* QWebInspector_vtbl(const VirtualQWebInspector* self) { return self->vtbl; }
+void* QWebInspector_vdata(const VirtualQWebInspector* self) { return self->vdata; }
+void QWebInspector_setVdata(VirtualQWebInspector* self, void* vdata) { self->vdata = vdata; }
+
+void QWebInspector_protectedbase_updateMicroFocus(VirtualQWebInspector* self) {
+	self->updateMicroFocus();
 }
 
-void QWebInspector_protectedbase_create(void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	self_cast->create();
-
+void QWebInspector_protectedbase_create(VirtualQWebInspector* self) {
+	self->create();
 }
 
-void QWebInspector_protectedbase_destroy(void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	self_cast->destroy();
-
+void QWebInspector_protectedbase_destroy(VirtualQWebInspector* self) {
+	self->destroy();
 }
 
-bool QWebInspector_protectedbase_focusNextChild(void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QWebInspector_protectedbase_focusNextChild(VirtualQWebInspector* self) {
+	return self->focusNextChild();
 }
 
-bool QWebInspector_protectedbase_focusPreviousChild(void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QWebInspector_protectedbase_focusPreviousChild(VirtualQWebInspector* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QWebInspector_protectedbase_sender(const void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QWebInspector_protectedbase_sender(const VirtualQWebInspector* self) {
+	return self->sender();
 }
 
-int QWebInspector_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QWebInspector_protectedbase_senderSignalIndex(const VirtualQWebInspector* self) {
+	return self->senderSignalIndex();
 }
 
-int QWebInspector_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QWebInspector_protectedbase_receivers(const VirtualQWebInspector* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QWebInspector_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQWebInspector* self_cast = static_cast<VirtualQWebInspector*>( (QWebInspector*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QWebInspector_protectedbase_isSignalConnected(const VirtualQWebInspector* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QWebInspector_delete(QWebInspector* self) {

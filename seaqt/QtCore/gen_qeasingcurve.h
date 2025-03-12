@@ -25,6 +25,7 @@ typedef struct QPointF QPointF;
 QEasingCurve* QEasingCurve_new();
 QEasingCurve* QEasingCurve_new2(QEasingCurve* other);
 QEasingCurve* QEasingCurve_new3(int type);
+
 void QEasingCurve_operatorAssign(QEasingCurve* self, QEasingCurve* other);
 void QEasingCurve_swap(QEasingCurve* self, QEasingCurve* other);
 bool QEasingCurve_operatorEqual(const QEasingCurve* self, QEasingCurve* other);
@@ -41,6 +42,7 @@ struct miqt_array /* of QPointF* */  QEasingCurve_toCubicSpline(const QEasingCur
 int QEasingCurve_type(const QEasingCurve* self);
 void QEasingCurve_setType(QEasingCurve* self, int type);
 double QEasingCurve_valueForProgress(const QEasingCurve* self, double progress);
+
 const QMetaObject* QEasingCurve_staticMetaObject();
 void QEasingCurve_delete(QEasingCurve* self);
 

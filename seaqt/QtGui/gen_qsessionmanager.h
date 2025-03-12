@@ -52,6 +52,7 @@ struct miqt_string QSessionManager_tr2(const char* s, const char* c);
 struct miqt_string QSessionManager_tr3(const char* s, const char* c, int n);
 struct miqt_string QSessionManager_trUtf82(const char* s, const char* c);
 struct miqt_string QSessionManager_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QSessionManager_staticMetaObject();
 
 #ifdef __cplusplus

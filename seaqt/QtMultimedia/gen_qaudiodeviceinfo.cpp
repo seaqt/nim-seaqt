@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qaudiodeviceinfo.h>
 #include "gen_qaudiodeviceinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAudioDeviceInfo* QAudioDeviceInfo_new() {
 	return new QAudioDeviceInfo();
 }

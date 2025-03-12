@@ -22,6 +22,7 @@ typedef struct QMimeType QMimeType;
 
 QMimeType* QMimeType_new();
 QMimeType* QMimeType_new2(QMimeType* other);
+
 void QMimeType_operatorAssign(QMimeType* self, QMimeType* other);
 void QMimeType_swap(QMimeType* self, QMimeType* other);
 bool QMimeType_operatorEqual(const QMimeType* self, QMimeType* other);
@@ -40,6 +41,7 @@ struct miqt_array /* of struct miqt_string */  QMimeType_suffixes(const QMimeTyp
 struct miqt_string QMimeType_preferredSuffix(const QMimeType* self);
 bool QMimeType_inherits(const QMimeType* self, struct miqt_string mimeTypeName);
 struct miqt_string QMimeType_filterString(const QMimeType* self);
+
 const QMetaObject* QMimeType_staticMetaObject();
 void QMimeType_delete(QMimeType* self);
 

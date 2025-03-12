@@ -5,15 +5,6 @@
 #include <QTextBoundaryFinder>
 #include <qtextboundaryfinder.h>
 #include "gen_qtextboundaryfinder.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTextBoundaryFinder* QTextBoundaryFinder_new() {
 	return new QTextBoundaryFinder();
 }

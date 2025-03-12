@@ -16,43 +16,36 @@
 #include <QWidget>
 #include <qcompleter.h>
 #include "gen_qcompleter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQCompleter final : public QCompleter {
-	struct QCompleter_VTable* vtbl;
+	const QCompleter_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QCompleter_VTable* QCompleter_vtbl(const VirtualQCompleter* self);
+	friend void* QCompleter_vdata(const VirtualQCompleter* self);
+	friend void QCompleter_setVdata(VirtualQCompleter* self, void* vdata);
 
-	VirtualQCompleter(struct QCompleter_VTable* vtbl): QCompleter(), vtbl(vtbl) {};
-	VirtualQCompleter(struct QCompleter_VTable* vtbl, QAbstractItemModel* model): QCompleter(model), vtbl(vtbl) {};
-	VirtualQCompleter(struct QCompleter_VTable* vtbl, const QStringList& completions): QCompleter(completions), vtbl(vtbl) {};
-	VirtualQCompleter(struct QCompleter_VTable* vtbl, QObject* parent): QCompleter(parent), vtbl(vtbl) {};
-	VirtualQCompleter(struct QCompleter_VTable* vtbl, QAbstractItemModel* model, QObject* parent): QCompleter(model, parent), vtbl(vtbl) {};
-	VirtualQCompleter(struct QCompleter_VTable* vtbl, const QStringList& completions, QObject* parent): QCompleter(completions, parent), vtbl(vtbl) {};
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata): QCompleter(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata, QAbstractItemModel* model): QCompleter(model), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata, const QStringList& completions): QCompleter(completions), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata, QObject* parent): QCompleter(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata, QAbstractItemModel* model, QObject* parent): QCompleter(model, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCompleter(const QCompleter_VTable* vtbl, void* vdata, const QStringList& completions, QObject* parent): QCompleter(completions, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQCompleter() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQCompleter() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QCompleter::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QCompleter_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QCompleter_virtualbase_metaObject(const VirtualQCompleter* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QCompleter::qt_metacast(param1);
@@ -60,14 +53,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QCompleter_virtualbase_metacast(void* self, const char* param1);
+	friend void* QCompleter_virtualbase_metacast(VirtualQCompleter* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QCompleter::qt_metacall(param1, param2, param3);
@@ -78,14 +70,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCompleter_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QCompleter_virtualbase_metacall(VirtualQCompleter* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QString pathFromIndex(const QModelIndex& index) const override {
 		if (vtbl->pathFromIndex == 0) {
 			return QCompleter::pathFromIndex(index);
@@ -95,16 +86,15 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		struct miqt_string callback_return_value = vtbl->pathFromIndex(vtbl, this, sigval1);
+		struct miqt_string callback_return_value = vtbl->pathFromIndex(this, sigval1);
 		QString callback_return_value_QString = QString::fromUtf8(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QString;
 	}
 
-	friend struct miqt_string QCompleter_virtualbase_pathFromIndex(const void* self, QModelIndex* index);
+	friend struct miqt_string QCompleter_virtualbase_pathFromIndex(const VirtualQCompleter* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual QStringList splitPath(const QString& path) const override {
 		if (vtbl->splitPath == 0) {
 			return QCompleter::splitPath(path);
@@ -119,7 +109,7 @@ public:
 		memcpy(path_ms.data, path_b.data(), path_ms.len);
 		struct miqt_string sigval1 = path_ms;
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->splitPath(vtbl, this, sigval1);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->splitPath(this, sigval1);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -133,9 +123,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(const void* self, struct miqt_string path);
+	friend struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(const VirtualQCompleter* self, struct miqt_string path);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* o, QEvent* e) override {
 		if (vtbl->eventFilter == 0) {
 			return QCompleter::eventFilter(o, e);
@@ -144,14 +133,13 @@ public:
 		QObject* sigval1 = o;
 		QEvent* sigval2 = e;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QCompleter_virtualbase_eventFilter(void* self, QObject* o, QEvent* e);
+	friend bool QCompleter_virtualbase_eventFilter(VirtualQCompleter* self, QObject* o, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QCompleter::event(param1);
@@ -159,14 +147,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCompleter_virtualbase_event(void* self, QEvent* param1);
+	friend bool QCompleter_virtualbase_event(VirtualQCompleter* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QCompleter::timerEvent(event);
@@ -175,13 +162,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QCompleter_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QCompleter_virtualbase_timerEvent(VirtualQCompleter* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QCompleter::childEvent(event);
@@ -190,13 +176,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QCompleter_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QCompleter_virtualbase_childEvent(VirtualQCompleter* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QCompleter::customEvent(event);
@@ -205,13 +190,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QCompleter_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QCompleter_virtualbase_customEvent(VirtualQCompleter* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QCompleter::connectNotify(signal);
@@ -222,13 +206,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QCompleter_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QCompleter_virtualbase_connectNotify(VirtualQCompleter* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QCompleter::disconnectNotify(signal);
@@ -239,28 +222,28 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QCompleter_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QCompleter_virtualbase_disconnectNotify(VirtualQCompleter* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QCompleter_protectedbase_sender(const void* self);
-	friend int QCompleter_protectedbase_senderSignalIndex(const void* self);
-	friend int QCompleter_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QCompleter_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QCompleter_protectedbase_sender(const VirtualQCompleter* self);
+	friend int QCompleter_protectedbase_senderSignalIndex(const VirtualQCompleter* self);
+	friend int QCompleter_protectedbase_receivers(const VirtualQCompleter* self, const char* signal);
+	friend bool QCompleter_protectedbase_isSignalConnected(const VirtualQCompleter* self, QMetaMethod* signal);
 };
 
-QCompleter* QCompleter_new(struct QCompleter_VTable* vtbl) {
-	return new VirtualQCompleter(vtbl);
+VirtualQCompleter* QCompleter_new(const QCompleter_VTable* vtbl, void* vdata) {
+	return new VirtualQCompleter(vtbl, vdata);
 }
 
-QCompleter* QCompleter_new2(struct QCompleter_VTable* vtbl, QAbstractItemModel* model) {
-	return new VirtualQCompleter(vtbl, model);
+VirtualQCompleter* QCompleter_new2(const QCompleter_VTable* vtbl, void* vdata, QAbstractItemModel* model) {
+	return new VirtualQCompleter(vtbl, vdata, model);
 }
 
-QCompleter* QCompleter_new3(struct QCompleter_VTable* vtbl, struct miqt_array /* of struct miqt_string */  completions) {
+VirtualQCompleter* QCompleter_new3(const QCompleter_VTable* vtbl, void* vdata, struct miqt_array /* of struct miqt_string */  completions) {
 	QStringList completions_QList;
 	completions_QList.reserve(completions.len);
 	struct miqt_string* completions_arr = static_cast<struct miqt_string*>(completions.data);
@@ -268,18 +251,18 @@ QCompleter* QCompleter_new3(struct QCompleter_VTable* vtbl, struct miqt_array /*
 		QString completions_arr_i_QString = QString::fromUtf8(completions_arr[i].data, completions_arr[i].len);
 		completions_QList.push_back(completions_arr_i_QString);
 	}
-	return new VirtualQCompleter(vtbl, completions_QList);
+	return new VirtualQCompleter(vtbl, vdata, completions_QList);
 }
 
-QCompleter* QCompleter_new4(struct QCompleter_VTable* vtbl, QObject* parent) {
-	return new VirtualQCompleter(vtbl, parent);
+VirtualQCompleter* QCompleter_new4(const QCompleter_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQCompleter(vtbl, vdata, parent);
 }
 
-QCompleter* QCompleter_new5(struct QCompleter_VTable* vtbl, QAbstractItemModel* model, QObject* parent) {
-	return new VirtualQCompleter(vtbl, model, parent);
+VirtualQCompleter* QCompleter_new5(const QCompleter_VTable* vtbl, void* vdata, QAbstractItemModel* model, QObject* parent) {
+	return new VirtualQCompleter(vtbl, vdata, model, parent);
 }
 
-QCompleter* QCompleter_new6(struct QCompleter_VTable* vtbl, struct miqt_array /* of struct miqt_string */  completions, QObject* parent) {
+VirtualQCompleter* QCompleter_new6(const QCompleter_VTable* vtbl, void* vdata, struct miqt_array /* of struct miqt_string */  completions, QObject* parent) {
 	QStringList completions_QList;
 	completions_QList.reserve(completions.len);
 	struct miqt_string* completions_arr = static_cast<struct miqt_string*>(completions.data);
@@ -287,7 +270,7 @@ QCompleter* QCompleter_new6(struct QCompleter_VTable* vtbl, struct miqt_array /*
 		QString completions_arr_i_QString = QString::fromUtf8(completions_arr[i].data, completions_arr[i].len);
 		completions_QList.push_back(completions_arr_i_QString);
 	}
-	return new VirtualQCompleter(vtbl, completions_QList, parent);
+	return new VirtualQCompleter(vtbl, vdata, completions_QList, parent);
 }
 
 void QCompleter_virtbase(QCompleter* src, QObject** outptr_QObject) {
@@ -508,7 +491,7 @@ void QCompleter_activated(QCompleter* self, struct miqt_string text) {
 	self->activated(text_QString);
 }
 
-void QCompleter_connect_activated(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QCompleter_connect_activated(VirtualQCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -531,7 +514,7 @@ void QCompleter_activatedWithIndex(QCompleter* self, QModelIndex* index) {
 	self->activated(*index);
 }
 
-void QCompleter_connect_activatedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QCompleter_connect_activatedWithIndex(VirtualQCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -550,7 +533,7 @@ void QCompleter_highlighted(QCompleter* self, struct miqt_string text) {
 	self->highlighted(text_QString);
 }
 
-void QCompleter_connect_highlighted(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QCompleter_connect_highlighted(VirtualQCompleter* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -573,7 +556,7 @@ void QCompleter_highlightedWithIndex(QCompleter* self, QModelIndex* index) {
 	self->highlighted(*index);
 }
 
-void QCompleter_connect_highlightedWithIndex(QCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QCompleter_connect_highlightedWithIndex(VirtualQCompleter* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -635,27 +618,24 @@ void QCompleter_complete1(QCompleter* self, QRect* rect) {
 	self->complete(*rect);
 }
 
-QMetaObject* QCompleter_virtualbase_metaObject(const void* self) {
+QMetaObject* QCompleter_virtualbase_metaObject(const VirtualQCompleter* self) {
 
-	return (QMetaObject*) ( (const VirtualQCompleter*)(self) )->QCompleter::metaObject();
-
+	return (QMetaObject*) self->QCompleter::metaObject();
 }
 
-void* QCompleter_virtualbase_metacast(void* self, const char* param1) {
+void* QCompleter_virtualbase_metacast(VirtualQCompleter* self, const char* param1) {
 
-	return ( (VirtualQCompleter*)(self) )->QCompleter::qt_metacast(param1);
-
+	return self->QCompleter::qt_metacast(param1);
 }
 
-int QCompleter_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QCompleter_virtualbase_metacall(VirtualQCompleter* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQCompleter*)(self) )->QCompleter::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QCompleter::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct miqt_string QCompleter_virtualbase_pathFromIndex(const void* self, QModelIndex* index) {
+struct miqt_string QCompleter_virtualbase_pathFromIndex(const VirtualQCompleter* self, QModelIndex* index) {
 
-	QString _ret = ( (const VirtualQCompleter*)(self) )->QCompleter::pathFromIndex(*index);
+	QString _ret = self->QCompleter::pathFromIndex(*index);
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory
 	QByteArray _b = _ret.toUtf8();
 	struct miqt_string _ms;
@@ -663,13 +643,12 @@ struct miqt_string QCompleter_virtualbase_pathFromIndex(const void* self, QModel
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _b.data(), _ms.len);
 	return _ms;
-
 }
 
-struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(const void* self, struct miqt_string path) {
+struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(const VirtualQCompleter* self, struct miqt_string path) {
 	QString path_QString = QString::fromUtf8(path.data, path.len);
 
-	QStringList _ret = ( (const VirtualQCompleter*)(self) )->QCompleter::splitPath(path_QString);
+	QStringList _ret = self->QCompleter::splitPath(path_QString);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct miqt_string* _arr = static_cast<struct miqt_string*>(malloc(sizeof(struct miqt_string) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -686,78 +665,63 @@ struct miqt_array /* of struct miqt_string */  QCompleter_virtualbase_splitPath(
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-bool QCompleter_virtualbase_eventFilter(void* self, QObject* o, QEvent* e) {
+bool QCompleter_virtualbase_eventFilter(VirtualQCompleter* self, QObject* o, QEvent* e) {
 
-	return ( (VirtualQCompleter*)(self) )->QCompleter::eventFilter(o, e);
-
+	return self->QCompleter::eventFilter(o, e);
 }
 
-bool QCompleter_virtualbase_event(void* self, QEvent* param1) {
+bool QCompleter_virtualbase_event(VirtualQCompleter* self, QEvent* param1) {
 
-	return ( (VirtualQCompleter*)(self) )->QCompleter::event(param1);
-
+	return self->QCompleter::event(param1);
 }
 
-void QCompleter_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QCompleter_virtualbase_timerEvent(VirtualQCompleter* self, QTimerEvent* event) {
 
-	( (VirtualQCompleter*)(self) )->QCompleter::timerEvent(event);
-
+	self->QCompleter::timerEvent(event);
 }
 
-void QCompleter_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QCompleter_virtualbase_childEvent(VirtualQCompleter* self, QChildEvent* event) {
 
-	( (VirtualQCompleter*)(self) )->QCompleter::childEvent(event);
-
+	self->QCompleter::childEvent(event);
 }
 
-void QCompleter_virtualbase_customEvent(void* self, QEvent* event) {
+void QCompleter_virtualbase_customEvent(VirtualQCompleter* self, QEvent* event) {
 
-	( (VirtualQCompleter*)(self) )->QCompleter::customEvent(event);
-
+	self->QCompleter::customEvent(event);
 }
 
-void QCompleter_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QCompleter_virtualbase_connectNotify(VirtualQCompleter* self, QMetaMethod* signal) {
 
-	( (VirtualQCompleter*)(self) )->QCompleter::connectNotify(*signal);
-
+	self->QCompleter::connectNotify(*signal);
 }
 
-void QCompleter_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QCompleter_virtualbase_disconnectNotify(VirtualQCompleter* self, QMetaMethod* signal) {
 
-	( (VirtualQCompleter*)(self) )->QCompleter::disconnectNotify(*signal);
-
+	self->QCompleter::disconnectNotify(*signal);
 }
 
 const QMetaObject* QCompleter_staticMetaObject() { return &QCompleter::staticMetaObject; }
-QObject* QCompleter_protectedbase_sender(const void* self) {
-	VirtualQCompleter* self_cast = static_cast<VirtualQCompleter*>( (QCompleter*)(self) );
-	
-	return self_cast->sender();
 
+const QCompleter_VTable* QCompleter_vtbl(const VirtualQCompleter* self) { return self->vtbl; }
+void* QCompleter_vdata(const VirtualQCompleter* self) { return self->vdata; }
+void QCompleter_setVdata(VirtualQCompleter* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QCompleter_protectedbase_sender(const VirtualQCompleter* self) {
+	return self->sender();
 }
 
-int QCompleter_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQCompleter* self_cast = static_cast<VirtualQCompleter*>( (QCompleter*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QCompleter_protectedbase_senderSignalIndex(const VirtualQCompleter* self) {
+	return self->senderSignalIndex();
 }
 
-int QCompleter_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQCompleter* self_cast = static_cast<VirtualQCompleter*>( (QCompleter*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QCompleter_protectedbase_receivers(const VirtualQCompleter* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QCompleter_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQCompleter* self_cast = static_cast<VirtualQCompleter*>( (QCompleter*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QCompleter_protectedbase_isSignalConnected(const VirtualQCompleter* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QCompleter_delete(QCompleter* self) {

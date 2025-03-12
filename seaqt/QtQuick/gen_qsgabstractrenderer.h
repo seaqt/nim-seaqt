@@ -72,6 +72,7 @@ struct miqt_string QSGAbstractRenderer_tr2(const char* s, const char* c);
 struct miqt_string QSGAbstractRenderer_tr3(const char* s, const char* c, int n);
 struct miqt_string QSGAbstractRenderer_trUtf82(const char* s, const char* c);
 struct miqt_string QSGAbstractRenderer_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QSGAbstractRenderer_staticMetaObject();
 void QSGAbstractRenderer_delete(QSGAbstractRenderer* self);
 

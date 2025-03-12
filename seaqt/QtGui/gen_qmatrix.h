@@ -42,6 +42,7 @@ QMatrix* QMatrix_new(int param1);
 QMatrix* QMatrix_new2();
 QMatrix* QMatrix_new3(double m11, double m12, double m21, double m22, double dx, double dy);
 QMatrix* QMatrix_new4(QMatrix* other);
+
 void QMatrix_operatorAssign(QMatrix* self, QMatrix* param1);
 void QMatrix_setMatrix(QMatrix* self, double m11, double m12, double m21, double m22, double dx, double dy);
 double QMatrix_m11(const QMatrix* self);
@@ -75,6 +76,7 @@ QMatrix* QMatrix_operatorMultiplyAssign(QMatrix* self, QMatrix* param1);
 QMatrix* QMatrix_operatorMultiply(const QMatrix* self, QMatrix* o);
 QVariant* QMatrix_ToQVariant(const QMatrix* self);
 QMatrix* QMatrix_inverted1(const QMatrix* self, bool* invertible);
+
 void QMatrix_delete(QMatrix* self);
 
 #ifdef __cplusplus

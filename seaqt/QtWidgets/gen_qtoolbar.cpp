@@ -40,41 +40,34 @@
 #include <QWidget>
 #include <qtoolbar.h>
 #include "gen_qtoolbar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQToolBar final : public QToolBar {
-	struct QToolBar_VTable* vtbl;
+	const QToolBar_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QToolBar_VTable* QToolBar_vtbl(const VirtualQToolBar* self);
+	friend void* QToolBar_vdata(const VirtualQToolBar* self);
+	friend void QToolBar_setVdata(VirtualQToolBar* self, void* vdata);
 
-	VirtualQToolBar(struct QToolBar_VTable* vtbl, QWidget* parent): QToolBar(parent), vtbl(vtbl) {};
-	VirtualQToolBar(struct QToolBar_VTable* vtbl, const QString& title): QToolBar(title), vtbl(vtbl) {};
-	VirtualQToolBar(struct QToolBar_VTable* vtbl): QToolBar(), vtbl(vtbl) {};
-	VirtualQToolBar(struct QToolBar_VTable* vtbl, const QString& title, QWidget* parent): QToolBar(title, parent), vtbl(vtbl) {};
+	VirtualQToolBar(const QToolBar_VTable* vtbl, void* vdata, QWidget* parent): QToolBar(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQToolBar(const QToolBar_VTable* vtbl, void* vdata, const QString& title): QToolBar(title), vtbl(vtbl), vdata(vdata) {}
+	VirtualQToolBar(const QToolBar_VTable* vtbl, void* vdata): QToolBar(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQToolBar(const QToolBar_VTable* vtbl, void* vdata, const QString& title, QWidget* parent): QToolBar(title, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQToolBar() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQToolBar() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QToolBar::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QToolBar_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QToolBar_virtualbase_metaObject(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QToolBar::qt_metacast(param1);
@@ -82,14 +75,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QToolBar_virtualbase_metacast(void* self, const char* param1);
+	friend void* QToolBar_virtualbase_metacast(VirtualQToolBar* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QToolBar::qt_metacall(param1, param2, param3);
@@ -100,14 +92,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QToolBar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QToolBar_virtualbase_metacall(VirtualQToolBar* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QToolBar::actionEvent(event);
@@ -116,13 +107,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QToolBar_virtualbase_actionEvent(VirtualQToolBar* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QToolBar::changeEvent(event);
@@ -131,13 +121,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QToolBar_virtualbase_changeEvent(VirtualQToolBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QToolBar::paintEvent(event);
@@ -146,13 +135,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QToolBar_virtualbase_paintEvent(VirtualQToolBar* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QToolBar::event(event);
@@ -160,28 +148,26 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QToolBar_virtualbase_event(void* self, QEvent* event);
+	friend bool QToolBar_virtualbase_event(VirtualQToolBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QToolBar::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QToolBar_virtualbase_devType(const void* self);
+	friend int QToolBar_virtualbase_devType(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QToolBar::setVisible(visible);
@@ -190,45 +176,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_setVisible(void* self, bool visible);
+	friend void QToolBar_virtualbase_setVisible(VirtualQToolBar* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QToolBar::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QToolBar_virtualbase_sizeHint(const void* self);
+	friend QSize* QToolBar_virtualbase_sizeHint(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QToolBar::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QToolBar_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QToolBar_virtualbase_minimumSizeHint(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QToolBar::heightForWidth(param1);
@@ -236,42 +219,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QToolBar_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QToolBar_virtualbase_heightForWidth(const VirtualQToolBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QToolBar::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QToolBar_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QToolBar_virtualbase_hasHeightForWidth(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QToolBar::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QToolBar_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QToolBar_virtualbase_paintEngine(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QToolBar::mousePressEvent(event);
@@ -280,13 +260,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QToolBar_virtualbase_mousePressEvent(VirtualQToolBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QToolBar::mouseReleaseEvent(event);
@@ -295,13 +274,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QToolBar_virtualbase_mouseReleaseEvent(VirtualQToolBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QToolBar::mouseDoubleClickEvent(event);
@@ -310,13 +288,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QToolBar_virtualbase_mouseDoubleClickEvent(VirtualQToolBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QToolBar::mouseMoveEvent(event);
@@ -325,13 +302,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QToolBar_virtualbase_mouseMoveEvent(VirtualQToolBar* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QToolBar::wheelEvent(event);
@@ -340,13 +316,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QToolBar_virtualbase_wheelEvent(VirtualQToolBar* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QToolBar::keyPressEvent(event);
@@ -355,13 +330,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QToolBar_virtualbase_keyPressEvent(VirtualQToolBar* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QToolBar::keyReleaseEvent(event);
@@ -370,13 +344,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QToolBar_virtualbase_keyReleaseEvent(VirtualQToolBar* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QToolBar::focusInEvent(event);
@@ -385,13 +358,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QToolBar_virtualbase_focusInEvent(VirtualQToolBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QToolBar::focusOutEvent(event);
@@ -400,13 +372,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QToolBar_virtualbase_focusOutEvent(VirtualQToolBar* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QToolBar::enterEvent(event);
@@ -415,13 +386,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QToolBar_virtualbase_enterEvent(VirtualQToolBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QToolBar::leaveEvent(event);
@@ -430,13 +400,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QToolBar_virtualbase_leaveEvent(VirtualQToolBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QToolBar::moveEvent(event);
@@ -445,13 +414,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QToolBar_virtualbase_moveEvent(VirtualQToolBar* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QToolBar::resizeEvent(event);
@@ -460,13 +428,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QToolBar_virtualbase_resizeEvent(VirtualQToolBar* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QToolBar::closeEvent(event);
@@ -475,13 +442,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QToolBar_virtualbase_closeEvent(VirtualQToolBar* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QToolBar::contextMenuEvent(event);
@@ -490,13 +456,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QToolBar_virtualbase_contextMenuEvent(VirtualQToolBar* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QToolBar::tabletEvent(event);
@@ -505,13 +470,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QToolBar_virtualbase_tabletEvent(VirtualQToolBar* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QToolBar::dragEnterEvent(event);
@@ -520,13 +484,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QToolBar_virtualbase_dragEnterEvent(VirtualQToolBar* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QToolBar::dragMoveEvent(event);
@@ -535,13 +498,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QToolBar_virtualbase_dragMoveEvent(VirtualQToolBar* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QToolBar::dragLeaveEvent(event);
@@ -550,13 +512,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QToolBar_virtualbase_dragLeaveEvent(VirtualQToolBar* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QToolBar::dropEvent(event);
@@ -565,13 +526,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QToolBar_virtualbase_dropEvent(VirtualQToolBar* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QToolBar::showEvent(event);
@@ -580,13 +540,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QToolBar_virtualbase_showEvent(VirtualQToolBar* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QToolBar::hideEvent(event);
@@ -595,13 +554,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QToolBar_virtualbase_hideEvent(VirtualQToolBar* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QToolBar::nativeEvent(eventType, message, result);
@@ -616,14 +574,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QToolBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QToolBar_virtualbase_nativeEvent(VirtualQToolBar* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QToolBar::metric(param1);
@@ -632,14 +589,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QToolBar_virtualbase_metric(const void* self, int param1);
+	friend int QToolBar_virtualbase_metric(const VirtualQToolBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QToolBar::initPainter(painter);
@@ -648,13 +604,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QToolBar_virtualbase_initPainter(const VirtualQToolBar* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QToolBar::redirected(offset);
@@ -662,28 +617,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QToolBar_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QToolBar_virtualbase_redirected(const VirtualQToolBar* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QToolBar::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QToolBar_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QToolBar_virtualbase_sharedPainter(const VirtualQToolBar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QToolBar::inputMethodEvent(param1);
@@ -692,13 +645,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QToolBar_virtualbase_inputMethodEvent(VirtualQToolBar* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QToolBar::inputMethodQuery(param1);
@@ -707,16 +659,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QToolBar_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QToolBar_virtualbase_inputMethodQuery(const VirtualQToolBar* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QToolBar::focusNextPrevChild(next);
@@ -724,14 +675,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QToolBar_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QToolBar_virtualbase_focusNextPrevChild(VirtualQToolBar* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QToolBar::eventFilter(watched, event);
@@ -740,14 +690,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QToolBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QToolBar_virtualbase_eventFilter(VirtualQToolBar* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QToolBar::timerEvent(event);
@@ -756,13 +705,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QToolBar_virtualbase_timerEvent(VirtualQToolBar* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QToolBar::childEvent(event);
@@ -771,13 +719,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QToolBar_virtualbase_childEvent(VirtualQToolBar* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QToolBar::customEvent(event);
@@ -786,13 +733,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QToolBar_virtualbase_customEvent(VirtualQToolBar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QToolBar::connectNotify(signal);
@@ -803,13 +749,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QToolBar_virtualbase_connectNotify(VirtualQToolBar* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QToolBar::disconnectNotify(signal);
@@ -820,41 +765,41 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QToolBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QToolBar_virtualbase_disconnectNotify(VirtualQToolBar* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QToolBar_protectedbase_initStyleOption(const void* self, QStyleOptionToolBar* option);
-	friend void QToolBar_protectedbase_updateMicroFocus(void* self);
-	friend void QToolBar_protectedbase_create(void* self);
-	friend void QToolBar_protectedbase_destroy(void* self);
-	friend bool QToolBar_protectedbase_focusNextChild(void* self);
-	friend bool QToolBar_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QToolBar_protectedbase_sender(const void* self);
-	friend int QToolBar_protectedbase_senderSignalIndex(const void* self);
-	friend int QToolBar_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QToolBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QToolBar_protectedbase_initStyleOption(const VirtualQToolBar* self, QStyleOptionToolBar* option);
+	friend void QToolBar_protectedbase_updateMicroFocus(VirtualQToolBar* self);
+	friend void QToolBar_protectedbase_create(VirtualQToolBar* self);
+	friend void QToolBar_protectedbase_destroy(VirtualQToolBar* self);
+	friend bool QToolBar_protectedbase_focusNextChild(VirtualQToolBar* self);
+	friend bool QToolBar_protectedbase_focusPreviousChild(VirtualQToolBar* self);
+	friend QObject* QToolBar_protectedbase_sender(const VirtualQToolBar* self);
+	friend int QToolBar_protectedbase_senderSignalIndex(const VirtualQToolBar* self);
+	friend int QToolBar_protectedbase_receivers(const VirtualQToolBar* self, const char* signal);
+	friend bool QToolBar_protectedbase_isSignalConnected(const VirtualQToolBar* self, QMetaMethod* signal);
 };
 
-QToolBar* QToolBar_new(struct QToolBar_VTable* vtbl, QWidget* parent) {
-	return new VirtualQToolBar(vtbl, parent);
+VirtualQToolBar* QToolBar_new(const QToolBar_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQToolBar(vtbl, vdata, parent);
 }
 
-QToolBar* QToolBar_new2(struct QToolBar_VTable* vtbl, struct miqt_string title) {
+VirtualQToolBar* QToolBar_new2(const QToolBar_VTable* vtbl, void* vdata, struct miqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQToolBar(vtbl, title_QString);
+	return new VirtualQToolBar(vtbl, vdata, title_QString);
 }
 
-QToolBar* QToolBar_new3(struct QToolBar_VTable* vtbl) {
-	return new VirtualQToolBar(vtbl);
+VirtualQToolBar* QToolBar_new3(const QToolBar_VTable* vtbl, void* vdata) {
+	return new VirtualQToolBar(vtbl, vdata);
 }
 
-QToolBar* QToolBar_new4(struct QToolBar_VTable* vtbl, struct miqt_string title, QWidget* parent) {
+VirtualQToolBar* QToolBar_new4(const QToolBar_VTable* vtbl, void* vdata, struct miqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQToolBar(vtbl, title_QString, parent);
+	return new VirtualQToolBar(vtbl, vdata, title_QString, parent);
 }
 
 void QToolBar_virtbase(QToolBar* src, QWidget** outptr_QWidget) {
@@ -1008,7 +953,7 @@ void QToolBar_actionTriggered(QToolBar* self, QAction* action) {
 	self->actionTriggered(action);
 }
 
-void QToolBar_connect_actionTriggered(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
+void QToolBar_connect_actionTriggered(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAction*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAction*);
@@ -1024,7 +969,7 @@ void QToolBar_movableChanged(QToolBar* self, bool movable) {
 	self->movableChanged(movable);
 }
 
-void QToolBar_connect_movableChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QToolBar_connect_movableChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1040,7 +985,7 @@ void QToolBar_allowedAreasChanged(QToolBar* self, int allowedAreas) {
 	self->allowedAreasChanged(static_cast<Qt::ToolBarAreas>(allowedAreas));
 }
 
-void QToolBar_connect_allowedAreasChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QToolBar_connect_allowedAreasChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1057,7 +1002,7 @@ void QToolBar_orientationChanged(QToolBar* self, int orientation) {
 	self->orientationChanged(static_cast<Qt::Orientation>(orientation));
 }
 
-void QToolBar_connect_orientationChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QToolBar_connect_orientationChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1074,7 +1019,7 @@ void QToolBar_iconSizeChanged(QToolBar* self, QSize* iconSize) {
 	self->iconSizeChanged(*iconSize);
 }
 
-void QToolBar_connect_iconSizeChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+void QToolBar_connect_iconSizeChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSize*);
@@ -1092,7 +1037,7 @@ void QToolBar_toolButtonStyleChanged(QToolBar* self, int toolButtonStyle) {
 	self->toolButtonStyleChanged(static_cast<Qt::ToolButtonStyle>(toolButtonStyle));
 }
 
-void QToolBar_connect_toolButtonStyleChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QToolBar_connect_toolButtonStyleChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1109,7 +1054,7 @@ void QToolBar_topLevelChanged(QToolBar* self, bool topLevel) {
 	self->topLevelChanged(topLevel);
 }
 
-void QToolBar_connect_topLevelChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QToolBar_connect_topLevelChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1125,7 +1070,7 @@ void QToolBar_visibilityChanged(QToolBar* self, bool visible) {
 	self->visibilityChanged(visible);
 }
 
-void QToolBar_connect_visibilityChanged(QToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QToolBar_connect_visibilityChanged(VirtualQToolBar* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1181,376 +1126,301 @@ struct miqt_string QToolBar_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QToolBar_virtualbase_metaObject(const void* self) {
+QMetaObject* QToolBar_virtualbase_metaObject(const VirtualQToolBar* self) {
 
-	return (QMetaObject*) ( (const VirtualQToolBar*)(self) )->QToolBar::metaObject();
-
+	return (QMetaObject*) self->QToolBar::metaObject();
 }
 
-void* QToolBar_virtualbase_metacast(void* self, const char* param1) {
+void* QToolBar_virtualbase_metacast(VirtualQToolBar* self, const char* param1) {
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::qt_metacast(param1);
-
+	return self->QToolBar::qt_metacast(param1);
 }
 
-int QToolBar_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QToolBar_virtualbase_metacall(VirtualQToolBar* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QToolBar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QToolBar_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QToolBar_virtualbase_actionEvent(VirtualQToolBar* self, QActionEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::actionEvent(event);
-
+	self->QToolBar::actionEvent(event);
 }
 
-void QToolBar_virtualbase_changeEvent(void* self, QEvent* event) {
+void QToolBar_virtualbase_changeEvent(VirtualQToolBar* self, QEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::changeEvent(event);
-
+	self->QToolBar::changeEvent(event);
 }
 
-void QToolBar_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QToolBar_virtualbase_paintEvent(VirtualQToolBar* self, QPaintEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::paintEvent(event);
-
+	self->QToolBar::paintEvent(event);
 }
 
-bool QToolBar_virtualbase_event(void* self, QEvent* event) {
+bool QToolBar_virtualbase_event(VirtualQToolBar* self, QEvent* event) {
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::event(event);
-
+	return self->QToolBar::event(event);
 }
 
-int QToolBar_virtualbase_devType(const void* self) {
+int QToolBar_virtualbase_devType(const VirtualQToolBar* self) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::devType();
-
+	return self->QToolBar::devType();
 }
 
-void QToolBar_virtualbase_setVisible(void* self, bool visible) {
+void QToolBar_virtualbase_setVisible(VirtualQToolBar* self, bool visible) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::setVisible(visible);
-
+	self->QToolBar::setVisible(visible);
 }
 
-QSize* QToolBar_virtualbase_sizeHint(const void* self) {
+QSize* QToolBar_virtualbase_sizeHint(const VirtualQToolBar* self) {
 
-	return new QSize(( (const VirtualQToolBar*)(self) )->QToolBar::sizeHint());
-
+	return new QSize(self->QToolBar::sizeHint());
 }
 
-QSize* QToolBar_virtualbase_minimumSizeHint(const void* self) {
+QSize* QToolBar_virtualbase_minimumSizeHint(const VirtualQToolBar* self) {
 
-	return new QSize(( (const VirtualQToolBar*)(self) )->QToolBar::minimumSizeHint());
-
+	return new QSize(self->QToolBar::minimumSizeHint());
 }
 
-int QToolBar_virtualbase_heightForWidth(const void* self, int param1) {
+int QToolBar_virtualbase_heightForWidth(const VirtualQToolBar* self, int param1) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::heightForWidth(static_cast<int>(param1));
-
+	return self->QToolBar::heightForWidth(static_cast<int>(param1));
 }
 
-bool QToolBar_virtualbase_hasHeightForWidth(const void* self) {
+bool QToolBar_virtualbase_hasHeightForWidth(const VirtualQToolBar* self) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::hasHeightForWidth();
-
+	return self->QToolBar::hasHeightForWidth();
 }
 
-QPaintEngine* QToolBar_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QToolBar_virtualbase_paintEngine(const VirtualQToolBar* self) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::paintEngine();
-
+	return self->QToolBar::paintEngine();
 }
 
-void QToolBar_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QToolBar_virtualbase_mousePressEvent(VirtualQToolBar* self, QMouseEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::mousePressEvent(event);
-
+	self->QToolBar::mousePressEvent(event);
 }
 
-void QToolBar_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QToolBar_virtualbase_mouseReleaseEvent(VirtualQToolBar* self, QMouseEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::mouseReleaseEvent(event);
-
+	self->QToolBar::mouseReleaseEvent(event);
 }
 
-void QToolBar_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QToolBar_virtualbase_mouseDoubleClickEvent(VirtualQToolBar* self, QMouseEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::mouseDoubleClickEvent(event);
-
+	self->QToolBar::mouseDoubleClickEvent(event);
 }
 
-void QToolBar_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QToolBar_virtualbase_mouseMoveEvent(VirtualQToolBar* self, QMouseEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::mouseMoveEvent(event);
-
+	self->QToolBar::mouseMoveEvent(event);
 }
 
-void QToolBar_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QToolBar_virtualbase_wheelEvent(VirtualQToolBar* self, QWheelEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::wheelEvent(event);
-
+	self->QToolBar::wheelEvent(event);
 }
 
-void QToolBar_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QToolBar_virtualbase_keyPressEvent(VirtualQToolBar* self, QKeyEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::keyPressEvent(event);
-
+	self->QToolBar::keyPressEvent(event);
 }
 
-void QToolBar_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QToolBar_virtualbase_keyReleaseEvent(VirtualQToolBar* self, QKeyEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::keyReleaseEvent(event);
-
+	self->QToolBar::keyReleaseEvent(event);
 }
 
-void QToolBar_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QToolBar_virtualbase_focusInEvent(VirtualQToolBar* self, QFocusEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::focusInEvent(event);
-
+	self->QToolBar::focusInEvent(event);
 }
 
-void QToolBar_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QToolBar_virtualbase_focusOutEvent(VirtualQToolBar* self, QFocusEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::focusOutEvent(event);
-
+	self->QToolBar::focusOutEvent(event);
 }
 
-void QToolBar_virtualbase_enterEvent(void* self, QEvent* event) {
+void QToolBar_virtualbase_enterEvent(VirtualQToolBar* self, QEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::enterEvent(event);
-
+	self->QToolBar::enterEvent(event);
 }
 
-void QToolBar_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QToolBar_virtualbase_leaveEvent(VirtualQToolBar* self, QEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::leaveEvent(event);
-
+	self->QToolBar::leaveEvent(event);
 }
 
-void QToolBar_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QToolBar_virtualbase_moveEvent(VirtualQToolBar* self, QMoveEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::moveEvent(event);
-
+	self->QToolBar::moveEvent(event);
 }
 
-void QToolBar_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QToolBar_virtualbase_resizeEvent(VirtualQToolBar* self, QResizeEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::resizeEvent(event);
-
+	self->QToolBar::resizeEvent(event);
 }
 
-void QToolBar_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QToolBar_virtualbase_closeEvent(VirtualQToolBar* self, QCloseEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::closeEvent(event);
-
+	self->QToolBar::closeEvent(event);
 }
 
-void QToolBar_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QToolBar_virtualbase_contextMenuEvent(VirtualQToolBar* self, QContextMenuEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::contextMenuEvent(event);
-
+	self->QToolBar::contextMenuEvent(event);
 }
 
-void QToolBar_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QToolBar_virtualbase_tabletEvent(VirtualQToolBar* self, QTabletEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::tabletEvent(event);
-
+	self->QToolBar::tabletEvent(event);
 }
 
-void QToolBar_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QToolBar_virtualbase_dragEnterEvent(VirtualQToolBar* self, QDragEnterEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::dragEnterEvent(event);
-
+	self->QToolBar::dragEnterEvent(event);
 }
 
-void QToolBar_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QToolBar_virtualbase_dragMoveEvent(VirtualQToolBar* self, QDragMoveEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::dragMoveEvent(event);
-
+	self->QToolBar::dragMoveEvent(event);
 }
 
-void QToolBar_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QToolBar_virtualbase_dragLeaveEvent(VirtualQToolBar* self, QDragLeaveEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::dragLeaveEvent(event);
-
+	self->QToolBar::dragLeaveEvent(event);
 }
 
-void QToolBar_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QToolBar_virtualbase_dropEvent(VirtualQToolBar* self, QDropEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::dropEvent(event);
-
+	self->QToolBar::dropEvent(event);
 }
 
-void QToolBar_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QToolBar_virtualbase_showEvent(VirtualQToolBar* self, QShowEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::showEvent(event);
-
+	self->QToolBar::showEvent(event);
 }
 
-void QToolBar_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QToolBar_virtualbase_hideEvent(VirtualQToolBar* self, QHideEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::hideEvent(event);
-
+	self->QToolBar::hideEvent(event);
 }
 
-bool QToolBar_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QToolBar_virtualbase_nativeEvent(VirtualQToolBar* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QToolBar::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QToolBar_virtualbase_metric(const void* self, int param1) {
+int QToolBar_virtualbase_metric(const VirtualQToolBar* self, int param1) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::metric(static_cast<VirtualQToolBar::PaintDeviceMetric>(param1));
-
+	return self->QToolBar::metric(static_cast<VirtualQToolBar::PaintDeviceMetric>(param1));
 }
 
-void QToolBar_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QToolBar_virtualbase_initPainter(const VirtualQToolBar* self, QPainter* painter) {
 
-	( (const VirtualQToolBar*)(self) )->QToolBar::initPainter(painter);
-
+	self->QToolBar::initPainter(painter);
 }
 
-QPaintDevice* QToolBar_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QToolBar_virtualbase_redirected(const VirtualQToolBar* self, QPoint* offset) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::redirected(offset);
-
+	return self->QToolBar::redirected(offset);
 }
 
-QPainter* QToolBar_virtualbase_sharedPainter(const void* self) {
+QPainter* QToolBar_virtualbase_sharedPainter(const VirtualQToolBar* self) {
 
-	return ( (const VirtualQToolBar*)(self) )->QToolBar::sharedPainter();
-
+	return self->QToolBar::sharedPainter();
 }
 
-void QToolBar_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QToolBar_virtualbase_inputMethodEvent(VirtualQToolBar* self, QInputMethodEvent* param1) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::inputMethodEvent(param1);
-
+	self->QToolBar::inputMethodEvent(param1);
 }
 
-QVariant* QToolBar_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QToolBar_virtualbase_inputMethodQuery(const VirtualQToolBar* self, int param1) {
 
-	return new QVariant(( (const VirtualQToolBar*)(self) )->QToolBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QToolBar::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QToolBar_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QToolBar_virtualbase_focusNextPrevChild(VirtualQToolBar* self, bool next) {
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::focusNextPrevChild(next);
-
+	return self->QToolBar::focusNextPrevChild(next);
 }
 
-bool QToolBar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QToolBar_virtualbase_eventFilter(VirtualQToolBar* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQToolBar*)(self) )->QToolBar::eventFilter(watched, event);
-
+	return self->QToolBar::eventFilter(watched, event);
 }
 
-void QToolBar_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QToolBar_virtualbase_timerEvent(VirtualQToolBar* self, QTimerEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::timerEvent(event);
-
+	self->QToolBar::timerEvent(event);
 }
 
-void QToolBar_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QToolBar_virtualbase_childEvent(VirtualQToolBar* self, QChildEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::childEvent(event);
-
+	self->QToolBar::childEvent(event);
 }
 
-void QToolBar_virtualbase_customEvent(void* self, QEvent* event) {
+void QToolBar_virtualbase_customEvent(VirtualQToolBar* self, QEvent* event) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::customEvent(event);
-
+	self->QToolBar::customEvent(event);
 }
 
-void QToolBar_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QToolBar_virtualbase_connectNotify(VirtualQToolBar* self, QMetaMethod* signal) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::connectNotify(*signal);
-
+	self->QToolBar::connectNotify(*signal);
 }
 
-void QToolBar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QToolBar_virtualbase_disconnectNotify(VirtualQToolBar* self, QMetaMethod* signal) {
 
-	( (VirtualQToolBar*)(self) )->QToolBar::disconnectNotify(*signal);
-
+	self->QToolBar::disconnectNotify(*signal);
 }
 
 const QMetaObject* QToolBar_staticMetaObject() { return &QToolBar::staticMetaObject; }
-void QToolBar_protectedbase_initStyleOption(const void* self, QStyleOptionToolBar* option) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QToolBar_VTable* QToolBar_vtbl(const VirtualQToolBar* self) { return self->vtbl; }
+void* QToolBar_vdata(const VirtualQToolBar* self) { return self->vdata; }
+void QToolBar_setVdata(VirtualQToolBar* self, void* vdata) { self->vdata = vdata; }
+
+void QToolBar_protectedbase_initStyleOption(const VirtualQToolBar* self, QStyleOptionToolBar* option) {
+	self->initStyleOption(option);
 }
 
-void QToolBar_protectedbase_updateMicroFocus(void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QToolBar_protectedbase_updateMicroFocus(VirtualQToolBar* self) {
+	self->updateMicroFocus();
 }
 
-void QToolBar_protectedbase_create(void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	self_cast->create();
-
+void QToolBar_protectedbase_create(VirtualQToolBar* self) {
+	self->create();
 }
 
-void QToolBar_protectedbase_destroy(void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	self_cast->destroy();
-
+void QToolBar_protectedbase_destroy(VirtualQToolBar* self) {
+	self->destroy();
 }
 
-bool QToolBar_protectedbase_focusNextChild(void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QToolBar_protectedbase_focusNextChild(VirtualQToolBar* self) {
+	return self->focusNextChild();
 }
 
-bool QToolBar_protectedbase_focusPreviousChild(void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QToolBar_protectedbase_focusPreviousChild(VirtualQToolBar* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QToolBar_protectedbase_sender(const void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QToolBar_protectedbase_sender(const VirtualQToolBar* self) {
+	return self->sender();
 }
 
-int QToolBar_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QToolBar_protectedbase_senderSignalIndex(const VirtualQToolBar* self) {
+	return self->senderSignalIndex();
 }
 
-int QToolBar_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QToolBar_protectedbase_receivers(const VirtualQToolBar* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QToolBar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQToolBar* self_cast = static_cast<VirtualQToolBar*>( (QToolBar*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QToolBar_protectedbase_isSignalConnected(const VirtualQToolBar* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QToolBar_delete(QToolBar* self) {

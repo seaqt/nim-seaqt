@@ -52,24 +52,24 @@ export
 
 type cQVideoRendererControl*{.exportc: "QVideoRendererControl", incompleteStruct.} = object
 
-proc fcQVideoRendererControl_metaObject(self: pointer, ): pointer {.importc: "QVideoRendererControl_metaObject".}
+proc fcQVideoRendererControl_metaObject(self: pointer): pointer {.importc: "QVideoRendererControl_metaObject".}
 proc fcQVideoRendererControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QVideoRendererControl_metacast".}
 proc fcQVideoRendererControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QVideoRendererControl_metacall".}
 proc fcQVideoRendererControl_tr(s: cstring): struct_miqt_string {.importc: "QVideoRendererControl_tr".}
 proc fcQVideoRendererControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QVideoRendererControl_trUtf8".}
-proc fcQVideoRendererControl_surface(self: pointer, ): pointer {.importc: "QVideoRendererControl_surface".}
+proc fcQVideoRendererControl_surface(self: pointer): pointer {.importc: "QVideoRendererControl_surface".}
 proc fcQVideoRendererControl_setSurface(self: pointer, surface: pointer): void {.importc: "QVideoRendererControl_setSurface".}
 proc fcQVideoRendererControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoRendererControl_tr2".}
 proc fcQVideoRendererControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoRendererControl_tr3".}
 proc fcQVideoRendererControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QVideoRendererControl_trUtf82".}
 proc fcQVideoRendererControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QVideoRendererControl_trUtf83".}
-proc fcQVideoRendererControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QVideoRendererControl_protectedbase_sender".}
-proc fcQVideoRendererControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QVideoRendererControl_protectedbase_senderSignalIndex".}
+proc fcQVideoRendererControl_protectedbase_sender(self: pointer): pointer {.importc: "QVideoRendererControl_protectedbase_sender".}
+proc fcQVideoRendererControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QVideoRendererControl_protectedbase_senderSignalIndex".}
 proc fcQVideoRendererControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QVideoRendererControl_protectedbase_receivers".}
 proc fcQVideoRendererControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QVideoRendererControl_protectedbase_isSignalConnected".}
 proc fcQVideoRendererControl_staticMetaObject(): pointer {.importc: "QVideoRendererControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qvideorenderercontrol_types.QVideoRendererControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQVideoRendererControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, param1: cstring): pointer =
@@ -90,7 +90,7 @@ proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: c
   c_free(v_ms.data)
   vx_ret
 
-proc surface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qabstractvideosurface_types.QAbstractVideoSurface =
+proc surface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl): gen_qabstractvideosurface_types.QAbstractVideoSurface =
   gen_qabstractvideosurface_types.QAbstractVideoSurface(h: fcQVideoRendererControl_surface(self.h), owned: false)
 
 proc setSurface*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, surface: gen_qabstractvideosurface_types.QAbstractVideoSurface): void =
@@ -120,10 +120,10 @@ proc trUtf8*(_: type gen_qvideorenderercontrol_types.QVideoRendererControl, s: c
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qvideorenderercontrol_types.QVideoRendererControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQVideoRendererControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, ): cint =
+proc senderSignalIndex*(self: gen_qvideorenderercontrol_types.QVideoRendererControl): cint =
   fcQVideoRendererControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qvideorenderercontrol_types.QVideoRendererControl, signal: cstring): cint =

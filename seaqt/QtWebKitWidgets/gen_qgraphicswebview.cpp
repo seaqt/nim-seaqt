@@ -44,39 +44,32 @@
 #include <QWidget>
 #include <qgraphicswebview.h>
 #include "gen_qgraphicswebview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGraphicsWebView final : public QGraphicsWebView {
-	struct QGraphicsWebView_VTable* vtbl;
+	const QGraphicsWebView_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsWebView_VTable* QGraphicsWebView_vtbl(const VirtualQGraphicsWebView* self);
+	friend void* QGraphicsWebView_vdata(const VirtualQGraphicsWebView* self);
+	friend void QGraphicsWebView_setVdata(VirtualQGraphicsWebView* self, void* vdata);
 
-	VirtualQGraphicsWebView(struct QGraphicsWebView_VTable* vtbl): QGraphicsWebView(), vtbl(vtbl) {};
-	VirtualQGraphicsWebView(struct QGraphicsWebView_VTable* vtbl, QGraphicsItem* parent): QGraphicsWebView(parent), vtbl(vtbl) {};
+	VirtualQGraphicsWebView(const QGraphicsWebView_VTable* vtbl, void* vdata): QGraphicsWebView(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsWebView(const QGraphicsWebView_VTable* vtbl, void* vdata, QGraphicsItem* parent): QGraphicsWebView(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsWebView() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsWebView() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGraphicsWebView::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGraphicsWebView_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGraphicsWebView_virtualbase_metaObject(const VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGraphicsWebView::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGraphicsWebView_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGraphicsWebView_virtualbase_metacast(VirtualQGraphicsWebView* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGraphicsWebView::qt_metacall(param1, param2, param3);
@@ -102,14 +94,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsWebView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGraphicsWebView_virtualbase_metacall(VirtualQGraphicsWebView* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRectF& rect) override {
 		if (vtbl->setGeometry == 0) {
 			QGraphicsWebView::setGeometry(rect);
@@ -120,13 +111,12 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_setGeometry(void* self, QRectF* rect);
+	friend void QGraphicsWebView_virtualbase_setGeometry(VirtualQGraphicsWebView* self, QRectF* rect);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometry() override {
 		if (vtbl->updateGeometry == 0) {
 			QGraphicsWebView::updateGeometry();
@@ -134,13 +124,12 @@ public:
 		}
 
 
-		vtbl->updateGeometry(vtbl, this);
+		vtbl->updateGeometry(this);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_updateGeometry(void* self);
+	friend void QGraphicsWebView_virtualbase_updateGeometry(VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paint(QPainter* param1, const QStyleOptionGraphicsItem* options, QWidget* widget) override {
 		if (vtbl->paint == 0) {
 			QGraphicsWebView::paint(param1, options, widget);
@@ -151,13 +140,12 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) options;
 		QWidget* sigval3 = widget;
 
-		vtbl->paint(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paint(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_paint(void* self, QPainter* param1, QStyleOptionGraphicsItem* options, QWidget* widget);
+	friend void QGraphicsWebView_virtualbase_paint(VirtualQGraphicsWebView* self, QPainter* param1, QStyleOptionGraphicsItem* options, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant itemChange(QGraphicsItem::GraphicsItemChange change, const QVariant& value) override {
 		if (vtbl->itemChange == 0) {
 			return QGraphicsWebView::itemChange(change, value);
@@ -169,16 +157,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->itemChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->itemChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsWebView_virtualbase_itemChange(void* self, int change, QVariant* value);
+	friend QVariant* QGraphicsWebView_virtualbase_itemChange(VirtualQGraphicsWebView* self, int change, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QGraphicsWebView::event(param1);
@@ -186,14 +173,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_event(void* self, QEvent* param1);
+	friend bool QGraphicsWebView_virtualbase_event(VirtualQGraphicsWebView* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
 		if (vtbl->sizeHint == 0) {
 			return QGraphicsWebView::sizeHint(which, constraint);
@@ -205,16 +191,15 @@ public:
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
-		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		QSizeF* callback_return_value = vtbl->sizeHint(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSizeF* QGraphicsWebView_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
+	friend QSizeF* QGraphicsWebView_virtualbase_sizeHint(const VirtualQGraphicsWebView* self, int which, QSizeF* constraint);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGraphicsWebView::inputMethodQuery(query);
@@ -223,16 +208,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsWebView_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QGraphicsWebView_virtualbase_inputMethodQuery(const VirtualQGraphicsWebView* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QGraphicsSceneMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGraphicsWebView::mousePressEvent(param1);
@@ -241,13 +225,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* param1);
+	friend void QGraphicsWebView_virtualbase_mousePressEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QGraphicsSceneMouseEvent* param1) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGraphicsWebView::mouseDoubleClickEvent(param1);
@@ -256,13 +239,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = param1;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* param1);
+	friend void QGraphicsWebView_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QGraphicsSceneMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGraphicsWebView::mouseReleaseEvent(param1);
@@ -271,13 +253,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* param1);
+	friend void QGraphicsWebView_virtualbase_mouseReleaseEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QGraphicsSceneMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGraphicsWebView::mouseMoveEvent(param1);
@@ -286,13 +267,12 @@ public:
 
 		QGraphicsSceneMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* param1);
+	friend void QGraphicsWebView_virtualbase_mouseMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverMoveEvent(QGraphicsSceneHoverEvent* param1) override {
 		if (vtbl->hoverMoveEvent == 0) {
 			QGraphicsWebView::hoverMoveEvent(param1);
@@ -301,13 +281,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = param1;
 
-		vtbl->hoverMoveEvent(vtbl, this, sigval1);
+		vtbl->hoverMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* param1);
+	friend void QGraphicsWebView_virtualbase_hoverMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverLeaveEvent(QGraphicsSceneHoverEvent* param1) override {
 		if (vtbl->hoverLeaveEvent == 0) {
 			QGraphicsWebView::hoverLeaveEvent(param1);
@@ -316,13 +295,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = param1;
 
-		vtbl->hoverLeaveEvent(vtbl, this, sigval1);
+		vtbl->hoverLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* param1);
+	friend void QGraphicsWebView_virtualbase_hoverLeaveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QGraphicsSceneWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QGraphicsWebView::wheelEvent(param1);
@@ -331,13 +309,12 @@ public:
 
 		QGraphicsSceneWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* param1);
+	friend void QGraphicsWebView_virtualbase_wheelEvent(VirtualQGraphicsWebView* self, QGraphicsSceneWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGraphicsWebView::keyPressEvent(param1);
@@ -346,13 +323,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QGraphicsWebView_virtualbase_keyPressEvent(VirtualQGraphicsWebView* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* param1) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGraphicsWebView::keyReleaseEvent(param1);
@@ -361,13 +337,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1);
+	friend void QGraphicsWebView_virtualbase_keyReleaseEvent(VirtualQGraphicsWebView* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QGraphicsSceneContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGraphicsWebView::contextMenuEvent(param1);
@@ -376,13 +351,12 @@ public:
 
 		QGraphicsSceneContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* param1);
+	friend void QGraphicsWebView_virtualbase_contextMenuEvent(VirtualQGraphicsWebView* self, QGraphicsSceneContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QGraphicsSceneDragDropEvent* param1) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGraphicsWebView::dragEnterEvent(param1);
@@ -391,13 +365,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = param1;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* param1);
+	friend void QGraphicsWebView_virtualbase_dragEnterEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QGraphicsSceneDragDropEvent* param1) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGraphicsWebView::dragLeaveEvent(param1);
@@ -406,13 +379,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = param1;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* param1);
+	friend void QGraphicsWebView_virtualbase_dragLeaveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QGraphicsSceneDragDropEvent* param1) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGraphicsWebView::dragMoveEvent(param1);
@@ -421,13 +393,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = param1;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* param1);
+	friend void QGraphicsWebView_virtualbase_dragMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QGraphicsSceneDragDropEvent* param1) override {
 		if (vtbl->dropEvent == 0) {
 			QGraphicsWebView::dropEvent(param1);
@@ -436,13 +407,12 @@ public:
 
 		QGraphicsSceneDragDropEvent* sigval1 = param1;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* param1);
+	friend void QGraphicsWebView_virtualbase_dropEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QGraphicsWebView::focusInEvent(param1);
@@ -451,13 +421,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QGraphicsWebView_virtualbase_focusInEvent(VirtualQGraphicsWebView* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGraphicsWebView::focusOutEvent(param1);
@@ -466,13 +435,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QGraphicsWebView_virtualbase_focusOutEvent(VirtualQGraphicsWebView* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGraphicsWebView::inputMethodEvent(param1);
@@ -481,13 +449,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QGraphicsWebView_virtualbase_inputMethodEvent(VirtualQGraphicsWebView* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QGraphicsWebView::focusNextPrevChild(next);
@@ -495,14 +462,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QGraphicsWebView_virtualbase_focusNextPrevChild(VirtualQGraphicsWebView* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEvent(QEvent* param1) override {
 		if (vtbl->sceneEvent == 0) {
 			return QGraphicsWebView::sceneEvent(param1);
@@ -510,14 +476,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->sceneEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->sceneEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_sceneEvent(void* self, QEvent* param1);
+	friend bool QGraphicsWebView_virtualbase_sceneEvent(VirtualQGraphicsWebView* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
 		if (vtbl->getContentsMargins == 0) {
 			QGraphicsWebView::getContentsMargins(left, top, right, bottom);
@@ -533,27 +498,25 @@ public:
 		qreal* bottom_ret = bottom;
 		double* sigval4 = static_cast<double*>(bottom_ret);
 
-		vtbl->getContentsMargins(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->getContentsMargins(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
+	friend void QGraphicsWebView_virtualbase_getContentsMargins(const VirtualQGraphicsWebView* self, double* left, double* top, double* right, double* bottom);
 
-	// Subclass to allow providing a Go implementation
 	virtual int type() const override {
 		if (vtbl->type == 0) {
 			return QGraphicsWebView::type();
 		}
 
 
-		int callback_return_value = vtbl->type(vtbl, this);
+		int callback_return_value = vtbl->type(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsWebView_virtualbase_type(const void* self);
+	friend int QGraphicsWebView_virtualbase_type(const VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintWindowFrame(QPainter* painter, const QStyleOptionGraphicsItem* option, QWidget* widget) override {
 		if (vtbl->paintWindowFrame == 0) {
 			QGraphicsWebView::paintWindowFrame(painter, option, widget);
@@ -564,45 +527,42 @@ public:
 		QStyleOptionGraphicsItem* sigval2 = (QStyleOptionGraphicsItem*) option;
 		QWidget* sigval3 = widget;
 
-		vtbl->paintWindowFrame(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->paintWindowFrame(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_paintWindowFrame(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
+	friend void QGraphicsWebView_virtualbase_paintWindowFrame(VirtualQGraphicsWebView* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRectF boundingRect() const override {
 		if (vtbl->boundingRect == 0) {
 			return QGraphicsWebView::boundingRect();
 		}
 
 
-		QRectF* callback_return_value = vtbl->boundingRect(vtbl, this);
+		QRectF* callback_return_value = vtbl->boundingRect(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRectF* QGraphicsWebView_virtualbase_boundingRect(const void* self);
+	friend QRectF* QGraphicsWebView_virtualbase_boundingRect(const VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath shape() const override {
 		if (vtbl->shape == 0) {
 			return QGraphicsWebView::shape();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->shape(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->shape(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsWebView_virtualbase_shape(const void* self);
+	friend QPainterPath* QGraphicsWebView_virtualbase_shape(const VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initStyleOption(QStyleOption* option) const override {
 		if (vtbl->initStyleOption == 0) {
 			QGraphicsWebView::initStyleOption(option);
@@ -611,13 +571,12 @@ public:
 
 		QStyleOption* sigval1 = option;
 
-		vtbl->initStyleOption(vtbl, this, sigval1);
+		vtbl->initStyleOption(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_initStyleOption(const void* self, QStyleOption* option);
+	friend void QGraphicsWebView_virtualbase_initStyleOption(const VirtualQGraphicsWebView* self, QStyleOption* option);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant propertyChange(const QString& propertyName, const QVariant& value) override {
 		if (vtbl->propertyChange == 0) {
 			return QGraphicsWebView::propertyChange(propertyName, value);
@@ -635,16 +594,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		QVariant* callback_return_value = vtbl->propertyChange(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->propertyChange(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsWebView_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value);
+	friend QVariant* QGraphicsWebView_virtualbase_propertyChange(VirtualQGraphicsWebView* self, struct miqt_string propertyName, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool windowFrameEvent(QEvent* e) override {
 		if (vtbl->windowFrameEvent == 0) {
 			return QGraphicsWebView::windowFrameEvent(e);
@@ -652,14 +610,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->windowFrameEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->windowFrameEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_windowFrameEvent(void* self, QEvent* e);
+	friend bool QGraphicsWebView_virtualbase_windowFrameEvent(VirtualQGraphicsWebView* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual Qt::WindowFrameSection windowFrameSectionAt(const QPointF& pos) const override {
 		if (vtbl->windowFrameSectionAt == 0) {
 			return QGraphicsWebView::windowFrameSectionAt(pos);
@@ -669,14 +626,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&pos_ret);
 
-		int callback_return_value = vtbl->windowFrameSectionAt(vtbl, this, sigval1);
+		int callback_return_value = vtbl->windowFrameSectionAt(this, sigval1);
 
 		return static_cast<Qt::WindowFrameSection>(callback_return_value);
 	}
 
-	friend int QGraphicsWebView_virtualbase_windowFrameSectionAt(const void* self, QPointF* pos);
+	friend int QGraphicsWebView_virtualbase_windowFrameSectionAt(const VirtualQGraphicsWebView* self, QPointF* pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QGraphicsWebView::changeEvent(event);
@@ -685,13 +641,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_changeEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QGraphicsWebView::closeEvent(event);
@@ -700,13 +655,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QGraphicsWebView_virtualbase_closeEvent(VirtualQGraphicsWebView* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QGraphicsWebView::hideEvent(event);
@@ -715,13 +669,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QGraphicsWebView_virtualbase_hideEvent(VirtualQGraphicsWebView* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QGraphicsSceneMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QGraphicsWebView::moveEvent(event);
@@ -730,13 +683,12 @@ public:
 
 		QGraphicsSceneMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_moveEvent(void* self, QGraphicsSceneMoveEvent* event);
+	friend void QGraphicsWebView_virtualbase_moveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void polishEvent() override {
 		if (vtbl->polishEvent == 0) {
 			QGraphicsWebView::polishEvent();
@@ -744,13 +696,12 @@ public:
 		}
 
 
-		vtbl->polishEvent(vtbl, this);
+		vtbl->polishEvent(this);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_polishEvent(void* self);
+	friend void QGraphicsWebView_virtualbase_polishEvent(VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QGraphicsSceneResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QGraphicsWebView::resizeEvent(event);
@@ -759,13 +710,12 @@ public:
 
 		QGraphicsSceneResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_resizeEvent(void* self, QGraphicsSceneResizeEvent* event);
+	friend void QGraphicsWebView_virtualbase_resizeEvent(VirtualQGraphicsWebView* self, QGraphicsSceneResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QGraphicsWebView::showEvent(event);
@@ -774,13 +724,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QGraphicsWebView_virtualbase_showEvent(VirtualQGraphicsWebView* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void grabMouseEvent(QEvent* event) override {
 		if (vtbl->grabMouseEvent == 0) {
 			QGraphicsWebView::grabMouseEvent(event);
@@ -789,13 +738,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->grabMouseEvent(vtbl, this, sigval1);
+		vtbl->grabMouseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_grabMouseEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_grabMouseEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void ungrabMouseEvent(QEvent* event) override {
 		if (vtbl->ungrabMouseEvent == 0) {
 			QGraphicsWebView::ungrabMouseEvent(event);
@@ -804,13 +752,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->ungrabMouseEvent(vtbl, this, sigval1);
+		vtbl->ungrabMouseEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_ungrabMouseEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_ungrabMouseEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void grabKeyboardEvent(QEvent* event) override {
 		if (vtbl->grabKeyboardEvent == 0) {
 			QGraphicsWebView::grabKeyboardEvent(event);
@@ -819,13 +766,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->grabKeyboardEvent(vtbl, this, sigval1);
+		vtbl->grabKeyboardEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_grabKeyboardEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_grabKeyboardEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void ungrabKeyboardEvent(QEvent* event) override {
 		if (vtbl->ungrabKeyboardEvent == 0) {
 			QGraphicsWebView::ungrabKeyboardEvent(event);
@@ -834,13 +780,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->ungrabKeyboardEvent(vtbl, this, sigval1);
+		vtbl->ungrabKeyboardEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_ungrabKeyboardEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_ungrabKeyboardEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGraphicsWebView::eventFilter(watched, event);
@@ -849,14 +794,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGraphicsWebView_virtualbase_eventFilter(VirtualQGraphicsWebView* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGraphicsWebView::timerEvent(event);
@@ -865,13 +809,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGraphicsWebView_virtualbase_timerEvent(VirtualQGraphicsWebView* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGraphicsWebView::childEvent(event);
@@ -880,13 +823,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGraphicsWebView_virtualbase_childEvent(VirtualQGraphicsWebView* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGraphicsWebView::customEvent(event);
@@ -895,13 +837,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGraphicsWebView_virtualbase_customEvent(VirtualQGraphicsWebView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGraphicsWebView::connectNotify(signal);
@@ -912,13 +853,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsWebView_virtualbase_connectNotify(VirtualQGraphicsWebView* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGraphicsWebView::disconnectNotify(signal);
@@ -929,13 +869,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGraphicsWebView_virtualbase_disconnectNotify(VirtualQGraphicsWebView* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void advance(int phase) override {
 		if (vtbl->advance == 0) {
 			QGraphicsWebView::advance(phase);
@@ -944,13 +883,12 @@ public:
 
 		int sigval1 = phase;
 
-		vtbl->advance(vtbl, this, sigval1);
+		vtbl->advance(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_advance(void* self, int phase);
+	friend void QGraphicsWebView_virtualbase_advance(VirtualQGraphicsWebView* self, int phase);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool contains(const QPointF& point) const override {
 		if (vtbl->contains == 0) {
 			return QGraphicsWebView::contains(point);
@@ -960,14 +898,13 @@ public:
 		// Cast returned reference into pointer
 		QPointF* sigval1 = const_cast<QPointF*>(&point_ret);
 
-		bool callback_return_value = vtbl->contains(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->contains(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_contains(const void* self, QPointF* point);
+	friend bool QGraphicsWebView_virtualbase_contains(const VirtualQGraphicsWebView* self, QPointF* point);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithItem(const QGraphicsItem* other, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithItem == 0) {
 			return QGraphicsWebView::collidesWithItem(other, mode);
@@ -977,14 +914,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithItem(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithItem(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode);
+	friend bool QGraphicsWebView_virtualbase_collidesWithItem(const VirtualQGraphicsWebView* self, QGraphicsItem* other, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool collidesWithPath(const QPainterPath& path, Qt::ItemSelectionMode mode) const override {
 		if (vtbl->collidesWithPath == 0) {
 			return QGraphicsWebView::collidesWithPath(path, mode);
@@ -996,14 +932,13 @@ public:
 		Qt::ItemSelectionMode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->collidesWithPath(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->collidesWithPath(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode);
+	friend bool QGraphicsWebView_virtualbase_collidesWithPath(const VirtualQGraphicsWebView* self, QPainterPath* path, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isObscuredBy(const QGraphicsItem* item) const override {
 		if (vtbl->isObscuredBy == 0) {
 			return QGraphicsWebView::isObscuredBy(item);
@@ -1011,30 +946,28 @@ public:
 
 		QGraphicsItem* sigval1 = (QGraphicsItem*) item;
 
-		bool callback_return_value = vtbl->isObscuredBy(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isObscuredBy(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item);
+	friend bool QGraphicsWebView_virtualbase_isObscuredBy(const VirtualQGraphicsWebView* self, QGraphicsItem* item);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainterPath opaqueArea() const override {
 		if (vtbl->opaqueArea == 0) {
 			return QGraphicsWebView::opaqueArea();
 		}
 
 
-		QPainterPath* callback_return_value = vtbl->opaqueArea(vtbl, this);
+		QPainterPath* callback_return_value = vtbl->opaqueArea(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPainterPath* QGraphicsWebView_virtualbase_opaqueArea(const void* self);
+	friend QPainterPath* QGraphicsWebView_virtualbase_opaqueArea(const VirtualQGraphicsWebView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool sceneEventFilter(QGraphicsItem* watched, QEvent* event) override {
 		if (vtbl->sceneEventFilter == 0) {
 			return QGraphicsWebView::sceneEventFilter(watched, event);
@@ -1043,14 +976,13 @@ public:
 		QGraphicsItem* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->sceneEventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->sceneEventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event);
+	friend bool QGraphicsWebView_virtualbase_sceneEventFilter(VirtualQGraphicsWebView* self, QGraphicsItem* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hoverEnterEvent(QGraphicsSceneHoverEvent* event) override {
 		if (vtbl->hoverEnterEvent == 0) {
 			QGraphicsWebView::hoverEnterEvent(event);
@@ -1059,13 +991,12 @@ public:
 
 		QGraphicsSceneHoverEvent* sigval1 = event;
 
-		vtbl->hoverEnterEvent(vtbl, this, sigval1);
+		vtbl->hoverEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event);
+	friend void QGraphicsWebView_virtualbase_hoverEnterEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QGraphicsItem::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QGraphicsWebView::supportsExtension(extension);
@@ -1074,14 +1005,13 @@ public:
 		QGraphicsItem::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGraphicsWebView_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QGraphicsWebView_virtualbase_supportsExtension(const VirtualQGraphicsWebView* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setExtension(QGraphicsItem::Extension extension, const QVariant& variant) override {
 		if (vtbl->setExtension == 0) {
 			QGraphicsWebView::setExtension(extension, variant);
@@ -1094,13 +1024,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&variant_ret);
 
-		vtbl->setExtension(vtbl, this, sigval1, sigval2);
+		vtbl->setExtension(this, sigval1, sigval2);
 
 	}
 
-	friend void QGraphicsWebView_virtualbase_setExtension(void* self, int extension, QVariant* variant);
+	friend void QGraphicsWebView_virtualbase_setExtension(VirtualQGraphicsWebView* self, int extension, QVariant* variant);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant extension(const QVariant& variant) const override {
 		if (vtbl->extension == 0) {
 			return QGraphicsWebView::extension(variant);
@@ -1110,34 +1039,34 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval1 = const_cast<QVariant*>(&variant_ret);
 
-		QVariant* callback_return_value = vtbl->extension(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->extension(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGraphicsWebView_virtualbase_extension(const void* self, QVariant* variant);
+	friend QVariant* QGraphicsWebView_virtualbase_extension(const VirtualQGraphicsWebView* self, QVariant* variant);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsWebView_protectedbase_updateMicroFocus(void* self);
-	friend QObject* QGraphicsWebView_protectedbase_sender(const void* self);
-	friend int QGraphicsWebView_protectedbase_senderSignalIndex(const void* self);
-	friend int QGraphicsWebView_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGraphicsWebView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
-	friend void QGraphicsWebView_protectedbase_addToIndex(void* self);
-	friend void QGraphicsWebView_protectedbase_removeFromIndex(void* self);
-	friend void QGraphicsWebView_protectedbase_prepareGeometryChange(void* self);
-	friend void QGraphicsWebView_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
-	friend void QGraphicsWebView_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
+	friend void QGraphicsWebView_protectedbase_updateMicroFocus(VirtualQGraphicsWebView* self);
+	friend QObject* QGraphicsWebView_protectedbase_sender(const VirtualQGraphicsWebView* self);
+	friend int QGraphicsWebView_protectedbase_senderSignalIndex(const VirtualQGraphicsWebView* self);
+	friend int QGraphicsWebView_protectedbase_receivers(const VirtualQGraphicsWebView* self, const char* signal);
+	friend bool QGraphicsWebView_protectedbase_isSignalConnected(const VirtualQGraphicsWebView* self, QMetaMethod* signal);
+	friend void QGraphicsWebView_protectedbase_addToIndex(VirtualQGraphicsWebView* self);
+	friend void QGraphicsWebView_protectedbase_removeFromIndex(VirtualQGraphicsWebView* self);
+	friend void QGraphicsWebView_protectedbase_prepareGeometryChange(VirtualQGraphicsWebView* self);
+	friend void QGraphicsWebView_protectedbase_setGraphicsItem(VirtualQGraphicsWebView* self, QGraphicsItem* item);
+	friend void QGraphicsWebView_protectedbase_setOwnedByLayout(VirtualQGraphicsWebView* self, bool ownedByLayout);
 };
 
-QGraphicsWebView* QGraphicsWebView_new(struct QGraphicsWebView_VTable* vtbl) {
-	return new VirtualQGraphicsWebView(vtbl);
+VirtualQGraphicsWebView* QGraphicsWebView_new(const QGraphicsWebView_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsWebView(vtbl, vdata);
 }
 
-QGraphicsWebView* QGraphicsWebView_new2(struct QGraphicsWebView_VTable* vtbl, QGraphicsItem* parent) {
-	return new VirtualQGraphicsWebView(vtbl, parent);
+VirtualQGraphicsWebView* QGraphicsWebView_new2(const QGraphicsWebView_VTable* vtbl, void* vdata, QGraphicsItem* parent) {
+	return new VirtualQGraphicsWebView(vtbl, vdata, parent);
 }
 
 void QGraphicsWebView_virtbase(QGraphicsWebView* src, QGraphicsWidget** outptr_QGraphicsWidget) {
@@ -1338,7 +1267,7 @@ void QGraphicsWebView_loadStarted(QGraphicsWebView* self) {
 	self->loadStarted();
 }
 
-void QGraphicsWebView_connect_loadStarted(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_loadStarted(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1353,7 +1282,7 @@ void QGraphicsWebView_loadFinished(QGraphicsWebView* self, bool param1) {
 	self->loadFinished(param1);
 }
 
-void QGraphicsWebView_connect_loadFinished(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_loadFinished(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1369,7 +1298,7 @@ void QGraphicsWebView_loadProgress(QGraphicsWebView* self, int progress) {
 	self->loadProgress(static_cast<int>(progress));
 }
 
-void QGraphicsWebView_connect_loadProgress(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_loadProgress(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1385,7 +1314,7 @@ void QGraphicsWebView_urlChanged(QGraphicsWebView* self, QUrl* param1) {
 	self->urlChanged(*param1);
 }
 
-void QGraphicsWebView_connect_urlChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_urlChanged(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QUrl*);
@@ -1404,7 +1333,7 @@ void QGraphicsWebView_titleChanged(QGraphicsWebView* self, struct miqt_string pa
 	self->titleChanged(param1_QString);
 }
 
-void QGraphicsWebView_connect_titleChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_titleChanged(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1427,7 +1356,7 @@ void QGraphicsWebView_iconChanged(QGraphicsWebView* self) {
 	self->iconChanged();
 }
 
-void QGraphicsWebView_connect_iconChanged(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_iconChanged(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1443,7 +1372,7 @@ void QGraphicsWebView_statusBarMessage(QGraphicsWebView* self, struct miqt_strin
 	self->statusBarMessage(message_QString);
 }
 
-void QGraphicsWebView_connect_statusBarMessage(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_statusBarMessage(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1466,7 +1395,7 @@ void QGraphicsWebView_linkClicked(QGraphicsWebView* self, QUrl* param1) {
 	self->linkClicked(*param1);
 }
 
-void QGraphicsWebView_connect_linkClicked(QGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
+void QGraphicsWebView_connect_linkClicked(VirtualQGraphicsWebView* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QUrl*);
@@ -1563,473 +1492,382 @@ void QGraphicsWebView_setRenderHint2(QGraphicsWebView* self, int param1, bool en
 	self->setRenderHint(static_cast<QPainter::RenderHint>(param1), enabled);
 }
 
-QMetaObject* QGraphicsWebView_virtualbase_metaObject(const void* self) {
+QMetaObject* QGraphicsWebView_virtualbase_metaObject(const VirtualQGraphicsWebView* self) {
 
-	return (QMetaObject*) ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::metaObject();
-
+	return (QMetaObject*) self->QGraphicsWebView::metaObject();
 }
 
-void* QGraphicsWebView_virtualbase_metacast(void* self, const char* param1) {
+void* QGraphicsWebView_virtualbase_metacast(VirtualQGraphicsWebView* self, const char* param1) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::qt_metacast(param1);
-
+	return self->QGraphicsWebView::qt_metacast(param1);
 }
 
-int QGraphicsWebView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGraphicsWebView_virtualbase_metacall(VirtualQGraphicsWebView* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGraphicsWebView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QGraphicsWebView_virtualbase_setGeometry(void* self, QRectF* rect) {
+void QGraphicsWebView_virtualbase_setGeometry(VirtualQGraphicsWebView* self, QRectF* rect) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::setGeometry(*rect);
-
+	self->QGraphicsWebView::setGeometry(*rect);
 }
 
-void QGraphicsWebView_virtualbase_updateGeometry(void* self) {
+void QGraphicsWebView_virtualbase_updateGeometry(VirtualQGraphicsWebView* self) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::updateGeometry();
-
+	self->QGraphicsWebView::updateGeometry();
 }
 
-void QGraphicsWebView_virtualbase_paint(void* self, QPainter* param1, QStyleOptionGraphicsItem* options, QWidget* widget) {
+void QGraphicsWebView_virtualbase_paint(VirtualQGraphicsWebView* self, QPainter* param1, QStyleOptionGraphicsItem* options, QWidget* widget) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::paint(param1, options, widget);
-
+	self->QGraphicsWebView::paint(param1, options, widget);
 }
 
-QVariant* QGraphicsWebView_virtualbase_itemChange(void* self, int change, QVariant* value) {
+QVariant* QGraphicsWebView_virtualbase_itemChange(VirtualQGraphicsWebView* self, int change, QVariant* value) {
 
-	return new QVariant(( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::itemChange(static_cast<VirtualQGraphicsWebView::GraphicsItemChange>(change), *value));
-
+	return new QVariant(self->QGraphicsWebView::itemChange(static_cast<VirtualQGraphicsWebView::GraphicsItemChange>(change), *value));
 }
 
-bool QGraphicsWebView_virtualbase_event(void* self, QEvent* param1) {
+bool QGraphicsWebView_virtualbase_event(VirtualQGraphicsWebView* self, QEvent* param1) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::event(param1);
-
+	return self->QGraphicsWebView::event(param1);
 }
 
-QSizeF* QGraphicsWebView_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint) {
+QSizeF* QGraphicsWebView_virtualbase_sizeHint(const VirtualQGraphicsWebView* self, int which, QSizeF* constraint) {
 
-	return new QSizeF(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-
+	return new QSizeF(self->QGraphicsWebView::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
 }
 
-QVariant* QGraphicsWebView_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QGraphicsWebView_virtualbase_inputMethodQuery(const VirtualQGraphicsWebView* self, int query) {
 
-	return new QVariant(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QGraphicsWebView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-void QGraphicsWebView_virtualbase_mousePressEvent(void* self, QGraphicsSceneMouseEvent* param1) {
+void QGraphicsWebView_virtualbase_mousePressEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::mousePressEvent(param1);
-
+	self->QGraphicsWebView::mousePressEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_mouseDoubleClickEvent(void* self, QGraphicsSceneMouseEvent* param1) {
+void QGraphicsWebView_virtualbase_mouseDoubleClickEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::mouseDoubleClickEvent(param1);
-
+	self->QGraphicsWebView::mouseDoubleClickEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_mouseReleaseEvent(void* self, QGraphicsSceneMouseEvent* param1) {
+void QGraphicsWebView_virtualbase_mouseReleaseEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::mouseReleaseEvent(param1);
-
+	self->QGraphicsWebView::mouseReleaseEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_mouseMoveEvent(void* self, QGraphicsSceneMouseEvent* param1) {
+void QGraphicsWebView_virtualbase_mouseMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMouseEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::mouseMoveEvent(param1);
-
+	self->QGraphicsWebView::mouseMoveEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_hoverMoveEvent(void* self, QGraphicsSceneHoverEvent* param1) {
+void QGraphicsWebView_virtualbase_hoverMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::hoverMoveEvent(param1);
-
+	self->QGraphicsWebView::hoverMoveEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_hoverLeaveEvent(void* self, QGraphicsSceneHoverEvent* param1) {
+void QGraphicsWebView_virtualbase_hoverLeaveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::hoverLeaveEvent(param1);
-
+	self->QGraphicsWebView::hoverLeaveEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_wheelEvent(void* self, QGraphicsSceneWheelEvent* param1) {
+void QGraphicsWebView_virtualbase_wheelEvent(VirtualQGraphicsWebView* self, QGraphicsSceneWheelEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::wheelEvent(param1);
-
+	self->QGraphicsWebView::wheelEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QGraphicsWebView_virtualbase_keyPressEvent(VirtualQGraphicsWebView* self, QKeyEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::keyPressEvent(param1);
-
+	self->QGraphicsWebView::keyPressEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* param1) {
+void QGraphicsWebView_virtualbase_keyReleaseEvent(VirtualQGraphicsWebView* self, QKeyEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::keyReleaseEvent(param1);
-
+	self->QGraphicsWebView::keyReleaseEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_contextMenuEvent(void* self, QGraphicsSceneContextMenuEvent* param1) {
+void QGraphicsWebView_virtualbase_contextMenuEvent(VirtualQGraphicsWebView* self, QGraphicsSceneContextMenuEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::contextMenuEvent(param1);
-
+	self->QGraphicsWebView::contextMenuEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_dragEnterEvent(void* self, QGraphicsSceneDragDropEvent* param1) {
+void QGraphicsWebView_virtualbase_dragEnterEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::dragEnterEvent(param1);
-
+	self->QGraphicsWebView::dragEnterEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_dragLeaveEvent(void* self, QGraphicsSceneDragDropEvent* param1) {
+void QGraphicsWebView_virtualbase_dragLeaveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::dragLeaveEvent(param1);
-
+	self->QGraphicsWebView::dragLeaveEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_dragMoveEvent(void* self, QGraphicsSceneDragDropEvent* param1) {
+void QGraphicsWebView_virtualbase_dragMoveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::dragMoveEvent(param1);
-
+	self->QGraphicsWebView::dragMoveEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_dropEvent(void* self, QGraphicsSceneDragDropEvent* param1) {
+void QGraphicsWebView_virtualbase_dropEvent(VirtualQGraphicsWebView* self, QGraphicsSceneDragDropEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::dropEvent(param1);
-
+	self->QGraphicsWebView::dropEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QGraphicsWebView_virtualbase_focusInEvent(VirtualQGraphicsWebView* self, QFocusEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::focusInEvent(param1);
-
+	self->QGraphicsWebView::focusInEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QGraphicsWebView_virtualbase_focusOutEvent(VirtualQGraphicsWebView* self, QFocusEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::focusOutEvent(param1);
-
+	self->QGraphicsWebView::focusOutEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QGraphicsWebView_virtualbase_inputMethodEvent(VirtualQGraphicsWebView* self, QInputMethodEvent* param1) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::inputMethodEvent(param1);
-
+	self->QGraphicsWebView::inputMethodEvent(param1);
 }
 
-bool QGraphicsWebView_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QGraphicsWebView_virtualbase_focusNextPrevChild(VirtualQGraphicsWebView* self, bool next) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::focusNextPrevChild(next);
-
+	return self->QGraphicsWebView::focusNextPrevChild(next);
 }
 
-bool QGraphicsWebView_virtualbase_sceneEvent(void* self, QEvent* param1) {
+bool QGraphicsWebView_virtualbase_sceneEvent(VirtualQGraphicsWebView* self, QEvent* param1) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::sceneEvent(param1);
-
+	return self->QGraphicsWebView::sceneEvent(param1);
 }
 
-void QGraphicsWebView_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom) {
+void QGraphicsWebView_virtualbase_getContentsMargins(const VirtualQGraphicsWebView* self, double* left, double* top, double* right, double* bottom) {
 
-	( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
-
+	self->QGraphicsWebView::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
 }
 
-int QGraphicsWebView_virtualbase_type(const void* self) {
+int QGraphicsWebView_virtualbase_type(const VirtualQGraphicsWebView* self) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::type();
-
+	return self->QGraphicsWebView::type();
 }
 
-void QGraphicsWebView_virtualbase_paintWindowFrame(void* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
+void QGraphicsWebView_virtualbase_paintWindowFrame(VirtualQGraphicsWebView* self, QPainter* painter, QStyleOptionGraphicsItem* option, QWidget* widget) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::paintWindowFrame(painter, option, widget);
-
+	self->QGraphicsWebView::paintWindowFrame(painter, option, widget);
 }
 
-QRectF* QGraphicsWebView_virtualbase_boundingRect(const void* self) {
+QRectF* QGraphicsWebView_virtualbase_boundingRect(const VirtualQGraphicsWebView* self) {
 
-	return new QRectF(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::boundingRect());
-
+	return new QRectF(self->QGraphicsWebView::boundingRect());
 }
 
-QPainterPath* QGraphicsWebView_virtualbase_shape(const void* self) {
+QPainterPath* QGraphicsWebView_virtualbase_shape(const VirtualQGraphicsWebView* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::shape());
-
+	return new QPainterPath(self->QGraphicsWebView::shape());
 }
 
-void QGraphicsWebView_virtualbase_initStyleOption(const void* self, QStyleOption* option) {
+void QGraphicsWebView_virtualbase_initStyleOption(const VirtualQGraphicsWebView* self, QStyleOption* option) {
 
-	( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::initStyleOption(option);
-
+	self->QGraphicsWebView::initStyleOption(option);
 }
 
-QVariant* QGraphicsWebView_virtualbase_propertyChange(void* self, struct miqt_string propertyName, QVariant* value) {
+QVariant* QGraphicsWebView_virtualbase_propertyChange(VirtualQGraphicsWebView* self, struct miqt_string propertyName, QVariant* value) {
 	QString propertyName_QString = QString::fromUtf8(propertyName.data, propertyName.len);
 
-	return new QVariant(( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::propertyChange(propertyName_QString, *value));
-
+	return new QVariant(self->QGraphicsWebView::propertyChange(propertyName_QString, *value));
 }
 
-bool QGraphicsWebView_virtualbase_windowFrameEvent(void* self, QEvent* e) {
+bool QGraphicsWebView_virtualbase_windowFrameEvent(VirtualQGraphicsWebView* self, QEvent* e) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::windowFrameEvent(e);
-
+	return self->QGraphicsWebView::windowFrameEvent(e);
 }
 
-int QGraphicsWebView_virtualbase_windowFrameSectionAt(const void* self, QPointF* pos) {
+int QGraphicsWebView_virtualbase_windowFrameSectionAt(const VirtualQGraphicsWebView* self, QPointF* pos) {
 
-	Qt::WindowFrameSection _ret = ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::windowFrameSectionAt(*pos);
+	Qt::WindowFrameSection _ret = self->QGraphicsWebView::windowFrameSectionAt(*pos);
 	return static_cast<int>(_ret);
-
 }
 
-void QGraphicsWebView_virtualbase_changeEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_changeEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::changeEvent(event);
-
+	self->QGraphicsWebView::changeEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QGraphicsWebView_virtualbase_closeEvent(VirtualQGraphicsWebView* self, QCloseEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::closeEvent(event);
-
+	self->QGraphicsWebView::closeEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QGraphicsWebView_virtualbase_hideEvent(VirtualQGraphicsWebView* self, QHideEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::hideEvent(event);
-
+	self->QGraphicsWebView::hideEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_moveEvent(void* self, QGraphicsSceneMoveEvent* event) {
+void QGraphicsWebView_virtualbase_moveEvent(VirtualQGraphicsWebView* self, QGraphicsSceneMoveEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::moveEvent(event);
-
+	self->QGraphicsWebView::moveEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_polishEvent(void* self) {
+void QGraphicsWebView_virtualbase_polishEvent(VirtualQGraphicsWebView* self) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::polishEvent();
-
+	self->QGraphicsWebView::polishEvent();
 }
 
-void QGraphicsWebView_virtualbase_resizeEvent(void* self, QGraphicsSceneResizeEvent* event) {
+void QGraphicsWebView_virtualbase_resizeEvent(VirtualQGraphicsWebView* self, QGraphicsSceneResizeEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::resizeEvent(event);
-
+	self->QGraphicsWebView::resizeEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QGraphicsWebView_virtualbase_showEvent(VirtualQGraphicsWebView* self, QShowEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::showEvent(event);
-
+	self->QGraphicsWebView::showEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_grabMouseEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_grabMouseEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::grabMouseEvent(event);
-
+	self->QGraphicsWebView::grabMouseEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_ungrabMouseEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_ungrabMouseEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::ungrabMouseEvent(event);
-
+	self->QGraphicsWebView::ungrabMouseEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_grabKeyboardEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_grabKeyboardEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::grabKeyboardEvent(event);
-
+	self->QGraphicsWebView::grabKeyboardEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_ungrabKeyboardEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_ungrabKeyboardEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::ungrabKeyboardEvent(event);
-
+	self->QGraphicsWebView::ungrabKeyboardEvent(event);
 }
 
-bool QGraphicsWebView_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGraphicsWebView_virtualbase_eventFilter(VirtualQGraphicsWebView* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::eventFilter(watched, event);
-
+	return self->QGraphicsWebView::eventFilter(watched, event);
 }
 
-void QGraphicsWebView_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGraphicsWebView_virtualbase_timerEvent(VirtualQGraphicsWebView* self, QTimerEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::timerEvent(event);
-
+	self->QGraphicsWebView::timerEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGraphicsWebView_virtualbase_childEvent(VirtualQGraphicsWebView* self, QChildEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::childEvent(event);
-
+	self->QGraphicsWebView::childEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_customEvent(void* self, QEvent* event) {
+void QGraphicsWebView_virtualbase_customEvent(VirtualQGraphicsWebView* self, QEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::customEvent(event);
-
+	self->QGraphicsWebView::customEvent(event);
 }
 
-void QGraphicsWebView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsWebView_virtualbase_connectNotify(VirtualQGraphicsWebView* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::connectNotify(*signal);
-
+	self->QGraphicsWebView::connectNotify(*signal);
 }
 
-void QGraphicsWebView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGraphicsWebView_virtualbase_disconnectNotify(VirtualQGraphicsWebView* self, QMetaMethod* signal) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::disconnectNotify(*signal);
-
+	self->QGraphicsWebView::disconnectNotify(*signal);
 }
 
-void QGraphicsWebView_virtualbase_advance(void* self, int phase) {
+void QGraphicsWebView_virtualbase_advance(VirtualQGraphicsWebView* self, int phase) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::advance(static_cast<int>(phase));
-
+	self->QGraphicsWebView::advance(static_cast<int>(phase));
 }
 
-bool QGraphicsWebView_virtualbase_contains(const void* self, QPointF* point) {
+bool QGraphicsWebView_virtualbase_contains(const VirtualQGraphicsWebView* self, QPointF* point) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::contains(*point);
-
+	return self->QGraphicsWebView::contains(*point);
 }
 
-bool QGraphicsWebView_virtualbase_collidesWithItem(const void* self, QGraphicsItem* other, int mode) {
+bool QGraphicsWebView_virtualbase_collidesWithItem(const VirtualQGraphicsWebView* self, QGraphicsItem* other, int mode) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsWebView::collidesWithItem(other, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsWebView_virtualbase_collidesWithPath(const void* self, QPainterPath* path, int mode) {
+bool QGraphicsWebView_virtualbase_collidesWithPath(const VirtualQGraphicsWebView* self, QPainterPath* path, int mode) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
-
+	return self->QGraphicsWebView::collidesWithPath(*path, static_cast<Qt::ItemSelectionMode>(mode));
 }
 
-bool QGraphicsWebView_virtualbase_isObscuredBy(const void* self, QGraphicsItem* item) {
+bool QGraphicsWebView_virtualbase_isObscuredBy(const VirtualQGraphicsWebView* self, QGraphicsItem* item) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::isObscuredBy(item);
-
+	return self->QGraphicsWebView::isObscuredBy(item);
 }
 
-QPainterPath* QGraphicsWebView_virtualbase_opaqueArea(const void* self) {
+QPainterPath* QGraphicsWebView_virtualbase_opaqueArea(const VirtualQGraphicsWebView* self) {
 
-	return new QPainterPath(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::opaqueArea());
-
+	return new QPainterPath(self->QGraphicsWebView::opaqueArea());
 }
 
-bool QGraphicsWebView_virtualbase_sceneEventFilter(void* self, QGraphicsItem* watched, QEvent* event) {
+bool QGraphicsWebView_virtualbase_sceneEventFilter(VirtualQGraphicsWebView* self, QGraphicsItem* watched, QEvent* event) {
 
-	return ( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::sceneEventFilter(watched, event);
-
+	return self->QGraphicsWebView::sceneEventFilter(watched, event);
 }
 
-void QGraphicsWebView_virtualbase_hoverEnterEvent(void* self, QGraphicsSceneHoverEvent* event) {
+void QGraphicsWebView_virtualbase_hoverEnterEvent(VirtualQGraphicsWebView* self, QGraphicsSceneHoverEvent* event) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::hoverEnterEvent(event);
-
+	self->QGraphicsWebView::hoverEnterEvent(event);
 }
 
-bool QGraphicsWebView_virtualbase_supportsExtension(const void* self, int extension) {
+bool QGraphicsWebView_virtualbase_supportsExtension(const VirtualQGraphicsWebView* self, int extension) {
 
-	return ( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::supportsExtension(static_cast<VirtualQGraphicsWebView::Extension>(extension));
-
+	return self->QGraphicsWebView::supportsExtension(static_cast<VirtualQGraphicsWebView::Extension>(extension));
 }
 
-void QGraphicsWebView_virtualbase_setExtension(void* self, int extension, QVariant* variant) {
+void QGraphicsWebView_virtualbase_setExtension(VirtualQGraphicsWebView* self, int extension, QVariant* variant) {
 
-	( (VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::setExtension(static_cast<VirtualQGraphicsWebView::Extension>(extension), *variant);
-
+	self->QGraphicsWebView::setExtension(static_cast<VirtualQGraphicsWebView::Extension>(extension), *variant);
 }
 
-QVariant* QGraphicsWebView_virtualbase_extension(const void* self, QVariant* variant) {
+QVariant* QGraphicsWebView_virtualbase_extension(const VirtualQGraphicsWebView* self, QVariant* variant) {
 
-	return new QVariant(( (const VirtualQGraphicsWebView*)(self) )->QGraphicsWebView::extension(*variant));
-
+	return new QVariant(self->QGraphicsWebView::extension(*variant));
 }
 
 const QMetaObject* QGraphicsWebView_staticMetaObject() { return &QGraphicsWebView::staticMetaObject; }
-void QGraphicsWebView_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QGraphicsWebView_VTable* QGraphicsWebView_vtbl(const VirtualQGraphicsWebView* self) { return self->vtbl; }
+void* QGraphicsWebView_vdata(const VirtualQGraphicsWebView* self) { return self->vdata; }
+void QGraphicsWebView_setVdata(VirtualQGraphicsWebView* self, void* vdata) { self->vdata = vdata; }
+
+void QGraphicsWebView_protectedbase_updateMicroFocus(VirtualQGraphicsWebView* self) {
+	self->updateMicroFocus();
 }
 
-QObject* QGraphicsWebView_protectedbase_sender(const void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGraphicsWebView_protectedbase_sender(const VirtualQGraphicsWebView* self) {
+	return self->sender();
 }
 
-int QGraphicsWebView_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGraphicsWebView_protectedbase_senderSignalIndex(const VirtualQGraphicsWebView* self) {
+	return self->senderSignalIndex();
 }
 
-int QGraphicsWebView_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGraphicsWebView_protectedbase_receivers(const VirtualQGraphicsWebView* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGraphicsWebView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGraphicsWebView_protectedbase_isSignalConnected(const VirtualQGraphicsWebView* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
-void QGraphicsWebView_protectedbase_addToIndex(void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->addToIndex();
-
+void QGraphicsWebView_protectedbase_addToIndex(VirtualQGraphicsWebView* self) {
+	self->addToIndex();
 }
 
-void QGraphicsWebView_protectedbase_removeFromIndex(void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->removeFromIndex();
-
+void QGraphicsWebView_protectedbase_removeFromIndex(VirtualQGraphicsWebView* self) {
+	self->removeFromIndex();
 }
 
-void QGraphicsWebView_protectedbase_prepareGeometryChange(void* self) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->prepareGeometryChange();
-
+void QGraphicsWebView_protectedbase_prepareGeometryChange(VirtualQGraphicsWebView* self) {
+	self->prepareGeometryChange();
 }
 
-void QGraphicsWebView_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->setGraphicsItem(item);
-
+void QGraphicsWebView_protectedbase_setGraphicsItem(VirtualQGraphicsWebView* self, QGraphicsItem* item) {
+	self->setGraphicsItem(item);
 }
 
-void QGraphicsWebView_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
-	VirtualQGraphicsWebView* self_cast = static_cast<VirtualQGraphicsWebView*>( (QGraphicsWebView*)(self) );
-	
-	self_cast->setOwnedByLayout(ownedByLayout);
-
+void QGraphicsWebView_protectedbase_setOwnedByLayout(VirtualQGraphicsWebView* self, bool ownedByLayout) {
+	self->setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsWebView_delete(QGraphicsWebView* self) {

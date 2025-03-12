@@ -42,6 +42,7 @@ typedef struct QJsonValueRefPtr QJsonValueRefPtr;
 
 QJsonArray* QJsonArray_new();
 QJsonArray* QJsonArray_new2(QJsonArray* other);
+
 void QJsonArray_operatorAssign(QJsonArray* self, QJsonArray* other);
 QJsonArray* QJsonArray_fromStringList(struct miqt_array /* of struct miqt_string */  list);
 int QJsonArray_size(const QJsonArray* self);
@@ -82,11 +83,13 @@ void QJsonArray_pushFront(QJsonArray* self, QJsonValue* t);
 void QJsonArray_popFront(QJsonArray* self);
 void QJsonArray_popBack(QJsonArray* self);
 bool QJsonArray_empty(const QJsonArray* self);
+
 void QJsonArray_delete(QJsonArray* self);
 
 QJsonArray__iterator* QJsonArray__iterator_new();
 QJsonArray__iterator* QJsonArray__iterator_new2(QJsonArray* array, int index);
 QJsonArray__iterator* QJsonArray__iterator_new3(QJsonArray__iterator* param1);
+
 QJsonValueRef* QJsonArray__iterator_operatorMultiply(const QJsonArray__iterator* self);
 QJsonValueRefPtr* QJsonArray__iterator_operatorMinusGreater(const QJsonArray__iterator* self);
 QJsonValueRef* QJsonArray__iterator_operatorSubscript(const QJsonArray__iterator* self, int j);
@@ -111,12 +114,14 @@ QJsonArray__iterator* QJsonArray__iterator_operatorMinusAssign(QJsonArray__itera
 QJsonArray__iterator* QJsonArray__iterator_operatorPlus(const QJsonArray__iterator* self, int j);
 QJsonArray__iterator* QJsonArray__iterator_operatorMinus(const QJsonArray__iterator* self, int j);
 int QJsonArray__iterator_operatorMinusWithQJsonArrayiterator(const QJsonArray__iterator* self, QJsonArray__iterator* j);
+
 void QJsonArray__iterator_delete(QJsonArray__iterator* self);
 
 QJsonArray__const_iterator* QJsonArray__const_iterator_new();
 QJsonArray__const_iterator* QJsonArray__const_iterator_new2(QJsonArray* array, int index);
 QJsonArray__const_iterator* QJsonArray__const_iterator_new3(QJsonArray__const_iterator* o);
 QJsonArray__const_iterator* QJsonArray__const_iterator_new4(QJsonArray__iterator* o);
+
 QJsonValue* QJsonArray__const_iterator_operatorMultiply(const QJsonArray__const_iterator* self);
 QJsonValuePtr* QJsonArray__const_iterator_operatorMinusGreater(const QJsonArray__const_iterator* self);
 QJsonValue* QJsonArray__const_iterator_operatorSubscript(const QJsonArray__const_iterator* self, int j);
@@ -135,6 +140,7 @@ QJsonArray__const_iterator* QJsonArray__const_iterator_operatorMinusAssign(QJson
 QJsonArray__const_iterator* QJsonArray__const_iterator_operatorPlus(const QJsonArray__const_iterator* self, int j);
 QJsonArray__const_iterator* QJsonArray__const_iterator_operatorMinus(const QJsonArray__const_iterator* self, int j);
 int QJsonArray__const_iterator_operatorMinusWithQJsonArrayconstIterator(const QJsonArray__const_iterator* self, QJsonArray__const_iterator* j);
+
 void QJsonArray__const_iterator_delete(QJsonArray__const_iterator* self);
 
 #ifdef __cplusplus

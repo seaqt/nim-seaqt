@@ -8,15 +8,6 @@
 #include <QVideoDeviceSelectorControl>
 #include <qvideodeviceselectorcontrol.h>
 #include "gen_qvideodeviceselectorcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QVideoDeviceSelectorControl_virtbase(QVideoDeviceSelectorControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -193,6 +184,7 @@ struct miqt_string QVideoDeviceSelectorControl_trUtf83(const char* s, const char
 }
 
 const QMetaObject* QVideoDeviceSelectorControl_staticMetaObject() { return &QVideoDeviceSelectorControl::staticMetaObject; }
+
 void QVideoDeviceSelectorControl_delete(QVideoDeviceSelectorControl* self) {
 	delete self;
 }

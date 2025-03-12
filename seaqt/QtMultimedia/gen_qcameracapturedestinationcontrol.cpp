@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcameracapturedestinationcontrol.h>
 #include "gen_qcameracapturedestinationcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraCaptureDestinationControl_virtbase(QCameraCaptureDestinationControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -130,6 +121,7 @@ struct miqt_string QCameraCaptureDestinationControl_trUtf83(const char* s, const
 }
 
 const QMetaObject* QCameraCaptureDestinationControl_staticMetaObject() { return &QCameraCaptureDestinationControl::staticMetaObject; }
+
 void QCameraCaptureDestinationControl_delete(QCameraCaptureDestinationControl* self) {
 	delete self;
 }

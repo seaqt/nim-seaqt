@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qfinalstate.h>
 #include "gen_qfinalstate.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQFinalState final : public QFinalState {
-	struct QFinalState_VTable* vtbl;
+	const QFinalState_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFinalState_VTable* QFinalState_vtbl(const VirtualQFinalState* self);
+	friend void* QFinalState_vdata(const VirtualQFinalState* self);
+	friend void QFinalState_setVdata(VirtualQFinalState* self, void* vdata);
 
-	VirtualQFinalState(struct QFinalState_VTable* vtbl): QFinalState(), vtbl(vtbl) {};
-	VirtualQFinalState(struct QFinalState_VTable* vtbl, QState* parent): QFinalState(parent), vtbl(vtbl) {};
+	VirtualQFinalState(const QFinalState_VTable* vtbl, void* vdata): QFinalState(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFinalState(const QFinalState_VTable* vtbl, void* vdata, QState* parent): QFinalState(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFinalState() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFinalState() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QFinalState::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QFinalState_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QFinalState_virtualbase_metaObject(const VirtualQFinalState* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QFinalState::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QFinalState_virtualbase_metacast(void* self, const char* param1);
+	friend void* QFinalState_virtualbase_metacast(VirtualQFinalState* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QFinalState::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFinalState_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QFinalState_virtualbase_metacall(VirtualQFinalState* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onEntry(QEvent* event) override {
 		if (vtbl->onEntry == 0) {
 			QFinalState::onEntry(event);
@@ -86,13 +77,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onEntry(vtbl, this, sigval1);
+		vtbl->onEntry(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_onEntry(void* self, QEvent* event);
+	friend void QFinalState_virtualbase_onEntry(VirtualQFinalState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onExit(QEvent* event) override {
 		if (vtbl->onExit == 0) {
 			QFinalState::onExit(event);
@@ -101,13 +91,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onExit(vtbl, this, sigval1);
+		vtbl->onExit(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_onExit(void* self, QEvent* event);
+	friend void QFinalState_virtualbase_onExit(VirtualQFinalState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QFinalState::event(e);
@@ -115,14 +104,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFinalState_virtualbase_event(void* self, QEvent* e);
+	friend bool QFinalState_virtualbase_event(VirtualQFinalState* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QFinalState::eventFilter(watched, event);
@@ -131,14 +119,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QFinalState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QFinalState_virtualbase_eventFilter(VirtualQFinalState* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QFinalState::timerEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QFinalState_virtualbase_timerEvent(VirtualQFinalState* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QFinalState::childEvent(event);
@@ -162,13 +148,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QFinalState_virtualbase_childEvent(VirtualQFinalState* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QFinalState::customEvent(event);
@@ -177,13 +162,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QFinalState_virtualbase_customEvent(VirtualQFinalState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QFinalState::connectNotify(signal);
@@ -194,13 +178,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QFinalState_virtualbase_connectNotify(VirtualQFinalState* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QFinalState::disconnectNotify(signal);
@@ -211,25 +194,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QFinalState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QFinalState_virtualbase_disconnectNotify(VirtualQFinalState* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QFinalState_protectedbase_sender(const void* self);
-	friend int QFinalState_protectedbase_senderSignalIndex(const void* self);
-	friend int QFinalState_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QFinalState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QFinalState_protectedbase_sender(const VirtualQFinalState* self);
+	friend int QFinalState_protectedbase_senderSignalIndex(const VirtualQFinalState* self);
+	friend int QFinalState_protectedbase_receivers(const VirtualQFinalState* self, const char* signal);
+	friend bool QFinalState_protectedbase_isSignalConnected(const VirtualQFinalState* self, QMetaMethod* signal);
 };
 
-QFinalState* QFinalState_new(struct QFinalState_VTable* vtbl) {
-	return new VirtualQFinalState(vtbl);
+VirtualQFinalState* QFinalState_new(const QFinalState_VTable* vtbl, void* vdata) {
+	return new VirtualQFinalState(vtbl, vdata);
 }
 
-QFinalState* QFinalState_new2(struct QFinalState_VTable* vtbl, QState* parent) {
-	return new VirtualQFinalState(vtbl, parent);
+VirtualQFinalState* QFinalState_new2(const QFinalState_VTable* vtbl, void* vdata, QState* parent) {
+	return new VirtualQFinalState(vtbl, vdata, parent);
 }
 
 void QFinalState_virtbase(QFinalState* src, QAbstractState** outptr_QAbstractState) {
@@ -314,105 +297,86 @@ struct miqt_string QFinalState_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QFinalState_virtualbase_metaObject(const void* self) {
+QMetaObject* QFinalState_virtualbase_metaObject(const VirtualQFinalState* self) {
 
-	return (QMetaObject*) ( (const VirtualQFinalState*)(self) )->QFinalState::metaObject();
-
+	return (QMetaObject*) self->QFinalState::metaObject();
 }
 
-void* QFinalState_virtualbase_metacast(void* self, const char* param1) {
+void* QFinalState_virtualbase_metacast(VirtualQFinalState* self, const char* param1) {
 
-	return ( (VirtualQFinalState*)(self) )->QFinalState::qt_metacast(param1);
-
+	return self->QFinalState::qt_metacast(param1);
 }
 
-int QFinalState_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QFinalState_virtualbase_metacall(VirtualQFinalState* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQFinalState*)(self) )->QFinalState::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QFinalState::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QFinalState_virtualbase_onEntry(void* self, QEvent* event) {
+void QFinalState_virtualbase_onEntry(VirtualQFinalState* self, QEvent* event) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::onEntry(event);
-
+	self->QFinalState::onEntry(event);
 }
 
-void QFinalState_virtualbase_onExit(void* self, QEvent* event) {
+void QFinalState_virtualbase_onExit(VirtualQFinalState* self, QEvent* event) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::onExit(event);
-
+	self->QFinalState::onExit(event);
 }
 
-bool QFinalState_virtualbase_event(void* self, QEvent* e) {
+bool QFinalState_virtualbase_event(VirtualQFinalState* self, QEvent* e) {
 
-	return ( (VirtualQFinalState*)(self) )->QFinalState::event(e);
-
+	return self->QFinalState::event(e);
 }
 
-bool QFinalState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QFinalState_virtualbase_eventFilter(VirtualQFinalState* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQFinalState*)(self) )->QFinalState::eventFilter(watched, event);
-
+	return self->QFinalState::eventFilter(watched, event);
 }
 
-void QFinalState_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QFinalState_virtualbase_timerEvent(VirtualQFinalState* self, QTimerEvent* event) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::timerEvent(event);
-
+	self->QFinalState::timerEvent(event);
 }
 
-void QFinalState_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QFinalState_virtualbase_childEvent(VirtualQFinalState* self, QChildEvent* event) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::childEvent(event);
-
+	self->QFinalState::childEvent(event);
 }
 
-void QFinalState_virtualbase_customEvent(void* self, QEvent* event) {
+void QFinalState_virtualbase_customEvent(VirtualQFinalState* self, QEvent* event) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::customEvent(event);
-
+	self->QFinalState::customEvent(event);
 }
 
-void QFinalState_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QFinalState_virtualbase_connectNotify(VirtualQFinalState* self, QMetaMethod* signal) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::connectNotify(*signal);
-
+	self->QFinalState::connectNotify(*signal);
 }
 
-void QFinalState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QFinalState_virtualbase_disconnectNotify(VirtualQFinalState* self, QMetaMethod* signal) {
 
-	( (VirtualQFinalState*)(self) )->QFinalState::disconnectNotify(*signal);
-
+	self->QFinalState::disconnectNotify(*signal);
 }
 
 const QMetaObject* QFinalState_staticMetaObject() { return &QFinalState::staticMetaObject; }
-QObject* QFinalState_protectedbase_sender(const void* self) {
-	VirtualQFinalState* self_cast = static_cast<VirtualQFinalState*>( (QFinalState*)(self) );
-	
-	return self_cast->sender();
 
+const QFinalState_VTable* QFinalState_vtbl(const VirtualQFinalState* self) { return self->vtbl; }
+void* QFinalState_vdata(const VirtualQFinalState* self) { return self->vdata; }
+void QFinalState_setVdata(VirtualQFinalState* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QFinalState_protectedbase_sender(const VirtualQFinalState* self) {
+	return self->sender();
 }
 
-int QFinalState_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQFinalState* self_cast = static_cast<VirtualQFinalState*>( (QFinalState*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QFinalState_protectedbase_senderSignalIndex(const VirtualQFinalState* self) {
+	return self->senderSignalIndex();
 }
 
-int QFinalState_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQFinalState* self_cast = static_cast<VirtualQFinalState*>( (QFinalState*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QFinalState_protectedbase_receivers(const VirtualQFinalState* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QFinalState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQFinalState* self_cast = static_cast<VirtualQFinalState*>( (QFinalState*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QFinalState_protectedbase_isSignalConnected(const VirtualQFinalState* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QFinalState_delete(QFinalState* self) {

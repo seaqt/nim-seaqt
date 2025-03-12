@@ -27,6 +27,7 @@ typedef struct QResource QResource;
 QResource* QResource_new();
 QResource* QResource_new2(struct miqt_string file);
 QResource* QResource_new3(struct miqt_string file, QLocale* locale);
+
 void QResource_setFileName(QResource* self, struct miqt_string file);
 struct miqt_string QResource_fileName(const QResource* self);
 struct miqt_string QResource_absoluteFilePath(const QResource* self);
@@ -50,6 +51,7 @@ bool QResource_registerResource2(struct miqt_string rccFilename, struct miqt_str
 bool QResource_unregisterResource2(struct miqt_string rccFilename, struct miqt_string resourceRoot);
 bool QResource_registerResource22(const unsigned char* rccData, struct miqt_string resourceRoot);
 bool QResource_unregisterResource22(const unsigned char* rccData, struct miqt_string resourceRoot);
+
 void QResource_delete(QResource* self);
 
 #ifdef __cplusplus

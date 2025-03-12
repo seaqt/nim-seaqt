@@ -11,15 +11,6 @@
 #include <QVariant>
 #include <qmetaobject.h>
 #include "gen_qmetaobject.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMetaMethod* QMetaMethod_new() {
 	return new QMetaMethod();
 }

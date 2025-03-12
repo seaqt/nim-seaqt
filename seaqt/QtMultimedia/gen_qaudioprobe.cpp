@@ -13,39 +13,32 @@
 #include <QTimerEvent>
 #include <qaudioprobe.h>
 #include "gen_qaudioprobe.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAudioProbe final : public QAudioProbe {
-	struct QAudioProbe_VTable* vtbl;
+	const QAudioProbe_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAudioProbe_VTable* QAudioProbe_vtbl(const VirtualQAudioProbe* self);
+	friend void* QAudioProbe_vdata(const VirtualQAudioProbe* self);
+	friend void QAudioProbe_setVdata(VirtualQAudioProbe* self, void* vdata);
 
-	VirtualQAudioProbe(struct QAudioProbe_VTable* vtbl): QAudioProbe(), vtbl(vtbl) {};
-	VirtualQAudioProbe(struct QAudioProbe_VTable* vtbl, QObject* parent): QAudioProbe(parent), vtbl(vtbl) {};
+	VirtualQAudioProbe(const QAudioProbe_VTable* vtbl, void* vdata): QAudioProbe(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAudioProbe(const QAudioProbe_VTable* vtbl, void* vdata, QObject* parent): QAudioProbe(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAudioProbe() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAudioProbe() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAudioProbe::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAudioProbe_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAudioProbe_virtualbase_metaObject(const VirtualQAudioProbe* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAudioProbe::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAudioProbe_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAudioProbe_virtualbase_metacast(VirtualQAudioProbe* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAudioProbe::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAudioProbe_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAudioProbe_virtualbase_metacall(VirtualQAudioProbe* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAudioProbe::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioProbe_virtualbase_event(void* self, QEvent* event);
+	friend bool QAudioProbe_virtualbase_event(VirtualQAudioProbe* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAudioProbe::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioProbe_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAudioProbe_virtualbase_eventFilter(VirtualQAudioProbe* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAudioProbe::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAudioProbe_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAudioProbe_virtualbase_timerEvent(VirtualQAudioProbe* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAudioProbe::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAudioProbe_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAudioProbe_virtualbase_childEvent(VirtualQAudioProbe* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAudioProbe::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAudioProbe_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAudioProbe_virtualbase_customEvent(VirtualQAudioProbe* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAudioProbe::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioProbe_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioProbe_virtualbase_connectNotify(VirtualQAudioProbe* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAudioProbe::disconnectNotify(signal);
@@ -182,25 +167,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioProbe_virtualbase_disconnectNotify(VirtualQAudioProbe* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAudioProbe_protectedbase_sender(const void* self);
-	friend int QAudioProbe_protectedbase_senderSignalIndex(const void* self);
-	friend int QAudioProbe_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAudioProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAudioProbe_protectedbase_sender(const VirtualQAudioProbe* self);
+	friend int QAudioProbe_protectedbase_senderSignalIndex(const VirtualQAudioProbe* self);
+	friend int QAudioProbe_protectedbase_receivers(const VirtualQAudioProbe* self, const char* signal);
+	friend bool QAudioProbe_protectedbase_isSignalConnected(const VirtualQAudioProbe* self, QMetaMethod* signal);
 };
 
-QAudioProbe* QAudioProbe_new(struct QAudioProbe_VTable* vtbl) {
-	return new VirtualQAudioProbe(vtbl);
+VirtualQAudioProbe* QAudioProbe_new(const QAudioProbe_VTable* vtbl, void* vdata) {
+	return new VirtualQAudioProbe(vtbl, vdata);
 }
 
-QAudioProbe* QAudioProbe_new2(struct QAudioProbe_VTable* vtbl, QObject* parent) {
-	return new VirtualQAudioProbe(vtbl, parent);
+VirtualQAudioProbe* QAudioProbe_new2(const QAudioProbe_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAudioProbe(vtbl, vdata, parent);
 }
 
 void QAudioProbe_virtbase(QAudioProbe* src, QObject** outptr_QObject) {
@@ -257,7 +242,7 @@ void QAudioProbe_audioBufferProbed(QAudioProbe* self, QAudioBuffer* buffer) {
 	self->audioBufferProbed(*buffer);
 }
 
-void QAudioProbe_connect_audioBufferProbed(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) {
+void QAudioProbe_connect_audioBufferProbed(VirtualQAudioProbe* self, intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QAudioBuffer*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QAudioBuffer*);
@@ -275,7 +260,7 @@ void QAudioProbe_flush(QAudioProbe* self) {
 	self->flush();
 }
 
-void QAudioProbe_connect_flush(QAudioProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAudioProbe_connect_flush(VirtualQAudioProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -330,93 +315,76 @@ struct miqt_string QAudioProbe_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QAudioProbe_virtualbase_metaObject(const void* self) {
+QMetaObject* QAudioProbe_virtualbase_metaObject(const VirtualQAudioProbe* self) {
 
-	return (QMetaObject*) ( (const VirtualQAudioProbe*)(self) )->QAudioProbe::metaObject();
-
+	return (QMetaObject*) self->QAudioProbe::metaObject();
 }
 
-void* QAudioProbe_virtualbase_metacast(void* self, const char* param1) {
+void* QAudioProbe_virtualbase_metacast(VirtualQAudioProbe* self, const char* param1) {
 
-	return ( (VirtualQAudioProbe*)(self) )->QAudioProbe::qt_metacast(param1);
-
+	return self->QAudioProbe::qt_metacast(param1);
 }
 
-int QAudioProbe_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAudioProbe_virtualbase_metacall(VirtualQAudioProbe* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAudioProbe*)(self) )->QAudioProbe::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAudioProbe::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAudioProbe_virtualbase_event(void* self, QEvent* event) {
+bool QAudioProbe_virtualbase_event(VirtualQAudioProbe* self, QEvent* event) {
 
-	return ( (VirtualQAudioProbe*)(self) )->QAudioProbe::event(event);
-
+	return self->QAudioProbe::event(event);
 }
 
-bool QAudioProbe_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAudioProbe_virtualbase_eventFilter(VirtualQAudioProbe* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAudioProbe*)(self) )->QAudioProbe::eventFilter(watched, event);
-
+	return self->QAudioProbe::eventFilter(watched, event);
 }
 
-void QAudioProbe_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAudioProbe_virtualbase_timerEvent(VirtualQAudioProbe* self, QTimerEvent* event) {
 
-	( (VirtualQAudioProbe*)(self) )->QAudioProbe::timerEvent(event);
-
+	self->QAudioProbe::timerEvent(event);
 }
 
-void QAudioProbe_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAudioProbe_virtualbase_childEvent(VirtualQAudioProbe* self, QChildEvent* event) {
 
-	( (VirtualQAudioProbe*)(self) )->QAudioProbe::childEvent(event);
-
+	self->QAudioProbe::childEvent(event);
 }
 
-void QAudioProbe_virtualbase_customEvent(void* self, QEvent* event) {
+void QAudioProbe_virtualbase_customEvent(VirtualQAudioProbe* self, QEvent* event) {
 
-	( (VirtualQAudioProbe*)(self) )->QAudioProbe::customEvent(event);
-
+	self->QAudioProbe::customEvent(event);
 }
 
-void QAudioProbe_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAudioProbe_virtualbase_connectNotify(VirtualQAudioProbe* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioProbe*)(self) )->QAudioProbe::connectNotify(*signal);
-
+	self->QAudioProbe::connectNotify(*signal);
 }
 
-void QAudioProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAudioProbe_virtualbase_disconnectNotify(VirtualQAudioProbe* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioProbe*)(self) )->QAudioProbe::disconnectNotify(*signal);
-
+	self->QAudioProbe::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAudioProbe_staticMetaObject() { return &QAudioProbe::staticMetaObject; }
-QObject* QAudioProbe_protectedbase_sender(const void* self) {
-	VirtualQAudioProbe* self_cast = static_cast<VirtualQAudioProbe*>( (QAudioProbe*)(self) );
-	
-	return self_cast->sender();
 
+const QAudioProbe_VTable* QAudioProbe_vtbl(const VirtualQAudioProbe* self) { return self->vtbl; }
+void* QAudioProbe_vdata(const VirtualQAudioProbe* self) { return self->vdata; }
+void QAudioProbe_setVdata(VirtualQAudioProbe* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAudioProbe_protectedbase_sender(const VirtualQAudioProbe* self) {
+	return self->sender();
 }
 
-int QAudioProbe_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAudioProbe* self_cast = static_cast<VirtualQAudioProbe*>( (QAudioProbe*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAudioProbe_protectedbase_senderSignalIndex(const VirtualQAudioProbe* self) {
+	return self->senderSignalIndex();
 }
 
-int QAudioProbe_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAudioProbe* self_cast = static_cast<VirtualQAudioProbe*>( (QAudioProbe*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAudioProbe_protectedbase_receivers(const VirtualQAudioProbe* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAudioProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAudioProbe* self_cast = static_cast<VirtualQAudioProbe*>( (QAudioProbe*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAudioProbe_protectedbase_isSignalConnected(const VirtualQAudioProbe* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAudioProbe_delete(QAudioProbe* self) {

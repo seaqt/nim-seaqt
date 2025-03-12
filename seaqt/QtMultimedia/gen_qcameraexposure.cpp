@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qcameraexposure.h>
 #include "gen_qcameraexposure.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraExposure_virtbase(QCameraExposure* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -408,3 +399,4 @@ struct miqt_array /* of double */  QCameraExposure_supportedShutterSpeeds1(const
 }
 
 const QMetaObject* QCameraExposure_staticMetaObject() { return &QCameraExposure::staticMetaObject; }
+

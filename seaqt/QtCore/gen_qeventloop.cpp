@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qeventloop.h>
 #include "gen_qeventloop.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQEventLoop final : public QEventLoop {
-	struct QEventLoop_VTable* vtbl;
+	const QEventLoop_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QEventLoop_VTable* QEventLoop_vtbl(const VirtualQEventLoop* self);
+	friend void* QEventLoop_vdata(const VirtualQEventLoop* self);
+	friend void QEventLoop_setVdata(VirtualQEventLoop* self, void* vdata);
 
-	VirtualQEventLoop(struct QEventLoop_VTable* vtbl): QEventLoop(), vtbl(vtbl) {};
-	VirtualQEventLoop(struct QEventLoop_VTable* vtbl, QObject* parent): QEventLoop(parent), vtbl(vtbl) {};
+	VirtualQEventLoop(const QEventLoop_VTable* vtbl, void* vdata): QEventLoop(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQEventLoop(const QEventLoop_VTable* vtbl, void* vdata, QObject* parent): QEventLoop(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQEventLoop() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQEventLoop() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QEventLoop::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QEventLoop_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QEventLoop_virtualbase_metaObject(const VirtualQEventLoop* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QEventLoop::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QEventLoop_virtualbase_metacast(void* self, const char* param1);
+	friend void* QEventLoop_virtualbase_metacast(VirtualQEventLoop* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QEventLoop::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QEventLoop_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QEventLoop_virtualbase_metacall(VirtualQEventLoop* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QEventLoop::event(event);
@@ -85,14 +76,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QEventLoop_virtualbase_event(void* self, QEvent* event);
+	friend bool QEventLoop_virtualbase_event(VirtualQEventLoop* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QEventLoop::eventFilter(watched, event);
@@ -101,14 +91,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QEventLoop_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QEventLoop_virtualbase_eventFilter(VirtualQEventLoop* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QEventLoop::timerEvent(event);
@@ -117,13 +106,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QEventLoop_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QEventLoop_virtualbase_timerEvent(VirtualQEventLoop* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QEventLoop::childEvent(event);
@@ -132,13 +120,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QEventLoop_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QEventLoop_virtualbase_childEvent(VirtualQEventLoop* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QEventLoop::customEvent(event);
@@ -147,13 +134,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QEventLoop_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QEventLoop_virtualbase_customEvent(VirtualQEventLoop* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QEventLoop::connectNotify(signal);
@@ -164,13 +150,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QEventLoop_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QEventLoop_virtualbase_connectNotify(VirtualQEventLoop* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QEventLoop::disconnectNotify(signal);
@@ -181,25 +166,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QEventLoop_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QEventLoop_virtualbase_disconnectNotify(VirtualQEventLoop* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QEventLoop_protectedbase_sender(const void* self);
-	friend int QEventLoop_protectedbase_senderSignalIndex(const void* self);
-	friend int QEventLoop_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QEventLoop_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QEventLoop_protectedbase_sender(const VirtualQEventLoop* self);
+	friend int QEventLoop_protectedbase_senderSignalIndex(const VirtualQEventLoop* self);
+	friend int QEventLoop_protectedbase_receivers(const VirtualQEventLoop* self, const char* signal);
+	friend bool QEventLoop_protectedbase_isSignalConnected(const VirtualQEventLoop* self, QMetaMethod* signal);
 };
 
-QEventLoop* QEventLoop_new(struct QEventLoop_VTable* vtbl) {
-	return new VirtualQEventLoop(vtbl);
+VirtualQEventLoop* QEventLoop_new(const QEventLoop_VTable* vtbl, void* vdata) {
+	return new VirtualQEventLoop(vtbl, vdata);
 }
 
-QEventLoop* QEventLoop_new2(struct QEventLoop_VTable* vtbl, QObject* parent) {
-	return new VirtualQEventLoop(vtbl, parent);
+VirtualQEventLoop* QEventLoop_new2(const QEventLoop_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQEventLoop(vtbl, vdata, parent);
 }
 
 void QEventLoop_virtbase(QEventLoop* src, QObject** outptr_QObject) {
@@ -328,93 +313,76 @@ void QEventLoop_exit1(QEventLoop* self, int returnCode) {
 	self->exit(static_cast<int>(returnCode));
 }
 
-QMetaObject* QEventLoop_virtualbase_metaObject(const void* self) {
+QMetaObject* QEventLoop_virtualbase_metaObject(const VirtualQEventLoop* self) {
 
-	return (QMetaObject*) ( (const VirtualQEventLoop*)(self) )->QEventLoop::metaObject();
-
+	return (QMetaObject*) self->QEventLoop::metaObject();
 }
 
-void* QEventLoop_virtualbase_metacast(void* self, const char* param1) {
+void* QEventLoop_virtualbase_metacast(VirtualQEventLoop* self, const char* param1) {
 
-	return ( (VirtualQEventLoop*)(self) )->QEventLoop::qt_metacast(param1);
-
+	return self->QEventLoop::qt_metacast(param1);
 }
 
-int QEventLoop_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QEventLoop_virtualbase_metacall(VirtualQEventLoop* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQEventLoop*)(self) )->QEventLoop::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QEventLoop::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QEventLoop_virtualbase_event(void* self, QEvent* event) {
+bool QEventLoop_virtualbase_event(VirtualQEventLoop* self, QEvent* event) {
 
-	return ( (VirtualQEventLoop*)(self) )->QEventLoop::event(event);
-
+	return self->QEventLoop::event(event);
 }
 
-bool QEventLoop_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QEventLoop_virtualbase_eventFilter(VirtualQEventLoop* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQEventLoop*)(self) )->QEventLoop::eventFilter(watched, event);
-
+	return self->QEventLoop::eventFilter(watched, event);
 }
 
-void QEventLoop_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QEventLoop_virtualbase_timerEvent(VirtualQEventLoop* self, QTimerEvent* event) {
 
-	( (VirtualQEventLoop*)(self) )->QEventLoop::timerEvent(event);
-
+	self->QEventLoop::timerEvent(event);
 }
 
-void QEventLoop_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QEventLoop_virtualbase_childEvent(VirtualQEventLoop* self, QChildEvent* event) {
 
-	( (VirtualQEventLoop*)(self) )->QEventLoop::childEvent(event);
-
+	self->QEventLoop::childEvent(event);
 }
 
-void QEventLoop_virtualbase_customEvent(void* self, QEvent* event) {
+void QEventLoop_virtualbase_customEvent(VirtualQEventLoop* self, QEvent* event) {
 
-	( (VirtualQEventLoop*)(self) )->QEventLoop::customEvent(event);
-
+	self->QEventLoop::customEvent(event);
 }
 
-void QEventLoop_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QEventLoop_virtualbase_connectNotify(VirtualQEventLoop* self, QMetaMethod* signal) {
 
-	( (VirtualQEventLoop*)(self) )->QEventLoop::connectNotify(*signal);
-
+	self->QEventLoop::connectNotify(*signal);
 }
 
-void QEventLoop_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QEventLoop_virtualbase_disconnectNotify(VirtualQEventLoop* self, QMetaMethod* signal) {
 
-	( (VirtualQEventLoop*)(self) )->QEventLoop::disconnectNotify(*signal);
-
+	self->QEventLoop::disconnectNotify(*signal);
 }
 
 const QMetaObject* QEventLoop_staticMetaObject() { return &QEventLoop::staticMetaObject; }
-QObject* QEventLoop_protectedbase_sender(const void* self) {
-	VirtualQEventLoop* self_cast = static_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
-	
-	return self_cast->sender();
 
+const QEventLoop_VTable* QEventLoop_vtbl(const VirtualQEventLoop* self) { return self->vtbl; }
+void* QEventLoop_vdata(const VirtualQEventLoop* self) { return self->vdata; }
+void QEventLoop_setVdata(VirtualQEventLoop* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QEventLoop_protectedbase_sender(const VirtualQEventLoop* self) {
+	return self->sender();
 }
 
-int QEventLoop_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQEventLoop* self_cast = static_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QEventLoop_protectedbase_senderSignalIndex(const VirtualQEventLoop* self) {
+	return self->senderSignalIndex();
 }
 
-int QEventLoop_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQEventLoop* self_cast = static_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QEventLoop_protectedbase_receivers(const VirtualQEventLoop* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QEventLoop_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQEventLoop* self_cast = static_cast<VirtualQEventLoop*>( (QEventLoop*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QEventLoop_protectedbase_isSignalConnected(const VirtualQEventLoop* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QEventLoop_delete(QEventLoop* self) {

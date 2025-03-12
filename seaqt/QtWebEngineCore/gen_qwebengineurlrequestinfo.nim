@@ -79,39 +79,39 @@ export
 
 type cQWebEngineUrlRequestInfo*{.exportc: "QWebEngineUrlRequestInfo", incompleteStruct.} = object
 
-proc fcQWebEngineUrlRequestInfo_resourceType(self: pointer, ): cint {.importc: "QWebEngineUrlRequestInfo_resourceType".}
-proc fcQWebEngineUrlRequestInfo_navigationType(self: pointer, ): cint {.importc: "QWebEngineUrlRequestInfo_navigationType".}
-proc fcQWebEngineUrlRequestInfo_requestUrl(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestInfo_requestUrl".}
-proc fcQWebEngineUrlRequestInfo_firstPartyUrl(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestInfo_firstPartyUrl".}
-proc fcQWebEngineUrlRequestInfo_initiator(self: pointer, ): pointer {.importc: "QWebEngineUrlRequestInfo_initiator".}
-proc fcQWebEngineUrlRequestInfo_requestMethod(self: pointer, ): struct_miqt_string {.importc: "QWebEngineUrlRequestInfo_requestMethod".}
-proc fcQWebEngineUrlRequestInfo_changed(self: pointer, ): bool {.importc: "QWebEngineUrlRequestInfo_changed".}
+proc fcQWebEngineUrlRequestInfo_resourceType(self: pointer): cint {.importc: "QWebEngineUrlRequestInfo_resourceType".}
+proc fcQWebEngineUrlRequestInfo_navigationType(self: pointer): cint {.importc: "QWebEngineUrlRequestInfo_navigationType".}
+proc fcQWebEngineUrlRequestInfo_requestUrl(self: pointer): pointer {.importc: "QWebEngineUrlRequestInfo_requestUrl".}
+proc fcQWebEngineUrlRequestInfo_firstPartyUrl(self: pointer): pointer {.importc: "QWebEngineUrlRequestInfo_firstPartyUrl".}
+proc fcQWebEngineUrlRequestInfo_initiator(self: pointer): pointer {.importc: "QWebEngineUrlRequestInfo_initiator".}
+proc fcQWebEngineUrlRequestInfo_requestMethod(self: pointer): struct_miqt_string {.importc: "QWebEngineUrlRequestInfo_requestMethod".}
+proc fcQWebEngineUrlRequestInfo_changed(self: pointer): bool {.importc: "QWebEngineUrlRequestInfo_changed".}
 proc fcQWebEngineUrlRequestInfo_blockX(self: pointer, shouldBlock: bool): void {.importc: "QWebEngineUrlRequestInfo_block".}
 proc fcQWebEngineUrlRequestInfo_redirect(self: pointer, url: pointer): void {.importc: "QWebEngineUrlRequestInfo_redirect".}
 proc fcQWebEngineUrlRequestInfo_setHttpHeader(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebEngineUrlRequestInfo_setHttpHeader".}
 
-proc resourceType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): cint =
+proc resourceType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): cint =
   cint(fcQWebEngineUrlRequestInfo_resourceType(self.h))
 
-proc navigationType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): cint =
+proc navigationType*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): cint =
   cint(fcQWebEngineUrlRequestInfo_navigationType(self.h))
 
-proc requestUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
+proc requestUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_requestUrl(self.h), owned: true)
 
-proc firstPartyUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
+proc firstPartyUrl*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_firstPartyUrl(self.h), owned: true)
 
-proc initiator*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): gen_qurl_types.QUrl =
+proc initiator*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineUrlRequestInfo_initiator(self.h), owned: true)
 
-proc requestMethod*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): seq[byte] =
+proc requestMethod*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): seq[byte] =
   var v_bytearray = fcQWebEngineUrlRequestInfo_requestMethod(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc changed*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, ): bool =
+proc changed*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo): bool =
   fcQWebEngineUrlRequestInfo_changed(self.h)
 
 proc blockX*(self: gen_qwebengineurlrequestinfo_types.QWebEngineUrlRequestInfo, shouldBlock: bool): void =

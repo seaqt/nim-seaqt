@@ -12,15 +12,6 @@
 #include <cstring>
 #include <qaudiosystem.h>
 #include "gen_qaudiosystem.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAbstractAudioDeviceInfo_virtbase(QAbstractAudioDeviceInfo* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -210,6 +201,7 @@ struct miqt_string QAbstractAudioDeviceInfo_trUtf83(const char* s, const char* c
 }
 
 const QMetaObject* QAbstractAudioDeviceInfo_staticMetaObject() { return &QAbstractAudioDeviceInfo::staticMetaObject; }
+
 void QAbstractAudioDeviceInfo_delete(QAbstractAudioDeviceInfo* self) {
 	delete self;
 }
@@ -447,6 +439,7 @@ struct miqt_string QAbstractAudioOutput_trUtf83(const char* s, const char* c, in
 }
 
 const QMetaObject* QAbstractAudioOutput_staticMetaObject() { return &QAbstractAudioOutput::staticMetaObject; }
+
 void QAbstractAudioOutput_delete(QAbstractAudioOutput* self) {
 	delete self;
 }
@@ -668,6 +661,7 @@ struct miqt_string QAbstractAudioInput_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QAbstractAudioInput_staticMetaObject() { return &QAbstractAudioInput::staticMetaObject; }
+
 void QAbstractAudioInput_delete(QAbstractAudioInput* self) {
 	delete self;
 }

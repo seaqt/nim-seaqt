@@ -18,15 +18,6 @@
 #include <QVariant>
 #include <qnetworkreply.h>
 #include "gen_qnetworkreply.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QNetworkReply_virtbase(QNetworkReply* src, QIODevice** outptr_QIODevice) {
 	*outptr_QIODevice = static_cast<QIODevice*>(src);
 }
@@ -454,6 +445,7 @@ struct miqt_string QNetworkReply_trUtf83(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QNetworkReply_staticMetaObject() { return &QNetworkReply::staticMetaObject; }
+
 void QNetworkReply_delete(QNetworkReply* self) {
 	delete self;
 }

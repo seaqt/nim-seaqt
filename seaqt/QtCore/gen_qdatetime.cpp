@@ -8,15 +8,6 @@
 #include <QTimeZone>
 #include <qdatetime.h>
 #include "gen_qdatetime.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDate* QDate_new() {
 	return new QDate();
 }

@@ -6,52 +6,44 @@
 #include <QSGTextureMaterial>
 #include <qsgtexturematerial.h>
 #include "gen_qsgtexturematerial.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGOpaqueTextureMaterial final : public QSGOpaqueTextureMaterial {
-	struct QSGOpaqueTextureMaterial_VTable* vtbl;
+	const QSGOpaqueTextureMaterial_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGOpaqueTextureMaterial_VTable* QSGOpaqueTextureMaterial_vtbl(const VirtualQSGOpaqueTextureMaterial* self);
+	friend void* QSGOpaqueTextureMaterial_vdata(const VirtualQSGOpaqueTextureMaterial* self);
+	friend void QSGOpaqueTextureMaterial_setVdata(VirtualQSGOpaqueTextureMaterial* self, void* vdata);
 
-	VirtualQSGOpaqueTextureMaterial(struct QSGOpaqueTextureMaterial_VTable* vtbl): QSGOpaqueTextureMaterial(), vtbl(vtbl) {};
+	VirtualQSGOpaqueTextureMaterial(const QSGOpaqueTextureMaterial_VTable* vtbl, void* vdata): QSGOpaqueTextureMaterial(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGOpaqueTextureMaterial() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGOpaqueTextureMaterial() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialType* type() const override {
 		if (vtbl->type == 0) {
 			return QSGOpaqueTextureMaterial::type();
 		}
 
 
-		QSGMaterialType* callback_return_value = vtbl->type(vtbl, this);
+		QSGMaterialType* callback_return_value = vtbl->type(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const void* self);
+	friend QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const VirtualQSGOpaqueTextureMaterial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSGMaterialShader* createShader() const override {
 		if (vtbl->createShader == 0) {
 			return QSGOpaqueTextureMaterial::createShader();
 		}
 
 
-		QSGMaterialShader* callback_return_value = vtbl->createShader(vtbl, this);
+		QSGMaterialShader* callback_return_value = vtbl->createShader(this);
 
 		return callback_return_value;
 	}
 
-	friend QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const void* self);
+	friend QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const VirtualQSGOpaqueTextureMaterial* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int compare(const QSGMaterial* other) const override {
 		if (vtbl->compare == 0) {
 			return QSGOpaqueTextureMaterial::compare(other);
@@ -59,17 +51,17 @@ public:
 
 		QSGMaterial* sigval1 = (QSGMaterial*) other;
 
-		int callback_return_value = vtbl->compare(vtbl, this, sigval1);
+		int callback_return_value = vtbl->compare(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QSGOpaqueTextureMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+	friend int QSGOpaqueTextureMaterial_virtualbase_compare(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other);
 
 };
 
-QSGOpaqueTextureMaterial* QSGOpaqueTextureMaterial_new(struct QSGOpaqueTextureMaterial_VTable* vtbl) {
-	return new VirtualQSGOpaqueTextureMaterial(vtbl);
+VirtualQSGOpaqueTextureMaterial* QSGOpaqueTextureMaterial_new(const QSGOpaqueTextureMaterial_VTable* vtbl, void* vdata) {
+	return new VirtualQSGOpaqueTextureMaterial(vtbl, vdata);
 }
 
 void QSGOpaqueTextureMaterial_virtbase(QSGOpaqueTextureMaterial* src, QSGMaterial** outptr_QSGMaterial) {
@@ -141,23 +133,24 @@ int QSGOpaqueTextureMaterial_anisotropyLevel(const QSGOpaqueTextureMaterial* sel
 	return static_cast<int>(_ret);
 }
 
-QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const void* self) {
+QSGMaterialType* QSGOpaqueTextureMaterial_virtualbase_type(const VirtualQSGOpaqueTextureMaterial* self) {
 
-	return ( (const VirtualQSGOpaqueTextureMaterial*)(self) )->QSGOpaqueTextureMaterial::type();
-
+	return self->QSGOpaqueTextureMaterial::type();
 }
 
-QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const void* self) {
+QSGMaterialShader* QSGOpaqueTextureMaterial_virtualbase_createShader(const VirtualQSGOpaqueTextureMaterial* self) {
 
-	return ( (const VirtualQSGOpaqueTextureMaterial*)(self) )->QSGOpaqueTextureMaterial::createShader();
-
+	return self->QSGOpaqueTextureMaterial::createShader();
 }
 
-int QSGOpaqueTextureMaterial_virtualbase_compare(const void* self, QSGMaterial* other) {
+int QSGOpaqueTextureMaterial_virtualbase_compare(const VirtualQSGOpaqueTextureMaterial* self, QSGMaterial* other) {
 
-	return ( (const VirtualQSGOpaqueTextureMaterial*)(self) )->QSGOpaqueTextureMaterial::compare(other);
-
+	return self->QSGOpaqueTextureMaterial::compare(other);
 }
+
+const QSGOpaqueTextureMaterial_VTable* QSGOpaqueTextureMaterial_vtbl(const VirtualQSGOpaqueTextureMaterial* self) { return self->vtbl; }
+void* QSGOpaqueTextureMaterial_vdata(const VirtualQSGOpaqueTextureMaterial* self) { return self->vdata; }
+void QSGOpaqueTextureMaterial_setVdata(VirtualQSGOpaqueTextureMaterial* self, void* vdata) { self->vdata = vdata; }
 
 void QSGOpaqueTextureMaterial_delete(QSGOpaqueTextureMaterial* self) {
 	delete self;

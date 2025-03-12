@@ -52,16 +52,16 @@ proc fcQSslDiffieHellmanParameters_operatorAssign(self: pointer, other: pointer)
 proc fcQSslDiffieHellmanParameters_swap(self: pointer, other: pointer): void {.importc: "QSslDiffieHellmanParameters_swap".}
 proc fcQSslDiffieHellmanParameters_fromEncoded(encoded: struct_miqt_string): pointer {.importc: "QSslDiffieHellmanParameters_fromEncoded".}
 proc fcQSslDiffieHellmanParameters_fromEncodedWithDevice(device: pointer): pointer {.importc: "QSslDiffieHellmanParameters_fromEncodedWithDevice".}
-proc fcQSslDiffieHellmanParameters_isEmpty(self: pointer, ): bool {.importc: "QSslDiffieHellmanParameters_isEmpty".}
-proc fcQSslDiffieHellmanParameters_isValid(self: pointer, ): bool {.importc: "QSslDiffieHellmanParameters_isValid".}
-proc fcQSslDiffieHellmanParameters_error(self: pointer, ): cint {.importc: "QSslDiffieHellmanParameters_error".}
-proc fcQSslDiffieHellmanParameters_errorString(self: pointer, ): struct_miqt_string {.importc: "QSslDiffieHellmanParameters_errorString".}
+proc fcQSslDiffieHellmanParameters_isEmpty(self: pointer): bool {.importc: "QSslDiffieHellmanParameters_isEmpty".}
+proc fcQSslDiffieHellmanParameters_isValid(self: pointer): bool {.importc: "QSslDiffieHellmanParameters_isValid".}
+proc fcQSslDiffieHellmanParameters_error(self: pointer): cint {.importc: "QSslDiffieHellmanParameters_error".}
+proc fcQSslDiffieHellmanParameters_errorString(self: pointer): struct_miqt_string {.importc: "QSslDiffieHellmanParameters_errorString".}
 proc fcQSslDiffieHellmanParameters_fromEncoded2(encoded: struct_miqt_string, format: cint): pointer {.importc: "QSslDiffieHellmanParameters_fromEncoded2".}
 proc fcQSslDiffieHellmanParameters_fromEncoded22(device: pointer, format: cint): pointer {.importc: "QSslDiffieHellmanParameters_fromEncoded22".}
 proc fcQSslDiffieHellmanParameters_new(): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new".}
 proc fcQSslDiffieHellmanParameters_new2(other: pointer): ptr cQSslDiffieHellmanParameters {.importc: "QSslDiffieHellmanParameters_new2".}
 
-proc defaultParameters*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
+proc defaultParameters*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
   gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_defaultParameters(), owned: true)
 
 proc operatorAssign*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, other: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): void =
@@ -76,16 +76,16 @@ proc fromEncoded*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellma
 proc fromEncoded*(_: type gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, device: gen_qiodevice_types.QIODevice): gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters =
   gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters(h: fcQSslDiffieHellmanParameters_fromEncodedWithDevice(device.h), owned: true)
 
-proc isEmpty*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): bool =
+proc isEmpty*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): bool =
   fcQSslDiffieHellmanParameters_isEmpty(self.h)
 
-proc isValid*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): bool =
+proc isValid*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): bool =
   fcQSslDiffieHellmanParameters_isValid(self.h)
 
-proc error*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): cint =
+proc error*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): cint =
   cint(fcQSslDiffieHellmanParameters_error(self.h))
 
-proc errorString*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters, ): string =
+proc errorString*(self: gen_qssldiffiehellmanparameters_types.QSslDiffieHellmanParameters): string =
   let v_ms = fcQSslDiffieHellmanParameters_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

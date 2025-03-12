@@ -2,24 +2,18 @@
 #include <QByteArray>
 #include <qabstractnativeeventfilter.h>
 #include "gen_qabstractnativeeventfilter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractNativeEventFilter final : public QAbstractNativeEventFilter {
-	struct QAbstractNativeEventFilter_VTable* vtbl;
+	const QAbstractNativeEventFilter_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractNativeEventFilter_VTable* QAbstractNativeEventFilter_vtbl(const VirtualQAbstractNativeEventFilter* self);
+	friend void* QAbstractNativeEventFilter_vdata(const VirtualQAbstractNativeEventFilter* self);
+	friend void QAbstractNativeEventFilter_setVdata(VirtualQAbstractNativeEventFilter* self, void* vdata);
 
-	VirtualQAbstractNativeEventFilter(struct QAbstractNativeEventFilter_VTable* vtbl): QAbstractNativeEventFilter(), vtbl(vtbl) {};
+	VirtualQAbstractNativeEventFilter(const QAbstractNativeEventFilter_VTable* vtbl, void* vdata): QAbstractNativeEventFilter(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractNativeEventFilter() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractNativeEventFilter() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEventFilter(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEventFilter == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -34,21 +28,25 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEventFilter(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEventFilter(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
 };
 
-QAbstractNativeEventFilter* QAbstractNativeEventFilter_new(struct QAbstractNativeEventFilter_VTable* vtbl) {
-	return new VirtualQAbstractNativeEventFilter(vtbl);
+VirtualQAbstractNativeEventFilter* QAbstractNativeEventFilter_new(const QAbstractNativeEventFilter_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractNativeEventFilter(vtbl, vdata);
 }
 
 bool QAbstractNativeEventFilter_nativeEventFilter(QAbstractNativeEventFilter* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 	return self->nativeEventFilter(eventType_QByteArray, message, static_cast<long*>(result));
 }
+
+const QAbstractNativeEventFilter_VTable* QAbstractNativeEventFilter_vtbl(const VirtualQAbstractNativeEventFilter* self) { return self->vtbl; }
+void* QAbstractNativeEventFilter_vdata(const VirtualQAbstractNativeEventFilter* self) { return self->vdata; }
+void QAbstractNativeEventFilter_setVdata(VirtualQAbstractNativeEventFilter* self, void* vdata) { self->vdata = vdata; }
 
 void QAbstractNativeEventFilter_delete(QAbstractNativeEventFilter* self) {
 	delete self;

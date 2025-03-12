@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qmediaservice.h>
 #include "gen_qmediaservice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaService_virtbase(QMediaService* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -108,6 +99,7 @@ struct miqt_string QMediaService_trUtf83(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QMediaService_staticMetaObject() { return &QMediaService::staticMetaObject; }
+
 void QMediaService_delete(QMediaService* self) {
 	delete self;
 }

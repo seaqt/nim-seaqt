@@ -3,15 +3,6 @@
 #include <QTreeWidgetItemIterator>
 #include <qtreewidgetitemiterator.h>
 #include "gen_qtreewidgetitemiterator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTreeWidgetItemIterator* QTreeWidgetItemIterator_new(QTreeWidgetItemIterator* it) {
 	return new QTreeWidgetItemIterator(*it);
 }

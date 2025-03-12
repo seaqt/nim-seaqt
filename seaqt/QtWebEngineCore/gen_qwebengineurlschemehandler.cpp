@@ -11,39 +11,32 @@
 #include <QWebEngineUrlSchemeHandler>
 #include <qwebengineurlschemehandler.h>
 #include "gen_qwebengineurlschemehandler.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQWebEngineUrlSchemeHandler final : public QWebEngineUrlSchemeHandler {
-	struct QWebEngineUrlSchemeHandler_VTable* vtbl;
+	const QWebEngineUrlSchemeHandler_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWebEngineUrlSchemeHandler_VTable* QWebEngineUrlSchemeHandler_vtbl(const VirtualQWebEngineUrlSchemeHandler* self);
+	friend void* QWebEngineUrlSchemeHandler_vdata(const VirtualQWebEngineUrlSchemeHandler* self);
+	friend void QWebEngineUrlSchemeHandler_setVdata(VirtualQWebEngineUrlSchemeHandler* self, void* vdata);
 
-	VirtualQWebEngineUrlSchemeHandler(struct QWebEngineUrlSchemeHandler_VTable* vtbl): QWebEngineUrlSchemeHandler(), vtbl(vtbl) {};
-	VirtualQWebEngineUrlSchemeHandler(struct QWebEngineUrlSchemeHandler_VTable* vtbl, QObject* parent): QWebEngineUrlSchemeHandler(parent), vtbl(vtbl) {};
+	VirtualQWebEngineUrlSchemeHandler(const QWebEngineUrlSchemeHandler_VTable* vtbl, void* vdata): QWebEngineUrlSchemeHandler(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebEngineUrlSchemeHandler(const QWebEngineUrlSchemeHandler_VTable* vtbl, void* vdata, QObject* parent): QWebEngineUrlSchemeHandler(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWebEngineUrlSchemeHandler() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWebEngineUrlSchemeHandler() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QWebEngineUrlSchemeHandler::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const VirtualQWebEngineUrlSchemeHandler* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QWebEngineUrlSchemeHandler::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QWebEngineUrlSchemeHandler_virtualbase_metacast(void* self, const char* param1);
+	friend void* QWebEngineUrlSchemeHandler_virtualbase_metacast(VirtualQWebEngineUrlSchemeHandler* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QWebEngineUrlSchemeHandler::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebEngineUrlSchemeHandler_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QWebEngineUrlSchemeHandler_virtualbase_metacall(VirtualQWebEngineUrlSchemeHandler* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void requestStarted(QWebEngineUrlRequestJob* param1) override {
 		if (vtbl->requestStarted == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -84,11 +75,10 @@ public:
 
 		QWebEngineUrlRequestJob* sigval1 = param1;
 
-		vtbl->requestStarted(vtbl, this, sigval1);
+		vtbl->requestStarted(this, sigval1);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QWebEngineUrlSchemeHandler::event(event);
@@ -96,14 +86,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebEngineUrlSchemeHandler_virtualbase_event(void* self, QEvent* event);
+	friend bool QWebEngineUrlSchemeHandler_virtualbase_event(VirtualQWebEngineUrlSchemeHandler* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QWebEngineUrlSchemeHandler::eventFilter(watched, event);
@@ -112,14 +101,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebEngineUrlSchemeHandler_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QWebEngineUrlSchemeHandler_virtualbase_eventFilter(VirtualQWebEngineUrlSchemeHandler* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QWebEngineUrlSchemeHandler::timerEvent(event);
@@ -128,13 +116,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineUrlSchemeHandler_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QWebEngineUrlSchemeHandler_virtualbase_timerEvent(VirtualQWebEngineUrlSchemeHandler* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QWebEngineUrlSchemeHandler::childEvent(event);
@@ -143,13 +130,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineUrlSchemeHandler_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QWebEngineUrlSchemeHandler_virtualbase_childEvent(VirtualQWebEngineUrlSchemeHandler* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QWebEngineUrlSchemeHandler::customEvent(event);
@@ -158,13 +144,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QWebEngineUrlSchemeHandler_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QWebEngineUrlSchemeHandler_virtualbase_customEvent(VirtualQWebEngineUrlSchemeHandler* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QWebEngineUrlSchemeHandler::connectNotify(signal);
@@ -175,13 +160,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QWebEngineUrlSchemeHandler_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QWebEngineUrlSchemeHandler_virtualbase_connectNotify(VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QWebEngineUrlSchemeHandler::disconnectNotify(signal);
@@ -192,25 +176,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(const void* self);
-	friend int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const void* self);
-	friend int QWebEngineUrlSchemeHandler_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(const VirtualQWebEngineUrlSchemeHandler* self);
+	friend int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const VirtualQWebEngineUrlSchemeHandler* self);
+	friend int QWebEngineUrlSchemeHandler_protectedbase_receivers(const VirtualQWebEngineUrlSchemeHandler* self, const char* signal);
+	friend bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal);
 };
 
-QWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new(struct QWebEngineUrlSchemeHandler_VTable* vtbl) {
-	return new VirtualQWebEngineUrlSchemeHandler(vtbl);
+VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new(const QWebEngineUrlSchemeHandler_VTable* vtbl, void* vdata) {
+	return new VirtualQWebEngineUrlSchemeHandler(vtbl, vdata);
 }
 
-QWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new2(struct QWebEngineUrlSchemeHandler_VTable* vtbl, QObject* parent) {
-	return new VirtualQWebEngineUrlSchemeHandler(vtbl, parent);
+VirtualQWebEngineUrlSchemeHandler* QWebEngineUrlSchemeHandler_new2(const QWebEngineUrlSchemeHandler_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQWebEngineUrlSchemeHandler(vtbl, vdata, parent);
 }
 
 void QWebEngineUrlSchemeHandler_virtbase(QWebEngineUrlSchemeHandler* src, QObject** outptr_QObject) {
@@ -299,93 +283,76 @@ struct miqt_string QWebEngineUrlSchemeHandler_trUtf83(const char* s, const char*
 	return _ms;
 }
 
-QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const void* self) {
+QMetaObject* QWebEngineUrlSchemeHandler_virtualbase_metaObject(const VirtualQWebEngineUrlSchemeHandler* self) {
 
-	return (QMetaObject*) ( (const VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::metaObject();
-
+	return (QMetaObject*) self->QWebEngineUrlSchemeHandler::metaObject();
 }
 
-void* QWebEngineUrlSchemeHandler_virtualbase_metacast(void* self, const char* param1) {
+void* QWebEngineUrlSchemeHandler_virtualbase_metacast(VirtualQWebEngineUrlSchemeHandler* self, const char* param1) {
 
-	return ( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::qt_metacast(param1);
-
+	return self->QWebEngineUrlSchemeHandler::qt_metacast(param1);
 }
 
-int QWebEngineUrlSchemeHandler_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QWebEngineUrlSchemeHandler_virtualbase_metacall(VirtualQWebEngineUrlSchemeHandler* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QWebEngineUrlSchemeHandler::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QWebEngineUrlSchemeHandler_virtualbase_event(void* self, QEvent* event) {
+bool QWebEngineUrlSchemeHandler_virtualbase_event(VirtualQWebEngineUrlSchemeHandler* self, QEvent* event) {
 
-	return ( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::event(event);
-
+	return self->QWebEngineUrlSchemeHandler::event(event);
 }
 
-bool QWebEngineUrlSchemeHandler_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QWebEngineUrlSchemeHandler_virtualbase_eventFilter(VirtualQWebEngineUrlSchemeHandler* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::eventFilter(watched, event);
-
+	return self->QWebEngineUrlSchemeHandler::eventFilter(watched, event);
 }
 
-void QWebEngineUrlSchemeHandler_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QWebEngineUrlSchemeHandler_virtualbase_timerEvent(VirtualQWebEngineUrlSchemeHandler* self, QTimerEvent* event) {
 
-	( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::timerEvent(event);
-
+	self->QWebEngineUrlSchemeHandler::timerEvent(event);
 }
 
-void QWebEngineUrlSchemeHandler_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QWebEngineUrlSchemeHandler_virtualbase_childEvent(VirtualQWebEngineUrlSchemeHandler* self, QChildEvent* event) {
 
-	( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::childEvent(event);
-
+	self->QWebEngineUrlSchemeHandler::childEvent(event);
 }
 
-void QWebEngineUrlSchemeHandler_virtualbase_customEvent(void* self, QEvent* event) {
+void QWebEngineUrlSchemeHandler_virtualbase_customEvent(VirtualQWebEngineUrlSchemeHandler* self, QEvent* event) {
 
-	( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::customEvent(event);
-
+	self->QWebEngineUrlSchemeHandler::customEvent(event);
 }
 
-void QWebEngineUrlSchemeHandler_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QWebEngineUrlSchemeHandler_virtualbase_connectNotify(VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal) {
 
-	( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::connectNotify(*signal);
-
+	self->QWebEngineUrlSchemeHandler::connectNotify(*signal);
 }
 
-void QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QWebEngineUrlSchemeHandler_virtualbase_disconnectNotify(VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal) {
 
-	( (VirtualQWebEngineUrlSchemeHandler*)(self) )->QWebEngineUrlSchemeHandler::disconnectNotify(*signal);
-
+	self->QWebEngineUrlSchemeHandler::disconnectNotify(*signal);
 }
 
 const QMetaObject* QWebEngineUrlSchemeHandler_staticMetaObject() { return &QWebEngineUrlSchemeHandler::staticMetaObject; }
-QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(const void* self) {
-	VirtualQWebEngineUrlSchemeHandler* self_cast = static_cast<VirtualQWebEngineUrlSchemeHandler*>( (QWebEngineUrlSchemeHandler*)(self) );
-	
-	return self_cast->sender();
 
+const QWebEngineUrlSchemeHandler_VTable* QWebEngineUrlSchemeHandler_vtbl(const VirtualQWebEngineUrlSchemeHandler* self) { return self->vtbl; }
+void* QWebEngineUrlSchemeHandler_vdata(const VirtualQWebEngineUrlSchemeHandler* self) { return self->vdata; }
+void QWebEngineUrlSchemeHandler_setVdata(VirtualQWebEngineUrlSchemeHandler* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QWebEngineUrlSchemeHandler_protectedbase_sender(const VirtualQWebEngineUrlSchemeHandler* self) {
+	return self->sender();
 }
 
-int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQWebEngineUrlSchemeHandler* self_cast = static_cast<VirtualQWebEngineUrlSchemeHandler*>( (QWebEngineUrlSchemeHandler*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QWebEngineUrlSchemeHandler_protectedbase_senderSignalIndex(const VirtualQWebEngineUrlSchemeHandler* self) {
+	return self->senderSignalIndex();
 }
 
-int QWebEngineUrlSchemeHandler_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQWebEngineUrlSchemeHandler* self_cast = static_cast<VirtualQWebEngineUrlSchemeHandler*>( (QWebEngineUrlSchemeHandler*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QWebEngineUrlSchemeHandler_protectedbase_receivers(const VirtualQWebEngineUrlSchemeHandler* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQWebEngineUrlSchemeHandler* self_cast = static_cast<VirtualQWebEngineUrlSchemeHandler*>( (QWebEngineUrlSchemeHandler*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QWebEngineUrlSchemeHandler_protectedbase_isSignalConnected(const VirtualQWebEngineUrlSchemeHandler* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QWebEngineUrlSchemeHandler_delete(QWebEngineUrlSchemeHandler* self) {

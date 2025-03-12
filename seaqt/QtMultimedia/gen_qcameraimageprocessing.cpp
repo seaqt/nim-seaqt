@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qcameraimageprocessing.h>
 #include "gen_qcameraimageprocessing.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraImageProcessing_virtbase(QCameraImageProcessing* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -183,3 +174,4 @@ struct miqt_string QCameraImageProcessing_trUtf83(const char* s, const char* c, 
 }
 
 const QMetaObject* QCameraImageProcessing_staticMetaObject() { return &QCameraImageProcessing::staticMetaObject; }
+

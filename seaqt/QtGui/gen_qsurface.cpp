@@ -3,15 +3,6 @@
 #include <QSurfaceFormat>
 #include <qsurface.h>
 #include "gen_qsurface.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 int QSurface_surfaceClass(const QSurface* self) {
 	QSurface::SurfaceClass _ret = self->surfaceClass();
 	return static_cast<int>(_ret);
@@ -35,6 +26,7 @@ QSize* QSurface_size(const QSurface* self) {
 }
 
 const QMetaObject* QSurface_staticMetaObject() { return &QSurface::staticMetaObject; }
+
 void QSurface_delete(QSurface* self) {
 	delete self;
 }

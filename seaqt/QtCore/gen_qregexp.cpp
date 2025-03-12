@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qregexp.h>
 #include "gen_qregexp.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRegExp* QRegExp_new() {
 	return new QRegExp();
 }

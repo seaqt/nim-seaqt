@@ -24,22 +24,31 @@ typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialType QSGMaterialType;
 #endif
 
-struct QSGMaterial_VTable {
-	void (*destructor)(struct QSGMaterial_VTable* vtbl, QSGMaterial* self);
-	QSGMaterialType* (*type)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self);
-	QSGMaterialShader* (*createShader)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self);
-	int (*compare)(struct QSGMaterial_VTable* vtbl, const QSGMaterial* self, QSGMaterial* other);
-};
-QSGMaterial* QSGMaterial_new(struct QSGMaterial_VTable* vtbl);
+typedef struct VirtualQSGMaterial VirtualQSGMaterial;
+typedef struct QSGMaterial_VTable{
+	void (*destructor)(VirtualQSGMaterial* self);
+	QSGMaterialType* (*type)(const VirtualQSGMaterial* self);
+	QSGMaterialShader* (*createShader)(const VirtualQSGMaterial* self);
+	int (*compare)(const VirtualQSGMaterial* self, QSGMaterial* other);
+}QSGMaterial_VTable;
+
+const QSGMaterial_VTable* QSGMaterial_vtbl(const VirtualQSGMaterial* self);
+void* QSGMaterial_vdata(const VirtualQSGMaterial* self);
+void QSGMaterial_setVdata(VirtualQSGMaterial* self, void* vdata);
+
+VirtualQSGMaterial* QSGMaterial_new(const QSGMaterial_VTable* vtbl, void* vdata);
+
 QSGMaterialType* QSGMaterial_type(const QSGMaterial* self);
 QSGMaterialShader* QSGMaterial_createShader(const QSGMaterial* self);
 int QSGMaterial_compare(const QSGMaterial* self, QSGMaterial* other);
 int QSGMaterial_flags(const QSGMaterial* self);
 void QSGMaterial_setFlag(QSGMaterial* self, int flags);
 void QSGMaterial_setFlag2(QSGMaterial* self, int flags, bool on);
-QSGMaterialType* QSGMaterial_virtualbase_type(const void* self);
-QSGMaterialShader* QSGMaterial_virtualbase_createShader(const void* self);
-int QSGMaterial_virtualbase_compare(const void* self, QSGMaterial* other);
+
+QSGMaterialType* QSGMaterial_virtualbase_type(const VirtualQSGMaterial* self);
+QSGMaterialShader* QSGMaterial_virtualbase_createShader(const VirtualQSGMaterial* self);
+int QSGMaterial_virtualbase_compare(const VirtualQSGMaterial* self, QSGMaterial* other);
+
 void QSGMaterial_delete(QSGMaterial* self);
 
 #ifdef __cplusplus

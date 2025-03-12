@@ -21,6 +21,7 @@ typedef struct QTouchDevice QTouchDevice;
 #endif
 
 QTouchDevice* QTouchDevice_new();
+
 struct miqt_array /* of QTouchDevice* */  QTouchDevice_devices();
 struct miqt_string QTouchDevice_name(const QTouchDevice* self);
 int QTouchDevice_type(const QTouchDevice* self);
@@ -30,6 +31,7 @@ void QTouchDevice_setName(QTouchDevice* self, struct miqt_string name);
 void QTouchDevice_setType(QTouchDevice* self, int devType);
 void QTouchDevice_setCapabilities(QTouchDevice* self, int caps);
 void QTouchDevice_setMaximumTouchPoints(QTouchDevice* self, int max);
+
 const QMetaObject* QTouchDevice_staticMetaObject();
 void QTouchDevice_delete(QTouchDevice* self);
 

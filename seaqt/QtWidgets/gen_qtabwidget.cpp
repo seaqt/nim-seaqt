@@ -39,39 +39,32 @@
 #include <QWidget>
 #include <qtabwidget.h>
 #include "gen_qtabwidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQTabWidget final : public QTabWidget {
-	struct QTabWidget_VTable* vtbl;
+	const QTabWidget_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTabWidget_VTable* QTabWidget_vtbl(const VirtualQTabWidget* self);
+	friend void* QTabWidget_vdata(const VirtualQTabWidget* self);
+	friend void QTabWidget_setVdata(VirtualQTabWidget* self, void* vdata);
 
-	VirtualQTabWidget(struct QTabWidget_VTable* vtbl, QWidget* parent): QTabWidget(parent), vtbl(vtbl) {};
-	VirtualQTabWidget(struct QTabWidget_VTable* vtbl): QTabWidget(), vtbl(vtbl) {};
+	VirtualQTabWidget(const QTabWidget_VTable* vtbl, void* vdata, QWidget* parent): QTabWidget(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTabWidget(const QTabWidget_VTable* vtbl, void* vdata): QTabWidget(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTabWidget() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTabWidget() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTabWidget::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTabWidget_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTabWidget_virtualbase_metaObject(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTabWidget::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTabWidget_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTabWidget_virtualbase_metacast(VirtualQTabWidget* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTabWidget::qt_metacall(param1, param2, param3);
@@ -97,46 +89,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTabWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTabWidget_virtualbase_metacall(VirtualQTabWidget* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QTabWidget::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTabWidget_virtualbase_sizeHint(const void* self);
+	friend QSize* QTabWidget_virtualbase_sizeHint(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QTabWidget::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QTabWidget_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QTabWidget_virtualbase_minimumSizeHint(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int width) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QTabWidget::heightForWidth(width);
@@ -144,28 +133,26 @@ public:
 
 		int sigval1 = width;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTabWidget_virtualbase_heightForWidth(const void* self, int width);
+	friend int QTabWidget_virtualbase_heightForWidth(const VirtualQTabWidget* self, int width);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QTabWidget::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabWidget_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QTabWidget_virtualbase_hasHeightForWidth(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabInserted(int index) override {
 		if (vtbl->tabInserted == 0) {
 			QTabWidget::tabInserted(index);
@@ -174,13 +161,12 @@ public:
 
 		int sigval1 = index;
 
-		vtbl->tabInserted(vtbl, this, sigval1);
+		vtbl->tabInserted(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_tabInserted(void* self, int index);
+	friend void QTabWidget_virtualbase_tabInserted(VirtualQTabWidget* self, int index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabRemoved(int index) override {
 		if (vtbl->tabRemoved == 0) {
 			QTabWidget::tabRemoved(index);
@@ -189,13 +175,12 @@ public:
 
 		int sigval1 = index;
 
-		vtbl->tabRemoved(vtbl, this, sigval1);
+		vtbl->tabRemoved(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_tabRemoved(void* self, int index);
+	friend void QTabWidget_virtualbase_tabRemoved(VirtualQTabWidget* self, int index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* param1) override {
 		if (vtbl->showEvent == 0) {
 			QTabWidget::showEvent(param1);
@@ -204,13 +189,12 @@ public:
 
 		QShowEvent* sigval1 = param1;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_showEvent(void* self, QShowEvent* param1);
+	friend void QTabWidget_virtualbase_showEvent(VirtualQTabWidget* self, QShowEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* param1) override {
 		if (vtbl->resizeEvent == 0) {
 			QTabWidget::resizeEvent(param1);
@@ -219,13 +203,12 @@ public:
 
 		QResizeEvent* sigval1 = param1;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_resizeEvent(void* self, QResizeEvent* param1);
+	friend void QTabWidget_virtualbase_resizeEvent(VirtualQTabWidget* self, QResizeEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QTabWidget::keyPressEvent(param1);
@@ -234,13 +217,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QTabWidget_virtualbase_keyPressEvent(VirtualQTabWidget* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QTabWidget::paintEvent(param1);
@@ -249,13 +231,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QTabWidget_virtualbase_paintEvent(VirtualQTabWidget* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QTabWidget::changeEvent(param1);
@@ -264,13 +245,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QTabWidget_virtualbase_changeEvent(VirtualQTabWidget* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QTabWidget::event(param1);
@@ -278,28 +258,26 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabWidget_virtualbase_event(void* self, QEvent* param1);
+	friend bool QTabWidget_virtualbase_event(VirtualQTabWidget* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QTabWidget::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTabWidget_virtualbase_devType(const void* self);
+	friend int QTabWidget_virtualbase_devType(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QTabWidget::setVisible(visible);
@@ -308,27 +286,25 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_setVisible(void* self, bool visible);
+	friend void QTabWidget_virtualbase_setVisible(VirtualQTabWidget* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QTabWidget::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QTabWidget_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QTabWidget_virtualbase_paintEngine(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QTabWidget::mousePressEvent(event);
@@ -337,13 +313,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QTabWidget_virtualbase_mousePressEvent(VirtualQTabWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QTabWidget::mouseReleaseEvent(event);
@@ -352,13 +327,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QTabWidget_virtualbase_mouseReleaseEvent(VirtualQTabWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QTabWidget::mouseDoubleClickEvent(event);
@@ -367,13 +341,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QTabWidget_virtualbase_mouseDoubleClickEvent(VirtualQTabWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QTabWidget::mouseMoveEvent(event);
@@ -382,13 +355,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QTabWidget_virtualbase_mouseMoveEvent(VirtualQTabWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QTabWidget::wheelEvent(event);
@@ -397,13 +369,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QTabWidget_virtualbase_wheelEvent(VirtualQTabWidget* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QTabWidget::keyReleaseEvent(event);
@@ -412,13 +383,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QTabWidget_virtualbase_keyReleaseEvent(VirtualQTabWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QTabWidget::focusInEvent(event);
@@ -427,13 +397,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QTabWidget_virtualbase_focusInEvent(VirtualQTabWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QTabWidget::focusOutEvent(event);
@@ -442,13 +411,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QTabWidget_virtualbase_focusOutEvent(VirtualQTabWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QTabWidget::enterEvent(event);
@@ -457,13 +425,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QTabWidget_virtualbase_enterEvent(VirtualQTabWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QTabWidget::leaveEvent(event);
@@ -472,13 +439,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QTabWidget_virtualbase_leaveEvent(VirtualQTabWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QTabWidget::moveEvent(event);
@@ -487,13 +453,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QTabWidget_virtualbase_moveEvent(VirtualQTabWidget* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QTabWidget::closeEvent(event);
@@ -502,13 +467,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QTabWidget_virtualbase_closeEvent(VirtualQTabWidget* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QTabWidget::contextMenuEvent(event);
@@ -517,13 +481,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QTabWidget_virtualbase_contextMenuEvent(VirtualQTabWidget* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QTabWidget::tabletEvent(event);
@@ -532,13 +495,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QTabWidget_virtualbase_tabletEvent(VirtualQTabWidget* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QTabWidget::actionEvent(event);
@@ -547,13 +509,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QTabWidget_virtualbase_actionEvent(VirtualQTabWidget* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QTabWidget::dragEnterEvent(event);
@@ -562,13 +523,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QTabWidget_virtualbase_dragEnterEvent(VirtualQTabWidget* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QTabWidget::dragMoveEvent(event);
@@ -577,13 +537,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QTabWidget_virtualbase_dragMoveEvent(VirtualQTabWidget* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QTabWidget::dragLeaveEvent(event);
@@ -592,13 +551,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QTabWidget_virtualbase_dragLeaveEvent(VirtualQTabWidget* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QTabWidget::dropEvent(event);
@@ -607,13 +565,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QTabWidget_virtualbase_dropEvent(VirtualQTabWidget* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QTabWidget::hideEvent(event);
@@ -622,13 +579,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QTabWidget_virtualbase_hideEvent(VirtualQTabWidget* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QTabWidget::nativeEvent(eventType, message, result);
@@ -643,14 +599,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QTabWidget_virtualbase_nativeEvent(VirtualQTabWidget* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QTabWidget::metric(param1);
@@ -659,14 +614,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTabWidget_virtualbase_metric(const void* self, int param1);
+	friend int QTabWidget_virtualbase_metric(const VirtualQTabWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QTabWidget::initPainter(painter);
@@ -675,13 +629,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QTabWidget_virtualbase_initPainter(const VirtualQTabWidget* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QTabWidget::redirected(offset);
@@ -689,28 +642,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QTabWidget_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QTabWidget_virtualbase_redirected(const VirtualQTabWidget* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QTabWidget::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QTabWidget_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QTabWidget_virtualbase_sharedPainter(const VirtualQTabWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QTabWidget::inputMethodEvent(param1);
@@ -719,13 +670,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QTabWidget_virtualbase_inputMethodEvent(VirtualQTabWidget* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QTabWidget::inputMethodQuery(param1);
@@ -734,16 +684,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QTabWidget_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QTabWidget_virtualbase_inputMethodQuery(const VirtualQTabWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QTabWidget::focusNextPrevChild(next);
@@ -751,14 +700,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabWidget_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QTabWidget_virtualbase_focusNextPrevChild(VirtualQTabWidget* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTabWidget::eventFilter(watched, event);
@@ -767,14 +715,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTabWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTabWidget_virtualbase_eventFilter(VirtualQTabWidget* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QTabWidget::timerEvent(event);
@@ -783,13 +730,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QTabWidget_virtualbase_timerEvent(VirtualQTabWidget* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTabWidget::childEvent(event);
@@ -798,13 +744,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTabWidget_virtualbase_childEvent(VirtualQTabWidget* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTabWidget::customEvent(event);
@@ -813,13 +758,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTabWidget_virtualbase_customEvent(VirtualQTabWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTabWidget::connectNotify(signal);
@@ -830,13 +774,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTabWidget_virtualbase_connectNotify(VirtualQTabWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTabWidget::disconnectNotify(signal);
@@ -847,32 +790,32 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTabWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTabWidget_virtualbase_disconnectNotify(VirtualQTabWidget* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QTabWidget_protectedbase_setTabBar(void* self, QTabBar* tabBar);
-	friend void QTabWidget_protectedbase_initStyleOption(const void* self, QStyleOptionTabWidgetFrame* option);
-	friend void QTabWidget_protectedbase_updateMicroFocus(void* self);
-	friend void QTabWidget_protectedbase_create(void* self);
-	friend void QTabWidget_protectedbase_destroy(void* self);
-	friend bool QTabWidget_protectedbase_focusNextChild(void* self);
-	friend bool QTabWidget_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QTabWidget_protectedbase_sender(const void* self);
-	friend int QTabWidget_protectedbase_senderSignalIndex(const void* self);
-	friend int QTabWidget_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTabWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QTabWidget_protectedbase_setTabBar(VirtualQTabWidget* self, QTabBar* tabBar);
+	friend void QTabWidget_protectedbase_initStyleOption(const VirtualQTabWidget* self, QStyleOptionTabWidgetFrame* option);
+	friend void QTabWidget_protectedbase_updateMicroFocus(VirtualQTabWidget* self);
+	friend void QTabWidget_protectedbase_create(VirtualQTabWidget* self);
+	friend void QTabWidget_protectedbase_destroy(VirtualQTabWidget* self);
+	friend bool QTabWidget_protectedbase_focusNextChild(VirtualQTabWidget* self);
+	friend bool QTabWidget_protectedbase_focusPreviousChild(VirtualQTabWidget* self);
+	friend QObject* QTabWidget_protectedbase_sender(const VirtualQTabWidget* self);
+	friend int QTabWidget_protectedbase_senderSignalIndex(const VirtualQTabWidget* self);
+	friend int QTabWidget_protectedbase_receivers(const VirtualQTabWidget* self, const char* signal);
+	friend bool QTabWidget_protectedbase_isSignalConnected(const VirtualQTabWidget* self, QMetaMethod* signal);
 };
 
-QTabWidget* QTabWidget_new(struct QTabWidget_VTable* vtbl, QWidget* parent) {
-	return new VirtualQTabWidget(vtbl, parent);
+VirtualQTabWidget* QTabWidget_new(const QTabWidget_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQTabWidget(vtbl, vdata, parent);
 }
 
-QTabWidget* QTabWidget_new2(struct QTabWidget_VTable* vtbl) {
-	return new VirtualQTabWidget(vtbl);
+VirtualQTabWidget* QTabWidget_new2(const QTabWidget_VTable* vtbl, void* vdata) {
+	return new VirtualQTabWidget(vtbl, vdata);
 }
 
 void QTabWidget_virtbase(QTabWidget* src, QWidget** outptr_QWidget) {
@@ -1148,7 +1091,7 @@ void QTabWidget_currentChanged(QTabWidget* self, int index) {
 	self->currentChanged(static_cast<int>(index));
 }
 
-void QTabWidget_connect_currentChanged(QTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTabWidget_connect_currentChanged(VirtualQTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1164,7 +1107,7 @@ void QTabWidget_tabCloseRequested(QTabWidget* self, int index) {
 	self->tabCloseRequested(static_cast<int>(index));
 }
 
-void QTabWidget_connect_tabCloseRequested(QTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTabWidget_connect_tabCloseRequested(VirtualQTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1180,7 +1123,7 @@ void QTabWidget_tabBarClicked(QTabWidget* self, int index) {
 	self->tabBarClicked(static_cast<int>(index));
 }
 
-void QTabWidget_connect_tabBarClicked(QTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTabWidget_connect_tabBarClicked(VirtualQTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1196,7 +1139,7 @@ void QTabWidget_tabBarDoubleClicked(QTabWidget* self, int index) {
 	self->tabBarDoubleClicked(static_cast<int>(index));
 }
 
-void QTabWidget_connect_tabBarDoubleClicked(QTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QTabWidget_connect_tabBarDoubleClicked(VirtualQTabWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -1260,395 +1203,315 @@ QWidget* QTabWidget_cornerWidget1(const QTabWidget* self, int corner) {
 	return self->cornerWidget(static_cast<Qt::Corner>(corner));
 }
 
-QMetaObject* QTabWidget_virtualbase_metaObject(const void* self) {
+QMetaObject* QTabWidget_virtualbase_metaObject(const VirtualQTabWidget* self) {
 
-	return (QMetaObject*) ( (const VirtualQTabWidget*)(self) )->QTabWidget::metaObject();
-
+	return (QMetaObject*) self->QTabWidget::metaObject();
 }
 
-void* QTabWidget_virtualbase_metacast(void* self, const char* param1) {
+void* QTabWidget_virtualbase_metacast(VirtualQTabWidget* self, const char* param1) {
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::qt_metacast(param1);
-
+	return self->QTabWidget::qt_metacast(param1);
 }
 
-int QTabWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTabWidget_virtualbase_metacall(VirtualQTabWidget* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTabWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QTabWidget_virtualbase_sizeHint(const void* self) {
+QSize* QTabWidget_virtualbase_sizeHint(const VirtualQTabWidget* self) {
 
-	return new QSize(( (const VirtualQTabWidget*)(self) )->QTabWidget::sizeHint());
-
+	return new QSize(self->QTabWidget::sizeHint());
 }
 
-QSize* QTabWidget_virtualbase_minimumSizeHint(const void* self) {
+QSize* QTabWidget_virtualbase_minimumSizeHint(const VirtualQTabWidget* self) {
 
-	return new QSize(( (const VirtualQTabWidget*)(self) )->QTabWidget::minimumSizeHint());
-
+	return new QSize(self->QTabWidget::minimumSizeHint());
 }
 
-int QTabWidget_virtualbase_heightForWidth(const void* self, int width) {
+int QTabWidget_virtualbase_heightForWidth(const VirtualQTabWidget* self, int width) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::heightForWidth(static_cast<int>(width));
-
+	return self->QTabWidget::heightForWidth(static_cast<int>(width));
 }
 
-bool QTabWidget_virtualbase_hasHeightForWidth(const void* self) {
+bool QTabWidget_virtualbase_hasHeightForWidth(const VirtualQTabWidget* self) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::hasHeightForWidth();
-
+	return self->QTabWidget::hasHeightForWidth();
 }
 
-void QTabWidget_virtualbase_tabInserted(void* self, int index) {
+void QTabWidget_virtualbase_tabInserted(VirtualQTabWidget* self, int index) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::tabInserted(static_cast<int>(index));
-
+	self->QTabWidget::tabInserted(static_cast<int>(index));
 }
 
-void QTabWidget_virtualbase_tabRemoved(void* self, int index) {
+void QTabWidget_virtualbase_tabRemoved(VirtualQTabWidget* self, int index) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::tabRemoved(static_cast<int>(index));
-
+	self->QTabWidget::tabRemoved(static_cast<int>(index));
 }
 
-void QTabWidget_virtualbase_showEvent(void* self, QShowEvent* param1) {
+void QTabWidget_virtualbase_showEvent(VirtualQTabWidget* self, QShowEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::showEvent(param1);
-
+	self->QTabWidget::showEvent(param1);
 }
 
-void QTabWidget_virtualbase_resizeEvent(void* self, QResizeEvent* param1) {
+void QTabWidget_virtualbase_resizeEvent(VirtualQTabWidget* self, QResizeEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::resizeEvent(param1);
-
+	self->QTabWidget::resizeEvent(param1);
 }
 
-void QTabWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QTabWidget_virtualbase_keyPressEvent(VirtualQTabWidget* self, QKeyEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::keyPressEvent(param1);
-
+	self->QTabWidget::keyPressEvent(param1);
 }
 
-void QTabWidget_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QTabWidget_virtualbase_paintEvent(VirtualQTabWidget* self, QPaintEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::paintEvent(param1);
-
+	self->QTabWidget::paintEvent(param1);
 }
 
-void QTabWidget_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QTabWidget_virtualbase_changeEvent(VirtualQTabWidget* self, QEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::changeEvent(param1);
-
+	self->QTabWidget::changeEvent(param1);
 }
 
-bool QTabWidget_virtualbase_event(void* self, QEvent* param1) {
+bool QTabWidget_virtualbase_event(VirtualQTabWidget* self, QEvent* param1) {
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::event(param1);
-
+	return self->QTabWidget::event(param1);
 }
 
-int QTabWidget_virtualbase_devType(const void* self) {
+int QTabWidget_virtualbase_devType(const VirtualQTabWidget* self) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::devType();
-
+	return self->QTabWidget::devType();
 }
 
-void QTabWidget_virtualbase_setVisible(void* self, bool visible) {
+void QTabWidget_virtualbase_setVisible(VirtualQTabWidget* self, bool visible) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::setVisible(visible);
-
+	self->QTabWidget::setVisible(visible);
 }
 
-QPaintEngine* QTabWidget_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QTabWidget_virtualbase_paintEngine(const VirtualQTabWidget* self) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::paintEngine();
-
+	return self->QTabWidget::paintEngine();
 }
 
-void QTabWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QTabWidget_virtualbase_mousePressEvent(VirtualQTabWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::mousePressEvent(event);
-
+	self->QTabWidget::mousePressEvent(event);
 }
 
-void QTabWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QTabWidget_virtualbase_mouseReleaseEvent(VirtualQTabWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::mouseReleaseEvent(event);
-
+	self->QTabWidget::mouseReleaseEvent(event);
 }
 
-void QTabWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QTabWidget_virtualbase_mouseDoubleClickEvent(VirtualQTabWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::mouseDoubleClickEvent(event);
-
+	self->QTabWidget::mouseDoubleClickEvent(event);
 }
 
-void QTabWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QTabWidget_virtualbase_mouseMoveEvent(VirtualQTabWidget* self, QMouseEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::mouseMoveEvent(event);
-
+	self->QTabWidget::mouseMoveEvent(event);
 }
 
-void QTabWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QTabWidget_virtualbase_wheelEvent(VirtualQTabWidget* self, QWheelEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::wheelEvent(event);
-
+	self->QTabWidget::wheelEvent(event);
 }
 
-void QTabWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QTabWidget_virtualbase_keyReleaseEvent(VirtualQTabWidget* self, QKeyEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::keyReleaseEvent(event);
-
+	self->QTabWidget::keyReleaseEvent(event);
 }
 
-void QTabWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QTabWidget_virtualbase_focusInEvent(VirtualQTabWidget* self, QFocusEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::focusInEvent(event);
-
+	self->QTabWidget::focusInEvent(event);
 }
 
-void QTabWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QTabWidget_virtualbase_focusOutEvent(VirtualQTabWidget* self, QFocusEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::focusOutEvent(event);
-
+	self->QTabWidget::focusOutEvent(event);
 }
 
-void QTabWidget_virtualbase_enterEvent(void* self, QEvent* event) {
+void QTabWidget_virtualbase_enterEvent(VirtualQTabWidget* self, QEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::enterEvent(event);
-
+	self->QTabWidget::enterEvent(event);
 }
 
-void QTabWidget_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QTabWidget_virtualbase_leaveEvent(VirtualQTabWidget* self, QEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::leaveEvent(event);
-
+	self->QTabWidget::leaveEvent(event);
 }
 
-void QTabWidget_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QTabWidget_virtualbase_moveEvent(VirtualQTabWidget* self, QMoveEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::moveEvent(event);
-
+	self->QTabWidget::moveEvent(event);
 }
 
-void QTabWidget_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QTabWidget_virtualbase_closeEvent(VirtualQTabWidget* self, QCloseEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::closeEvent(event);
-
+	self->QTabWidget::closeEvent(event);
 }
 
-void QTabWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QTabWidget_virtualbase_contextMenuEvent(VirtualQTabWidget* self, QContextMenuEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::contextMenuEvent(event);
-
+	self->QTabWidget::contextMenuEvent(event);
 }
 
-void QTabWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QTabWidget_virtualbase_tabletEvent(VirtualQTabWidget* self, QTabletEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::tabletEvent(event);
-
+	self->QTabWidget::tabletEvent(event);
 }
 
-void QTabWidget_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QTabWidget_virtualbase_actionEvent(VirtualQTabWidget* self, QActionEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::actionEvent(event);
-
+	self->QTabWidget::actionEvent(event);
 }
 
-void QTabWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QTabWidget_virtualbase_dragEnterEvent(VirtualQTabWidget* self, QDragEnterEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::dragEnterEvent(event);
-
+	self->QTabWidget::dragEnterEvent(event);
 }
 
-void QTabWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QTabWidget_virtualbase_dragMoveEvent(VirtualQTabWidget* self, QDragMoveEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::dragMoveEvent(event);
-
+	self->QTabWidget::dragMoveEvent(event);
 }
 
-void QTabWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QTabWidget_virtualbase_dragLeaveEvent(VirtualQTabWidget* self, QDragLeaveEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::dragLeaveEvent(event);
-
+	self->QTabWidget::dragLeaveEvent(event);
 }
 
-void QTabWidget_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QTabWidget_virtualbase_dropEvent(VirtualQTabWidget* self, QDropEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::dropEvent(event);
-
+	self->QTabWidget::dropEvent(event);
 }
 
-void QTabWidget_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QTabWidget_virtualbase_hideEvent(VirtualQTabWidget* self, QHideEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::hideEvent(event);
-
+	self->QTabWidget::hideEvent(event);
 }
 
-bool QTabWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QTabWidget_virtualbase_nativeEvent(VirtualQTabWidget* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QTabWidget::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QTabWidget_virtualbase_metric(const void* self, int param1) {
+int QTabWidget_virtualbase_metric(const VirtualQTabWidget* self, int param1) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::metric(static_cast<VirtualQTabWidget::PaintDeviceMetric>(param1));
-
+	return self->QTabWidget::metric(static_cast<VirtualQTabWidget::PaintDeviceMetric>(param1));
 }
 
-void QTabWidget_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QTabWidget_virtualbase_initPainter(const VirtualQTabWidget* self, QPainter* painter) {
 
-	( (const VirtualQTabWidget*)(self) )->QTabWidget::initPainter(painter);
-
+	self->QTabWidget::initPainter(painter);
 }
 
-QPaintDevice* QTabWidget_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QTabWidget_virtualbase_redirected(const VirtualQTabWidget* self, QPoint* offset) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::redirected(offset);
-
+	return self->QTabWidget::redirected(offset);
 }
 
-QPainter* QTabWidget_virtualbase_sharedPainter(const void* self) {
+QPainter* QTabWidget_virtualbase_sharedPainter(const VirtualQTabWidget* self) {
 
-	return ( (const VirtualQTabWidget*)(self) )->QTabWidget::sharedPainter();
-
+	return self->QTabWidget::sharedPainter();
 }
 
-void QTabWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QTabWidget_virtualbase_inputMethodEvent(VirtualQTabWidget* self, QInputMethodEvent* param1) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::inputMethodEvent(param1);
-
+	self->QTabWidget::inputMethodEvent(param1);
 }
 
-QVariant* QTabWidget_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QTabWidget_virtualbase_inputMethodQuery(const VirtualQTabWidget* self, int param1) {
 
-	return new QVariant(( (const VirtualQTabWidget*)(self) )->QTabWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QTabWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QTabWidget_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QTabWidget_virtualbase_focusNextPrevChild(VirtualQTabWidget* self, bool next) {
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::focusNextPrevChild(next);
-
+	return self->QTabWidget::focusNextPrevChild(next);
 }
 
-bool QTabWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTabWidget_virtualbase_eventFilter(VirtualQTabWidget* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTabWidget*)(self) )->QTabWidget::eventFilter(watched, event);
-
+	return self->QTabWidget::eventFilter(watched, event);
 }
 
-void QTabWidget_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QTabWidget_virtualbase_timerEvent(VirtualQTabWidget* self, QTimerEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::timerEvent(event);
-
+	self->QTabWidget::timerEvent(event);
 }
 
-void QTabWidget_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTabWidget_virtualbase_childEvent(VirtualQTabWidget* self, QChildEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::childEvent(event);
-
+	self->QTabWidget::childEvent(event);
 }
 
-void QTabWidget_virtualbase_customEvent(void* self, QEvent* event) {
+void QTabWidget_virtualbase_customEvent(VirtualQTabWidget* self, QEvent* event) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::customEvent(event);
-
+	self->QTabWidget::customEvent(event);
 }
 
-void QTabWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTabWidget_virtualbase_connectNotify(VirtualQTabWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::connectNotify(*signal);
-
+	self->QTabWidget::connectNotify(*signal);
 }
 
-void QTabWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTabWidget_virtualbase_disconnectNotify(VirtualQTabWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQTabWidget*)(self) )->QTabWidget::disconnectNotify(*signal);
-
+	self->QTabWidget::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTabWidget_staticMetaObject() { return &QTabWidget::staticMetaObject; }
-void QTabWidget_protectedbase_setTabBar(void* self, QTabBar* tabBar) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	self_cast->setTabBar(tabBar);
 
+const QTabWidget_VTable* QTabWidget_vtbl(const VirtualQTabWidget* self) { return self->vtbl; }
+void* QTabWidget_vdata(const VirtualQTabWidget* self) { return self->vdata; }
+void QTabWidget_setVdata(VirtualQTabWidget* self, void* vdata) { self->vdata = vdata; }
+
+void QTabWidget_protectedbase_setTabBar(VirtualQTabWidget* self, QTabBar* tabBar) {
+	self->setTabBar(tabBar);
 }
 
-void QTabWidget_protectedbase_initStyleOption(const void* self, QStyleOptionTabWidgetFrame* option) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	self_cast->initStyleOption(option);
-
+void QTabWidget_protectedbase_initStyleOption(const VirtualQTabWidget* self, QStyleOptionTabWidgetFrame* option) {
+	self->initStyleOption(option);
 }
 
-void QTabWidget_protectedbase_updateMicroFocus(void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QTabWidget_protectedbase_updateMicroFocus(VirtualQTabWidget* self) {
+	self->updateMicroFocus();
 }
 
-void QTabWidget_protectedbase_create(void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	self_cast->create();
-
+void QTabWidget_protectedbase_create(VirtualQTabWidget* self) {
+	self->create();
 }
 
-void QTabWidget_protectedbase_destroy(void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	self_cast->destroy();
-
+void QTabWidget_protectedbase_destroy(VirtualQTabWidget* self) {
+	self->destroy();
 }
 
-bool QTabWidget_protectedbase_focusNextChild(void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QTabWidget_protectedbase_focusNextChild(VirtualQTabWidget* self) {
+	return self->focusNextChild();
 }
 
-bool QTabWidget_protectedbase_focusPreviousChild(void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QTabWidget_protectedbase_focusPreviousChild(VirtualQTabWidget* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QTabWidget_protectedbase_sender(const void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QTabWidget_protectedbase_sender(const VirtualQTabWidget* self) {
+	return self->sender();
 }
 
-int QTabWidget_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTabWidget_protectedbase_senderSignalIndex(const VirtualQTabWidget* self) {
+	return self->senderSignalIndex();
 }
 
-int QTabWidget_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTabWidget_protectedbase_receivers(const VirtualQTabWidget* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTabWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTabWidget* self_cast = static_cast<VirtualQTabWidget*>( (QTabWidget*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTabWidget_protectedbase_isSignalConnected(const VirtualQTabWidget* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTabWidget_delete(QTabWidget* self) {

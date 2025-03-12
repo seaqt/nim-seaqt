@@ -55,38 +55,38 @@ export
 
 type cQSessionManager*{.exportc: "QSessionManager", incompleteStruct.} = object
 
-proc fcQSessionManager_metaObject(self: pointer, ): pointer {.importc: "QSessionManager_metaObject".}
+proc fcQSessionManager_metaObject(self: pointer): pointer {.importc: "QSessionManager_metaObject".}
 proc fcQSessionManager_metacast(self: pointer, param1: cstring): pointer {.importc: "QSessionManager_metacast".}
 proc fcQSessionManager_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSessionManager_metacall".}
 proc fcQSessionManager_tr(s: cstring): struct_miqt_string {.importc: "QSessionManager_tr".}
 proc fcQSessionManager_trUtf8(s: cstring): struct_miqt_string {.importc: "QSessionManager_trUtf8".}
-proc fcQSessionManager_sessionId(self: pointer, ): struct_miqt_string {.importc: "QSessionManager_sessionId".}
-proc fcQSessionManager_sessionKey(self: pointer, ): struct_miqt_string {.importc: "QSessionManager_sessionKey".}
-proc fcQSessionManager_allowsInteraction(self: pointer, ): bool {.importc: "QSessionManager_allowsInteraction".}
-proc fcQSessionManager_allowsErrorInteraction(self: pointer, ): bool {.importc: "QSessionManager_allowsErrorInteraction".}
-proc fcQSessionManager_release(self: pointer, ): void {.importc: "QSessionManager_release".}
-proc fcQSessionManager_cancel(self: pointer, ): void {.importc: "QSessionManager_cancel".}
+proc fcQSessionManager_sessionId(self: pointer): struct_miqt_string {.importc: "QSessionManager_sessionId".}
+proc fcQSessionManager_sessionKey(self: pointer): struct_miqt_string {.importc: "QSessionManager_sessionKey".}
+proc fcQSessionManager_allowsInteraction(self: pointer): bool {.importc: "QSessionManager_allowsInteraction".}
+proc fcQSessionManager_allowsErrorInteraction(self: pointer): bool {.importc: "QSessionManager_allowsErrorInteraction".}
+proc fcQSessionManager_release(self: pointer): void {.importc: "QSessionManager_release".}
+proc fcQSessionManager_cancel(self: pointer): void {.importc: "QSessionManager_cancel".}
 proc fcQSessionManager_setRestartHint(self: pointer, restartHint: cint): void {.importc: "QSessionManager_setRestartHint".}
-proc fcQSessionManager_restartHint(self: pointer, ): cint {.importc: "QSessionManager_restartHint".}
+proc fcQSessionManager_restartHint(self: pointer): cint {.importc: "QSessionManager_restartHint".}
 proc fcQSessionManager_setRestartCommand(self: pointer, restartCommand: struct_miqt_array): void {.importc: "QSessionManager_setRestartCommand".}
-proc fcQSessionManager_restartCommand(self: pointer, ): struct_miqt_array {.importc: "QSessionManager_restartCommand".}
+proc fcQSessionManager_restartCommand(self: pointer): struct_miqt_array {.importc: "QSessionManager_restartCommand".}
 proc fcQSessionManager_setDiscardCommand(self: pointer, discardCommand: struct_miqt_array): void {.importc: "QSessionManager_setDiscardCommand".}
-proc fcQSessionManager_discardCommand(self: pointer, ): struct_miqt_array {.importc: "QSessionManager_discardCommand".}
+proc fcQSessionManager_discardCommand(self: pointer): struct_miqt_array {.importc: "QSessionManager_discardCommand".}
 proc fcQSessionManager_setManagerProperty(self: pointer, name: struct_miqt_string, value: struct_miqt_string): void {.importc: "QSessionManager_setManagerProperty".}
 proc fcQSessionManager_setManagerProperty2(self: pointer, name: struct_miqt_string, value: struct_miqt_array): void {.importc: "QSessionManager_setManagerProperty2".}
-proc fcQSessionManager_isPhase2(self: pointer, ): bool {.importc: "QSessionManager_isPhase2".}
-proc fcQSessionManager_requestPhase2(self: pointer, ): void {.importc: "QSessionManager_requestPhase2".}
+proc fcQSessionManager_isPhase2(self: pointer): bool {.importc: "QSessionManager_isPhase2".}
+proc fcQSessionManager_requestPhase2(self: pointer): void {.importc: "QSessionManager_requestPhase2".}
 proc fcQSessionManager_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSessionManager_tr2".}
 proc fcQSessionManager_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_tr3".}
 proc fcQSessionManager_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSessionManager_trUtf82".}
 proc fcQSessionManager_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSessionManager_trUtf83".}
-proc fcQSessionManager_protectedbase_sender(self: pointer, ): pointer {.importc: "QSessionManager_protectedbase_sender".}
-proc fcQSessionManager_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSessionManager_protectedbase_senderSignalIndex".}
+proc fcQSessionManager_protectedbase_sender(self: pointer): pointer {.importc: "QSessionManager_protectedbase_sender".}
+proc fcQSessionManager_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSessionManager_protectedbase_senderSignalIndex".}
 proc fcQSessionManager_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSessionManager_protectedbase_receivers".}
 proc fcQSessionManager_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSessionManager_protectedbase_isSignalConnected".}
 proc fcQSessionManager_staticMetaObject(): pointer {.importc: "QSessionManager_staticMetaObject".}
 
-proc metaObject*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qsessionmanager_types.QSessionManager): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSessionManager_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsessionmanager_types.QSessionManager, param1: cstring): pointer =
@@ -107,34 +107,34 @@ proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring): str
   c_free(v_ms.data)
   vx_ret
 
-proc sessionId*(self: gen_qsessionmanager_types.QSessionManager, ): string =
+proc sessionId*(self: gen_qsessionmanager_types.QSessionManager): string =
   let v_ms = fcQSessionManager_sessionId(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc sessionKey*(self: gen_qsessionmanager_types.QSessionManager, ): string =
+proc sessionKey*(self: gen_qsessionmanager_types.QSessionManager): string =
   let v_ms = fcQSessionManager_sessionKey(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc allowsInteraction*(self: gen_qsessionmanager_types.QSessionManager, ): bool =
+proc allowsInteraction*(self: gen_qsessionmanager_types.QSessionManager): bool =
   fcQSessionManager_allowsInteraction(self.h)
 
-proc allowsErrorInteraction*(self: gen_qsessionmanager_types.QSessionManager, ): bool =
+proc allowsErrorInteraction*(self: gen_qsessionmanager_types.QSessionManager): bool =
   fcQSessionManager_allowsErrorInteraction(self.h)
 
-proc release*(self: gen_qsessionmanager_types.QSessionManager, ): void =
+proc release*(self: gen_qsessionmanager_types.QSessionManager): void =
   fcQSessionManager_release(self.h)
 
-proc cancel*(self: gen_qsessionmanager_types.QSessionManager, ): void =
+proc cancel*(self: gen_qsessionmanager_types.QSessionManager): void =
   fcQSessionManager_cancel(self.h)
 
 proc setRestartHint*(self: gen_qsessionmanager_types.QSessionManager, restartHint: cint): void =
   fcQSessionManager_setRestartHint(self.h, cint(restartHint))
 
-proc restartHint*(self: gen_qsessionmanager_types.QSessionManager, ): cint =
+proc restartHint*(self: gen_qsessionmanager_types.QSessionManager): cint =
   cint(fcQSessionManager_restartHint(self.h))
 
 proc setRestartCommand*(self: gen_qsessionmanager_types.QSessionManager, restartCommand: seq[string]): void =
@@ -144,7 +144,7 @@ proc setRestartCommand*(self: gen_qsessionmanager_types.QSessionManager, restart
 
   fcQSessionManager_setRestartCommand(self.h, struct_miqt_array(len: csize_t(len(restartCommand)), data: if len(restartCommand) == 0: nil else: addr(restartCommand_CArray[0])))
 
-proc restartCommand*(self: gen_qsessionmanager_types.QSessionManager, ): seq[string] =
+proc restartCommand*(self: gen_qsessionmanager_types.QSessionManager): seq[string] =
   var v_ma = fcQSessionManager_restartCommand(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -163,7 +163,7 @@ proc setDiscardCommand*(self: gen_qsessionmanager_types.QSessionManager, discard
 
   fcQSessionManager_setDiscardCommand(self.h, struct_miqt_array(len: csize_t(len(discardCommand)), data: if len(discardCommand) == 0: nil else: addr(discardCommand_CArray[0])))
 
-proc discardCommand*(self: gen_qsessionmanager_types.QSessionManager, ): seq[string] =
+proc discardCommand*(self: gen_qsessionmanager_types.QSessionManager): seq[string] =
   var v_ma = fcQSessionManager_discardCommand(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -185,10 +185,10 @@ proc setManagerProperty*(self: gen_qsessionmanager_types.QSessionManager, name: 
 
   fcQSessionManager_setManagerProperty2(self.h, struct_miqt_string(data: name, len: csize_t(len(name))), struct_miqt_array(len: csize_t(len(value)), data: if len(value) == 0: nil else: addr(value_CArray[0])))
 
-proc isPhase2*(self: gen_qsessionmanager_types.QSessionManager, ): bool =
+proc isPhase2*(self: gen_qsessionmanager_types.QSessionManager): bool =
   fcQSessionManager_isPhase2(self.h)
 
-proc requestPhase2*(self: gen_qsessionmanager_types.QSessionManager, ): void =
+proc requestPhase2*(self: gen_qsessionmanager_types.QSessionManager): void =
   fcQSessionManager_requestPhase2(self.h)
 
 proc tr*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: cstring): string =
@@ -215,10 +215,10 @@ proc trUtf8*(_: type gen_qsessionmanager_types.QSessionManager, s: cstring, c: c
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qsessionmanager_types.QSessionManager, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qsessionmanager_types.QSessionManager): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSessionManager_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qsessionmanager_types.QSessionManager, ): cint =
+proc senderSignalIndex*(self: gen_qsessionmanager_types.QSessionManager): cint =
   fcQSessionManager_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qsessionmanager_types.QSessionManager, signal: cstring): cint =

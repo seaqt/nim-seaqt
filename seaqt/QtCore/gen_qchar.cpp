@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qchar.h>
 #include "gen_qchar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QLatin1Char* QLatin1Char_new(char c) {
 	return new QLatin1Char(static_cast<char>(c));
 }

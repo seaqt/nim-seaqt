@@ -30,6 +30,7 @@ QQmlListReference* QQmlListReference_new();
 QQmlListReference* QQmlListReference_new2(QObject* param1, const char* property);
 QQmlListReference* QQmlListReference_new3(QQmlListReference* param1);
 QQmlListReference* QQmlListReference_new4(QObject* param1, const char* property, QQmlEngine* param3);
+
 void QQmlListReference_operatorAssign(QQmlListReference* self, QQmlListReference* param1);
 bool QQmlListReference_isValid(const QQmlListReference* self);
 QObject* QQmlListReference_object(const QQmlListReference* self);
@@ -48,6 +49,7 @@ bool QQmlListReference_clear(const QQmlListReference* self);
 int QQmlListReference_count(const QQmlListReference* self);
 bool QQmlListReference_replace(const QQmlListReference* self, int param1, QObject* param2);
 bool QQmlListReference_removeLast(const QQmlListReference* self);
+
 void QQmlListReference_delete(QQmlListReference* self);
 
 #ifdef __cplusplus

@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qradiotunercontrol.h>
 #include "gen_qradiotunercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QRadioTunerControl_virtbase(QRadioTunerControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -414,6 +405,7 @@ struct miqt_string QRadioTunerControl_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QRadioTunerControl_staticMetaObject() { return &QRadioTunerControl::staticMetaObject; }
+
 void QRadioTunerControl_delete(QRadioTunerControl* self) {
 	delete self;
 }

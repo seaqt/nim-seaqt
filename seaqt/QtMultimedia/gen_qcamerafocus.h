@@ -36,6 +36,7 @@ QCameraFocusZone* QCameraFocusZone_new();
 QCameraFocusZone* QCameraFocusZone_new2(QRectF* area);
 QCameraFocusZone* QCameraFocusZone_new3(QCameraFocusZone* other);
 QCameraFocusZone* QCameraFocusZone_new4(QRectF* area, int status);
+
 void QCameraFocusZone_operatorAssign(QCameraFocusZone* self, QCameraFocusZone* other);
 bool QCameraFocusZone_operatorEqual(const QCameraFocusZone* self, QCameraFocusZone* other);
 bool QCameraFocusZone_operatorNotEqual(const QCameraFocusZone* self, QCameraFocusZone* other);
@@ -43,6 +44,7 @@ bool QCameraFocusZone_isValid(const QCameraFocusZone* self);
 QRectF* QCameraFocusZone_area(const QCameraFocusZone* self);
 int QCameraFocusZone_status(const QCameraFocusZone* self);
 void QCameraFocusZone_setStatus(QCameraFocusZone* self, int status);
+
 void QCameraFocusZone_delete(QCameraFocusZone* self);
 
 void QCameraFocus_virtbase(QCameraFocus* src, QObject** outptr_QObject);
@@ -80,6 +82,7 @@ struct miqt_string QCameraFocus_tr2(const char* s, const char* c);
 struct miqt_string QCameraFocus_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraFocus_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraFocus_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QCameraFocus_staticMetaObject();
 
 #ifdef __cplusplus

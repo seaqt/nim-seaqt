@@ -37,38 +37,31 @@
 #include <QWidget>
 #include <qdesktopwidget.h>
 #include "gen_qdesktopwidget.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQDesktopWidget final : public QDesktopWidget {
-	struct QDesktopWidget_VTable* vtbl;
+	const QDesktopWidget_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QDesktopWidget_VTable* QDesktopWidget_vtbl(const VirtualQDesktopWidget* self);
+	friend void* QDesktopWidget_vdata(const VirtualQDesktopWidget* self);
+	friend void QDesktopWidget_setVdata(VirtualQDesktopWidget* self, void* vdata);
 
-	VirtualQDesktopWidget(struct QDesktopWidget_VTable* vtbl): QDesktopWidget(), vtbl(vtbl) {};
+	VirtualQDesktopWidget(const QDesktopWidget_VTable* vtbl, void* vdata): QDesktopWidget(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQDesktopWidget() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQDesktopWidget() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QDesktopWidget::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QDesktopWidget_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QDesktopWidget_virtualbase_metaObject(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QDesktopWidget::qt_metacast(param1);
@@ -76,14 +69,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QDesktopWidget_virtualbase_metacast(void* self, const char* param1);
+	friend void* QDesktopWidget_virtualbase_metacast(VirtualQDesktopWidget* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QDesktopWidget::qt_metacall(param1, param2, param3);
@@ -94,14 +86,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDesktopWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QDesktopWidget_virtualbase_metacall(VirtualQDesktopWidget* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
 		if (vtbl->resizeEvent == 0) {
 			QDesktopWidget::resizeEvent(e);
@@ -110,27 +101,25 @@ public:
 
 		QResizeEvent* sigval1 = e;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_resizeEvent(void* self, QResizeEvent* e);
+	friend void QDesktopWidget_virtualbase_resizeEvent(VirtualQDesktopWidget* self, QResizeEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QDesktopWidget::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDesktopWidget_virtualbase_devType(const void* self);
+	friend int QDesktopWidget_virtualbase_devType(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QDesktopWidget::setVisible(visible);
@@ -139,45 +128,42 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_setVisible(void* self, bool visible);
+	friend void QDesktopWidget_virtualbase_setVisible(VirtualQDesktopWidget* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QDesktopWidget::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDesktopWidget_virtualbase_sizeHint(const void* self);
+	friend QSize* QDesktopWidget_virtualbase_sizeHint(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QDesktopWidget::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QDesktopWidget_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QDesktopWidget_virtualbase_minimumSizeHint(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QDesktopWidget::heightForWidth(param1);
@@ -185,42 +171,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDesktopWidget_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QDesktopWidget_virtualbase_heightForWidth(const VirtualQDesktopWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QDesktopWidget::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QDesktopWidget_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QDesktopWidget_virtualbase_hasHeightForWidth(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QDesktopWidget::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QDesktopWidget_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QDesktopWidget_virtualbase_paintEngine(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QDesktopWidget::event(event);
@@ -228,14 +211,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDesktopWidget_virtualbase_event(void* self, QEvent* event);
+	friend bool QDesktopWidget_virtualbase_event(VirtualQDesktopWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QDesktopWidget::mousePressEvent(event);
@@ -244,13 +226,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QDesktopWidget_virtualbase_mousePressEvent(VirtualQDesktopWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QDesktopWidget::mouseReleaseEvent(event);
@@ -259,13 +240,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QDesktopWidget_virtualbase_mouseReleaseEvent(VirtualQDesktopWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QDesktopWidget::mouseDoubleClickEvent(event);
@@ -274,13 +254,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QDesktopWidget_virtualbase_mouseDoubleClickEvent(VirtualQDesktopWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QDesktopWidget::mouseMoveEvent(event);
@@ -289,13 +268,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QDesktopWidget_virtualbase_mouseMoveEvent(VirtualQDesktopWidget* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QDesktopWidget::wheelEvent(event);
@@ -304,13 +282,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QDesktopWidget_virtualbase_wheelEvent(VirtualQDesktopWidget* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QDesktopWidget::keyPressEvent(event);
@@ -319,13 +296,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QDesktopWidget_virtualbase_keyPressEvent(VirtualQDesktopWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QDesktopWidget::keyReleaseEvent(event);
@@ -334,13 +310,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QDesktopWidget_virtualbase_keyReleaseEvent(VirtualQDesktopWidget* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QDesktopWidget::focusInEvent(event);
@@ -349,13 +324,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QDesktopWidget_virtualbase_focusInEvent(VirtualQDesktopWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QDesktopWidget::focusOutEvent(event);
@@ -364,13 +338,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QDesktopWidget_virtualbase_focusOutEvent(VirtualQDesktopWidget* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QDesktopWidget::enterEvent(event);
@@ -379,13 +352,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QDesktopWidget_virtualbase_enterEvent(VirtualQDesktopWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QDesktopWidget::leaveEvent(event);
@@ -394,13 +366,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QDesktopWidget_virtualbase_leaveEvent(VirtualQDesktopWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QDesktopWidget::paintEvent(event);
@@ -409,13 +380,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QDesktopWidget_virtualbase_paintEvent(VirtualQDesktopWidget* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QDesktopWidget::moveEvent(event);
@@ -424,13 +394,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QDesktopWidget_virtualbase_moveEvent(VirtualQDesktopWidget* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QDesktopWidget::closeEvent(event);
@@ -439,13 +408,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QDesktopWidget_virtualbase_closeEvent(VirtualQDesktopWidget* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QDesktopWidget::contextMenuEvent(event);
@@ -454,13 +422,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QDesktopWidget_virtualbase_contextMenuEvent(VirtualQDesktopWidget* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QDesktopWidget::tabletEvent(event);
@@ -469,13 +436,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QDesktopWidget_virtualbase_tabletEvent(VirtualQDesktopWidget* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QDesktopWidget::actionEvent(event);
@@ -484,13 +450,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QDesktopWidget_virtualbase_actionEvent(VirtualQDesktopWidget* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QDesktopWidget::dragEnterEvent(event);
@@ -499,13 +464,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QDesktopWidget_virtualbase_dragEnterEvent(VirtualQDesktopWidget* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QDesktopWidget::dragMoveEvent(event);
@@ -514,13 +478,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QDesktopWidget_virtualbase_dragMoveEvent(VirtualQDesktopWidget* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QDesktopWidget::dragLeaveEvent(event);
@@ -529,13 +492,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QDesktopWidget_virtualbase_dragLeaveEvent(VirtualQDesktopWidget* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QDesktopWidget::dropEvent(event);
@@ -544,13 +506,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QDesktopWidget_virtualbase_dropEvent(VirtualQDesktopWidget* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QDesktopWidget::showEvent(event);
@@ -559,13 +520,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QDesktopWidget_virtualbase_showEvent(VirtualQDesktopWidget* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QDesktopWidget::hideEvent(event);
@@ -574,13 +534,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QDesktopWidget_virtualbase_hideEvent(VirtualQDesktopWidget* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QDesktopWidget::nativeEvent(eventType, message, result);
@@ -595,14 +554,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QDesktopWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QDesktopWidget_virtualbase_nativeEvent(VirtualQDesktopWidget* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QDesktopWidget::changeEvent(param1);
@@ -611,13 +569,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QDesktopWidget_virtualbase_changeEvent(VirtualQDesktopWidget* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QDesktopWidget::metric(param1);
@@ -626,14 +583,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QDesktopWidget_virtualbase_metric(const void* self, int param1);
+	friend int QDesktopWidget_virtualbase_metric(const VirtualQDesktopWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QDesktopWidget::initPainter(painter);
@@ -642,13 +598,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QDesktopWidget_virtualbase_initPainter(const VirtualQDesktopWidget* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QDesktopWidget::redirected(offset);
@@ -656,28 +611,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QDesktopWidget_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QDesktopWidget_virtualbase_redirected(const VirtualQDesktopWidget* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QDesktopWidget::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QDesktopWidget_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QDesktopWidget_virtualbase_sharedPainter(const VirtualQDesktopWidget* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QDesktopWidget::inputMethodEvent(param1);
@@ -686,13 +639,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QDesktopWidget_virtualbase_inputMethodEvent(VirtualQDesktopWidget* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QDesktopWidget::inputMethodQuery(param1);
@@ -701,16 +653,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QDesktopWidget_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QDesktopWidget_virtualbase_inputMethodQuery(const VirtualQDesktopWidget* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QDesktopWidget::focusNextPrevChild(next);
@@ -718,14 +669,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QDesktopWidget_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QDesktopWidget_virtualbase_focusNextPrevChild(VirtualQDesktopWidget* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QDesktopWidget::eventFilter(watched, event);
@@ -734,14 +684,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QDesktopWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QDesktopWidget_virtualbase_eventFilter(VirtualQDesktopWidget* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QDesktopWidget::timerEvent(event);
@@ -750,13 +699,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QDesktopWidget_virtualbase_timerEvent(VirtualQDesktopWidget* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QDesktopWidget::childEvent(event);
@@ -765,13 +713,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QDesktopWidget_virtualbase_childEvent(VirtualQDesktopWidget* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QDesktopWidget::customEvent(event);
@@ -780,13 +727,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QDesktopWidget_virtualbase_customEvent(VirtualQDesktopWidget* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QDesktopWidget::connectNotify(signal);
@@ -797,13 +743,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QDesktopWidget_virtualbase_connectNotify(VirtualQDesktopWidget* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QDesktopWidget::disconnectNotify(signal);
@@ -814,26 +759,26 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QDesktopWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QDesktopWidget_virtualbase_disconnectNotify(VirtualQDesktopWidget* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QDesktopWidget_protectedbase_updateMicroFocus(void* self);
-	friend void QDesktopWidget_protectedbase_create(void* self);
-	friend void QDesktopWidget_protectedbase_destroy(void* self);
-	friend bool QDesktopWidget_protectedbase_focusNextChild(void* self);
-	friend bool QDesktopWidget_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QDesktopWidget_protectedbase_sender(const void* self);
-	friend int QDesktopWidget_protectedbase_senderSignalIndex(const void* self);
-	friend int QDesktopWidget_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QDesktopWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QDesktopWidget_protectedbase_updateMicroFocus(VirtualQDesktopWidget* self);
+	friend void QDesktopWidget_protectedbase_create(VirtualQDesktopWidget* self);
+	friend void QDesktopWidget_protectedbase_destroy(VirtualQDesktopWidget* self);
+	friend bool QDesktopWidget_protectedbase_focusNextChild(VirtualQDesktopWidget* self);
+	friend bool QDesktopWidget_protectedbase_focusPreviousChild(VirtualQDesktopWidget* self);
+	friend QObject* QDesktopWidget_protectedbase_sender(const VirtualQDesktopWidget* self);
+	friend int QDesktopWidget_protectedbase_senderSignalIndex(const VirtualQDesktopWidget* self);
+	friend int QDesktopWidget_protectedbase_receivers(const VirtualQDesktopWidget* self, const char* signal);
+	friend bool QDesktopWidget_protectedbase_isSignalConnected(const VirtualQDesktopWidget* self, QMetaMethod* signal);
 };
 
-QDesktopWidget* QDesktopWidget_new(struct QDesktopWidget_VTable* vtbl) {
-	return new VirtualQDesktopWidget(vtbl);
+VirtualQDesktopWidget* QDesktopWidget_new(const QDesktopWidget_VTable* vtbl, void* vdata) {
+	return new VirtualQDesktopWidget(vtbl, vdata);
 }
 
 void QDesktopWidget_virtbase(QDesktopWidget* src, QWidget** outptr_QWidget) {
@@ -930,7 +875,7 @@ void QDesktopWidget_resized(QDesktopWidget* self, int param1) {
 	self->resized(static_cast<int>(param1));
 }
 
-void QDesktopWidget_connect_resized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QDesktopWidget_connect_resized(VirtualQDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -946,7 +891,7 @@ void QDesktopWidget_workAreaResized(QDesktopWidget* self, int param1) {
 	self->workAreaResized(static_cast<int>(param1));
 }
 
-void QDesktopWidget_connect_workAreaResized(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QDesktopWidget_connect_workAreaResized(VirtualQDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -962,7 +907,7 @@ void QDesktopWidget_screenCountChanged(QDesktopWidget* self, int param1) {
 	self->screenCountChanged(static_cast<int>(param1));
 }
 
-void QDesktopWidget_connect_screenCountChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QDesktopWidget_connect_screenCountChanged(VirtualQDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -978,7 +923,7 @@ void QDesktopWidget_primaryScreenChanged(QDesktopWidget* self) {
 	self->primaryScreenChanged();
 }
 
-void QDesktopWidget_connect_primaryScreenChanged(QDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QDesktopWidget_connect_primaryScreenChanged(VirtualQDesktopWidget* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1049,369 +994,297 @@ QRect* QDesktopWidget_availableGeometry1(const QDesktopWidget* self, int screen)
 	return new QRect(self->availableGeometry(static_cast<int>(screen)));
 }
 
-QMetaObject* QDesktopWidget_virtualbase_metaObject(const void* self) {
+QMetaObject* QDesktopWidget_virtualbase_metaObject(const VirtualQDesktopWidget* self) {
 
-	return (QMetaObject*) ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::metaObject();
-
+	return (QMetaObject*) self->QDesktopWidget::metaObject();
 }
 
-void* QDesktopWidget_virtualbase_metacast(void* self, const char* param1) {
+void* QDesktopWidget_virtualbase_metacast(VirtualQDesktopWidget* self, const char* param1) {
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::qt_metacast(param1);
-
+	return self->QDesktopWidget::qt_metacast(param1);
 }
 
-int QDesktopWidget_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QDesktopWidget_virtualbase_metacall(VirtualQDesktopWidget* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QDesktopWidget::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QDesktopWidget_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
+void QDesktopWidget_virtualbase_resizeEvent(VirtualQDesktopWidget* self, QResizeEvent* e) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::resizeEvent(e);
-
+	self->QDesktopWidget::resizeEvent(e);
 }
 
-int QDesktopWidget_virtualbase_devType(const void* self) {
+int QDesktopWidget_virtualbase_devType(const VirtualQDesktopWidget* self) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::devType();
-
+	return self->QDesktopWidget::devType();
 }
 
-void QDesktopWidget_virtualbase_setVisible(void* self, bool visible) {
+void QDesktopWidget_virtualbase_setVisible(VirtualQDesktopWidget* self, bool visible) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::setVisible(visible);
-
+	self->QDesktopWidget::setVisible(visible);
 }
 
-QSize* QDesktopWidget_virtualbase_sizeHint(const void* self) {
+QSize* QDesktopWidget_virtualbase_sizeHint(const VirtualQDesktopWidget* self) {
 
-	return new QSize(( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::sizeHint());
-
+	return new QSize(self->QDesktopWidget::sizeHint());
 }
 
-QSize* QDesktopWidget_virtualbase_minimumSizeHint(const void* self) {
+QSize* QDesktopWidget_virtualbase_minimumSizeHint(const VirtualQDesktopWidget* self) {
 
-	return new QSize(( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::minimumSizeHint());
-
+	return new QSize(self->QDesktopWidget::minimumSizeHint());
 }
 
-int QDesktopWidget_virtualbase_heightForWidth(const void* self, int param1) {
+int QDesktopWidget_virtualbase_heightForWidth(const VirtualQDesktopWidget* self, int param1) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::heightForWidth(static_cast<int>(param1));
-
+	return self->QDesktopWidget::heightForWidth(static_cast<int>(param1));
 }
 
-bool QDesktopWidget_virtualbase_hasHeightForWidth(const void* self) {
+bool QDesktopWidget_virtualbase_hasHeightForWidth(const VirtualQDesktopWidget* self) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::hasHeightForWidth();
-
+	return self->QDesktopWidget::hasHeightForWidth();
 }
 
-QPaintEngine* QDesktopWidget_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QDesktopWidget_virtualbase_paintEngine(const VirtualQDesktopWidget* self) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::paintEngine();
-
+	return self->QDesktopWidget::paintEngine();
 }
 
-bool QDesktopWidget_virtualbase_event(void* self, QEvent* event) {
+bool QDesktopWidget_virtualbase_event(VirtualQDesktopWidget* self, QEvent* event) {
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::event(event);
-
+	return self->QDesktopWidget::event(event);
 }
 
-void QDesktopWidget_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QDesktopWidget_virtualbase_mousePressEvent(VirtualQDesktopWidget* self, QMouseEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::mousePressEvent(event);
-
+	self->QDesktopWidget::mousePressEvent(event);
 }
 
-void QDesktopWidget_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QDesktopWidget_virtualbase_mouseReleaseEvent(VirtualQDesktopWidget* self, QMouseEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::mouseReleaseEvent(event);
-
+	self->QDesktopWidget::mouseReleaseEvent(event);
 }
 
-void QDesktopWidget_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QDesktopWidget_virtualbase_mouseDoubleClickEvent(VirtualQDesktopWidget* self, QMouseEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::mouseDoubleClickEvent(event);
-
+	self->QDesktopWidget::mouseDoubleClickEvent(event);
 }
 
-void QDesktopWidget_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QDesktopWidget_virtualbase_mouseMoveEvent(VirtualQDesktopWidget* self, QMouseEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::mouseMoveEvent(event);
-
+	self->QDesktopWidget::mouseMoveEvent(event);
 }
 
-void QDesktopWidget_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QDesktopWidget_virtualbase_wheelEvent(VirtualQDesktopWidget* self, QWheelEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::wheelEvent(event);
-
+	self->QDesktopWidget::wheelEvent(event);
 }
 
-void QDesktopWidget_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QDesktopWidget_virtualbase_keyPressEvent(VirtualQDesktopWidget* self, QKeyEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::keyPressEvent(event);
-
+	self->QDesktopWidget::keyPressEvent(event);
 }
 
-void QDesktopWidget_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QDesktopWidget_virtualbase_keyReleaseEvent(VirtualQDesktopWidget* self, QKeyEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::keyReleaseEvent(event);
-
+	self->QDesktopWidget::keyReleaseEvent(event);
 }
 
-void QDesktopWidget_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QDesktopWidget_virtualbase_focusInEvent(VirtualQDesktopWidget* self, QFocusEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::focusInEvent(event);
-
+	self->QDesktopWidget::focusInEvent(event);
 }
 
-void QDesktopWidget_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QDesktopWidget_virtualbase_focusOutEvent(VirtualQDesktopWidget* self, QFocusEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::focusOutEvent(event);
-
+	self->QDesktopWidget::focusOutEvent(event);
 }
 
-void QDesktopWidget_virtualbase_enterEvent(void* self, QEvent* event) {
+void QDesktopWidget_virtualbase_enterEvent(VirtualQDesktopWidget* self, QEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::enterEvent(event);
-
+	self->QDesktopWidget::enterEvent(event);
 }
 
-void QDesktopWidget_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QDesktopWidget_virtualbase_leaveEvent(VirtualQDesktopWidget* self, QEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::leaveEvent(event);
-
+	self->QDesktopWidget::leaveEvent(event);
 }
 
-void QDesktopWidget_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QDesktopWidget_virtualbase_paintEvent(VirtualQDesktopWidget* self, QPaintEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::paintEvent(event);
-
+	self->QDesktopWidget::paintEvent(event);
 }
 
-void QDesktopWidget_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QDesktopWidget_virtualbase_moveEvent(VirtualQDesktopWidget* self, QMoveEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::moveEvent(event);
-
+	self->QDesktopWidget::moveEvent(event);
 }
 
-void QDesktopWidget_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QDesktopWidget_virtualbase_closeEvent(VirtualQDesktopWidget* self, QCloseEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::closeEvent(event);
-
+	self->QDesktopWidget::closeEvent(event);
 }
 
-void QDesktopWidget_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QDesktopWidget_virtualbase_contextMenuEvent(VirtualQDesktopWidget* self, QContextMenuEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::contextMenuEvent(event);
-
+	self->QDesktopWidget::contextMenuEvent(event);
 }
 
-void QDesktopWidget_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QDesktopWidget_virtualbase_tabletEvent(VirtualQDesktopWidget* self, QTabletEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::tabletEvent(event);
-
+	self->QDesktopWidget::tabletEvent(event);
 }
 
-void QDesktopWidget_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QDesktopWidget_virtualbase_actionEvent(VirtualQDesktopWidget* self, QActionEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::actionEvent(event);
-
+	self->QDesktopWidget::actionEvent(event);
 }
 
-void QDesktopWidget_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QDesktopWidget_virtualbase_dragEnterEvent(VirtualQDesktopWidget* self, QDragEnterEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::dragEnterEvent(event);
-
+	self->QDesktopWidget::dragEnterEvent(event);
 }
 
-void QDesktopWidget_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QDesktopWidget_virtualbase_dragMoveEvent(VirtualQDesktopWidget* self, QDragMoveEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::dragMoveEvent(event);
-
+	self->QDesktopWidget::dragMoveEvent(event);
 }
 
-void QDesktopWidget_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QDesktopWidget_virtualbase_dragLeaveEvent(VirtualQDesktopWidget* self, QDragLeaveEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::dragLeaveEvent(event);
-
+	self->QDesktopWidget::dragLeaveEvent(event);
 }
 
-void QDesktopWidget_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QDesktopWidget_virtualbase_dropEvent(VirtualQDesktopWidget* self, QDropEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::dropEvent(event);
-
+	self->QDesktopWidget::dropEvent(event);
 }
 
-void QDesktopWidget_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QDesktopWidget_virtualbase_showEvent(VirtualQDesktopWidget* self, QShowEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::showEvent(event);
-
+	self->QDesktopWidget::showEvent(event);
 }
 
-void QDesktopWidget_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QDesktopWidget_virtualbase_hideEvent(VirtualQDesktopWidget* self, QHideEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::hideEvent(event);
-
+	self->QDesktopWidget::hideEvent(event);
 }
 
-bool QDesktopWidget_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QDesktopWidget_virtualbase_nativeEvent(VirtualQDesktopWidget* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QDesktopWidget::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-void QDesktopWidget_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QDesktopWidget_virtualbase_changeEvent(VirtualQDesktopWidget* self, QEvent* param1) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::changeEvent(param1);
-
+	self->QDesktopWidget::changeEvent(param1);
 }
 
-int QDesktopWidget_virtualbase_metric(const void* self, int param1) {
+int QDesktopWidget_virtualbase_metric(const VirtualQDesktopWidget* self, int param1) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::metric(static_cast<VirtualQDesktopWidget::PaintDeviceMetric>(param1));
-
+	return self->QDesktopWidget::metric(static_cast<VirtualQDesktopWidget::PaintDeviceMetric>(param1));
 }
 
-void QDesktopWidget_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QDesktopWidget_virtualbase_initPainter(const VirtualQDesktopWidget* self, QPainter* painter) {
 
-	( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::initPainter(painter);
-
+	self->QDesktopWidget::initPainter(painter);
 }
 
-QPaintDevice* QDesktopWidget_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QDesktopWidget_virtualbase_redirected(const VirtualQDesktopWidget* self, QPoint* offset) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::redirected(offset);
-
+	return self->QDesktopWidget::redirected(offset);
 }
 
-QPainter* QDesktopWidget_virtualbase_sharedPainter(const void* self) {
+QPainter* QDesktopWidget_virtualbase_sharedPainter(const VirtualQDesktopWidget* self) {
 
-	return ( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::sharedPainter();
-
+	return self->QDesktopWidget::sharedPainter();
 }
 
-void QDesktopWidget_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QDesktopWidget_virtualbase_inputMethodEvent(VirtualQDesktopWidget* self, QInputMethodEvent* param1) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::inputMethodEvent(param1);
-
+	self->QDesktopWidget::inputMethodEvent(param1);
 }
 
-QVariant* QDesktopWidget_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QDesktopWidget_virtualbase_inputMethodQuery(const VirtualQDesktopWidget* self, int param1) {
 
-	return new QVariant(( (const VirtualQDesktopWidget*)(self) )->QDesktopWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QDesktopWidget::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QDesktopWidget_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QDesktopWidget_virtualbase_focusNextPrevChild(VirtualQDesktopWidget* self, bool next) {
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::focusNextPrevChild(next);
-
+	return self->QDesktopWidget::focusNextPrevChild(next);
 }
 
-bool QDesktopWidget_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QDesktopWidget_virtualbase_eventFilter(VirtualQDesktopWidget* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::eventFilter(watched, event);
-
+	return self->QDesktopWidget::eventFilter(watched, event);
 }
 
-void QDesktopWidget_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QDesktopWidget_virtualbase_timerEvent(VirtualQDesktopWidget* self, QTimerEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::timerEvent(event);
-
+	self->QDesktopWidget::timerEvent(event);
 }
 
-void QDesktopWidget_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QDesktopWidget_virtualbase_childEvent(VirtualQDesktopWidget* self, QChildEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::childEvent(event);
-
+	self->QDesktopWidget::childEvent(event);
 }
 
-void QDesktopWidget_virtualbase_customEvent(void* self, QEvent* event) {
+void QDesktopWidget_virtualbase_customEvent(VirtualQDesktopWidget* self, QEvent* event) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::customEvent(event);
-
+	self->QDesktopWidget::customEvent(event);
 }
 
-void QDesktopWidget_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QDesktopWidget_virtualbase_connectNotify(VirtualQDesktopWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::connectNotify(*signal);
-
+	self->QDesktopWidget::connectNotify(*signal);
 }
 
-void QDesktopWidget_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QDesktopWidget_virtualbase_disconnectNotify(VirtualQDesktopWidget* self, QMetaMethod* signal) {
 
-	( (VirtualQDesktopWidget*)(self) )->QDesktopWidget::disconnectNotify(*signal);
-
+	self->QDesktopWidget::disconnectNotify(*signal);
 }
 
 const QMetaObject* QDesktopWidget_staticMetaObject() { return &QDesktopWidget::staticMetaObject; }
-void QDesktopWidget_protectedbase_updateMicroFocus(void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	self_cast->updateMicroFocus();
 
+const QDesktopWidget_VTable* QDesktopWidget_vtbl(const VirtualQDesktopWidget* self) { return self->vtbl; }
+void* QDesktopWidget_vdata(const VirtualQDesktopWidget* self) { return self->vdata; }
+void QDesktopWidget_setVdata(VirtualQDesktopWidget* self, void* vdata) { self->vdata = vdata; }
+
+void QDesktopWidget_protectedbase_updateMicroFocus(VirtualQDesktopWidget* self) {
+	self->updateMicroFocus();
 }
 
-void QDesktopWidget_protectedbase_create(void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	self_cast->create();
-
+void QDesktopWidget_protectedbase_create(VirtualQDesktopWidget* self) {
+	self->create();
 }
 
-void QDesktopWidget_protectedbase_destroy(void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	self_cast->destroy();
-
+void QDesktopWidget_protectedbase_destroy(VirtualQDesktopWidget* self) {
+	self->destroy();
 }
 
-bool QDesktopWidget_protectedbase_focusNextChild(void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QDesktopWidget_protectedbase_focusNextChild(VirtualQDesktopWidget* self) {
+	return self->focusNextChild();
 }
 
-bool QDesktopWidget_protectedbase_focusPreviousChild(void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QDesktopWidget_protectedbase_focusPreviousChild(VirtualQDesktopWidget* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QDesktopWidget_protectedbase_sender(const void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QDesktopWidget_protectedbase_sender(const VirtualQDesktopWidget* self) {
+	return self->sender();
 }
 
-int QDesktopWidget_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QDesktopWidget_protectedbase_senderSignalIndex(const VirtualQDesktopWidget* self) {
+	return self->senderSignalIndex();
 }
 
-int QDesktopWidget_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QDesktopWidget_protectedbase_receivers(const VirtualQDesktopWidget* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QDesktopWidget_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQDesktopWidget* self_cast = static_cast<VirtualQDesktopWidget*>( (QDesktopWidget*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QDesktopWidget_protectedbase_isSignalConnected(const VirtualQDesktopWidget* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QDesktopWidget_delete(QDesktopWidget* self) {

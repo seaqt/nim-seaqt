@@ -16,15 +16,6 @@
 #include <QTimerEvent>
 #include <qaudiosystemplugin.h>
 #include "gen_qaudiosystemplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 struct miqt_array /* of struct miqt_string */  QAudioSystemFactoryInterface_availableDevices(const QAudioSystemFactoryInterface* self, int param1) {
 	QList<QByteArray> _ret = self->availableDevices(static_cast<QAudio::Mode>(param1));
 	// Convert QList<> from C++ memory to manually-managed C memory
@@ -67,29 +58,31 @@ void QAudioSystemFactoryInterface_delete(QAudioSystemFactoryInterface* self) {
 }
 
 class VirtualQAudioSystemPlugin final : public QAudioSystemPlugin {
-	struct QAudioSystemPlugin_VTable* vtbl;
+	const QAudioSystemPlugin_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAudioSystemPlugin_VTable* QAudioSystemPlugin_vtbl(const VirtualQAudioSystemPlugin* self);
+	friend void* QAudioSystemPlugin_vdata(const VirtualQAudioSystemPlugin* self);
+	friend void QAudioSystemPlugin_setVdata(VirtualQAudioSystemPlugin* self, void* vdata);
 
-	VirtualQAudioSystemPlugin(struct QAudioSystemPlugin_VTable* vtbl): QAudioSystemPlugin(), vtbl(vtbl) {};
-	VirtualQAudioSystemPlugin(struct QAudioSystemPlugin_VTable* vtbl, QObject* parent): QAudioSystemPlugin(parent), vtbl(vtbl) {};
+	VirtualQAudioSystemPlugin(const QAudioSystemPlugin_VTable* vtbl, void* vdata): QAudioSystemPlugin(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAudioSystemPlugin(const QAudioSystemPlugin_VTable* vtbl, void* vdata, QObject* parent): QAudioSystemPlugin(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAudioSystemPlugin() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAudioSystemPlugin() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAudioSystemPlugin::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const VirtualQAudioSystemPlugin* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAudioSystemPlugin::qt_metacast(param1);
@@ -97,14 +90,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAudioSystemPlugin_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAudioSystemPlugin_virtualbase_metacast(VirtualQAudioSystemPlugin* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAudioSystemPlugin::qt_metacall(param1, param2, param3);
@@ -115,14 +107,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAudioSystemPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAudioSystemPlugin_virtualbase_metacall(VirtualQAudioSystemPlugin* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<QByteArray> availableDevices(QAudio::Mode param1) const override {
 		if (vtbl->availableDevices == 0) {
 			return QList<QByteArray>(); // Pure virtual, there is no base we can call
@@ -131,7 +122,7 @@ public:
 		QAudio::Mode param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->availableDevices(vtbl, this, sigval1);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->availableDevices(this, sigval1);
 		QList<QByteArray> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -145,7 +136,6 @@ public:
 		return callback_return_value_QList;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractAudioInput* createInput(const QByteArray& device) override {
 		if (vtbl->createInput == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -158,12 +148,11 @@ public:
 		memcpy(device_ms.data, device_qb.data(), device_ms.len);
 		struct miqt_string sigval1 = device_ms;
 
-		QAbstractAudioInput* callback_return_value = vtbl->createInput(vtbl, this, sigval1);
+		QAbstractAudioInput* callback_return_value = vtbl->createInput(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractAudioOutput* createOutput(const QByteArray& device) override {
 		if (vtbl->createOutput == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -176,12 +165,11 @@ public:
 		memcpy(device_ms.data, device_qb.data(), device_ms.len);
 		struct miqt_string sigval1 = device_ms;
 
-		QAbstractAudioOutput* callback_return_value = vtbl->createOutput(vtbl, this, sigval1);
+		QAbstractAudioOutput* callback_return_value = vtbl->createOutput(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QAbstractAudioDeviceInfo* createDeviceInfo(const QByteArray& device, QAudio::Mode mode) override {
 		if (vtbl->createDeviceInfo == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -196,12 +184,11 @@ public:
 		QAudio::Mode mode_ret = mode;
 		int sigval2 = static_cast<int>(mode_ret);
 
-		QAbstractAudioDeviceInfo* callback_return_value = vtbl->createDeviceInfo(vtbl, this, sigval1, sigval2);
+		QAbstractAudioDeviceInfo* callback_return_value = vtbl->createDeviceInfo(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAudioSystemPlugin::event(event);
@@ -209,14 +196,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioSystemPlugin_virtualbase_event(void* self, QEvent* event);
+	friend bool QAudioSystemPlugin_virtualbase_event(VirtualQAudioSystemPlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAudioSystemPlugin::eventFilter(watched, event);
@@ -225,14 +211,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAudioSystemPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAudioSystemPlugin_virtualbase_eventFilter(VirtualQAudioSystemPlugin* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAudioSystemPlugin::timerEvent(event);
@@ -241,13 +226,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAudioSystemPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAudioSystemPlugin_virtualbase_timerEvent(VirtualQAudioSystemPlugin* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAudioSystemPlugin::childEvent(event);
@@ -256,13 +240,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAudioSystemPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAudioSystemPlugin_virtualbase_childEvent(VirtualQAudioSystemPlugin* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAudioSystemPlugin::customEvent(event);
@@ -271,13 +254,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAudioSystemPlugin_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAudioSystemPlugin_virtualbase_customEvent(VirtualQAudioSystemPlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAudioSystemPlugin::connectNotify(signal);
@@ -288,13 +270,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioSystemPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioSystemPlugin_virtualbase_connectNotify(VirtualQAudioSystemPlugin* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAudioSystemPlugin::disconnectNotify(signal);
@@ -305,25 +286,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAudioSystemPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAudioSystemPlugin_virtualbase_disconnectNotify(VirtualQAudioSystemPlugin* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAudioSystemPlugin_protectedbase_sender(const void* self);
-	friend int QAudioSystemPlugin_protectedbase_senderSignalIndex(const void* self);
-	friend int QAudioSystemPlugin_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAudioSystemPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAudioSystemPlugin_protectedbase_sender(const VirtualQAudioSystemPlugin* self);
+	friend int QAudioSystemPlugin_protectedbase_senderSignalIndex(const VirtualQAudioSystemPlugin* self);
+	friend int QAudioSystemPlugin_protectedbase_receivers(const VirtualQAudioSystemPlugin* self, const char* signal);
+	friend bool QAudioSystemPlugin_protectedbase_isSignalConnected(const VirtualQAudioSystemPlugin* self, QMetaMethod* signal);
 };
 
-QAudioSystemPlugin* QAudioSystemPlugin_new(struct QAudioSystemPlugin_VTable* vtbl) {
-	return new VirtualQAudioSystemPlugin(vtbl);
+VirtualQAudioSystemPlugin* QAudioSystemPlugin_new(const QAudioSystemPlugin_VTable* vtbl, void* vdata) {
+	return new VirtualQAudioSystemPlugin(vtbl, vdata);
 }
 
-QAudioSystemPlugin* QAudioSystemPlugin_new2(struct QAudioSystemPlugin_VTable* vtbl, QObject* parent) {
-	return new VirtualQAudioSystemPlugin(vtbl, parent);
+VirtualQAudioSystemPlugin* QAudioSystemPlugin_new2(const QAudioSystemPlugin_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAudioSystemPlugin(vtbl, vdata, parent);
 }
 
 void QAudioSystemPlugin_virtbase(QAudioSystemPlugin* src, QObject** outptr_QObject, QAudioSystemFactoryInterface** outptr_QAudioSystemFactoryInterface) {
@@ -442,93 +423,76 @@ struct miqt_string QAudioSystemPlugin_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
-QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const void* self) {
+QMetaObject* QAudioSystemPlugin_virtualbase_metaObject(const VirtualQAudioSystemPlugin* self) {
 
-	return (QMetaObject*) ( (const VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::metaObject();
-
+	return (QMetaObject*) self->QAudioSystemPlugin::metaObject();
 }
 
-void* QAudioSystemPlugin_virtualbase_metacast(void* self, const char* param1) {
+void* QAudioSystemPlugin_virtualbase_metacast(VirtualQAudioSystemPlugin* self, const char* param1) {
 
-	return ( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::qt_metacast(param1);
-
+	return self->QAudioSystemPlugin::qt_metacast(param1);
 }
 
-int QAudioSystemPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAudioSystemPlugin_virtualbase_metacall(VirtualQAudioSystemPlugin* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAudioSystemPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAudioSystemPlugin_virtualbase_event(void* self, QEvent* event) {
+bool QAudioSystemPlugin_virtualbase_event(VirtualQAudioSystemPlugin* self, QEvent* event) {
 
-	return ( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::event(event);
-
+	return self->QAudioSystemPlugin::event(event);
 }
 
-bool QAudioSystemPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAudioSystemPlugin_virtualbase_eventFilter(VirtualQAudioSystemPlugin* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::eventFilter(watched, event);
-
+	return self->QAudioSystemPlugin::eventFilter(watched, event);
 }
 
-void QAudioSystemPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAudioSystemPlugin_virtualbase_timerEvent(VirtualQAudioSystemPlugin* self, QTimerEvent* event) {
 
-	( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::timerEvent(event);
-
+	self->QAudioSystemPlugin::timerEvent(event);
 }
 
-void QAudioSystemPlugin_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAudioSystemPlugin_virtualbase_childEvent(VirtualQAudioSystemPlugin* self, QChildEvent* event) {
 
-	( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::childEvent(event);
-
+	self->QAudioSystemPlugin::childEvent(event);
 }
 
-void QAudioSystemPlugin_virtualbase_customEvent(void* self, QEvent* event) {
+void QAudioSystemPlugin_virtualbase_customEvent(VirtualQAudioSystemPlugin* self, QEvent* event) {
 
-	( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::customEvent(event);
-
+	self->QAudioSystemPlugin::customEvent(event);
 }
 
-void QAudioSystemPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAudioSystemPlugin_virtualbase_connectNotify(VirtualQAudioSystemPlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::connectNotify(*signal);
-
+	self->QAudioSystemPlugin::connectNotify(*signal);
 }
 
-void QAudioSystemPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAudioSystemPlugin_virtualbase_disconnectNotify(VirtualQAudioSystemPlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQAudioSystemPlugin*)(self) )->QAudioSystemPlugin::disconnectNotify(*signal);
-
+	self->QAudioSystemPlugin::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAudioSystemPlugin_staticMetaObject() { return &QAudioSystemPlugin::staticMetaObject; }
-QObject* QAudioSystemPlugin_protectedbase_sender(const void* self) {
-	VirtualQAudioSystemPlugin* self_cast = static_cast<VirtualQAudioSystemPlugin*>( (QAudioSystemPlugin*)(self) );
-	
-	return self_cast->sender();
 
+const QAudioSystemPlugin_VTable* QAudioSystemPlugin_vtbl(const VirtualQAudioSystemPlugin* self) { return self->vtbl; }
+void* QAudioSystemPlugin_vdata(const VirtualQAudioSystemPlugin* self) { return self->vdata; }
+void QAudioSystemPlugin_setVdata(VirtualQAudioSystemPlugin* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAudioSystemPlugin_protectedbase_sender(const VirtualQAudioSystemPlugin* self) {
+	return self->sender();
 }
 
-int QAudioSystemPlugin_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAudioSystemPlugin* self_cast = static_cast<VirtualQAudioSystemPlugin*>( (QAudioSystemPlugin*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAudioSystemPlugin_protectedbase_senderSignalIndex(const VirtualQAudioSystemPlugin* self) {
+	return self->senderSignalIndex();
 }
 
-int QAudioSystemPlugin_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAudioSystemPlugin* self_cast = static_cast<VirtualQAudioSystemPlugin*>( (QAudioSystemPlugin*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAudioSystemPlugin_protectedbase_receivers(const VirtualQAudioSystemPlugin* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAudioSystemPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAudioSystemPlugin* self_cast = static_cast<VirtualQAudioSystemPlugin*>( (QAudioSystemPlugin*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAudioSystemPlugin_protectedbase_isSignalConnected(const VirtualQAudioSystemPlugin* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAudioSystemPlugin_delete(QAudioSystemPlugin* self) {

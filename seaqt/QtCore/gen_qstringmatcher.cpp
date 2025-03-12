@@ -5,15 +5,6 @@
 #include <QStringMatcher>
 #include <qstringmatcher.h>
 #include "gen_qstringmatcher.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStringMatcher* QStringMatcher_new() {
 	return new QStringMatcher();
 }

@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qoperatingsystemversion.h>
 #include "gen_qoperatingsystemversion.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QOperatingSystemVersion* QOperatingSystemVersion_new(int osType, int vmajor) {
 	return new QOperatingSystemVersion(static_cast<QOperatingSystemVersion::OSType>(osType), static_cast<int>(vmajor));
 }

@@ -62,15 +62,6 @@
 #include <QWindowStateChangeEvent>
 #include <qevent.h>
 #include "gen_qevent.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QInputEvent* QInputEvent_new(int type) {
 	return new QInputEvent(static_cast<QEvent::Type>(type));
 }
@@ -553,6 +544,7 @@ int QTabletEvent_buttons(const QTabletEvent* self) {
 }
 
 const QMetaObject* QTabletEvent_staticMetaObject() { return &QTabletEvent::staticMetaObject; }
+
 void QTabletEvent_delete(QTabletEvent* self) {
 	delete self;
 }
@@ -1549,6 +1541,7 @@ long long QPointingDeviceUniqueId_numericId(const QPointingDeviceUniqueId* self)
 }
 
 const QMetaObject* QPointingDeviceUniqueId_staticMetaObject() { return &QPointingDeviceUniqueId::staticMetaObject; }
+
 void QPointingDeviceUniqueId_delete(QPointingDeviceUniqueId* self) {
 	delete self;
 }
@@ -1767,15 +1760,15 @@ void QApplicationStateChangeEvent_delete(QApplicationStateChangeEvent* self) {
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new(int typ, int s, int l, QVariant* val) {
-	return new QInputMethodEvent::Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l), *val);
+	return new QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l), *val);
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new2(int typ, int s, int l) {
-	return new QInputMethodEvent::Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l));
+	return new QInputMethodEvent__Attribute(static_cast<QInputMethodEvent::AttributeType>(typ), static_cast<int>(s), static_cast<int>(l));
 }
 
 QInputMethodEvent__Attribute* QInputMethodEvent__Attribute_new3(QInputMethodEvent__Attribute* param1) {
-	return new QInputMethodEvent::Attribute(*param1);
+	return new QInputMethodEvent__Attribute(*param1);
 }
 
 void QInputMethodEvent__Attribute_operatorAssign(QInputMethodEvent__Attribute* self, QInputMethodEvent__Attribute* param1) {
@@ -1787,15 +1780,15 @@ void QInputMethodEvent__Attribute_delete(QInputMethodEvent__Attribute* self) {
 }
 
 QTouchEvent__TouchPoint* QTouchEvent__TouchPoint_new() {
-	return new QTouchEvent::TouchPoint();
+	return new QTouchEvent__TouchPoint();
 }
 
 QTouchEvent__TouchPoint* QTouchEvent__TouchPoint_new2(QTouchEvent__TouchPoint* other) {
-	return new QTouchEvent::TouchPoint(*other);
+	return new QTouchEvent__TouchPoint(*other);
 }
 
 QTouchEvent__TouchPoint* QTouchEvent__TouchPoint_new3(int id) {
-	return new QTouchEvent::TouchPoint(static_cast<int>(id));
+	return new QTouchEvent__TouchPoint(static_cast<int>(id));
 }
 
 void QTouchEvent__TouchPoint_operatorAssign(QTouchEvent__TouchPoint* self, QTouchEvent__TouchPoint* other) {

@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qmediaavailabilitycontrol.h>
 #include "gen_qmediaavailabilitycontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaAvailabilityControl_virtbase(QMediaAvailabilityControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -122,6 +113,7 @@ struct miqt_string QMediaAvailabilityControl_trUtf83(const char* s, const char* 
 }
 
 const QMetaObject* QMediaAvailabilityControl_staticMetaObject() { return &QMediaAvailabilityControl::staticMetaObject; }
+
 void QMediaAvailabilityControl_delete(QMediaAvailabilityControl* self) {
 	delete self;
 }

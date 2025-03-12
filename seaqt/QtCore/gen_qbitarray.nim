@@ -40,15 +40,15 @@ type cQBitRef*{.exportc: "QBitRef", incompleteStruct.} = object
 
 proc fcQBitArray_operatorAssign(self: pointer, other: pointer): void {.importc: "QBitArray_operatorAssign".}
 proc fcQBitArray_swap(self: pointer, other: pointer): void {.importc: "QBitArray_swap".}
-proc fcQBitArray_size(self: pointer, ): cint {.importc: "QBitArray_size".}
-proc fcQBitArray_count(self: pointer, ): cint {.importc: "QBitArray_count".}
+proc fcQBitArray_size(self: pointer): cint {.importc: "QBitArray_size".}
+proc fcQBitArray_count(self: pointer): cint {.importc: "QBitArray_count".}
 proc fcQBitArray_countWithOn(self: pointer, on: bool): cint {.importc: "QBitArray_countWithOn".}
-proc fcQBitArray_isEmpty(self: pointer, ): bool {.importc: "QBitArray_isEmpty".}
-proc fcQBitArray_isNull(self: pointer, ): bool {.importc: "QBitArray_isNull".}
+proc fcQBitArray_isEmpty(self: pointer): bool {.importc: "QBitArray_isEmpty".}
+proc fcQBitArray_isNull(self: pointer): bool {.importc: "QBitArray_isNull".}
 proc fcQBitArray_resize(self: pointer, size: cint): void {.importc: "QBitArray_resize".}
-proc fcQBitArray_detach(self: pointer, ): void {.importc: "QBitArray_detach".}
-proc fcQBitArray_isDetached(self: pointer, ): bool {.importc: "QBitArray_isDetached".}
-proc fcQBitArray_clear(self: pointer, ): void {.importc: "QBitArray_clear".}
+proc fcQBitArray_detach(self: pointer): void {.importc: "QBitArray_detach".}
+proc fcQBitArray_isDetached(self: pointer): bool {.importc: "QBitArray_isDetached".}
+proc fcQBitArray_clear(self: pointer): void {.importc: "QBitArray_clear".}
 proc fcQBitArray_testBit(self: pointer, i: cint): bool {.importc: "QBitArray_testBit".}
 proc fcQBitArray_setBit(self: pointer, i: cint): void {.importc: "QBitArray_setBit".}
 proc fcQBitArray_setBit2(self: pointer, i: cint, val: bool): void {.importc: "QBitArray_setBit2".}
@@ -67,15 +67,15 @@ proc fcQBitArray_operatorNotEqual(self: pointer, other: pointer): bool {.importc
 proc fcQBitArray_fill(self: pointer, val: bool): bool {.importc: "QBitArray_fill".}
 proc fcQBitArray_fill2(self: pointer, val: bool, first: cint, last: cint): void {.importc: "QBitArray_fill2".}
 proc fcQBitArray_truncate(self: pointer, pos: cint): void {.importc: "QBitArray_truncate".}
-proc fcQBitArray_bits(self: pointer, ): cstring {.importc: "QBitArray_bits".}
+proc fcQBitArray_bits(self: pointer): cstring {.importc: "QBitArray_bits".}
 proc fcQBitArray_fromBits(data: cstring, len: int64): pointer {.importc: "QBitArray_fromBits".}
 proc fcQBitArray_fill22(self: pointer, val: bool, size: cint): bool {.importc: "QBitArray_fill22".}
 proc fcQBitArray_new(): ptr cQBitArray {.importc: "QBitArray_new".}
 proc fcQBitArray_new2(size: cint): ptr cQBitArray {.importc: "QBitArray_new2".}
 proc fcQBitArray_new3(other: pointer): ptr cQBitArray {.importc: "QBitArray_new3".}
 proc fcQBitArray_new4(size: cint, val: bool): ptr cQBitArray {.importc: "QBitArray_new4".}
-proc fcQBitRef_ToBool(self: pointer, ): bool {.importc: "QBitRef_ToBool".}
-proc fcQBitRef_operatorNot(self: pointer, ): bool {.importc: "QBitRef_operatorNot".}
+proc fcQBitRef_ToBool(self: pointer): bool {.importc: "QBitRef_ToBool".}
+proc fcQBitRef_operatorNot(self: pointer): bool {.importc: "QBitRef_operatorNot".}
 proc fcQBitRef_operatorAssign(self: pointer, val: pointer): void {.importc: "QBitRef_operatorAssign".}
 proc fcQBitRef_operatorAssignWithVal(self: pointer, val: bool): void {.importc: "QBitRef_operatorAssignWithVal".}
 proc fcQBitRef_new(param1: pointer): ptr cQBitRef {.importc: "QBitRef_new".}
@@ -86,31 +86,31 @@ proc operatorAssign*(self: gen_qbitarray_types.QBitArray, other: gen_qbitarray_t
 proc swap*(self: gen_qbitarray_types.QBitArray, other: gen_qbitarray_types.QBitArray): void =
   fcQBitArray_swap(self.h, other.h)
 
-proc size*(self: gen_qbitarray_types.QBitArray, ): cint =
+proc size*(self: gen_qbitarray_types.QBitArray): cint =
   fcQBitArray_size(self.h)
 
-proc count*(self: gen_qbitarray_types.QBitArray, ): cint =
+proc count*(self: gen_qbitarray_types.QBitArray): cint =
   fcQBitArray_count(self.h)
 
 proc count*(self: gen_qbitarray_types.QBitArray, on: bool): cint =
   fcQBitArray_countWithOn(self.h, on)
 
-proc isEmpty*(self: gen_qbitarray_types.QBitArray, ): bool =
+proc isEmpty*(self: gen_qbitarray_types.QBitArray): bool =
   fcQBitArray_isEmpty(self.h)
 
-proc isNull*(self: gen_qbitarray_types.QBitArray, ): bool =
+proc isNull*(self: gen_qbitarray_types.QBitArray): bool =
   fcQBitArray_isNull(self.h)
 
 proc resize*(self: gen_qbitarray_types.QBitArray, size: cint): void =
   fcQBitArray_resize(self.h, size)
 
-proc detach*(self: gen_qbitarray_types.QBitArray, ): void =
+proc detach*(self: gen_qbitarray_types.QBitArray): void =
   fcQBitArray_detach(self.h)
 
-proc isDetached*(self: gen_qbitarray_types.QBitArray, ): bool =
+proc isDetached*(self: gen_qbitarray_types.QBitArray): bool =
   fcQBitArray_isDetached(self.h)
 
-proc clear*(self: gen_qbitarray_types.QBitArray, ): void =
+proc clear*(self: gen_qbitarray_types.QBitArray): void =
   fcQBitArray_clear(self.h)
 
 proc testBit*(self: gen_qbitarray_types.QBitArray, i: cint): bool =
@@ -167,7 +167,7 @@ proc fill*(self: gen_qbitarray_types.QBitArray, val: bool, first: cint, last: ci
 proc truncate*(self: gen_qbitarray_types.QBitArray, pos: cint): void =
   fcQBitArray_truncate(self.h, pos)
 
-proc bits*(self: gen_qbitarray_types.QBitArray, ): cstring =
+proc bits*(self: gen_qbitarray_types.QBitArray): cstring =
   (fcQBitArray_bits(self.h))
 
 proc fromBits*(_: type gen_qbitarray_types.QBitArray, data: cstring, len: int64): gen_qbitarray_types.QBitArray =
@@ -191,10 +191,10 @@ proc create*(T: type gen_qbitarray_types.QBitArray,
     size: cint, val: bool): gen_qbitarray_types.QBitArray =
   gen_qbitarray_types.QBitArray(h: fcQBitArray_new4(size, val), owned: true)
 
-proc ToBool*(self: gen_qbitarray_types.QBitRef, ): bool =
+proc ToBool*(self: gen_qbitarray_types.QBitRef): bool =
   fcQBitRef_ToBool(self.h)
 
-proc operatorNot*(self: gen_qbitarray_types.QBitRef, ): bool =
+proc operatorNot*(self: gen_qbitarray_types.QBitRef): bool =
   fcQBitRef_operatorNot(self.h)
 
 proc operatorAssign*(self: gen_qbitarray_types.QBitRef, val: gen_qbitarray_types.QBitRef): void =

@@ -53,12 +53,12 @@ type cQMatrix*{.exportc: "QMatrix", incompleteStruct.} = object
 
 proc fcQMatrix_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMatrix_operatorAssign".}
 proc fcQMatrix_setMatrix(self: pointer, m11: float64, m12: float64, m21: float64, m22: float64, dx: float64, dy: float64): void {.importc: "QMatrix_setMatrix".}
-proc fcQMatrix_m11(self: pointer, ): float64 {.importc: "QMatrix_m11".}
-proc fcQMatrix_m12(self: pointer, ): float64 {.importc: "QMatrix_m12".}
-proc fcQMatrix_m21(self: pointer, ): float64 {.importc: "QMatrix_m21".}
-proc fcQMatrix_m22(self: pointer, ): float64 {.importc: "QMatrix_m22".}
-proc fcQMatrix_dx(self: pointer, ): float64 {.importc: "QMatrix_dx".}
-proc fcQMatrix_dy(self: pointer, ): float64 {.importc: "QMatrix_dy".}
+proc fcQMatrix_m11(self: pointer): float64 {.importc: "QMatrix_m11".}
+proc fcQMatrix_m12(self: pointer): float64 {.importc: "QMatrix_m12".}
+proc fcQMatrix_m21(self: pointer): float64 {.importc: "QMatrix_m21".}
+proc fcQMatrix_m22(self: pointer): float64 {.importc: "QMatrix_m22".}
+proc fcQMatrix_dx(self: pointer): float64 {.importc: "QMatrix_dx".}
+proc fcQMatrix_dy(self: pointer): float64 {.importc: "QMatrix_dy".}
 proc fcQMatrix_map(self: pointer, x: cint, y: cint, tx: ptr cint, ty: ptr cint): void {.importc: "QMatrix_map".}
 proc fcQMatrix_map2(self: pointer, x: float64, y: float64, tx: ptr float64, ty: ptr float64): void {.importc: "QMatrix_map2".}
 proc fcQMatrix_mapRect(self: pointer, param1: pointer): pointer {.importc: "QMatrix_mapRect".}
@@ -69,20 +69,20 @@ proc fcQMatrix_mapWithQLine(self: pointer, l: pointer): pointer {.importc: "QMat
 proc fcQMatrix_mapWithQLineF(self: pointer, l: pointer): pointer {.importc: "QMatrix_mapWithQLineF".}
 proc fcQMatrix_mapWithQRegion(self: pointer, r: pointer): pointer {.importc: "QMatrix_mapWithQRegion".}
 proc fcQMatrix_mapWithQPainterPath(self: pointer, p: pointer): pointer {.importc: "QMatrix_mapWithQPainterPath".}
-proc fcQMatrix_reset(self: pointer, ): void {.importc: "QMatrix_reset".}
-proc fcQMatrix_isIdentity(self: pointer, ): bool {.importc: "QMatrix_isIdentity".}
+proc fcQMatrix_reset(self: pointer): void {.importc: "QMatrix_reset".}
+proc fcQMatrix_isIdentity(self: pointer): bool {.importc: "QMatrix_isIdentity".}
 proc fcQMatrix_translate(self: pointer, dx: float64, dy: float64): pointer {.importc: "QMatrix_translate".}
 proc fcQMatrix_scale(self: pointer, sx: float64, sy: float64): pointer {.importc: "QMatrix_scale".}
 proc fcQMatrix_shear(self: pointer, sh: float64, sv: float64): pointer {.importc: "QMatrix_shear".}
 proc fcQMatrix_rotate(self: pointer, a: float64): pointer {.importc: "QMatrix_rotate".}
-proc fcQMatrix_isInvertible(self: pointer, ): bool {.importc: "QMatrix_isInvertible".}
-proc fcQMatrix_determinant(self: pointer, ): float64 {.importc: "QMatrix_determinant".}
-proc fcQMatrix_inverted(self: pointer, ): pointer {.importc: "QMatrix_inverted".}
+proc fcQMatrix_isInvertible(self: pointer): bool {.importc: "QMatrix_isInvertible".}
+proc fcQMatrix_determinant(self: pointer): float64 {.importc: "QMatrix_determinant".}
+proc fcQMatrix_inverted(self: pointer): pointer {.importc: "QMatrix_inverted".}
 proc fcQMatrix_operatorEqual(self: pointer, param1: pointer): bool {.importc: "QMatrix_operatorEqual".}
 proc fcQMatrix_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QMatrix_operatorNotEqual".}
 proc fcQMatrix_operatorMultiplyAssign(self: pointer, param1: pointer): pointer {.importc: "QMatrix_operatorMultiplyAssign".}
 proc fcQMatrix_operatorMultiply(self: pointer, o: pointer): pointer {.importc: "QMatrix_operatorMultiply".}
-proc fcQMatrix_ToQVariant(self: pointer, ): pointer {.importc: "QMatrix_ToQVariant".}
+proc fcQMatrix_ToQVariant(self: pointer): pointer {.importc: "QMatrix_ToQVariant".}
 proc fcQMatrix_inverted1(self: pointer, invertible: ptr bool): pointer {.importc: "QMatrix_inverted1".}
 proc fcQMatrix_new(param1: cint): ptr cQMatrix {.importc: "QMatrix_new".}
 proc fcQMatrix_new2(): ptr cQMatrix {.importc: "QMatrix_new2".}
@@ -95,22 +95,22 @@ proc operatorAssign*(self: gen_qmatrix_types.QMatrix, param1: gen_qmatrix_types.
 proc setMatrix*(self: gen_qmatrix_types.QMatrix, m11: float64, m12: float64, m21: float64, m22: float64, dx: float64, dy: float64): void =
   fcQMatrix_setMatrix(self.h, m11, m12, m21, m22, dx, dy)
 
-proc m11*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc m11*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_m11(self.h)
 
-proc m12*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc m12*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_m12(self.h)
 
-proc m21*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc m21*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_m21(self.h)
 
-proc m22*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc m22*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_m22(self.h)
 
-proc dx*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc dx*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_dx(self.h)
 
-proc dy*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc dy*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_dy(self.h)
 
 proc map*(self: gen_qmatrix_types.QMatrix, x: cint, y: cint, tx: ptr cint, ty: ptr cint): void =
@@ -143,10 +143,10 @@ proc map*(self: gen_qmatrix_types.QMatrix, r: gen_qregion_types.QRegion): gen_qr
 proc map*(self: gen_qmatrix_types.QMatrix, p: gen_qpainterpath_types.QPainterPath): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQMatrix_mapWithQPainterPath(self.h, p.h), owned: true)
 
-proc reset*(self: gen_qmatrix_types.QMatrix, ): void =
+proc reset*(self: gen_qmatrix_types.QMatrix): void =
   fcQMatrix_reset(self.h)
 
-proc isIdentity*(self: gen_qmatrix_types.QMatrix, ): bool =
+proc isIdentity*(self: gen_qmatrix_types.QMatrix): bool =
   fcQMatrix_isIdentity(self.h)
 
 proc translate*(self: gen_qmatrix_types.QMatrix, dx: float64, dy: float64): gen_qmatrix_types.QMatrix =
@@ -161,13 +161,13 @@ proc shear*(self: gen_qmatrix_types.QMatrix, sh: float64, sv: float64): gen_qmat
 proc rotate*(self: gen_qmatrix_types.QMatrix, a: float64): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQMatrix_rotate(self.h, a), owned: false)
 
-proc isInvertible*(self: gen_qmatrix_types.QMatrix, ): bool =
+proc isInvertible*(self: gen_qmatrix_types.QMatrix): bool =
   fcQMatrix_isInvertible(self.h)
 
-proc determinant*(self: gen_qmatrix_types.QMatrix, ): float64 =
+proc determinant*(self: gen_qmatrix_types.QMatrix): float64 =
   fcQMatrix_determinant(self.h)
 
-proc inverted*(self: gen_qmatrix_types.QMatrix, ): gen_qmatrix_types.QMatrix =
+proc inverted*(self: gen_qmatrix_types.QMatrix): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQMatrix_inverted(self.h), owned: true)
 
 proc operatorEqual*(self: gen_qmatrix_types.QMatrix, param1: gen_qmatrix_types.QMatrix): bool =
@@ -182,7 +182,7 @@ proc operatorMultiplyAssign*(self: gen_qmatrix_types.QMatrix, param1: gen_qmatri
 proc operatorMultiply*(self: gen_qmatrix_types.QMatrix, o: gen_qmatrix_types.QMatrix): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQMatrix_operatorMultiply(self.h, o.h), owned: true)
 
-proc ToQVariant*(self: gen_qmatrix_types.QMatrix, ): gen_qvariant_types.QVariant =
+proc ToQVariant*(self: gen_qmatrix_types.QMatrix): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQMatrix_ToQVariant(self.h), owned: true)
 
 proc inverted*(self: gen_qmatrix_types.QMatrix, invertible: ptr bool): gen_qmatrix_types.QMatrix =

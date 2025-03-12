@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qhstspolicy.h>
 #include "gen_qhstspolicy.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QHstsPolicy* QHstsPolicy_new() {
 	return new QHstsPolicy();
 }

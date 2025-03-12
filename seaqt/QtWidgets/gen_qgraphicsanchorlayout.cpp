@@ -14,15 +14,6 @@
 #include <cstring>
 #include <qgraphicsanchorlayout.h>
 #include "gen_qgraphicsanchorlayout.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QGraphicsAnchor_virtbase(QGraphicsAnchor* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -128,20 +119,24 @@ struct miqt_string QGraphicsAnchor_trUtf83(const char* s, const char* c, int n) 
 }
 
 const QMetaObject* QGraphicsAnchor_staticMetaObject() { return &QGraphicsAnchor::staticMetaObject; }
+
 void QGraphicsAnchor_delete(QGraphicsAnchor* self) {
 	delete self;
 }
 
 class VirtualQGraphicsAnchorLayout final : public QGraphicsAnchorLayout {
-	struct QGraphicsAnchorLayout_VTable* vtbl;
+	const QGraphicsAnchorLayout_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGraphicsAnchorLayout_VTable* QGraphicsAnchorLayout_vtbl(const VirtualQGraphicsAnchorLayout* self);
+	friend void* QGraphicsAnchorLayout_vdata(const VirtualQGraphicsAnchorLayout* self);
+	friend void QGraphicsAnchorLayout_setVdata(VirtualQGraphicsAnchorLayout* self, void* vdata);
 
-	VirtualQGraphicsAnchorLayout(struct QGraphicsAnchorLayout_VTable* vtbl): QGraphicsAnchorLayout(), vtbl(vtbl) {};
-	VirtualQGraphicsAnchorLayout(struct QGraphicsAnchorLayout_VTable* vtbl, QGraphicsLayoutItem* parent): QGraphicsAnchorLayout(parent), vtbl(vtbl) {};
+	VirtualQGraphicsAnchorLayout(const QGraphicsAnchorLayout_VTable* vtbl, void* vdata): QGraphicsAnchorLayout(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGraphicsAnchorLayout(const QGraphicsAnchorLayout_VTable* vtbl, void* vdata, QGraphicsLayoutItem* parent): QGraphicsAnchorLayout(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGraphicsAnchorLayout() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGraphicsAnchorLayout() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual void removeAt(int index) override {
 		if (vtbl->removeAt == 0) {
 			QGraphicsAnchorLayout::removeAt(index);
@@ -150,13 +145,12 @@ public:
 
 		int sigval1 = index;
 
-		vtbl->removeAt(vtbl, this, sigval1);
+		vtbl->removeAt(this, sigval1);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_removeAt(void* self, int index);
+	friend void QGraphicsAnchorLayout_virtualbase_removeAt(VirtualQGraphicsAnchorLayout* self, int index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setGeometry(const QRectF& rect) override {
 		if (vtbl->setGeometry == 0) {
 			QGraphicsAnchorLayout::setGeometry(rect);
@@ -167,27 +161,25 @@ public:
 		// Cast returned reference into pointer
 		QRectF* sigval1 = const_cast<QRectF*>(&rect_ret);
 
-		vtbl->setGeometry(vtbl, this, sigval1);
+		vtbl->setGeometry(this, sigval1);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_setGeometry(void* self, QRectF* rect);
+	friend void QGraphicsAnchorLayout_virtualbase_setGeometry(VirtualQGraphicsAnchorLayout* self, QRectF* rect);
 
-	// Subclass to allow providing a Go implementation
 	virtual int count() const override {
 		if (vtbl->count == 0) {
 			return QGraphicsAnchorLayout::count();
 		}
 
 
-		int callback_return_value = vtbl->count(vtbl, this);
+		int callback_return_value = vtbl->count(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGraphicsAnchorLayout_virtualbase_count(const void* self);
+	friend int QGraphicsAnchorLayout_virtualbase_count(const VirtualQGraphicsAnchorLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QGraphicsLayoutItem* itemAt(int index) const override {
 		if (vtbl->itemAt == 0) {
 			return QGraphicsAnchorLayout::itemAt(index);
@@ -195,14 +187,13 @@ public:
 
 		int sigval1 = index;
 
-		QGraphicsLayoutItem* callback_return_value = vtbl->itemAt(vtbl, this, sigval1);
+		QGraphicsLayoutItem* callback_return_value = vtbl->itemAt(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QGraphicsLayoutItem* QGraphicsAnchorLayout_virtualbase_itemAt(const void* self, int index);
+	friend QGraphicsLayoutItem* QGraphicsAnchorLayout_virtualbase_itemAt(const VirtualQGraphicsAnchorLayout* self, int index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void invalidate() override {
 		if (vtbl->invalidate == 0) {
 			QGraphicsAnchorLayout::invalidate();
@@ -210,13 +201,12 @@ public:
 		}
 
 
-		vtbl->invalidate(vtbl, this);
+		vtbl->invalidate(this);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_invalidate(void* self);
+	friend void QGraphicsAnchorLayout_virtualbase_invalidate(VirtualQGraphicsAnchorLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSizeF sizeHint(Qt::SizeHint which, const QSizeF& constraint) const override {
 		if (vtbl->sizeHint == 0) {
 			return QGraphicsAnchorLayout::sizeHint(which, constraint);
@@ -228,16 +218,15 @@ public:
 		// Cast returned reference into pointer
 		QSizeF* sigval2 = const_cast<QSizeF*>(&constraint_ret);
 
-		QSizeF* callback_return_value = vtbl->sizeHint(vtbl, this, sigval1, sigval2);
+		QSizeF* callback_return_value = vtbl->sizeHint(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSizeF* QGraphicsAnchorLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint);
+	friend QSizeF* QGraphicsAnchorLayout_virtualbase_sizeHint(const VirtualQGraphicsAnchorLayout* self, int which, QSizeF* constraint);
 
-	// Subclass to allow providing a Go implementation
 	virtual void getContentsMargins(qreal* left, qreal* top, qreal* right, qreal* bottom) const override {
 		if (vtbl->getContentsMargins == 0) {
 			QGraphicsAnchorLayout::getContentsMargins(left, top, right, bottom);
@@ -253,13 +242,12 @@ public:
 		qreal* bottom_ret = bottom;
 		double* sigval4 = static_cast<double*>(bottom_ret);
 
-		vtbl->getContentsMargins(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->getContentsMargins(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom);
+	friend void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const VirtualQGraphicsAnchorLayout* self, double* left, double* top, double* right, double* bottom);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometry() override {
 		if (vtbl->updateGeometry == 0) {
 			QGraphicsAnchorLayout::updateGeometry();
@@ -267,13 +255,12 @@ public:
 		}
 
 
-		vtbl->updateGeometry(vtbl, this);
+		vtbl->updateGeometry(this);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_updateGeometry(void* self);
+	friend void QGraphicsAnchorLayout_virtualbase_updateGeometry(VirtualQGraphicsAnchorLayout* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void widgetEvent(QEvent* e) override {
 		if (vtbl->widgetEvent == 0) {
 			QGraphicsAnchorLayout::widgetEvent(e);
@@ -282,24 +269,24 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->widgetEvent(vtbl, this, sigval1);
+		vtbl->widgetEvent(this, sigval1);
 
 	}
 
-	friend void QGraphicsAnchorLayout_virtualbase_widgetEvent(void* self, QEvent* e);
+	friend void QGraphicsAnchorLayout_virtualbase_widgetEvent(VirtualQGraphicsAnchorLayout* self, QEvent* e);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem);
-	friend void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item);
-	friend void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout);
+	friend void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsAnchorLayout* self, QGraphicsLayoutItem* layoutItem);
+	friend void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(VirtualQGraphicsAnchorLayout* self, QGraphicsItem* item);
+	friend void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsAnchorLayout* self, bool ownedByLayout);
 };
 
-QGraphicsAnchorLayout* QGraphicsAnchorLayout_new(struct QGraphicsAnchorLayout_VTable* vtbl) {
-	return new VirtualQGraphicsAnchorLayout(vtbl);
+VirtualQGraphicsAnchorLayout* QGraphicsAnchorLayout_new(const QGraphicsAnchorLayout_VTable* vtbl, void* vdata) {
+	return new VirtualQGraphicsAnchorLayout(vtbl, vdata);
 }
 
-QGraphicsAnchorLayout* QGraphicsAnchorLayout_new2(struct QGraphicsAnchorLayout_VTable* vtbl, QGraphicsLayoutItem* parent) {
-	return new VirtualQGraphicsAnchorLayout(vtbl, parent);
+VirtualQGraphicsAnchorLayout* QGraphicsAnchorLayout_new2(const QGraphicsAnchorLayout_VTable* vtbl, void* vdata, QGraphicsLayoutItem* parent) {
+	return new VirtualQGraphicsAnchorLayout(vtbl, vdata, parent);
 }
 
 void QGraphicsAnchorLayout_virtbase(QGraphicsAnchorLayout* src, QGraphicsLayout** outptr_QGraphicsLayout) {
@@ -368,79 +355,65 @@ void QGraphicsAnchorLayout_addAnchors3(QGraphicsAnchorLayout* self, QGraphicsLay
 	self->addAnchors(firstItem, secondItem, static_cast<Qt::Orientations>(orientations));
 }
 
-void QGraphicsAnchorLayout_virtualbase_removeAt(void* self, int index) {
+void QGraphicsAnchorLayout_virtualbase_removeAt(VirtualQGraphicsAnchorLayout* self, int index) {
 
-	( (VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::removeAt(static_cast<int>(index));
-
+	self->QGraphicsAnchorLayout::removeAt(static_cast<int>(index));
 }
 
-void QGraphicsAnchorLayout_virtualbase_setGeometry(void* self, QRectF* rect) {
+void QGraphicsAnchorLayout_virtualbase_setGeometry(VirtualQGraphicsAnchorLayout* self, QRectF* rect) {
 
-	( (VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::setGeometry(*rect);
-
+	self->QGraphicsAnchorLayout::setGeometry(*rect);
 }
 
-int QGraphicsAnchorLayout_virtualbase_count(const void* self) {
+int QGraphicsAnchorLayout_virtualbase_count(const VirtualQGraphicsAnchorLayout* self) {
 
-	return ( (const VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::count();
-
+	return self->QGraphicsAnchorLayout::count();
 }
 
-QGraphicsLayoutItem* QGraphicsAnchorLayout_virtualbase_itemAt(const void* self, int index) {
+QGraphicsLayoutItem* QGraphicsAnchorLayout_virtualbase_itemAt(const VirtualQGraphicsAnchorLayout* self, int index) {
 
-	return ( (const VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::itemAt(static_cast<int>(index));
-
+	return self->QGraphicsAnchorLayout::itemAt(static_cast<int>(index));
 }
 
-void QGraphicsAnchorLayout_virtualbase_invalidate(void* self) {
+void QGraphicsAnchorLayout_virtualbase_invalidate(VirtualQGraphicsAnchorLayout* self) {
 
-	( (VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::invalidate();
-
+	self->QGraphicsAnchorLayout::invalidate();
 }
 
-QSizeF* QGraphicsAnchorLayout_virtualbase_sizeHint(const void* self, int which, QSizeF* constraint) {
+QSizeF* QGraphicsAnchorLayout_virtualbase_sizeHint(const VirtualQGraphicsAnchorLayout* self, int which, QSizeF* constraint) {
 
-	return new QSizeF(( (const VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
-
+	return new QSizeF(self->QGraphicsAnchorLayout::sizeHint(static_cast<Qt::SizeHint>(which), *constraint));
 }
 
-void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const void* self, double* left, double* top, double* right, double* bottom) {
+void QGraphicsAnchorLayout_virtualbase_getContentsMargins(const VirtualQGraphicsAnchorLayout* self, double* left, double* top, double* right, double* bottom) {
 
-	( (const VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
-
+	self->QGraphicsAnchorLayout::getContentsMargins(static_cast<qreal*>(left), static_cast<qreal*>(top), static_cast<qreal*>(right), static_cast<qreal*>(bottom));
 }
 
-void QGraphicsAnchorLayout_virtualbase_updateGeometry(void* self) {
+void QGraphicsAnchorLayout_virtualbase_updateGeometry(VirtualQGraphicsAnchorLayout* self) {
 
-	( (VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::updateGeometry();
-
+	self->QGraphicsAnchorLayout::updateGeometry();
 }
 
-void QGraphicsAnchorLayout_virtualbase_widgetEvent(void* self, QEvent* e) {
+void QGraphicsAnchorLayout_virtualbase_widgetEvent(VirtualQGraphicsAnchorLayout* self, QEvent* e) {
 
-	( (VirtualQGraphicsAnchorLayout*)(self) )->QGraphicsAnchorLayout::widgetEvent(e);
-
+	self->QGraphicsAnchorLayout::widgetEvent(e);
 }
 
-void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(void* self, QGraphicsLayoutItem* layoutItem) {
-	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	
-	self_cast->addChildLayoutItem(layoutItem);
+const QGraphicsAnchorLayout_VTable* QGraphicsAnchorLayout_vtbl(const VirtualQGraphicsAnchorLayout* self) { return self->vtbl; }
+void* QGraphicsAnchorLayout_vdata(const VirtualQGraphicsAnchorLayout* self) { return self->vdata; }
+void QGraphicsAnchorLayout_setVdata(VirtualQGraphicsAnchorLayout* self, void* vdata) { self->vdata = vdata; }
 
+void QGraphicsAnchorLayout_protectedbase_addChildLayoutItem(VirtualQGraphicsAnchorLayout* self, QGraphicsLayoutItem* layoutItem) {
+	self->addChildLayoutItem(layoutItem);
 }
 
-void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(void* self, QGraphicsItem* item) {
-	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	
-	self_cast->setGraphicsItem(item);
-
+void QGraphicsAnchorLayout_protectedbase_setGraphicsItem(VirtualQGraphicsAnchorLayout* self, QGraphicsItem* item) {
+	self->setGraphicsItem(item);
 }
 
-void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(void* self, bool ownedByLayout) {
-	VirtualQGraphicsAnchorLayout* self_cast = static_cast<VirtualQGraphicsAnchorLayout*>( (QGraphicsAnchorLayout*)(self) );
-	
-	self_cast->setOwnedByLayout(ownedByLayout);
-
+void QGraphicsAnchorLayout_protectedbase_setOwnedByLayout(VirtualQGraphicsAnchorLayout* self, bool ownedByLayout) {
+	self->setOwnedByLayout(ownedByLayout);
 }
 
 void QGraphicsAnchorLayout_delete(QGraphicsAnchorLayout* self) {

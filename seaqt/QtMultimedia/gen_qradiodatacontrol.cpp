@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qradiodatacontrol.h>
 #include "gen_qradiodatacontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QRadioDataControl_virtbase(QRadioDataControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -319,6 +310,7 @@ struct miqt_string QRadioDataControl_trUtf83(const char* s, const char* c, int n
 }
 
 const QMetaObject* QRadioDataControl_staticMetaObject() { return &QRadioDataControl::staticMetaObject; }
+
 void QRadioDataControl_delete(QRadioDataControl* self) {
 	delete self;
 }

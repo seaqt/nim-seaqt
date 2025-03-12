@@ -57,10 +57,10 @@ export
 type cQTouchDevice*{.exportc: "QTouchDevice", incompleteStruct.} = object
 
 proc fcQTouchDevice_devices(): struct_miqt_array {.importc: "QTouchDevice_devices".}
-proc fcQTouchDevice_name(self: pointer, ): struct_miqt_string {.importc: "QTouchDevice_name".}
-proc fcQTouchDevice_typeX(self: pointer, ): cint {.importc: "QTouchDevice_type".}
-proc fcQTouchDevice_capabilities(self: pointer, ): cint {.importc: "QTouchDevice_capabilities".}
-proc fcQTouchDevice_maximumTouchPoints(self: pointer, ): cint {.importc: "QTouchDevice_maximumTouchPoints".}
+proc fcQTouchDevice_name(self: pointer): struct_miqt_string {.importc: "QTouchDevice_name".}
+proc fcQTouchDevice_typeX(self: pointer): cint {.importc: "QTouchDevice_type".}
+proc fcQTouchDevice_capabilities(self: pointer): cint {.importc: "QTouchDevice_capabilities".}
+proc fcQTouchDevice_maximumTouchPoints(self: pointer): cint {.importc: "QTouchDevice_maximumTouchPoints".}
 proc fcQTouchDevice_setName(self: pointer, name: struct_miqt_string): void {.importc: "QTouchDevice_setName".}
 proc fcQTouchDevice_setType(self: pointer, devType: cint): void {.importc: "QTouchDevice_setType".}
 proc fcQTouchDevice_setCapabilities(self: pointer, caps: cint): void {.importc: "QTouchDevice_setCapabilities".}
@@ -68,7 +68,7 @@ proc fcQTouchDevice_setMaximumTouchPoints(self: pointer, max: cint): void {.impo
 proc fcQTouchDevice_new(): ptr cQTouchDevice {.importc: "QTouchDevice_new".}
 proc fcQTouchDevice_staticMetaObject(): pointer {.importc: "QTouchDevice_staticMetaObject".}
 
-proc devices*(_: type gen_qtouchdevice_types.QTouchDevice, ): seq[gen_qtouchdevice_types.QTouchDevice] =
+proc devices*(_: type gen_qtouchdevice_types.QTouchDevice): seq[gen_qtouchdevice_types.QTouchDevice] =
   var v_ma = fcQTouchDevice_devices()
   var vx_ret = newSeq[gen_qtouchdevice_types.QTouchDevice](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -77,19 +77,19 @@ proc devices*(_: type gen_qtouchdevice_types.QTouchDevice, ): seq[gen_qtouchdevi
   c_free(v_ma.data)
   vx_ret
 
-proc name*(self: gen_qtouchdevice_types.QTouchDevice, ): string =
+proc name*(self: gen_qtouchdevice_types.QTouchDevice): string =
   let v_ms = fcQTouchDevice_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc typeX*(self: gen_qtouchdevice_types.QTouchDevice, ): cint =
+proc typeX*(self: gen_qtouchdevice_types.QTouchDevice): cint =
   cint(fcQTouchDevice_typeX(self.h))
 
-proc capabilities*(self: gen_qtouchdevice_types.QTouchDevice, ): cint =
+proc capabilities*(self: gen_qtouchdevice_types.QTouchDevice): cint =
   cint(fcQTouchDevice_capabilities(self.h))
 
-proc maximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice, ): cint =
+proc maximumTouchPoints*(self: gen_qtouchdevice_types.QTouchDevice): cint =
   fcQTouchDevice_maximumTouchPoints(self.h)
 
 proc setName*(self: gen_qtouchdevice_types.QTouchDevice, name: string): void =

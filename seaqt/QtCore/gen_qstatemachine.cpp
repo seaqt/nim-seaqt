@@ -17,41 +17,34 @@
 #include <QTimerEvent>
 #include <qstatemachine.h>
 #include "gen_qstatemachine.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQStateMachine final : public QStateMachine {
-	struct QStateMachine_VTable* vtbl;
+	const QStateMachine_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QStateMachine_VTable* QStateMachine_vtbl(const VirtualQStateMachine* self);
+	friend void* QStateMachine_vdata(const VirtualQStateMachine* self);
+	friend void QStateMachine_setVdata(VirtualQStateMachine* self, void* vdata);
 
-	VirtualQStateMachine(struct QStateMachine_VTable* vtbl): QStateMachine(), vtbl(vtbl) {};
-	VirtualQStateMachine(struct QStateMachine_VTable* vtbl, QState::ChildMode childMode): QStateMachine(childMode), vtbl(vtbl) {};
-	VirtualQStateMachine(struct QStateMachine_VTable* vtbl, QObject* parent): QStateMachine(parent), vtbl(vtbl) {};
-	VirtualQStateMachine(struct QStateMachine_VTable* vtbl, QState::ChildMode childMode, QObject* parent): QStateMachine(childMode, parent), vtbl(vtbl) {};
+	VirtualQStateMachine(const QStateMachine_VTable* vtbl, void* vdata): QStateMachine(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQStateMachine(const QStateMachine_VTable* vtbl, void* vdata, QState::ChildMode childMode): QStateMachine(childMode), vtbl(vtbl), vdata(vdata) {}
+	VirtualQStateMachine(const QStateMachine_VTable* vtbl, void* vdata, QObject* parent): QStateMachine(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQStateMachine(const QStateMachine_VTable* vtbl, void* vdata, QState::ChildMode childMode, QObject* parent): QStateMachine(childMode, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQStateMachine() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQStateMachine() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QStateMachine::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QStateMachine_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QStateMachine_virtualbase_metaObject(const VirtualQStateMachine* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QStateMachine::qt_metacast(param1);
@@ -59,14 +52,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QStateMachine_virtualbase_metacast(void* self, const char* param1);
+	friend void* QStateMachine_virtualbase_metacast(VirtualQStateMachine* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QStateMachine::qt_metacall(param1, param2, param3);
@@ -77,14 +69,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStateMachine_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QStateMachine_virtualbase_metacall(VirtualQStateMachine* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QStateMachine::eventFilter(watched, event);
@@ -93,14 +84,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QStateMachine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QStateMachine_virtualbase_eventFilter(VirtualQStateMachine* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onEntry(QEvent* event) override {
 		if (vtbl->onEntry == 0) {
 			QStateMachine::onEntry(event);
@@ -109,13 +99,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onEntry(vtbl, this, sigval1);
+		vtbl->onEntry(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_onEntry(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_onEntry(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onExit(QEvent* event) override {
 		if (vtbl->onExit == 0) {
 			QStateMachine::onExit(event);
@@ -124,13 +113,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onExit(vtbl, this, sigval1);
+		vtbl->onExit(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_onExit(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_onExit(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void beginSelectTransitions(QEvent* event) override {
 		if (vtbl->beginSelectTransitions == 0) {
 			QStateMachine::beginSelectTransitions(event);
@@ -139,13 +127,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->beginSelectTransitions(vtbl, this, sigval1);
+		vtbl->beginSelectTransitions(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_beginSelectTransitions(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_beginSelectTransitions(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void endSelectTransitions(QEvent* event) override {
 		if (vtbl->endSelectTransitions == 0) {
 			QStateMachine::endSelectTransitions(event);
@@ -154,13 +141,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->endSelectTransitions(vtbl, this, sigval1);
+		vtbl->endSelectTransitions(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_endSelectTransitions(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_endSelectTransitions(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void beginMicrostep(QEvent* event) override {
 		if (vtbl->beginMicrostep == 0) {
 			QStateMachine::beginMicrostep(event);
@@ -169,13 +155,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->beginMicrostep(vtbl, this, sigval1);
+		vtbl->beginMicrostep(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_beginMicrostep(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_beginMicrostep(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void endMicrostep(QEvent* event) override {
 		if (vtbl->endMicrostep == 0) {
 			QStateMachine::endMicrostep(event);
@@ -184,13 +169,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->endMicrostep(vtbl, this, sigval1);
+		vtbl->endMicrostep(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_endMicrostep(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_endMicrostep(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QStateMachine::event(e);
@@ -198,14 +182,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QStateMachine_virtualbase_event(void* self, QEvent* e);
+	friend bool QStateMachine_virtualbase_event(VirtualQStateMachine* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QStateMachine::timerEvent(event);
@@ -214,13 +197,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QStateMachine_virtualbase_timerEvent(VirtualQStateMachine* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QStateMachine::childEvent(event);
@@ -229,13 +211,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QStateMachine_virtualbase_childEvent(VirtualQStateMachine* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QStateMachine::customEvent(event);
@@ -244,13 +225,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QStateMachine_virtualbase_customEvent(VirtualQStateMachine* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QStateMachine::connectNotify(signal);
@@ -261,13 +241,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QStateMachine_virtualbase_connectNotify(VirtualQStateMachine* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QStateMachine::disconnectNotify(signal);
@@ -278,33 +257,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QStateMachine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QStateMachine_virtualbase_disconnectNotify(VirtualQStateMachine* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QStateMachine_protectedbase_sender(const void* self);
-	friend int QStateMachine_protectedbase_senderSignalIndex(const void* self);
-	friend int QStateMachine_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QStateMachine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QStateMachine_protectedbase_sender(const VirtualQStateMachine* self);
+	friend int QStateMachine_protectedbase_senderSignalIndex(const VirtualQStateMachine* self);
+	friend int QStateMachine_protectedbase_receivers(const VirtualQStateMachine* self, const char* signal);
+	friend bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* self, QMetaMethod* signal);
 };
 
-QStateMachine* QStateMachine_new(struct QStateMachine_VTable* vtbl) {
-	return new VirtualQStateMachine(vtbl);
+VirtualQStateMachine* QStateMachine_new(const QStateMachine_VTable* vtbl, void* vdata) {
+	return new VirtualQStateMachine(vtbl, vdata);
 }
 
-QStateMachine* QStateMachine_new2(struct QStateMachine_VTable* vtbl, int childMode) {
-	return new VirtualQStateMachine(vtbl, static_cast<QState::ChildMode>(childMode));
+VirtualQStateMachine* QStateMachine_new2(const QStateMachine_VTable* vtbl, void* vdata, int childMode) {
+	return new VirtualQStateMachine(vtbl, vdata, static_cast<QState::ChildMode>(childMode));
 }
 
-QStateMachine* QStateMachine_new3(struct QStateMachine_VTable* vtbl, QObject* parent) {
-	return new VirtualQStateMachine(vtbl, parent);
+VirtualQStateMachine* QStateMachine_new3(const QStateMachine_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQStateMachine(vtbl, vdata, parent);
 }
 
-QStateMachine* QStateMachine_new4(struct QStateMachine_VTable* vtbl, int childMode, QObject* parent) {
-	return new VirtualQStateMachine(vtbl, static_cast<QState::ChildMode>(childMode), parent);
+VirtualQStateMachine* QStateMachine_new4(const QStateMachine_VTable* vtbl, void* vdata, int childMode, QObject* parent) {
+	return new VirtualQStateMachine(vtbl, vdata, static_cast<QState::ChildMode>(childMode), parent);
 }
 
 void QStateMachine_virtbase(QStateMachine* src, QState** outptr_QState) {
@@ -462,7 +441,7 @@ void QStateMachine_runningChanged(QStateMachine* self, bool running) {
 	self->runningChanged(running);
 }
 
-void QStateMachine_connect_runningChanged(QStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QStateMachine_connect_runningChanged(VirtualQStateMachine* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -522,129 +501,106 @@ void QStateMachine_postEvent2(QStateMachine* self, QEvent* event, int priority) 
 	self->postEvent(event, static_cast<QStateMachine::EventPriority>(priority));
 }
 
-QMetaObject* QStateMachine_virtualbase_metaObject(const void* self) {
+QMetaObject* QStateMachine_virtualbase_metaObject(const VirtualQStateMachine* self) {
 
-	return (QMetaObject*) ( (const VirtualQStateMachine*)(self) )->QStateMachine::metaObject();
-
+	return (QMetaObject*) self->QStateMachine::metaObject();
 }
 
-void* QStateMachine_virtualbase_metacast(void* self, const char* param1) {
+void* QStateMachine_virtualbase_metacast(VirtualQStateMachine* self, const char* param1) {
 
-	return ( (VirtualQStateMachine*)(self) )->QStateMachine::qt_metacast(param1);
-
+	return self->QStateMachine::qt_metacast(param1);
 }
 
-int QStateMachine_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QStateMachine_virtualbase_metacall(VirtualQStateMachine* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQStateMachine*)(self) )->QStateMachine::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QStateMachine::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QStateMachine_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QStateMachine_virtualbase_eventFilter(VirtualQStateMachine* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQStateMachine*)(self) )->QStateMachine::eventFilter(watched, event);
-
+	return self->QStateMachine::eventFilter(watched, event);
 }
 
-void QStateMachine_virtualbase_onEntry(void* self, QEvent* event) {
+void QStateMachine_virtualbase_onEntry(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::onEntry(event);
-
+	self->QStateMachine::onEntry(event);
 }
 
-void QStateMachine_virtualbase_onExit(void* self, QEvent* event) {
+void QStateMachine_virtualbase_onExit(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::onExit(event);
-
+	self->QStateMachine::onExit(event);
 }
 
-void QStateMachine_virtualbase_beginSelectTransitions(void* self, QEvent* event) {
+void QStateMachine_virtualbase_beginSelectTransitions(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::beginSelectTransitions(event);
-
+	self->QStateMachine::beginSelectTransitions(event);
 }
 
-void QStateMachine_virtualbase_endSelectTransitions(void* self, QEvent* event) {
+void QStateMachine_virtualbase_endSelectTransitions(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::endSelectTransitions(event);
-
+	self->QStateMachine::endSelectTransitions(event);
 }
 
-void QStateMachine_virtualbase_beginMicrostep(void* self, QEvent* event) {
+void QStateMachine_virtualbase_beginMicrostep(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::beginMicrostep(event);
-
+	self->QStateMachine::beginMicrostep(event);
 }
 
-void QStateMachine_virtualbase_endMicrostep(void* self, QEvent* event) {
+void QStateMachine_virtualbase_endMicrostep(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::endMicrostep(event);
-
+	self->QStateMachine::endMicrostep(event);
 }
 
-bool QStateMachine_virtualbase_event(void* self, QEvent* e) {
+bool QStateMachine_virtualbase_event(VirtualQStateMachine* self, QEvent* e) {
 
-	return ( (VirtualQStateMachine*)(self) )->QStateMachine::event(e);
-
+	return self->QStateMachine::event(e);
 }
 
-void QStateMachine_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QStateMachine_virtualbase_timerEvent(VirtualQStateMachine* self, QTimerEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::timerEvent(event);
-
+	self->QStateMachine::timerEvent(event);
 }
 
-void QStateMachine_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QStateMachine_virtualbase_childEvent(VirtualQStateMachine* self, QChildEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::childEvent(event);
-
+	self->QStateMachine::childEvent(event);
 }
 
-void QStateMachine_virtualbase_customEvent(void* self, QEvent* event) {
+void QStateMachine_virtualbase_customEvent(VirtualQStateMachine* self, QEvent* event) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::customEvent(event);
-
+	self->QStateMachine::customEvent(event);
 }
 
-void QStateMachine_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QStateMachine_virtualbase_connectNotify(VirtualQStateMachine* self, QMetaMethod* signal) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::connectNotify(*signal);
-
+	self->QStateMachine::connectNotify(*signal);
 }
 
-void QStateMachine_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QStateMachine_virtualbase_disconnectNotify(VirtualQStateMachine* self, QMetaMethod* signal) {
 
-	( (VirtualQStateMachine*)(self) )->QStateMachine::disconnectNotify(*signal);
-
+	self->QStateMachine::disconnectNotify(*signal);
 }
 
 const QMetaObject* QStateMachine_staticMetaObject() { return &QStateMachine::staticMetaObject; }
-QObject* QStateMachine_protectedbase_sender(const void* self) {
-	VirtualQStateMachine* self_cast = static_cast<VirtualQStateMachine*>( (QStateMachine*)(self) );
-	
-	return self_cast->sender();
 
+const QStateMachine_VTable* QStateMachine_vtbl(const VirtualQStateMachine* self) { return self->vtbl; }
+void* QStateMachine_vdata(const VirtualQStateMachine* self) { return self->vdata; }
+void QStateMachine_setVdata(VirtualQStateMachine* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QStateMachine_protectedbase_sender(const VirtualQStateMachine* self) {
+	return self->sender();
 }
 
-int QStateMachine_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQStateMachine* self_cast = static_cast<VirtualQStateMachine*>( (QStateMachine*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QStateMachine_protectedbase_senderSignalIndex(const VirtualQStateMachine* self) {
+	return self->senderSignalIndex();
 }
 
-int QStateMachine_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQStateMachine* self_cast = static_cast<VirtualQStateMachine*>( (QStateMachine*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QStateMachine_protectedbase_receivers(const VirtualQStateMachine* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QStateMachine_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQStateMachine* self_cast = static_cast<VirtualQStateMachine*>( (QStateMachine*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QStateMachine_protectedbase_isSignalConnected(const VirtualQStateMachine* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QStateMachine_delete(QStateMachine* self) {
@@ -652,7 +608,7 @@ void QStateMachine_delete(QStateMachine* self) {
 }
 
 QStateMachine__SignalEvent* QStateMachine__SignalEvent_new(QStateMachine__SignalEvent* param1) {
-	return new QStateMachine::SignalEvent(*param1);
+	return new QStateMachine__SignalEvent(*param1);
 }
 
 void QStateMachine__SignalEvent_virtbase(QStateMachine__SignalEvent* src, QEvent** outptr_QEvent) {
@@ -672,11 +628,11 @@ void QStateMachine__SignalEvent_delete(QStateMachine__SignalEvent* self) {
 }
 
 QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new(QObject* object, QEvent* event) {
-	return new QStateMachine::WrappedEvent(object, event);
+	return new QStateMachine__WrappedEvent(object, event);
 }
 
 QStateMachine__WrappedEvent* QStateMachine__WrappedEvent_new2(QStateMachine__WrappedEvent* param1) {
-	return new QStateMachine::WrappedEvent(*param1);
+	return new QStateMachine__WrappedEvent(*param1);
 }
 
 void QStateMachine__WrappedEvent_virtbase(QStateMachine__WrappedEvent* src, QEvent** outptr_QEvent) {

@@ -78,18 +78,18 @@ proc fcQNetworkConfiguration_operatorAssign(self: pointer, other: pointer): void
 proc fcQNetworkConfiguration_swap(self: pointer, other: pointer): void {.importc: "QNetworkConfiguration_swap".}
 proc fcQNetworkConfiguration_operatorEqual(self: pointer, other: pointer): bool {.importc: "QNetworkConfiguration_operatorEqual".}
 proc fcQNetworkConfiguration_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QNetworkConfiguration_operatorNotEqual".}
-proc fcQNetworkConfiguration_state(self: pointer, ): cint {.importc: "QNetworkConfiguration_state".}
-proc fcQNetworkConfiguration_typeX(self: pointer, ): cint {.importc: "QNetworkConfiguration_type".}
-proc fcQNetworkConfiguration_purpose(self: pointer, ): cint {.importc: "QNetworkConfiguration_purpose".}
-proc fcQNetworkConfiguration_bearerType(self: pointer, ): cint {.importc: "QNetworkConfiguration_bearerType".}
-proc fcQNetworkConfiguration_bearerTypeFamily(self: pointer, ): cint {.importc: "QNetworkConfiguration_bearerTypeFamily".}
-proc fcQNetworkConfiguration_bearerTypeName(self: pointer, ): struct_miqt_string {.importc: "QNetworkConfiguration_bearerTypeName".}
-proc fcQNetworkConfiguration_identifier(self: pointer, ): struct_miqt_string {.importc: "QNetworkConfiguration_identifier".}
-proc fcQNetworkConfiguration_isRoamingAvailable(self: pointer, ): bool {.importc: "QNetworkConfiguration_isRoamingAvailable".}
-proc fcQNetworkConfiguration_children(self: pointer, ): struct_miqt_array {.importc: "QNetworkConfiguration_children".}
-proc fcQNetworkConfiguration_name(self: pointer, ): struct_miqt_string {.importc: "QNetworkConfiguration_name".}
-proc fcQNetworkConfiguration_isValid(self: pointer, ): bool {.importc: "QNetworkConfiguration_isValid".}
-proc fcQNetworkConfiguration_connectTimeout(self: pointer, ): cint {.importc: "QNetworkConfiguration_connectTimeout".}
+proc fcQNetworkConfiguration_state(self: pointer): cint {.importc: "QNetworkConfiguration_state".}
+proc fcQNetworkConfiguration_typeX(self: pointer): cint {.importc: "QNetworkConfiguration_type".}
+proc fcQNetworkConfiguration_purpose(self: pointer): cint {.importc: "QNetworkConfiguration_purpose".}
+proc fcQNetworkConfiguration_bearerType(self: pointer): cint {.importc: "QNetworkConfiguration_bearerType".}
+proc fcQNetworkConfiguration_bearerTypeFamily(self: pointer): cint {.importc: "QNetworkConfiguration_bearerTypeFamily".}
+proc fcQNetworkConfiguration_bearerTypeName(self: pointer): struct_miqt_string {.importc: "QNetworkConfiguration_bearerTypeName".}
+proc fcQNetworkConfiguration_identifier(self: pointer): struct_miqt_string {.importc: "QNetworkConfiguration_identifier".}
+proc fcQNetworkConfiguration_isRoamingAvailable(self: pointer): bool {.importc: "QNetworkConfiguration_isRoamingAvailable".}
+proc fcQNetworkConfiguration_children(self: pointer): struct_miqt_array {.importc: "QNetworkConfiguration_children".}
+proc fcQNetworkConfiguration_name(self: pointer): struct_miqt_string {.importc: "QNetworkConfiguration_name".}
+proc fcQNetworkConfiguration_isValid(self: pointer): bool {.importc: "QNetworkConfiguration_isValid".}
+proc fcQNetworkConfiguration_connectTimeout(self: pointer): cint {.importc: "QNetworkConfiguration_connectTimeout".}
 proc fcQNetworkConfiguration_setConnectTimeout(self: pointer, timeout: cint): bool {.importc: "QNetworkConfiguration_setConnectTimeout".}
 proc fcQNetworkConfiguration_new(): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new".}
 proc fcQNetworkConfiguration_new2(other: pointer): ptr cQNetworkConfiguration {.importc: "QNetworkConfiguration_new2".}
@@ -106,37 +106,37 @@ proc operatorEqual*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration,
 proc operatorNotEqual*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, other: gen_qnetworkconfiguration_types.QNetworkConfiguration): bool =
   fcQNetworkConfiguration_operatorNotEqual(self.h, other.h)
 
-proc state*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc state*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   cint(fcQNetworkConfiguration_state(self.h))
 
-proc typeX*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc typeX*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   cint(fcQNetworkConfiguration_typeX(self.h))
 
-proc purpose*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc purpose*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   cint(fcQNetworkConfiguration_purpose(self.h))
 
-proc bearerType*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc bearerType*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   cint(fcQNetworkConfiguration_bearerType(self.h))
 
-proc bearerTypeFamily*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc bearerTypeFamily*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   cint(fcQNetworkConfiguration_bearerTypeFamily(self.h))
 
-proc bearerTypeName*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): string =
+proc bearerTypeName*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): string =
   let v_ms = fcQNetworkConfiguration_bearerTypeName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc identifier*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): string =
+proc identifier*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): string =
   let v_ms = fcQNetworkConfiguration_identifier(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isRoamingAvailable*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): bool =
+proc isRoamingAvailable*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): bool =
   fcQNetworkConfiguration_isRoamingAvailable(self.h)
 
-proc children*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): seq[gen_qnetworkconfiguration_types.QNetworkConfiguration] =
+proc children*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): seq[gen_qnetworkconfiguration_types.QNetworkConfiguration] =
   var v_ma = fcQNetworkConfiguration_children(self.h)
   var vx_ret = newSeq[gen_qnetworkconfiguration_types.QNetworkConfiguration](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -145,16 +145,16 @@ proc children*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): s
   c_free(v_ma.data)
   vx_ret
 
-proc name*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): string =
+proc name*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): string =
   let v_ms = fcQNetworkConfiguration_name(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isValid*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): bool =
+proc isValid*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): bool =
   fcQNetworkConfiguration_isValid(self.h)
 
-proc connectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, ): cint =
+proc connectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration): cint =
   fcQNetworkConfiguration_connectTimeout(self.h)
 
 proc setConnectTimeout*(self: gen_qnetworkconfiguration_types.QNetworkConfiguration, timeout: cint): bool =

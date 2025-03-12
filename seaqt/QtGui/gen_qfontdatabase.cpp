@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qfontdatabase.h>
 #include "gen_qfontdatabase.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFontDatabase* QFontDatabase_new() {
 	return new QFontDatabase();
 }
@@ -337,6 +328,7 @@ bool QFontDatabase_isFixedPitch2(const QFontDatabase* self, struct miqt_string f
 }
 
 const QMetaObject* QFontDatabase_staticMetaObject() { return &QFontDatabase::staticMetaObject; }
+
 void QFontDatabase_delete(QFontDatabase* self) {
 	delete self;
 }

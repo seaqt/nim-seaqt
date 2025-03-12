@@ -100,6 +100,7 @@ struct miqt_string QNetworkReply_tr2(const char* s, const char* c);
 struct miqt_string QNetworkReply_tr3(const char* s, const char* c, int n);
 struct miqt_string QNetworkReply_trUtf82(const char* s, const char* c);
 struct miqt_string QNetworkReply_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QNetworkReply_staticMetaObject();
 void QNetworkReply_delete(QNetworkReply* self);
 

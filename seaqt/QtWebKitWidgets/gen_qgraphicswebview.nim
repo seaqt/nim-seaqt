@@ -88,48 +88,48 @@ export
 
 type cQGraphicsWebView*{.exportc: "QGraphicsWebView", incompleteStruct.} = object
 
-proc fcQGraphicsWebView_metaObject(self: pointer, ): pointer {.importc: "QGraphicsWebView_metaObject".}
+proc fcQGraphicsWebView_metaObject(self: pointer): pointer {.importc: "QGraphicsWebView_metaObject".}
 proc fcQGraphicsWebView_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsWebView_metacast".}
 proc fcQGraphicsWebView_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsWebView_metacall".}
 proc fcQGraphicsWebView_tr(s: cstring): struct_miqt_string {.importc: "QGraphicsWebView_tr".}
 proc fcQGraphicsWebView_trUtf8(s: cstring): struct_miqt_string {.importc: "QGraphicsWebView_trUtf8".}
-proc fcQGraphicsWebView_page(self: pointer, ): pointer {.importc: "QGraphicsWebView_page".}
+proc fcQGraphicsWebView_page(self: pointer): pointer {.importc: "QGraphicsWebView_page".}
 proc fcQGraphicsWebView_setPage(self: pointer, page: pointer): void {.importc: "QGraphicsWebView_setPage".}
-proc fcQGraphicsWebView_url(self: pointer, ): pointer {.importc: "QGraphicsWebView_url".}
+proc fcQGraphicsWebView_url(self: pointer): pointer {.importc: "QGraphicsWebView_url".}
 proc fcQGraphicsWebView_setUrl(self: pointer, url: pointer): void {.importc: "QGraphicsWebView_setUrl".}
-proc fcQGraphicsWebView_title(self: pointer, ): struct_miqt_string {.importc: "QGraphicsWebView_title".}
-proc fcQGraphicsWebView_icon(self: pointer, ): pointer {.importc: "QGraphicsWebView_icon".}
-proc fcQGraphicsWebView_zoomFactor(self: pointer, ): float64 {.importc: "QGraphicsWebView_zoomFactor".}
+proc fcQGraphicsWebView_title(self: pointer): struct_miqt_string {.importc: "QGraphicsWebView_title".}
+proc fcQGraphicsWebView_icon(self: pointer): pointer {.importc: "QGraphicsWebView_icon".}
+proc fcQGraphicsWebView_zoomFactor(self: pointer): float64 {.importc: "QGraphicsWebView_zoomFactor".}
 proc fcQGraphicsWebView_setZoomFactor(self: pointer, zoomFactor: float64): void {.importc: "QGraphicsWebView_setZoomFactor".}
-proc fcQGraphicsWebView_isModified(self: pointer, ): bool {.importc: "QGraphicsWebView_isModified".}
+proc fcQGraphicsWebView_isModified(self: pointer): bool {.importc: "QGraphicsWebView_isModified".}
 proc fcQGraphicsWebView_load(self: pointer, url: pointer): void {.importc: "QGraphicsWebView_load".}
 proc fcQGraphicsWebView_loadWithRequest(self: pointer, request: pointer): void {.importc: "QGraphicsWebView_loadWithRequest".}
 proc fcQGraphicsWebView_setHtml(self: pointer, html: struct_miqt_string): void {.importc: "QGraphicsWebView_setHtml".}
 proc fcQGraphicsWebView_setContent(self: pointer, data: struct_miqt_string): void {.importc: "QGraphicsWebView_setContent".}
-proc fcQGraphicsWebView_history(self: pointer, ): pointer {.importc: "QGraphicsWebView_history".}
-proc fcQGraphicsWebView_settings(self: pointer, ): pointer {.importc: "QGraphicsWebView_settings".}
+proc fcQGraphicsWebView_history(self: pointer): pointer {.importc: "QGraphicsWebView_history".}
+proc fcQGraphicsWebView_settings(self: pointer): pointer {.importc: "QGraphicsWebView_settings".}
 proc fcQGraphicsWebView_pageAction(self: pointer, action: cint): pointer {.importc: "QGraphicsWebView_pageAction".}
 proc fcQGraphicsWebView_triggerPageAction(self: pointer, action: cint): void {.importc: "QGraphicsWebView_triggerPageAction".}
 proc fcQGraphicsWebView_findText(self: pointer, subString: struct_miqt_string): bool {.importc: "QGraphicsWebView_findText".}
-proc fcQGraphicsWebView_resizesToContents(self: pointer, ): bool {.importc: "QGraphicsWebView_resizesToContents".}
+proc fcQGraphicsWebView_resizesToContents(self: pointer): bool {.importc: "QGraphicsWebView_resizesToContents".}
 proc fcQGraphicsWebView_setResizesToContents(self: pointer, enabled: bool): void {.importc: "QGraphicsWebView_setResizesToContents".}
-proc fcQGraphicsWebView_isTiledBackingStoreFrozen(self: pointer, ): bool {.importc: "QGraphicsWebView_isTiledBackingStoreFrozen".}
+proc fcQGraphicsWebView_isTiledBackingStoreFrozen(self: pointer): bool {.importc: "QGraphicsWebView_isTiledBackingStoreFrozen".}
 proc fcQGraphicsWebView_setTiledBackingStoreFrozen(self: pointer, frozen: bool): void {.importc: "QGraphicsWebView_setTiledBackingStoreFrozen".}
 proc fcQGraphicsWebView_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsWebView_setGeometry".}
-proc fcQGraphicsWebView_updateGeometry(self: pointer, ): void {.importc: "QGraphicsWebView_updateGeometry".}
+proc fcQGraphicsWebView_updateGeometry(self: pointer): void {.importc: "QGraphicsWebView_updateGeometry".}
 proc fcQGraphicsWebView_paint(self: pointer, param1: pointer, options: pointer, widget: pointer): void {.importc: "QGraphicsWebView_paint".}
 proc fcQGraphicsWebView_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsWebView_itemChange".}
 proc fcQGraphicsWebView_event(self: pointer, param1: pointer): bool {.importc: "QGraphicsWebView_event".}
 proc fcQGraphicsWebView_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.importc: "QGraphicsWebView_sizeHint".}
 proc fcQGraphicsWebView_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QGraphicsWebView_inputMethodQuery".}
-proc fcQGraphicsWebView_renderHints(self: pointer, ): cint {.importc: "QGraphicsWebView_renderHints".}
+proc fcQGraphicsWebView_renderHints(self: pointer): cint {.importc: "QGraphicsWebView_renderHints".}
 proc fcQGraphicsWebView_setRenderHints(self: pointer, renderHints: cint): void {.importc: "QGraphicsWebView_setRenderHints".}
 proc fcQGraphicsWebView_setRenderHint(self: pointer, param1: cint): void {.importc: "QGraphicsWebView_setRenderHint".}
-proc fcQGraphicsWebView_stop(self: pointer, ): void {.importc: "QGraphicsWebView_stop".}
-proc fcQGraphicsWebView_back(self: pointer, ): void {.importc: "QGraphicsWebView_back".}
-proc fcQGraphicsWebView_forward(self: pointer, ): void {.importc: "QGraphicsWebView_forward".}
-proc fcQGraphicsWebView_reload(self: pointer, ): void {.importc: "QGraphicsWebView_reload".}
-proc fcQGraphicsWebView_loadStarted(self: pointer, ): void {.importc: "QGraphicsWebView_loadStarted".}
+proc fcQGraphicsWebView_stop(self: pointer): void {.importc: "QGraphicsWebView_stop".}
+proc fcQGraphicsWebView_back(self: pointer): void {.importc: "QGraphicsWebView_back".}
+proc fcQGraphicsWebView_forward(self: pointer): void {.importc: "QGraphicsWebView_forward".}
+proc fcQGraphicsWebView_reload(self: pointer): void {.importc: "QGraphicsWebView_reload".}
+proc fcQGraphicsWebView_loadStarted(self: pointer): void {.importc: "QGraphicsWebView_loadStarted".}
 proc fcQGraphicsWebView_connect_loadStarted(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_loadStarted".}
 proc fcQGraphicsWebView_loadFinished(self: pointer, param1: bool): void {.importc: "QGraphicsWebView_loadFinished".}
 proc fcQGraphicsWebView_connect_loadFinished(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_loadFinished".}
@@ -139,7 +139,7 @@ proc fcQGraphicsWebView_urlChanged(self: pointer, param1: pointer): void {.impor
 proc fcQGraphicsWebView_connect_urlChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_urlChanged".}
 proc fcQGraphicsWebView_titleChanged(self: pointer, param1: struct_miqt_string): void {.importc: "QGraphicsWebView_titleChanged".}
 proc fcQGraphicsWebView_connect_titleChanged(self: pointer, slot: int, callback: proc (slot: int, param1: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_titleChanged".}
-proc fcQGraphicsWebView_iconChanged(self: pointer, ): void {.importc: "QGraphicsWebView_iconChanged".}
+proc fcQGraphicsWebView_iconChanged(self: pointer): void {.importc: "QGraphicsWebView_iconChanged".}
 proc fcQGraphicsWebView_connect_iconChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_iconChanged".}
 proc fcQGraphicsWebView_statusBarMessage(self: pointer, message: struct_miqt_string): void {.importc: "QGraphicsWebView_statusBarMessage".}
 proc fcQGraphicsWebView_connect_statusBarMessage(self: pointer, slot: int, callback: proc (slot: int, message: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QGraphicsWebView_connect_statusBarMessage".}
@@ -157,79 +157,81 @@ proc fcQGraphicsWebView_setContent3(self: pointer, data: struct_miqt_string, mim
 proc fcQGraphicsWebView_triggerPageAction2(self: pointer, action: cint, checked: bool): void {.importc: "QGraphicsWebView_triggerPageAction2".}
 proc fcQGraphicsWebView_findText2(self: pointer, subString: struct_miqt_string, options: cint): bool {.importc: "QGraphicsWebView_findText2".}
 proc fcQGraphicsWebView_setRenderHint2(self: pointer, param1: cint, enabled: bool): void {.importc: "QGraphicsWebView_setRenderHint2".}
+proc fcQGraphicsWebView_vtbl(self: pointer): pointer {.importc: "QGraphicsWebView_vtbl".}
+proc fcQGraphicsWebView_vdata(self: pointer): pointer {.importc: "QGraphicsWebView_vdata".}
 type cQGraphicsWebViewVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQGraphicsWebViewVTable, self: ptr cQGraphicsWebView) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  setGeometry*: proc(vtbl, self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
-  updateGeometry*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  paint*: proc(vtbl, self: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  itemChange*: proc(vtbl, self: pointer, change: cint, value: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  sizeHint*: proc(vtbl, self: pointer, which: cint, constraint: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  hoverMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  hoverLeaveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  contextMenuEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusNextPrevChild*: proc(vtbl, self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
-  sceneEvent*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  getContentsMargins*: proc(vtbl, self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl, raises: [], gcsafe.}
-  typeX*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  paintWindowFrame*: proc(vtbl, self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
-  boundingRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  shape*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  initStyleOption*: proc(vtbl, self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
-  propertyChange*: proc(vtbl, self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  windowFrameEvent*: proc(vtbl, self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
-  windowFrameSectionAt*: proc(vtbl, self: pointer, pos: pointer): cint {.cdecl, raises: [], gcsafe.}
-  changeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  closeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hideEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  moveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  polishEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  resizeEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  showEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  grabMouseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  ungrabMouseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  grabKeyboardEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  ungrabKeyboardEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  advance*: proc(vtbl, self: pointer, phase: cint): void {.cdecl, raises: [], gcsafe.}
-  contains*: proc(vtbl, self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
-  collidesWithItem*: proc(vtbl, self: pointer, other: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
-  collidesWithPath*: proc(vtbl, self: pointer, path: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
-  isObscuredBy*: proc(vtbl, self: pointer, item: pointer): bool {.cdecl, raises: [], gcsafe.}
-  opaqueArea*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  sceneEventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  hoverEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  supportsExtension*: proc(vtbl, self: pointer, extension: cint): bool {.cdecl, raises: [], gcsafe.}
-  setExtension*: proc(vtbl, self: pointer, extension: cint, variant: pointer): void {.cdecl, raises: [], gcsafe.}
-  extension*: proc(vtbl, self: pointer, variant: pointer): pointer {.cdecl, raises: [], gcsafe.}
-proc fcQGraphicsWebView_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QGraphicsWebView_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setGeometry*: proc(self: pointer, rect: pointer): void {.cdecl, raises: [], gcsafe.}
+  updateGeometry*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  paint*: proc(self: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  itemChange*: proc(self: pointer, change: cint, value: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  sizeHint*: proc(self: pointer, which: cint, constraint: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverMoveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverLeaveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  contextMenuEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusNextPrevChild*: proc(self: pointer, next: bool): bool {.cdecl, raises: [], gcsafe.}
+  sceneEvent*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  getContentsMargins*: proc(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl, raises: [], gcsafe.}
+  typeX*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  paintWindowFrame*: proc(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl, raises: [], gcsafe.}
+  boundingRect*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  shape*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  initStyleOption*: proc(self: pointer, option: pointer): void {.cdecl, raises: [], gcsafe.}
+  propertyChange*: proc(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  windowFrameEvent*: proc(self: pointer, e: pointer): bool {.cdecl, raises: [], gcsafe.}
+  windowFrameSectionAt*: proc(self: pointer, pos: pointer): cint {.cdecl, raises: [], gcsafe.}
+  changeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  closeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hideEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  moveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  polishEvent*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  resizeEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  showEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  grabMouseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  ungrabMouseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  grabKeyboardEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  ungrabKeyboardEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  advance*: proc(self: pointer, phase: cint): void {.cdecl, raises: [], gcsafe.}
+  contains*: proc(self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
+  collidesWithItem*: proc(self: pointer, other: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  collidesWithPath*: proc(self: pointer, path: pointer, mode: cint): bool {.cdecl, raises: [], gcsafe.}
+  isObscuredBy*: proc(self: pointer, item: pointer): bool {.cdecl, raises: [], gcsafe.}
+  opaqueArea*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sceneEventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  hoverEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  supportsExtension*: proc(self: pointer, extension: cint): bool {.cdecl, raises: [], gcsafe.}
+  setExtension*: proc(self: pointer, extension: cint, variant: pointer): void {.cdecl, raises: [], gcsafe.}
+  extension*: proc(self: pointer, variant: pointer): pointer {.cdecl, raises: [], gcsafe.}
+proc fcQGraphicsWebView_virtualbase_metaObject(self: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_metaObject".}
 proc fcQGraphicsWebView_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QGraphicsWebView_virtualbase_metacast".}
 proc fcQGraphicsWebView_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QGraphicsWebView_virtualbase_metacall".}
 proc fcQGraphicsWebView_virtualbase_setGeometry(self: pointer, rect: pointer): void {.importc: "QGraphicsWebView_virtualbase_setGeometry".}
-proc fcQGraphicsWebView_virtualbase_updateGeometry(self: pointer, ): void {.importc: "QGraphicsWebView_virtualbase_updateGeometry".}
+proc fcQGraphicsWebView_virtualbase_updateGeometry(self: pointer): void {.importc: "QGraphicsWebView_virtualbase_updateGeometry".}
 proc fcQGraphicsWebView_virtualbase_paint(self: pointer, param1: pointer, options: pointer, widget: pointer): void {.importc: "QGraphicsWebView_virtualbase_paint".}
 proc fcQGraphicsWebView_virtualbase_itemChange(self: pointer, change: cint, value: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_itemChange".}
 proc fcQGraphicsWebView_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QGraphicsWebView_virtualbase_event".}
@@ -255,10 +257,10 @@ proc fcQGraphicsWebView_virtualbase_inputMethodEvent(self: pointer, param1: poin
 proc fcQGraphicsWebView_virtualbase_focusNextPrevChild(self: pointer, next: bool): bool {.importc: "QGraphicsWebView_virtualbase_focusNextPrevChild".}
 proc fcQGraphicsWebView_virtualbase_sceneEvent(self: pointer, param1: pointer): bool {.importc: "QGraphicsWebView_virtualbase_sceneEvent".}
 proc fcQGraphicsWebView_virtualbase_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.importc: "QGraphicsWebView_virtualbase_getContentsMargins".}
-proc fcQGraphicsWebView_virtualbase_typeX(self: pointer, ): cint {.importc: "QGraphicsWebView_virtualbase_type".}
+proc fcQGraphicsWebView_virtualbase_typeX(self: pointer): cint {.importc: "QGraphicsWebView_virtualbase_type".}
 proc fcQGraphicsWebView_virtualbase_paintWindowFrame(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.importc: "QGraphicsWebView_virtualbase_paintWindowFrame".}
-proc fcQGraphicsWebView_virtualbase_boundingRect(self: pointer, ): pointer {.importc: "QGraphicsWebView_virtualbase_boundingRect".}
-proc fcQGraphicsWebView_virtualbase_shape(self: pointer, ): pointer {.importc: "QGraphicsWebView_virtualbase_shape".}
+proc fcQGraphicsWebView_virtualbase_boundingRect(self: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_boundingRect".}
+proc fcQGraphicsWebView_virtualbase_shape(self: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_shape".}
 proc fcQGraphicsWebView_virtualbase_initStyleOption(self: pointer, option: pointer): void {.importc: "QGraphicsWebView_virtualbase_initStyleOption".}
 proc fcQGraphicsWebView_virtualbase_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_propertyChange".}
 proc fcQGraphicsWebView_virtualbase_windowFrameEvent(self: pointer, e: pointer): bool {.importc: "QGraphicsWebView_virtualbase_windowFrameEvent".}
@@ -267,7 +269,7 @@ proc fcQGraphicsWebView_virtualbase_changeEvent(self: pointer, event: pointer): 
 proc fcQGraphicsWebView_virtualbase_closeEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_closeEvent".}
 proc fcQGraphicsWebView_virtualbase_hideEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_hideEvent".}
 proc fcQGraphicsWebView_virtualbase_moveEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_moveEvent".}
-proc fcQGraphicsWebView_virtualbase_polishEvent(self: pointer, ): void {.importc: "QGraphicsWebView_virtualbase_polishEvent".}
+proc fcQGraphicsWebView_virtualbase_polishEvent(self: pointer): void {.importc: "QGraphicsWebView_virtualbase_polishEvent".}
 proc fcQGraphicsWebView_virtualbase_resizeEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_resizeEvent".}
 proc fcQGraphicsWebView_virtualbase_showEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_showEvent".}
 proc fcQGraphicsWebView_virtualbase_grabMouseEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_grabMouseEvent".}
@@ -285,27 +287,27 @@ proc fcQGraphicsWebView_virtualbase_contains(self: pointer, point: pointer): boo
 proc fcQGraphicsWebView_virtualbase_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.importc: "QGraphicsWebView_virtualbase_collidesWithItem".}
 proc fcQGraphicsWebView_virtualbase_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.importc: "QGraphicsWebView_virtualbase_collidesWithPath".}
 proc fcQGraphicsWebView_virtualbase_isObscuredBy(self: pointer, item: pointer): bool {.importc: "QGraphicsWebView_virtualbase_isObscuredBy".}
-proc fcQGraphicsWebView_virtualbase_opaqueArea(self: pointer, ): pointer {.importc: "QGraphicsWebView_virtualbase_opaqueArea".}
+proc fcQGraphicsWebView_virtualbase_opaqueArea(self: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_opaqueArea".}
 proc fcQGraphicsWebView_virtualbase_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QGraphicsWebView_virtualbase_sceneEventFilter".}
 proc fcQGraphicsWebView_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void {.importc: "QGraphicsWebView_virtualbase_hoverEnterEvent".}
 proc fcQGraphicsWebView_virtualbase_supportsExtension(self: pointer, extension: cint): bool {.importc: "QGraphicsWebView_virtualbase_supportsExtension".}
 proc fcQGraphicsWebView_virtualbase_setExtension(self: pointer, extension: cint, variant: pointer): void {.importc: "QGraphicsWebView_virtualbase_setExtension".}
 proc fcQGraphicsWebView_virtualbase_extension(self: pointer, variant: pointer): pointer {.importc: "QGraphicsWebView_virtualbase_extension".}
-proc fcQGraphicsWebView_protectedbase_updateMicroFocus(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_updateMicroFocus".}
-proc fcQGraphicsWebView_protectedbase_sender(self: pointer, ): pointer {.importc: "QGraphicsWebView_protectedbase_sender".}
-proc fcQGraphicsWebView_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QGraphicsWebView_protectedbase_senderSignalIndex".}
+proc fcQGraphicsWebView_protectedbase_updateMicroFocus(self: pointer): void {.importc: "QGraphicsWebView_protectedbase_updateMicroFocus".}
+proc fcQGraphicsWebView_protectedbase_sender(self: pointer): pointer {.importc: "QGraphicsWebView_protectedbase_sender".}
+proc fcQGraphicsWebView_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QGraphicsWebView_protectedbase_senderSignalIndex".}
 proc fcQGraphicsWebView_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QGraphicsWebView_protectedbase_receivers".}
 proc fcQGraphicsWebView_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QGraphicsWebView_protectedbase_isSignalConnected".}
-proc fcQGraphicsWebView_protectedbase_addToIndex(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_addToIndex".}
-proc fcQGraphicsWebView_protectedbase_removeFromIndex(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_removeFromIndex".}
-proc fcQGraphicsWebView_protectedbase_prepareGeometryChange(self: pointer, ): void {.importc: "QGraphicsWebView_protectedbase_prepareGeometryChange".}
+proc fcQGraphicsWebView_protectedbase_addToIndex(self: pointer): void {.importc: "QGraphicsWebView_protectedbase_addToIndex".}
+proc fcQGraphicsWebView_protectedbase_removeFromIndex(self: pointer): void {.importc: "QGraphicsWebView_protectedbase_removeFromIndex".}
+proc fcQGraphicsWebView_protectedbase_prepareGeometryChange(self: pointer): void {.importc: "QGraphicsWebView_protectedbase_prepareGeometryChange".}
 proc fcQGraphicsWebView_protectedbase_setGraphicsItem(self: pointer, item: pointer): void {.importc: "QGraphicsWebView_protectedbase_setGraphicsItem".}
 proc fcQGraphicsWebView_protectedbase_setOwnedByLayout(self: pointer, ownedByLayout: bool): void {.importc: "QGraphicsWebView_protectedbase_setOwnedByLayout".}
-proc fcQGraphicsWebView_new(vtbl: pointer, ): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new".}
-proc fcQGraphicsWebView_new2(vtbl: pointer, parent: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new2".}
+proc fcQGraphicsWebView_new(vtbl, vdata: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new".}
+proc fcQGraphicsWebView_new2(vtbl, vdata: pointer, parent: pointer): ptr cQGraphicsWebView {.importc: "QGraphicsWebView_new2".}
 proc fcQGraphicsWebView_staticMetaObject(): pointer {.importc: "QGraphicsWebView_staticMetaObject".}
 
-proc metaObject*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsWebView_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cstring): pointer =
@@ -326,34 +328,34 @@ proc trUtf8*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring): s
   c_free(v_ms.data)
   vx_ret
 
-proc page*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qwebpage_types.QWebPage =
+proc page*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qwebpage_types.QWebPage =
   gen_qwebpage_types.QWebPage(h: fcQGraphicsWebView_page(self.h), owned: false)
 
 proc setPage*(self: gen_qgraphicswebview_types.QGraphicsWebView, page: gen_qwebpage_types.QWebPage): void =
   fcQGraphicsWebView_setPage(self.h, page.h)
 
-proc url*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQGraphicsWebView_url(self.h), owned: true)
 
 proc setUrl*(self: gen_qgraphicswebview_types.QGraphicsWebView, url: gen_qurl_types.QUrl): void =
   fcQGraphicsWebView_setUrl(self.h, url.h)
 
-proc title*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): string =
+proc title*(self: gen_qgraphicswebview_types.QGraphicsWebView): string =
   let v_ms = fcQGraphicsWebView_title(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc icon*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qicon_types.QIcon =
+proc icon*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qicon_types.QIcon =
   gen_qicon_types.QIcon(h: fcQGraphicsWebView_icon(self.h), owned: true)
 
-proc zoomFactor*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): float64 =
+proc zoomFactor*(self: gen_qgraphicswebview_types.QGraphicsWebView): float64 =
   fcQGraphicsWebView_zoomFactor(self.h)
 
 proc setZoomFactor*(self: gen_qgraphicswebview_types.QGraphicsWebView, zoomFactor: float64): void =
   fcQGraphicsWebView_setZoomFactor(self.h, zoomFactor)
 
-proc isModified*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): bool =
+proc isModified*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_isModified(self.h)
 
 proc load*(self: gen_qgraphicswebview_types.QGraphicsWebView, url: gen_qurl_types.QUrl): void =
@@ -368,10 +370,10 @@ proc setHtml*(self: gen_qgraphicswebview_types.QGraphicsWebView, html: string): 
 proc setContent*(self: gen_qgraphicswebview_types.QGraphicsWebView, data: seq[byte]): void =
   fcQGraphicsWebView_setContent(self.h, struct_miqt_string(data: cast[cstring](if len(data) == 0: nil else: unsafeAddr data[0]), len: csize_t(len(data))))
 
-proc history*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qwebhistory_types.QWebHistory =
+proc history*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qwebhistory_types.QWebHistory =
   gen_qwebhistory_types.QWebHistory(h: fcQGraphicsWebView_history(self.h), owned: false)
 
-proc settings*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qwebsettings_types.QWebSettings =
+proc settings*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qwebsettings_types.QWebSettings =
   gen_qwebsettings_types.QWebSettings(h: fcQGraphicsWebView_settings(self.h), owned: false)
 
 proc pageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, action: cint): gen_qaction_types.QAction =
@@ -383,13 +385,13 @@ proc triggerPageAction*(self: gen_qgraphicswebview_types.QGraphicsWebView, actio
 proc findText*(self: gen_qgraphicswebview_types.QGraphicsWebView, subString: string): bool =
   fcQGraphicsWebView_findText(self.h, struct_miqt_string(data: subString, len: csize_t(len(subString))))
 
-proc resizesToContents*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): bool =
+proc resizesToContents*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_resizesToContents(self.h)
 
 proc setResizesToContents*(self: gen_qgraphicswebview_types.QGraphicsWebView, enabled: bool): void =
   fcQGraphicsWebView_setResizesToContents(self.h, enabled)
 
-proc isTiledBackingStoreFrozen*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): bool =
+proc isTiledBackingStoreFrozen*(self: gen_qgraphicswebview_types.QGraphicsWebView): bool =
   fcQGraphicsWebView_isTiledBackingStoreFrozen(self.h)
 
 proc setTiledBackingStoreFrozen*(self: gen_qgraphicswebview_types.QGraphicsWebView, frozen: bool): void =
@@ -398,7 +400,7 @@ proc setTiledBackingStoreFrozen*(self: gen_qgraphicswebview_types.QGraphicsWebVi
 proc setGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsWebView_setGeometry(self.h, rect.h)
 
-proc updateGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc updateGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_updateGeometry(self.h)
 
 proc paint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
@@ -416,7 +418,7 @@ proc sizeHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, which: cint, c
 proc inputMethodQuery*(self: gen_qgraphicswebview_types.QGraphicsWebView, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWebView_inputMethodQuery(self.h, cint(query)), owned: true)
 
-proc renderHints*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): cint =
+proc renderHints*(self: gen_qgraphicswebview_types.QGraphicsWebView): cint =
   cint(fcQGraphicsWebView_renderHints(self.h))
 
 proc setRenderHints*(self: gen_qgraphicswebview_types.QGraphicsWebView, renderHints: cint): void =
@@ -425,27 +427,27 @@ proc setRenderHints*(self: gen_qgraphicswebview_types.QGraphicsWebView, renderHi
 proc setRenderHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint): void =
   fcQGraphicsWebView_setRenderHint(self.h, cint(param1))
 
-proc stop*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc stop*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_stop(self.h)
 
-proc back*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc back*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_back(self.h)
 
-proc forward*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc forward*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_forward(self.h)
 
-proc reload*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc reload*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_reload(self.h)
 
-proc loadStarted*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc loadStarted*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_loadStarted(self.h)
 
 type QGraphicsWebViewloadStartedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsWebView_loadStarted(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadStarted(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewloadStartedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQGraphicsWebView_loadStarted_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadStarted_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewloadStartedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -453,19 +455,19 @@ proc onloadStarted*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
   var tmp = new QGraphicsWebViewloadStartedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_loadStarted(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_loadStarted, miqt_exec_callback_cQGraphicsWebView_loadStarted_release)
+  fcQGraphicsWebView_connect_loadStarted(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_loadStarted, cQGraphicsWebView_slot_callback_loadStarted_release)
 
 proc loadFinished*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: bool): void =
   fcQGraphicsWebView_loadFinished(self.h, param1)
 
 type QGraphicsWebViewloadFinishedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQGraphicsWebView_loadFinished(slot: int, param1: bool) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadFinished(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewloadFinishedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_loadFinished_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadFinished_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewloadFinishedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -473,19 +475,19 @@ proc onloadFinished*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QG
   var tmp = new QGraphicsWebViewloadFinishedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_loadFinished, miqt_exec_callback_cQGraphicsWebView_loadFinished_release)
+  fcQGraphicsWebView_connect_loadFinished(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_loadFinished, cQGraphicsWebView_slot_callback_loadFinished_release)
 
 proc loadProgress*(self: gen_qgraphicswebview_types.QGraphicsWebView, progress: cint): void =
   fcQGraphicsWebView_loadProgress(self.h, progress)
 
 type QGraphicsWebViewloadProgressSlot* = proc(progress: cint)
-proc miqt_exec_callback_cQGraphicsWebView_loadProgress(slot: int, progress: cint) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadProgress(slot: int, progress: cint) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewloadProgressSlot](cast[pointer](slot))
   let slotval1 = progress
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_loadProgress_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_loadProgress_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewloadProgressSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -493,19 +495,19 @@ proc onloadProgress*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QG
   var tmp = new QGraphicsWebViewloadProgressSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_loadProgress(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_loadProgress, miqt_exec_callback_cQGraphicsWebView_loadProgress_release)
+  fcQGraphicsWebView_connect_loadProgress(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_loadProgress, cQGraphicsWebView_slot_callback_loadProgress_release)
 
 proc urlChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qurl_types.QUrl): void =
   fcQGraphicsWebView_urlChanged(self.h, param1.h)
 
 type QGraphicsWebViewurlChangedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQGraphicsWebView_urlChanged(slot: int, param1: pointer) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_urlChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewurlChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_urlChanged_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_urlChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewurlChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -513,13 +515,13 @@ proc onurlChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGra
   var tmp = new QGraphicsWebViewurlChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_urlChanged, miqt_exec_callback_cQGraphicsWebView_urlChanged_release)
+  fcQGraphicsWebView_connect_urlChanged(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_urlChanged, cQGraphicsWebView_slot_callback_urlChanged_release)
 
 proc titleChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: string): void =
   fcQGraphicsWebView_titleChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QGraphicsWebViewtitleChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQGraphicsWebView_titleChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_titleChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewtitleChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -528,7 +530,7 @@ proc miqt_exec_callback_cQGraphicsWebView_titleChanged(slot: int, param1: struct
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_titleChanged_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_titleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewtitleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -536,17 +538,17 @@ proc ontitleChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QG
   var tmp = new QGraphicsWebViewtitleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_titleChanged, miqt_exec_callback_cQGraphicsWebView_titleChanged_release)
+  fcQGraphicsWebView_connect_titleChanged(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_titleChanged, cQGraphicsWebView_slot_callback_titleChanged_release)
 
-proc iconChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc iconChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_iconChanged(self.h)
 
 type QGraphicsWebViewiconChangedSlot* = proc()
-proc miqt_exec_callback_cQGraphicsWebView_iconChanged(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_iconChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewiconChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQGraphicsWebView_iconChanged_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_iconChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewiconChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -554,13 +556,13 @@ proc oniconChanged*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
   var tmp = new QGraphicsWebViewiconChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_iconChanged, miqt_exec_callback_cQGraphicsWebView_iconChanged_release)
+  fcQGraphicsWebView_connect_iconChanged(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_iconChanged, cQGraphicsWebView_slot_callback_iconChanged_release)
 
 proc statusBarMessage*(self: gen_qgraphicswebview_types.QGraphicsWebView, message: string): void =
   fcQGraphicsWebView_statusBarMessage(self.h, struct_miqt_string(data: message, len: csize_t(len(message))))
 
 type QGraphicsWebViewstatusBarMessageSlot* = proc(message: string)
-proc miqt_exec_callback_cQGraphicsWebView_statusBarMessage(slot: int, message: struct_miqt_string) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_statusBarMessage(slot: int, message: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewstatusBarMessageSlot](cast[pointer](slot))
   let vmessage_ms = message
   let vmessagex_ret = string.fromBytes(toOpenArrayByte(vmessage_ms.data, 0, int(vmessage_ms.len)-1))
@@ -569,7 +571,7 @@ proc miqt_exec_callback_cQGraphicsWebView_statusBarMessage(slot: int, message: s
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_statusBarMessage_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_statusBarMessage_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewstatusBarMessageSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -577,19 +579,19 @@ proc onstatusBarMessage*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot
   var tmp = new QGraphicsWebViewstatusBarMessageSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_statusBarMessage, miqt_exec_callback_cQGraphicsWebView_statusBarMessage_release)
+  fcQGraphicsWebView_connect_statusBarMessage(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_statusBarMessage, cQGraphicsWebView_slot_callback_statusBarMessage_release)
 
 proc linkClicked*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qurl_types.QUrl): void =
   fcQGraphicsWebView_linkClicked(self.h, param1.h)
 
 type QGraphicsWebViewlinkClickedSlot* = proc(param1: gen_qurl_types.QUrl)
-proc miqt_exec_callback_cQGraphicsWebView_linkClicked(slot: int, param1: pointer) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_linkClicked(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QGraphicsWebViewlinkClickedSlot](cast[pointer](slot))
   let slotval1 = gen_qurl_types.QUrl(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQGraphicsWebView_linkClicked_release(slot: int) {.cdecl.} =
+proc cQGraphicsWebView_slot_callback_linkClicked_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QGraphicsWebViewlinkClickedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -597,7 +599,7 @@ proc onlinkClicked*(self: gen_qgraphicswebview_types.QGraphicsWebView, slot: QGr
   var tmp = new QGraphicsWebViewlinkClickedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQGraphicsWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQGraphicsWebView_linkClicked, miqt_exec_callback_cQGraphicsWebView_linkClicked_release)
+  fcQGraphicsWebView_connect_linkClicked(self.h, cast[int](addr tmp[]), cQGraphicsWebView_slot_callback_linkClicked, cQGraphicsWebView_slot_callback_linkClicked_release)
 
 proc tr*(_: type gen_qgraphicswebview_types.QGraphicsWebView, s: cstring, c: cstring): string =
   let v_ms = fcQGraphicsWebView_tr2(s, c)
@@ -781,11 +783,11 @@ type QGraphicsWebViewVTable* {.inheritable, pure.} = object
   supportsExtension*: QGraphicsWebViewsupportsExtensionProc
   setExtension*: QGraphicsWebViewsetExtensionProc
   extension*: QGraphicsWebViewextensionProc
-proc QGraphicsWebViewmetaObject*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qobjectdefs_types.QMetaObject =
+proc QGraphicsWebViewmetaObject*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsWebView_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQGraphicsWebView_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -796,8 +798,8 @@ proc miqt_exec_callback_cQGraphicsWebView_metaObject(vtbl: pointer, self: pointe
 proc QGraphicsWebViewmetacast*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cstring): pointer =
   fcQGraphicsWebView_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQGraphicsWebView_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -806,8 +808,8 @@ proc miqt_exec_callback_cQGraphicsWebView_metacast(vtbl: pointer, self: pointer,
 proc QGraphicsWebViewmetacall*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: cint, param2: cint, param3: pointer): cint =
   fcQGraphicsWebView_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQGraphicsWebView_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -818,25 +820,25 @@ proc miqt_exec_callback_cQGraphicsWebView_metacall(vtbl: pointer, self: pointer,
 proc QGraphicsWebViewsetGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView, rect: gen_qrect_types.QRectF): void =
   fcQGraphicsWebView_virtualbase_setGeometry(self.h, rect.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_setGeometry(vtbl: pointer, self: pointer, rect: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
   vtbl[].setGeometry(self, slotval1)
 
-proc QGraphicsWebViewupdateGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc QGraphicsWebViewupdateGeometry*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_virtualbase_updateGeometry(self.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_updateGeometry(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_updateGeometry(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   vtbl[].updateGeometry(self)
 
 proc QGraphicsWebViewpaint*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsWebView_virtualbase_paint(self.h, param1.h, options.h, widget.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_paint(vtbl: pointer, self: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_paint(self: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: param1, owned: false)
   let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: options, owned: false)
@@ -846,8 +848,8 @@ proc miqt_exec_callback_cQGraphicsWebView_paint(vtbl: pointer, self: pointer, pa
 proc QGraphicsWebViewitemChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_itemChange(self.h, cint(change), value.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_itemChange(vtbl: pointer, self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -860,8 +862,8 @@ proc miqt_exec_callback_cQGraphicsWebView_itemChange(vtbl: pointer, self: pointe
 proc QGraphicsWebViewevent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsWebView_virtualbase_event(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -870,8 +872,8 @@ proc miqt_exec_callback_cQGraphicsWebView_event(vtbl: pointer, self: pointer, pa
 proc QGraphicsWebViewsizeHint*(self: gen_qgraphicswebview_types.QGraphicsWebView, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQGraphicsWebView_virtualbase_sizeHint(self.h, cint(which), constraint.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_sizeHint(vtbl: pointer, self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(which)
   let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
@@ -884,8 +886,8 @@ proc miqt_exec_callback_cQGraphicsWebView_sizeHint(vtbl: pointer, self: pointer,
 proc QGraphicsWebViewinputMethodQuery*(self: gen_qgraphicswebview_types.QGraphicsWebView, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -897,8 +899,8 @@ proc miqt_exec_callback_cQGraphicsWebView_inputMethodQuery(vtbl: pointer, self: 
 proc QGraphicsWebViewmousePressEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
   fcQGraphicsWebView_virtualbase_mousePressEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_mousePressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -906,8 +908,8 @@ proc miqt_exec_callback_cQGraphicsWebView_mousePressEvent(vtbl: pointer, self: p
 proc QGraphicsWebViewmouseDoubleClickEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
   fcQGraphicsWebView_virtualbase_mouseDoubleClickEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_mouseDoubleClickEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
@@ -915,8 +917,8 @@ proc miqt_exec_callback_cQGraphicsWebView_mouseDoubleClickEvent(vtbl: pointer, s
 proc QGraphicsWebViewmouseReleaseEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
   fcQGraphicsWebView_virtualbase_mouseReleaseEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_mouseReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -924,8 +926,8 @@ proc miqt_exec_callback_cQGraphicsWebView_mouseReleaseEvent(vtbl: pointer, self:
 proc QGraphicsWebViewmouseMoveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void =
   fcQGraphicsWebView_virtualbase_mouseMoveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_mouseMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -933,8 +935,8 @@ proc miqt_exec_callback_cQGraphicsWebView_mouseMoveEvent(vtbl: pointer, self: po
 proc QGraphicsWebViewhoverMoveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
   fcQGraphicsWebView_virtualbase_hoverMoveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_hoverMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_hoverMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: param1, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
@@ -942,8 +944,8 @@ proc miqt_exec_callback_cQGraphicsWebView_hoverMoveEvent(vtbl: pointer, self: po
 proc QGraphicsWebViewhoverLeaveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
   fcQGraphicsWebView_virtualbase_hoverLeaveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_hoverLeaveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_hoverLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: param1, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
@@ -951,8 +953,8 @@ proc miqt_exec_callback_cQGraphicsWebView_hoverLeaveEvent(vtbl: pointer, self: p
 proc QGraphicsWebViewwheelEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void =
   fcQGraphicsWebView_virtualbase_wheelEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_wheelEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: param1, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -960,8 +962,8 @@ proc miqt_exec_callback_cQGraphicsWebView_wheelEvent(vtbl: pointer, self: pointe
 proc QGraphicsWebViewkeyPressEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qevent_types.QKeyEvent): void =
   fcQGraphicsWebView_virtualbase_keyPressEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_keyPressEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -969,8 +971,8 @@ proc miqt_exec_callback_cQGraphicsWebView_keyPressEvent(vtbl: pointer, self: poi
 proc QGraphicsWebViewkeyReleaseEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qevent_types.QKeyEvent): void =
   fcQGraphicsWebView_virtualbase_keyReleaseEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_keyReleaseEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -978,8 +980,8 @@ proc miqt_exec_callback_cQGraphicsWebView_keyReleaseEvent(vtbl: pointer, self: p
 proc QGraphicsWebViewcontextMenuEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void =
   fcQGraphicsWebView_virtualbase_contextMenuEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_contextMenuEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: param1, owned: false)
   vtbl[].contextMenuEvent(self, slotval1)
@@ -987,8 +989,8 @@ proc miqt_exec_callback_cQGraphicsWebView_contextMenuEvent(vtbl: pointer, self: 
 proc QGraphicsWebViewdragEnterEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
   fcQGraphicsWebView_virtualbase_dragEnterEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_dragEnterEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -996,8 +998,8 @@ proc miqt_exec_callback_cQGraphicsWebView_dragEnterEvent(vtbl: pointer, self: po
 proc QGraphicsWebViewdragLeaveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
   fcQGraphicsWebView_virtualbase_dragLeaveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_dragLeaveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -1005,8 +1007,8 @@ proc miqt_exec_callback_cQGraphicsWebView_dragLeaveEvent(vtbl: pointer, self: po
 proc QGraphicsWebViewdragMoveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
   fcQGraphicsWebView_virtualbase_dragMoveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_dragMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -1014,8 +1016,8 @@ proc miqt_exec_callback_cQGraphicsWebView_dragMoveEvent(vtbl: pointer, self: poi
 proc QGraphicsWebViewdropEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void =
   fcQGraphicsWebView_virtualbase_dropEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_dropEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -1023,8 +1025,8 @@ proc miqt_exec_callback_cQGraphicsWebView_dropEvent(vtbl: pointer, self: pointer
 proc QGraphicsWebViewfocusInEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qevent_types.QFocusEvent): void =
   fcQGraphicsWebView_virtualbase_focusInEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -1032,8 +1034,8 @@ proc miqt_exec_callback_cQGraphicsWebView_focusInEvent(vtbl: pointer, self: poin
 proc QGraphicsWebViewfocusOutEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qevent_types.QFocusEvent): void =
   fcQGraphicsWebView_virtualbase_focusOutEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -1041,8 +1043,8 @@ proc miqt_exec_callback_cQGraphicsWebView_focusOutEvent(vtbl: pointer, self: poi
 proc QGraphicsWebViewinputMethodEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQGraphicsWebView_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -1050,8 +1052,8 @@ proc miqt_exec_callback_cQGraphicsWebView_inputMethodEvent(vtbl: pointer, self: 
 proc QGraphicsWebViewfocusNextPrevChild*(self: gen_qgraphicswebview_types.QGraphicsWebView, next: bool): bool =
   fcQGraphicsWebView_virtualbase_focusNextPrevChild(self.h, next)
 
-proc miqt_exec_callback_cQGraphicsWebView_focusNextPrevChild(vtbl: pointer, self: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = next
   var virtualReturn = vtbl[].focusNextPrevChild(self, slotval1)
@@ -1060,8 +1062,8 @@ proc miqt_exec_callback_cQGraphicsWebView_focusNextPrevChild(vtbl: pointer, self
 proc QGraphicsWebViewsceneEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, param1: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsWebView_virtualbase_sceneEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_sceneEvent(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_sceneEvent(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].sceneEvent(self, slotval1)
@@ -1070,8 +1072,8 @@ proc miqt_exec_callback_cQGraphicsWebView_sceneEvent(vtbl: pointer, self: pointe
 proc QGraphicsWebViewgetContentsMargins*(self: gen_qgraphicswebview_types.QGraphicsWebView, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void =
   fcQGraphicsWebView_virtualbase_getContentsMargins(self.h, left, top, right, bottom)
 
-proc miqt_exec_callback_cQGraphicsWebView_getContentsMargins(vtbl: pointer, self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = left
   let slotval2 = top
@@ -1079,11 +1081,11 @@ proc miqt_exec_callback_cQGraphicsWebView_getContentsMargins(vtbl: pointer, self
   let slotval4 = bottom
   vtbl[].getContentsMargins(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QGraphicsWebViewtypeX*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): cint =
+proc QGraphicsWebViewtypeX*(self: gen_qgraphicswebview_types.QGraphicsWebView): cint =
   fcQGraphicsWebView_virtualbase_typeX(self.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_typeX(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_typeX(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   var virtualReturn = vtbl[].typeX(self)
   virtualReturn
@@ -1091,19 +1093,19 @@ proc miqt_exec_callback_cQGraphicsWebView_typeX(vtbl: pointer, self: pointer): c
 proc QGraphicsWebViewpaintWindowFrame*(self: gen_qgraphicswebview_types.QGraphicsWebView, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void =
   fcQGraphicsWebView_virtualbase_paintWindowFrame(self.h, painter.h, option.h, widget.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_paintWindowFrame(vtbl: pointer, self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_paintWindowFrame(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
   let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
   vtbl[].paintWindowFrame(self, slotval1, slotval2, slotval3)
 
-proc QGraphicsWebViewboundingRect*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qrect_types.QRectF =
+proc QGraphicsWebViewboundingRect*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQGraphicsWebView_virtualbase_boundingRect(self.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_boundingRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
   virtualReturn.owned = false # TODO move?
@@ -1111,11 +1113,11 @@ proc miqt_exec_callback_cQGraphicsWebView_boundingRect(vtbl: pointer, self: poin
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QGraphicsWebViewshape*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qpainterpath_types.QPainterPath =
+proc QGraphicsWebViewshape*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQGraphicsWebView_virtualbase_shape(self.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_shape(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_shape(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   var virtualReturn = vtbl[].shape(self)
   virtualReturn.owned = false # TODO move?
@@ -1126,8 +1128,8 @@ proc miqt_exec_callback_cQGraphicsWebView_shape(vtbl: pointer, self: pointer): p
 proc QGraphicsWebViewinitStyleOption*(self: gen_qgraphicswebview_types.QGraphicsWebView, option: gen_qstyleoption_types.QStyleOption): void =
   fcQGraphicsWebView_virtualbase_initStyleOption(self.h, option.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_initStyleOption(vtbl: pointer, self: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
   vtbl[].initStyleOption(self, slotval1)
@@ -1135,8 +1137,8 @@ proc miqt_exec_callback_cQGraphicsWebView_initStyleOption(vtbl: pointer, self: p
 proc QGraphicsWebViewpropertyChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_propertyChange(self.h, struct_miqt_string(data: propertyName, len: csize_t(len(propertyName))), value.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_propertyChange(vtbl: pointer, self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let vpropertyName_ms = propertyName
   let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
@@ -1152,8 +1154,8 @@ proc miqt_exec_callback_cQGraphicsWebView_propertyChange(vtbl: pointer, self: po
 proc QGraphicsWebViewwindowFrameEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, e: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsWebView_virtualbase_windowFrameEvent(self.h, e.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_windowFrameEvent(vtbl: pointer, self: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_windowFrameEvent(self: pointer, e: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
   var virtualReturn = vtbl[].windowFrameEvent(self, slotval1)
@@ -1162,8 +1164,8 @@ proc miqt_exec_callback_cQGraphicsWebView_windowFrameEvent(vtbl: pointer, self: 
 proc QGraphicsWebViewwindowFrameSectionAt*(self: gen_qgraphicswebview_types.QGraphicsWebView, pos: gen_qpoint_types.QPointF): cint =
   cint(fcQGraphicsWebView_virtualbase_windowFrameSectionAt(self.h, pos.h))
 
-proc miqt_exec_callback_cQGraphicsWebView_windowFrameSectionAt(vtbl: pointer, self: pointer, pos: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_windowFrameSectionAt(self: pointer, pos: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: pos, owned: false)
   var virtualReturn = vtbl[].windowFrameSectionAt(self, slotval1)
@@ -1172,8 +1174,8 @@ proc miqt_exec_callback_cQGraphicsWebView_windowFrameSectionAt(vtbl: pointer, se
 proc QGraphicsWebViewchangeEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_changeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_changeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].changeEvent(self, slotval1)
@@ -1181,8 +1183,8 @@ proc miqt_exec_callback_cQGraphicsWebView_changeEvent(vtbl: pointer, self: point
 proc QGraphicsWebViewcloseEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qevent_types.QCloseEvent): void =
   fcQGraphicsWebView_virtualbase_closeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_closeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
   vtbl[].closeEvent(self, slotval1)
@@ -1190,8 +1192,8 @@ proc miqt_exec_callback_cQGraphicsWebView_closeEvent(vtbl: pointer, self: pointe
 proc QGraphicsWebViewhideEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qevent_types.QHideEvent): void =
   fcQGraphicsWebView_virtualbase_hideEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_hideEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
   vtbl[].hideEvent(self, slotval1)
@@ -1199,25 +1201,25 @@ proc miqt_exec_callback_cQGraphicsWebView_hideEvent(vtbl: pointer, self: pointer
 proc QGraphicsWebViewmoveEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): void =
   fcQGraphicsWebView_virtualbase_moveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_moveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event, owned: false)
   vtbl[].moveEvent(self, slotval1)
 
-proc QGraphicsWebViewpolishEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc QGraphicsWebViewpolishEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_virtualbase_polishEvent(self.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_polishEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_polishEvent(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   vtbl[].polishEvent(self)
 
 proc QGraphicsWebViewresizeEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent): void =
   fcQGraphicsWebView_virtualbase_resizeEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_resizeEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event, owned: false)
   vtbl[].resizeEvent(self, slotval1)
@@ -1225,8 +1227,8 @@ proc miqt_exec_callback_cQGraphicsWebView_resizeEvent(vtbl: pointer, self: point
 proc QGraphicsWebViewshowEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qevent_types.QShowEvent): void =
   fcQGraphicsWebView_virtualbase_showEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_showEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
   vtbl[].showEvent(self, slotval1)
@@ -1234,8 +1236,8 @@ proc miqt_exec_callback_cQGraphicsWebView_showEvent(vtbl: pointer, self: pointer
 proc QGraphicsWebViewgrabMouseEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_grabMouseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_grabMouseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_grabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].grabMouseEvent(self, slotval1)
@@ -1243,8 +1245,8 @@ proc miqt_exec_callback_cQGraphicsWebView_grabMouseEvent(vtbl: pointer, self: po
 proc QGraphicsWebViewungrabMouseEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_ungrabMouseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_ungrabMouseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_ungrabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].ungrabMouseEvent(self, slotval1)
@@ -1252,8 +1254,8 @@ proc miqt_exec_callback_cQGraphicsWebView_ungrabMouseEvent(vtbl: pointer, self: 
 proc QGraphicsWebViewgrabKeyboardEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_grabKeyboardEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_grabKeyboardEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_grabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].grabKeyboardEvent(self, slotval1)
@@ -1261,8 +1263,8 @@ proc miqt_exec_callback_cQGraphicsWebView_grabKeyboardEvent(vtbl: pointer, self:
 proc QGraphicsWebViewungrabKeyboardEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_ungrabKeyboardEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_ungrabKeyboardEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_ungrabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].ungrabKeyboardEvent(self, slotval1)
@@ -1270,8 +1272,8 @@ proc miqt_exec_callback_cQGraphicsWebView_ungrabKeyboardEvent(vtbl: pointer, sel
 proc QGraphicsWebVieweventFilter*(self: gen_qgraphicswebview_types.QGraphicsWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsWebView_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1281,8 +1283,8 @@ proc miqt_exec_callback_cQGraphicsWebView_eventFilter(vtbl: pointer, self: point
 proc QGraphicsWebViewtimerEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQGraphicsWebView_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1290,8 +1292,8 @@ proc miqt_exec_callback_cQGraphicsWebView_timerEvent(vtbl: pointer, self: pointe
 proc QGraphicsWebViewchildEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QChildEvent): void =
   fcQGraphicsWebView_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1299,8 +1301,8 @@ proc miqt_exec_callback_cQGraphicsWebView_childEvent(vtbl: pointer, self: pointe
 proc QGraphicsWebViewcustomEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qcoreevent_types.QEvent): void =
   fcQGraphicsWebView_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1308,8 +1310,8 @@ proc miqt_exec_callback_cQGraphicsWebView_customEvent(vtbl: pointer, self: point
 proc QGraphicsWebViewconnectNotify*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQGraphicsWebView_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1317,8 +1319,8 @@ proc miqt_exec_callback_cQGraphicsWebView_connectNotify(vtbl: pointer, self: poi
 proc QGraphicsWebViewdisconnectNotify*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQGraphicsWebView_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
@@ -1326,8 +1328,8 @@ proc miqt_exec_callback_cQGraphicsWebView_disconnectNotify(vtbl: pointer, self: 
 proc QGraphicsWebViewadvance*(self: gen_qgraphicswebview_types.QGraphicsWebView, phase: cint): void =
   fcQGraphicsWebView_virtualbase_advance(self.h, phase)
 
-proc miqt_exec_callback_cQGraphicsWebView_advance(vtbl: pointer, self: pointer, phase: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = phase
   vtbl[].advance(self, slotval1)
@@ -1335,8 +1337,8 @@ proc miqt_exec_callback_cQGraphicsWebView_advance(vtbl: pointer, self: pointer, 
 proc QGraphicsWebViewcontains*(self: gen_qgraphicswebview_types.QGraphicsWebView, point: gen_qpoint_types.QPointF): bool =
   fcQGraphicsWebView_virtualbase_contains(self.h, point.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_contains(vtbl: pointer, self: pointer, point: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
@@ -1345,8 +1347,8 @@ proc miqt_exec_callback_cQGraphicsWebView_contains(vtbl: pointer, self: pointer,
 proc QGraphicsWebViewcollidesWithItem*(self: gen_qgraphicswebview_types.QGraphicsWebView, other: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): bool =
   fcQGraphicsWebView_virtualbase_collidesWithItem(self.h, other.h, cint(mode))
 
-proc miqt_exec_callback_cQGraphicsWebView_collidesWithItem(vtbl: pointer, self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
@@ -1356,8 +1358,8 @@ proc miqt_exec_callback_cQGraphicsWebView_collidesWithItem(vtbl: pointer, self: 
 proc QGraphicsWebViewcollidesWithPath*(self: gen_qgraphicswebview_types.QGraphicsWebView, path: gen_qpainterpath_types.QPainterPath, mode: cint): bool =
   fcQGraphicsWebView_virtualbase_collidesWithPath(self.h, path.h, cint(mode))
 
-proc miqt_exec_callback_cQGraphicsWebView_collidesWithPath(vtbl: pointer, self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
@@ -1367,18 +1369,18 @@ proc miqt_exec_callback_cQGraphicsWebView_collidesWithPath(vtbl: pointer, self: 
 proc QGraphicsWebViewisObscuredBy*(self: gen_qgraphicswebview_types.QGraphicsWebView, item: gen_qgraphicsitem_types.QGraphicsItem): bool =
   fcQGraphicsWebView_virtualbase_isObscuredBy(self.h, item.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_isObscuredBy(vtbl: pointer, self: pointer, item: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
   var virtualReturn = vtbl[].isObscuredBy(self, slotval1)
   virtualReturn
 
-proc QGraphicsWebViewopaqueArea*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qpainterpath_types.QPainterPath =
+proc QGraphicsWebViewopaqueArea*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQGraphicsWebView_virtualbase_opaqueArea(self.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_opaqueArea(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   var virtualReturn = vtbl[].opaqueArea(self)
   virtualReturn.owned = false # TODO move?
@@ -1389,8 +1391,8 @@ proc miqt_exec_callback_cQGraphicsWebView_opaqueArea(vtbl: pointer, self: pointe
 proc QGraphicsWebViewsceneEventFilter*(self: gen_qgraphicswebview_types.QGraphicsWebView, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool =
   fcQGraphicsWebView_virtualbase_sceneEventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_sceneEventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1400,8 +1402,8 @@ proc miqt_exec_callback_cQGraphicsWebView_sceneEventFilter(vtbl: pointer, self: 
 proc QGraphicsWebViewhoverEnterEvent*(self: gen_qgraphicswebview_types.QGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void =
   fcQGraphicsWebView_virtualbase_hoverEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_hoverEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
@@ -1409,8 +1411,8 @@ proc miqt_exec_callback_cQGraphicsWebView_hoverEnterEvent(vtbl: pointer, self: p
 proc QGraphicsWebViewsupportsExtension*(self: gen_qgraphicswebview_types.QGraphicsWebView, extension: cint): bool =
   fcQGraphicsWebView_virtualbase_supportsExtension(self.h, cint(extension))
 
-proc miqt_exec_callback_cQGraphicsWebView_supportsExtension(vtbl: pointer, self: pointer, extension: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(extension)
   var virtualReturn = vtbl[].supportsExtension(self, slotval1)
@@ -1419,8 +1421,8 @@ proc miqt_exec_callback_cQGraphicsWebView_supportsExtension(vtbl: pointer, self:
 proc QGraphicsWebViewsetExtension*(self: gen_qgraphicswebview_types.QGraphicsWebView, extension: cint, variant: gen_qvariant_types.QVariant): void =
   fcQGraphicsWebView_virtualbase_setExtension(self.h, cint(extension), variant.h)
 
-proc miqt_exec_callback_cQGraphicsWebView_setExtension(vtbl: pointer, self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = cint(extension)
   let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
@@ -1429,8 +1431,8 @@ proc miqt_exec_callback_cQGraphicsWebView_setExtension(vtbl: pointer, self: poin
 proc QGraphicsWebViewextension*(self: gen_qgraphicswebview_types.QGraphicsWebView, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQGraphicsWebView_virtualbase_extension(self.h, variant.h), owned: true)
 
-proc miqt_exec_callback_cQGraphicsWebView_extension(vtbl: pointer, self: pointer, variant: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QGraphicsWebViewVTable](vtbl)
+proc cQGraphicsWebView_vtable_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
   let self = QGraphicsWebView(h: self)
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
   var virtualReturn = vtbl[].extension(self, slotval1)
@@ -1441,11 +1443,11 @@ proc miqt_exec_callback_cQGraphicsWebView_extension(vtbl: pointer, self: pointer
 
 type VirtualQGraphicsWebView* {.inheritable.} = ref object of QGraphicsWebView
   vtbl*: cQGraphicsWebViewVTable
-method metaObject*(self: VirtualQGraphicsWebView, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQGraphicsWebView): gen_qobjectdefs_types.QMetaObject {.base.} =
   QGraphicsWebViewmetaObject(self[])
-proc miqt_exec_method_cQGraphicsWebView_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQGraphicsWebView_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1453,51 +1455,51 @@ proc miqt_exec_method_cQGraphicsWebView_metaObject(vtbl: pointer, inst: pointer)
 
 method metacast*(self: VirtualQGraphicsWebView, param1: cstring): pointer {.base.} =
   QGraphicsWebViewmetacast(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQGraphicsWebView, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QGraphicsWebViewmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQGraphicsWebView_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method setGeometry*(self: VirtualQGraphicsWebView, rect: gen_qrect_types.QRectF): void {.base.} =
   QGraphicsWebViewsetGeometry(self[], rect)
-proc miqt_exec_method_cQGraphicsWebView_setGeometry(vtbl: pointer, inst: pointer, rect: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_setGeometry(self: pointer, rect: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qrect_types.QRectF(h: rect, owned: false)
-  vtbl.setGeometry(slotval1)
+  inst.setGeometry(slotval1)
 
-method updateGeometry*(self: VirtualQGraphicsWebView, ): void {.base.} =
+method updateGeometry*(self: VirtualQGraphicsWebView): void {.base.} =
   QGraphicsWebViewupdateGeometry(self[])
-proc miqt_exec_method_cQGraphicsWebView_updateGeometry(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  vtbl.updateGeometry()
+proc cQGraphicsWebView_method_callback_updateGeometry(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  inst.updateGeometry()
 
 method paint*(self: VirtualQGraphicsWebView, param1: gen_qpainter_types.QPainter, options: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void {.base.} =
   QGraphicsWebViewpaint(self[], param1, options, widget)
-proc miqt_exec_method_cQGraphicsWebView_paint(vtbl: pointer, inst: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_paint(self: pointer, param1: pointer, options: pointer, widget: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: param1, owned: false)
   let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: options, owned: false)
   let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl.paint(slotval1, slotval2, slotval3)
+  inst.paint(slotval1, slotval2, slotval3)
 
 method itemChange*(self: VirtualQGraphicsWebView, change: cint, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWebViewitemChange(self[], change, value)
-proc miqt_exec_method_cQGraphicsWebView_itemChange(vtbl: pointer, inst: pointer, change: cint, value: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_itemChange(self: pointer, change: cint, value: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(change)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  var virtualReturn = vtbl.itemChange(slotval1, slotval2)
+  var virtualReturn = inst.itemChange(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1505,19 +1507,19 @@ proc miqt_exec_method_cQGraphicsWebView_itemChange(vtbl: pointer, inst: pointer,
 
 method event*(self: VirtualQGraphicsWebView, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QGraphicsWebViewevent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method sizeHint*(self: VirtualQGraphicsWebView, which: cint, constraint: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF {.base.} =
   QGraphicsWebViewsizeHint(self[], which, constraint)
-proc miqt_exec_method_cQGraphicsWebView_sizeHint(vtbl: pointer, inst: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_sizeHint(self: pointer, which: cint, constraint: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(which)
   let slotval2 = gen_qsize_types.QSizeF(h: constraint, owned: false)
-  var virtualReturn = vtbl.sizeHint(slotval1, slotval2)
+  var virtualReturn = inst.sizeHint(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1525,10 +1527,10 @@ proc miqt_exec_method_cQGraphicsWebView_sizeHint(vtbl: pointer, inst: pointer, w
 
 method inputMethodQuery*(self: VirtualQGraphicsWebView, query: cint): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWebViewinputMethodQuery(self[], query)
-proc miqt_exec_method_cQGraphicsWebView_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(query)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1536,180 +1538,180 @@ proc miqt_exec_method_cQGraphicsWebView_inputMethodQuery(vtbl: pointer, inst: po
 
 method mousePressEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsWebViewmousePressEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_mousePressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_mousePressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsWebViewmouseDoubleClickEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_mouseDoubleClickEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsWebViewmouseReleaseEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_mouseReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_mouseReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent): void {.base.} =
   QGraphicsWebViewmouseMoveEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_mouseMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_mouseMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMouseEvent(h: param1, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsWebViewhoverMoveEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_hoverMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_hoverMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: param1, owned: false)
-  vtbl.hoverMoveEvent(slotval1)
+  inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsWebViewhoverLeaveEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_hoverLeaveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_hoverLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: param1, owned: false)
-  vtbl.hoverLeaveEvent(slotval1)
+  inst.hoverLeaveEvent(slotval1)
 
 method wheelEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent): void {.base.} =
   QGraphicsWebViewwheelEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_wheelEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_wheelEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneWheelEvent(h: param1, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method keyPressEvent*(self: VirtualQGraphicsWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsWebViewkeyPressEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_keyPressEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_keyPressEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQGraphicsWebView, param1: gen_qevent_types.QKeyEvent): void {.base.} =
   QGraphicsWebViewkeyReleaseEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_keyReleaseEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_keyReleaseEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: param1, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method contextMenuEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent): void {.base.} =
   QGraphicsWebViewcontextMenuEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_contextMenuEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_contextMenuEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneContextMenuEvent(h: param1, owned: false)
-  vtbl.contextMenuEvent(slotval1)
+  inst.contextMenuEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsWebViewdragEnterEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_dragEnterEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsWebViewdragLeaveEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_dragLeaveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsWebViewdragMoveEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_dragMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dropEvent*(self: VirtualQGraphicsWebView, param1: gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent): void {.base.} =
   QGraphicsWebViewdropEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_dropEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneDragDropEvent(h: param1, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method focusInEvent*(self: VirtualQGraphicsWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsWebViewfocusInEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_focusInEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQGraphicsWebView, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QGraphicsWebViewfocusOutEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_focusOutEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQGraphicsWebView, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QGraphicsWebViewinputMethodEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method focusNextPrevChild*(self: VirtualQGraphicsWebView, next: bool): bool {.base.} =
   QGraphicsWebViewfocusNextPrevChild(self[], next)
-proc miqt_exec_method_cQGraphicsWebView_focusNextPrevChild(vtbl: pointer, inst: pointer, next: bool): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_focusNextPrevChild(self: pointer, next: bool): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = next
-  var virtualReturn = vtbl.focusNextPrevChild(slotval1)
+  var virtualReturn = inst.focusNextPrevChild(slotval1)
   virtualReturn
 
 method sceneEvent*(self: VirtualQGraphicsWebView, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QGraphicsWebViewsceneEvent(self[], param1)
-proc miqt_exec_method_cQGraphicsWebView_sceneEvent(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_sceneEvent(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.sceneEvent(slotval1)
+  var virtualReturn = inst.sceneEvent(slotval1)
   virtualReturn
 
 method getContentsMargins*(self: VirtualQGraphicsWebView, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.base.} =
   QGraphicsWebViewgetContentsMargins(self[], left, top, right, bottom)
-proc miqt_exec_method_cQGraphicsWebView_getContentsMargins(vtbl: pointer, inst: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_getContentsMargins(self: pointer, left: ptr float64, top: ptr float64, right: ptr float64, bottom: ptr float64): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = left
   let slotval2 = top
   let slotval3 = right
   let slotval4 = bottom
-  vtbl.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
+  inst.getContentsMargins(slotval1, slotval2, slotval3, slotval4)
 
-method typeX*(self: VirtualQGraphicsWebView, ): cint {.base.} =
+method typeX*(self: VirtualQGraphicsWebView): cint {.base.} =
   QGraphicsWebViewtypeX(self[])
-proc miqt_exec_method_cQGraphicsWebView_typeX(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  var virtualReturn = vtbl.typeX()
+proc cQGraphicsWebView_method_callback_typeX(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  var virtualReturn = inst.typeX()
   virtualReturn
 
 method paintWindowFrame*(self: VirtualQGraphicsWebView, painter: gen_qpainter_types.QPainter, option: gen_qstyleoption_types.QStyleOptionGraphicsItem, widget: gen_qwidget_types.QWidget): void {.base.} =
   QGraphicsWebViewpaintWindowFrame(self[], painter, option, widget)
-proc miqt_exec_method_cQGraphicsWebView_paintWindowFrame(vtbl: pointer, inst: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_paintWindowFrame(self: pointer, painter: pointer, option: pointer, widget: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qstyleoption_types.QStyleOptionGraphicsItem(h: option, owned: false)
   let slotval3 = gen_qwidget_types.QWidget(h: widget, owned: false)
-  vtbl.paintWindowFrame(slotval1, slotval2, slotval3)
+  inst.paintWindowFrame(slotval1, slotval2, slotval3)
 
-method boundingRect*(self: VirtualQGraphicsWebView, ): gen_qrect_types.QRectF {.base.} =
+method boundingRect*(self: VirtualQGraphicsWebView): gen_qrect_types.QRectF {.base.} =
   QGraphicsWebViewboundingRect(self[])
-proc miqt_exec_method_cQGraphicsWebView_boundingRect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  var virtualReturn = vtbl.boundingRect()
+proc cQGraphicsWebView_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  var virtualReturn = inst.boundingRect()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method shape*(self: VirtualQGraphicsWebView, ): gen_qpainterpath_types.QPainterPath {.base.} =
+method shape*(self: VirtualQGraphicsWebView): gen_qpainterpath_types.QPainterPath {.base.} =
   QGraphicsWebViewshape(self[])
-proc miqt_exec_method_cQGraphicsWebView_shape(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  var virtualReturn = vtbl.shape()
+proc cQGraphicsWebView_method_callback_shape(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  var virtualReturn = inst.shape()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1717,21 +1719,21 @@ proc miqt_exec_method_cQGraphicsWebView_shape(vtbl: pointer, inst: pointer): poi
 
 method initStyleOption*(self: VirtualQGraphicsWebView, option: gen_qstyleoption_types.QStyleOption): void {.base.} =
   QGraphicsWebViewinitStyleOption(self[], option)
-proc miqt_exec_method_cQGraphicsWebView_initStyleOption(vtbl: pointer, inst: pointer, option: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_initStyleOption(self: pointer, option: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qstyleoption_types.QStyleOption(h: option, owned: false)
-  vtbl.initStyleOption(slotval1)
+  inst.initStyleOption(slotval1)
 
 method propertyChange*(self: VirtualQGraphicsWebView, propertyName: string, value: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWebViewpropertyChange(self[], propertyName, value)
-proc miqt_exec_method_cQGraphicsWebView_propertyChange(vtbl: pointer, inst: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_propertyChange(self: pointer, propertyName: struct_miqt_string, value: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let vpropertyName_ms = propertyName
   let vpropertyNamex_ret = string.fromBytes(toOpenArrayByte(vpropertyName_ms.data, 0, int(vpropertyName_ms.len)-1))
   c_free(vpropertyName_ms.data)
   let slotval1 = vpropertyNamex_ret
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
-  var virtualReturn = vtbl.propertyChange(slotval1, slotval2)
+  var virtualReturn = inst.propertyChange(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1739,186 +1741,186 @@ proc miqt_exec_method_cQGraphicsWebView_propertyChange(vtbl: pointer, inst: poin
 
 method windowFrameEvent*(self: VirtualQGraphicsWebView, e: gen_qcoreevent_types.QEvent): bool {.base.} =
   QGraphicsWebViewwindowFrameEvent(self[], e)
-proc miqt_exec_method_cQGraphicsWebView_windowFrameEvent(vtbl: pointer, inst: pointer, e: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_windowFrameEvent(self: pointer, e: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: e, owned: false)
-  var virtualReturn = vtbl.windowFrameEvent(slotval1)
+  var virtualReturn = inst.windowFrameEvent(slotval1)
   virtualReturn
 
 method windowFrameSectionAt*(self: VirtualQGraphicsWebView, pos: gen_qpoint_types.QPointF): cint {.base.} =
   QGraphicsWebViewwindowFrameSectionAt(self[], pos)
-proc miqt_exec_method_cQGraphicsWebView_windowFrameSectionAt(vtbl: pointer, inst: pointer, pos: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_windowFrameSectionAt(self: pointer, pos: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qpoint_types.QPointF(h: pos, owned: false)
-  var virtualReturn = vtbl.windowFrameSectionAt(slotval1)
+  var virtualReturn = inst.windowFrameSectionAt(slotval1)
   cint(virtualReturn)
 
 method changeEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewchangeEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_changeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_changeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.changeEvent(slotval1)
+  inst.changeEvent(slotval1)
 
 method closeEvent*(self: VirtualQGraphicsWebView, event: gen_qevent_types.QCloseEvent): void {.base.} =
   QGraphicsWebViewcloseEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_closeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_closeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QCloseEvent(h: event, owned: false)
-  vtbl.closeEvent(slotval1)
+  inst.closeEvent(slotval1)
 
 method hideEvent*(self: VirtualQGraphicsWebView, event: gen_qevent_types.QHideEvent): void {.base.} =
   QGraphicsWebViewhideEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_hideEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_hideEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QHideEvent(h: event, owned: false)
-  vtbl.hideEvent(slotval1)
+  inst.hideEvent(slotval1)
 
 method moveEvent*(self: VirtualQGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent): void {.base.} =
   QGraphicsWebViewmoveEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_moveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_moveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneMoveEvent(h: event, owned: false)
-  vtbl.moveEvent(slotval1)
+  inst.moveEvent(slotval1)
 
-method polishEvent*(self: VirtualQGraphicsWebView, ): void {.base.} =
+method polishEvent*(self: VirtualQGraphicsWebView): void {.base.} =
   QGraphicsWebViewpolishEvent(self[])
-proc miqt_exec_method_cQGraphicsWebView_polishEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  vtbl.polishEvent()
+proc cQGraphicsWebView_method_callback_polishEvent(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  inst.polishEvent()
 
 method resizeEvent*(self: VirtualQGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent): void {.base.} =
   QGraphicsWebViewresizeEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_resizeEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_resizeEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneResizeEvent(h: event, owned: false)
-  vtbl.resizeEvent(slotval1)
+  inst.resizeEvent(slotval1)
 
 method showEvent*(self: VirtualQGraphicsWebView, event: gen_qevent_types.QShowEvent): void {.base.} =
   QGraphicsWebViewshowEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_showEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_showEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qevent_types.QShowEvent(h: event, owned: false)
-  vtbl.showEvent(slotval1)
+  inst.showEvent(slotval1)
 
 method grabMouseEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewgrabMouseEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_grabMouseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_grabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.grabMouseEvent(slotval1)
+  inst.grabMouseEvent(slotval1)
 
 method ungrabMouseEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewungrabMouseEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_ungrabMouseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_ungrabMouseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.ungrabMouseEvent(slotval1)
+  inst.ungrabMouseEvent(slotval1)
 
 method grabKeyboardEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewgrabKeyboardEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_grabKeyboardEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_grabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.grabKeyboardEvent(slotval1)
+  inst.grabKeyboardEvent(slotval1)
 
 method ungrabKeyboardEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewungrabKeyboardEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_ungrabKeyboardEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_ungrabKeyboardEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.ungrabKeyboardEvent(slotval1)
+  inst.ungrabKeyboardEvent(slotval1)
 
 method eventFilter*(self: VirtualQGraphicsWebView, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QGraphicsWebVieweventFilter(self[], watched, event)
-proc miqt_exec_method_cQGraphicsWebView_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QGraphicsWebViewtimerEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QGraphicsWebViewchildEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQGraphicsWebView, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QGraphicsWebViewcustomEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsWebViewconnectNotify(self[], signal)
-proc miqt_exec_method_cQGraphicsWebView_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QGraphicsWebViewdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQGraphicsWebView_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 method advance*(self: VirtualQGraphicsWebView, phase: cint): void {.base.} =
   QGraphicsWebViewadvance(self[], phase)
-proc miqt_exec_method_cQGraphicsWebView_advance(vtbl: pointer, inst: pointer, phase: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_advance(self: pointer, phase: cint): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = phase
-  vtbl.advance(slotval1)
+  inst.advance(slotval1)
 
 method contains*(self: VirtualQGraphicsWebView, point: gen_qpoint_types.QPointF): bool {.base.} =
   QGraphicsWebViewcontains(self[], point)
-proc miqt_exec_method_cQGraphicsWebView_contains(vtbl: pointer, inst: pointer, point: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
-  var virtualReturn = vtbl.contains(slotval1)
+  var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
 method collidesWithItem*(self: VirtualQGraphicsWebView, other: gen_qgraphicsitem_types.QGraphicsItem, mode: cint): bool {.base.} =
   QGraphicsWebViewcollidesWithItem(self[], other, mode)
-proc miqt_exec_method_cQGraphicsWebView_collidesWithItem(vtbl: pointer, inst: pointer, other: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_collidesWithItem(self: pointer, other: pointer, mode: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: other, owned: false)
   let slotval2 = cint(mode)
-  var virtualReturn = vtbl.collidesWithItem(slotval1, slotval2)
+  var virtualReturn = inst.collidesWithItem(slotval1, slotval2)
   virtualReturn
 
 method collidesWithPath*(self: VirtualQGraphicsWebView, path: gen_qpainterpath_types.QPainterPath, mode: cint): bool {.base.} =
   QGraphicsWebViewcollidesWithPath(self[], path, mode)
-proc miqt_exec_method_cQGraphicsWebView_collidesWithPath(vtbl: pointer, inst: pointer, path: pointer, mode: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_collidesWithPath(self: pointer, path: pointer, mode: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qpainterpath_types.QPainterPath(h: path, owned: false)
   let slotval2 = cint(mode)
-  var virtualReturn = vtbl.collidesWithPath(slotval1, slotval2)
+  var virtualReturn = inst.collidesWithPath(slotval1, slotval2)
   virtualReturn
 
 method isObscuredBy*(self: VirtualQGraphicsWebView, item: gen_qgraphicsitem_types.QGraphicsItem): bool {.base.} =
   QGraphicsWebViewisObscuredBy(self[], item)
-proc miqt_exec_method_cQGraphicsWebView_isObscuredBy(vtbl: pointer, inst: pointer, item: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_isObscuredBy(self: pointer, item: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: item, owned: false)
-  var virtualReturn = vtbl.isObscuredBy(slotval1)
+  var virtualReturn = inst.isObscuredBy(slotval1)
   virtualReturn
 
-method opaqueArea*(self: VirtualQGraphicsWebView, ): gen_qpainterpath_types.QPainterPath {.base.} =
+method opaqueArea*(self: VirtualQGraphicsWebView): gen_qpainterpath_types.QPainterPath {.base.} =
   QGraphicsWebViewopaqueArea(self[])
-proc miqt_exec_method_cQGraphicsWebView_opaqueArea(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-  var virtualReturn = vtbl.opaqueArea()
+proc cQGraphicsWebView_method_callback_opaqueArea(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
+  var virtualReturn = inst.opaqueArea()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1926,54 +1928,54 @@ proc miqt_exec_method_cQGraphicsWebView_opaqueArea(vtbl: pointer, inst: pointer)
 
 method sceneEventFilter*(self: VirtualQGraphicsWebView, watched: gen_qgraphicsitem_types.QGraphicsItem, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QGraphicsWebViewsceneEventFilter(self[], watched, event)
-proc miqt_exec_method_cQGraphicsWebView_sceneEventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_sceneEventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicsitem_types.QGraphicsItem(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.sceneEventFilter(slotval1, slotval2)
+  var virtualReturn = inst.sceneEventFilter(slotval1, slotval2)
   virtualReturn
 
 method hoverEnterEvent*(self: VirtualQGraphicsWebView, event: gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent): void {.base.} =
   QGraphicsWebViewhoverEnterEvent(self[], event)
-proc miqt_exec_method_cQGraphicsWebView_hoverEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qgraphicssceneevent_types.QGraphicsSceneHoverEvent(h: event, owned: false)
-  vtbl.hoverEnterEvent(slotval1)
+  inst.hoverEnterEvent(slotval1)
 
 method supportsExtension*(self: VirtualQGraphicsWebView, extension: cint): bool {.base.} =
   QGraphicsWebViewsupportsExtension(self[], extension)
-proc miqt_exec_method_cQGraphicsWebView_supportsExtension(vtbl: pointer, inst: pointer, extension: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_supportsExtension(self: pointer, extension: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(extension)
-  var virtualReturn = vtbl.supportsExtension(slotval1)
+  var virtualReturn = inst.supportsExtension(slotval1)
   virtualReturn
 
 method setExtension*(self: VirtualQGraphicsWebView, extension: cint, variant: gen_qvariant_types.QVariant): void {.base.} =
   QGraphicsWebViewsetExtension(self[], extension, variant)
-proc miqt_exec_method_cQGraphicsWebView_setExtension(vtbl: pointer, inst: pointer, extension: cint, variant: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_setExtension(self: pointer, extension: cint, variant: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = cint(extension)
   let slotval2 = gen_qvariant_types.QVariant(h: variant, owned: false)
-  vtbl.setExtension(slotval1, slotval2)
+  inst.setExtension(slotval1, slotval2)
 
 method extension*(self: VirtualQGraphicsWebView, variant: gen_qvariant_types.QVariant): gen_qvariant_types.QVariant {.base.} =
   QGraphicsWebViewextension(self[], variant)
-proc miqt_exec_method_cQGraphicsWebView_extension(vtbl: pointer, inst: pointer, variant: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQGraphicsWebView](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
+proc cQGraphicsWebView_method_callback_extension(self: pointer, variant: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQGraphicsWebView](fcQGraphicsWebView_vdata(self))
   let slotval1 = gen_qvariant_types.QVariant(h: variant, owned: false)
-  var virtualReturn = vtbl.extension(slotval1)
+  var virtualReturn = inst.extension(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-proc updateMicroFocus*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc updateMicroFocus*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_protectedbase_updateMicroFocus(self.h)
 
-proc sender*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qgraphicswebview_types.QGraphicsWebView): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQGraphicsWebView_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): cint =
+proc senderSignalIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView): cint =
   fcQGraphicsWebView_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: cstring): cint =
@@ -1982,13 +1984,13 @@ proc receivers*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: cstri
 proc isSignalConnected*(self: gen_qgraphicswebview_types.QGraphicsWebView, signal: gen_qmetaobject_types.QMetaMethod): bool =
   fcQGraphicsWebView_protectedbase_isSignalConnected(self.h, signal.h)
 
-proc addToIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc addToIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_protectedbase_addToIndex(self.h)
 
-proc removeFromIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc removeFromIndex*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_protectedbase_removeFromIndex(self.h)
 
-proc prepareGeometryChange*(self: gen_qgraphicswebview_types.QGraphicsWebView, ): void =
+proc prepareGeometryChange*(self: gen_qgraphicswebview_types.QGraphicsWebView): void =
   fcQGraphicsWebView_protectedbase_prepareGeometryChange(self.h)
 
 proc setGraphicsItem*(self: gen_qgraphicswebview_types.QGraphicsWebView, item: gen_qgraphicsitem_types.QGraphicsItem): void =
@@ -2001,439 +2003,369 @@ proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
     vtbl: ref QGraphicsWebViewVTable = nil): gen_qgraphicswebview_types.QGraphicsWebView =
   let vtbl = if vtbl == nil: new QGraphicsWebViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsWebViewVTable, _: ptr cQGraphicsWebView) {.cdecl.} =
-    let vtbl = cast[ref QGraphicsWebViewVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsWebView_metaObject
+    vtbl[].vtbl.metaObject = cQGraphicsWebView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsWebView_metacast
+    vtbl[].vtbl.metacast = cQGraphicsWebView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsWebView_metacall
+    vtbl[].vtbl.metacall = cQGraphicsWebView_vtable_callback_metacall
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsWebView_setGeometry
+    vtbl[].vtbl.setGeometry = cQGraphicsWebView_vtable_callback_setGeometry
   if not isNil(vtbl[].updateGeometry):
-    vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsWebView_updateGeometry
+    vtbl[].vtbl.updateGeometry = cQGraphicsWebView_vtable_callback_updateGeometry
   if not isNil(vtbl[].paint):
-    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsWebView_paint
+    vtbl[].vtbl.paint = cQGraphicsWebView_vtable_callback_paint
   if not isNil(vtbl[].itemChange):
-    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsWebView_itemChange
+    vtbl[].vtbl.itemChange = cQGraphicsWebView_vtable_callback_itemChange
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsWebView_event
+    vtbl[].vtbl.event = cQGraphicsWebView_vtable_callback_event
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsWebView_sizeHint
+    vtbl[].vtbl.sizeHint = cQGraphicsWebView_vtable_callback_sizeHint
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsWebView_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQGraphicsWebView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsWebView_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQGraphicsWebView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsWebView_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQGraphicsWebView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsWebView_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQGraphicsWebView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsWebView_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQGraphicsWebView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hoverMoveEvent):
-    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsWebView_hoverMoveEvent
+    vtbl[].vtbl.hoverMoveEvent = cQGraphicsWebView_vtable_callback_hoverMoveEvent
   if not isNil(vtbl[].hoverLeaveEvent):
-    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsWebView_hoverLeaveEvent
+    vtbl[].vtbl.hoverLeaveEvent = cQGraphicsWebView_vtable_callback_hoverLeaveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsWebView_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQGraphicsWebView_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsWebView_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQGraphicsWebView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsWebView_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQGraphicsWebView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsWebView_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQGraphicsWebView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsWebView_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQGraphicsWebView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsWebView_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQGraphicsWebView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsWebView_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQGraphicsWebView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsWebView_dropEvent
+    vtbl[].vtbl.dropEvent = cQGraphicsWebView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsWebView_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQGraphicsWebView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsWebView_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQGraphicsWebView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsWebView_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQGraphicsWebView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQGraphicsWebView_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQGraphicsWebView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].sceneEvent):
-    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsWebView_sceneEvent
+    vtbl[].vtbl.sceneEvent = cQGraphicsWebView_vtable_callback_sceneEvent
   if not isNil(vtbl[].getContentsMargins):
-    vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsWebView_getContentsMargins
+    vtbl[].vtbl.getContentsMargins = cQGraphicsWebView_vtable_callback_getContentsMargins
   if not isNil(vtbl[].typeX):
-    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsWebView_typeX
+    vtbl[].vtbl.typeX = cQGraphicsWebView_vtable_callback_typeX
   if not isNil(vtbl[].paintWindowFrame):
-    vtbl[].vtbl.paintWindowFrame = miqt_exec_callback_cQGraphicsWebView_paintWindowFrame
+    vtbl[].vtbl.paintWindowFrame = cQGraphicsWebView_vtable_callback_paintWindowFrame
   if not isNil(vtbl[].boundingRect):
-    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsWebView_boundingRect
+    vtbl[].vtbl.boundingRect = cQGraphicsWebView_vtable_callback_boundingRect
   if not isNil(vtbl[].shape):
-    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsWebView_shape
+    vtbl[].vtbl.shape = cQGraphicsWebView_vtable_callback_shape
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQGraphicsWebView_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQGraphicsWebView_vtable_callback_initStyleOption
   if not isNil(vtbl[].propertyChange):
-    vtbl[].vtbl.propertyChange = miqt_exec_callback_cQGraphicsWebView_propertyChange
+    vtbl[].vtbl.propertyChange = cQGraphicsWebView_vtable_callback_propertyChange
   if not isNil(vtbl[].windowFrameEvent):
-    vtbl[].vtbl.windowFrameEvent = miqt_exec_callback_cQGraphicsWebView_windowFrameEvent
+    vtbl[].vtbl.windowFrameEvent = cQGraphicsWebView_vtable_callback_windowFrameEvent
   if not isNil(vtbl[].windowFrameSectionAt):
-    vtbl[].vtbl.windowFrameSectionAt = miqt_exec_callback_cQGraphicsWebView_windowFrameSectionAt
+    vtbl[].vtbl.windowFrameSectionAt = cQGraphicsWebView_vtable_callback_windowFrameSectionAt
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQGraphicsWebView_changeEvent
+    vtbl[].vtbl.changeEvent = cQGraphicsWebView_vtable_callback_changeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQGraphicsWebView_closeEvent
+    vtbl[].vtbl.closeEvent = cQGraphicsWebView_vtable_callback_closeEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQGraphicsWebView_hideEvent
+    vtbl[].vtbl.hideEvent = cQGraphicsWebView_vtable_callback_hideEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQGraphicsWebView_moveEvent
+    vtbl[].vtbl.moveEvent = cQGraphicsWebView_vtable_callback_moveEvent
   if not isNil(vtbl[].polishEvent):
-    vtbl[].vtbl.polishEvent = miqt_exec_callback_cQGraphicsWebView_polishEvent
+    vtbl[].vtbl.polishEvent = cQGraphicsWebView_vtable_callback_polishEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQGraphicsWebView_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQGraphicsWebView_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQGraphicsWebView_showEvent
+    vtbl[].vtbl.showEvent = cQGraphicsWebView_vtable_callback_showEvent
   if not isNil(vtbl[].grabMouseEvent):
-    vtbl[].vtbl.grabMouseEvent = miqt_exec_callback_cQGraphicsWebView_grabMouseEvent
+    vtbl[].vtbl.grabMouseEvent = cQGraphicsWebView_vtable_callback_grabMouseEvent
   if not isNil(vtbl[].ungrabMouseEvent):
-    vtbl[].vtbl.ungrabMouseEvent = miqt_exec_callback_cQGraphicsWebView_ungrabMouseEvent
+    vtbl[].vtbl.ungrabMouseEvent = cQGraphicsWebView_vtable_callback_ungrabMouseEvent
   if not isNil(vtbl[].grabKeyboardEvent):
-    vtbl[].vtbl.grabKeyboardEvent = miqt_exec_callback_cQGraphicsWebView_grabKeyboardEvent
+    vtbl[].vtbl.grabKeyboardEvent = cQGraphicsWebView_vtable_callback_grabKeyboardEvent
   if not isNil(vtbl[].ungrabKeyboardEvent):
-    vtbl[].vtbl.ungrabKeyboardEvent = miqt_exec_callback_cQGraphicsWebView_ungrabKeyboardEvent
+    vtbl[].vtbl.ungrabKeyboardEvent = cQGraphicsWebView_vtable_callback_ungrabKeyboardEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsWebView_eventFilter
+    vtbl[].vtbl.eventFilter = cQGraphicsWebView_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsWebView_timerEvent
+    vtbl[].vtbl.timerEvent = cQGraphicsWebView_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsWebView_childEvent
+    vtbl[].vtbl.childEvent = cQGraphicsWebView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsWebView_customEvent
+    vtbl[].vtbl.customEvent = cQGraphicsWebView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsWebView_connectNotify
+    vtbl[].vtbl.connectNotify = cQGraphicsWebView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsWebView_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = cQGraphicsWebView_vtable_callback_disconnectNotify
   if not isNil(vtbl[].advance):
-    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsWebView_advance
+    vtbl[].vtbl.advance = cQGraphicsWebView_vtable_callback_advance
   if not isNil(vtbl[].contains):
-    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsWebView_contains
+    vtbl[].vtbl.contains = cQGraphicsWebView_vtable_callback_contains
   if not isNil(vtbl[].collidesWithItem):
-    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsWebView_collidesWithItem
+    vtbl[].vtbl.collidesWithItem = cQGraphicsWebView_vtable_callback_collidesWithItem
   if not isNil(vtbl[].collidesWithPath):
-    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsWebView_collidesWithPath
+    vtbl[].vtbl.collidesWithPath = cQGraphicsWebView_vtable_callback_collidesWithPath
   if not isNil(vtbl[].isObscuredBy):
-    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsWebView_isObscuredBy
+    vtbl[].vtbl.isObscuredBy = cQGraphicsWebView_vtable_callback_isObscuredBy
   if not isNil(vtbl[].opaqueArea):
-    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsWebView_opaqueArea
+    vtbl[].vtbl.opaqueArea = cQGraphicsWebView_vtable_callback_opaqueArea
   if not isNil(vtbl[].sceneEventFilter):
-    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsWebView_sceneEventFilter
+    vtbl[].vtbl.sceneEventFilter = cQGraphicsWebView_vtable_callback_sceneEventFilter
   if not isNil(vtbl[].hoverEnterEvent):
-    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsWebView_hoverEnterEvent
+    vtbl[].vtbl.hoverEnterEvent = cQGraphicsWebView_vtable_callback_hoverEnterEvent
   if not isNil(vtbl[].supportsExtension):
-    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsWebView_supportsExtension
+    vtbl[].vtbl.supportsExtension = cQGraphicsWebView_vtable_callback_supportsExtension
   if not isNil(vtbl[].setExtension):
-    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsWebView_setExtension
+    vtbl[].vtbl.setExtension = cQGraphicsWebView_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
-    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsWebView_extension
-  gen_qgraphicswebview_types.QGraphicsWebView(h: fcQGraphicsWebView_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.extension = cQGraphicsWebView_vtable_callback_extension
+  gen_qgraphicswebview_types.QGraphicsWebView(h: fcQGraphicsWebView_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
     vtbl: ref QGraphicsWebViewVTable = nil): gen_qgraphicswebview_types.QGraphicsWebView =
   let vtbl = if vtbl == nil: new QGraphicsWebViewVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsWebViewVTable, _: ptr cQGraphicsWebView) {.cdecl.} =
-    let vtbl = cast[ref QGraphicsWebViewVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QGraphicsWebViewVTable](fcQGraphicsWebView_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQGraphicsWebView_metaObject
+    vtbl[].vtbl.metaObject = cQGraphicsWebView_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQGraphicsWebView_metacast
+    vtbl[].vtbl.metacast = cQGraphicsWebView_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQGraphicsWebView_metacall
+    vtbl[].vtbl.metacall = cQGraphicsWebView_vtable_callback_metacall
   if not isNil(vtbl[].setGeometry):
-    vtbl[].vtbl.setGeometry = miqt_exec_callback_cQGraphicsWebView_setGeometry
+    vtbl[].vtbl.setGeometry = cQGraphicsWebView_vtable_callback_setGeometry
   if not isNil(vtbl[].updateGeometry):
-    vtbl[].vtbl.updateGeometry = miqt_exec_callback_cQGraphicsWebView_updateGeometry
+    vtbl[].vtbl.updateGeometry = cQGraphicsWebView_vtable_callback_updateGeometry
   if not isNil(vtbl[].paint):
-    vtbl[].vtbl.paint = miqt_exec_callback_cQGraphicsWebView_paint
+    vtbl[].vtbl.paint = cQGraphicsWebView_vtable_callback_paint
   if not isNil(vtbl[].itemChange):
-    vtbl[].vtbl.itemChange = miqt_exec_callback_cQGraphicsWebView_itemChange
+    vtbl[].vtbl.itemChange = cQGraphicsWebView_vtable_callback_itemChange
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQGraphicsWebView_event
+    vtbl[].vtbl.event = cQGraphicsWebView_vtable_callback_event
   if not isNil(vtbl[].sizeHint):
-    vtbl[].vtbl.sizeHint = miqt_exec_callback_cQGraphicsWebView_sizeHint
+    vtbl[].vtbl.sizeHint = cQGraphicsWebView_vtable_callback_sizeHint
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQGraphicsWebView_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQGraphicsWebView_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQGraphicsWebView_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQGraphicsWebView_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQGraphicsWebView_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQGraphicsWebView_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQGraphicsWebView_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQGraphicsWebView_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQGraphicsWebView_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQGraphicsWebView_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].hoverMoveEvent):
-    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQGraphicsWebView_hoverMoveEvent
+    vtbl[].vtbl.hoverMoveEvent = cQGraphicsWebView_vtable_callback_hoverMoveEvent
   if not isNil(vtbl[].hoverLeaveEvent):
-    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQGraphicsWebView_hoverLeaveEvent
+    vtbl[].vtbl.hoverLeaveEvent = cQGraphicsWebView_vtable_callback_hoverLeaveEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQGraphicsWebView_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQGraphicsWebView_vtable_callback_wheelEvent
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQGraphicsWebView_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQGraphicsWebView_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQGraphicsWebView_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQGraphicsWebView_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].contextMenuEvent):
-    vtbl[].vtbl.contextMenuEvent = miqt_exec_callback_cQGraphicsWebView_contextMenuEvent
+    vtbl[].vtbl.contextMenuEvent = cQGraphicsWebView_vtable_callback_contextMenuEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQGraphicsWebView_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQGraphicsWebView_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQGraphicsWebView_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQGraphicsWebView_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQGraphicsWebView_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQGraphicsWebView_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQGraphicsWebView_dropEvent
+    vtbl[].vtbl.dropEvent = cQGraphicsWebView_vtable_callback_dropEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQGraphicsWebView_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQGraphicsWebView_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQGraphicsWebView_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQGraphicsWebView_vtable_callback_focusOutEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQGraphicsWebView_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQGraphicsWebView_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusNextPrevChild):
-    vtbl[].vtbl.focusNextPrevChild = miqt_exec_callback_cQGraphicsWebView_focusNextPrevChild
+    vtbl[].vtbl.focusNextPrevChild = cQGraphicsWebView_vtable_callback_focusNextPrevChild
   if not isNil(vtbl[].sceneEvent):
-    vtbl[].vtbl.sceneEvent = miqt_exec_callback_cQGraphicsWebView_sceneEvent
+    vtbl[].vtbl.sceneEvent = cQGraphicsWebView_vtable_callback_sceneEvent
   if not isNil(vtbl[].getContentsMargins):
-    vtbl[].vtbl.getContentsMargins = miqt_exec_callback_cQGraphicsWebView_getContentsMargins
+    vtbl[].vtbl.getContentsMargins = cQGraphicsWebView_vtable_callback_getContentsMargins
   if not isNil(vtbl[].typeX):
-    vtbl[].vtbl.typeX = miqt_exec_callback_cQGraphicsWebView_typeX
+    vtbl[].vtbl.typeX = cQGraphicsWebView_vtable_callback_typeX
   if not isNil(vtbl[].paintWindowFrame):
-    vtbl[].vtbl.paintWindowFrame = miqt_exec_callback_cQGraphicsWebView_paintWindowFrame
+    vtbl[].vtbl.paintWindowFrame = cQGraphicsWebView_vtable_callback_paintWindowFrame
   if not isNil(vtbl[].boundingRect):
-    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQGraphicsWebView_boundingRect
+    vtbl[].vtbl.boundingRect = cQGraphicsWebView_vtable_callback_boundingRect
   if not isNil(vtbl[].shape):
-    vtbl[].vtbl.shape = miqt_exec_callback_cQGraphicsWebView_shape
+    vtbl[].vtbl.shape = cQGraphicsWebView_vtable_callback_shape
   if not isNil(vtbl[].initStyleOption):
-    vtbl[].vtbl.initStyleOption = miqt_exec_callback_cQGraphicsWebView_initStyleOption
+    vtbl[].vtbl.initStyleOption = cQGraphicsWebView_vtable_callback_initStyleOption
   if not isNil(vtbl[].propertyChange):
-    vtbl[].vtbl.propertyChange = miqt_exec_callback_cQGraphicsWebView_propertyChange
+    vtbl[].vtbl.propertyChange = cQGraphicsWebView_vtable_callback_propertyChange
   if not isNil(vtbl[].windowFrameEvent):
-    vtbl[].vtbl.windowFrameEvent = miqt_exec_callback_cQGraphicsWebView_windowFrameEvent
+    vtbl[].vtbl.windowFrameEvent = cQGraphicsWebView_vtable_callback_windowFrameEvent
   if not isNil(vtbl[].windowFrameSectionAt):
-    vtbl[].vtbl.windowFrameSectionAt = miqt_exec_callback_cQGraphicsWebView_windowFrameSectionAt
+    vtbl[].vtbl.windowFrameSectionAt = cQGraphicsWebView_vtable_callback_windowFrameSectionAt
   if not isNil(vtbl[].changeEvent):
-    vtbl[].vtbl.changeEvent = miqt_exec_callback_cQGraphicsWebView_changeEvent
+    vtbl[].vtbl.changeEvent = cQGraphicsWebView_vtable_callback_changeEvent
   if not isNil(vtbl[].closeEvent):
-    vtbl[].vtbl.closeEvent = miqt_exec_callback_cQGraphicsWebView_closeEvent
+    vtbl[].vtbl.closeEvent = cQGraphicsWebView_vtable_callback_closeEvent
   if not isNil(vtbl[].hideEvent):
-    vtbl[].vtbl.hideEvent = miqt_exec_callback_cQGraphicsWebView_hideEvent
+    vtbl[].vtbl.hideEvent = cQGraphicsWebView_vtable_callback_hideEvent
   if not isNil(vtbl[].moveEvent):
-    vtbl[].vtbl.moveEvent = miqt_exec_callback_cQGraphicsWebView_moveEvent
+    vtbl[].vtbl.moveEvent = cQGraphicsWebView_vtable_callback_moveEvent
   if not isNil(vtbl[].polishEvent):
-    vtbl[].vtbl.polishEvent = miqt_exec_callback_cQGraphicsWebView_polishEvent
+    vtbl[].vtbl.polishEvent = cQGraphicsWebView_vtable_callback_polishEvent
   if not isNil(vtbl[].resizeEvent):
-    vtbl[].vtbl.resizeEvent = miqt_exec_callback_cQGraphicsWebView_resizeEvent
+    vtbl[].vtbl.resizeEvent = cQGraphicsWebView_vtable_callback_resizeEvent
   if not isNil(vtbl[].showEvent):
-    vtbl[].vtbl.showEvent = miqt_exec_callback_cQGraphicsWebView_showEvent
+    vtbl[].vtbl.showEvent = cQGraphicsWebView_vtable_callback_showEvent
   if not isNil(vtbl[].grabMouseEvent):
-    vtbl[].vtbl.grabMouseEvent = miqt_exec_callback_cQGraphicsWebView_grabMouseEvent
+    vtbl[].vtbl.grabMouseEvent = cQGraphicsWebView_vtable_callback_grabMouseEvent
   if not isNil(vtbl[].ungrabMouseEvent):
-    vtbl[].vtbl.ungrabMouseEvent = miqt_exec_callback_cQGraphicsWebView_ungrabMouseEvent
+    vtbl[].vtbl.ungrabMouseEvent = cQGraphicsWebView_vtable_callback_ungrabMouseEvent
   if not isNil(vtbl[].grabKeyboardEvent):
-    vtbl[].vtbl.grabKeyboardEvent = miqt_exec_callback_cQGraphicsWebView_grabKeyboardEvent
+    vtbl[].vtbl.grabKeyboardEvent = cQGraphicsWebView_vtable_callback_grabKeyboardEvent
   if not isNil(vtbl[].ungrabKeyboardEvent):
-    vtbl[].vtbl.ungrabKeyboardEvent = miqt_exec_callback_cQGraphicsWebView_ungrabKeyboardEvent
+    vtbl[].vtbl.ungrabKeyboardEvent = cQGraphicsWebView_vtable_callback_ungrabKeyboardEvent
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQGraphicsWebView_eventFilter
+    vtbl[].vtbl.eventFilter = cQGraphicsWebView_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQGraphicsWebView_timerEvent
+    vtbl[].vtbl.timerEvent = cQGraphicsWebView_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQGraphicsWebView_childEvent
+    vtbl[].vtbl.childEvent = cQGraphicsWebView_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQGraphicsWebView_customEvent
+    vtbl[].vtbl.customEvent = cQGraphicsWebView_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQGraphicsWebView_connectNotify
+    vtbl[].vtbl.connectNotify = cQGraphicsWebView_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQGraphicsWebView_disconnectNotify
+    vtbl[].vtbl.disconnectNotify = cQGraphicsWebView_vtable_callback_disconnectNotify
   if not isNil(vtbl[].advance):
-    vtbl[].vtbl.advance = miqt_exec_callback_cQGraphicsWebView_advance
+    vtbl[].vtbl.advance = cQGraphicsWebView_vtable_callback_advance
   if not isNil(vtbl[].contains):
-    vtbl[].vtbl.contains = miqt_exec_callback_cQGraphicsWebView_contains
+    vtbl[].vtbl.contains = cQGraphicsWebView_vtable_callback_contains
   if not isNil(vtbl[].collidesWithItem):
-    vtbl[].vtbl.collidesWithItem = miqt_exec_callback_cQGraphicsWebView_collidesWithItem
+    vtbl[].vtbl.collidesWithItem = cQGraphicsWebView_vtable_callback_collidesWithItem
   if not isNil(vtbl[].collidesWithPath):
-    vtbl[].vtbl.collidesWithPath = miqt_exec_callback_cQGraphicsWebView_collidesWithPath
+    vtbl[].vtbl.collidesWithPath = cQGraphicsWebView_vtable_callback_collidesWithPath
   if not isNil(vtbl[].isObscuredBy):
-    vtbl[].vtbl.isObscuredBy = miqt_exec_callback_cQGraphicsWebView_isObscuredBy
+    vtbl[].vtbl.isObscuredBy = cQGraphicsWebView_vtable_callback_isObscuredBy
   if not isNil(vtbl[].opaqueArea):
-    vtbl[].vtbl.opaqueArea = miqt_exec_callback_cQGraphicsWebView_opaqueArea
+    vtbl[].vtbl.opaqueArea = cQGraphicsWebView_vtable_callback_opaqueArea
   if not isNil(vtbl[].sceneEventFilter):
-    vtbl[].vtbl.sceneEventFilter = miqt_exec_callback_cQGraphicsWebView_sceneEventFilter
+    vtbl[].vtbl.sceneEventFilter = cQGraphicsWebView_vtable_callback_sceneEventFilter
   if not isNil(vtbl[].hoverEnterEvent):
-    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQGraphicsWebView_hoverEnterEvent
+    vtbl[].vtbl.hoverEnterEvent = cQGraphicsWebView_vtable_callback_hoverEnterEvent
   if not isNil(vtbl[].supportsExtension):
-    vtbl[].vtbl.supportsExtension = miqt_exec_callback_cQGraphicsWebView_supportsExtension
+    vtbl[].vtbl.supportsExtension = cQGraphicsWebView_vtable_callback_supportsExtension
   if not isNil(vtbl[].setExtension):
-    vtbl[].vtbl.setExtension = miqt_exec_callback_cQGraphicsWebView_setExtension
+    vtbl[].vtbl.setExtension = cQGraphicsWebView_vtable_callback_setExtension
   if not isNil(vtbl[].extension):
-    vtbl[].vtbl.extension = miqt_exec_callback_cQGraphicsWebView_extension
-  gen_qgraphicswebview_types.QGraphicsWebView(h: fcQGraphicsWebView_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.extension = cQGraphicsWebView_vtable_callback_extension
+  gen_qgraphicswebview_types.QGraphicsWebView(h: fcQGraphicsWebView_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQGraphicsWebView_mvtbl = cQGraphicsWebViewVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQGraphicsWebView()[])](self.fcQGraphicsWebView_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQGraphicsWebView_method_callback_metaObject,
+  metacast: cQGraphicsWebView_method_callback_metacast,
+  metacall: cQGraphicsWebView_method_callback_metacall,
+  setGeometry: cQGraphicsWebView_method_callback_setGeometry,
+  updateGeometry: cQGraphicsWebView_method_callback_updateGeometry,
+  paint: cQGraphicsWebView_method_callback_paint,
+  itemChange: cQGraphicsWebView_method_callback_itemChange,
+  event: cQGraphicsWebView_method_callback_event,
+  sizeHint: cQGraphicsWebView_method_callback_sizeHint,
+  inputMethodQuery: cQGraphicsWebView_method_callback_inputMethodQuery,
+  mousePressEvent: cQGraphicsWebView_method_callback_mousePressEvent,
+  mouseDoubleClickEvent: cQGraphicsWebView_method_callback_mouseDoubleClickEvent,
+  mouseReleaseEvent: cQGraphicsWebView_method_callback_mouseReleaseEvent,
+  mouseMoveEvent: cQGraphicsWebView_method_callback_mouseMoveEvent,
+  hoverMoveEvent: cQGraphicsWebView_method_callback_hoverMoveEvent,
+  hoverLeaveEvent: cQGraphicsWebView_method_callback_hoverLeaveEvent,
+  wheelEvent: cQGraphicsWebView_method_callback_wheelEvent,
+  keyPressEvent: cQGraphicsWebView_method_callback_keyPressEvent,
+  keyReleaseEvent: cQGraphicsWebView_method_callback_keyReleaseEvent,
+  contextMenuEvent: cQGraphicsWebView_method_callback_contextMenuEvent,
+  dragEnterEvent: cQGraphicsWebView_method_callback_dragEnterEvent,
+  dragLeaveEvent: cQGraphicsWebView_method_callback_dragLeaveEvent,
+  dragMoveEvent: cQGraphicsWebView_method_callback_dragMoveEvent,
+  dropEvent: cQGraphicsWebView_method_callback_dropEvent,
+  focusInEvent: cQGraphicsWebView_method_callback_focusInEvent,
+  focusOutEvent: cQGraphicsWebView_method_callback_focusOutEvent,
+  inputMethodEvent: cQGraphicsWebView_method_callback_inputMethodEvent,
+  focusNextPrevChild: cQGraphicsWebView_method_callback_focusNextPrevChild,
+  sceneEvent: cQGraphicsWebView_method_callback_sceneEvent,
+  getContentsMargins: cQGraphicsWebView_method_callback_getContentsMargins,
+  typeX: cQGraphicsWebView_method_callback_typeX,
+  paintWindowFrame: cQGraphicsWebView_method_callback_paintWindowFrame,
+  boundingRect: cQGraphicsWebView_method_callback_boundingRect,
+  shape: cQGraphicsWebView_method_callback_shape,
+  initStyleOption: cQGraphicsWebView_method_callback_initStyleOption,
+  propertyChange: cQGraphicsWebView_method_callback_propertyChange,
+  windowFrameEvent: cQGraphicsWebView_method_callback_windowFrameEvent,
+  windowFrameSectionAt: cQGraphicsWebView_method_callback_windowFrameSectionAt,
+  changeEvent: cQGraphicsWebView_method_callback_changeEvent,
+  closeEvent: cQGraphicsWebView_method_callback_closeEvent,
+  hideEvent: cQGraphicsWebView_method_callback_hideEvent,
+  moveEvent: cQGraphicsWebView_method_callback_moveEvent,
+  polishEvent: cQGraphicsWebView_method_callback_polishEvent,
+  resizeEvent: cQGraphicsWebView_method_callback_resizeEvent,
+  showEvent: cQGraphicsWebView_method_callback_showEvent,
+  grabMouseEvent: cQGraphicsWebView_method_callback_grabMouseEvent,
+  ungrabMouseEvent: cQGraphicsWebView_method_callback_ungrabMouseEvent,
+  grabKeyboardEvent: cQGraphicsWebView_method_callback_grabKeyboardEvent,
+  ungrabKeyboardEvent: cQGraphicsWebView_method_callback_ungrabKeyboardEvent,
+  eventFilter: cQGraphicsWebView_method_callback_eventFilter,
+  timerEvent: cQGraphicsWebView_method_callback_timerEvent,
+  childEvent: cQGraphicsWebView_method_callback_childEvent,
+  customEvent: cQGraphicsWebView_method_callback_customEvent,
+  connectNotify: cQGraphicsWebView_method_callback_connectNotify,
+  disconnectNotify: cQGraphicsWebView_method_callback_disconnectNotify,
+  advance: cQGraphicsWebView_method_callback_advance,
+  contains: cQGraphicsWebView_method_callback_contains,
+  collidesWithItem: cQGraphicsWebView_method_callback_collidesWithItem,
+  collidesWithPath: cQGraphicsWebView_method_callback_collidesWithPath,
+  isObscuredBy: cQGraphicsWebView_method_callback_isObscuredBy,
+  opaqueArea: cQGraphicsWebView_method_callback_opaqueArea,
+  sceneEventFilter: cQGraphicsWebView_method_callback_sceneEventFilter,
+  hoverEnterEvent: cQGraphicsWebView_method_callback_hoverEnterEvent,
+  supportsExtension: cQGraphicsWebView_method_callback_supportsExtension,
+  setExtension: cQGraphicsWebView_method_callback_setExtension,
+  extension: cQGraphicsWebView_method_callback_extension,
+)
 proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
-    vtbl: VirtualQGraphicsWebView) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsWebViewVTable, _: ptr cQGraphicsWebView) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQGraphicsWebView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsWebView_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsWebView_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsWebView_metacall
-  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsWebView_setGeometry
-  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsWebView_updateGeometry
-  vtbl[].vtbl.paint = miqt_exec_method_cQGraphicsWebView_paint
-  vtbl[].vtbl.itemChange = miqt_exec_method_cQGraphicsWebView_itemChange
-  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsWebView_event
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsWebView_sizeHint
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsWebView_inputMethodQuery
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsWebView_mousePressEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsWebView_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsWebView_mouseReleaseEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsWebView_mouseMoveEvent
-  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQGraphicsWebView_hoverMoveEvent
-  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQGraphicsWebView_hoverLeaveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsWebView_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsWebView_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsWebView_keyReleaseEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsWebView_contextMenuEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsWebView_dragEnterEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsWebView_dragLeaveEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsWebView_dragMoveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsWebView_dropEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsWebView_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsWebView_focusOutEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsWebView_inputMethodEvent
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQGraphicsWebView_focusNextPrevChild
-  vtbl[].vtbl.sceneEvent = miqt_exec_method_cQGraphicsWebView_sceneEvent
-  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsWebView_getContentsMargins
-  vtbl[].vtbl.typeX = miqt_exec_method_cQGraphicsWebView_typeX
-  vtbl[].vtbl.paintWindowFrame = miqt_exec_method_cQGraphicsWebView_paintWindowFrame
-  vtbl[].vtbl.boundingRect = miqt_exec_method_cQGraphicsWebView_boundingRect
-  vtbl[].vtbl.shape = miqt_exec_method_cQGraphicsWebView_shape
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQGraphicsWebView_initStyleOption
-  vtbl[].vtbl.propertyChange = miqt_exec_method_cQGraphicsWebView_propertyChange
-  vtbl[].vtbl.windowFrameEvent = miqt_exec_method_cQGraphicsWebView_windowFrameEvent
-  vtbl[].vtbl.windowFrameSectionAt = miqt_exec_method_cQGraphicsWebView_windowFrameSectionAt
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQGraphicsWebView_changeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQGraphicsWebView_closeEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQGraphicsWebView_hideEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQGraphicsWebView_moveEvent
-  vtbl[].vtbl.polishEvent = miqt_exec_method_cQGraphicsWebView_polishEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQGraphicsWebView_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQGraphicsWebView_showEvent
-  vtbl[].vtbl.grabMouseEvent = miqt_exec_method_cQGraphicsWebView_grabMouseEvent
-  vtbl[].vtbl.ungrabMouseEvent = miqt_exec_method_cQGraphicsWebView_ungrabMouseEvent
-  vtbl[].vtbl.grabKeyboardEvent = miqt_exec_method_cQGraphicsWebView_grabKeyboardEvent
-  vtbl[].vtbl.ungrabKeyboardEvent = miqt_exec_method_cQGraphicsWebView_ungrabKeyboardEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsWebView_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsWebView_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsWebView_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsWebView_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsWebView_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsWebView_disconnectNotify
-  vtbl[].vtbl.advance = miqt_exec_method_cQGraphicsWebView_advance
-  vtbl[].vtbl.contains = miqt_exec_method_cQGraphicsWebView_contains
-  vtbl[].vtbl.collidesWithItem = miqt_exec_method_cQGraphicsWebView_collidesWithItem
-  vtbl[].vtbl.collidesWithPath = miqt_exec_method_cQGraphicsWebView_collidesWithPath
-  vtbl[].vtbl.isObscuredBy = miqt_exec_method_cQGraphicsWebView_isObscuredBy
-  vtbl[].vtbl.opaqueArea = miqt_exec_method_cQGraphicsWebView_opaqueArea
-  vtbl[].vtbl.sceneEventFilter = miqt_exec_method_cQGraphicsWebView_sceneEventFilter
-  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQGraphicsWebView_hoverEnterEvent
-  vtbl[].vtbl.supportsExtension = miqt_exec_method_cQGraphicsWebView_supportsExtension
-  vtbl[].vtbl.setExtension = miqt_exec_method_cQGraphicsWebView_setExtension
-  vtbl[].vtbl.extension = miqt_exec_method_cQGraphicsWebView_extension
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQGraphicsWebView_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQGraphicsWebView) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQGraphicsWebView_new(addr(cQGraphicsWebView_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qgraphicswebview_types.QGraphicsWebView,
     parent: gen_qgraphicsitem_types.QGraphicsItem,
-    vtbl: VirtualQGraphicsWebView) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQGraphicsWebViewVTable, _: ptr cQGraphicsWebView) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQGraphicsWebView()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQGraphicsWebView, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQGraphicsWebView_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQGraphicsWebView_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQGraphicsWebView_metacall
-  vtbl[].vtbl.setGeometry = miqt_exec_method_cQGraphicsWebView_setGeometry
-  vtbl[].vtbl.updateGeometry = miqt_exec_method_cQGraphicsWebView_updateGeometry
-  vtbl[].vtbl.paint = miqt_exec_method_cQGraphicsWebView_paint
-  vtbl[].vtbl.itemChange = miqt_exec_method_cQGraphicsWebView_itemChange
-  vtbl[].vtbl.event = miqt_exec_method_cQGraphicsWebView_event
-  vtbl[].vtbl.sizeHint = miqt_exec_method_cQGraphicsWebView_sizeHint
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQGraphicsWebView_inputMethodQuery
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQGraphicsWebView_mousePressEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQGraphicsWebView_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQGraphicsWebView_mouseReleaseEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQGraphicsWebView_mouseMoveEvent
-  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQGraphicsWebView_hoverMoveEvent
-  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQGraphicsWebView_hoverLeaveEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQGraphicsWebView_wheelEvent
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQGraphicsWebView_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQGraphicsWebView_keyReleaseEvent
-  vtbl[].vtbl.contextMenuEvent = miqt_exec_method_cQGraphicsWebView_contextMenuEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQGraphicsWebView_dragEnterEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQGraphicsWebView_dragLeaveEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQGraphicsWebView_dragMoveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQGraphicsWebView_dropEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQGraphicsWebView_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQGraphicsWebView_focusOutEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQGraphicsWebView_inputMethodEvent
-  vtbl[].vtbl.focusNextPrevChild = miqt_exec_method_cQGraphicsWebView_focusNextPrevChild
-  vtbl[].vtbl.sceneEvent = miqt_exec_method_cQGraphicsWebView_sceneEvent
-  vtbl[].vtbl.getContentsMargins = miqt_exec_method_cQGraphicsWebView_getContentsMargins
-  vtbl[].vtbl.typeX = miqt_exec_method_cQGraphicsWebView_typeX
-  vtbl[].vtbl.paintWindowFrame = miqt_exec_method_cQGraphicsWebView_paintWindowFrame
-  vtbl[].vtbl.boundingRect = miqt_exec_method_cQGraphicsWebView_boundingRect
-  vtbl[].vtbl.shape = miqt_exec_method_cQGraphicsWebView_shape
-  vtbl[].vtbl.initStyleOption = miqt_exec_method_cQGraphicsWebView_initStyleOption
-  vtbl[].vtbl.propertyChange = miqt_exec_method_cQGraphicsWebView_propertyChange
-  vtbl[].vtbl.windowFrameEvent = miqt_exec_method_cQGraphicsWebView_windowFrameEvent
-  vtbl[].vtbl.windowFrameSectionAt = miqt_exec_method_cQGraphicsWebView_windowFrameSectionAt
-  vtbl[].vtbl.changeEvent = miqt_exec_method_cQGraphicsWebView_changeEvent
-  vtbl[].vtbl.closeEvent = miqt_exec_method_cQGraphicsWebView_closeEvent
-  vtbl[].vtbl.hideEvent = miqt_exec_method_cQGraphicsWebView_hideEvent
-  vtbl[].vtbl.moveEvent = miqt_exec_method_cQGraphicsWebView_moveEvent
-  vtbl[].vtbl.polishEvent = miqt_exec_method_cQGraphicsWebView_polishEvent
-  vtbl[].vtbl.resizeEvent = miqt_exec_method_cQGraphicsWebView_resizeEvent
-  vtbl[].vtbl.showEvent = miqt_exec_method_cQGraphicsWebView_showEvent
-  vtbl[].vtbl.grabMouseEvent = miqt_exec_method_cQGraphicsWebView_grabMouseEvent
-  vtbl[].vtbl.ungrabMouseEvent = miqt_exec_method_cQGraphicsWebView_ungrabMouseEvent
-  vtbl[].vtbl.grabKeyboardEvent = miqt_exec_method_cQGraphicsWebView_grabKeyboardEvent
-  vtbl[].vtbl.ungrabKeyboardEvent = miqt_exec_method_cQGraphicsWebView_ungrabKeyboardEvent
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQGraphicsWebView_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQGraphicsWebView_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQGraphicsWebView_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQGraphicsWebView_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQGraphicsWebView_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQGraphicsWebView_disconnectNotify
-  vtbl[].vtbl.advance = miqt_exec_method_cQGraphicsWebView_advance
-  vtbl[].vtbl.contains = miqt_exec_method_cQGraphicsWebView_contains
-  vtbl[].vtbl.collidesWithItem = miqt_exec_method_cQGraphicsWebView_collidesWithItem
-  vtbl[].vtbl.collidesWithPath = miqt_exec_method_cQGraphicsWebView_collidesWithPath
-  vtbl[].vtbl.isObscuredBy = miqt_exec_method_cQGraphicsWebView_isObscuredBy
-  vtbl[].vtbl.opaqueArea = miqt_exec_method_cQGraphicsWebView_opaqueArea
-  vtbl[].vtbl.sceneEventFilter = miqt_exec_method_cQGraphicsWebView_sceneEventFilter
-  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQGraphicsWebView_hoverEnterEvent
-  vtbl[].vtbl.supportsExtension = miqt_exec_method_cQGraphicsWebView_supportsExtension
-  vtbl[].vtbl.setExtension = miqt_exec_method_cQGraphicsWebView_setExtension
-  vtbl[].vtbl.extension = miqt_exec_method_cQGraphicsWebView_extension
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQGraphicsWebView_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQGraphicsWebView) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQGraphicsWebView_new2(addr(cQGraphicsWebView_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qgraphicswebview_types.QGraphicsWebView): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQGraphicsWebView_staticMetaObject())

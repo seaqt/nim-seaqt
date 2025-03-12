@@ -11,39 +11,32 @@
 #include <QTimerEvent>
 #include <qaccessibleplugin.h>
 #include "gen_qaccessibleplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAccessiblePlugin final : public QAccessiblePlugin {
-	struct QAccessiblePlugin_VTable* vtbl;
+	const QAccessiblePlugin_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAccessiblePlugin_VTable* QAccessiblePlugin_vtbl(const VirtualQAccessiblePlugin* self);
+	friend void* QAccessiblePlugin_vdata(const VirtualQAccessiblePlugin* self);
+	friend void QAccessiblePlugin_setVdata(VirtualQAccessiblePlugin* self, void* vdata);
 
-	VirtualQAccessiblePlugin(struct QAccessiblePlugin_VTable* vtbl): QAccessiblePlugin(), vtbl(vtbl) {};
-	VirtualQAccessiblePlugin(struct QAccessiblePlugin_VTable* vtbl, QObject* parent): QAccessiblePlugin(parent), vtbl(vtbl) {};
+	VirtualQAccessiblePlugin(const QAccessiblePlugin_VTable* vtbl, void* vdata): QAccessiblePlugin(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAccessiblePlugin(const QAccessiblePlugin_VTable* vtbl, void* vdata, QObject* parent): QAccessiblePlugin(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAccessiblePlugin() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAccessiblePlugin() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAccessiblePlugin::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const VirtualQAccessiblePlugin* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAccessiblePlugin::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAccessiblePlugin_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAccessiblePlugin_virtualbase_metacast(VirtualQAccessiblePlugin* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAccessiblePlugin::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAccessiblePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAccessiblePlugin_virtualbase_metacall(VirtualQAccessiblePlugin* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QAccessibleInterface* create(const QString& key, QObject* object) override {
 		if (vtbl->create == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -92,12 +83,11 @@ public:
 		struct miqt_string sigval1 = key_ms;
 		QObject* sigval2 = object;
 
-		QAccessibleInterface* callback_return_value = vtbl->create(vtbl, this, sigval1, sigval2);
+		QAccessibleInterface* callback_return_value = vtbl->create(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAccessiblePlugin::event(event);
@@ -105,14 +95,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAccessiblePlugin_virtualbase_event(void* self, QEvent* event);
+	friend bool QAccessiblePlugin_virtualbase_event(VirtualQAccessiblePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAccessiblePlugin::eventFilter(watched, event);
@@ -121,14 +110,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAccessiblePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAccessiblePlugin_virtualbase_eventFilter(VirtualQAccessiblePlugin* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAccessiblePlugin::timerEvent(event);
@@ -137,13 +125,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAccessiblePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAccessiblePlugin_virtualbase_timerEvent(VirtualQAccessiblePlugin* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAccessiblePlugin::childEvent(event);
@@ -152,13 +139,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAccessiblePlugin_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAccessiblePlugin_virtualbase_childEvent(VirtualQAccessiblePlugin* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAccessiblePlugin::customEvent(event);
@@ -167,13 +153,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAccessiblePlugin_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAccessiblePlugin_virtualbase_customEvent(VirtualQAccessiblePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAccessiblePlugin::connectNotify(signal);
@@ -184,13 +169,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAccessiblePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAccessiblePlugin_virtualbase_connectNotify(VirtualQAccessiblePlugin* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAccessiblePlugin::disconnectNotify(signal);
@@ -201,25 +185,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAccessiblePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAccessiblePlugin_virtualbase_disconnectNotify(VirtualQAccessiblePlugin* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAccessiblePlugin_protectedbase_sender(const void* self);
-	friend int QAccessiblePlugin_protectedbase_senderSignalIndex(const void* self);
-	friend int QAccessiblePlugin_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAccessiblePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAccessiblePlugin_protectedbase_sender(const VirtualQAccessiblePlugin* self);
+	friend int QAccessiblePlugin_protectedbase_senderSignalIndex(const VirtualQAccessiblePlugin* self);
+	friend int QAccessiblePlugin_protectedbase_receivers(const VirtualQAccessiblePlugin* self, const char* signal);
+	friend bool QAccessiblePlugin_protectedbase_isSignalConnected(const VirtualQAccessiblePlugin* self, QMetaMethod* signal);
 };
 
-QAccessiblePlugin* QAccessiblePlugin_new(struct QAccessiblePlugin_VTable* vtbl) {
-	return new VirtualQAccessiblePlugin(vtbl);
+VirtualQAccessiblePlugin* QAccessiblePlugin_new(const QAccessiblePlugin_VTable* vtbl, void* vdata) {
+	return new VirtualQAccessiblePlugin(vtbl, vdata);
 }
 
-QAccessiblePlugin* QAccessiblePlugin_new2(struct QAccessiblePlugin_VTable* vtbl, QObject* parent) {
-	return new VirtualQAccessiblePlugin(vtbl, parent);
+VirtualQAccessiblePlugin* QAccessiblePlugin_new2(const QAccessiblePlugin_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAccessiblePlugin(vtbl, vdata, parent);
 }
 
 void QAccessiblePlugin_virtbase(QAccessiblePlugin* src, QObject** outptr_QObject) {
@@ -309,93 +293,76 @@ struct miqt_string QAccessiblePlugin_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const void* self) {
+QMetaObject* QAccessiblePlugin_virtualbase_metaObject(const VirtualQAccessiblePlugin* self) {
 
-	return (QMetaObject*) ( (const VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::metaObject();
-
+	return (QMetaObject*) self->QAccessiblePlugin::metaObject();
 }
 
-void* QAccessiblePlugin_virtualbase_metacast(void* self, const char* param1) {
+void* QAccessiblePlugin_virtualbase_metacast(VirtualQAccessiblePlugin* self, const char* param1) {
 
-	return ( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::qt_metacast(param1);
-
+	return self->QAccessiblePlugin::qt_metacast(param1);
 }
 
-int QAccessiblePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAccessiblePlugin_virtualbase_metacall(VirtualQAccessiblePlugin* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAccessiblePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAccessiblePlugin_virtualbase_event(void* self, QEvent* event) {
+bool QAccessiblePlugin_virtualbase_event(VirtualQAccessiblePlugin* self, QEvent* event) {
 
-	return ( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::event(event);
-
+	return self->QAccessiblePlugin::event(event);
 }
 
-bool QAccessiblePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAccessiblePlugin_virtualbase_eventFilter(VirtualQAccessiblePlugin* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::eventFilter(watched, event);
-
+	return self->QAccessiblePlugin::eventFilter(watched, event);
 }
 
-void QAccessiblePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAccessiblePlugin_virtualbase_timerEvent(VirtualQAccessiblePlugin* self, QTimerEvent* event) {
 
-	( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::timerEvent(event);
-
+	self->QAccessiblePlugin::timerEvent(event);
 }
 
-void QAccessiblePlugin_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAccessiblePlugin_virtualbase_childEvent(VirtualQAccessiblePlugin* self, QChildEvent* event) {
 
-	( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::childEvent(event);
-
+	self->QAccessiblePlugin::childEvent(event);
 }
 
-void QAccessiblePlugin_virtualbase_customEvent(void* self, QEvent* event) {
+void QAccessiblePlugin_virtualbase_customEvent(VirtualQAccessiblePlugin* self, QEvent* event) {
 
-	( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::customEvent(event);
-
+	self->QAccessiblePlugin::customEvent(event);
 }
 
-void QAccessiblePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAccessiblePlugin_virtualbase_connectNotify(VirtualQAccessiblePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::connectNotify(*signal);
-
+	self->QAccessiblePlugin::connectNotify(*signal);
 }
 
-void QAccessiblePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAccessiblePlugin_virtualbase_disconnectNotify(VirtualQAccessiblePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQAccessiblePlugin*)(self) )->QAccessiblePlugin::disconnectNotify(*signal);
-
+	self->QAccessiblePlugin::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAccessiblePlugin_staticMetaObject() { return &QAccessiblePlugin::staticMetaObject; }
-QObject* QAccessiblePlugin_protectedbase_sender(const void* self) {
-	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	
-	return self_cast->sender();
 
+const QAccessiblePlugin_VTable* QAccessiblePlugin_vtbl(const VirtualQAccessiblePlugin* self) { return self->vtbl; }
+void* QAccessiblePlugin_vdata(const VirtualQAccessiblePlugin* self) { return self->vdata; }
+void QAccessiblePlugin_setVdata(VirtualQAccessiblePlugin* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAccessiblePlugin_protectedbase_sender(const VirtualQAccessiblePlugin* self) {
+	return self->sender();
 }
 
-int QAccessiblePlugin_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAccessiblePlugin_protectedbase_senderSignalIndex(const VirtualQAccessiblePlugin* self) {
+	return self->senderSignalIndex();
 }
 
-int QAccessiblePlugin_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAccessiblePlugin_protectedbase_receivers(const VirtualQAccessiblePlugin* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAccessiblePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAccessiblePlugin* self_cast = static_cast<VirtualQAccessiblePlugin*>( (QAccessiblePlugin*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAccessiblePlugin_protectedbase_isSignalConnected(const VirtualQAccessiblePlugin* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAccessiblePlugin_delete(QAccessiblePlugin* self) {

@@ -52,35 +52,35 @@ export
 
 type cQWebEngineNotification*{.exportc: "QWebEngineNotification", incompleteStruct.} = object
 
-proc fcQWebEngineNotification_metaObject(self: pointer, ): pointer {.importc: "QWebEngineNotification_metaObject".}
+proc fcQWebEngineNotification_metaObject(self: pointer): pointer {.importc: "QWebEngineNotification_metaObject".}
 proc fcQWebEngineNotification_metacast(self: pointer, param1: cstring): pointer {.importc: "QWebEngineNotification_metacast".}
 proc fcQWebEngineNotification_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QWebEngineNotification_metacall".}
 proc fcQWebEngineNotification_tr(s: cstring): struct_miqt_string {.importc: "QWebEngineNotification_tr".}
 proc fcQWebEngineNotification_trUtf8(s: cstring): struct_miqt_string {.importc: "QWebEngineNotification_trUtf8".}
 proc fcQWebEngineNotification_matches(self: pointer, other: pointer): bool {.importc: "QWebEngineNotification_matches".}
-proc fcQWebEngineNotification_origin(self: pointer, ): pointer {.importc: "QWebEngineNotification_origin".}
-proc fcQWebEngineNotification_icon(self: pointer, ): pointer {.importc: "QWebEngineNotification_icon".}
-proc fcQWebEngineNotification_title(self: pointer, ): struct_miqt_string {.importc: "QWebEngineNotification_title".}
-proc fcQWebEngineNotification_message(self: pointer, ): struct_miqt_string {.importc: "QWebEngineNotification_message".}
-proc fcQWebEngineNotification_tag(self: pointer, ): struct_miqt_string {.importc: "QWebEngineNotification_tag".}
-proc fcQWebEngineNotification_language(self: pointer, ): struct_miqt_string {.importc: "QWebEngineNotification_language".}
-proc fcQWebEngineNotification_direction(self: pointer, ): cint {.importc: "QWebEngineNotification_direction".}
-proc fcQWebEngineNotification_show(self: pointer, ): void {.importc: "QWebEngineNotification_show".}
-proc fcQWebEngineNotification_click(self: pointer, ): void {.importc: "QWebEngineNotification_click".}
-proc fcQWebEngineNotification_close(self: pointer, ): void {.importc: "QWebEngineNotification_close".}
-proc fcQWebEngineNotification_closed(self: pointer, ): void {.importc: "QWebEngineNotification_closed".}
+proc fcQWebEngineNotification_origin(self: pointer): pointer {.importc: "QWebEngineNotification_origin".}
+proc fcQWebEngineNotification_icon(self: pointer): pointer {.importc: "QWebEngineNotification_icon".}
+proc fcQWebEngineNotification_title(self: pointer): struct_miqt_string {.importc: "QWebEngineNotification_title".}
+proc fcQWebEngineNotification_message(self: pointer): struct_miqt_string {.importc: "QWebEngineNotification_message".}
+proc fcQWebEngineNotification_tag(self: pointer): struct_miqt_string {.importc: "QWebEngineNotification_tag".}
+proc fcQWebEngineNotification_language(self: pointer): struct_miqt_string {.importc: "QWebEngineNotification_language".}
+proc fcQWebEngineNotification_direction(self: pointer): cint {.importc: "QWebEngineNotification_direction".}
+proc fcQWebEngineNotification_show(self: pointer): void {.importc: "QWebEngineNotification_show".}
+proc fcQWebEngineNotification_click(self: pointer): void {.importc: "QWebEngineNotification_click".}
+proc fcQWebEngineNotification_close(self: pointer): void {.importc: "QWebEngineNotification_close".}
+proc fcQWebEngineNotification_closed(self: pointer): void {.importc: "QWebEngineNotification_closed".}
 proc fcQWebEngineNotification_connect_closed(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QWebEngineNotification_connect_closed".}
 proc fcQWebEngineNotification_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNotification_tr2".}
 proc fcQWebEngineNotification_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNotification_tr3".}
 proc fcQWebEngineNotification_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QWebEngineNotification_trUtf82".}
 proc fcQWebEngineNotification_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QWebEngineNotification_trUtf83".}
-proc fcQWebEngineNotification_protectedbase_sender(self: pointer, ): pointer {.importc: "QWebEngineNotification_protectedbase_sender".}
-proc fcQWebEngineNotification_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QWebEngineNotification_protectedbase_senderSignalIndex".}
+proc fcQWebEngineNotification_protectedbase_sender(self: pointer): pointer {.importc: "QWebEngineNotification_protectedbase_sender".}
+proc fcQWebEngineNotification_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QWebEngineNotification_protectedbase_senderSignalIndex".}
 proc fcQWebEngineNotification_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QWebEngineNotification_protectedbase_receivers".}
 proc fcQWebEngineNotification_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QWebEngineNotification_protectedbase_isSignalConnected".}
 proc fcQWebEngineNotification_staticMetaObject(): pointer {.importc: "QWebEngineNotification_staticMetaObject".}
 
-proc metaObject*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qwebenginenotification_types.QWebEngineNotification): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQWebEngineNotification_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qwebenginenotification_types.QWebEngineNotification, param1: cstring): pointer =
@@ -104,57 +104,57 @@ proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s:
 proc matches*(self: gen_qwebenginenotification_types.QWebEngineNotification, other: gen_qwebenginenotification_types.QWebEngineNotification): bool =
   fcQWebEngineNotification_matches(self.h, other.h)
 
-proc origin*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qurl_types.QUrl =
+proc origin*(self: gen_qwebenginenotification_types.QWebEngineNotification): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineNotification_origin(self.h), owned: true)
 
-proc icon*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qimage_types.QImage =
+proc icon*(self: gen_qwebenginenotification_types.QWebEngineNotification): gen_qimage_types.QImage =
   gen_qimage_types.QImage(h: fcQWebEngineNotification_icon(self.h), owned: true)
 
-proc title*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): string =
+proc title*(self: gen_qwebenginenotification_types.QWebEngineNotification): string =
   let v_ms = fcQWebEngineNotification_title(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc message*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): string =
+proc message*(self: gen_qwebenginenotification_types.QWebEngineNotification): string =
   let v_ms = fcQWebEngineNotification_message(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc tag*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): string =
+proc tag*(self: gen_qwebenginenotification_types.QWebEngineNotification): string =
   let v_ms = fcQWebEngineNotification_tag(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc language*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): string =
+proc language*(self: gen_qwebenginenotification_types.QWebEngineNotification): string =
   let v_ms = fcQWebEngineNotification_language(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc direction*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): cint =
+proc direction*(self: gen_qwebenginenotification_types.QWebEngineNotification): cint =
   cint(fcQWebEngineNotification_direction(self.h))
 
-proc show*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): void =
+proc show*(self: gen_qwebenginenotification_types.QWebEngineNotification): void =
   fcQWebEngineNotification_show(self.h)
 
-proc click*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): void =
+proc click*(self: gen_qwebenginenotification_types.QWebEngineNotification): void =
   fcQWebEngineNotification_click(self.h)
 
-proc close*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): void =
+proc close*(self: gen_qwebenginenotification_types.QWebEngineNotification): void =
   fcQWebEngineNotification_close(self.h)
 
-proc closed*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): void =
+proc closed*(self: gen_qwebenginenotification_types.QWebEngineNotification): void =
   fcQWebEngineNotification_closed(self.h)
 
 type QWebEngineNotificationclosedSlot* = proc()
-proc miqt_exec_callback_cQWebEngineNotification_closed(slot: int) {.cdecl.} =
+proc cQWebEngineNotification_slot_callback_closed(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QWebEngineNotificationclosedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQWebEngineNotification_closed_release(slot: int) {.cdecl.} =
+proc cQWebEngineNotification_slot_callback_closed_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QWebEngineNotificationclosedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -162,7 +162,7 @@ proc onclosed*(self: gen_qwebenginenotification_types.QWebEngineNotification, sl
   var tmp = new QWebEngineNotificationclosedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQWebEngineNotification_connect_closed(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQWebEngineNotification_closed, miqt_exec_callback_cQWebEngineNotification_closed_release)
+  fcQWebEngineNotification_connect_closed(self.h, cast[int](addr tmp[]), cQWebEngineNotification_slot_callback_closed, cQWebEngineNotification_slot_callback_closed_release)
 
 proc tr*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s: cstring, c: cstring): string =
   let v_ms = fcQWebEngineNotification_tr2(s, c)
@@ -188,10 +188,10 @@ proc trUtf8*(_: type gen_qwebenginenotification_types.QWebEngineNotification, s:
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qwebenginenotification_types.QWebEngineNotification): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQWebEngineNotification_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qwebenginenotification_types.QWebEngineNotification, ): cint =
+proc senderSignalIndex*(self: gen_qwebenginenotification_types.QWebEngineNotification): cint =
   fcQWebEngineNotification_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qwebenginenotification_types.QWebEngineNotification, signal: cstring): cint =

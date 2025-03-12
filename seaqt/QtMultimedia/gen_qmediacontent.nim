@@ -50,13 +50,13 @@ type cQMediaContent*{.exportc: "QMediaContent", incompleteStruct.} = object
 proc fcQMediaContent_operatorAssign(self: pointer, other: pointer): void {.importc: "QMediaContent_operatorAssign".}
 proc fcQMediaContent_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMediaContent_operatorEqual".}
 proc fcQMediaContent_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QMediaContent_operatorNotEqual".}
-proc fcQMediaContent_isNull(self: pointer, ): bool {.importc: "QMediaContent_isNull".}
-proc fcQMediaContent_request(self: pointer, ): pointer {.importc: "QMediaContent_request".}
-proc fcQMediaContent_canonicalUrl(self: pointer, ): pointer {.importc: "QMediaContent_canonicalUrl".}
-proc fcQMediaContent_canonicalRequest(self: pointer, ): pointer {.importc: "QMediaContent_canonicalRequest".}
-proc fcQMediaContent_canonicalResource(self: pointer, ): pointer {.importc: "QMediaContent_canonicalResource".}
-proc fcQMediaContent_resources(self: pointer, ): struct_miqt_array {.importc: "QMediaContent_resources".}
-proc fcQMediaContent_playlist(self: pointer, ): pointer {.importc: "QMediaContent_playlist".}
+proc fcQMediaContent_isNull(self: pointer): bool {.importc: "QMediaContent_isNull".}
+proc fcQMediaContent_request(self: pointer): pointer {.importc: "QMediaContent_request".}
+proc fcQMediaContent_canonicalUrl(self: pointer): pointer {.importc: "QMediaContent_canonicalUrl".}
+proc fcQMediaContent_canonicalRequest(self: pointer): pointer {.importc: "QMediaContent_canonicalRequest".}
+proc fcQMediaContent_canonicalResource(self: pointer): pointer {.importc: "QMediaContent_canonicalResource".}
+proc fcQMediaContent_resources(self: pointer): struct_miqt_array {.importc: "QMediaContent_resources".}
+proc fcQMediaContent_playlist(self: pointer): pointer {.importc: "QMediaContent_playlist".}
 proc fcQMediaContent_new(): ptr cQMediaContent {.importc: "QMediaContent_new".}
 proc fcQMediaContent_new2(contentUrl: pointer): ptr cQMediaContent {.importc: "QMediaContent_new2".}
 proc fcQMediaContent_new3(contentRequest: pointer): ptr cQMediaContent {.importc: "QMediaContent_new3".}
@@ -76,22 +76,22 @@ proc operatorEqual*(self: gen_qmediacontent_types.QMediaContent, other: gen_qmed
 proc operatorNotEqual*(self: gen_qmediacontent_types.QMediaContent, other: gen_qmediacontent_types.QMediaContent): bool =
   fcQMediaContent_operatorNotEqual(self.h, other.h)
 
-proc isNull*(self: gen_qmediacontent_types.QMediaContent, ): bool =
+proc isNull*(self: gen_qmediacontent_types.QMediaContent): bool =
   fcQMediaContent_isNull(self.h)
 
-proc request*(self: gen_qmediacontent_types.QMediaContent, ): gen_qnetworkrequest_types.QNetworkRequest =
+proc request*(self: gen_qmediacontent_types.QMediaContent): gen_qnetworkrequest_types.QNetworkRequest =
   gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_request(self.h), owned: true)
 
-proc canonicalUrl*(self: gen_qmediacontent_types.QMediaContent, ): gen_qurl_types.QUrl =
+proc canonicalUrl*(self: gen_qmediacontent_types.QMediaContent): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQMediaContent_canonicalUrl(self.h), owned: true)
 
-proc canonicalRequest*(self: gen_qmediacontent_types.QMediaContent, ): gen_qnetworkrequest_types.QNetworkRequest =
+proc canonicalRequest*(self: gen_qmediacontent_types.QMediaContent): gen_qnetworkrequest_types.QNetworkRequest =
   gen_qnetworkrequest_types.QNetworkRequest(h: fcQMediaContent_canonicalRequest(self.h), owned: true)
 
-proc canonicalResource*(self: gen_qmediacontent_types.QMediaContent, ): gen_qmediaresource_types.QMediaResource =
+proc canonicalResource*(self: gen_qmediacontent_types.QMediaContent): gen_qmediaresource_types.QMediaResource =
   gen_qmediaresource_types.QMediaResource(h: fcQMediaContent_canonicalResource(self.h), owned: true)
 
-proc resources*(self: gen_qmediacontent_types.QMediaContent, ): seq[gen_qmediaresource_types.QMediaResource] =
+proc resources*(self: gen_qmediacontent_types.QMediaContent): seq[gen_qmediaresource_types.QMediaResource] =
   var v_ma = fcQMediaContent_resources(self.h)
   var vx_ret = newSeq[gen_qmediaresource_types.QMediaResource](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -100,7 +100,7 @@ proc resources*(self: gen_qmediacontent_types.QMediaContent, ): seq[gen_qmediare
   c_free(v_ma.data)
   vx_ret
 
-proc playlist*(self: gen_qmediacontent_types.QMediaContent, ): gen_qmediaplaylist_types.QMediaPlaylist =
+proc playlist*(self: gen_qmediacontent_types.QMediaContent): gen_qmediaplaylist_types.QMediaPlaylist =
   gen_qmediaplaylist_types.QMediaPlaylist(h: fcQMediaContent_playlist(self.h), owned: false)
 
 proc create*(T: type gen_qmediacontent_types.QMediaContent): gen_qmediacontent_types.QMediaContent =

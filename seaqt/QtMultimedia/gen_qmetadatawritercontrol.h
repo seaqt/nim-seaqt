@@ -53,6 +53,7 @@ struct miqt_string QMetaDataWriterControl_tr2(const char* s, const char* c);
 struct miqt_string QMetaDataWriterControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMetaDataWriterControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMetaDataWriterControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMetaDataWriterControl_staticMetaObject();
 void QMetaDataWriterControl_delete(QMetaDataWriterControl* self);
 

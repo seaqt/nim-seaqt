@@ -26,6 +26,7 @@ QSizePolicy* QSizePolicy_new();
 QSizePolicy* QSizePolicy_new2(int horizontal, int vertical);
 QSizePolicy* QSizePolicy_new3(QSizePolicy* param1);
 QSizePolicy* QSizePolicy_new4(int horizontal, int vertical, int type);
+
 int QSizePolicy_horizontalPolicy(const QSizePolicy* self);
 int QSizePolicy_verticalPolicy(const QSizePolicy* self);
 int QSizePolicy_controlType(const QSizePolicy* self);
@@ -48,6 +49,7 @@ bool QSizePolicy_retainSizeWhenHidden(const QSizePolicy* self);
 void QSizePolicy_setRetainSizeWhenHidden(QSizePolicy* self, bool retainSize);
 void QSizePolicy_transpose(QSizePolicy* self);
 QSizePolicy* QSizePolicy_transposed(const QSizePolicy* self);
+
 const QMetaObject* QSizePolicy_staticMetaObject();
 void QSizePolicy_delete(QSizePolicy* self);
 

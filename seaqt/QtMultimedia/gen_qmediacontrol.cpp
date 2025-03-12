@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qmediacontrol.h>
 #include "gen_qmediacontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaControl_virtbase(QMediaControl* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -99,6 +90,7 @@ struct miqt_string QMediaControl_trUtf83(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QMediaControl_staticMetaObject() { return &QMediaControl::staticMetaObject; }
+
 void QMediaControl_delete(QMediaControl* self) {
 	delete self;
 }

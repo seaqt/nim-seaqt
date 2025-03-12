@@ -63,41 +63,43 @@ proc fcQIconEngine_actualSize(self: pointer, size: pointer, mode: cint, state: c
 proc fcQIconEngine_pixmap(self: pointer, size: pointer, mode: cint, state: cint): pointer {.importc: "QIconEngine_pixmap".}
 proc fcQIconEngine_addPixmap(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.importc: "QIconEngine_addPixmap".}
 proc fcQIconEngine_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.importc: "QIconEngine_addFile".}
-proc fcQIconEngine_key(self: pointer, ): struct_miqt_string {.importc: "QIconEngine_key".}
-proc fcQIconEngine_clone(self: pointer, ): pointer {.importc: "QIconEngine_clone".}
+proc fcQIconEngine_key(self: pointer): struct_miqt_string {.importc: "QIconEngine_key".}
+proc fcQIconEngine_clone(self: pointer): pointer {.importc: "QIconEngine_clone".}
 proc fcQIconEngine_read(self: pointer, inVal: pointer): bool {.importc: "QIconEngine_read".}
 proc fcQIconEngine_write(self: pointer, outVal: pointer): bool {.importc: "QIconEngine_write".}
 proc fcQIconEngine_availableSizes(self: pointer, mode: cint, state: cint): struct_miqt_array {.importc: "QIconEngine_availableSizes".}
-proc fcQIconEngine_iconName(self: pointer, ): struct_miqt_string {.importc: "QIconEngine_iconName".}
-proc fcQIconEngine_isNull(self: pointer, ): bool {.importc: "QIconEngine_isNull".}
+proc fcQIconEngine_iconName(self: pointer): struct_miqt_string {.importc: "QIconEngine_iconName".}
+proc fcQIconEngine_isNull(self: pointer): bool {.importc: "QIconEngine_isNull".}
 proc fcQIconEngine_scaledPixmap(self: pointer, size: pointer, mode: cint, state: cint, scale: float64): pointer {.importc: "QIconEngine_scaledPixmap".}
 proc fcQIconEngine_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtualHook".}
+proc fcQIconEngine_vtbl(self: pointer): pointer {.importc: "QIconEngine_vtbl".}
+proc fcQIconEngine_vdata(self: pointer): pointer {.importc: "QIconEngine_vdata".}
 type cQIconEngineVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQIconEngineVTable, self: ptr cQIconEngine) {.cdecl, raises:[], gcsafe.}
-  paint*: proc(vtbl, self: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
-  actualSize*: proc(vtbl, self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl, raises: [], gcsafe.}
-  pixmap*: proc(vtbl, self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl, raises: [], gcsafe.}
-  addPixmap*: proc(vtbl, self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
-  addFile*: proc(vtbl, self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
-  key*: proc(vtbl, self: pointer, ): struct_miqt_string {.cdecl, raises: [], gcsafe.}
-  clone*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  read*: proc(vtbl, self: pointer, inVal: pointer): bool {.cdecl, raises: [], gcsafe.}
-  write*: proc(vtbl, self: pointer, outVal: pointer): bool {.cdecl, raises: [], gcsafe.}
-  availableSizes*: proc(vtbl, self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  iconName*: proc(vtbl, self: pointer, ): struct_miqt_string {.cdecl, raises: [], gcsafe.}
-  virtualHook*: proc(vtbl, self: pointer, id: cint, data: pointer): void {.cdecl, raises: [], gcsafe.}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  paint*: proc(self: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
+  actualSize*: proc(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl, raises: [], gcsafe.}
+  pixmap*: proc(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl, raises: [], gcsafe.}
+  addPixmap*: proc(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
+  addFile*: proc(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl, raises: [], gcsafe.}
+  key*: proc(self: pointer): struct_miqt_string {.cdecl, raises: [], gcsafe.}
+  clone*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  read*: proc(self: pointer, inVal: pointer): bool {.cdecl, raises: [], gcsafe.}
+  write*: proc(self: pointer, outVal: pointer): bool {.cdecl, raises: [], gcsafe.}
+  availableSizes*: proc(self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  iconName*: proc(self: pointer): struct_miqt_string {.cdecl, raises: [], gcsafe.}
+  virtualHook*: proc(self: pointer, id: cint, data: pointer): void {.cdecl, raises: [], gcsafe.}
 proc fcQIconEngine_virtualbase_actualSize(self: pointer, size: pointer, mode: cint, state: cint): pointer {.importc: "QIconEngine_virtualbase_actualSize".}
 proc fcQIconEngine_virtualbase_pixmap(self: pointer, size: pointer, mode: cint, state: cint): pointer {.importc: "QIconEngine_virtualbase_pixmap".}
 proc fcQIconEngine_virtualbase_addPixmap(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.importc: "QIconEngine_virtualbase_addPixmap".}
 proc fcQIconEngine_virtualbase_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.importc: "QIconEngine_virtualbase_addFile".}
-proc fcQIconEngine_virtualbase_key(self: pointer, ): struct_miqt_string {.importc: "QIconEngine_virtualbase_key".}
+proc fcQIconEngine_virtualbase_key(self: pointer): struct_miqt_string {.importc: "QIconEngine_virtualbase_key".}
 proc fcQIconEngine_virtualbase_read(self: pointer, inVal: pointer): bool {.importc: "QIconEngine_virtualbase_read".}
 proc fcQIconEngine_virtualbase_write(self: pointer, outVal: pointer): bool {.importc: "QIconEngine_virtualbase_write".}
 proc fcQIconEngine_virtualbase_availableSizes(self: pointer, mode: cint, state: cint): struct_miqt_array {.importc: "QIconEngine_virtualbase_availableSizes".}
-proc fcQIconEngine_virtualbase_iconName(self: pointer, ): struct_miqt_string {.importc: "QIconEngine_virtualbase_iconName".}
+proc fcQIconEngine_virtualbase_iconName(self: pointer): struct_miqt_string {.importc: "QIconEngine_virtualbase_iconName".}
 proc fcQIconEngine_virtualbase_virtualHook(self: pointer, id: cint, data: pointer): void {.importc: "QIconEngine_virtualbase_virtualHook".}
-proc fcQIconEngine_new(vtbl: pointer, ): ptr cQIconEngine {.importc: "QIconEngine_new".}
-proc fcQIconEngine_new2(vtbl: pointer, other: pointer): ptr cQIconEngine {.importc: "QIconEngine_new2".}
+proc fcQIconEngine_new(vtbl, vdata: pointer): ptr cQIconEngine {.importc: "QIconEngine_new".}
+proc fcQIconEngine_new2(vtbl, vdata: pointer, other: pointer): ptr cQIconEngine {.importc: "QIconEngine_new2".}
 proc fcQIconEngineAvailableSizesArgument_operatorAssign(self: pointer, param1: pointer): void {.importc: "QIconEngine__AvailableSizesArgument_operatorAssign".}
 proc fcQIconEngineAvailableSizesArgument_new(param1: pointer): ptr cQIconEngineAvailableSizesArgument {.importc: "QIconEngine__AvailableSizesArgument_new".}
 proc fcQIconEngineScaledPixmapArgument_operatorAssign(self: pointer, param1: pointer): void {.importc: "QIconEngine__ScaledPixmapArgument_operatorAssign".}
@@ -118,13 +120,13 @@ proc addPixmap*(self: gen_qiconengine_types.QIconEngine, pixmap: gen_qpixmap_typ
 proc addFile*(self: gen_qiconengine_types.QIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void =
   fcQIconEngine_addFile(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), size.h, cint(mode), cint(state))
 
-proc key*(self: gen_qiconengine_types.QIconEngine, ): string =
+proc key*(self: gen_qiconengine_types.QIconEngine): string =
   let v_ms = fcQIconEngine_key(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc clone*(self: gen_qiconengine_types.QIconEngine, ): gen_qiconengine_types.QIconEngine =
+proc clone*(self: gen_qiconengine_types.QIconEngine): gen_qiconengine_types.QIconEngine =
   gen_qiconengine_types.QIconEngine(h: fcQIconEngine_clone(self.h), owned: false)
 
 proc read*(self: gen_qiconengine_types.QIconEngine, inVal: gen_qdatastream_types.QDataStream): bool =
@@ -142,13 +144,13 @@ proc availableSizes*(self: gen_qiconengine_types.QIconEngine, mode: cint, state:
   c_free(v_ma.data)
   vx_ret
 
-proc iconName*(self: gen_qiconengine_types.QIconEngine, ): string =
+proc iconName*(self: gen_qiconengine_types.QIconEngine): string =
   let v_ms = fcQIconEngine_iconName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isNull*(self: gen_qiconengine_types.QIconEngine, ): bool =
+proc isNull*(self: gen_qiconengine_types.QIconEngine): bool =
   fcQIconEngine_isNull(self.h)
 
 proc scaledPixmap*(self: gen_qiconengine_types.QIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint, scale: float64): gen_qpixmap_types.QPixmap =
@@ -183,8 +185,8 @@ type QIconEngineVTable* {.inheritable, pure.} = object
   availableSizes*: QIconEngineavailableSizesProc
   iconName*: QIconEngineiconNameProc
   virtualHook*: QIconEnginevirtualHookProc
-proc miqt_exec_callback_cQIconEngine_paint(vtbl: pointer, self: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_paint(self: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
@@ -195,8 +197,8 @@ proc miqt_exec_callback_cQIconEngine_paint(vtbl: pointer, self: pointer, painter
 proc QIconEngineactualSize*(self: gen_qiconengine_types.QIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQIconEngine_virtualbase_actualSize(self.h, size.h, cint(mode), cint(state)), owned: true)
 
-proc miqt_exec_callback_cQIconEngine_actualSize(vtbl: pointer, self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_actualSize(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval2 = cint(mode)
@@ -210,8 +212,8 @@ proc miqt_exec_callback_cQIconEngine_actualSize(vtbl: pointer, self: pointer, si
 proc QIconEnginepixmap*(self: gen_qiconengine_types.QIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qpixmap_types.QPixmap =
   gen_qpixmap_types.QPixmap(h: fcQIconEngine_virtualbase_pixmap(self.h, size.h, cint(mode), cint(state)), owned: true)
 
-proc miqt_exec_callback_cQIconEngine_pixmap(vtbl: pointer, self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_pixmap(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval2 = cint(mode)
@@ -225,8 +227,8 @@ proc miqt_exec_callback_cQIconEngine_pixmap(vtbl: pointer, self: pointer, size: 
 proc QIconEngineaddPixmap*(self: gen_qiconengine_types.QIconEngine, pixmap: gen_qpixmap_types.QPixmap, mode: cint, state: cint): void =
   fcQIconEngine_virtualbase_addPixmap(self.h, pixmap.h, cint(mode), cint(state))
 
-proc miqt_exec_callback_cQIconEngine_addPixmap(vtbl: pointer, self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_addPixmap(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   let slotval2 = cint(mode)
@@ -236,8 +238,8 @@ proc miqt_exec_callback_cQIconEngine_addPixmap(vtbl: pointer, self: pointer, pix
 proc QIconEngineaddFile*(self: gen_qiconengine_types.QIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void =
   fcQIconEngine_virtualbase_addFile(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))), size.h, cint(mode), cint(state))
 
-proc miqt_exec_callback_cQIconEngine_addFile(vtbl: pointer, self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let vfileName_ms = fileName
   let vfileNamex_ret = string.fromBytes(toOpenArrayByte(vfileName_ms.data, 0, int(vfileName_ms.len)-1))
@@ -248,22 +250,22 @@ proc miqt_exec_callback_cQIconEngine_addFile(vtbl: pointer, self: pointer, fileN
   let slotval4 = cint(state)
   vtbl[].addFile(self, slotval1, slotval2, slotval3, slotval4)
 
-proc QIconEnginekey*(self: gen_qiconengine_types.QIconEngine, ): string =
+proc QIconEnginekey*(self: gen_qiconengine_types.QIconEngine): string =
   let v_ms = fcQIconEngine_virtualbase_key(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc miqt_exec_callback_cQIconEngine_key(vtbl: pointer, self: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_key(self: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   var virtualReturn = vtbl[].key(self)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-proc miqt_exec_callback_cQIconEngine_clone(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_clone(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   var virtualReturn = vtbl[].clone(self)
   virtualReturn.owned = false # TODO move?
@@ -274,8 +276,8 @@ proc miqt_exec_callback_cQIconEngine_clone(vtbl: pointer, self: pointer): pointe
 proc QIconEngineread*(self: gen_qiconengine_types.QIconEngine, inVal: gen_qdatastream_types.QDataStream): bool =
   fcQIconEngine_virtualbase_read(self.h, inVal.h)
 
-proc miqt_exec_callback_cQIconEngine_read(vtbl: pointer, self: pointer, inVal: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_read(self: pointer, inVal: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
   var virtualReturn = vtbl[].read(self, slotval1)
@@ -284,8 +286,8 @@ proc miqt_exec_callback_cQIconEngine_read(vtbl: pointer, self: pointer, inVal: p
 proc QIconEnginewrite*(self: gen_qiconengine_types.QIconEngine, outVal: gen_qdatastream_types.QDataStream): bool =
   fcQIconEngine_virtualbase_write(self.h, outVal.h)
 
-proc miqt_exec_callback_cQIconEngine_write(vtbl: pointer, self: pointer, outVal: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_write(self: pointer, outVal: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
   var virtualReturn = vtbl[].write(self, slotval1)
@@ -300,8 +302,8 @@ proc QIconEngineavailableSizes*(self: gen_qiconengine_types.QIconEngine, mode: c
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQIconEngine_availableSizes(vtbl: pointer, self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_availableSizes(self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = cint(mode)
   let slotval2 = cint(state)
@@ -315,14 +317,14 @@ proc miqt_exec_callback_cQIconEngine_availableSizes(vtbl: pointer, self: pointer
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-proc QIconEngineiconName*(self: gen_qiconengine_types.QIconEngine, ): string =
+proc QIconEngineiconName*(self: gen_qiconengine_types.QIconEngine): string =
   let v_ms = fcQIconEngine_virtualbase_iconName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc miqt_exec_callback_cQIconEngine_iconName(vtbl: pointer, self: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_iconName(self: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   var virtualReturn = vtbl[].iconName(self)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
@@ -332,8 +334,8 @@ proc miqt_exec_callback_cQIconEngine_iconName(vtbl: pointer, self: pointer): str
 proc QIconEnginevirtualHook*(self: gen_qiconengine_types.QIconEngine, id: cint, data: pointer): void =
   fcQIconEngine_virtualbase_virtualHook(self.h, id, data)
 
-proc miqt_exec_callback_cQIconEngine_virtualHook(vtbl: pointer, self: pointer, id: cint, data: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QIconEngineVTable](vtbl)
+proc cQIconEngine_vtable_callback_virtualHook(self: pointer, id: cint, data: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QIconEngineVTable](fcQIconEngine_vdata(self))
   let self = QIconEngine(h: self)
   let slotval1 = id
   let slotval2 = data
@@ -343,22 +345,22 @@ type VirtualQIconEngine* {.inheritable.} = ref object of QIconEngine
   vtbl*: cQIconEngineVTable
 method paint*(self: VirtualQIconEngine, painter: gen_qpainter_types.QPainter, rect: gen_qrect_types.QRect, mode: cint, state: cint): void {.base.} =
   raiseAssert("missing implementation of QIconEngine_virtualbase_paint")
-proc miqt_exec_method_cQIconEngine_paint(vtbl: pointer, inst: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_paint(self: pointer, painter: pointer, rect: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qpainter_types.QPainter(h: painter, owned: false)
   let slotval2 = gen_qrect_types.QRect(h: rect, owned: false)
   let slotval3 = cint(mode)
   let slotval4 = cint(state)
-  vtbl.paint(slotval1, slotval2, slotval3, slotval4)
+  inst.paint(slotval1, slotval2, slotval3, slotval4)
 
 method actualSize*(self: VirtualQIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qsize_types.QSize {.base.} =
   QIconEngineactualSize(self[], size, mode, state)
-proc miqt_exec_method_cQIconEngine_actualSize(vtbl: pointer, inst: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_actualSize(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval2 = cint(mode)
   let slotval3 = cint(state)
-  var virtualReturn = vtbl.actualSize(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.actualSize(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -366,12 +368,12 @@ proc miqt_exec_method_cQIconEngine_actualSize(vtbl: pointer, inst: pointer, size
 
 method pixmap*(self: VirtualQIconEngine, size: gen_qsize_types.QSize, mode: cint, state: cint): gen_qpixmap_types.QPixmap {.base.} =
   QIconEnginepixmap(self[], size, mode, state)
-proc miqt_exec_method_cQIconEngine_pixmap(vtbl: pointer, inst: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_pixmap(self: pointer, size: pointer, mode: cint, state: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval2 = cint(mode)
   let slotval3 = cint(state)
-  var virtualReturn = vtbl.pixmap(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.pixmap(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -379,17 +381,17 @@ proc miqt_exec_method_cQIconEngine_pixmap(vtbl: pointer, inst: pointer, size: po
 
 method addPixmap*(self: VirtualQIconEngine, pixmap: gen_qpixmap_types.QPixmap, mode: cint, state: cint): void {.base.} =
   QIconEngineaddPixmap(self[], pixmap, mode, state)
-proc miqt_exec_method_cQIconEngine_addPixmap(vtbl: pointer, inst: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_addPixmap(self: pointer, pixmap: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qpixmap_types.QPixmap(h: pixmap, owned: false)
   let slotval2 = cint(mode)
   let slotval3 = cint(state)
-  vtbl.addPixmap(slotval1, slotval2, slotval3)
+  inst.addPixmap(slotval1, slotval2, slotval3)
 
 method addFile*(self: VirtualQIconEngine, fileName: string, size: gen_qsize_types.QSize, mode: cint, state: cint): void {.base.} =
   QIconEngineaddFile(self[], fileName, size, mode, state)
-proc miqt_exec_method_cQIconEngine_addFile(vtbl: pointer, inst: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_addFile(self: pointer, fileName: struct_miqt_string, size: pointer, mode: cint, state: cint): void {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let vfileName_ms = fileName
   let vfileNamex_ret = string.fromBytes(toOpenArrayByte(vfileName_ms.data, 0, int(vfileName_ms.len)-1))
   c_free(vfileName_ms.data)
@@ -397,22 +399,22 @@ proc miqt_exec_method_cQIconEngine_addFile(vtbl: pointer, inst: pointer, fileNam
   let slotval2 = gen_qsize_types.QSize(h: size, owned: false)
   let slotval3 = cint(mode)
   let slotval4 = cint(state)
-  vtbl.addFile(slotval1, slotval2, slotval3, slotval4)
+  inst.addFile(slotval1, slotval2, slotval3, slotval4)
 
-method key*(self: VirtualQIconEngine, ): string {.base.} =
+method key*(self: VirtualQIconEngine): string {.base.} =
   QIconEnginekey(self[])
-proc miqt_exec_method_cQIconEngine_key(vtbl: pointer, inst: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
-  var virtualReturn = vtbl.key()
+proc cQIconEngine_method_callback_key(self: pointer): struct_miqt_string {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
+  var virtualReturn = inst.key()
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
-method clone*(self: VirtualQIconEngine, ): gen_qiconengine_types.QIconEngine {.base.} =
+method clone*(self: VirtualQIconEngine): gen_qiconengine_types.QIconEngine {.base.} =
   raiseAssert("missing implementation of QIconEngine_virtualbase_clone")
-proc miqt_exec_method_cQIconEngine_clone(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
-  var virtualReturn = vtbl.clone()
+proc cQIconEngine_method_callback_clone(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
+  var virtualReturn = inst.clone()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -420,27 +422,27 @@ proc miqt_exec_method_cQIconEngine_clone(vtbl: pointer, inst: pointer): pointer 
 
 method read*(self: VirtualQIconEngine, inVal: gen_qdatastream_types.QDataStream): bool {.base.} =
   QIconEngineread(self[], inVal)
-proc miqt_exec_method_cQIconEngine_read(vtbl: pointer, inst: pointer, inVal: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_read(self: pointer, inVal: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qdatastream_types.QDataStream(h: inVal, owned: false)
-  var virtualReturn = vtbl.read(slotval1)
+  var virtualReturn = inst.read(slotval1)
   virtualReturn
 
 method write*(self: VirtualQIconEngine, outVal: gen_qdatastream_types.QDataStream): bool {.base.} =
   QIconEnginewrite(self[], outVal)
-proc miqt_exec_method_cQIconEngine_write(vtbl: pointer, inst: pointer, outVal: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_write(self: pointer, outVal: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = gen_qdatastream_types.QDataStream(h: outVal, owned: false)
-  var virtualReturn = vtbl.write(slotval1)
+  var virtualReturn = inst.write(slotval1)
   virtualReturn
 
 method availableSizes*(self: VirtualQIconEngine, mode: cint, state: cint): seq[gen_qsize_types.QSize] {.base.} =
   QIconEngineavailableSizes(self[], mode, state)
-proc miqt_exec_method_cQIconEngine_availableSizes(vtbl: pointer, inst: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_availableSizes(self: pointer, mode: cint, state: cint): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = cint(mode)
   let slotval2 = cint(state)
-  var virtualReturn = vtbl.availableSizes(slotval1, slotval2)
+  var virtualReturn = inst.availableSizes(slotval1, slotval2)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -450,136 +452,120 @@ proc miqt_exec_method_cQIconEngine_availableSizes(vtbl: pointer, inst: pointer, 
 
   struct_miqt_array(len: csize_t(len(virtualReturn)), data: if len(virtualReturn) == 0: nil else: addr(virtualReturn_CArray[0]))
 
-method iconName*(self: VirtualQIconEngine, ): string {.base.} =
+method iconName*(self: VirtualQIconEngine): string {.base.} =
   QIconEngineiconName(self[])
-proc miqt_exec_method_cQIconEngine_iconName(vtbl: pointer, inst: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
-  var virtualReturn = vtbl.iconName()
+proc cQIconEngine_method_callback_iconName(self: pointer): struct_miqt_string {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
+  var virtualReturn = inst.iconName()
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 method virtualHook*(self: VirtualQIconEngine, id: cint, data: pointer): void {.base.} =
   QIconEnginevirtualHook(self[], id, data)
-proc miqt_exec_method_cQIconEngine_virtualHook(vtbl: pointer, inst: pointer, id: cint, data: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQIconEngine](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
+proc cQIconEngine_method_callback_virtualHook(self: pointer, id: cint, data: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQIconEngine](fcQIconEngine_vdata(self))
   let slotval1 = id
   let slotval2 = data
-  vtbl.virtualHook(slotval1, slotval2)
+  inst.virtualHook(slotval1, slotval2)
 
 proc create*(T: type gen_qiconengine_types.QIconEngine,
     vtbl: ref QIconEngineVTable = nil): gen_qiconengine_types.QIconEngine =
   let vtbl = if vtbl == nil: new QIconEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEngineVTable, _: ptr cQIconEngine) {.cdecl.} =
-    let vtbl = cast[ref QIconEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIconEngineVTable](fcQIconEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].paint):
-    vtbl[].vtbl.paint = miqt_exec_callback_cQIconEngine_paint
+    vtbl[].vtbl.paint = cQIconEngine_vtable_callback_paint
   if not isNil(vtbl[].actualSize):
-    vtbl[].vtbl.actualSize = miqt_exec_callback_cQIconEngine_actualSize
+    vtbl[].vtbl.actualSize = cQIconEngine_vtable_callback_actualSize
   if not isNil(vtbl[].pixmap):
-    vtbl[].vtbl.pixmap = miqt_exec_callback_cQIconEngine_pixmap
+    vtbl[].vtbl.pixmap = cQIconEngine_vtable_callback_pixmap
   if not isNil(vtbl[].addPixmap):
-    vtbl[].vtbl.addPixmap = miqt_exec_callback_cQIconEngine_addPixmap
+    vtbl[].vtbl.addPixmap = cQIconEngine_vtable_callback_addPixmap
   if not isNil(vtbl[].addFile):
-    vtbl[].vtbl.addFile = miqt_exec_callback_cQIconEngine_addFile
+    vtbl[].vtbl.addFile = cQIconEngine_vtable_callback_addFile
   if not isNil(vtbl[].key):
-    vtbl[].vtbl.key = miqt_exec_callback_cQIconEngine_key
+    vtbl[].vtbl.key = cQIconEngine_vtable_callback_key
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQIconEngine_clone
+    vtbl[].vtbl.clone = cQIconEngine_vtable_callback_clone
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQIconEngine_read
+    vtbl[].vtbl.read = cQIconEngine_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQIconEngine_write
+    vtbl[].vtbl.write = cQIconEngine_vtable_callback_write
   if not isNil(vtbl[].availableSizes):
-    vtbl[].vtbl.availableSizes = miqt_exec_callback_cQIconEngine_availableSizes
+    vtbl[].vtbl.availableSizes = cQIconEngine_vtable_callback_availableSizes
   if not isNil(vtbl[].iconName):
-    vtbl[].vtbl.iconName = miqt_exec_callback_cQIconEngine_iconName
+    vtbl[].vtbl.iconName = cQIconEngine_vtable_callback_iconName
   if not isNil(vtbl[].virtualHook):
-    vtbl[].vtbl.virtualHook = miqt_exec_callback_cQIconEngine_virtualHook
-  gen_qiconengine_types.QIconEngine(h: fcQIconEngine_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.virtualHook = cQIconEngine_vtable_callback_virtualHook
+  gen_qiconengine_types.QIconEngine(h: fcQIconEngine_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qiconengine_types.QIconEngine,
     other: gen_qiconengine_types.QIconEngine,
     vtbl: ref QIconEngineVTable = nil): gen_qiconengine_types.QIconEngine =
   let vtbl = if vtbl == nil: new QIconEngineVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEngineVTable, _: ptr cQIconEngine) {.cdecl.} =
-    let vtbl = cast[ref QIconEngineVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QIconEngineVTable](fcQIconEngine_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].paint):
-    vtbl[].vtbl.paint = miqt_exec_callback_cQIconEngine_paint
+    vtbl[].vtbl.paint = cQIconEngine_vtable_callback_paint
   if not isNil(vtbl[].actualSize):
-    vtbl[].vtbl.actualSize = miqt_exec_callback_cQIconEngine_actualSize
+    vtbl[].vtbl.actualSize = cQIconEngine_vtable_callback_actualSize
   if not isNil(vtbl[].pixmap):
-    vtbl[].vtbl.pixmap = miqt_exec_callback_cQIconEngine_pixmap
+    vtbl[].vtbl.pixmap = cQIconEngine_vtable_callback_pixmap
   if not isNil(vtbl[].addPixmap):
-    vtbl[].vtbl.addPixmap = miqt_exec_callback_cQIconEngine_addPixmap
+    vtbl[].vtbl.addPixmap = cQIconEngine_vtable_callback_addPixmap
   if not isNil(vtbl[].addFile):
-    vtbl[].vtbl.addFile = miqt_exec_callback_cQIconEngine_addFile
+    vtbl[].vtbl.addFile = cQIconEngine_vtable_callback_addFile
   if not isNil(vtbl[].key):
-    vtbl[].vtbl.key = miqt_exec_callback_cQIconEngine_key
+    vtbl[].vtbl.key = cQIconEngine_vtable_callback_key
   if not isNil(vtbl[].clone):
-    vtbl[].vtbl.clone = miqt_exec_callback_cQIconEngine_clone
+    vtbl[].vtbl.clone = cQIconEngine_vtable_callback_clone
   if not isNil(vtbl[].read):
-    vtbl[].vtbl.read = miqt_exec_callback_cQIconEngine_read
+    vtbl[].vtbl.read = cQIconEngine_vtable_callback_read
   if not isNil(vtbl[].write):
-    vtbl[].vtbl.write = miqt_exec_callback_cQIconEngine_write
+    vtbl[].vtbl.write = cQIconEngine_vtable_callback_write
   if not isNil(vtbl[].availableSizes):
-    vtbl[].vtbl.availableSizes = miqt_exec_callback_cQIconEngine_availableSizes
+    vtbl[].vtbl.availableSizes = cQIconEngine_vtable_callback_availableSizes
   if not isNil(vtbl[].iconName):
-    vtbl[].vtbl.iconName = miqt_exec_callback_cQIconEngine_iconName
+    vtbl[].vtbl.iconName = cQIconEngine_vtable_callback_iconName
   if not isNil(vtbl[].virtualHook):
-    vtbl[].vtbl.virtualHook = miqt_exec_callback_cQIconEngine_virtualHook
-  gen_qiconengine_types.QIconEngine(h: fcQIconEngine_new2(addr(vtbl[].vtbl), other.h), owned: true)
+    vtbl[].vtbl.virtualHook = cQIconEngine_vtable_callback_virtualHook
+  gen_qiconengine_types.QIconEngine(h: fcQIconEngine_new2(addr(vtbl[].vtbl), addr(vtbl[]), other.h), owned: true)
 
+const cQIconEngine_mvtbl = cQIconEngineVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQIconEngine()[])](self.fcQIconEngine_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  paint: cQIconEngine_method_callback_paint,
+  actualSize: cQIconEngine_method_callback_actualSize,
+  pixmap: cQIconEngine_method_callback_pixmap,
+  addPixmap: cQIconEngine_method_callback_addPixmap,
+  addFile: cQIconEngine_method_callback_addFile,
+  key: cQIconEngine_method_callback_key,
+  clone: cQIconEngine_method_callback_clone,
+  read: cQIconEngine_method_callback_read,
+  write: cQIconEngine_method_callback_write,
+  availableSizes: cQIconEngine_method_callback_availableSizes,
+  iconName: cQIconEngine_method_callback_iconName,
+  virtualHook: cQIconEngine_method_callback_virtualHook,
+)
 proc create*(T: type gen_qiconengine_types.QIconEngine,
-    vtbl: VirtualQIconEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEngineVTable, _: ptr cQIconEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIconEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.paint = miqt_exec_method_cQIconEngine_paint
-  vtbl[].vtbl.actualSize = miqt_exec_method_cQIconEngine_actualSize
-  vtbl[].vtbl.pixmap = miqt_exec_method_cQIconEngine_pixmap
-  vtbl[].vtbl.addPixmap = miqt_exec_method_cQIconEngine_addPixmap
-  vtbl[].vtbl.addFile = miqt_exec_method_cQIconEngine_addFile
-  vtbl[].vtbl.key = miqt_exec_method_cQIconEngine_key
-  vtbl[].vtbl.clone = miqt_exec_method_cQIconEngine_clone
-  vtbl[].vtbl.read = miqt_exec_method_cQIconEngine_read
-  vtbl[].vtbl.write = miqt_exec_method_cQIconEngine_write
-  vtbl[].vtbl.availableSizes = miqt_exec_method_cQIconEngine_availableSizes
-  vtbl[].vtbl.iconName = miqt_exec_method_cQIconEngine_iconName
-  vtbl[].vtbl.virtualHook = miqt_exec_method_cQIconEngine_virtualHook
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIconEngine_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQIconEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIconEngine_new(addr(cQIconEngine_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qiconengine_types.QIconEngine,
     other: gen_qiconengine_types.QIconEngine,
-    vtbl: VirtualQIconEngine) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQIconEngineVTable, _: ptr cQIconEngine) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQIconEngine()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQIconEngine, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.paint = miqt_exec_method_cQIconEngine_paint
-  vtbl[].vtbl.actualSize = miqt_exec_method_cQIconEngine_actualSize
-  vtbl[].vtbl.pixmap = miqt_exec_method_cQIconEngine_pixmap
-  vtbl[].vtbl.addPixmap = miqt_exec_method_cQIconEngine_addPixmap
-  vtbl[].vtbl.addFile = miqt_exec_method_cQIconEngine_addFile
-  vtbl[].vtbl.key = miqt_exec_method_cQIconEngine_key
-  vtbl[].vtbl.clone = miqt_exec_method_cQIconEngine_clone
-  vtbl[].vtbl.read = miqt_exec_method_cQIconEngine_read
-  vtbl[].vtbl.write = miqt_exec_method_cQIconEngine_write
-  vtbl[].vtbl.availableSizes = miqt_exec_method_cQIconEngine_availableSizes
-  vtbl[].vtbl.iconName = miqt_exec_method_cQIconEngine_iconName
-  vtbl[].vtbl.virtualHook = miqt_exec_method_cQIconEngine_virtualHook
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQIconEngine_new2(addr(vtbl[].vtbl), other.h)
-  vtbl[].owned = true
+    inst: VirtualQIconEngine) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQIconEngine_new2(addr(cQIconEngine_mvtbl), addr(inst[]), other.h)
+  inst[].owned = true
 
 proc operatorAssign*(self: gen_qiconengine_types.QIconEngineAvailableSizesArgument, param1: gen_qiconengine_types.QIconEngineAvailableSizesArgument): void =
   fcQIconEngineAvailableSizesArgument_operatorAssign(self.h, param1.h)

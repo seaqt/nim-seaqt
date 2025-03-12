@@ -10,15 +10,6 @@
 #include <QVariant>
 #include <qmetadatareadercontrol.h>
 #include "gen_qmetadatareadercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMetaDataReaderControl_virtbase(QMetaDataReaderControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -189,6 +180,7 @@ struct miqt_string QMetaDataReaderControl_trUtf83(const char* s, const char* c, 
 }
 
 const QMetaObject* QMetaDataReaderControl_staticMetaObject() { return &QMetaDataReaderControl::staticMetaObject; }
+
 void QMetaDataReaderControl_delete(QMetaDataReaderControl* self) {
 	delete self;
 }

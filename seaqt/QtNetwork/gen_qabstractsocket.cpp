@@ -15,38 +15,31 @@
 #include <QVariant>
 #include <qabstractsocket.h>
 #include "gen_qabstractsocket.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractSocket final : public QAbstractSocket {
-	struct QAbstractSocket_VTable* vtbl;
+	const QAbstractSocket_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractSocket_VTable* QAbstractSocket_vtbl(const VirtualQAbstractSocket* self);
+	friend void* QAbstractSocket_vdata(const VirtualQAbstractSocket* self);
+	friend void QAbstractSocket_setVdata(VirtualQAbstractSocket* self, void* vdata);
 
-	VirtualQAbstractSocket(struct QAbstractSocket_VTable* vtbl, QAbstractSocket::SocketType socketType, QObject* parent): QAbstractSocket(socketType, parent), vtbl(vtbl) {};
+	VirtualQAbstractSocket(const QAbstractSocket_VTable* vtbl, void* vdata, QAbstractSocket::SocketType socketType, QObject* parent): QAbstractSocket(socketType, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractSocket() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractSocket() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractSocket::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractSocket_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractSocket_virtualbase_metaObject(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractSocket::qt_metacast(param1);
@@ -54,14 +47,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractSocket_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractSocket_virtualbase_metacast(VirtualQAbstractSocket* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractSocket::qt_metacall(param1, param2, param3);
@@ -72,14 +64,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractSocket_virtualbase_metacall(VirtualQAbstractSocket* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resume() override {
 		if (vtbl->resume == 0) {
 			QAbstractSocket::resume();
@@ -87,13 +78,12 @@ public:
 		}
 
 
-		vtbl->resume(vtbl, this);
+		vtbl->resume(this);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_resume(void* self);
+	friend void QAbstractSocket_virtualbase_resume(VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QString& hostName, quint16 port, QIODevice::OpenMode mode, QAbstractSocket::NetworkLayerProtocol protocol) override {
 		if (vtbl->connectToHost == 0) {
 			QAbstractSocket::connectToHost(hostName, port, mode, protocol);
@@ -115,13 +105,12 @@ public:
 		QAbstractSocket::NetworkLayerProtocol protocol_ret = protocol;
 		int sigval4 = static_cast<int>(protocol_ret);
 
-		vtbl->connectToHost(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->connectToHost(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol);
+	friend void QAbstractSocket_virtualbase_connectToHost(VirtualQAbstractSocket* self, struct miqt_string hostName, uint16_t port, int mode, int protocol);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectToHost(const QHostAddress& address, quint16 port, QIODevice::OpenMode mode) override {
 		if (vtbl->connectToHost2 == 0) {
 			QAbstractSocket::connectToHost(address, port, mode);
@@ -136,13 +125,12 @@ public:
 		QIODevice::OpenMode mode_ret = mode;
 		int sigval3 = static_cast<int>(mode_ret);
 
-		vtbl->connectToHost2(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->connectToHost2(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_connectToHost2(void* self, QHostAddress* address, uint16_t port, int mode);
+	friend void QAbstractSocket_virtualbase_connectToHost2(VirtualQAbstractSocket* self, QHostAddress* address, uint16_t port, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectFromHost() override {
 		if (vtbl->disconnectFromHost == 0) {
 			QAbstractSocket::disconnectFromHost();
@@ -150,55 +138,51 @@ public:
 		}
 
 
-		vtbl->disconnectFromHost(vtbl, this);
+		vtbl->disconnectFromHost(this);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_disconnectFromHost(void* self);
+	friend void QAbstractSocket_virtualbase_disconnectFromHost(VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesAvailable() const override {
 		if (vtbl->bytesAvailable == 0) {
 			return QAbstractSocket::bytesAvailable();
 		}
 
 
-		long long callback_return_value = vtbl->bytesAvailable(vtbl, this);
+		long long callback_return_value = vtbl->bytesAvailable(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_bytesAvailable(const void* self);
+	friend long long QAbstractSocket_virtualbase_bytesAvailable(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 bytesToWrite() const override {
 		if (vtbl->bytesToWrite == 0) {
 			return QAbstractSocket::bytesToWrite();
 		}
 
 
-		long long callback_return_value = vtbl->bytesToWrite(vtbl, this);
+		long long callback_return_value = vtbl->bytesToWrite(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_bytesToWrite(const void* self);
+	friend long long QAbstractSocket_virtualbase_bytesToWrite(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool canReadLine() const override {
 		if (vtbl->canReadLine == 0) {
 			return QAbstractSocket::canReadLine();
 		}
 
 
-		bool callback_return_value = vtbl->canReadLine(vtbl, this);
+		bool callback_return_value = vtbl->canReadLine(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_canReadLine(const void* self);
+	friend bool QAbstractSocket_virtualbase_canReadLine(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setReadBufferSize(qint64 size) override {
 		if (vtbl->setReadBufferSize == 0) {
 			QAbstractSocket::setReadBufferSize(size);
@@ -208,27 +192,25 @@ public:
 		qint64 size_ret = size;
 		long long sigval1 = static_cast<long long>(size_ret);
 
-		vtbl->setReadBufferSize(vtbl, this, sigval1);
+		vtbl->setReadBufferSize(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_setReadBufferSize(void* self, long long size);
+	friend void QAbstractSocket_virtualbase_setReadBufferSize(VirtualQAbstractSocket* self, long long size);
 
-	// Subclass to allow providing a Go implementation
 	virtual qintptr socketDescriptor() const override {
 		if (vtbl->socketDescriptor == 0) {
 			return QAbstractSocket::socketDescriptor();
 		}
 
 
-		intptr_t callback_return_value = vtbl->socketDescriptor(vtbl, this);
+		intptr_t callback_return_value = vtbl->socketDescriptor(this);
 
 		return (qintptr)(callback_return_value);
 	}
 
-	friend intptr_t QAbstractSocket_virtualbase_socketDescriptor(const void* self);
+	friend intptr_t QAbstractSocket_virtualbase_socketDescriptor(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool setSocketDescriptor(qintptr socketDescriptor, QAbstractSocket::SocketState state, QIODevice::OpenMode openMode) override {
 		if (vtbl->setSocketDescriptor == 0) {
 			return QAbstractSocket::setSocketDescriptor(socketDescriptor, state, openMode);
@@ -241,14 +223,13 @@ public:
 		QIODevice::OpenMode openMode_ret = openMode;
 		int sigval3 = static_cast<int>(openMode_ret);
 
-		bool callback_return_value = vtbl->setSocketDescriptor(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->setSocketDescriptor(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode);
+	friend bool QAbstractSocket_virtualbase_setSocketDescriptor(VirtualQAbstractSocket* self, intptr_t socketDescriptor, int state, int openMode);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSocketOption(QAbstractSocket::SocketOption option, const QVariant& value) override {
 		if (vtbl->setSocketOption == 0) {
 			QAbstractSocket::setSocketOption(option, value);
@@ -261,13 +242,12 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&value_ret);
 
-		vtbl->setSocketOption(vtbl, this, sigval1, sigval2);
+		vtbl->setSocketOption(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value);
+	friend void QAbstractSocket_virtualbase_setSocketOption(VirtualQAbstractSocket* self, int option, QVariant* value);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant socketOption(QAbstractSocket::SocketOption option) override {
 		if (vtbl->socketOption == 0) {
 			return QAbstractSocket::socketOption(option);
@@ -276,16 +256,15 @@ public:
 		QAbstractSocket::SocketOption option_ret = option;
 		int sigval1 = static_cast<int>(option_ret);
 
-		QVariant* callback_return_value = vtbl->socketOption(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->socketOption(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractSocket_virtualbase_socketOption(void* self, int option);
+	friend QVariant* QAbstractSocket_virtualbase_socketOption(VirtualQAbstractSocket* self, int option);
 
-	// Subclass to allow providing a Go implementation
 	virtual void close() override {
 		if (vtbl->close == 0) {
 			QAbstractSocket::close();
@@ -293,41 +272,38 @@ public:
 		}
 
 
-		vtbl->close(vtbl, this);
+		vtbl->close(this);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_close(void* self);
+	friend void QAbstractSocket_virtualbase_close(VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isSequential() const override {
 		if (vtbl->isSequential == 0) {
 			return QAbstractSocket::isSequential();
 		}
 
 
-		bool callback_return_value = vtbl->isSequential(vtbl, this);
+		bool callback_return_value = vtbl->isSequential(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_isSequential(const void* self);
+	friend bool QAbstractSocket_virtualbase_isSequential(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool atEnd() const override {
 		if (vtbl->atEnd == 0) {
 			return QAbstractSocket::atEnd();
 		}
 
 
-		bool callback_return_value = vtbl->atEnd(vtbl, this);
+		bool callback_return_value = vtbl->atEnd(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_atEnd(const void* self);
+	friend bool QAbstractSocket_virtualbase_atEnd(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForConnected(int msecs) override {
 		if (vtbl->waitForConnected == 0) {
 			return QAbstractSocket::waitForConnected(msecs);
@@ -335,14 +311,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForConnected(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForConnected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_waitForConnected(void* self, int msecs);
+	friend bool QAbstractSocket_virtualbase_waitForConnected(VirtualQAbstractSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForReadyRead(int msecs) override {
 		if (vtbl->waitForReadyRead == 0) {
 			return QAbstractSocket::waitForReadyRead(msecs);
@@ -350,14 +325,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForReadyRead(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForReadyRead(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_waitForReadyRead(void* self, int msecs);
+	friend bool QAbstractSocket_virtualbase_waitForReadyRead(VirtualQAbstractSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForBytesWritten(int msecs) override {
 		if (vtbl->waitForBytesWritten == 0) {
 			return QAbstractSocket::waitForBytesWritten(msecs);
@@ -365,14 +339,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForBytesWritten(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForBytesWritten(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_waitForBytesWritten(void* self, int msecs);
+	friend bool QAbstractSocket_virtualbase_waitForBytesWritten(VirtualQAbstractSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool waitForDisconnected(int msecs) override {
 		if (vtbl->waitForDisconnected == 0) {
 			return QAbstractSocket::waitForDisconnected(msecs);
@@ -380,14 +353,13 @@ public:
 
 		int sigval1 = msecs;
 
-		bool callback_return_value = vtbl->waitForDisconnected(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->waitForDisconnected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_waitForDisconnected(void* self, int msecs);
+	friend bool QAbstractSocket_virtualbase_waitForDisconnected(VirtualQAbstractSocket* self, int msecs);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readData(char* data, qint64 maxlen) override {
 		if (vtbl->readData == 0) {
 			return QAbstractSocket::readData(data, maxlen);
@@ -397,14 +369,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_readData(void* self, char* data, long long maxlen);
+	friend long long QAbstractSocket_virtualbase_readData(VirtualQAbstractSocket* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 readLineData(char* data, qint64 maxlen) override {
 		if (vtbl->readLineData == 0) {
 			return QAbstractSocket::readLineData(data, maxlen);
@@ -414,14 +385,13 @@ public:
 		qint64 maxlen_ret = maxlen;
 		long long sigval2 = static_cast<long long>(maxlen_ret);
 
-		long long callback_return_value = vtbl->readLineData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->readLineData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_readLineData(void* self, char* data, long long maxlen);
+	friend long long QAbstractSocket_virtualbase_readLineData(VirtualQAbstractSocket* self, char* data, long long maxlen);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 writeData(const char* data, qint64 len) override {
 		if (vtbl->writeData == 0) {
 			return QAbstractSocket::writeData(data, len);
@@ -431,14 +401,13 @@ public:
 		qint64 len_ret = len;
 		long long sigval2 = static_cast<long long>(len_ret);
 
-		long long callback_return_value = vtbl->writeData(vtbl, this, sigval1, sigval2);
+		long long callback_return_value = vtbl->writeData(this, sigval1, sigval2);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_writeData(void* self, const char* data, long long len);
+	friend long long QAbstractSocket_virtualbase_writeData(VirtualQAbstractSocket* self, const char* data, long long len);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool open(QIODevice::OpenMode mode) override {
 		if (vtbl->open == 0) {
 			return QAbstractSocket::open(mode);
@@ -447,42 +416,39 @@ public:
 		QIODevice::OpenMode mode_ret = mode;
 		int sigval1 = static_cast<int>(mode_ret);
 
-		bool callback_return_value = vtbl->open(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->open(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_open(void* self, int mode);
+	friend bool QAbstractSocket_virtualbase_open(VirtualQAbstractSocket* self, int mode);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 pos() const override {
 		if (vtbl->pos == 0) {
 			return QAbstractSocket::pos();
 		}
 
 
-		long long callback_return_value = vtbl->pos(vtbl, this);
+		long long callback_return_value = vtbl->pos(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_pos(const void* self);
+	friend long long QAbstractSocket_virtualbase_pos(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual qint64 size() const override {
 		if (vtbl->size == 0) {
 			return QAbstractSocket::size();
 		}
 
 
-		long long callback_return_value = vtbl->size(vtbl, this);
+		long long callback_return_value = vtbl->size(this);
 
 		return static_cast<qint64>(callback_return_value);
 	}
 
-	friend long long QAbstractSocket_virtualbase_size(const void* self);
+	friend long long QAbstractSocket_virtualbase_size(const VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool seek(qint64 pos) override {
 		if (vtbl->seek == 0) {
 			return QAbstractSocket::seek(pos);
@@ -491,28 +457,26 @@ public:
 		qint64 pos_ret = pos;
 		long long sigval1 = static_cast<long long>(pos_ret);
 
-		bool callback_return_value = vtbl->seek(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->seek(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_seek(void* self, long long pos);
+	friend bool QAbstractSocket_virtualbase_seek(VirtualQAbstractSocket* self, long long pos);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool reset() override {
 		if (vtbl->reset == 0) {
 			return QAbstractSocket::reset();
 		}
 
 
-		bool callback_return_value = vtbl->reset(vtbl, this);
+		bool callback_return_value = vtbl->reset(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_reset(void* self);
+	friend bool QAbstractSocket_virtualbase_reset(VirtualQAbstractSocket* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAbstractSocket::event(event);
@@ -520,14 +484,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_event(void* self, QEvent* event);
+	friend bool QAbstractSocket_virtualbase_event(VirtualQAbstractSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractSocket::eventFilter(watched, event);
@@ -536,14 +499,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAbstractSocket_virtualbase_eventFilter(VirtualQAbstractSocket* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractSocket::timerEvent(event);
@@ -552,13 +514,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractSocket_virtualbase_timerEvent(VirtualQAbstractSocket* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractSocket::childEvent(event);
@@ -567,13 +528,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractSocket_virtualbase_childEvent(VirtualQAbstractSocket* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractSocket::customEvent(event);
@@ -582,13 +542,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractSocket_virtualbase_customEvent(VirtualQAbstractSocket* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractSocket::connectNotify(signal);
@@ -599,13 +558,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractSocket_virtualbase_connectNotify(VirtualQAbstractSocket* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractSocket::disconnectNotify(signal);
@@ -616,30 +574,30 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractSocket_virtualbase_disconnectNotify(VirtualQAbstractSocket* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractSocket_protectedbase_setSocketState(void* self, int state);
-	friend void QAbstractSocket_protectedbase_setSocketError(void* self, int socketError);
-	friend void QAbstractSocket_protectedbase_setLocalPort(void* self, uint16_t port);
-	friend void QAbstractSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address);
-	friend void QAbstractSocket_protectedbase_setPeerPort(void* self, uint16_t port);
-	friend void QAbstractSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address);
-	friend void QAbstractSocket_protectedbase_setPeerName(void* self, struct miqt_string name);
-	friend void QAbstractSocket_protectedbase_setOpenMode(void* self, int openMode);
-	friend void QAbstractSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString);
-	friend QObject* QAbstractSocket_protectedbase_sender(const void* self);
-	friend int QAbstractSocket_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractSocket_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QAbstractSocket_protectedbase_setSocketState(VirtualQAbstractSocket* self, int state);
+	friend void QAbstractSocket_protectedbase_setSocketError(VirtualQAbstractSocket* self, int socketError);
+	friend void QAbstractSocket_protectedbase_setLocalPort(VirtualQAbstractSocket* self, uint16_t port);
+	friend void QAbstractSocket_protectedbase_setLocalAddress(VirtualQAbstractSocket* self, QHostAddress* address);
+	friend void QAbstractSocket_protectedbase_setPeerPort(VirtualQAbstractSocket* self, uint16_t port);
+	friend void QAbstractSocket_protectedbase_setPeerAddress(VirtualQAbstractSocket* self, QHostAddress* address);
+	friend void QAbstractSocket_protectedbase_setPeerName(VirtualQAbstractSocket* self, struct miqt_string name);
+	friend void QAbstractSocket_protectedbase_setOpenMode(VirtualQAbstractSocket* self, int openMode);
+	friend void QAbstractSocket_protectedbase_setErrorString(VirtualQAbstractSocket* self, struct miqt_string errorString);
+	friend QObject* QAbstractSocket_protectedbase_sender(const VirtualQAbstractSocket* self);
+	friend int QAbstractSocket_protectedbase_senderSignalIndex(const VirtualQAbstractSocket* self);
+	friend int QAbstractSocket_protectedbase_receivers(const VirtualQAbstractSocket* self, const char* signal);
+	friend bool QAbstractSocket_protectedbase_isSignalConnected(const VirtualQAbstractSocket* self, QMetaMethod* signal);
 };
 
-QAbstractSocket* QAbstractSocket_new(struct QAbstractSocket_VTable* vtbl, int socketType, QObject* parent) {
-	return new VirtualQAbstractSocket(vtbl, static_cast<QAbstractSocket::SocketType>(socketType), parent);
+VirtualQAbstractSocket* QAbstractSocket_new(const QAbstractSocket_VTable* vtbl, void* vdata, int socketType, QObject* parent) {
+	return new VirtualQAbstractSocket(vtbl, vdata, static_cast<QAbstractSocket::SocketType>(socketType), parent);
 }
 
 void QAbstractSocket_virtbase(QAbstractSocket* src, QIODevice** outptr_QIODevice) {
@@ -866,7 +824,7 @@ void QAbstractSocket_hostFound(QAbstractSocket* self) {
 	self->hostFound();
 }
 
-void QAbstractSocket_connect_hostFound(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_hostFound(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -881,7 +839,7 @@ void QAbstractSocket_connected(QAbstractSocket* self) {
 	self->connected();
 }
 
-void QAbstractSocket_connect_connected(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_connected(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -896,7 +854,7 @@ void QAbstractSocket_disconnected(QAbstractSocket* self) {
 	self->disconnected();
 }
 
-void QAbstractSocket_connect_disconnected(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_disconnected(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -911,7 +869,7 @@ void QAbstractSocket_stateChanged(QAbstractSocket* self, int param1) {
 	self->stateChanged(static_cast<QAbstractSocket::SocketState>(param1));
 }
 
-void QAbstractSocket_connect_stateChanged(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_stateChanged(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -928,7 +886,7 @@ void QAbstractSocket_errorWithQAbstractSocketSocketError(QAbstractSocket* self, 
 	self->error(static_cast<QAbstractSocket::SocketError>(param1));
 }
 
-void QAbstractSocket_connect_errorWithQAbstractSocketSocketError(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_errorWithQAbstractSocketSocketError(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -945,7 +903,7 @@ void QAbstractSocket_errorOccurred(QAbstractSocket* self, int param1) {
 	self->errorOccurred(static_cast<QAbstractSocket::SocketError>(param1));
 }
 
-void QAbstractSocket_connect_errorOccurred(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_errorOccurred(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -962,7 +920,7 @@ void QAbstractSocket_proxyAuthenticationRequired(QAbstractSocket* self, QNetwork
 	self->proxyAuthenticationRequired(*proxy, authenticator);
 }
 
-void QAbstractSocket_connect_proxyAuthenticationRequired(QAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) {
+void QAbstractSocket_connect_proxyAuthenticationRequired(VirtualQAbstractSocket* self, intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QNetworkProxy*, QAuthenticator*);
@@ -1037,329 +995,258 @@ bool QAbstractSocket_bind23(QAbstractSocket* self, uint16_t port, int mode) {
 	return self->bind(static_cast<quint16>(port), static_cast<QAbstractSocket::BindMode>(mode));
 }
 
-QMetaObject* QAbstractSocket_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractSocket_virtualbase_metaObject(const VirtualQAbstractSocket* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::metaObject();
-
+	return (QMetaObject*) self->QAbstractSocket::metaObject();
 }
 
-void* QAbstractSocket_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractSocket_virtualbase_metacast(VirtualQAbstractSocket* self, const char* param1) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::qt_metacast(param1);
-
+	return self->QAbstractSocket::qt_metacast(param1);
 }
 
-int QAbstractSocket_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractSocket_virtualbase_metacall(VirtualQAbstractSocket* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractSocket::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QAbstractSocket_virtualbase_resume(void* self) {
+void QAbstractSocket_virtualbase_resume(VirtualQAbstractSocket* self) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::resume();
-
+	self->QAbstractSocket::resume();
 }
 
-void QAbstractSocket_virtualbase_connectToHost(void* self, struct miqt_string hostName, uint16_t port, int mode, int protocol) {
+void QAbstractSocket_virtualbase_connectToHost(VirtualQAbstractSocket* self, struct miqt_string hostName, uint16_t port, int mode, int protocol) {
 	QString hostName_QString = QString::fromUtf8(hostName.data, hostName.len);
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQAbstractSocket::OpenMode>(mode), static_cast<VirtualQAbstractSocket::NetworkLayerProtocol>(protocol));
-
+	self->QAbstractSocket::connectToHost(hostName_QString, static_cast<quint16>(port), static_cast<VirtualQAbstractSocket::OpenMode>(mode), static_cast<VirtualQAbstractSocket::NetworkLayerProtocol>(protocol));
 }
 
-void QAbstractSocket_virtualbase_connectToHost2(void* self, QHostAddress* address, uint16_t port, int mode) {
+void QAbstractSocket_virtualbase_connectToHost2(VirtualQAbstractSocket* self, QHostAddress* address, uint16_t port, int mode) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::connectToHost(*address, static_cast<quint16>(port), static_cast<VirtualQAbstractSocket::OpenMode>(mode));
-
+	self->QAbstractSocket::connectToHost(*address, static_cast<quint16>(port), static_cast<VirtualQAbstractSocket::OpenMode>(mode));
 }
 
-void QAbstractSocket_virtualbase_disconnectFromHost(void* self) {
+void QAbstractSocket_virtualbase_disconnectFromHost(VirtualQAbstractSocket* self) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::disconnectFromHost();
-
+	self->QAbstractSocket::disconnectFromHost();
 }
 
-long long QAbstractSocket_virtualbase_bytesAvailable(const void* self) {
+long long QAbstractSocket_virtualbase_bytesAvailable(const VirtualQAbstractSocket* self) {
 
-	qint64 _ret = ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::bytesAvailable();
+	qint64 _ret = self->QAbstractSocket::bytesAvailable();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QAbstractSocket_virtualbase_bytesToWrite(const void* self) {
+long long QAbstractSocket_virtualbase_bytesToWrite(const VirtualQAbstractSocket* self) {
 
-	qint64 _ret = ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::bytesToWrite();
+	qint64 _ret = self->QAbstractSocket::bytesToWrite();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QAbstractSocket_virtualbase_canReadLine(const void* self) {
+bool QAbstractSocket_virtualbase_canReadLine(const VirtualQAbstractSocket* self) {
 
-	return ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::canReadLine();
-
+	return self->QAbstractSocket::canReadLine();
 }
 
-void QAbstractSocket_virtualbase_setReadBufferSize(void* self, long long size) {
+void QAbstractSocket_virtualbase_setReadBufferSize(VirtualQAbstractSocket* self, long long size) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::setReadBufferSize(static_cast<qint64>(size));
-
+	self->QAbstractSocket::setReadBufferSize(static_cast<qint64>(size));
 }
 
-intptr_t QAbstractSocket_virtualbase_socketDescriptor(const void* self) {
+intptr_t QAbstractSocket_virtualbase_socketDescriptor(const VirtualQAbstractSocket* self) {
 
-	qintptr _ret = ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::socketDescriptor();
+	qintptr _ret = self->QAbstractSocket::socketDescriptor();
 	return (intptr_t)(_ret);
-
 }
 
-bool QAbstractSocket_virtualbase_setSocketDescriptor(void* self, intptr_t socketDescriptor, int state, int openMode) {
+bool QAbstractSocket_virtualbase_setSocketDescriptor(VirtualQAbstractSocket* self, intptr_t socketDescriptor, int state, int openMode) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::setSocketDescriptor((qintptr)(socketDescriptor), static_cast<VirtualQAbstractSocket::SocketState>(state), static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
-
+	return self->QAbstractSocket::setSocketDescriptor((qintptr)(socketDescriptor), static_cast<VirtualQAbstractSocket::SocketState>(state), static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
 }
 
-void QAbstractSocket_virtualbase_setSocketOption(void* self, int option, QVariant* value) {
+void QAbstractSocket_virtualbase_setSocketOption(VirtualQAbstractSocket* self, int option, QVariant* value) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::setSocketOption(static_cast<VirtualQAbstractSocket::SocketOption>(option), *value);
-
+	self->QAbstractSocket::setSocketOption(static_cast<VirtualQAbstractSocket::SocketOption>(option), *value);
 }
 
-QVariant* QAbstractSocket_virtualbase_socketOption(void* self, int option) {
+QVariant* QAbstractSocket_virtualbase_socketOption(VirtualQAbstractSocket* self, int option) {
 
-	return new QVariant(( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::socketOption(static_cast<VirtualQAbstractSocket::SocketOption>(option)));
-
+	return new QVariant(self->QAbstractSocket::socketOption(static_cast<VirtualQAbstractSocket::SocketOption>(option)));
 }
 
-void QAbstractSocket_virtualbase_close(void* self) {
+void QAbstractSocket_virtualbase_close(VirtualQAbstractSocket* self) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::close();
-
+	self->QAbstractSocket::close();
 }
 
-bool QAbstractSocket_virtualbase_isSequential(const void* self) {
+bool QAbstractSocket_virtualbase_isSequential(const VirtualQAbstractSocket* self) {
 
-	return ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::isSequential();
-
+	return self->QAbstractSocket::isSequential();
 }
 
-bool QAbstractSocket_virtualbase_atEnd(const void* self) {
+bool QAbstractSocket_virtualbase_atEnd(const VirtualQAbstractSocket* self) {
 
-	return ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::atEnd();
-
+	return self->QAbstractSocket::atEnd();
 }
 
-bool QAbstractSocket_virtualbase_waitForConnected(void* self, int msecs) {
+bool QAbstractSocket_virtualbase_waitForConnected(VirtualQAbstractSocket* self, int msecs) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::waitForConnected(static_cast<int>(msecs));
-
+	return self->QAbstractSocket::waitForConnected(static_cast<int>(msecs));
 }
 
-bool QAbstractSocket_virtualbase_waitForReadyRead(void* self, int msecs) {
+bool QAbstractSocket_virtualbase_waitForReadyRead(VirtualQAbstractSocket* self, int msecs) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::waitForReadyRead(static_cast<int>(msecs));
-
+	return self->QAbstractSocket::waitForReadyRead(static_cast<int>(msecs));
 }
 
-bool QAbstractSocket_virtualbase_waitForBytesWritten(void* self, int msecs) {
+bool QAbstractSocket_virtualbase_waitForBytesWritten(VirtualQAbstractSocket* self, int msecs) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::waitForBytesWritten(static_cast<int>(msecs));
-
+	return self->QAbstractSocket::waitForBytesWritten(static_cast<int>(msecs));
 }
 
-bool QAbstractSocket_virtualbase_waitForDisconnected(void* self, int msecs) {
+bool QAbstractSocket_virtualbase_waitForDisconnected(VirtualQAbstractSocket* self, int msecs) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::waitForDisconnected(static_cast<int>(msecs));
-
+	return self->QAbstractSocket::waitForDisconnected(static_cast<int>(msecs));
 }
 
-long long QAbstractSocket_virtualbase_readData(void* self, char* data, long long maxlen) {
+long long QAbstractSocket_virtualbase_readData(VirtualQAbstractSocket* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::readData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QAbstractSocket::readData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QAbstractSocket_virtualbase_readLineData(void* self, char* data, long long maxlen) {
+long long QAbstractSocket_virtualbase_readLineData(VirtualQAbstractSocket* self, char* data, long long maxlen) {
 
-	qint64 _ret = ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::readLineData(data, static_cast<qint64>(maxlen));
+	qint64 _ret = self->QAbstractSocket::readLineData(data, static_cast<qint64>(maxlen));
 	return static_cast<long long>(_ret);
-
 }
 
-long long QAbstractSocket_virtualbase_writeData(void* self, const char* data, long long len) {
+long long QAbstractSocket_virtualbase_writeData(VirtualQAbstractSocket* self, const char* data, long long len) {
 
-	qint64 _ret = ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::writeData(data, static_cast<qint64>(len));
+	qint64 _ret = self->QAbstractSocket::writeData(data, static_cast<qint64>(len));
 	return static_cast<long long>(_ret);
-
 }
 
-bool QAbstractSocket_virtualbase_open(void* self, int mode) {
+bool QAbstractSocket_virtualbase_open(VirtualQAbstractSocket* self, int mode) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::open(static_cast<VirtualQAbstractSocket::OpenMode>(mode));
-
+	return self->QAbstractSocket::open(static_cast<VirtualQAbstractSocket::OpenMode>(mode));
 }
 
-long long QAbstractSocket_virtualbase_pos(const void* self) {
+long long QAbstractSocket_virtualbase_pos(const VirtualQAbstractSocket* self) {
 
-	qint64 _ret = ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::pos();
+	qint64 _ret = self->QAbstractSocket::pos();
 	return static_cast<long long>(_ret);
-
 }
 
-long long QAbstractSocket_virtualbase_size(const void* self) {
+long long QAbstractSocket_virtualbase_size(const VirtualQAbstractSocket* self) {
 
-	qint64 _ret = ( (const VirtualQAbstractSocket*)(self) )->QAbstractSocket::size();
+	qint64 _ret = self->QAbstractSocket::size();
 	return static_cast<long long>(_ret);
-
 }
 
-bool QAbstractSocket_virtualbase_seek(void* self, long long pos) {
+bool QAbstractSocket_virtualbase_seek(VirtualQAbstractSocket* self, long long pos) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::seek(static_cast<qint64>(pos));
-
+	return self->QAbstractSocket::seek(static_cast<qint64>(pos));
 }
 
-bool QAbstractSocket_virtualbase_reset(void* self) {
+bool QAbstractSocket_virtualbase_reset(VirtualQAbstractSocket* self) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::reset();
-
+	return self->QAbstractSocket::reset();
 }
 
-bool QAbstractSocket_virtualbase_event(void* self, QEvent* event) {
+bool QAbstractSocket_virtualbase_event(VirtualQAbstractSocket* self, QEvent* event) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::event(event);
-
+	return self->QAbstractSocket::event(event);
 }
 
-bool QAbstractSocket_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAbstractSocket_virtualbase_eventFilter(VirtualQAbstractSocket* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::eventFilter(watched, event);
-
+	return self->QAbstractSocket::eventFilter(watched, event);
 }
 
-void QAbstractSocket_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractSocket_virtualbase_timerEvent(VirtualQAbstractSocket* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::timerEvent(event);
-
+	self->QAbstractSocket::timerEvent(event);
 }
 
-void QAbstractSocket_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractSocket_virtualbase_childEvent(VirtualQAbstractSocket* self, QChildEvent* event) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::childEvent(event);
-
+	self->QAbstractSocket::childEvent(event);
 }
 
-void QAbstractSocket_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractSocket_virtualbase_customEvent(VirtualQAbstractSocket* self, QEvent* event) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::customEvent(event);
-
+	self->QAbstractSocket::customEvent(event);
 }
 
-void QAbstractSocket_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractSocket_virtualbase_connectNotify(VirtualQAbstractSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::connectNotify(*signal);
-
+	self->QAbstractSocket::connectNotify(*signal);
 }
 
-void QAbstractSocket_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractSocket_virtualbase_disconnectNotify(VirtualQAbstractSocket* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractSocket*)(self) )->QAbstractSocket::disconnectNotify(*signal);
-
+	self->QAbstractSocket::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractSocket_staticMetaObject() { return &QAbstractSocket::staticMetaObject; }
-void QAbstractSocket_protectedbase_setSocketState(void* self, int state) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setSocketState(static_cast<VirtualQAbstractSocket::SocketState>(state));
 
+const QAbstractSocket_VTable* QAbstractSocket_vtbl(const VirtualQAbstractSocket* self) { return self->vtbl; }
+void* QAbstractSocket_vdata(const VirtualQAbstractSocket* self) { return self->vdata; }
+void QAbstractSocket_setVdata(VirtualQAbstractSocket* self, void* vdata) { self->vdata = vdata; }
+
+void QAbstractSocket_protectedbase_setSocketState(VirtualQAbstractSocket* self, int state) {
+	self->setSocketState(static_cast<VirtualQAbstractSocket::SocketState>(state));
 }
 
-void QAbstractSocket_protectedbase_setSocketError(void* self, int socketError) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setSocketError(static_cast<VirtualQAbstractSocket::SocketError>(socketError));
-
+void QAbstractSocket_protectedbase_setSocketError(VirtualQAbstractSocket* self, int socketError) {
+	self->setSocketError(static_cast<VirtualQAbstractSocket::SocketError>(socketError));
 }
 
-void QAbstractSocket_protectedbase_setLocalPort(void* self, uint16_t port) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setLocalPort(static_cast<quint16>(port));
-
+void QAbstractSocket_protectedbase_setLocalPort(VirtualQAbstractSocket* self, uint16_t port) {
+	self->setLocalPort(static_cast<quint16>(port));
 }
 
-void QAbstractSocket_protectedbase_setLocalAddress(void* self, QHostAddress* address) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setLocalAddress(*address);
-
+void QAbstractSocket_protectedbase_setLocalAddress(VirtualQAbstractSocket* self, QHostAddress* address) {
+	self->setLocalAddress(*address);
 }
 
-void QAbstractSocket_protectedbase_setPeerPort(void* self, uint16_t port) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setPeerPort(static_cast<quint16>(port));
-
+void QAbstractSocket_protectedbase_setPeerPort(VirtualQAbstractSocket* self, uint16_t port) {
+	self->setPeerPort(static_cast<quint16>(port));
 }
 
-void QAbstractSocket_protectedbase_setPeerAddress(void* self, QHostAddress* address) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setPeerAddress(*address);
-
+void QAbstractSocket_protectedbase_setPeerAddress(VirtualQAbstractSocket* self, QHostAddress* address) {
+	self->setPeerAddress(*address);
 }
 
-void QAbstractSocket_protectedbase_setPeerName(void* self, struct miqt_string name) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-			QString name_QString = QString::fromUtf8(name.data, name.len);
-
-	self_cast->setPeerName(name_QString);
-
+void QAbstractSocket_protectedbase_setPeerName(VirtualQAbstractSocket* self, struct miqt_string name) {
+		QString name_QString = QString::fromUtf8(name.data, name.len);
+	self->setPeerName(name_QString);
 }
 
-void QAbstractSocket_protectedbase_setOpenMode(void* self, int openMode) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	self_cast->setOpenMode(static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
-
+void QAbstractSocket_protectedbase_setOpenMode(VirtualQAbstractSocket* self, int openMode) {
+	self->setOpenMode(static_cast<VirtualQAbstractSocket::OpenMode>(openMode));
 }
 
-void QAbstractSocket_protectedbase_setErrorString(void* self, struct miqt_string errorString) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-			QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
-
-	self_cast->setErrorString(errorString_QString);
-
+void QAbstractSocket_protectedbase_setErrorString(VirtualQAbstractSocket* self, struct miqt_string errorString) {
+		QString errorString_QString = QString::fromUtf8(errorString.data, errorString.len);
+	self->setErrorString(errorString_QString);
 }
 
-QObject* QAbstractSocket_protectedbase_sender(const void* self) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractSocket_protectedbase_sender(const VirtualQAbstractSocket* self) {
+	return self->sender();
 }
 
-int QAbstractSocket_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractSocket_protectedbase_senderSignalIndex(const VirtualQAbstractSocket* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractSocket_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractSocket_protectedbase_receivers(const VirtualQAbstractSocket* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractSocket_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractSocket* self_cast = static_cast<VirtualQAbstractSocket*>( (QAbstractSocket*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractSocket_protectedbase_isSignalConnected(const VirtualQAbstractSocket* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractSocket_delete(QAbstractSocket* self) {

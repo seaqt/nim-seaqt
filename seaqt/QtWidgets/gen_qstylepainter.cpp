@@ -13,15 +13,6 @@
 #include <QWidget>
 #include <qstylepainter.h>
 #include "gen_qstylepainter.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStylePainter* QStylePainter_new(QWidget* w) {
 	return new QStylePainter(w);
 }

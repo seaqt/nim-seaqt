@@ -25,6 +25,7 @@ QPixelFormat* QPixelFormat_new2(int colorModel, unsigned char firstSize, unsigne
 QPixelFormat* QPixelFormat_new3(QPixelFormat* param1);
 QPixelFormat* QPixelFormat_new4(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder);
 QPixelFormat* QPixelFormat_new5(int colorModel, unsigned char firstSize, unsigned char secondSize, unsigned char thirdSize, unsigned char fourthSize, unsigned char fifthSize, unsigned char alphaSize, int alphaUsage, int alphaPosition, int premultiplied, int typeInterpretation, int byteOrder, unsigned char subEnum);
+
 int QPixelFormat_colorModel(const QPixelFormat* self);
 unsigned char QPixelFormat_channelCount(const QPixelFormat* self);
 unsigned char QPixelFormat_redSize(const QPixelFormat* self);
@@ -47,6 +48,7 @@ int QPixelFormat_typeInterpretation(const QPixelFormat* self);
 int QPixelFormat_byteOrder(const QPixelFormat* self);
 int QPixelFormat_yuvLayout(const QPixelFormat* self);
 unsigned char QPixelFormat_subEnum(const QPixelFormat* self);
+
 void QPixelFormat_delete(QPixelFormat* self);
 
 #ifdef __cplusplus

@@ -44,41 +44,34 @@
 #include <QWidget>
 #include <qlineedit.h>
 #include "gen_qlineedit.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQLineEdit final : public QLineEdit {
-	struct QLineEdit_VTable* vtbl;
+	const QLineEdit_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QLineEdit_VTable* QLineEdit_vtbl(const VirtualQLineEdit* self);
+	friend void* QLineEdit_vdata(const VirtualQLineEdit* self);
+	friend void QLineEdit_setVdata(VirtualQLineEdit* self, void* vdata);
 
-	VirtualQLineEdit(struct QLineEdit_VTable* vtbl, QWidget* parent): QLineEdit(parent), vtbl(vtbl) {};
-	VirtualQLineEdit(struct QLineEdit_VTable* vtbl): QLineEdit(), vtbl(vtbl) {};
-	VirtualQLineEdit(struct QLineEdit_VTable* vtbl, const QString& param1): QLineEdit(param1), vtbl(vtbl) {};
-	VirtualQLineEdit(struct QLineEdit_VTable* vtbl, const QString& param1, QWidget* parent): QLineEdit(param1, parent), vtbl(vtbl) {};
+	VirtualQLineEdit(const QLineEdit_VTable* vtbl, void* vdata, QWidget* parent): QLineEdit(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLineEdit(const QLineEdit_VTable* vtbl, void* vdata): QLineEdit(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLineEdit(const QLineEdit_VTable* vtbl, void* vdata, const QString& param1): QLineEdit(param1), vtbl(vtbl), vdata(vdata) {}
+	VirtualQLineEdit(const QLineEdit_VTable* vtbl, void* vdata, const QString& param1, QWidget* parent): QLineEdit(param1, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQLineEdit() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQLineEdit() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QLineEdit::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QLineEdit_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QLineEdit_virtualbase_metaObject(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QLineEdit::qt_metacast(param1);
@@ -86,14 +79,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QLineEdit_virtualbase_metacast(void* self, const char* param1);
+	friend void* QLineEdit_virtualbase_metacast(VirtualQLineEdit* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QLineEdit::qt_metacall(param1, param2, param3);
@@ -104,46 +96,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLineEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QLineEdit_virtualbase_metacall(VirtualQLineEdit* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QLineEdit::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QLineEdit_virtualbase_sizeHint(const void* self);
+	friend QSize* QLineEdit_virtualbase_sizeHint(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QLineEdit::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QLineEdit_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QLineEdit_virtualbase_minimumSizeHint(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* param1) override {
 		if (vtbl->mousePressEvent == 0) {
 			QLineEdit::mousePressEvent(param1);
@@ -152,13 +141,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* param1);
+	friend void QLineEdit_virtualbase_mousePressEvent(VirtualQLineEdit* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QLineEdit::mouseMoveEvent(param1);
@@ -167,13 +155,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QLineEdit_virtualbase_mouseMoveEvent(VirtualQLineEdit* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QLineEdit::mouseReleaseEvent(param1);
@@ -182,13 +169,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1);
+	friend void QLineEdit_virtualbase_mouseReleaseEvent(VirtualQLineEdit* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QLineEdit::mouseDoubleClickEvent(param1);
@@ -197,13 +183,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1);
+	friend void QLineEdit_virtualbase_mouseDoubleClickEvent(VirtualQLineEdit* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QLineEdit::keyPressEvent(param1);
@@ -212,13 +197,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QLineEdit_virtualbase_keyPressEvent(VirtualQLineEdit* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* param1) override {
 		if (vtbl->focusInEvent == 0) {
 			QLineEdit::focusInEvent(param1);
@@ -227,13 +211,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_focusInEvent(void* self, QFocusEvent* param1);
+	friend void QLineEdit_virtualbase_focusInEvent(VirtualQLineEdit* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* param1) override {
 		if (vtbl->focusOutEvent == 0) {
 			QLineEdit::focusOutEvent(param1);
@@ -242,13 +225,12 @@ public:
 
 		QFocusEvent* sigval1 = param1;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* param1);
+	friend void QLineEdit_virtualbase_focusOutEvent(VirtualQLineEdit* self, QFocusEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QLineEdit::paintEvent(param1);
@@ -257,13 +239,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QLineEdit_virtualbase_paintEvent(VirtualQLineEdit* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* param1) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QLineEdit::dragEnterEvent(param1);
@@ -272,13 +253,12 @@ public:
 
 		QDragEnterEvent* sigval1 = param1;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1);
+	friend void QLineEdit_virtualbase_dragEnterEvent(VirtualQLineEdit* self, QDragEnterEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* e) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QLineEdit::dragMoveEvent(e);
@@ -287,13 +267,12 @@ public:
 
 		QDragMoveEvent* sigval1 = e;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e);
+	friend void QLineEdit_virtualbase_dragMoveEvent(VirtualQLineEdit* self, QDragMoveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* e) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QLineEdit::dragLeaveEvent(e);
@@ -302,13 +281,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = e;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e);
+	friend void QLineEdit_virtualbase_dragLeaveEvent(VirtualQLineEdit* self, QDragLeaveEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* param1) override {
 		if (vtbl->dropEvent == 0) {
 			QLineEdit::dropEvent(param1);
@@ -317,13 +295,12 @@ public:
 
 		QDropEvent* sigval1 = param1;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_dropEvent(void* self, QDropEvent* param1);
+	friend void QLineEdit_virtualbase_dropEvent(VirtualQLineEdit* self, QDropEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QLineEdit::changeEvent(param1);
@@ -332,13 +309,12 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QLineEdit_virtualbase_changeEvent(VirtualQLineEdit* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QLineEdit::contextMenuEvent(param1);
@@ -347,13 +323,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QLineEdit_virtualbase_contextMenuEvent(VirtualQLineEdit* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QLineEdit::inputMethodEvent(param1);
@@ -362,13 +337,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QLineEdit_virtualbase_inputMethodEvent(VirtualQLineEdit* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QLineEdit::inputMethodQuery(param1);
@@ -377,16 +351,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QLineEdit_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QLineEdit_virtualbase_inputMethodQuery(const VirtualQLineEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QLineEdit::event(param1);
@@ -394,28 +367,26 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLineEdit_virtualbase_event(void* self, QEvent* param1);
+	friend bool QLineEdit_virtualbase_event(VirtualQLineEdit* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QLineEdit::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLineEdit_virtualbase_devType(const void* self);
+	friend int QLineEdit_virtualbase_devType(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QLineEdit::setVisible(visible);
@@ -424,13 +395,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_setVisible(void* self, bool visible);
+	friend void QLineEdit_virtualbase_setVisible(VirtualQLineEdit* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QLineEdit::heightForWidth(param1);
@@ -438,42 +408,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLineEdit_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QLineEdit_virtualbase_heightForWidth(const VirtualQLineEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QLineEdit::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QLineEdit_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QLineEdit_virtualbase_hasHeightForWidth(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QLineEdit::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QLineEdit_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QLineEdit_virtualbase_paintEngine(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QLineEdit::wheelEvent(event);
@@ -482,13 +449,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QLineEdit_virtualbase_wheelEvent(VirtualQLineEdit* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QLineEdit::keyReleaseEvent(event);
@@ -497,13 +463,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QLineEdit_virtualbase_keyReleaseEvent(VirtualQLineEdit* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QLineEdit::enterEvent(event);
@@ -512,13 +477,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QLineEdit_virtualbase_enterEvent(VirtualQLineEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QLineEdit::leaveEvent(event);
@@ -527,13 +491,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QLineEdit_virtualbase_leaveEvent(VirtualQLineEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QLineEdit::moveEvent(event);
@@ -542,13 +505,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QLineEdit_virtualbase_moveEvent(VirtualQLineEdit* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QLineEdit::resizeEvent(event);
@@ -557,13 +519,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QLineEdit_virtualbase_resizeEvent(VirtualQLineEdit* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QLineEdit::closeEvent(event);
@@ -572,13 +533,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QLineEdit_virtualbase_closeEvent(VirtualQLineEdit* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QLineEdit::tabletEvent(event);
@@ -587,13 +547,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QLineEdit_virtualbase_tabletEvent(VirtualQLineEdit* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QLineEdit::actionEvent(event);
@@ -602,13 +561,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QLineEdit_virtualbase_actionEvent(VirtualQLineEdit* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QLineEdit::showEvent(event);
@@ -617,13 +575,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QLineEdit_virtualbase_showEvent(VirtualQLineEdit* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QLineEdit::hideEvent(event);
@@ -632,13 +589,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QLineEdit_virtualbase_hideEvent(VirtualQLineEdit* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QLineEdit::nativeEvent(eventType, message, result);
@@ -653,14 +609,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QLineEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QLineEdit_virtualbase_nativeEvent(VirtualQLineEdit* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QLineEdit::metric(param1);
@@ -669,14 +624,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QLineEdit_virtualbase_metric(const void* self, int param1);
+	friend int QLineEdit_virtualbase_metric(const VirtualQLineEdit* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QLineEdit::initPainter(painter);
@@ -685,13 +639,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QLineEdit_virtualbase_initPainter(const VirtualQLineEdit* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QLineEdit::redirected(offset);
@@ -699,28 +652,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QLineEdit_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QLineEdit_virtualbase_redirected(const VirtualQLineEdit* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QLineEdit::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QLineEdit_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QLineEdit_virtualbase_sharedPainter(const VirtualQLineEdit* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QLineEdit::focusNextPrevChild(next);
@@ -728,14 +679,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QLineEdit_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QLineEdit_virtualbase_focusNextPrevChild(VirtualQLineEdit* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QLineEdit::eventFilter(watched, event);
@@ -744,14 +694,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QLineEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QLineEdit_virtualbase_eventFilter(VirtualQLineEdit* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QLineEdit::timerEvent(event);
@@ -760,13 +709,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QLineEdit_virtualbase_timerEvent(VirtualQLineEdit* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QLineEdit::childEvent(event);
@@ -775,13 +723,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QLineEdit_virtualbase_childEvent(VirtualQLineEdit* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QLineEdit::customEvent(event);
@@ -790,13 +737,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QLineEdit_virtualbase_customEvent(VirtualQLineEdit* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QLineEdit::connectNotify(signal);
@@ -807,13 +753,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QLineEdit_virtualbase_connectNotify(VirtualQLineEdit* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QLineEdit::disconnectNotify(signal);
@@ -824,42 +769,42 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QLineEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QLineEdit_virtualbase_disconnectNotify(VirtualQLineEdit* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QLineEdit_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option);
-	friend QRect* QLineEdit_protectedbase_cursorRect(const void* self);
-	friend void QLineEdit_protectedbase_updateMicroFocus(void* self);
-	friend void QLineEdit_protectedbase_create(void* self);
-	friend void QLineEdit_protectedbase_destroy(void* self);
-	friend bool QLineEdit_protectedbase_focusNextChild(void* self);
-	friend bool QLineEdit_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QLineEdit_protectedbase_sender(const void* self);
-	friend int QLineEdit_protectedbase_senderSignalIndex(const void* self);
-	friend int QLineEdit_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QLineEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QLineEdit_protectedbase_initStyleOption(const VirtualQLineEdit* self, QStyleOptionFrame* option);
+	friend QRect* QLineEdit_protectedbase_cursorRect(const VirtualQLineEdit* self);
+	friend void QLineEdit_protectedbase_updateMicroFocus(VirtualQLineEdit* self);
+	friend void QLineEdit_protectedbase_create(VirtualQLineEdit* self);
+	friend void QLineEdit_protectedbase_destroy(VirtualQLineEdit* self);
+	friend bool QLineEdit_protectedbase_focusNextChild(VirtualQLineEdit* self);
+	friend bool QLineEdit_protectedbase_focusPreviousChild(VirtualQLineEdit* self);
+	friend QObject* QLineEdit_protectedbase_sender(const VirtualQLineEdit* self);
+	friend int QLineEdit_protectedbase_senderSignalIndex(const VirtualQLineEdit* self);
+	friend int QLineEdit_protectedbase_receivers(const VirtualQLineEdit* self, const char* signal);
+	friend bool QLineEdit_protectedbase_isSignalConnected(const VirtualQLineEdit* self, QMetaMethod* signal);
 };
 
-QLineEdit* QLineEdit_new(struct QLineEdit_VTable* vtbl, QWidget* parent) {
-	return new VirtualQLineEdit(vtbl, parent);
+VirtualQLineEdit* QLineEdit_new(const QLineEdit_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQLineEdit(vtbl, vdata, parent);
 }
 
-QLineEdit* QLineEdit_new2(struct QLineEdit_VTable* vtbl) {
-	return new VirtualQLineEdit(vtbl);
+VirtualQLineEdit* QLineEdit_new2(const QLineEdit_VTable* vtbl, void* vdata) {
+	return new VirtualQLineEdit(vtbl, vdata);
 }
 
-QLineEdit* QLineEdit_new3(struct QLineEdit_VTable* vtbl, struct miqt_string param1) {
+VirtualQLineEdit* QLineEdit_new3(const QLineEdit_VTable* vtbl, void* vdata, struct miqt_string param1) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
-	return new VirtualQLineEdit(vtbl, param1_QString);
+	return new VirtualQLineEdit(vtbl, vdata, param1_QString);
 }
 
-QLineEdit* QLineEdit_new4(struct QLineEdit_VTable* vtbl, struct miqt_string param1, QWidget* parent) {
+VirtualQLineEdit* QLineEdit_new4(const QLineEdit_VTable* vtbl, void* vdata, struct miqt_string param1, QWidget* parent) {
 	QString param1_QString = QString::fromUtf8(param1.data, param1.len);
-	return new VirtualQLineEdit(vtbl, param1_QString, parent);
+	return new VirtualQLineEdit(vtbl, vdata, param1_QString, parent);
 }
 
 void QLineEdit_virtbase(QLineEdit* src, QWidget** outptr_QWidget) {
@@ -1215,7 +1160,7 @@ void QLineEdit_textChanged(QLineEdit* self, struct miqt_string param1) {
 	self->textChanged(param1_QString);
 }
 
-void QLineEdit_connect_textChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QLineEdit_connect_textChanged(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1239,7 +1184,7 @@ void QLineEdit_textEdited(QLineEdit* self, struct miqt_string param1) {
 	self->textEdited(param1_QString);
 }
 
-void QLineEdit_connect_textEdited(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
+void QLineEdit_connect_textEdited(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string);
@@ -1262,7 +1207,7 @@ void QLineEdit_cursorPositionChanged(QLineEdit* self, int param1, int param2) {
 	self->cursorPositionChanged(static_cast<int>(param1), static_cast<int>(param2));
 }
 
-void QLineEdit_connect_cursorPositionChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QLineEdit_connect_cursorPositionChanged(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -1279,7 +1224,7 @@ void QLineEdit_returnPressed(QLineEdit* self) {
 	self->returnPressed();
 }
 
-void QLineEdit_connect_returnPressed(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLineEdit_connect_returnPressed(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1294,7 +1239,7 @@ void QLineEdit_editingFinished(QLineEdit* self) {
 	self->editingFinished();
 }
 
-void QLineEdit_connect_editingFinished(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLineEdit_connect_editingFinished(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1309,7 +1254,7 @@ void QLineEdit_selectionChanged(QLineEdit* self) {
 	self->selectionChanged();
 }
 
-void QLineEdit_connect_selectionChanged(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLineEdit_connect_selectionChanged(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1324,7 +1269,7 @@ void QLineEdit_inputRejected(QLineEdit* self) {
 	self->inputRejected();
 }
 
-void QLineEdit_connect_inputRejected(QLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QLineEdit_connect_inputRejected(VirtualQLineEdit* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1399,383 +1344,305 @@ void QLineEdit_cursorBackward2(QLineEdit* self, bool mark, int steps) {
 	self->cursorBackward(mark, static_cast<int>(steps));
 }
 
-QMetaObject* QLineEdit_virtualbase_metaObject(const void* self) {
+QMetaObject* QLineEdit_virtualbase_metaObject(const VirtualQLineEdit* self) {
 
-	return (QMetaObject*) ( (const VirtualQLineEdit*)(self) )->QLineEdit::metaObject();
-
+	return (QMetaObject*) self->QLineEdit::metaObject();
 }
 
-void* QLineEdit_virtualbase_metacast(void* self, const char* param1) {
+void* QLineEdit_virtualbase_metacast(VirtualQLineEdit* self, const char* param1) {
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::qt_metacast(param1);
-
+	return self->QLineEdit::qt_metacast(param1);
 }
 
-int QLineEdit_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QLineEdit_virtualbase_metacall(VirtualQLineEdit* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QLineEdit::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QLineEdit_virtualbase_sizeHint(const void* self) {
+QSize* QLineEdit_virtualbase_sizeHint(const VirtualQLineEdit* self) {
 
-	return new QSize(( (const VirtualQLineEdit*)(self) )->QLineEdit::sizeHint());
-
+	return new QSize(self->QLineEdit::sizeHint());
 }
 
-QSize* QLineEdit_virtualbase_minimumSizeHint(const void* self) {
+QSize* QLineEdit_virtualbase_minimumSizeHint(const VirtualQLineEdit* self) {
 
-	return new QSize(( (const VirtualQLineEdit*)(self) )->QLineEdit::minimumSizeHint());
-
+	return new QSize(self->QLineEdit::minimumSizeHint());
 }
 
-void QLineEdit_virtualbase_mousePressEvent(void* self, QMouseEvent* param1) {
+void QLineEdit_virtualbase_mousePressEvent(VirtualQLineEdit* self, QMouseEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::mousePressEvent(param1);
-
+	self->QLineEdit::mousePressEvent(param1);
 }
 
-void QLineEdit_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QLineEdit_virtualbase_mouseMoveEvent(VirtualQLineEdit* self, QMouseEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::mouseMoveEvent(param1);
-
+	self->QLineEdit::mouseMoveEvent(param1);
 }
 
-void QLineEdit_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* param1) {
+void QLineEdit_virtualbase_mouseReleaseEvent(VirtualQLineEdit* self, QMouseEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::mouseReleaseEvent(param1);
-
+	self->QLineEdit::mouseReleaseEvent(param1);
 }
 
-void QLineEdit_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* param1) {
+void QLineEdit_virtualbase_mouseDoubleClickEvent(VirtualQLineEdit* self, QMouseEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::mouseDoubleClickEvent(param1);
-
+	self->QLineEdit::mouseDoubleClickEvent(param1);
 }
 
-void QLineEdit_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QLineEdit_virtualbase_keyPressEvent(VirtualQLineEdit* self, QKeyEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::keyPressEvent(param1);
-
+	self->QLineEdit::keyPressEvent(param1);
 }
 
-void QLineEdit_virtualbase_focusInEvent(void* self, QFocusEvent* param1) {
+void QLineEdit_virtualbase_focusInEvent(VirtualQLineEdit* self, QFocusEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::focusInEvent(param1);
-
+	self->QLineEdit::focusInEvent(param1);
 }
 
-void QLineEdit_virtualbase_focusOutEvent(void* self, QFocusEvent* param1) {
+void QLineEdit_virtualbase_focusOutEvent(VirtualQLineEdit* self, QFocusEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::focusOutEvent(param1);
-
+	self->QLineEdit::focusOutEvent(param1);
 }
 
-void QLineEdit_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QLineEdit_virtualbase_paintEvent(VirtualQLineEdit* self, QPaintEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::paintEvent(param1);
-
+	self->QLineEdit::paintEvent(param1);
 }
 
-void QLineEdit_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* param1) {
+void QLineEdit_virtualbase_dragEnterEvent(VirtualQLineEdit* self, QDragEnterEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::dragEnterEvent(param1);
-
+	self->QLineEdit::dragEnterEvent(param1);
 }
 
-void QLineEdit_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* e) {
+void QLineEdit_virtualbase_dragMoveEvent(VirtualQLineEdit* self, QDragMoveEvent* e) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::dragMoveEvent(e);
-
+	self->QLineEdit::dragMoveEvent(e);
 }
 
-void QLineEdit_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* e) {
+void QLineEdit_virtualbase_dragLeaveEvent(VirtualQLineEdit* self, QDragLeaveEvent* e) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::dragLeaveEvent(e);
-
+	self->QLineEdit::dragLeaveEvent(e);
 }
 
-void QLineEdit_virtualbase_dropEvent(void* self, QDropEvent* param1) {
+void QLineEdit_virtualbase_dropEvent(VirtualQLineEdit* self, QDropEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::dropEvent(param1);
-
+	self->QLineEdit::dropEvent(param1);
 }
 
-void QLineEdit_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QLineEdit_virtualbase_changeEvent(VirtualQLineEdit* self, QEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::changeEvent(param1);
-
+	self->QLineEdit::changeEvent(param1);
 }
 
-void QLineEdit_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QLineEdit_virtualbase_contextMenuEvent(VirtualQLineEdit* self, QContextMenuEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::contextMenuEvent(param1);
-
+	self->QLineEdit::contextMenuEvent(param1);
 }
 
-void QLineEdit_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QLineEdit_virtualbase_inputMethodEvent(VirtualQLineEdit* self, QInputMethodEvent* param1) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::inputMethodEvent(param1);
-
+	self->QLineEdit::inputMethodEvent(param1);
 }
 
-QVariant* QLineEdit_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QLineEdit_virtualbase_inputMethodQuery(const VirtualQLineEdit* self, int param1) {
 
-	return new QVariant(( (const VirtualQLineEdit*)(self) )->QLineEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QLineEdit::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QLineEdit_virtualbase_event(void* self, QEvent* param1) {
+bool QLineEdit_virtualbase_event(VirtualQLineEdit* self, QEvent* param1) {
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::event(param1);
-
+	return self->QLineEdit::event(param1);
 }
 
-int QLineEdit_virtualbase_devType(const void* self) {
+int QLineEdit_virtualbase_devType(const VirtualQLineEdit* self) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::devType();
-
+	return self->QLineEdit::devType();
 }
 
-void QLineEdit_virtualbase_setVisible(void* self, bool visible) {
+void QLineEdit_virtualbase_setVisible(VirtualQLineEdit* self, bool visible) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::setVisible(visible);
-
+	self->QLineEdit::setVisible(visible);
 }
 
-int QLineEdit_virtualbase_heightForWidth(const void* self, int param1) {
+int QLineEdit_virtualbase_heightForWidth(const VirtualQLineEdit* self, int param1) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::heightForWidth(static_cast<int>(param1));
-
+	return self->QLineEdit::heightForWidth(static_cast<int>(param1));
 }
 
-bool QLineEdit_virtualbase_hasHeightForWidth(const void* self) {
+bool QLineEdit_virtualbase_hasHeightForWidth(const VirtualQLineEdit* self) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::hasHeightForWidth();
-
+	return self->QLineEdit::hasHeightForWidth();
 }
 
-QPaintEngine* QLineEdit_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QLineEdit_virtualbase_paintEngine(const VirtualQLineEdit* self) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::paintEngine();
-
+	return self->QLineEdit::paintEngine();
 }
 
-void QLineEdit_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QLineEdit_virtualbase_wheelEvent(VirtualQLineEdit* self, QWheelEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::wheelEvent(event);
-
+	self->QLineEdit::wheelEvent(event);
 }
 
-void QLineEdit_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QLineEdit_virtualbase_keyReleaseEvent(VirtualQLineEdit* self, QKeyEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::keyReleaseEvent(event);
-
+	self->QLineEdit::keyReleaseEvent(event);
 }
 
-void QLineEdit_virtualbase_enterEvent(void* self, QEvent* event) {
+void QLineEdit_virtualbase_enterEvent(VirtualQLineEdit* self, QEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::enterEvent(event);
-
+	self->QLineEdit::enterEvent(event);
 }
 
-void QLineEdit_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QLineEdit_virtualbase_leaveEvent(VirtualQLineEdit* self, QEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::leaveEvent(event);
-
+	self->QLineEdit::leaveEvent(event);
 }
 
-void QLineEdit_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QLineEdit_virtualbase_moveEvent(VirtualQLineEdit* self, QMoveEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::moveEvent(event);
-
+	self->QLineEdit::moveEvent(event);
 }
 
-void QLineEdit_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QLineEdit_virtualbase_resizeEvent(VirtualQLineEdit* self, QResizeEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::resizeEvent(event);
-
+	self->QLineEdit::resizeEvent(event);
 }
 
-void QLineEdit_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QLineEdit_virtualbase_closeEvent(VirtualQLineEdit* self, QCloseEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::closeEvent(event);
-
+	self->QLineEdit::closeEvent(event);
 }
 
-void QLineEdit_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QLineEdit_virtualbase_tabletEvent(VirtualQLineEdit* self, QTabletEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::tabletEvent(event);
-
+	self->QLineEdit::tabletEvent(event);
 }
 
-void QLineEdit_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QLineEdit_virtualbase_actionEvent(VirtualQLineEdit* self, QActionEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::actionEvent(event);
-
+	self->QLineEdit::actionEvent(event);
 }
 
-void QLineEdit_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QLineEdit_virtualbase_showEvent(VirtualQLineEdit* self, QShowEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::showEvent(event);
-
+	self->QLineEdit::showEvent(event);
 }
 
-void QLineEdit_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QLineEdit_virtualbase_hideEvent(VirtualQLineEdit* self, QHideEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::hideEvent(event);
-
+	self->QLineEdit::hideEvent(event);
 }
 
-bool QLineEdit_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QLineEdit_virtualbase_nativeEvent(VirtualQLineEdit* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QLineEdit::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QLineEdit_virtualbase_metric(const void* self, int param1) {
+int QLineEdit_virtualbase_metric(const VirtualQLineEdit* self, int param1) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::metric(static_cast<VirtualQLineEdit::PaintDeviceMetric>(param1));
-
+	return self->QLineEdit::metric(static_cast<VirtualQLineEdit::PaintDeviceMetric>(param1));
 }
 
-void QLineEdit_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QLineEdit_virtualbase_initPainter(const VirtualQLineEdit* self, QPainter* painter) {
 
-	( (const VirtualQLineEdit*)(self) )->QLineEdit::initPainter(painter);
-
+	self->QLineEdit::initPainter(painter);
 }
 
-QPaintDevice* QLineEdit_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QLineEdit_virtualbase_redirected(const VirtualQLineEdit* self, QPoint* offset) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::redirected(offset);
-
+	return self->QLineEdit::redirected(offset);
 }
 
-QPainter* QLineEdit_virtualbase_sharedPainter(const void* self) {
+QPainter* QLineEdit_virtualbase_sharedPainter(const VirtualQLineEdit* self) {
 
-	return ( (const VirtualQLineEdit*)(self) )->QLineEdit::sharedPainter();
-
+	return self->QLineEdit::sharedPainter();
 }
 
-bool QLineEdit_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QLineEdit_virtualbase_focusNextPrevChild(VirtualQLineEdit* self, bool next) {
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::focusNextPrevChild(next);
-
+	return self->QLineEdit::focusNextPrevChild(next);
 }
 
-bool QLineEdit_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QLineEdit_virtualbase_eventFilter(VirtualQLineEdit* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQLineEdit*)(self) )->QLineEdit::eventFilter(watched, event);
-
+	return self->QLineEdit::eventFilter(watched, event);
 }
 
-void QLineEdit_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QLineEdit_virtualbase_timerEvent(VirtualQLineEdit* self, QTimerEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::timerEvent(event);
-
+	self->QLineEdit::timerEvent(event);
 }
 
-void QLineEdit_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QLineEdit_virtualbase_childEvent(VirtualQLineEdit* self, QChildEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::childEvent(event);
-
+	self->QLineEdit::childEvent(event);
 }
 
-void QLineEdit_virtualbase_customEvent(void* self, QEvent* event) {
+void QLineEdit_virtualbase_customEvent(VirtualQLineEdit* self, QEvent* event) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::customEvent(event);
-
+	self->QLineEdit::customEvent(event);
 }
 
-void QLineEdit_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QLineEdit_virtualbase_connectNotify(VirtualQLineEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::connectNotify(*signal);
-
+	self->QLineEdit::connectNotify(*signal);
 }
 
-void QLineEdit_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QLineEdit_virtualbase_disconnectNotify(VirtualQLineEdit* self, QMetaMethod* signal) {
 
-	( (VirtualQLineEdit*)(self) )->QLineEdit::disconnectNotify(*signal);
-
+	self->QLineEdit::disconnectNotify(*signal);
 }
 
 const QMetaObject* QLineEdit_staticMetaObject() { return &QLineEdit::staticMetaObject; }
-void QLineEdit_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QLineEdit_VTable* QLineEdit_vtbl(const VirtualQLineEdit* self) { return self->vtbl; }
+void* QLineEdit_vdata(const VirtualQLineEdit* self) { return self->vdata; }
+void QLineEdit_setVdata(VirtualQLineEdit* self, void* vdata) { self->vdata = vdata; }
+
+void QLineEdit_protectedbase_initStyleOption(const VirtualQLineEdit* self, QStyleOptionFrame* option) {
+	self->initStyleOption(option);
 }
 
-QRect* QLineEdit_protectedbase_cursorRect(const void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return new QRect(self_cast->cursorRect());
-
+QRect* QLineEdit_protectedbase_cursorRect(const VirtualQLineEdit* self) {
+	return new QRect(self->cursorRect());
 }
 
-void QLineEdit_protectedbase_updateMicroFocus(void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QLineEdit_protectedbase_updateMicroFocus(VirtualQLineEdit* self) {
+	self->updateMicroFocus();
 }
 
-void QLineEdit_protectedbase_create(void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	self_cast->create();
-
+void QLineEdit_protectedbase_create(VirtualQLineEdit* self) {
+	self->create();
 }
 
-void QLineEdit_protectedbase_destroy(void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	self_cast->destroy();
-
+void QLineEdit_protectedbase_destroy(VirtualQLineEdit* self) {
+	self->destroy();
 }
 
-bool QLineEdit_protectedbase_focusNextChild(void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QLineEdit_protectedbase_focusNextChild(VirtualQLineEdit* self) {
+	return self->focusNextChild();
 }
 
-bool QLineEdit_protectedbase_focusPreviousChild(void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QLineEdit_protectedbase_focusPreviousChild(VirtualQLineEdit* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QLineEdit_protectedbase_sender(const void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QLineEdit_protectedbase_sender(const VirtualQLineEdit* self) {
+	return self->sender();
 }
 
-int QLineEdit_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QLineEdit_protectedbase_senderSignalIndex(const VirtualQLineEdit* self) {
+	return self->senderSignalIndex();
 }
 
-int QLineEdit_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QLineEdit_protectedbase_receivers(const VirtualQLineEdit* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QLineEdit_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQLineEdit* self_cast = static_cast<VirtualQLineEdit*>( (QLineEdit*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QLineEdit_protectedbase_isSignalConnected(const VirtualQLineEdit* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QLineEdit_delete(QLineEdit* self) {

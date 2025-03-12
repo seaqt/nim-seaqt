@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qcameracapturebufferformatcontrol.h>
 #include "gen_qcameracapturebufferformatcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraCaptureBufferFormatControl_virtbase(QCameraCaptureBufferFormatControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -141,6 +132,7 @@ struct miqt_string QCameraCaptureBufferFormatControl_trUtf83(const char* s, cons
 }
 
 const QMetaObject* QCameraCaptureBufferFormatControl_staticMetaObject() { return &QCameraCaptureBufferFormatControl::staticMetaObject; }
+
 void QCameraCaptureBufferFormatControl_delete(QCameraCaptureBufferFormatControl* self) {
 	delete self;
 }

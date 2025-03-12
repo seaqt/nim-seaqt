@@ -22,6 +22,7 @@ typedef struct QAudioFormat QAudioFormat;
 
 QAudioFormat* QAudioFormat_new();
 QAudioFormat* QAudioFormat_new2(QAudioFormat* other);
+
 void QAudioFormat_operatorAssign(QAudioFormat* self, QAudioFormat* other);
 bool QAudioFormat_operatorEqual(const QAudioFormat* self, QAudioFormat* other);
 bool QAudioFormat_operatorNotEqual(const QAudioFormat* self, QAudioFormat* other);
@@ -45,6 +46,7 @@ int QAudioFormat_framesForBytes(const QAudioFormat* self, int byteCount);
 int QAudioFormat_framesForDuration(const QAudioFormat* self, long long duration);
 long long QAudioFormat_durationForFrames(const QAudioFormat* self, int frameCount);
 int QAudioFormat_bytesPerFrame(const QAudioFormat* self);
+
 void QAudioFormat_delete(QAudioFormat* self);
 
 #ifdef __cplusplus

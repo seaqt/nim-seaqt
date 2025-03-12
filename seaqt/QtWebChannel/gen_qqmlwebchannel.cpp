@@ -13,39 +13,32 @@
 #include <QWebChannel>
 #include <qqmlwebchannel.h>
 #include "gen_qqmlwebchannel.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQmlWebChannel final : public QQmlWebChannel {
-	struct QQmlWebChannel_VTable* vtbl;
+	const QQmlWebChannel_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlWebChannel_VTable* QQmlWebChannel_vtbl(const VirtualQQmlWebChannel* self);
+	friend void* QQmlWebChannel_vdata(const VirtualQQmlWebChannel* self);
+	friend void QQmlWebChannel_setVdata(VirtualQQmlWebChannel* self, void* vdata);
 
-	VirtualQQmlWebChannel(struct QQmlWebChannel_VTable* vtbl): QQmlWebChannel(), vtbl(vtbl) {};
-	VirtualQQmlWebChannel(struct QQmlWebChannel_VTable* vtbl, QObject* parent): QQmlWebChannel(parent), vtbl(vtbl) {};
+	VirtualQQmlWebChannel(const QQmlWebChannel_VTable* vtbl, void* vdata): QQmlWebChannel(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQmlWebChannel(const QQmlWebChannel_VTable* vtbl, void* vdata, QObject* parent): QQmlWebChannel(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlWebChannel() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlWebChannel() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQmlWebChannel::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQmlWebChannel_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQmlWebChannel_virtualbase_metaObject(const VirtualQQmlWebChannel* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQmlWebChannel::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQmlWebChannel_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQmlWebChannel_virtualbase_metacast(VirtualQQmlWebChannel* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQmlWebChannel::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQmlWebChannel_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQmlWebChannel_virtualbase_metacall(VirtualQQmlWebChannel* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QQmlWebChannel::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQmlWebChannel_virtualbase_event(void* self, QEvent* event);
+	friend bool QQmlWebChannel_virtualbase_event(VirtualQQmlWebChannel* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQmlWebChannel::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQmlWebChannel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQmlWebChannel_virtualbase_eventFilter(VirtualQQmlWebChannel* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QQmlWebChannel::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQmlWebChannel_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QQmlWebChannel_virtualbase_timerEvent(VirtualQQmlWebChannel* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQmlWebChannel::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQmlWebChannel_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQmlWebChannel_virtualbase_childEvent(VirtualQQmlWebChannel* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQmlWebChannel::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQmlWebChannel_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQmlWebChannel_virtualbase_customEvent(VirtualQQmlWebChannel* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQmlWebChannel::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQmlWebChannel_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQmlWebChannel_virtualbase_connectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQmlWebChannel::disconnectNotify(signal);
@@ -182,25 +167,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQmlWebChannel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQmlWebChannel_virtualbase_disconnectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQmlWebChannel_protectedbase_sender(const void* self);
-	friend int QQmlWebChannel_protectedbase_senderSignalIndex(const void* self);
-	friend int QQmlWebChannel_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQmlWebChannel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QQmlWebChannel_protectedbase_sender(const VirtualQQmlWebChannel* self);
+	friend int QQmlWebChannel_protectedbase_senderSignalIndex(const VirtualQQmlWebChannel* self);
+	friend int QQmlWebChannel_protectedbase_receivers(const VirtualQQmlWebChannel* self, const char* signal);
+	friend bool QQmlWebChannel_protectedbase_isSignalConnected(const VirtualQQmlWebChannel* self, QMetaMethod* signal);
 };
 
-QQmlWebChannel* QQmlWebChannel_new(struct QQmlWebChannel_VTable* vtbl) {
-	return new VirtualQQmlWebChannel(vtbl);
+VirtualQQmlWebChannel* QQmlWebChannel_new(const QQmlWebChannel_VTable* vtbl, void* vdata) {
+	return new VirtualQQmlWebChannel(vtbl, vdata);
 }
 
-QQmlWebChannel* QQmlWebChannel_new2(struct QQmlWebChannel_VTable* vtbl, QObject* parent) {
-	return new VirtualQQmlWebChannel(vtbl, parent);
+VirtualQQmlWebChannel* QQmlWebChannel_new2(const QQmlWebChannel_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQQmlWebChannel(vtbl, vdata, parent);
 }
 
 void QQmlWebChannel_virtbase(QQmlWebChannel* src, QWebChannel** outptr_QWebChannel) {
@@ -304,93 +289,76 @@ struct miqt_string QQmlWebChannel_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QQmlWebChannel_virtualbase_metaObject(const void* self) {
+QMetaObject* QQmlWebChannel_virtualbase_metaObject(const VirtualQQmlWebChannel* self) {
 
-	return (QMetaObject*) ( (const VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::metaObject();
-
+	return (QMetaObject*) self->QQmlWebChannel::metaObject();
 }
 
-void* QQmlWebChannel_virtualbase_metacast(void* self, const char* param1) {
+void* QQmlWebChannel_virtualbase_metacast(VirtualQQmlWebChannel* self, const char* param1) {
 
-	return ( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::qt_metacast(param1);
-
+	return self->QQmlWebChannel::qt_metacast(param1);
 }
 
-int QQmlWebChannel_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQmlWebChannel_virtualbase_metacall(VirtualQQmlWebChannel* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQmlWebChannel::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QQmlWebChannel_virtualbase_event(void* self, QEvent* event) {
+bool QQmlWebChannel_virtualbase_event(VirtualQQmlWebChannel* self, QEvent* event) {
 
-	return ( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::event(event);
-
+	return self->QQmlWebChannel::event(event);
 }
 
-bool QQmlWebChannel_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQmlWebChannel_virtualbase_eventFilter(VirtualQQmlWebChannel* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::eventFilter(watched, event);
-
+	return self->QQmlWebChannel::eventFilter(watched, event);
 }
 
-void QQmlWebChannel_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QQmlWebChannel_virtualbase_timerEvent(VirtualQQmlWebChannel* self, QTimerEvent* event) {
 
-	( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::timerEvent(event);
-
+	self->QQmlWebChannel::timerEvent(event);
 }
 
-void QQmlWebChannel_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQmlWebChannel_virtualbase_childEvent(VirtualQQmlWebChannel* self, QChildEvent* event) {
 
-	( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::childEvent(event);
-
+	self->QQmlWebChannel::childEvent(event);
 }
 
-void QQmlWebChannel_virtualbase_customEvent(void* self, QEvent* event) {
+void QQmlWebChannel_virtualbase_customEvent(VirtualQQmlWebChannel* self, QEvent* event) {
 
-	( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::customEvent(event);
-
+	self->QQmlWebChannel::customEvent(event);
 }
 
-void QQmlWebChannel_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQmlWebChannel_virtualbase_connectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal) {
 
-	( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::connectNotify(*signal);
-
+	self->QQmlWebChannel::connectNotify(*signal);
 }
 
-void QQmlWebChannel_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQmlWebChannel_virtualbase_disconnectNotify(VirtualQQmlWebChannel* self, QMetaMethod* signal) {
 
-	( (VirtualQQmlWebChannel*)(self) )->QQmlWebChannel::disconnectNotify(*signal);
-
+	self->QQmlWebChannel::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQmlWebChannel_staticMetaObject() { return &QQmlWebChannel::staticMetaObject; }
-QObject* QQmlWebChannel_protectedbase_sender(const void* self) {
-	VirtualQQmlWebChannel* self_cast = static_cast<VirtualQQmlWebChannel*>( (QQmlWebChannel*)(self) );
-	
-	return self_cast->sender();
 
+const QQmlWebChannel_VTable* QQmlWebChannel_vtbl(const VirtualQQmlWebChannel* self) { return self->vtbl; }
+void* QQmlWebChannel_vdata(const VirtualQQmlWebChannel* self) { return self->vdata; }
+void QQmlWebChannel_setVdata(VirtualQQmlWebChannel* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QQmlWebChannel_protectedbase_sender(const VirtualQQmlWebChannel* self) {
+	return self->sender();
 }
 
-int QQmlWebChannel_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQmlWebChannel* self_cast = static_cast<VirtualQQmlWebChannel*>( (QQmlWebChannel*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQmlWebChannel_protectedbase_senderSignalIndex(const VirtualQQmlWebChannel* self) {
+	return self->senderSignalIndex();
 }
 
-int QQmlWebChannel_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQmlWebChannel* self_cast = static_cast<VirtualQQmlWebChannel*>( (QQmlWebChannel*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQmlWebChannel_protectedbase_receivers(const VirtualQQmlWebChannel* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQmlWebChannel_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQmlWebChannel* self_cast = static_cast<VirtualQQmlWebChannel*>( (QQmlWebChannel*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQmlWebChannel_protectedbase_isSignalConnected(const VirtualQQmlWebChannel* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQmlWebChannel_delete(QQmlWebChannel* self) {

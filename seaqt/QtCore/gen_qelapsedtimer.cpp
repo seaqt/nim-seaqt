@@ -1,15 +1,6 @@
 #include <QElapsedTimer>
 #include <qelapsedtimer.h>
 #include "gen_qelapsedtimer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QElapsedTimer* QElapsedTimer_new() {
 	return new QElapsedTimer();
 }

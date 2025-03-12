@@ -49,12 +49,12 @@ export
 
 type cQDirIterator*{.exportc: "QDirIterator", incompleteStruct.} = object
 
-proc fcQDirIterator_next(self: pointer, ): struct_miqt_string {.importc: "QDirIterator_next".}
-proc fcQDirIterator_hasNext(self: pointer, ): bool {.importc: "QDirIterator_hasNext".}
-proc fcQDirIterator_fileName(self: pointer, ): struct_miqt_string {.importc: "QDirIterator_fileName".}
-proc fcQDirIterator_filePath(self: pointer, ): struct_miqt_string {.importc: "QDirIterator_filePath".}
-proc fcQDirIterator_fileInfo(self: pointer, ): pointer {.importc: "QDirIterator_fileInfo".}
-proc fcQDirIterator_path(self: pointer, ): struct_miqt_string {.importc: "QDirIterator_path".}
+proc fcQDirIterator_next(self: pointer): struct_miqt_string {.importc: "QDirIterator_next".}
+proc fcQDirIterator_hasNext(self: pointer): bool {.importc: "QDirIterator_hasNext".}
+proc fcQDirIterator_fileName(self: pointer): struct_miqt_string {.importc: "QDirIterator_fileName".}
+proc fcQDirIterator_filePath(self: pointer): struct_miqt_string {.importc: "QDirIterator_filePath".}
+proc fcQDirIterator_fileInfo(self: pointer): pointer {.importc: "QDirIterator_fileInfo".}
+proc fcQDirIterator_path(self: pointer): struct_miqt_string {.importc: "QDirIterator_path".}
 proc fcQDirIterator_new(dir: pointer): ptr cQDirIterator {.importc: "QDirIterator_new".}
 proc fcQDirIterator_new2(path: struct_miqt_string): ptr cQDirIterator {.importc: "QDirIterator_new2".}
 proc fcQDirIterator_new3(path: struct_miqt_string, filter: cint): ptr cQDirIterator {.importc: "QDirIterator_new3".}
@@ -65,31 +65,31 @@ proc fcQDirIterator_new7(path: struct_miqt_string, filter: cint, flags: cint): p
 proc fcQDirIterator_new8(path: struct_miqt_string, nameFilters: struct_miqt_array, filters: cint): ptr cQDirIterator {.importc: "QDirIterator_new8".}
 proc fcQDirIterator_new9(path: struct_miqt_string, nameFilters: struct_miqt_array, filters: cint, flags: cint): ptr cQDirIterator {.importc: "QDirIterator_new9".}
 
-proc next*(self: gen_qdiriterator_types.QDirIterator, ): string =
+proc next*(self: gen_qdiriterator_types.QDirIterator): string =
   let v_ms = fcQDirIterator_next(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc hasNext*(self: gen_qdiriterator_types.QDirIterator, ): bool =
+proc hasNext*(self: gen_qdiriterator_types.QDirIterator): bool =
   fcQDirIterator_hasNext(self.h)
 
-proc fileName*(self: gen_qdiriterator_types.QDirIterator, ): string =
+proc fileName*(self: gen_qdiriterator_types.QDirIterator): string =
   let v_ms = fcQDirIterator_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc filePath*(self: gen_qdiriterator_types.QDirIterator, ): string =
+proc filePath*(self: gen_qdiriterator_types.QDirIterator): string =
   let v_ms = fcQDirIterator_filePath(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc fileInfo*(self: gen_qdiriterator_types.QDirIterator, ): gen_qfileinfo_types.QFileInfo =
+proc fileInfo*(self: gen_qdiriterator_types.QDirIterator): gen_qfileinfo_types.QFileInfo =
   gen_qfileinfo_types.QFileInfo(h: fcQDirIterator_fileInfo(self.h), owned: true)
 
-proc path*(self: gen_qdiriterator_types.QDirIterator, ): string =
+proc path*(self: gen_qdiriterator_types.QDirIterator): string =
   let v_ms = fcQDirIterator_path(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)

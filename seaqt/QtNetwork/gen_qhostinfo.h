@@ -25,6 +25,7 @@ typedef struct QHostInfo QHostInfo;
 QHostInfo* QHostInfo_new();
 QHostInfo* QHostInfo_new2(QHostInfo* d);
 QHostInfo* QHostInfo_new3(int lookupId);
+
 void QHostInfo_operatorAssign(QHostInfo* self, QHostInfo* d);
 void QHostInfo_swap(QHostInfo* self, QHostInfo* other);
 struct miqt_string QHostInfo_hostName(const QHostInfo* self);
@@ -41,6 +42,7 @@ void QHostInfo_abortHostLookup(int lookupId);
 QHostInfo* QHostInfo_fromName(struct miqt_string name);
 struct miqt_string QHostInfo_localHostName();
 struct miqt_string QHostInfo_localDomainName();
+
 void QHostInfo_delete(QHostInfo* self);
 
 #ifdef __cplusplus

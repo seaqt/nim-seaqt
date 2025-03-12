@@ -32,23 +32,30 @@ typedef struct QTimerEvent QTimerEvent;
 typedef struct QWebHistoryInterface QWebHistoryInterface;
 #endif
 
-struct QWebHistoryInterface_VTable {
-	void (*destructor)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self);
-	QMetaObject* (*metaObject)(struct QWebHistoryInterface_VTable* vtbl, const QWebHistoryInterface* self);
-	void* (*metacast)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, const char* param1);
-	int (*metacall)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, int param1, int param2, void** param3);
-	bool (*historyContains)(struct QWebHistoryInterface_VTable* vtbl, const QWebHistoryInterface* self, struct miqt_string url);
-	void (*addHistoryEntry)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, struct miqt_string url);
-	bool (*event)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QEvent* event);
-	bool (*eventFilter)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QTimerEvent* event);
-	void (*childEvent)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QChildEvent* event);
-	void (*customEvent)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QEvent* event);
-	void (*connectNotify)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QWebHistoryInterface_VTable* vtbl, QWebHistoryInterface* self, QMetaMethod* signal);
-};
-QWebHistoryInterface* QWebHistoryInterface_new(struct QWebHistoryInterface_VTable* vtbl);
-QWebHistoryInterface* QWebHistoryInterface_new2(struct QWebHistoryInterface_VTable* vtbl, QObject* parent);
+typedef struct VirtualQWebHistoryInterface VirtualQWebHistoryInterface;
+typedef struct QWebHistoryInterface_VTable{
+	void (*destructor)(VirtualQWebHistoryInterface* self);
+	QMetaObject* (*metaObject)(const VirtualQWebHistoryInterface* self);
+	void* (*metacast)(VirtualQWebHistoryInterface* self, const char* param1);
+	int (*metacall)(VirtualQWebHistoryInterface* self, int param1, int param2, void** param3);
+	bool (*historyContains)(const VirtualQWebHistoryInterface* self, struct miqt_string url);
+	void (*addHistoryEntry)(VirtualQWebHistoryInterface* self, struct miqt_string url);
+	bool (*event)(VirtualQWebHistoryInterface* self, QEvent* event);
+	bool (*eventFilter)(VirtualQWebHistoryInterface* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQWebHistoryInterface* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQWebHistoryInterface* self, QChildEvent* event);
+	void (*customEvent)(VirtualQWebHistoryInterface* self, QEvent* event);
+	void (*connectNotify)(VirtualQWebHistoryInterface* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQWebHistoryInterface* self, QMetaMethod* signal);
+}QWebHistoryInterface_VTable;
+
+const QWebHistoryInterface_VTable* QWebHistoryInterface_vtbl(const VirtualQWebHistoryInterface* self);
+void* QWebHistoryInterface_vdata(const VirtualQWebHistoryInterface* self);
+void QWebHistoryInterface_setVdata(VirtualQWebHistoryInterface* self, void* vdata);
+
+VirtualQWebHistoryInterface* QWebHistoryInterface_new(const QWebHistoryInterface_VTable* vtbl, void* vdata);
+VirtualQWebHistoryInterface* QWebHistoryInterface_new2(const QWebHistoryInterface_VTable* vtbl, void* vdata, QObject* parent);
+
 void QWebHistoryInterface_virtbase(QWebHistoryInterface* src, QObject** outptr_QObject);
 QMetaObject* QWebHistoryInterface_metaObject(const QWebHistoryInterface* self);
 void* QWebHistoryInterface_metacast(QWebHistoryInterface* self, const char* param1);
@@ -63,22 +70,25 @@ struct miqt_string QWebHistoryInterface_tr2(const char* s, const char* c);
 struct miqt_string QWebHistoryInterface_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebHistoryInterface_trUtf82(const char* s, const char* c);
 struct miqt_string QWebHistoryInterface_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QWebHistoryInterface_virtualbase_metaObject(const void* self);
-void* QWebHistoryInterface_virtualbase_metacast(void* self, const char* param1);
-int QWebHistoryInterface_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QWebHistoryInterface_virtualbase_historyContains(const void* self, struct miqt_string url);
-void QWebHistoryInterface_virtualbase_addHistoryEntry(void* self, struct miqt_string url);
-bool QWebHistoryInterface_virtualbase_event(void* self, QEvent* event);
-bool QWebHistoryInterface_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QWebHistoryInterface_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QWebHistoryInterface_virtualbase_childEvent(void* self, QChildEvent* event);
-void QWebHistoryInterface_virtualbase_customEvent(void* self, QEvent* event);
-void QWebHistoryInterface_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QWebHistoryInterface_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebHistoryInterface_protectedbase_sender(const void* self);
-int QWebHistoryInterface_protectedbase_senderSignalIndex(const void* self);
-int QWebHistoryInterface_protectedbase_receivers(const void* self, const char* signal);
-bool QWebHistoryInterface_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QWebHistoryInterface_virtualbase_metaObject(const VirtualQWebHistoryInterface* self);
+void* QWebHistoryInterface_virtualbase_metacast(VirtualQWebHistoryInterface* self, const char* param1);
+int QWebHistoryInterface_virtualbase_metacall(VirtualQWebHistoryInterface* self, int param1, int param2, void** param3);
+bool QWebHistoryInterface_virtualbase_historyContains(const VirtualQWebHistoryInterface* self, struct miqt_string url);
+void QWebHistoryInterface_virtualbase_addHistoryEntry(VirtualQWebHistoryInterface* self, struct miqt_string url);
+bool QWebHistoryInterface_virtualbase_event(VirtualQWebHistoryInterface* self, QEvent* event);
+bool QWebHistoryInterface_virtualbase_eventFilter(VirtualQWebHistoryInterface* self, QObject* watched, QEvent* event);
+void QWebHistoryInterface_virtualbase_timerEvent(VirtualQWebHistoryInterface* self, QTimerEvent* event);
+void QWebHistoryInterface_virtualbase_childEvent(VirtualQWebHistoryInterface* self, QChildEvent* event);
+void QWebHistoryInterface_virtualbase_customEvent(VirtualQWebHistoryInterface* self, QEvent* event);
+void QWebHistoryInterface_virtualbase_connectNotify(VirtualQWebHistoryInterface* self, QMetaMethod* signal);
+void QWebHistoryInterface_virtualbase_disconnectNotify(VirtualQWebHistoryInterface* self, QMetaMethod* signal);
+
+QObject* QWebHistoryInterface_protectedbase_sender(const VirtualQWebHistoryInterface* self);
+int QWebHistoryInterface_protectedbase_senderSignalIndex(const VirtualQWebHistoryInterface* self);
+int QWebHistoryInterface_protectedbase_receivers(const VirtualQWebHistoryInterface* self, const char* signal);
+bool QWebHistoryInterface_protectedbase_isSignalConnected(const VirtualQWebHistoryInterface* self, QMetaMethod* signal);
+
 const QMetaObject* QWebHistoryInterface_staticMetaObject();
 void QWebHistoryInterface_delete(QWebHistoryInterface* self);
 

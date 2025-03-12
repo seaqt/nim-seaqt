@@ -11,39 +11,32 @@
 #include <QTimerEvent>
 #include <qpictureformatplugin.h>
 #include "gen_qpictureformatplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPictureFormatPlugin final : public QPictureFormatPlugin {
-	struct QPictureFormatPlugin_VTable* vtbl;
+	const QPictureFormatPlugin_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPictureFormatPlugin_VTable* QPictureFormatPlugin_vtbl(const VirtualQPictureFormatPlugin* self);
+	friend void* QPictureFormatPlugin_vdata(const VirtualQPictureFormatPlugin* self);
+	friend void QPictureFormatPlugin_setVdata(VirtualQPictureFormatPlugin* self, void* vdata);
 
-	VirtualQPictureFormatPlugin(struct QPictureFormatPlugin_VTable* vtbl): QPictureFormatPlugin(), vtbl(vtbl) {};
-	VirtualQPictureFormatPlugin(struct QPictureFormatPlugin_VTable* vtbl, QObject* parent): QPictureFormatPlugin(parent), vtbl(vtbl) {};
+	VirtualQPictureFormatPlugin(const QPictureFormatPlugin_VTable* vtbl, void* vdata): QPictureFormatPlugin(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQPictureFormatPlugin(const QPictureFormatPlugin_VTable* vtbl, void* vdata, QObject* parent): QPictureFormatPlugin(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPictureFormatPlugin() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPictureFormatPlugin() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QPictureFormatPlugin::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QPictureFormatPlugin_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QPictureFormatPlugin_virtualbase_metaObject(const VirtualQPictureFormatPlugin* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QPictureFormatPlugin::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QPictureFormatPlugin_virtualbase_metacast(void* self, const char* param1);
+	friend void* QPictureFormatPlugin_virtualbase_metacast(VirtualQPictureFormatPlugin* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QPictureFormatPlugin::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPictureFormatPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QPictureFormatPlugin_virtualbase_metacall(VirtualQPictureFormatPlugin* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool loadPicture(const QString& format, const QString& filename, QPicture* pic) override {
 		if (vtbl->loadPicture == 0) {
 			return QPictureFormatPlugin::loadPicture(format, filename, pic);
@@ -100,14 +91,13 @@ public:
 		struct miqt_string sigval2 = filename_ms;
 		QPicture* sigval3 = pic;
 
-		bool callback_return_value = vtbl->loadPicture(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->loadPicture(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QPictureFormatPlugin_virtualbase_loadPicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
+	friend bool QPictureFormatPlugin_virtualbase_loadPicture(VirtualQPictureFormatPlugin* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool savePicture(const QString& format, const QString& filename, const QPicture& pic) override {
 		if (vtbl->savePicture == 0) {
 			return QPictureFormatPlugin::savePicture(format, filename, pic);
@@ -133,14 +123,13 @@ public:
 		// Cast returned reference into pointer
 		QPicture* sigval3 = const_cast<QPicture*>(&pic_ret);
 
-		bool callback_return_value = vtbl->savePicture(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->savePicture(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QPictureFormatPlugin_virtualbase_savePicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
+	friend bool QPictureFormatPlugin_virtualbase_savePicture(VirtualQPictureFormatPlugin* self, struct miqt_string format, struct miqt_string filename, QPicture* pic);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool installIOHandler(const QString& format) override {
 		if (vtbl->installIOHandler == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -155,12 +144,11 @@ public:
 		memcpy(format_ms.data, format_b.data(), format_ms.len);
 		struct miqt_string sigval1 = format_ms;
 
-		bool callback_return_value = vtbl->installIOHandler(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->installIOHandler(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QPictureFormatPlugin::event(event);
@@ -168,14 +156,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QPictureFormatPlugin_virtualbase_event(void* self, QEvent* event);
+	friend bool QPictureFormatPlugin_virtualbase_event(VirtualQPictureFormatPlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QPictureFormatPlugin::eventFilter(watched, event);
@@ -184,14 +171,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QPictureFormatPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QPictureFormatPlugin_virtualbase_eventFilter(VirtualQPictureFormatPlugin* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QPictureFormatPlugin::timerEvent(event);
@@ -200,13 +186,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QPictureFormatPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QPictureFormatPlugin_virtualbase_timerEvent(VirtualQPictureFormatPlugin* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QPictureFormatPlugin::childEvent(event);
@@ -215,13 +200,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QPictureFormatPlugin_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QPictureFormatPlugin_virtualbase_childEvent(VirtualQPictureFormatPlugin* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QPictureFormatPlugin::customEvent(event);
@@ -230,13 +214,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QPictureFormatPlugin_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QPictureFormatPlugin_virtualbase_customEvent(VirtualQPictureFormatPlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QPictureFormatPlugin::connectNotify(signal);
@@ -247,13 +230,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QPictureFormatPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QPictureFormatPlugin_virtualbase_connectNotify(VirtualQPictureFormatPlugin* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QPictureFormatPlugin::disconnectNotify(signal);
@@ -264,25 +246,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QPictureFormatPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QPictureFormatPlugin_virtualbase_disconnectNotify(VirtualQPictureFormatPlugin* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QPictureFormatPlugin_protectedbase_sender(const void* self);
-	friend int QPictureFormatPlugin_protectedbase_senderSignalIndex(const void* self);
-	friend int QPictureFormatPlugin_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QPictureFormatPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QPictureFormatPlugin_protectedbase_sender(const VirtualQPictureFormatPlugin* self);
+	friend int QPictureFormatPlugin_protectedbase_senderSignalIndex(const VirtualQPictureFormatPlugin* self);
+	friend int QPictureFormatPlugin_protectedbase_receivers(const VirtualQPictureFormatPlugin* self, const char* signal);
+	friend bool QPictureFormatPlugin_protectedbase_isSignalConnected(const VirtualQPictureFormatPlugin* self, QMetaMethod* signal);
 };
 
-QPictureFormatPlugin* QPictureFormatPlugin_new(struct QPictureFormatPlugin_VTable* vtbl) {
-	return new VirtualQPictureFormatPlugin(vtbl);
+VirtualQPictureFormatPlugin* QPictureFormatPlugin_new(const QPictureFormatPlugin_VTable* vtbl, void* vdata) {
+	return new VirtualQPictureFormatPlugin(vtbl, vdata);
 }
 
-QPictureFormatPlugin* QPictureFormatPlugin_new2(struct QPictureFormatPlugin_VTable* vtbl, QObject* parent) {
-	return new VirtualQPictureFormatPlugin(vtbl, parent);
+VirtualQPictureFormatPlugin* QPictureFormatPlugin_new2(const QPictureFormatPlugin_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQPictureFormatPlugin(vtbl, vdata, parent);
 }
 
 void QPictureFormatPlugin_virtbase(QPictureFormatPlugin* src, QObject** outptr_QObject) {
@@ -384,109 +366,90 @@ struct miqt_string QPictureFormatPlugin_trUtf83(const char* s, const char* c, in
 	return _ms;
 }
 
-QMetaObject* QPictureFormatPlugin_virtualbase_metaObject(const void* self) {
+QMetaObject* QPictureFormatPlugin_virtualbase_metaObject(const VirtualQPictureFormatPlugin* self) {
 
-	return (QMetaObject*) ( (const VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::metaObject();
-
+	return (QMetaObject*) self->QPictureFormatPlugin::metaObject();
 }
 
-void* QPictureFormatPlugin_virtualbase_metacast(void* self, const char* param1) {
+void* QPictureFormatPlugin_virtualbase_metacast(VirtualQPictureFormatPlugin* self, const char* param1) {
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::qt_metacast(param1);
-
+	return self->QPictureFormatPlugin::qt_metacast(param1);
 }
 
-int QPictureFormatPlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QPictureFormatPlugin_virtualbase_metacall(VirtualQPictureFormatPlugin* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QPictureFormatPlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QPictureFormatPlugin_virtualbase_loadPicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic) {
+bool QPictureFormatPlugin_virtualbase_loadPicture(VirtualQPictureFormatPlugin* self, struct miqt_string format, struct miqt_string filename, QPicture* pic) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::loadPicture(format_QString, filename_QString, pic);
-
+	return self->QPictureFormatPlugin::loadPicture(format_QString, filename_QString, pic);
 }
 
-bool QPictureFormatPlugin_virtualbase_savePicture(void* self, struct miqt_string format, struct miqt_string filename, QPicture* pic) {
+bool QPictureFormatPlugin_virtualbase_savePicture(VirtualQPictureFormatPlugin* self, struct miqt_string format, struct miqt_string filename, QPicture* pic) {
 	QString format_QString = QString::fromUtf8(format.data, format.len);
 	QString filename_QString = QString::fromUtf8(filename.data, filename.len);
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::savePicture(format_QString, filename_QString, *pic);
-
+	return self->QPictureFormatPlugin::savePicture(format_QString, filename_QString, *pic);
 }
 
-bool QPictureFormatPlugin_virtualbase_event(void* self, QEvent* event) {
+bool QPictureFormatPlugin_virtualbase_event(VirtualQPictureFormatPlugin* self, QEvent* event) {
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::event(event);
-
+	return self->QPictureFormatPlugin::event(event);
 }
 
-bool QPictureFormatPlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QPictureFormatPlugin_virtualbase_eventFilter(VirtualQPictureFormatPlugin* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::eventFilter(watched, event);
-
+	return self->QPictureFormatPlugin::eventFilter(watched, event);
 }
 
-void QPictureFormatPlugin_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QPictureFormatPlugin_virtualbase_timerEvent(VirtualQPictureFormatPlugin* self, QTimerEvent* event) {
 
-	( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::timerEvent(event);
-
+	self->QPictureFormatPlugin::timerEvent(event);
 }
 
-void QPictureFormatPlugin_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QPictureFormatPlugin_virtualbase_childEvent(VirtualQPictureFormatPlugin* self, QChildEvent* event) {
 
-	( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::childEvent(event);
-
+	self->QPictureFormatPlugin::childEvent(event);
 }
 
-void QPictureFormatPlugin_virtualbase_customEvent(void* self, QEvent* event) {
+void QPictureFormatPlugin_virtualbase_customEvent(VirtualQPictureFormatPlugin* self, QEvent* event) {
 
-	( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::customEvent(event);
-
+	self->QPictureFormatPlugin::customEvent(event);
 }
 
-void QPictureFormatPlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QPictureFormatPlugin_virtualbase_connectNotify(VirtualQPictureFormatPlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::connectNotify(*signal);
-
+	self->QPictureFormatPlugin::connectNotify(*signal);
 }
 
-void QPictureFormatPlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QPictureFormatPlugin_virtualbase_disconnectNotify(VirtualQPictureFormatPlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQPictureFormatPlugin*)(self) )->QPictureFormatPlugin::disconnectNotify(*signal);
-
+	self->QPictureFormatPlugin::disconnectNotify(*signal);
 }
 
 const QMetaObject* QPictureFormatPlugin_staticMetaObject() { return &QPictureFormatPlugin::staticMetaObject; }
-QObject* QPictureFormatPlugin_protectedbase_sender(const void* self) {
-	VirtualQPictureFormatPlugin* self_cast = static_cast<VirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
-	
-	return self_cast->sender();
 
+const QPictureFormatPlugin_VTable* QPictureFormatPlugin_vtbl(const VirtualQPictureFormatPlugin* self) { return self->vtbl; }
+void* QPictureFormatPlugin_vdata(const VirtualQPictureFormatPlugin* self) { return self->vdata; }
+void QPictureFormatPlugin_setVdata(VirtualQPictureFormatPlugin* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QPictureFormatPlugin_protectedbase_sender(const VirtualQPictureFormatPlugin* self) {
+	return self->sender();
 }
 
-int QPictureFormatPlugin_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQPictureFormatPlugin* self_cast = static_cast<VirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QPictureFormatPlugin_protectedbase_senderSignalIndex(const VirtualQPictureFormatPlugin* self) {
+	return self->senderSignalIndex();
 }
 
-int QPictureFormatPlugin_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQPictureFormatPlugin* self_cast = static_cast<VirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QPictureFormatPlugin_protectedbase_receivers(const VirtualQPictureFormatPlugin* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QPictureFormatPlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQPictureFormatPlugin* self_cast = static_cast<VirtualQPictureFormatPlugin*>( (QPictureFormatPlugin*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QPictureFormatPlugin_protectedbase_isSignalConnected(const VirtualQPictureFormatPlugin* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QPictureFormatPlugin_delete(QPictureFormatPlugin* self) {

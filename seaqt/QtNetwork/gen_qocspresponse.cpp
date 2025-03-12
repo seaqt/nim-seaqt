@@ -2,15 +2,6 @@
 #include <QSslCertificate>
 #include <qocspresponse.h>
 #include "gen_qocspresponse.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QOcspResponse* QOcspResponse_new() {
 	return new QOcspResponse();
 }

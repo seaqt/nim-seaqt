@@ -25,6 +25,7 @@ QRegExp* QRegExp_new2(struct miqt_string pattern);
 QRegExp* QRegExp_new3(QRegExp* rx);
 QRegExp* QRegExp_new4(struct miqt_string pattern, int cs);
 QRegExp* QRegExp_new5(struct miqt_string pattern, int cs, int syntax);
+
 void QRegExp_operatorAssign(QRegExp* self, QRegExp* rx);
 void QRegExp_swap(QRegExp* self, QRegExp* other);
 bool QRegExp_operatorEqual(const QRegExp* self, QRegExp* rx);
@@ -61,6 +62,7 @@ struct miqt_string QRegExp_cap1(const QRegExp* self, int nth);
 struct miqt_string QRegExp_cap1WithNth(QRegExp* self, int nth);
 int QRegExp_pos1(const QRegExp* self, int nth);
 int QRegExp_pos1WithNth(QRegExp* self, int nth);
+
 void QRegExp_delete(QRegExp* self);
 
 #ifdef __cplusplus

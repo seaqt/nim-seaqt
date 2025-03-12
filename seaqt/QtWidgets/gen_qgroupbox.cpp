@@ -37,41 +37,34 @@
 #include <QWidget>
 #include <qgroupbox.h>
 #include "gen_qgroupbox.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGroupBox final : public QGroupBox {
-	struct QGroupBox_VTable* vtbl;
+	const QGroupBox_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGroupBox_VTable* QGroupBox_vtbl(const VirtualQGroupBox* self);
+	friend void* QGroupBox_vdata(const VirtualQGroupBox* self);
+	friend void QGroupBox_setVdata(VirtualQGroupBox* self, void* vdata);
 
-	VirtualQGroupBox(struct QGroupBox_VTable* vtbl, QWidget* parent): QGroupBox(parent), vtbl(vtbl) {};
-	VirtualQGroupBox(struct QGroupBox_VTable* vtbl): QGroupBox(), vtbl(vtbl) {};
-	VirtualQGroupBox(struct QGroupBox_VTable* vtbl, const QString& title): QGroupBox(title), vtbl(vtbl) {};
-	VirtualQGroupBox(struct QGroupBox_VTable* vtbl, const QString& title, QWidget* parent): QGroupBox(title, parent), vtbl(vtbl) {};
+	VirtualQGroupBox(const QGroupBox_VTable* vtbl, void* vdata, QWidget* parent): QGroupBox(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGroupBox(const QGroupBox_VTable* vtbl, void* vdata): QGroupBox(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGroupBox(const QGroupBox_VTable* vtbl, void* vdata, const QString& title): QGroupBox(title), vtbl(vtbl), vdata(vdata) {}
+	VirtualQGroupBox(const QGroupBox_VTable* vtbl, void* vdata, const QString& title, QWidget* parent): QGroupBox(title, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGroupBox() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGroupBox() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QGroupBox::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QGroupBox_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QGroupBox_virtualbase_metaObject(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QGroupBox::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QGroupBox_virtualbase_metacast(void* self, const char* param1);
+	friend void* QGroupBox_virtualbase_metacast(VirtualQGroupBox* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QGroupBox::qt_metacall(param1, param2, param3);
@@ -97,30 +89,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGroupBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QGroupBox_virtualbase_metacall(VirtualQGroupBox* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QGroupBox::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QGroupBox_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QGroupBox_virtualbase_minimumSizeHint(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QGroupBox::event(event);
@@ -128,14 +118,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGroupBox_virtualbase_event(void* self, QEvent* event);
+	friend bool QGroupBox_virtualbase_event(VirtualQGroupBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QGroupBox::childEvent(event);
@@ -144,13 +133,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QGroupBox_virtualbase_childEvent(VirtualQGroupBox* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QGroupBox::resizeEvent(event);
@@ -159,13 +147,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QGroupBox_virtualbase_resizeEvent(VirtualQGroupBox* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QGroupBox::paintEvent(event);
@@ -174,13 +161,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QGroupBox_virtualbase_paintEvent(VirtualQGroupBox* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QGroupBox::focusInEvent(event);
@@ -189,13 +175,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QGroupBox_virtualbase_focusInEvent(VirtualQGroupBox* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QGroupBox::changeEvent(event);
@@ -204,13 +189,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QGroupBox_virtualbase_changeEvent(VirtualQGroupBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QGroupBox::mousePressEvent(event);
@@ -219,13 +203,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QGroupBox_virtualbase_mousePressEvent(VirtualQGroupBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QGroupBox::mouseMoveEvent(event);
@@ -234,13 +217,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QGroupBox_virtualbase_mouseMoveEvent(VirtualQGroupBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QGroupBox::mouseReleaseEvent(event);
@@ -249,27 +231,25 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QGroupBox_virtualbase_mouseReleaseEvent(VirtualQGroupBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QGroupBox::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGroupBox_virtualbase_devType(const void* self);
+	friend int QGroupBox_virtualbase_devType(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QGroupBox::setVisible(visible);
@@ -278,29 +258,27 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_setVisible(void* self, bool visible);
+	friend void QGroupBox_virtualbase_setVisible(VirtualQGroupBox* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QGroupBox::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QGroupBox_virtualbase_sizeHint(const void* self);
+	friend QSize* QGroupBox_virtualbase_sizeHint(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QGroupBox::heightForWidth(param1);
@@ -308,42 +286,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGroupBox_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QGroupBox_virtualbase_heightForWidth(const VirtualQGroupBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QGroupBox::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QGroupBox_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QGroupBox_virtualbase_hasHeightForWidth(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QGroupBox::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QGroupBox_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QGroupBox_virtualbase_paintEngine(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QGroupBox::mouseDoubleClickEvent(event);
@@ -352,13 +327,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QGroupBox_virtualbase_mouseDoubleClickEvent(VirtualQGroupBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QGroupBox::wheelEvent(event);
@@ -367,13 +341,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QGroupBox_virtualbase_wheelEvent(VirtualQGroupBox* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QGroupBox::keyPressEvent(event);
@@ -382,13 +355,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QGroupBox_virtualbase_keyPressEvent(VirtualQGroupBox* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QGroupBox::keyReleaseEvent(event);
@@ -397,13 +369,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QGroupBox_virtualbase_keyReleaseEvent(VirtualQGroupBox* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QGroupBox::focusOutEvent(event);
@@ -412,13 +383,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QGroupBox_virtualbase_focusOutEvent(VirtualQGroupBox* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QGroupBox::enterEvent(event);
@@ -427,13 +397,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QGroupBox_virtualbase_enterEvent(VirtualQGroupBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QGroupBox::leaveEvent(event);
@@ -442,13 +411,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QGroupBox_virtualbase_leaveEvent(VirtualQGroupBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QGroupBox::moveEvent(event);
@@ -457,13 +425,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QGroupBox_virtualbase_moveEvent(VirtualQGroupBox* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QGroupBox::closeEvent(event);
@@ -472,13 +439,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QGroupBox_virtualbase_closeEvent(VirtualQGroupBox* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QGroupBox::contextMenuEvent(event);
@@ -487,13 +453,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QGroupBox_virtualbase_contextMenuEvent(VirtualQGroupBox* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QGroupBox::tabletEvent(event);
@@ -502,13 +467,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QGroupBox_virtualbase_tabletEvent(VirtualQGroupBox* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QGroupBox::actionEvent(event);
@@ -517,13 +481,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QGroupBox_virtualbase_actionEvent(VirtualQGroupBox* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QGroupBox::dragEnterEvent(event);
@@ -532,13 +495,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QGroupBox_virtualbase_dragEnterEvent(VirtualQGroupBox* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QGroupBox::dragMoveEvent(event);
@@ -547,13 +509,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QGroupBox_virtualbase_dragMoveEvent(VirtualQGroupBox* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QGroupBox::dragLeaveEvent(event);
@@ -562,13 +523,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QGroupBox_virtualbase_dragLeaveEvent(VirtualQGroupBox* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QGroupBox::dropEvent(event);
@@ -577,13 +537,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QGroupBox_virtualbase_dropEvent(VirtualQGroupBox* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QGroupBox::showEvent(event);
@@ -592,13 +551,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QGroupBox_virtualbase_showEvent(VirtualQGroupBox* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QGroupBox::hideEvent(event);
@@ -607,13 +565,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QGroupBox_virtualbase_hideEvent(VirtualQGroupBox* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QGroupBox::nativeEvent(eventType, message, result);
@@ -628,14 +585,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QGroupBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QGroupBox_virtualbase_nativeEvent(VirtualQGroupBox* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QGroupBox::metric(param1);
@@ -644,14 +600,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QGroupBox_virtualbase_metric(const void* self, int param1);
+	friend int QGroupBox_virtualbase_metric(const VirtualQGroupBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QGroupBox::initPainter(painter);
@@ -660,13 +615,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QGroupBox_virtualbase_initPainter(const VirtualQGroupBox* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QGroupBox::redirected(offset);
@@ -674,28 +628,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QGroupBox_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QGroupBox_virtualbase_redirected(const VirtualQGroupBox* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QGroupBox::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QGroupBox_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QGroupBox_virtualbase_sharedPainter(const VirtualQGroupBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QGroupBox::inputMethodEvent(param1);
@@ -704,13 +656,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QGroupBox_virtualbase_inputMethodEvent(VirtualQGroupBox* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QGroupBox::inputMethodQuery(param1);
@@ -719,16 +670,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QGroupBox_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QGroupBox_virtualbase_inputMethodQuery(const VirtualQGroupBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QGroupBox::focusNextPrevChild(next);
@@ -736,14 +686,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QGroupBox_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QGroupBox_virtualbase_focusNextPrevChild(VirtualQGroupBox* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QGroupBox::eventFilter(watched, event);
@@ -752,14 +701,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QGroupBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QGroupBox_virtualbase_eventFilter(VirtualQGroupBox* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QGroupBox::timerEvent(event);
@@ -768,13 +716,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QGroupBox_virtualbase_timerEvent(VirtualQGroupBox* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QGroupBox::customEvent(event);
@@ -783,13 +730,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QGroupBox_virtualbase_customEvent(VirtualQGroupBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QGroupBox::connectNotify(signal);
@@ -800,13 +746,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QGroupBox_virtualbase_connectNotify(VirtualQGroupBox* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QGroupBox::disconnectNotify(signal);
@@ -817,41 +762,41 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QGroupBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QGroupBox_virtualbase_disconnectNotify(VirtualQGroupBox* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QGroupBox_protectedbase_initStyleOption(const void* self, QStyleOptionGroupBox* option);
-	friend void QGroupBox_protectedbase_updateMicroFocus(void* self);
-	friend void QGroupBox_protectedbase_create(void* self);
-	friend void QGroupBox_protectedbase_destroy(void* self);
-	friend bool QGroupBox_protectedbase_focusNextChild(void* self);
-	friend bool QGroupBox_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QGroupBox_protectedbase_sender(const void* self);
-	friend int QGroupBox_protectedbase_senderSignalIndex(const void* self);
-	friend int QGroupBox_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QGroupBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QGroupBox_protectedbase_initStyleOption(const VirtualQGroupBox* self, QStyleOptionGroupBox* option);
+	friend void QGroupBox_protectedbase_updateMicroFocus(VirtualQGroupBox* self);
+	friend void QGroupBox_protectedbase_create(VirtualQGroupBox* self);
+	friend void QGroupBox_protectedbase_destroy(VirtualQGroupBox* self);
+	friend bool QGroupBox_protectedbase_focusNextChild(VirtualQGroupBox* self);
+	friend bool QGroupBox_protectedbase_focusPreviousChild(VirtualQGroupBox* self);
+	friend QObject* QGroupBox_protectedbase_sender(const VirtualQGroupBox* self);
+	friend int QGroupBox_protectedbase_senderSignalIndex(const VirtualQGroupBox* self);
+	friend int QGroupBox_protectedbase_receivers(const VirtualQGroupBox* self, const char* signal);
+	friend bool QGroupBox_protectedbase_isSignalConnected(const VirtualQGroupBox* self, QMetaMethod* signal);
 };
 
-QGroupBox* QGroupBox_new(struct QGroupBox_VTable* vtbl, QWidget* parent) {
-	return new VirtualQGroupBox(vtbl, parent);
+VirtualQGroupBox* QGroupBox_new(const QGroupBox_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQGroupBox(vtbl, vdata, parent);
 }
 
-QGroupBox* QGroupBox_new2(struct QGroupBox_VTable* vtbl) {
-	return new VirtualQGroupBox(vtbl);
+VirtualQGroupBox* QGroupBox_new2(const QGroupBox_VTable* vtbl, void* vdata) {
+	return new VirtualQGroupBox(vtbl, vdata);
 }
 
-QGroupBox* QGroupBox_new3(struct QGroupBox_VTable* vtbl, struct miqt_string title) {
+VirtualQGroupBox* QGroupBox_new3(const QGroupBox_VTable* vtbl, void* vdata, struct miqt_string title) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQGroupBox(vtbl, title_QString);
+	return new VirtualQGroupBox(vtbl, vdata, title_QString);
 }
 
-QGroupBox* QGroupBox_new4(struct QGroupBox_VTable* vtbl, struct miqt_string title, QWidget* parent) {
+VirtualQGroupBox* QGroupBox_new4(const QGroupBox_VTable* vtbl, void* vdata, struct miqt_string title, QWidget* parent) {
 	QString title_QString = QString::fromUtf8(title.data, title.len);
-	return new VirtualQGroupBox(vtbl, title_QString, parent);
+	return new VirtualQGroupBox(vtbl, vdata, title_QString, parent);
 }
 
 void QGroupBox_virtbase(QGroupBox* src, QWidget** outptr_QWidget) {
@@ -949,7 +894,7 @@ void QGroupBox_clicked(QGroupBox* self) {
 	self->clicked();
 }
 
-void QGroupBox_connect_clicked(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QGroupBox_connect_clicked(VirtualQGroupBox* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -964,7 +909,7 @@ void QGroupBox_toggled(QGroupBox* self, bool param1) {
 	self->toggled(param1);
 }
 
-void QGroupBox_connect_toggled(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QGroupBox_connect_toggled(VirtualQGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1024,7 +969,7 @@ void QGroupBox_clicked1(QGroupBox* self, bool checked) {
 	self->clicked(checked);
 }
 
-void QGroupBox_connect_clicked1(QGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QGroupBox_connect_clicked1(VirtualQGroupBox* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -1036,376 +981,301 @@ void QGroupBox_connect_clicked1(QGroupBox* self, intptr_t slot, void (*callback)
 	VirtualQGroupBox::connect(self, static_cast<void (QGroupBox::*)(bool)>(&QGroupBox::clicked), self, local_caller{slot, callback, release});
 }
 
-QMetaObject* QGroupBox_virtualbase_metaObject(const void* self) {
+QMetaObject* QGroupBox_virtualbase_metaObject(const VirtualQGroupBox* self) {
 
-	return (QMetaObject*) ( (const VirtualQGroupBox*)(self) )->QGroupBox::metaObject();
-
+	return (QMetaObject*) self->QGroupBox::metaObject();
 }
 
-void* QGroupBox_virtualbase_metacast(void* self, const char* param1) {
+void* QGroupBox_virtualbase_metacast(VirtualQGroupBox* self, const char* param1) {
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::qt_metacast(param1);
-
+	return self->QGroupBox::qt_metacast(param1);
 }
 
-int QGroupBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QGroupBox_virtualbase_metacall(VirtualQGroupBox* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QGroupBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QGroupBox_virtualbase_minimumSizeHint(const void* self) {
+QSize* QGroupBox_virtualbase_minimumSizeHint(const VirtualQGroupBox* self) {
 
-	return new QSize(( (const VirtualQGroupBox*)(self) )->QGroupBox::minimumSizeHint());
-
+	return new QSize(self->QGroupBox::minimumSizeHint());
 }
 
-bool QGroupBox_virtualbase_event(void* self, QEvent* event) {
+bool QGroupBox_virtualbase_event(VirtualQGroupBox* self, QEvent* event) {
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::event(event);
-
+	return self->QGroupBox::event(event);
 }
 
-void QGroupBox_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QGroupBox_virtualbase_childEvent(VirtualQGroupBox* self, QChildEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::childEvent(event);
-
+	self->QGroupBox::childEvent(event);
 }
 
-void QGroupBox_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QGroupBox_virtualbase_resizeEvent(VirtualQGroupBox* self, QResizeEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::resizeEvent(event);
-
+	self->QGroupBox::resizeEvent(event);
 }
 
-void QGroupBox_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QGroupBox_virtualbase_paintEvent(VirtualQGroupBox* self, QPaintEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::paintEvent(event);
-
+	self->QGroupBox::paintEvent(event);
 }
 
-void QGroupBox_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QGroupBox_virtualbase_focusInEvent(VirtualQGroupBox* self, QFocusEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::focusInEvent(event);
-
+	self->QGroupBox::focusInEvent(event);
 }
 
-void QGroupBox_virtualbase_changeEvent(void* self, QEvent* event) {
+void QGroupBox_virtualbase_changeEvent(VirtualQGroupBox* self, QEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::changeEvent(event);
-
+	self->QGroupBox::changeEvent(event);
 }
 
-void QGroupBox_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QGroupBox_virtualbase_mousePressEvent(VirtualQGroupBox* self, QMouseEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::mousePressEvent(event);
-
+	self->QGroupBox::mousePressEvent(event);
 }
 
-void QGroupBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QGroupBox_virtualbase_mouseMoveEvent(VirtualQGroupBox* self, QMouseEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::mouseMoveEvent(event);
-
+	self->QGroupBox::mouseMoveEvent(event);
 }
 
-void QGroupBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QGroupBox_virtualbase_mouseReleaseEvent(VirtualQGroupBox* self, QMouseEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::mouseReleaseEvent(event);
-
+	self->QGroupBox::mouseReleaseEvent(event);
 }
 
-int QGroupBox_virtualbase_devType(const void* self) {
+int QGroupBox_virtualbase_devType(const VirtualQGroupBox* self) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::devType();
-
+	return self->QGroupBox::devType();
 }
 
-void QGroupBox_virtualbase_setVisible(void* self, bool visible) {
+void QGroupBox_virtualbase_setVisible(VirtualQGroupBox* self, bool visible) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::setVisible(visible);
-
+	self->QGroupBox::setVisible(visible);
 }
 
-QSize* QGroupBox_virtualbase_sizeHint(const void* self) {
+QSize* QGroupBox_virtualbase_sizeHint(const VirtualQGroupBox* self) {
 
-	return new QSize(( (const VirtualQGroupBox*)(self) )->QGroupBox::sizeHint());
-
+	return new QSize(self->QGroupBox::sizeHint());
 }
 
-int QGroupBox_virtualbase_heightForWidth(const void* self, int param1) {
+int QGroupBox_virtualbase_heightForWidth(const VirtualQGroupBox* self, int param1) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::heightForWidth(static_cast<int>(param1));
-
+	return self->QGroupBox::heightForWidth(static_cast<int>(param1));
 }
 
-bool QGroupBox_virtualbase_hasHeightForWidth(const void* self) {
+bool QGroupBox_virtualbase_hasHeightForWidth(const VirtualQGroupBox* self) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::hasHeightForWidth();
-
+	return self->QGroupBox::hasHeightForWidth();
 }
 
-QPaintEngine* QGroupBox_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QGroupBox_virtualbase_paintEngine(const VirtualQGroupBox* self) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::paintEngine();
-
+	return self->QGroupBox::paintEngine();
 }
 
-void QGroupBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QGroupBox_virtualbase_mouseDoubleClickEvent(VirtualQGroupBox* self, QMouseEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::mouseDoubleClickEvent(event);
-
+	self->QGroupBox::mouseDoubleClickEvent(event);
 }
 
-void QGroupBox_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QGroupBox_virtualbase_wheelEvent(VirtualQGroupBox* self, QWheelEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::wheelEvent(event);
-
+	self->QGroupBox::wheelEvent(event);
 }
 
-void QGroupBox_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QGroupBox_virtualbase_keyPressEvent(VirtualQGroupBox* self, QKeyEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::keyPressEvent(event);
-
+	self->QGroupBox::keyPressEvent(event);
 }
 
-void QGroupBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QGroupBox_virtualbase_keyReleaseEvent(VirtualQGroupBox* self, QKeyEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::keyReleaseEvent(event);
-
+	self->QGroupBox::keyReleaseEvent(event);
 }
 
-void QGroupBox_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QGroupBox_virtualbase_focusOutEvent(VirtualQGroupBox* self, QFocusEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::focusOutEvent(event);
-
+	self->QGroupBox::focusOutEvent(event);
 }
 
-void QGroupBox_virtualbase_enterEvent(void* self, QEvent* event) {
+void QGroupBox_virtualbase_enterEvent(VirtualQGroupBox* self, QEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::enterEvent(event);
-
+	self->QGroupBox::enterEvent(event);
 }
 
-void QGroupBox_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QGroupBox_virtualbase_leaveEvent(VirtualQGroupBox* self, QEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::leaveEvent(event);
-
+	self->QGroupBox::leaveEvent(event);
 }
 
-void QGroupBox_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QGroupBox_virtualbase_moveEvent(VirtualQGroupBox* self, QMoveEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::moveEvent(event);
-
+	self->QGroupBox::moveEvent(event);
 }
 
-void QGroupBox_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QGroupBox_virtualbase_closeEvent(VirtualQGroupBox* self, QCloseEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::closeEvent(event);
-
+	self->QGroupBox::closeEvent(event);
 }
 
-void QGroupBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QGroupBox_virtualbase_contextMenuEvent(VirtualQGroupBox* self, QContextMenuEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::contextMenuEvent(event);
-
+	self->QGroupBox::contextMenuEvent(event);
 }
 
-void QGroupBox_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QGroupBox_virtualbase_tabletEvent(VirtualQGroupBox* self, QTabletEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::tabletEvent(event);
-
+	self->QGroupBox::tabletEvent(event);
 }
 
-void QGroupBox_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QGroupBox_virtualbase_actionEvent(VirtualQGroupBox* self, QActionEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::actionEvent(event);
-
+	self->QGroupBox::actionEvent(event);
 }
 
-void QGroupBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QGroupBox_virtualbase_dragEnterEvent(VirtualQGroupBox* self, QDragEnterEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::dragEnterEvent(event);
-
+	self->QGroupBox::dragEnterEvent(event);
 }
 
-void QGroupBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QGroupBox_virtualbase_dragMoveEvent(VirtualQGroupBox* self, QDragMoveEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::dragMoveEvent(event);
-
+	self->QGroupBox::dragMoveEvent(event);
 }
 
-void QGroupBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QGroupBox_virtualbase_dragLeaveEvent(VirtualQGroupBox* self, QDragLeaveEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::dragLeaveEvent(event);
-
+	self->QGroupBox::dragLeaveEvent(event);
 }
 
-void QGroupBox_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QGroupBox_virtualbase_dropEvent(VirtualQGroupBox* self, QDropEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::dropEvent(event);
-
+	self->QGroupBox::dropEvent(event);
 }
 
-void QGroupBox_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QGroupBox_virtualbase_showEvent(VirtualQGroupBox* self, QShowEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::showEvent(event);
-
+	self->QGroupBox::showEvent(event);
 }
 
-void QGroupBox_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QGroupBox_virtualbase_hideEvent(VirtualQGroupBox* self, QHideEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::hideEvent(event);
-
+	self->QGroupBox::hideEvent(event);
 }
 
-bool QGroupBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QGroupBox_virtualbase_nativeEvent(VirtualQGroupBox* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QGroupBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QGroupBox_virtualbase_metric(const void* self, int param1) {
+int QGroupBox_virtualbase_metric(const VirtualQGroupBox* self, int param1) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::metric(static_cast<VirtualQGroupBox::PaintDeviceMetric>(param1));
-
+	return self->QGroupBox::metric(static_cast<VirtualQGroupBox::PaintDeviceMetric>(param1));
 }
 
-void QGroupBox_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QGroupBox_virtualbase_initPainter(const VirtualQGroupBox* self, QPainter* painter) {
 
-	( (const VirtualQGroupBox*)(self) )->QGroupBox::initPainter(painter);
-
+	self->QGroupBox::initPainter(painter);
 }
 
-QPaintDevice* QGroupBox_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QGroupBox_virtualbase_redirected(const VirtualQGroupBox* self, QPoint* offset) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::redirected(offset);
-
+	return self->QGroupBox::redirected(offset);
 }
 
-QPainter* QGroupBox_virtualbase_sharedPainter(const void* self) {
+QPainter* QGroupBox_virtualbase_sharedPainter(const VirtualQGroupBox* self) {
 
-	return ( (const VirtualQGroupBox*)(self) )->QGroupBox::sharedPainter();
-
+	return self->QGroupBox::sharedPainter();
 }
 
-void QGroupBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QGroupBox_virtualbase_inputMethodEvent(VirtualQGroupBox* self, QInputMethodEvent* param1) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::inputMethodEvent(param1);
-
+	self->QGroupBox::inputMethodEvent(param1);
 }
 
-QVariant* QGroupBox_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QGroupBox_virtualbase_inputMethodQuery(const VirtualQGroupBox* self, int param1) {
 
-	return new QVariant(( (const VirtualQGroupBox*)(self) )->QGroupBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QGroupBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QGroupBox_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QGroupBox_virtualbase_focusNextPrevChild(VirtualQGroupBox* self, bool next) {
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::focusNextPrevChild(next);
-
+	return self->QGroupBox::focusNextPrevChild(next);
 }
 
-bool QGroupBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QGroupBox_virtualbase_eventFilter(VirtualQGroupBox* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQGroupBox*)(self) )->QGroupBox::eventFilter(watched, event);
-
+	return self->QGroupBox::eventFilter(watched, event);
 }
 
-void QGroupBox_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QGroupBox_virtualbase_timerEvent(VirtualQGroupBox* self, QTimerEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::timerEvent(event);
-
+	self->QGroupBox::timerEvent(event);
 }
 
-void QGroupBox_virtualbase_customEvent(void* self, QEvent* event) {
+void QGroupBox_virtualbase_customEvent(VirtualQGroupBox* self, QEvent* event) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::customEvent(event);
-
+	self->QGroupBox::customEvent(event);
 }
 
-void QGroupBox_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QGroupBox_virtualbase_connectNotify(VirtualQGroupBox* self, QMetaMethod* signal) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::connectNotify(*signal);
-
+	self->QGroupBox::connectNotify(*signal);
 }
 
-void QGroupBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QGroupBox_virtualbase_disconnectNotify(VirtualQGroupBox* self, QMetaMethod* signal) {
 
-	( (VirtualQGroupBox*)(self) )->QGroupBox::disconnectNotify(*signal);
-
+	self->QGroupBox::disconnectNotify(*signal);
 }
 
 const QMetaObject* QGroupBox_staticMetaObject() { return &QGroupBox::staticMetaObject; }
-void QGroupBox_protectedbase_initStyleOption(const void* self, QStyleOptionGroupBox* option) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QGroupBox_VTable* QGroupBox_vtbl(const VirtualQGroupBox* self) { return self->vtbl; }
+void* QGroupBox_vdata(const VirtualQGroupBox* self) { return self->vdata; }
+void QGroupBox_setVdata(VirtualQGroupBox* self, void* vdata) { self->vdata = vdata; }
+
+void QGroupBox_protectedbase_initStyleOption(const VirtualQGroupBox* self, QStyleOptionGroupBox* option) {
+	self->initStyleOption(option);
 }
 
-void QGroupBox_protectedbase_updateMicroFocus(void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QGroupBox_protectedbase_updateMicroFocus(VirtualQGroupBox* self) {
+	self->updateMicroFocus();
 }
 
-void QGroupBox_protectedbase_create(void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	self_cast->create();
-
+void QGroupBox_protectedbase_create(VirtualQGroupBox* self) {
+	self->create();
 }
 
-void QGroupBox_protectedbase_destroy(void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	self_cast->destroy();
-
+void QGroupBox_protectedbase_destroy(VirtualQGroupBox* self) {
+	self->destroy();
 }
 
-bool QGroupBox_protectedbase_focusNextChild(void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QGroupBox_protectedbase_focusNextChild(VirtualQGroupBox* self) {
+	return self->focusNextChild();
 }
 
-bool QGroupBox_protectedbase_focusPreviousChild(void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QGroupBox_protectedbase_focusPreviousChild(VirtualQGroupBox* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QGroupBox_protectedbase_sender(const void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QGroupBox_protectedbase_sender(const VirtualQGroupBox* self) {
+	return self->sender();
 }
 
-int QGroupBox_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QGroupBox_protectedbase_senderSignalIndex(const VirtualQGroupBox* self) {
+	return self->senderSignalIndex();
 }
 
-int QGroupBox_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QGroupBox_protectedbase_receivers(const VirtualQGroupBox* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QGroupBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQGroupBox* self_cast = static_cast<VirtualQGroupBox*>( (QGroupBox*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QGroupBox_protectedbase_isSignalConnected(const VirtualQGroupBox* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QGroupBox_delete(QGroupBox* self) {

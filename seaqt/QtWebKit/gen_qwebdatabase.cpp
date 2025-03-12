@@ -5,15 +5,6 @@
 #include <QWebSecurityOrigin>
 #include <qwebdatabase.h>
 #include "gen_qwebdatabase.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebDatabase* QWebDatabase_new(QWebDatabase* other) {
 	return new QWebDatabase(*other);
 }

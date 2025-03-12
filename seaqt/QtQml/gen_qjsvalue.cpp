@@ -10,15 +10,6 @@
 #include <QVariant>
 #include <qjsvalue.h>
 #include "gen_qjsvalue.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QJSValue* QJSValue_new() {
 	return new QJSValue();
 }

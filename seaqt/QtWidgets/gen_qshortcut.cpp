@@ -12,42 +12,35 @@
 #include <QWidget>
 #include <qshortcut.h>
 #include "gen_qshortcut.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQShortcut final : public QShortcut {
-	struct QShortcut_VTable* vtbl;
+	const QShortcut_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QShortcut_VTable* QShortcut_vtbl(const VirtualQShortcut* self);
+	friend void* QShortcut_vdata(const VirtualQShortcut* self);
+	friend void QShortcut_setVdata(VirtualQShortcut* self, void* vdata);
 
-	VirtualQShortcut(struct QShortcut_VTable* vtbl, QWidget* parent): QShortcut(parent), vtbl(vtbl) {};
-	VirtualQShortcut(struct QShortcut_VTable* vtbl, const QKeySequence& key, QWidget* parent): QShortcut(key, parent), vtbl(vtbl) {};
-	VirtualQShortcut(struct QShortcut_VTable* vtbl, const QKeySequence& key, QWidget* parent, const char* member): QShortcut(key, parent, member), vtbl(vtbl) {};
-	VirtualQShortcut(struct QShortcut_VTable* vtbl, const QKeySequence& key, QWidget* parent, const char* member, const char* ambiguousMember): QShortcut(key, parent, member, ambiguousMember), vtbl(vtbl) {};
-	VirtualQShortcut(struct QShortcut_VTable* vtbl, const QKeySequence& key, QWidget* parent, const char* member, const char* ambiguousMember, Qt::ShortcutContext shortcutContext): QShortcut(key, parent, member, ambiguousMember, shortcutContext), vtbl(vtbl) {};
+	VirtualQShortcut(const QShortcut_VTable* vtbl, void* vdata, QWidget* parent): QShortcut(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQShortcut(const QShortcut_VTable* vtbl, void* vdata, const QKeySequence& key, QWidget* parent): QShortcut(key, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQShortcut(const QShortcut_VTable* vtbl, void* vdata, const QKeySequence& key, QWidget* parent, const char* member): QShortcut(key, parent, member), vtbl(vtbl), vdata(vdata) {}
+	VirtualQShortcut(const QShortcut_VTable* vtbl, void* vdata, const QKeySequence& key, QWidget* parent, const char* member, const char* ambiguousMember): QShortcut(key, parent, member, ambiguousMember), vtbl(vtbl), vdata(vdata) {}
+	VirtualQShortcut(const QShortcut_VTable* vtbl, void* vdata, const QKeySequence& key, QWidget* parent, const char* member, const char* ambiguousMember, Qt::ShortcutContext shortcutContext): QShortcut(key, parent, member, ambiguousMember, shortcutContext), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQShortcut() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQShortcut() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QShortcut::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QShortcut_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QShortcut_virtualbase_metaObject(const VirtualQShortcut* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QShortcut::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QShortcut_virtualbase_metacast(void* self, const char* param1);
+	friend void* QShortcut_virtualbase_metacast(VirtualQShortcut* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QShortcut::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QShortcut_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QShortcut_virtualbase_metacall(VirtualQShortcut* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QShortcut::event(e);
@@ -88,14 +79,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QShortcut_virtualbase_event(void* self, QEvent* e);
+	friend bool QShortcut_virtualbase_event(VirtualQShortcut* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QShortcut::eventFilter(watched, event);
@@ -104,14 +94,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QShortcut_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QShortcut_virtualbase_eventFilter(VirtualQShortcut* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QShortcut::timerEvent(event);
@@ -120,13 +109,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QShortcut_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QShortcut_virtualbase_timerEvent(VirtualQShortcut* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QShortcut::childEvent(event);
@@ -135,13 +123,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QShortcut_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QShortcut_virtualbase_childEvent(VirtualQShortcut* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QShortcut::customEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QShortcut_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QShortcut_virtualbase_customEvent(VirtualQShortcut* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QShortcut::connectNotify(signal);
@@ -167,13 +153,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QShortcut_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QShortcut_virtualbase_connectNotify(VirtualQShortcut* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QShortcut::disconnectNotify(signal);
@@ -184,37 +169,37 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QShortcut_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QShortcut_virtualbase_disconnectNotify(VirtualQShortcut* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QShortcut_protectedbase_sender(const void* self);
-	friend int QShortcut_protectedbase_senderSignalIndex(const void* self);
-	friend int QShortcut_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QShortcut_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QShortcut_protectedbase_sender(const VirtualQShortcut* self);
+	friend int QShortcut_protectedbase_senderSignalIndex(const VirtualQShortcut* self);
+	friend int QShortcut_protectedbase_receivers(const VirtualQShortcut* self, const char* signal);
+	friend bool QShortcut_protectedbase_isSignalConnected(const VirtualQShortcut* self, QMetaMethod* signal);
 };
 
-QShortcut* QShortcut_new(struct QShortcut_VTable* vtbl, QWidget* parent) {
-	return new VirtualQShortcut(vtbl, parent);
+VirtualQShortcut* QShortcut_new(const QShortcut_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQShortcut(vtbl, vdata, parent);
 }
 
-QShortcut* QShortcut_new2(struct QShortcut_VTable* vtbl, QKeySequence* key, QWidget* parent) {
-	return new VirtualQShortcut(vtbl, *key, parent);
+VirtualQShortcut* QShortcut_new2(const QShortcut_VTable* vtbl, void* vdata, QKeySequence* key, QWidget* parent) {
+	return new VirtualQShortcut(vtbl, vdata, *key, parent);
 }
 
-QShortcut* QShortcut_new3(struct QShortcut_VTable* vtbl, QKeySequence* key, QWidget* parent, const char* member) {
-	return new VirtualQShortcut(vtbl, *key, parent, member);
+VirtualQShortcut* QShortcut_new3(const QShortcut_VTable* vtbl, void* vdata, QKeySequence* key, QWidget* parent, const char* member) {
+	return new VirtualQShortcut(vtbl, vdata, *key, parent, member);
 }
 
-QShortcut* QShortcut_new4(struct QShortcut_VTable* vtbl, QKeySequence* key, QWidget* parent, const char* member, const char* ambiguousMember) {
-	return new VirtualQShortcut(vtbl, *key, parent, member, ambiguousMember);
+VirtualQShortcut* QShortcut_new4(const QShortcut_VTable* vtbl, void* vdata, QKeySequence* key, QWidget* parent, const char* member, const char* ambiguousMember) {
+	return new VirtualQShortcut(vtbl, vdata, *key, parent, member, ambiguousMember);
 }
 
-QShortcut* QShortcut_new5(struct QShortcut_VTable* vtbl, QKeySequence* key, QWidget* parent, const char* member, const char* ambiguousMember, int shortcutContext) {
-	return new VirtualQShortcut(vtbl, *key, parent, member, ambiguousMember, static_cast<Qt::ShortcutContext>(shortcutContext));
+VirtualQShortcut* QShortcut_new5(const QShortcut_VTable* vtbl, void* vdata, QKeySequence* key, QWidget* parent, const char* member, const char* ambiguousMember, int shortcutContext) {
+	return new VirtualQShortcut(vtbl, vdata, *key, parent, member, ambiguousMember, static_cast<Qt::ShortcutContext>(shortcutContext));
 }
 
 void QShortcut_virtbase(QShortcut* src, QObject** outptr_QObject) {
@@ -316,7 +301,7 @@ void QShortcut_activated(QShortcut* self) {
 	self->activated();
 }
 
-void QShortcut_connect_activated(QShortcut* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QShortcut_connect_activated(VirtualQShortcut* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -331,7 +316,7 @@ void QShortcut_activatedAmbiguously(QShortcut* self) {
 	self->activatedAmbiguously();
 }
 
-void QShortcut_connect_activatedAmbiguously(QShortcut* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QShortcut_connect_activatedAmbiguously(VirtualQShortcut* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -386,93 +371,76 @@ struct miqt_string QShortcut_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QShortcut_virtualbase_metaObject(const void* self) {
+QMetaObject* QShortcut_virtualbase_metaObject(const VirtualQShortcut* self) {
 
-	return (QMetaObject*) ( (const VirtualQShortcut*)(self) )->QShortcut::metaObject();
-
+	return (QMetaObject*) self->QShortcut::metaObject();
 }
 
-void* QShortcut_virtualbase_metacast(void* self, const char* param1) {
+void* QShortcut_virtualbase_metacast(VirtualQShortcut* self, const char* param1) {
 
-	return ( (VirtualQShortcut*)(self) )->QShortcut::qt_metacast(param1);
-
+	return self->QShortcut::qt_metacast(param1);
 }
 
-int QShortcut_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QShortcut_virtualbase_metacall(VirtualQShortcut* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQShortcut*)(self) )->QShortcut::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QShortcut::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QShortcut_virtualbase_event(void* self, QEvent* e) {
+bool QShortcut_virtualbase_event(VirtualQShortcut* self, QEvent* e) {
 
-	return ( (VirtualQShortcut*)(self) )->QShortcut::event(e);
-
+	return self->QShortcut::event(e);
 }
 
-bool QShortcut_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QShortcut_virtualbase_eventFilter(VirtualQShortcut* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQShortcut*)(self) )->QShortcut::eventFilter(watched, event);
-
+	return self->QShortcut::eventFilter(watched, event);
 }
 
-void QShortcut_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QShortcut_virtualbase_timerEvent(VirtualQShortcut* self, QTimerEvent* event) {
 
-	( (VirtualQShortcut*)(self) )->QShortcut::timerEvent(event);
-
+	self->QShortcut::timerEvent(event);
 }
 
-void QShortcut_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QShortcut_virtualbase_childEvent(VirtualQShortcut* self, QChildEvent* event) {
 
-	( (VirtualQShortcut*)(self) )->QShortcut::childEvent(event);
-
+	self->QShortcut::childEvent(event);
 }
 
-void QShortcut_virtualbase_customEvent(void* self, QEvent* event) {
+void QShortcut_virtualbase_customEvent(VirtualQShortcut* self, QEvent* event) {
 
-	( (VirtualQShortcut*)(self) )->QShortcut::customEvent(event);
-
+	self->QShortcut::customEvent(event);
 }
 
-void QShortcut_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QShortcut_virtualbase_connectNotify(VirtualQShortcut* self, QMetaMethod* signal) {
 
-	( (VirtualQShortcut*)(self) )->QShortcut::connectNotify(*signal);
-
+	self->QShortcut::connectNotify(*signal);
 }
 
-void QShortcut_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QShortcut_virtualbase_disconnectNotify(VirtualQShortcut* self, QMetaMethod* signal) {
 
-	( (VirtualQShortcut*)(self) )->QShortcut::disconnectNotify(*signal);
-
+	self->QShortcut::disconnectNotify(*signal);
 }
 
 const QMetaObject* QShortcut_staticMetaObject() { return &QShortcut::staticMetaObject; }
-QObject* QShortcut_protectedbase_sender(const void* self) {
-	VirtualQShortcut* self_cast = static_cast<VirtualQShortcut*>( (QShortcut*)(self) );
-	
-	return self_cast->sender();
 
+const QShortcut_VTable* QShortcut_vtbl(const VirtualQShortcut* self) { return self->vtbl; }
+void* QShortcut_vdata(const VirtualQShortcut* self) { return self->vdata; }
+void QShortcut_setVdata(VirtualQShortcut* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QShortcut_protectedbase_sender(const VirtualQShortcut* self) {
+	return self->sender();
 }
 
-int QShortcut_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQShortcut* self_cast = static_cast<VirtualQShortcut*>( (QShortcut*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QShortcut_protectedbase_senderSignalIndex(const VirtualQShortcut* self) {
+	return self->senderSignalIndex();
 }
 
-int QShortcut_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQShortcut* self_cast = static_cast<VirtualQShortcut*>( (QShortcut*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QShortcut_protectedbase_receivers(const VirtualQShortcut* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QShortcut_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQShortcut* self_cast = static_cast<VirtualQShortcut*>( (QShortcut*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QShortcut_protectedbase_isSignalConnected(const VirtualQShortcut* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QShortcut_delete(QShortcut* self) {

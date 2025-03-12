@@ -1,15 +1,6 @@
 #include <QPixelFormat>
 #include <qpixelformat.h>
 #include "gen_qpixelformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPixelFormat* QPixelFormat_new() {
 	return new QPixelFormat();
 }

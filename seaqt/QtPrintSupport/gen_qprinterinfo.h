@@ -29,6 +29,7 @@ typedef struct QSizeF QSizeF;
 QPrinterInfo* QPrinterInfo_new();
 QPrinterInfo* QPrinterInfo_new2(QPrinterInfo* other);
 QPrinterInfo* QPrinterInfo_new3(QPrinter* printer);
+
 void QPrinterInfo_operatorAssign(QPrinterInfo* self, QPrinterInfo* other);
 struct miqt_string QPrinterInfo_printerName(const QPrinterInfo* self);
 struct miqt_string QPrinterInfo_description(const QPrinterInfo* self);
@@ -55,6 +56,7 @@ struct miqt_array /* of QPrinterInfo* */  QPrinterInfo_availablePrinters();
 struct miqt_string QPrinterInfo_defaultPrinterName();
 QPrinterInfo* QPrinterInfo_defaultPrinter();
 QPrinterInfo* QPrinterInfo_printerInfo(struct miqt_string printerName);
+
 void QPrinterInfo_delete(QPrinterInfo* self);
 
 #ifdef __cplusplus

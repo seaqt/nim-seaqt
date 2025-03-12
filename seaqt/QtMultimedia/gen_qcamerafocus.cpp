@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qcamerafocus.h>
 #include "gen_qcamerafocus.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCameraFocusZone* QCameraFocusZone_new() {
 	return new QCameraFocusZone();
 }
@@ -310,3 +301,4 @@ struct miqt_string QCameraFocus_trUtf83(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QCameraFocus_staticMetaObject() { return &QCameraFocus::staticMetaObject; }
+

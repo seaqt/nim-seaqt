@@ -24,6 +24,7 @@ typedef struct QAudioFormat QAudioFormat;
 
 QAudioDeviceInfo* QAudioDeviceInfo_new();
 QAudioDeviceInfo* QAudioDeviceInfo_new2(QAudioDeviceInfo* other);
+
 void QAudioDeviceInfo_operatorAssign(QAudioDeviceInfo* self, QAudioDeviceInfo* other);
 bool QAudioDeviceInfo_operatorEqual(const QAudioDeviceInfo* self, QAudioDeviceInfo* other);
 bool QAudioDeviceInfo_operatorNotEqual(const QAudioDeviceInfo* self, QAudioDeviceInfo* other);
@@ -42,6 +43,7 @@ struct miqt_string QAudioDeviceInfo_realm(const QAudioDeviceInfo* self);
 QAudioDeviceInfo* QAudioDeviceInfo_defaultInputDevice();
 QAudioDeviceInfo* QAudioDeviceInfo_defaultOutputDevice();
 struct miqt_array /* of QAudioDeviceInfo* */  QAudioDeviceInfo_availableDevices(int mode);
+
 void QAudioDeviceInfo_delete(QAudioDeviceInfo* self);
 
 #ifdef __cplusplus

@@ -3,15 +3,6 @@
 #include <QSslKey>
 #include <qsslkey.h>
 #include "gen_qsslkey.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslKey* QSslKey_new() {
 	return new QSslKey();
 }

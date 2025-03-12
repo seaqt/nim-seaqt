@@ -10,36 +10,29 @@
 #include <QSizeF>
 #include <qpagedpaintdevice.h>
 #include "gen_qpagedpaintdevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQPagedPaintDevice final : public QPagedPaintDevice {
-	struct QPagedPaintDevice_VTable* vtbl;
+	const QPagedPaintDevice_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QPagedPaintDevice_VTable* QPagedPaintDevice_vtbl(const VirtualQPagedPaintDevice* self);
+	friend void* QPagedPaintDevice_vdata(const VirtualQPagedPaintDevice* self);
+	friend void QPagedPaintDevice_setVdata(VirtualQPagedPaintDevice* self, void* vdata);
 
-	VirtualQPagedPaintDevice(struct QPagedPaintDevice_VTable* vtbl): QPagedPaintDevice(), vtbl(vtbl) {};
+	VirtualQPagedPaintDevice(const QPagedPaintDevice_VTable* vtbl, void* vdata): QPagedPaintDevice(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQPagedPaintDevice() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQPagedPaintDevice() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool newPage() override {
 		if (vtbl->newPage == 0) {
 			return false; // Pure virtual, there is no base we can call
 		}
 
 
-		bool callback_return_value = vtbl->newPage(vtbl, this);
+		bool callback_return_value = vtbl->newPage(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void setPageSize(QPagedPaintDevice::PageSize size) override {
 		if (vtbl->setPageSizeWithSize == 0) {
 			QPagedPaintDevice::setPageSize(size);
@@ -49,13 +42,12 @@ public:
 		QPagedPaintDevice::PageSize size_ret = size;
 		int sigval1 = static_cast<int>(size_ret);
 
-		vtbl->setPageSizeWithSize(vtbl, this, sigval1);
+		vtbl->setPageSizeWithSize(this, sigval1);
 
 	}
 
-	friend void QPagedPaintDevice_virtualbase_setPageSizeWithSize(void* self, int size);
+	friend void QPagedPaintDevice_virtualbase_setPageSizeWithSize(VirtualQPagedPaintDevice* self, int size);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setPageSizeMM(const QSizeF& size) override {
 		if (vtbl->setPageSizeMM == 0) {
 			QPagedPaintDevice::setPageSizeMM(size);
@@ -66,13 +58,12 @@ public:
 		// Cast returned reference into pointer
 		QSizeF* sigval1 = const_cast<QSizeF*>(&size_ret);
 
-		vtbl->setPageSizeMM(vtbl, this, sigval1);
+		vtbl->setPageSizeMM(this, sigval1);
 
 	}
 
-	friend void QPagedPaintDevice_virtualbase_setPageSizeMM(void* self, QSizeF* size);
+	friend void QPagedPaintDevice_virtualbase_setPageSizeMM(VirtualQPagedPaintDevice* self, QSizeF* size);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setMargins(const QPagedPaintDevice::Margins& margins) override {
 		if (vtbl->setMargins == 0) {
 			QPagedPaintDevice::setMargins(margins);
@@ -83,39 +74,36 @@ public:
 		// Cast returned reference into pointer
 		QPagedPaintDevice__Margins* sigval1 = const_cast<QPagedPaintDevice::Margins*>(&margins_ret);
 
-		vtbl->setMargins(vtbl, this, sigval1);
+		vtbl->setMargins(this, sigval1);
 
 	}
 
-	friend void QPagedPaintDevice_virtualbase_setMargins(void* self, QPagedPaintDevice__Margins* margins);
+	friend void QPagedPaintDevice_virtualbase_setMargins(VirtualQPagedPaintDevice* self, QPagedPaintDevice__Margins* margins);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QPagedPaintDevice::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPagedPaintDevice_virtualbase_devType(const void* self);
+	friend int QPagedPaintDevice_virtualbase_devType(const VirtualQPagedPaintDevice* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric metric) const override {
 		if (vtbl->metric == 0) {
 			return QPagedPaintDevice::metric(metric);
@@ -124,14 +112,13 @@ public:
 		QPaintDevice::PaintDeviceMetric metric_ret = metric;
 		int sigval1 = static_cast<int>(metric_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QPagedPaintDevice_virtualbase_metric(const void* self, int metric);
+	friend int QPagedPaintDevice_virtualbase_metric(const VirtualQPagedPaintDevice* self, int metric);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QPagedPaintDevice::initPainter(painter);
@@ -140,13 +127,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QPagedPaintDevice_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QPagedPaintDevice_virtualbase_initPainter(const VirtualQPagedPaintDevice* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QPagedPaintDevice::redirected(offset);
@@ -154,34 +140,33 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QPagedPaintDevice_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QPagedPaintDevice_virtualbase_redirected(const VirtualQPagedPaintDevice* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QPagedPaintDevice::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const VirtualQPagedPaintDevice* self);
 
 	// Wrappers to allow calling protected methods:
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const void* self);
-	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(void* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const VirtualQPagedPaintDevice* self);
+	friend QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(VirtualQPagedPaintDevice* self);
 };
 
-QPagedPaintDevice* QPagedPaintDevice_new(struct QPagedPaintDevice_VTable* vtbl) {
-	return new VirtualQPagedPaintDevice(vtbl);
+VirtualQPagedPaintDevice* QPagedPaintDevice_new(const QPagedPaintDevice_VTable* vtbl, void* vdata) {
+	return new VirtualQPagedPaintDevice(vtbl, vdata);
 }
 
 void QPagedPaintDevice_virtbase(QPagedPaintDevice* src, QPaintDevice** outptr_QPaintDevice) {
@@ -241,68 +226,58 @@ QPagedPaintDevice__Margins* QPagedPaintDevice_margins(const QPagedPaintDevice* s
 	return new QPagedPaintDevice::Margins(self->margins());
 }
 
-void QPagedPaintDevice_virtualbase_setPageSizeWithSize(void* self, int size) {
+void QPagedPaintDevice_virtualbase_setPageSizeWithSize(VirtualQPagedPaintDevice* self, int size) {
 
-	( (VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::setPageSize(static_cast<VirtualQPagedPaintDevice::PageSize>(size));
-
+	self->QPagedPaintDevice::setPageSize(static_cast<VirtualQPagedPaintDevice::PageSize>(size));
 }
 
-void QPagedPaintDevice_virtualbase_setPageSizeMM(void* self, QSizeF* size) {
+void QPagedPaintDevice_virtualbase_setPageSizeMM(VirtualQPagedPaintDevice* self, QSizeF* size) {
 
-	( (VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::setPageSizeMM(*size);
-
+	self->QPagedPaintDevice::setPageSizeMM(*size);
 }
 
-void QPagedPaintDevice_virtualbase_setMargins(void* self, QPagedPaintDevice__Margins* margins) {
+void QPagedPaintDevice_virtualbase_setMargins(VirtualQPagedPaintDevice* self, QPagedPaintDevice__Margins* margins) {
 
-	( (VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::setMargins(*margins);
-
+	self->QPagedPaintDevice::setMargins(*margins);
 }
 
-int QPagedPaintDevice_virtualbase_devType(const void* self) {
+int QPagedPaintDevice_virtualbase_devType(const VirtualQPagedPaintDevice* self) {
 
-	return ( (const VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::devType();
-
+	return self->QPagedPaintDevice::devType();
 }
 
-int QPagedPaintDevice_virtualbase_metric(const void* self, int metric) {
+int QPagedPaintDevice_virtualbase_metric(const VirtualQPagedPaintDevice* self, int metric) {
 
-	return ( (const VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::metric(static_cast<VirtualQPagedPaintDevice::PaintDeviceMetric>(metric));
-
+	return self->QPagedPaintDevice::metric(static_cast<VirtualQPagedPaintDevice::PaintDeviceMetric>(metric));
 }
 
-void QPagedPaintDevice_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QPagedPaintDevice_virtualbase_initPainter(const VirtualQPagedPaintDevice* self, QPainter* painter) {
 
-	( (const VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::initPainter(painter);
-
+	self->QPagedPaintDevice::initPainter(painter);
 }
 
-QPaintDevice* QPagedPaintDevice_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QPagedPaintDevice_virtualbase_redirected(const VirtualQPagedPaintDevice* self, QPoint* offset) {
 
-	return ( (const VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::redirected(offset);
-
+	return self->QPagedPaintDevice::redirected(offset);
 }
 
-QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const void* self) {
+QPainter* QPagedPaintDevice_virtualbase_sharedPainter(const VirtualQPagedPaintDevice* self) {
 
-	return ( (const VirtualQPagedPaintDevice*)(self) )->QPagedPaintDevice::sharedPainter();
-
+	return self->QPagedPaintDevice::sharedPainter();
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const void* self) {
-	VirtualQPagedPaintDevice* self_cast = static_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
-	
-	return new QPageLayout(self_cast->devicePageLayout());
+const QPagedPaintDevice_VTable* QPagedPaintDevice_vtbl(const VirtualQPagedPaintDevice* self) { return self->vtbl; }
+void* QPagedPaintDevice_vdata(const VirtualQPagedPaintDevice* self) { return self->vdata; }
+void QPagedPaintDevice_setVdata(VirtualQPagedPaintDevice* self, void* vdata) { self->vdata = vdata; }
 
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout(const VirtualQPagedPaintDevice* self) {
+	return new QPageLayout(self->devicePageLayout());
 }
 
-QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(void* self) {
-	VirtualQPagedPaintDevice* self_cast = static_cast<VirtualQPagedPaintDevice*>( (QPagedPaintDevice*)(self) );
-	
-	QPageLayout& _ret = self_cast->devicePageLayout();
+QPageLayout* QPagedPaintDevice_protectedbase_devicePageLayout2(VirtualQPagedPaintDevice* self) {
+	QPageLayout& _ret = self->devicePageLayout();
 	// Cast returned reference into pointer
 	return &_ret;
-
 }
 
 void QPagedPaintDevice_delete(QPagedPaintDevice* self) {

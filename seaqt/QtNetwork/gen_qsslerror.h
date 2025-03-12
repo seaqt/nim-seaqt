@@ -26,6 +26,7 @@ QSslError* QSslError_new();
 QSslError* QSslError_new2(int error);
 QSslError* QSslError_new3(int error, QSslCertificate* certificate);
 QSslError* QSslError_new4(QSslError* other);
+
 void QSslError_swap(QSslError* self, QSslError* other);
 void QSslError_operatorAssign(QSslError* self, QSslError* other);
 bool QSslError_operatorEqual(const QSslError* self, QSslError* other);
@@ -33,6 +34,7 @@ bool QSslError_operatorNotEqual(const QSslError* self, QSslError* other);
 int QSslError_error(const QSslError* self);
 struct miqt_string QSslError_errorString(const QSslError* self);
 QSslCertificate* QSslError_certificate(const QSslError* self);
+
 const QMetaObject* QSslError_staticMetaObject();
 void QSslError_delete(QSslError* self);
 

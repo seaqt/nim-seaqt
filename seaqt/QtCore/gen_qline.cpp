@@ -4,15 +4,6 @@
 #include <QPointF>
 #include <qline.h>
 #include "gen_qline.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QLine* QLine_new() {
 	return new QLine();
 }

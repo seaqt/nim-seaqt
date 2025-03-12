@@ -39,39 +39,32 @@
 #include <QWidget>
 #include <qfontcombobox.h>
 #include "gen_qfontcombobox.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQFontComboBox final : public QFontComboBox {
-	struct QFontComboBox_VTable* vtbl;
+	const QFontComboBox_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QFontComboBox_VTable* QFontComboBox_vtbl(const VirtualQFontComboBox* self);
+	friend void* QFontComboBox_vdata(const VirtualQFontComboBox* self);
+	friend void QFontComboBox_setVdata(VirtualQFontComboBox* self, void* vdata);
 
-	VirtualQFontComboBox(struct QFontComboBox_VTable* vtbl, QWidget* parent): QFontComboBox(parent), vtbl(vtbl) {};
-	VirtualQFontComboBox(struct QFontComboBox_VTable* vtbl): QFontComboBox(), vtbl(vtbl) {};
+	VirtualQFontComboBox(const QFontComboBox_VTable* vtbl, void* vdata, QWidget* parent): QFontComboBox(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQFontComboBox(const QFontComboBox_VTable* vtbl, void* vdata): QFontComboBox(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQFontComboBox() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQFontComboBox() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QFontComboBox::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QFontComboBox_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QFontComboBox_virtualbase_metaObject(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QFontComboBox::qt_metacast(param1);
@@ -79,14 +72,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QFontComboBox_virtualbase_metacast(void* self, const char* param1);
+	friend void* QFontComboBox_virtualbase_metacast(VirtualQFontComboBox* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QFontComboBox::qt_metacall(param1, param2, param3);
@@ -97,30 +89,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QFontComboBox_virtualbase_metacall(VirtualQFontComboBox* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QFontComboBox::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QFontComboBox_virtualbase_sizeHint(const void* self);
+	friend QSize* QFontComboBox_virtualbase_sizeHint(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QFontComboBox::event(e);
@@ -128,30 +118,28 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontComboBox_virtualbase_event(void* self, QEvent* e);
+	friend bool QFontComboBox_virtualbase_event(VirtualQFontComboBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QFontComboBox::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QFontComboBox_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QFontComboBox_virtualbase_minimumSizeHint(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showPopup() override {
 		if (vtbl->showPopup == 0) {
 			QFontComboBox::showPopup();
@@ -159,13 +147,12 @@ public:
 		}
 
 
-		vtbl->showPopup(vtbl, this);
+		vtbl->showPopup(this);
 
 	}
 
-	friend void QFontComboBox_virtualbase_showPopup(void* self);
+	friend void QFontComboBox_virtualbase_showPopup(VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hidePopup() override {
 		if (vtbl->hidePopup == 0) {
 			QFontComboBox::hidePopup();
@@ -173,13 +160,12 @@ public:
 		}
 
 
-		vtbl->hidePopup(vtbl, this);
+		vtbl->hidePopup(this);
 
 	}
 
-	friend void QFontComboBox_virtualbase_hidePopup(void* self);
+	friend void QFontComboBox_virtualbase_hidePopup(VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QFontComboBox::inputMethodQuery(param1);
@@ -188,16 +174,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QFontComboBox_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QFontComboBox_virtualbase_inputMethodQuery(const VirtualQFontComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QFontComboBox::focusInEvent(e);
@@ -206,13 +191,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QFontComboBox_virtualbase_focusInEvent(VirtualQFontComboBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QFontComboBox::focusOutEvent(e);
@@ -221,13 +205,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QFontComboBox_virtualbase_focusOutEvent(VirtualQFontComboBox* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QFontComboBox::changeEvent(e);
@@ -236,13 +219,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QFontComboBox_virtualbase_changeEvent(VirtualQFontComboBox* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* e) override {
 		if (vtbl->resizeEvent == 0) {
 			QFontComboBox::resizeEvent(e);
@@ -251,13 +233,12 @@ public:
 
 		QResizeEvent* sigval1 = e;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_resizeEvent(void* self, QResizeEvent* e);
+	friend void QFontComboBox_virtualbase_resizeEvent(VirtualQFontComboBox* self, QResizeEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* e) override {
 		if (vtbl->paintEvent == 0) {
 			QFontComboBox::paintEvent(e);
@@ -266,13 +247,12 @@ public:
 
 		QPaintEvent* sigval1 = e;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_paintEvent(void* self, QPaintEvent* e);
+	friend void QFontComboBox_virtualbase_paintEvent(VirtualQFontComboBox* self, QPaintEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* e) override {
 		if (vtbl->showEvent == 0) {
 			QFontComboBox::showEvent(e);
@@ -281,13 +261,12 @@ public:
 
 		QShowEvent* sigval1 = e;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_showEvent(void* self, QShowEvent* e);
+	friend void QFontComboBox_virtualbase_showEvent(VirtualQFontComboBox* self, QShowEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* e) override {
 		if (vtbl->hideEvent == 0) {
 			QFontComboBox::hideEvent(e);
@@ -296,13 +275,12 @@ public:
 
 		QHideEvent* sigval1 = e;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_hideEvent(void* self, QHideEvent* e);
+	friend void QFontComboBox_virtualbase_hideEvent(VirtualQFontComboBox* self, QHideEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QFontComboBox::mousePressEvent(e);
@@ -311,13 +289,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QFontComboBox_virtualbase_mousePressEvent(VirtualQFontComboBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QFontComboBox::mouseReleaseEvent(e);
@@ -326,13 +303,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QFontComboBox_virtualbase_mouseReleaseEvent(VirtualQFontComboBox* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QFontComboBox::keyPressEvent(e);
@@ -341,13 +317,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QFontComboBox_virtualbase_keyPressEvent(VirtualQFontComboBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QFontComboBox::keyReleaseEvent(e);
@@ -356,13 +331,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QFontComboBox_virtualbase_keyReleaseEvent(VirtualQFontComboBox* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* e) override {
 		if (vtbl->wheelEvent == 0) {
 			QFontComboBox::wheelEvent(e);
@@ -371,13 +345,12 @@ public:
 
 		QWheelEvent* sigval1 = e;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_wheelEvent(void* self, QWheelEvent* e);
+	friend void QFontComboBox_virtualbase_wheelEvent(VirtualQFontComboBox* self, QWheelEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* e) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QFontComboBox::contextMenuEvent(e);
@@ -386,13 +359,12 @@ public:
 
 		QContextMenuEvent* sigval1 = e;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e);
+	friend void QFontComboBox_virtualbase_contextMenuEvent(VirtualQFontComboBox* self, QContextMenuEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QFontComboBox::inputMethodEvent(param1);
@@ -401,27 +373,25 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QFontComboBox_virtualbase_inputMethodEvent(VirtualQFontComboBox* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QFontComboBox::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontComboBox_virtualbase_devType(const void* self);
+	friend int QFontComboBox_virtualbase_devType(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QFontComboBox::setVisible(visible);
@@ -430,13 +400,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_setVisible(void* self, bool visible);
+	friend void QFontComboBox_virtualbase_setVisible(VirtualQFontComboBox* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QFontComboBox::heightForWidth(param1);
@@ -444,42 +413,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontComboBox_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QFontComboBox_virtualbase_heightForWidth(const VirtualQFontComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QFontComboBox::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontComboBox_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QFontComboBox_virtualbase_hasHeightForWidth(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QFontComboBox::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QFontComboBox_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QFontComboBox_virtualbase_paintEngine(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QFontComboBox::mouseDoubleClickEvent(event);
@@ -488,13 +454,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QFontComboBox_virtualbase_mouseDoubleClickEvent(VirtualQFontComboBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QFontComboBox::mouseMoveEvent(event);
@@ -503,13 +468,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QFontComboBox_virtualbase_mouseMoveEvent(VirtualQFontComboBox* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QFontComboBox::enterEvent(event);
@@ -518,13 +482,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QFontComboBox_virtualbase_enterEvent(VirtualQFontComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QFontComboBox::leaveEvent(event);
@@ -533,13 +496,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QFontComboBox_virtualbase_leaveEvent(VirtualQFontComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QFontComboBox::moveEvent(event);
@@ -548,13 +510,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QFontComboBox_virtualbase_moveEvent(VirtualQFontComboBox* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QFontComboBox::closeEvent(event);
@@ -563,13 +524,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QFontComboBox_virtualbase_closeEvent(VirtualQFontComboBox* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QFontComboBox::tabletEvent(event);
@@ -578,13 +538,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QFontComboBox_virtualbase_tabletEvent(VirtualQFontComboBox* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QFontComboBox::actionEvent(event);
@@ -593,13 +552,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QFontComboBox_virtualbase_actionEvent(VirtualQFontComboBox* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QFontComboBox::dragEnterEvent(event);
@@ -608,13 +566,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QFontComboBox_virtualbase_dragEnterEvent(VirtualQFontComboBox* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QFontComboBox::dragMoveEvent(event);
@@ -623,13 +580,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QFontComboBox_virtualbase_dragMoveEvent(VirtualQFontComboBox* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QFontComboBox::dragLeaveEvent(event);
@@ -638,13 +594,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QFontComboBox_virtualbase_dragLeaveEvent(VirtualQFontComboBox* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QFontComboBox::dropEvent(event);
@@ -653,13 +608,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QFontComboBox_virtualbase_dropEvent(VirtualQFontComboBox* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QFontComboBox::nativeEvent(eventType, message, result);
@@ -674,14 +628,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontComboBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QFontComboBox_virtualbase_nativeEvent(VirtualQFontComboBox* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QFontComboBox::metric(param1);
@@ -690,14 +643,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QFontComboBox_virtualbase_metric(const void* self, int param1);
+	friend int QFontComboBox_virtualbase_metric(const VirtualQFontComboBox* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QFontComboBox::initPainter(painter);
@@ -706,13 +658,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QFontComboBox_virtualbase_initPainter(const VirtualQFontComboBox* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QFontComboBox::redirected(offset);
@@ -720,28 +671,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QFontComboBox_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QFontComboBox_virtualbase_redirected(const VirtualQFontComboBox* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QFontComboBox::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QFontComboBox_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QFontComboBox_virtualbase_sharedPainter(const VirtualQFontComboBox* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QFontComboBox::focusNextPrevChild(next);
@@ -749,14 +698,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontComboBox_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QFontComboBox_virtualbase_focusNextPrevChild(VirtualQFontComboBox* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QFontComboBox::eventFilter(watched, event);
@@ -765,14 +713,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QFontComboBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QFontComboBox_virtualbase_eventFilter(VirtualQFontComboBox* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QFontComboBox::timerEvent(event);
@@ -781,13 +728,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QFontComboBox_virtualbase_timerEvent(VirtualQFontComboBox* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QFontComboBox::childEvent(event);
@@ -796,13 +742,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QFontComboBox_virtualbase_childEvent(VirtualQFontComboBox* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QFontComboBox::customEvent(event);
@@ -811,13 +756,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QFontComboBox_virtualbase_customEvent(VirtualQFontComboBox* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QFontComboBox::connectNotify(signal);
@@ -828,13 +772,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QFontComboBox_virtualbase_connectNotify(VirtualQFontComboBox* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QFontComboBox::disconnectNotify(signal);
@@ -845,31 +788,31 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QFontComboBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QFontComboBox_virtualbase_disconnectNotify(VirtualQFontComboBox* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QFontComboBox_protectedbase_initStyleOption(const void* self, QStyleOptionComboBox* option);
-	friend void QFontComboBox_protectedbase_updateMicroFocus(void* self);
-	friend void QFontComboBox_protectedbase_create(void* self);
-	friend void QFontComboBox_protectedbase_destroy(void* self);
-	friend bool QFontComboBox_protectedbase_focusNextChild(void* self);
-	friend bool QFontComboBox_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QFontComboBox_protectedbase_sender(const void* self);
-	friend int QFontComboBox_protectedbase_senderSignalIndex(const void* self);
-	friend int QFontComboBox_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QFontComboBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QFontComboBox_protectedbase_initStyleOption(const VirtualQFontComboBox* self, QStyleOptionComboBox* option);
+	friend void QFontComboBox_protectedbase_updateMicroFocus(VirtualQFontComboBox* self);
+	friend void QFontComboBox_protectedbase_create(VirtualQFontComboBox* self);
+	friend void QFontComboBox_protectedbase_destroy(VirtualQFontComboBox* self);
+	friend bool QFontComboBox_protectedbase_focusNextChild(VirtualQFontComboBox* self);
+	friend bool QFontComboBox_protectedbase_focusPreviousChild(VirtualQFontComboBox* self);
+	friend QObject* QFontComboBox_protectedbase_sender(const VirtualQFontComboBox* self);
+	friend int QFontComboBox_protectedbase_senderSignalIndex(const VirtualQFontComboBox* self);
+	friend int QFontComboBox_protectedbase_receivers(const VirtualQFontComboBox* self, const char* signal);
+	friend bool QFontComboBox_protectedbase_isSignalConnected(const VirtualQFontComboBox* self, QMetaMethod* signal);
 };
 
-QFontComboBox* QFontComboBox_new(struct QFontComboBox_VTable* vtbl, QWidget* parent) {
-	return new VirtualQFontComboBox(vtbl, parent);
+VirtualQFontComboBox* QFontComboBox_new(const QFontComboBox_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQFontComboBox(vtbl, vdata, parent);
 }
 
-QFontComboBox* QFontComboBox_new2(struct QFontComboBox_VTable* vtbl) {
-	return new VirtualQFontComboBox(vtbl);
+VirtualQFontComboBox* QFontComboBox_new2(const QFontComboBox_VTable* vtbl, void* vdata) {
+	return new VirtualQFontComboBox(vtbl, vdata);
 }
 
 void QFontComboBox_virtbase(QFontComboBox* src, QComboBox** outptr_QComboBox) {
@@ -944,7 +887,7 @@ void QFontComboBox_currentFontChanged(QFontComboBox* self, QFont* f) {
 	self->currentFontChanged(*f);
 }
 
-void QFontComboBox_connect_currentFontChanged(QFontComboBox* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
+void QFontComboBox_connect_currentFontChanged(VirtualQFontComboBox* self, intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QFont*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QFont*);
@@ -1002,388 +945,311 @@ struct miqt_string QFontComboBox_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QFontComboBox_virtualbase_metaObject(const void* self) {
+QMetaObject* QFontComboBox_virtualbase_metaObject(const VirtualQFontComboBox* self) {
 
-	return (QMetaObject*) ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::metaObject();
-
+	return (QMetaObject*) self->QFontComboBox::metaObject();
 }
 
-void* QFontComboBox_virtualbase_metacast(void* self, const char* param1) {
+void* QFontComboBox_virtualbase_metacast(VirtualQFontComboBox* self, const char* param1) {
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::qt_metacast(param1);
-
+	return self->QFontComboBox::qt_metacast(param1);
 }
 
-int QFontComboBox_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QFontComboBox_virtualbase_metacall(VirtualQFontComboBox* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QFontComboBox::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QFontComboBox_virtualbase_sizeHint(const void* self) {
+QSize* QFontComboBox_virtualbase_sizeHint(const VirtualQFontComboBox* self) {
 
-	return new QSize(( (const VirtualQFontComboBox*)(self) )->QFontComboBox::sizeHint());
-
+	return new QSize(self->QFontComboBox::sizeHint());
 }
 
-bool QFontComboBox_virtualbase_event(void* self, QEvent* e) {
+bool QFontComboBox_virtualbase_event(VirtualQFontComboBox* self, QEvent* e) {
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::event(e);
-
+	return self->QFontComboBox::event(e);
 }
 
-QSize* QFontComboBox_virtualbase_minimumSizeHint(const void* self) {
+QSize* QFontComboBox_virtualbase_minimumSizeHint(const VirtualQFontComboBox* self) {
 
-	return new QSize(( (const VirtualQFontComboBox*)(self) )->QFontComboBox::minimumSizeHint());
-
+	return new QSize(self->QFontComboBox::minimumSizeHint());
 }
 
-void QFontComboBox_virtualbase_showPopup(void* self) {
+void QFontComboBox_virtualbase_showPopup(VirtualQFontComboBox* self) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::showPopup();
-
+	self->QFontComboBox::showPopup();
 }
 
-void QFontComboBox_virtualbase_hidePopup(void* self) {
+void QFontComboBox_virtualbase_hidePopup(VirtualQFontComboBox* self) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::hidePopup();
-
+	self->QFontComboBox::hidePopup();
 }
 
-QVariant* QFontComboBox_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QFontComboBox_virtualbase_inputMethodQuery(const VirtualQFontComboBox* self, int param1) {
 
-	return new QVariant(( (const VirtualQFontComboBox*)(self) )->QFontComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QFontComboBox::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-void QFontComboBox_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QFontComboBox_virtualbase_focusInEvent(VirtualQFontComboBox* self, QFocusEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::focusInEvent(e);
-
+	self->QFontComboBox::focusInEvent(e);
 }
 
-void QFontComboBox_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QFontComboBox_virtualbase_focusOutEvent(VirtualQFontComboBox* self, QFocusEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::focusOutEvent(e);
-
+	self->QFontComboBox::focusOutEvent(e);
 }
 
-void QFontComboBox_virtualbase_changeEvent(void* self, QEvent* e) {
+void QFontComboBox_virtualbase_changeEvent(VirtualQFontComboBox* self, QEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::changeEvent(e);
-
+	self->QFontComboBox::changeEvent(e);
 }
 
-void QFontComboBox_virtualbase_resizeEvent(void* self, QResizeEvent* e) {
+void QFontComboBox_virtualbase_resizeEvent(VirtualQFontComboBox* self, QResizeEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::resizeEvent(e);
-
+	self->QFontComboBox::resizeEvent(e);
 }
 
-void QFontComboBox_virtualbase_paintEvent(void* self, QPaintEvent* e) {
+void QFontComboBox_virtualbase_paintEvent(VirtualQFontComboBox* self, QPaintEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::paintEvent(e);
-
+	self->QFontComboBox::paintEvent(e);
 }
 
-void QFontComboBox_virtualbase_showEvent(void* self, QShowEvent* e) {
+void QFontComboBox_virtualbase_showEvent(VirtualQFontComboBox* self, QShowEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::showEvent(e);
-
+	self->QFontComboBox::showEvent(e);
 }
 
-void QFontComboBox_virtualbase_hideEvent(void* self, QHideEvent* e) {
+void QFontComboBox_virtualbase_hideEvent(VirtualQFontComboBox* self, QHideEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::hideEvent(e);
-
+	self->QFontComboBox::hideEvent(e);
 }
 
-void QFontComboBox_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QFontComboBox_virtualbase_mousePressEvent(VirtualQFontComboBox* self, QMouseEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::mousePressEvent(e);
-
+	self->QFontComboBox::mousePressEvent(e);
 }
 
-void QFontComboBox_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QFontComboBox_virtualbase_mouseReleaseEvent(VirtualQFontComboBox* self, QMouseEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::mouseReleaseEvent(e);
-
+	self->QFontComboBox::mouseReleaseEvent(e);
 }
 
-void QFontComboBox_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QFontComboBox_virtualbase_keyPressEvent(VirtualQFontComboBox* self, QKeyEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::keyPressEvent(e);
-
+	self->QFontComboBox::keyPressEvent(e);
 }
 
-void QFontComboBox_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QFontComboBox_virtualbase_keyReleaseEvent(VirtualQFontComboBox* self, QKeyEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::keyReleaseEvent(e);
-
+	self->QFontComboBox::keyReleaseEvent(e);
 }
 
-void QFontComboBox_virtualbase_wheelEvent(void* self, QWheelEvent* e) {
+void QFontComboBox_virtualbase_wheelEvent(VirtualQFontComboBox* self, QWheelEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::wheelEvent(e);
-
+	self->QFontComboBox::wheelEvent(e);
 }
 
-void QFontComboBox_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* e) {
+void QFontComboBox_virtualbase_contextMenuEvent(VirtualQFontComboBox* self, QContextMenuEvent* e) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::contextMenuEvent(e);
-
+	self->QFontComboBox::contextMenuEvent(e);
 }
 
-void QFontComboBox_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QFontComboBox_virtualbase_inputMethodEvent(VirtualQFontComboBox* self, QInputMethodEvent* param1) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::inputMethodEvent(param1);
-
+	self->QFontComboBox::inputMethodEvent(param1);
 }
 
-int QFontComboBox_virtualbase_devType(const void* self) {
+int QFontComboBox_virtualbase_devType(const VirtualQFontComboBox* self) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::devType();
-
+	return self->QFontComboBox::devType();
 }
 
-void QFontComboBox_virtualbase_setVisible(void* self, bool visible) {
+void QFontComboBox_virtualbase_setVisible(VirtualQFontComboBox* self, bool visible) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::setVisible(visible);
-
+	self->QFontComboBox::setVisible(visible);
 }
 
-int QFontComboBox_virtualbase_heightForWidth(const void* self, int param1) {
+int QFontComboBox_virtualbase_heightForWidth(const VirtualQFontComboBox* self, int param1) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::heightForWidth(static_cast<int>(param1));
-
+	return self->QFontComboBox::heightForWidth(static_cast<int>(param1));
 }
 
-bool QFontComboBox_virtualbase_hasHeightForWidth(const void* self) {
+bool QFontComboBox_virtualbase_hasHeightForWidth(const VirtualQFontComboBox* self) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::hasHeightForWidth();
-
+	return self->QFontComboBox::hasHeightForWidth();
 }
 
-QPaintEngine* QFontComboBox_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QFontComboBox_virtualbase_paintEngine(const VirtualQFontComboBox* self) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::paintEngine();
-
+	return self->QFontComboBox::paintEngine();
 }
 
-void QFontComboBox_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QFontComboBox_virtualbase_mouseDoubleClickEvent(VirtualQFontComboBox* self, QMouseEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::mouseDoubleClickEvent(event);
-
+	self->QFontComboBox::mouseDoubleClickEvent(event);
 }
 
-void QFontComboBox_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QFontComboBox_virtualbase_mouseMoveEvent(VirtualQFontComboBox* self, QMouseEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::mouseMoveEvent(event);
-
+	self->QFontComboBox::mouseMoveEvent(event);
 }
 
-void QFontComboBox_virtualbase_enterEvent(void* self, QEvent* event) {
+void QFontComboBox_virtualbase_enterEvent(VirtualQFontComboBox* self, QEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::enterEvent(event);
-
+	self->QFontComboBox::enterEvent(event);
 }
 
-void QFontComboBox_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QFontComboBox_virtualbase_leaveEvent(VirtualQFontComboBox* self, QEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::leaveEvent(event);
-
+	self->QFontComboBox::leaveEvent(event);
 }
 
-void QFontComboBox_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QFontComboBox_virtualbase_moveEvent(VirtualQFontComboBox* self, QMoveEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::moveEvent(event);
-
+	self->QFontComboBox::moveEvent(event);
 }
 
-void QFontComboBox_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QFontComboBox_virtualbase_closeEvent(VirtualQFontComboBox* self, QCloseEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::closeEvent(event);
-
+	self->QFontComboBox::closeEvent(event);
 }
 
-void QFontComboBox_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QFontComboBox_virtualbase_tabletEvent(VirtualQFontComboBox* self, QTabletEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::tabletEvent(event);
-
+	self->QFontComboBox::tabletEvent(event);
 }
 
-void QFontComboBox_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QFontComboBox_virtualbase_actionEvent(VirtualQFontComboBox* self, QActionEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::actionEvent(event);
-
+	self->QFontComboBox::actionEvent(event);
 }
 
-void QFontComboBox_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QFontComboBox_virtualbase_dragEnterEvent(VirtualQFontComboBox* self, QDragEnterEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::dragEnterEvent(event);
-
+	self->QFontComboBox::dragEnterEvent(event);
 }
 
-void QFontComboBox_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QFontComboBox_virtualbase_dragMoveEvent(VirtualQFontComboBox* self, QDragMoveEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::dragMoveEvent(event);
-
+	self->QFontComboBox::dragMoveEvent(event);
 }
 
-void QFontComboBox_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QFontComboBox_virtualbase_dragLeaveEvent(VirtualQFontComboBox* self, QDragLeaveEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::dragLeaveEvent(event);
-
+	self->QFontComboBox::dragLeaveEvent(event);
 }
 
-void QFontComboBox_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QFontComboBox_virtualbase_dropEvent(VirtualQFontComboBox* self, QDropEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::dropEvent(event);
-
+	self->QFontComboBox::dropEvent(event);
 }
 
-bool QFontComboBox_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QFontComboBox_virtualbase_nativeEvent(VirtualQFontComboBox* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QFontComboBox::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QFontComboBox_virtualbase_metric(const void* self, int param1) {
+int QFontComboBox_virtualbase_metric(const VirtualQFontComboBox* self, int param1) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::metric(static_cast<VirtualQFontComboBox::PaintDeviceMetric>(param1));
-
+	return self->QFontComboBox::metric(static_cast<VirtualQFontComboBox::PaintDeviceMetric>(param1));
 }
 
-void QFontComboBox_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QFontComboBox_virtualbase_initPainter(const VirtualQFontComboBox* self, QPainter* painter) {
 
-	( (const VirtualQFontComboBox*)(self) )->QFontComboBox::initPainter(painter);
-
+	self->QFontComboBox::initPainter(painter);
 }
 
-QPaintDevice* QFontComboBox_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QFontComboBox_virtualbase_redirected(const VirtualQFontComboBox* self, QPoint* offset) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::redirected(offset);
-
+	return self->QFontComboBox::redirected(offset);
 }
 
-QPainter* QFontComboBox_virtualbase_sharedPainter(const void* self) {
+QPainter* QFontComboBox_virtualbase_sharedPainter(const VirtualQFontComboBox* self) {
 
-	return ( (const VirtualQFontComboBox*)(self) )->QFontComboBox::sharedPainter();
-
+	return self->QFontComboBox::sharedPainter();
 }
 
-bool QFontComboBox_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QFontComboBox_virtualbase_focusNextPrevChild(VirtualQFontComboBox* self, bool next) {
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::focusNextPrevChild(next);
-
+	return self->QFontComboBox::focusNextPrevChild(next);
 }
 
-bool QFontComboBox_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QFontComboBox_virtualbase_eventFilter(VirtualQFontComboBox* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQFontComboBox*)(self) )->QFontComboBox::eventFilter(watched, event);
-
+	return self->QFontComboBox::eventFilter(watched, event);
 }
 
-void QFontComboBox_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QFontComboBox_virtualbase_timerEvent(VirtualQFontComboBox* self, QTimerEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::timerEvent(event);
-
+	self->QFontComboBox::timerEvent(event);
 }
 
-void QFontComboBox_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QFontComboBox_virtualbase_childEvent(VirtualQFontComboBox* self, QChildEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::childEvent(event);
-
+	self->QFontComboBox::childEvent(event);
 }
 
-void QFontComboBox_virtualbase_customEvent(void* self, QEvent* event) {
+void QFontComboBox_virtualbase_customEvent(VirtualQFontComboBox* self, QEvent* event) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::customEvent(event);
-
+	self->QFontComboBox::customEvent(event);
 }
 
-void QFontComboBox_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QFontComboBox_virtualbase_connectNotify(VirtualQFontComboBox* self, QMetaMethod* signal) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::connectNotify(*signal);
-
+	self->QFontComboBox::connectNotify(*signal);
 }
 
-void QFontComboBox_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QFontComboBox_virtualbase_disconnectNotify(VirtualQFontComboBox* self, QMetaMethod* signal) {
 
-	( (VirtualQFontComboBox*)(self) )->QFontComboBox::disconnectNotify(*signal);
-
+	self->QFontComboBox::disconnectNotify(*signal);
 }
 
 const QMetaObject* QFontComboBox_staticMetaObject() { return &QFontComboBox::staticMetaObject; }
-void QFontComboBox_protectedbase_initStyleOption(const void* self, QStyleOptionComboBox* option) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	self_cast->initStyleOption(option);
 
+const QFontComboBox_VTable* QFontComboBox_vtbl(const VirtualQFontComboBox* self) { return self->vtbl; }
+void* QFontComboBox_vdata(const VirtualQFontComboBox* self) { return self->vdata; }
+void QFontComboBox_setVdata(VirtualQFontComboBox* self, void* vdata) { self->vdata = vdata; }
+
+void QFontComboBox_protectedbase_initStyleOption(const VirtualQFontComboBox* self, QStyleOptionComboBox* option) {
+	self->initStyleOption(option);
 }
 
-void QFontComboBox_protectedbase_updateMicroFocus(void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QFontComboBox_protectedbase_updateMicroFocus(VirtualQFontComboBox* self) {
+	self->updateMicroFocus();
 }
 
-void QFontComboBox_protectedbase_create(void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	self_cast->create();
-
+void QFontComboBox_protectedbase_create(VirtualQFontComboBox* self) {
+	self->create();
 }
 
-void QFontComboBox_protectedbase_destroy(void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	self_cast->destroy();
-
+void QFontComboBox_protectedbase_destroy(VirtualQFontComboBox* self) {
+	self->destroy();
 }
 
-bool QFontComboBox_protectedbase_focusNextChild(void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QFontComboBox_protectedbase_focusNextChild(VirtualQFontComboBox* self) {
+	return self->focusNextChild();
 }
 
-bool QFontComboBox_protectedbase_focusPreviousChild(void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QFontComboBox_protectedbase_focusPreviousChild(VirtualQFontComboBox* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QFontComboBox_protectedbase_sender(const void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QFontComboBox_protectedbase_sender(const VirtualQFontComboBox* self) {
+	return self->sender();
 }
 
-int QFontComboBox_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QFontComboBox_protectedbase_senderSignalIndex(const VirtualQFontComboBox* self) {
+	return self->senderSignalIndex();
 }
 
-int QFontComboBox_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QFontComboBox_protectedbase_receivers(const VirtualQFontComboBox* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QFontComboBox_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQFontComboBox* self_cast = static_cast<VirtualQFontComboBox*>( (QFontComboBox*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QFontComboBox_protectedbase_isSignalConnected(const VirtualQFontComboBox* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QFontComboBox_delete(QFontComboBox* self) {

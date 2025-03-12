@@ -42,15 +42,15 @@ export
 type cQSize*{.exportc: "QSize", incompleteStruct.} = object
 type cQSizeF*{.exportc: "QSizeF", incompleteStruct.} = object
 
-proc fcQSize_isNull(self: pointer, ): bool {.importc: "QSize_isNull".}
-proc fcQSize_isEmpty(self: pointer, ): bool {.importc: "QSize_isEmpty".}
-proc fcQSize_isValid(self: pointer, ): bool {.importc: "QSize_isValid".}
-proc fcQSize_width(self: pointer, ): cint {.importc: "QSize_width".}
-proc fcQSize_height(self: pointer, ): cint {.importc: "QSize_height".}
+proc fcQSize_isNull(self: pointer): bool {.importc: "QSize_isNull".}
+proc fcQSize_isEmpty(self: pointer): bool {.importc: "QSize_isEmpty".}
+proc fcQSize_isValid(self: pointer): bool {.importc: "QSize_isValid".}
+proc fcQSize_width(self: pointer): cint {.importc: "QSize_width".}
+proc fcQSize_height(self: pointer): cint {.importc: "QSize_height".}
 proc fcQSize_setWidth(self: pointer, w: cint): void {.importc: "QSize_setWidth".}
 proc fcQSize_setHeight(self: pointer, h: cint): void {.importc: "QSize_setHeight".}
-proc fcQSize_transpose(self: pointer, ): void {.importc: "QSize_transpose".}
-proc fcQSize_transposed(self: pointer, ): pointer {.importc: "QSize_transposed".}
+proc fcQSize_transpose(self: pointer): void {.importc: "QSize_transpose".}
+proc fcQSize_transposed(self: pointer): pointer {.importc: "QSize_transposed".}
 proc fcQSize_scale(self: pointer, w: cint, h: cint, mode: cint): void {.importc: "QSize_scale".}
 proc fcQSize_scale2(self: pointer, s: pointer, mode: cint): void {.importc: "QSize_scale2".}
 proc fcQSize_scaled(self: pointer, w: cint, h: cint, mode: cint): pointer {.importc: "QSize_scaled".}
@@ -66,15 +66,15 @@ proc fcQSize_operatorDivideAssign(self: pointer, c: float64): pointer {.importc:
 proc fcQSize_new(): ptr cQSize {.importc: "QSize_new".}
 proc fcQSize_new2(w: cint, h: cint): ptr cQSize {.importc: "QSize_new2".}
 proc fcQSize_new3(param1: pointer): ptr cQSize {.importc: "QSize_new3".}
-proc fcQSizeF_isNull(self: pointer, ): bool {.importc: "QSizeF_isNull".}
-proc fcQSizeF_isEmpty(self: pointer, ): bool {.importc: "QSizeF_isEmpty".}
-proc fcQSizeF_isValid(self: pointer, ): bool {.importc: "QSizeF_isValid".}
-proc fcQSizeF_width(self: pointer, ): float64 {.importc: "QSizeF_width".}
-proc fcQSizeF_height(self: pointer, ): float64 {.importc: "QSizeF_height".}
+proc fcQSizeF_isNull(self: pointer): bool {.importc: "QSizeF_isNull".}
+proc fcQSizeF_isEmpty(self: pointer): bool {.importc: "QSizeF_isEmpty".}
+proc fcQSizeF_isValid(self: pointer): bool {.importc: "QSizeF_isValid".}
+proc fcQSizeF_width(self: pointer): float64 {.importc: "QSizeF_width".}
+proc fcQSizeF_height(self: pointer): float64 {.importc: "QSizeF_height".}
 proc fcQSizeF_setWidth(self: pointer, w: float64): void {.importc: "QSizeF_setWidth".}
 proc fcQSizeF_setHeight(self: pointer, h: float64): void {.importc: "QSizeF_setHeight".}
-proc fcQSizeF_transpose(self: pointer, ): void {.importc: "QSizeF_transpose".}
-proc fcQSizeF_transposed(self: pointer, ): pointer {.importc: "QSizeF_transposed".}
+proc fcQSizeF_transpose(self: pointer): void {.importc: "QSizeF_transpose".}
+proc fcQSizeF_transposed(self: pointer): pointer {.importc: "QSizeF_transposed".}
 proc fcQSizeF_scale(self: pointer, w: float64, h: float64, mode: cint): void {.importc: "QSizeF_scale".}
 proc fcQSizeF_scale2(self: pointer, s: pointer, mode: cint): void {.importc: "QSizeF_scale2".}
 proc fcQSizeF_scaled(self: pointer, w: float64, h: float64, mode: cint): pointer {.importc: "QSizeF_scaled".}
@@ -87,25 +87,25 @@ proc fcQSizeF_operatorPlusAssign(self: pointer, param1: pointer): pointer {.impo
 proc fcQSizeF_operatorMinusAssign(self: pointer, param1: pointer): pointer {.importc: "QSizeF_operatorMinusAssign".}
 proc fcQSizeF_operatorMultiplyAssign(self: pointer, c: float64): pointer {.importc: "QSizeF_operatorMultiplyAssign".}
 proc fcQSizeF_operatorDivideAssign(self: pointer, c: float64): pointer {.importc: "QSizeF_operatorDivideAssign".}
-proc fcQSizeF_toSize(self: pointer, ): pointer {.importc: "QSizeF_toSize".}
+proc fcQSizeF_toSize(self: pointer): pointer {.importc: "QSizeF_toSize".}
 proc fcQSizeF_new(): ptr cQSizeF {.importc: "QSizeF_new".}
 proc fcQSizeF_new2(sz: pointer): ptr cQSizeF {.importc: "QSizeF_new2".}
 proc fcQSizeF_new3(w: float64, h: float64): ptr cQSizeF {.importc: "QSizeF_new3".}
 proc fcQSizeF_new4(param1: pointer): ptr cQSizeF {.importc: "QSizeF_new4".}
 
-proc isNull*(self: gen_qsize_types.QSize, ): bool =
+proc isNull*(self: gen_qsize_types.QSize): bool =
   fcQSize_isNull(self.h)
 
-proc isEmpty*(self: gen_qsize_types.QSize, ): bool =
+proc isEmpty*(self: gen_qsize_types.QSize): bool =
   fcQSize_isEmpty(self.h)
 
-proc isValid*(self: gen_qsize_types.QSize, ): bool =
+proc isValid*(self: gen_qsize_types.QSize): bool =
   fcQSize_isValid(self.h)
 
-proc width*(self: gen_qsize_types.QSize, ): cint =
+proc width*(self: gen_qsize_types.QSize): cint =
   fcQSize_width(self.h)
 
-proc height*(self: gen_qsize_types.QSize, ): cint =
+proc height*(self: gen_qsize_types.QSize): cint =
   fcQSize_height(self.h)
 
 proc setWidth*(self: gen_qsize_types.QSize, w: cint): void =
@@ -114,10 +114,10 @@ proc setWidth*(self: gen_qsize_types.QSize, w: cint): void =
 proc setHeight*(self: gen_qsize_types.QSize, h: cint): void =
   fcQSize_setHeight(self.h, h)
 
-proc transpose*(self: gen_qsize_types.QSize, ): void =
+proc transpose*(self: gen_qsize_types.QSize): void =
   fcQSize_transpose(self.h)
 
-proc transposed*(self: gen_qsize_types.QSize, ): gen_qsize_types.QSize =
+proc transposed*(self: gen_qsize_types.QSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSize_transposed(self.h), owned: true)
 
 proc scale*(self: gen_qsize_types.QSize, w: cint, h: cint, mode: cint): void =
@@ -167,19 +167,19 @@ proc create*(T: type gen_qsize_types.QSize,
     param1: gen_qsize_types.QSize): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSize_new3(param1.h), owned: true)
 
-proc isNull*(self: gen_qsize_types.QSizeF, ): bool =
+proc isNull*(self: gen_qsize_types.QSizeF): bool =
   fcQSizeF_isNull(self.h)
 
-proc isEmpty*(self: gen_qsize_types.QSizeF, ): bool =
+proc isEmpty*(self: gen_qsize_types.QSizeF): bool =
   fcQSizeF_isEmpty(self.h)
 
-proc isValid*(self: gen_qsize_types.QSizeF, ): bool =
+proc isValid*(self: gen_qsize_types.QSizeF): bool =
   fcQSizeF_isValid(self.h)
 
-proc width*(self: gen_qsize_types.QSizeF, ): float64 =
+proc width*(self: gen_qsize_types.QSizeF): float64 =
   fcQSizeF_width(self.h)
 
-proc height*(self: gen_qsize_types.QSizeF, ): float64 =
+proc height*(self: gen_qsize_types.QSizeF): float64 =
   fcQSizeF_height(self.h)
 
 proc setWidth*(self: gen_qsize_types.QSizeF, w: float64): void =
@@ -188,10 +188,10 @@ proc setWidth*(self: gen_qsize_types.QSizeF, w: float64): void =
 proc setHeight*(self: gen_qsize_types.QSizeF, h: float64): void =
   fcQSizeF_setHeight(self.h, h)
 
-proc transpose*(self: gen_qsize_types.QSizeF, ): void =
+proc transpose*(self: gen_qsize_types.QSizeF): void =
   fcQSizeF_transpose(self.h)
 
-proc transposed*(self: gen_qsize_types.QSizeF, ): gen_qsize_types.QSizeF =
+proc transposed*(self: gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQSizeF_transposed(self.h), owned: true)
 
 proc scale*(self: gen_qsize_types.QSizeF, w: float64, h: float64, mode: cint): void =
@@ -230,7 +230,7 @@ proc operatorMultiplyAssign*(self: gen_qsize_types.QSizeF, c: float64): gen_qsiz
 proc operatorDivideAssign*(self: gen_qsize_types.QSizeF, c: float64): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQSizeF_operatorDivideAssign(self.h, c), owned: false)
 
-proc toSize*(self: gen_qsize_types.QSizeF, ): gen_qsize_types.QSize =
+proc toSize*(self: gen_qsize_types.QSizeF): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQSizeF_toSize(self.h), owned: true)
 
 proc create*(T: type gen_qsize_types.QSizeF): gen_qsize_types.QSizeF =

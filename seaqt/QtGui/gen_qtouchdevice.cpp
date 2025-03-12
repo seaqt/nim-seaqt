@@ -5,15 +5,6 @@
 #include <QTouchDevice>
 #include <qtouchdevice.h>
 #include "gen_qtouchdevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTouchDevice* QTouchDevice_new() {
 	return new QTouchDevice();
 }
@@ -74,6 +65,7 @@ void QTouchDevice_setMaximumTouchPoints(QTouchDevice* self, int max) {
 }
 
 const QMetaObject* QTouchDevice_staticMetaObject() { return &QTouchDevice::staticMetaObject; }
+
 void QTouchDevice_delete(QTouchDevice* self) {
 	delete self;
 }

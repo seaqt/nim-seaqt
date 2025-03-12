@@ -4,15 +4,6 @@
 #include <QWidget>
 #include <qitemeditorfactory.h>
 #include "gen_qitemeditorfactory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWidget* QItemEditorCreatorBase_createWidget(const QItemEditorCreatorBase* self, QWidget* parent) {
 	return self->createWidget(parent);
 }
@@ -35,15 +26,18 @@ void QItemEditorCreatorBase_delete(QItemEditorCreatorBase* self) {
 }
 
 class VirtualQItemEditorFactory final : public QItemEditorFactory {
-	struct QItemEditorFactory_VTable* vtbl;
+	const QItemEditorFactory_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QItemEditorFactory_VTable* QItemEditorFactory_vtbl(const VirtualQItemEditorFactory* self);
+	friend void* QItemEditorFactory_vdata(const VirtualQItemEditorFactory* self);
+	friend void QItemEditorFactory_setVdata(VirtualQItemEditorFactory* self, void* vdata);
 
-	VirtualQItemEditorFactory(struct QItemEditorFactory_VTable* vtbl): QItemEditorFactory(), vtbl(vtbl) {};
-	VirtualQItemEditorFactory(struct QItemEditorFactory_VTable* vtbl, const QItemEditorFactory& param1): QItemEditorFactory(param1), vtbl(vtbl) {};
+	VirtualQItemEditorFactory(const QItemEditorFactory_VTable* vtbl, void* vdata): QItemEditorFactory(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQItemEditorFactory(const QItemEditorFactory_VTable* vtbl, void* vdata, const QItemEditorFactory& param1): QItemEditorFactory(param1), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQItemEditorFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQItemEditorFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QWidget* createEditor(int userType, QWidget* parent) const override {
 		if (vtbl->createEditor == 0) {
 			return QItemEditorFactory::createEditor(userType, parent);
@@ -52,14 +46,13 @@ public:
 		int sigval1 = userType;
 		QWidget* sigval2 = parent;
 
-		QWidget* callback_return_value = vtbl->createEditor(vtbl, this, sigval1, sigval2);
+		QWidget* callback_return_value = vtbl->createEditor(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userType, QWidget* parent);
+	friend QWidget* QItemEditorFactory_virtualbase_createEditor(const VirtualQItemEditorFactory* self, int userType, QWidget* parent);
 
-	// Subclass to allow providing a Go implementation
 	virtual QByteArray valuePropertyName(int userType) const override {
 		if (vtbl->valuePropertyName == 0) {
 			return QItemEditorFactory::valuePropertyName(userType);
@@ -67,23 +60,23 @@ public:
 
 		int sigval1 = userType;
 
-		struct miqt_string callback_return_value = vtbl->valuePropertyName(vtbl, this, sigval1);
+		struct miqt_string callback_return_value = vtbl->valuePropertyName(this, sigval1);
 		QByteArray callback_return_value_QByteArray(callback_return_value.data, callback_return_value.len);
 		free(callback_return_value.data);
 
 		return callback_return_value_QByteArray;
 	}
 
-	friend struct miqt_string QItemEditorFactory_virtualbase_valuePropertyName(const void* self, int userType);
+	friend struct miqt_string QItemEditorFactory_virtualbase_valuePropertyName(const VirtualQItemEditorFactory* self, int userType);
 
 };
 
-QItemEditorFactory* QItemEditorFactory_new(struct QItemEditorFactory_VTable* vtbl) {
-	return new VirtualQItemEditorFactory(vtbl);
+VirtualQItemEditorFactory* QItemEditorFactory_new(const QItemEditorFactory_VTable* vtbl, void* vdata) {
+	return new VirtualQItemEditorFactory(vtbl, vdata);
 }
 
-QItemEditorFactory* QItemEditorFactory_new2(struct QItemEditorFactory_VTable* vtbl, QItemEditorFactory* param1) {
-	return new VirtualQItemEditorFactory(vtbl, *param1);
+VirtualQItemEditorFactory* QItemEditorFactory_new2(const QItemEditorFactory_VTable* vtbl, void* vdata, QItemEditorFactory* param1) {
+	return new VirtualQItemEditorFactory(vtbl, vdata, *param1);
 }
 
 QWidget* QItemEditorFactory_createEditor(const QItemEditorFactory* self, int userType, QWidget* parent) {
@@ -111,22 +104,24 @@ void QItemEditorFactory_setDefaultFactory(QItemEditorFactory* factory) {
 	QItemEditorFactory::setDefaultFactory(factory);
 }
 
-QWidget* QItemEditorFactory_virtualbase_createEditor(const void* self, int userType, QWidget* parent) {
+QWidget* QItemEditorFactory_virtualbase_createEditor(const VirtualQItemEditorFactory* self, int userType, QWidget* parent) {
 
-	return ( (const VirtualQItemEditorFactory*)(self) )->QItemEditorFactory::createEditor(static_cast<int>(userType), parent);
-
+	return self->QItemEditorFactory::createEditor(static_cast<int>(userType), parent);
 }
 
-struct miqt_string QItemEditorFactory_virtualbase_valuePropertyName(const void* self, int userType) {
+struct miqt_string QItemEditorFactory_virtualbase_valuePropertyName(const VirtualQItemEditorFactory* self, int userType) {
 
-	QByteArray _qb = ( (const VirtualQItemEditorFactory*)(self) )->QItemEditorFactory::valuePropertyName(static_cast<int>(userType));
+	QByteArray _qb = self->QItemEditorFactory::valuePropertyName(static_cast<int>(userType));
 	struct miqt_string _ms;
 	_ms.len = _qb.length();
 	_ms.data = static_cast<char*>(malloc(_ms.len));
 	memcpy(_ms.data, _qb.data(), _ms.len);
 	return _ms;
-
 }
+
+const QItemEditorFactory_VTable* QItemEditorFactory_vtbl(const VirtualQItemEditorFactory* self) { return self->vtbl; }
+void* QItemEditorFactory_vdata(const VirtualQItemEditorFactory* self) { return self->vdata; }
+void QItemEditorFactory_setVdata(VirtualQItemEditorFactory* self, void* vdata) { self->vdata = vdata; }
 
 void QItemEditorFactory_delete(QItemEditorFactory* self) {
 	delete self;

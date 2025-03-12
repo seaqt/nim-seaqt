@@ -12,38 +12,31 @@
 #include <QTimerEvent>
 #include <qquicktextdocument.h>
 #include "gen_qquicktextdocument.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQuickTextDocument final : public QQuickTextDocument {
-	struct QQuickTextDocument_VTable* vtbl;
+	const QQuickTextDocument_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQuickTextDocument_VTable* QQuickTextDocument_vtbl(const VirtualQQuickTextDocument* self);
+	friend void* QQuickTextDocument_vdata(const VirtualQQuickTextDocument* self);
+	friend void QQuickTextDocument_setVdata(VirtualQQuickTextDocument* self, void* vdata);
 
-	VirtualQQuickTextDocument(struct QQuickTextDocument_VTable* vtbl, QQuickItem* parent): QQuickTextDocument(parent), vtbl(vtbl) {};
+	VirtualQQuickTextDocument(const QQuickTextDocument_VTable* vtbl, void* vdata, QQuickItem* parent): QQuickTextDocument(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQuickTextDocument() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQuickTextDocument() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQuickTextDocument::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQuickTextDocument_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQuickTextDocument_virtualbase_metaObject(const VirtualQQuickTextDocument* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQuickTextDocument::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQuickTextDocument_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQuickTextDocument_virtualbase_metacast(VirtualQQuickTextDocument* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQuickTextDocument::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQuickTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQuickTextDocument_virtualbase_metacall(VirtualQQuickTextDocument* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QQuickTextDocument::event(event);
@@ -84,14 +75,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickTextDocument_virtualbase_event(void* self, QEvent* event);
+	friend bool QQuickTextDocument_virtualbase_event(VirtualQQuickTextDocument* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQuickTextDocument::eventFilter(watched, event);
@@ -100,14 +90,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQuickTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQuickTextDocument_virtualbase_eventFilter(VirtualQQuickTextDocument* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QQuickTextDocument::timerEvent(event);
@@ -116,13 +105,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQuickTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QQuickTextDocument_virtualbase_timerEvent(VirtualQQuickTextDocument* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQuickTextDocument::childEvent(event);
@@ -131,13 +119,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQuickTextDocument_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQuickTextDocument_virtualbase_childEvent(VirtualQQuickTextDocument* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQuickTextDocument::customEvent(event);
@@ -146,13 +133,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQuickTextDocument_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQuickTextDocument_virtualbase_customEvent(VirtualQQuickTextDocument* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQuickTextDocument::connectNotify(signal);
@@ -163,13 +149,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickTextDocument_virtualbase_connectNotify(VirtualQQuickTextDocument* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQuickTextDocument::disconnectNotify(signal);
@@ -180,21 +165,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQuickTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQuickTextDocument_virtualbase_disconnectNotify(VirtualQQuickTextDocument* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQuickTextDocument_protectedbase_sender(const void* self);
-	friend int QQuickTextDocument_protectedbase_senderSignalIndex(const void* self);
-	friend int QQuickTextDocument_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQuickTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QQuickTextDocument_protectedbase_sender(const VirtualQQuickTextDocument* self);
+	friend int QQuickTextDocument_protectedbase_senderSignalIndex(const VirtualQQuickTextDocument* self);
+	friend int QQuickTextDocument_protectedbase_receivers(const VirtualQQuickTextDocument* self, const char* signal);
+	friend bool QQuickTextDocument_protectedbase_isSignalConnected(const VirtualQQuickTextDocument* self, QMetaMethod* signal);
 };
 
-QQuickTextDocument* QQuickTextDocument_new(struct QQuickTextDocument_VTable* vtbl, QQuickItem* parent) {
-	return new VirtualQQuickTextDocument(vtbl, parent);
+VirtualQQuickTextDocument* QQuickTextDocument_new(const QQuickTextDocument_VTable* vtbl, void* vdata, QQuickItem* parent) {
+	return new VirtualQQuickTextDocument(vtbl, vdata, parent);
 }
 
 void QQuickTextDocument_virtbase(QQuickTextDocument* src, QObject** outptr_QObject) {
@@ -283,93 +268,76 @@ struct miqt_string QQuickTextDocument_trUtf83(const char* s, const char* c, int 
 	return _ms;
 }
 
-QMetaObject* QQuickTextDocument_virtualbase_metaObject(const void* self) {
+QMetaObject* QQuickTextDocument_virtualbase_metaObject(const VirtualQQuickTextDocument* self) {
 
-	return (QMetaObject*) ( (const VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::metaObject();
-
+	return (QMetaObject*) self->QQuickTextDocument::metaObject();
 }
 
-void* QQuickTextDocument_virtualbase_metacast(void* self, const char* param1) {
+void* QQuickTextDocument_virtualbase_metacast(VirtualQQuickTextDocument* self, const char* param1) {
 
-	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::qt_metacast(param1);
-
+	return self->QQuickTextDocument::qt_metacast(param1);
 }
 
-int QQuickTextDocument_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQuickTextDocument_virtualbase_metacall(VirtualQQuickTextDocument* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQuickTextDocument::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QQuickTextDocument_virtualbase_event(void* self, QEvent* event) {
+bool QQuickTextDocument_virtualbase_event(VirtualQQuickTextDocument* self, QEvent* event) {
 
-	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::event(event);
-
+	return self->QQuickTextDocument::event(event);
 }
 
-bool QQuickTextDocument_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQuickTextDocument_virtualbase_eventFilter(VirtualQQuickTextDocument* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::eventFilter(watched, event);
-
+	return self->QQuickTextDocument::eventFilter(watched, event);
 }
 
-void QQuickTextDocument_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QQuickTextDocument_virtualbase_timerEvent(VirtualQQuickTextDocument* self, QTimerEvent* event) {
 
-	( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::timerEvent(event);
-
+	self->QQuickTextDocument::timerEvent(event);
 }
 
-void QQuickTextDocument_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQuickTextDocument_virtualbase_childEvent(VirtualQQuickTextDocument* self, QChildEvent* event) {
 
-	( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::childEvent(event);
-
+	self->QQuickTextDocument::childEvent(event);
 }
 
-void QQuickTextDocument_virtualbase_customEvent(void* self, QEvent* event) {
+void QQuickTextDocument_virtualbase_customEvent(VirtualQQuickTextDocument* self, QEvent* event) {
 
-	( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::customEvent(event);
-
+	self->QQuickTextDocument::customEvent(event);
 }
 
-void QQuickTextDocument_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQuickTextDocument_virtualbase_connectNotify(VirtualQQuickTextDocument* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::connectNotify(*signal);
-
+	self->QQuickTextDocument::connectNotify(*signal);
 }
 
-void QQuickTextDocument_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQuickTextDocument_virtualbase_disconnectNotify(VirtualQQuickTextDocument* self, QMetaMethod* signal) {
 
-	( (VirtualQQuickTextDocument*)(self) )->QQuickTextDocument::disconnectNotify(*signal);
-
+	self->QQuickTextDocument::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQuickTextDocument_staticMetaObject() { return &QQuickTextDocument::staticMetaObject; }
-QObject* QQuickTextDocument_protectedbase_sender(const void* self) {
-	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	
-	return self_cast->sender();
 
+const QQuickTextDocument_VTable* QQuickTextDocument_vtbl(const VirtualQQuickTextDocument* self) { return self->vtbl; }
+void* QQuickTextDocument_vdata(const VirtualQQuickTextDocument* self) { return self->vdata; }
+void QQuickTextDocument_setVdata(VirtualQQuickTextDocument* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QQuickTextDocument_protectedbase_sender(const VirtualQQuickTextDocument* self) {
+	return self->sender();
 }
 
-int QQuickTextDocument_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQuickTextDocument_protectedbase_senderSignalIndex(const VirtualQQuickTextDocument* self) {
+	return self->senderSignalIndex();
 }
 
-int QQuickTextDocument_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQuickTextDocument_protectedbase_receivers(const VirtualQQuickTextDocument* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQuickTextDocument_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQuickTextDocument* self_cast = static_cast<VirtualQQuickTextDocument*>( (QQuickTextDocument*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQuickTextDocument_protectedbase_isSignalConnected(const VirtualQQuickTextDocument* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQuickTextDocument_delete(QQuickTextDocument* self) {

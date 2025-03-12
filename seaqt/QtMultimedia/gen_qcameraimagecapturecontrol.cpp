@@ -11,15 +11,6 @@
 #include <QVideoFrame>
 #include <qcameraimagecapturecontrol.h>
 #include "gen_qcameraimagecapturecontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraImageCaptureControl_virtbase(QCameraImageCaptureControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -274,6 +265,7 @@ struct miqt_string QCameraImageCaptureControl_trUtf83(const char* s, const char*
 }
 
 const QMetaObject* QCameraImageCaptureControl_staticMetaObject() { return &QCameraImageCaptureControl::staticMetaObject; }
+
 void QCameraImageCaptureControl_delete(QCameraImageCaptureControl* self) {
 	delete self;
 }

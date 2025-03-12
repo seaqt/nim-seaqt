@@ -2,15 +2,6 @@
 #include <QSurfaceFormat>
 #include <qsurfaceformat.h>
 #include "gen_qsurfaceformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSurfaceFormat* QSurfaceFormat_new() {
 	return new QSurfaceFormat();
 }
@@ -211,6 +202,7 @@ void QSurfaceFormat_setOption2(QSurfaceFormat* self, int option, bool on) {
 }
 
 const QMetaObject* QSurfaceFormat_staticMetaObject() { return &QSurfaceFormat::staticMetaObject; }
+
 void QSurfaceFormat_delete(QSurfaceFormat* self) {
 	delete self;
 }

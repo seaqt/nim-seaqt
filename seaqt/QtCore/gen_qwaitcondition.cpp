@@ -4,15 +4,6 @@
 #include <QWaitCondition>
 #include <qwaitcondition.h>
 #include "gen_qwaitcondition.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWaitCondition* QWaitCondition_new() {
 	return new QWaitCondition();
 }

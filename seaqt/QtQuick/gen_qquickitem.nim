@@ -108,7 +108,7 @@ type cQQuickItem*{.exportc: "QQuickItem", incompleteStruct.} = object
 type cQQuickItemItemChangeData*{.exportc: "QQuickItem__ItemChangeData", incompleteStruct.} = object
 type cQQuickItemUpdatePaintNodeData*{.exportc: "QQuickItem__UpdatePaintNodeData", incompleteStruct.} = object
 
-proc fcQQuickTransform_metaObject(self: pointer, ): pointer {.importc: "QQuickTransform_metaObject".}
+proc fcQQuickTransform_metaObject(self: pointer): pointer {.importc: "QQuickTransform_metaObject".}
 proc fcQQuickTransform_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTransform_metacast".}
 proc fcQQuickTransform_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTransform_metacall".}
 proc fcQQuickTransform_tr(s: cstring): struct_miqt_string {.importc: "QQuickTransform_tr".}
@@ -120,20 +120,22 @@ proc fcQQuickTransform_tr2(s: cstring, c: cstring): struct_miqt_string {.importc
 proc fcQQuickTransform_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickTransform_tr3".}
 proc fcQQuickTransform_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickTransform_trUtf82".}
 proc fcQQuickTransform_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickTransform_trUtf83".}
+proc fcQQuickTransform_vtbl(self: pointer): pointer {.importc: "QQuickTransform_vtbl".}
+proc fcQQuickTransform_vdata(self: pointer): pointer {.importc: "QQuickTransform_vdata".}
 type cQQuickTransformVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQQuickTransformVTable, self: ptr cQQuickTransform) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  applyTo*: proc(vtbl, self: pointer, matrix: pointer): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQQuickTransform_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQuickTransform_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  applyTo*: proc(self: pointer, matrix: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQuickTransform_virtualbase_metaObject(self: pointer): pointer {.importc: "QQuickTransform_virtualbase_metaObject".}
 proc fcQQuickTransform_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickTransform_virtualbase_metacast".}
 proc fcQQuickTransform_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickTransform_virtualbase_metacall".}
 proc fcQQuickTransform_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QQuickTransform_virtualbase_event".}
@@ -143,108 +145,108 @@ proc fcQQuickTransform_virtualbase_childEvent(self: pointer, event: pointer): vo
 proc fcQQuickTransform_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickTransform_virtualbase_customEvent".}
 proc fcQQuickTransform_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTransform_virtualbase_connectNotify".}
 proc fcQQuickTransform_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickTransform_virtualbase_disconnectNotify".}
-proc fcQQuickTransform_protectedbase_update(self: pointer, ): void {.importc: "QQuickTransform_protectedbase_update".}
-proc fcQQuickTransform_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickTransform_protectedbase_sender".}
-proc fcQQuickTransform_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickTransform_protectedbase_senderSignalIndex".}
+proc fcQQuickTransform_protectedbase_update(self: pointer): void {.importc: "QQuickTransform_protectedbase_update".}
+proc fcQQuickTransform_protectedbase_sender(self: pointer): pointer {.importc: "QQuickTransform_protectedbase_sender".}
+proc fcQQuickTransform_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQuickTransform_protectedbase_senderSignalIndex".}
 proc fcQQuickTransform_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickTransform_protectedbase_receivers".}
 proc fcQQuickTransform_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickTransform_protectedbase_isSignalConnected".}
-proc fcQQuickTransform_new(vtbl: pointer, ): ptr cQQuickTransform {.importc: "QQuickTransform_new".}
-proc fcQQuickTransform_new2(vtbl: pointer, parent: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new2".}
+proc fcQQuickTransform_new(vtbl, vdata: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new".}
+proc fcQQuickTransform_new2(vtbl, vdata: pointer, parent: pointer): ptr cQQuickTransform {.importc: "QQuickTransform_new2".}
 proc fcQQuickTransform_staticMetaObject(): pointer {.importc: "QQuickTransform_staticMetaObject".}
-proc fcQQuickItem_metaObject(self: pointer, ): pointer {.importc: "QQuickItem_metaObject".}
+proc fcQQuickItem_metaObject(self: pointer): pointer {.importc: "QQuickItem_metaObject".}
 proc fcQQuickItem_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickItem_metacast".}
 proc fcQQuickItem_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickItem_metacall".}
 proc fcQQuickItem_tr(s: cstring): struct_miqt_string {.importc: "QQuickItem_tr".}
 proc fcQQuickItem_trUtf8(s: cstring): struct_miqt_string {.importc: "QQuickItem_trUtf8".}
-proc fcQQuickItem_window(self: pointer, ): pointer {.importc: "QQuickItem_window".}
-proc fcQQuickItem_parentItem(self: pointer, ): pointer {.importc: "QQuickItem_parentItem".}
+proc fcQQuickItem_window(self: pointer): pointer {.importc: "QQuickItem_window".}
+proc fcQQuickItem_parentItem(self: pointer): pointer {.importc: "QQuickItem_parentItem".}
 proc fcQQuickItem_setParentItem(self: pointer, parent: pointer): void {.importc: "QQuickItem_setParentItem".}
 proc fcQQuickItem_stackBefore(self: pointer, param1: pointer): void {.importc: "QQuickItem_stackBefore".}
 proc fcQQuickItem_stackAfter(self: pointer, param1: pointer): void {.importc: "QQuickItem_stackAfter".}
-proc fcQQuickItem_childrenRect(self: pointer, ): pointer {.importc: "QQuickItem_childrenRect".}
-proc fcQQuickItem_childItems(self: pointer, ): struct_miqt_array {.importc: "QQuickItem_childItems".}
-proc fcQQuickItem_clip(self: pointer, ): bool {.importc: "QQuickItem_clip".}
+proc fcQQuickItem_childrenRect(self: pointer): pointer {.importc: "QQuickItem_childrenRect".}
+proc fcQQuickItem_childItems(self: pointer): struct_miqt_array {.importc: "QQuickItem_childItems".}
+proc fcQQuickItem_clip(self: pointer): bool {.importc: "QQuickItem_clip".}
 proc fcQQuickItem_setClip(self: pointer, clip: bool): void {.importc: "QQuickItem_setClip".}
-proc fcQQuickItem_state(self: pointer, ): struct_miqt_string {.importc: "QQuickItem_state".}
+proc fcQQuickItem_state(self: pointer): struct_miqt_string {.importc: "QQuickItem_state".}
 proc fcQQuickItem_setState(self: pointer, state: struct_miqt_string): void {.importc: "QQuickItem_setState".}
-proc fcQQuickItem_baselineOffset(self: pointer, ): float64 {.importc: "QQuickItem_baselineOffset".}
+proc fcQQuickItem_baselineOffset(self: pointer): float64 {.importc: "QQuickItem_baselineOffset".}
 proc fcQQuickItem_setBaselineOffset(self: pointer, baselineOffset: float64): void {.importc: "QQuickItem_setBaselineOffset".}
-proc fcQQuickItem_x(self: pointer, ): float64 {.importc: "QQuickItem_x".}
-proc fcQQuickItem_y(self: pointer, ): float64 {.importc: "QQuickItem_y".}
-proc fcQQuickItem_position(self: pointer, ): pointer {.importc: "QQuickItem_position".}
+proc fcQQuickItem_x(self: pointer): float64 {.importc: "QQuickItem_x".}
+proc fcQQuickItem_y(self: pointer): float64 {.importc: "QQuickItem_y".}
+proc fcQQuickItem_position(self: pointer): pointer {.importc: "QQuickItem_position".}
 proc fcQQuickItem_setX(self: pointer, x: float64): void {.importc: "QQuickItem_setX".}
 proc fcQQuickItem_setY(self: pointer, y: float64): void {.importc: "QQuickItem_setY".}
 proc fcQQuickItem_setPosition(self: pointer, position: pointer): void {.importc: "QQuickItem_setPosition".}
-proc fcQQuickItem_width(self: pointer, ): float64 {.importc: "QQuickItem_width".}
+proc fcQQuickItem_width(self: pointer): float64 {.importc: "QQuickItem_width".}
 proc fcQQuickItem_setWidth(self: pointer, width: float64): void {.importc: "QQuickItem_setWidth".}
-proc fcQQuickItem_resetWidth(self: pointer, ): void {.importc: "QQuickItem_resetWidth".}
+proc fcQQuickItem_resetWidth(self: pointer): void {.importc: "QQuickItem_resetWidth".}
 proc fcQQuickItem_setImplicitWidth(self: pointer, implicitWidth: float64): void {.importc: "QQuickItem_setImplicitWidth".}
-proc fcQQuickItem_implicitWidth(self: pointer, ): float64 {.importc: "QQuickItem_implicitWidth".}
-proc fcQQuickItem_height(self: pointer, ): float64 {.importc: "QQuickItem_height".}
+proc fcQQuickItem_implicitWidth(self: pointer): float64 {.importc: "QQuickItem_implicitWidth".}
+proc fcQQuickItem_height(self: pointer): float64 {.importc: "QQuickItem_height".}
 proc fcQQuickItem_setHeight(self: pointer, height: float64): void {.importc: "QQuickItem_setHeight".}
-proc fcQQuickItem_resetHeight(self: pointer, ): void {.importc: "QQuickItem_resetHeight".}
+proc fcQQuickItem_resetHeight(self: pointer): void {.importc: "QQuickItem_resetHeight".}
 proc fcQQuickItem_setImplicitHeight(self: pointer, implicitHeight: float64): void {.importc: "QQuickItem_setImplicitHeight".}
-proc fcQQuickItem_implicitHeight(self: pointer, ): float64 {.importc: "QQuickItem_implicitHeight".}
-proc fcQQuickItem_size(self: pointer, ): pointer {.importc: "QQuickItem_size".}
+proc fcQQuickItem_implicitHeight(self: pointer): float64 {.importc: "QQuickItem_implicitHeight".}
+proc fcQQuickItem_size(self: pointer): pointer {.importc: "QQuickItem_size".}
 proc fcQQuickItem_setSize(self: pointer, size: pointer): void {.importc: "QQuickItem_setSize".}
-proc fcQQuickItem_transformOrigin(self: pointer, ): cint {.importc: "QQuickItem_transformOrigin".}
+proc fcQQuickItem_transformOrigin(self: pointer): cint {.importc: "QQuickItem_transformOrigin".}
 proc fcQQuickItem_setTransformOrigin(self: pointer, transformOrigin: cint): void {.importc: "QQuickItem_setTransformOrigin".}
-proc fcQQuickItem_transformOriginPoint(self: pointer, ): pointer {.importc: "QQuickItem_transformOriginPoint".}
+proc fcQQuickItem_transformOriginPoint(self: pointer): pointer {.importc: "QQuickItem_transformOriginPoint".}
 proc fcQQuickItem_setTransformOriginPoint(self: pointer, transformOriginPoint: pointer): void {.importc: "QQuickItem_setTransformOriginPoint".}
-proc fcQQuickItem_z(self: pointer, ): float64 {.importc: "QQuickItem_z".}
+proc fcQQuickItem_z(self: pointer): float64 {.importc: "QQuickItem_z".}
 proc fcQQuickItem_setZ(self: pointer, z: float64): void {.importc: "QQuickItem_setZ".}
-proc fcQQuickItem_rotation(self: pointer, ): float64 {.importc: "QQuickItem_rotation".}
+proc fcQQuickItem_rotation(self: pointer): float64 {.importc: "QQuickItem_rotation".}
 proc fcQQuickItem_setRotation(self: pointer, rotation: float64): void {.importc: "QQuickItem_setRotation".}
-proc fcQQuickItem_scale(self: pointer, ): float64 {.importc: "QQuickItem_scale".}
+proc fcQQuickItem_scale(self: pointer): float64 {.importc: "QQuickItem_scale".}
 proc fcQQuickItem_setScale(self: pointer, scale: float64): void {.importc: "QQuickItem_setScale".}
-proc fcQQuickItem_opacity(self: pointer, ): float64 {.importc: "QQuickItem_opacity".}
+proc fcQQuickItem_opacity(self: pointer): float64 {.importc: "QQuickItem_opacity".}
 proc fcQQuickItem_setOpacity(self: pointer, opacity: float64): void {.importc: "QQuickItem_setOpacity".}
-proc fcQQuickItem_isVisible(self: pointer, ): bool {.importc: "QQuickItem_isVisible".}
+proc fcQQuickItem_isVisible(self: pointer): bool {.importc: "QQuickItem_isVisible".}
 proc fcQQuickItem_setVisible(self: pointer, visible: bool): void {.importc: "QQuickItem_setVisible".}
-proc fcQQuickItem_isEnabled(self: pointer, ): bool {.importc: "QQuickItem_isEnabled".}
+proc fcQQuickItem_isEnabled(self: pointer): bool {.importc: "QQuickItem_isEnabled".}
 proc fcQQuickItem_setEnabled(self: pointer, enabled: bool): void {.importc: "QQuickItem_setEnabled".}
-proc fcQQuickItem_smooth(self: pointer, ): bool {.importc: "QQuickItem_smooth".}
+proc fcQQuickItem_smooth(self: pointer): bool {.importc: "QQuickItem_smooth".}
 proc fcQQuickItem_setSmooth(self: pointer, smooth: bool): void {.importc: "QQuickItem_setSmooth".}
-proc fcQQuickItem_activeFocusOnTab(self: pointer, ): bool {.importc: "QQuickItem_activeFocusOnTab".}
+proc fcQQuickItem_activeFocusOnTab(self: pointer): bool {.importc: "QQuickItem_activeFocusOnTab".}
 proc fcQQuickItem_setActiveFocusOnTab(self: pointer, activeFocusOnTab: bool): void {.importc: "QQuickItem_setActiveFocusOnTab".}
-proc fcQQuickItem_antialiasing(self: pointer, ): bool {.importc: "QQuickItem_antialiasing".}
+proc fcQQuickItem_antialiasing(self: pointer): bool {.importc: "QQuickItem_antialiasing".}
 proc fcQQuickItem_setAntialiasing(self: pointer, antialiasing: bool): void {.importc: "QQuickItem_setAntialiasing".}
-proc fcQQuickItem_resetAntialiasing(self: pointer, ): void {.importc: "QQuickItem_resetAntialiasing".}
-proc fcQQuickItem_flags(self: pointer, ): cint {.importc: "QQuickItem_flags".}
+proc fcQQuickItem_resetAntialiasing(self: pointer): void {.importc: "QQuickItem_resetAntialiasing".}
+proc fcQQuickItem_flags(self: pointer): cint {.importc: "QQuickItem_flags".}
 proc fcQQuickItem_setFlag(self: pointer, flag: cint): void {.importc: "QQuickItem_setFlag".}
 proc fcQQuickItem_setFlags(self: pointer, flags: cint): void {.importc: "QQuickItem_setFlags".}
-proc fcQQuickItem_boundingRect(self: pointer, ): pointer {.importc: "QQuickItem_boundingRect".}
-proc fcQQuickItem_clipRect(self: pointer, ): pointer {.importc: "QQuickItem_clipRect".}
-proc fcQQuickItem_hasActiveFocus(self: pointer, ): bool {.importc: "QQuickItem_hasActiveFocus".}
-proc fcQQuickItem_hasFocus(self: pointer, ): bool {.importc: "QQuickItem_hasFocus".}
+proc fcQQuickItem_boundingRect(self: pointer): pointer {.importc: "QQuickItem_boundingRect".}
+proc fcQQuickItem_clipRect(self: pointer): pointer {.importc: "QQuickItem_clipRect".}
+proc fcQQuickItem_hasActiveFocus(self: pointer): bool {.importc: "QQuickItem_hasActiveFocus".}
+proc fcQQuickItem_hasFocus(self: pointer): bool {.importc: "QQuickItem_hasFocus".}
 proc fcQQuickItem_setFocus(self: pointer, focus: bool): void {.importc: "QQuickItem_setFocus".}
 proc fcQQuickItem_setFocus2(self: pointer, focus: bool, reason: cint): void {.importc: "QQuickItem_setFocus2".}
-proc fcQQuickItem_isFocusScope(self: pointer, ): bool {.importc: "QQuickItem_isFocusScope".}
-proc fcQQuickItem_scopedFocusItem(self: pointer, ): pointer {.importc: "QQuickItem_scopedFocusItem".}
+proc fcQQuickItem_isFocusScope(self: pointer): bool {.importc: "QQuickItem_isFocusScope".}
+proc fcQQuickItem_scopedFocusItem(self: pointer): pointer {.importc: "QQuickItem_scopedFocusItem".}
 proc fcQQuickItem_isAncestorOf(self: pointer, child: pointer): bool {.importc: "QQuickItem_isAncestorOf".}
-proc fcQQuickItem_acceptedMouseButtons(self: pointer, ): cint {.importc: "QQuickItem_acceptedMouseButtons".}
+proc fcQQuickItem_acceptedMouseButtons(self: pointer): cint {.importc: "QQuickItem_acceptedMouseButtons".}
 proc fcQQuickItem_setAcceptedMouseButtons(self: pointer, buttons: cint): void {.importc: "QQuickItem_setAcceptedMouseButtons".}
-proc fcQQuickItem_acceptHoverEvents(self: pointer, ): bool {.importc: "QQuickItem_acceptHoverEvents".}
+proc fcQQuickItem_acceptHoverEvents(self: pointer): bool {.importc: "QQuickItem_acceptHoverEvents".}
 proc fcQQuickItem_setAcceptHoverEvents(self: pointer, enabled: bool): void {.importc: "QQuickItem_setAcceptHoverEvents".}
-proc fcQQuickItem_acceptTouchEvents(self: pointer, ): bool {.importc: "QQuickItem_acceptTouchEvents".}
+proc fcQQuickItem_acceptTouchEvents(self: pointer): bool {.importc: "QQuickItem_acceptTouchEvents".}
 proc fcQQuickItem_setAcceptTouchEvents(self: pointer, accept: bool): void {.importc: "QQuickItem_setAcceptTouchEvents".}
-proc fcQQuickItem_cursor(self: pointer, ): pointer {.importc: "QQuickItem_cursor".}
+proc fcQQuickItem_cursor(self: pointer): pointer {.importc: "QQuickItem_cursor".}
 proc fcQQuickItem_setCursor(self: pointer, cursor: pointer): void {.importc: "QQuickItem_setCursor".}
-proc fcQQuickItem_unsetCursor(self: pointer, ): void {.importc: "QQuickItem_unsetCursor".}
-proc fcQQuickItem_isUnderMouse(self: pointer, ): bool {.importc: "QQuickItem_isUnderMouse".}
-proc fcQQuickItem_grabMouse(self: pointer, ): void {.importc: "QQuickItem_grabMouse".}
-proc fcQQuickItem_ungrabMouse(self: pointer, ): void {.importc: "QQuickItem_ungrabMouse".}
-proc fcQQuickItem_keepMouseGrab(self: pointer, ): bool {.importc: "QQuickItem_keepMouseGrab".}
+proc fcQQuickItem_unsetCursor(self: pointer): void {.importc: "QQuickItem_unsetCursor".}
+proc fcQQuickItem_isUnderMouse(self: pointer): bool {.importc: "QQuickItem_isUnderMouse".}
+proc fcQQuickItem_grabMouse(self: pointer): void {.importc: "QQuickItem_grabMouse".}
+proc fcQQuickItem_ungrabMouse(self: pointer): void {.importc: "QQuickItem_ungrabMouse".}
+proc fcQQuickItem_keepMouseGrab(self: pointer): bool {.importc: "QQuickItem_keepMouseGrab".}
 proc fcQQuickItem_setKeepMouseGrab(self: pointer, keepMouseGrab: bool): void {.importc: "QQuickItem_setKeepMouseGrab".}
-proc fcQQuickItem_filtersChildMouseEvents(self: pointer, ): bool {.importc: "QQuickItem_filtersChildMouseEvents".}
+proc fcQQuickItem_filtersChildMouseEvents(self: pointer): bool {.importc: "QQuickItem_filtersChildMouseEvents".}
 proc fcQQuickItem_setFiltersChildMouseEvents(self: pointer, filter: bool): void {.importc: "QQuickItem_setFiltersChildMouseEvents".}
 proc fcQQuickItem_grabTouchPoints(self: pointer, ids: struct_miqt_array): void {.importc: "QQuickItem_grabTouchPoints".}
-proc fcQQuickItem_ungrabTouchPoints(self: pointer, ): void {.importc: "QQuickItem_ungrabTouchPoints".}
-proc fcQQuickItem_keepTouchGrab(self: pointer, ): bool {.importc: "QQuickItem_keepTouchGrab".}
+proc fcQQuickItem_ungrabTouchPoints(self: pointer): void {.importc: "QQuickItem_ungrabTouchPoints".}
+proc fcQQuickItem_keepTouchGrab(self: pointer): bool {.importc: "QQuickItem_keepTouchGrab".}
 proc fcQQuickItem_setKeepTouchGrab(self: pointer, keepTouchGrab: bool): void {.importc: "QQuickItem_setKeepTouchGrab".}
 proc fcQQuickItem_grabToImage(self: pointer, callback: pointer): bool {.importc: "QQuickItem_grabToImage".}
 proc fcQQuickItem_contains(self: pointer, point: pointer): bool {.importc: "QQuickItem_contains".}
-proc fcQQuickItem_containmentMask(self: pointer, ): pointer {.importc: "QQuickItem_containmentMask".}
+proc fcQQuickItem_containmentMask(self: pointer): pointer {.importc: "QQuickItem_containmentMask".}
 proc fcQQuickItem_setContainmentMask(self: pointer, mask: pointer): void {.importc: "QQuickItem_setContainmentMask".}
 proc fcQQuickItem_itemTransform(self: pointer, param1: pointer, param2: ptr bool): pointer {.importc: "QQuickItem_itemTransform".}
 proc fcQQuickItem_mapToItem(self: pointer, item: pointer, point: pointer): pointer {.importc: "QQuickItem_mapToItem".}
@@ -257,15 +259,15 @@ proc fcQQuickItem_mapFromScene(self: pointer, point: pointer): pointer {.importc
 proc fcQQuickItem_mapFromGlobal(self: pointer, point: pointer): pointer {.importc: "QQuickItem_mapFromGlobal".}
 proc fcQQuickItem_mapRectFromItem(self: pointer, item: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectFromItem".}
 proc fcQQuickItem_mapRectFromScene(self: pointer, rect: pointer): pointer {.importc: "QQuickItem_mapRectFromScene".}
-proc fcQQuickItem_polish(self: pointer, ): void {.importc: "QQuickItem_polish".}
-proc fcQQuickItem_forceActiveFocus(self: pointer, ): void {.importc: "QQuickItem_forceActiveFocus".}
+proc fcQQuickItem_polish(self: pointer): void {.importc: "QQuickItem_polish".}
+proc fcQQuickItem_forceActiveFocus(self: pointer): void {.importc: "QQuickItem_forceActiveFocus".}
 proc fcQQuickItem_forceActiveFocusWithReason(self: pointer, reason: cint): void {.importc: "QQuickItem_forceActiveFocusWithReason".}
-proc fcQQuickItem_nextItemInFocusChain(self: pointer, ): pointer {.importc: "QQuickItem_nextItemInFocusChain".}
+proc fcQQuickItem_nextItemInFocusChain(self: pointer): pointer {.importc: "QQuickItem_nextItemInFocusChain".}
 proc fcQQuickItem_childAt(self: pointer, x: float64, y: float64): pointer {.importc: "QQuickItem_childAt".}
 proc fcQQuickItem_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QQuickItem_inputMethodQuery".}
-proc fcQQuickItem_isTextureProvider(self: pointer, ): bool {.importc: "QQuickItem_isTextureProvider".}
-proc fcQQuickItem_textureProvider(self: pointer, ): pointer {.importc: "QQuickItem_textureProvider".}
-proc fcQQuickItem_update(self: pointer, ): void {.importc: "QQuickItem_update".}
+proc fcQQuickItem_isTextureProvider(self: pointer): bool {.importc: "QQuickItem_isTextureProvider".}
+proc fcQQuickItem_textureProvider(self: pointer): pointer {.importc: "QQuickItem_textureProvider".}
+proc fcQQuickItem_update(self: pointer): void {.importc: "QQuickItem_update".}
 proc fcQQuickItem_childrenRectChanged(self: pointer, param1: pointer): void {.importc: "QQuickItem_childrenRectChanged".}
 proc fcQQuickItem_connect_childrenRectChanged(self: pointer, slot: int, callback: proc (slot: int, param1: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_childrenRectChanged".}
 proc fcQQuickItem_baselineOffsetChanged(self: pointer, param1: float64): void {.importc: "QQuickItem_baselineOffsetChanged".}
@@ -290,35 +292,35 @@ proc fcQQuickItem_clipChanged(self: pointer, param1: bool): void {.importc: "QQu
 proc fcQQuickItem_connect_clipChanged(self: pointer, slot: int, callback: proc (slot: int, param1: bool) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_clipChanged".}
 proc fcQQuickItem_windowChanged(self: pointer, window: pointer): void {.importc: "QQuickItem_windowChanged".}
 proc fcQQuickItem_connect_windowChanged(self: pointer, slot: int, callback: proc (slot: int, window: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_windowChanged".}
-proc fcQQuickItem_childrenChanged(self: pointer, ): void {.importc: "QQuickItem_childrenChanged".}
+proc fcQQuickItem_childrenChanged(self: pointer): void {.importc: "QQuickItem_childrenChanged".}
 proc fcQQuickItem_connect_childrenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_childrenChanged".}
-proc fcQQuickItem_opacityChanged(self: pointer, ): void {.importc: "QQuickItem_opacityChanged".}
+proc fcQQuickItem_opacityChanged(self: pointer): void {.importc: "QQuickItem_opacityChanged".}
 proc fcQQuickItem_connect_opacityChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_opacityChanged".}
-proc fcQQuickItem_enabledChanged(self: pointer, ): void {.importc: "QQuickItem_enabledChanged".}
+proc fcQQuickItem_enabledChanged(self: pointer): void {.importc: "QQuickItem_enabledChanged".}
 proc fcQQuickItem_connect_enabledChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_enabledChanged".}
-proc fcQQuickItem_visibleChanged(self: pointer, ): void {.importc: "QQuickItem_visibleChanged".}
+proc fcQQuickItem_visibleChanged(self: pointer): void {.importc: "QQuickItem_visibleChanged".}
 proc fcQQuickItem_connect_visibleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_visibleChanged".}
-proc fcQQuickItem_visibleChildrenChanged(self: pointer, ): void {.importc: "QQuickItem_visibleChildrenChanged".}
+proc fcQQuickItem_visibleChildrenChanged(self: pointer): void {.importc: "QQuickItem_visibleChildrenChanged".}
 proc fcQQuickItem_connect_visibleChildrenChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_visibleChildrenChanged".}
-proc fcQQuickItem_rotationChanged(self: pointer, ): void {.importc: "QQuickItem_rotationChanged".}
+proc fcQQuickItem_rotationChanged(self: pointer): void {.importc: "QQuickItem_rotationChanged".}
 proc fcQQuickItem_connect_rotationChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_rotationChanged".}
-proc fcQQuickItem_scaleChanged(self: pointer, ): void {.importc: "QQuickItem_scaleChanged".}
+proc fcQQuickItem_scaleChanged(self: pointer): void {.importc: "QQuickItem_scaleChanged".}
 proc fcQQuickItem_connect_scaleChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_scaleChanged".}
-proc fcQQuickItem_xChanged(self: pointer, ): void {.importc: "QQuickItem_xChanged".}
+proc fcQQuickItem_xChanged(self: pointer): void {.importc: "QQuickItem_xChanged".}
 proc fcQQuickItem_connect_xChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_xChanged".}
-proc fcQQuickItem_yChanged(self: pointer, ): void {.importc: "QQuickItem_yChanged".}
+proc fcQQuickItem_yChanged(self: pointer): void {.importc: "QQuickItem_yChanged".}
 proc fcQQuickItem_connect_yChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_yChanged".}
-proc fcQQuickItem_widthChanged(self: pointer, ): void {.importc: "QQuickItem_widthChanged".}
+proc fcQQuickItem_widthChanged(self: pointer): void {.importc: "QQuickItem_widthChanged".}
 proc fcQQuickItem_connect_widthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_widthChanged".}
-proc fcQQuickItem_heightChanged(self: pointer, ): void {.importc: "QQuickItem_heightChanged".}
+proc fcQQuickItem_heightChanged(self: pointer): void {.importc: "QQuickItem_heightChanged".}
 proc fcQQuickItem_connect_heightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_heightChanged".}
-proc fcQQuickItem_zChanged(self: pointer, ): void {.importc: "QQuickItem_zChanged".}
+proc fcQQuickItem_zChanged(self: pointer): void {.importc: "QQuickItem_zChanged".}
 proc fcQQuickItem_connect_zChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_zChanged".}
-proc fcQQuickItem_implicitWidthChanged(self: pointer, ): void {.importc: "QQuickItem_implicitWidthChanged".}
+proc fcQQuickItem_implicitWidthChanged(self: pointer): void {.importc: "QQuickItem_implicitWidthChanged".}
 proc fcQQuickItem_connect_implicitWidthChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_implicitWidthChanged".}
-proc fcQQuickItem_implicitHeightChanged(self: pointer, ): void {.importc: "QQuickItem_implicitHeightChanged".}
+proc fcQQuickItem_implicitHeightChanged(self: pointer): void {.importc: "QQuickItem_implicitHeightChanged".}
 proc fcQQuickItem_connect_implicitHeightChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_implicitHeightChanged".}
-proc fcQQuickItem_containmentMaskChanged(self: pointer, ): void {.importc: "QQuickItem_containmentMaskChanged".}
+proc fcQQuickItem_containmentMaskChanged(self: pointer): void {.importc: "QQuickItem_containmentMaskChanged".}
 proc fcQQuickItem_connect_containmentMaskChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QQuickItem_connect_containmentMaskChanged".}
 proc fcQQuickItem_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QQuickItem_tr2".}
 proc fcQQuickItem_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QQuickItem_tr3".}
@@ -327,66 +329,68 @@ proc fcQQuickItem_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {
 proc fcQQuickItem_setFlag2(self: pointer, flag: cint, enabled: bool): void {.importc: "QQuickItem_setFlag2".}
 proc fcQQuickItem_grabToImage22(self: pointer, callback: pointer, targetSize: pointer): bool {.importc: "QQuickItem_grabToImage22".}
 proc fcQQuickItem_nextItemInFocusChain1(self: pointer, forward: bool): pointer {.importc: "QQuickItem_nextItemInFocusChain1".}
+proc fcQQuickItem_vtbl(self: pointer): pointer {.importc: "QQuickItem_vtbl".}
+proc fcQQuickItem_vdata(self: pointer): pointer {.importc: "QQuickItem_vdata".}
 type cQQuickItemVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQQuickItemVTable, self: ptr cQQuickItem) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  boundingRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  clipRect*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  contains*: proc(vtbl, self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
-  inputMethodQuery*: proc(vtbl, self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
-  isTextureProvider*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  textureProvider*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
-  itemChange*: proc(vtbl, self: pointer, param1: cint, param2: pointer): void {.cdecl, raises: [], gcsafe.}
-  classBegin*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  componentComplete*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  keyPressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  keyReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  inputMethodEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusInEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  focusOutEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  mousePressEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseReleaseEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseDoubleClickEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  mouseUngrabEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  touchUngrabEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  wheelEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  touchEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hoverEnterEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hoverMoveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  hoverLeaveEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragEnterEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragMoveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dragLeaveEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  dropEvent*: proc(vtbl, self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
-  childMouseEventFilter*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
-  windowDeactivateEvent*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  geometryChanged*: proc(vtbl, self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl, raises: [], gcsafe.}
-  updatePaintNode*: proc(vtbl, self: pointer, param1: pointer, param2: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  releaseResources*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  updatePolish*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQQuickItem_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QQuickItem_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  boundingRect*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  clipRect*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  contains*: proc(self: pointer, point: pointer): bool {.cdecl, raises: [], gcsafe.}
+  inputMethodQuery*: proc(self: pointer, query: cint): pointer {.cdecl, raises: [], gcsafe.}
+  isTextureProvider*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  textureProvider*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, param1: pointer): bool {.cdecl, raises: [], gcsafe.}
+  itemChange*: proc(self: pointer, param1: cint, param2: pointer): void {.cdecl, raises: [], gcsafe.}
+  classBegin*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  componentComplete*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyPressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  keyReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  inputMethodEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusInEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  focusOutEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  mousePressEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseReleaseEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseDoubleClickEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  mouseUngrabEvent*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  touchUngrabEvent*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  wheelEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  touchEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverEnterEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverMoveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  hoverLeaveEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragEnterEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragMoveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dragLeaveEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  dropEvent*: proc(self: pointer, param1: pointer): void {.cdecl, raises: [], gcsafe.}
+  childMouseEventFilter*: proc(self: pointer, param1: pointer, param2: pointer): bool {.cdecl, raises: [], gcsafe.}
+  windowDeactivateEvent*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  geometryChanged*: proc(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl, raises: [], gcsafe.}
+  updatePaintNode*: proc(self: pointer, param1: pointer, param2: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  releaseResources*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  updatePolish*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQQuickItem_virtualbase_metaObject(self: pointer): pointer {.importc: "QQuickItem_virtualbase_metaObject".}
 proc fcQQuickItem_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QQuickItem_virtualbase_metacast".}
 proc fcQQuickItem_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QQuickItem_virtualbase_metacall".}
-proc fcQQuickItem_virtualbase_boundingRect(self: pointer, ): pointer {.importc: "QQuickItem_virtualbase_boundingRect".}
-proc fcQQuickItem_virtualbase_clipRect(self: pointer, ): pointer {.importc: "QQuickItem_virtualbase_clipRect".}
+proc fcQQuickItem_virtualbase_boundingRect(self: pointer): pointer {.importc: "QQuickItem_virtualbase_boundingRect".}
+proc fcQQuickItem_virtualbase_clipRect(self: pointer): pointer {.importc: "QQuickItem_virtualbase_clipRect".}
 proc fcQQuickItem_virtualbase_contains(self: pointer, point: pointer): bool {.importc: "QQuickItem_virtualbase_contains".}
 proc fcQQuickItem_virtualbase_inputMethodQuery(self: pointer, query: cint): pointer {.importc: "QQuickItem_virtualbase_inputMethodQuery".}
-proc fcQQuickItem_virtualbase_isTextureProvider(self: pointer, ): bool {.importc: "QQuickItem_virtualbase_isTextureProvider".}
-proc fcQQuickItem_virtualbase_textureProvider(self: pointer, ): pointer {.importc: "QQuickItem_virtualbase_textureProvider".}
+proc fcQQuickItem_virtualbase_isTextureProvider(self: pointer): bool {.importc: "QQuickItem_virtualbase_isTextureProvider".}
+proc fcQQuickItem_virtualbase_textureProvider(self: pointer): pointer {.importc: "QQuickItem_virtualbase_textureProvider".}
 proc fcQQuickItem_virtualbase_event(self: pointer, param1: pointer): bool {.importc: "QQuickItem_virtualbase_event".}
 proc fcQQuickItem_virtualbase_itemChange(self: pointer, param1: cint, param2: pointer): void {.importc: "QQuickItem_virtualbase_itemChange".}
-proc fcQQuickItem_virtualbase_classBegin(self: pointer, ): void {.importc: "QQuickItem_virtualbase_classBegin".}
-proc fcQQuickItem_virtualbase_componentComplete(self: pointer, ): void {.importc: "QQuickItem_virtualbase_componentComplete".}
+proc fcQQuickItem_virtualbase_classBegin(self: pointer): void {.importc: "QQuickItem_virtualbase_classBegin".}
+proc fcQQuickItem_virtualbase_componentComplete(self: pointer): void {.importc: "QQuickItem_virtualbase_componentComplete".}
 proc fcQQuickItem_virtualbase_keyPressEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_keyPressEvent".}
 proc fcQQuickItem_virtualbase_keyReleaseEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_keyReleaseEvent".}
 proc fcQQuickItem_virtualbase_inputMethodEvent(self: pointer, param1: pointer): void {.importc: "QQuickItem_virtualbase_inputMethodEvent".}
@@ -396,8 +400,8 @@ proc fcQQuickItem_virtualbase_mousePressEvent(self: pointer, event: pointer): vo
 proc fcQQuickItem_virtualbase_mouseMoveEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_mouseMoveEvent".}
 proc fcQQuickItem_virtualbase_mouseReleaseEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_mouseReleaseEvent".}
 proc fcQQuickItem_virtualbase_mouseDoubleClickEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_mouseDoubleClickEvent".}
-proc fcQQuickItem_virtualbase_mouseUngrabEvent(self: pointer, ): void {.importc: "QQuickItem_virtualbase_mouseUngrabEvent".}
-proc fcQQuickItem_virtualbase_touchUngrabEvent(self: pointer, ): void {.importc: "QQuickItem_virtualbase_touchUngrabEvent".}
+proc fcQQuickItem_virtualbase_mouseUngrabEvent(self: pointer): void {.importc: "QQuickItem_virtualbase_mouseUngrabEvent".}
+proc fcQQuickItem_virtualbase_touchUngrabEvent(self: pointer): void {.importc: "QQuickItem_virtualbase_touchUngrabEvent".}
 proc fcQQuickItem_virtualbase_wheelEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_wheelEvent".}
 proc fcQQuickItem_virtualbase_touchEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_touchEvent".}
 proc fcQQuickItem_virtualbase_hoverEnterEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_hoverEnterEvent".}
@@ -408,36 +412,36 @@ proc fcQQuickItem_virtualbase_dragMoveEvent(self: pointer, param1: pointer): voi
 proc fcQQuickItem_virtualbase_dragLeaveEvent(self: pointer, param1: pointer): void {.importc: "QQuickItem_virtualbase_dragLeaveEvent".}
 proc fcQQuickItem_virtualbase_dropEvent(self: pointer, param1: pointer): void {.importc: "QQuickItem_virtualbase_dropEvent".}
 proc fcQQuickItem_virtualbase_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.importc: "QQuickItem_virtualbase_childMouseEventFilter".}
-proc fcQQuickItem_virtualbase_windowDeactivateEvent(self: pointer, ): void {.importc: "QQuickItem_virtualbase_windowDeactivateEvent".}
+proc fcQQuickItem_virtualbase_windowDeactivateEvent(self: pointer): void {.importc: "QQuickItem_virtualbase_windowDeactivateEvent".}
 proc fcQQuickItem_virtualbase_geometryChanged(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.importc: "QQuickItem_virtualbase_geometryChanged".}
 proc fcQQuickItem_virtualbase_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.importc: "QQuickItem_virtualbase_updatePaintNode".}
-proc fcQQuickItem_virtualbase_releaseResources(self: pointer, ): void {.importc: "QQuickItem_virtualbase_releaseResources".}
-proc fcQQuickItem_virtualbase_updatePolish(self: pointer, ): void {.importc: "QQuickItem_virtualbase_updatePolish".}
+proc fcQQuickItem_virtualbase_releaseResources(self: pointer): void {.importc: "QQuickItem_virtualbase_releaseResources".}
+proc fcQQuickItem_virtualbase_updatePolish(self: pointer): void {.importc: "QQuickItem_virtualbase_updatePolish".}
 proc fcQQuickItem_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QQuickItem_virtualbase_eventFilter".}
 proc fcQQuickItem_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_timerEvent".}
 proc fcQQuickItem_virtualbase_childEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_childEvent".}
 proc fcQQuickItem_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QQuickItem_virtualbase_customEvent".}
 proc fcQQuickItem_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QQuickItem_virtualbase_connectNotify".}
 proc fcQQuickItem_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QQuickItem_virtualbase_disconnectNotify".}
-proc fcQQuickItem_protectedbase_isComponentComplete(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_isComponentComplete".}
-proc fcQQuickItem_protectedbase_updateInputMethod(self: pointer, ): void {.importc: "QQuickItem_protectedbase_updateInputMethod".}
-proc fcQQuickItem_protectedbase_widthValid(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_widthValid".}
-proc fcQQuickItem_protectedbase_heightValid(self: pointer, ): bool {.importc: "QQuickItem_protectedbase_heightValid".}
+proc fcQQuickItem_protectedbase_isComponentComplete(self: pointer): bool {.importc: "QQuickItem_protectedbase_isComponentComplete".}
+proc fcQQuickItem_protectedbase_updateInputMethod(self: pointer): void {.importc: "QQuickItem_protectedbase_updateInputMethod".}
+proc fcQQuickItem_protectedbase_widthValid(self: pointer): bool {.importc: "QQuickItem_protectedbase_widthValid".}
+proc fcQQuickItem_protectedbase_heightValid(self: pointer): bool {.importc: "QQuickItem_protectedbase_heightValid".}
 proc fcQQuickItem_protectedbase_setImplicitSize(self: pointer, param1: float64, param2: float64): void {.importc: "QQuickItem_protectedbase_setImplicitSize".}
 proc fcQQuickItem_protectedbase_updateInputMethod1(self: pointer, queries: cint): void {.importc: "QQuickItem_protectedbase_updateInputMethod1".}
-proc fcQQuickItem_protectedbase_sender(self: pointer, ): pointer {.importc: "QQuickItem_protectedbase_sender".}
-proc fcQQuickItem_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QQuickItem_protectedbase_senderSignalIndex".}
+proc fcQQuickItem_protectedbase_sender(self: pointer): pointer {.importc: "QQuickItem_protectedbase_sender".}
+proc fcQQuickItem_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QQuickItem_protectedbase_senderSignalIndex".}
 proc fcQQuickItem_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QQuickItem_protectedbase_receivers".}
 proc fcQQuickItem_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QQuickItem_protectedbase_isSignalConnected".}
-proc fcQQuickItem_new(vtbl: pointer, ): ptr cQQuickItem {.importc: "QQuickItem_new".}
-proc fcQQuickItem_new2(vtbl: pointer, parent: pointer): ptr cQQuickItem {.importc: "QQuickItem_new2".}
+proc fcQQuickItem_new(vtbl, vdata: pointer): ptr cQQuickItem {.importc: "QQuickItem_new".}
+proc fcQQuickItem_new2(vtbl, vdata: pointer, parent: pointer): ptr cQQuickItem {.importc: "QQuickItem_new2".}
 proc fcQQuickItem_staticMetaObject(): pointer {.importc: "QQuickItem_staticMetaObject".}
 proc fcQQuickItemItemChangeData_new(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new".}
 proc fcQQuickItemItemChangeData_new2(v: pointer): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new2".}
 proc fcQQuickItemItemChangeData_new3(v: float64): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new3".}
 proc fcQQuickItemItemChangeData_new4(v: bool): ptr cQQuickItemItemChangeData {.importc: "QQuickItem__ItemChangeData_new4".}
 
-proc metaObject*(self: gen_qquickitem_types.QQuickTransform, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qquickitem_types.QQuickTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTransform_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickitem_types.QQuickTransform, param1: cstring): pointer =
@@ -515,11 +519,11 @@ type QQuickTransformVTable* {.inheritable, pure.} = object
   customEvent*: QQuickTransformcustomEventProc
   connectNotify*: QQuickTransformconnectNotifyProc
   disconnectNotify*: QQuickTransformdisconnectNotifyProc
-proc QQuickTransformmetaObject*(self: gen_qquickitem_types.QQuickTransform, ): gen_qobjectdefs_types.QMetaObject =
+proc QQuickTransformmetaObject*(self: gen_qquickitem_types.QQuickTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTransform_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQQuickTransform_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -530,8 +534,8 @@ proc miqt_exec_callback_cQQuickTransform_metaObject(vtbl: pointer, self: pointer
 proc QQuickTransformmetacast*(self: gen_qquickitem_types.QQuickTransform, param1: cstring): pointer =
   fcQQuickTransform_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQQuickTransform_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -540,8 +544,8 @@ proc miqt_exec_callback_cQQuickTransform_metacast(vtbl: pointer, self: pointer, 
 proc QQuickTransformmetacall*(self: gen_qquickitem_types.QQuickTransform, param1: cint, param2: cint, param3: pointer): cint =
   fcQQuickTransform_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQQuickTransform_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -549,8 +553,8 @@ proc miqt_exec_callback_cQQuickTransform_metacall(vtbl: pointer, self: pointer, 
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQQuickTransform_applyTo(vtbl: pointer, self: pointer, matrix: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_applyTo(self: pointer, matrix: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
   vtbl[].applyTo(self, slotval1)
@@ -558,8 +562,8 @@ proc miqt_exec_callback_cQQuickTransform_applyTo(vtbl: pointer, self: pointer, m
 proc QQuickTransformevent*(self: gen_qquickitem_types.QQuickTransform, event: gen_qcoreevent_types.QEvent): bool =
   fcQQuickTransform_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickTransform_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -568,8 +572,8 @@ proc miqt_exec_callback_cQQuickTransform_event(vtbl: pointer, self: pointer, eve
 proc QQuickTransformeventFilter*(self: gen_qquickitem_types.QQuickTransform, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQQuickTransform_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQQuickTransform_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -579,8 +583,8 @@ proc miqt_exec_callback_cQQuickTransform_eventFilter(vtbl: pointer, self: pointe
 proc QQuickTransformtimerEvent*(self: gen_qquickitem_types.QQuickTransform, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQQuickTransform_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickTransform_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -588,8 +592,8 @@ proc miqt_exec_callback_cQQuickTransform_timerEvent(vtbl: pointer, self: pointer
 proc QQuickTransformchildEvent*(self: gen_qquickitem_types.QQuickTransform, event: gen_qcoreevent_types.QChildEvent): void =
   fcQQuickTransform_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickTransform_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -597,8 +601,8 @@ proc miqt_exec_callback_cQQuickTransform_childEvent(vtbl: pointer, self: pointer
 proc QQuickTransformcustomEvent*(self: gen_qquickitem_types.QQuickTransform, event: gen_qcoreevent_types.QEvent): void =
   fcQQuickTransform_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickTransform_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -606,8 +610,8 @@ proc miqt_exec_callback_cQQuickTransform_customEvent(vtbl: pointer, self: pointe
 proc QQuickTransformconnectNotify*(self: gen_qquickitem_types.QQuickTransform, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQuickTransform_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQuickTransform_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -615,19 +619,19 @@ proc miqt_exec_callback_cQQuickTransform_connectNotify(vtbl: pointer, self: poin
 proc QQuickTransformdisconnectNotify*(self: gen_qquickitem_types.QQuickTransform, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQuickTransform_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQuickTransform_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickTransformVTable](vtbl)
+proc cQQuickTransform_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickTransformVTable](fcQQuickTransform_vdata(self))
   let self = QQuickTransform(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQuickTransform* {.inheritable.} = ref object of QQuickTransform
   vtbl*: cQQuickTransformVTable
-method metaObject*(self: VirtualQQuickTransform, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQQuickTransform): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQuickTransformmetaObject(self[])
-proc miqt_exec_method_cQQuickTransform_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQQuickTransform_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -635,88 +639,88 @@ proc miqt_exec_method_cQQuickTransform_metaObject(vtbl: pointer, inst: pointer):
 
 method metacast*(self: VirtualQQuickTransform, param1: cstring): pointer {.base.} =
   QQuickTransformmetacast(self[], param1)
-proc miqt_exec_method_cQQuickTransform_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQQuickTransform, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QQuickTransformmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQQuickTransform_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method applyTo*(self: VirtualQQuickTransform, matrix: gen_qmatrix4x4_types.QMatrix4x4): void {.base.} =
   raiseAssert("missing implementation of QQuickTransform_virtualbase_applyTo")
-proc miqt_exec_method_cQQuickTransform_applyTo(vtbl: pointer, inst: pointer, matrix: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_applyTo(self: pointer, matrix: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qmatrix4x4_types.QMatrix4x4(h: matrix, owned: false)
-  vtbl.applyTo(slotval1)
+  inst.applyTo(slotval1)
 
 method event*(self: VirtualQQuickTransform, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQuickTransformevent(self[], event)
-proc miqt_exec_method_cQQuickTransform_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQQuickTransform, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQuickTransformeventFilter(self[], watched, event)
-proc miqt_exec_method_cQQuickTransform_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQQuickTransform, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QQuickTransformtimerEvent(self[], event)
-proc miqt_exec_method_cQQuickTransform_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQuickTransform, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQuickTransformchildEvent(self[], event)
-proc miqt_exec_method_cQQuickTransform_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQuickTransform, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQuickTransformcustomEvent(self[], event)
-proc miqt_exec_method_cQQuickTransform_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQuickTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickTransformconnectNotify(self[], signal)
-proc miqt_exec_method_cQQuickTransform_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQuickTransform, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickTransformdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQQuickTransform_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickTransform](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
+proc cQQuickTransform_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickTransform](fcQQuickTransform_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc update*(self: gen_qquickitem_types.QQuickTransform, ): void =
+proc update*(self: gen_qquickitem_types.QQuickTransform): void =
   fcQQuickTransform_protectedbase_update(self.h)
 
-proc sender*(self: gen_qquickitem_types.QQuickTransform, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qquickitem_types.QQuickTransform): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQuickTransform_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qquickitem_types.QQuickTransform, ): cint =
+proc senderSignalIndex*(self: gen_qquickitem_types.QQuickTransform): cint =
   fcQQuickTransform_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qquickitem_types.QQuickTransform, signal: cstring): cint =
@@ -729,113 +733,98 @@ proc create*(T: type gen_qquickitem_types.QQuickTransform,
     vtbl: ref QQuickTransformVTable = nil): gen_qquickitem_types.QQuickTransform =
   let vtbl = if vtbl == nil: new QQuickTransformVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickTransformVTable, _: ptr cQQuickTransform) {.cdecl.} =
-    let vtbl = cast[ref QQuickTransformVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQuickTransformVTable](fcQQuickTransform_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickTransform_metaObject
+    vtbl[].vtbl.metaObject = cQQuickTransform_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickTransform_metacast
+    vtbl[].vtbl.metacast = cQQuickTransform_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickTransform_metacall
+    vtbl[].vtbl.metacall = cQQuickTransform_vtable_callback_metacall
   if not isNil(vtbl[].applyTo):
-    vtbl[].vtbl.applyTo = miqt_exec_callback_cQQuickTransform_applyTo
+    vtbl[].vtbl.applyTo = cQQuickTransform_vtable_callback_applyTo
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQuickTransform_event
+    vtbl[].vtbl.event = cQQuickTransform_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickTransform_eventFilter
+    vtbl[].vtbl.eventFilter = cQQuickTransform_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickTransform_timerEvent
+    vtbl[].vtbl.timerEvent = cQQuickTransform_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickTransform_childEvent
+    vtbl[].vtbl.childEvent = cQQuickTransform_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickTransform_customEvent
+    vtbl[].vtbl.customEvent = cQQuickTransform_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickTransform_connectNotify
+    vtbl[].vtbl.connectNotify = cQQuickTransform_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickTransform_disconnectNotify
-  gen_qquickitem_types.QQuickTransform(h: fcQQuickTransform_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQuickTransform_vtable_callback_disconnectNotify
+  gen_qquickitem_types.QQuickTransform(h: fcQQuickTransform_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qquickitem_types.QQuickTransform,
     parent: gen_qobject_types.QObject,
     vtbl: ref QQuickTransformVTable = nil): gen_qquickitem_types.QQuickTransform =
   let vtbl = if vtbl == nil: new QQuickTransformVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickTransformVTable, _: ptr cQQuickTransform) {.cdecl.} =
-    let vtbl = cast[ref QQuickTransformVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQuickTransformVTable](fcQQuickTransform_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickTransform_metaObject
+    vtbl[].vtbl.metaObject = cQQuickTransform_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickTransform_metacast
+    vtbl[].vtbl.metacast = cQQuickTransform_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickTransform_metacall
+    vtbl[].vtbl.metacall = cQQuickTransform_vtable_callback_metacall
   if not isNil(vtbl[].applyTo):
-    vtbl[].vtbl.applyTo = miqt_exec_callback_cQQuickTransform_applyTo
+    vtbl[].vtbl.applyTo = cQQuickTransform_vtable_callback_applyTo
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQuickTransform_event
+    vtbl[].vtbl.event = cQQuickTransform_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickTransform_eventFilter
+    vtbl[].vtbl.eventFilter = cQQuickTransform_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickTransform_timerEvent
+    vtbl[].vtbl.timerEvent = cQQuickTransform_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickTransform_childEvent
+    vtbl[].vtbl.childEvent = cQQuickTransform_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickTransform_customEvent
+    vtbl[].vtbl.customEvent = cQQuickTransform_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickTransform_connectNotify
+    vtbl[].vtbl.connectNotify = cQQuickTransform_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickTransform_disconnectNotify
-  gen_qquickitem_types.QQuickTransform(h: fcQQuickTransform_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQuickTransform_vtable_callback_disconnectNotify
+  gen_qquickitem_types.QQuickTransform(h: fcQQuickTransform_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQQuickTransform_mvtbl = cQQuickTransformVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQQuickTransform()[])](self.fcQQuickTransform_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQQuickTransform_method_callback_metaObject,
+  metacast: cQQuickTransform_method_callback_metacast,
+  metacall: cQQuickTransform_method_callback_metacall,
+  applyTo: cQQuickTransform_method_callback_applyTo,
+  event: cQQuickTransform_method_callback_event,
+  eventFilter: cQQuickTransform_method_callback_eventFilter,
+  timerEvent: cQQuickTransform_method_callback_timerEvent,
+  childEvent: cQQuickTransform_method_callback_childEvent,
+  customEvent: cQQuickTransform_method_callback_customEvent,
+  connectNotify: cQQuickTransform_method_callback_connectNotify,
+  disconnectNotify: cQQuickTransform_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qquickitem_types.QQuickTransform,
-    vtbl: VirtualQQuickTransform) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickTransformVTable, _: ptr cQQuickTransform) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQuickTransform()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickTransform_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickTransform_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickTransform_metacall
-  vtbl[].vtbl.applyTo = miqt_exec_method_cQQuickTransform_applyTo
-  vtbl[].vtbl.event = miqt_exec_method_cQQuickTransform_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickTransform_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickTransform_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickTransform_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickTransform_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickTransform_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickTransform_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQuickTransform_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQQuickTransform) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQuickTransform_new(addr(cQQuickTransform_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qquickitem_types.QQuickTransform,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQQuickTransform) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickTransformVTable, _: ptr cQQuickTransform) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQuickTransform()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickTransform, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickTransform_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickTransform_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickTransform_metacall
-  vtbl[].vtbl.applyTo = miqt_exec_method_cQQuickTransform_applyTo
-  vtbl[].vtbl.event = miqt_exec_method_cQQuickTransform_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickTransform_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickTransform_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickTransform_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickTransform_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickTransform_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickTransform_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQuickTransform_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQQuickTransform) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQuickTransform_new2(addr(cQQuickTransform_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickitem_types.QQuickTransform): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickTransform_staticMetaObject())
-proc metaObject*(self: gen_qquickitem_types.QQuickItem, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qquickitem_types.QQuickItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItem_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qquickitem_types.QQuickItem, param1: cstring): pointer =
@@ -856,10 +845,10 @@ proc trUtf8*(_: type gen_qquickitem_types.QQuickItem, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc window*(self: gen_qquickitem_types.QQuickItem, ): gen_qquickwindow_types.QQuickWindow =
+proc window*(self: gen_qquickitem_types.QQuickItem): gen_qquickwindow_types.QQuickWindow =
   gen_qquickwindow_types.QQuickWindow(h: fcQQuickItem_window(self.h), owned: false)
 
-proc parentItem*(self: gen_qquickitem_types.QQuickItem, ): gen_qquickitem_types.QQuickItem =
+proc parentItem*(self: gen_qquickitem_types.QQuickItem): gen_qquickitem_types.QQuickItem =
   gen_qquickitem_types.QQuickItem(h: fcQQuickItem_parentItem(self.h), owned: false)
 
 proc setParentItem*(self: gen_qquickitem_types.QQuickItem, parent: gen_qquickitem_types.QQuickItem): void =
@@ -871,10 +860,10 @@ proc stackBefore*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickitem_
 proc stackAfter*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_stackAfter(self.h, param1.h)
 
-proc childrenRect*(self: gen_qquickitem_types.QQuickItem, ): gen_qrect_types.QRectF =
+proc childrenRect*(self: gen_qquickitem_types.QQuickItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_childrenRect(self.h), owned: true)
 
-proc childItems*(self: gen_qquickitem_types.QQuickItem, ): seq[gen_qquickitem_types.QQuickItem] =
+proc childItems*(self: gen_qquickitem_types.QQuickItem): seq[gen_qquickitem_types.QQuickItem] =
   var v_ma = fcQQuickItem_childItems(self.h)
   var vx_ret = newSeq[gen_qquickitem_types.QQuickItem](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -883,13 +872,13 @@ proc childItems*(self: gen_qquickitem_types.QQuickItem, ): seq[gen_qquickitem_ty
   c_free(v_ma.data)
   vx_ret
 
-proc clip*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc clip*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_clip(self.h)
 
 proc setClip*(self: gen_qquickitem_types.QQuickItem, clip: bool): void =
   fcQQuickItem_setClip(self.h, clip)
 
-proc state*(self: gen_qquickitem_types.QQuickItem, ): string =
+proc state*(self: gen_qquickitem_types.QQuickItem): string =
   let v_ms = fcQQuickItem_state(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -898,19 +887,19 @@ proc state*(self: gen_qquickitem_types.QQuickItem, ): string =
 proc setState*(self: gen_qquickitem_types.QQuickItem, state: string): void =
   fcQQuickItem_setState(self.h, struct_miqt_string(data: state, len: csize_t(len(state))))
 
-proc baselineOffset*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc baselineOffset*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_baselineOffset(self.h)
 
 proc setBaselineOffset*(self: gen_qquickitem_types.QQuickItem, baselineOffset: float64): void =
   fcQQuickItem_setBaselineOffset(self.h, baselineOffset)
 
-proc x*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc x*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_x(self.h)
 
-proc y*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc y*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_y(self.h)
 
-proc position*(self: gen_qquickitem_types.QQuickItem, ): gen_qpoint_types.QPointF =
+proc position*(self: gen_qquickitem_types.QQuickItem): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQQuickItem_position(self.h), owned: true)
 
 proc setX*(self: gen_qquickitem_types.QQuickItem, x: float64): void =
@@ -922,112 +911,112 @@ proc setY*(self: gen_qquickitem_types.QQuickItem, y: float64): void =
 proc setPosition*(self: gen_qquickitem_types.QQuickItem, position: gen_qpoint_types.QPointF): void =
   fcQQuickItem_setPosition(self.h, position.h)
 
-proc width*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc width*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_width(self.h)
 
 proc setWidth*(self: gen_qquickitem_types.QQuickItem, width: float64): void =
   fcQQuickItem_setWidth(self.h, width)
 
-proc resetWidth*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc resetWidth*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_resetWidth(self.h)
 
 proc setImplicitWidth*(self: gen_qquickitem_types.QQuickItem, implicitWidth: float64): void =
   fcQQuickItem_setImplicitWidth(self.h, implicitWidth)
 
-proc implicitWidth*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc implicitWidth*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_implicitWidth(self.h)
 
-proc height*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc height*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_height(self.h)
 
 proc setHeight*(self: gen_qquickitem_types.QQuickItem, height: float64): void =
   fcQQuickItem_setHeight(self.h, height)
 
-proc resetHeight*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc resetHeight*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_resetHeight(self.h)
 
 proc setImplicitHeight*(self: gen_qquickitem_types.QQuickItem, implicitHeight: float64): void =
   fcQQuickItem_setImplicitHeight(self.h, implicitHeight)
 
-proc implicitHeight*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc implicitHeight*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_implicitHeight(self.h)
 
-proc size*(self: gen_qquickitem_types.QQuickItem, ): gen_qsize_types.QSizeF =
+proc size*(self: gen_qquickitem_types.QQuickItem): gen_qsize_types.QSizeF =
   gen_qsize_types.QSizeF(h: fcQQuickItem_size(self.h), owned: true)
 
 proc setSize*(self: gen_qquickitem_types.QQuickItem, size: gen_qsize_types.QSizeF): void =
   fcQQuickItem_setSize(self.h, size.h)
 
-proc transformOrigin*(self: gen_qquickitem_types.QQuickItem, ): cint =
+proc transformOrigin*(self: gen_qquickitem_types.QQuickItem): cint =
   cint(fcQQuickItem_transformOrigin(self.h))
 
 proc setTransformOrigin*(self: gen_qquickitem_types.QQuickItem, transformOrigin: cint): void =
   fcQQuickItem_setTransformOrigin(self.h, cint(transformOrigin))
 
-proc transformOriginPoint*(self: gen_qquickitem_types.QQuickItem, ): gen_qpoint_types.QPointF =
+proc transformOriginPoint*(self: gen_qquickitem_types.QQuickItem): gen_qpoint_types.QPointF =
   gen_qpoint_types.QPointF(h: fcQQuickItem_transformOriginPoint(self.h), owned: true)
 
 proc setTransformOriginPoint*(self: gen_qquickitem_types.QQuickItem, transformOriginPoint: gen_qpoint_types.QPointF): void =
   fcQQuickItem_setTransformOriginPoint(self.h, transformOriginPoint.h)
 
-proc z*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc z*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_z(self.h)
 
 proc setZ*(self: gen_qquickitem_types.QQuickItem, z: float64): void =
   fcQQuickItem_setZ(self.h, z)
 
-proc rotation*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc rotation*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_rotation(self.h)
 
 proc setRotation*(self: gen_qquickitem_types.QQuickItem, rotation: float64): void =
   fcQQuickItem_setRotation(self.h, rotation)
 
-proc scale*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc scale*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_scale(self.h)
 
 proc setScale*(self: gen_qquickitem_types.QQuickItem, scale: float64): void =
   fcQQuickItem_setScale(self.h, scale)
 
-proc opacity*(self: gen_qquickitem_types.QQuickItem, ): float64 =
+proc opacity*(self: gen_qquickitem_types.QQuickItem): float64 =
   fcQQuickItem_opacity(self.h)
 
 proc setOpacity*(self: gen_qquickitem_types.QQuickItem, opacity: float64): void =
   fcQQuickItem_setOpacity(self.h, opacity)
 
-proc isVisible*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isVisible*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isVisible(self.h)
 
 proc setVisible*(self: gen_qquickitem_types.QQuickItem, visible: bool): void =
   fcQQuickItem_setVisible(self.h, visible)
 
-proc isEnabled*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isEnabled*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isEnabled(self.h)
 
 proc setEnabled*(self: gen_qquickitem_types.QQuickItem, enabled: bool): void =
   fcQQuickItem_setEnabled(self.h, enabled)
 
-proc smooth*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc smooth*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_smooth(self.h)
 
 proc setSmooth*(self: gen_qquickitem_types.QQuickItem, smooth: bool): void =
   fcQQuickItem_setSmooth(self.h, smooth)
 
-proc activeFocusOnTab*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc activeFocusOnTab*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_activeFocusOnTab(self.h)
 
 proc setActiveFocusOnTab*(self: gen_qquickitem_types.QQuickItem, activeFocusOnTab: bool): void =
   fcQQuickItem_setActiveFocusOnTab(self.h, activeFocusOnTab)
 
-proc antialiasing*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc antialiasing*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_antialiasing(self.h)
 
 proc setAntialiasing*(self: gen_qquickitem_types.QQuickItem, antialiasing: bool): void =
   fcQQuickItem_setAntialiasing(self.h, antialiasing)
 
-proc resetAntialiasing*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc resetAntialiasing*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_resetAntialiasing(self.h)
 
-proc flags*(self: gen_qquickitem_types.QQuickItem, ): cint =
+proc flags*(self: gen_qquickitem_types.QQuickItem): cint =
   cint(fcQQuickItem_flags(self.h))
 
 proc setFlag*(self: gen_qquickitem_types.QQuickItem, flag: cint): void =
@@ -1036,16 +1025,16 @@ proc setFlag*(self: gen_qquickitem_types.QQuickItem, flag: cint): void =
 proc setFlags*(self: gen_qquickitem_types.QQuickItem, flags: cint): void =
   fcQQuickItem_setFlags(self.h, cint(flags))
 
-proc boundingRect*(self: gen_qquickitem_types.QQuickItem, ): gen_qrect_types.QRectF =
+proc boundingRect*(self: gen_qquickitem_types.QQuickItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_boundingRect(self.h), owned: true)
 
-proc clipRect*(self: gen_qquickitem_types.QQuickItem, ): gen_qrect_types.QRectF =
+proc clipRect*(self: gen_qquickitem_types.QQuickItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_clipRect(self.h), owned: true)
 
-proc hasActiveFocus*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc hasActiveFocus*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_hasActiveFocus(self.h)
 
-proc hasFocus*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc hasFocus*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_hasFocus(self.h)
 
 proc setFocus*(self: gen_qquickitem_types.QQuickItem, focus: bool): void =
@@ -1054,58 +1043,58 @@ proc setFocus*(self: gen_qquickitem_types.QQuickItem, focus: bool): void =
 proc setFocus*(self: gen_qquickitem_types.QQuickItem, focus: bool, reason: cint): void =
   fcQQuickItem_setFocus2(self.h, focus, cint(reason))
 
-proc isFocusScope*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isFocusScope*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isFocusScope(self.h)
 
-proc scopedFocusItem*(self: gen_qquickitem_types.QQuickItem, ): gen_qquickitem_types.QQuickItem =
+proc scopedFocusItem*(self: gen_qquickitem_types.QQuickItem): gen_qquickitem_types.QQuickItem =
   gen_qquickitem_types.QQuickItem(h: fcQQuickItem_scopedFocusItem(self.h), owned: false)
 
 proc isAncestorOf*(self: gen_qquickitem_types.QQuickItem, child: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isAncestorOf(self.h, child.h)
 
-proc acceptedMouseButtons*(self: gen_qquickitem_types.QQuickItem, ): cint =
+proc acceptedMouseButtons*(self: gen_qquickitem_types.QQuickItem): cint =
   cint(fcQQuickItem_acceptedMouseButtons(self.h))
 
 proc setAcceptedMouseButtons*(self: gen_qquickitem_types.QQuickItem, buttons: cint): void =
   fcQQuickItem_setAcceptedMouseButtons(self.h, cint(buttons))
 
-proc acceptHoverEvents*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc acceptHoverEvents*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_acceptHoverEvents(self.h)
 
 proc setAcceptHoverEvents*(self: gen_qquickitem_types.QQuickItem, enabled: bool): void =
   fcQQuickItem_setAcceptHoverEvents(self.h, enabled)
 
-proc acceptTouchEvents*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc acceptTouchEvents*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_acceptTouchEvents(self.h)
 
 proc setAcceptTouchEvents*(self: gen_qquickitem_types.QQuickItem, accept: bool): void =
   fcQQuickItem_setAcceptTouchEvents(self.h, accept)
 
-proc cursor*(self: gen_qquickitem_types.QQuickItem, ): gen_qcursor_types.QCursor =
+proc cursor*(self: gen_qquickitem_types.QQuickItem): gen_qcursor_types.QCursor =
   gen_qcursor_types.QCursor(h: fcQQuickItem_cursor(self.h), owned: true)
 
 proc setCursor*(self: gen_qquickitem_types.QQuickItem, cursor: gen_qcursor_types.QCursor): void =
   fcQQuickItem_setCursor(self.h, cursor.h)
 
-proc unsetCursor*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc unsetCursor*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_unsetCursor(self.h)
 
-proc isUnderMouse*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isUnderMouse*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isUnderMouse(self.h)
 
-proc grabMouse*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc grabMouse*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_grabMouse(self.h)
 
-proc ungrabMouse*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc ungrabMouse*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_ungrabMouse(self.h)
 
-proc keepMouseGrab*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc keepMouseGrab*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_keepMouseGrab(self.h)
 
 proc setKeepMouseGrab*(self: gen_qquickitem_types.QQuickItem, keepMouseGrab: bool): void =
   fcQQuickItem_setKeepMouseGrab(self.h, keepMouseGrab)
 
-proc filtersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc filtersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_filtersChildMouseEvents(self.h)
 
 proc setFiltersChildMouseEvents*(self: gen_qquickitem_types.QQuickItem, filter: bool): void =
@@ -1118,10 +1107,10 @@ proc grabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ids: seq[cint]): vo
 
   fcQQuickItem_grabTouchPoints(self.h, struct_miqt_array(len: csize_t(len(ids)), data: if len(ids) == 0: nil else: addr(ids_CArray[0])))
 
-proc ungrabTouchPoints*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc ungrabTouchPoints*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_ungrabTouchPoints(self.h)
 
-proc keepTouchGrab*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc keepTouchGrab*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_keepTouchGrab(self.h)
 
 proc setKeepTouchGrab*(self: gen_qquickitem_types.QQuickItem, keepTouchGrab: bool): void =
@@ -1133,7 +1122,7 @@ proc grabToImage*(self: gen_qquickitem_types.QQuickItem, callback: gen_qjsvalue_
 proc contains*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): bool =
   fcQQuickItem_contains(self.h, point.h)
 
-proc containmentMask*(self: gen_qquickitem_types.QQuickItem, ): gen_qobject_types.QObject =
+proc containmentMask*(self: gen_qquickitem_types.QQuickItem): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQuickItem_containmentMask(self.h), owned: false)
 
 proc setContainmentMask*(self: gen_qquickitem_types.QQuickItem, mask: gen_qobject_types.QObject): void =
@@ -1172,16 +1161,16 @@ proc mapRectFromItem*(self: gen_qquickitem_types.QQuickItem, item: gen_qquickite
 proc mapRectFromScene*(self: gen_qquickitem_types.QQuickItem, rect: gen_qrect_types.QRectF): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_mapRectFromScene(self.h, rect.h), owned: true)
 
-proc polish*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc polish*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_polish(self.h)
 
-proc forceActiveFocus*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc forceActiveFocus*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_forceActiveFocus(self.h)
 
 proc forceActiveFocus*(self: gen_qquickitem_types.QQuickItem, reason: cint): void =
   fcQQuickItem_forceActiveFocusWithReason(self.h, cint(reason))
 
-proc nextItemInFocusChain*(self: gen_qquickitem_types.QQuickItem, ): gen_qquickitem_types.QQuickItem =
+proc nextItemInFocusChain*(self: gen_qquickitem_types.QQuickItem): gen_qquickitem_types.QQuickItem =
   gen_qquickitem_types.QQuickItem(h: fcQQuickItem_nextItemInFocusChain(self.h), owned: false)
 
 proc childAt*(self: gen_qquickitem_types.QQuickItem, x: float64, y: float64): gen_qquickitem_types.QQuickItem =
@@ -1190,26 +1179,26 @@ proc childAt*(self: gen_qquickitem_types.QQuickItem, x: float64, y: float64): ge
 proc inputMethodQuery*(self: gen_qquickitem_types.QQuickItem, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQuickItem_inputMethodQuery(self.h, cint(query)), owned: true)
 
-proc isTextureProvider*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isTextureProvider*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_isTextureProvider(self.h)
 
-proc textureProvider*(self: gen_qquickitem_types.QQuickItem, ): gen_qsgtextureprovider_types.QSGTextureProvider =
+proc textureProvider*(self: gen_qquickitem_types.QQuickItem): gen_qsgtextureprovider_types.QSGTextureProvider =
   gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickItem_textureProvider(self.h), owned: false)
 
-proc update*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc update*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_update(self.h)
 
 proc childrenRectChanged*(self: gen_qquickitem_types.QQuickItem, param1: gen_qrect_types.QRectF): void =
   fcQQuickItem_childrenRectChanged(self.h, param1.h)
 
 type QQuickItemchildrenRectChangedSlot* = proc(param1: gen_qrect_types.QRectF)
-proc miqt_exec_callback_cQQuickItem_childrenRectChanged(slot: int, param1: pointer) {.cdecl.} =
+proc cQQuickItem_slot_callback_childrenRectChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemchildrenRectChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qrect_types.QRectF(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_childrenRectChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_childrenRectChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemchildrenRectChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1217,19 +1206,19 @@ proc onchildrenRectChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickI
   var tmp = new QQuickItemchildrenRectChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_childrenRectChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_childrenRectChanged, miqt_exec_callback_cQQuickItem_childrenRectChanged_release)
+  fcQQuickItem_connect_childrenRectChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_childrenRectChanged, cQQuickItem_slot_callback_childrenRectChanged_release)
 
 proc baselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, param1: float64): void =
   fcQQuickItem_baselineOffsetChanged(self.h, param1)
 
 type QQuickItembaselineOffsetChangedSlot* = proc(param1: float64)
-proc miqt_exec_callback_cQQuickItem_baselineOffsetChanged(slot: int, param1: float64) {.cdecl.} =
+proc cQQuickItem_slot_callback_baselineOffsetChanged(slot: int, param1: float64) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItembaselineOffsetChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_baselineOffsetChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_baselineOffsetChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItembaselineOffsetChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1237,13 +1226,13 @@ proc onbaselineOffsetChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuic
   var tmp = new QQuickItembaselineOffsetChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_baselineOffsetChanged, miqt_exec_callback_cQQuickItem_baselineOffsetChanged_release)
+  fcQQuickItem_connect_baselineOffsetChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_baselineOffsetChanged, cQQuickItem_slot_callback_baselineOffsetChanged_release)
 
 proc stateChanged*(self: gen_qquickitem_types.QQuickItem, param1: string): void =
   fcQQuickItem_stateChanged(self.h, struct_miqt_string(data: param1, len: csize_t(len(param1))))
 
 type QQuickItemstateChangedSlot* = proc(param1: string)
-proc miqt_exec_callback_cQQuickItem_stateChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
+proc cQQuickItem_slot_callback_stateChanged(slot: int, param1: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemstateChangedSlot](cast[pointer](slot))
   let vparam1_ms = param1
   let vparam1x_ret = string.fromBytes(toOpenArrayByte(vparam1_ms.data, 0, int(vparam1_ms.len)-1))
@@ -1252,7 +1241,7 @@ proc miqt_exec_callback_cQQuickItem_stateChanged(slot: int, param1: struct_miqt_
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_stateChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_stateChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemstateChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1260,19 +1249,19 @@ proc onstateChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemstat
   var tmp = new QQuickItemstateChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_stateChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_stateChanged, miqt_exec_callback_cQQuickItem_stateChanged_release)
+  fcQQuickItem_connect_stateChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_stateChanged, cQQuickItem_slot_callback_stateChanged_release)
 
 proc focusChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_focusChanged(self.h, param1)
 
 type QQuickItemfocusChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_focusChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_focusChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemfocusChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_focusChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_focusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemfocusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1280,19 +1269,19 @@ proc onfocusChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemfocu
   var tmp = new QQuickItemfocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_focusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_focusChanged, miqt_exec_callback_cQQuickItem_focusChanged_release)
+  fcQQuickItem_connect_focusChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_focusChanged, cQQuickItem_slot_callback_focusChanged_release)
 
 proc activeFocusChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_activeFocusChanged(self.h, param1)
 
 type QQuickItemactiveFocusChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_activeFocusChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_activeFocusChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemactiveFocusChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_activeFocusChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_activeFocusChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemactiveFocusChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1300,19 +1289,19 @@ proc onactiveFocusChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickIt
   var tmp = new QQuickItemactiveFocusChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_activeFocusChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_activeFocusChanged, miqt_exec_callback_cQQuickItem_activeFocusChanged_release)
+  fcQQuickItem_connect_activeFocusChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_activeFocusChanged, cQQuickItem_slot_callback_activeFocusChanged_release)
 
 proc activeFocusOnTabChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_activeFocusOnTabChanged(self.h, param1)
 
 type QQuickItemactiveFocusOnTabChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_activeFocusOnTabChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemactiveFocusOnTabChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_activeFocusOnTabChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemactiveFocusOnTabChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1320,19 +1309,19 @@ proc onactiveFocusOnTabChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQu
   var tmp = new QQuickItemactiveFocusOnTabChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_activeFocusOnTabChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged, miqt_exec_callback_cQQuickItem_activeFocusOnTabChanged_release)
+  fcQQuickItem_connect_activeFocusOnTabChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_activeFocusOnTabChanged, cQQuickItem_slot_callback_activeFocusOnTabChanged_release)
 
 proc parentChanged*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_parentChanged(self.h, param1.h)
 
 type QQuickItemparentChangedSlot* = proc(param1: gen_qquickitem_types.QQuickItem)
-proc miqt_exec_callback_cQQuickItem_parentChanged(slot: int, param1: pointer) {.cdecl.} =
+proc cQQuickItem_slot_callback_parentChanged(slot: int, param1: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemparentChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_parentChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_parentChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemparentChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1340,19 +1329,19 @@ proc onparentChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItempar
   var tmp = new QQuickItemparentChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_parentChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_parentChanged, miqt_exec_callback_cQQuickItem_parentChanged_release)
+  fcQQuickItem_connect_parentChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_parentChanged, cQQuickItem_slot_callback_parentChanged_release)
 
 proc transformOriginChanged*(self: gen_qquickitem_types.QQuickItem, param1: cint): void =
   fcQQuickItem_transformOriginChanged(self.h, cint(param1))
 
 type QQuickItemtransformOriginChangedSlot* = proc(param1: cint)
-proc miqt_exec_callback_cQQuickItem_transformOriginChanged(slot: int, param1: cint) {.cdecl.} =
+proc cQQuickItem_slot_callback_transformOriginChanged(slot: int, param1: cint) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemtransformOriginChangedSlot](cast[pointer](slot))
   let slotval1 = cint(param1)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_transformOriginChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_transformOriginChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemtransformOriginChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1360,19 +1349,19 @@ proc ontransformOriginChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQui
   var tmp = new QQuickItemtransformOriginChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_transformOriginChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_transformOriginChanged, miqt_exec_callback_cQQuickItem_transformOriginChanged_release)
+  fcQQuickItem_connect_transformOriginChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_transformOriginChanged, cQQuickItem_slot_callback_transformOriginChanged_release)
 
 proc smoothChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_smoothChanged(self.h, param1)
 
 type QQuickItemsmoothChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_smoothChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_smoothChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemsmoothChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_smoothChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_smoothChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemsmoothChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1380,19 +1369,19 @@ proc onsmoothChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemsmo
   var tmp = new QQuickItemsmoothChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_smoothChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_smoothChanged, miqt_exec_callback_cQQuickItem_smoothChanged_release)
+  fcQQuickItem_connect_smoothChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_smoothChanged, cQQuickItem_slot_callback_smoothChanged_release)
 
 proc antialiasingChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_antialiasingChanged(self.h, param1)
 
 type QQuickItemantialiasingChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_antialiasingChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_antialiasingChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemantialiasingChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_antialiasingChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_antialiasingChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemantialiasingChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1400,19 +1389,19 @@ proc onantialiasingChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickI
   var tmp = new QQuickItemantialiasingChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_antialiasingChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_antialiasingChanged, miqt_exec_callback_cQQuickItem_antialiasingChanged_release)
+  fcQQuickItem_connect_antialiasingChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_antialiasingChanged, cQQuickItem_slot_callback_antialiasingChanged_release)
 
 proc clipChanged*(self: gen_qquickitem_types.QQuickItem, param1: bool): void =
   fcQQuickItem_clipChanged(self.h, param1)
 
 type QQuickItemclipChangedSlot* = proc(param1: bool)
-proc miqt_exec_callback_cQQuickItem_clipChanged(slot: int, param1: bool) {.cdecl.} =
+proc cQQuickItem_slot_callback_clipChanged(slot: int, param1: bool) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemclipChangedSlot](cast[pointer](slot))
   let slotval1 = param1
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_clipChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_clipChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemclipChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1420,19 +1409,19 @@ proc onclipChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemclipC
   var tmp = new QQuickItemclipChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_clipChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_clipChanged, miqt_exec_callback_cQQuickItem_clipChanged_release)
+  fcQQuickItem_connect_clipChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_clipChanged, cQQuickItem_slot_callback_clipChanged_release)
 
 proc windowChanged*(self: gen_qquickitem_types.QQuickItem, window: gen_qquickwindow_types.QQuickWindow): void =
   fcQQuickItem_windowChanged(self.h, window.h)
 
 type QQuickItemwindowChangedSlot* = proc(window: gen_qquickwindow_types.QQuickWindow)
-proc miqt_exec_callback_cQQuickItem_windowChanged(slot: int, window: pointer) {.cdecl.} =
+proc cQQuickItem_slot_callback_windowChanged(slot: int, window: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemwindowChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qquickwindow_types.QQuickWindow(h: window, owned: false)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQQuickItem_windowChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_windowChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemwindowChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1440,17 +1429,17 @@ proc onwindowChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemwin
   var tmp = new QQuickItemwindowChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_windowChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_windowChanged, miqt_exec_callback_cQQuickItem_windowChanged_release)
+  fcQQuickItem_connect_windowChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_windowChanged, cQQuickItem_slot_callback_windowChanged_release)
 
-proc childrenChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc childrenChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_childrenChanged(self.h)
 
 type QQuickItemchildrenChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_childrenChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_childrenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemchildrenChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_childrenChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_childrenChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemchildrenChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1458,17 +1447,17 @@ proc onchildrenChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemc
   var tmp = new QQuickItemchildrenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_childrenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_childrenChanged, miqt_exec_callback_cQQuickItem_childrenChanged_release)
+  fcQQuickItem_connect_childrenChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_childrenChanged, cQQuickItem_slot_callback_childrenChanged_release)
 
-proc opacityChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc opacityChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_opacityChanged(self.h)
 
 type QQuickItemopacityChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_opacityChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_opacityChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemopacityChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_opacityChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_opacityChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemopacityChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1476,17 +1465,17 @@ proc onopacityChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemop
   var tmp = new QQuickItemopacityChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_opacityChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_opacityChanged, miqt_exec_callback_cQQuickItem_opacityChanged_release)
+  fcQQuickItem_connect_opacityChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_opacityChanged, cQQuickItem_slot_callback_opacityChanged_release)
 
-proc enabledChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc enabledChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_enabledChanged(self.h)
 
 type QQuickItemenabledChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_enabledChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_enabledChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemenabledChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_enabledChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_enabledChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemenabledChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1494,17 +1483,17 @@ proc onenabledChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemen
   var tmp = new QQuickItemenabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_enabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_enabledChanged, miqt_exec_callback_cQQuickItem_enabledChanged_release)
+  fcQQuickItem_connect_enabledChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_enabledChanged, cQQuickItem_slot_callback_enabledChanged_release)
 
-proc visibleChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc visibleChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_visibleChanged(self.h)
 
 type QQuickItemvisibleChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_visibleChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_visibleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemvisibleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_visibleChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_visibleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemvisibleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1512,17 +1501,17 @@ proc onvisibleChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemvi
   var tmp = new QQuickItemvisibleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_visibleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_visibleChanged, miqt_exec_callback_cQQuickItem_visibleChanged_release)
+  fcQQuickItem_connect_visibleChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_visibleChanged, cQQuickItem_slot_callback_visibleChanged_release)
 
-proc visibleChildrenChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc visibleChildrenChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_visibleChildrenChanged(self.h)
 
 type QQuickItemvisibleChildrenChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_visibleChildrenChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_visibleChildrenChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemvisibleChildrenChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_visibleChildrenChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_visibleChildrenChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemvisibleChildrenChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1530,17 +1519,17 @@ proc onvisibleChildrenChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQui
   var tmp = new QQuickItemvisibleChildrenChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_visibleChildrenChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_visibleChildrenChanged, miqt_exec_callback_cQQuickItem_visibleChildrenChanged_release)
+  fcQQuickItem_connect_visibleChildrenChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_visibleChildrenChanged, cQQuickItem_slot_callback_visibleChildrenChanged_release)
 
-proc rotationChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc rotationChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_rotationChanged(self.h)
 
 type QQuickItemrotationChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_rotationChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_rotationChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemrotationChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_rotationChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_rotationChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemrotationChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1548,17 +1537,17 @@ proc onrotationChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemr
   var tmp = new QQuickItemrotationChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_rotationChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_rotationChanged, miqt_exec_callback_cQQuickItem_rotationChanged_release)
+  fcQQuickItem_connect_rotationChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_rotationChanged, cQQuickItem_slot_callback_rotationChanged_release)
 
-proc scaleChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc scaleChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_scaleChanged(self.h)
 
 type QQuickItemscaleChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_scaleChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_scaleChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemscaleChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_scaleChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_scaleChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemscaleChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1566,17 +1555,17 @@ proc onscaleChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemscal
   var tmp = new QQuickItemscaleChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_scaleChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_scaleChanged, miqt_exec_callback_cQQuickItem_scaleChanged_release)
+  fcQQuickItem_connect_scaleChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_scaleChanged, cQQuickItem_slot_callback_scaleChanged_release)
 
-proc xChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc xChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_xChanged(self.h)
 
 type QQuickItemxChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_xChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_xChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemxChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_xChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_xChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemxChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1584,17 +1573,17 @@ proc onxChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemxChanged
   var tmp = new QQuickItemxChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_xChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_xChanged, miqt_exec_callback_cQQuickItem_xChanged_release)
+  fcQQuickItem_connect_xChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_xChanged, cQQuickItem_slot_callback_xChanged_release)
 
-proc yChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc yChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_yChanged(self.h)
 
 type QQuickItemyChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_yChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_yChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemyChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_yChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_yChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemyChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1602,17 +1591,17 @@ proc onyChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemyChanged
   var tmp = new QQuickItemyChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_yChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_yChanged, miqt_exec_callback_cQQuickItem_yChanged_release)
+  fcQQuickItem_connect_yChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_yChanged, cQQuickItem_slot_callback_yChanged_release)
 
-proc widthChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc widthChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_widthChanged(self.h)
 
 type QQuickItemwidthChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_widthChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_widthChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemwidthChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_widthChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_widthChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemwidthChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1620,17 +1609,17 @@ proc onwidthChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemwidt
   var tmp = new QQuickItemwidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_widthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_widthChanged, miqt_exec_callback_cQQuickItem_widthChanged_release)
+  fcQQuickItem_connect_widthChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_widthChanged, cQQuickItem_slot_callback_widthChanged_release)
 
-proc heightChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc heightChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_heightChanged(self.h)
 
 type QQuickItemheightChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_heightChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_heightChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemheightChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_heightChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_heightChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemheightChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1638,17 +1627,17 @@ proc onheightChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemhei
   var tmp = new QQuickItemheightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_heightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_heightChanged, miqt_exec_callback_cQQuickItem_heightChanged_release)
+  fcQQuickItem_connect_heightChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_heightChanged, cQQuickItem_slot_callback_heightChanged_release)
 
-proc zChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc zChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_zChanged(self.h)
 
 type QQuickItemzChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_zChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_zChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemzChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_zChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_zChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemzChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1656,17 +1645,17 @@ proc onzChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuickItemzChanged
   var tmp = new QQuickItemzChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_zChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_zChanged, miqt_exec_callback_cQQuickItem_zChanged_release)
+  fcQQuickItem_connect_zChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_zChanged, cQQuickItem_slot_callback_zChanged_release)
 
-proc implicitWidthChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc implicitWidthChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_implicitWidthChanged(self.h)
 
 type QQuickItemimplicitWidthChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_implicitWidthChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_implicitWidthChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemimplicitWidthChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_implicitWidthChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_implicitWidthChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemimplicitWidthChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1674,17 +1663,17 @@ proc onimplicitWidthChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuick
   var tmp = new QQuickItemimplicitWidthChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_implicitWidthChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_implicitWidthChanged, miqt_exec_callback_cQQuickItem_implicitWidthChanged_release)
+  fcQQuickItem_connect_implicitWidthChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_implicitWidthChanged, cQQuickItem_slot_callback_implicitWidthChanged_release)
 
-proc implicitHeightChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc implicitHeightChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_implicitHeightChanged(self.h)
 
 type QQuickItemimplicitHeightChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_implicitHeightChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_implicitHeightChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemimplicitHeightChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_implicitHeightChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_implicitHeightChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemimplicitHeightChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1692,17 +1681,17 @@ proc onimplicitHeightChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQuic
   var tmp = new QQuickItemimplicitHeightChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_implicitHeightChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_implicitHeightChanged, miqt_exec_callback_cQQuickItem_implicitHeightChanged_release)
+  fcQQuickItem_connect_implicitHeightChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_implicitHeightChanged, cQQuickItem_slot_callback_implicitHeightChanged_release)
 
-proc containmentMaskChanged*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc containmentMaskChanged*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_containmentMaskChanged(self.h)
 
 type QQuickItemcontainmentMaskChangedSlot* = proc()
-proc miqt_exec_callback_cQQuickItem_containmentMaskChanged(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_containmentMaskChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QQuickItemcontainmentMaskChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQQuickItem_containmentMaskChanged_release(slot: int) {.cdecl.} =
+proc cQQuickItem_slot_callback_containmentMaskChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QQuickItemcontainmentMaskChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1710,7 +1699,7 @@ proc oncontainmentMaskChanged*(self: gen_qquickitem_types.QQuickItem, slot: QQui
   var tmp = new QQuickItemcontainmentMaskChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQQuickItem_connect_containmentMaskChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQQuickItem_containmentMaskChanged, miqt_exec_callback_cQQuickItem_containmentMaskChanged_release)
+  fcQQuickItem_connect_containmentMaskChanged(self.h, cast[int](addr tmp[]), cQQuickItem_slot_callback_containmentMaskChanged, cQQuickItem_slot_callback_containmentMaskChanged_release)
 
 proc tr*(_: type gen_qquickitem_types.QQuickItem, s: cstring, c: cstring): string =
   let v_ms = fcQQuickItem_tr2(s, c)
@@ -1837,11 +1826,11 @@ type QQuickItemVTable* {.inheritable, pure.} = object
   customEvent*: QQuickItemcustomEventProc
   connectNotify*: QQuickItemconnectNotifyProc
   disconnectNotify*: QQuickItemdisconnectNotifyProc
-proc QQuickItemmetaObject*(self: gen_qquickitem_types.QQuickItem, ): gen_qobjectdefs_types.QMetaObject =
+proc QQuickItemmetaObject*(self: gen_qquickitem_types.QQuickItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItem_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQQuickItem_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -1852,8 +1841,8 @@ proc miqt_exec_callback_cQQuickItem_metaObject(vtbl: pointer, self: pointer): po
 proc QQuickItemmetacast*(self: gen_qquickitem_types.QQuickItem, param1: cstring): pointer =
   fcQQuickItem_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQQuickItem_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -1862,8 +1851,8 @@ proc miqt_exec_callback_cQQuickItem_metacast(vtbl: pointer, self: pointer, param
 proc QQuickItemmetacall*(self: gen_qquickitem_types.QQuickItem, param1: cint, param2: cint, param3: pointer): cint =
   fcQQuickItem_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQQuickItem_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1871,11 +1860,11 @@ proc miqt_exec_callback_cQQuickItem_metacall(vtbl: pointer, self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QQuickItemboundingRect*(self: gen_qquickitem_types.QQuickItem, ): gen_qrect_types.QRectF =
+proc QQuickItemboundingRect*(self: gen_qquickitem_types.QQuickItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_virtualbase_boundingRect(self.h), owned: true)
 
-proc miqt_exec_callback_cQQuickItem_boundingRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_boundingRect(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   var virtualReturn = vtbl[].boundingRect(self)
   virtualReturn.owned = false # TODO move?
@@ -1883,11 +1872,11 @@ proc miqt_exec_callback_cQQuickItem_boundingRect(vtbl: pointer, self: pointer): 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickItemclipRect*(self: gen_qquickitem_types.QQuickItem, ): gen_qrect_types.QRectF =
+proc QQuickItemclipRect*(self: gen_qquickitem_types.QQuickItem): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQQuickItem_virtualbase_clipRect(self.h), owned: true)
 
-proc miqt_exec_callback_cQQuickItem_clipRect(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_clipRect(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   var virtualReturn = vtbl[].clipRect(self)
   virtualReturn.owned = false # TODO move?
@@ -1898,8 +1887,8 @@ proc miqt_exec_callback_cQQuickItem_clipRect(vtbl: pointer, self: pointer): poin
 proc QQuickItemcontains*(self: gen_qquickitem_types.QQuickItem, point: gen_qpoint_types.QPointF): bool =
   fcQQuickItem_virtualbase_contains(self.h, point.h)
 
-proc miqt_exec_callback_cQQuickItem_contains(vtbl: pointer, self: pointer, point: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
   var virtualReturn = vtbl[].contains(self, slotval1)
@@ -1908,8 +1897,8 @@ proc miqt_exec_callback_cQQuickItem_contains(vtbl: pointer, self: pointer, point
 proc QQuickIteminputMethodQuery*(self: gen_qquickitem_types.QQuickItem, query: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQQuickItem_virtualbase_inputMethodQuery(self.h, cint(query)), owned: true)
 
-proc miqt_exec_callback_cQQuickItem_inputMethodQuery(vtbl: pointer, self: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = cint(query)
   var virtualReturn = vtbl[].inputMethodQuery(self, slotval1)
@@ -1918,20 +1907,20 @@ proc miqt_exec_callback_cQQuickItem_inputMethodQuery(vtbl: pointer, self: pointe
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickItemisTextureProvider*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc QQuickItemisTextureProvider*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_virtualbase_isTextureProvider(self.h)
 
-proc miqt_exec_callback_cQQuickItem_isTextureProvider(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   var virtualReturn = vtbl[].isTextureProvider(self)
   virtualReturn
 
-proc QQuickItemtextureProvider*(self: gen_qquickitem_types.QQuickItem, ): gen_qsgtextureprovider_types.QSGTextureProvider =
+proc QQuickItemtextureProvider*(self: gen_qquickitem_types.QQuickItem): gen_qsgtextureprovider_types.QSGTextureProvider =
   gen_qsgtextureprovider_types.QSGTextureProvider(h: fcQQuickItem_virtualbase_textureProvider(self.h), owned: false)
 
-proc miqt_exec_callback_cQQuickItem_textureProvider(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_textureProvider(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   var virtualReturn = vtbl[].textureProvider(self)
   virtualReturn.owned = false # TODO move?
@@ -1942,8 +1931,8 @@ proc miqt_exec_callback_cQQuickItem_textureProvider(vtbl: pointer, self: pointer
 proc QQuickItemevent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qcoreevent_types.QEvent): bool =
   fcQQuickItem_virtualbase_event(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_event(vtbl: pointer, self: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -1952,34 +1941,34 @@ proc miqt_exec_callback_cQQuickItem_event(vtbl: pointer, self: pointer, param1: 
 proc QQuickItemitemChange*(self: gen_qquickitem_types.QQuickItem, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void =
   fcQQuickItem_virtualbase_itemChange(self.h, cint(param1), param2.h)
 
-proc miqt_exec_callback_cQQuickItem_itemChange(vtbl: pointer, self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_itemChange(self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = cint(param1)
   let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
   vtbl[].itemChange(self, slotval1, slotval2)
 
-proc QQuickItemclassBegin*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemclassBegin*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_classBegin(self.h)
 
-proc miqt_exec_callback_cQQuickItem_classBegin(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_classBegin(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].classBegin(self)
 
-proc QQuickItemcomponentComplete*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemcomponentComplete*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_componentComplete(self.h)
 
-proc miqt_exec_callback_cQQuickItem_componentComplete(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_componentComplete(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].componentComplete(self)
 
 proc QQuickItemkeyPressEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QKeyEvent): void =
   fcQQuickItem_virtualbase_keyPressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_keyPressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyPressEvent(self, slotval1)
@@ -1987,8 +1976,8 @@ proc miqt_exec_callback_cQQuickItem_keyPressEvent(vtbl: pointer, self: pointer, 
 proc QQuickItemkeyReleaseEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QKeyEvent): void =
   fcQQuickItem_virtualbase_keyReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_keyReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
   vtbl[].keyReleaseEvent(self, slotval1)
@@ -1996,8 +1985,8 @@ proc miqt_exec_callback_cQQuickItem_keyReleaseEvent(vtbl: pointer, self: pointer
 proc QQuickIteminputMethodEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QInputMethodEvent): void =
   fcQQuickItem_virtualbase_inputMethodEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_inputMethodEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
   vtbl[].inputMethodEvent(self, slotval1)
@@ -2005,8 +1994,8 @@ proc miqt_exec_callback_cQQuickItem_inputMethodEvent(vtbl: pointer, self: pointe
 proc QQuickItemfocusInEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QFocusEvent): void =
   fcQQuickItem_virtualbase_focusInEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_focusInEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusInEvent(self, slotval1)
@@ -2014,8 +2003,8 @@ proc miqt_exec_callback_cQQuickItem_focusInEvent(vtbl: pointer, self: pointer, p
 proc QQuickItemfocusOutEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QFocusEvent): void =
   fcQQuickItem_virtualbase_focusOutEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_focusOutEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
   vtbl[].focusOutEvent(self, slotval1)
@@ -2023,8 +2012,8 @@ proc miqt_exec_callback_cQQuickItem_focusOutEvent(vtbl: pointer, self: pointer, 
 proc QQuickItemmousePressEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QMouseEvent): void =
   fcQQuickItem_virtualbase_mousePressEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_mousePressEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mousePressEvent(self, slotval1)
@@ -2032,8 +2021,8 @@ proc miqt_exec_callback_cQQuickItem_mousePressEvent(vtbl: pointer, self: pointer
 proc QQuickItemmouseMoveEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QMouseEvent): void =
   fcQQuickItem_virtualbase_mouseMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_mouseMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseMoveEvent(self, slotval1)
@@ -2041,8 +2030,8 @@ proc miqt_exec_callback_cQQuickItem_mouseMoveEvent(vtbl: pointer, self: pointer,
 proc QQuickItemmouseReleaseEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QMouseEvent): void =
   fcQQuickItem_virtualbase_mouseReleaseEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_mouseReleaseEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseReleaseEvent(self, slotval1)
@@ -2050,33 +2039,33 @@ proc miqt_exec_callback_cQQuickItem_mouseReleaseEvent(vtbl: pointer, self: point
 proc QQuickItemmouseDoubleClickEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QMouseEvent): void =
   fcQQuickItem_virtualbase_mouseDoubleClickEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_mouseDoubleClickEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
   vtbl[].mouseDoubleClickEvent(self, slotval1)
 
-proc QQuickItemmouseUngrabEvent*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemmouseUngrabEvent*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_mouseUngrabEvent(self.h)
 
-proc miqt_exec_callback_cQQuickItem_mouseUngrabEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_mouseUngrabEvent(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].mouseUngrabEvent(self)
 
-proc QQuickItemtouchUngrabEvent*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemtouchUngrabEvent*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_touchUngrabEvent(self.h)
 
-proc miqt_exec_callback_cQQuickItem_touchUngrabEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_touchUngrabEvent(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].touchUngrabEvent(self)
 
 proc QQuickItemwheelEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QWheelEvent): void =
   fcQQuickItem_virtualbase_wheelEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_wheelEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
   vtbl[].wheelEvent(self, slotval1)
@@ -2084,8 +2073,8 @@ proc miqt_exec_callback_cQQuickItem_wheelEvent(vtbl: pointer, self: pointer, eve
 proc QQuickItemtouchEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QTouchEvent): void =
   fcQQuickItem_virtualbase_touchEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_touchEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_touchEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
   vtbl[].touchEvent(self, slotval1)
@@ -2093,8 +2082,8 @@ proc miqt_exec_callback_cQQuickItem_touchEvent(vtbl: pointer, self: pointer, eve
 proc QQuickItemhoverEnterEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QHoverEvent): void =
   fcQQuickItem_virtualbase_hoverEnterEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_hoverEnterEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverEnterEvent(self, slotval1)
@@ -2102,8 +2091,8 @@ proc miqt_exec_callback_cQQuickItem_hoverEnterEvent(vtbl: pointer, self: pointer
 proc QQuickItemhoverMoveEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QHoverEvent): void =
   fcQQuickItem_virtualbase_hoverMoveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_hoverMoveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverMoveEvent(self, slotval1)
@@ -2111,8 +2100,8 @@ proc miqt_exec_callback_cQQuickItem_hoverMoveEvent(vtbl: pointer, self: pointer,
 proc QQuickItemhoverLeaveEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qevent_types.QHoverEvent): void =
   fcQQuickItem_virtualbase_hoverLeaveEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_hoverLeaveEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
   vtbl[].hoverLeaveEvent(self, slotval1)
@@ -2120,8 +2109,8 @@ proc miqt_exec_callback_cQQuickItem_hoverLeaveEvent(vtbl: pointer, self: pointer
 proc QQuickItemdragEnterEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QDragEnterEvent): void =
   fcQQuickItem_virtualbase_dragEnterEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_dragEnterEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
   vtbl[].dragEnterEvent(self, slotval1)
@@ -2129,8 +2118,8 @@ proc miqt_exec_callback_cQQuickItem_dragEnterEvent(vtbl: pointer, self: pointer,
 proc QQuickItemdragMoveEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QDragMoveEvent): void =
   fcQQuickItem_virtualbase_dragMoveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_dragMoveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
   vtbl[].dragMoveEvent(self, slotval1)
@@ -2138,8 +2127,8 @@ proc miqt_exec_callback_cQQuickItem_dragMoveEvent(vtbl: pointer, self: pointer, 
 proc QQuickItemdragLeaveEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QDragLeaveEvent): void =
   fcQQuickItem_virtualbase_dragLeaveEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_dragLeaveEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
   vtbl[].dragLeaveEvent(self, slotval1)
@@ -2147,8 +2136,8 @@ proc miqt_exec_callback_cQQuickItem_dragLeaveEvent(vtbl: pointer, self: pointer,
 proc QQuickItemdropEvent*(self: gen_qquickitem_types.QQuickItem, param1: gen_qevent_types.QDropEvent): void =
   fcQQuickItem_virtualbase_dropEvent(self.h, param1.h)
 
-proc miqt_exec_callback_cQQuickItem_dropEvent(vtbl: pointer, self: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
   vtbl[].dropEvent(self, slotval1)
@@ -2156,27 +2145,27 @@ proc miqt_exec_callback_cQQuickItem_dropEvent(vtbl: pointer, self: pointer, para
 proc QQuickItemchildMouseEventFilter*(self: gen_qquickitem_types.QQuickItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool =
   fcQQuickItem_virtualbase_childMouseEventFilter(self.h, param1.h, param2.h)
 
-proc miqt_exec_callback_cQQuickItem_childMouseEventFilter(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
   var virtualReturn = vtbl[].childMouseEventFilter(self, slotval1, slotval2)
   virtualReturn
 
-proc QQuickItemwindowDeactivateEvent*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemwindowDeactivateEvent*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_windowDeactivateEvent(self.h)
 
-proc miqt_exec_callback_cQQuickItem_windowDeactivateEvent(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_windowDeactivateEvent(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].windowDeactivateEvent(self)
 
 proc QQuickItemgeometryChanged*(self: gen_qquickitem_types.QQuickItem, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void =
   fcQQuickItem_virtualbase_geometryChanged(self.h, newGeometry.h, oldGeometry.h)
 
-proc miqt_exec_callback_cQQuickItem_geometryChanged(vtbl: pointer, self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_geometryChanged(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
@@ -2185,8 +2174,8 @@ proc miqt_exec_callback_cQQuickItem_geometryChanged(vtbl: pointer, self: pointer
 proc QQuickItemupdatePaintNode*(self: gen_qquickitem_types.QQuickItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode =
   gen_qsgnode_types.QSGNode(h: fcQQuickItem_virtualbase_updatePaintNode(self.h, param1.h, param2.h), owned: false)
 
-proc miqt_exec_callback_cQQuickItem_updatePaintNode(vtbl: pointer, self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
   let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
@@ -2196,27 +2185,27 @@ proc miqt_exec_callback_cQQuickItem_updatePaintNode(vtbl: pointer, self: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QQuickItemreleaseResources*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemreleaseResources*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_releaseResources(self.h)
 
-proc miqt_exec_callback_cQQuickItem_releaseResources(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_releaseResources(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].releaseResources(self)
 
-proc QQuickItemupdatePolish*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc QQuickItemupdatePolish*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_virtualbase_updatePolish(self.h)
 
-proc miqt_exec_callback_cQQuickItem_updatePolish(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_updatePolish(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   vtbl[].updatePolish(self)
 
 proc QQuickItemeventFilter*(self: gen_qquickitem_types.QQuickItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQQuickItem_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -2226,8 +2215,8 @@ proc miqt_exec_callback_cQQuickItem_eventFilter(vtbl: pointer, self: pointer, wa
 proc QQuickItemtimerEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQQuickItem_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -2235,8 +2224,8 @@ proc miqt_exec_callback_cQQuickItem_timerEvent(vtbl: pointer, self: pointer, eve
 proc QQuickItemchildEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qcoreevent_types.QChildEvent): void =
   fcQQuickItem_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -2244,8 +2233,8 @@ proc miqt_exec_callback_cQQuickItem_childEvent(vtbl: pointer, self: pointer, eve
 proc QQuickItemcustomEvent*(self: gen_qquickitem_types.QQuickItem, event: gen_qcoreevent_types.QEvent): void =
   fcQQuickItem_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQQuickItem_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -2253,8 +2242,8 @@ proc miqt_exec_callback_cQQuickItem_customEvent(vtbl: pointer, self: pointer, ev
 proc QQuickItemconnectNotify*(self: gen_qquickitem_types.QQuickItem, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQuickItem_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQuickItem_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -2262,19 +2251,19 @@ proc miqt_exec_callback_cQQuickItem_connectNotify(vtbl: pointer, self: pointer, 
 proc QQuickItemdisconnectNotify*(self: gen_qquickitem_types.QQuickItem, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQQuickItem_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQQuickItem_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QQuickItemVTable](vtbl)
+proc cQQuickItem_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QQuickItemVTable](fcQQuickItem_vdata(self))
   let self = QQuickItem(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQQuickItem* {.inheritable.} = ref object of QQuickItem
   vtbl*: cQQuickItemVTable
-method metaObject*(self: VirtualQQuickItem, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQQuickItem): gen_qobjectdefs_types.QMetaObject {.base.} =
   QQuickItemmetaObject(self[])
-proc miqt_exec_method_cQQuickItem_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQQuickItem_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2282,37 +2271,37 @@ proc miqt_exec_method_cQQuickItem_metaObject(vtbl: pointer, inst: pointer): poin
 
 method metacast*(self: VirtualQQuickItem, param1: cstring): pointer {.base.} =
   QQuickItemmetacast(self[], param1)
-proc miqt_exec_method_cQQuickItem_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQQuickItem, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QQuickItemmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQQuickItem_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method boundingRect*(self: VirtualQQuickItem, ): gen_qrect_types.QRectF {.base.} =
+method boundingRect*(self: VirtualQQuickItem): gen_qrect_types.QRectF {.base.} =
   QQuickItemboundingRect(self[])
-proc miqt_exec_method_cQQuickItem_boundingRect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  var virtualReturn = vtbl.boundingRect()
+proc cQQuickItem_method_callback_boundingRect(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  var virtualReturn = inst.boundingRect()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method clipRect*(self: VirtualQQuickItem, ): gen_qrect_types.QRectF {.base.} =
+method clipRect*(self: VirtualQQuickItem): gen_qrect_types.QRectF {.base.} =
   QQuickItemclipRect(self[])
-proc miqt_exec_method_cQQuickItem_clipRect(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  var virtualReturn = vtbl.clipRect()
+proc cQQuickItem_method_callback_clipRect(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  var virtualReturn = inst.clipRect()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2320,35 +2309,35 @@ proc miqt_exec_method_cQQuickItem_clipRect(vtbl: pointer, inst: pointer): pointe
 
 method contains*(self: VirtualQQuickItem, point: gen_qpoint_types.QPointF): bool {.base.} =
   QQuickItemcontains(self[], point)
-proc miqt_exec_method_cQQuickItem_contains(vtbl: pointer, inst: pointer, point: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_contains(self: pointer, point: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qpoint_types.QPointF(h: point, owned: false)
-  var virtualReturn = vtbl.contains(slotval1)
+  var virtualReturn = inst.contains(slotval1)
   virtualReturn
 
 method inputMethodQuery*(self: VirtualQQuickItem, query: cint): gen_qvariant_types.QVariant {.base.} =
   QQuickIteminputMethodQuery(self[], query)
-proc miqt_exec_method_cQQuickItem_inputMethodQuery(vtbl: pointer, inst: pointer, query: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_inputMethodQuery(self: pointer, query: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = cint(query)
-  var virtualReturn = vtbl.inputMethodQuery(slotval1)
+  var virtualReturn = inst.inputMethodQuery(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method isTextureProvider*(self: VirtualQQuickItem, ): bool {.base.} =
+method isTextureProvider*(self: VirtualQQuickItem): bool {.base.} =
   QQuickItemisTextureProvider(self[])
-proc miqt_exec_method_cQQuickItem_isTextureProvider(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  var virtualReturn = vtbl.isTextureProvider()
+proc cQQuickItem_method_callback_isTextureProvider(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  var virtualReturn = inst.isTextureProvider()
   virtualReturn
 
-method textureProvider*(self: VirtualQQuickItem, ): gen_qsgtextureprovider_types.QSGTextureProvider {.base.} =
+method textureProvider*(self: VirtualQQuickItem): gen_qsgtextureprovider_types.QSGTextureProvider {.base.} =
   QQuickItemtextureProvider(self[])
-proc miqt_exec_method_cQQuickItem_textureProvider(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  var virtualReturn = vtbl.textureProvider()
+proc cQQuickItem_method_callback_textureProvider(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  var virtualReturn = inst.textureProvider()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2356,271 +2345,271 @@ proc miqt_exec_method_cQQuickItem_textureProvider(vtbl: pointer, inst: pointer):
 
 method event*(self: VirtualQQuickItem, param1: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQuickItemevent(self[], param1)
-proc miqt_exec_method_cQQuickItem_event(vtbl: pointer, inst: pointer, param1: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_event(self: pointer, param1: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: param1, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method itemChange*(self: VirtualQQuickItem, param1: cint, param2: gen_qquickitem_types.QQuickItemItemChangeData): void {.base.} =
   QQuickItemitemChange(self[], param1, param2)
-proc miqt_exec_method_cQQuickItem_itemChange(vtbl: pointer, inst: pointer, param1: cint, param2: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_itemChange(self: pointer, param1: cint, param2: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = gen_qquickitem_types.QQuickItemItemChangeData(h: param2, owned: false)
-  vtbl.itemChange(slotval1, slotval2)
+  inst.itemChange(slotval1, slotval2)
 
-method classBegin*(self: VirtualQQuickItem, ): void {.base.} =
+method classBegin*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemclassBegin(self[])
-proc miqt_exec_method_cQQuickItem_classBegin(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.classBegin()
+proc cQQuickItem_method_callback_classBegin(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.classBegin()
 
-method componentComplete*(self: VirtualQQuickItem, ): void {.base.} =
+method componentComplete*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemcomponentComplete(self[])
-proc miqt_exec_method_cQQuickItem_componentComplete(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.componentComplete()
+proc cQQuickItem_method_callback_componentComplete(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.componentComplete()
 
 method keyPressEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QQuickItemkeyPressEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_keyPressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_keyPressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyPressEvent(slotval1)
+  inst.keyPressEvent(slotval1)
 
 method keyReleaseEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QKeyEvent): void {.base.} =
   QQuickItemkeyReleaseEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_keyReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_keyReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QKeyEvent(h: event, owned: false)
-  vtbl.keyReleaseEvent(slotval1)
+  inst.keyReleaseEvent(slotval1)
 
 method inputMethodEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QInputMethodEvent): void {.base.} =
   QQuickIteminputMethodEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_inputMethodEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_inputMethodEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QInputMethodEvent(h: param1, owned: false)
-  vtbl.inputMethodEvent(slotval1)
+  inst.inputMethodEvent(slotval1)
 
 method focusInEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QQuickItemfocusInEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_focusInEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_focusInEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
-  vtbl.focusInEvent(slotval1)
+  inst.focusInEvent(slotval1)
 
 method focusOutEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QFocusEvent): void {.base.} =
   QQuickItemfocusOutEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_focusOutEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_focusOutEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QFocusEvent(h: param1, owned: false)
-  vtbl.focusOutEvent(slotval1)
+  inst.focusOutEvent(slotval1)
 
 method mousePressEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QQuickItemmousePressEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_mousePressEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_mousePressEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mousePressEvent(slotval1)
+  inst.mousePressEvent(slotval1)
 
 method mouseMoveEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QQuickItemmouseMoveEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_mouseMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_mouseMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseMoveEvent(slotval1)
+  inst.mouseMoveEvent(slotval1)
 
 method mouseReleaseEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QQuickItemmouseReleaseEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_mouseReleaseEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_mouseReleaseEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseReleaseEvent(slotval1)
+  inst.mouseReleaseEvent(slotval1)
 
 method mouseDoubleClickEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QMouseEvent): void {.base.} =
   QQuickItemmouseDoubleClickEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_mouseDoubleClickEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_mouseDoubleClickEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QMouseEvent(h: event, owned: false)
-  vtbl.mouseDoubleClickEvent(slotval1)
+  inst.mouseDoubleClickEvent(slotval1)
 
-method mouseUngrabEvent*(self: VirtualQQuickItem, ): void {.base.} =
+method mouseUngrabEvent*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemmouseUngrabEvent(self[])
-proc miqt_exec_method_cQQuickItem_mouseUngrabEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.mouseUngrabEvent()
+proc cQQuickItem_method_callback_mouseUngrabEvent(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.mouseUngrabEvent()
 
-method touchUngrabEvent*(self: VirtualQQuickItem, ): void {.base.} =
+method touchUngrabEvent*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemtouchUngrabEvent(self[])
-proc miqt_exec_method_cQQuickItem_touchUngrabEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.touchUngrabEvent()
+proc cQQuickItem_method_callback_touchUngrabEvent(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.touchUngrabEvent()
 
 method wheelEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QWheelEvent): void {.base.} =
   QQuickItemwheelEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_wheelEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_wheelEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QWheelEvent(h: event, owned: false)
-  vtbl.wheelEvent(slotval1)
+  inst.wheelEvent(slotval1)
 
 method touchEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QTouchEvent): void {.base.} =
   QQuickItemtouchEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_touchEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_touchEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QTouchEvent(h: event, owned: false)
-  vtbl.touchEvent(slotval1)
+  inst.touchEvent(slotval1)
 
 method hoverEnterEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
   QQuickItemhoverEnterEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_hoverEnterEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_hoverEnterEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
-  vtbl.hoverEnterEvent(slotval1)
+  inst.hoverEnterEvent(slotval1)
 
 method hoverMoveEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
   QQuickItemhoverMoveEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_hoverMoveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_hoverMoveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
-  vtbl.hoverMoveEvent(slotval1)
+  inst.hoverMoveEvent(slotval1)
 
 method hoverLeaveEvent*(self: VirtualQQuickItem, event: gen_qevent_types.QHoverEvent): void {.base.} =
   QQuickItemhoverLeaveEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_hoverLeaveEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_hoverLeaveEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QHoverEvent(h: event, owned: false)
-  vtbl.hoverLeaveEvent(slotval1)
+  inst.hoverLeaveEvent(slotval1)
 
 method dragEnterEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QDragEnterEvent): void {.base.} =
   QQuickItemdragEnterEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_dragEnterEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_dragEnterEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QDragEnterEvent(h: param1, owned: false)
-  vtbl.dragEnterEvent(slotval1)
+  inst.dragEnterEvent(slotval1)
 
 method dragMoveEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QDragMoveEvent): void {.base.} =
   QQuickItemdragMoveEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_dragMoveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_dragMoveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QDragMoveEvent(h: param1, owned: false)
-  vtbl.dragMoveEvent(slotval1)
+  inst.dragMoveEvent(slotval1)
 
 method dragLeaveEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QDragLeaveEvent): void {.base.} =
   QQuickItemdragLeaveEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_dragLeaveEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_dragLeaveEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QDragLeaveEvent(h: param1, owned: false)
-  vtbl.dragLeaveEvent(slotval1)
+  inst.dragLeaveEvent(slotval1)
 
 method dropEvent*(self: VirtualQQuickItem, param1: gen_qevent_types.QDropEvent): void {.base.} =
   QQuickItemdropEvent(self[], param1)
-proc miqt_exec_method_cQQuickItem_dropEvent(vtbl: pointer, inst: pointer, param1: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_dropEvent(self: pointer, param1: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qevent_types.QDropEvent(h: param1, owned: false)
-  vtbl.dropEvent(slotval1)
+  inst.dropEvent(slotval1)
 
 method childMouseEventFilter*(self: VirtualQQuickItem, param1: gen_qquickitem_types.QQuickItem, param2: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQuickItemchildMouseEventFilter(self[], param1, param2)
-proc miqt_exec_method_cQQuickItem_childMouseEventFilter(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_childMouseEventFilter(self: pointer, param1: pointer, param2: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qquickitem_types.QQuickItem(h: param1, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: param2, owned: false)
-  var virtualReturn = vtbl.childMouseEventFilter(slotval1, slotval2)
+  var virtualReturn = inst.childMouseEventFilter(slotval1, slotval2)
   virtualReturn
 
-method windowDeactivateEvent*(self: VirtualQQuickItem, ): void {.base.} =
+method windowDeactivateEvent*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemwindowDeactivateEvent(self[])
-proc miqt_exec_method_cQQuickItem_windowDeactivateEvent(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.windowDeactivateEvent()
+proc cQQuickItem_method_callback_windowDeactivateEvent(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.windowDeactivateEvent()
 
 method geometryChanged*(self: VirtualQQuickItem, newGeometry: gen_qrect_types.QRectF, oldGeometry: gen_qrect_types.QRectF): void {.base.} =
   QQuickItemgeometryChanged(self[], newGeometry, oldGeometry)
-proc miqt_exec_method_cQQuickItem_geometryChanged(vtbl: pointer, inst: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_geometryChanged(self: pointer, newGeometry: pointer, oldGeometry: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qrect_types.QRectF(h: newGeometry, owned: false)
   let slotval2 = gen_qrect_types.QRectF(h: oldGeometry, owned: false)
-  vtbl.geometryChanged(slotval1, slotval2)
+  inst.geometryChanged(slotval1, slotval2)
 
 method updatePaintNode*(self: VirtualQQuickItem, param1: gen_qsgnode_types.QSGNode, param2: gen_qquickitem_types.QQuickItemUpdatePaintNodeData): gen_qsgnode_types.QSGNode {.base.} =
   QQuickItemupdatePaintNode(self[], param1, param2)
-proc miqt_exec_method_cQQuickItem_updatePaintNode(vtbl: pointer, inst: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_updatePaintNode(self: pointer, param1: pointer, param2: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qsgnode_types.QSGNode(h: param1, owned: false)
   let slotval2 = gen_qquickitem_types.QQuickItemUpdatePaintNodeData(h: param2, owned: false)
-  var virtualReturn = vtbl.updatePaintNode(slotval1, slotval2)
+  var virtualReturn = inst.updatePaintNode(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method releaseResources*(self: VirtualQQuickItem, ): void {.base.} =
+method releaseResources*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemreleaseResources(self[])
-proc miqt_exec_method_cQQuickItem_releaseResources(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.releaseResources()
+proc cQQuickItem_method_callback_releaseResources(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.releaseResources()
 
-method updatePolish*(self: VirtualQQuickItem, ): void {.base.} =
+method updatePolish*(self: VirtualQQuickItem): void {.base.} =
   QQuickItemupdatePolish(self[])
-proc miqt_exec_method_cQQuickItem_updatePolish(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-  vtbl.updatePolish()
+proc cQQuickItem_method_callback_updatePolish(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
+  inst.updatePolish()
 
 method eventFilter*(self: VirtualQQuickItem, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QQuickItemeventFilter(self[], watched, event)
-proc miqt_exec_method_cQQuickItem_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQQuickItem, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QQuickItemtimerEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQQuickItem, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QQuickItemchildEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQQuickItem, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QQuickItemcustomEvent(self[], event)
-proc miqt_exec_method_cQQuickItem_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQQuickItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickItemconnectNotify(self[], signal)
-proc miqt_exec_method_cQQuickItem_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQQuickItem, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QQuickItemdisconnectNotify(self[], signal)
-proc miqt_exec_method_cQQuickItem_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQQuickItem](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
+proc cQQuickItem_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQQuickItem](fcQQuickItem_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc isComponentComplete*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc isComponentComplete*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_protectedbase_isComponentComplete(self.h)
 
-proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem, ): void =
+proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem): void =
   fcQQuickItem_protectedbase_updateInputMethod(self.h)
 
-proc widthValid*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc widthValid*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_protectedbase_widthValid(self.h)
 
-proc heightValid*(self: gen_qquickitem_types.QQuickItem, ): bool =
+proc heightValid*(self: gen_qquickitem_types.QQuickItem): bool =
   fcQQuickItem_protectedbase_heightValid(self.h)
 
 proc setImplicitSize*(self: gen_qquickitem_types.QQuickItem, param1: float64, param2: float64): void =
@@ -2629,10 +2618,10 @@ proc setImplicitSize*(self: gen_qquickitem_types.QQuickItem, param1: float64, pa
 proc updateInputMethod*(self: gen_qquickitem_types.QQuickItem, queries: cint): void =
   fcQQuickItem_protectedbase_updateInputMethod1(self.h, cint(queries))
 
-proc sender*(self: gen_qquickitem_types.QQuickItem, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qquickitem_types.QQuickItem): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQQuickItem_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qquickitem_types.QQuickItem, ): cint =
+proc senderSignalIndex*(self: gen_qquickitem_types.QQuickItem): cint =
   fcQQuickItem_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qquickitem_types.QQuickItem, signal: cstring): cint =
@@ -2645,313 +2634,264 @@ proc create*(T: type gen_qquickitem_types.QQuickItem,
     vtbl: ref QQuickItemVTable = nil): gen_qquickitem_types.QQuickItem =
   let vtbl = if vtbl == nil: new QQuickItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickItemVTable, _: ptr cQQuickItem) {.cdecl.} =
-    let vtbl = cast[ref QQuickItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQuickItemVTable](fcQQuickItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickItem_metaObject
+    vtbl[].vtbl.metaObject = cQQuickItem_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickItem_metacast
+    vtbl[].vtbl.metacast = cQQuickItem_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickItem_metacall
+    vtbl[].vtbl.metacall = cQQuickItem_vtable_callback_metacall
   if not isNil(vtbl[].boundingRect):
-    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickItem_boundingRect
+    vtbl[].vtbl.boundingRect = cQQuickItem_vtable_callback_boundingRect
   if not isNil(vtbl[].clipRect):
-    vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickItem_clipRect
+    vtbl[].vtbl.clipRect = cQQuickItem_vtable_callback_clipRect
   if not isNil(vtbl[].contains):
-    vtbl[].vtbl.contains = miqt_exec_callback_cQQuickItem_contains
+    vtbl[].vtbl.contains = cQQuickItem_vtable_callback_contains
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickItem_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQQuickItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].isTextureProvider):
-    vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickItem_isTextureProvider
+    vtbl[].vtbl.isTextureProvider = cQQuickItem_vtable_callback_isTextureProvider
   if not isNil(vtbl[].textureProvider):
-    vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickItem_textureProvider
+    vtbl[].vtbl.textureProvider = cQQuickItem_vtable_callback_textureProvider
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQuickItem_event
+    vtbl[].vtbl.event = cQQuickItem_vtable_callback_event
   if not isNil(vtbl[].itemChange):
-    vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickItem_itemChange
+    vtbl[].vtbl.itemChange = cQQuickItem_vtable_callback_itemChange
   if not isNil(vtbl[].classBegin):
-    vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickItem_classBegin
+    vtbl[].vtbl.classBegin = cQQuickItem_vtable_callback_classBegin
   if not isNil(vtbl[].componentComplete):
-    vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickItem_componentComplete
+    vtbl[].vtbl.componentComplete = cQQuickItem_vtable_callback_componentComplete
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickItem_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQQuickItem_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickItem_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQQuickItem_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickItem_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQQuickItem_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickItem_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQQuickItem_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickItem_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQQuickItem_vtable_callback_focusOutEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickItem_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQQuickItem_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickItem_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQQuickItem_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickItem_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQQuickItem_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickItem_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQQuickItem_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseUngrabEvent):
-    vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickItem_mouseUngrabEvent
+    vtbl[].vtbl.mouseUngrabEvent = cQQuickItem_vtable_callback_mouseUngrabEvent
   if not isNil(vtbl[].touchUngrabEvent):
-    vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickItem_touchUngrabEvent
+    vtbl[].vtbl.touchUngrabEvent = cQQuickItem_vtable_callback_touchUngrabEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickItem_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQQuickItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].touchEvent):
-    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickItem_touchEvent
+    vtbl[].vtbl.touchEvent = cQQuickItem_vtable_callback_touchEvent
   if not isNil(vtbl[].hoverEnterEvent):
-    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickItem_hoverEnterEvent
+    vtbl[].vtbl.hoverEnterEvent = cQQuickItem_vtable_callback_hoverEnterEvent
   if not isNil(vtbl[].hoverMoveEvent):
-    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickItem_hoverMoveEvent
+    vtbl[].vtbl.hoverMoveEvent = cQQuickItem_vtable_callback_hoverMoveEvent
   if not isNil(vtbl[].hoverLeaveEvent):
-    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickItem_hoverLeaveEvent
+    vtbl[].vtbl.hoverLeaveEvent = cQQuickItem_vtable_callback_hoverLeaveEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickItem_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQQuickItem_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickItem_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQQuickItem_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickItem_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQQuickItem_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickItem_dropEvent
+    vtbl[].vtbl.dropEvent = cQQuickItem_vtable_callback_dropEvent
   if not isNil(vtbl[].childMouseEventFilter):
-    vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickItem_childMouseEventFilter
+    vtbl[].vtbl.childMouseEventFilter = cQQuickItem_vtable_callback_childMouseEventFilter
   if not isNil(vtbl[].windowDeactivateEvent):
-    vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickItem_windowDeactivateEvent
+    vtbl[].vtbl.windowDeactivateEvent = cQQuickItem_vtable_callback_windowDeactivateEvent
   if not isNil(vtbl[].geometryChanged):
-    vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickItem_geometryChanged
+    vtbl[].vtbl.geometryChanged = cQQuickItem_vtable_callback_geometryChanged
   if not isNil(vtbl[].updatePaintNode):
-    vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickItem_updatePaintNode
+    vtbl[].vtbl.updatePaintNode = cQQuickItem_vtable_callback_updatePaintNode
   if not isNil(vtbl[].releaseResources):
-    vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickItem_releaseResources
+    vtbl[].vtbl.releaseResources = cQQuickItem_vtable_callback_releaseResources
   if not isNil(vtbl[].updatePolish):
-    vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickItem_updatePolish
+    vtbl[].vtbl.updatePolish = cQQuickItem_vtable_callback_updatePolish
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickItem_eventFilter
+    vtbl[].vtbl.eventFilter = cQQuickItem_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickItem_timerEvent
+    vtbl[].vtbl.timerEvent = cQQuickItem_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickItem_childEvent
+    vtbl[].vtbl.childEvent = cQQuickItem_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickItem_customEvent
+    vtbl[].vtbl.customEvent = cQQuickItem_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickItem_connectNotify
+    vtbl[].vtbl.connectNotify = cQQuickItem_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickItem_disconnectNotify
-  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQuickItem_vtable_callback_disconnectNotify
+  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qquickitem_types.QQuickItem,
     parent: gen_qquickitem_types.QQuickItem,
     vtbl: ref QQuickItemVTable = nil): gen_qquickitem_types.QQuickItem =
   let vtbl = if vtbl == nil: new QQuickItemVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickItemVTable, _: ptr cQQuickItem) {.cdecl.} =
-    let vtbl = cast[ref QQuickItemVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QQuickItemVTable](fcQQuickItem_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQQuickItem_metaObject
+    vtbl[].vtbl.metaObject = cQQuickItem_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQQuickItem_metacast
+    vtbl[].vtbl.metacast = cQQuickItem_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQQuickItem_metacall
+    vtbl[].vtbl.metacall = cQQuickItem_vtable_callback_metacall
   if not isNil(vtbl[].boundingRect):
-    vtbl[].vtbl.boundingRect = miqt_exec_callback_cQQuickItem_boundingRect
+    vtbl[].vtbl.boundingRect = cQQuickItem_vtable_callback_boundingRect
   if not isNil(vtbl[].clipRect):
-    vtbl[].vtbl.clipRect = miqt_exec_callback_cQQuickItem_clipRect
+    vtbl[].vtbl.clipRect = cQQuickItem_vtable_callback_clipRect
   if not isNil(vtbl[].contains):
-    vtbl[].vtbl.contains = miqt_exec_callback_cQQuickItem_contains
+    vtbl[].vtbl.contains = cQQuickItem_vtable_callback_contains
   if not isNil(vtbl[].inputMethodQuery):
-    vtbl[].vtbl.inputMethodQuery = miqt_exec_callback_cQQuickItem_inputMethodQuery
+    vtbl[].vtbl.inputMethodQuery = cQQuickItem_vtable_callback_inputMethodQuery
   if not isNil(vtbl[].isTextureProvider):
-    vtbl[].vtbl.isTextureProvider = miqt_exec_callback_cQQuickItem_isTextureProvider
+    vtbl[].vtbl.isTextureProvider = cQQuickItem_vtable_callback_isTextureProvider
   if not isNil(vtbl[].textureProvider):
-    vtbl[].vtbl.textureProvider = miqt_exec_callback_cQQuickItem_textureProvider
+    vtbl[].vtbl.textureProvider = cQQuickItem_vtable_callback_textureProvider
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQQuickItem_event
+    vtbl[].vtbl.event = cQQuickItem_vtable_callback_event
   if not isNil(vtbl[].itemChange):
-    vtbl[].vtbl.itemChange = miqt_exec_callback_cQQuickItem_itemChange
+    vtbl[].vtbl.itemChange = cQQuickItem_vtable_callback_itemChange
   if not isNil(vtbl[].classBegin):
-    vtbl[].vtbl.classBegin = miqt_exec_callback_cQQuickItem_classBegin
+    vtbl[].vtbl.classBegin = cQQuickItem_vtable_callback_classBegin
   if not isNil(vtbl[].componentComplete):
-    vtbl[].vtbl.componentComplete = miqt_exec_callback_cQQuickItem_componentComplete
+    vtbl[].vtbl.componentComplete = cQQuickItem_vtable_callback_componentComplete
   if not isNil(vtbl[].keyPressEvent):
-    vtbl[].vtbl.keyPressEvent = miqt_exec_callback_cQQuickItem_keyPressEvent
+    vtbl[].vtbl.keyPressEvent = cQQuickItem_vtable_callback_keyPressEvent
   if not isNil(vtbl[].keyReleaseEvent):
-    vtbl[].vtbl.keyReleaseEvent = miqt_exec_callback_cQQuickItem_keyReleaseEvent
+    vtbl[].vtbl.keyReleaseEvent = cQQuickItem_vtable_callback_keyReleaseEvent
   if not isNil(vtbl[].inputMethodEvent):
-    vtbl[].vtbl.inputMethodEvent = miqt_exec_callback_cQQuickItem_inputMethodEvent
+    vtbl[].vtbl.inputMethodEvent = cQQuickItem_vtable_callback_inputMethodEvent
   if not isNil(vtbl[].focusInEvent):
-    vtbl[].vtbl.focusInEvent = miqt_exec_callback_cQQuickItem_focusInEvent
+    vtbl[].vtbl.focusInEvent = cQQuickItem_vtable_callback_focusInEvent
   if not isNil(vtbl[].focusOutEvent):
-    vtbl[].vtbl.focusOutEvent = miqt_exec_callback_cQQuickItem_focusOutEvent
+    vtbl[].vtbl.focusOutEvent = cQQuickItem_vtable_callback_focusOutEvent
   if not isNil(vtbl[].mousePressEvent):
-    vtbl[].vtbl.mousePressEvent = miqt_exec_callback_cQQuickItem_mousePressEvent
+    vtbl[].vtbl.mousePressEvent = cQQuickItem_vtable_callback_mousePressEvent
   if not isNil(vtbl[].mouseMoveEvent):
-    vtbl[].vtbl.mouseMoveEvent = miqt_exec_callback_cQQuickItem_mouseMoveEvent
+    vtbl[].vtbl.mouseMoveEvent = cQQuickItem_vtable_callback_mouseMoveEvent
   if not isNil(vtbl[].mouseReleaseEvent):
-    vtbl[].vtbl.mouseReleaseEvent = miqt_exec_callback_cQQuickItem_mouseReleaseEvent
+    vtbl[].vtbl.mouseReleaseEvent = cQQuickItem_vtable_callback_mouseReleaseEvent
   if not isNil(vtbl[].mouseDoubleClickEvent):
-    vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_callback_cQQuickItem_mouseDoubleClickEvent
+    vtbl[].vtbl.mouseDoubleClickEvent = cQQuickItem_vtable_callback_mouseDoubleClickEvent
   if not isNil(vtbl[].mouseUngrabEvent):
-    vtbl[].vtbl.mouseUngrabEvent = miqt_exec_callback_cQQuickItem_mouseUngrabEvent
+    vtbl[].vtbl.mouseUngrabEvent = cQQuickItem_vtable_callback_mouseUngrabEvent
   if not isNil(vtbl[].touchUngrabEvent):
-    vtbl[].vtbl.touchUngrabEvent = miqt_exec_callback_cQQuickItem_touchUngrabEvent
+    vtbl[].vtbl.touchUngrabEvent = cQQuickItem_vtable_callback_touchUngrabEvent
   if not isNil(vtbl[].wheelEvent):
-    vtbl[].vtbl.wheelEvent = miqt_exec_callback_cQQuickItem_wheelEvent
+    vtbl[].vtbl.wheelEvent = cQQuickItem_vtable_callback_wheelEvent
   if not isNil(vtbl[].touchEvent):
-    vtbl[].vtbl.touchEvent = miqt_exec_callback_cQQuickItem_touchEvent
+    vtbl[].vtbl.touchEvent = cQQuickItem_vtable_callback_touchEvent
   if not isNil(vtbl[].hoverEnterEvent):
-    vtbl[].vtbl.hoverEnterEvent = miqt_exec_callback_cQQuickItem_hoverEnterEvent
+    vtbl[].vtbl.hoverEnterEvent = cQQuickItem_vtable_callback_hoverEnterEvent
   if not isNil(vtbl[].hoverMoveEvent):
-    vtbl[].vtbl.hoverMoveEvent = miqt_exec_callback_cQQuickItem_hoverMoveEvent
+    vtbl[].vtbl.hoverMoveEvent = cQQuickItem_vtable_callback_hoverMoveEvent
   if not isNil(vtbl[].hoverLeaveEvent):
-    vtbl[].vtbl.hoverLeaveEvent = miqt_exec_callback_cQQuickItem_hoverLeaveEvent
+    vtbl[].vtbl.hoverLeaveEvent = cQQuickItem_vtable_callback_hoverLeaveEvent
   if not isNil(vtbl[].dragEnterEvent):
-    vtbl[].vtbl.dragEnterEvent = miqt_exec_callback_cQQuickItem_dragEnterEvent
+    vtbl[].vtbl.dragEnterEvent = cQQuickItem_vtable_callback_dragEnterEvent
   if not isNil(vtbl[].dragMoveEvent):
-    vtbl[].vtbl.dragMoveEvent = miqt_exec_callback_cQQuickItem_dragMoveEvent
+    vtbl[].vtbl.dragMoveEvent = cQQuickItem_vtable_callback_dragMoveEvent
   if not isNil(vtbl[].dragLeaveEvent):
-    vtbl[].vtbl.dragLeaveEvent = miqt_exec_callback_cQQuickItem_dragLeaveEvent
+    vtbl[].vtbl.dragLeaveEvent = cQQuickItem_vtable_callback_dragLeaveEvent
   if not isNil(vtbl[].dropEvent):
-    vtbl[].vtbl.dropEvent = miqt_exec_callback_cQQuickItem_dropEvent
+    vtbl[].vtbl.dropEvent = cQQuickItem_vtable_callback_dropEvent
   if not isNil(vtbl[].childMouseEventFilter):
-    vtbl[].vtbl.childMouseEventFilter = miqt_exec_callback_cQQuickItem_childMouseEventFilter
+    vtbl[].vtbl.childMouseEventFilter = cQQuickItem_vtable_callback_childMouseEventFilter
   if not isNil(vtbl[].windowDeactivateEvent):
-    vtbl[].vtbl.windowDeactivateEvent = miqt_exec_callback_cQQuickItem_windowDeactivateEvent
+    vtbl[].vtbl.windowDeactivateEvent = cQQuickItem_vtable_callback_windowDeactivateEvent
   if not isNil(vtbl[].geometryChanged):
-    vtbl[].vtbl.geometryChanged = miqt_exec_callback_cQQuickItem_geometryChanged
+    vtbl[].vtbl.geometryChanged = cQQuickItem_vtable_callback_geometryChanged
   if not isNil(vtbl[].updatePaintNode):
-    vtbl[].vtbl.updatePaintNode = miqt_exec_callback_cQQuickItem_updatePaintNode
+    vtbl[].vtbl.updatePaintNode = cQQuickItem_vtable_callback_updatePaintNode
   if not isNil(vtbl[].releaseResources):
-    vtbl[].vtbl.releaseResources = miqt_exec_callback_cQQuickItem_releaseResources
+    vtbl[].vtbl.releaseResources = cQQuickItem_vtable_callback_releaseResources
   if not isNil(vtbl[].updatePolish):
-    vtbl[].vtbl.updatePolish = miqt_exec_callback_cQQuickItem_updatePolish
+    vtbl[].vtbl.updatePolish = cQQuickItem_vtable_callback_updatePolish
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQQuickItem_eventFilter
+    vtbl[].vtbl.eventFilter = cQQuickItem_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQQuickItem_timerEvent
+    vtbl[].vtbl.timerEvent = cQQuickItem_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQQuickItem_childEvent
+    vtbl[].vtbl.childEvent = cQQuickItem_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQQuickItem_customEvent
+    vtbl[].vtbl.customEvent = cQQuickItem_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQQuickItem_connectNotify
+    vtbl[].vtbl.connectNotify = cQQuickItem_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQQuickItem_disconnectNotify
-  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQQuickItem_vtable_callback_disconnectNotify
+  gen_qquickitem_types.QQuickItem(h: fcQQuickItem_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQQuickItem_mvtbl = cQQuickItemVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQQuickItem()[])](self.fcQQuickItem_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQQuickItem_method_callback_metaObject,
+  metacast: cQQuickItem_method_callback_metacast,
+  metacall: cQQuickItem_method_callback_metacall,
+  boundingRect: cQQuickItem_method_callback_boundingRect,
+  clipRect: cQQuickItem_method_callback_clipRect,
+  contains: cQQuickItem_method_callback_contains,
+  inputMethodQuery: cQQuickItem_method_callback_inputMethodQuery,
+  isTextureProvider: cQQuickItem_method_callback_isTextureProvider,
+  textureProvider: cQQuickItem_method_callback_textureProvider,
+  event: cQQuickItem_method_callback_event,
+  itemChange: cQQuickItem_method_callback_itemChange,
+  classBegin: cQQuickItem_method_callback_classBegin,
+  componentComplete: cQQuickItem_method_callback_componentComplete,
+  keyPressEvent: cQQuickItem_method_callback_keyPressEvent,
+  keyReleaseEvent: cQQuickItem_method_callback_keyReleaseEvent,
+  inputMethodEvent: cQQuickItem_method_callback_inputMethodEvent,
+  focusInEvent: cQQuickItem_method_callback_focusInEvent,
+  focusOutEvent: cQQuickItem_method_callback_focusOutEvent,
+  mousePressEvent: cQQuickItem_method_callback_mousePressEvent,
+  mouseMoveEvent: cQQuickItem_method_callback_mouseMoveEvent,
+  mouseReleaseEvent: cQQuickItem_method_callback_mouseReleaseEvent,
+  mouseDoubleClickEvent: cQQuickItem_method_callback_mouseDoubleClickEvent,
+  mouseUngrabEvent: cQQuickItem_method_callback_mouseUngrabEvent,
+  touchUngrabEvent: cQQuickItem_method_callback_touchUngrabEvent,
+  wheelEvent: cQQuickItem_method_callback_wheelEvent,
+  touchEvent: cQQuickItem_method_callback_touchEvent,
+  hoverEnterEvent: cQQuickItem_method_callback_hoverEnterEvent,
+  hoverMoveEvent: cQQuickItem_method_callback_hoverMoveEvent,
+  hoverLeaveEvent: cQQuickItem_method_callback_hoverLeaveEvent,
+  dragEnterEvent: cQQuickItem_method_callback_dragEnterEvent,
+  dragMoveEvent: cQQuickItem_method_callback_dragMoveEvent,
+  dragLeaveEvent: cQQuickItem_method_callback_dragLeaveEvent,
+  dropEvent: cQQuickItem_method_callback_dropEvent,
+  childMouseEventFilter: cQQuickItem_method_callback_childMouseEventFilter,
+  windowDeactivateEvent: cQQuickItem_method_callback_windowDeactivateEvent,
+  geometryChanged: cQQuickItem_method_callback_geometryChanged,
+  updatePaintNode: cQQuickItem_method_callback_updatePaintNode,
+  releaseResources: cQQuickItem_method_callback_releaseResources,
+  updatePolish: cQQuickItem_method_callback_updatePolish,
+  eventFilter: cQQuickItem_method_callback_eventFilter,
+  timerEvent: cQQuickItem_method_callback_timerEvent,
+  childEvent: cQQuickItem_method_callback_childEvent,
+  customEvent: cQQuickItem_method_callback_customEvent,
+  connectNotify: cQQuickItem_method_callback_connectNotify,
+  disconnectNotify: cQQuickItem_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qquickitem_types.QQuickItem,
-    vtbl: VirtualQQuickItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickItemVTable, _: ptr cQQuickItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQuickItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickItem_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickItem_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickItem_metacall
-  vtbl[].vtbl.boundingRect = miqt_exec_method_cQQuickItem_boundingRect
-  vtbl[].vtbl.clipRect = miqt_exec_method_cQQuickItem_clipRect
-  vtbl[].vtbl.contains = miqt_exec_method_cQQuickItem_contains
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQQuickItem_inputMethodQuery
-  vtbl[].vtbl.isTextureProvider = miqt_exec_method_cQQuickItem_isTextureProvider
-  vtbl[].vtbl.textureProvider = miqt_exec_method_cQQuickItem_textureProvider
-  vtbl[].vtbl.event = miqt_exec_method_cQQuickItem_event
-  vtbl[].vtbl.itemChange = miqt_exec_method_cQQuickItem_itemChange
-  vtbl[].vtbl.classBegin = miqt_exec_method_cQQuickItem_classBegin
-  vtbl[].vtbl.componentComplete = miqt_exec_method_cQQuickItem_componentComplete
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickItem_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickItem_keyReleaseEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQQuickItem_inputMethodEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickItem_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickItem_focusOutEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickItem_mousePressEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickItem_mouseMoveEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickItem_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickItem_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseUngrabEvent = miqt_exec_method_cQQuickItem_mouseUngrabEvent
-  vtbl[].vtbl.touchUngrabEvent = miqt_exec_method_cQQuickItem_touchUngrabEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickItem_wheelEvent
-  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickItem_touchEvent
-  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQQuickItem_hoverEnterEvent
-  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQQuickItem_hoverMoveEvent
-  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQQuickItem_hoverLeaveEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQQuickItem_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQQuickItem_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQQuickItem_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQQuickItem_dropEvent
-  vtbl[].vtbl.childMouseEventFilter = miqt_exec_method_cQQuickItem_childMouseEventFilter
-  vtbl[].vtbl.windowDeactivateEvent = miqt_exec_method_cQQuickItem_windowDeactivateEvent
-  vtbl[].vtbl.geometryChanged = miqt_exec_method_cQQuickItem_geometryChanged
-  vtbl[].vtbl.updatePaintNode = miqt_exec_method_cQQuickItem_updatePaintNode
-  vtbl[].vtbl.releaseResources = miqt_exec_method_cQQuickItem_releaseResources
-  vtbl[].vtbl.updatePolish = miqt_exec_method_cQQuickItem_updatePolish
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickItem_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickItem_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickItem_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickItem_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickItem_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickItem_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQuickItem_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQQuickItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQuickItem_new(addr(cQQuickItem_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qquickitem_types.QQuickItem,
     parent: gen_qquickitem_types.QQuickItem,
-    vtbl: VirtualQQuickItem) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQQuickItemVTable, _: ptr cQQuickItem) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQQuickItem()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQQuickItem, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQQuickItem_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQQuickItem_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQQuickItem_metacall
-  vtbl[].vtbl.boundingRect = miqt_exec_method_cQQuickItem_boundingRect
-  vtbl[].vtbl.clipRect = miqt_exec_method_cQQuickItem_clipRect
-  vtbl[].vtbl.contains = miqt_exec_method_cQQuickItem_contains
-  vtbl[].vtbl.inputMethodQuery = miqt_exec_method_cQQuickItem_inputMethodQuery
-  vtbl[].vtbl.isTextureProvider = miqt_exec_method_cQQuickItem_isTextureProvider
-  vtbl[].vtbl.textureProvider = miqt_exec_method_cQQuickItem_textureProvider
-  vtbl[].vtbl.event = miqt_exec_method_cQQuickItem_event
-  vtbl[].vtbl.itemChange = miqt_exec_method_cQQuickItem_itemChange
-  vtbl[].vtbl.classBegin = miqt_exec_method_cQQuickItem_classBegin
-  vtbl[].vtbl.componentComplete = miqt_exec_method_cQQuickItem_componentComplete
-  vtbl[].vtbl.keyPressEvent = miqt_exec_method_cQQuickItem_keyPressEvent
-  vtbl[].vtbl.keyReleaseEvent = miqt_exec_method_cQQuickItem_keyReleaseEvent
-  vtbl[].vtbl.inputMethodEvent = miqt_exec_method_cQQuickItem_inputMethodEvent
-  vtbl[].vtbl.focusInEvent = miqt_exec_method_cQQuickItem_focusInEvent
-  vtbl[].vtbl.focusOutEvent = miqt_exec_method_cQQuickItem_focusOutEvent
-  vtbl[].vtbl.mousePressEvent = miqt_exec_method_cQQuickItem_mousePressEvent
-  vtbl[].vtbl.mouseMoveEvent = miqt_exec_method_cQQuickItem_mouseMoveEvent
-  vtbl[].vtbl.mouseReleaseEvent = miqt_exec_method_cQQuickItem_mouseReleaseEvent
-  vtbl[].vtbl.mouseDoubleClickEvent = miqt_exec_method_cQQuickItem_mouseDoubleClickEvent
-  vtbl[].vtbl.mouseUngrabEvent = miqt_exec_method_cQQuickItem_mouseUngrabEvent
-  vtbl[].vtbl.touchUngrabEvent = miqt_exec_method_cQQuickItem_touchUngrabEvent
-  vtbl[].vtbl.wheelEvent = miqt_exec_method_cQQuickItem_wheelEvent
-  vtbl[].vtbl.touchEvent = miqt_exec_method_cQQuickItem_touchEvent
-  vtbl[].vtbl.hoverEnterEvent = miqt_exec_method_cQQuickItem_hoverEnterEvent
-  vtbl[].vtbl.hoverMoveEvent = miqt_exec_method_cQQuickItem_hoverMoveEvent
-  vtbl[].vtbl.hoverLeaveEvent = miqt_exec_method_cQQuickItem_hoverLeaveEvent
-  vtbl[].vtbl.dragEnterEvent = miqt_exec_method_cQQuickItem_dragEnterEvent
-  vtbl[].vtbl.dragMoveEvent = miqt_exec_method_cQQuickItem_dragMoveEvent
-  vtbl[].vtbl.dragLeaveEvent = miqt_exec_method_cQQuickItem_dragLeaveEvent
-  vtbl[].vtbl.dropEvent = miqt_exec_method_cQQuickItem_dropEvent
-  vtbl[].vtbl.childMouseEventFilter = miqt_exec_method_cQQuickItem_childMouseEventFilter
-  vtbl[].vtbl.windowDeactivateEvent = miqt_exec_method_cQQuickItem_windowDeactivateEvent
-  vtbl[].vtbl.geometryChanged = miqt_exec_method_cQQuickItem_geometryChanged
-  vtbl[].vtbl.updatePaintNode = miqt_exec_method_cQQuickItem_updatePaintNode
-  vtbl[].vtbl.releaseResources = miqt_exec_method_cQQuickItem_releaseResources
-  vtbl[].vtbl.updatePolish = miqt_exec_method_cQQuickItem_updatePolish
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQQuickItem_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQQuickItem_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQQuickItem_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQQuickItem_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQQuickItem_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQQuickItem_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQQuickItem_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQQuickItem) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQQuickItem_new2(addr(cQQuickItem_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qquickitem_types.QQuickItem): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQQuickItem_staticMetaObject())

@@ -17,15 +17,6 @@
 #include <cstring>
 #include <qmediaserviceproviderplugin.h>
 #include "gen_qmediaserviceproviderplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaServiceProviderHint* QMediaServiceProviderHint_new() {
 	return new QMediaServiceProviderHint();
 }
@@ -376,6 +367,7 @@ struct miqt_string QMediaServiceProviderPlugin_trUtf83(const char* s, const char
 }
 
 const QMetaObject* QMediaServiceProviderPlugin_staticMetaObject() { return &QMediaServiceProviderPlugin::staticMetaObject; }
+
 void QMediaServiceProviderPlugin_delete(QMediaServiceProviderPlugin* self) {
 	delete self;
 }

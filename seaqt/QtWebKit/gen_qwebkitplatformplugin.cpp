@@ -20,15 +20,6 @@
 #include <QWebTouchModifier>
 #include <qwebkitplatformplugin.h>
 #include "gen_qwebkitplatformplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 int QWebSelectData_itemType(const QWebSelectData* self, int param1) {
 	QWebSelectData::ItemType _ret = self->itemType(static_cast<int>(param1));
 	return static_cast<int>(_ret);
@@ -228,6 +219,7 @@ struct miqt_string QWebSelectMethod_trUtf83(const char* s, const char* c, int n)
 }
 
 const QMetaObject* QWebSelectMethod_staticMetaObject() { return &QWebSelectMethod::staticMetaObject; }
+
 void QWebSelectMethod_delete(QWebSelectMethod* self) {
 	delete self;
 }
@@ -387,6 +379,7 @@ struct miqt_string QWebNotificationPresenter_trUtf83(const char* s, const char* 
 }
 
 const QMetaObject* QWebNotificationPresenter_staticMetaObject() { return &QWebNotificationPresenter::staticMetaObject; }
+
 void QWebNotificationPresenter_delete(QWebNotificationPresenter* self) {
 	delete self;
 }
@@ -479,6 +472,7 @@ struct miqt_string QWebHapticFeedbackPlayer_trUtf83(const char* s, const char* c
 }
 
 const QMetaObject* QWebHapticFeedbackPlayer_staticMetaObject() { return &QWebHapticFeedbackPlayer::staticMetaObject; }
+
 void QWebHapticFeedbackPlayer_delete(QWebHapticFeedbackPlayer* self) {
 	delete self;
 }
@@ -570,6 +564,7 @@ struct miqt_string QWebTouchModifier_trUtf83(const char* s, const char* c, int n
 }
 
 const QMetaObject* QWebTouchModifier_staticMetaObject() { return &QWebTouchModifier::staticMetaObject; }
+
 void QWebTouchModifier_delete(QWebTouchModifier* self) {
 	delete self;
 }
@@ -724,6 +719,7 @@ struct miqt_string QWebSpellChecker_trUtf83(const char* s, const char* c, int n)
 }
 
 const QMetaObject* QWebSpellChecker_staticMetaObject() { return &QWebSpellChecker::staticMetaObject; }
+
 void QWebSpellChecker_delete(QWebSpellChecker* self) {
 	delete self;
 }
@@ -745,7 +741,7 @@ void QWebKitPlatformPlugin_delete(QWebKitPlatformPlugin* self) {
 }
 
 QWebSpellChecker__GrammarDetail* QWebSpellChecker__GrammarDetail_new(QWebSpellChecker__GrammarDetail* param1) {
-	return new QWebSpellChecker::GrammarDetail(*param1);
+	return new QWebSpellChecker__GrammarDetail(*param1);
 }
 
 void QWebSpellChecker__GrammarDetail_operatorAssign(QWebSpellChecker__GrammarDetail* self, QWebSpellChecker__GrammarDetail* param1) {

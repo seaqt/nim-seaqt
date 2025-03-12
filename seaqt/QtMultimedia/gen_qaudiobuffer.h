@@ -28,6 +28,7 @@ QAudioBuffer* QAudioBuffer_new3(struct miqt_string data, QAudioFormat* format);
 QAudioBuffer* QAudioBuffer_new4(int numFrames, QAudioFormat* format);
 QAudioBuffer* QAudioBuffer_new5(struct miqt_string data, QAudioFormat* format, long long startTime);
 QAudioBuffer* QAudioBuffer_new6(int numFrames, QAudioFormat* format, long long startTime);
+
 void QAudioBuffer_operatorAssign(QAudioBuffer* self, QAudioBuffer* other);
 bool QAudioBuffer_isValid(const QAudioBuffer* self);
 QAudioFormat* QAudioBuffer_format(const QAudioBuffer* self);
@@ -39,6 +40,7 @@ long long QAudioBuffer_startTime(const QAudioBuffer* self);
 const void* QAudioBuffer_constData(const QAudioBuffer* self);
 const void* QAudioBuffer_data(const QAudioBuffer* self);
 void* QAudioBuffer_data2(QAudioBuffer* self);
+
 void QAudioBuffer_delete(QAudioBuffer* self);
 
 #ifdef __cplusplus

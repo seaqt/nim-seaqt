@@ -4,15 +4,6 @@
 #include <QIODevice>
 #include <qcborstreamreader.h>
 #include "gen_qcborstreamreader.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCborStreamReader* QCborStreamReader_new() {
 	return new QCborStreamReader();
 }
@@ -246,6 +237,7 @@ bool QCborStreamReader_next1(QCborStreamReader* self, int maxRecursion) {
 }
 
 const QMetaObject* QCborStreamReader_staticMetaObject() { return &QCborStreamReader::staticMetaObject; }
+
 void QCborStreamReader_delete(QCborStreamReader* self) {
 	delete self;
 }

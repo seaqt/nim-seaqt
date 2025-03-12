@@ -21,6 +21,7 @@ typedef struct QInternal QInternal;
 #endif
 
 bool QInternal_activateCallbacks(int param1, void** param2);
+
 void QInternal_delete(QInternal* self);
 
 #ifdef __cplusplus

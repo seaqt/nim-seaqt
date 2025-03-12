@@ -2,15 +2,6 @@
 #include <QVariant>
 #include <qscrollerproperties.h>
 #include "gen_qscrollerproperties.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QScrollerProperties* QScrollerProperties_new() {
 	return new QScrollerProperties();
 }

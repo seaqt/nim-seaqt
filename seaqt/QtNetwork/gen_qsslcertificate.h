@@ -36,6 +36,7 @@ QSslCertificate* QSslCertificate_new3(QSslCertificate* other);
 QSslCertificate* QSslCertificate_new4(QIODevice* device, int format);
 QSslCertificate* QSslCertificate_new5(struct miqt_string data);
 QSslCertificate* QSslCertificate_new6(struct miqt_string data, int format);
+
 void QSslCertificate_operatorAssign(QSslCertificate* self, QSslCertificate* other);
 void QSslCertificate_swap(QSslCertificate* self, QSslCertificate* other);
 bool QSslCertificate_operatorEqual(const QSslCertificate* self, QSslCertificate* other);
@@ -77,6 +78,7 @@ struct miqt_array /* of QSslCertificate* */  QSslCertificate_fromData2(struct mi
 struct miqt_array /* of QSslError* */  QSslCertificate_verify2(struct miqt_array /* of QSslCertificate* */  certificateChain, struct miqt_string hostName);
 bool QSslCertificate_importPkcs124(QIODevice* device, QSslKey* key, QSslCertificate* cert, struct miqt_array /* of QSslCertificate* */  caCertificates);
 bool QSslCertificate_importPkcs125(QIODevice* device, QSslKey* key, QSslCertificate* cert, struct miqt_array /* of QSslCertificate* */  caCertificates, struct miqt_string passPhrase);
+
 void QSslCertificate_delete(QSslCertificate* self);
 
 #ifdef __cplusplus

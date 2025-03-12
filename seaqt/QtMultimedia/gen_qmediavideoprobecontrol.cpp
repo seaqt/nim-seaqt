@@ -9,15 +9,6 @@
 #include <QVideoFrame>
 #include <qmediavideoprobecontrol.h>
 #include "gen_qmediavideoprobecontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaVideoProbeControl_virtbase(QMediaVideoProbeControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -134,6 +125,7 @@ struct miqt_string QMediaVideoProbeControl_trUtf83(const char* s, const char* c,
 }
 
 const QMetaObject* QMediaVideoProbeControl_staticMetaObject() { return &QMediaVideoProbeControl::staticMetaObject; }
+
 void QMediaVideoProbeControl_delete(QMediaVideoProbeControl* self) {
 	delete self;
 }

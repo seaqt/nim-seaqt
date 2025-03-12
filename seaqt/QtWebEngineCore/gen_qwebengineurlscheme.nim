@@ -66,13 +66,13 @@ type cQWebEngineUrlScheme*{.exportc: "QWebEngineUrlScheme", incompleteStruct.} =
 proc fcQWebEngineUrlScheme_operatorAssign(self: pointer, that: pointer): void {.importc: "QWebEngineUrlScheme_operatorAssign".}
 proc fcQWebEngineUrlScheme_operatorEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineUrlScheme_operatorEqual".}
 proc fcQWebEngineUrlScheme_operatorNotEqual(self: pointer, that: pointer): bool {.importc: "QWebEngineUrlScheme_operatorNotEqual".}
-proc fcQWebEngineUrlScheme_name(self: pointer, ): struct_miqt_string {.importc: "QWebEngineUrlScheme_name".}
+proc fcQWebEngineUrlScheme_name(self: pointer): struct_miqt_string {.importc: "QWebEngineUrlScheme_name".}
 proc fcQWebEngineUrlScheme_setName(self: pointer, newValue: struct_miqt_string): void {.importc: "QWebEngineUrlScheme_setName".}
-proc fcQWebEngineUrlScheme_syntax(self: pointer, ): cint {.importc: "QWebEngineUrlScheme_syntax".}
+proc fcQWebEngineUrlScheme_syntax(self: pointer): cint {.importc: "QWebEngineUrlScheme_syntax".}
 proc fcQWebEngineUrlScheme_setSyntax(self: pointer, newValue: cint): void {.importc: "QWebEngineUrlScheme_setSyntax".}
-proc fcQWebEngineUrlScheme_defaultPort(self: pointer, ): cint {.importc: "QWebEngineUrlScheme_defaultPort".}
+proc fcQWebEngineUrlScheme_defaultPort(self: pointer): cint {.importc: "QWebEngineUrlScheme_defaultPort".}
 proc fcQWebEngineUrlScheme_setDefaultPort(self: pointer, newValue: cint): void {.importc: "QWebEngineUrlScheme_setDefaultPort".}
-proc fcQWebEngineUrlScheme_flags(self: pointer, ): cint {.importc: "QWebEngineUrlScheme_flags".}
+proc fcQWebEngineUrlScheme_flags(self: pointer): cint {.importc: "QWebEngineUrlScheme_flags".}
 proc fcQWebEngineUrlScheme_setFlags(self: pointer, newValue: cint): void {.importc: "QWebEngineUrlScheme_setFlags".}
 proc fcQWebEngineUrlScheme_registerScheme(scheme: pointer): void {.importc: "QWebEngineUrlScheme_registerScheme".}
 proc fcQWebEngineUrlScheme_schemeByName(name: struct_miqt_string): pointer {.importc: "QWebEngineUrlScheme_schemeByName".}
@@ -90,7 +90,7 @@ proc operatorEqual*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, tha
 proc operatorNotEqual*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, that: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): bool =
   fcQWebEngineUrlScheme_operatorNotEqual(self.h, that.h)
 
-proc name*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, ): seq[byte] =
+proc name*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): seq[byte] =
   var v_bytearray = fcQWebEngineUrlScheme_name(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -99,19 +99,19 @@ proc name*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, ): seq[byte]
 proc setName*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: seq[byte]): void =
   fcQWebEngineUrlScheme_setName(self.h, struct_miqt_string(data: cast[cstring](if len(newValue) == 0: nil else: unsafeAddr newValue[0]), len: csize_t(len(newValue))))
 
-proc syntax*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, ): cint =
+proc syntax*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): cint =
   cint(fcQWebEngineUrlScheme_syntax(self.h))
 
 proc setSyntax*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: cint): void =
   fcQWebEngineUrlScheme_setSyntax(self.h, cint(newValue))
 
-proc defaultPort*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, ): cint =
+proc defaultPort*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): cint =
   fcQWebEngineUrlScheme_defaultPort(self.h)
 
 proc setDefaultPort*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: cint): void =
   fcQWebEngineUrlScheme_setDefaultPort(self.h, newValue)
 
-proc flags*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, ): cint =
+proc flags*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme): cint =
   cint(fcQWebEngineUrlScheme_flags(self.h))
 
 proc setFlags*(self: gen_qwebengineurlscheme_types.QWebEngineUrlScheme, newValue: cint): void =

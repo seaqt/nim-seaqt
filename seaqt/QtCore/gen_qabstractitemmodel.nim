@@ -73,19 +73,19 @@ type cQAbstractItemModel*{.exportc: "QAbstractItemModel", incompleteStruct.} = o
 type cQAbstractTableModel*{.exportc: "QAbstractTableModel", incompleteStruct.} = object
 type cQAbstractListModel*{.exportc: "QAbstractListModel", incompleteStruct.} = object
 
-proc fcQModelIndex_row(self: pointer, ): cint {.importc: "QModelIndex_row".}
-proc fcQModelIndex_column(self: pointer, ): cint {.importc: "QModelIndex_column".}
-proc fcQModelIndex_internalId(self: pointer, ): uint {.importc: "QModelIndex_internalId".}
-proc fcQModelIndex_internalPointer(self: pointer, ): pointer {.importc: "QModelIndex_internalPointer".}
-proc fcQModelIndex_parent(self: pointer, ): pointer {.importc: "QModelIndex_parent".}
+proc fcQModelIndex_row(self: pointer): cint {.importc: "QModelIndex_row".}
+proc fcQModelIndex_column(self: pointer): cint {.importc: "QModelIndex_column".}
+proc fcQModelIndex_internalId(self: pointer): uint {.importc: "QModelIndex_internalId".}
+proc fcQModelIndex_internalPointer(self: pointer): pointer {.importc: "QModelIndex_internalPointer".}
+proc fcQModelIndex_parent(self: pointer): pointer {.importc: "QModelIndex_parent".}
 proc fcQModelIndex_sibling(self: pointer, row: cint, column: cint): pointer {.importc: "QModelIndex_sibling".}
 proc fcQModelIndex_siblingAtColumn(self: pointer, column: cint): pointer {.importc: "QModelIndex_siblingAtColumn".}
 proc fcQModelIndex_siblingAtRow(self: pointer, row: cint): pointer {.importc: "QModelIndex_siblingAtRow".}
 proc fcQModelIndex_child(self: pointer, row: cint, column: cint): pointer {.importc: "QModelIndex_child".}
-proc fcQModelIndex_data(self: pointer, ): pointer {.importc: "QModelIndex_data".}
-proc fcQModelIndex_flags(self: pointer, ): cint {.importc: "QModelIndex_flags".}
-proc fcQModelIndex_model(self: pointer, ): pointer {.importc: "QModelIndex_model".}
-proc fcQModelIndex_isValid(self: pointer, ): bool {.importc: "QModelIndex_isValid".}
+proc fcQModelIndex_data(self: pointer): pointer {.importc: "QModelIndex_data".}
+proc fcQModelIndex_flags(self: pointer): cint {.importc: "QModelIndex_flags".}
+proc fcQModelIndex_model(self: pointer): pointer {.importc: "QModelIndex_model".}
+proc fcQModelIndex_isValid(self: pointer): bool {.importc: "QModelIndex_isValid".}
 proc fcQModelIndex_operatorEqual(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorEqual".}
 proc fcQModelIndex_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorNotEqual".}
 proc fcQModelIndex_operatorLesser(self: pointer, other: pointer): bool {.importc: "QModelIndex_operatorLesser".}
@@ -100,23 +100,23 @@ proc fcQPersistentModelIndex_swap(self: pointer, other: pointer): void {.importc
 proc fcQPersistentModelIndex_operatorEqualWithOther(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorEqualWithOther".}
 proc fcQPersistentModelIndex_operatorNotEqualWithOther(self: pointer, other: pointer): bool {.importc: "QPersistentModelIndex_operatorNotEqualWithOther".}
 proc fcQPersistentModelIndex_operatorAssignWithOther(self: pointer, other: pointer): void {.importc: "QPersistentModelIndex_operatorAssignWithOther".}
-proc fcQPersistentModelIndex_ToConstQModelIndexBitwiseAnd(self: pointer, ): pointer {.importc: "QPersistentModelIndex_ToConstQModelIndexBitwiseAnd".}
-proc fcQPersistentModelIndex_row(self: pointer, ): cint {.importc: "QPersistentModelIndex_row".}
-proc fcQPersistentModelIndex_column(self: pointer, ): cint {.importc: "QPersistentModelIndex_column".}
-proc fcQPersistentModelIndex_internalPointer(self: pointer, ): pointer {.importc: "QPersistentModelIndex_internalPointer".}
-proc fcQPersistentModelIndex_internalId(self: pointer, ): uint {.importc: "QPersistentModelIndex_internalId".}
-proc fcQPersistentModelIndex_parent(self: pointer, ): pointer {.importc: "QPersistentModelIndex_parent".}
+proc fcQPersistentModelIndex_ToConstQModelIndexBitwiseAnd(self: pointer): pointer {.importc: "QPersistentModelIndex_ToConstQModelIndexBitwiseAnd".}
+proc fcQPersistentModelIndex_row(self: pointer): cint {.importc: "QPersistentModelIndex_row".}
+proc fcQPersistentModelIndex_column(self: pointer): cint {.importc: "QPersistentModelIndex_column".}
+proc fcQPersistentModelIndex_internalPointer(self: pointer): pointer {.importc: "QPersistentModelIndex_internalPointer".}
+proc fcQPersistentModelIndex_internalId(self: pointer): uint {.importc: "QPersistentModelIndex_internalId".}
+proc fcQPersistentModelIndex_parent(self: pointer): pointer {.importc: "QPersistentModelIndex_parent".}
 proc fcQPersistentModelIndex_sibling(self: pointer, row: cint, column: cint): pointer {.importc: "QPersistentModelIndex_sibling".}
 proc fcQPersistentModelIndex_child(self: pointer, row: cint, column: cint): pointer {.importc: "QPersistentModelIndex_child".}
-proc fcQPersistentModelIndex_data(self: pointer, ): pointer {.importc: "QPersistentModelIndex_data".}
-proc fcQPersistentModelIndex_flags(self: pointer, ): cint {.importc: "QPersistentModelIndex_flags".}
-proc fcQPersistentModelIndex_model(self: pointer, ): pointer {.importc: "QPersistentModelIndex_model".}
-proc fcQPersistentModelIndex_isValid(self: pointer, ): bool {.importc: "QPersistentModelIndex_isValid".}
+proc fcQPersistentModelIndex_data(self: pointer): pointer {.importc: "QPersistentModelIndex_data".}
+proc fcQPersistentModelIndex_flags(self: pointer): cint {.importc: "QPersistentModelIndex_flags".}
+proc fcQPersistentModelIndex_model(self: pointer): pointer {.importc: "QPersistentModelIndex_model".}
+proc fcQPersistentModelIndex_isValid(self: pointer): bool {.importc: "QPersistentModelIndex_isValid".}
 proc fcQPersistentModelIndex_data1(self: pointer, role: cint): pointer {.importc: "QPersistentModelIndex_data1".}
 proc fcQPersistentModelIndex_new(): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new".}
 proc fcQPersistentModelIndex_new2(index: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new2".}
 proc fcQPersistentModelIndex_new3(other: pointer): ptr cQPersistentModelIndex {.importc: "QPersistentModelIndex_new3".}
-proc fcQAbstractItemModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractItemModel_metaObject".}
+proc fcQAbstractItemModel_metaObject(self: pointer): pointer {.importc: "QAbstractItemModel_metaObject".}
 proc fcQAbstractItemModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractItemModel_metacast".}
 proc fcQAbstractItemModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractItemModel_metacall".}
 proc fcQAbstractItemModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractItemModel_tr".}
@@ -134,12 +134,12 @@ proc fcQAbstractItemModel_headerData(self: pointer, section: cint, orientation: 
 proc fcQAbstractItemModel_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QAbstractItemModel_setHeaderData".}
 proc fcQAbstractItemModel_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QAbstractItemModel_itemData".}
 proc fcQAbstractItemModel_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QAbstractItemModel_setItemData".}
-proc fcQAbstractItemModel_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QAbstractItemModel_mimeTypes".}
+proc fcQAbstractItemModel_mimeTypes(self: pointer): struct_miqt_array {.importc: "QAbstractItemModel_mimeTypes".}
 proc fcQAbstractItemModel_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QAbstractItemModel_mimeData".}
 proc fcQAbstractItemModel_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_canDropMimeData".}
 proc fcQAbstractItemModel_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_dropMimeData".}
-proc fcQAbstractItemModel_supportedDropActions(self: pointer, ): cint {.importc: "QAbstractItemModel_supportedDropActions".}
-proc fcQAbstractItemModel_supportedDragActions(self: pointer, ): cint {.importc: "QAbstractItemModel_supportedDragActions".}
+proc fcQAbstractItemModel_supportedDropActions(self: pointer): cint {.importc: "QAbstractItemModel_supportedDropActions".}
+proc fcQAbstractItemModel_supportedDragActions(self: pointer): cint {.importc: "QAbstractItemModel_supportedDragActions".}
 proc fcQAbstractItemModel_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertRows".}
 proc fcQAbstractItemModel_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_insertColumns".}
 proc fcQAbstractItemModel_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_removeRows".}
@@ -159,18 +159,18 @@ proc fcQAbstractItemModel_sort(self: pointer, column: cint, order: cint): void {
 proc fcQAbstractItemModel_buddy(self: pointer, index: pointer): pointer {.importc: "QAbstractItemModel_buddy".}
 proc fcQAbstractItemModel_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QAbstractItemModel_match".}
 proc fcQAbstractItemModel_span(self: pointer, index: pointer): pointer {.importc: "QAbstractItemModel_span".}
-proc fcQAbstractItemModel_roleNames(self: pointer, ): struct_miqt_map {.importc: "QAbstractItemModel_roleNames".}
+proc fcQAbstractItemModel_roleNames(self: pointer): struct_miqt_map {.importc: "QAbstractItemModel_roleNames".}
 proc fcQAbstractItemModel_checkIndex(self: pointer, index: pointer): bool {.importc: "QAbstractItemModel_checkIndex".}
 proc fcQAbstractItemModel_dataChanged(self: pointer, topLeft: pointer, bottomRight: pointer): void {.importc: "QAbstractItemModel_dataChanged".}
 proc fcQAbstractItemModel_connect_dataChanged(self: pointer, slot: int, callback: proc (slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_dataChanged".}
 proc fcQAbstractItemModel_headerDataChanged(self: pointer, orientation: cint, first: cint, last: cint): void {.importc: "QAbstractItemModel_headerDataChanged".}
 proc fcQAbstractItemModel_connect_headerDataChanged(self: pointer, slot: int, callback: proc (slot: int, orientation: cint, first: cint, last: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_headerDataChanged".}
-proc fcQAbstractItemModel_layoutChanged(self: pointer, ): void {.importc: "QAbstractItemModel_layoutChanged".}
+proc fcQAbstractItemModel_layoutChanged(self: pointer): void {.importc: "QAbstractItemModel_layoutChanged".}
 proc fcQAbstractItemModel_connect_layoutChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutChanged".}
-proc fcQAbstractItemModel_layoutAboutToBeChanged(self: pointer, ): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged".}
+proc fcQAbstractItemModel_layoutAboutToBeChanged(self: pointer): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged".}
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged(self: pointer, slot: int, callback: proc (slot: int) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged".}
-proc fcQAbstractItemModel_submit(self: pointer, ): bool {.importc: "QAbstractItemModel_submit".}
-proc fcQAbstractItemModel_revert(self: pointer, ): void {.importc: "QAbstractItemModel_revert".}
+proc fcQAbstractItemModel_submit(self: pointer): bool {.importc: "QAbstractItemModel_submit".}
+proc fcQAbstractItemModel_revert(self: pointer): void {.importc: "QAbstractItemModel_revert".}
 proc fcQAbstractItemModel_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemModel_tr2".}
 proc fcQAbstractItemModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractItemModel_tr3".}
 proc fcQAbstractItemModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractItemModel_trUtf82".}
@@ -191,53 +191,55 @@ proc fcQAbstractItemModel_layoutAboutToBeChanged1(self: pointer, parents: struct
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged1".}
 proc fcQAbstractItemModel_layoutAboutToBeChanged2(self: pointer, parents: struct_miqt_array, hint: cint): void {.importc: "QAbstractItemModel_layoutAboutToBeChanged2".}
 proc fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self: pointer, slot: int, callback: proc (slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QAbstractItemModel_connect_layoutAboutToBeChanged2".}
+proc fcQAbstractItemModel_vtbl(self: pointer): pointer {.importc: "QAbstractItemModel_vtbl".}
+proc fcQAbstractItemModel_vdata(self: pointer): pointer {.importc: "QAbstractItemModel_vdata".}
 type cQAbstractItemModelVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractItemModelVTable, self: ptr cQAbstractItemModel) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  index*: proc(vtbl, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  parent*: proc(vtbl, self: pointer, child: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sibling*: proc(vtbl, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  rowCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
-  columnCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
-  hasChildren*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  data*: proc(vtbl, self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setData*: proc(vtbl, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  headerData*: proc(vtbl, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setHeaderData*: proc(vtbl, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  itemData*: proc(vtbl, self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  setItemData*: proc(vtbl, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
-  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  mimeData*: proc(vtbl, self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
-  canDropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  dropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  supportedDragActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  insertRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  insertColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  moveRows*: proc(vtbl, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  moveColumns*: proc(vtbl, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  fetchMore*: proc(vtbl, self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
-  canFetchMore*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  flags*: proc(vtbl, self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
-  sort*: proc(vtbl, self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
-  buddy*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  match*: proc(vtbl, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  span*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  roleNames*: proc(vtbl, self: pointer, ): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  submit*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  revert*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractItemModel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAbstractItemModel_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  index*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  parent*: proc(self: pointer, child: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sibling*: proc(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  rowCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  columnCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  hasChildren*: proc(self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  data*: proc(self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  headerData*: proc(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setHeaderData*: proc(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  itemData*: proc(self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  setItemData*: proc(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  canDropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  supportedDragActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  insertRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  insertColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveRows*: proc(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  moveColumns*: proc(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  fetchMore*: proc(self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
+  canFetchMore*: proc(self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  flags*: proc(self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
+  sort*: proc(self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
+  buddy*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  match*: proc(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  span*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  roleNames*: proc(self: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  submit*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  revert*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractItemModel_virtualbase_metaObject(self: pointer): pointer {.importc: "QAbstractItemModel_virtualbase_metaObject".}
 proc fcQAbstractItemModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractItemModel_virtualbase_metacast".}
 proc fcQAbstractItemModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractItemModel_virtualbase_metacall".}
 proc fcQAbstractItemModel_virtualbase_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.importc: "QAbstractItemModel_virtualbase_sibling".}
@@ -247,12 +249,12 @@ proc fcQAbstractItemModel_virtualbase_headerData(self: pointer, section: cint, o
 proc fcQAbstractItemModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QAbstractItemModel_virtualbase_setHeaderData".}
 proc fcQAbstractItemModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QAbstractItemModel_virtualbase_itemData".}
 proc fcQAbstractItemModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QAbstractItemModel_virtualbase_setItemData".}
-proc fcQAbstractItemModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QAbstractItemModel_virtualbase_mimeTypes".}
+proc fcQAbstractItemModel_virtualbase_mimeTypes(self: pointer): struct_miqt_array {.importc: "QAbstractItemModel_virtualbase_mimeTypes".}
 proc fcQAbstractItemModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QAbstractItemModel_virtualbase_mimeData".}
 proc fcQAbstractItemModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_virtualbase_canDropMimeData".}
 proc fcQAbstractItemModel_virtualbase_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractItemModel_virtualbase_dropMimeData".}
-proc fcQAbstractItemModel_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QAbstractItemModel_virtualbase_supportedDropActions".}
-proc fcQAbstractItemModel_virtualbase_supportedDragActions(self: pointer, ): cint {.importc: "QAbstractItemModel_virtualbase_supportedDragActions".}
+proc fcQAbstractItemModel_virtualbase_supportedDropActions(self: pointer): cint {.importc: "QAbstractItemModel_virtualbase_supportedDropActions".}
+proc fcQAbstractItemModel_virtualbase_supportedDragActions(self: pointer): cint {.importc: "QAbstractItemModel_virtualbase_supportedDragActions".}
 proc fcQAbstractItemModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_virtualbase_insertRows".}
 proc fcQAbstractItemModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_virtualbase_insertColumns".}
 proc fcQAbstractItemModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractItemModel_virtualbase_removeRows".}
@@ -266,9 +268,9 @@ proc fcQAbstractItemModel_virtualbase_sort(self: pointer, column: cint, order: c
 proc fcQAbstractItemModel_virtualbase_buddy(self: pointer, index: pointer): pointer {.importc: "QAbstractItemModel_virtualbase_buddy".}
 proc fcQAbstractItemModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QAbstractItemModel_virtualbase_match".}
 proc fcQAbstractItemModel_virtualbase_span(self: pointer, index: pointer): pointer {.importc: "QAbstractItemModel_virtualbase_span".}
-proc fcQAbstractItemModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map {.importc: "QAbstractItemModel_virtualbase_roleNames".}
-proc fcQAbstractItemModel_virtualbase_submit(self: pointer, ): bool {.importc: "QAbstractItemModel_virtualbase_submit".}
-proc fcQAbstractItemModel_virtualbase_revert(self: pointer, ): void {.importc: "QAbstractItemModel_virtualbase_revert".}
+proc fcQAbstractItemModel_virtualbase_roleNames(self: pointer): struct_miqt_map {.importc: "QAbstractItemModel_virtualbase_roleNames".}
+proc fcQAbstractItemModel_virtualbase_submit(self: pointer): bool {.importc: "QAbstractItemModel_virtualbase_submit".}
+proc fcQAbstractItemModel_virtualbase_revert(self: pointer): void {.importc: "QAbstractItemModel_virtualbase_revert".}
 proc fcQAbstractItemModel_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QAbstractItemModel_virtualbase_event".}
 proc fcQAbstractItemModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QAbstractItemModel_virtualbase_eventFilter".}
 proc fcQAbstractItemModel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QAbstractItemModel_virtualbase_timerEvent".}
@@ -276,37 +278,37 @@ proc fcQAbstractItemModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAbstractItemModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractItemModel_virtualbase_customEvent".}
 proc fcQAbstractItemModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_connectNotify".}
 proc fcQAbstractItemModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractItemModel_virtualbase_disconnectNotify".}
-proc fcQAbstractItemModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_resetInternalData".}
+proc fcQAbstractItemModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_resetInternalData".}
 proc fcQAbstractItemModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex".}
 proc fcQAbstractItemModel_protectedbase_createIndex2(self: pointer, row: cint, column: cint, id: uint): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex2".}
 proc fcQAbstractItemModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractItemModel_protectedbase_encodeData".}
 proc fcQAbstractItemModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractItemModel_protectedbase_decodeData".}
 proc fcQAbstractItemModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginInsertRows".}
-proc fcQAbstractItemModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endInsertRows".}
+proc fcQAbstractItemModel_protectedbase_endInsertRows(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endInsertRows".}
 proc fcQAbstractItemModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginRemoveRows".}
-proc fcQAbstractItemModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endRemoveRows".}
+proc fcQAbstractItemModel_protectedbase_endRemoveRows(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endRemoveRows".}
 proc fcQAbstractItemModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractItemModel_protectedbase_beginMoveRows".}
-proc fcQAbstractItemModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endMoveRows".}
+proc fcQAbstractItemModel_protectedbase_endMoveRows(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endMoveRows".}
 proc fcQAbstractItemModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginInsertColumns".}
-proc fcQAbstractItemModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endInsertColumns".}
+proc fcQAbstractItemModel_protectedbase_endInsertColumns(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endInsertColumns".}
 proc fcQAbstractItemModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractItemModel_protectedbase_beginRemoveColumns".}
-proc fcQAbstractItemModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractItemModel_protectedbase_endRemoveColumns(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endRemoveColumns".}
 proc fcQAbstractItemModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractItemModel_protectedbase_beginMoveColumns".}
-proc fcQAbstractItemModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endMoveColumns".}
-proc fcQAbstractItemModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_beginResetModel".}
-proc fcQAbstractItemModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractItemModel_protectedbase_endResetModel".}
+proc fcQAbstractItemModel_protectedbase_endMoveColumns(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endMoveColumns".}
+proc fcQAbstractItemModel_protectedbase_beginResetModel(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_beginResetModel".}
+proc fcQAbstractItemModel_protectedbase_endResetModel(self: pointer): void {.importc: "QAbstractItemModel_protectedbase_endResetModel".}
 proc fcQAbstractItemModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndex".}
 proc fcQAbstractItemModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractItemModel_protectedbase_changePersistentIndexList".}
-proc fcQAbstractItemModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractItemModel_protectedbase_persistentIndexList".}
+proc fcQAbstractItemModel_protectedbase_persistentIndexList(self: pointer): struct_miqt_array {.importc: "QAbstractItemModel_protectedbase_persistentIndexList".}
 proc fcQAbstractItemModel_protectedbase_createIndex3(self: pointer, row: cint, column: cint, data: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_createIndex3".}
-proc fcQAbstractItemModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractItemModel_protectedbase_sender".}
-proc fcQAbstractItemModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractItemModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractItemModel_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractItemModel_protectedbase_sender".}
+proc fcQAbstractItemModel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractItemModel_protectedbase_senderSignalIndex".}
 proc fcQAbstractItemModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractItemModel_protectedbase_receivers".}
 proc fcQAbstractItemModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractItemModel_protectedbase_isSignalConnected".}
-proc fcQAbstractItemModel_new(vtbl: pointer, ): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new".}
-proc fcQAbstractItemModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new2".}
+proc fcQAbstractItemModel_new(vtbl, vdata: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new".}
+proc fcQAbstractItemModel_new2(vtbl, vdata: pointer, parent: pointer): ptr cQAbstractItemModel {.importc: "QAbstractItemModel_new2".}
 proc fcQAbstractItemModel_staticMetaObject(): pointer {.importc: "QAbstractItemModel_staticMetaObject".}
-proc fcQAbstractTableModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractTableModel_metaObject".}
+proc fcQAbstractTableModel_metaObject(self: pointer): pointer {.importc: "QAbstractTableModel_metaObject".}
 proc fcQAbstractTableModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTableModel_metacast".}
 proc fcQAbstractTableModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTableModel_metacall".}
 proc fcQAbstractTableModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractTableModel_tr".}
@@ -319,51 +321,53 @@ proc fcQAbstractTableModel_tr2(s: cstring, c: cstring): struct_miqt_string {.imp
 proc fcQAbstractTableModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTableModel_tr3".}
 proc fcQAbstractTableModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractTableModel_trUtf82".}
 proc fcQAbstractTableModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractTableModel_trUtf83".}
+proc fcQAbstractTableModel_vtbl(self: pointer): pointer {.importc: "QAbstractTableModel_vtbl".}
+proc fcQAbstractTableModel_vdata(self: pointer): pointer {.importc: "QAbstractTableModel_vdata".}
 type cQAbstractTableModelVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractTableModelVTable, self: ptr cQAbstractTableModel) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  index*: proc(vtbl, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sibling*: proc(vtbl, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  dropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  flags*: proc(vtbl, self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
-  rowCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
-  columnCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
-  data*: proc(vtbl, self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setData*: proc(vtbl, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  headerData*: proc(vtbl, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setHeaderData*: proc(vtbl, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  itemData*: proc(vtbl, self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  setItemData*: proc(vtbl, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
-  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  mimeData*: proc(vtbl, self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
-  canDropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  supportedDragActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  insertRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  insertColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  moveRows*: proc(vtbl, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  moveColumns*: proc(vtbl, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  fetchMore*: proc(vtbl, self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
-  canFetchMore*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  sort*: proc(vtbl, self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
-  buddy*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  match*: proc(vtbl, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  span*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  roleNames*: proc(vtbl, self: pointer, ): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  submit*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  revert*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractTableModel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAbstractTableModel_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  index*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sibling*: proc(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  flags*: proc(self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
+  rowCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  columnCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  data*: proc(self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  headerData*: proc(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setHeaderData*: proc(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  itemData*: proc(self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  setItemData*: proc(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  canDropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  supportedDragActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  insertRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  insertColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveRows*: proc(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  moveColumns*: proc(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  fetchMore*: proc(self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
+  canFetchMore*: proc(self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  sort*: proc(self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
+  buddy*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  match*: proc(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  span*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  roleNames*: proc(self: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  submit*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  revert*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractTableModel_virtualbase_metaObject(self: pointer): pointer {.importc: "QAbstractTableModel_virtualbase_metaObject".}
 proc fcQAbstractTableModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractTableModel_virtualbase_metacast".}
 proc fcQAbstractTableModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractTableModel_virtualbase_metacall".}
 proc fcQAbstractTableModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractTableModel_virtualbase_index".}
@@ -375,11 +379,11 @@ proc fcQAbstractTableModel_virtualbase_headerData(self: pointer, section: cint, 
 proc fcQAbstractTableModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QAbstractTableModel_virtualbase_setHeaderData".}
 proc fcQAbstractTableModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QAbstractTableModel_virtualbase_itemData".}
 proc fcQAbstractTableModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QAbstractTableModel_virtualbase_setItemData".}
-proc fcQAbstractTableModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QAbstractTableModel_virtualbase_mimeTypes".}
+proc fcQAbstractTableModel_virtualbase_mimeTypes(self: pointer): struct_miqt_array {.importc: "QAbstractTableModel_virtualbase_mimeTypes".}
 proc fcQAbstractTableModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QAbstractTableModel_virtualbase_mimeData".}
 proc fcQAbstractTableModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractTableModel_virtualbase_canDropMimeData".}
-proc fcQAbstractTableModel_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QAbstractTableModel_virtualbase_supportedDropActions".}
-proc fcQAbstractTableModel_virtualbase_supportedDragActions(self: pointer, ): cint {.importc: "QAbstractTableModel_virtualbase_supportedDragActions".}
+proc fcQAbstractTableModel_virtualbase_supportedDropActions(self: pointer): cint {.importc: "QAbstractTableModel_virtualbase_supportedDropActions".}
+proc fcQAbstractTableModel_virtualbase_supportedDragActions(self: pointer): cint {.importc: "QAbstractTableModel_virtualbase_supportedDragActions".}
 proc fcQAbstractTableModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractTableModel_virtualbase_insertRows".}
 proc fcQAbstractTableModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QAbstractTableModel_virtualbase_insertColumns".}
 proc fcQAbstractTableModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractTableModel_virtualbase_removeRows".}
@@ -392,9 +396,9 @@ proc fcQAbstractTableModel_virtualbase_sort(self: pointer, column: cint, order: 
 proc fcQAbstractTableModel_virtualbase_buddy(self: pointer, index: pointer): pointer {.importc: "QAbstractTableModel_virtualbase_buddy".}
 proc fcQAbstractTableModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QAbstractTableModel_virtualbase_match".}
 proc fcQAbstractTableModel_virtualbase_span(self: pointer, index: pointer): pointer {.importc: "QAbstractTableModel_virtualbase_span".}
-proc fcQAbstractTableModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map {.importc: "QAbstractTableModel_virtualbase_roleNames".}
-proc fcQAbstractTableModel_virtualbase_submit(self: pointer, ): bool {.importc: "QAbstractTableModel_virtualbase_submit".}
-proc fcQAbstractTableModel_virtualbase_revert(self: pointer, ): void {.importc: "QAbstractTableModel_virtualbase_revert".}
+proc fcQAbstractTableModel_virtualbase_roleNames(self: pointer): struct_miqt_map {.importc: "QAbstractTableModel_virtualbase_roleNames".}
+proc fcQAbstractTableModel_virtualbase_submit(self: pointer): bool {.importc: "QAbstractTableModel_virtualbase_submit".}
+proc fcQAbstractTableModel_virtualbase_revert(self: pointer): void {.importc: "QAbstractTableModel_virtualbase_revert".}
 proc fcQAbstractTableModel_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QAbstractTableModel_virtualbase_event".}
 proc fcQAbstractTableModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QAbstractTableModel_virtualbase_eventFilter".}
 proc fcQAbstractTableModel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QAbstractTableModel_virtualbase_timerEvent".}
@@ -402,35 +406,35 @@ proc fcQAbstractTableModel_virtualbase_childEvent(self: pointer, event: pointer)
 proc fcQAbstractTableModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractTableModel_virtualbase_customEvent".}
 proc fcQAbstractTableModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_connectNotify".}
 proc fcQAbstractTableModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractTableModel_virtualbase_disconnectNotify".}
-proc fcQAbstractTableModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_resetInternalData".}
+proc fcQAbstractTableModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_resetInternalData".}
 proc fcQAbstractTableModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractTableModel_protectedbase_createIndex".}
 proc fcQAbstractTableModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractTableModel_protectedbase_encodeData".}
 proc fcQAbstractTableModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractTableModel_protectedbase_decodeData".}
 proc fcQAbstractTableModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginInsertRows".}
-proc fcQAbstractTableModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endInsertRows".}
+proc fcQAbstractTableModel_protectedbase_endInsertRows(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endInsertRows".}
 proc fcQAbstractTableModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginRemoveRows".}
-proc fcQAbstractTableModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endRemoveRows".}
+proc fcQAbstractTableModel_protectedbase_endRemoveRows(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endRemoveRows".}
 proc fcQAbstractTableModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractTableModel_protectedbase_beginMoveRows".}
-proc fcQAbstractTableModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endMoveRows".}
+proc fcQAbstractTableModel_protectedbase_endMoveRows(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endMoveRows".}
 proc fcQAbstractTableModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginInsertColumns".}
-proc fcQAbstractTableModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endInsertColumns".}
+proc fcQAbstractTableModel_protectedbase_endInsertColumns(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endInsertColumns".}
 proc fcQAbstractTableModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractTableModel_protectedbase_beginRemoveColumns".}
-proc fcQAbstractTableModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractTableModel_protectedbase_endRemoveColumns(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endRemoveColumns".}
 proc fcQAbstractTableModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractTableModel_protectedbase_beginMoveColumns".}
-proc fcQAbstractTableModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endMoveColumns".}
-proc fcQAbstractTableModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_beginResetModel".}
-proc fcQAbstractTableModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractTableModel_protectedbase_endResetModel".}
+proc fcQAbstractTableModel_protectedbase_endMoveColumns(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endMoveColumns".}
+proc fcQAbstractTableModel_protectedbase_beginResetModel(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_beginResetModel".}
+proc fcQAbstractTableModel_protectedbase_endResetModel(self: pointer): void {.importc: "QAbstractTableModel_protectedbase_endResetModel".}
 proc fcQAbstractTableModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractTableModel_protectedbase_changePersistentIndex".}
 proc fcQAbstractTableModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractTableModel_protectedbase_changePersistentIndexList".}
-proc fcQAbstractTableModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractTableModel_protectedbase_persistentIndexList".}
-proc fcQAbstractTableModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractTableModel_protectedbase_sender".}
-proc fcQAbstractTableModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractTableModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractTableModel_protectedbase_persistentIndexList(self: pointer): struct_miqt_array {.importc: "QAbstractTableModel_protectedbase_persistentIndexList".}
+proc fcQAbstractTableModel_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractTableModel_protectedbase_sender".}
+proc fcQAbstractTableModel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractTableModel_protectedbase_senderSignalIndex".}
 proc fcQAbstractTableModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractTableModel_protectedbase_receivers".}
 proc fcQAbstractTableModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractTableModel_protectedbase_isSignalConnected".}
-proc fcQAbstractTableModel_new(vtbl: pointer, ): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new".}
-proc fcQAbstractTableModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new2".}
+proc fcQAbstractTableModel_new(vtbl, vdata: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new".}
+proc fcQAbstractTableModel_new2(vtbl, vdata: pointer, parent: pointer): ptr cQAbstractTableModel {.importc: "QAbstractTableModel_new2".}
 proc fcQAbstractTableModel_staticMetaObject(): pointer {.importc: "QAbstractTableModel_staticMetaObject".}
-proc fcQAbstractListModel_metaObject(self: pointer, ): pointer {.importc: "QAbstractListModel_metaObject".}
+proc fcQAbstractListModel_metaObject(self: pointer): pointer {.importc: "QAbstractListModel_metaObject".}
 proc fcQAbstractListModel_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractListModel_metacast".}
 proc fcQAbstractListModel_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractListModel_metacall".}
 proc fcQAbstractListModel_tr(s: cstring): struct_miqt_string {.importc: "QAbstractListModel_tr".}
@@ -443,50 +447,52 @@ proc fcQAbstractListModel_tr2(s: cstring, c: cstring): struct_miqt_string {.impo
 proc fcQAbstractListModel_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractListModel_tr3".}
 proc fcQAbstractListModel_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAbstractListModel_trUtf82".}
 proc fcQAbstractListModel_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAbstractListModel_trUtf83".}
+proc fcQAbstractListModel_vtbl(self: pointer): pointer {.importc: "QAbstractListModel_vtbl".}
+proc fcQAbstractListModel_vdata(self: pointer): pointer {.importc: "QAbstractListModel_vdata".}
 type cQAbstractListModelVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQAbstractListModelVTable, self: ptr cQAbstractListModel) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  index*: proc(vtbl, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  sibling*: proc(vtbl, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  dropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  flags*: proc(vtbl, self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
-  rowCount*: proc(vtbl, self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
-  data*: proc(vtbl, self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setData*: proc(vtbl, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  headerData*: proc(vtbl, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
-  setHeaderData*: proc(vtbl, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
-  itemData*: proc(vtbl, self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  setItemData*: proc(vtbl, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
-  mimeTypes*: proc(vtbl, self: pointer, ): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  mimeData*: proc(vtbl, self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
-  canDropMimeData*: proc(vtbl, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  supportedDropActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  supportedDragActions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  insertRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  insertColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeRows*: proc(vtbl, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  removeColumns*: proc(vtbl, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  moveRows*: proc(vtbl, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  moveColumns*: proc(vtbl, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
-  fetchMore*: proc(vtbl, self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
-  canFetchMore*: proc(vtbl, self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
-  sort*: proc(vtbl, self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
-  buddy*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  match*: proc(vtbl, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
-  span*: proc(vtbl, self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
-  roleNames*: proc(vtbl, self: pointer, ): struct_miqt_map {.cdecl, raises: [], gcsafe.}
-  submit*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  revert*: proc(vtbl, self: pointer, ): void {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQAbstractListModel_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QAbstractListModel_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  index*: proc(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  sibling*: proc(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  dropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  flags*: proc(self: pointer, index: pointer): cint {.cdecl, raises: [], gcsafe.}
+  rowCount*: proc(self: pointer, parent: pointer): cint {.cdecl, raises: [], gcsafe.}
+  data*: proc(self: pointer, index: pointer, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setData*: proc(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  headerData*: proc(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl, raises: [], gcsafe.}
+  setHeaderData*: proc(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl, raises: [], gcsafe.}
+  itemData*: proc(self: pointer, index: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  setItemData*: proc(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl, raises: [], gcsafe.}
+  mimeTypes*: proc(self: pointer): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  mimeData*: proc(self: pointer, indexes: struct_miqt_array): pointer {.cdecl, raises: [], gcsafe.}
+  canDropMimeData*: proc(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  supportedDropActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  supportedDragActions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  insertRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  insertColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeRows*: proc(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  removeColumns*: proc(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  moveRows*: proc(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  moveColumns*: proc(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl, raises: [], gcsafe.}
+  fetchMore*: proc(self: pointer, parent: pointer): void {.cdecl, raises: [], gcsafe.}
+  canFetchMore*: proc(self: pointer, parent: pointer): bool {.cdecl, raises: [], gcsafe.}
+  sort*: proc(self: pointer, column: cint, order: cint): void {.cdecl, raises: [], gcsafe.}
+  buddy*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  match*: proc(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl, raises: [], gcsafe.}
+  span*: proc(self: pointer, index: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  roleNames*: proc(self: pointer): struct_miqt_map {.cdecl, raises: [], gcsafe.}
+  submit*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  revert*: proc(self: pointer): void {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQAbstractListModel_virtualbase_metaObject(self: pointer): pointer {.importc: "QAbstractListModel_virtualbase_metaObject".}
 proc fcQAbstractListModel_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QAbstractListModel_virtualbase_metacast".}
 proc fcQAbstractListModel_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAbstractListModel_virtualbase_metacall".}
 proc fcQAbstractListModel_virtualbase_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.importc: "QAbstractListModel_virtualbase_index".}
@@ -498,11 +504,11 @@ proc fcQAbstractListModel_virtualbase_headerData(self: pointer, section: cint, o
 proc fcQAbstractListModel_virtualbase_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.importc: "QAbstractListModel_virtualbase_setHeaderData".}
 proc fcQAbstractListModel_virtualbase_itemData(self: pointer, index: pointer): struct_miqt_map {.importc: "QAbstractListModel_virtualbase_itemData".}
 proc fcQAbstractListModel_virtualbase_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.importc: "QAbstractListModel_virtualbase_setItemData".}
-proc fcQAbstractListModel_virtualbase_mimeTypes(self: pointer, ): struct_miqt_array {.importc: "QAbstractListModel_virtualbase_mimeTypes".}
+proc fcQAbstractListModel_virtualbase_mimeTypes(self: pointer): struct_miqt_array {.importc: "QAbstractListModel_virtualbase_mimeTypes".}
 proc fcQAbstractListModel_virtualbase_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.importc: "QAbstractListModel_virtualbase_mimeData".}
 proc fcQAbstractListModel_virtualbase_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.importc: "QAbstractListModel_virtualbase_canDropMimeData".}
-proc fcQAbstractListModel_virtualbase_supportedDropActions(self: pointer, ): cint {.importc: "QAbstractListModel_virtualbase_supportedDropActions".}
-proc fcQAbstractListModel_virtualbase_supportedDragActions(self: pointer, ): cint {.importc: "QAbstractListModel_virtualbase_supportedDragActions".}
+proc fcQAbstractListModel_virtualbase_supportedDropActions(self: pointer): cint {.importc: "QAbstractListModel_virtualbase_supportedDropActions".}
+proc fcQAbstractListModel_virtualbase_supportedDragActions(self: pointer): cint {.importc: "QAbstractListModel_virtualbase_supportedDragActions".}
 proc fcQAbstractListModel_virtualbase_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractListModel_virtualbase_insertRows".}
 proc fcQAbstractListModel_virtualbase_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.importc: "QAbstractListModel_virtualbase_insertColumns".}
 proc fcQAbstractListModel_virtualbase_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.importc: "QAbstractListModel_virtualbase_removeRows".}
@@ -515,9 +521,9 @@ proc fcQAbstractListModel_virtualbase_sort(self: pointer, column: cint, order: c
 proc fcQAbstractListModel_virtualbase_buddy(self: pointer, index: pointer): pointer {.importc: "QAbstractListModel_virtualbase_buddy".}
 proc fcQAbstractListModel_virtualbase_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.importc: "QAbstractListModel_virtualbase_match".}
 proc fcQAbstractListModel_virtualbase_span(self: pointer, index: pointer): pointer {.importc: "QAbstractListModel_virtualbase_span".}
-proc fcQAbstractListModel_virtualbase_roleNames(self: pointer, ): struct_miqt_map {.importc: "QAbstractListModel_virtualbase_roleNames".}
-proc fcQAbstractListModel_virtualbase_submit(self: pointer, ): bool {.importc: "QAbstractListModel_virtualbase_submit".}
-proc fcQAbstractListModel_virtualbase_revert(self: pointer, ): void {.importc: "QAbstractListModel_virtualbase_revert".}
+proc fcQAbstractListModel_virtualbase_roleNames(self: pointer): struct_miqt_map {.importc: "QAbstractListModel_virtualbase_roleNames".}
+proc fcQAbstractListModel_virtualbase_submit(self: pointer): bool {.importc: "QAbstractListModel_virtualbase_submit".}
+proc fcQAbstractListModel_virtualbase_revert(self: pointer): void {.importc: "QAbstractListModel_virtualbase_revert".}
 proc fcQAbstractListModel_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QAbstractListModel_virtualbase_event".}
 proc fcQAbstractListModel_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QAbstractListModel_virtualbase_eventFilter".}
 proc fcQAbstractListModel_virtualbase_timerEvent(self: pointer, event: pointer): void {.importc: "QAbstractListModel_virtualbase_timerEvent".}
@@ -525,48 +531,48 @@ proc fcQAbstractListModel_virtualbase_childEvent(self: pointer, event: pointer):
 proc fcQAbstractListModel_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QAbstractListModel_virtualbase_customEvent".}
 proc fcQAbstractListModel_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_connectNotify".}
 proc fcQAbstractListModel_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QAbstractListModel_virtualbase_disconnectNotify".}
-proc fcQAbstractListModel_protectedbase_resetInternalData(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_resetInternalData".}
+proc fcQAbstractListModel_protectedbase_resetInternalData(self: pointer): void {.importc: "QAbstractListModel_protectedbase_resetInternalData".}
 proc fcQAbstractListModel_protectedbase_createIndex(self: pointer, row: cint, column: cint): pointer {.importc: "QAbstractListModel_protectedbase_createIndex".}
 proc fcQAbstractListModel_protectedbase_encodeData(self: pointer, indexes: struct_miqt_array, stream: pointer): void {.importc: "QAbstractListModel_protectedbase_encodeData".}
 proc fcQAbstractListModel_protectedbase_decodeData(self: pointer, row: cint, column: cint, parent: pointer, stream: pointer): bool {.importc: "QAbstractListModel_protectedbase_decodeData".}
 proc fcQAbstractListModel_protectedbase_beginInsertRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginInsertRows".}
-proc fcQAbstractListModel_protectedbase_endInsertRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endInsertRows".}
+proc fcQAbstractListModel_protectedbase_endInsertRows(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endInsertRows".}
 proc fcQAbstractListModel_protectedbase_beginRemoveRows(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginRemoveRows".}
-proc fcQAbstractListModel_protectedbase_endRemoveRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endRemoveRows".}
+proc fcQAbstractListModel_protectedbase_endRemoveRows(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endRemoveRows".}
 proc fcQAbstractListModel_protectedbase_beginMoveRows(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationRow: cint): bool {.importc: "QAbstractListModel_protectedbase_beginMoveRows".}
-proc fcQAbstractListModel_protectedbase_endMoveRows(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endMoveRows".}
+proc fcQAbstractListModel_protectedbase_endMoveRows(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endMoveRows".}
 proc fcQAbstractListModel_protectedbase_beginInsertColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginInsertColumns".}
-proc fcQAbstractListModel_protectedbase_endInsertColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endInsertColumns".}
+proc fcQAbstractListModel_protectedbase_endInsertColumns(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endInsertColumns".}
 proc fcQAbstractListModel_protectedbase_beginRemoveColumns(self: pointer, parent: pointer, first: cint, last: cint): void {.importc: "QAbstractListModel_protectedbase_beginRemoveColumns".}
-proc fcQAbstractListModel_protectedbase_endRemoveColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endRemoveColumns".}
+proc fcQAbstractListModel_protectedbase_endRemoveColumns(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endRemoveColumns".}
 proc fcQAbstractListModel_protectedbase_beginMoveColumns(self: pointer, sourceParent: pointer, sourceFirst: cint, sourceLast: cint, destinationParent: pointer, destinationColumn: cint): bool {.importc: "QAbstractListModel_protectedbase_beginMoveColumns".}
-proc fcQAbstractListModel_protectedbase_endMoveColumns(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endMoveColumns".}
-proc fcQAbstractListModel_protectedbase_beginResetModel(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_beginResetModel".}
-proc fcQAbstractListModel_protectedbase_endResetModel(self: pointer, ): void {.importc: "QAbstractListModel_protectedbase_endResetModel".}
+proc fcQAbstractListModel_protectedbase_endMoveColumns(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endMoveColumns".}
+proc fcQAbstractListModel_protectedbase_beginResetModel(self: pointer): void {.importc: "QAbstractListModel_protectedbase_beginResetModel".}
+proc fcQAbstractListModel_protectedbase_endResetModel(self: pointer): void {.importc: "QAbstractListModel_protectedbase_endResetModel".}
 proc fcQAbstractListModel_protectedbase_changePersistentIndex(self: pointer, fromVal: pointer, to: pointer): void {.importc: "QAbstractListModel_protectedbase_changePersistentIndex".}
 proc fcQAbstractListModel_protectedbase_changePersistentIndexList(self: pointer, fromVal: struct_miqt_array, to: struct_miqt_array): void {.importc: "QAbstractListModel_protectedbase_changePersistentIndexList".}
-proc fcQAbstractListModel_protectedbase_persistentIndexList(self: pointer, ): struct_miqt_array {.importc: "QAbstractListModel_protectedbase_persistentIndexList".}
-proc fcQAbstractListModel_protectedbase_sender(self: pointer, ): pointer {.importc: "QAbstractListModel_protectedbase_sender".}
-proc fcQAbstractListModel_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAbstractListModel_protectedbase_senderSignalIndex".}
+proc fcQAbstractListModel_protectedbase_persistentIndexList(self: pointer): struct_miqt_array {.importc: "QAbstractListModel_protectedbase_persistentIndexList".}
+proc fcQAbstractListModel_protectedbase_sender(self: pointer): pointer {.importc: "QAbstractListModel_protectedbase_sender".}
+proc fcQAbstractListModel_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAbstractListModel_protectedbase_senderSignalIndex".}
 proc fcQAbstractListModel_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAbstractListModel_protectedbase_receivers".}
 proc fcQAbstractListModel_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAbstractListModel_protectedbase_isSignalConnected".}
-proc fcQAbstractListModel_new(vtbl: pointer, ): ptr cQAbstractListModel {.importc: "QAbstractListModel_new".}
-proc fcQAbstractListModel_new2(vtbl: pointer, parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new2".}
+proc fcQAbstractListModel_new(vtbl, vdata: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new".}
+proc fcQAbstractListModel_new2(vtbl, vdata: pointer, parent: pointer): ptr cQAbstractListModel {.importc: "QAbstractListModel_new2".}
 proc fcQAbstractListModel_staticMetaObject(): pointer {.importc: "QAbstractListModel_staticMetaObject".}
 
-proc row*(self: gen_qabstractitemmodel_types.QModelIndex, ): cint =
+proc row*(self: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQModelIndex_row(self.h)
 
-proc column*(self: gen_qabstractitemmodel_types.QModelIndex, ): cint =
+proc column*(self: gen_qabstractitemmodel_types.QModelIndex): cint =
   fcQModelIndex_column(self.h)
 
-proc internalId*(self: gen_qabstractitemmodel_types.QModelIndex, ): uint =
+proc internalId*(self: gen_qabstractitemmodel_types.QModelIndex): uint =
   fcQModelIndex_internalId(self.h)
 
-proc internalPointer*(self: gen_qabstractitemmodel_types.QModelIndex, ): pointer =
+proc internalPointer*(self: gen_qabstractitemmodel_types.QModelIndex): pointer =
   fcQModelIndex_internalPointer(self.h)
 
-proc parent*(self: gen_qabstractitemmodel_types.QModelIndex, ): gen_qabstractitemmodel_types.QModelIndex =
+proc parent*(self: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQModelIndex_parent(self.h), owned: true)
 
 proc sibling*(self: gen_qabstractitemmodel_types.QModelIndex, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
@@ -581,16 +587,16 @@ proc siblingAtRow*(self: gen_qabstractitemmodel_types.QModelIndex, row: cint): g
 proc child*(self: gen_qabstractitemmodel_types.QModelIndex, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQModelIndex_child(self.h, row, column), owned: true)
 
-proc data*(self: gen_qabstractitemmodel_types.QModelIndex, ): gen_qvariant_types.QVariant =
+proc data*(self: gen_qabstractitemmodel_types.QModelIndex): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQModelIndex_data(self.h), owned: true)
 
-proc flags*(self: gen_qabstractitemmodel_types.QModelIndex, ): cint =
+proc flags*(self: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQModelIndex_flags(self.h))
 
-proc model*(self: gen_qabstractitemmodel_types.QModelIndex, ): gen_qabstractitemmodel_types.QAbstractItemModel =
+proc model*(self: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QAbstractItemModel =
   gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQModelIndex_model(self.h), owned: false)
 
-proc isValid*(self: gen_qabstractitemmodel_types.QModelIndex, ): bool =
+proc isValid*(self: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQModelIndex_isValid(self.h)
 
 proc operatorEqual*(self: gen_qabstractitemmodel_types.QModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): bool =
@@ -636,22 +642,22 @@ proc operatorNotEqual*(self: gen_qabstractitemmodel_types.QPersistentModelIndex,
 proc operatorAssign*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, other: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQPersistentModelIndex_operatorAssignWithOther(self.h, other.h)
 
-proc ToConstQModelIndexBitwiseAnd*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): gen_qabstractitemmodel_types.QModelIndex =
+proc ToConstQModelIndexBitwiseAnd*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQPersistentModelIndex_ToConstQModelIndexBitwiseAnd(self.h), owned: false)
 
-proc row*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): cint =
+proc row*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): cint =
   fcQPersistentModelIndex_row(self.h)
 
-proc column*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): cint =
+proc column*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): cint =
   fcQPersistentModelIndex_column(self.h)
 
-proc internalPointer*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): pointer =
+proc internalPointer*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): pointer =
   fcQPersistentModelIndex_internalPointer(self.h)
 
-proc internalId*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): uint =
+proc internalId*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): uint =
   fcQPersistentModelIndex_internalId(self.h)
 
-proc parent*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): gen_qabstractitemmodel_types.QModelIndex =
+proc parent*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQPersistentModelIndex_parent(self.h), owned: true)
 
 proc sibling*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
@@ -660,16 +666,16 @@ proc sibling*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, row: cin
 proc child*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQPersistentModelIndex_child(self.h, row, column), owned: true)
 
-proc data*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): gen_qvariant_types.QVariant =
+proc data*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQPersistentModelIndex_data(self.h), owned: true)
 
-proc flags*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): cint =
+proc flags*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): cint =
   cint(fcQPersistentModelIndex_flags(self.h))
 
-proc model*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): gen_qabstractitemmodel_types.QAbstractItemModel =
+proc model*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QAbstractItemModel =
   gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQPersistentModelIndex_model(self.h), owned: false)
 
-proc isValid*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, ): bool =
+proc isValid*(self: gen_qabstractitemmodel_types.QPersistentModelIndex): bool =
   fcQPersistentModelIndex_isValid(self.h)
 
 proc data*(self: gen_qabstractitemmodel_types.QPersistentModelIndex, role: cint): gen_qvariant_types.QVariant =
@@ -686,7 +692,7 @@ proc create*(T: type gen_qabstractitemmodel_types.QPersistentModelIndex,
     other: gen_qabstractitemmodel_types.QPersistentModelIndex): gen_qabstractitemmodel_types.QPersistentModelIndex =
   gen_qabstractitemmodel_types.QPersistentModelIndex(h: fcQPersistentModelIndex_new3(other.h), owned: true)
 
-proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cstring): pointer =
@@ -769,7 +775,7 @@ proc setItemData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: 
 
   fcQAbstractItemModel_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-proc mimeTypes*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): seq[string] =
+proc mimeTypes*(self: gen_qabstractitemmodel_types.QAbstractItemModel): seq[string] =
   var v_ma = fcQAbstractItemModel_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -794,10 +800,10 @@ proc canDropMimeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, dat
 proc dropMimeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc supportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+proc supportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel): cint =
   cint(fcQAbstractItemModel_supportedDropActions(self.h))
 
-proc supportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+proc supportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel): cint =
   cint(fcQAbstractItemModel_supportedDragActions(self.h))
 
 proc insertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
@@ -863,7 +869,7 @@ proc match*(self: gen_qabstractitemmodel_types.QAbstractItemModel, start: gen_qa
 proc span*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractItemModel_span(self.h, index.h), owned: true)
 
-proc roleNames*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): Table[cint,seq[byte]] =
+proc roleNames*(self: gen_qabstractitemmodel_types.QAbstractItemModel): Table[cint,seq[byte]] =
   var v_mm = fcQAbstractItemModel_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
@@ -888,7 +894,7 @@ proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft
   fcQAbstractItemModel_dataChanged(self.h, topLeft.h, bottomRight.h)
 
 type QAbstractItemModeldataChangedSlot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex)
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged(slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_dataChanged(slot: int, topLeft: pointer, bottomRight: pointer) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModeldataChangedSlot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
 
@@ -896,7 +902,7 @@ proc miqt_exec_callback_cQAbstractItemModel_dataChanged(slot: int, topLeft: poin
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_dataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModeldataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -904,13 +910,13 @@ proc ondataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot:
   var tmp = new QAbstractItemModeldataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_dataChanged, miqt_exec_callback_cQAbstractItemModel_dataChanged_release)
+  fcQAbstractItemModel_connect_dataChanged(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_dataChanged, cQAbstractItemModel_slot_callback_dataChanged_release)
 
 proc headerDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, orientation: cint, first: cint, last: cint): void =
   fcQAbstractItemModel_headerDataChanged(self.h, cint(orientation), first, last)
 
 type QAbstractItemModelheaderDataChangedSlot* = proc(orientation: cint, first: cint, last: cint)
-proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged(slot: int, orientation: cint, first: cint, last: cint) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_headerDataChanged(slot: int, orientation: cint, first: cint, last: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModelheaderDataChangedSlot](cast[pointer](slot))
   let slotval1 = cint(orientation)
 
@@ -920,7 +926,7 @@ proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged(slot: int, orienta
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc miqt_exec_callback_cQAbstractItemModel_headerDataChanged_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_headerDataChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModelheaderDataChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -928,17 +934,17 @@ proc onheaderDataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel,
   var tmp = new QAbstractItemModelheaderDataChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_headerDataChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_headerDataChanged, miqt_exec_callback_cQAbstractItemModel_headerDataChanged_release)
+  fcQAbstractItemModel_connect_headerDataChanged(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_headerDataChanged, cQAbstractItemModel_slot_callback_headerDataChanged_release)
 
-proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_layoutChanged(self.h)
 
 type QAbstractItemModellayoutChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -946,17 +952,17 @@ proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slo
   var tmp = new QAbstractItemModellayoutChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged, miqt_exec_callback_cQAbstractItemModel_layoutChanged_release)
+  fcQAbstractItemModel_connect_layoutChanged(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutChanged, cQAbstractItemModel_slot_callback_layoutChanged_release)
 
-proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_layoutAboutToBeChanged(self.h)
 
 type QAbstractItemModellayoutAboutToBeChangedSlot* = proc()
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged(slot: int) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChangedSlot](cast[pointer](slot))
   nimfunc[]()
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -964,12 +970,12 @@ proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemM
   var tmp = new QAbstractItemModellayoutAboutToBeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged_release)
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutAboutToBeChanged, cQAbstractItemModel_slot_callback_layoutAboutToBeChanged_release)
 
-proc submit*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): bool =
+proc submit*(self: gen_qabstractitemmodel_types.QAbstractItemModel): bool =
   fcQAbstractItemModel_submit(self.h)
 
-proc revert*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc revert*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_revert(self.h)
 
 proc tr*(_: type gen_qabstractitemmodel_types.QAbstractItemModel, s: cstring, c: cstring): string =
@@ -1022,7 +1028,7 @@ proc dataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, topLeft
   fcQAbstractItemModel_dataChanged3(self.h, topLeft.h, bottomRight.h, struct_miqt_array(len: csize_t(len(roles)), data: if len(roles) == 0: nil else: addr(roles_CArray[0])))
 
 type QAbstractItemModeldataChanged3Slot* = proc(topLeft: gen_qabstractitemmodel_types.QModelIndex, bottomRight: gen_qabstractitemmodel_types.QModelIndex, roles: seq[cint])
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged3(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_dataChanged3(slot: int, topLeft: pointer, bottomRight: pointer, roles: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModeldataChanged3Slot](cast[pointer](slot))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: topLeft, owned: false)
 
@@ -1038,7 +1044,7 @@ proc miqt_exec_callback_cQAbstractItemModel_dataChanged3(slot: int, topLeft: poi
 
   nimfunc[](slotval1, slotval2, slotval3)
 
-proc miqt_exec_callback_cQAbstractItemModel_dataChanged3_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_dataChanged3_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModeldataChanged3Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1046,7 +1052,7 @@ proc ondataChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slot:
   var tmp = new QAbstractItemModeldataChanged3Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_dataChanged3(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_dataChanged3, miqt_exec_callback_cQAbstractItemModel_dataChanged3_release)
+  fcQAbstractItemModel_connect_dataChanged3(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_dataChanged3, cQAbstractItemModel_slot_callback_dataChanged3_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1056,7 +1062,7 @@ proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, paren
   fcQAbstractItemModel_layoutChanged1(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
 type QAbstractItemModellayoutChanged1Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChanged1Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1068,7 +1074,7 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1(slot: int, parents: s
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged1_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged1_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutChanged1Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1076,7 +1082,7 @@ proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slo
   var tmp = new QAbstractItemModellayoutChanged1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged1, miqt_exec_callback_cQAbstractItemModel_layoutChanged1_release)
+  fcQAbstractItemModel_connect_layoutChanged1(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutChanged1, cQAbstractItemModel_slot_callback_layoutChanged1_release)
 
 proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1086,7 +1092,7 @@ proc layoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, paren
   fcQAbstractItemModel_layoutChanged2(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
 type QAbstractItemModellayoutChanged2Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1100,7 +1106,7 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2(slot: int, parents: s
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutChanged2_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutChanged2_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutChanged2Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1108,7 +1114,7 @@ proc onlayoutChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, slo
   var tmp = new QAbstractItemModellayoutChanged2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutChanged2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutChanged2, miqt_exec_callback_cQAbstractItemModel_layoutChanged2_release)
+  fcQAbstractItemModel_connect_layoutChanged2(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutChanged2, cQAbstractItemModel_slot_callback_layoutChanged2_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex]): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1118,7 +1124,7 @@ proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemMod
   fcQAbstractItemModel_layoutAboutToBeChanged1(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])))
 
 type QAbstractItemModellayoutAboutToBeChanged1Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex])
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged1(slot: int, parents: struct_miqt_array) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChanged1Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1130,7 +1136,7 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1(slot: int, p
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged1_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChanged1Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1138,7 +1144,7 @@ proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemM
   var tmp = new QAbstractItemModellayoutAboutToBeChanged1Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged1_release)
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged1(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutAboutToBeChanged1, cQAbstractItemModel_slot_callback_layoutAboutToBeChanged1_release)
 
 proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint): void =
   var parents_CArray = newSeq[pointer](len(parents))
@@ -1148,7 +1154,7 @@ proc layoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemMod
   fcQAbstractItemModel_layoutAboutToBeChanged2(self.h, struct_miqt_array(len: csize_t(len(parents)), data: if len(parents) == 0: nil else: addr(parents_CArray[0])), cint(hint))
 
 type QAbstractItemModellayoutAboutToBeChanged2Slot* = proc(parents: seq[gen_qabstractitemmodel_types.QPersistentModelIndex], hint: cint)
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged2(slot: int, parents: struct_miqt_array, hint: cint) {.cdecl.} =
   let nimfunc = cast[ptr QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
   var vparents_ma = parents
   var vparentsx_ret = newSeq[gen_qabstractitemmodel_types.QPersistentModelIndex](int(vparents_ma.len))
@@ -1162,7 +1168,7 @@ proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2(slot: int, p
 
   nimfunc[](slotval1, slotval2)
 
-proc miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2_release(slot: int) {.cdecl.} =
+proc cQAbstractItemModel_slot_callback_layoutAboutToBeChanged2_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QAbstractItemModellayoutAboutToBeChanged2Slot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -1170,7 +1176,7 @@ proc onlayoutAboutToBeChanged*(self: gen_qabstractitemmodel_types.QAbstractItemM
   var tmp = new QAbstractItemModellayoutAboutToBeChanged2Slot
   tmp[] = slot
   GC_ref(tmp)
-  fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2, miqt_exec_callback_cQAbstractItemModel_layoutAboutToBeChanged2_release)
+  fcQAbstractItemModel_connect_layoutAboutToBeChanged2(self.h, cast[int](addr tmp[]), cQAbstractItemModel_slot_callback_layoutAboutToBeChanged2, cQAbstractItemModel_slot_callback_layoutAboutToBeChanged2_release)
 
 type QAbstractItemModelmetaObjectProc* = proc(self: QAbstractItemModel): gen_qobjectdefs_types.QMetaObject {.raises: [], gcsafe.}
 type QAbstractItemModelmetacastProc* = proc(self: QAbstractItemModel, param1: cstring): pointer {.raises: [], gcsafe.}
@@ -1262,11 +1268,11 @@ type QAbstractItemModelVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractItemModelcustomEventProc
   connectNotify*: QAbstractItemModelconnectNotifyProc
   disconnectNotify*: QAbstractItemModeldisconnectNotifyProc
-proc QAbstractItemModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_qobjectdefs_types.QMetaObject =
+proc QAbstractItemModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemModel_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractItemModel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -1277,8 +1283,8 @@ proc miqt_exec_callback_cQAbstractItemModel_metaObject(vtbl: pointer, self: poin
 proc QAbstractItemModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cstring): pointer =
   fcQAbstractItemModel_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractItemModel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -1287,8 +1293,8 @@ proc miqt_exec_callback_cQAbstractItemModel_metacast(vtbl: pointer, self: pointe
 proc QAbstractItemModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractItemModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQAbstractItemModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAbstractItemModel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -1296,8 +1302,8 @@ proc miqt_exec_callback_cQAbstractItemModel_metacall(vtbl: pointer, self: pointe
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractItemModel_index(vtbl: pointer, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -1308,8 +1314,8 @@ proc miqt_exec_callback_cQAbstractItemModel_index(vtbl: pointer, self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc miqt_exec_callback_cQAbstractItemModel_parent(vtbl: pointer, self: pointer, child: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
   var virtualReturn = vtbl[].parent(self, slotval1)
@@ -1321,8 +1327,8 @@ proc miqt_exec_callback_cQAbstractItemModel_parent(vtbl: pointer, self: pointer,
 proc QAbstractItemModelsibling*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractItemModel_sibling(vtbl: pointer, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -1333,15 +1339,15 @@ proc miqt_exec_callback_cQAbstractItemModel_sibling(vtbl: pointer, self: pointer
   virtualReturn.h = nil
   virtualReturn_h
 
-proc miqt_exec_callback_cQAbstractItemModel_rowCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractItemModel_columnCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
@@ -1350,15 +1356,15 @@ proc miqt_exec_callback_cQAbstractItemModel_columnCount(vtbl: pointer, self: poi
 proc QAbstractItemModelhasChildren*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_hasChildren(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_hasChildren(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].hasChildren(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractItemModel_data(vtbl: pointer, self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
@@ -1371,8 +1377,8 @@ proc miqt_exec_callback_cQAbstractItemModel_data(vtbl: pointer, self: pointer, i
 proc QAbstractItemModelsetData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractItemModel_virtualbase_setData(self.h, index.h, value.h, role)
 
-proc miqt_exec_callback_cQAbstractItemModel_setData(vtbl: pointer, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -1383,8 +1389,8 @@ proc miqt_exec_callback_cQAbstractItemModel_setData(vtbl: pointer, self: pointer
 proc QAbstractItemModelheaderData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractItemModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc miqt_exec_callback_cQAbstractItemModel_headerData(vtbl: pointer, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1398,8 +1404,8 @@ proc miqt_exec_callback_cQAbstractItemModel_headerData(vtbl: pointer, self: poin
 proc QAbstractItemModelsetHeaderData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractItemModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
-proc miqt_exec_callback_cQAbstractItemModel_setHeaderData(vtbl: pointer, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -1423,8 +1429,8 @@ proc QAbstractItemModelitemData*(self: gen_qabstractitemmodel_types.QAbstractIte
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractItemModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
@@ -1458,8 +1464,8 @@ proc QAbstractItemModelsetItemData*(self: gen_qabstractitemmodel_types.QAbstract
 
   fcQAbstractItemModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-proc miqt_exec_callback_cQAbstractItemModel_setItemData(vtbl: pointer, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -1478,7 +1484,7 @@ proc miqt_exec_callback_cQAbstractItemModel_setItemData(vtbl: pointer, self: poi
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractItemModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): seq[string] =
+proc QAbstractItemModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractItemModel): seq[string] =
   var v_ma = fcQAbstractItemModel_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -1490,8 +1496,8 @@ proc QAbstractItemModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractIt
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractItemModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -1509,8 +1515,8 @@ proc QAbstractItemModelmimeData*(self: gen_qabstractitemmodel_types.QAbstractIte
 
   gen_qmimedata_types.QMimeData(h: fcQAbstractItemModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
-proc miqt_exec_callback_cQAbstractItemModel_mimeData(vtbl: pointer, self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -1528,8 +1534,8 @@ proc miqt_exec_callback_cQAbstractItemModel_mimeData(vtbl: pointer, self: pointe
 proc QAbstractItemModelcanDropMimeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_canDropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1542,8 +1548,8 @@ proc miqt_exec_callback_cQAbstractItemModel_canDropMimeData(vtbl: pointer, self:
 proc QAbstractItemModeldropMimeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_dropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -1553,20 +1559,20 @@ proc miqt_exec_callback_cQAbstractItemModel_dropMimeData(vtbl: pointer, self: po
   var virtualReturn = vtbl[].dropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QAbstractItemModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+proc QAbstractItemModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel): cint =
   cint(fcQAbstractItemModel_virtualbase_supportedDropActions(self.h))
 
-proc miqt_exec_callback_cQAbstractItemModel_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
 
-proc QAbstractItemModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+proc QAbstractItemModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractItemModel): cint =
   cint(fcQAbstractItemModel_virtualbase_supportedDragActions(self.h))
 
-proc miqt_exec_callback_cQAbstractItemModel_supportedDragActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
@@ -1574,8 +1580,8 @@ proc miqt_exec_callback_cQAbstractItemModel_supportedDragActions(vtbl: pointer, 
 proc QAbstractItemModelinsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_insertRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -1586,8 +1592,8 @@ proc miqt_exec_callback_cQAbstractItemModel_insertRows(vtbl: pointer, self: poin
 proc QAbstractItemModelinsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_insertColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_insertColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -1598,8 +1604,8 @@ proc miqt_exec_callback_cQAbstractItemModel_insertColumns(vtbl: pointer, self: p
 proc QAbstractItemModelremoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_removeRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -1610,8 +1616,8 @@ proc miqt_exec_callback_cQAbstractItemModel_removeRows(vtbl: pointer, self: poin
 proc QAbstractItemModelremoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_removeColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_removeColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -1622,8 +1628,8 @@ proc miqt_exec_callback_cQAbstractItemModel_removeColumns(vtbl: pointer, self: p
 proc QAbstractItemModelmoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractItemModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractItemModel_moveRows(vtbl: pointer, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -1636,8 +1642,8 @@ proc miqt_exec_callback_cQAbstractItemModel_moveRows(vtbl: pointer, self: pointe
 proc QAbstractItemModelmoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractItemModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractItemModel_moveColumns(vtbl: pointer, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -1650,8 +1656,8 @@ proc miqt_exec_callback_cQAbstractItemModel_moveColumns(vtbl: pointer, self: poi
 proc QAbstractItemModelfetchMore*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractItemModel_virtualbase_fetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_fetchMore(vtbl: pointer, self: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
@@ -1659,8 +1665,8 @@ proc miqt_exec_callback_cQAbstractItemModel_fetchMore(vtbl: pointer, self: point
 proc QAbstractItemModelcanFetchMore*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractItemModel_virtualbase_canFetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_canFetchMore(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
@@ -1669,8 +1675,8 @@ proc miqt_exec_callback_cQAbstractItemModel_canFetchMore(vtbl: pointer, self: po
 proc QAbstractItemModelflags*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQAbstractItemModel_virtualbase_flags(self.h, index.h))
 
-proc miqt_exec_callback_cQAbstractItemModel_flags(vtbl: pointer, self: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
@@ -1679,8 +1685,8 @@ proc miqt_exec_callback_cQAbstractItemModel_flags(vtbl: pointer, self: pointer, 
 proc QAbstractItemModelsort*(self: gen_qabstractitemmodel_types.QAbstractItemModel, column: cint, order: cint): void =
   fcQAbstractItemModel_virtualbase_sort(self.h, column, cint(order))
 
-proc miqt_exec_callback_cQAbstractItemModel_sort(vtbl: pointer, self: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = column
   let slotval2 = cint(order)
@@ -1689,8 +1695,8 @@ proc miqt_exec_callback_cQAbstractItemModel_sort(vtbl: pointer, self: pointer, c
 proc QAbstractItemModelbuddy*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_virtualbase_buddy(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractItemModel_buddy(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
@@ -1708,8 +1714,8 @@ proc QAbstractItemModelmatch*(self: gen_qabstractitemmodel_types.QAbstractItemMo
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractItemModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -1729,8 +1735,8 @@ proc miqt_exec_callback_cQAbstractItemModel_match(vtbl: pointer, self: pointer, 
 proc QAbstractItemModelspan*(self: gen_qabstractitemmodel_types.QAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractItemModel_virtualbase_span(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractItemModel_span(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
@@ -1739,7 +1745,7 @@ proc miqt_exec_callback_cQAbstractItemModel_span(vtbl: pointer, self: pointer, i
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractItemModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): Table[cint,seq[byte]] =
+proc QAbstractItemModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractItemModel): Table[cint,seq[byte]] =
   var v_mm = fcQAbstractItemModel_virtualbase_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
@@ -1757,8 +1763,8 @@ proc QAbstractItemModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractIt
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractItemModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -1776,28 +1782,28 @@ proc miqt_exec_callback_cQAbstractItemModel_roleNames(vtbl: pointer, self: point
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QAbstractItemModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): bool =
+proc QAbstractItemModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractItemModel): bool =
   fcQAbstractItemModel_virtualbase_submit(self.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_submit(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QAbstractItemModelrevert*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc QAbstractItemModelrevert*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_virtualbase_revert(self.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_revert(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   vtbl[].revert(self)
 
 proc QAbstractItemModelevent*(self: gen_qabstractitemmodel_types.QAbstractItemModel, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractItemModel_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -1806,8 +1812,8 @@ proc miqt_exec_callback_cQAbstractItemModel_event(vtbl: pointer, self: pointer, 
 proc QAbstractItemModeleventFilter*(self: gen_qabstractitemmodel_types.QAbstractItemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractItemModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -1817,8 +1823,8 @@ proc miqt_exec_callback_cQAbstractItemModel_eventFilter(vtbl: pointer, self: poi
 proc QAbstractItemModeltimerEvent*(self: gen_qabstractitemmodel_types.QAbstractItemModel, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQAbstractItemModel_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -1826,8 +1832,8 @@ proc miqt_exec_callback_cQAbstractItemModel_timerEvent(vtbl: pointer, self: poin
 proc QAbstractItemModelchildEvent*(self: gen_qabstractitemmodel_types.QAbstractItemModel, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAbstractItemModel_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -1835,8 +1841,8 @@ proc miqt_exec_callback_cQAbstractItemModel_childEvent(vtbl: pointer, self: poin
 proc QAbstractItemModelcustomEvent*(self: gen_qabstractitemmodel_types.QAbstractItemModel, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractItemModel_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -1844,8 +1850,8 @@ proc miqt_exec_callback_cQAbstractItemModel_customEvent(vtbl: pointer, self: poi
 proc QAbstractItemModelconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractItemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractItemModel_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -1853,19 +1859,19 @@ proc miqt_exec_callback_cQAbstractItemModel_connectNotify(vtbl: pointer, self: p
 proc QAbstractItemModeldisconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractItemModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractItemModel_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractItemModel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractItemModelVTable](vtbl)
+proc cQAbstractItemModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
   let self = QAbstractItemModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractItemModel* {.inheritable.} = ref object of QAbstractItemModel
   vtbl*: cQAbstractItemModelVTable
-method metaObject*(self: VirtualQAbstractItemModel, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAbstractItemModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractItemModelmetaObject(self[])
-proc miqt_exec_method_cQAbstractItemModel_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAbstractItemModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1873,30 +1879,30 @@ proc miqt_exec_method_cQAbstractItemModel_metaObject(vtbl: pointer, inst: pointe
 
 method metacast*(self: VirtualQAbstractItemModel, param1: cstring): pointer {.base.} =
   QAbstractItemModelmetacast(self[], param1)
-proc miqt_exec_method_cQAbstractItemModel_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAbstractItemModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAbstractItemModelmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAbstractItemModel_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method index*(self: VirtualQAbstractItemModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   raiseAssert("missing implementation of QAbstractItemModel_virtualbase_index")
-proc miqt_exec_method_cQAbstractItemModel_index(vtbl: pointer, inst: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.index(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1904,10 +1910,10 @@ proc miqt_exec_method_cQAbstractItemModel_index(vtbl: pointer, inst: pointer, ro
 
 method parent*(self: VirtualQAbstractItemModel, child: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   raiseAssert("missing implementation of QAbstractItemModel_virtualbase_parent")
-proc miqt_exec_method_cQAbstractItemModel_parent(vtbl: pointer, inst: pointer, child: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_parent(self: pointer, child: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: child, owned: false)
-  var virtualReturn = vtbl.parent(slotval1)
+  var virtualReturn = inst.parent(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1915,12 +1921,12 @@ proc miqt_exec_method_cQAbstractItemModel_parent(vtbl: pointer, inst: pointer, c
 
 method sibling*(self: VirtualQAbstractItemModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractItemModelsibling(self[], row, column, idx)
-proc miqt_exec_method_cQAbstractItemModel_sibling(vtbl: pointer, inst: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
-  var virtualReturn = vtbl.sibling(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1928,35 +1934,35 @@ proc miqt_exec_method_cQAbstractItemModel_sibling(vtbl: pointer, inst: pointer, 
 
 method rowCount*(self: VirtualQAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   raiseAssert("missing implementation of QAbstractItemModel_virtualbase_rowCount")
-proc miqt_exec_method_cQAbstractItemModel_rowCount(vtbl: pointer, inst: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.rowCount(slotval1)
+  var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
 method columnCount*(self: VirtualQAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   raiseAssert("missing implementation of QAbstractItemModel_virtualbase_columnCount")
-proc miqt_exec_method_cQAbstractItemModel_columnCount(vtbl: pointer, inst: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.columnCount(slotval1)
+  var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
 method hasChildren*(self: VirtualQAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelhasChildren(self[], parent)
-proc miqt_exec_method_cQAbstractItemModel_hasChildren(vtbl: pointer, inst: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_hasChildren(self: pointer, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.hasChildren(slotval1)
+  var virtualReturn = inst.hasChildren(slotval1)
   virtualReturn
 
 method data*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
   raiseAssert("missing implementation of QAbstractItemModel_virtualbase_data")
-proc miqt_exec_method_cQAbstractItemModel_data(vtbl: pointer, inst: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
-  var virtualReturn = vtbl.data(slotval1, slotval2)
+  var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1964,22 +1970,22 @@ proc miqt_exec_method_cQAbstractItemModel_data(vtbl: pointer, inst: pointer, ind
 
 method setData*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractItemModelsetData(self[], index, value, role)
-proc miqt_exec_method_cQAbstractItemModel_setData(vtbl: pointer, inst: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
-  var virtualReturn = vtbl.setData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
 method headerData*(self: VirtualQAbstractItemModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
   QAbstractItemModelheaderData(self[], section, orientation, role)
-proc miqt_exec_method_cQAbstractItemModel_headerData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = role
-  var virtualReturn = vtbl.headerData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -1987,21 +1993,21 @@ proc miqt_exec_method_cQAbstractItemModel_headerData(vtbl: pointer, inst: pointe
 
 method setHeaderData*(self: VirtualQAbstractItemModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractItemModelsetHeaderData(self[], section, orientation, value, role)
-proc miqt_exec_method_cQAbstractItemModel_setHeaderData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
-  var virtualReturn = vtbl.setHeaderData(slotval1, slotval2, slotval3, slotval4)
+  var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 method itemData*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
   QAbstractItemModelitemData(self[], index)
-proc miqt_exec_method_cQAbstractItemModel_itemData(vtbl: pointer, inst: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.itemData(slotval1)
+  var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -2020,8 +2026,8 @@ proc miqt_exec_method_cQAbstractItemModel_itemData(vtbl: pointer, inst: pointer,
 
 method setItemData*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
   QAbstractItemModelsetItemData(self[], index, roles)
-proc miqt_exec_method_cQAbstractItemModel_setItemData(vtbl: pointer, inst: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
@@ -2036,14 +2042,14 @@ proc miqt_exec_method_cQAbstractItemModel_setItemData(vtbl: pointer, inst: point
   c_free(vroles_mm.keys)
   c_free(vroles_mm.values)
   let slotval2 = vrolesx_ret
-  var virtualReturn = vtbl.setItemData(slotval1, slotval2)
+  var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method mimeTypes*(self: VirtualQAbstractItemModel, ): seq[string] {.base.} =
+method mimeTypes*(self: VirtualQAbstractItemModel): seq[string] {.base.} =
   QAbstractItemModelmimeTypes(self[])
-proc miqt_exec_method_cQAbstractItemModel_mimeTypes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.mimeTypes()
+proc cQAbstractItemModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
@@ -2054,8 +2060,8 @@ proc miqt_exec_method_cQAbstractItemModel_mimeTypes(vtbl: pointer, inst: pointer
 
 method mimeData*(self: VirtualQAbstractItemModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QAbstractItemModelmimeData(self[], indexes)
-proc miqt_exec_method_cQAbstractItemModel_mimeData(vtbl: pointer, inst: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
@@ -2063,7 +2069,7 @@ proc miqt_exec_method_cQAbstractItemModel_mimeData(vtbl: pointer, inst: pointer,
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
-  var virtualReturn = vtbl.mimeData(slotval1)
+  var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2071,143 +2077,143 @@ proc miqt_exec_method_cQAbstractItemModel_mimeData(vtbl: pointer, inst: pointer,
 
 method canDropMimeData*(self: VirtualQAbstractItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelcanDropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractItemModel_canDropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method dropMimeData*(self: VirtualQAbstractItemModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModeldropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractItemModel_dropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQAbstractItemModel, ): cint {.base.} =
+method supportedDropActions*(self: VirtualQAbstractItemModel): cint {.base.} =
   QAbstractItemModelsupportedDropActions(self[])
-proc miqt_exec_method_cQAbstractItemModel_supportedDropActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.supportedDropActions()
+proc cQAbstractItemModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method supportedDragActions*(self: VirtualQAbstractItemModel, ): cint {.base.} =
+method supportedDragActions*(self: VirtualQAbstractItemModel): cint {.base.} =
   QAbstractItemModelsupportedDragActions(self[])
-proc miqt_exec_method_cQAbstractItemModel_supportedDragActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.supportedDragActions()
+proc cQAbstractItemModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
 method insertRows*(self: VirtualQAbstractItemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelinsertRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractItemModel_insertRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method insertColumns*(self: VirtualQAbstractItemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelinsertColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractItemModel_insertColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeRows*(self: VirtualQAbstractItemModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelremoveRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractItemModel_removeRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeColumns*(self: VirtualQAbstractItemModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelremoveColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractItemModel_removeColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method moveRows*(self: VirtualQAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractItemModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractItemModel_moveRows(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method moveColumns*(self: VirtualQAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractItemModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractItemModel_moveColumns(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method fetchMore*(self: VirtualQAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QAbstractItemModelfetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractItemModel_fetchMore(vtbl: pointer, inst: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  vtbl.fetchMore(slotval1)
+  inst.fetchMore(slotval1)
 
 method canFetchMore*(self: VirtualQAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractItemModelcanFetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractItemModel_canFetchMore(vtbl: pointer, inst: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canFetchMore(slotval1)
+  var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
 method flags*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   QAbstractItemModelflags(self[], index)
-proc miqt_exec_method_cQAbstractItemModel_flags(vtbl: pointer, inst: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.flags(slotval1)
+  var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
 method sort*(self: VirtualQAbstractItemModel, column: cint, order: cint): void {.base.} =
   QAbstractItemModelsort(self[], column, order)
-proc miqt_exec_method_cQAbstractItemModel_sort(vtbl: pointer, inst: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
-  vtbl.sort(slotval1, slotval2)
+  inst.sort(slotval1, slotval2)
 
 method buddy*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractItemModelbuddy(self[], index)
-proc miqt_exec_method_cQAbstractItemModel_buddy(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.buddy(slotval1)
+  var virtualReturn = inst.buddy(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -2215,14 +2221,14 @@ proc miqt_exec_method_cQAbstractItemModel_buddy(vtbl: pointer, inst: pointer, in
 
 method match*(self: VirtualQAbstractItemModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
   QAbstractItemModelmatch(self[], start, role, value, hits, flags)
-proc miqt_exec_method_cQAbstractItemModel_match(vtbl: pointer, inst: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
-  var virtualReturn = vtbl.match(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -2234,20 +2240,20 @@ proc miqt_exec_method_cQAbstractItemModel_match(vtbl: pointer, inst: pointer, st
 
 method span*(self: VirtualQAbstractItemModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
   QAbstractItemModelspan(self[], index)
-proc miqt_exec_method_cQAbstractItemModel_span(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.span(slotval1)
+  var virtualReturn = inst.span(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method roleNames*(self: VirtualQAbstractItemModel, ): Table[cint,seq[byte]] {.base.} =
+method roleNames*(self: VirtualQAbstractItemModel): Table[cint,seq[byte]] {.base.} =
   QAbstractItemModelroleNames(self[])
-proc miqt_exec_method_cQAbstractItemModel_roleNames(vtbl: pointer, inst: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.roleNames()
+proc cQAbstractItemModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -2263,72 +2269,72 @@ proc miqt_exec_method_cQAbstractItemModel_roleNames(vtbl: pointer, inst: pointer
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method submit*(self: VirtualQAbstractItemModel, ): bool {.base.} =
+method submit*(self: VirtualQAbstractItemModel): bool {.base.} =
   QAbstractItemModelsubmit(self[])
-proc miqt_exec_method_cQAbstractItemModel_submit(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  var virtualReturn = vtbl.submit()
+proc cQAbstractItemModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQAbstractItemModel, ): void {.base.} =
+method revert*(self: VirtualQAbstractItemModel): void {.base.} =
   QAbstractItemModelrevert(self[])
-proc miqt_exec_method_cQAbstractItemModel_revert(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-  vtbl.revert()
+proc cQAbstractItemModel_method_callback_revert(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
+  inst.revert()
 
 method event*(self: VirtualQAbstractItemModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractItemModelevent(self[], event)
-proc miqt_exec_method_cQAbstractItemModel_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAbstractItemModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractItemModeleventFilter(self[], watched, event)
-proc miqt_exec_method_cQAbstractItemModel_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQAbstractItemModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAbstractItemModeltimerEvent(self[], event)
-proc miqt_exec_method_cQAbstractItemModel_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAbstractItemModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractItemModelchildEvent(self[], event)
-proc miqt_exec_method_cQAbstractItemModel_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractItemModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractItemModelcustomEvent(self[], event)
-proc miqt_exec_method_cQAbstractItemModel_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractItemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractItemModelconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractItemModel_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractItemModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractItemModeldisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractItemModel_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractItemModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
+proc cQAbstractItemModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractItemModel](fcQAbstractItemModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
@@ -2350,43 +2356,43 @@ proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cin
 proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractItemModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
 
-proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endInsertRows(self.h)
 
 proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractItemModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
 
-proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endRemoveRows(self.h)
 
 proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
   fcQAbstractItemModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
 
-proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endMoveRows(self.h)
 
 proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractItemModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
 
-proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endInsertColumns(self.h)
 
 proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractItemModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
 
-proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endRemoveColumns(self.h)
 
 proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
   fcQAbstractItemModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
 
-proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endMoveColumns(self.h)
 
-proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_beginResetModel(self.h)
 
-proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): void =
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractItemModel): void =
   fcQAbstractItemModel_protectedbase_endResetModel(self.h)
 
 proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -2403,7 +2409,7 @@ proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItem
 
   fcQAbstractItemModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
 
-proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQAbstractItemModel_protectedbase_persistentIndexList(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -2415,10 +2421,10 @@ proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractItemModel,
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, row: cint, column: cint, data: pointer): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractItemModel_protectedbase_createIndex3(self.h, row, column, data), owned: true)
 
-proc sender*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractItemModel_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel, ): cint =
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractItemModel): cint =
   fcQAbstractItemModel_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstractitemmodel_types.QAbstractItemModel, signal: cstring): cint =
@@ -2431,311 +2437,263 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
     vtbl: ref QAbstractItemModelVTable = nil): gen_qabstractitemmodel_types.QAbstractItemModel =
   let vtbl = if vtbl == nil: new QAbstractItemModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractItemModelVTable, _: ptr cQAbstractItemModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractItemModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractItemModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractItemModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractItemModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractItemModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractItemModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractItemModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractItemModel_index
+    vtbl[].vtbl.index = cQAbstractItemModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = miqt_exec_callback_cQAbstractItemModel_parent
+    vtbl[].vtbl.parent = cQAbstractItemModel_vtable_callback_parent
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractItemModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractItemModel_vtable_callback_sibling
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractItemModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractItemModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = miqt_exec_callback_cQAbstractItemModel_columnCount
+    vtbl[].vtbl.columnCount = cQAbstractItemModel_vtable_callback_columnCount
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQAbstractItemModel_hasChildren
+    vtbl[].vtbl.hasChildren = cQAbstractItemModel_vtable_callback_hasChildren
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractItemModel_data
+    vtbl[].vtbl.data = cQAbstractItemModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractItemModel_setData
+    vtbl[].vtbl.setData = cQAbstractItemModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractItemModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractItemModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractItemModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractItemModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractItemModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractItemModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractItemModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractItemModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractItemModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractItemModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractItemModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractItemModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractItemModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractItemModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractItemModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractItemModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractItemModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractItemModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractItemModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractItemModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractItemModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractItemModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractItemModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractItemModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractItemModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractItemModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractItemModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractItemModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractItemModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractItemModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractItemModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractItemModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractItemModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractItemModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractItemModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractItemModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractItemModel_flags
+    vtbl[].vtbl.flags = cQAbstractItemModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractItemModel_sort
+    vtbl[].vtbl.sort = cQAbstractItemModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractItemModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractItemModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractItemModel_match
+    vtbl[].vtbl.match = cQAbstractItemModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractItemModel_span
+    vtbl[].vtbl.span = cQAbstractItemModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractItemModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractItemModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractItemModel_submit
+    vtbl[].vtbl.submit = cQAbstractItemModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractItemModel_revert
+    vtbl[].vtbl.revert = cQAbstractItemModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractItemModel_event
+    vtbl[].vtbl.event = cQAbstractItemModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractItemModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractItemModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractItemModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractItemModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractItemModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractItemModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractItemModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractItemModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractItemModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractItemModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractItemModel_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractItemModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractItemModel_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAbstractItemModelVTable = nil): gen_qabstractitemmodel_types.QAbstractItemModel =
   let vtbl = if vtbl == nil: new QAbstractItemModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractItemModelVTable, _: ptr cQAbstractItemModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractItemModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractItemModelVTable](fcQAbstractItemModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractItemModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractItemModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractItemModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractItemModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractItemModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractItemModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractItemModel_index
+    vtbl[].vtbl.index = cQAbstractItemModel_vtable_callback_index
   if not isNil(vtbl[].parent):
-    vtbl[].vtbl.parent = miqt_exec_callback_cQAbstractItemModel_parent
+    vtbl[].vtbl.parent = cQAbstractItemModel_vtable_callback_parent
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractItemModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractItemModel_vtable_callback_sibling
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractItemModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractItemModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = miqt_exec_callback_cQAbstractItemModel_columnCount
+    vtbl[].vtbl.columnCount = cQAbstractItemModel_vtable_callback_columnCount
   if not isNil(vtbl[].hasChildren):
-    vtbl[].vtbl.hasChildren = miqt_exec_callback_cQAbstractItemModel_hasChildren
+    vtbl[].vtbl.hasChildren = cQAbstractItemModel_vtable_callback_hasChildren
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractItemModel_data
+    vtbl[].vtbl.data = cQAbstractItemModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractItemModel_setData
+    vtbl[].vtbl.setData = cQAbstractItemModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractItemModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractItemModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractItemModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractItemModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractItemModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractItemModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractItemModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractItemModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractItemModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractItemModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractItemModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractItemModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractItemModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractItemModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractItemModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractItemModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractItemModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractItemModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractItemModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractItemModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractItemModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractItemModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractItemModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractItemModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractItemModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractItemModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractItemModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractItemModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractItemModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractItemModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractItemModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractItemModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractItemModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractItemModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractItemModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractItemModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractItemModel_flags
+    vtbl[].vtbl.flags = cQAbstractItemModel_vtable_callback_flags
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractItemModel_sort
+    vtbl[].vtbl.sort = cQAbstractItemModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractItemModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractItemModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractItemModel_match
+    vtbl[].vtbl.match = cQAbstractItemModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractItemModel_span
+    vtbl[].vtbl.span = cQAbstractItemModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractItemModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractItemModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractItemModel_submit
+    vtbl[].vtbl.submit = cQAbstractItemModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractItemModel_revert
+    vtbl[].vtbl.revert = cQAbstractItemModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractItemModel_event
+    vtbl[].vtbl.event = cQAbstractItemModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractItemModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractItemModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractItemModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractItemModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractItemModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractItemModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractItemModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractItemModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractItemModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractItemModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractItemModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractItemModel_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractItemModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractItemModel(h: fcQAbstractItemModel_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQAbstractItemModel_mvtbl = cQAbstractItemModelVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractItemModel()[])](self.fcQAbstractItemModel_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAbstractItemModel_method_callback_metaObject,
+  metacast: cQAbstractItemModel_method_callback_metacast,
+  metacall: cQAbstractItemModel_method_callback_metacall,
+  index: cQAbstractItemModel_method_callback_index,
+  parent: cQAbstractItemModel_method_callback_parent,
+  sibling: cQAbstractItemModel_method_callback_sibling,
+  rowCount: cQAbstractItemModel_method_callback_rowCount,
+  columnCount: cQAbstractItemModel_method_callback_columnCount,
+  hasChildren: cQAbstractItemModel_method_callback_hasChildren,
+  data: cQAbstractItemModel_method_callback_data,
+  setData: cQAbstractItemModel_method_callback_setData,
+  headerData: cQAbstractItemModel_method_callback_headerData,
+  setHeaderData: cQAbstractItemModel_method_callback_setHeaderData,
+  itemData: cQAbstractItemModel_method_callback_itemData,
+  setItemData: cQAbstractItemModel_method_callback_setItemData,
+  mimeTypes: cQAbstractItemModel_method_callback_mimeTypes,
+  mimeData: cQAbstractItemModel_method_callback_mimeData,
+  canDropMimeData: cQAbstractItemModel_method_callback_canDropMimeData,
+  dropMimeData: cQAbstractItemModel_method_callback_dropMimeData,
+  supportedDropActions: cQAbstractItemModel_method_callback_supportedDropActions,
+  supportedDragActions: cQAbstractItemModel_method_callback_supportedDragActions,
+  insertRows: cQAbstractItemModel_method_callback_insertRows,
+  insertColumns: cQAbstractItemModel_method_callback_insertColumns,
+  removeRows: cQAbstractItemModel_method_callback_removeRows,
+  removeColumns: cQAbstractItemModel_method_callback_removeColumns,
+  moveRows: cQAbstractItemModel_method_callback_moveRows,
+  moveColumns: cQAbstractItemModel_method_callback_moveColumns,
+  fetchMore: cQAbstractItemModel_method_callback_fetchMore,
+  canFetchMore: cQAbstractItemModel_method_callback_canFetchMore,
+  flags: cQAbstractItemModel_method_callback_flags,
+  sort: cQAbstractItemModel_method_callback_sort,
+  buddy: cQAbstractItemModel_method_callback_buddy,
+  match: cQAbstractItemModel_method_callback_match,
+  span: cQAbstractItemModel_method_callback_span,
+  roleNames: cQAbstractItemModel_method_callback_roleNames,
+  submit: cQAbstractItemModel_method_callback_submit,
+  revert: cQAbstractItemModel_method_callback_revert,
+  event: cQAbstractItemModel_method_callback_event,
+  eventFilter: cQAbstractItemModel_method_callback_eventFilter,
+  timerEvent: cQAbstractItemModel_method_callback_timerEvent,
+  childEvent: cQAbstractItemModel_method_callback_childEvent,
+  customEvent: cQAbstractItemModel_method_callback_customEvent,
+  connectNotify: cQAbstractItemModel_method_callback_connectNotify,
+  disconnectNotify: cQAbstractItemModel_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
-    vtbl: VirtualQAbstractItemModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractItemModelVTable, _: ptr cQAbstractItemModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractItemModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractItemModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractItemModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractItemModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractItemModel_index
-  vtbl[].vtbl.parent = miqt_exec_method_cQAbstractItemModel_parent
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractItemModel_sibling
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractItemModel_rowCount
-  vtbl[].vtbl.columnCount = miqt_exec_method_cQAbstractItemModel_columnCount
-  vtbl[].vtbl.hasChildren = miqt_exec_method_cQAbstractItemModel_hasChildren
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractItemModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractItemModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractItemModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractItemModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractItemModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractItemModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractItemModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractItemModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractItemModel_canDropMimeData
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractItemModel_dropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractItemModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractItemModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractItemModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractItemModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractItemModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractItemModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractItemModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractItemModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractItemModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractItemModel_canFetchMore
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractItemModel_flags
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractItemModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractItemModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractItemModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractItemModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractItemModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractItemModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractItemModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractItemModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractItemModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractItemModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractItemModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractItemModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractItemModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractItemModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractItemModel_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAbstractItemModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractItemModel_new(addr(cQAbstractItemModel_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractItemModel,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAbstractItemModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractItemModelVTable, _: ptr cQAbstractItemModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractItemModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractItemModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractItemModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractItemModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractItemModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractItemModel_index
-  vtbl[].vtbl.parent = miqt_exec_method_cQAbstractItemModel_parent
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractItemModel_sibling
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractItemModel_rowCount
-  vtbl[].vtbl.columnCount = miqt_exec_method_cQAbstractItemModel_columnCount
-  vtbl[].vtbl.hasChildren = miqt_exec_method_cQAbstractItemModel_hasChildren
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractItemModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractItemModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractItemModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractItemModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractItemModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractItemModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractItemModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractItemModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractItemModel_canDropMimeData
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractItemModel_dropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractItemModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractItemModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractItemModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractItemModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractItemModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractItemModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractItemModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractItemModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractItemModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractItemModel_canFetchMore
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractItemModel_flags
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractItemModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractItemModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractItemModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractItemModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractItemModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractItemModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractItemModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractItemModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractItemModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractItemModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractItemModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractItemModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractItemModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractItemModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractItemModel_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAbstractItemModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractItemModel_new2(addr(cQAbstractItemModel_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractItemModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractItemModel_staticMetaObject())
-proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTableModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cstring): pointer =
@@ -2878,11 +2836,11 @@ type QAbstractTableModelVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractTableModelcustomEventProc
   connectNotify*: QAbstractTableModelconnectNotifyProc
   disconnectNotify*: QAbstractTableModeldisconnectNotifyProc
-proc QAbstractTableModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_qobjectdefs_types.QMetaObject =
+proc QAbstractTableModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractTableModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTableModel_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractTableModel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -2893,8 +2851,8 @@ proc miqt_exec_callback_cQAbstractTableModel_metaObject(vtbl: pointer, self: poi
 proc QAbstractTableModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cstring): pointer =
   fcQAbstractTableModel_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractTableModel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -2903,8 +2861,8 @@ proc miqt_exec_callback_cQAbstractTableModel_metacast(vtbl: pointer, self: point
 proc QAbstractTableModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractTableModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQAbstractTableModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAbstractTableModel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -2915,8 +2873,8 @@ proc miqt_exec_callback_cQAbstractTableModel_metacall(vtbl: pointer, self: point
 proc QAbstractTableModelindex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractTableModel_index(vtbl: pointer, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -2930,8 +2888,8 @@ proc miqt_exec_callback_cQAbstractTableModel_index(vtbl: pointer, self: pointer,
 proc QAbstractTableModelsibling*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractTableModel_sibling(vtbl: pointer, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -2945,8 +2903,8 @@ proc miqt_exec_callback_cQAbstractTableModel_sibling(vtbl: pointer, self: pointe
 proc QAbstractTableModeldropMimeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_dropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -2959,29 +2917,29 @@ proc miqt_exec_callback_cQAbstractTableModel_dropMimeData(vtbl: pointer, self: p
 proc QAbstractTableModelflags*(self: gen_qabstractitemmodel_types.QAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQAbstractTableModel_virtualbase_flags(self.h, index.h))
 
-proc miqt_exec_callback_cQAbstractTableModel_flags(vtbl: pointer, self: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
-proc miqt_exec_callback_cQAbstractTableModel_rowCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractTableModel_columnCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].columnCount(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractTableModel_data(vtbl: pointer, self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
@@ -2994,8 +2952,8 @@ proc miqt_exec_callback_cQAbstractTableModel_data(vtbl: pointer, self: pointer, 
 proc QAbstractTableModelsetData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractTableModel_virtualbase_setData(self.h, index.h, value.h, role)
 
-proc miqt_exec_callback_cQAbstractTableModel_setData(vtbl: pointer, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -3006,8 +2964,8 @@ proc miqt_exec_callback_cQAbstractTableModel_setData(vtbl: pointer, self: pointe
 proc QAbstractTableModelheaderData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractTableModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc miqt_exec_callback_cQAbstractTableModel_headerData(vtbl: pointer, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -3021,8 +2979,8 @@ proc miqt_exec_callback_cQAbstractTableModel_headerData(vtbl: pointer, self: poi
 proc QAbstractTableModelsetHeaderData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractTableModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
-proc miqt_exec_callback_cQAbstractTableModel_setHeaderData(vtbl: pointer, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -3046,8 +3004,8 @@ proc QAbstractTableModelitemData*(self: gen_qabstractitemmodel_types.QAbstractTa
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractTableModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
@@ -3081,8 +3039,8 @@ proc QAbstractTableModelsetItemData*(self: gen_qabstractitemmodel_types.QAbstrac
 
   fcQAbstractTableModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-proc miqt_exec_callback_cQAbstractTableModel_setItemData(vtbl: pointer, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -3101,7 +3059,7 @@ proc miqt_exec_callback_cQAbstractTableModel_setItemData(vtbl: pointer, self: po
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractTableModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): seq[string] =
+proc QAbstractTableModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractTableModel): seq[string] =
   var v_ma = fcQAbstractTableModel_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -3113,8 +3071,8 @@ proc QAbstractTableModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractT
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractTableModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -3132,8 +3090,8 @@ proc QAbstractTableModelmimeData*(self: gen_qabstractitemmodel_types.QAbstractTa
 
   gen_qmimedata_types.QMimeData(h: fcQAbstractTableModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
-proc miqt_exec_callback_cQAbstractTableModel_mimeData(vtbl: pointer, self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -3151,8 +3109,8 @@ proc miqt_exec_callback_cQAbstractTableModel_mimeData(vtbl: pointer, self: point
 proc QAbstractTableModelcanDropMimeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_canDropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -3162,20 +3120,20 @@ proc miqt_exec_callback_cQAbstractTableModel_canDropMimeData(vtbl: pointer, self
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QAbstractTableModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): cint =
+proc QAbstractTableModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractTableModel): cint =
   cint(fcQAbstractTableModel_virtualbase_supportedDropActions(self.h))
 
-proc miqt_exec_callback_cQAbstractTableModel_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
 
-proc QAbstractTableModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): cint =
+proc QAbstractTableModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractTableModel): cint =
   cint(fcQAbstractTableModel_virtualbase_supportedDragActions(self.h))
 
-proc miqt_exec_callback_cQAbstractTableModel_supportedDragActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
@@ -3183,8 +3141,8 @@ proc miqt_exec_callback_cQAbstractTableModel_supportedDragActions(vtbl: pointer,
 proc QAbstractTableModelinsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_insertRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -3195,8 +3153,8 @@ proc miqt_exec_callback_cQAbstractTableModel_insertRows(vtbl: pointer, self: poi
 proc QAbstractTableModelinsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_insertColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_insertColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -3207,8 +3165,8 @@ proc miqt_exec_callback_cQAbstractTableModel_insertColumns(vtbl: pointer, self: 
 proc QAbstractTableModelremoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_removeRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -3219,8 +3177,8 @@ proc miqt_exec_callback_cQAbstractTableModel_removeRows(vtbl: pointer, self: poi
 proc QAbstractTableModelremoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_removeColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_removeColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -3231,8 +3189,8 @@ proc miqt_exec_callback_cQAbstractTableModel_removeColumns(vtbl: pointer, self: 
 proc QAbstractTableModelmoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractTableModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractTableModel_moveRows(vtbl: pointer, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -3245,8 +3203,8 @@ proc miqt_exec_callback_cQAbstractTableModel_moveRows(vtbl: pointer, self: point
 proc QAbstractTableModelmoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractTableModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractTableModel_moveColumns(vtbl: pointer, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -3259,8 +3217,8 @@ proc miqt_exec_callback_cQAbstractTableModel_moveColumns(vtbl: pointer, self: po
 proc QAbstractTableModelfetchMore*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractTableModel_virtualbase_fetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_fetchMore(vtbl: pointer, self: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
@@ -3268,8 +3226,8 @@ proc miqt_exec_callback_cQAbstractTableModel_fetchMore(vtbl: pointer, self: poin
 proc QAbstractTableModelcanFetchMore*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractTableModel_virtualbase_canFetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_canFetchMore(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
@@ -3278,8 +3236,8 @@ proc miqt_exec_callback_cQAbstractTableModel_canFetchMore(vtbl: pointer, self: p
 proc QAbstractTableModelsort*(self: gen_qabstractitemmodel_types.QAbstractTableModel, column: cint, order: cint): void =
   fcQAbstractTableModel_virtualbase_sort(self.h, column, cint(order))
 
-proc miqt_exec_callback_cQAbstractTableModel_sort(vtbl: pointer, self: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = column
   let slotval2 = cint(order)
@@ -3288,8 +3246,8 @@ proc miqt_exec_callback_cQAbstractTableModel_sort(vtbl: pointer, self: pointer, 
 proc QAbstractTableModelbuddy*(self: gen_qabstractitemmodel_types.QAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractTableModel_virtualbase_buddy(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractTableModel_buddy(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
@@ -3307,8 +3265,8 @@ proc QAbstractTableModelmatch*(self: gen_qabstractitemmodel_types.QAbstractTable
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractTableModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -3328,8 +3286,8 @@ proc miqt_exec_callback_cQAbstractTableModel_match(vtbl: pointer, self: pointer,
 proc QAbstractTableModelspan*(self: gen_qabstractitemmodel_types.QAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractTableModel_virtualbase_span(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractTableModel_span(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
@@ -3338,7 +3296,7 @@ proc miqt_exec_callback_cQAbstractTableModel_span(vtbl: pointer, self: pointer, 
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractTableModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): Table[cint,seq[byte]] =
+proc QAbstractTableModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractTableModel): Table[cint,seq[byte]] =
   var v_mm = fcQAbstractTableModel_virtualbase_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
@@ -3356,8 +3314,8 @@ proc QAbstractTableModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractT
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractTableModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -3375,28 +3333,28 @@ proc miqt_exec_callback_cQAbstractTableModel_roleNames(vtbl: pointer, self: poin
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QAbstractTableModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): bool =
+proc QAbstractTableModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractTableModel): bool =
   fcQAbstractTableModel_virtualbase_submit(self.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_submit(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QAbstractTableModelrevert*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc QAbstractTableModelrevert*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_virtualbase_revert(self.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_revert(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   vtbl[].revert(self)
 
 proc QAbstractTableModelevent*(self: gen_qabstractitemmodel_types.QAbstractTableModel, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractTableModel_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -3405,8 +3363,8 @@ proc miqt_exec_callback_cQAbstractTableModel_event(vtbl: pointer, self: pointer,
 proc QAbstractTableModeleventFilter*(self: gen_qabstractitemmodel_types.QAbstractTableModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractTableModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -3416,8 +3374,8 @@ proc miqt_exec_callback_cQAbstractTableModel_eventFilter(vtbl: pointer, self: po
 proc QAbstractTableModeltimerEvent*(self: gen_qabstractitemmodel_types.QAbstractTableModel, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQAbstractTableModel_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -3425,8 +3383,8 @@ proc miqt_exec_callback_cQAbstractTableModel_timerEvent(vtbl: pointer, self: poi
 proc QAbstractTableModelchildEvent*(self: gen_qabstractitemmodel_types.QAbstractTableModel, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAbstractTableModel_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -3434,8 +3392,8 @@ proc miqt_exec_callback_cQAbstractTableModel_childEvent(vtbl: pointer, self: poi
 proc QAbstractTableModelcustomEvent*(self: gen_qabstractitemmodel_types.QAbstractTableModel, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractTableModel_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -3443,8 +3401,8 @@ proc miqt_exec_callback_cQAbstractTableModel_customEvent(vtbl: pointer, self: po
 proc QAbstractTableModelconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractTableModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractTableModel_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -3452,19 +3410,19 @@ proc miqt_exec_callback_cQAbstractTableModel_connectNotify(vtbl: pointer, self: 
 proc QAbstractTableModeldisconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractTableModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractTableModel_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractTableModel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractTableModelVTable](vtbl)
+proc cQAbstractTableModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
   let self = QAbstractTableModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractTableModel* {.inheritable.} = ref object of QAbstractTableModel
   vtbl*: cQAbstractTableModelVTable
-method metaObject*(self: VirtualQAbstractTableModel, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAbstractTableModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractTableModelmetaObject(self[])
-proc miqt_exec_method_cQAbstractTableModel_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAbstractTableModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3472,30 +3430,30 @@ proc miqt_exec_method_cQAbstractTableModel_metaObject(vtbl: pointer, inst: point
 
 method metacast*(self: VirtualQAbstractTableModel, param1: cstring): pointer {.base.} =
   QAbstractTableModelmetacast(self[], param1)
-proc miqt_exec_method_cQAbstractTableModel_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAbstractTableModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAbstractTableModelmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAbstractTableModel_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method index*(self: VirtualQAbstractTableModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractTableModelindex(self[], row, column, parent)
-proc miqt_exec_method_cQAbstractTableModel_index(vtbl: pointer, inst: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.index(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3503,12 +3461,12 @@ proc miqt_exec_method_cQAbstractTableModel_index(vtbl: pointer, inst: pointer, r
 
 method sibling*(self: VirtualQAbstractTableModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractTableModelsibling(self[], row, column, idx)
-proc miqt_exec_method_cQAbstractTableModel_sibling(vtbl: pointer, inst: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
-  var virtualReturn = vtbl.sibling(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3516,47 +3474,47 @@ proc miqt_exec_method_cQAbstractTableModel_sibling(vtbl: pointer, inst: pointer,
 
 method dropMimeData*(self: VirtualQAbstractTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModeldropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractTableModel_dropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method flags*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   QAbstractTableModelflags(self[], index)
-proc miqt_exec_method_cQAbstractTableModel_flags(vtbl: pointer, inst: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.flags(slotval1)
+  var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
 method rowCount*(self: VirtualQAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   raiseAssert("missing implementation of QAbstractTableModel_virtualbase_rowCount")
-proc miqt_exec_method_cQAbstractTableModel_rowCount(vtbl: pointer, inst: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.rowCount(slotval1)
+  var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
 method columnCount*(self: VirtualQAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   raiseAssert("missing implementation of QAbstractTableModel_virtualbase_columnCount")
-proc miqt_exec_method_cQAbstractTableModel_columnCount(vtbl: pointer, inst: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_columnCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.columnCount(slotval1)
+  var virtualReturn = inst.columnCount(slotval1)
   virtualReturn
 
 method data*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
   raiseAssert("missing implementation of QAbstractTableModel_virtualbase_data")
-proc miqt_exec_method_cQAbstractTableModel_data(vtbl: pointer, inst: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
-  var virtualReturn = vtbl.data(slotval1, slotval2)
+  var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3564,22 +3522,22 @@ proc miqt_exec_method_cQAbstractTableModel_data(vtbl: pointer, inst: pointer, in
 
 method setData*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractTableModelsetData(self[], index, value, role)
-proc miqt_exec_method_cQAbstractTableModel_setData(vtbl: pointer, inst: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
-  var virtualReturn = vtbl.setData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
 method headerData*(self: VirtualQAbstractTableModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
   QAbstractTableModelheaderData(self[], section, orientation, role)
-proc miqt_exec_method_cQAbstractTableModel_headerData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = role
-  var virtualReturn = vtbl.headerData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3587,21 +3545,21 @@ proc miqt_exec_method_cQAbstractTableModel_headerData(vtbl: pointer, inst: point
 
 method setHeaderData*(self: VirtualQAbstractTableModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractTableModelsetHeaderData(self[], section, orientation, value, role)
-proc miqt_exec_method_cQAbstractTableModel_setHeaderData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
-  var virtualReturn = vtbl.setHeaderData(slotval1, slotval2, slotval3, slotval4)
+  var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 method itemData*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
   QAbstractTableModelitemData(self[], index)
-proc miqt_exec_method_cQAbstractTableModel_itemData(vtbl: pointer, inst: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.itemData(slotval1)
+  var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -3620,8 +3578,8 @@ proc miqt_exec_method_cQAbstractTableModel_itemData(vtbl: pointer, inst: pointer
 
 method setItemData*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
   QAbstractTableModelsetItemData(self[], index, roles)
-proc miqt_exec_method_cQAbstractTableModel_setItemData(vtbl: pointer, inst: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
@@ -3636,14 +3594,14 @@ proc miqt_exec_method_cQAbstractTableModel_setItemData(vtbl: pointer, inst: poin
   c_free(vroles_mm.keys)
   c_free(vroles_mm.values)
   let slotval2 = vrolesx_ret
-  var virtualReturn = vtbl.setItemData(slotval1, slotval2)
+  var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method mimeTypes*(self: VirtualQAbstractTableModel, ): seq[string] {.base.} =
+method mimeTypes*(self: VirtualQAbstractTableModel): seq[string] {.base.} =
   QAbstractTableModelmimeTypes(self[])
-proc miqt_exec_method_cQAbstractTableModel_mimeTypes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.mimeTypes()
+proc cQAbstractTableModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
@@ -3654,8 +3612,8 @@ proc miqt_exec_method_cQAbstractTableModel_mimeTypes(vtbl: pointer, inst: pointe
 
 method mimeData*(self: VirtualQAbstractTableModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QAbstractTableModelmimeData(self[], indexes)
-proc miqt_exec_method_cQAbstractTableModel_mimeData(vtbl: pointer, inst: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
@@ -3663,7 +3621,7 @@ proc miqt_exec_method_cQAbstractTableModel_mimeData(vtbl: pointer, inst: pointer
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
-  var virtualReturn = vtbl.mimeData(slotval1)
+  var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3671,123 +3629,123 @@ proc miqt_exec_method_cQAbstractTableModel_mimeData(vtbl: pointer, inst: pointer
 
 method canDropMimeData*(self: VirtualQAbstractTableModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelcanDropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractTableModel_canDropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQAbstractTableModel, ): cint {.base.} =
+method supportedDropActions*(self: VirtualQAbstractTableModel): cint {.base.} =
   QAbstractTableModelsupportedDropActions(self[])
-proc miqt_exec_method_cQAbstractTableModel_supportedDropActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.supportedDropActions()
+proc cQAbstractTableModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method supportedDragActions*(self: VirtualQAbstractTableModel, ): cint {.base.} =
+method supportedDragActions*(self: VirtualQAbstractTableModel): cint {.base.} =
   QAbstractTableModelsupportedDragActions(self[])
-proc miqt_exec_method_cQAbstractTableModel_supportedDragActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.supportedDragActions()
+proc cQAbstractTableModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
 method insertRows*(self: VirtualQAbstractTableModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelinsertRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractTableModel_insertRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method insertColumns*(self: VirtualQAbstractTableModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelinsertColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractTableModel_insertColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeRows*(self: VirtualQAbstractTableModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelremoveRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractTableModel_removeRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeColumns*(self: VirtualQAbstractTableModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelremoveColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractTableModel_removeColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method moveRows*(self: VirtualQAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractTableModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractTableModel_moveRows(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method moveColumns*(self: VirtualQAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractTableModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractTableModel_moveColumns(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method fetchMore*(self: VirtualQAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QAbstractTableModelfetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractTableModel_fetchMore(vtbl: pointer, inst: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  vtbl.fetchMore(slotval1)
+  inst.fetchMore(slotval1)
 
 method canFetchMore*(self: VirtualQAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractTableModelcanFetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractTableModel_canFetchMore(vtbl: pointer, inst: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canFetchMore(slotval1)
+  var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
 method sort*(self: VirtualQAbstractTableModel, column: cint, order: cint): void {.base.} =
   QAbstractTableModelsort(self[], column, order)
-proc miqt_exec_method_cQAbstractTableModel_sort(vtbl: pointer, inst: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
-  vtbl.sort(slotval1, slotval2)
+  inst.sort(slotval1, slotval2)
 
 method buddy*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractTableModelbuddy(self[], index)
-proc miqt_exec_method_cQAbstractTableModel_buddy(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.buddy(slotval1)
+  var virtualReturn = inst.buddy(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -3795,14 +3753,14 @@ proc miqt_exec_method_cQAbstractTableModel_buddy(vtbl: pointer, inst: pointer, i
 
 method match*(self: VirtualQAbstractTableModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
   QAbstractTableModelmatch(self[], start, role, value, hits, flags)
-proc miqt_exec_method_cQAbstractTableModel_match(vtbl: pointer, inst: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
-  var virtualReturn = vtbl.match(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -3814,20 +3772,20 @@ proc miqt_exec_method_cQAbstractTableModel_match(vtbl: pointer, inst: pointer, s
 
 method span*(self: VirtualQAbstractTableModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
   QAbstractTableModelspan(self[], index)
-proc miqt_exec_method_cQAbstractTableModel_span(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.span(slotval1)
+  var virtualReturn = inst.span(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method roleNames*(self: VirtualQAbstractTableModel, ): Table[cint,seq[byte]] {.base.} =
+method roleNames*(self: VirtualQAbstractTableModel): Table[cint,seq[byte]] {.base.} =
   QAbstractTableModelroleNames(self[])
-proc miqt_exec_method_cQAbstractTableModel_roleNames(vtbl: pointer, inst: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.roleNames()
+proc cQAbstractTableModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -3843,72 +3801,72 @@ proc miqt_exec_method_cQAbstractTableModel_roleNames(vtbl: pointer, inst: pointe
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method submit*(self: VirtualQAbstractTableModel, ): bool {.base.} =
+method submit*(self: VirtualQAbstractTableModel): bool {.base.} =
   QAbstractTableModelsubmit(self[])
-proc miqt_exec_method_cQAbstractTableModel_submit(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  var virtualReturn = vtbl.submit()
+proc cQAbstractTableModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQAbstractTableModel, ): void {.base.} =
+method revert*(self: VirtualQAbstractTableModel): void {.base.} =
   QAbstractTableModelrevert(self[])
-proc miqt_exec_method_cQAbstractTableModel_revert(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-  vtbl.revert()
+proc cQAbstractTableModel_method_callback_revert(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
+  inst.revert()
 
 method event*(self: VirtualQAbstractTableModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractTableModelevent(self[], event)
-proc miqt_exec_method_cQAbstractTableModel_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAbstractTableModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractTableModeleventFilter(self[], watched, event)
-proc miqt_exec_method_cQAbstractTableModel_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQAbstractTableModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAbstractTableModeltimerEvent(self[], event)
-proc miqt_exec_method_cQAbstractTableModel_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAbstractTableModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractTableModelchildEvent(self[], event)
-proc miqt_exec_method_cQAbstractTableModel_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractTableModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractTableModelcustomEvent(self[], event)
-proc miqt_exec_method_cQAbstractTableModel_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractTableModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractTableModelconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractTableModel_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractTableModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractTableModeldisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractTableModel_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractTableModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
+proc cQAbstractTableModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractTableModel](fcQAbstractTableModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
@@ -3927,43 +3885,43 @@ proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractTableModel, row: ci
 proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractTableModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
 
-proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endInsertRows(self.h)
 
 proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractTableModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
 
-proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endRemoveRows(self.h)
 
 proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
   fcQAbstractTableModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
 
-proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endMoveRows(self.h)
 
 proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractTableModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
 
-proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endInsertColumns(self.h)
 
 proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractTableModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
 
-proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endRemoveColumns(self.h)
 
 proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
   fcQAbstractTableModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
 
-proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endMoveColumns(self.h)
 
-proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_beginResetModel(self.h)
 
-proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): void =
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractTableModel): void =
   fcQAbstractTableModel_protectedbase_endResetModel(self.h)
 
 proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -3980,7 +3938,7 @@ proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTabl
 
   fcQAbstractTableModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
 
-proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTableModel): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQAbstractTableModel_protectedbase_persistentIndexList(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -3989,10 +3947,10 @@ proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractTableModel
   c_free(v_ma.data)
   vx_ret
 
-proc sender*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractTableModel): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractTableModel_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel, ): cint =
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractTableModel): cint =
   fcQAbstractTableModel_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstractitemmodel_types.QAbstractTableModel, signal: cstring): cint =
@@ -4005,299 +3963,253 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
     vtbl: ref QAbstractTableModelVTable = nil): gen_qabstractitemmodel_types.QAbstractTableModel =
   let vtbl = if vtbl == nil: new QAbstractTableModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTableModelVTable, _: ptr cQAbstractTableModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractTableModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractTableModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractTableModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractTableModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractTableModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractTableModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractTableModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractTableModel_index
+    vtbl[].vtbl.index = cQAbstractTableModel_vtable_callback_index
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractTableModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractTableModel_vtable_callback_sibling
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractTableModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractTableModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractTableModel_flags
+    vtbl[].vtbl.flags = cQAbstractTableModel_vtable_callback_flags
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractTableModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractTableModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = miqt_exec_callback_cQAbstractTableModel_columnCount
+    vtbl[].vtbl.columnCount = cQAbstractTableModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractTableModel_data
+    vtbl[].vtbl.data = cQAbstractTableModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractTableModel_setData
+    vtbl[].vtbl.setData = cQAbstractTableModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractTableModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractTableModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractTableModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractTableModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractTableModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractTableModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractTableModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractTableModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractTableModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractTableModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractTableModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractTableModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractTableModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractTableModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractTableModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractTableModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractTableModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractTableModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractTableModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractTableModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractTableModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractTableModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractTableModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractTableModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractTableModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractTableModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractTableModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractTableModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractTableModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractTableModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractTableModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractTableModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractTableModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractTableModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractTableModel_sort
+    vtbl[].vtbl.sort = cQAbstractTableModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractTableModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractTableModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractTableModel_match
+    vtbl[].vtbl.match = cQAbstractTableModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractTableModel_span
+    vtbl[].vtbl.span = cQAbstractTableModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractTableModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractTableModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractTableModel_submit
+    vtbl[].vtbl.submit = cQAbstractTableModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractTableModel_revert
+    vtbl[].vtbl.revert = cQAbstractTableModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractTableModel_event
+    vtbl[].vtbl.event = cQAbstractTableModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractTableModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractTableModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractTableModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractTableModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractTableModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractTableModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractTableModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractTableModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractTableModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractTableModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractTableModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractTableModel(h: fcQAbstractTableModel_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractTableModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractTableModel(h: fcQAbstractTableModel_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAbstractTableModelVTable = nil): gen_qabstractitemmodel_types.QAbstractTableModel =
   let vtbl = if vtbl == nil: new QAbstractTableModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTableModelVTable, _: ptr cQAbstractTableModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractTableModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractTableModelVTable](fcQAbstractTableModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractTableModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractTableModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractTableModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractTableModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractTableModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractTableModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractTableModel_index
+    vtbl[].vtbl.index = cQAbstractTableModel_vtable_callback_index
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractTableModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractTableModel_vtable_callback_sibling
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractTableModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractTableModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractTableModel_flags
+    vtbl[].vtbl.flags = cQAbstractTableModel_vtable_callback_flags
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractTableModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractTableModel_vtable_callback_rowCount
   if not isNil(vtbl[].columnCount):
-    vtbl[].vtbl.columnCount = miqt_exec_callback_cQAbstractTableModel_columnCount
+    vtbl[].vtbl.columnCount = cQAbstractTableModel_vtable_callback_columnCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractTableModel_data
+    vtbl[].vtbl.data = cQAbstractTableModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractTableModel_setData
+    vtbl[].vtbl.setData = cQAbstractTableModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractTableModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractTableModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractTableModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractTableModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractTableModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractTableModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractTableModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractTableModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractTableModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractTableModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractTableModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractTableModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractTableModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractTableModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractTableModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractTableModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractTableModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractTableModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractTableModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractTableModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractTableModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractTableModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractTableModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractTableModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractTableModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractTableModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractTableModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractTableModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractTableModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractTableModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractTableModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractTableModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractTableModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractTableModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractTableModel_sort
+    vtbl[].vtbl.sort = cQAbstractTableModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractTableModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractTableModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractTableModel_match
+    vtbl[].vtbl.match = cQAbstractTableModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractTableModel_span
+    vtbl[].vtbl.span = cQAbstractTableModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractTableModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractTableModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractTableModel_submit
+    vtbl[].vtbl.submit = cQAbstractTableModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractTableModel_revert
+    vtbl[].vtbl.revert = cQAbstractTableModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractTableModel_event
+    vtbl[].vtbl.event = cQAbstractTableModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractTableModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractTableModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractTableModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractTableModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractTableModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractTableModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractTableModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractTableModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractTableModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractTableModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractTableModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractTableModel(h: fcQAbstractTableModel_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractTableModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractTableModel(h: fcQAbstractTableModel_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQAbstractTableModel_mvtbl = cQAbstractTableModelVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractTableModel()[])](self.fcQAbstractTableModel_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAbstractTableModel_method_callback_metaObject,
+  metacast: cQAbstractTableModel_method_callback_metacast,
+  metacall: cQAbstractTableModel_method_callback_metacall,
+  index: cQAbstractTableModel_method_callback_index,
+  sibling: cQAbstractTableModel_method_callback_sibling,
+  dropMimeData: cQAbstractTableModel_method_callback_dropMimeData,
+  flags: cQAbstractTableModel_method_callback_flags,
+  rowCount: cQAbstractTableModel_method_callback_rowCount,
+  columnCount: cQAbstractTableModel_method_callback_columnCount,
+  data: cQAbstractTableModel_method_callback_data,
+  setData: cQAbstractTableModel_method_callback_setData,
+  headerData: cQAbstractTableModel_method_callback_headerData,
+  setHeaderData: cQAbstractTableModel_method_callback_setHeaderData,
+  itemData: cQAbstractTableModel_method_callback_itemData,
+  setItemData: cQAbstractTableModel_method_callback_setItemData,
+  mimeTypes: cQAbstractTableModel_method_callback_mimeTypes,
+  mimeData: cQAbstractTableModel_method_callback_mimeData,
+  canDropMimeData: cQAbstractTableModel_method_callback_canDropMimeData,
+  supportedDropActions: cQAbstractTableModel_method_callback_supportedDropActions,
+  supportedDragActions: cQAbstractTableModel_method_callback_supportedDragActions,
+  insertRows: cQAbstractTableModel_method_callback_insertRows,
+  insertColumns: cQAbstractTableModel_method_callback_insertColumns,
+  removeRows: cQAbstractTableModel_method_callback_removeRows,
+  removeColumns: cQAbstractTableModel_method_callback_removeColumns,
+  moveRows: cQAbstractTableModel_method_callback_moveRows,
+  moveColumns: cQAbstractTableModel_method_callback_moveColumns,
+  fetchMore: cQAbstractTableModel_method_callback_fetchMore,
+  canFetchMore: cQAbstractTableModel_method_callback_canFetchMore,
+  sort: cQAbstractTableModel_method_callback_sort,
+  buddy: cQAbstractTableModel_method_callback_buddy,
+  match: cQAbstractTableModel_method_callback_match,
+  span: cQAbstractTableModel_method_callback_span,
+  roleNames: cQAbstractTableModel_method_callback_roleNames,
+  submit: cQAbstractTableModel_method_callback_submit,
+  revert: cQAbstractTableModel_method_callback_revert,
+  event: cQAbstractTableModel_method_callback_event,
+  eventFilter: cQAbstractTableModel_method_callback_eventFilter,
+  timerEvent: cQAbstractTableModel_method_callback_timerEvent,
+  childEvent: cQAbstractTableModel_method_callback_childEvent,
+  customEvent: cQAbstractTableModel_method_callback_customEvent,
+  connectNotify: cQAbstractTableModel_method_callback_connectNotify,
+  disconnectNotify: cQAbstractTableModel_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
-    vtbl: VirtualQAbstractTableModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTableModelVTable, _: ptr cQAbstractTableModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractTableModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractTableModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractTableModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractTableModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractTableModel_index
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractTableModel_sibling
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractTableModel_dropMimeData
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractTableModel_flags
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractTableModel_rowCount
-  vtbl[].vtbl.columnCount = miqt_exec_method_cQAbstractTableModel_columnCount
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractTableModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractTableModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractTableModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractTableModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractTableModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractTableModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractTableModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractTableModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractTableModel_canDropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractTableModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractTableModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractTableModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractTableModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractTableModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractTableModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractTableModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractTableModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractTableModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractTableModel_canFetchMore
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractTableModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractTableModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractTableModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractTableModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractTableModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractTableModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractTableModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractTableModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractTableModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractTableModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractTableModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractTableModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractTableModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractTableModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractTableModel_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAbstractTableModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractTableModel_new(addr(cQAbstractTableModel_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractTableModel,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAbstractTableModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractTableModelVTable, _: ptr cQAbstractTableModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractTableModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractTableModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractTableModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractTableModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractTableModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractTableModel_index
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractTableModel_sibling
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractTableModel_dropMimeData
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractTableModel_flags
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractTableModel_rowCount
-  vtbl[].vtbl.columnCount = miqt_exec_method_cQAbstractTableModel_columnCount
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractTableModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractTableModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractTableModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractTableModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractTableModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractTableModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractTableModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractTableModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractTableModel_canDropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractTableModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractTableModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractTableModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractTableModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractTableModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractTableModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractTableModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractTableModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractTableModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractTableModel_canFetchMore
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractTableModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractTableModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractTableModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractTableModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractTableModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractTableModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractTableModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractTableModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractTableModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractTableModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractTableModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractTableModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractTableModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractTableModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractTableModel_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAbstractTableModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractTableModel_new2(addr(cQAbstractTableModel_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractTableModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractTableModel_staticMetaObject())
-proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractListModel_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cstring): pointer =
@@ -4438,11 +4350,11 @@ type QAbstractListModelVTable* {.inheritable, pure.} = object
   customEvent*: QAbstractListModelcustomEventProc
   connectNotify*: QAbstractListModelconnectNotifyProc
   disconnectNotify*: QAbstractListModeldisconnectNotifyProc
-proc QAbstractListModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_qobjectdefs_types.QMetaObject =
+proc QAbstractListModelmetaObject*(self: gen_qabstractitemmodel_types.QAbstractListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractListModel_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQAbstractListModel_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -4453,8 +4365,8 @@ proc miqt_exec_callback_cQAbstractListModel_metaObject(vtbl: pointer, self: poin
 proc QAbstractListModelmetacast*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cstring): pointer =
   fcQAbstractListModel_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQAbstractListModel_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -4463,8 +4375,8 @@ proc miqt_exec_callback_cQAbstractListModel_metacast(vtbl: pointer, self: pointe
 proc QAbstractListModelmetacall*(self: gen_qabstractitemmodel_types.QAbstractListModel, param1: cint, param2: cint, param3: pointer): cint =
   fcQAbstractListModel_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQAbstractListModel_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -4475,8 +4387,8 @@ proc miqt_exec_callback_cQAbstractListModel_metacall(vtbl: pointer, self: pointe
 proc QAbstractListModelindex*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_virtualbase_index(self.h, row, column, parent.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractListModel_index(vtbl: pointer, self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -4490,8 +4402,8 @@ proc miqt_exec_callback_cQAbstractListModel_index(vtbl: pointer, self: pointer, 
 proc QAbstractListModelsibling*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_virtualbase_sibling(self.h, row, column, idx.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractListModel_sibling(vtbl: pointer, self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = row
   let slotval2 = column
@@ -4505,8 +4417,8 @@ proc miqt_exec_callback_cQAbstractListModel_sibling(vtbl: pointer, self: pointer
 proc QAbstractListModeldropMimeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_dropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_dropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -4519,22 +4431,22 @@ proc miqt_exec_callback_cQAbstractListModel_dropMimeData(vtbl: pointer, self: po
 proc QAbstractListModelflags*(self: gen_qabstractitemmodel_types.QAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): cint =
   cint(fcQAbstractListModel_virtualbase_flags(self.h, index.h))
 
-proc miqt_exec_callback_cQAbstractListModel_flags(vtbl: pointer, self: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].flags(self, slotval1)
   cint(virtualReturn)
 
-proc miqt_exec_callback_cQAbstractListModel_rowCount(vtbl: pointer, self: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].rowCount(self, slotval1)
   virtualReturn
 
-proc miqt_exec_callback_cQAbstractListModel_data(vtbl: pointer, self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
@@ -4547,8 +4459,8 @@ proc miqt_exec_callback_cQAbstractListModel_data(vtbl: pointer, self: pointer, i
 proc QAbstractListModelsetData*(self: gen_qabstractitemmodel_types.QAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractListModel_virtualbase_setData(self.h, index.h, value.h, role)
 
-proc miqt_exec_callback_cQAbstractListModel_setData(vtbl: pointer, self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
@@ -4559,8 +4471,8 @@ proc miqt_exec_callback_cQAbstractListModel_setData(vtbl: pointer, self: pointer
 proc QAbstractListModelheaderData*(self: gen_qabstractitemmodel_types.QAbstractListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQAbstractListModel_virtualbase_headerData(self.h, section, cint(orientation), role), owned: true)
 
-proc miqt_exec_callback_cQAbstractListModel_headerData(vtbl: pointer, self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -4574,8 +4486,8 @@ proc miqt_exec_callback_cQAbstractListModel_headerData(vtbl: pointer, self: poin
 proc QAbstractListModelsetHeaderData*(self: gen_qabstractitemmodel_types.QAbstractListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool =
   fcQAbstractListModel_virtualbase_setHeaderData(self.h, section, cint(orientation), value.h, role)
 
-proc miqt_exec_callback_cQAbstractListModel_setHeaderData(vtbl: pointer, self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = section
   let slotval2 = cint(orientation)
@@ -4599,8 +4511,8 @@ proc QAbstractListModelitemData*(self: gen_qabstractitemmodel_types.QAbstractLis
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractListModel_itemData(vtbl: pointer, self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].itemData(self, slotval1)
@@ -4634,8 +4546,8 @@ proc QAbstractListModelsetItemData*(self: gen_qabstractitemmodel_types.QAbstract
 
   fcQAbstractListModel_virtualbase_setItemData(self.h, index.h, struct_miqt_map(len: csize_t(len(roles)),keys: if len(roles) == 0: nil else: addr(roles_Keys_CArray[0]), values: if len(roles) == 0: nil else: addr(roles_Values_CArray[0]),))
 
-proc miqt_exec_callback_cQAbstractListModel_setItemData(vtbl: pointer, self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
@@ -4654,7 +4566,7 @@ proc miqt_exec_callback_cQAbstractListModel_setItemData(vtbl: pointer, self: poi
   var virtualReturn = vtbl[].setItemData(self, slotval1, slotval2)
   virtualReturn
 
-proc QAbstractListModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): seq[string] =
+proc QAbstractListModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractListModel): seq[string] =
   var v_ma = fcQAbstractListModel_virtualbase_mimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -4666,8 +4578,8 @@ proc QAbstractListModelmimeTypes*(self: gen_qabstractitemmodel_types.QAbstractLi
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractListModel_mimeTypes(vtbl: pointer, self: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].mimeTypes(self)
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
@@ -4685,8 +4597,8 @@ proc QAbstractListModelmimeData*(self: gen_qabstractitemmodel_types.QAbstractLis
 
   gen_qmimedata_types.QMimeData(h: fcQAbstractListModel_virtualbase_mimeData(self.h, struct_miqt_array(len: csize_t(len(indexes)), data: if len(indexes) == 0: nil else: addr(indexes_CArray[0]))), owned: false)
 
-proc miqt_exec_callback_cQAbstractListModel_mimeData(vtbl: pointer, self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
@@ -4704,8 +4616,8 @@ proc miqt_exec_callback_cQAbstractListModel_mimeData(vtbl: pointer, self: pointe
 proc QAbstractListModelcanDropMimeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_canDropMimeData(self.h, data.h, cint(action), row, column, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_canDropMimeData(vtbl: pointer, self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
@@ -4715,20 +4627,20 @@ proc miqt_exec_callback_cQAbstractListModel_canDropMimeData(vtbl: pointer, self:
   var virtualReturn = vtbl[].canDropMimeData(self, slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-proc QAbstractListModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): cint =
+proc QAbstractListModelsupportedDropActions*(self: gen_qabstractitemmodel_types.QAbstractListModel): cint =
   cint(fcQAbstractListModel_virtualbase_supportedDropActions(self.h))
 
-proc miqt_exec_callback_cQAbstractListModel_supportedDropActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].supportedDropActions(self)
   cint(virtualReturn)
 
-proc QAbstractListModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): cint =
+proc QAbstractListModelsupportedDragActions*(self: gen_qabstractitemmodel_types.QAbstractListModel): cint =
   cint(fcQAbstractListModel_virtualbase_supportedDragActions(self.h))
 
-proc miqt_exec_callback_cQAbstractListModel_supportedDragActions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].supportedDragActions(self)
   cint(virtualReturn)
@@ -4736,8 +4648,8 @@ proc miqt_exec_callback_cQAbstractListModel_supportedDragActions(vtbl: pointer, 
 proc QAbstractListModelinsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_insertRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_insertRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -4748,8 +4660,8 @@ proc miqt_exec_callback_cQAbstractListModel_insertRows(vtbl: pointer, self: poin
 proc QAbstractListModelinsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_insertColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_insertColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -4760,8 +4672,8 @@ proc miqt_exec_callback_cQAbstractListModel_insertColumns(vtbl: pointer, self: p
 proc QAbstractListModelremoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_removeRows(self.h, row, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_removeRows(vtbl: pointer, self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = row
   let slotval2 = count
@@ -4772,8 +4684,8 @@ proc miqt_exec_callback_cQAbstractListModel_removeRows(vtbl: pointer, self: poin
 proc QAbstractListModelremoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_removeColumns(self.h, column, count, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_removeColumns(vtbl: pointer, self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = column
   let slotval2 = count
@@ -4784,8 +4696,8 @@ proc miqt_exec_callback_cQAbstractListModel_removeColumns(vtbl: pointer, self: p
 proc QAbstractListModelmoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractListModel_virtualbase_moveRows(self.h, sourceParent.h, sourceRow, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractListModel_moveRows(vtbl: pointer, self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
@@ -4798,8 +4710,8 @@ proc miqt_exec_callback_cQAbstractListModel_moveRows(vtbl: pointer, self: pointe
 proc QAbstractListModelmoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool =
   fcQAbstractListModel_virtualbase_moveColumns(self.h, sourceParent.h, sourceColumn, count, destinationParent.h, destinationChild)
 
-proc miqt_exec_callback_cQAbstractListModel_moveColumns(vtbl: pointer, self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
@@ -4812,8 +4724,8 @@ proc miqt_exec_callback_cQAbstractListModel_moveColumns(vtbl: pointer, self: poi
 proc QAbstractListModelfetchMore*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex): void =
   fcQAbstractListModel_virtualbase_fetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_fetchMore(vtbl: pointer, self: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   vtbl[].fetchMore(self, slotval1)
@@ -4821,8 +4733,8 @@ proc miqt_exec_callback_cQAbstractListModel_fetchMore(vtbl: pointer, self: point
 proc QAbstractListModelcanFetchMore*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool =
   fcQAbstractListModel_virtualbase_canFetchMore(self.h, parent.h)
 
-proc miqt_exec_callback_cQAbstractListModel_canFetchMore(vtbl: pointer, self: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
   var virtualReturn = vtbl[].canFetchMore(self, slotval1)
@@ -4831,8 +4743,8 @@ proc miqt_exec_callback_cQAbstractListModel_canFetchMore(vtbl: pointer, self: po
 proc QAbstractListModelsort*(self: gen_qabstractitemmodel_types.QAbstractListModel, column: cint, order: cint): void =
   fcQAbstractListModel_virtualbase_sort(self.h, column, cint(order))
 
-proc miqt_exec_callback_cQAbstractListModel_sort(vtbl: pointer, self: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = column
   let slotval2 = cint(order)
@@ -4841,8 +4753,8 @@ proc miqt_exec_callback_cQAbstractListModel_sort(vtbl: pointer, self: pointer, c
 proc QAbstractListModelbuddy*(self: gen_qabstractitemmodel_types.QAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex =
   gen_qabstractitemmodel_types.QModelIndex(h: fcQAbstractListModel_virtualbase_buddy(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractListModel_buddy(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].buddy(self, slotval1)
@@ -4860,8 +4772,8 @@ proc QAbstractListModelmatch*(self: gen_qabstractitemmodel_types.QAbstractListMo
   c_free(v_ma.data)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractListModel_match(vtbl: pointer, self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
@@ -4881,8 +4793,8 @@ proc miqt_exec_callback_cQAbstractListModel_match(vtbl: pointer, self: pointer, 
 proc QAbstractListModelspan*(self: gen_qabstractitemmodel_types.QAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize =
   gen_qsize_types.QSize(h: fcQAbstractListModel_virtualbase_span(self.h, index.h), owned: true)
 
-proc miqt_exec_callback_cQAbstractListModel_span(vtbl: pointer, self: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var virtualReturn = vtbl[].span(self, slotval1)
@@ -4891,7 +4803,7 @@ proc miqt_exec_callback_cQAbstractListModel_span(vtbl: pointer, self: pointer, i
   virtualReturn.h = nil
   virtualReturn_h
 
-proc QAbstractListModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): Table[cint,seq[byte]] =
+proc QAbstractListModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractListModel): Table[cint,seq[byte]] =
   var v_mm = fcQAbstractListModel_virtualbase_roleNames(self.h)
   var vx_ret: Table[cint, seq[byte]]
   var v_Keys = cast[ptr UncheckedArray[cint]](v_mm.keys)
@@ -4909,8 +4821,8 @@ proc QAbstractListModelroleNames*(self: gen_qabstractitemmodel_types.QAbstractLi
   c_free(v_mm.values)
   vx_ret
 
-proc miqt_exec_callback_cQAbstractListModel_roleNames(vtbl: pointer, self: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].roleNames(self)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
@@ -4928,28 +4840,28 @@ proc miqt_exec_callback_cQAbstractListModel_roleNames(vtbl: pointer, self: point
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-proc QAbstractListModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): bool =
+proc QAbstractListModelsubmit*(self: gen_qabstractitemmodel_types.QAbstractListModel): bool =
   fcQAbstractListModel_virtualbase_submit(self.h)
 
-proc miqt_exec_callback_cQAbstractListModel_submit(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_submit(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   var virtualReturn = vtbl[].submit(self)
   virtualReturn
 
-proc QAbstractListModelrevert*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc QAbstractListModelrevert*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_virtualbase_revert(self.h)
 
-proc miqt_exec_callback_cQAbstractListModel_revert(vtbl: pointer, self: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_revert(self: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   vtbl[].revert(self)
 
 proc QAbstractListModelevent*(self: gen_qabstractitemmodel_types.QAbstractListModel, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractListModel_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractListModel_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -4958,8 +4870,8 @@ proc miqt_exec_callback_cQAbstractListModel_event(vtbl: pointer, self: pointer, 
 proc QAbstractListModeleventFilter*(self: gen_qabstractitemmodel_types.QAbstractListModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQAbstractListModel_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQAbstractListModel_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -4969,8 +4881,8 @@ proc miqt_exec_callback_cQAbstractListModel_eventFilter(vtbl: pointer, self: poi
 proc QAbstractListModeltimerEvent*(self: gen_qabstractitemmodel_types.QAbstractListModel, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQAbstractListModel_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractListModel_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -4978,8 +4890,8 @@ proc miqt_exec_callback_cQAbstractListModel_timerEvent(vtbl: pointer, self: poin
 proc QAbstractListModelchildEvent*(self: gen_qabstractitemmodel_types.QAbstractListModel, event: gen_qcoreevent_types.QChildEvent): void =
   fcQAbstractListModel_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractListModel_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -4987,8 +4899,8 @@ proc miqt_exec_callback_cQAbstractListModel_childEvent(vtbl: pointer, self: poin
 proc QAbstractListModelcustomEvent*(self: gen_qabstractitemmodel_types.QAbstractListModel, event: gen_qcoreevent_types.QEvent): void =
   fcQAbstractListModel_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQAbstractListModel_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -4996,8 +4908,8 @@ proc miqt_exec_callback_cQAbstractListModel_customEvent(vtbl: pointer, self: poi
 proc QAbstractListModelconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractListModel_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractListModel_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -5005,19 +4917,19 @@ proc miqt_exec_callback_cQAbstractListModel_connectNotify(vtbl: pointer, self: p
 proc QAbstractListModeldisconnectNotify*(self: gen_qabstractitemmodel_types.QAbstractListModel, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQAbstractListModel_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQAbstractListModel_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QAbstractListModelVTable](vtbl)
+proc cQAbstractListModel_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
   let self = QAbstractListModel(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQAbstractListModel* {.inheritable.} = ref object of QAbstractListModel
   vtbl*: cQAbstractListModelVTable
-method metaObject*(self: VirtualQAbstractListModel, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQAbstractListModel): gen_qobjectdefs_types.QMetaObject {.base.} =
   QAbstractListModelmetaObject(self[])
-proc miqt_exec_method_cQAbstractListModel_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQAbstractListModel_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5025,30 +4937,30 @@ proc miqt_exec_method_cQAbstractListModel_metaObject(vtbl: pointer, inst: pointe
 
 method metacast*(self: VirtualQAbstractListModel, param1: cstring): pointer {.base.} =
   QAbstractListModelmetacast(self[], param1)
-proc miqt_exec_method_cQAbstractListModel_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQAbstractListModel, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QAbstractListModelmetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQAbstractListModel_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
 method index*(self: VirtualQAbstractListModel, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractListModelindex(self[], row, column, parent)
-proc miqt_exec_method_cQAbstractListModel_index(vtbl: pointer, inst: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_index(self: pointer, row: cint, column: cint, parent: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.index(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.index(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5056,12 +4968,12 @@ proc miqt_exec_method_cQAbstractListModel_index(vtbl: pointer, inst: pointer, ro
 
 method sibling*(self: VirtualQAbstractListModel, row: cint, column: cint, idx: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractListModelsibling(self[], row, column, idx)
-proc miqt_exec_method_cQAbstractListModel_sibling(vtbl: pointer, inst: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_sibling(self: pointer, row: cint, column: cint, idx: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = row
   let slotval2 = column
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: idx, owned: false)
-  var virtualReturn = vtbl.sibling(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.sibling(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5069,39 +4981,39 @@ proc miqt_exec_method_cQAbstractListModel_sibling(vtbl: pointer, inst: pointer, 
 
 method dropMimeData*(self: VirtualQAbstractListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModeldropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractListModel_dropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_dropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.dropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method flags*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   QAbstractListModelflags(self[], index)
-proc miqt_exec_method_cQAbstractListModel_flags(vtbl: pointer, inst: pointer, index: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_flags(self: pointer, index: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.flags(slotval1)
+  var virtualReturn = inst.flags(slotval1)
   cint(virtualReturn)
 
 method rowCount*(self: VirtualQAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex): cint {.base.} =
   raiseAssert("missing implementation of QAbstractListModel_virtualbase_rowCount")
-proc miqt_exec_method_cQAbstractListModel_rowCount(vtbl: pointer, inst: pointer, parent: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_rowCount(self: pointer, parent: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.rowCount(slotval1)
+  var virtualReturn = inst.rowCount(slotval1)
   virtualReturn
 
 method data*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex, role: cint): gen_qvariant_types.QVariant {.base.} =
   raiseAssert("missing implementation of QAbstractListModel_virtualbase_data")
-proc miqt_exec_method_cQAbstractListModel_data(vtbl: pointer, inst: pointer, index: pointer, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_data(self: pointer, index: pointer, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = role
-  var virtualReturn = vtbl.data(slotval1, slotval2)
+  var virtualReturn = inst.data(slotval1, slotval2)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5109,22 +5021,22 @@ proc miqt_exec_method_cQAbstractListModel_data(vtbl: pointer, inst: pointer, ind
 
 method setData*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractListModelsetData(self[], index, value, role)
-proc miqt_exec_method_cQAbstractListModel_setData(vtbl: pointer, inst: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_setData(self: pointer, index: pointer, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   let slotval2 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval3 = role
-  var virtualReturn = vtbl.setData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.setData(slotval1, slotval2, slotval3)
   virtualReturn
 
 method headerData*(self: VirtualQAbstractListModel, section: cint, orientation: cint, role: cint): gen_qvariant_types.QVariant {.base.} =
   QAbstractListModelheaderData(self[], section, orientation, role)
-proc miqt_exec_method_cQAbstractListModel_headerData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_headerData(self: pointer, section: cint, orientation: cint, role: cint): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = role
-  var virtualReturn = vtbl.headerData(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.headerData(slotval1, slotval2, slotval3)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5132,21 +5044,21 @@ proc miqt_exec_method_cQAbstractListModel_headerData(vtbl: pointer, inst: pointe
 
 method setHeaderData*(self: VirtualQAbstractListModel, section: cint, orientation: cint, value: gen_qvariant_types.QVariant, role: cint): bool {.base.} =
   QAbstractListModelsetHeaderData(self[], section, orientation, value, role)
-proc miqt_exec_method_cQAbstractListModel_setHeaderData(vtbl: pointer, inst: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_setHeaderData(self: pointer, section: cint, orientation: cint, value: pointer, role: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = section
   let slotval2 = cint(orientation)
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = role
-  var virtualReturn = vtbl.setHeaderData(slotval1, slotval2, slotval3, slotval4)
+  var virtualReturn = inst.setHeaderData(slotval1, slotval2, slotval3, slotval4)
   virtualReturn
 
 method itemData*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): Table[cint,gen_qvariant_types.QVariant] {.base.} =
   QAbstractListModelitemData(self[], index)
-proc miqt_exec_method_cQAbstractListModel_itemData(vtbl: pointer, inst: pointer, index: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_itemData(self: pointer, index: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.itemData(slotval1)
+  var virtualReturn = inst.itemData(slotval1)
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(pointer) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -5165,8 +5077,8 @@ proc miqt_exec_method_cQAbstractListModel_itemData(vtbl: pointer, inst: pointer,
 
 method setItemData*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex, roles: Table[cint,gen_qvariant_types.QVariant]): bool {.base.} =
   QAbstractListModelsetItemData(self[], index, roles)
-proc miqt_exec_method_cQAbstractListModel_setItemData(vtbl: pointer, inst: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_setItemData(self: pointer, index: pointer, roles: struct_miqt_map): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
   var vroles_mm = roles
   var vrolesx_ret: Table[cint, gen_qvariant_types.QVariant]
@@ -5181,14 +5093,14 @@ proc miqt_exec_method_cQAbstractListModel_setItemData(vtbl: pointer, inst: point
   c_free(vroles_mm.keys)
   c_free(vroles_mm.values)
   let slotval2 = vrolesx_ret
-  var virtualReturn = vtbl.setItemData(slotval1, slotval2)
+  var virtualReturn = inst.setItemData(slotval1, slotval2)
   virtualReturn
 
-method mimeTypes*(self: VirtualQAbstractListModel, ): seq[string] {.base.} =
+method mimeTypes*(self: VirtualQAbstractListModel): seq[string] {.base.} =
   QAbstractListModelmimeTypes(self[])
-proc miqt_exec_method_cQAbstractListModel_mimeTypes(vtbl: pointer, inst: pointer): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.mimeTypes()
+proc cQAbstractListModel_method_callback_mimeTypes(self: pointer): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.mimeTypes()
   var virtualReturn_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     var virtualReturn_i_copy = cast[cstring](if len(virtualReturn[i]) > 0: c_malloc(csize_t(len(virtualReturn[i]))) else: nil)
@@ -5199,8 +5111,8 @@ proc miqt_exec_method_cQAbstractListModel_mimeTypes(vtbl: pointer, inst: pointer
 
 method mimeData*(self: VirtualQAbstractListModel, indexes: seq[gen_qabstractitemmodel_types.QModelIndex]): gen_qmimedata_types.QMimeData {.base.} =
   QAbstractListModelmimeData(self[], indexes)
-proc miqt_exec_method_cQAbstractListModel_mimeData(vtbl: pointer, inst: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_mimeData(self: pointer, indexes: struct_miqt_array): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   var vindexes_ma = indexes
   var vindexesx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(vindexes_ma.len))
   let vindexes_outCast = cast[ptr UncheckedArray[pointer]](vindexes_ma.data)
@@ -5208,7 +5120,7 @@ proc miqt_exec_method_cQAbstractListModel_mimeData(vtbl: pointer, inst: pointer,
     vindexesx_ret[i] = gen_qabstractitemmodel_types.QModelIndex(h: vindexes_outCast[i], owned: true)
   c_free(vindexes_ma.data)
   let slotval1 = vindexesx_ret
-  var virtualReturn = vtbl.mimeData(slotval1)
+  var virtualReturn = inst.mimeData(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5216,123 +5128,123 @@ proc miqt_exec_method_cQAbstractListModel_mimeData(vtbl: pointer, inst: pointer,
 
 method canDropMimeData*(self: VirtualQAbstractListModel, data: gen_qmimedata_types.QMimeData, action: cint, row: cint, column: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelcanDropMimeData(self[], data, action, row, column, parent)
-proc miqt_exec_method_cQAbstractListModel_canDropMimeData(vtbl: pointer, inst: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_canDropMimeData(self: pointer, data: pointer, action: cint, row: cint, column: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qmimedata_types.QMimeData(h: data, owned: false)
   let slotval2 = cint(action)
   let slotval3 = row
   let slotval4 = column
   let slotval5 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.canDropMimeData(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
-method supportedDropActions*(self: VirtualQAbstractListModel, ): cint {.base.} =
+method supportedDropActions*(self: VirtualQAbstractListModel): cint {.base.} =
   QAbstractListModelsupportedDropActions(self[])
-proc miqt_exec_method_cQAbstractListModel_supportedDropActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.supportedDropActions()
+proc cQAbstractListModel_method_callback_supportedDropActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.supportedDropActions()
   cint(virtualReturn)
 
-method supportedDragActions*(self: VirtualQAbstractListModel, ): cint {.base.} =
+method supportedDragActions*(self: VirtualQAbstractListModel): cint {.base.} =
   QAbstractListModelsupportedDragActions(self[])
-proc miqt_exec_method_cQAbstractListModel_supportedDragActions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.supportedDragActions()
+proc cQAbstractListModel_method_callback_supportedDragActions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.supportedDragActions()
   cint(virtualReturn)
 
 method insertRows*(self: VirtualQAbstractListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelinsertRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractListModel_insertRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_insertRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method insertColumns*(self: VirtualQAbstractListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelinsertColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractListModel_insertColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_insertColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.insertColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.insertColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeRows*(self: VirtualQAbstractListModel, row: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelremoveRows(self[], row, count, parent)
-proc miqt_exec_method_cQAbstractListModel_removeRows(vtbl: pointer, inst: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_removeRows(self: pointer, row: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = row
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeRows(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeRows(slotval1, slotval2, slotval3)
   virtualReturn
 
 method removeColumns*(self: VirtualQAbstractListModel, column: cint, count: cint, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelremoveColumns(self[], column, count, parent)
-proc miqt_exec_method_cQAbstractListModel_removeColumns(vtbl: pointer, inst: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_removeColumns(self: pointer, column: cint, count: cint, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = column
   let slotval2 = count
   let slotval3 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.removeColumns(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.removeColumns(slotval1, slotval2, slotval3)
   virtualReturn
 
 method moveRows*(self: VirtualQAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceRow: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractListModelmoveRows(self[], sourceParent, sourceRow, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractListModel_moveRows(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_moveRows(self: pointer, sourceParent: pointer, sourceRow: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceRow
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveRows(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method moveColumns*(self: VirtualQAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceColumn: cint, count: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationChild: cint): bool {.base.} =
   QAbstractListModelmoveColumns(self[], sourceParent, sourceColumn, count, destinationParent, destinationChild)
-proc miqt_exec_method_cQAbstractListModel_moveColumns(vtbl: pointer, inst: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_moveColumns(self: pointer, sourceParent: pointer, sourceColumn: cint, count: cint, destinationParent: pointer, destinationChild: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: sourceParent, owned: false)
   let slotval2 = sourceColumn
   let slotval3 = count
   let slotval4 = gen_qabstractitemmodel_types.QModelIndex(h: destinationParent, owned: false)
   let slotval5 = destinationChild
-  var virtualReturn = vtbl.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.moveColumns(slotval1, slotval2, slotval3, slotval4, slotval5)
   virtualReturn
 
 method fetchMore*(self: VirtualQAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex): void {.base.} =
   QAbstractListModelfetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractListModel_fetchMore(vtbl: pointer, inst: pointer, parent: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_fetchMore(self: pointer, parent: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  vtbl.fetchMore(slotval1)
+  inst.fetchMore(slotval1)
 
 method canFetchMore*(self: VirtualQAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex): bool {.base.} =
   QAbstractListModelcanFetchMore(self[], parent)
-proc miqt_exec_method_cQAbstractListModel_canFetchMore(vtbl: pointer, inst: pointer, parent: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_canFetchMore(self: pointer, parent: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: parent, owned: false)
-  var virtualReturn = vtbl.canFetchMore(slotval1)
+  var virtualReturn = inst.canFetchMore(slotval1)
   virtualReturn
 
 method sort*(self: VirtualQAbstractListModel, column: cint, order: cint): void {.base.} =
   QAbstractListModelsort(self[], column, order)
-proc miqt_exec_method_cQAbstractListModel_sort(vtbl: pointer, inst: pointer, column: cint, order: cint): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_sort(self: pointer, column: cint, order: cint): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = column
   let slotval2 = cint(order)
-  vtbl.sort(slotval1, slotval2)
+  inst.sort(slotval1, slotval2)
 
 method buddy*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qabstractitemmodel_types.QModelIndex {.base.} =
   QAbstractListModelbuddy(self[], index)
-proc miqt_exec_method_cQAbstractListModel_buddy(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_buddy(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.buddy(slotval1)
+  var virtualReturn = inst.buddy(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -5340,14 +5252,14 @@ proc miqt_exec_method_cQAbstractListModel_buddy(vtbl: pointer, inst: pointer, in
 
 method match*(self: VirtualQAbstractListModel, start: gen_qabstractitemmodel_types.QModelIndex, role: cint, value: gen_qvariant_types.QVariant, hits: cint, flags: cint): seq[gen_qabstractitemmodel_types.QModelIndex] {.base.} =
   QAbstractListModelmatch(self[], start, role, value, hits, flags)
-proc miqt_exec_method_cQAbstractListModel_match(vtbl: pointer, inst: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_match(self: pointer, start: pointer, role: cint, value: pointer, hits: cint, flags: cint): struct_miqt_array {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: start, owned: false)
   let slotval2 = role
   let slotval3 = gen_qvariant_types.QVariant(h: value, owned: false)
   let slotval4 = hits
   let slotval5 = cint(flags)
-  var virtualReturn = vtbl.match(slotval1, slotval2, slotval3, slotval4, slotval5)
+  var virtualReturn = inst.match(slotval1, slotval2, slotval3, slotval4, slotval5)
   var virtualReturn_CArray = cast[ptr UncheckedArray[pointer]](if len(virtualReturn) > 0: c_malloc(c_sizet(sizeof(pointer) * len(virtualReturn))) else: nil)
   for i in 0..<len(virtualReturn):
     virtualReturn[i].owned = false # TODO move?
@@ -5359,20 +5271,20 @@ proc miqt_exec_method_cQAbstractListModel_match(vtbl: pointer, inst: pointer, st
 
 method span*(self: VirtualQAbstractListModel, index: gen_qabstractitemmodel_types.QModelIndex): gen_qsize_types.QSize {.base.} =
   QAbstractListModelspan(self[], index)
-proc miqt_exec_method_cQAbstractListModel_span(vtbl: pointer, inst: pointer, index: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_span(self: pointer, index: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qabstractitemmodel_types.QModelIndex(h: index, owned: false)
-  var virtualReturn = vtbl.span(slotval1)
+  var virtualReturn = inst.span(slotval1)
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
   virtualReturn_h
 
-method roleNames*(self: VirtualQAbstractListModel, ): Table[cint,seq[byte]] {.base.} =
+method roleNames*(self: VirtualQAbstractListModel): Table[cint,seq[byte]] {.base.} =
   QAbstractListModelroleNames(self[])
-proc miqt_exec_method_cQAbstractListModel_roleNames(vtbl: pointer, inst: pointer): struct_miqt_map {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.roleNames()
+proc cQAbstractListModel_method_callback_roleNames(self: pointer): struct_miqt_map {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.roleNames()
   var virtualReturn_Keys_CArray = cast[ptr UncheckedArray[cint]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(cint) * len(virtualReturn))) else: nil)
   var virtualReturn_Values_CArray = cast[ptr UncheckedArray[struct_miqt_string]](if len(virtualReturn) > 0: c_malloc(csize_t(sizeof(struct_miqt_string) * len(virtualReturn))) else: nil)
   var virtualReturn_ctr = 0
@@ -5388,72 +5300,72 @@ proc miqt_exec_method_cQAbstractListModel_roleNames(vtbl: pointer, inst: pointer
 
   struct_miqt_map(len: csize_t(len(virtualReturn)),keys: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Keys_CArray[0]), values: if len(virtualReturn) == 0: nil else: addr(virtualReturn_Values_CArray[0]),)
 
-method submit*(self: VirtualQAbstractListModel, ): bool {.base.} =
+method submit*(self: VirtualQAbstractListModel): bool {.base.} =
   QAbstractListModelsubmit(self[])
-proc miqt_exec_method_cQAbstractListModel_submit(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  var virtualReturn = vtbl.submit()
+proc cQAbstractListModel_method_callback_submit(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  var virtualReturn = inst.submit()
   virtualReturn
 
-method revert*(self: VirtualQAbstractListModel, ): void {.base.} =
+method revert*(self: VirtualQAbstractListModel): void {.base.} =
   QAbstractListModelrevert(self[])
-proc miqt_exec_method_cQAbstractListModel_revert(vtbl: pointer, inst: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-  vtbl.revert()
+proc cQAbstractListModel_method_callback_revert(self: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
+  inst.revert()
 
 method event*(self: VirtualQAbstractListModel, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractListModelevent(self[], event)
-proc miqt_exec_method_cQAbstractListModel_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQAbstractListModel, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QAbstractListModeleventFilter(self[], watched, event)
-proc miqt_exec_method_cQAbstractListModel_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQAbstractListModel, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QAbstractListModeltimerEvent(self[], event)
-proc miqt_exec_method_cQAbstractListModel_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQAbstractListModel, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QAbstractListModelchildEvent(self[], event)
-proc miqt_exec_method_cQAbstractListModel_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQAbstractListModel, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QAbstractListModelcustomEvent(self[], event)
-proc miqt_exec_method_cQAbstractListModel_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQAbstractListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractListModelconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractListModel_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQAbstractListModel, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QAbstractListModeldisconnectNotify(self[], signal)
-proc miqt_exec_method_cQAbstractListModel_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQAbstractListModel](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
+proc cQAbstractListModel_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQAbstractListModel](fcQAbstractListModel_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc resetInternalData*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_resetInternalData(self.h)
 
 proc createIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cint, column: cint): gen_qabstractitemmodel_types.QModelIndex =
@@ -5472,43 +5384,43 @@ proc decodeData*(self: gen_qabstractitemmodel_types.QAbstractListModel, row: cin
 proc beginInsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractListModel_protectedbase_beginInsertRows(self.h, parent.h, first, last)
 
-proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endInsertRows*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endInsertRows(self.h)
 
 proc beginRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractListModel_protectedbase_beginRemoveRows(self.h, parent.h, first, last)
 
-proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endRemoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endRemoveRows(self.h)
 
 proc beginMoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationRow: cint): bool =
   fcQAbstractListModel_protectedbase_beginMoveRows(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationRow)
 
-proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endMoveRows*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endMoveRows(self.h)
 
 proc beginInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractListModel_protectedbase_beginInsertColumns(self.h, parent.h, first, last)
 
-proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endInsertColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endInsertColumns(self.h)
 
 proc beginRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, parent: gen_qabstractitemmodel_types.QModelIndex, first: cint, last: cint): void =
   fcQAbstractListModel_protectedbase_beginRemoveColumns(self.h, parent.h, first, last)
 
-proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endRemoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endRemoveColumns(self.h)
 
 proc beginMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, sourceParent: gen_qabstractitemmodel_types.QModelIndex, sourceFirst: cint, sourceLast: cint, destinationParent: gen_qabstractitemmodel_types.QModelIndex, destinationColumn: cint): bool =
   fcQAbstractListModel_protectedbase_beginMoveColumns(self.h, sourceParent.h, sourceFirst, sourceLast, destinationParent.h, destinationColumn)
 
-proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endMoveColumns*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endMoveColumns(self.h)
 
-proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc beginResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_beginResetModel(self.h)
 
-proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): void =
+proc endResetModel*(self: gen_qabstractitemmodel_types.QAbstractListModel): void =
   fcQAbstractListModel_protectedbase_endResetModel(self.h)
 
 proc changePersistentIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, fromVal: gen_qabstractitemmodel_types.QModelIndex, to: gen_qabstractitemmodel_types.QModelIndex): void =
@@ -5525,7 +5437,7 @@ proc changePersistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractList
 
   fcQAbstractListModel_protectedbase_changePersistentIndexList(self.h, struct_miqt_array(len: csize_t(len(fromVal)), data: if len(fromVal) == 0: nil else: addr(fromVal_CArray[0])), struct_miqt_array(len: csize_t(len(to)), data: if len(to) == 0: nil else: addr(to_CArray[0])))
 
-proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): seq[gen_qabstractitemmodel_types.QModelIndex] =
+proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractListModel): seq[gen_qabstractitemmodel_types.QModelIndex] =
   var v_ma = fcQAbstractListModel_protectedbase_persistentIndexList(self.h)
   var vx_ret = newSeq[gen_qabstractitemmodel_types.QModelIndex](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -5534,10 +5446,10 @@ proc persistentIndexList*(self: gen_qabstractitemmodel_types.QAbstractListModel,
   c_free(v_ma.data)
   vx_ret
 
-proc sender*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qabstractitemmodel_types.QAbstractListModel): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAbstractListModel_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel, ): cint =
+proc senderSignalIndex*(self: gen_qabstractitemmodel_types.QAbstractListModel): cint =
   fcQAbstractListModel_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qabstractitemmodel_types.QAbstractListModel, signal: cstring): cint =
@@ -5550,289 +5462,244 @@ proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
     vtbl: ref QAbstractListModelVTable = nil): gen_qabstractitemmodel_types.QAbstractListModel =
   let vtbl = if vtbl == nil: new QAbstractListModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractListModelVTable, _: ptr cQAbstractListModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractListModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractListModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractListModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractListModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractListModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractListModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractListModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractListModel_index
+    vtbl[].vtbl.index = cQAbstractListModel_vtable_callback_index
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractListModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractListModel_vtable_callback_sibling
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractListModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractListModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractListModel_flags
+    vtbl[].vtbl.flags = cQAbstractListModel_vtable_callback_flags
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractListModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractListModel_vtable_callback_rowCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractListModel_data
+    vtbl[].vtbl.data = cQAbstractListModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractListModel_setData
+    vtbl[].vtbl.setData = cQAbstractListModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractListModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractListModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractListModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractListModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractListModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractListModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractListModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractListModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractListModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractListModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractListModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractListModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractListModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractListModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractListModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractListModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractListModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractListModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractListModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractListModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractListModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractListModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractListModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractListModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractListModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractListModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractListModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractListModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractListModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractListModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractListModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractListModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractListModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractListModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractListModel_sort
+    vtbl[].vtbl.sort = cQAbstractListModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractListModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractListModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractListModel_match
+    vtbl[].vtbl.match = cQAbstractListModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractListModel_span
+    vtbl[].vtbl.span = cQAbstractListModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractListModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractListModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractListModel_submit
+    vtbl[].vtbl.submit = cQAbstractListModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractListModel_revert
+    vtbl[].vtbl.revert = cQAbstractListModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractListModel_event
+    vtbl[].vtbl.event = cQAbstractListModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractListModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractListModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractListModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractListModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractListModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractListModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractListModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractListModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractListModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractListModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractListModel(h: fcQAbstractListModel_new(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractListModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractListModel(h: fcQAbstractListModel_new(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
     parent: gen_qobject_types.QObject,
     vtbl: ref QAbstractListModelVTable = nil): gen_qabstractitemmodel_types.QAbstractListModel =
   let vtbl = if vtbl == nil: new QAbstractListModelVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractListModelVTable, _: ptr cQAbstractListModel) {.cdecl.} =
-    let vtbl = cast[ref QAbstractListModelVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QAbstractListModelVTable](fcQAbstractListModel_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQAbstractListModel_metaObject
+    vtbl[].vtbl.metaObject = cQAbstractListModel_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQAbstractListModel_metacast
+    vtbl[].vtbl.metacast = cQAbstractListModel_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQAbstractListModel_metacall
+    vtbl[].vtbl.metacall = cQAbstractListModel_vtable_callback_metacall
   if not isNil(vtbl[].index):
-    vtbl[].vtbl.index = miqt_exec_callback_cQAbstractListModel_index
+    vtbl[].vtbl.index = cQAbstractListModel_vtable_callback_index
   if not isNil(vtbl[].sibling):
-    vtbl[].vtbl.sibling = miqt_exec_callback_cQAbstractListModel_sibling
+    vtbl[].vtbl.sibling = cQAbstractListModel_vtable_callback_sibling
   if not isNil(vtbl[].dropMimeData):
-    vtbl[].vtbl.dropMimeData = miqt_exec_callback_cQAbstractListModel_dropMimeData
+    vtbl[].vtbl.dropMimeData = cQAbstractListModel_vtable_callback_dropMimeData
   if not isNil(vtbl[].flags):
-    vtbl[].vtbl.flags = miqt_exec_callback_cQAbstractListModel_flags
+    vtbl[].vtbl.flags = cQAbstractListModel_vtable_callback_flags
   if not isNil(vtbl[].rowCount):
-    vtbl[].vtbl.rowCount = miqt_exec_callback_cQAbstractListModel_rowCount
+    vtbl[].vtbl.rowCount = cQAbstractListModel_vtable_callback_rowCount
   if not isNil(vtbl[].data):
-    vtbl[].vtbl.data = miqt_exec_callback_cQAbstractListModel_data
+    vtbl[].vtbl.data = cQAbstractListModel_vtable_callback_data
   if not isNil(vtbl[].setData):
-    vtbl[].vtbl.setData = miqt_exec_callback_cQAbstractListModel_setData
+    vtbl[].vtbl.setData = cQAbstractListModel_vtable_callback_setData
   if not isNil(vtbl[].headerData):
-    vtbl[].vtbl.headerData = miqt_exec_callback_cQAbstractListModel_headerData
+    vtbl[].vtbl.headerData = cQAbstractListModel_vtable_callback_headerData
   if not isNil(vtbl[].setHeaderData):
-    vtbl[].vtbl.setHeaderData = miqt_exec_callback_cQAbstractListModel_setHeaderData
+    vtbl[].vtbl.setHeaderData = cQAbstractListModel_vtable_callback_setHeaderData
   if not isNil(vtbl[].itemData):
-    vtbl[].vtbl.itemData = miqt_exec_callback_cQAbstractListModel_itemData
+    vtbl[].vtbl.itemData = cQAbstractListModel_vtable_callback_itemData
   if not isNil(vtbl[].setItemData):
-    vtbl[].vtbl.setItemData = miqt_exec_callback_cQAbstractListModel_setItemData
+    vtbl[].vtbl.setItemData = cQAbstractListModel_vtable_callback_setItemData
   if not isNil(vtbl[].mimeTypes):
-    vtbl[].vtbl.mimeTypes = miqt_exec_callback_cQAbstractListModel_mimeTypes
+    vtbl[].vtbl.mimeTypes = cQAbstractListModel_vtable_callback_mimeTypes
   if not isNil(vtbl[].mimeData):
-    vtbl[].vtbl.mimeData = miqt_exec_callback_cQAbstractListModel_mimeData
+    vtbl[].vtbl.mimeData = cQAbstractListModel_vtable_callback_mimeData
   if not isNil(vtbl[].canDropMimeData):
-    vtbl[].vtbl.canDropMimeData = miqt_exec_callback_cQAbstractListModel_canDropMimeData
+    vtbl[].vtbl.canDropMimeData = cQAbstractListModel_vtable_callback_canDropMimeData
   if not isNil(vtbl[].supportedDropActions):
-    vtbl[].vtbl.supportedDropActions = miqt_exec_callback_cQAbstractListModel_supportedDropActions
+    vtbl[].vtbl.supportedDropActions = cQAbstractListModel_vtable_callback_supportedDropActions
   if not isNil(vtbl[].supportedDragActions):
-    vtbl[].vtbl.supportedDragActions = miqt_exec_callback_cQAbstractListModel_supportedDragActions
+    vtbl[].vtbl.supportedDragActions = cQAbstractListModel_vtable_callback_supportedDragActions
   if not isNil(vtbl[].insertRows):
-    vtbl[].vtbl.insertRows = miqt_exec_callback_cQAbstractListModel_insertRows
+    vtbl[].vtbl.insertRows = cQAbstractListModel_vtable_callback_insertRows
   if not isNil(vtbl[].insertColumns):
-    vtbl[].vtbl.insertColumns = miqt_exec_callback_cQAbstractListModel_insertColumns
+    vtbl[].vtbl.insertColumns = cQAbstractListModel_vtable_callback_insertColumns
   if not isNil(vtbl[].removeRows):
-    vtbl[].vtbl.removeRows = miqt_exec_callback_cQAbstractListModel_removeRows
+    vtbl[].vtbl.removeRows = cQAbstractListModel_vtable_callback_removeRows
   if not isNil(vtbl[].removeColumns):
-    vtbl[].vtbl.removeColumns = miqt_exec_callback_cQAbstractListModel_removeColumns
+    vtbl[].vtbl.removeColumns = cQAbstractListModel_vtable_callback_removeColumns
   if not isNil(vtbl[].moveRows):
-    vtbl[].vtbl.moveRows = miqt_exec_callback_cQAbstractListModel_moveRows
+    vtbl[].vtbl.moveRows = cQAbstractListModel_vtable_callback_moveRows
   if not isNil(vtbl[].moveColumns):
-    vtbl[].vtbl.moveColumns = miqt_exec_callback_cQAbstractListModel_moveColumns
+    vtbl[].vtbl.moveColumns = cQAbstractListModel_vtable_callback_moveColumns
   if not isNil(vtbl[].fetchMore):
-    vtbl[].vtbl.fetchMore = miqt_exec_callback_cQAbstractListModel_fetchMore
+    vtbl[].vtbl.fetchMore = cQAbstractListModel_vtable_callback_fetchMore
   if not isNil(vtbl[].canFetchMore):
-    vtbl[].vtbl.canFetchMore = miqt_exec_callback_cQAbstractListModel_canFetchMore
+    vtbl[].vtbl.canFetchMore = cQAbstractListModel_vtable_callback_canFetchMore
   if not isNil(vtbl[].sort):
-    vtbl[].vtbl.sort = miqt_exec_callback_cQAbstractListModel_sort
+    vtbl[].vtbl.sort = cQAbstractListModel_vtable_callback_sort
   if not isNil(vtbl[].buddy):
-    vtbl[].vtbl.buddy = miqt_exec_callback_cQAbstractListModel_buddy
+    vtbl[].vtbl.buddy = cQAbstractListModel_vtable_callback_buddy
   if not isNil(vtbl[].match):
-    vtbl[].vtbl.match = miqt_exec_callback_cQAbstractListModel_match
+    vtbl[].vtbl.match = cQAbstractListModel_vtable_callback_match
   if not isNil(vtbl[].span):
-    vtbl[].vtbl.span = miqt_exec_callback_cQAbstractListModel_span
+    vtbl[].vtbl.span = cQAbstractListModel_vtable_callback_span
   if not isNil(vtbl[].roleNames):
-    vtbl[].vtbl.roleNames = miqt_exec_callback_cQAbstractListModel_roleNames
+    vtbl[].vtbl.roleNames = cQAbstractListModel_vtable_callback_roleNames
   if not isNil(vtbl[].submit):
-    vtbl[].vtbl.submit = miqt_exec_callback_cQAbstractListModel_submit
+    vtbl[].vtbl.submit = cQAbstractListModel_vtable_callback_submit
   if not isNil(vtbl[].revert):
-    vtbl[].vtbl.revert = miqt_exec_callback_cQAbstractListModel_revert
+    vtbl[].vtbl.revert = cQAbstractListModel_vtable_callback_revert
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQAbstractListModel_event
+    vtbl[].vtbl.event = cQAbstractListModel_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQAbstractListModel_eventFilter
+    vtbl[].vtbl.eventFilter = cQAbstractListModel_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQAbstractListModel_timerEvent
+    vtbl[].vtbl.timerEvent = cQAbstractListModel_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQAbstractListModel_childEvent
+    vtbl[].vtbl.childEvent = cQAbstractListModel_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQAbstractListModel_customEvent
+    vtbl[].vtbl.customEvent = cQAbstractListModel_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQAbstractListModel_connectNotify
+    vtbl[].vtbl.connectNotify = cQAbstractListModel_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQAbstractListModel_disconnectNotify
-  gen_qabstractitemmodel_types.QAbstractListModel(h: fcQAbstractListModel_new2(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQAbstractListModel_vtable_callback_disconnectNotify
+  gen_qabstractitemmodel_types.QAbstractListModel(h: fcQAbstractListModel_new2(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQAbstractListModel_mvtbl = cQAbstractListModelVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQAbstractListModel()[])](self.fcQAbstractListModel_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQAbstractListModel_method_callback_metaObject,
+  metacast: cQAbstractListModel_method_callback_metacast,
+  metacall: cQAbstractListModel_method_callback_metacall,
+  index: cQAbstractListModel_method_callback_index,
+  sibling: cQAbstractListModel_method_callback_sibling,
+  dropMimeData: cQAbstractListModel_method_callback_dropMimeData,
+  flags: cQAbstractListModel_method_callback_flags,
+  rowCount: cQAbstractListModel_method_callback_rowCount,
+  data: cQAbstractListModel_method_callback_data,
+  setData: cQAbstractListModel_method_callback_setData,
+  headerData: cQAbstractListModel_method_callback_headerData,
+  setHeaderData: cQAbstractListModel_method_callback_setHeaderData,
+  itemData: cQAbstractListModel_method_callback_itemData,
+  setItemData: cQAbstractListModel_method_callback_setItemData,
+  mimeTypes: cQAbstractListModel_method_callback_mimeTypes,
+  mimeData: cQAbstractListModel_method_callback_mimeData,
+  canDropMimeData: cQAbstractListModel_method_callback_canDropMimeData,
+  supportedDropActions: cQAbstractListModel_method_callback_supportedDropActions,
+  supportedDragActions: cQAbstractListModel_method_callback_supportedDragActions,
+  insertRows: cQAbstractListModel_method_callback_insertRows,
+  insertColumns: cQAbstractListModel_method_callback_insertColumns,
+  removeRows: cQAbstractListModel_method_callback_removeRows,
+  removeColumns: cQAbstractListModel_method_callback_removeColumns,
+  moveRows: cQAbstractListModel_method_callback_moveRows,
+  moveColumns: cQAbstractListModel_method_callback_moveColumns,
+  fetchMore: cQAbstractListModel_method_callback_fetchMore,
+  canFetchMore: cQAbstractListModel_method_callback_canFetchMore,
+  sort: cQAbstractListModel_method_callback_sort,
+  buddy: cQAbstractListModel_method_callback_buddy,
+  match: cQAbstractListModel_method_callback_match,
+  span: cQAbstractListModel_method_callback_span,
+  roleNames: cQAbstractListModel_method_callback_roleNames,
+  submit: cQAbstractListModel_method_callback_submit,
+  revert: cQAbstractListModel_method_callback_revert,
+  event: cQAbstractListModel_method_callback_event,
+  eventFilter: cQAbstractListModel_method_callback_eventFilter,
+  timerEvent: cQAbstractListModel_method_callback_timerEvent,
+  childEvent: cQAbstractListModel_method_callback_childEvent,
+  customEvent: cQAbstractListModel_method_callback_customEvent,
+  connectNotify: cQAbstractListModel_method_callback_connectNotify,
+  disconnectNotify: cQAbstractListModel_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
-    vtbl: VirtualQAbstractListModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractListModelVTable, _: ptr cQAbstractListModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractListModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractListModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractListModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractListModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractListModel_index
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractListModel_sibling
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractListModel_dropMimeData
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractListModel_flags
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractListModel_rowCount
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractListModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractListModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractListModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractListModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractListModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractListModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractListModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractListModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractListModel_canDropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractListModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractListModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractListModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractListModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractListModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractListModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractListModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractListModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractListModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractListModel_canFetchMore
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractListModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractListModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractListModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractListModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractListModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractListModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractListModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractListModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractListModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractListModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractListModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractListModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractListModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractListModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractListModel_new(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQAbstractListModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractListModel_new(addr(cQAbstractListModel_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qabstractitemmodel_types.QAbstractListModel,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQAbstractListModel) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQAbstractListModelVTable, _: ptr cQAbstractListModel) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQAbstractListModel()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQAbstractListModel, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQAbstractListModel_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQAbstractListModel_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQAbstractListModel_metacall
-  vtbl[].vtbl.index = miqt_exec_method_cQAbstractListModel_index
-  vtbl[].vtbl.sibling = miqt_exec_method_cQAbstractListModel_sibling
-  vtbl[].vtbl.dropMimeData = miqt_exec_method_cQAbstractListModel_dropMimeData
-  vtbl[].vtbl.flags = miqt_exec_method_cQAbstractListModel_flags
-  vtbl[].vtbl.rowCount = miqt_exec_method_cQAbstractListModel_rowCount
-  vtbl[].vtbl.data = miqt_exec_method_cQAbstractListModel_data
-  vtbl[].vtbl.setData = miqt_exec_method_cQAbstractListModel_setData
-  vtbl[].vtbl.headerData = miqt_exec_method_cQAbstractListModel_headerData
-  vtbl[].vtbl.setHeaderData = miqt_exec_method_cQAbstractListModel_setHeaderData
-  vtbl[].vtbl.itemData = miqt_exec_method_cQAbstractListModel_itemData
-  vtbl[].vtbl.setItemData = miqt_exec_method_cQAbstractListModel_setItemData
-  vtbl[].vtbl.mimeTypes = miqt_exec_method_cQAbstractListModel_mimeTypes
-  vtbl[].vtbl.mimeData = miqt_exec_method_cQAbstractListModel_mimeData
-  vtbl[].vtbl.canDropMimeData = miqt_exec_method_cQAbstractListModel_canDropMimeData
-  vtbl[].vtbl.supportedDropActions = miqt_exec_method_cQAbstractListModel_supportedDropActions
-  vtbl[].vtbl.supportedDragActions = miqt_exec_method_cQAbstractListModel_supportedDragActions
-  vtbl[].vtbl.insertRows = miqt_exec_method_cQAbstractListModel_insertRows
-  vtbl[].vtbl.insertColumns = miqt_exec_method_cQAbstractListModel_insertColumns
-  vtbl[].vtbl.removeRows = miqt_exec_method_cQAbstractListModel_removeRows
-  vtbl[].vtbl.removeColumns = miqt_exec_method_cQAbstractListModel_removeColumns
-  vtbl[].vtbl.moveRows = miqt_exec_method_cQAbstractListModel_moveRows
-  vtbl[].vtbl.moveColumns = miqt_exec_method_cQAbstractListModel_moveColumns
-  vtbl[].vtbl.fetchMore = miqt_exec_method_cQAbstractListModel_fetchMore
-  vtbl[].vtbl.canFetchMore = miqt_exec_method_cQAbstractListModel_canFetchMore
-  vtbl[].vtbl.sort = miqt_exec_method_cQAbstractListModel_sort
-  vtbl[].vtbl.buddy = miqt_exec_method_cQAbstractListModel_buddy
-  vtbl[].vtbl.match = miqt_exec_method_cQAbstractListModel_match
-  vtbl[].vtbl.span = miqt_exec_method_cQAbstractListModel_span
-  vtbl[].vtbl.roleNames = miqt_exec_method_cQAbstractListModel_roleNames
-  vtbl[].vtbl.submit = miqt_exec_method_cQAbstractListModel_submit
-  vtbl[].vtbl.revert = miqt_exec_method_cQAbstractListModel_revert
-  vtbl[].vtbl.event = miqt_exec_method_cQAbstractListModel_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQAbstractListModel_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQAbstractListModel_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQAbstractListModel_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQAbstractListModel_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQAbstractListModel_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQAbstractListModel_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQAbstractListModel_new2(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQAbstractListModel) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQAbstractListModel_new2(addr(cQAbstractListModel_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qabstractitemmodel_types.QAbstractListModel): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAbstractListModel_staticMetaObject())

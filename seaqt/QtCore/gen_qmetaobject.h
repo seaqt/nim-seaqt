@@ -38,6 +38,7 @@ typedef struct QVariant QVariant;
 
 QMetaMethod* QMetaMethod_new();
 QMetaMethod* QMetaMethod_new2(QMetaMethod* param1);
+
 struct miqt_string QMetaMethod_methodSignature(const QMetaMethod* self);
 struct miqt_string QMetaMethod_name(const QMetaMethod* self);
 const char* QMetaMethod_typeName(const QMetaMethod* self);
@@ -121,10 +122,12 @@ bool QMetaMethod_invokeOnGadget82(const QMetaMethod* self, void* gadget, QGeneri
 bool QMetaMethod_invokeOnGadget92(const QMetaMethod* self, void* gadget, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7);
 bool QMetaMethod_invokeOnGadget102(const QMetaMethod* self, void* gadget, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8);
 bool QMetaMethod_invokeOnGadget112(const QMetaMethod* self, void* gadget, QGenericArgument* val0, QGenericArgument* val1, QGenericArgument* val2, QGenericArgument* val3, QGenericArgument* val4, QGenericArgument* val5, QGenericArgument* val6, QGenericArgument* val7, QGenericArgument* val8, QGenericArgument* val9);
+
 void QMetaMethod_delete(QMetaMethod* self);
 
 QMetaEnum* QMetaEnum_new();
 QMetaEnum* QMetaEnum_new2(QMetaEnum* param1);
+
 const char* QMetaEnum_name(const QMetaEnum* self);
 const char* QMetaEnum_enumName(const QMetaEnum* self);
 bool QMetaEnum_isFlag(const QMetaEnum* self);
@@ -141,9 +144,11 @@ QMetaObject* QMetaEnum_enclosingMetaObject(const QMetaEnum* self);
 bool QMetaEnum_isValid(const QMetaEnum* self);
 int QMetaEnum_keyToValue2(const QMetaEnum* self, const char* key, bool* ok);
 int QMetaEnum_keysToValue2(const QMetaEnum* self, const char* keys, bool* ok);
+
 void QMetaEnum_delete(QMetaEnum* self);
 
 QMetaProperty* QMetaProperty_new();
+
 const char* QMetaProperty_name(const QMetaProperty* self);
 const char* QMetaProperty_typeName(const QMetaProperty* self);
 int QMetaProperty_type(const QMetaProperty* self);
@@ -182,12 +187,15 @@ bool QMetaProperty_isScriptable1(const QMetaProperty* self, QObject* obj);
 bool QMetaProperty_isStored1(const QMetaProperty* self, QObject* obj);
 bool QMetaProperty_isEditable1(const QMetaProperty* self, QObject* obj);
 bool QMetaProperty_isUser1(const QMetaProperty* self, QObject* obj);
+
 void QMetaProperty_delete(QMetaProperty* self);
 
 QMetaClassInfo* QMetaClassInfo_new();
+
 const char* QMetaClassInfo_name(const QMetaClassInfo* self);
 const char* QMetaClassInfo_value(const QMetaClassInfo* self);
 QMetaObject* QMetaClassInfo_enclosingMetaObject(const QMetaClassInfo* self);
+
 void QMetaClassInfo_delete(QMetaClassInfo* self);
 
 #ifdef __cplusplus

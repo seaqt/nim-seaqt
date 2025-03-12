@@ -35,6 +35,7 @@ QImageReader* QImageReader_new2(QIODevice* device);
 QImageReader* QImageReader_new3(struct miqt_string fileName);
 QImageReader* QImageReader_new4(QIODevice* device, struct miqt_string format);
 QImageReader* QImageReader_new5(struct miqt_string fileName, struct miqt_string format);
+
 struct miqt_string QImageReader_tr(const char* sourceText);
 struct miqt_string QImageReader_trUtf8(const char* sourceText);
 void QImageReader_setFormat(QImageReader* self, struct miqt_string format);
@@ -91,6 +92,7 @@ struct miqt_string QImageReader_tr2(const char* sourceText, const char* disambig
 struct miqt_string QImageReader_tr3(const char* sourceText, const char* disambiguation, int n);
 struct miqt_string QImageReader_trUtf82(const char* sourceText, const char* disambiguation);
 struct miqt_string QImageReader_trUtf83(const char* sourceText, const char* disambiguation, int n);
+
 void QImageReader_delete(QImageReader* self);
 
 #ifdef __cplusplus

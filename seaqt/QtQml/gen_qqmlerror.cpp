@@ -6,15 +6,6 @@
 #include <QUrl>
 #include <qqmlerror.h>
 #include "gen_qqmlerror.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlError* QQmlError_new() {
 	return new QQmlError();
 }

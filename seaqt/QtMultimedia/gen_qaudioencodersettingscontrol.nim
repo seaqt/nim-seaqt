@@ -52,27 +52,27 @@ export
 
 type cQAudioEncoderSettingsControl*{.exportc: "QAudioEncoderSettingsControl", incompleteStruct.} = object
 
-proc fcQAudioEncoderSettingsControl_metaObject(self: pointer, ): pointer {.importc: "QAudioEncoderSettingsControl_metaObject".}
+proc fcQAudioEncoderSettingsControl_metaObject(self: pointer): pointer {.importc: "QAudioEncoderSettingsControl_metaObject".}
 proc fcQAudioEncoderSettingsControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QAudioEncoderSettingsControl_metacast".}
 proc fcQAudioEncoderSettingsControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QAudioEncoderSettingsControl_metacall".}
 proc fcQAudioEncoderSettingsControl_tr(s: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_tr".}
 proc fcQAudioEncoderSettingsControl_trUtf8(s: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf8".}
-proc fcQAudioEncoderSettingsControl_supportedAudioCodecs(self: pointer, ): struct_miqt_array {.importc: "QAudioEncoderSettingsControl_supportedAudioCodecs".}
+proc fcQAudioEncoderSettingsControl_supportedAudioCodecs(self: pointer): struct_miqt_array {.importc: "QAudioEncoderSettingsControl_supportedAudioCodecs".}
 proc fcQAudioEncoderSettingsControl_codecDescription(self: pointer, codecName: struct_miqt_string): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_codecDescription".}
 proc fcQAudioEncoderSettingsControl_supportedSampleRates(self: pointer, settings: pointer, continuous: ptr bool): struct_miqt_array {.importc: "QAudioEncoderSettingsControl_supportedSampleRates".}
-proc fcQAudioEncoderSettingsControl_audioSettings(self: pointer, ): pointer {.importc: "QAudioEncoderSettingsControl_audioSettings".}
+proc fcQAudioEncoderSettingsControl_audioSettings(self: pointer): pointer {.importc: "QAudioEncoderSettingsControl_audioSettings".}
 proc fcQAudioEncoderSettingsControl_setAudioSettings(self: pointer, settings: pointer): void {.importc: "QAudioEncoderSettingsControl_setAudioSettings".}
 proc fcQAudioEncoderSettingsControl_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_tr2".}
 proc fcQAudioEncoderSettingsControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_tr3".}
 proc fcQAudioEncoderSettingsControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf82".}
 proc fcQAudioEncoderSettingsControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QAudioEncoderSettingsControl_trUtf83".}
-proc fcQAudioEncoderSettingsControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QAudioEncoderSettingsControl_protectedbase_sender".}
-proc fcQAudioEncoderSettingsControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QAudioEncoderSettingsControl_protectedbase_senderSignalIndex".}
+proc fcQAudioEncoderSettingsControl_protectedbase_sender(self: pointer): pointer {.importc: "QAudioEncoderSettingsControl_protectedbase_sender".}
+proc fcQAudioEncoderSettingsControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QAudioEncoderSettingsControl_protectedbase_senderSignalIndex".}
 proc fcQAudioEncoderSettingsControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QAudioEncoderSettingsControl_protectedbase_receivers".}
 proc fcQAudioEncoderSettingsControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QAudioEncoderSettingsControl_protectedbase_isSignalConnected".}
 proc fcQAudioEncoderSettingsControl_staticMetaObject(): pointer {.importc: "QAudioEncoderSettingsControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQAudioEncoderSettingsControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, param1: cstring): pointer =
@@ -93,7 +93,7 @@ proc trUtf8*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSetting
   c_free(v_ms.data)
   vx_ret
 
-proc supportedAudioCodecs*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): seq[string] =
+proc supportedAudioCodecs*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): seq[string] =
   var v_ma = fcQAudioEncoderSettingsControl_supportedAudioCodecs(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -120,7 +120,7 @@ proc supportedSampleRates*(self: gen_qaudioencodersettingscontrol_types.QAudioEn
   c_free(v_ma.data)
   vx_ret
 
-proc audioSettings*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qmediaencodersettings_types.QAudioEncoderSettings =
+proc audioSettings*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): gen_qmediaencodersettings_types.QAudioEncoderSettings =
   gen_qmediaencodersettings_types.QAudioEncoderSettings(h: fcQAudioEncoderSettingsControl_audioSettings(self.h), owned: true)
 
 proc setAudioSettings*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, settings: gen_qmediaencodersettings_types.QAudioEncoderSettings): void =
@@ -150,10 +150,10 @@ proc trUtf8*(_: type gen_qaudioencodersettingscontrol_types.QAudioEncoderSetting
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQAudioEncoderSettingsControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, ): cint =
+proc senderSignalIndex*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl): cint =
   fcQAudioEncoderSettingsControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qaudioencodersettingscontrol_types.QAudioEncoderSettingsControl, signal: cstring): cint =

@@ -10,39 +10,32 @@
 #include <QTimerEvent>
 #include <qtimer.h>
 #include "gen_qtimer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQTimer final : public QTimer {
-	struct QTimer_VTable* vtbl;
+	const QTimer_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QTimer_VTable* QTimer_vtbl(const VirtualQTimer* self);
+	friend void* QTimer_vdata(const VirtualQTimer* self);
+	friend void QTimer_setVdata(VirtualQTimer* self, void* vdata);
 
-	VirtualQTimer(struct QTimer_VTable* vtbl): QTimer(), vtbl(vtbl) {};
-	VirtualQTimer(struct QTimer_VTable* vtbl, QObject* parent): QTimer(parent), vtbl(vtbl) {};
+	VirtualQTimer(const QTimer_VTable* vtbl, void* vdata): QTimer(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQTimer(const QTimer_VTable* vtbl, void* vdata, QObject* parent): QTimer(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQTimer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQTimer() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QTimer::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QTimer_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QTimer_virtualbase_metaObject(const VirtualQTimer* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QTimer::qt_metacast(param1);
@@ -50,14 +43,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QTimer_virtualbase_metacast(void* self, const char* param1);
+	friend void* QTimer_virtualbase_metacast(VirtualQTimer* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QTimer::qt_metacall(param1, param2, param3);
@@ -68,14 +60,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QTimer_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QTimer_virtualbase_metacall(VirtualQTimer* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* param1) override {
 		if (vtbl->timerEvent == 0) {
 			QTimer::timerEvent(param1);
@@ -84,13 +75,12 @@ public:
 
 		QTimerEvent* sigval1 = param1;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QTimer_virtualbase_timerEvent(void* self, QTimerEvent* param1);
+	friend void QTimer_virtualbase_timerEvent(VirtualQTimer* self, QTimerEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QTimer::event(event);
@@ -98,14 +88,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimer_virtualbase_event(void* self, QEvent* event);
+	friend bool QTimer_virtualbase_event(VirtualQTimer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QTimer::eventFilter(watched, event);
@@ -114,14 +103,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QTimer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QTimer_virtualbase_eventFilter(VirtualQTimer* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QTimer::childEvent(event);
@@ -130,13 +118,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QTimer_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QTimer_virtualbase_childEvent(VirtualQTimer* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QTimer::customEvent(event);
@@ -145,13 +132,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QTimer_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QTimer_virtualbase_customEvent(VirtualQTimer* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QTimer::connectNotify(signal);
@@ -162,13 +148,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QTimer_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QTimer_virtualbase_connectNotify(VirtualQTimer* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QTimer::disconnectNotify(signal);
@@ -179,25 +164,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QTimer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QTimer_virtualbase_disconnectNotify(VirtualQTimer* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QTimer_protectedbase_sender(const void* self);
-	friend int QTimer_protectedbase_senderSignalIndex(const void* self);
-	friend int QTimer_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QTimer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QTimer_protectedbase_sender(const VirtualQTimer* self);
+	friend int QTimer_protectedbase_senderSignalIndex(const VirtualQTimer* self);
+	friend int QTimer_protectedbase_receivers(const VirtualQTimer* self, const char* signal);
+	friend bool QTimer_protectedbase_isSignalConnected(const VirtualQTimer* self, QMetaMethod* signal);
 };
 
-QTimer* QTimer_new(struct QTimer_VTable* vtbl) {
-	return new VirtualQTimer(vtbl);
+VirtualQTimer* QTimer_new(const QTimer_VTable* vtbl, void* vdata) {
+	return new VirtualQTimer(vtbl, vdata);
 }
 
-QTimer* QTimer_new2(struct QTimer_VTable* vtbl, QObject* parent) {
-	return new VirtualQTimer(vtbl, parent);
+VirtualQTimer* QTimer_new2(const QTimer_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQTimer(vtbl, vdata, parent);
 }
 
 void QTimer_virtbase(QTimer* src, QObject** outptr_QObject) {
@@ -331,93 +316,76 @@ struct miqt_string QTimer_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QTimer_virtualbase_metaObject(const void* self) {
+QMetaObject* QTimer_virtualbase_metaObject(const VirtualQTimer* self) {
 
-	return (QMetaObject*) ( (const VirtualQTimer*)(self) )->QTimer::metaObject();
-
+	return (QMetaObject*) self->QTimer::metaObject();
 }
 
-void* QTimer_virtualbase_metacast(void* self, const char* param1) {
+void* QTimer_virtualbase_metacast(VirtualQTimer* self, const char* param1) {
 
-	return ( (VirtualQTimer*)(self) )->QTimer::qt_metacast(param1);
-
+	return self->QTimer::qt_metacast(param1);
 }
 
-int QTimer_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QTimer_virtualbase_metacall(VirtualQTimer* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQTimer*)(self) )->QTimer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QTimer::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QTimer_virtualbase_timerEvent(void* self, QTimerEvent* param1) {
+void QTimer_virtualbase_timerEvent(VirtualQTimer* self, QTimerEvent* param1) {
 
-	( (VirtualQTimer*)(self) )->QTimer::timerEvent(param1);
-
+	self->QTimer::timerEvent(param1);
 }
 
-bool QTimer_virtualbase_event(void* self, QEvent* event) {
+bool QTimer_virtualbase_event(VirtualQTimer* self, QEvent* event) {
 
-	return ( (VirtualQTimer*)(self) )->QTimer::event(event);
-
+	return self->QTimer::event(event);
 }
 
-bool QTimer_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QTimer_virtualbase_eventFilter(VirtualQTimer* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQTimer*)(self) )->QTimer::eventFilter(watched, event);
-
+	return self->QTimer::eventFilter(watched, event);
 }
 
-void QTimer_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QTimer_virtualbase_childEvent(VirtualQTimer* self, QChildEvent* event) {
 
-	( (VirtualQTimer*)(self) )->QTimer::childEvent(event);
-
+	self->QTimer::childEvent(event);
 }
 
-void QTimer_virtualbase_customEvent(void* self, QEvent* event) {
+void QTimer_virtualbase_customEvent(VirtualQTimer* self, QEvent* event) {
 
-	( (VirtualQTimer*)(self) )->QTimer::customEvent(event);
-
+	self->QTimer::customEvent(event);
 }
 
-void QTimer_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QTimer_virtualbase_connectNotify(VirtualQTimer* self, QMetaMethod* signal) {
 
-	( (VirtualQTimer*)(self) )->QTimer::connectNotify(*signal);
-
+	self->QTimer::connectNotify(*signal);
 }
 
-void QTimer_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QTimer_virtualbase_disconnectNotify(VirtualQTimer* self, QMetaMethod* signal) {
 
-	( (VirtualQTimer*)(self) )->QTimer::disconnectNotify(*signal);
-
+	self->QTimer::disconnectNotify(*signal);
 }
 
 const QMetaObject* QTimer_staticMetaObject() { return &QTimer::staticMetaObject; }
-QObject* QTimer_protectedbase_sender(const void* self) {
-	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
-	
-	return self_cast->sender();
 
+const QTimer_VTable* QTimer_vtbl(const VirtualQTimer* self) { return self->vtbl; }
+void* QTimer_vdata(const VirtualQTimer* self) { return self->vdata; }
+void QTimer_setVdata(VirtualQTimer* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QTimer_protectedbase_sender(const VirtualQTimer* self) {
+	return self->sender();
 }
 
-int QTimer_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QTimer_protectedbase_senderSignalIndex(const VirtualQTimer* self) {
+	return self->senderSignalIndex();
 }
 
-int QTimer_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QTimer_protectedbase_receivers(const VirtualQTimer* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QTimer_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQTimer* self_cast = static_cast<VirtualQTimer*>( (QTimer*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QTimer_protectedbase_isSignalConnected(const VirtualQTimer* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QTimer_delete(QTimer* self) {

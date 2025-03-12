@@ -28,6 +28,7 @@ QImageWriter* QImageWriter_new();
 QImageWriter* QImageWriter_new2(QIODevice* device, struct miqt_string format);
 QImageWriter* QImageWriter_new3(struct miqt_string fileName);
 QImageWriter* QImageWriter_new4(struct miqt_string fileName, struct miqt_string format);
+
 struct miqt_string QImageWriter_tr(const char* sourceText);
 struct miqt_string QImageWriter_trUtf8(const char* sourceText);
 void QImageWriter_setFormat(QImageWriter* self, struct miqt_string format);
@@ -66,6 +67,7 @@ struct miqt_string QImageWriter_tr2(const char* sourceText, const char* disambig
 struct miqt_string QImageWriter_tr3(const char* sourceText, const char* disambiguation, int n);
 struct miqt_string QImageWriter_trUtf82(const char* sourceText, const char* disambiguation);
 struct miqt_string QImageWriter_trUtf83(const char* sourceText, const char* disambiguation, int n);
+
 void QImageWriter_delete(QImageWriter* self);
 
 #ifdef __cplusplus

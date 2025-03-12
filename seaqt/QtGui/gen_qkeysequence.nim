@@ -128,16 +128,16 @@ export
 
 type cQKeySequence*{.exportc: "QKeySequence", incompleteStruct.} = object
 
-proc fcQKeySequence_count(self: pointer, ): cint {.importc: "QKeySequence_count".}
-proc fcQKeySequence_isEmpty(self: pointer, ): bool {.importc: "QKeySequence_isEmpty".}
-proc fcQKeySequence_toString(self: pointer, ): struct_miqt_string {.importc: "QKeySequence_toString".}
+proc fcQKeySequence_count(self: pointer): cint {.importc: "QKeySequence_count".}
+proc fcQKeySequence_isEmpty(self: pointer): bool {.importc: "QKeySequence_isEmpty".}
+proc fcQKeySequence_toString(self: pointer): struct_miqt_string {.importc: "QKeySequence_toString".}
 proc fcQKeySequence_fromString(str: struct_miqt_string): pointer {.importc: "QKeySequence_fromString".}
 proc fcQKeySequence_listFromString(str: struct_miqt_string): struct_miqt_array {.importc: "QKeySequence_listFromString".}
 proc fcQKeySequence_listToString(list: struct_miqt_array): struct_miqt_string {.importc: "QKeySequence_listToString".}
 proc fcQKeySequence_matches(self: pointer, seq: pointer): cint {.importc: "QKeySequence_matches".}
 proc fcQKeySequence_mnemonic(text: struct_miqt_string): pointer {.importc: "QKeySequence_mnemonic".}
 proc fcQKeySequence_keyBindings(key: cint): struct_miqt_array {.importc: "QKeySequence_keyBindings".}
-proc fcQKeySequence_ToQVariant(self: pointer, ): pointer {.importc: "QKeySequence_ToQVariant".}
+proc fcQKeySequence_ToQVariant(self: pointer): pointer {.importc: "QKeySequence_ToQVariant".}
 proc fcQKeySequence_operatorSubscript(self: pointer, i: cuint): cint {.importc: "QKeySequence_operatorSubscript".}
 proc fcQKeySequence_operatorAssign(self: pointer, other: pointer): void {.importc: "QKeySequence_operatorAssign".}
 proc fcQKeySequence_swap(self: pointer, other: pointer): void {.importc: "QKeySequence_swap".}
@@ -147,7 +147,7 @@ proc fcQKeySequence_operatorLesser(self: pointer, ks: pointer): bool {.importc: 
 proc fcQKeySequence_operatorGreater(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorGreater".}
 proc fcQKeySequence_operatorLesserOrEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorLesserOrEqual".}
 proc fcQKeySequence_operatorGreaterOrEqual(self: pointer, other: pointer): bool {.importc: "QKeySequence_operatorGreaterOrEqual".}
-proc fcQKeySequence_isDetached(self: pointer, ): bool {.importc: "QKeySequence_isDetached".}
+proc fcQKeySequence_isDetached(self: pointer): bool {.importc: "QKeySequence_isDetached".}
 proc fcQKeySequence_toString1(self: pointer, format: cint): struct_miqt_string {.importc: "QKeySequence_toString1".}
 proc fcQKeySequence_fromString2(str: struct_miqt_string, format: cint): pointer {.importc: "QKeySequence_fromString2".}
 proc fcQKeySequence_listFromString2(str: struct_miqt_string, format: cint): struct_miqt_array {.importc: "QKeySequence_listFromString2".}
@@ -163,13 +163,13 @@ proc fcQKeySequence_new8(k1: cint, k2: cint, k3: cint): ptr cQKeySequence {.impo
 proc fcQKeySequence_new9(k1: cint, k2: cint, k3: cint, k4: cint): ptr cQKeySequence {.importc: "QKeySequence_new9".}
 proc fcQKeySequence_staticMetaObject(): pointer {.importc: "QKeySequence_staticMetaObject".}
 
-proc count*(self: gen_qkeysequence_types.QKeySequence, ): cint =
+proc count*(self: gen_qkeysequence_types.QKeySequence): cint =
   fcQKeySequence_count(self.h)
 
-proc isEmpty*(self: gen_qkeysequence_types.QKeySequence, ): bool =
+proc isEmpty*(self: gen_qkeysequence_types.QKeySequence): bool =
   fcQKeySequence_isEmpty(self.h)
 
-proc toString*(self: gen_qkeysequence_types.QKeySequence, ): string =
+proc toString*(self: gen_qkeysequence_types.QKeySequence): string =
   let v_ms = fcQKeySequence_toString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -212,7 +212,7 @@ proc keyBindings*(_: type gen_qkeysequence_types.QKeySequence, key: cint): seq[g
   c_free(v_ma.data)
   vx_ret
 
-proc ToQVariant*(self: gen_qkeysequence_types.QKeySequence, ): gen_qvariant_types.QVariant =
+proc ToQVariant*(self: gen_qkeysequence_types.QKeySequence): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQKeySequence_ToQVariant(self.h), owned: true)
 
 proc operatorSubscript*(self: gen_qkeysequence_types.QKeySequence, i: cuint): cint =
@@ -242,7 +242,7 @@ proc operatorLesserOrEqual*(self: gen_qkeysequence_types.QKeySequence, other: ge
 proc operatorGreaterOrEqual*(self: gen_qkeysequence_types.QKeySequence, other: gen_qkeysequence_types.QKeySequence): bool =
   fcQKeySequence_operatorGreaterOrEqual(self.h, other.h)
 
-proc isDetached*(self: gen_qkeysequence_types.QKeySequence, ): bool =
+proc isDetached*(self: gen_qkeysequence_types.QKeySequence): bool =
   fcQKeySequence_isDetached(self.h)
 
 proc toString*(self: gen_qkeysequence_types.QKeySequence, format: cint): string =

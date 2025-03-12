@@ -10,15 +10,6 @@
 #include <QVideoWindowControl>
 #include <qvideowindowcontrol.h>
 #include "gen_qvideowindowcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QVideoWindowControl_virtbase(QVideoWindowControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -271,6 +262,7 @@ struct miqt_string QVideoWindowControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QVideoWindowControl_staticMetaObject() { return &QVideoWindowControl::staticMetaObject; }
+
 void QVideoWindowControl_delete(QVideoWindowControl* self) {
 	delete self;
 }

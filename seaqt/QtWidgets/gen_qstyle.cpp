@@ -23,38 +23,31 @@
 #include <QWidget>
 #include <qstyle.h>
 #include "gen_qstyle.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQStyle final : public QStyle {
-	struct QStyle_VTable* vtbl;
+	const QStyle_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QStyle_VTable* QStyle_vtbl(const VirtualQStyle* self);
+	friend void* QStyle_vdata(const VirtualQStyle* self);
+	friend void QStyle_setVdata(VirtualQStyle* self, void* vdata);
 
-	VirtualQStyle(struct QStyle_VTable* vtbl): QStyle(), vtbl(vtbl) {};
+	VirtualQStyle(const QStyle_VTable* vtbl, void* vdata): QStyle(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQStyle() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQStyle() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QStyle::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QStyle_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QStyle_virtualbase_metaObject(const VirtualQStyle* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QStyle::qt_metacast(param1);
@@ -62,14 +55,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QStyle_virtualbase_metacast(void* self, const char* param1);
+	friend void* QStyle_virtualbase_metacast(VirtualQStyle* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QStyle::qt_metacall(param1, param2, param3);
@@ -80,14 +72,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QStyle_virtualbase_metacall(VirtualQStyle* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void polish(QWidget* widget) override {
 		if (vtbl->polish == 0) {
 			QStyle::polish(widget);
@@ -96,13 +87,12 @@ public:
 
 		QWidget* sigval1 = widget;
 
-		vtbl->polish(vtbl, this, sigval1);
+		vtbl->polish(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_polish(void* self, QWidget* widget);
+	friend void QStyle_virtualbase_polish(VirtualQStyle* self, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual void unpolish(QWidget* widget) override {
 		if (vtbl->unpolish == 0) {
 			QStyle::unpolish(widget);
@@ -111,13 +101,12 @@ public:
 
 		QWidget* sigval1 = widget;
 
-		vtbl->unpolish(vtbl, this, sigval1);
+		vtbl->unpolish(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_unpolish(void* self, QWidget* widget);
+	friend void QStyle_virtualbase_unpolish(VirtualQStyle* self, QWidget* widget);
 
-	// Subclass to allow providing a Go implementation
 	virtual void polish(QApplication* application) override {
 		if (vtbl->polishWithApplication == 0) {
 			QStyle::polish(application);
@@ -126,13 +115,12 @@ public:
 
 		QApplication* sigval1 = application;
 
-		vtbl->polishWithApplication(vtbl, this, sigval1);
+		vtbl->polishWithApplication(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_polishWithApplication(void* self, QApplication* application);
+	friend void QStyle_virtualbase_polishWithApplication(VirtualQStyle* self, QApplication* application);
 
-	// Subclass to allow providing a Go implementation
 	virtual void unpolish(QApplication* application) override {
 		if (vtbl->unpolishWithApplication == 0) {
 			QStyle::unpolish(application);
@@ -141,13 +129,12 @@ public:
 
 		QApplication* sigval1 = application;
 
-		vtbl->unpolishWithApplication(vtbl, this, sigval1);
+		vtbl->unpolishWithApplication(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_unpolishWithApplication(void* self, QApplication* application);
+	friend void QStyle_virtualbase_unpolishWithApplication(VirtualQStyle* self, QApplication* application);
 
-	// Subclass to allow providing a Go implementation
 	virtual void polish(QPalette& palette) override {
 		if (vtbl->polishWithPalette == 0) {
 			QStyle::polish(palette);
@@ -158,13 +145,12 @@ public:
 		// Cast returned reference into pointer
 		QPalette* sigval1 = &palette_ret;
 
-		vtbl->polishWithPalette(vtbl, this, sigval1);
+		vtbl->polishWithPalette(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_polishWithPalette(void* self, QPalette* palette);
+	friend void QStyle_virtualbase_polishWithPalette(VirtualQStyle* self, QPalette* palette);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect itemTextRect(const QFontMetrics& fm, const QRect& r, int flags, bool enabled, const QString& text) const override {
 		if (vtbl->itemTextRect == 0) {
 			return QStyle::itemTextRect(fm, r, flags, enabled, text);
@@ -187,16 +173,15 @@ public:
 		memcpy(text_ms.data, text_b.data(), text_ms.len);
 		struct miqt_string sigval5 = text_ms;
 
-		QRect* callback_return_value = vtbl->itemTextRect(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
+		QRect* callback_return_value = vtbl->itemTextRect(this, sigval1, sigval2, sigval3, sigval4, sigval5);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QStyle_virtualbase_itemTextRect(const void* self, QFontMetrics* fm, QRect* r, int flags, bool enabled, struct miqt_string text);
+	friend QRect* QStyle_virtualbase_itemTextRect(const VirtualQStyle* self, QFontMetrics* fm, QRect* r, int flags, bool enabled, struct miqt_string text);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect itemPixmapRect(const QRect& r, int flags, const QPixmap& pixmap) const override {
 		if (vtbl->itemPixmapRect == 0) {
 			return QStyle::itemPixmapRect(r, flags, pixmap);
@@ -210,16 +195,15 @@ public:
 		// Cast returned reference into pointer
 		QPixmap* sigval3 = const_cast<QPixmap*>(&pixmap_ret);
 
-		QRect* callback_return_value = vtbl->itemPixmapRect(vtbl, this, sigval1, sigval2, sigval3);
+		QRect* callback_return_value = vtbl->itemPixmapRect(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QRect* QStyle_virtualbase_itemPixmapRect(const void* self, QRect* r, int flags, QPixmap* pixmap);
+	friend QRect* QStyle_virtualbase_itemPixmapRect(const VirtualQStyle* self, QRect* r, int flags, QPixmap* pixmap);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawItemText(QPainter* painter, const QRect& rect, int flags, const QPalette& pal, bool enabled, const QString& text, QPalette::ColorRole textRole) const override {
 		if (vtbl->drawItemText == 0) {
 			QStyle::drawItemText(painter, rect, flags, pal, enabled, text, textRole);
@@ -246,13 +230,12 @@ public:
 		QPalette::ColorRole textRole_ret = textRole;
 		int sigval7 = static_cast<int>(textRole_ret);
 
-		vtbl->drawItemText(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
+		vtbl->drawItemText(this, sigval1, sigval2, sigval3, sigval4, sigval5, sigval6, sigval7);
 
 	}
 
-	friend void QStyle_virtualbase_drawItemText(const void* self, QPainter* painter, QRect* rect, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole);
+	friend void QStyle_virtualbase_drawItemText(const VirtualQStyle* self, QPainter* painter, QRect* rect, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawItemPixmap(QPainter* painter, const QRect& rect, int alignment, const QPixmap& pixmap) const override {
 		if (vtbl->drawItemPixmap == 0) {
 			QStyle::drawItemPixmap(painter, rect, alignment, pixmap);
@@ -268,29 +251,27 @@ public:
 		// Cast returned reference into pointer
 		QPixmap* sigval4 = const_cast<QPixmap*>(&pixmap_ret);
 
-		vtbl->drawItemPixmap(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->drawItemPixmap(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	friend void QStyle_virtualbase_drawItemPixmap(const void* self, QPainter* painter, QRect* rect, int alignment, QPixmap* pixmap);
+	friend void QStyle_virtualbase_drawItemPixmap(const VirtualQStyle* self, QPainter* painter, QRect* rect, int alignment, QPixmap* pixmap);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPalette standardPalette() const override {
 		if (vtbl->standardPalette == 0) {
 			return QStyle::standardPalette();
 		}
 
 
-		QPalette* callback_return_value = vtbl->standardPalette(vtbl, this);
+		QPalette* callback_return_value = vtbl->standardPalette(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QPalette* QStyle_virtualbase_standardPalette(const void* self);
+	friend QPalette* QStyle_virtualbase_standardPalette(const VirtualQStyle* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawPrimitive(QStyle::PrimitiveElement pe, const QStyleOption* opt, QPainter* p, const QWidget* w) const override {
 		if (vtbl->drawPrimitive == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -302,11 +283,10 @@ public:
 		QPainter* sigval3 = p;
 		QWidget* sigval4 = (QWidget*) w;
 
-		vtbl->drawPrimitive(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->drawPrimitive(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawControl(QStyle::ControlElement element, const QStyleOption* opt, QPainter* p, const QWidget* w) const override {
 		if (vtbl->drawControl == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -318,11 +298,10 @@ public:
 		QPainter* sigval3 = p;
 		QWidget* sigval4 = (QWidget*) w;
 
-		vtbl->drawControl(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->drawControl(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect subElementRect(QStyle::SubElement subElement, const QStyleOption* option, const QWidget* widget) const override {
 		if (vtbl->subElementRect == 0) {
 			return QRect(); // Pure virtual, there is no base we can call
@@ -333,14 +312,13 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
 
-		QRect* callback_return_value = vtbl->subElementRect(vtbl, this, sigval1, sigval2, sigval3);
+		QRect* callback_return_value = vtbl->subElementRect(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void drawComplexControl(QStyle::ComplexControl cc, const QStyleOptionComplex* opt, QPainter* p, const QWidget* widget) const override {
 		if (vtbl->drawComplexControl == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -352,11 +330,10 @@ public:
 		QPainter* sigval3 = p;
 		QWidget* sigval4 = (QWidget*) widget;
 
-		vtbl->drawComplexControl(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		vtbl->drawComplexControl(this, sigval1, sigval2, sigval3, sigval4);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QStyle::SubControl hitTestComplexControl(QStyle::ComplexControl cc, const QStyleOptionComplex* opt, const QPoint& pt, const QWidget* widget) const override {
 		if (vtbl->hitTestComplexControl == 0) {
 			return (QStyle::SubControl)(0); // Pure virtual, there is no base we can call
@@ -370,12 +347,11 @@ public:
 		QPoint* sigval3 = const_cast<QPoint*>(&pt_ret);
 		QWidget* sigval4 = (QWidget*) widget;
 
-		int callback_return_value = vtbl->hitTestComplexControl(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = vtbl->hitTestComplexControl(this, sigval1, sigval2, sigval3, sigval4);
 
 		return static_cast<QStyle::SubControl>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect subControlRect(QStyle::ComplexControl cc, const QStyleOptionComplex* opt, QStyle::SubControl sc, const QWidget* widget) const override {
 		if (vtbl->subControlRect == 0) {
 			return QRect(); // Pure virtual, there is no base we can call
@@ -388,14 +364,13 @@ public:
 		int sigval3 = static_cast<int>(sc_ret);
 		QWidget* sigval4 = (QWidget*) widget;
 
-		QRect* callback_return_value = vtbl->subControlRect(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		QRect* callback_return_value = vtbl->subControlRect(this, sigval1, sigval2, sigval3, sigval4);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int pixelMetric(QStyle::PixelMetric metric, const QStyleOption* option, const QWidget* widget) const override {
 		if (vtbl->pixelMetric == 0) {
 			return 0; // Pure virtual, there is no base we can call
@@ -406,12 +381,11 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
 
-		int callback_return_value = vtbl->pixelMetric(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->pixelMetric(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeFromContents(QStyle::ContentsType ct, const QStyleOption* opt, const QSize& contentsSize, const QWidget* w) const override {
 		if (vtbl->sizeFromContents == 0) {
 			return QSize(); // Pure virtual, there is no base we can call
@@ -425,14 +399,13 @@ public:
 		QSize* sigval3 = const_cast<QSize*>(&contentsSize_ret);
 		QWidget* sigval4 = (QWidget*) w;
 
-		QSize* callback_return_value = vtbl->sizeFromContents(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		QSize* callback_return_value = vtbl->sizeFromContents(this, sigval1, sigval2, sigval3, sigval4);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int styleHint(QStyle::StyleHint stylehint, const QStyleOption* opt, const QWidget* widget, QStyleHintReturn* returnData) const override {
 		if (vtbl->styleHint == 0) {
 			return 0; // Pure virtual, there is no base we can call
@@ -444,12 +417,11 @@ public:
 		QWidget* sigval3 = (QWidget*) widget;
 		QStyleHintReturn* sigval4 = returnData;
 
-		int callback_return_value = vtbl->styleHint(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		int callback_return_value = vtbl->styleHint(this, sigval1, sigval2, sigval3, sigval4);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPixmap standardPixmap(QStyle::StandardPixmap standardPixmap, const QStyleOption* opt, const QWidget* widget) const override {
 		if (vtbl->standardPixmap == 0) {
 			return QPixmap(); // Pure virtual, there is no base we can call
@@ -460,14 +432,13 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) opt;
 		QWidget* sigval3 = (QWidget*) widget;
 
-		QPixmap* callback_return_value = vtbl->standardPixmap(vtbl, this, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = vtbl->standardPixmap(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QIcon standardIcon(QStyle::StandardPixmap standardIcon, const QStyleOption* option, const QWidget* widget) const override {
 		if (vtbl->standardIcon == 0) {
 			return QIcon(); // Pure virtual, there is no base we can call
@@ -478,14 +449,13 @@ public:
 		QStyleOption* sigval2 = (QStyleOption*) option;
 		QWidget* sigval3 = (QWidget*) widget;
 
-		QIcon* callback_return_value = vtbl->standardIcon(vtbl, this, sigval1, sigval2, sigval3);
+		QIcon* callback_return_value = vtbl->standardIcon(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QPixmap generatedIconPixmap(QIcon::Mode iconMode, const QPixmap& pixmap, const QStyleOption* opt) const override {
 		if (vtbl->generatedIconPixmap == 0) {
 			return QPixmap(); // Pure virtual, there is no base we can call
@@ -498,14 +468,13 @@ public:
 		QPixmap* sigval2 = const_cast<QPixmap*>(&pixmap_ret);
 		QStyleOption* sigval3 = (QStyleOption*) opt;
 
-		QPixmap* callback_return_value = vtbl->generatedIconPixmap(vtbl, this, sigval1, sigval2, sigval3);
+		QPixmap* callback_return_value = vtbl->generatedIconPixmap(this, sigval1, sigval2, sigval3);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int layoutSpacing(QSizePolicy::ControlType control1, QSizePolicy::ControlType control2, Qt::Orientation orientation, const QStyleOption* option, const QWidget* widget) const override {
 		if (vtbl->layoutSpacing == 0) {
 			return 0; // Pure virtual, there is no base we can call
@@ -520,12 +489,11 @@ public:
 		QStyleOption* sigval4 = (QStyleOption*) option;
 		QWidget* sigval5 = (QWidget*) widget;
 
-		int callback_return_value = vtbl->layoutSpacing(vtbl, this, sigval1, sigval2, sigval3, sigval4, sigval5);
+		int callback_return_value = vtbl->layoutSpacing(this, sigval1, sigval2, sigval3, sigval4, sigval5);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QStyle::event(event);
@@ -533,14 +501,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QStyle_virtualbase_event(void* self, QEvent* event);
+	friend bool QStyle_virtualbase_event(VirtualQStyle* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QStyle::eventFilter(watched, event);
@@ -549,14 +516,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QStyle_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QStyle_virtualbase_eventFilter(VirtualQStyle* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QStyle::timerEvent(event);
@@ -565,13 +531,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QStyle_virtualbase_timerEvent(VirtualQStyle* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QStyle::childEvent(event);
@@ -580,13 +545,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QStyle_virtualbase_childEvent(VirtualQStyle* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QStyle::customEvent(event);
@@ -595,13 +559,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QStyle_virtualbase_customEvent(VirtualQStyle* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QStyle::connectNotify(signal);
@@ -612,13 +575,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QStyle_virtualbase_connectNotify(VirtualQStyle* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QStyle::disconnectNotify(signal);
@@ -629,21 +591,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QStyle_virtualbase_disconnectNotify(VirtualQStyle* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QStyle_protectedbase_sender(const void* self);
-	friend int QStyle_protectedbase_senderSignalIndex(const void* self);
-	friend int QStyle_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QStyle_protectedbase_sender(const VirtualQStyle* self);
+	friend int QStyle_protectedbase_senderSignalIndex(const VirtualQStyle* self);
+	friend int QStyle_protectedbase_receivers(const VirtualQStyle* self, const char* signal);
+	friend bool QStyle_protectedbase_isSignalConnected(const VirtualQStyle* self, QMetaMethod* signal);
 };
 
-QStyle* QStyle_new(struct QStyle_VTable* vtbl) {
-	return new VirtualQStyle(vtbl);
+VirtualQStyle* QStyle_new(const QStyle_VTable* vtbl, void* vdata) {
+	return new VirtualQStyle(vtbl, vdata);
 }
 
 void QStyle_virtbase(QStyle* src, QObject** outptr_QObject) {
@@ -872,155 +834,128 @@ int QStyle_combinedLayoutSpacing5(const QStyle* self, int controls1, int control
 	return self->combinedLayoutSpacing(static_cast<QSizePolicy::ControlTypes>(controls1), static_cast<QSizePolicy::ControlTypes>(controls2), static_cast<Qt::Orientation>(orientation), option, widget);
 }
 
-QMetaObject* QStyle_virtualbase_metaObject(const void* self) {
+QMetaObject* QStyle_virtualbase_metaObject(const VirtualQStyle* self) {
 
-	return (QMetaObject*) ( (const VirtualQStyle*)(self) )->QStyle::metaObject();
-
+	return (QMetaObject*) self->QStyle::metaObject();
 }
 
-void* QStyle_virtualbase_metacast(void* self, const char* param1) {
+void* QStyle_virtualbase_metacast(VirtualQStyle* self, const char* param1) {
 
-	return ( (VirtualQStyle*)(self) )->QStyle::qt_metacast(param1);
-
+	return self->QStyle::qt_metacast(param1);
 }
 
-int QStyle_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QStyle_virtualbase_metacall(VirtualQStyle* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQStyle*)(self) )->QStyle::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QStyle::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QStyle_virtualbase_polish(void* self, QWidget* widget) {
+void QStyle_virtualbase_polish(VirtualQStyle* self, QWidget* widget) {
 
-	( (VirtualQStyle*)(self) )->QStyle::polish(widget);
-
+	self->QStyle::polish(widget);
 }
 
-void QStyle_virtualbase_unpolish(void* self, QWidget* widget) {
+void QStyle_virtualbase_unpolish(VirtualQStyle* self, QWidget* widget) {
 
-	( (VirtualQStyle*)(self) )->QStyle::unpolish(widget);
-
+	self->QStyle::unpolish(widget);
 }
 
-void QStyle_virtualbase_polishWithApplication(void* self, QApplication* application) {
+void QStyle_virtualbase_polishWithApplication(VirtualQStyle* self, QApplication* application) {
 
-	( (VirtualQStyle*)(self) )->QStyle::polish(application);
-
+	self->QStyle::polish(application);
 }
 
-void QStyle_virtualbase_unpolishWithApplication(void* self, QApplication* application) {
+void QStyle_virtualbase_unpolishWithApplication(VirtualQStyle* self, QApplication* application) {
 
-	( (VirtualQStyle*)(self) )->QStyle::unpolish(application);
-
+	self->QStyle::unpolish(application);
 }
 
-void QStyle_virtualbase_polishWithPalette(void* self, QPalette* palette) {
+void QStyle_virtualbase_polishWithPalette(VirtualQStyle* self, QPalette* palette) {
 
-	( (VirtualQStyle*)(self) )->QStyle::polish(*palette);
-
+	self->QStyle::polish(*palette);
 }
 
-QRect* QStyle_virtualbase_itemTextRect(const void* self, QFontMetrics* fm, QRect* r, int flags, bool enabled, struct miqt_string text) {
+QRect* QStyle_virtualbase_itemTextRect(const VirtualQStyle* self, QFontMetrics* fm, QRect* r, int flags, bool enabled, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 
-	return new QRect(( (const VirtualQStyle*)(self) )->QStyle::itemTextRect(*fm, *r, static_cast<int>(flags), enabled, text_QString));
-
+	return new QRect(self->QStyle::itemTextRect(*fm, *r, static_cast<int>(flags), enabled, text_QString));
 }
 
-QRect* QStyle_virtualbase_itemPixmapRect(const void* self, QRect* r, int flags, QPixmap* pixmap) {
+QRect* QStyle_virtualbase_itemPixmapRect(const VirtualQStyle* self, QRect* r, int flags, QPixmap* pixmap) {
 
-	return new QRect(( (const VirtualQStyle*)(self) )->QStyle::itemPixmapRect(*r, static_cast<int>(flags), *pixmap));
-
+	return new QRect(self->QStyle::itemPixmapRect(*r, static_cast<int>(flags), *pixmap));
 }
 
-void QStyle_virtualbase_drawItemText(const void* self, QPainter* painter, QRect* rect, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole) {
+void QStyle_virtualbase_drawItemText(const VirtualQStyle* self, QPainter* painter, QRect* rect, int flags, QPalette* pal, bool enabled, struct miqt_string text, int textRole) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
 
-	( (const VirtualQStyle*)(self) )->QStyle::drawItemText(painter, *rect, static_cast<int>(flags), *pal, enabled, text_QString, static_cast<QPalette::ColorRole>(textRole));
-
+	self->QStyle::drawItemText(painter, *rect, static_cast<int>(flags), *pal, enabled, text_QString, static_cast<QPalette::ColorRole>(textRole));
 }
 
-void QStyle_virtualbase_drawItemPixmap(const void* self, QPainter* painter, QRect* rect, int alignment, QPixmap* pixmap) {
+void QStyle_virtualbase_drawItemPixmap(const VirtualQStyle* self, QPainter* painter, QRect* rect, int alignment, QPixmap* pixmap) {
 
-	( (const VirtualQStyle*)(self) )->QStyle::drawItemPixmap(painter, *rect, static_cast<int>(alignment), *pixmap);
-
+	self->QStyle::drawItemPixmap(painter, *rect, static_cast<int>(alignment), *pixmap);
 }
 
-QPalette* QStyle_virtualbase_standardPalette(const void* self) {
+QPalette* QStyle_virtualbase_standardPalette(const VirtualQStyle* self) {
 
-	return new QPalette(( (const VirtualQStyle*)(self) )->QStyle::standardPalette());
-
+	return new QPalette(self->QStyle::standardPalette());
 }
 
-bool QStyle_virtualbase_event(void* self, QEvent* event) {
+bool QStyle_virtualbase_event(VirtualQStyle* self, QEvent* event) {
 
-	return ( (VirtualQStyle*)(self) )->QStyle::event(event);
-
+	return self->QStyle::event(event);
 }
 
-bool QStyle_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QStyle_virtualbase_eventFilter(VirtualQStyle* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQStyle*)(self) )->QStyle::eventFilter(watched, event);
-
+	return self->QStyle::eventFilter(watched, event);
 }
 
-void QStyle_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QStyle_virtualbase_timerEvent(VirtualQStyle* self, QTimerEvent* event) {
 
-	( (VirtualQStyle*)(self) )->QStyle::timerEvent(event);
-
+	self->QStyle::timerEvent(event);
 }
 
-void QStyle_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QStyle_virtualbase_childEvent(VirtualQStyle* self, QChildEvent* event) {
 
-	( (VirtualQStyle*)(self) )->QStyle::childEvent(event);
-
+	self->QStyle::childEvent(event);
 }
 
-void QStyle_virtualbase_customEvent(void* self, QEvent* event) {
+void QStyle_virtualbase_customEvent(VirtualQStyle* self, QEvent* event) {
 
-	( (VirtualQStyle*)(self) )->QStyle::customEvent(event);
-
+	self->QStyle::customEvent(event);
 }
 
-void QStyle_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QStyle_virtualbase_connectNotify(VirtualQStyle* self, QMetaMethod* signal) {
 
-	( (VirtualQStyle*)(self) )->QStyle::connectNotify(*signal);
-
+	self->QStyle::connectNotify(*signal);
 }
 
-void QStyle_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QStyle_virtualbase_disconnectNotify(VirtualQStyle* self, QMetaMethod* signal) {
 
-	( (VirtualQStyle*)(self) )->QStyle::disconnectNotify(*signal);
-
+	self->QStyle::disconnectNotify(*signal);
 }
 
 const QMetaObject* QStyle_staticMetaObject() { return &QStyle::staticMetaObject; }
-QObject* QStyle_protectedbase_sender(const void* self) {
-	VirtualQStyle* self_cast = static_cast<VirtualQStyle*>( (QStyle*)(self) );
-	
-	return self_cast->sender();
 
+const QStyle_VTable* QStyle_vtbl(const VirtualQStyle* self) { return self->vtbl; }
+void* QStyle_vdata(const VirtualQStyle* self) { return self->vdata; }
+void QStyle_setVdata(VirtualQStyle* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QStyle_protectedbase_sender(const VirtualQStyle* self) {
+	return self->sender();
 }
 
-int QStyle_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQStyle* self_cast = static_cast<VirtualQStyle*>( (QStyle*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QStyle_protectedbase_senderSignalIndex(const VirtualQStyle* self) {
+	return self->senderSignalIndex();
 }
 
-int QStyle_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQStyle* self_cast = static_cast<VirtualQStyle*>( (QStyle*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QStyle_protectedbase_receivers(const VirtualQStyle* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QStyle_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQStyle* self_cast = static_cast<VirtualQStyle*>( (QStyle*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QStyle_protectedbase_isSignalConnected(const VirtualQStyle* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QStyle_delete(QStyle* self) {

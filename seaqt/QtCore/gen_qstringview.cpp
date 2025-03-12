@@ -7,15 +7,6 @@
 #include <QStringView>
 #include <qstringview.h>
 #include "gen_qstringview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QStringView* QStringView_new() {
 	return new QStringView();
 }

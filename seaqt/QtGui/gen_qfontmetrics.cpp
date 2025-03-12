@@ -12,15 +12,6 @@
 #include <cstring>
 #include <qfontmetrics.h>
 #include "gen_qfontmetrics.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QFontMetrics* QFontMetrics_new(QFont* param1) {
 	return new QFontMetrics(*param1);
 }

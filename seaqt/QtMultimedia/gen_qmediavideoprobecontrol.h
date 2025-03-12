@@ -44,6 +44,7 @@ struct miqt_string QMediaVideoProbeControl_tr2(const char* s, const char* c);
 struct miqt_string QMediaVideoProbeControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QMediaVideoProbeControl_trUtf82(const char* s, const char* c);
 struct miqt_string QMediaVideoProbeControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QMediaVideoProbeControl_staticMetaObject();
 void QMediaVideoProbeControl_delete(QMediaVideoProbeControl* self);
 

@@ -32,6 +32,7 @@ QTextStream* QTextStream_new();
 QTextStream* QTextStream_new2(QIODevice* device);
 QTextStream* QTextStream_new3(struct miqt_string array);
 QTextStream* QTextStream_new4(struct miqt_string array, int openMode);
+
 void QTextStream_setCodec(QTextStream* self, QTextCodec* codec);
 void QTextStream_setCodecWithCodecName(QTextStream* self, const char* codecName);
 QTextCodec* QTextStream_codec(const QTextStream* self);
@@ -102,6 +103,7 @@ QTextStream* QTextStream_operatorShiftLeftWithArray(QTextStream* self, struct mi
 QTextStream* QTextStream_operatorShiftLeftWithChar(QTextStream* self, const char* c);
 QTextStream* QTextStream_operatorShiftLeftWithPtr(QTextStream* self, const void* ptr);
 struct miqt_string QTextStream_readLine1(QTextStream* self, long long maxlen);
+
 void QTextStream_delete(QTextStream* self);
 
 #ifdef __cplusplus

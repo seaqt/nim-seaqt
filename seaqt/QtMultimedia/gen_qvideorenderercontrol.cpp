@@ -9,15 +9,6 @@
 #include <QVideoRendererControl>
 #include <qvideorenderercontrol.h>
 #include "gen_qvideorenderercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QVideoRendererControl_virtbase(QVideoRendererControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -109,6 +100,7 @@ struct miqt_string QVideoRendererControl_trUtf83(const char* s, const char* c, i
 }
 
 const QMetaObject* QVideoRendererControl_staticMetaObject() { return &QVideoRendererControl::staticMetaObject; }
+
 void QVideoRendererControl_delete(QVideoRendererControl* self) {
 	delete self;
 }

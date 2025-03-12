@@ -51,34 +51,34 @@ proc fcQColormap_initialize(): void {.importc: "QColormap_initialize".}
 proc fcQColormap_cleanup(): void {.importc: "QColormap_cleanup".}
 proc fcQColormap_instance(): pointer {.importc: "QColormap_instance".}
 proc fcQColormap_operatorAssign(self: pointer, colormap: pointer): void {.importc: "QColormap_operatorAssign".}
-proc fcQColormap_mode(self: pointer, ): cint {.importc: "QColormap_mode".}
-proc fcQColormap_depth(self: pointer, ): cint {.importc: "QColormap_depth".}
-proc fcQColormap_size(self: pointer, ): cint {.importc: "QColormap_size".}
+proc fcQColormap_mode(self: pointer): cint {.importc: "QColormap_mode".}
+proc fcQColormap_depth(self: pointer): cint {.importc: "QColormap_depth".}
+proc fcQColormap_size(self: pointer): cint {.importc: "QColormap_size".}
 proc fcQColormap_pixel(self: pointer, color: pointer): cuint {.importc: "QColormap_pixel".}
 proc fcQColormap_colorAt(self: pointer, pixel: cuint): pointer {.importc: "QColormap_colorAt".}
-proc fcQColormap_colormap(self: pointer, ): struct_miqt_array {.importc: "QColormap_colormap".}
+proc fcQColormap_colormap(self: pointer): struct_miqt_array {.importc: "QColormap_colormap".}
 proc fcQColormap_instance1(screen: cint): pointer {.importc: "QColormap_instance1".}
 proc fcQColormap_new(colormap: pointer): ptr cQColormap {.importc: "QColormap_new".}
 
-proc initialize*(_: type gen_qcolormap_types.QColormap, ): void =
+proc initialize*(_: type gen_qcolormap_types.QColormap): void =
   fcQColormap_initialize()
 
-proc cleanup*(_: type gen_qcolormap_types.QColormap, ): void =
+proc cleanup*(_: type gen_qcolormap_types.QColormap): void =
   fcQColormap_cleanup()
 
-proc instance*(_: type gen_qcolormap_types.QColormap, ): gen_qcolormap_types.QColormap =
+proc instance*(_: type gen_qcolormap_types.QColormap): gen_qcolormap_types.QColormap =
   gen_qcolormap_types.QColormap(h: fcQColormap_instance(), owned: true)
 
 proc operatorAssign*(self: gen_qcolormap_types.QColormap, colormap: gen_qcolormap_types.QColormap): void =
   fcQColormap_operatorAssign(self.h, colormap.h)
 
-proc mode*(self: gen_qcolormap_types.QColormap, ): cint =
+proc mode*(self: gen_qcolormap_types.QColormap): cint =
   cint(fcQColormap_mode(self.h))
 
-proc depth*(self: gen_qcolormap_types.QColormap, ): cint =
+proc depth*(self: gen_qcolormap_types.QColormap): cint =
   fcQColormap_depth(self.h)
 
-proc size*(self: gen_qcolormap_types.QColormap, ): cint =
+proc size*(self: gen_qcolormap_types.QColormap): cint =
   fcQColormap_size(self.h)
 
 proc pixel*(self: gen_qcolormap_types.QColormap, color: gen_qcolor_types.QColor): cuint =
@@ -87,7 +87,7 @@ proc pixel*(self: gen_qcolormap_types.QColormap, color: gen_qcolor_types.QColor)
 proc colorAt*(self: gen_qcolormap_types.QColormap, pixel: cuint): gen_qcolor_types.QColor =
   gen_qcolor_types.QColor(h: fcQColormap_colorAt(self.h, pixel), owned: true)
 
-proc colormap*(self: gen_qcolormap_types.QColormap, ): seq[gen_qcolor_types.QColor] =
+proc colormap*(self: gen_qcolormap_types.QColormap): seq[gen_qcolor_types.QColor] =
   var v_ma = fcQColormap_colormap(self.h)
   var vx_ret = newSeq[gen_qcolor_types.QColor](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)

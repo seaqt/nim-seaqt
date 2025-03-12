@@ -2,15 +2,6 @@
 #include <QRandomGenerator64>
 #include <qrandom.h>
 #include "gen_qrandom.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRandomGenerator* QRandomGenerator_new() {
 	return new QRandomGenerator();
 }

@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcamerainfocontrol.h>
 #include "gen_qcamerainfocontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraInfoControl_virtbase(QCameraInfoControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -111,6 +102,7 @@ struct miqt_string QCameraInfoControl_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QCameraInfoControl_staticMetaObject() { return &QCameraInfoControl::staticMetaObject; }
+
 void QCameraInfoControl_delete(QCameraInfoControl* self) {
 	delete self;
 }

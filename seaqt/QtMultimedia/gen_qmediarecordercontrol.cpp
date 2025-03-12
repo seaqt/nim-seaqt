@@ -9,15 +9,6 @@
 #include <QUrl>
 #include <qmediarecordercontrol.h>
 #include "gen_qmediarecordercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaRecorderControl_virtbase(QMediaRecorderControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -276,6 +267,7 @@ struct miqt_string QMediaRecorderControl_trUtf83(const char* s, const char* c, i
 }
 
 const QMetaObject* QMediaRecorderControl_staticMetaObject() { return &QMediaRecorderControl::staticMetaObject; }
+
 void QMediaRecorderControl_delete(QMediaRecorderControl* self) {
 	delete self;
 }

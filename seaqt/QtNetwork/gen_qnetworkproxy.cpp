@@ -11,15 +11,6 @@
 #include <QVariant>
 #include <qnetworkproxy.h>
 #include "gen_qnetworkproxy.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkProxyQuery* QNetworkProxyQuery_new() {
 	return new QNetworkProxyQuery();
 }
@@ -196,6 +187,7 @@ void QNetworkProxyQuery_setNetworkConfiguration(QNetworkProxyQuery* self, QNetwo
 }
 
 const QMetaObject* QNetworkProxyQuery_staticMetaObject() { return &QNetworkProxyQuery::staticMetaObject; }
+
 void QNetworkProxyQuery_delete(QNetworkProxyQuery* self) {
 	delete self;
 }
@@ -394,14 +386,17 @@ void QNetworkProxy_delete(QNetworkProxy* self) {
 }
 
 class VirtualQNetworkProxyFactory final : public QNetworkProxyFactory {
-	struct QNetworkProxyFactory_VTable* vtbl;
+	const QNetworkProxyFactory_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QNetworkProxyFactory_VTable* QNetworkProxyFactory_vtbl(const VirtualQNetworkProxyFactory* self);
+	friend void* QNetworkProxyFactory_vdata(const VirtualQNetworkProxyFactory* self);
+	friend void QNetworkProxyFactory_setVdata(VirtualQNetworkProxyFactory* self, void* vdata);
 
-	VirtualQNetworkProxyFactory(struct QNetworkProxyFactory_VTable* vtbl): QNetworkProxyFactory(), vtbl(vtbl) {};
+	VirtualQNetworkProxyFactory(const QNetworkProxyFactory_VTable* vtbl, void* vdata): QNetworkProxyFactory(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQNetworkProxyFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQNetworkProxyFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<QNetworkProxy> queryProxy(const QNetworkProxyQuery& query) override {
 		if (vtbl->queryProxy == 0) {
 			return QList<QNetworkProxy>(); // Pure virtual, there is no base we can call
@@ -411,7 +406,7 @@ public:
 		// Cast returned reference into pointer
 		QNetworkProxyQuery* sigval1 = const_cast<QNetworkProxyQuery*>(&query_ret);
 
-		struct miqt_array /* of QNetworkProxy* */  callback_return_value = vtbl->queryProxy(vtbl, this, sigval1);
+		struct miqt_array /* of QNetworkProxy* */  callback_return_value = vtbl->queryProxy(this, sigval1);
 		QList<QNetworkProxy> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QNetworkProxy** callback_return_value_arr = static_cast<QNetworkProxy**>(callback_return_value.data);
@@ -425,8 +420,8 @@ public:
 
 };
 
-QNetworkProxyFactory* QNetworkProxyFactory_new(struct QNetworkProxyFactory_VTable* vtbl) {
-	return new VirtualQNetworkProxyFactory(vtbl);
+VirtualQNetworkProxyFactory* QNetworkProxyFactory_new(const QNetworkProxyFactory_VTable* vtbl, void* vdata) {
+	return new VirtualQNetworkProxyFactory(vtbl, vdata);
 }
 
 struct miqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_queryProxy(QNetworkProxyFactory* self, QNetworkProxyQuery* query) {
@@ -496,6 +491,10 @@ struct miqt_array /* of QNetworkProxy* */  QNetworkProxyFactory_systemProxyForQu
 	_out.data = static_cast<void*>(_arr);
 	return _out;
 }
+
+const QNetworkProxyFactory_VTable* QNetworkProxyFactory_vtbl(const VirtualQNetworkProxyFactory* self) { return self->vtbl; }
+void* QNetworkProxyFactory_vdata(const VirtualQNetworkProxyFactory* self) { return self->vdata; }
+void QNetworkProxyFactory_setVdata(VirtualQNetworkProxyFactory* self, void* vdata) { self->vdata = vdata; }
 
 void QNetworkProxyFactory_delete(QNetworkProxyFactory* self) {
 	delete self;

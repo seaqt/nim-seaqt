@@ -37,6 +37,7 @@ QMediaContent* QMediaContent_new6(QMediaContent* other);
 QMediaContent* QMediaContent_new7(QMediaPlaylist* playlist);
 QMediaContent* QMediaContent_new8(QMediaPlaylist* playlist, QUrl* contentUrl);
 QMediaContent* QMediaContent_new9(QMediaPlaylist* playlist, QUrl* contentUrl, bool takeOwnership);
+
 void QMediaContent_operatorAssign(QMediaContent* self, QMediaContent* other);
 bool QMediaContent_operatorEqual(const QMediaContent* self, QMediaContent* other);
 bool QMediaContent_operatorNotEqual(const QMediaContent* self, QMediaContent* other);
@@ -47,6 +48,7 @@ QNetworkRequest* QMediaContent_canonicalRequest(const QMediaContent* self);
 QMediaResource* QMediaContent_canonicalResource(const QMediaContent* self);
 struct miqt_array /* of QMediaResource* */  QMediaContent_resources(const QMediaContent* self);
 QMediaPlaylist* QMediaContent_playlist(const QMediaContent* self);
+
 void QMediaContent_delete(QMediaContent* self);
 
 #ifdef __cplusplus

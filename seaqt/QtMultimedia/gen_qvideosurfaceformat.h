@@ -30,6 +30,7 @@ QVideoSurfaceFormat* QVideoSurfaceFormat_new();
 QVideoSurfaceFormat* QVideoSurfaceFormat_new2(QSize* size, int pixelFormat);
 QVideoSurfaceFormat* QVideoSurfaceFormat_new3(QVideoSurfaceFormat* format);
 QVideoSurfaceFormat* QVideoSurfaceFormat_new4(QSize* size, int pixelFormat, int handleType);
+
 void QVideoSurfaceFormat_operatorAssign(QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
 bool QVideoSurfaceFormat_operatorEqual(const QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
 bool QVideoSurfaceFormat_operatorNotEqual(const QVideoSurfaceFormat* self, QVideoSurfaceFormat* format);
@@ -58,6 +59,7 @@ QSize* QVideoSurfaceFormat_sizeHint(const QVideoSurfaceFormat* self);
 struct miqt_array /* of struct miqt_string */  QVideoSurfaceFormat_propertyNames(const QVideoSurfaceFormat* self);
 QVariant* QVideoSurfaceFormat_property(const QVideoSurfaceFormat* self, const char* name);
 void QVideoSurfaceFormat_setProperty(QVideoSurfaceFormat* self, const char* name, QVariant* value);
+
 void QVideoSurfaceFormat_delete(QVideoSurfaceFormat* self);
 
 #ifdef __cplusplus

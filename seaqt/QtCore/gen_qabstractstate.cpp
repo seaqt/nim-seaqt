@@ -10,15 +10,6 @@
 #include <cstring>
 #include <qabstractstate.h>
 #include "gen_qabstractstate.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAbstractState_virtbase(QAbstractState* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -130,6 +121,7 @@ struct miqt_string QAbstractState_trUtf83(const char* s, const char* c, int n) {
 }
 
 const QMetaObject* QAbstractState_staticMetaObject() { return &QAbstractState::staticMetaObject; }
+
 void QAbstractState_delete(QAbstractState* self) {
 	delete self;
 }

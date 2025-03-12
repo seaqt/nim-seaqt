@@ -65,17 +65,17 @@ export
 
 type cQCryptographicHash*{.exportc: "QCryptographicHash", incompleteStruct.} = object
 
-proc fcQCryptographicHash_reset(self: pointer, ): void {.importc: "QCryptographicHash_reset".}
+proc fcQCryptographicHash_reset(self: pointer): void {.importc: "QCryptographicHash_reset".}
 proc fcQCryptographicHash_addData(self: pointer, data: cstring, length: cint): void {.importc: "QCryptographicHash_addData".}
 proc fcQCryptographicHash_addDataWithData(self: pointer, data: struct_miqt_string): void {.importc: "QCryptographicHash_addDataWithData".}
 proc fcQCryptographicHash_addDataWithDevice(self: pointer, device: pointer): bool {.importc: "QCryptographicHash_addDataWithDevice".}
-proc fcQCryptographicHash_resultX(self: pointer, ): struct_miqt_string {.importc: "QCryptographicHash_result".}
+proc fcQCryptographicHash_resultX(self: pointer): struct_miqt_string {.importc: "QCryptographicHash_result".}
 proc fcQCryptographicHash_hash(data: struct_miqt_string, methodVal: cint): struct_miqt_string {.importc: "QCryptographicHash_hash".}
 proc fcQCryptographicHash_hashLength(methodVal: cint): cint {.importc: "QCryptographicHash_hashLength".}
 proc fcQCryptographicHash_new(methodVal: cint): ptr cQCryptographicHash {.importc: "QCryptographicHash_new".}
 proc fcQCryptographicHash_staticMetaObject(): pointer {.importc: "QCryptographicHash_staticMetaObject".}
 
-proc reset*(self: gen_qcryptographichash_types.QCryptographicHash, ): void =
+proc reset*(self: gen_qcryptographichash_types.QCryptographicHash): void =
   fcQCryptographicHash_reset(self.h)
 
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: cstring, length: cint): void =
@@ -87,7 +87,7 @@ proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, data: seq[b
 proc addData*(self: gen_qcryptographichash_types.QCryptographicHash, device: gen_qiodevice_types.QIODevice): bool =
   fcQCryptographicHash_addDataWithDevice(self.h, device.h)
 
-proc resultX*(self: gen_qcryptographichash_types.QCryptographicHash, ): seq[byte] =
+proc resultX*(self: gen_qcryptographichash_types.QCryptographicHash): seq[byte] =
   var v_bytearray = fcQCryptographicHash_resultX(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)

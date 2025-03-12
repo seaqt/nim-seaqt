@@ -26,6 +26,7 @@ QStorageInfo* QStorageInfo_new();
 QStorageInfo* QStorageInfo_new2(struct miqt_string path);
 QStorageInfo* QStorageInfo_new3(QDir* dir);
 QStorageInfo* QStorageInfo_new4(QStorageInfo* other);
+
 void QStorageInfo_operatorAssign(QStorageInfo* self, QStorageInfo* other);
 void QStorageInfo_swap(QStorageInfo* self, QStorageInfo* other);
 void QStorageInfo_setPath(QStorageInfo* self, struct miqt_string path);
@@ -46,6 +47,7 @@ bool QStorageInfo_isValid(const QStorageInfo* self);
 void QStorageInfo_refresh(QStorageInfo* self);
 struct miqt_array /* of QStorageInfo* */  QStorageInfo_mountedVolumes();
 QStorageInfo* QStorageInfo_root();
+
 void QStorageInfo_delete(QStorageInfo* self);
 
 #ifdef __cplusplus

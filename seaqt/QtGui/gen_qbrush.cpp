@@ -16,15 +16,6 @@
 #include <QVariant>
 #include <qbrush.h>
 #include "gen_qbrush.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QBrush* QBrush_new() {
 	return new QBrush();
 }
@@ -273,6 +264,7 @@ bool QGradient_operatorNotEqual(const QGradient* self, QGradient* other) {
 }
 
 const QMetaObject* QGradient_staticMetaObject() { return &QGradient::staticMetaObject; }
+
 void QGradient_delete(QGradient* self) {
 	delete self;
 }
@@ -462,7 +454,7 @@ void QConicalGradient_delete(QConicalGradient* self) {
 }
 
 QGradient__QGradientData* QGradient__QGradientData_new(QGradient__QGradientData* param1) {
-	return new QGradient::QGradientData(*param1);
+	return new QGradient__QGradientData(*param1);
 }
 
 void QGradient__QGradientData_operatorAssign(QGradient__QGradientData* self, QGradient__QGradientData* param1) {

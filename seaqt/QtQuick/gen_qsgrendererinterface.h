@@ -30,6 +30,7 @@ int QSGRendererInterface_shaderCompilationType(const QSGRendererInterface* self)
 int QSGRendererInterface_shaderSourceType(const QSGRendererInterface* self);
 bool QSGRendererInterface_isApiRhiBased(int api);
 void QSGRendererInterface_operatorAssign(QSGRendererInterface* self, QSGRendererInterface* param1);
+
 void QSGRendererInterface_delete(QSGRendererInterface* self);
 
 #ifdef __cplusplus

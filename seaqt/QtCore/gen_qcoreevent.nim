@@ -222,52 +222,52 @@ type cQChildEvent*{.exportc: "QChildEvent", incompleteStruct.} = object
 type cQDynamicPropertyChangeEvent*{.exportc: "QDynamicPropertyChangeEvent", incompleteStruct.} = object
 
 proc fcQEvent_operatorAssign(self: pointer, other: pointer): void {.importc: "QEvent_operatorAssign".}
-proc fcQEvent_typeX(self: pointer, ): cint {.importc: "QEvent_type".}
-proc fcQEvent_spontaneous(self: pointer, ): bool {.importc: "QEvent_spontaneous".}
+proc fcQEvent_typeX(self: pointer): cint {.importc: "QEvent_type".}
+proc fcQEvent_spontaneous(self: pointer): bool {.importc: "QEvent_spontaneous".}
 proc fcQEvent_setAccepted(self: pointer, accepted: bool): void {.importc: "QEvent_setAccepted".}
-proc fcQEvent_isAccepted(self: pointer, ): bool {.importc: "QEvent_isAccepted".}
-proc fcQEvent_accept(self: pointer, ): void {.importc: "QEvent_accept".}
-proc fcQEvent_ignore(self: pointer, ): void {.importc: "QEvent_ignore".}
+proc fcQEvent_isAccepted(self: pointer): bool {.importc: "QEvent_isAccepted".}
+proc fcQEvent_accept(self: pointer): void {.importc: "QEvent_accept".}
+proc fcQEvent_ignore(self: pointer): void {.importc: "QEvent_ignore".}
 proc fcQEvent_registerEventType(): cint {.importc: "QEvent_registerEventType".}
 proc fcQEvent_registerEventType1(hint: cint): cint {.importc: "QEvent_registerEventType1".}
 proc fcQEvent_new(typeVal: cint): ptr cQEvent {.importc: "QEvent_new".}
 proc fcQEvent_new2(other: pointer): ptr cQEvent {.importc: "QEvent_new2".}
 proc fcQEvent_staticMetaObject(): pointer {.importc: "QEvent_staticMetaObject".}
-proc fcQTimerEvent_timerId(self: pointer, ): cint {.importc: "QTimerEvent_timerId".}
+proc fcQTimerEvent_timerId(self: pointer): cint {.importc: "QTimerEvent_timerId".}
 proc fcQTimerEvent_new(timerId: cint): ptr cQTimerEvent {.importc: "QTimerEvent_new".}
 proc fcQTimerEvent_new2(param1: pointer): ptr cQTimerEvent {.importc: "QTimerEvent_new2".}
-proc fcQChildEvent_child(self: pointer, ): pointer {.importc: "QChildEvent_child".}
-proc fcQChildEvent_added(self: pointer, ): bool {.importc: "QChildEvent_added".}
-proc fcQChildEvent_polished(self: pointer, ): bool {.importc: "QChildEvent_polished".}
-proc fcQChildEvent_removed(self: pointer, ): bool {.importc: "QChildEvent_removed".}
+proc fcQChildEvent_child(self: pointer): pointer {.importc: "QChildEvent_child".}
+proc fcQChildEvent_added(self: pointer): bool {.importc: "QChildEvent_added".}
+proc fcQChildEvent_polished(self: pointer): bool {.importc: "QChildEvent_polished".}
+proc fcQChildEvent_removed(self: pointer): bool {.importc: "QChildEvent_removed".}
 proc fcQChildEvent_new(typeVal: cint, child: pointer): ptr cQChildEvent {.importc: "QChildEvent_new".}
 proc fcQChildEvent_new2(param1: pointer): ptr cQChildEvent {.importc: "QChildEvent_new2".}
-proc fcQDynamicPropertyChangeEvent_propertyName(self: pointer, ): struct_miqt_string {.importc: "QDynamicPropertyChangeEvent_propertyName".}
+proc fcQDynamicPropertyChangeEvent_propertyName(self: pointer): struct_miqt_string {.importc: "QDynamicPropertyChangeEvent_propertyName".}
 proc fcQDynamicPropertyChangeEvent_new(name: struct_miqt_string): ptr cQDynamicPropertyChangeEvent {.importc: "QDynamicPropertyChangeEvent_new".}
 proc fcQDynamicPropertyChangeEvent_new2(param1: pointer): ptr cQDynamicPropertyChangeEvent {.importc: "QDynamicPropertyChangeEvent_new2".}
 
 proc operatorAssign*(self: gen_qcoreevent_types.QEvent, other: gen_qcoreevent_types.QEvent): void =
   fcQEvent_operatorAssign(self.h, other.h)
 
-proc typeX*(self: gen_qcoreevent_types.QEvent, ): cint =
+proc typeX*(self: gen_qcoreevent_types.QEvent): cint =
   cint(fcQEvent_typeX(self.h))
 
-proc spontaneous*(self: gen_qcoreevent_types.QEvent, ): bool =
+proc spontaneous*(self: gen_qcoreevent_types.QEvent): bool =
   fcQEvent_spontaneous(self.h)
 
 proc setAccepted*(self: gen_qcoreevent_types.QEvent, accepted: bool): void =
   fcQEvent_setAccepted(self.h, accepted)
 
-proc isAccepted*(self: gen_qcoreevent_types.QEvent, ): bool =
+proc isAccepted*(self: gen_qcoreevent_types.QEvent): bool =
   fcQEvent_isAccepted(self.h)
 
-proc accept*(self: gen_qcoreevent_types.QEvent, ): void =
+proc accept*(self: gen_qcoreevent_types.QEvent): void =
   fcQEvent_accept(self.h)
 
-proc ignore*(self: gen_qcoreevent_types.QEvent, ): void =
+proc ignore*(self: gen_qcoreevent_types.QEvent): void =
   fcQEvent_ignore(self.h)
 
-proc registerEventType*(_: type gen_qcoreevent_types.QEvent, ): cint =
+proc registerEventType*(_: type gen_qcoreevent_types.QEvent): cint =
   fcQEvent_registerEventType()
 
 proc registerEventType*(_: type gen_qcoreevent_types.QEvent, hint: cint): cint =
@@ -283,7 +283,7 @@ proc create*(T: type gen_qcoreevent_types.QEvent,
 
 proc staticMetaObject*(_: type gen_qcoreevent_types.QEvent): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQEvent_staticMetaObject())
-proc timerId*(self: gen_qcoreevent_types.QTimerEvent, ): cint =
+proc timerId*(self: gen_qcoreevent_types.QTimerEvent): cint =
   fcQTimerEvent_timerId(self.h)
 
 proc create*(T: type gen_qcoreevent_types.QTimerEvent,
@@ -294,16 +294,16 @@ proc create*(T: type gen_qcoreevent_types.QTimerEvent,
     param1: gen_qcoreevent_types.QTimerEvent): gen_qcoreevent_types.QTimerEvent =
   gen_qcoreevent_types.QTimerEvent(h: fcQTimerEvent_new2(param1.h), owned: true)
 
-proc child*(self: gen_qcoreevent_types.QChildEvent, ): gen_qobject_types.QObject =
+proc child*(self: gen_qcoreevent_types.QChildEvent): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQChildEvent_child(self.h), owned: false)
 
-proc added*(self: gen_qcoreevent_types.QChildEvent, ): bool =
+proc added*(self: gen_qcoreevent_types.QChildEvent): bool =
   fcQChildEvent_added(self.h)
 
-proc polished*(self: gen_qcoreevent_types.QChildEvent, ): bool =
+proc polished*(self: gen_qcoreevent_types.QChildEvent): bool =
   fcQChildEvent_polished(self.h)
 
-proc removed*(self: gen_qcoreevent_types.QChildEvent, ): bool =
+proc removed*(self: gen_qcoreevent_types.QChildEvent): bool =
   fcQChildEvent_removed(self.h)
 
 proc create*(T: type gen_qcoreevent_types.QChildEvent,
@@ -314,7 +314,7 @@ proc create*(T: type gen_qcoreevent_types.QChildEvent,
     param1: gen_qcoreevent_types.QChildEvent): gen_qcoreevent_types.QChildEvent =
   gen_qcoreevent_types.QChildEvent(h: fcQChildEvent_new2(param1.h), owned: true)
 
-proc propertyName*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent, ): seq[byte] =
+proc propertyName*(self: gen_qcoreevent_types.QDynamicPropertyChangeEvent): seq[byte] =
   var v_bytearray = fcQDynamicPropertyChangeEvent_propertyName(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)

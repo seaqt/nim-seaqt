@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qpagesize.h>
 #include "gen_qpagesize.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPageSize* QPageSize_new() {
 	return new QPageSize();
 }

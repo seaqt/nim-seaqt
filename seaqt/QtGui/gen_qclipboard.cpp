@@ -10,15 +10,6 @@
 #include <cstring>
 #include <qclipboard.h>
 #include "gen_qclipboard.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QClipboard_virtbase(QClipboard* src, QObject** outptr_QObject) {
 	*outptr_QObject = static_cast<QObject*>(src);
 }
@@ -296,3 +287,4 @@ void QClipboard_setPixmap2(QClipboard* self, QPixmap* param1, int mode) {
 }
 
 const QMetaObject* QClipboard_staticMetaObject() { return &QClipboard::staticMetaObject; }
+

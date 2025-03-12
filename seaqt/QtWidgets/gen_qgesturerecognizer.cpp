@@ -4,24 +4,18 @@
 #include <QObject>
 #include <qgesturerecognizer.h>
 #include "gen_qgesturerecognizer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQGestureRecognizer final : public QGestureRecognizer {
-	struct QGestureRecognizer_VTable* vtbl;
+	const QGestureRecognizer_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QGestureRecognizer_VTable* QGestureRecognizer_vtbl(const VirtualQGestureRecognizer* self);
+	friend void* QGestureRecognizer_vdata(const VirtualQGestureRecognizer* self);
+	friend void QGestureRecognizer_setVdata(VirtualQGestureRecognizer* self, void* vdata);
 
-	VirtualQGestureRecognizer(struct QGestureRecognizer_VTable* vtbl): QGestureRecognizer(), vtbl(vtbl) {};
+	VirtualQGestureRecognizer(const QGestureRecognizer_VTable* vtbl, void* vdata): QGestureRecognizer(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQGestureRecognizer() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQGestureRecognizer() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual QGesture* create(QObject* target) override {
 		if (vtbl->create == 0) {
 			return QGestureRecognizer::create(target);
@@ -29,14 +23,13 @@ public:
 
 		QObject* sigval1 = target;
 
-		QGesture* callback_return_value = vtbl->create(vtbl, this, sigval1);
+		QGesture* callback_return_value = vtbl->create(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QGesture* QGestureRecognizer_virtualbase_create(void* self, QObject* target);
+	friend QGesture* QGestureRecognizer_virtualbase_create(VirtualQGestureRecognizer* self, QObject* target);
 
-	// Subclass to allow providing a Go implementation
 	virtual QGestureRecognizer::Result recognize(QGesture* state, QObject* watched, QEvent* event) override {
 		if (vtbl->recognize == 0) {
 			return QGestureRecognizer::Result(); // Pure virtual, there is no base we can call
@@ -46,12 +39,11 @@ public:
 		QObject* sigval2 = watched;
 		QEvent* sigval3 = event;
 
-		int callback_return_value = vtbl->recognize(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->recognize(this, sigval1, sigval2, sigval3);
 
 		return static_cast<QGestureRecognizer::Result>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void reset(QGesture* state) override {
 		if (vtbl->reset == 0) {
 			QGestureRecognizer::reset(state);
@@ -60,16 +52,16 @@ public:
 
 		QGesture* sigval1 = state;
 
-		vtbl->reset(vtbl, this, sigval1);
+		vtbl->reset(this, sigval1);
 
 	}
 
-	friend void QGestureRecognizer_virtualbase_reset(void* self, QGesture* state);
+	friend void QGestureRecognizer_virtualbase_reset(VirtualQGestureRecognizer* self, QGesture* state);
 
 };
 
-QGestureRecognizer* QGestureRecognizer_new(struct QGestureRecognizer_VTable* vtbl) {
-	return new VirtualQGestureRecognizer(vtbl);
+VirtualQGestureRecognizer* QGestureRecognizer_new(const QGestureRecognizer_VTable* vtbl, void* vdata) {
+	return new VirtualQGestureRecognizer(vtbl, vdata);
 }
 
 QGesture* QGestureRecognizer_create(QGestureRecognizer* self, QObject* target) {
@@ -98,17 +90,19 @@ void QGestureRecognizer_operatorAssign(QGestureRecognizer* self, QGestureRecogni
 	self->operator=(*param1);
 }
 
-QGesture* QGestureRecognizer_virtualbase_create(void* self, QObject* target) {
+QGesture* QGestureRecognizer_virtualbase_create(VirtualQGestureRecognizer* self, QObject* target) {
 
-	return ( (VirtualQGestureRecognizer*)(self) )->QGestureRecognizer::create(target);
-
+	return self->QGestureRecognizer::create(target);
 }
 
-void QGestureRecognizer_virtualbase_reset(void* self, QGesture* state) {
+void QGestureRecognizer_virtualbase_reset(VirtualQGestureRecognizer* self, QGesture* state) {
 
-	( (VirtualQGestureRecognizer*)(self) )->QGestureRecognizer::reset(state);
-
+	self->QGestureRecognizer::reset(state);
 }
+
+const QGestureRecognizer_VTable* QGestureRecognizer_vtbl(const VirtualQGestureRecognizer* self) { return self->vtbl; }
+void* QGestureRecognizer_vdata(const VirtualQGestureRecognizer* self) { return self->vdata; }
+void QGestureRecognizer_setVdata(VirtualQGestureRecognizer* self, void* vdata) { self->vdata = vdata; }
 
 void QGestureRecognizer_delete(QGestureRecognizer* self) {
 	delete self;

@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qcollator.h>
 #include "gen_qcollator.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QCollatorSortKey* QCollatorSortKey_new(QCollatorSortKey* other) {
 	return new QCollatorSortKey(*other);
 }

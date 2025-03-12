@@ -11,39 +11,32 @@
 #include <QTimerEvent>
 #include <qstyleplugin.h>
 #include "gen_qstyleplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQStylePlugin final : public QStylePlugin {
-	struct QStylePlugin_VTable* vtbl;
+	const QStylePlugin_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QStylePlugin_VTable* QStylePlugin_vtbl(const VirtualQStylePlugin* self);
+	friend void* QStylePlugin_vdata(const VirtualQStylePlugin* self);
+	friend void QStylePlugin_setVdata(VirtualQStylePlugin* self, void* vdata);
 
-	VirtualQStylePlugin(struct QStylePlugin_VTable* vtbl): QStylePlugin(), vtbl(vtbl) {};
-	VirtualQStylePlugin(struct QStylePlugin_VTable* vtbl, QObject* parent): QStylePlugin(parent), vtbl(vtbl) {};
+	VirtualQStylePlugin(const QStylePlugin_VTable* vtbl, void* vdata): QStylePlugin(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQStylePlugin(const QStylePlugin_VTable* vtbl, void* vdata, QObject* parent): QStylePlugin(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQStylePlugin() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQStylePlugin() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QStylePlugin::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QStylePlugin_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QStylePlugin_virtualbase_metaObject(const VirtualQStylePlugin* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QStylePlugin::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QStylePlugin_virtualbase_metacast(void* self, const char* param1);
+	friend void* QStylePlugin_virtualbase_metacast(VirtualQStylePlugin* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QStylePlugin::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QStylePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QStylePlugin_virtualbase_metacall(VirtualQStylePlugin* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QStyle* create(const QString& key) override {
 		if (vtbl->create == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -91,12 +82,11 @@ public:
 		memcpy(key_ms.data, key_b.data(), key_ms.len);
 		struct miqt_string sigval1 = key_ms;
 
-		QStyle* callback_return_value = vtbl->create(vtbl, this, sigval1);
+		QStyle* callback_return_value = vtbl->create(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QStylePlugin::event(event);
@@ -104,14 +94,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QStylePlugin_virtualbase_event(void* self, QEvent* event);
+	friend bool QStylePlugin_virtualbase_event(VirtualQStylePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QStylePlugin::eventFilter(watched, event);
@@ -120,14 +109,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QStylePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QStylePlugin_virtualbase_eventFilter(VirtualQStylePlugin* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QStylePlugin::timerEvent(event);
@@ -136,13 +124,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QStylePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QStylePlugin_virtualbase_timerEvent(VirtualQStylePlugin* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QStylePlugin::childEvent(event);
@@ -151,13 +138,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QStylePlugin_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QStylePlugin_virtualbase_childEvent(VirtualQStylePlugin* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QStylePlugin::customEvent(event);
@@ -166,13 +152,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QStylePlugin_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QStylePlugin_virtualbase_customEvent(VirtualQStylePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QStylePlugin::connectNotify(signal);
@@ -183,13 +168,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QStylePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QStylePlugin_virtualbase_connectNotify(VirtualQStylePlugin* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QStylePlugin::disconnectNotify(signal);
@@ -200,25 +184,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QStylePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QStylePlugin_virtualbase_disconnectNotify(VirtualQStylePlugin* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QStylePlugin_protectedbase_sender(const void* self);
-	friend int QStylePlugin_protectedbase_senderSignalIndex(const void* self);
-	friend int QStylePlugin_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QStylePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QStylePlugin_protectedbase_sender(const VirtualQStylePlugin* self);
+	friend int QStylePlugin_protectedbase_senderSignalIndex(const VirtualQStylePlugin* self);
+	friend int QStylePlugin_protectedbase_receivers(const VirtualQStylePlugin* self, const char* signal);
+	friend bool QStylePlugin_protectedbase_isSignalConnected(const VirtualQStylePlugin* self, QMetaMethod* signal);
 };
 
-QStylePlugin* QStylePlugin_new(struct QStylePlugin_VTable* vtbl) {
-	return new VirtualQStylePlugin(vtbl);
+VirtualQStylePlugin* QStylePlugin_new(const QStylePlugin_VTable* vtbl, void* vdata) {
+	return new VirtualQStylePlugin(vtbl, vdata);
 }
 
-QStylePlugin* QStylePlugin_new2(struct QStylePlugin_VTable* vtbl, QObject* parent) {
-	return new VirtualQStylePlugin(vtbl, parent);
+VirtualQStylePlugin* QStylePlugin_new2(const QStylePlugin_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQStylePlugin(vtbl, vdata, parent);
 }
 
 void QStylePlugin_virtbase(QStylePlugin* src, QObject** outptr_QObject) {
@@ -308,93 +292,76 @@ struct miqt_string QStylePlugin_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QStylePlugin_virtualbase_metaObject(const void* self) {
+QMetaObject* QStylePlugin_virtualbase_metaObject(const VirtualQStylePlugin* self) {
 
-	return (QMetaObject*) ( (const VirtualQStylePlugin*)(self) )->QStylePlugin::metaObject();
-
+	return (QMetaObject*) self->QStylePlugin::metaObject();
 }
 
-void* QStylePlugin_virtualbase_metacast(void* self, const char* param1) {
+void* QStylePlugin_virtualbase_metacast(VirtualQStylePlugin* self, const char* param1) {
 
-	return ( (VirtualQStylePlugin*)(self) )->QStylePlugin::qt_metacast(param1);
-
+	return self->QStylePlugin::qt_metacast(param1);
 }
 
-int QStylePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QStylePlugin_virtualbase_metacall(VirtualQStylePlugin* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQStylePlugin*)(self) )->QStylePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QStylePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QStylePlugin_virtualbase_event(void* self, QEvent* event) {
+bool QStylePlugin_virtualbase_event(VirtualQStylePlugin* self, QEvent* event) {
 
-	return ( (VirtualQStylePlugin*)(self) )->QStylePlugin::event(event);
-
+	return self->QStylePlugin::event(event);
 }
 
-bool QStylePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QStylePlugin_virtualbase_eventFilter(VirtualQStylePlugin* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQStylePlugin*)(self) )->QStylePlugin::eventFilter(watched, event);
-
+	return self->QStylePlugin::eventFilter(watched, event);
 }
 
-void QStylePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QStylePlugin_virtualbase_timerEvent(VirtualQStylePlugin* self, QTimerEvent* event) {
 
-	( (VirtualQStylePlugin*)(self) )->QStylePlugin::timerEvent(event);
-
+	self->QStylePlugin::timerEvent(event);
 }
 
-void QStylePlugin_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QStylePlugin_virtualbase_childEvent(VirtualQStylePlugin* self, QChildEvent* event) {
 
-	( (VirtualQStylePlugin*)(self) )->QStylePlugin::childEvent(event);
-
+	self->QStylePlugin::childEvent(event);
 }
 
-void QStylePlugin_virtualbase_customEvent(void* self, QEvent* event) {
+void QStylePlugin_virtualbase_customEvent(VirtualQStylePlugin* self, QEvent* event) {
 
-	( (VirtualQStylePlugin*)(self) )->QStylePlugin::customEvent(event);
-
+	self->QStylePlugin::customEvent(event);
 }
 
-void QStylePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QStylePlugin_virtualbase_connectNotify(VirtualQStylePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQStylePlugin*)(self) )->QStylePlugin::connectNotify(*signal);
-
+	self->QStylePlugin::connectNotify(*signal);
 }
 
-void QStylePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QStylePlugin_virtualbase_disconnectNotify(VirtualQStylePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQStylePlugin*)(self) )->QStylePlugin::disconnectNotify(*signal);
-
+	self->QStylePlugin::disconnectNotify(*signal);
 }
 
 const QMetaObject* QStylePlugin_staticMetaObject() { return &QStylePlugin::staticMetaObject; }
-QObject* QStylePlugin_protectedbase_sender(const void* self) {
-	VirtualQStylePlugin* self_cast = static_cast<VirtualQStylePlugin*>( (QStylePlugin*)(self) );
-	
-	return self_cast->sender();
 
+const QStylePlugin_VTable* QStylePlugin_vtbl(const VirtualQStylePlugin* self) { return self->vtbl; }
+void* QStylePlugin_vdata(const VirtualQStylePlugin* self) { return self->vdata; }
+void QStylePlugin_setVdata(VirtualQStylePlugin* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QStylePlugin_protectedbase_sender(const VirtualQStylePlugin* self) {
+	return self->sender();
 }
 
-int QStylePlugin_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQStylePlugin* self_cast = static_cast<VirtualQStylePlugin*>( (QStylePlugin*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QStylePlugin_protectedbase_senderSignalIndex(const VirtualQStylePlugin* self) {
+	return self->senderSignalIndex();
 }
 
-int QStylePlugin_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQStylePlugin* self_cast = static_cast<VirtualQStylePlugin*>( (QStylePlugin*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QStylePlugin_protectedbase_receivers(const VirtualQStylePlugin* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QStylePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQStylePlugin* self_cast = static_cast<VirtualQStylePlugin*>( (QStylePlugin*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QStylePlugin_protectedbase_isSignalConnected(const VirtualQStylePlugin* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QStylePlugin_delete(QStylePlugin* self) {

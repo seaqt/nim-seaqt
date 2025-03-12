@@ -32,23 +32,30 @@ typedef struct QObject QObject;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QFileSystemWatcher_VTable {
-	void (*destructor)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self);
-	QMetaObject* (*metaObject)(struct QFileSystemWatcher_VTable* vtbl, const QFileSystemWatcher* self);
-	void* (*metacast)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, const char* param1);
-	int (*metacall)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, int param1, int param2, void** param3);
-	bool (*event)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QEvent* event);
-	bool (*eventFilter)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QTimerEvent* event);
-	void (*childEvent)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QChildEvent* event);
-	void (*customEvent)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QEvent* event);
-	void (*connectNotify)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QFileSystemWatcher_VTable* vtbl, QFileSystemWatcher* self, QMetaMethod* signal);
-};
-QFileSystemWatcher* QFileSystemWatcher_new(struct QFileSystemWatcher_VTable* vtbl);
-QFileSystemWatcher* QFileSystemWatcher_new2(struct QFileSystemWatcher_VTable* vtbl, struct miqt_array /* of struct miqt_string */  paths);
-QFileSystemWatcher* QFileSystemWatcher_new3(struct QFileSystemWatcher_VTable* vtbl, QObject* parent);
-QFileSystemWatcher* QFileSystemWatcher_new4(struct QFileSystemWatcher_VTable* vtbl, struct miqt_array /* of struct miqt_string */  paths, QObject* parent);
+typedef struct VirtualQFileSystemWatcher VirtualQFileSystemWatcher;
+typedef struct QFileSystemWatcher_VTable{
+	void (*destructor)(VirtualQFileSystemWatcher* self);
+	QMetaObject* (*metaObject)(const VirtualQFileSystemWatcher* self);
+	void* (*metacast)(VirtualQFileSystemWatcher* self, const char* param1);
+	int (*metacall)(VirtualQFileSystemWatcher* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQFileSystemWatcher* self, QEvent* event);
+	bool (*eventFilter)(VirtualQFileSystemWatcher* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQFileSystemWatcher* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQFileSystemWatcher* self, QChildEvent* event);
+	void (*customEvent)(VirtualQFileSystemWatcher* self, QEvent* event);
+	void (*connectNotify)(VirtualQFileSystemWatcher* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQFileSystemWatcher* self, QMetaMethod* signal);
+}QFileSystemWatcher_VTable;
+
+const QFileSystemWatcher_VTable* QFileSystemWatcher_vtbl(const VirtualQFileSystemWatcher* self);
+void* QFileSystemWatcher_vdata(const VirtualQFileSystemWatcher* self);
+void QFileSystemWatcher_setVdata(VirtualQFileSystemWatcher* self, void* vdata);
+
+VirtualQFileSystemWatcher* QFileSystemWatcher_new(const QFileSystemWatcher_VTable* vtbl, void* vdata);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new2(const QFileSystemWatcher_VTable* vtbl, void* vdata, struct miqt_array /* of struct miqt_string */  paths);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new3(const QFileSystemWatcher_VTable* vtbl, void* vdata, QObject* parent);
+VirtualQFileSystemWatcher* QFileSystemWatcher_new4(const QFileSystemWatcher_VTable* vtbl, void* vdata, struct miqt_array /* of struct miqt_string */  paths, QObject* parent);
+
 void QFileSystemWatcher_virtbase(QFileSystemWatcher* src, QObject** outptr_QObject);
 QMetaObject* QFileSystemWatcher_metaObject(const QFileSystemWatcher* self);
 void* QFileSystemWatcher_metacast(QFileSystemWatcher* self, const char* param1);
@@ -65,20 +72,23 @@ struct miqt_string QFileSystemWatcher_tr2(const char* s, const char* c);
 struct miqt_string QFileSystemWatcher_tr3(const char* s, const char* c, int n);
 struct miqt_string QFileSystemWatcher_trUtf82(const char* s, const char* c);
 struct miqt_string QFileSystemWatcher_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QFileSystemWatcher_virtualbase_metaObject(const void* self);
-void* QFileSystemWatcher_virtualbase_metacast(void* self, const char* param1);
-int QFileSystemWatcher_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QFileSystemWatcher_virtualbase_event(void* self, QEvent* event);
-bool QFileSystemWatcher_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QFileSystemWatcher_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QFileSystemWatcher_virtualbase_childEvent(void* self, QChildEvent* event);
-void QFileSystemWatcher_virtualbase_customEvent(void* self, QEvent* event);
-void QFileSystemWatcher_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QFileSystemWatcher_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QFileSystemWatcher_protectedbase_sender(const void* self);
-int QFileSystemWatcher_protectedbase_senderSignalIndex(const void* self);
-int QFileSystemWatcher_protectedbase_receivers(const void* self, const char* signal);
-bool QFileSystemWatcher_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QFileSystemWatcher_virtualbase_metaObject(const VirtualQFileSystemWatcher* self);
+void* QFileSystemWatcher_virtualbase_metacast(VirtualQFileSystemWatcher* self, const char* param1);
+int QFileSystemWatcher_virtualbase_metacall(VirtualQFileSystemWatcher* self, int param1, int param2, void** param3);
+bool QFileSystemWatcher_virtualbase_event(VirtualQFileSystemWatcher* self, QEvent* event);
+bool QFileSystemWatcher_virtualbase_eventFilter(VirtualQFileSystemWatcher* self, QObject* watched, QEvent* event);
+void QFileSystemWatcher_virtualbase_timerEvent(VirtualQFileSystemWatcher* self, QTimerEvent* event);
+void QFileSystemWatcher_virtualbase_childEvent(VirtualQFileSystemWatcher* self, QChildEvent* event);
+void QFileSystemWatcher_virtualbase_customEvent(VirtualQFileSystemWatcher* self, QEvent* event);
+void QFileSystemWatcher_virtualbase_connectNotify(VirtualQFileSystemWatcher* self, QMetaMethod* signal);
+void QFileSystemWatcher_virtualbase_disconnectNotify(VirtualQFileSystemWatcher* self, QMetaMethod* signal);
+
+QObject* QFileSystemWatcher_protectedbase_sender(const VirtualQFileSystemWatcher* self);
+int QFileSystemWatcher_protectedbase_senderSignalIndex(const VirtualQFileSystemWatcher* self);
+int QFileSystemWatcher_protectedbase_receivers(const VirtualQFileSystemWatcher* self, const char* signal);
+bool QFileSystemWatcher_protectedbase_isSignalConnected(const VirtualQFileSystemWatcher* self, QMetaMethod* signal);
+
 const QMetaObject* QFileSystemWatcher_staticMetaObject();
 void QFileSystemWatcher_delete(QFileSystemWatcher* self);
 

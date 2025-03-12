@@ -51,6 +51,7 @@ QTextCursor* QTextCursor_new2(QTextDocument* document);
 QTextCursor* QTextCursor_new3(QTextFrame* frame);
 QTextCursor* QTextCursor_new4(QTextBlock* block);
 QTextCursor* QTextCursor_new5(QTextCursor* cursor);
+
 void QTextCursor_operatorAssign(QTextCursor* self, QTextCursor* other);
 void QTextCursor_swap(QTextCursor* self, QTextCursor* other);
 bool QTextCursor_isNull(const QTextCursor* self);
@@ -129,6 +130,7 @@ void QTextCursor_setPosition2(QTextCursor* self, int pos, int mode);
 bool QTextCursor_movePosition2(QTextCursor* self, int op, int param2);
 bool QTextCursor_movePosition3(QTextCursor* self, int op, int param2, int n);
 void QTextCursor_insertImage2(QTextCursor* self, QImage* image, struct miqt_string name);
+
 void QTextCursor_delete(QTextCursor* self);
 
 #ifdef __cplusplus

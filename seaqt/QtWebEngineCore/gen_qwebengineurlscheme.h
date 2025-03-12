@@ -23,6 +23,7 @@ typedef struct QWebEngineUrlScheme QWebEngineUrlScheme;
 QWebEngineUrlScheme* QWebEngineUrlScheme_new();
 QWebEngineUrlScheme* QWebEngineUrlScheme_new2(struct miqt_string name);
 QWebEngineUrlScheme* QWebEngineUrlScheme_new3(QWebEngineUrlScheme* that);
+
 void QWebEngineUrlScheme_operatorAssign(QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
 bool QWebEngineUrlScheme_operatorEqual(const QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
 bool QWebEngineUrlScheme_operatorNotEqual(const QWebEngineUrlScheme* self, QWebEngineUrlScheme* that);
@@ -36,6 +37,7 @@ int QWebEngineUrlScheme_flags(const QWebEngineUrlScheme* self);
 void QWebEngineUrlScheme_setFlags(QWebEngineUrlScheme* self, int newValue);
 void QWebEngineUrlScheme_registerScheme(QWebEngineUrlScheme* scheme);
 QWebEngineUrlScheme* QWebEngineUrlScheme_schemeByName(struct miqt_string name);
+
 const QMetaObject* QWebEngineUrlScheme_staticMetaObject();
 void QWebEngineUrlScheme_delete(QWebEngineUrlScheme* self);
 

@@ -38,6 +38,7 @@ QVector2D* QVector2D_new5(QPointF* point);
 QVector2D* QVector2D_new6(QVector3D* vector);
 QVector2D* QVector2D_new7(QVector4D* vector);
 QVector2D* QVector2D_new8(QVector2D* param1);
+
 bool QVector2D_isNull(const QVector2D* self);
 float QVector2D_x(const QVector2D* self);
 float QVector2D_y(const QVector2D* self);
@@ -62,6 +63,7 @@ QVector4D* QVector2D_toVector4D(const QVector2D* self);
 QPoint* QVector2D_toPoint(const QVector2D* self);
 QPointF* QVector2D_toPointF(const QVector2D* self);
 QVariant* QVector2D_ToQVariant(const QVector2D* self);
+
 void QVector2D_delete(QVector2D* self);
 
 #ifdef __cplusplus

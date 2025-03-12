@@ -65,13 +65,13 @@ export
 type cQTreeWidgetItemIterator*{.exportc: "QTreeWidgetItemIterator", incompleteStruct.} = object
 
 proc fcQTreeWidgetItemIterator_operatorAssign(self: pointer, it: pointer): void {.importc: "QTreeWidgetItemIterator_operatorAssign".}
-proc fcQTreeWidgetItemIterator_operatorPlusPlus(self: pointer, ): pointer {.importc: "QTreeWidgetItemIterator_operatorPlusPlus".}
+proc fcQTreeWidgetItemIterator_operatorPlusPlus(self: pointer): pointer {.importc: "QTreeWidgetItemIterator_operatorPlusPlus".}
 proc fcQTreeWidgetItemIterator_operatorPlusPlusWithInt(self: pointer, param1: cint): pointer {.importc: "QTreeWidgetItemIterator_operatorPlusPlusWithInt".}
 proc fcQTreeWidgetItemIterator_operatorPlusAssign(self: pointer, n: cint): pointer {.importc: "QTreeWidgetItemIterator_operatorPlusAssign".}
-proc fcQTreeWidgetItemIterator_operatorMinusMinus(self: pointer, ): pointer {.importc: "QTreeWidgetItemIterator_operatorMinusMinus".}
+proc fcQTreeWidgetItemIterator_operatorMinusMinus(self: pointer): pointer {.importc: "QTreeWidgetItemIterator_operatorMinusMinus".}
 proc fcQTreeWidgetItemIterator_operatorMinusMinusWithInt(self: pointer, param1: cint): pointer {.importc: "QTreeWidgetItemIterator_operatorMinusMinusWithInt".}
 proc fcQTreeWidgetItemIterator_operatorMinusAssign(self: pointer, n: cint): pointer {.importc: "QTreeWidgetItemIterator_operatorMinusAssign".}
-proc fcQTreeWidgetItemIterator_operatorMultiply(self: pointer, ): pointer {.importc: "QTreeWidgetItemIterator_operatorMultiply".}
+proc fcQTreeWidgetItemIterator_operatorMultiply(self: pointer): pointer {.importc: "QTreeWidgetItemIterator_operatorMultiply".}
 proc fcQTreeWidgetItemIterator_new(it: pointer): ptr cQTreeWidgetItemIterator {.importc: "QTreeWidgetItemIterator_new".}
 proc fcQTreeWidgetItemIterator_new2(widget: pointer): ptr cQTreeWidgetItemIterator {.importc: "QTreeWidgetItemIterator_new2".}
 proc fcQTreeWidgetItemIterator_new3(item: pointer): ptr cQTreeWidgetItemIterator {.importc: "QTreeWidgetItemIterator_new3".}
@@ -81,7 +81,7 @@ proc fcQTreeWidgetItemIterator_new5(item: pointer, flags: cint): ptr cQTreeWidge
 proc operatorAssign*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, it: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator): void =
   fcQTreeWidgetItemIterator_operatorAssign(self.h, it.h)
 
-proc operatorPlusPlus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, ): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
+proc operatorPlusPlus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
   gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator(h: fcQTreeWidgetItemIterator_operatorPlusPlus(self.h), owned: false)
 
 proc operatorPlusPlus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, param1: cint): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
@@ -90,7 +90,7 @@ proc operatorPlusPlus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIt
 proc operatorPlusAssign*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, n: cint): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
   gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator(h: fcQTreeWidgetItemIterator_operatorPlusAssign(self.h, n), owned: false)
 
-proc operatorMinusMinus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, ): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
+proc operatorMinusMinus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
   gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator(h: fcQTreeWidgetItemIterator_operatorMinusMinus(self.h), owned: false)
 
 proc operatorMinusMinus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, param1: cint): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
@@ -99,7 +99,7 @@ proc operatorMinusMinus*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItem
 proc operatorMinusAssign*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, n: cint): gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator =
   gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator(h: fcQTreeWidgetItemIterator_operatorMinusAssign(self.h, n), owned: false)
 
-proc operatorMultiply*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator, ): gen_qtreewidget_types.QTreeWidgetItem =
+proc operatorMultiply*(self: gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator): gen_qtreewidget_types.QTreeWidgetItem =
   gen_qtreewidget_types.QTreeWidgetItem(h: fcQTreeWidgetItemIterator_operatorMultiply(self.h), owned: false)
 
 proc create*(T: type gen_qtreewidgetitemiterator_types.QTreeWidgetItemIterator,

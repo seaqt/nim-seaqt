@@ -41,8 +41,8 @@ export
 
 type cQStaticPlugin*{.exportc: "QStaticPlugin", incompleteStruct.} = object
 
-proc fcQStaticPlugin_metaData(self: pointer, ): pointer {.importc: "QStaticPlugin_metaData".}
+proc fcQStaticPlugin_metaData(self: pointer): pointer {.importc: "QStaticPlugin_metaData".}
 
-proc metaData*(self: gen_qplugin_types.QStaticPlugin, ): gen_qjsonobject_types.QJsonObject =
+proc metaData*(self: gen_qplugin_types.QStaticPlugin): gen_qjsonobject_types.QJsonObject =
   gen_qjsonobject_types.QJsonObject(h: fcQStaticPlugin_metaData(self.h), owned: true)
 

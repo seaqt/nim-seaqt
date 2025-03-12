@@ -7,15 +7,6 @@
 #include <cstring>
 #include <qregularexpression.h>
 #include "gen_qregularexpression.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRegularExpression* QRegularExpression_new() {
 	return new QRegularExpression();
 }

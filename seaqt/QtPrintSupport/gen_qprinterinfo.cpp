@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qprinterinfo.h>
 #include "gen_qprinterinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QPrinterInfo* QPrinterInfo_new() {
 	return new QPrinterInfo();
 }

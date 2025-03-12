@@ -10,15 +10,6 @@
 #include <cstring>
 #include <qaudioencodersettingscontrol.h>
 #include "gen_qaudioencodersettingscontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QAudioEncoderSettingsControl_virtbase(QAudioEncoderSettingsControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -155,6 +146,7 @@ struct miqt_string QAudioEncoderSettingsControl_trUtf83(const char* s, const cha
 }
 
 const QMetaObject* QAudioEncoderSettingsControl_staticMetaObject() { return &QAudioEncoderSettingsControl::staticMetaObject; }
+
 void QAudioEncoderSettingsControl_delete(QAudioEncoderSettingsControl* self) {
 	delete self;
 }

@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qaudioformat.h>
 #include "gen_qaudioformat.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAudioFormat* QAudioFormat_new() {
 	return new QAudioFormat();
 }

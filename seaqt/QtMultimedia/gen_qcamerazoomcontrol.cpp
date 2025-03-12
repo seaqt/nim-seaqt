@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcamerazoomcontrol.h>
 #include "gen_qcamerazoomcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraZoomControl_virtbase(QCameraZoomControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -236,6 +227,7 @@ struct miqt_string QCameraZoomControl_trUtf83(const char* s, const char* c, int 
 }
 
 const QMetaObject* QCameraZoomControl_staticMetaObject() { return &QCameraZoomControl::staticMetaObject; }
+
 void QCameraZoomControl_delete(QCameraZoomControl* self) {
 	delete self;
 }

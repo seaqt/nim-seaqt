@@ -48,15 +48,15 @@ export
 type cQTextDocumentWriter*{.exportc: "QTextDocumentWriter", incompleteStruct.} = object
 
 proc fcQTextDocumentWriter_setFormat(self: pointer, format: struct_miqt_string): void {.importc: "QTextDocumentWriter_setFormat".}
-proc fcQTextDocumentWriter_format(self: pointer, ): struct_miqt_string {.importc: "QTextDocumentWriter_format".}
+proc fcQTextDocumentWriter_format(self: pointer): struct_miqt_string {.importc: "QTextDocumentWriter_format".}
 proc fcQTextDocumentWriter_setDevice(self: pointer, device: pointer): void {.importc: "QTextDocumentWriter_setDevice".}
-proc fcQTextDocumentWriter_device(self: pointer, ): pointer {.importc: "QTextDocumentWriter_device".}
+proc fcQTextDocumentWriter_device(self: pointer): pointer {.importc: "QTextDocumentWriter_device".}
 proc fcQTextDocumentWriter_setFileName(self: pointer, fileName: struct_miqt_string): void {.importc: "QTextDocumentWriter_setFileName".}
-proc fcQTextDocumentWriter_fileName(self: pointer, ): struct_miqt_string {.importc: "QTextDocumentWriter_fileName".}
+proc fcQTextDocumentWriter_fileName(self: pointer): struct_miqt_string {.importc: "QTextDocumentWriter_fileName".}
 proc fcQTextDocumentWriter_write(self: pointer, document: pointer): bool {.importc: "QTextDocumentWriter_write".}
 proc fcQTextDocumentWriter_writeWithFragment(self: pointer, fragment: pointer): bool {.importc: "QTextDocumentWriter_writeWithFragment".}
 proc fcQTextDocumentWriter_setCodec(self: pointer, codec: pointer): void {.importc: "QTextDocumentWriter_setCodec".}
-proc fcQTextDocumentWriter_codec(self: pointer, ): pointer {.importc: "QTextDocumentWriter_codec".}
+proc fcQTextDocumentWriter_codec(self: pointer): pointer {.importc: "QTextDocumentWriter_codec".}
 proc fcQTextDocumentWriter_supportedDocumentFormats(): struct_miqt_array {.importc: "QTextDocumentWriter_supportedDocumentFormats".}
 proc fcQTextDocumentWriter_new(): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new".}
 proc fcQTextDocumentWriter_new2(device: pointer, format: struct_miqt_string): ptr cQTextDocumentWriter {.importc: "QTextDocumentWriter_new2".}
@@ -66,7 +66,7 @@ proc fcQTextDocumentWriter_new4(fileName: struct_miqt_string, format: struct_miq
 proc setFormat*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, format: seq[byte]): void =
   fcQTextDocumentWriter_setFormat(self.h, struct_miqt_string(data: cast[cstring](if len(format) == 0: nil else: unsafeAddr format[0]), len: csize_t(len(format))))
 
-proc format*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, ): seq[byte] =
+proc format*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): seq[byte] =
   var v_bytearray = fcQTextDocumentWriter_format(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -75,13 +75,13 @@ proc format*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, ): seq[byt
 proc setDevice*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, device: gen_qiodevice_types.QIODevice): void =
   fcQTextDocumentWriter_setDevice(self.h, device.h)
 
-proc device*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, ): gen_qiodevice_types.QIODevice =
+proc device*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQTextDocumentWriter_device(self.h), owned: false)
 
 proc setFileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fileName: string): void =
   fcQTextDocumentWriter_setFileName(self.h, struct_miqt_string(data: fileName, len: csize_t(len(fileName))))
 
-proc fileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, ): string =
+proc fileName*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): string =
   let v_ms = fcQTextDocumentWriter_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -96,10 +96,10 @@ proc write*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, fragment: g
 proc setCodec*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, codec: gen_qtextcodec_types.QTextCodec): void =
   fcQTextDocumentWriter_setCodec(self.h, codec.h)
 
-proc codec*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter, ): gen_qtextcodec_types.QTextCodec =
+proc codec*(self: gen_qtextdocumentwriter_types.QTextDocumentWriter): gen_qtextcodec_types.QTextCodec =
   gen_qtextcodec_types.QTextCodec(h: fcQTextDocumentWriter_codec(self.h), owned: false)
 
-proc supportedDocumentFormats*(_: type gen_qtextdocumentwriter_types.QTextDocumentWriter, ): seq[seq[byte]] =
+proc supportedDocumentFormats*(_: type gen_qtextdocumentwriter_types.QTextDocumentWriter): seq[seq[byte]] =
   var v_ma = fcQTextDocumentWriter_supportedDocumentFormats()
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

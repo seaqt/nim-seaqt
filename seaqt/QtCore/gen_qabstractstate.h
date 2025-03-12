@@ -50,6 +50,7 @@ struct miqt_string QAbstractState_tr2(const char* s, const char* c);
 struct miqt_string QAbstractState_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractState_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractState_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QAbstractState_staticMetaObject();
 void QAbstractState_delete(QAbstractState* self);
 

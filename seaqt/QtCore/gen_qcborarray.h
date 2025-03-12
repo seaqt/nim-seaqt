@@ -40,6 +40,7 @@ typedef struct QJsonArray QJsonArray;
 
 QCborArray* QCborArray_new();
 QCborArray* QCborArray_new2(QCborArray* other);
+
 void QCborArray_operatorAssign(QCborArray* self, QCborArray* other);
 void QCborArray_swap(QCborArray* self, QCborArray* other);
 QCborValue* QCborArray_toCborValue(const QCborArray* self);
@@ -92,10 +93,12 @@ QCborArray* QCborArray_operatorShiftLeft(QCborArray* self, QCborValue* v);
 QCborArray* QCborArray_fromStringList(struct miqt_array /* of struct miqt_string */  list);
 QCborArray* QCborArray_fromJsonArray(QJsonArray* array);
 QJsonArray* QCborArray_toJsonArray(const QCborArray* self);
+
 void QCborArray_delete(QCborArray* self);
 
 QCborArray__Iterator* QCborArray__Iterator_new();
 QCborArray__Iterator* QCborArray__Iterator_new2(QCborArray__Iterator* param1);
+
 void QCborArray__Iterator_operatorAssign(QCborArray__Iterator* self, QCborArray__Iterator* other);
 QCborValueRef* QCborArray__Iterator_operatorMultiply(const QCborArray__Iterator* self);
 QCborValueRef* QCborArray__Iterator_operatorMinusGreater(const QCborArray__Iterator* self);
@@ -121,10 +124,12 @@ QCborArray__Iterator* QCborArray__Iterator_operatorMinusAssign(QCborArray__Itera
 QCborArray__Iterator* QCborArray__Iterator_operatorPlus(const QCborArray__Iterator* self, ptrdiff_t j);
 QCborArray__Iterator* QCborArray__Iterator_operatorMinus(const QCborArray__Iterator* self, ptrdiff_t j);
 ptrdiff_t QCborArray__Iterator_operatorMinusWithQCborArrayIterator(const QCborArray__Iterator* self, QCborArray__Iterator* j);
+
 void QCborArray__Iterator_delete(QCborArray__Iterator* self);
 
 QCborArray__ConstIterator* QCborArray__ConstIterator_new();
 QCborArray__ConstIterator* QCborArray__ConstIterator_new2(QCborArray__ConstIterator* param1);
+
 void QCborArray__ConstIterator_operatorAssign(QCborArray__ConstIterator* self, QCborArray__ConstIterator* other);
 QCborValueRef* QCborArray__ConstIterator_operatorMultiply(const QCborArray__ConstIterator* self);
 QCborValueRef* QCborArray__ConstIterator_operatorMinusGreater(const QCborArray__ConstIterator* self);
@@ -150,6 +155,7 @@ QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinusAssign(QCborAr
 QCborArray__ConstIterator* QCborArray__ConstIterator_operatorPlus(const QCborArray__ConstIterator* self, ptrdiff_t j);
 QCborArray__ConstIterator* QCborArray__ConstIterator_operatorMinus(const QCborArray__ConstIterator* self, ptrdiff_t j);
 ptrdiff_t QCborArray__ConstIterator_operatorMinusWithQCborArrayConstIterator(const QCborArray__ConstIterator* self, QCborArray__ConstIterator* j);
+
 void QCborArray__ConstIterator_delete(QCborArray__ConstIterator* self);
 
 #ifdef __cplusplus

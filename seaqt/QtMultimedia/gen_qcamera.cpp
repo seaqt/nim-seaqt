@@ -22,45 +22,38 @@
 #include <QTimerEvent>
 #include <qcamera.h>
 #include "gen_qcamera.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQCamera final : public QCamera {
-	struct QCamera_VTable* vtbl;
+	const QCamera_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QCamera_VTable* QCamera_vtbl(const VirtualQCamera* self);
+	friend void* QCamera_vdata(const VirtualQCamera* self);
+	friend void QCamera_setVdata(VirtualQCamera* self, void* vdata);
 
-	VirtualQCamera(struct QCamera_VTable* vtbl): QCamera(), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, const QByteArray& deviceName): QCamera(deviceName), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, const QCameraInfo& cameraInfo): QCamera(cameraInfo), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, QCamera::Position position): QCamera(position), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, QObject* parent): QCamera(parent), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, const QByteArray& deviceName, QObject* parent): QCamera(deviceName, parent), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, const QCameraInfo& cameraInfo, QObject* parent): QCamera(cameraInfo, parent), vtbl(vtbl) {};
-	VirtualQCamera(struct QCamera_VTable* vtbl, QCamera::Position position, QObject* parent): QCamera(position, parent), vtbl(vtbl) {};
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata): QCamera(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, const QByteArray& deviceName): QCamera(deviceName), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, const QCameraInfo& cameraInfo): QCamera(cameraInfo), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, QCamera::Position position): QCamera(position), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, QObject* parent): QCamera(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, const QByteArray& deviceName, QObject* parent): QCamera(deviceName, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, const QCameraInfo& cameraInfo, QObject* parent): QCamera(cameraInfo, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQCamera(const QCamera_VTable* vtbl, void* vdata, QCamera::Position position, QObject* parent): QCamera(position, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQCamera() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQCamera() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QCamera::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QCamera_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QCamera_virtualbase_metaObject(const VirtualQCamera* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QCamera::qt_metacast(param1);
@@ -68,14 +61,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QCamera_virtualbase_metacast(void* self, const char* param1);
+	friend void* QCamera_virtualbase_metacast(VirtualQCamera* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QCamera::qt_metacall(param1, param2, param3);
@@ -86,56 +78,52 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QCamera_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QCamera_virtualbase_metacall(VirtualQCamera* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMultimedia::AvailabilityStatus availability() const override {
 		if (vtbl->availability == 0) {
 			return QCamera::availability();
 		}
 
 
-		int callback_return_value = vtbl->availability(vtbl, this);
+		int callback_return_value = vtbl->availability(this);
 
 		return static_cast<QMultimedia::AvailabilityStatus>(callback_return_value);
 	}
 
-	friend int QCamera_virtualbase_availability(const void* self);
+	friend int QCamera_virtualbase_availability(const VirtualQCamera* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isAvailable() const override {
 		if (vtbl->isAvailable == 0) {
 			return QCamera::isAvailable();
 		}
 
 
-		bool callback_return_value = vtbl->isAvailable(vtbl, this);
+		bool callback_return_value = vtbl->isAvailable(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QCamera_virtualbase_isAvailable(const void* self);
+	friend bool QCamera_virtualbase_isAvailable(const VirtualQCamera* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QMediaService* service() const override {
 		if (vtbl->service == 0) {
 			return QCamera::service();
 		}
 
 
-		QMediaService* callback_return_value = vtbl->service(vtbl, this);
+		QMediaService* callback_return_value = vtbl->service(this);
 
 		return callback_return_value;
 	}
 
-	friend QMediaService* QCamera_virtualbase_service(const void* self);
+	friend QMediaService* QCamera_virtualbase_service(const VirtualQCamera* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool bind(QObject* param1) override {
 		if (vtbl->bind == 0) {
 			return QCamera::bind(param1);
@@ -143,14 +131,13 @@ public:
 
 		QObject* sigval1 = param1;
 
-		bool callback_return_value = vtbl->bind(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->bind(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCamera_virtualbase_bind(void* self, QObject* param1);
+	friend bool QCamera_virtualbase_bind(VirtualQCamera* self, QObject* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void unbind(QObject* param1) override {
 		if (vtbl->unbind == 0) {
 			QCamera::unbind(param1);
@@ -159,13 +146,12 @@ public:
 
 		QObject* sigval1 = param1;
 
-		vtbl->unbind(vtbl, this, sigval1);
+		vtbl->unbind(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_unbind(void* self, QObject* param1);
+	friend void QCamera_virtualbase_unbind(VirtualQCamera* self, QObject* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QCamera::event(event);
@@ -173,14 +159,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QCamera_virtualbase_event(void* self, QEvent* event);
+	friend bool QCamera_virtualbase_event(VirtualQCamera* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QCamera::eventFilter(watched, event);
@@ -189,14 +174,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QCamera_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QCamera_virtualbase_eventFilter(VirtualQCamera* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QCamera::timerEvent(event);
@@ -205,13 +189,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QCamera_virtualbase_timerEvent(VirtualQCamera* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QCamera::childEvent(event);
@@ -220,13 +203,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QCamera_virtualbase_childEvent(VirtualQCamera* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QCamera::customEvent(event);
@@ -235,13 +217,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QCamera_virtualbase_customEvent(VirtualQCamera* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QCamera::connectNotify(signal);
@@ -252,13 +233,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QCamera_virtualbase_connectNotify(VirtualQCamera* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QCamera::disconnectNotify(signal);
@@ -269,53 +249,53 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QCamera_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QCamera_virtualbase_disconnectNotify(VirtualQCamera* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QCamera_protectedbase_addPropertyWatch(void* self, struct miqt_string name);
-	friend void QCamera_protectedbase_removePropertyWatch(void* self, struct miqt_string name);
-	friend QObject* QCamera_protectedbase_sender(const void* self);
-	friend int QCamera_protectedbase_senderSignalIndex(const void* self);
-	friend int QCamera_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QCamera_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QCamera_protectedbase_addPropertyWatch(VirtualQCamera* self, struct miqt_string name);
+	friend void QCamera_protectedbase_removePropertyWatch(VirtualQCamera* self, struct miqt_string name);
+	friend QObject* QCamera_protectedbase_sender(const VirtualQCamera* self);
+	friend int QCamera_protectedbase_senderSignalIndex(const VirtualQCamera* self);
+	friend int QCamera_protectedbase_receivers(const VirtualQCamera* self, const char* signal);
+	friend bool QCamera_protectedbase_isSignalConnected(const VirtualQCamera* self, QMetaMethod* signal);
 };
 
-QCamera* QCamera_new(struct QCamera_VTable* vtbl) {
-	return new VirtualQCamera(vtbl);
+VirtualQCamera* QCamera_new(const QCamera_VTable* vtbl, void* vdata) {
+	return new VirtualQCamera(vtbl, vdata);
 }
 
-QCamera* QCamera_new2(struct QCamera_VTable* vtbl, struct miqt_string deviceName) {
+VirtualQCamera* QCamera_new2(const QCamera_VTable* vtbl, void* vdata, struct miqt_string deviceName) {
 	QByteArray deviceName_QByteArray(deviceName.data, deviceName.len);
-	return new VirtualQCamera(vtbl, deviceName_QByteArray);
+	return new VirtualQCamera(vtbl, vdata, deviceName_QByteArray);
 }
 
-QCamera* QCamera_new3(struct QCamera_VTable* vtbl, QCameraInfo* cameraInfo) {
-	return new VirtualQCamera(vtbl, *cameraInfo);
+VirtualQCamera* QCamera_new3(const QCamera_VTable* vtbl, void* vdata, QCameraInfo* cameraInfo) {
+	return new VirtualQCamera(vtbl, vdata, *cameraInfo);
 }
 
-QCamera* QCamera_new4(struct QCamera_VTable* vtbl, int position) {
-	return new VirtualQCamera(vtbl, static_cast<QCamera::Position>(position));
+VirtualQCamera* QCamera_new4(const QCamera_VTable* vtbl, void* vdata, int position) {
+	return new VirtualQCamera(vtbl, vdata, static_cast<QCamera::Position>(position));
 }
 
-QCamera* QCamera_new5(struct QCamera_VTable* vtbl, QObject* parent) {
-	return new VirtualQCamera(vtbl, parent);
+VirtualQCamera* QCamera_new5(const QCamera_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQCamera(vtbl, vdata, parent);
 }
 
-QCamera* QCamera_new6(struct QCamera_VTable* vtbl, struct miqt_string deviceName, QObject* parent) {
+VirtualQCamera* QCamera_new6(const QCamera_VTable* vtbl, void* vdata, struct miqt_string deviceName, QObject* parent) {
 	QByteArray deviceName_QByteArray(deviceName.data, deviceName.len);
-	return new VirtualQCamera(vtbl, deviceName_QByteArray, parent);
+	return new VirtualQCamera(vtbl, vdata, deviceName_QByteArray, parent);
 }
 
-QCamera* QCamera_new7(struct QCamera_VTable* vtbl, QCameraInfo* cameraInfo, QObject* parent) {
-	return new VirtualQCamera(vtbl, *cameraInfo, parent);
+VirtualQCamera* QCamera_new7(const QCamera_VTable* vtbl, void* vdata, QCameraInfo* cameraInfo, QObject* parent) {
+	return new VirtualQCamera(vtbl, vdata, *cameraInfo, parent);
 }
 
-QCamera* QCamera_new8(struct QCamera_VTable* vtbl, int position, QObject* parent) {
-	return new VirtualQCamera(vtbl, static_cast<QCamera::Position>(position), parent);
+VirtualQCamera* QCamera_new8(const QCamera_VTable* vtbl, void* vdata, int position, QObject* parent) {
+	return new VirtualQCamera(vtbl, vdata, static_cast<QCamera::Position>(position), parent);
 }
 
 void QCamera_virtbase(QCamera* src, QMediaObject** outptr_QMediaObject) {
@@ -571,7 +551,7 @@ void QCamera_stateChanged(QCamera* self, int state) {
 	self->stateChanged(static_cast<QCamera::State>(state));
 }
 
-void QCamera_connect_stateChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_stateChanged(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -588,7 +568,7 @@ void QCamera_captureModeChanged(QCamera* self, int param1) {
 	self->captureModeChanged(static_cast<QCamera::CaptureModes>(param1));
 }
 
-void QCamera_connect_captureModeChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_captureModeChanged(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -605,7 +585,7 @@ void QCamera_statusChanged(QCamera* self, int status) {
 	self->statusChanged(static_cast<QCamera::Status>(status));
 }
 
-void QCamera_connect_statusChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_statusChanged(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -622,7 +602,7 @@ void QCamera_locked(QCamera* self) {
 	self->locked();
 }
 
-void QCamera_connect_locked(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QCamera_connect_locked(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -637,7 +617,7 @@ void QCamera_lockFailed(QCamera* self) {
 	self->lockFailed();
 }
 
-void QCamera_connect_lockFailed(QCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QCamera_connect_lockFailed(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -652,7 +632,7 @@ void QCamera_lockStatusChanged(QCamera* self, int status, int reason) {
 	self->lockStatusChanged(static_cast<QCamera::LockStatus>(status), static_cast<QCamera::LockChangeReason>(reason));
 }
 
-void QCamera_connect_lockStatusChanged(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
+void QCamera_connect_lockStatusChanged(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int);
@@ -671,7 +651,7 @@ void QCamera_lockStatusChanged2(QCamera* self, int lock, int status, int reason)
 	self->lockStatusChanged(static_cast<QCamera::LockType>(lock), static_cast<QCamera::LockStatus>(status), static_cast<QCamera::LockChangeReason>(reason));
 }
 
-void QCamera_connect_lockStatusChanged2(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
+void QCamera_connect_lockStatusChanged2(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int, int, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int, int, int);
@@ -692,7 +672,7 @@ void QCamera_errorWithQCameraError(QCamera* self, int param1) {
 	self->error(static_cast<QCamera::Error>(param1));
 }
 
-void QCamera_connect_errorWithQCameraError(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_errorWithQCameraError(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -709,7 +689,7 @@ void QCamera_errorOccurred(QCamera* self, int param1) {
 	self->errorOccurred(static_cast<QCamera::Error>(param1));
 }
 
-void QCamera_connect_errorOccurred(QCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
+void QCamera_connect_errorOccurred(VirtualQCamera* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, int);
@@ -819,140 +799,112 @@ struct miqt_array /* of int */  QCamera_supportedViewfinderPixelFormats1(const Q
 	return _out;
 }
 
-QMetaObject* QCamera_virtualbase_metaObject(const void* self) {
+QMetaObject* QCamera_virtualbase_metaObject(const VirtualQCamera* self) {
 
-	return (QMetaObject*) ( (const VirtualQCamera*)(self) )->QCamera::metaObject();
-
+	return (QMetaObject*) self->QCamera::metaObject();
 }
 
-void* QCamera_virtualbase_metacast(void* self, const char* param1) {
+void* QCamera_virtualbase_metacast(VirtualQCamera* self, const char* param1) {
 
-	return ( (VirtualQCamera*)(self) )->QCamera::qt_metacast(param1);
-
+	return self->QCamera::qt_metacast(param1);
 }
 
-int QCamera_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QCamera_virtualbase_metacall(VirtualQCamera* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQCamera*)(self) )->QCamera::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QCamera::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-int QCamera_virtualbase_availability(const void* self) {
+int QCamera_virtualbase_availability(const VirtualQCamera* self) {
 
-	QMultimedia::AvailabilityStatus _ret = ( (const VirtualQCamera*)(self) )->QCamera::availability();
+	QMultimedia::AvailabilityStatus _ret = self->QCamera::availability();
 	return static_cast<int>(_ret);
-
 }
 
-bool QCamera_virtualbase_isAvailable(const void* self) {
+bool QCamera_virtualbase_isAvailable(const VirtualQCamera* self) {
 
-	return ( (const VirtualQCamera*)(self) )->QCamera::isAvailable();
-
+	return self->QCamera::isAvailable();
 }
 
-QMediaService* QCamera_virtualbase_service(const void* self) {
+QMediaService* QCamera_virtualbase_service(const VirtualQCamera* self) {
 
-	return ( (const VirtualQCamera*)(self) )->QCamera::service();
-
+	return self->QCamera::service();
 }
 
-bool QCamera_virtualbase_bind(void* self, QObject* param1) {
+bool QCamera_virtualbase_bind(VirtualQCamera* self, QObject* param1) {
 
-	return ( (VirtualQCamera*)(self) )->QCamera::bind(param1);
-
+	return self->QCamera::bind(param1);
 }
 
-void QCamera_virtualbase_unbind(void* self, QObject* param1) {
+void QCamera_virtualbase_unbind(VirtualQCamera* self, QObject* param1) {
 
-	( (VirtualQCamera*)(self) )->QCamera::unbind(param1);
-
+	self->QCamera::unbind(param1);
 }
 
-bool QCamera_virtualbase_event(void* self, QEvent* event) {
+bool QCamera_virtualbase_event(VirtualQCamera* self, QEvent* event) {
 
-	return ( (VirtualQCamera*)(self) )->QCamera::event(event);
-
+	return self->QCamera::event(event);
 }
 
-bool QCamera_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QCamera_virtualbase_eventFilter(VirtualQCamera* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQCamera*)(self) )->QCamera::eventFilter(watched, event);
-
+	return self->QCamera::eventFilter(watched, event);
 }
 
-void QCamera_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QCamera_virtualbase_timerEvent(VirtualQCamera* self, QTimerEvent* event) {
 
-	( (VirtualQCamera*)(self) )->QCamera::timerEvent(event);
-
+	self->QCamera::timerEvent(event);
 }
 
-void QCamera_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QCamera_virtualbase_childEvent(VirtualQCamera* self, QChildEvent* event) {
 
-	( (VirtualQCamera*)(self) )->QCamera::childEvent(event);
-
+	self->QCamera::childEvent(event);
 }
 
-void QCamera_virtualbase_customEvent(void* self, QEvent* event) {
+void QCamera_virtualbase_customEvent(VirtualQCamera* self, QEvent* event) {
 
-	( (VirtualQCamera*)(self) )->QCamera::customEvent(event);
-
+	self->QCamera::customEvent(event);
 }
 
-void QCamera_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QCamera_virtualbase_connectNotify(VirtualQCamera* self, QMetaMethod* signal) {
 
-	( (VirtualQCamera*)(self) )->QCamera::connectNotify(*signal);
-
+	self->QCamera::connectNotify(*signal);
 }
 
-void QCamera_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QCamera_virtualbase_disconnectNotify(VirtualQCamera* self, QMetaMethod* signal) {
 
-	( (VirtualQCamera*)(self) )->QCamera::disconnectNotify(*signal);
-
+	self->QCamera::disconnectNotify(*signal);
 }
 
 const QMetaObject* QCamera_staticMetaObject() { return &QCamera::staticMetaObject; }
-void QCamera_protectedbase_addPropertyWatch(void* self, struct miqt_string name) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-			QByteArray name_QByteArray(name.data, name.len);
 
-	self_cast->addPropertyWatch(name_QByteArray);
+const QCamera_VTable* QCamera_vtbl(const VirtualQCamera* self) { return self->vtbl; }
+void* QCamera_vdata(const VirtualQCamera* self) { return self->vdata; }
+void QCamera_setVdata(VirtualQCamera* self, void* vdata) { self->vdata = vdata; }
 
+void QCamera_protectedbase_addPropertyWatch(VirtualQCamera* self, struct miqt_string name) {
+		QByteArray name_QByteArray(name.data, name.len);
+	self->addPropertyWatch(name_QByteArray);
 }
 
-void QCamera_protectedbase_removePropertyWatch(void* self, struct miqt_string name) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-			QByteArray name_QByteArray(name.data, name.len);
-
-	self_cast->removePropertyWatch(name_QByteArray);
-
+void QCamera_protectedbase_removePropertyWatch(VirtualQCamera* self, struct miqt_string name) {
+		QByteArray name_QByteArray(name.data, name.len);
+	self->removePropertyWatch(name_QByteArray);
 }
 
-QObject* QCamera_protectedbase_sender(const void* self) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QCamera_protectedbase_sender(const VirtualQCamera* self) {
+	return self->sender();
 }
 
-int QCamera_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QCamera_protectedbase_senderSignalIndex(const VirtualQCamera* self) {
+	return self->senderSignalIndex();
 }
 
-int QCamera_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QCamera_protectedbase_receivers(const VirtualQCamera* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QCamera_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQCamera* self_cast = static_cast<VirtualQCamera*>( (QCamera*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QCamera_protectedbase_isSignalConnected(const VirtualQCamera* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QCamera_delete(QCamera* self) {
@@ -960,15 +912,15 @@ void QCamera_delete(QCamera* self) {
 }
 
 QCamera__FrameRateRange* QCamera__FrameRateRange_new() {
-	return new QCamera::FrameRateRange();
+	return new QCamera__FrameRateRange();
 }
 
 QCamera__FrameRateRange* QCamera__FrameRateRange_new2(double minimum, double maximum) {
-	return new QCamera::FrameRateRange(static_cast<qreal>(minimum), static_cast<qreal>(maximum));
+	return new QCamera__FrameRateRange(static_cast<qreal>(minimum), static_cast<qreal>(maximum));
 }
 
 QCamera__FrameRateRange* QCamera__FrameRateRange_new3(QCamera__FrameRateRange* param1) {
-	return new QCamera::FrameRateRange(*param1);
+	return new QCamera__FrameRateRange(*param1);
 }
 
 void QCamera__FrameRateRange_delete(QCamera__FrameRateRange* self) {

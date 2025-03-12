@@ -36,6 +36,7 @@ void QSGRectangleNode_setRect2(QSGRectangleNode* self, double x, double y, doubl
 QRectF* QSGRectangleNode_rect(const QSGRectangleNode* self);
 void QSGRectangleNode_setColor(QSGRectangleNode* self, QColor* color);
 QColor* QSGRectangleNode_color(const QSGRectangleNode* self);
+
 void QSGRectangleNode_delete(QSGRectangleNode* self);
 
 #ifdef __cplusplus

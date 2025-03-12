@@ -44,7 +44,7 @@ type cQGenericPluginFactory*{.exportc: "QGenericPluginFactory", incompleteStruct
 proc fcQGenericPluginFactory_keys(): struct_miqt_array {.importc: "QGenericPluginFactory_keys".}
 proc fcQGenericPluginFactory_create(param1: struct_miqt_string, param2: struct_miqt_string): pointer {.importc: "QGenericPluginFactory_create".}
 
-proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory, ): seq[string] =
+proc keys*(_: type gen_qgenericpluginfactory_types.QGenericPluginFactory): seq[string] =
   var v_ma = fcQGenericPluginFactory_keys()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

@@ -5,15 +5,6 @@
 #include <cstring>
 #include <qnetworkconfiguration.h>
 #include "gen_qnetworkconfiguration.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkConfiguration* QNetworkConfiguration_new() {
 	return new QNetworkConfiguration();
 }

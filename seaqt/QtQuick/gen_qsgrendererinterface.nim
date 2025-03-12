@@ -86,16 +86,16 @@ export
 
 type cQSGRendererInterface*{.exportc: "QSGRendererInterface", incompleteStruct.} = object
 
-proc fcQSGRendererInterface_graphicsApi(self: pointer, ): cint {.importc: "QSGRendererInterface_graphicsApi".}
+proc fcQSGRendererInterface_graphicsApi(self: pointer): cint {.importc: "QSGRendererInterface_graphicsApi".}
 proc fcQSGRendererInterface_getResource(self: pointer, window: pointer, resource: cint): pointer {.importc: "QSGRendererInterface_getResource".}
 proc fcQSGRendererInterface_getResource2(self: pointer, window: pointer, resource: cstring): pointer {.importc: "QSGRendererInterface_getResource2".}
-proc fcQSGRendererInterface_shaderType(self: pointer, ): cint {.importc: "QSGRendererInterface_shaderType".}
-proc fcQSGRendererInterface_shaderCompilationType(self: pointer, ): cint {.importc: "QSGRendererInterface_shaderCompilationType".}
-proc fcQSGRendererInterface_shaderSourceType(self: pointer, ): cint {.importc: "QSGRendererInterface_shaderSourceType".}
+proc fcQSGRendererInterface_shaderType(self: pointer): cint {.importc: "QSGRendererInterface_shaderType".}
+proc fcQSGRendererInterface_shaderCompilationType(self: pointer): cint {.importc: "QSGRendererInterface_shaderCompilationType".}
+proc fcQSGRendererInterface_shaderSourceType(self: pointer): cint {.importc: "QSGRendererInterface_shaderSourceType".}
 proc fcQSGRendererInterface_isApiRhiBased(api: cint): bool {.importc: "QSGRendererInterface_isApiRhiBased".}
 proc fcQSGRendererInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QSGRendererInterface_operatorAssign".}
 
-proc graphicsApi*(self: gen_qsgrendererinterface_types.QSGRendererInterface, ): cint =
+proc graphicsApi*(self: gen_qsgrendererinterface_types.QSGRendererInterface): cint =
   cint(fcQSGRendererInterface_graphicsApi(self.h))
 
 proc getResource*(self: gen_qsgrendererinterface_types.QSGRendererInterface, window: gen_qquickwindow_types.QQuickWindow, resource: cint): pointer =
@@ -104,13 +104,13 @@ proc getResource*(self: gen_qsgrendererinterface_types.QSGRendererInterface, win
 proc getResource*(self: gen_qsgrendererinterface_types.QSGRendererInterface, window: gen_qquickwindow_types.QQuickWindow, resource: cstring): pointer =
   fcQSGRendererInterface_getResource2(self.h, window.h, resource)
 
-proc shaderType*(self: gen_qsgrendererinterface_types.QSGRendererInterface, ): cint =
+proc shaderType*(self: gen_qsgrendererinterface_types.QSGRendererInterface): cint =
   cint(fcQSGRendererInterface_shaderType(self.h))
 
-proc shaderCompilationType*(self: gen_qsgrendererinterface_types.QSGRendererInterface, ): cint =
+proc shaderCompilationType*(self: gen_qsgrendererinterface_types.QSGRendererInterface): cint =
   cint(fcQSGRendererInterface_shaderCompilationType(self.h))
 
-proc shaderSourceType*(self: gen_qsgrendererinterface_types.QSGRendererInterface, ): cint =
+proc shaderSourceType*(self: gen_qsgrendererinterface_types.QSGRendererInterface): cint =
   cint(fcQSGRendererInterface_shaderSourceType(self.h))
 
 proc isApiRhiBased*(_: type gen_qsgrendererinterface_types.QSGRendererInterface, api: cint): bool =

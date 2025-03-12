@@ -63,30 +63,30 @@ export
 type cQTransform*{.exportc: "QTransform", incompleteStruct.} = object
 
 proc fcQTransform_operatorAssign(self: pointer, param1: pointer): void {.importc: "QTransform_operatorAssign".}
-proc fcQTransform_isAffine(self: pointer, ): bool {.importc: "QTransform_isAffine".}
-proc fcQTransform_isIdentity(self: pointer, ): bool {.importc: "QTransform_isIdentity".}
-proc fcQTransform_isInvertible(self: pointer, ): bool {.importc: "QTransform_isInvertible".}
-proc fcQTransform_isScaling(self: pointer, ): bool {.importc: "QTransform_isScaling".}
-proc fcQTransform_isRotating(self: pointer, ): bool {.importc: "QTransform_isRotating".}
-proc fcQTransform_isTranslating(self: pointer, ): bool {.importc: "QTransform_isTranslating".}
-proc fcQTransform_typeX(self: pointer, ): cint {.importc: "QTransform_type".}
-proc fcQTransform_determinant(self: pointer, ): float64 {.importc: "QTransform_determinant".}
-proc fcQTransform_det(self: pointer, ): float64 {.importc: "QTransform_det".}
-proc fcQTransform_m11(self: pointer, ): float64 {.importc: "QTransform_m11".}
-proc fcQTransform_m12(self: pointer, ): float64 {.importc: "QTransform_m12".}
-proc fcQTransform_m13(self: pointer, ): float64 {.importc: "QTransform_m13".}
-proc fcQTransform_m21(self: pointer, ): float64 {.importc: "QTransform_m21".}
-proc fcQTransform_m22(self: pointer, ): float64 {.importc: "QTransform_m22".}
-proc fcQTransform_m23(self: pointer, ): float64 {.importc: "QTransform_m23".}
-proc fcQTransform_m31(self: pointer, ): float64 {.importc: "QTransform_m31".}
-proc fcQTransform_m32(self: pointer, ): float64 {.importc: "QTransform_m32".}
-proc fcQTransform_m33(self: pointer, ): float64 {.importc: "QTransform_m33".}
-proc fcQTransform_dx(self: pointer, ): float64 {.importc: "QTransform_dx".}
-proc fcQTransform_dy(self: pointer, ): float64 {.importc: "QTransform_dy".}
+proc fcQTransform_isAffine(self: pointer): bool {.importc: "QTransform_isAffine".}
+proc fcQTransform_isIdentity(self: pointer): bool {.importc: "QTransform_isIdentity".}
+proc fcQTransform_isInvertible(self: pointer): bool {.importc: "QTransform_isInvertible".}
+proc fcQTransform_isScaling(self: pointer): bool {.importc: "QTransform_isScaling".}
+proc fcQTransform_isRotating(self: pointer): bool {.importc: "QTransform_isRotating".}
+proc fcQTransform_isTranslating(self: pointer): bool {.importc: "QTransform_isTranslating".}
+proc fcQTransform_typeX(self: pointer): cint {.importc: "QTransform_type".}
+proc fcQTransform_determinant(self: pointer): float64 {.importc: "QTransform_determinant".}
+proc fcQTransform_det(self: pointer): float64 {.importc: "QTransform_det".}
+proc fcQTransform_m11(self: pointer): float64 {.importc: "QTransform_m11".}
+proc fcQTransform_m12(self: pointer): float64 {.importc: "QTransform_m12".}
+proc fcQTransform_m13(self: pointer): float64 {.importc: "QTransform_m13".}
+proc fcQTransform_m21(self: pointer): float64 {.importc: "QTransform_m21".}
+proc fcQTransform_m22(self: pointer): float64 {.importc: "QTransform_m22".}
+proc fcQTransform_m23(self: pointer): float64 {.importc: "QTransform_m23".}
+proc fcQTransform_m31(self: pointer): float64 {.importc: "QTransform_m31".}
+proc fcQTransform_m32(self: pointer): float64 {.importc: "QTransform_m32".}
+proc fcQTransform_m33(self: pointer): float64 {.importc: "QTransform_m33".}
+proc fcQTransform_dx(self: pointer): float64 {.importc: "QTransform_dx".}
+proc fcQTransform_dy(self: pointer): float64 {.importc: "QTransform_dy".}
 proc fcQTransform_setMatrix(self: pointer, m11: float64, m12: float64, m13: float64, m21: float64, m22: float64, m23: float64, m31: float64, m32: float64, m33: float64): void {.importc: "QTransform_setMatrix".}
-proc fcQTransform_inverted(self: pointer, ): pointer {.importc: "QTransform_inverted".}
-proc fcQTransform_adjoint(self: pointer, ): pointer {.importc: "QTransform_adjoint".}
-proc fcQTransform_transposed(self: pointer, ): pointer {.importc: "QTransform_transposed".}
+proc fcQTransform_inverted(self: pointer): pointer {.importc: "QTransform_inverted".}
+proc fcQTransform_adjoint(self: pointer): pointer {.importc: "QTransform_adjoint".}
+proc fcQTransform_transposed(self: pointer): pointer {.importc: "QTransform_transposed".}
 proc fcQTransform_translate(self: pointer, dx: float64, dy: float64): pointer {.importc: "QTransform_translate".}
 proc fcQTransform_scale(self: pointer, sx: float64, sy: float64): pointer {.importc: "QTransform_scale".}
 proc fcQTransform_shear(self: pointer, sh: float64, sv: float64): pointer {.importc: "QTransform_shear".}
@@ -96,8 +96,8 @@ proc fcQTransform_operatorEqual(self: pointer, param1: pointer): bool {.importc:
 proc fcQTransform_operatorNotEqual(self: pointer, param1: pointer): bool {.importc: "QTransform_operatorNotEqual".}
 proc fcQTransform_operatorMultiplyAssign(self: pointer, param1: pointer): pointer {.importc: "QTransform_operatorMultiplyAssign".}
 proc fcQTransform_operatorMultiply(self: pointer, o: pointer): pointer {.importc: "QTransform_operatorMultiply".}
-proc fcQTransform_ToQVariant(self: pointer, ): pointer {.importc: "QTransform_ToQVariant".}
-proc fcQTransform_reset(self: pointer, ): void {.importc: "QTransform_reset".}
+proc fcQTransform_ToQVariant(self: pointer): pointer {.importc: "QTransform_ToQVariant".}
+proc fcQTransform_reset(self: pointer): void {.importc: "QTransform_reset".}
 proc fcQTransform_map(self: pointer, p: pointer): pointer {.importc: "QTransform_map".}
 proc fcQTransform_mapWithQPointF(self: pointer, p: pointer): pointer {.importc: "QTransform_mapWithQPointF".}
 proc fcQTransform_mapWithQLine(self: pointer, l: pointer): pointer {.importc: "QTransform_mapWithQLine".}
@@ -108,7 +108,7 @@ proc fcQTransform_mapRect(self: pointer, param1: pointer): pointer {.importc: "Q
 proc fcQTransform_mapRectWithQRectF(self: pointer, param1: pointer): pointer {.importc: "QTransform_mapRectWithQRectF".}
 proc fcQTransform_map2(self: pointer, x: cint, y: cint, tx: ptr cint, ty: ptr cint): void {.importc: "QTransform_map2".}
 proc fcQTransform_map3(self: pointer, x: float64, y: float64, tx: ptr float64, ty: ptr float64): void {.importc: "QTransform_map3".}
-proc fcQTransform_toAffine(self: pointer, ): pointer {.importc: "QTransform_toAffine".}
+proc fcQTransform_toAffine(self: pointer): pointer {.importc: "QTransform_toAffine".}
 proc fcQTransform_operatorMultiplyAssignWithDiv(self: pointer, divVal: float64): pointer {.importc: "QTransform_operatorMultiplyAssignWithDiv".}
 proc fcQTransform_operatorDivideAssign(self: pointer, divVal: float64): pointer {.importc: "QTransform_operatorDivideAssign".}
 proc fcQTransform_operatorPlusAssign(self: pointer, divVal: float64): pointer {.importc: "QTransform_operatorPlusAssign".}
@@ -129,76 +129,76 @@ proc fcQTransform_new7(h11: float64, h12: float64, h13: float64, h21: float64, h
 proc operatorAssign*(self: gen_qtransform_types.QTransform, param1: gen_qtransform_types.QTransform): void =
   fcQTransform_operatorAssign(self.h, param1.h)
 
-proc isAffine*(self: gen_qtransform_types.QTransform, ): bool =
+proc isAffine*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isAffine(self.h)
 
-proc isIdentity*(self: gen_qtransform_types.QTransform, ): bool =
+proc isIdentity*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isIdentity(self.h)
 
-proc isInvertible*(self: gen_qtransform_types.QTransform, ): bool =
+proc isInvertible*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isInvertible(self.h)
 
-proc isScaling*(self: gen_qtransform_types.QTransform, ): bool =
+proc isScaling*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isScaling(self.h)
 
-proc isRotating*(self: gen_qtransform_types.QTransform, ): bool =
+proc isRotating*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isRotating(self.h)
 
-proc isTranslating*(self: gen_qtransform_types.QTransform, ): bool =
+proc isTranslating*(self: gen_qtransform_types.QTransform): bool =
   fcQTransform_isTranslating(self.h)
 
-proc typeX*(self: gen_qtransform_types.QTransform, ): cint =
+proc typeX*(self: gen_qtransform_types.QTransform): cint =
   cint(fcQTransform_typeX(self.h))
 
-proc determinant*(self: gen_qtransform_types.QTransform, ): float64 =
+proc determinant*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_determinant(self.h)
 
-proc det*(self: gen_qtransform_types.QTransform, ): float64 =
+proc det*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_det(self.h)
 
-proc m11*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m11*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m11(self.h)
 
-proc m12*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m12*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m12(self.h)
 
-proc m13*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m13*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m13(self.h)
 
-proc m21*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m21*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m21(self.h)
 
-proc m22*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m22*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m22(self.h)
 
-proc m23*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m23*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m23(self.h)
 
-proc m31*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m31*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m31(self.h)
 
-proc m32*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m32*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m32(self.h)
 
-proc m33*(self: gen_qtransform_types.QTransform, ): float64 =
+proc m33*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_m33(self.h)
 
-proc dx*(self: gen_qtransform_types.QTransform, ): float64 =
+proc dx*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_dx(self.h)
 
-proc dy*(self: gen_qtransform_types.QTransform, ): float64 =
+proc dy*(self: gen_qtransform_types.QTransform): float64 =
   fcQTransform_dy(self.h)
 
 proc setMatrix*(self: gen_qtransform_types.QTransform, m11: float64, m12: float64, m13: float64, m21: float64, m22: float64, m23: float64, m31: float64, m32: float64, m33: float64): void =
   fcQTransform_setMatrix(self.h, m11, m12, m13, m21, m22, m23, m31, m32, m33)
 
-proc inverted*(self: gen_qtransform_types.QTransform, ): gen_qtransform_types.QTransform =
+proc inverted*(self: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQTransform_inverted(self.h), owned: true)
 
-proc adjoint*(self: gen_qtransform_types.QTransform, ): gen_qtransform_types.QTransform =
+proc adjoint*(self: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQTransform_adjoint(self.h), owned: true)
 
-proc transposed*(self: gen_qtransform_types.QTransform, ): gen_qtransform_types.QTransform =
+proc transposed*(self: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQTransform_transposed(self.h), owned: true)
 
 proc translate*(self: gen_qtransform_types.QTransform, dx: float64, dy: float64): gen_qtransform_types.QTransform =
@@ -228,10 +228,10 @@ proc operatorMultiplyAssign*(self: gen_qtransform_types.QTransform, param1: gen_
 proc operatorMultiply*(self: gen_qtransform_types.QTransform, o: gen_qtransform_types.QTransform): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQTransform_operatorMultiply(self.h, o.h), owned: true)
 
-proc ToQVariant*(self: gen_qtransform_types.QTransform, ): gen_qvariant_types.QVariant =
+proc ToQVariant*(self: gen_qtransform_types.QTransform): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQTransform_ToQVariant(self.h), owned: true)
 
-proc reset*(self: gen_qtransform_types.QTransform, ): void =
+proc reset*(self: gen_qtransform_types.QTransform): void =
   fcQTransform_reset(self.h)
 
 proc map*(self: gen_qtransform_types.QTransform, p: gen_qpoint_types.QPoint): gen_qpoint_types.QPoint =
@@ -264,7 +264,7 @@ proc map*(self: gen_qtransform_types.QTransform, x: cint, y: cint, tx: ptr cint,
 proc map*(self: gen_qtransform_types.QTransform, x: float64, y: float64, tx: ptr float64, ty: ptr float64): void =
   fcQTransform_map3(self.h, x, y, tx, ty)
 
-proc toAffine*(self: gen_qtransform_types.QTransform, ): gen_qmatrix_types.QMatrix =
+proc toAffine*(self: gen_qtransform_types.QTransform): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQTransform_toAffine(self.h), owned: false)
 
 proc operatorMultiplyAssign*(self: gen_qtransform_types.QTransform, divVal: float64): gen_qtransform_types.QTransform =

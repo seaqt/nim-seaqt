@@ -72,13 +72,13 @@ type cQMediaServiceProviderPlugin*{.exportc: "QMediaServiceProviderPlugin", inco
 proc fcQMediaServiceProviderHint_operatorAssign(self: pointer, other: pointer): void {.importc: "QMediaServiceProviderHint_operatorAssign".}
 proc fcQMediaServiceProviderHint_operatorEqual(self: pointer, other: pointer): bool {.importc: "QMediaServiceProviderHint_operatorEqual".}
 proc fcQMediaServiceProviderHint_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QMediaServiceProviderHint_operatorNotEqual".}
-proc fcQMediaServiceProviderHint_isNull(self: pointer, ): bool {.importc: "QMediaServiceProviderHint_isNull".}
-proc fcQMediaServiceProviderHint_typeX(self: pointer, ): cint {.importc: "QMediaServiceProviderHint_type".}
-proc fcQMediaServiceProviderHint_mimeType(self: pointer, ): struct_miqt_string {.importc: "QMediaServiceProviderHint_mimeType".}
-proc fcQMediaServiceProviderHint_codecs(self: pointer, ): struct_miqt_array {.importc: "QMediaServiceProviderHint_codecs".}
-proc fcQMediaServiceProviderHint_device(self: pointer, ): struct_miqt_string {.importc: "QMediaServiceProviderHint_device".}
-proc fcQMediaServiceProviderHint_cameraPosition(self: pointer, ): cint {.importc: "QMediaServiceProviderHint_cameraPosition".}
-proc fcQMediaServiceProviderHint_features(self: pointer, ): cint {.importc: "QMediaServiceProviderHint_features".}
+proc fcQMediaServiceProviderHint_isNull(self: pointer): bool {.importc: "QMediaServiceProviderHint_isNull".}
+proc fcQMediaServiceProviderHint_typeX(self: pointer): cint {.importc: "QMediaServiceProviderHint_type".}
+proc fcQMediaServiceProviderHint_mimeType(self: pointer): struct_miqt_string {.importc: "QMediaServiceProviderHint_mimeType".}
+proc fcQMediaServiceProviderHint_codecs(self: pointer): struct_miqt_array {.importc: "QMediaServiceProviderHint_codecs".}
+proc fcQMediaServiceProviderHint_device(self: pointer): struct_miqt_string {.importc: "QMediaServiceProviderHint_device".}
+proc fcQMediaServiceProviderHint_cameraPosition(self: pointer): cint {.importc: "QMediaServiceProviderHint_cameraPosition".}
+proc fcQMediaServiceProviderHint_features(self: pointer): cint {.importc: "QMediaServiceProviderHint_features".}
 proc fcQMediaServiceProviderHint_new(): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new".}
 proc fcQMediaServiceProviderHint_new2(mimeType: struct_miqt_string, codecs: struct_miqt_array): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new2".}
 proc fcQMediaServiceProviderHint_new3(device: struct_miqt_string): ptr cQMediaServiceProviderHint {.importc: "QMediaServiceProviderHint_new3".}
@@ -89,7 +89,7 @@ proc fcQMediaServiceProviderFactoryInterface_create(self: pointer, key: struct_m
 proc fcQMediaServiceProviderFactoryInterface_release(self: pointer, service: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_release".}
 proc fcQMediaServiceProviderFactoryInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceProviderFactoryInterface_operatorAssign".}
 proc fcQMediaServiceSupportedFormatsInterface_hasSupport(self: pointer, mimeType: struct_miqt_string, codecs: struct_miqt_array): cint {.importc: "QMediaServiceSupportedFormatsInterface_hasSupport".}
-proc fcQMediaServiceSupportedFormatsInterface_supportedMimeTypes(self: pointer, ): struct_miqt_array {.importc: "QMediaServiceSupportedFormatsInterface_supportedMimeTypes".}
+proc fcQMediaServiceSupportedFormatsInterface_supportedMimeTypes(self: pointer): struct_miqt_array {.importc: "QMediaServiceSupportedFormatsInterface_supportedMimeTypes".}
 proc fcQMediaServiceSupportedFormatsInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceSupportedFormatsInterface_operatorAssign".}
 proc fcQMediaServiceSupportedDevicesInterface_devices(self: pointer, service: struct_miqt_string): struct_miqt_array {.importc: "QMediaServiceSupportedDevicesInterface_devices".}
 proc fcQMediaServiceSupportedDevicesInterface_deviceDescription(self: pointer, service: struct_miqt_string, device: struct_miqt_string): struct_miqt_string {.importc: "QMediaServiceSupportedDevicesInterface_deviceDescription".}
@@ -101,7 +101,7 @@ proc fcQMediaServiceCameraInfoInterface_cameraOrientation(self: pointer, device:
 proc fcQMediaServiceCameraInfoInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceCameraInfoInterface_operatorAssign".}
 proc fcQMediaServiceFeaturesInterface_supportedFeatures(self: pointer, service: struct_miqt_string): cint {.importc: "QMediaServiceFeaturesInterface_supportedFeatures".}
 proc fcQMediaServiceFeaturesInterface_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaServiceFeaturesInterface_operatorAssign".}
-proc fcQMediaServiceProviderPlugin_metaObject(self: pointer, ): pointer {.importc: "QMediaServiceProviderPlugin_metaObject".}
+proc fcQMediaServiceProviderPlugin_metaObject(self: pointer): pointer {.importc: "QMediaServiceProviderPlugin_metaObject".}
 proc fcQMediaServiceProviderPlugin_metacast(self: pointer, param1: cstring): pointer {.importc: "QMediaServiceProviderPlugin_metacast".}
 proc fcQMediaServiceProviderPlugin_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QMediaServiceProviderPlugin_metacall".}
 proc fcQMediaServiceProviderPlugin_tr(s: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr".}
@@ -112,8 +112,8 @@ proc fcQMediaServiceProviderPlugin_tr2(s: cstring, c: cstring): struct_miqt_stri
 proc fcQMediaServiceProviderPlugin_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_tr3".}
 proc fcQMediaServiceProviderPlugin_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf82".}
 proc fcQMediaServiceProviderPlugin_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QMediaServiceProviderPlugin_trUtf83".}
-proc fcQMediaServiceProviderPlugin_protectedbase_sender(self: pointer, ): pointer {.importc: "QMediaServiceProviderPlugin_protectedbase_sender".}
-proc fcQMediaServiceProviderPlugin_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QMediaServiceProviderPlugin_protectedbase_senderSignalIndex".}
+proc fcQMediaServiceProviderPlugin_protectedbase_sender(self: pointer): pointer {.importc: "QMediaServiceProviderPlugin_protectedbase_sender".}
+proc fcQMediaServiceProviderPlugin_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QMediaServiceProviderPlugin_protectedbase_senderSignalIndex".}
 proc fcQMediaServiceProviderPlugin_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QMediaServiceProviderPlugin_protectedbase_receivers".}
 proc fcQMediaServiceProviderPlugin_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QMediaServiceProviderPlugin_protectedbase_isSignalConnected".}
 proc fcQMediaServiceProviderPlugin_staticMetaObject(): pointer {.importc: "QMediaServiceProviderPlugin_staticMetaObject".}
@@ -127,19 +127,19 @@ proc operatorEqual*(self: gen_qmediaserviceproviderplugin_types.QMediaServicePro
 proc operatorNotEqual*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, other: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): bool =
   fcQMediaServiceProviderHint_operatorNotEqual(self.h, other.h)
 
-proc isNull*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): bool =
+proc isNull*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): bool =
   fcQMediaServiceProviderHint_isNull(self.h)
 
-proc typeX*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): cint =
+proc typeX*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): cint =
   cint(fcQMediaServiceProviderHint_typeX(self.h))
 
-proc mimeType*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): string =
+proc mimeType*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): string =
   let v_ms = fcQMediaServiceProviderHint_mimeType(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc codecs*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): seq[string] =
+proc codecs*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): seq[string] =
   var v_ma = fcQMediaServiceProviderHint_codecs(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -151,16 +151,16 @@ proc codecs*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHi
   c_free(v_ma.data)
   vx_ret
 
-proc device*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): seq[byte] =
+proc device*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): seq[byte] =
   var v_bytearray = fcQMediaServiceProviderHint_device(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc cameraPosition*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): cint =
+proc cameraPosition*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): cint =
   cint(fcQMediaServiceProviderHint_cameraPosition(self.h))
 
-proc features*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint, ): cint =
+proc features*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): cint =
   cint(fcQMediaServiceProviderHint_features(self.h))
 
 proc create*(T: type gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint): gen_qmediaserviceproviderplugin_types.QMediaServiceProviderHint =
@@ -206,7 +206,7 @@ proc hasSupport*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSuppor
 
   cint(fcQMediaServiceSupportedFormatsInterface_hasSupport(self.h, struct_miqt_string(data: mimeType, len: csize_t(len(mimeType))), struct_miqt_array(len: csize_t(len(codecs)), data: if len(codecs) == 0: nil else: addr(codecs_CArray[0]))))
 
-proc supportedMimeTypes*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface, ): seq[string] =
+proc supportedMimeTypes*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceSupportedFormatsInterface): seq[string] =
   var v_ma = fcQMediaServiceSupportedFormatsInterface_supportedMimeTypes(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -266,7 +266,7 @@ proc supportedFeatures*(self: gen_qmediaserviceproviderplugin_types.QMediaServic
 proc operatorAssign*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface, param1: gen_qmediaserviceproviderplugin_types.QMediaServiceFeaturesInterface): void =
   fcQMediaServiceFeaturesInterface_operatorAssign(self.h, param1.h)
 
-proc metaObject*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQMediaServiceProviderPlugin_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, param1: cstring): pointer =
@@ -317,10 +317,10 @@ proc trUtf8*(_: type gen_qmediaserviceproviderplugin_types.QMediaServiceProvider
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQMediaServiceProviderPlugin_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, ): cint =
+proc senderSignalIndex*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin): cint =
   fcQMediaServiceProviderPlugin_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qmediaserviceproviderplugin_types.QMediaServiceProviderPlugin, signal: cstring): cint =

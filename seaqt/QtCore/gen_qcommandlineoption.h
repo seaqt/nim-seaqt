@@ -29,6 +29,7 @@ QCommandLineOption* QCommandLineOption_new6(struct miqt_string name, struct miqt
 QCommandLineOption* QCommandLineOption_new7(struct miqt_string name, struct miqt_string description, struct miqt_string valueName, struct miqt_string defaultValue);
 QCommandLineOption* QCommandLineOption_new8(struct miqt_array /* of struct miqt_string */  names, struct miqt_string description, struct miqt_string valueName);
 QCommandLineOption* QCommandLineOption_new9(struct miqt_array /* of struct miqt_string */  names, struct miqt_string description, struct miqt_string valueName, struct miqt_string defaultValue);
+
 void QCommandLineOption_operatorAssign(QCommandLineOption* self, QCommandLineOption* other);
 void QCommandLineOption_swap(QCommandLineOption* self, QCommandLineOption* other);
 struct miqt_array /* of struct miqt_string */  QCommandLineOption_names(const QCommandLineOption* self);
@@ -43,6 +44,7 @@ int QCommandLineOption_flags(const QCommandLineOption* self);
 void QCommandLineOption_setFlags(QCommandLineOption* self, int aflags);
 void QCommandLineOption_setHidden(QCommandLineOption* self, bool hidden);
 bool QCommandLineOption_isHidden(const QCommandLineOption* self);
+
 void QCommandLineOption_delete(QCommandLineOption* self);
 
 #ifdef __cplusplus

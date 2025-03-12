@@ -44,18 +44,18 @@ type cQCommandLineOption*{.exportc: "QCommandLineOption", incompleteStruct.} = o
 
 proc fcQCommandLineOption_operatorAssign(self: pointer, other: pointer): void {.importc: "QCommandLineOption_operatorAssign".}
 proc fcQCommandLineOption_swap(self: pointer, other: pointer): void {.importc: "QCommandLineOption_swap".}
-proc fcQCommandLineOption_names(self: pointer, ): struct_miqt_array {.importc: "QCommandLineOption_names".}
+proc fcQCommandLineOption_names(self: pointer): struct_miqt_array {.importc: "QCommandLineOption_names".}
 proc fcQCommandLineOption_setValueName(self: pointer, name: struct_miqt_string): void {.importc: "QCommandLineOption_setValueName".}
-proc fcQCommandLineOption_valueName(self: pointer, ): struct_miqt_string {.importc: "QCommandLineOption_valueName".}
+proc fcQCommandLineOption_valueName(self: pointer): struct_miqt_string {.importc: "QCommandLineOption_valueName".}
 proc fcQCommandLineOption_setDescription(self: pointer, description: struct_miqt_string): void {.importc: "QCommandLineOption_setDescription".}
-proc fcQCommandLineOption_description(self: pointer, ): struct_miqt_string {.importc: "QCommandLineOption_description".}
+proc fcQCommandLineOption_description(self: pointer): struct_miqt_string {.importc: "QCommandLineOption_description".}
 proc fcQCommandLineOption_setDefaultValue(self: pointer, defaultValue: struct_miqt_string): void {.importc: "QCommandLineOption_setDefaultValue".}
 proc fcQCommandLineOption_setDefaultValues(self: pointer, defaultValues: struct_miqt_array): void {.importc: "QCommandLineOption_setDefaultValues".}
-proc fcQCommandLineOption_defaultValues(self: pointer, ): struct_miqt_array {.importc: "QCommandLineOption_defaultValues".}
-proc fcQCommandLineOption_flags(self: pointer, ): cint {.importc: "QCommandLineOption_flags".}
+proc fcQCommandLineOption_defaultValues(self: pointer): struct_miqt_array {.importc: "QCommandLineOption_defaultValues".}
+proc fcQCommandLineOption_flags(self: pointer): cint {.importc: "QCommandLineOption_flags".}
 proc fcQCommandLineOption_setFlags(self: pointer, aflags: cint): void {.importc: "QCommandLineOption_setFlags".}
 proc fcQCommandLineOption_setHidden(self: pointer, hidden: bool): void {.importc: "QCommandLineOption_setHidden".}
-proc fcQCommandLineOption_isHidden(self: pointer, ): bool {.importc: "QCommandLineOption_isHidden".}
+proc fcQCommandLineOption_isHidden(self: pointer): bool {.importc: "QCommandLineOption_isHidden".}
 proc fcQCommandLineOption_new(name: struct_miqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new".}
 proc fcQCommandLineOption_new2(names: struct_miqt_array): ptr cQCommandLineOption {.importc: "QCommandLineOption_new2".}
 proc fcQCommandLineOption_new3(name: struct_miqt_string, description: struct_miqt_string): ptr cQCommandLineOption {.importc: "QCommandLineOption_new3".}
@@ -72,7 +72,7 @@ proc operatorAssign*(self: gen_qcommandlineoption_types.QCommandLineOption, othe
 proc swap*(self: gen_qcommandlineoption_types.QCommandLineOption, other: gen_qcommandlineoption_types.QCommandLineOption): void =
   fcQCommandLineOption_swap(self.h, other.h)
 
-proc names*(self: gen_qcommandlineoption_types.QCommandLineOption, ): seq[string] =
+proc names*(self: gen_qcommandlineoption_types.QCommandLineOption): seq[string] =
   var v_ma = fcQCommandLineOption_names(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -87,7 +87,7 @@ proc names*(self: gen_qcommandlineoption_types.QCommandLineOption, ): seq[string
 proc setValueName*(self: gen_qcommandlineoption_types.QCommandLineOption, name: string): void =
   fcQCommandLineOption_setValueName(self.h, struct_miqt_string(data: name, len: csize_t(len(name))))
 
-proc valueName*(self: gen_qcommandlineoption_types.QCommandLineOption, ): string =
+proc valueName*(self: gen_qcommandlineoption_types.QCommandLineOption): string =
   let v_ms = fcQCommandLineOption_valueName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -96,7 +96,7 @@ proc valueName*(self: gen_qcommandlineoption_types.QCommandLineOption, ): string
 proc setDescription*(self: gen_qcommandlineoption_types.QCommandLineOption, description: string): void =
   fcQCommandLineOption_setDescription(self.h, struct_miqt_string(data: description, len: csize_t(len(description))))
 
-proc description*(self: gen_qcommandlineoption_types.QCommandLineOption, ): string =
+proc description*(self: gen_qcommandlineoption_types.QCommandLineOption): string =
   let v_ms = fcQCommandLineOption_description(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -112,7 +112,7 @@ proc setDefaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption, de
 
   fcQCommandLineOption_setDefaultValues(self.h, struct_miqt_array(len: csize_t(len(defaultValues)), data: if len(defaultValues) == 0: nil else: addr(defaultValues_CArray[0])))
 
-proc defaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption, ): seq[string] =
+proc defaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption): seq[string] =
   var v_ma = fcQCommandLineOption_defaultValues(self.h)
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -124,7 +124,7 @@ proc defaultValues*(self: gen_qcommandlineoption_types.QCommandLineOption, ): se
   c_free(v_ma.data)
   vx_ret
 
-proc flags*(self: gen_qcommandlineoption_types.QCommandLineOption, ): cint =
+proc flags*(self: gen_qcommandlineoption_types.QCommandLineOption): cint =
   cint(fcQCommandLineOption_flags(self.h))
 
 proc setFlags*(self: gen_qcommandlineoption_types.QCommandLineOption, aflags: cint): void =
@@ -133,7 +133,7 @@ proc setFlags*(self: gen_qcommandlineoption_types.QCommandLineOption, aflags: ci
 proc setHidden*(self: gen_qcommandlineoption_types.QCommandLineOption, hidden: bool): void =
   fcQCommandLineOption_setHidden(self.h, hidden)
 
-proc isHidden*(self: gen_qcommandlineoption_types.QCommandLineOption, ): bool =
+proc isHidden*(self: gen_qcommandlineoption_types.QCommandLineOption): bool =
   fcQCommandLineOption_isHidden(self.h)
 
 proc create*(T: type gen_qcommandlineoption_types.QCommandLineOption,

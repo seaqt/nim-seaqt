@@ -69,7 +69,7 @@ export
 
 type cQCameraImageProcessingControl*{.exportc: "QCameraImageProcessingControl", incompleteStruct.} = object
 
-proc fcQCameraImageProcessingControl_metaObject(self: pointer, ): pointer {.importc: "QCameraImageProcessingControl_metaObject".}
+proc fcQCameraImageProcessingControl_metaObject(self: pointer): pointer {.importc: "QCameraImageProcessingControl_metaObject".}
 proc fcQCameraImageProcessingControl_metacast(self: pointer, param1: cstring): pointer {.importc: "QCameraImageProcessingControl_metacast".}
 proc fcQCameraImageProcessingControl_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QCameraImageProcessingControl_metacall".}
 proc fcQCameraImageProcessingControl_tr(s: cstring): struct_miqt_string {.importc: "QCameraImageProcessingControl_tr".}
@@ -82,13 +82,13 @@ proc fcQCameraImageProcessingControl_tr2(s: cstring, c: cstring): struct_miqt_st
 proc fcQCameraImageProcessingControl_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageProcessingControl_tr3".}
 proc fcQCameraImageProcessingControl_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QCameraImageProcessingControl_trUtf82".}
 proc fcQCameraImageProcessingControl_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QCameraImageProcessingControl_trUtf83".}
-proc fcQCameraImageProcessingControl_protectedbase_sender(self: pointer, ): pointer {.importc: "QCameraImageProcessingControl_protectedbase_sender".}
-proc fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QCameraImageProcessingControl_protectedbase_senderSignalIndex".}
+proc fcQCameraImageProcessingControl_protectedbase_sender(self: pointer): pointer {.importc: "QCameraImageProcessingControl_protectedbase_sender".}
+proc fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QCameraImageProcessingControl_protectedbase_senderSignalIndex".}
 proc fcQCameraImageProcessingControl_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QCameraImageProcessingControl_protectedbase_receivers".}
 proc fcQCameraImageProcessingControl_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QCameraImageProcessingControl_protectedbase_isSignalConnected".}
 proc fcQCameraImageProcessingControl_staticMetaObject(): pointer {.importc: "QCameraImageProcessingControl_staticMetaObject".}
 
-proc metaObject*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQCameraImageProcessingControl_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, param1: cstring): pointer =
@@ -145,10 +145,10 @@ proc trUtf8*(_: type gen_qcameraimageprocessingcontrol_types.QCameraImageProcess
   c_free(v_ms.data)
   vx_ret
 
-proc sender*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQCameraImageProcessingControl_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, ): cint =
+proc senderSignalIndex*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl): cint =
   fcQCameraImageProcessingControl_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qcameraimageprocessingcontrol_types.QCameraImageProcessingControl, signal: cstring): cint =

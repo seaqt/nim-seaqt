@@ -13,39 +13,32 @@
 #include <QUrl>
 #include <qnetworkcookiejar.h>
 #include "gen_qnetworkcookiejar.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQNetworkCookieJar final : public QNetworkCookieJar {
-	struct QNetworkCookieJar_VTable* vtbl;
+	const QNetworkCookieJar_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QNetworkCookieJar_VTable* QNetworkCookieJar_vtbl(const VirtualQNetworkCookieJar* self);
+	friend void* QNetworkCookieJar_vdata(const VirtualQNetworkCookieJar* self);
+	friend void QNetworkCookieJar_setVdata(VirtualQNetworkCookieJar* self, void* vdata);
 
-	VirtualQNetworkCookieJar(struct QNetworkCookieJar_VTable* vtbl): QNetworkCookieJar(), vtbl(vtbl) {};
-	VirtualQNetworkCookieJar(struct QNetworkCookieJar_VTable* vtbl, QObject* parent): QNetworkCookieJar(parent), vtbl(vtbl) {};
+	VirtualQNetworkCookieJar(const QNetworkCookieJar_VTable* vtbl, void* vdata): QNetworkCookieJar(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQNetworkCookieJar(const QNetworkCookieJar_VTable* vtbl, void* vdata, QObject* parent): QNetworkCookieJar(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQNetworkCookieJar() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQNetworkCookieJar() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QNetworkCookieJar::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QNetworkCookieJar_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QNetworkCookieJar_virtualbase_metaObject(const VirtualQNetworkCookieJar* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QNetworkCookieJar::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QNetworkCookieJar_virtualbase_metacast(void* self, const char* param1);
+	friend void* QNetworkCookieJar_virtualbase_metacast(VirtualQNetworkCookieJar* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QNetworkCookieJar::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QNetworkCookieJar_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QNetworkCookieJar_virtualbase_metacall(VirtualQNetworkCookieJar* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<QNetworkCookie> cookiesForUrl(const QUrl& url) const override {
 		if (vtbl->cookiesForUrl == 0) {
 			return QNetworkCookieJar::cookiesForUrl(url);
@@ -88,7 +79,7 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval1 = const_cast<QUrl*>(&url_ret);
 
-		struct miqt_array /* of QNetworkCookie* */  callback_return_value = vtbl->cookiesForUrl(vtbl, this, sigval1);
+		struct miqt_array /* of QNetworkCookie* */  callback_return_value = vtbl->cookiesForUrl(this, sigval1);
 		QList<QNetworkCookie> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QNetworkCookie** callback_return_value_arr = static_cast<QNetworkCookie**>(callback_return_value.data);
@@ -100,9 +91,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_virtualbase_cookiesForUrl(const void* self, QUrl* url);
+	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_virtualbase_cookiesForUrl(const VirtualQNetworkCookieJar* self, QUrl* url);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool setCookiesFromUrl(const QList<QNetworkCookie>& cookieList, const QUrl& url) override {
 		if (vtbl->setCookiesFromUrl == 0) {
 			return QNetworkCookieJar::setCookiesFromUrl(cookieList, url);
@@ -122,14 +112,13 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval2 = const_cast<QUrl*>(&url_ret);
 
-		bool callback_return_value = vtbl->setCookiesFromUrl(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->setCookiesFromUrl(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_setCookiesFromUrl(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList, QUrl* url);
+	friend bool QNetworkCookieJar_virtualbase_setCookiesFromUrl(VirtualQNetworkCookieJar* self, struct miqt_array /* of QNetworkCookie* */  cookieList, QUrl* url);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool insertCookie(const QNetworkCookie& cookie) override {
 		if (vtbl->insertCookie == 0) {
 			return QNetworkCookieJar::insertCookie(cookie);
@@ -139,14 +128,13 @@ public:
 		// Cast returned reference into pointer
 		QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
 
-		bool callback_return_value = vtbl->insertCookie(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->insertCookie(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_insertCookie(void* self, QNetworkCookie* cookie);
+	friend bool QNetworkCookieJar_virtualbase_insertCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool updateCookie(const QNetworkCookie& cookie) override {
 		if (vtbl->updateCookie == 0) {
 			return QNetworkCookieJar::updateCookie(cookie);
@@ -156,14 +144,13 @@ public:
 		// Cast returned reference into pointer
 		QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
 
-		bool callback_return_value = vtbl->updateCookie(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->updateCookie(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_updateCookie(void* self, QNetworkCookie* cookie);
+	friend bool QNetworkCookieJar_virtualbase_updateCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool deleteCookie(const QNetworkCookie& cookie) override {
 		if (vtbl->deleteCookie == 0) {
 			return QNetworkCookieJar::deleteCookie(cookie);
@@ -173,14 +160,13 @@ public:
 		// Cast returned reference into pointer
 		QNetworkCookie* sigval1 = const_cast<QNetworkCookie*>(&cookie_ret);
 
-		bool callback_return_value = vtbl->deleteCookie(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->deleteCookie(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_deleteCookie(void* self, QNetworkCookie* cookie);
+	friend bool QNetworkCookieJar_virtualbase_deleteCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool validateCookie(const QNetworkCookie& cookie, const QUrl& url) const override {
 		if (vtbl->validateCookie == 0) {
 			return QNetworkCookieJar::validateCookie(cookie, url);
@@ -193,14 +179,13 @@ public:
 		// Cast returned reference into pointer
 		QUrl* sigval2 = const_cast<QUrl*>(&url_ret);
 
-		bool callback_return_value = vtbl->validateCookie(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->validateCookie(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_validateCookie(const void* self, QNetworkCookie* cookie, QUrl* url);
+	friend bool QNetworkCookieJar_virtualbase_validateCookie(const VirtualQNetworkCookieJar* self, QNetworkCookie* cookie, QUrl* url);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QNetworkCookieJar::event(event);
@@ -208,14 +193,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_event(void* self, QEvent* event);
+	friend bool QNetworkCookieJar_virtualbase_event(VirtualQNetworkCookieJar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QNetworkCookieJar::eventFilter(watched, event);
@@ -224,14 +208,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QNetworkCookieJar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QNetworkCookieJar_virtualbase_eventFilter(VirtualQNetworkCookieJar* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QNetworkCookieJar::timerEvent(event);
@@ -240,13 +223,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkCookieJar_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QNetworkCookieJar_virtualbase_timerEvent(VirtualQNetworkCookieJar* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QNetworkCookieJar::childEvent(event);
@@ -255,13 +237,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkCookieJar_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QNetworkCookieJar_virtualbase_childEvent(VirtualQNetworkCookieJar* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QNetworkCookieJar::customEvent(event);
@@ -270,13 +251,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QNetworkCookieJar_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QNetworkCookieJar_virtualbase_customEvent(VirtualQNetworkCookieJar* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QNetworkCookieJar::connectNotify(signal);
@@ -287,13 +267,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QNetworkCookieJar_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QNetworkCookieJar_virtualbase_connectNotify(VirtualQNetworkCookieJar* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QNetworkCookieJar::disconnectNotify(signal);
@@ -304,27 +283,27 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QNetworkCookieJar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QNetworkCookieJar_virtualbase_disconnectNotify(VirtualQNetworkCookieJar* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const void* self);
-	friend void QNetworkCookieJar_protectedbase_setAllCookies(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList);
-	friend QObject* QNetworkCookieJar_protectedbase_sender(const void* self);
-	friend int QNetworkCookieJar_protectedbase_senderSignalIndex(const void* self);
-	friend int QNetworkCookieJar_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QNetworkCookieJar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const VirtualQNetworkCookieJar* self);
+	friend void QNetworkCookieJar_protectedbase_setAllCookies(VirtualQNetworkCookieJar* self, struct miqt_array /* of QNetworkCookie* */  cookieList);
+	friend QObject* QNetworkCookieJar_protectedbase_sender(const VirtualQNetworkCookieJar* self);
+	friend int QNetworkCookieJar_protectedbase_senderSignalIndex(const VirtualQNetworkCookieJar* self);
+	friend int QNetworkCookieJar_protectedbase_receivers(const VirtualQNetworkCookieJar* self, const char* signal);
+	friend bool QNetworkCookieJar_protectedbase_isSignalConnected(const VirtualQNetworkCookieJar* self, QMetaMethod* signal);
 };
 
-QNetworkCookieJar* QNetworkCookieJar_new(struct QNetworkCookieJar_VTable* vtbl) {
-	return new VirtualQNetworkCookieJar(vtbl);
+VirtualQNetworkCookieJar* QNetworkCookieJar_new(const QNetworkCookieJar_VTable* vtbl, void* vdata) {
+	return new VirtualQNetworkCookieJar(vtbl, vdata);
 }
 
-QNetworkCookieJar* QNetworkCookieJar_new2(struct QNetworkCookieJar_VTable* vtbl, QObject* parent) {
-	return new VirtualQNetworkCookieJar(vtbl, parent);
+VirtualQNetworkCookieJar* QNetworkCookieJar_new2(const QNetworkCookieJar_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQNetworkCookieJar(vtbl, vdata, parent);
 }
 
 void QNetworkCookieJar_virtbase(QNetworkCookieJar* src, QObject** outptr_QObject) {
@@ -444,27 +423,24 @@ struct miqt_string QNetworkCookieJar_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QMetaObject* QNetworkCookieJar_virtualbase_metaObject(const void* self) {
+QMetaObject* QNetworkCookieJar_virtualbase_metaObject(const VirtualQNetworkCookieJar* self) {
 
-	return (QMetaObject*) ( (const VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::metaObject();
-
+	return (QMetaObject*) self->QNetworkCookieJar::metaObject();
 }
 
-void* QNetworkCookieJar_virtualbase_metacast(void* self, const char* param1) {
+void* QNetworkCookieJar_virtualbase_metacast(VirtualQNetworkCookieJar* self, const char* param1) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::qt_metacast(param1);
-
+	return self->QNetworkCookieJar::qt_metacast(param1);
 }
 
-int QNetworkCookieJar_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QNetworkCookieJar_virtualbase_metacall(VirtualQNetworkCookieJar* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QNetworkCookieJar::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_virtualbase_cookiesForUrl(const void* self, QUrl* url) {
+struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_virtualbase_cookiesForUrl(const VirtualQNetworkCookieJar* self, QUrl* url) {
 
-	QList<QNetworkCookie> _ret = ( (const VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::cookiesForUrl(*url);
+	QList<QNetworkCookie> _ret = self->QNetworkCookieJar::cookiesForUrl(*url);
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QNetworkCookie** _arr = static_cast<QNetworkCookie**>(malloc(sizeof(QNetworkCookie*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -474,10 +450,9 @@ struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_virtualbase_cookie
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-bool QNetworkCookieJar_virtualbase_setCookiesFromUrl(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList, QUrl* url) {
+bool QNetworkCookieJar_virtualbase_setCookiesFromUrl(VirtualQNetworkCookieJar* self, struct miqt_array /* of QNetworkCookie* */  cookieList, QUrl* url) {
 	QList<QNetworkCookie> cookieList_QList;
 	cookieList_QList.reserve(cookieList.len);
 	QNetworkCookie** cookieList_arr = static_cast<QNetworkCookie**>(cookieList.data);
@@ -485,81 +460,72 @@ bool QNetworkCookieJar_virtualbase_setCookiesFromUrl(void* self, struct miqt_arr
 		cookieList_QList.push_back(*(cookieList_arr[i]));
 	}
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::setCookiesFromUrl(cookieList_QList, *url);
-
+	return self->QNetworkCookieJar::setCookiesFromUrl(cookieList_QList, *url);
 }
 
-bool QNetworkCookieJar_virtualbase_insertCookie(void* self, QNetworkCookie* cookie) {
+bool QNetworkCookieJar_virtualbase_insertCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::insertCookie(*cookie);
-
+	return self->QNetworkCookieJar::insertCookie(*cookie);
 }
 
-bool QNetworkCookieJar_virtualbase_updateCookie(void* self, QNetworkCookie* cookie) {
+bool QNetworkCookieJar_virtualbase_updateCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::updateCookie(*cookie);
-
+	return self->QNetworkCookieJar::updateCookie(*cookie);
 }
 
-bool QNetworkCookieJar_virtualbase_deleteCookie(void* self, QNetworkCookie* cookie) {
+bool QNetworkCookieJar_virtualbase_deleteCookie(VirtualQNetworkCookieJar* self, QNetworkCookie* cookie) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::deleteCookie(*cookie);
-
+	return self->QNetworkCookieJar::deleteCookie(*cookie);
 }
 
-bool QNetworkCookieJar_virtualbase_validateCookie(const void* self, QNetworkCookie* cookie, QUrl* url) {
+bool QNetworkCookieJar_virtualbase_validateCookie(const VirtualQNetworkCookieJar* self, QNetworkCookie* cookie, QUrl* url) {
 
-	return ( (const VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::validateCookie(*cookie, *url);
-
+	return self->QNetworkCookieJar::validateCookie(*cookie, *url);
 }
 
-bool QNetworkCookieJar_virtualbase_event(void* self, QEvent* event) {
+bool QNetworkCookieJar_virtualbase_event(VirtualQNetworkCookieJar* self, QEvent* event) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::event(event);
-
+	return self->QNetworkCookieJar::event(event);
 }
 
-bool QNetworkCookieJar_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QNetworkCookieJar_virtualbase_eventFilter(VirtualQNetworkCookieJar* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::eventFilter(watched, event);
-
+	return self->QNetworkCookieJar::eventFilter(watched, event);
 }
 
-void QNetworkCookieJar_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QNetworkCookieJar_virtualbase_timerEvent(VirtualQNetworkCookieJar* self, QTimerEvent* event) {
 
-	( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::timerEvent(event);
-
+	self->QNetworkCookieJar::timerEvent(event);
 }
 
-void QNetworkCookieJar_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QNetworkCookieJar_virtualbase_childEvent(VirtualQNetworkCookieJar* self, QChildEvent* event) {
 
-	( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::childEvent(event);
-
+	self->QNetworkCookieJar::childEvent(event);
 }
 
-void QNetworkCookieJar_virtualbase_customEvent(void* self, QEvent* event) {
+void QNetworkCookieJar_virtualbase_customEvent(VirtualQNetworkCookieJar* self, QEvent* event) {
 
-	( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::customEvent(event);
-
+	self->QNetworkCookieJar::customEvent(event);
 }
 
-void QNetworkCookieJar_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QNetworkCookieJar_virtualbase_connectNotify(VirtualQNetworkCookieJar* self, QMetaMethod* signal) {
 
-	( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::connectNotify(*signal);
-
+	self->QNetworkCookieJar::connectNotify(*signal);
 }
 
-void QNetworkCookieJar_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QNetworkCookieJar_virtualbase_disconnectNotify(VirtualQNetworkCookieJar* self, QMetaMethod* signal) {
 
-	( (VirtualQNetworkCookieJar*)(self) )->QNetworkCookieJar::disconnectNotify(*signal);
-
+	self->QNetworkCookieJar::disconnectNotify(*signal);
 }
 
 const QMetaObject* QNetworkCookieJar_staticMetaObject() { return &QNetworkCookieJar::staticMetaObject; }
-struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const void* self) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	
-	QList<QNetworkCookie> _ret = self_cast->allCookies();
+
+const QNetworkCookieJar_VTable* QNetworkCookieJar_vtbl(const VirtualQNetworkCookieJar* self) { return self->vtbl; }
+void* QNetworkCookieJar_vdata(const VirtualQNetworkCookieJar* self) { return self->vdata; }
+void QNetworkCookieJar_setVdata(VirtualQNetworkCookieJar* self, void* vdata) { self->vdata = vdata; }
+
+struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allCookies(const VirtualQNetworkCookieJar* self) {
+	QList<QNetworkCookie> _ret = self->allCookies();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QNetworkCookie** _arr = static_cast<QNetworkCookie**>(malloc(sizeof(QNetworkCookie*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -569,48 +535,32 @@ struct miqt_array /* of QNetworkCookie* */  QNetworkCookieJar_protectedbase_allC
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-void QNetworkCookieJar_protectedbase_setAllCookies(void* self, struct miqt_array /* of QNetworkCookie* */  cookieList) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-			QList<QNetworkCookie> cookieList_QList;
+void QNetworkCookieJar_protectedbase_setAllCookies(VirtualQNetworkCookieJar* self, struct miqt_array /* of QNetworkCookie* */  cookieList) {
+		QList<QNetworkCookie> cookieList_QList;
 		cookieList_QList.reserve(cookieList.len);
 		QNetworkCookie** cookieList_arr = static_cast<QNetworkCookie**>(cookieList.data);
 		for(size_t i = 0; i < cookieList.len; ++i) {
 			cookieList_QList.push_back(*(cookieList_arr[i]));
 		}
-
-	self_cast->setAllCookies(cookieList_QList);
-
+	self->setAllCookies(cookieList_QList);
 }
 
-QObject* QNetworkCookieJar_protectedbase_sender(const void* self) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QNetworkCookieJar_protectedbase_sender(const VirtualQNetworkCookieJar* self) {
+	return self->sender();
 }
 
-int QNetworkCookieJar_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QNetworkCookieJar_protectedbase_senderSignalIndex(const VirtualQNetworkCookieJar* self) {
+	return self->senderSignalIndex();
 }
 
-int QNetworkCookieJar_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QNetworkCookieJar_protectedbase_receivers(const VirtualQNetworkCookieJar* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QNetworkCookieJar_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQNetworkCookieJar* self_cast = static_cast<VirtualQNetworkCookieJar*>( (QNetworkCookieJar*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QNetworkCookieJar_protectedbase_isSignalConnected(const VirtualQNetworkCookieJar* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QNetworkCookieJar_delete(QNetworkCookieJar* self) {

@@ -14,38 +14,31 @@
 #include <QVariant>
 #include <qmimedata.h>
 #include "gen_qmimedata.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQMimeData final : public QMimeData {
-	struct QMimeData_VTable* vtbl;
+	const QMimeData_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QMimeData_VTable* QMimeData_vtbl(const VirtualQMimeData* self);
+	friend void* QMimeData_vdata(const VirtualQMimeData* self);
+	friend void QMimeData_setVdata(VirtualQMimeData* self, void* vdata);
 
-	VirtualQMimeData(struct QMimeData_VTable* vtbl): QMimeData(), vtbl(vtbl) {};
+	VirtualQMimeData(const QMimeData_VTable* vtbl, void* vdata): QMimeData(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQMimeData() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQMimeData() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QMimeData::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QMimeData_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QMimeData_virtualbase_metaObject(const VirtualQMimeData* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QMimeData::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QMimeData_virtualbase_metacast(void* self, const char* param1);
+	friend void* QMimeData_virtualbase_metacast(VirtualQMimeData* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QMimeData::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QMimeData_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QMimeData_virtualbase_metacall(VirtualQMimeData* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasFormat(const QString& mimetype) const override {
 		if (vtbl->hasFormat == 0) {
 			return QMimeData::hasFormat(mimetype);
@@ -93,21 +84,20 @@ public:
 		memcpy(mimetype_ms.data, mimetype_b.data(), mimetype_ms.len);
 		struct miqt_string sigval1 = mimetype_ms;
 
-		bool callback_return_value = vtbl->hasFormat(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hasFormat(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimetype);
+	friend bool QMimeData_virtualbase_hasFormat(const VirtualQMimeData* self, struct miqt_string mimetype);
 
-	// Subclass to allow providing a Go implementation
 	virtual QStringList formats() const override {
 		if (vtbl->formats == 0) {
 			return QMimeData::formats();
 		}
 
 
-		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->formats(vtbl, this);
+		struct miqt_array /* of struct miqt_string */  callback_return_value = vtbl->formats(this);
 		QStringList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		struct miqt_string* callback_return_value_arr = static_cast<struct miqt_string*>(callback_return_value.data);
@@ -121,9 +111,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const void* self);
+	friend struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const VirtualQMimeData* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant retrieveData(const QString& mimetype, QVariant::Type preferredType) const override {
 		if (vtbl->retrieveData == 0) {
 			return QMimeData::retrieveData(mimetype, preferredType);
@@ -140,16 +129,15 @@ public:
 		QVariant::Type preferredType_ret = preferredType;
 		int sigval2 = static_cast<int>(preferredType_ret);
 
-		QVariant* callback_return_value = vtbl->retrieveData(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->retrieveData(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_string mimetype, int preferredType);
+	friend QVariant* QMimeData_virtualbase_retrieveData(const VirtualQMimeData* self, struct miqt_string mimetype, int preferredType);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QMimeData::event(event);
@@ -157,14 +145,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QMimeData_virtualbase_event(void* self, QEvent* event);
+	friend bool QMimeData_virtualbase_event(VirtualQMimeData* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QMimeData::eventFilter(watched, event);
@@ -173,14 +160,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QMimeData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QMimeData_virtualbase_eventFilter(VirtualQMimeData* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QMimeData::timerEvent(event);
@@ -189,13 +175,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QMimeData_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QMimeData_virtualbase_timerEvent(VirtualQMimeData* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QMimeData::childEvent(event);
@@ -204,13 +189,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QMimeData_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QMimeData_virtualbase_childEvent(VirtualQMimeData* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QMimeData::customEvent(event);
@@ -219,13 +203,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QMimeData_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QMimeData_virtualbase_customEvent(VirtualQMimeData* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QMimeData::connectNotify(signal);
@@ -236,13 +219,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QMimeData_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QMimeData_virtualbase_connectNotify(VirtualQMimeData* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QMimeData::disconnectNotify(signal);
@@ -253,21 +235,21 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QMimeData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QMimeData_virtualbase_disconnectNotify(VirtualQMimeData* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QMimeData_protectedbase_sender(const void* self);
-	friend int QMimeData_protectedbase_senderSignalIndex(const void* self);
-	friend int QMimeData_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QMimeData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QMimeData_protectedbase_sender(const VirtualQMimeData* self);
+	friend int QMimeData_protectedbase_senderSignalIndex(const VirtualQMimeData* self);
+	friend int QMimeData_protectedbase_receivers(const VirtualQMimeData* self, const char* signal);
+	friend bool QMimeData_protectedbase_isSignalConnected(const VirtualQMimeData* self, QMetaMethod* signal);
 };
 
-QMimeData* QMimeData_new(struct QMimeData_VTable* vtbl) {
-	return new VirtualQMimeData(vtbl);
+VirtualQMimeData* QMimeData_new(const QMimeData_VTable* vtbl, void* vdata) {
+	return new VirtualQMimeData(vtbl, vdata);
 }
 
 void QMimeData_virtbase(QMimeData* src, QObject** outptr_QObject) {
@@ -493,34 +475,30 @@ struct miqt_string QMimeData_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QMimeData_virtualbase_metaObject(const void* self) {
+QMetaObject* QMimeData_virtualbase_metaObject(const VirtualQMimeData* self) {
 
-	return (QMetaObject*) ( (const VirtualQMimeData*)(self) )->QMimeData::metaObject();
-
+	return (QMetaObject*) self->QMimeData::metaObject();
 }
 
-void* QMimeData_virtualbase_metacast(void* self, const char* param1) {
+void* QMimeData_virtualbase_metacast(VirtualQMimeData* self, const char* param1) {
 
-	return ( (VirtualQMimeData*)(self) )->QMimeData::qt_metacast(param1);
-
+	return self->QMimeData::qt_metacast(param1);
 }
 
-int QMimeData_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QMimeData_virtualbase_metacall(VirtualQMimeData* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQMimeData*)(self) )->QMimeData::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QMimeData::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QMimeData_virtualbase_hasFormat(const void* self, struct miqt_string mimetype) {
+bool QMimeData_virtualbase_hasFormat(const VirtualQMimeData* self, struct miqt_string mimetype) {
 	QString mimetype_QString = QString::fromUtf8(mimetype.data, mimetype.len);
 
-	return ( (const VirtualQMimeData*)(self) )->QMimeData::hasFormat(mimetype_QString);
-
+	return self->QMimeData::hasFormat(mimetype_QString);
 }
 
-struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const void* self) {
+struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(const VirtualQMimeData* self) {
 
-	QStringList _ret = ( (const VirtualQMimeData*)(self) )->QMimeData::formats();
+	QStringList _ret = self->QMimeData::formats();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	struct miqt_string* _arr = static_cast<struct miqt_string*>(malloc(sizeof(struct miqt_string) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -537,85 +515,69 @@ struct miqt_array /* of struct miqt_string */  QMimeData_virtualbase_formats(con
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-QVariant* QMimeData_virtualbase_retrieveData(const void* self, struct miqt_string mimetype, int preferredType) {
+QVariant* QMimeData_virtualbase_retrieveData(const VirtualQMimeData* self, struct miqt_string mimetype, int preferredType) {
 	QString mimetype_QString = QString::fromUtf8(mimetype.data, mimetype.len);
 
-	return new QVariant(( (const VirtualQMimeData*)(self) )->QMimeData::retrieveData(mimetype_QString, static_cast<QVariant::Type>(preferredType)));
-
+	return new QVariant(self->QMimeData::retrieveData(mimetype_QString, static_cast<QVariant::Type>(preferredType)));
 }
 
-bool QMimeData_virtualbase_event(void* self, QEvent* event) {
+bool QMimeData_virtualbase_event(VirtualQMimeData* self, QEvent* event) {
 
-	return ( (VirtualQMimeData*)(self) )->QMimeData::event(event);
-
+	return self->QMimeData::event(event);
 }
 
-bool QMimeData_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QMimeData_virtualbase_eventFilter(VirtualQMimeData* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQMimeData*)(self) )->QMimeData::eventFilter(watched, event);
-
+	return self->QMimeData::eventFilter(watched, event);
 }
 
-void QMimeData_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QMimeData_virtualbase_timerEvent(VirtualQMimeData* self, QTimerEvent* event) {
 
-	( (VirtualQMimeData*)(self) )->QMimeData::timerEvent(event);
-
+	self->QMimeData::timerEvent(event);
 }
 
-void QMimeData_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QMimeData_virtualbase_childEvent(VirtualQMimeData* self, QChildEvent* event) {
 
-	( (VirtualQMimeData*)(self) )->QMimeData::childEvent(event);
-
+	self->QMimeData::childEvent(event);
 }
 
-void QMimeData_virtualbase_customEvent(void* self, QEvent* event) {
+void QMimeData_virtualbase_customEvent(VirtualQMimeData* self, QEvent* event) {
 
-	( (VirtualQMimeData*)(self) )->QMimeData::customEvent(event);
-
+	self->QMimeData::customEvent(event);
 }
 
-void QMimeData_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QMimeData_virtualbase_connectNotify(VirtualQMimeData* self, QMetaMethod* signal) {
 
-	( (VirtualQMimeData*)(self) )->QMimeData::connectNotify(*signal);
-
+	self->QMimeData::connectNotify(*signal);
 }
 
-void QMimeData_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QMimeData_virtualbase_disconnectNotify(VirtualQMimeData* self, QMetaMethod* signal) {
 
-	( (VirtualQMimeData*)(self) )->QMimeData::disconnectNotify(*signal);
-
+	self->QMimeData::disconnectNotify(*signal);
 }
 
 const QMetaObject* QMimeData_staticMetaObject() { return &QMimeData::staticMetaObject; }
-QObject* QMimeData_protectedbase_sender(const void* self) {
-	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	
-	return self_cast->sender();
 
+const QMimeData_VTable* QMimeData_vtbl(const VirtualQMimeData* self) { return self->vtbl; }
+void* QMimeData_vdata(const VirtualQMimeData* self) { return self->vdata; }
+void QMimeData_setVdata(VirtualQMimeData* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QMimeData_protectedbase_sender(const VirtualQMimeData* self) {
+	return self->sender();
 }
 
-int QMimeData_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QMimeData_protectedbase_senderSignalIndex(const VirtualQMimeData* self) {
+	return self->senderSignalIndex();
 }
 
-int QMimeData_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QMimeData_protectedbase_receivers(const VirtualQMimeData* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QMimeData_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQMimeData* self_cast = static_cast<VirtualQMimeData*>( (QMimeData*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QMimeData_protectedbase_isSignalConnected(const VirtualQMimeData* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QMimeData_delete(QMimeData* self) {

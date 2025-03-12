@@ -8,15 +8,6 @@
 #include <QUrl>
 #include <qnetworkcookie.h>
 #include "gen_qnetworkcookie.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QNetworkCookie* QNetworkCookie_new() {
 	return new QNetworkCookie();
 }

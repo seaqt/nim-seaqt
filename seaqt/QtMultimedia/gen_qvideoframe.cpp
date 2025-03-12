@@ -8,15 +8,6 @@
 #include <QVideoFrame>
 #include <qvideoframe.h>
 #include "gen_qvideoframe.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QVideoFrame* QVideoFrame_new() {
 	return new QVideoFrame();
 }

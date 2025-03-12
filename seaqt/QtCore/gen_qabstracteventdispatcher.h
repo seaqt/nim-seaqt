@@ -72,10 +72,12 @@ struct miqt_string QAbstractEventDispatcher_tr3(const char* s, const char* c, in
 struct miqt_string QAbstractEventDispatcher_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractEventDispatcher_trUtf83(const char* s, const char* c, int n);
 QAbstractEventDispatcher* QAbstractEventDispatcher_instance1(QThread* thread);
+
 const QMetaObject* QAbstractEventDispatcher_staticMetaObject();
 void QAbstractEventDispatcher_delete(QAbstractEventDispatcher* self);
 
 QAbstractEventDispatcher__TimerInfo* QAbstractEventDispatcher__TimerInfo_new(int id, int i, int t);
+
 void QAbstractEventDispatcher__TimerInfo_delete(QAbstractEventDispatcher__TimerInfo* self);
 
 #ifdef __cplusplus

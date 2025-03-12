@@ -44,7 +44,7 @@ type cQStyleFactory*{.exportc: "QStyleFactory", incompleteStruct.} = object
 proc fcQStyleFactory_keys(): struct_miqt_array {.importc: "QStyleFactory_keys".}
 proc fcQStyleFactory_create(param1: struct_miqt_string): pointer {.importc: "QStyleFactory_create".}
 
-proc keys*(_: type gen_qstylefactory_types.QStyleFactory, ): seq[string] =
+proc keys*(_: type gen_qstylefactory_types.QStyleFactory): seq[string] =
   var v_ma = fcQStyleFactory_keys()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

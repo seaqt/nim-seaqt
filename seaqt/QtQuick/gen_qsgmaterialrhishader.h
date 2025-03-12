@@ -46,20 +46,27 @@ typedef struct QSGMaterialShader QSGMaterialShader;
 typedef struct QSGMaterialShader__RenderState QSGMaterialShader__RenderState;
 #endif
 
-struct QSGMaterialRhiShader_VTable {
-	void (*destructor)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self);
-	bool (*updateUniformData)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-	bool (*updateGraphicsPipelineState)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-	const char** (*attributeNames)(struct QSGMaterialRhiShader_VTable* vtbl, const QSGMaterialRhiShader* self);
-	void (*activate)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self);
-	void (*deactivate)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self);
-	void (*updateState)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-	void (*compile)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self);
-	void (*initialize)(struct QSGMaterialRhiShader_VTable* vtbl, QSGMaterialRhiShader* self);
-	const char* (*vertexShader)(struct QSGMaterialRhiShader_VTable* vtbl, const QSGMaterialRhiShader* self);
-	const char* (*fragmentShader)(struct QSGMaterialRhiShader_VTable* vtbl, const QSGMaterialRhiShader* self);
-};
-QSGMaterialRhiShader* QSGMaterialRhiShader_new(struct QSGMaterialRhiShader_VTable* vtbl);
+typedef struct VirtualQSGMaterialRhiShader VirtualQSGMaterialRhiShader;
+typedef struct QSGMaterialRhiShader_VTable{
+	void (*destructor)(VirtualQSGMaterialRhiShader* self);
+	bool (*updateUniformData)(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	bool (*updateGraphicsPipelineState)(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	const char** (*attributeNames)(const VirtualQSGMaterialRhiShader* self);
+	void (*activate)(VirtualQSGMaterialRhiShader* self);
+	void (*deactivate)(VirtualQSGMaterialRhiShader* self);
+	void (*updateState)(VirtualQSGMaterialRhiShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	void (*compile)(VirtualQSGMaterialRhiShader* self);
+	void (*initialize)(VirtualQSGMaterialRhiShader* self);
+	const char* (*vertexShader)(const VirtualQSGMaterialRhiShader* self);
+	const char* (*fragmentShader)(const VirtualQSGMaterialRhiShader* self);
+}QSGMaterialRhiShader_VTable;
+
+const QSGMaterialRhiShader_VTable* QSGMaterialRhiShader_vtbl(const VirtualQSGMaterialRhiShader* self);
+void* QSGMaterialRhiShader_vdata(const VirtualQSGMaterialRhiShader* self);
+void QSGMaterialRhiShader_setVdata(VirtualQSGMaterialRhiShader* self, void* vdata);
+
+VirtualQSGMaterialRhiShader* QSGMaterialRhiShader_new(const QSGMaterialRhiShader_VTable* vtbl, void* vdata);
+
 void QSGMaterialRhiShader_virtbase(QSGMaterialRhiShader* src, QSGMaterialShader** outptr_QSGMaterialShader);
 bool QSGMaterialRhiShader_updateUniformData(QSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 bool QSGMaterialRhiShader_updateGraphicsPipelineState(QSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
@@ -67,20 +74,23 @@ int QSGMaterialRhiShader_flags(const QSGMaterialRhiShader* self);
 void QSGMaterialRhiShader_setFlag(QSGMaterialRhiShader* self, int flags);
 const char** QSGMaterialRhiShader_attributeNames(const QSGMaterialRhiShader* self);
 void QSGMaterialRhiShader_setFlag2(QSGMaterialRhiShader* self, int flags, bool on);
-bool QSGMaterialRhiShader_virtualbase_updateUniformData(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-const char** QSGMaterialRhiShader_virtualbase_attributeNames(const void* self);
-void QSGMaterialRhiShader_virtualbase_activate(void* self);
-void QSGMaterialRhiShader_virtualbase_deactivate(void* self);
-void QSGMaterialRhiShader_virtualbase_updateState(void* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
-void QSGMaterialRhiShader_virtualbase_compile(void* self);
-void QSGMaterialRhiShader_virtualbase_initialize(void* self);
-const char* QSGMaterialRhiShader_virtualbase_vertexShader(const void* self);
-const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const void* self);
-void QSGMaterialRhiShader_protectedbase_setShaderFileName(void* self, int stage, struct miqt_string filename);
-void QSGMaterialRhiShader_protectedbase_setShader(void* self, int stage, const QShader* shader);
-void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(void* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
-void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(void* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
+
+bool QSGMaterialRhiShader_virtualbase_updateUniformData(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+const char** QSGMaterialRhiShader_virtualbase_attributeNames(const VirtualQSGMaterialRhiShader* self);
+void QSGMaterialRhiShader_virtualbase_activate(VirtualQSGMaterialRhiShader* self);
+void QSGMaterialRhiShader_virtualbase_deactivate(VirtualQSGMaterialRhiShader* self);
+void QSGMaterialRhiShader_virtualbase_updateState(VirtualQSGMaterialRhiShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+void QSGMaterialRhiShader_virtualbase_compile(VirtualQSGMaterialRhiShader* self);
+void QSGMaterialRhiShader_virtualbase_initialize(VirtualQSGMaterialRhiShader* self);
+const char* QSGMaterialRhiShader_virtualbase_vertexShader(const VirtualQSGMaterialRhiShader* self);
+const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const VirtualQSGMaterialRhiShader* self);
+
+void QSGMaterialRhiShader_protectedbase_setShaderFileName(VirtualQSGMaterialRhiShader* self, int stage, struct miqt_string filename);
+void QSGMaterialRhiShader_protectedbase_setShader(VirtualQSGMaterialRhiShader* self, int stage, const QShader* shader);
+void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
+void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
+
 void QSGMaterialRhiShader_delete(QSGMaterialRhiShader* self);
 
 int QSGMaterialRhiShader__RenderState_dirtyStates(const QSGMaterialRhiShader__RenderState* self);
@@ -95,10 +105,13 @@ QRect* QSGMaterialRhiShader__RenderState_deviceRect(const QSGMaterialRhiShader__
 float QSGMaterialRhiShader__RenderState_determinant(const QSGMaterialRhiShader__RenderState* self);
 float QSGMaterialRhiShader__RenderState_devicePixelRatio(const QSGMaterialRhiShader__RenderState* self);
 struct miqt_string QSGMaterialRhiShader__RenderState_uniformData(QSGMaterialRhiShader__RenderState* self);
+
 void QSGMaterialRhiShader__RenderState_delete(QSGMaterialRhiShader__RenderState* self);
 
 QSGMaterialRhiShader__GraphicsPipelineState* QSGMaterialRhiShader__GraphicsPipelineState_new(QSGMaterialRhiShader__GraphicsPipelineState* param1);
+
 void QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign(QSGMaterialRhiShader__GraphicsPipelineState* self, QSGMaterialRhiShader__GraphicsPipelineState* param1);
+
 void QSGMaterialRhiShader__GraphicsPipelineState_delete(QSGMaterialRhiShader__GraphicsPipelineState* self);
 
 #ifdef __cplusplus

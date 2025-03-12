@@ -49,39 +49,32 @@
 #include <QWidget>
 #include <qabstractitemview.h>
 #include "gen_qabstractitemview.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAbstractItemView final : public QAbstractItemView {
-	struct QAbstractItemView_VTable* vtbl;
+	const QAbstractItemView_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAbstractItemView_VTable* QAbstractItemView_vtbl(const VirtualQAbstractItemView* self);
+	friend void* QAbstractItemView_vdata(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_setVdata(VirtualQAbstractItemView* self, void* vdata);
 
-	VirtualQAbstractItemView(struct QAbstractItemView_VTable* vtbl, QWidget* parent): QAbstractItemView(parent), vtbl(vtbl) {};
-	VirtualQAbstractItemView(struct QAbstractItemView_VTable* vtbl): QAbstractItemView(), vtbl(vtbl) {};
+	VirtualQAbstractItemView(const QAbstractItemView_VTable* vtbl, void* vdata, QWidget* parent): QAbstractItemView(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAbstractItemView(const QAbstractItemView_VTable* vtbl, void* vdata): QAbstractItemView(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAbstractItemView() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAbstractItemView() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAbstractItemView::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAbstractItemView_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAbstractItemView_virtualbase_metaObject(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAbstractItemView::qt_metacast(param1);
@@ -89,14 +82,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAbstractItemView_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAbstractItemView_virtualbase_metacast(VirtualQAbstractItemView* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAbstractItemView::qt_metacall(param1, param2, param3);
@@ -107,14 +99,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAbstractItemView_virtualbase_metacall(VirtualQAbstractItemView* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setModel(QAbstractItemModel* model) override {
 		if (vtbl->setModel == 0) {
 			QAbstractItemView::setModel(model);
@@ -123,13 +114,12 @@ public:
 
 		QAbstractItemModel* sigval1 = model;
 
-		vtbl->setModel(vtbl, this, sigval1);
+		vtbl->setModel(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_setModel(void* self, QAbstractItemModel* model);
+	friend void QAbstractItemView_virtualbase_setModel(VirtualQAbstractItemView* self, QAbstractItemModel* model);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelectionModel(QItemSelectionModel* selectionModel) override {
 		if (vtbl->setSelectionModel == 0) {
 			QAbstractItemView::setSelectionModel(selectionModel);
@@ -138,13 +128,12 @@ public:
 
 		QItemSelectionModel* sigval1 = selectionModel;
 
-		vtbl->setSelectionModel(vtbl, this, sigval1);
+		vtbl->setSelectionModel(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel);
+	friend void QAbstractItemView_virtualbase_setSelectionModel(VirtualQAbstractItemView* self, QItemSelectionModel* selectionModel);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyboardSearch(const QString& search) override {
 		if (vtbl->keyboardSearch == 0) {
 			QAbstractItemView::keyboardSearch(search);
@@ -160,13 +149,12 @@ public:
 		memcpy(search_ms.data, search_b.data(), search_ms.len);
 		struct miqt_string sigval1 = search_ms;
 
-		vtbl->keyboardSearch(vtbl, this, sigval1);
+		vtbl->keyboardSearch(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_keyboardSearch(void* self, struct miqt_string search);
+	friend void QAbstractItemView_virtualbase_keyboardSearch(VirtualQAbstractItemView* self, struct miqt_string search);
 
-	// Subclass to allow providing a Go implementation
 	virtual QRect visualRect(const QModelIndex& index) const override {
 		if (vtbl->visualRect == 0) {
 			return QRect(); // Pure virtual, there is no base we can call
@@ -176,14 +164,13 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		QRect* callback_return_value = vtbl->visualRect(vtbl, this, sigval1);
+		QRect* callback_return_value = vtbl->visualRect(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollTo(const QModelIndex& index, QAbstractItemView::ScrollHint hint) override {
 		if (vtbl->scrollTo == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -195,11 +182,10 @@ public:
 		QAbstractItemView::ScrollHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->scrollTo(vtbl, this, sigval1, sigval2);
+		vtbl->scrollTo(this, sigval1, sigval2);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex indexAt(const QPoint& point) const override {
 		if (vtbl->indexAt == 0) {
 			return QModelIndex(); // Pure virtual, there is no base we can call
@@ -209,14 +195,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&point_ret);
 
-		QModelIndex* callback_return_value = vtbl->indexAt(vtbl, this, sigval1);
+		QModelIndex* callback_return_value = vtbl->indexAt(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForRow(int row) const override {
 		if (vtbl->sizeHintForRow == 0) {
 			return QAbstractItemView::sizeHintForRow(row);
@@ -224,14 +209,13 @@ public:
 
 		int sigval1 = row;
 
-		int callback_return_value = vtbl->sizeHintForRow(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForRow(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_sizeHintForRow(const void* self, int row);
+	friend int QAbstractItemView_virtualbase_sizeHintForRow(const VirtualQAbstractItemView* self, int row);
 
-	// Subclass to allow providing a Go implementation
 	virtual int sizeHintForColumn(int column) const override {
 		if (vtbl->sizeHintForColumn == 0) {
 			return QAbstractItemView::sizeHintForColumn(column);
@@ -239,14 +223,13 @@ public:
 
 		int sigval1 = column;
 
-		int callback_return_value = vtbl->sizeHintForColumn(vtbl, this, sigval1);
+		int callback_return_value = vtbl->sizeHintForColumn(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_sizeHintForColumn(const void* self, int column);
+	friend int QAbstractItemView_virtualbase_sizeHintForColumn(const VirtualQAbstractItemView* self, int column);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery query) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QAbstractItemView::inputMethodQuery(query);
@@ -255,16 +238,15 @@ public:
 		Qt::InputMethodQuery query_ret = query;
 		int sigval1 = static_cast<int>(query_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QAbstractItemView_virtualbase_inputMethodQuery(const void* self, int query);
+	friend QVariant* QAbstractItemView_virtualbase_inputMethodQuery(const VirtualQAbstractItemView* self, int query);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reset() override {
 		if (vtbl->reset == 0) {
 			QAbstractItemView::reset();
@@ -272,13 +254,12 @@ public:
 		}
 
 
-		vtbl->reset(vtbl, this);
+		vtbl->reset(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_reset(void* self);
+	friend void QAbstractItemView_virtualbase_reset(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setRootIndex(const QModelIndex& index) override {
 		if (vtbl->setRootIndex == 0) {
 			QAbstractItemView::setRootIndex(index);
@@ -289,13 +270,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		vtbl->setRootIndex(vtbl, this, sigval1);
+		vtbl->setRootIndex(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_setRootIndex(void* self, QModelIndex* index);
+	friend void QAbstractItemView_virtualbase_setRootIndex(VirtualQAbstractItemView* self, QModelIndex* index);
 
-	// Subclass to allow providing a Go implementation
 	virtual void doItemsLayout() override {
 		if (vtbl->doItemsLayout == 0) {
 			QAbstractItemView::doItemsLayout();
@@ -303,13 +283,12 @@ public:
 		}
 
 
-		vtbl->doItemsLayout(vtbl, this);
+		vtbl->doItemsLayout(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_doItemsLayout(void* self);
+	friend void QAbstractItemView_virtualbase_doItemsLayout(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectAll() override {
 		if (vtbl->selectAll == 0) {
 			QAbstractItemView::selectAll();
@@ -317,13 +296,12 @@ public:
 		}
 
 
-		vtbl->selectAll(vtbl, this);
+		vtbl->selectAll(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_selectAll(void* self);
+	friend void QAbstractItemView_virtualbase_selectAll(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dataChanged(const QModelIndex& topLeft, const QModelIndex& bottomRight, const QVector<int>& roles) override {
 		if (vtbl->dataChanged == 0) {
 			QAbstractItemView::dataChanged(topLeft, bottomRight, roles);
@@ -347,13 +325,12 @@ public:
 		roles_out.data = static_cast<void*>(roles_arr);
 		struct miqt_array /* of int */  sigval3 = roles_out;
 
-		vtbl->dataChanged(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->dataChanged(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
+	friend void QAbstractItemView_virtualbase_dataChanged(VirtualQAbstractItemView* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsInserted(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsInserted == 0) {
 			QAbstractItemView::rowsInserted(parent, start, end);
@@ -366,13 +343,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsInserted(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsInserted(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end);
+	friend void QAbstractItemView_virtualbase_rowsInserted(VirtualQAbstractItemView* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void rowsAboutToBeRemoved(const QModelIndex& parent, int start, int end) override {
 		if (vtbl->rowsAboutToBeRemoved == 0) {
 			QAbstractItemView::rowsAboutToBeRemoved(parent, start, end);
@@ -385,13 +361,12 @@ public:
 		int sigval2 = start;
 		int sigval3 = end;
 
-		vtbl->rowsAboutToBeRemoved(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->rowsAboutToBeRemoved(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end);
+	friend void QAbstractItemView_virtualbase_rowsAboutToBeRemoved(VirtualQAbstractItemView* self, QModelIndex* parent, int start, int end);
 
-	// Subclass to allow providing a Go implementation
 	virtual void selectionChanged(const QItemSelection& selected, const QItemSelection& deselected) override {
 		if (vtbl->selectionChanged == 0) {
 			QAbstractItemView::selectionChanged(selected, deselected);
@@ -405,13 +380,12 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval2 = const_cast<QItemSelection*>(&deselected_ret);
 
-		vtbl->selectionChanged(vtbl, this, sigval1, sigval2);
+		vtbl->selectionChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected);
+	friend void QAbstractItemView_virtualbase_selectionChanged(VirtualQAbstractItemView* self, QItemSelection* selected, QItemSelection* deselected);
 
-	// Subclass to allow providing a Go implementation
 	virtual void currentChanged(const QModelIndex& current, const QModelIndex& previous) override {
 		if (vtbl->currentChanged == 0) {
 			QAbstractItemView::currentChanged(current, previous);
@@ -425,13 +399,12 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval2 = const_cast<QModelIndex*>(&previous_ret);
 
-		vtbl->currentChanged(vtbl, this, sigval1, sigval2);
+		vtbl->currentChanged(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous);
+	friend void QAbstractItemView_virtualbase_currentChanged(VirtualQAbstractItemView* self, QModelIndex* current, QModelIndex* previous);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorData() override {
 		if (vtbl->updateEditorData == 0) {
 			QAbstractItemView::updateEditorData();
@@ -439,13 +412,12 @@ public:
 		}
 
 
-		vtbl->updateEditorData(vtbl, this);
+		vtbl->updateEditorData(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_updateEditorData(void* self);
+	friend void QAbstractItemView_virtualbase_updateEditorData(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateEditorGeometries() override {
 		if (vtbl->updateEditorGeometries == 0) {
 			QAbstractItemView::updateEditorGeometries();
@@ -453,13 +425,12 @@ public:
 		}
 
 
-		vtbl->updateEditorGeometries(vtbl, this);
+		vtbl->updateEditorGeometries(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_updateEditorGeometries(void* self);
+	friend void QAbstractItemView_virtualbase_updateEditorGeometries(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateGeometries() override {
 		if (vtbl->updateGeometries == 0) {
 			QAbstractItemView::updateGeometries();
@@ -467,13 +438,12 @@ public:
 		}
 
 
-		vtbl->updateGeometries(vtbl, this);
+		vtbl->updateGeometries(this);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_updateGeometries(void* self);
+	friend void QAbstractItemView_virtualbase_updateGeometries(VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarAction(int action) override {
 		if (vtbl->verticalScrollbarAction == 0) {
 			QAbstractItemView::verticalScrollbarAction(action);
@@ -482,13 +452,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->verticalScrollbarAction(vtbl, this, sigval1);
+		vtbl->verticalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_verticalScrollbarAction(void* self, int action);
+	friend void QAbstractItemView_virtualbase_verticalScrollbarAction(VirtualQAbstractItemView* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarAction(int action) override {
 		if (vtbl->horizontalScrollbarAction == 0) {
 			QAbstractItemView::horizontalScrollbarAction(action);
@@ -497,13 +466,12 @@ public:
 
 		int sigval1 = action;
 
-		vtbl->horizontalScrollbarAction(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarAction(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_horizontalScrollbarAction(void* self, int action);
+	friend void QAbstractItemView_virtualbase_horizontalScrollbarAction(VirtualQAbstractItemView* self, int action);
 
-	// Subclass to allow providing a Go implementation
 	virtual void verticalScrollbarValueChanged(int value) override {
 		if (vtbl->verticalScrollbarValueChanged == 0) {
 			QAbstractItemView::verticalScrollbarValueChanged(value);
@@ -512,13 +480,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->verticalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->verticalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_verticalScrollbarValueChanged(void* self, int value);
+	friend void QAbstractItemView_virtualbase_verticalScrollbarValueChanged(VirtualQAbstractItemView* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void horizontalScrollbarValueChanged(int value) override {
 		if (vtbl->horizontalScrollbarValueChanged == 0) {
 			QAbstractItemView::horizontalScrollbarValueChanged(value);
@@ -527,13 +494,12 @@ public:
 
 		int sigval1 = value;
 
-		vtbl->horizontalScrollbarValueChanged(vtbl, this, sigval1);
+		vtbl->horizontalScrollbarValueChanged(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_horizontalScrollbarValueChanged(void* self, int value);
+	friend void QAbstractItemView_virtualbase_horizontalScrollbarValueChanged(VirtualQAbstractItemView* self, int value);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEditor(QWidget* editor, QAbstractItemDelegate::EndEditHint hint) override {
 		if (vtbl->closeEditor == 0) {
 			QAbstractItemView::closeEditor(editor, hint);
@@ -544,13 +510,12 @@ public:
 		QAbstractItemDelegate::EndEditHint hint_ret = hint;
 		int sigval2 = static_cast<int>(hint_ret);
 
-		vtbl->closeEditor(vtbl, this, sigval1, sigval2);
+		vtbl->closeEditor(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_closeEditor(void* self, QWidget* editor, int hint);
+	friend void QAbstractItemView_virtualbase_closeEditor(VirtualQAbstractItemView* self, QWidget* editor, int hint);
 
-	// Subclass to allow providing a Go implementation
 	virtual void commitData(QWidget* editor) override {
 		if (vtbl->commitData == 0) {
 			QAbstractItemView::commitData(editor);
@@ -559,13 +524,12 @@ public:
 
 		QWidget* sigval1 = editor;
 
-		vtbl->commitData(vtbl, this, sigval1);
+		vtbl->commitData(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_commitData(void* self, QWidget* editor);
+	friend void QAbstractItemView_virtualbase_commitData(VirtualQAbstractItemView* self, QWidget* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual void editorDestroyed(QObject* editor) override {
 		if (vtbl->editorDestroyed == 0) {
 			QAbstractItemView::editorDestroyed(editor);
@@ -574,13 +538,12 @@ public:
 
 		QObject* sigval1 = editor;
 
-		vtbl->editorDestroyed(vtbl, this, sigval1);
+		vtbl->editorDestroyed(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_editorDestroyed(void* self, QObject* editor);
+	friend void QAbstractItemView_virtualbase_editorDestroyed(VirtualQAbstractItemView* self, QObject* editor);
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndex moveCursor(QAbstractItemView::CursorAction cursorAction, Qt::KeyboardModifiers modifiers) override {
 		if (vtbl->moveCursor == 0) {
 			return QModelIndex(); // Pure virtual, there is no base we can call
@@ -591,38 +554,35 @@ public:
 		Qt::KeyboardModifiers modifiers_ret = modifiers;
 		int sigval2 = static_cast<int>(modifiers_ret);
 
-		QModelIndex* callback_return_value = vtbl->moveCursor(vtbl, this, sigval1, sigval2);
+		QModelIndex* callback_return_value = vtbl->moveCursor(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int horizontalOffset() const override {
 		if (vtbl->horizontalOffset == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->horizontalOffset(vtbl, this);
+		int callback_return_value = vtbl->horizontalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual int verticalOffset() const override {
 		if (vtbl->verticalOffset == 0) {
 			return 0; // Pure virtual, there is no base we can call
 		}
 
 
-		int callback_return_value = vtbl->verticalOffset(vtbl, this);
+		int callback_return_value = vtbl->verticalOffset(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool isIndexHidden(const QModelIndex& index) const override {
 		if (vtbl->isIndexHidden == 0) {
 			return false; // Pure virtual, there is no base we can call
@@ -632,12 +592,11 @@ public:
 		// Cast returned reference into pointer
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 
-		bool callback_return_value = vtbl->isIndexHidden(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->isIndexHidden(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void setSelection(const QRect& rect, QItemSelectionModel::SelectionFlags command) override {
 		if (vtbl->setSelection == 0) {
 			return; // Pure virtual, there is no base we can call
@@ -649,11 +608,10 @@ public:
 		QItemSelectionModel::SelectionFlags command_ret = command;
 		int sigval2 = static_cast<int>(command_ret);
 
-		vtbl->setSelection(vtbl, this, sigval1, sigval2);
+		vtbl->setSelection(this, sigval1, sigval2);
 
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QRegion visualRegionForSelection(const QItemSelection& selection) const override {
 		if (vtbl->visualRegionForSelection == 0) {
 			return QRegion(); // Pure virtual, there is no base we can call
@@ -663,21 +621,20 @@ public:
 		// Cast returned reference into pointer
 		QItemSelection* sigval1 = const_cast<QItemSelection*>(&selection_ret);
 
-		QRegion* callback_return_value = vtbl->visualRegionForSelection(vtbl, this, sigval1);
+		QRegion* callback_return_value = vtbl->visualRegionForSelection(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual QModelIndexList selectedIndexes() const override {
 		if (vtbl->selectedIndexes == 0) {
 			return QAbstractItemView::selectedIndexes();
 		}
 
 
-		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(vtbl, this);
+		struct miqt_array /* of QModelIndex* */  callback_return_value = vtbl->selectedIndexes(this);
 		QModelIndexList callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QModelIndex** callback_return_value_arr = static_cast<QModelIndex**>(callback_return_value.data);
@@ -689,9 +646,8 @@ public:
 		return callback_return_value_QList;
 	}
 
-	friend struct miqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const void* self);
+	friend struct miqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool edit(const QModelIndex& index, QAbstractItemView::EditTrigger trigger, QEvent* event) override {
 		if (vtbl->edit2 == 0) {
 			return QAbstractItemView::edit(index, trigger, event);
@@ -704,14 +660,13 @@ public:
 		int sigval2 = static_cast<int>(trigger_ret);
 		QEvent* sigval3 = event;
 
-		bool callback_return_value = vtbl->edit2(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->edit2(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event);
+	friend bool QAbstractItemView_virtualbase_edit2(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QItemSelectionModel::SelectionFlags selectionCommand(const QModelIndex& index, const QEvent* event) const override {
 		if (vtbl->selectionCommand == 0) {
 			return QAbstractItemView::selectionCommand(index, event);
@@ -722,14 +677,13 @@ public:
 		QModelIndex* sigval1 = const_cast<QModelIndex*>(&index_ret);
 		QEvent* sigval2 = (QEvent*) event;
 
-		int callback_return_value = vtbl->selectionCommand(vtbl, this, sigval1, sigval2);
+		int callback_return_value = vtbl->selectionCommand(this, sigval1, sigval2);
 
 		return static_cast<QItemSelectionModel::SelectionFlags>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event);
+	friend int QAbstractItemView_virtualbase_selectionCommand(const VirtualQAbstractItemView* self, QModelIndex* index, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void startDrag(Qt::DropActions supportedActions) override {
 		if (vtbl->startDrag == 0) {
 			QAbstractItemView::startDrag(supportedActions);
@@ -739,29 +693,27 @@ public:
 		Qt::DropActions supportedActions_ret = supportedActions;
 		int sigval1 = static_cast<int>(supportedActions_ret);
 
-		vtbl->startDrag(vtbl, this, sigval1);
+		vtbl->startDrag(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_startDrag(void* self, int supportedActions);
+	friend void QAbstractItemView_virtualbase_startDrag(VirtualQAbstractItemView* self, int supportedActions);
 
-	// Subclass to allow providing a Go implementation
 	virtual QStyleOptionViewItem viewOptions() const override {
 		if (vtbl->viewOptions == 0) {
 			return QAbstractItemView::viewOptions();
 		}
 
 
-		QStyleOptionViewItem* callback_return_value = vtbl->viewOptions(vtbl, this);
+		QStyleOptionViewItem* callback_return_value = vtbl->viewOptions(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QStyleOptionViewItem* QAbstractItemView_virtualbase_viewOptions(const void* self);
+	friend QStyleOptionViewItem* QAbstractItemView_virtualbase_viewOptions(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QAbstractItemView::focusNextPrevChild(next);
@@ -769,14 +721,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QAbstractItemView_virtualbase_focusNextPrevChild(VirtualQAbstractItemView* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QAbstractItemView::event(event);
@@ -784,14 +735,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_event(void* self, QEvent* event);
+	friend bool QAbstractItemView_virtualbase_event(VirtualQAbstractItemView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool viewportEvent(QEvent* event) override {
 		if (vtbl->viewportEvent == 0) {
 			return QAbstractItemView::viewportEvent(event);
@@ -799,14 +749,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->viewportEvent(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->viewportEvent(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_viewportEvent(void* self, QEvent* event);
+	friend bool QAbstractItemView_virtualbase_viewportEvent(VirtualQAbstractItemView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QAbstractItemView::mousePressEvent(event);
@@ -815,13 +764,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QAbstractItemView_virtualbase_mousePressEvent(VirtualQAbstractItemView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QAbstractItemView::mouseMoveEvent(event);
@@ -830,13 +778,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QAbstractItemView_virtualbase_mouseMoveEvent(VirtualQAbstractItemView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QAbstractItemView::mouseReleaseEvent(event);
@@ -845,13 +792,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QAbstractItemView_virtualbase_mouseReleaseEvent(VirtualQAbstractItemView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QAbstractItemView::mouseDoubleClickEvent(event);
@@ -860,13 +806,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QAbstractItemView_virtualbase_mouseDoubleClickEvent(VirtualQAbstractItemView* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QAbstractItemView::dragEnterEvent(event);
@@ -875,13 +820,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QAbstractItemView_virtualbase_dragEnterEvent(VirtualQAbstractItemView* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QAbstractItemView::dragMoveEvent(event);
@@ -890,13 +834,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QAbstractItemView_virtualbase_dragMoveEvent(VirtualQAbstractItemView* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QAbstractItemView::dragLeaveEvent(event);
@@ -905,13 +848,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QAbstractItemView_virtualbase_dragLeaveEvent(VirtualQAbstractItemView* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QAbstractItemView::dropEvent(event);
@@ -920,13 +862,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QAbstractItemView_virtualbase_dropEvent(VirtualQAbstractItemView* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QAbstractItemView::focusInEvent(event);
@@ -935,13 +876,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QAbstractItemView_virtualbase_focusInEvent(VirtualQAbstractItemView* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QAbstractItemView::focusOutEvent(event);
@@ -950,13 +890,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QAbstractItemView_virtualbase_focusOutEvent(VirtualQAbstractItemView* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* event) override {
 		if (vtbl->keyPressEvent == 0) {
 			QAbstractItemView::keyPressEvent(event);
@@ -965,13 +904,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_keyPressEvent(void* self, QKeyEvent* event);
+	friend void QAbstractItemView_virtualbase_keyPressEvent(VirtualQAbstractItemView* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QAbstractItemView::resizeEvent(event);
@@ -980,13 +918,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QAbstractItemView_virtualbase_resizeEvent(VirtualQAbstractItemView* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAbstractItemView::timerEvent(event);
@@ -995,13 +932,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAbstractItemView_virtualbase_timerEvent(VirtualQAbstractItemView* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* event) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QAbstractItemView::inputMethodEvent(event);
@@ -1010,13 +946,12 @@ public:
 
 		QInputMethodEvent* sigval1 = event;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event);
+	friend void QAbstractItemView_virtualbase_inputMethodEvent(VirtualQAbstractItemView* self, QInputMethodEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* object, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAbstractItemView::eventFilter(object, event);
@@ -1025,62 +960,58 @@ public:
 		QObject* sigval1 = object;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_eventFilter(void* self, QObject* object, QEvent* event);
+	friend bool QAbstractItemView_virtualbase_eventFilter(VirtualQAbstractItemView* self, QObject* object, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize viewportSizeHint() const override {
 		if (vtbl->viewportSizeHint == 0) {
 			return QAbstractItemView::viewportSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->viewportSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->viewportSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractItemView_virtualbase_viewportSizeHint(const void* self);
+	friend QSize* QAbstractItemView_virtualbase_viewportSizeHint(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QAbstractItemView::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractItemView_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QAbstractItemView_virtualbase_minimumSizeHint(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QAbstractItemView::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QAbstractItemView_virtualbase_sizeHint(const void* self);
+	friend QSize* QAbstractItemView_virtualbase_sizeHint(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setupViewport(QWidget* viewport) override {
 		if (vtbl->setupViewport == 0) {
 			QAbstractItemView::setupViewport(viewport);
@@ -1089,13 +1020,12 @@ public:
 
 		QWidget* sigval1 = viewport;
 
-		vtbl->setupViewport(vtbl, this, sigval1);
+		vtbl->setupViewport(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_setupViewport(void* self, QWidget* viewport);
+	friend void QAbstractItemView_virtualbase_setupViewport(VirtualQAbstractItemView* self, QWidget* viewport);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QAbstractItemView::paintEvent(param1);
@@ -1104,13 +1034,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QAbstractItemView_virtualbase_paintEvent(VirtualQAbstractItemView* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* param1) override {
 		if (vtbl->wheelEvent == 0) {
 			QAbstractItemView::wheelEvent(param1);
@@ -1119,13 +1048,12 @@ public:
 
 		QWheelEvent* sigval1 = param1;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_wheelEvent(void* self, QWheelEvent* param1);
+	friend void QAbstractItemView_virtualbase_wheelEvent(VirtualQAbstractItemView* self, QWheelEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QAbstractItemView::contextMenuEvent(param1);
@@ -1134,13 +1062,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QAbstractItemView_virtualbase_contextMenuEvent(VirtualQAbstractItemView* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void scrollContentsBy(int dx, int dy) override {
 		if (vtbl->scrollContentsBy == 0) {
 			QAbstractItemView::scrollContentsBy(dx, dy);
@@ -1150,13 +1077,12 @@ public:
 		int sigval1 = dx;
 		int sigval2 = dy;
 
-		vtbl->scrollContentsBy(vtbl, this, sigval1, sigval2);
+		vtbl->scrollContentsBy(this, sigval1, sigval2);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_scrollContentsBy(void* self, int dx, int dy);
+	friend void QAbstractItemView_virtualbase_scrollContentsBy(VirtualQAbstractItemView* self, int dx, int dy);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* param1) override {
 		if (vtbl->changeEvent == 0) {
 			QAbstractItemView::changeEvent(param1);
@@ -1165,27 +1091,25 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_changeEvent(void* self, QEvent* param1);
+	friend void QAbstractItemView_virtualbase_changeEvent(VirtualQAbstractItemView* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QAbstractItemView::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_devType(const void* self);
+	friend int QAbstractItemView_virtualbase_devType(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QAbstractItemView::setVisible(visible);
@@ -1194,13 +1118,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_setVisible(void* self, bool visible);
+	friend void QAbstractItemView_virtualbase_setVisible(VirtualQAbstractItemView* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QAbstractItemView::heightForWidth(param1);
@@ -1208,42 +1131,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QAbstractItemView_virtualbase_heightForWidth(const VirtualQAbstractItemView* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QAbstractItemView::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QAbstractItemView_virtualbase_hasHeightForWidth(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QAbstractItemView::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QAbstractItemView_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QAbstractItemView_virtualbase_paintEngine(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QAbstractItemView::keyReleaseEvent(event);
@@ -1252,13 +1172,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QAbstractItemView_virtualbase_keyReleaseEvent(VirtualQAbstractItemView* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QAbstractItemView::enterEvent(event);
@@ -1267,13 +1186,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QAbstractItemView_virtualbase_enterEvent(VirtualQAbstractItemView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QAbstractItemView::leaveEvent(event);
@@ -1282,13 +1200,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QAbstractItemView_virtualbase_leaveEvent(VirtualQAbstractItemView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QAbstractItemView::moveEvent(event);
@@ -1297,13 +1214,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QAbstractItemView_virtualbase_moveEvent(VirtualQAbstractItemView* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QAbstractItemView::closeEvent(event);
@@ -1312,13 +1228,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QAbstractItemView_virtualbase_closeEvent(VirtualQAbstractItemView* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QAbstractItemView::tabletEvent(event);
@@ -1327,13 +1242,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QAbstractItemView_virtualbase_tabletEvent(VirtualQAbstractItemView* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QAbstractItemView::actionEvent(event);
@@ -1342,13 +1256,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QAbstractItemView_virtualbase_actionEvent(VirtualQAbstractItemView* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QAbstractItemView::showEvent(event);
@@ -1357,13 +1270,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QAbstractItemView_virtualbase_showEvent(VirtualQAbstractItemView* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QAbstractItemView::hideEvent(event);
@@ -1372,13 +1284,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QAbstractItemView_virtualbase_hideEvent(VirtualQAbstractItemView* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QAbstractItemView::nativeEvent(eventType, message, result);
@@ -1393,14 +1304,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QAbstractItemView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QAbstractItemView_virtualbase_nativeEvent(VirtualQAbstractItemView* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QAbstractItemView::metric(param1);
@@ -1409,14 +1319,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAbstractItemView_virtualbase_metric(const void* self, int param1);
+	friend int QAbstractItemView_virtualbase_metric(const VirtualQAbstractItemView* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QAbstractItemView::initPainter(painter);
@@ -1425,13 +1334,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QAbstractItemView_virtualbase_initPainter(const VirtualQAbstractItemView* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QAbstractItemView::redirected(offset);
@@ -1439,28 +1347,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QAbstractItemView_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QAbstractItemView_virtualbase_redirected(const VirtualQAbstractItemView* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QAbstractItemView::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QAbstractItemView_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QAbstractItemView_virtualbase_sharedPainter(const VirtualQAbstractItemView* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAbstractItemView::childEvent(event);
@@ -1469,13 +1375,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAbstractItemView_virtualbase_childEvent(VirtualQAbstractItemView* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAbstractItemView::customEvent(event);
@@ -1484,13 +1389,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAbstractItemView_virtualbase_customEvent(VirtualQAbstractItemView* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAbstractItemView::connectNotify(signal);
@@ -1501,13 +1405,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractItemView_virtualbase_connectNotify(VirtualQAbstractItemView* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAbstractItemView::disconnectNotify(signal);
@@ -1518,49 +1421,49 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAbstractItemView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAbstractItemView_virtualbase_disconnectNotify(VirtualQAbstractItemView* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(void* self, int steps);
-	friend int QAbstractItemView_protectedbase_horizontalStepsPerItem(const void* self);
-	friend void QAbstractItemView_protectedbase_setVerticalStepsPerItem(void* self, int steps);
-	friend int QAbstractItemView_protectedbase_verticalStepsPerItem(const void* self);
-	friend int QAbstractItemView_protectedbase_state(const void* self);
-	friend void QAbstractItemView_protectedbase_setState(void* self, int state);
-	friend void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(void* self);
-	friend void QAbstractItemView_protectedbase_executeDelayedItemsLayout(void* self);
-	friend void QAbstractItemView_protectedbase_setDirtyRegion(void* self, QRegion* region);
-	friend void QAbstractItemView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy);
-	friend QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const void* self);
-	friend void QAbstractItemView_protectedbase_startAutoScroll(void* self);
-	friend void QAbstractItemView_protectedbase_stopAutoScroll(void* self);
-	friend void QAbstractItemView_protectedbase_doAutoScroll(void* self);
-	friend int QAbstractItemView_protectedbase_dropIndicatorPosition(const void* self);
-	friend void QAbstractItemView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom);
-	friend QMargins* QAbstractItemView_protectedbase_viewportMargins(const void* self);
-	friend void QAbstractItemView_protectedbase_drawFrame(void* self, QPainter* param1);
-	friend void QAbstractItemView_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option);
-	friend void QAbstractItemView_protectedbase_updateMicroFocus(void* self);
-	friend void QAbstractItemView_protectedbase_create(void* self);
-	friend void QAbstractItemView_protectedbase_destroy(void* self);
-	friend bool QAbstractItemView_protectedbase_focusNextChild(void* self);
-	friend bool QAbstractItemView_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QAbstractItemView_protectedbase_sender(const void* self);
-	friend int QAbstractItemView_protectedbase_senderSignalIndex(const void* self);
-	friend int QAbstractItemView_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAbstractItemView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(VirtualQAbstractItemView* self, int steps);
+	friend int QAbstractItemView_protectedbase_horizontalStepsPerItem(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_setVerticalStepsPerItem(VirtualQAbstractItemView* self, int steps);
+	friend int QAbstractItemView_protectedbase_verticalStepsPerItem(const VirtualQAbstractItemView* self);
+	friend int QAbstractItemView_protectedbase_state(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_setState(VirtualQAbstractItemView* self, int state);
+	friend void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_executeDelayedItemsLayout(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_setDirtyRegion(VirtualQAbstractItemView* self, QRegion* region);
+	friend void QAbstractItemView_protectedbase_scrollDirtyRegion(VirtualQAbstractItemView* self, int dx, int dy);
+	friend QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_startAutoScroll(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_stopAutoScroll(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_doAutoScroll(VirtualQAbstractItemView* self);
+	friend int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_setViewportMargins(VirtualQAbstractItemView* self, int left, int top, int right, int bottom);
+	friend QMargins* QAbstractItemView_protectedbase_viewportMargins(const VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_drawFrame(VirtualQAbstractItemView* self, QPainter* param1);
+	friend void QAbstractItemView_protectedbase_initStyleOption(const VirtualQAbstractItemView* self, QStyleOptionFrame* option);
+	friend void QAbstractItemView_protectedbase_updateMicroFocus(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_create(VirtualQAbstractItemView* self);
+	friend void QAbstractItemView_protectedbase_destroy(VirtualQAbstractItemView* self);
+	friend bool QAbstractItemView_protectedbase_focusNextChild(VirtualQAbstractItemView* self);
+	friend bool QAbstractItemView_protectedbase_focusPreviousChild(VirtualQAbstractItemView* self);
+	friend QObject* QAbstractItemView_protectedbase_sender(const VirtualQAbstractItemView* self);
+	friend int QAbstractItemView_protectedbase_senderSignalIndex(const VirtualQAbstractItemView* self);
+	friend int QAbstractItemView_protectedbase_receivers(const VirtualQAbstractItemView* self, const char* signal);
+	friend bool QAbstractItemView_protectedbase_isSignalConnected(const VirtualQAbstractItemView* self, QMetaMethod* signal);
 };
 
-QAbstractItemView* QAbstractItemView_new(struct QAbstractItemView_VTable* vtbl, QWidget* parent) {
-	return new VirtualQAbstractItemView(vtbl, parent);
+VirtualQAbstractItemView* QAbstractItemView_new(const QAbstractItemView_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQAbstractItemView(vtbl, vdata, parent);
 }
 
-QAbstractItemView* QAbstractItemView_new2(struct QAbstractItemView_VTable* vtbl) {
-	return new VirtualQAbstractItemView(vtbl);
+VirtualQAbstractItemView* QAbstractItemView_new2(const QAbstractItemView_VTable* vtbl, void* vdata) {
+	return new VirtualQAbstractItemView(vtbl, vdata);
 }
 
 void QAbstractItemView_virtbase(QAbstractItemView* src, QAbstractScrollArea** outptr_QAbstractScrollArea) {
@@ -1894,7 +1797,7 @@ void QAbstractItemView_pressed(QAbstractItemView* self, QModelIndex* index) {
 	self->pressed(*index);
 }
 
-void QAbstractItemView_connect_pressed(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_pressed(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -1912,7 +1815,7 @@ void QAbstractItemView_clicked(QAbstractItemView* self, QModelIndex* index) {
 	self->clicked(*index);
 }
 
-void QAbstractItemView_connect_clicked(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_clicked(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -1930,7 +1833,7 @@ void QAbstractItemView_doubleClicked(QAbstractItemView* self, QModelIndex* index
 	self->doubleClicked(*index);
 }
 
-void QAbstractItemView_connect_doubleClicked(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_doubleClicked(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -1948,7 +1851,7 @@ void QAbstractItemView_activated(QAbstractItemView* self, QModelIndex* index) {
 	self->activated(*index);
 }
 
-void QAbstractItemView_connect_activated(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_activated(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -1966,7 +1869,7 @@ void QAbstractItemView_entered(QAbstractItemView* self, QModelIndex* index) {
 	self->entered(*index);
 }
 
-void QAbstractItemView_connect_entered(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_entered(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QModelIndex*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QModelIndex*);
@@ -1984,7 +1887,7 @@ void QAbstractItemView_viewportEntered(QAbstractItemView* self) {
 	self->viewportEntered();
 }
 
-void QAbstractItemView_connect_viewportEntered(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_viewportEntered(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1999,7 +1902,7 @@ void QAbstractItemView_iconSizeChanged(QAbstractItemView* self, QSize* size) {
 	self->iconSizeChanged(*size);
 }
 
-void QAbstractItemView_connect_iconSizeChanged(QAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
+void QAbstractItemView_connect_iconSizeChanged(VirtualQAbstractItemView* self, intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QSize*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QSize*);
@@ -2057,86 +1960,73 @@ struct miqt_string QAbstractItemView_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QMetaObject* QAbstractItemView_virtualbase_metaObject(const void* self) {
+QMetaObject* QAbstractItemView_virtualbase_metaObject(const VirtualQAbstractItemView* self) {
 
-	return (QMetaObject*) ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::metaObject();
-
+	return (QMetaObject*) self->QAbstractItemView::metaObject();
 }
 
-void* QAbstractItemView_virtualbase_metacast(void* self, const char* param1) {
+void* QAbstractItemView_virtualbase_metacast(VirtualQAbstractItemView* self, const char* param1) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::qt_metacast(param1);
-
+	return self->QAbstractItemView::qt_metacast(param1);
 }
 
-int QAbstractItemView_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAbstractItemView_virtualbase_metacall(VirtualQAbstractItemView* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAbstractItemView::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QAbstractItemView_virtualbase_setModel(void* self, QAbstractItemModel* model) {
+void QAbstractItemView_virtualbase_setModel(VirtualQAbstractItemView* self, QAbstractItemModel* model) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::setModel(model);
-
+	self->QAbstractItemView::setModel(model);
 }
 
-void QAbstractItemView_virtualbase_setSelectionModel(void* self, QItemSelectionModel* selectionModel) {
+void QAbstractItemView_virtualbase_setSelectionModel(VirtualQAbstractItemView* self, QItemSelectionModel* selectionModel) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::setSelectionModel(selectionModel);
-
+	self->QAbstractItemView::setSelectionModel(selectionModel);
 }
 
-void QAbstractItemView_virtualbase_keyboardSearch(void* self, struct miqt_string search) {
+void QAbstractItemView_virtualbase_keyboardSearch(VirtualQAbstractItemView* self, struct miqt_string search) {
 	QString search_QString = QString::fromUtf8(search.data, search.len);
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::keyboardSearch(search_QString);
-
+	self->QAbstractItemView::keyboardSearch(search_QString);
 }
 
-int QAbstractItemView_virtualbase_sizeHintForRow(const void* self, int row) {
+int QAbstractItemView_virtualbase_sizeHintForRow(const VirtualQAbstractItemView* self, int row) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::sizeHintForRow(static_cast<int>(row));
-
+	return self->QAbstractItemView::sizeHintForRow(static_cast<int>(row));
 }
 
-int QAbstractItemView_virtualbase_sizeHintForColumn(const void* self, int column) {
+int QAbstractItemView_virtualbase_sizeHintForColumn(const VirtualQAbstractItemView* self, int column) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::sizeHintForColumn(static_cast<int>(column));
-
+	return self->QAbstractItemView::sizeHintForColumn(static_cast<int>(column));
 }
 
-QVariant* QAbstractItemView_virtualbase_inputMethodQuery(const void* self, int query) {
+QVariant* QAbstractItemView_virtualbase_inputMethodQuery(const VirtualQAbstractItemView* self, int query) {
 
-	return new QVariant(( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
-
+	return new QVariant(self->QAbstractItemView::inputMethodQuery(static_cast<Qt::InputMethodQuery>(query)));
 }
 
-void QAbstractItemView_virtualbase_reset(void* self) {
+void QAbstractItemView_virtualbase_reset(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::reset();
-
+	self->QAbstractItemView::reset();
 }
 
-void QAbstractItemView_virtualbase_setRootIndex(void* self, QModelIndex* index) {
+void QAbstractItemView_virtualbase_setRootIndex(VirtualQAbstractItemView* self, QModelIndex* index) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::setRootIndex(*index);
-
+	self->QAbstractItemView::setRootIndex(*index);
 }
 
-void QAbstractItemView_virtualbase_doItemsLayout(void* self) {
+void QAbstractItemView_virtualbase_doItemsLayout(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::doItemsLayout();
-
+	self->QAbstractItemView::doItemsLayout();
 }
 
-void QAbstractItemView_virtualbase_selectAll(void* self) {
+void QAbstractItemView_virtualbase_selectAll(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::selectAll();
-
+	self->QAbstractItemView::selectAll();
 }
 
-void QAbstractItemView_virtualbase_dataChanged(void* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
+void QAbstractItemView_virtualbase_dataChanged(VirtualQAbstractItemView* self, QModelIndex* topLeft, QModelIndex* bottomRight, struct miqt_array /* of int */  roles) {
 	QVector<int> roles_QList;
 	roles_QList.reserve(roles.len);
 	int* roles_arr = static_cast<int*>(roles.data);
@@ -2144,97 +2034,82 @@ void QAbstractItemView_virtualbase_dataChanged(void* self, QModelIndex* topLeft,
 		roles_QList.push_back(static_cast<int>(roles_arr[i]));
 	}
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::dataChanged(*topLeft, *bottomRight, roles_QList);
-
+	self->QAbstractItemView::dataChanged(*topLeft, *bottomRight, roles_QList);
 }
 
-void QAbstractItemView_virtualbase_rowsInserted(void* self, QModelIndex* parent, int start, int end) {
+void QAbstractItemView_virtualbase_rowsInserted(VirtualQAbstractItemView* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QAbstractItemView::rowsInserted(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QAbstractItemView_virtualbase_rowsAboutToBeRemoved(void* self, QModelIndex* parent, int start, int end) {
+void QAbstractItemView_virtualbase_rowsAboutToBeRemoved(VirtualQAbstractItemView* self, QModelIndex* parent, int start, int end) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
-
+	self->QAbstractItemView::rowsAboutToBeRemoved(*parent, static_cast<int>(start), static_cast<int>(end));
 }
 
-void QAbstractItemView_virtualbase_selectionChanged(void* self, QItemSelection* selected, QItemSelection* deselected) {
+void QAbstractItemView_virtualbase_selectionChanged(VirtualQAbstractItemView* self, QItemSelection* selected, QItemSelection* deselected) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::selectionChanged(*selected, *deselected);
-
+	self->QAbstractItemView::selectionChanged(*selected, *deselected);
 }
 
-void QAbstractItemView_virtualbase_currentChanged(void* self, QModelIndex* current, QModelIndex* previous) {
+void QAbstractItemView_virtualbase_currentChanged(VirtualQAbstractItemView* self, QModelIndex* current, QModelIndex* previous) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::currentChanged(*current, *previous);
-
+	self->QAbstractItemView::currentChanged(*current, *previous);
 }
 
-void QAbstractItemView_virtualbase_updateEditorData(void* self) {
+void QAbstractItemView_virtualbase_updateEditorData(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::updateEditorData();
-
+	self->QAbstractItemView::updateEditorData();
 }
 
-void QAbstractItemView_virtualbase_updateEditorGeometries(void* self) {
+void QAbstractItemView_virtualbase_updateEditorGeometries(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::updateEditorGeometries();
-
+	self->QAbstractItemView::updateEditorGeometries();
 }
 
-void QAbstractItemView_virtualbase_updateGeometries(void* self) {
+void QAbstractItemView_virtualbase_updateGeometries(VirtualQAbstractItemView* self) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::updateGeometries();
-
+	self->QAbstractItemView::updateGeometries();
 }
 
-void QAbstractItemView_virtualbase_verticalScrollbarAction(void* self, int action) {
+void QAbstractItemView_virtualbase_verticalScrollbarAction(VirtualQAbstractItemView* self, int action) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::verticalScrollbarAction(static_cast<int>(action));
-
+	self->QAbstractItemView::verticalScrollbarAction(static_cast<int>(action));
 }
 
-void QAbstractItemView_virtualbase_horizontalScrollbarAction(void* self, int action) {
+void QAbstractItemView_virtualbase_horizontalScrollbarAction(VirtualQAbstractItemView* self, int action) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::horizontalScrollbarAction(static_cast<int>(action));
-
+	self->QAbstractItemView::horizontalScrollbarAction(static_cast<int>(action));
 }
 
-void QAbstractItemView_virtualbase_verticalScrollbarValueChanged(void* self, int value) {
+void QAbstractItemView_virtualbase_verticalScrollbarValueChanged(VirtualQAbstractItemView* self, int value) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::verticalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QAbstractItemView::verticalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QAbstractItemView_virtualbase_horizontalScrollbarValueChanged(void* self, int value) {
+void QAbstractItemView_virtualbase_horizontalScrollbarValueChanged(VirtualQAbstractItemView* self, int value) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::horizontalScrollbarValueChanged(static_cast<int>(value));
-
+	self->QAbstractItemView::horizontalScrollbarValueChanged(static_cast<int>(value));
 }
 
-void QAbstractItemView_virtualbase_closeEditor(void* self, QWidget* editor, int hint) {
+void QAbstractItemView_virtualbase_closeEditor(VirtualQAbstractItemView* self, QWidget* editor, int hint) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
-
+	self->QAbstractItemView::closeEditor(editor, static_cast<QAbstractItemDelegate::EndEditHint>(hint));
 }
 
-void QAbstractItemView_virtualbase_commitData(void* self, QWidget* editor) {
+void QAbstractItemView_virtualbase_commitData(VirtualQAbstractItemView* self, QWidget* editor) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::commitData(editor);
-
+	self->QAbstractItemView::commitData(editor);
 }
 
-void QAbstractItemView_virtualbase_editorDestroyed(void* self, QObject* editor) {
+void QAbstractItemView_virtualbase_editorDestroyed(VirtualQAbstractItemView* self, QObject* editor) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::editorDestroyed(editor);
-
+	self->QAbstractItemView::editorDestroyed(editor);
 }
 
-struct miqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const void* self) {
+struct miqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedIndexes(const VirtualQAbstractItemView* self) {
 
-	QModelIndexList _ret = ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::selectedIndexes();
+	QModelIndexList _ret = self->QAbstractItemView::selectedIndexes();
 	// Convert QList<> from C++ memory to manually-managed C memory
 	QModelIndex** _arr = static_cast<QModelIndex**>(malloc(sizeof(QModelIndex*) * _ret.length()));
 	for (size_t i = 0, e = _ret.length(); i < e; ++i) {
@@ -2244,532 +2119,398 @@ struct miqt_array /* of QModelIndex* */  QAbstractItemView_virtualbase_selectedI
 	_out.len = _ret.length();
 	_out.data = static_cast<void*>(_arr);
 	return _out;
-
 }
 
-bool QAbstractItemView_virtualbase_edit2(void* self, QModelIndex* index, int trigger, QEvent* event) {
+bool QAbstractItemView_virtualbase_edit2(VirtualQAbstractItemView* self, QModelIndex* index, int trigger, QEvent* event) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::edit(*index, static_cast<VirtualQAbstractItemView::EditTrigger>(trigger), event);
-
+	return self->QAbstractItemView::edit(*index, static_cast<VirtualQAbstractItemView::EditTrigger>(trigger), event);
 }
 
-int QAbstractItemView_virtualbase_selectionCommand(const void* self, QModelIndex* index, QEvent* event) {
+int QAbstractItemView_virtualbase_selectionCommand(const VirtualQAbstractItemView* self, QModelIndex* index, QEvent* event) {
 
-	QItemSelectionModel::SelectionFlags _ret = ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::selectionCommand(*index, event);
+	QItemSelectionModel::SelectionFlags _ret = self->QAbstractItemView::selectionCommand(*index, event);
 	return static_cast<int>(_ret);
-
 }
 
-void QAbstractItemView_virtualbase_startDrag(void* self, int supportedActions) {
+void QAbstractItemView_virtualbase_startDrag(VirtualQAbstractItemView* self, int supportedActions) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::startDrag(static_cast<Qt::DropActions>(supportedActions));
-
+	self->QAbstractItemView::startDrag(static_cast<Qt::DropActions>(supportedActions));
 }
 
-QStyleOptionViewItem* QAbstractItemView_virtualbase_viewOptions(const void* self) {
+QStyleOptionViewItem* QAbstractItemView_virtualbase_viewOptions(const VirtualQAbstractItemView* self) {
 
-	return new QStyleOptionViewItem(( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::viewOptions());
-
+	return new QStyleOptionViewItem(self->QAbstractItemView::viewOptions());
 }
 
-bool QAbstractItemView_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QAbstractItemView_virtualbase_focusNextPrevChild(VirtualQAbstractItemView* self, bool next) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::focusNextPrevChild(next);
-
+	return self->QAbstractItemView::focusNextPrevChild(next);
 }
 
-bool QAbstractItemView_virtualbase_event(void* self, QEvent* event) {
+bool QAbstractItemView_virtualbase_event(VirtualQAbstractItemView* self, QEvent* event) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::event(event);
-
+	return self->QAbstractItemView::event(event);
 }
 
-bool QAbstractItemView_virtualbase_viewportEvent(void* self, QEvent* event) {
+bool QAbstractItemView_virtualbase_viewportEvent(VirtualQAbstractItemView* self, QEvent* event) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::viewportEvent(event);
-
+	return self->QAbstractItemView::viewportEvent(event);
 }
 
-void QAbstractItemView_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QAbstractItemView_virtualbase_mousePressEvent(VirtualQAbstractItemView* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::mousePressEvent(event);
-
+	self->QAbstractItemView::mousePressEvent(event);
 }
 
-void QAbstractItemView_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QAbstractItemView_virtualbase_mouseMoveEvent(VirtualQAbstractItemView* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::mouseMoveEvent(event);
-
+	self->QAbstractItemView::mouseMoveEvent(event);
 }
 
-void QAbstractItemView_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QAbstractItemView_virtualbase_mouseReleaseEvent(VirtualQAbstractItemView* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::mouseReleaseEvent(event);
-
+	self->QAbstractItemView::mouseReleaseEvent(event);
 }
 
-void QAbstractItemView_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QAbstractItemView_virtualbase_mouseDoubleClickEvent(VirtualQAbstractItemView* self, QMouseEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::mouseDoubleClickEvent(event);
-
+	self->QAbstractItemView::mouseDoubleClickEvent(event);
 }
 
-void QAbstractItemView_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QAbstractItemView_virtualbase_dragEnterEvent(VirtualQAbstractItemView* self, QDragEnterEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::dragEnterEvent(event);
-
+	self->QAbstractItemView::dragEnterEvent(event);
 }
 
-void QAbstractItemView_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QAbstractItemView_virtualbase_dragMoveEvent(VirtualQAbstractItemView* self, QDragMoveEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::dragMoveEvent(event);
-
+	self->QAbstractItemView::dragMoveEvent(event);
 }
 
-void QAbstractItemView_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QAbstractItemView_virtualbase_dragLeaveEvent(VirtualQAbstractItemView* self, QDragLeaveEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::dragLeaveEvent(event);
-
+	self->QAbstractItemView::dragLeaveEvent(event);
 }
 
-void QAbstractItemView_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QAbstractItemView_virtualbase_dropEvent(VirtualQAbstractItemView* self, QDropEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::dropEvent(event);
-
+	self->QAbstractItemView::dropEvent(event);
 }
 
-void QAbstractItemView_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QAbstractItemView_virtualbase_focusInEvent(VirtualQAbstractItemView* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::focusInEvent(event);
-
+	self->QAbstractItemView::focusInEvent(event);
 }
 
-void QAbstractItemView_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QAbstractItemView_virtualbase_focusOutEvent(VirtualQAbstractItemView* self, QFocusEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::focusOutEvent(event);
-
+	self->QAbstractItemView::focusOutEvent(event);
 }
 
-void QAbstractItemView_virtualbase_keyPressEvent(void* self, QKeyEvent* event) {
+void QAbstractItemView_virtualbase_keyPressEvent(VirtualQAbstractItemView* self, QKeyEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::keyPressEvent(event);
-
+	self->QAbstractItemView::keyPressEvent(event);
 }
 
-void QAbstractItemView_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QAbstractItemView_virtualbase_resizeEvent(VirtualQAbstractItemView* self, QResizeEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::resizeEvent(event);
-
+	self->QAbstractItemView::resizeEvent(event);
 }
 
-void QAbstractItemView_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAbstractItemView_virtualbase_timerEvent(VirtualQAbstractItemView* self, QTimerEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::timerEvent(event);
-
+	self->QAbstractItemView::timerEvent(event);
 }
 
-void QAbstractItemView_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* event) {
+void QAbstractItemView_virtualbase_inputMethodEvent(VirtualQAbstractItemView* self, QInputMethodEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::inputMethodEvent(event);
-
+	self->QAbstractItemView::inputMethodEvent(event);
 }
 
-bool QAbstractItemView_virtualbase_eventFilter(void* self, QObject* object, QEvent* event) {
+bool QAbstractItemView_virtualbase_eventFilter(VirtualQAbstractItemView* self, QObject* object, QEvent* event) {
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::eventFilter(object, event);
-
+	return self->QAbstractItemView::eventFilter(object, event);
 }
 
-QSize* QAbstractItemView_virtualbase_viewportSizeHint(const void* self) {
+QSize* QAbstractItemView_virtualbase_viewportSizeHint(const VirtualQAbstractItemView* self) {
 
-	return new QSize(( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::viewportSizeHint());
-
+	return new QSize(self->QAbstractItemView::viewportSizeHint());
 }
 
-QSize* QAbstractItemView_virtualbase_minimumSizeHint(const void* self) {
+QSize* QAbstractItemView_virtualbase_minimumSizeHint(const VirtualQAbstractItemView* self) {
 
-	return new QSize(( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::minimumSizeHint());
-
+	return new QSize(self->QAbstractItemView::minimumSizeHint());
 }
 
-QSize* QAbstractItemView_virtualbase_sizeHint(const void* self) {
+QSize* QAbstractItemView_virtualbase_sizeHint(const VirtualQAbstractItemView* self) {
 
-	return new QSize(( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::sizeHint());
-
+	return new QSize(self->QAbstractItemView::sizeHint());
 }
 
-void QAbstractItemView_virtualbase_setupViewport(void* self, QWidget* viewport) {
+void QAbstractItemView_virtualbase_setupViewport(VirtualQAbstractItemView* self, QWidget* viewport) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::setupViewport(viewport);
-
+	self->QAbstractItemView::setupViewport(viewport);
 }
 
-void QAbstractItemView_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QAbstractItemView_virtualbase_paintEvent(VirtualQAbstractItemView* self, QPaintEvent* param1) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::paintEvent(param1);
-
+	self->QAbstractItemView::paintEvent(param1);
 }
 
-void QAbstractItemView_virtualbase_wheelEvent(void* self, QWheelEvent* param1) {
+void QAbstractItemView_virtualbase_wheelEvent(VirtualQAbstractItemView* self, QWheelEvent* param1) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::wheelEvent(param1);
-
+	self->QAbstractItemView::wheelEvent(param1);
 }
 
-void QAbstractItemView_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QAbstractItemView_virtualbase_contextMenuEvent(VirtualQAbstractItemView* self, QContextMenuEvent* param1) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::contextMenuEvent(param1);
-
+	self->QAbstractItemView::contextMenuEvent(param1);
 }
 
-void QAbstractItemView_virtualbase_scrollContentsBy(void* self, int dx, int dy) {
+void QAbstractItemView_virtualbase_scrollContentsBy(VirtualQAbstractItemView* self, int dx, int dy) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
-
+	self->QAbstractItemView::scrollContentsBy(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-void QAbstractItemView_virtualbase_changeEvent(void* self, QEvent* param1) {
+void QAbstractItemView_virtualbase_changeEvent(VirtualQAbstractItemView* self, QEvent* param1) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::changeEvent(param1);
-
+	self->QAbstractItemView::changeEvent(param1);
 }
 
-int QAbstractItemView_virtualbase_devType(const void* self) {
+int QAbstractItemView_virtualbase_devType(const VirtualQAbstractItemView* self) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::devType();
-
+	return self->QAbstractItemView::devType();
 }
 
-void QAbstractItemView_virtualbase_setVisible(void* self, bool visible) {
+void QAbstractItemView_virtualbase_setVisible(VirtualQAbstractItemView* self, bool visible) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::setVisible(visible);
-
+	self->QAbstractItemView::setVisible(visible);
 }
 
-int QAbstractItemView_virtualbase_heightForWidth(const void* self, int param1) {
+int QAbstractItemView_virtualbase_heightForWidth(const VirtualQAbstractItemView* self, int param1) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::heightForWidth(static_cast<int>(param1));
-
+	return self->QAbstractItemView::heightForWidth(static_cast<int>(param1));
 }
 
-bool QAbstractItemView_virtualbase_hasHeightForWidth(const void* self) {
+bool QAbstractItemView_virtualbase_hasHeightForWidth(const VirtualQAbstractItemView* self) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::hasHeightForWidth();
-
+	return self->QAbstractItemView::hasHeightForWidth();
 }
 
-QPaintEngine* QAbstractItemView_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QAbstractItemView_virtualbase_paintEngine(const VirtualQAbstractItemView* self) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::paintEngine();
-
+	return self->QAbstractItemView::paintEngine();
 }
 
-void QAbstractItemView_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QAbstractItemView_virtualbase_keyReleaseEvent(VirtualQAbstractItemView* self, QKeyEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::keyReleaseEvent(event);
-
+	self->QAbstractItemView::keyReleaseEvent(event);
 }
 
-void QAbstractItemView_virtualbase_enterEvent(void* self, QEvent* event) {
+void QAbstractItemView_virtualbase_enterEvent(VirtualQAbstractItemView* self, QEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::enterEvent(event);
-
+	self->QAbstractItemView::enterEvent(event);
 }
 
-void QAbstractItemView_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QAbstractItemView_virtualbase_leaveEvent(VirtualQAbstractItemView* self, QEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::leaveEvent(event);
-
+	self->QAbstractItemView::leaveEvent(event);
 }
 
-void QAbstractItemView_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QAbstractItemView_virtualbase_moveEvent(VirtualQAbstractItemView* self, QMoveEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::moveEvent(event);
-
+	self->QAbstractItemView::moveEvent(event);
 }
 
-void QAbstractItemView_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QAbstractItemView_virtualbase_closeEvent(VirtualQAbstractItemView* self, QCloseEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::closeEvent(event);
-
+	self->QAbstractItemView::closeEvent(event);
 }
 
-void QAbstractItemView_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QAbstractItemView_virtualbase_tabletEvent(VirtualQAbstractItemView* self, QTabletEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::tabletEvent(event);
-
+	self->QAbstractItemView::tabletEvent(event);
 }
 
-void QAbstractItemView_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QAbstractItemView_virtualbase_actionEvent(VirtualQAbstractItemView* self, QActionEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::actionEvent(event);
-
+	self->QAbstractItemView::actionEvent(event);
 }
 
-void QAbstractItemView_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QAbstractItemView_virtualbase_showEvent(VirtualQAbstractItemView* self, QShowEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::showEvent(event);
-
+	self->QAbstractItemView::showEvent(event);
 }
 
-void QAbstractItemView_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QAbstractItemView_virtualbase_hideEvent(VirtualQAbstractItemView* self, QHideEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::hideEvent(event);
-
+	self->QAbstractItemView::hideEvent(event);
 }
 
-bool QAbstractItemView_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QAbstractItemView_virtualbase_nativeEvent(VirtualQAbstractItemView* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QAbstractItemView::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QAbstractItemView_virtualbase_metric(const void* self, int param1) {
+int QAbstractItemView_virtualbase_metric(const VirtualQAbstractItemView* self, int param1) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::metric(static_cast<VirtualQAbstractItemView::PaintDeviceMetric>(param1));
-
+	return self->QAbstractItemView::metric(static_cast<VirtualQAbstractItemView::PaintDeviceMetric>(param1));
 }
 
-void QAbstractItemView_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QAbstractItemView_virtualbase_initPainter(const VirtualQAbstractItemView* self, QPainter* painter) {
 
-	( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::initPainter(painter);
-
+	self->QAbstractItemView::initPainter(painter);
 }
 
-QPaintDevice* QAbstractItemView_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QAbstractItemView_virtualbase_redirected(const VirtualQAbstractItemView* self, QPoint* offset) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::redirected(offset);
-
+	return self->QAbstractItemView::redirected(offset);
 }
 
-QPainter* QAbstractItemView_virtualbase_sharedPainter(const void* self) {
+QPainter* QAbstractItemView_virtualbase_sharedPainter(const VirtualQAbstractItemView* self) {
 
-	return ( (const VirtualQAbstractItemView*)(self) )->QAbstractItemView::sharedPainter();
-
+	return self->QAbstractItemView::sharedPainter();
 }
 
-void QAbstractItemView_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAbstractItemView_virtualbase_childEvent(VirtualQAbstractItemView* self, QChildEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::childEvent(event);
-
+	self->QAbstractItemView::childEvent(event);
 }
 
-void QAbstractItemView_virtualbase_customEvent(void* self, QEvent* event) {
+void QAbstractItemView_virtualbase_customEvent(VirtualQAbstractItemView* self, QEvent* event) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::customEvent(event);
-
+	self->QAbstractItemView::customEvent(event);
 }
 
-void QAbstractItemView_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAbstractItemView_virtualbase_connectNotify(VirtualQAbstractItemView* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::connectNotify(*signal);
-
+	self->QAbstractItemView::connectNotify(*signal);
 }
 
-void QAbstractItemView_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAbstractItemView_virtualbase_disconnectNotify(VirtualQAbstractItemView* self, QMetaMethod* signal) {
 
-	( (VirtualQAbstractItemView*)(self) )->QAbstractItemView::disconnectNotify(*signal);
-
+	self->QAbstractItemView::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAbstractItemView_staticMetaObject() { return &QAbstractItemView::staticMetaObject; }
-void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(void* self, int steps) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->setHorizontalStepsPerItem(static_cast<int>(steps));
 
+const QAbstractItemView_VTable* QAbstractItemView_vtbl(const VirtualQAbstractItemView* self) { return self->vtbl; }
+void* QAbstractItemView_vdata(const VirtualQAbstractItemView* self) { return self->vdata; }
+void QAbstractItemView_setVdata(VirtualQAbstractItemView* self, void* vdata) { self->vdata = vdata; }
+
+void QAbstractItemView_protectedbase_setHorizontalStepsPerItem(VirtualQAbstractItemView* self, int steps) {
+	self->setHorizontalStepsPerItem(static_cast<int>(steps));
 }
 
-int QAbstractItemView_protectedbase_horizontalStepsPerItem(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->horizontalStepsPerItem();
-
+int QAbstractItemView_protectedbase_horizontalStepsPerItem(const VirtualQAbstractItemView* self) {
+	return self->horizontalStepsPerItem();
 }
 
-void QAbstractItemView_protectedbase_setVerticalStepsPerItem(void* self, int steps) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->setVerticalStepsPerItem(static_cast<int>(steps));
-
+void QAbstractItemView_protectedbase_setVerticalStepsPerItem(VirtualQAbstractItemView* self, int steps) {
+	self->setVerticalStepsPerItem(static_cast<int>(steps));
 }
 
-int QAbstractItemView_protectedbase_verticalStepsPerItem(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->verticalStepsPerItem();
-
+int QAbstractItemView_protectedbase_verticalStepsPerItem(const VirtualQAbstractItemView* self) {
+	return self->verticalStepsPerItem();
 }
 
-int QAbstractItemView_protectedbase_state(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	VirtualQAbstractItemView::State _ret = self_cast->state();
+int QAbstractItemView_protectedbase_state(const VirtualQAbstractItemView* self) {
+	VirtualQAbstractItemView::State _ret = self->state();
 	return static_cast<int>(_ret);
-
 }
 
-void QAbstractItemView_protectedbase_setState(void* self, int state) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->setState(static_cast<VirtualQAbstractItemView::State>(state));
-
+void QAbstractItemView_protectedbase_setState(VirtualQAbstractItemView* self, int state) {
+	self->setState(static_cast<VirtualQAbstractItemView::State>(state));
 }
 
-void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->scheduleDelayedItemsLayout();
-
+void QAbstractItemView_protectedbase_scheduleDelayedItemsLayout(VirtualQAbstractItemView* self) {
+	self->scheduleDelayedItemsLayout();
 }
 
-void QAbstractItemView_protectedbase_executeDelayedItemsLayout(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->executeDelayedItemsLayout();
-
+void QAbstractItemView_protectedbase_executeDelayedItemsLayout(VirtualQAbstractItemView* self) {
+	self->executeDelayedItemsLayout();
 }
 
-void QAbstractItemView_protectedbase_setDirtyRegion(void* self, QRegion* region) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->setDirtyRegion(*region);
-
+void QAbstractItemView_protectedbase_setDirtyRegion(VirtualQAbstractItemView* self, QRegion* region) {
+	self->setDirtyRegion(*region);
 }
 
-void QAbstractItemView_protectedbase_scrollDirtyRegion(void* self, int dx, int dy) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
-
+void QAbstractItemView_protectedbase_scrollDirtyRegion(VirtualQAbstractItemView* self, int dx, int dy) {
+	self->scrollDirtyRegion(static_cast<int>(dx), static_cast<int>(dy));
 }
 
-QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return new QPoint(self_cast->dirtyRegionOffset());
-
+QPoint* QAbstractItemView_protectedbase_dirtyRegionOffset(const VirtualQAbstractItemView* self) {
+	return new QPoint(self->dirtyRegionOffset());
 }
 
-void QAbstractItemView_protectedbase_startAutoScroll(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->startAutoScroll();
-
+void QAbstractItemView_protectedbase_startAutoScroll(VirtualQAbstractItemView* self) {
+	self->startAutoScroll();
 }
 
-void QAbstractItemView_protectedbase_stopAutoScroll(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->stopAutoScroll();
-
+void QAbstractItemView_protectedbase_stopAutoScroll(VirtualQAbstractItemView* self) {
+	self->stopAutoScroll();
 }
 
-void QAbstractItemView_protectedbase_doAutoScroll(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->doAutoScroll();
-
+void QAbstractItemView_protectedbase_doAutoScroll(VirtualQAbstractItemView* self) {
+	self->doAutoScroll();
 }
 
-int QAbstractItemView_protectedbase_dropIndicatorPosition(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	VirtualQAbstractItemView::DropIndicatorPosition _ret = self_cast->dropIndicatorPosition();
+int QAbstractItemView_protectedbase_dropIndicatorPosition(const VirtualQAbstractItemView* self) {
+	VirtualQAbstractItemView::DropIndicatorPosition _ret = self->dropIndicatorPosition();
 	return static_cast<int>(_ret);
-
 }
 
-void QAbstractItemView_protectedbase_setViewportMargins(void* self, int left, int top, int right, int bottom) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
-
+void QAbstractItemView_protectedbase_setViewportMargins(VirtualQAbstractItemView* self, int left, int top, int right, int bottom) {
+	self->setViewportMargins(static_cast<int>(left), static_cast<int>(top), static_cast<int>(right), static_cast<int>(bottom));
 }
 
-QMargins* QAbstractItemView_protectedbase_viewportMargins(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return new QMargins(self_cast->viewportMargins());
-
+QMargins* QAbstractItemView_protectedbase_viewportMargins(const VirtualQAbstractItemView* self) {
+	return new QMargins(self->viewportMargins());
 }
 
-void QAbstractItemView_protectedbase_drawFrame(void* self, QPainter* param1) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->drawFrame(param1);
-
+void QAbstractItemView_protectedbase_drawFrame(VirtualQAbstractItemView* self, QPainter* param1) {
+	self->drawFrame(param1);
 }
 
-void QAbstractItemView_protectedbase_initStyleOption(const void* self, QStyleOptionFrame* option) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->initStyleOption(option);
-
+void QAbstractItemView_protectedbase_initStyleOption(const VirtualQAbstractItemView* self, QStyleOptionFrame* option) {
+	self->initStyleOption(option);
 }
 
-void QAbstractItemView_protectedbase_updateMicroFocus(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QAbstractItemView_protectedbase_updateMicroFocus(VirtualQAbstractItemView* self) {
+	self->updateMicroFocus();
 }
 
-void QAbstractItemView_protectedbase_create(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->create();
-
+void QAbstractItemView_protectedbase_create(VirtualQAbstractItemView* self) {
+	self->create();
 }
 
-void QAbstractItemView_protectedbase_destroy(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	self_cast->destroy();
-
+void QAbstractItemView_protectedbase_destroy(VirtualQAbstractItemView* self) {
+	self->destroy();
 }
 
-bool QAbstractItemView_protectedbase_focusNextChild(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QAbstractItemView_protectedbase_focusNextChild(VirtualQAbstractItemView* self) {
+	return self->focusNextChild();
 }
 
-bool QAbstractItemView_protectedbase_focusPreviousChild(void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QAbstractItemView_protectedbase_focusPreviousChild(VirtualQAbstractItemView* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QAbstractItemView_protectedbase_sender(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QAbstractItemView_protectedbase_sender(const VirtualQAbstractItemView* self) {
+	return self->sender();
 }
 
-int QAbstractItemView_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAbstractItemView_protectedbase_senderSignalIndex(const VirtualQAbstractItemView* self) {
+	return self->senderSignalIndex();
 }
 
-int QAbstractItemView_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAbstractItemView_protectedbase_receivers(const VirtualQAbstractItemView* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAbstractItemView_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAbstractItemView* self_cast = static_cast<VirtualQAbstractItemView*>( (QAbstractItemView*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAbstractItemView_protectedbase_isSignalConnected(const VirtualQAbstractItemView* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAbstractItemView_delete(QAbstractItemView* self) {

@@ -52,14 +52,14 @@ proc fcQWebEngineHttpRequest_postRequest(url: pointer, postData: struct_miqt_map
 proc fcQWebEngineHttpRequest_swap(self: pointer, other: pointer): void {.importc: "QWebEngineHttpRequest_swap".}
 proc fcQWebEngineHttpRequest_operatorEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineHttpRequest_operatorEqual".}
 proc fcQWebEngineHttpRequest_operatorNotEqual(self: pointer, other: pointer): bool {.importc: "QWebEngineHttpRequest_operatorNotEqual".}
-proc fcQWebEngineHttpRequest_methodX(self: pointer, ): cint {.importc: "QWebEngineHttpRequest_method".}
+proc fcQWebEngineHttpRequest_methodX(self: pointer): cint {.importc: "QWebEngineHttpRequest_method".}
 proc fcQWebEngineHttpRequest_setMethod(self: pointer, methodVal: cint): void {.importc: "QWebEngineHttpRequest_setMethod".}
-proc fcQWebEngineHttpRequest_url(self: pointer, ): pointer {.importc: "QWebEngineHttpRequest_url".}
+proc fcQWebEngineHttpRequest_url(self: pointer): pointer {.importc: "QWebEngineHttpRequest_url".}
 proc fcQWebEngineHttpRequest_setUrl(self: pointer, url: pointer): void {.importc: "QWebEngineHttpRequest_setUrl".}
-proc fcQWebEngineHttpRequest_postData(self: pointer, ): struct_miqt_string {.importc: "QWebEngineHttpRequest_postData".}
+proc fcQWebEngineHttpRequest_postData(self: pointer): struct_miqt_string {.importc: "QWebEngineHttpRequest_postData".}
 proc fcQWebEngineHttpRequest_setPostData(self: pointer, postData: struct_miqt_string): void {.importc: "QWebEngineHttpRequest_setPostData".}
 proc fcQWebEngineHttpRequest_hasHeader(self: pointer, headerName: struct_miqt_string): bool {.importc: "QWebEngineHttpRequest_hasHeader".}
-proc fcQWebEngineHttpRequest_headers(self: pointer, ): struct_miqt_array {.importc: "QWebEngineHttpRequest_headers".}
+proc fcQWebEngineHttpRequest_headers(self: pointer): struct_miqt_array {.importc: "QWebEngineHttpRequest_headers".}
 proc fcQWebEngineHttpRequest_header(self: pointer, headerName: struct_miqt_string): struct_miqt_string {.importc: "QWebEngineHttpRequest_header".}
 proc fcQWebEngineHttpRequest_setHeader(self: pointer, headerName: struct_miqt_string, value: struct_miqt_string): void {.importc: "QWebEngineHttpRequest_setHeader".}
 proc fcQWebEngineHttpRequest_unsetHeader(self: pointer, headerName: struct_miqt_string): void {.importc: "QWebEngineHttpRequest_unsetHeader".}
@@ -94,19 +94,19 @@ proc operatorEqual*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest,
 proc operatorNotEqual*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, other: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): bool =
   fcQWebEngineHttpRequest_operatorNotEqual(self.h, other.h)
 
-proc methodX*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): cint =
+proc methodX*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): cint =
   cint(fcQWebEngineHttpRequest_methodX(self.h))
 
 proc setMethod*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, methodVal: cint): void =
   fcQWebEngineHttpRequest_setMethod(self.h, cint(methodVal))
 
-proc url*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): gen_qurl_types.QUrl =
+proc url*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): gen_qurl_types.QUrl =
   gen_qurl_types.QUrl(h: fcQWebEngineHttpRequest_url(self.h), owned: true)
 
 proc setUrl*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, url: gen_qurl_types.QUrl): void =
   fcQWebEngineHttpRequest_setUrl(self.h, url.h)
 
-proc postData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): seq[byte] =
+proc postData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): seq[byte] =
   var v_bytearray = fcQWebEngineHttpRequest_postData(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
@@ -118,7 +118,7 @@ proc setPostData*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, p
 proc hasHeader*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, headerName: seq[byte]): bool =
   fcQWebEngineHttpRequest_hasHeader(self.h, struct_miqt_string(data: cast[cstring](if len(headerName) == 0: nil else: unsafeAddr headerName[0]), len: csize_t(len(headerName))))
 
-proc headers*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest, ): seq[seq[byte]] =
+proc headers*(self: gen_qwebenginehttprequest_types.QWebEngineHttpRequest): seq[seq[byte]] =
   var v_ma = fcQWebEngineHttpRequest_headers(self.h)
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

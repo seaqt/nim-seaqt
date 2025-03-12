@@ -8,15 +8,6 @@
 #include <QSizeF>
 #include <qrect.h>
 #include "gen_qrect.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QRect* QRect_new() {
 	return new QRect();
 }

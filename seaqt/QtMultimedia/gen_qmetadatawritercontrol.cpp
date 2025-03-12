@@ -10,15 +10,6 @@
 #include <QVariant>
 #include <qmetadatawritercontrol.h>
 #include "gen_qmetadatawritercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMetaDataWriterControl_virtbase(QMetaDataWriterControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -214,6 +205,7 @@ struct miqt_string QMetaDataWriterControl_trUtf83(const char* s, const char* c, 
 }
 
 const QMetaObject* QMetaDataWriterControl_staticMetaObject() { return &QMetaDataWriterControl::staticMetaObject; }
+
 void QMetaDataWriterControl_delete(QMetaDataWriterControl* self) {
 	delete self;
 }

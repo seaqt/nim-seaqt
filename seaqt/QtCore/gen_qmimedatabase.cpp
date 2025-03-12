@@ -10,15 +10,6 @@
 #include <QUrl>
 #include <qmimedatabase.h>
 #include "gen_qmimedatabase.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMimeDatabase* QMimeDatabase_new() {
 	return new QMimeDatabase();
 }

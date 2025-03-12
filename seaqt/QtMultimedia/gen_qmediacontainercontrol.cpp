@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qmediacontainercontrol.h>
 #include "gen_qmediacontainercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaContainerControl_virtbase(QMediaContainerControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -149,6 +140,7 @@ struct miqt_string QMediaContainerControl_trUtf83(const char* s, const char* c, 
 }
 
 const QMetaObject* QMediaContainerControl_staticMetaObject() { return &QMediaContainerControl::staticMetaObject; }
+
 void QMediaContainerControl_delete(QMediaContainerControl* self) {
 	delete self;
 }

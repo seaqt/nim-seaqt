@@ -13,24 +13,18 @@
 #include <cstring>
 #include <qsgmaterialrhishader.h>
 #include "gen_qsgmaterialrhishader.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQSGMaterialRhiShader final : public QSGMaterialRhiShader {
-	struct QSGMaterialRhiShader_VTable* vtbl;
+	const QSGMaterialRhiShader_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QSGMaterialRhiShader_VTable* QSGMaterialRhiShader_vtbl(const VirtualQSGMaterialRhiShader* self);
+	friend void* QSGMaterialRhiShader_vdata(const VirtualQSGMaterialRhiShader* self);
+	friend void QSGMaterialRhiShader_setVdata(VirtualQSGMaterialRhiShader* self, void* vdata);
 
-	VirtualQSGMaterialRhiShader(struct QSGMaterialRhiShader_VTable* vtbl): QSGMaterialRhiShader(), vtbl(vtbl) {};
+	VirtualQSGMaterialRhiShader(const QSGMaterialRhiShader_VTable* vtbl, void* vdata): QSGMaterialRhiShader(), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQSGMaterialRhiShader() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQSGMaterialRhiShader() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual bool updateUniformData(QSGMaterialRhiShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
 		if (vtbl->updateUniformData == 0) {
 			return QSGMaterialRhiShader::updateUniformData(state, newMaterial, oldMaterial);
@@ -42,14 +36,13 @@ public:
 		QSGMaterial* sigval2 = newMaterial;
 		QSGMaterial* sigval3 = oldMaterial;
 
-		bool callback_return_value = vtbl->updateUniformData(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->updateUniformData(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGMaterialRhiShader_virtualbase_updateUniformData(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	friend bool QSGMaterialRhiShader_virtualbase_updateUniformData(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool updateGraphicsPipelineState(QSGMaterialRhiShader::RenderState& state, QSGMaterialRhiShader::GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
 		if (vtbl->updateGraphicsPipelineState == 0) {
 			return QSGMaterialRhiShader::updateGraphicsPipelineState(state, ps, newMaterial, oldMaterial);
@@ -62,28 +55,26 @@ public:
 		QSGMaterial* sigval3 = newMaterial;
 		QSGMaterial* sigval4 = oldMaterial;
 
-		bool callback_return_value = vtbl->updateGraphicsPipelineState(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		bool callback_return_value = vtbl->updateGraphicsPipelineState(this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	friend bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	friend bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 
-	// Subclass to allow providing a Go implementation
 	virtual const char** attributeNames() const override {
 		if (vtbl->attributeNames == 0) {
 			return QSGMaterialRhiShader::attributeNames();
 		}
 
 
-		const char** callback_return_value = vtbl->attributeNames(vtbl, this);
+		const char** callback_return_value = vtbl->attributeNames(this);
 
 		return callback_return_value;
 	}
 
-	friend const char** QSGMaterialRhiShader_virtualbase_attributeNames(const void* self);
+	friend const char** QSGMaterialRhiShader_virtualbase_attributeNames(const VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void activate() override {
 		if (vtbl->activate == 0) {
 			QSGMaterialRhiShader::activate();
@@ -91,13 +82,12 @@ public:
 		}
 
 
-		vtbl->activate(vtbl, this);
+		vtbl->activate(this);
 
 	}
 
-	friend void QSGMaterialRhiShader_virtualbase_activate(void* self);
+	friend void QSGMaterialRhiShader_virtualbase_activate(VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void deactivate() override {
 		if (vtbl->deactivate == 0) {
 			QSGMaterialRhiShader::deactivate();
@@ -105,13 +95,12 @@ public:
 		}
 
 
-		vtbl->deactivate(vtbl, this);
+		vtbl->deactivate(this);
 
 	}
 
-	friend void QSGMaterialRhiShader_virtualbase_deactivate(void* self);
+	friend void QSGMaterialRhiShader_virtualbase_deactivate(VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateState(const QSGMaterialShader::RenderState& state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) override {
 		if (vtbl->updateState == 0) {
 			QSGMaterialRhiShader::updateState(state, newMaterial, oldMaterial);
@@ -124,13 +113,12 @@ public:
 		QSGMaterial* sigval2 = newMaterial;
 		QSGMaterial* sigval3 = oldMaterial;
 
-		vtbl->updateState(vtbl, this, sigval1, sigval2, sigval3);
+		vtbl->updateState(this, sigval1, sigval2, sigval3);
 
 	}
 
-	friend void QSGMaterialRhiShader_virtualbase_updateState(void* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
+	friend void QSGMaterialRhiShader_virtualbase_updateState(VirtualQSGMaterialRhiShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial);
 
-	// Subclass to allow providing a Go implementation
 	virtual void compile() override {
 		if (vtbl->compile == 0) {
 			QSGMaterialRhiShader::compile();
@@ -138,13 +126,12 @@ public:
 		}
 
 
-		vtbl->compile(vtbl, this);
+		vtbl->compile(this);
 
 	}
 
-	friend void QSGMaterialRhiShader_virtualbase_compile(void* self);
+	friend void QSGMaterialRhiShader_virtualbase_compile(VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initialize() override {
 		if (vtbl->initialize == 0) {
 			QSGMaterialRhiShader::initialize();
@@ -152,49 +139,47 @@ public:
 		}
 
 
-		vtbl->initialize(vtbl, this);
+		vtbl->initialize(this);
 
 	}
 
-	friend void QSGMaterialRhiShader_virtualbase_initialize(void* self);
+	friend void QSGMaterialRhiShader_virtualbase_initialize(VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual const char* vertexShader() const override {
 		if (vtbl->vertexShader == 0) {
 			return QSGMaterialRhiShader::vertexShader();
 		}
 
 
-		const char* callback_return_value = vtbl->vertexShader(vtbl, this);
+		const char* callback_return_value = vtbl->vertexShader(this);
 
 		return callback_return_value;
 	}
 
-	friend const char* QSGMaterialRhiShader_virtualbase_vertexShader(const void* self);
+	friend const char* QSGMaterialRhiShader_virtualbase_vertexShader(const VirtualQSGMaterialRhiShader* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual const char* fragmentShader() const override {
 		if (vtbl->fragmentShader == 0) {
 			return QSGMaterialRhiShader::fragmentShader();
 		}
 
 
-		const char* callback_return_value = vtbl->fragmentShader(vtbl, this);
+		const char* callback_return_value = vtbl->fragmentShader(this);
 
 		return callback_return_value;
 	}
 
-	friend const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const void* self);
+	friend const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const VirtualQSGMaterialRhiShader* self);
 
 	// Wrappers to allow calling protected methods:
-	friend void QSGMaterialRhiShader_protectedbase_setShaderFileName(void* self, int stage, struct miqt_string filename);
-	friend void QSGMaterialRhiShader_protectedbase_setShader(void* self, int stage, const QShader* shader);
-	friend void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(void* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
-	friend void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(void* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
+	friend void QSGMaterialRhiShader_protectedbase_setShaderFileName(VirtualQSGMaterialRhiShader* self, int stage, struct miqt_string filename);
+	friend void QSGMaterialRhiShader_protectedbase_setShader(VirtualQSGMaterialRhiShader* self, int stage, const QShader* shader);
+	friend void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile);
+	friend void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles);
 };
 
-QSGMaterialRhiShader* QSGMaterialRhiShader_new(struct QSGMaterialRhiShader_VTable* vtbl) {
-	return new VirtualQSGMaterialRhiShader(vtbl);
+VirtualQSGMaterialRhiShader* QSGMaterialRhiShader_new(const QSGMaterialRhiShader_VTable* vtbl, void* vdata) {
+	return new VirtualQSGMaterialRhiShader(vtbl, vdata);
 }
 
 void QSGMaterialRhiShader_virtbase(QSGMaterialRhiShader* src, QSGMaterialShader** outptr_QSGMaterialShader) {
@@ -226,101 +211,83 @@ void QSGMaterialRhiShader_setFlag2(QSGMaterialRhiShader* self, int flags, bool o
 	self->setFlag(static_cast<QSGMaterialRhiShader::Flags>(flags), on);
 }
 
-bool QSGMaterialRhiShader_virtualbase_updateUniformData(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
+bool QSGMaterialRhiShader_virtualbase_updateUniformData(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
 
-	return ( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::updateUniformData(*state, newMaterial, oldMaterial);
-
+	return self->QSGMaterialRhiShader::updateUniformData(*state, newMaterial, oldMaterial);
 }
 
-bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(void* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
+bool QSGMaterialRhiShader_virtualbase_updateGraphicsPipelineState(VirtualQSGMaterialRhiShader* self, QSGMaterialRhiShader__RenderState* state, QSGMaterialRhiShader__GraphicsPipelineState* ps, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
 
-	return ( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::updateGraphicsPipelineState(*state, ps, newMaterial, oldMaterial);
-
+	return self->QSGMaterialRhiShader::updateGraphicsPipelineState(*state, ps, newMaterial, oldMaterial);
 }
 
-const char** QSGMaterialRhiShader_virtualbase_attributeNames(const void* self) {
+const char** QSGMaterialRhiShader_virtualbase_attributeNames(const VirtualQSGMaterialRhiShader* self) {
 
-	return (const char**) ( (const VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::attributeNames();
-
+	return (const char**) self->QSGMaterialRhiShader::attributeNames();
 }
 
-void QSGMaterialRhiShader_virtualbase_activate(void* self) {
+void QSGMaterialRhiShader_virtualbase_activate(VirtualQSGMaterialRhiShader* self) {
 
-	( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::activate();
-
+	self->QSGMaterialRhiShader::activate();
 }
 
-void QSGMaterialRhiShader_virtualbase_deactivate(void* self) {
+void QSGMaterialRhiShader_virtualbase_deactivate(VirtualQSGMaterialRhiShader* self) {
 
-	( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::deactivate();
-
+	self->QSGMaterialRhiShader::deactivate();
 }
 
-void QSGMaterialRhiShader_virtualbase_updateState(void* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
+void QSGMaterialRhiShader_virtualbase_updateState(VirtualQSGMaterialRhiShader* self, QSGMaterialShader__RenderState* state, QSGMaterial* newMaterial, QSGMaterial* oldMaterial) {
 
-	( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::updateState(*state, newMaterial, oldMaterial);
-
+	self->QSGMaterialRhiShader::updateState(*state, newMaterial, oldMaterial);
 }
 
-void QSGMaterialRhiShader_virtualbase_compile(void* self) {
+void QSGMaterialRhiShader_virtualbase_compile(VirtualQSGMaterialRhiShader* self) {
 
-	( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::compile();
-
+	self->QSGMaterialRhiShader::compile();
 }
 
-void QSGMaterialRhiShader_virtualbase_initialize(void* self) {
+void QSGMaterialRhiShader_virtualbase_initialize(VirtualQSGMaterialRhiShader* self) {
 
-	( (VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::initialize();
-
+	self->QSGMaterialRhiShader::initialize();
 }
 
-const char* QSGMaterialRhiShader_virtualbase_vertexShader(const void* self) {
+const char* QSGMaterialRhiShader_virtualbase_vertexShader(const VirtualQSGMaterialRhiShader* self) {
 
-	return (const char*) ( (const VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::vertexShader();
-
+	return (const char*) self->QSGMaterialRhiShader::vertexShader();
 }
 
-const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const void* self) {
+const char* QSGMaterialRhiShader_virtualbase_fragmentShader(const VirtualQSGMaterialRhiShader* self) {
 
-	return (const char*) ( (const VirtualQSGMaterialRhiShader*)(self) )->QSGMaterialRhiShader::fragmentShader();
-
+	return (const char*) self->QSGMaterialRhiShader::fragmentShader();
 }
 
-void QSGMaterialRhiShader_protectedbase_setShaderFileName(void* self, int stage, struct miqt_string filename) {
-	VirtualQSGMaterialRhiShader* self_cast = static_cast<VirtualQSGMaterialRhiShader*>( (QSGMaterialRhiShader*)(self) );
-			QString filename_QString = QString::fromUtf8(filename.data, filename.len);
+const QSGMaterialRhiShader_VTable* QSGMaterialRhiShader_vtbl(const VirtualQSGMaterialRhiShader* self) { return self->vtbl; }
+void* QSGMaterialRhiShader_vdata(const VirtualQSGMaterialRhiShader* self) { return self->vdata; }
+void QSGMaterialRhiShader_setVdata(VirtualQSGMaterialRhiShader* self, void* vdata) { self->vdata = vdata; }
 
-	self_cast->setShaderFileName(static_cast<VirtualQSGMaterialRhiShader::Stage>(stage), filename_QString);
-
+void QSGMaterialRhiShader_protectedbase_setShaderFileName(VirtualQSGMaterialRhiShader* self, int stage, struct miqt_string filename) {
+		QString filename_QString = QString::fromUtf8(filename.data, filename.len);
+	self->setShaderFileName(static_cast<VirtualQSGMaterialRhiShader::Stage>(stage), filename_QString);
 }
 
-void QSGMaterialRhiShader_protectedbase_setShader(void* self, int stage, const QShader* shader) {
-	VirtualQSGMaterialRhiShader* self_cast = static_cast<VirtualQSGMaterialRhiShader*>( (QSGMaterialRhiShader*)(self) );
-	
-	self_cast->setShader(static_cast<VirtualQSGMaterialRhiShader::Stage>(stage), *shader);
-
+void QSGMaterialRhiShader_protectedbase_setShader(VirtualQSGMaterialRhiShader* self, int stage, const QShader* shader) {
+	self->setShader(static_cast<VirtualQSGMaterialRhiShader::Stage>(stage), *shader);
 }
 
-void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(void* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile) {
-	VirtualQSGMaterialRhiShader* self_cast = static_cast<VirtualQSGMaterialRhiShader*>( (QSGMaterialRhiShader*)(self) );
-			QString sourceFile_QString = QString::fromUtf8(sourceFile.data, sourceFile.len);
-
-	self_cast->setShaderSourceFile(type, sourceFile_QString);
-
+void QSGMaterialRhiShader_protectedbase_setShaderSourceFile(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_string sourceFile) {
+		QString sourceFile_QString = QString::fromUtf8(sourceFile.data, sourceFile.len);
+	self->setShaderSourceFile(type, sourceFile_QString);
 }
 
-void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(void* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles) {
-	VirtualQSGMaterialRhiShader* self_cast = static_cast<VirtualQSGMaterialRhiShader*>( (QSGMaterialRhiShader*)(self) );
-			QStringList sourceFiles_QList;
+void QSGMaterialRhiShader_protectedbase_setShaderSourceFiles(VirtualQSGMaterialRhiShader* self, QOpenGLShader::ShaderType type, struct miqt_array /* of struct miqt_string */  sourceFiles) {
+		QStringList sourceFiles_QList;
 		sourceFiles_QList.reserve(sourceFiles.len);
 		struct miqt_string* sourceFiles_arr = static_cast<struct miqt_string*>(sourceFiles.data);
 		for(size_t i = 0; i < sourceFiles.len; ++i) {
 			QString sourceFiles_arr_i_QString = QString::fromUtf8(sourceFiles_arr[i].data, sourceFiles_arr[i].len);
 			sourceFiles_QList.push_back(sourceFiles_arr_i_QString);
 		}
-
-	self_cast->setShaderSourceFiles(type, sourceFiles_QList);
-
+	self->setShaderSourceFiles(type, sourceFiles_QList);
 }
 
 void QSGMaterialRhiShader_delete(QSGMaterialRhiShader* self) {
@@ -386,7 +353,7 @@ void QSGMaterialRhiShader__RenderState_delete(QSGMaterialRhiShader__RenderState*
 }
 
 QSGMaterialRhiShader__GraphicsPipelineState* QSGMaterialRhiShader__GraphicsPipelineState_new(QSGMaterialRhiShader__GraphicsPipelineState* param1) {
-	return new QSGMaterialRhiShader::GraphicsPipelineState(*param1);
+	return new QSGMaterialRhiShader__GraphicsPipelineState(*param1);
 }
 
 void QSGMaterialRhiShader__GraphicsPipelineState_operatorAssign(QSGMaterialRhiShader__GraphicsPipelineState* self, QSGMaterialRhiShader__GraphicsPipelineState* param1) {

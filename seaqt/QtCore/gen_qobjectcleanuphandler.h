@@ -32,20 +32,27 @@ typedef struct QObjectCleanupHandler QObjectCleanupHandler;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QObjectCleanupHandler_VTable {
-	void (*destructor)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self);
-	QMetaObject* (*metaObject)(struct QObjectCleanupHandler_VTable* vtbl, const QObjectCleanupHandler* self);
-	void* (*metacast)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, const char* param1);
-	int (*metacall)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, int param1, int param2, void** param3);
-	bool (*event)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QEvent* event);
-	bool (*eventFilter)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QTimerEvent* event);
-	void (*childEvent)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QChildEvent* event);
-	void (*customEvent)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QEvent* event);
-	void (*connectNotify)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QObjectCleanupHandler_VTable* vtbl, QObjectCleanupHandler* self, QMetaMethod* signal);
-};
-QObjectCleanupHandler* QObjectCleanupHandler_new(struct QObjectCleanupHandler_VTable* vtbl);
+typedef struct VirtualQObjectCleanupHandler VirtualQObjectCleanupHandler;
+typedef struct QObjectCleanupHandler_VTable{
+	void (*destructor)(VirtualQObjectCleanupHandler* self);
+	QMetaObject* (*metaObject)(const VirtualQObjectCleanupHandler* self);
+	void* (*metacast)(VirtualQObjectCleanupHandler* self, const char* param1);
+	int (*metacall)(VirtualQObjectCleanupHandler* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQObjectCleanupHandler* self, QEvent* event);
+	bool (*eventFilter)(VirtualQObjectCleanupHandler* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQObjectCleanupHandler* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQObjectCleanupHandler* self, QChildEvent* event);
+	void (*customEvent)(VirtualQObjectCleanupHandler* self, QEvent* event);
+	void (*connectNotify)(VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
+}QObjectCleanupHandler_VTable;
+
+const QObjectCleanupHandler_VTable* QObjectCleanupHandler_vtbl(const VirtualQObjectCleanupHandler* self);
+void* QObjectCleanupHandler_vdata(const VirtualQObjectCleanupHandler* self);
+void QObjectCleanupHandler_setVdata(VirtualQObjectCleanupHandler* self, void* vdata);
+
+VirtualQObjectCleanupHandler* QObjectCleanupHandler_new(const QObjectCleanupHandler_VTable* vtbl, void* vdata);
+
 void QObjectCleanupHandler_virtbase(QObjectCleanupHandler* src, QObject** outptr_QObject);
 QMetaObject* QObjectCleanupHandler_metaObject(const QObjectCleanupHandler* self);
 void* QObjectCleanupHandler_metacast(QObjectCleanupHandler* self, const char* param1);
@@ -60,20 +67,23 @@ struct miqt_string QObjectCleanupHandler_tr2(const char* s, const char* c);
 struct miqt_string QObjectCleanupHandler_tr3(const char* s, const char* c, int n);
 struct miqt_string QObjectCleanupHandler_trUtf82(const char* s, const char* c);
 struct miqt_string QObjectCleanupHandler_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QObjectCleanupHandler_virtualbase_metaObject(const void* self);
-void* QObjectCleanupHandler_virtualbase_metacast(void* self, const char* param1);
-int QObjectCleanupHandler_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QObjectCleanupHandler_virtualbase_event(void* self, QEvent* event);
-bool QObjectCleanupHandler_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QObjectCleanupHandler_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QObjectCleanupHandler_virtualbase_childEvent(void* self, QChildEvent* event);
-void QObjectCleanupHandler_virtualbase_customEvent(void* self, QEvent* event);
-void QObjectCleanupHandler_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QObjectCleanupHandler_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QObjectCleanupHandler_protectedbase_sender(const void* self);
-int QObjectCleanupHandler_protectedbase_senderSignalIndex(const void* self);
-int QObjectCleanupHandler_protectedbase_receivers(const void* self, const char* signal);
-bool QObjectCleanupHandler_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QObjectCleanupHandler_virtualbase_metaObject(const VirtualQObjectCleanupHandler* self);
+void* QObjectCleanupHandler_virtualbase_metacast(VirtualQObjectCleanupHandler* self, const char* param1);
+int QObjectCleanupHandler_virtualbase_metacall(VirtualQObjectCleanupHandler* self, int param1, int param2, void** param3);
+bool QObjectCleanupHandler_virtualbase_event(VirtualQObjectCleanupHandler* self, QEvent* event);
+bool QObjectCleanupHandler_virtualbase_eventFilter(VirtualQObjectCleanupHandler* self, QObject* watched, QEvent* event);
+void QObjectCleanupHandler_virtualbase_timerEvent(VirtualQObjectCleanupHandler* self, QTimerEvent* event);
+void QObjectCleanupHandler_virtualbase_childEvent(VirtualQObjectCleanupHandler* self, QChildEvent* event);
+void QObjectCleanupHandler_virtualbase_customEvent(VirtualQObjectCleanupHandler* self, QEvent* event);
+void QObjectCleanupHandler_virtualbase_connectNotify(VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
+void QObjectCleanupHandler_virtualbase_disconnectNotify(VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
+
+QObject* QObjectCleanupHandler_protectedbase_sender(const VirtualQObjectCleanupHandler* self);
+int QObjectCleanupHandler_protectedbase_senderSignalIndex(const VirtualQObjectCleanupHandler* self);
+int QObjectCleanupHandler_protectedbase_receivers(const VirtualQObjectCleanupHandler* self, const char* signal);
+bool QObjectCleanupHandler_protectedbase_isSignalConnected(const VirtualQObjectCleanupHandler* self, QMetaMethod* signal);
+
 const QMetaObject* QObjectCleanupHandler_staticMetaObject();
 void QObjectCleanupHandler_delete(QObjectCleanupHandler* self);
 

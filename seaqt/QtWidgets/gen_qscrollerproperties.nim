@@ -100,7 +100,7 @@ proc operatorNotEqual*(self: gen_qscrollerproperties_types.QScrollerProperties, 
 proc setDefaultScrollerProperties*(_: type gen_qscrollerproperties_types.QScrollerProperties, sp: gen_qscrollerproperties_types.QScrollerProperties): void =
   fcQScrollerProperties_setDefaultScrollerProperties(sp.h)
 
-proc unsetDefaultScrollerProperties*(_: type gen_qscrollerproperties_types.QScrollerProperties, ): void =
+proc unsetDefaultScrollerProperties*(_: type gen_qscrollerproperties_types.QScrollerProperties): void =
   fcQScrollerProperties_unsetDefaultScrollerProperties()
 
 proc scrollMetric*(self: gen_qscrollerproperties_types.QScrollerProperties, metric: cint): gen_qvariant_types.QVariant =

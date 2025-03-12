@@ -40,23 +40,30 @@ typedef struct QStateMachine QStateMachine;
 typedef struct QTimerEvent QTimerEvent;
 #endif
 
-struct QAbstractTransition_VTable {
-	void (*destructor)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self);
-	QMetaObject* (*metaObject)(struct QAbstractTransition_VTable* vtbl, const QAbstractTransition* self);
-	void* (*metacast)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, const char* param1);
-	int (*metacall)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, int param1, int param2, void** param3);
-	bool (*eventTest)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QEvent* event);
-	void (*onTransition)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QEvent* event);
-	bool (*event)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QEvent* e);
-	bool (*eventFilter)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QTimerEvent* event);
-	void (*childEvent)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QChildEvent* event);
-	void (*customEvent)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QEvent* event);
-	void (*connectNotify)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QAbstractTransition_VTable* vtbl, QAbstractTransition* self, QMetaMethod* signal);
-};
-QAbstractTransition* QAbstractTransition_new(struct QAbstractTransition_VTable* vtbl);
-QAbstractTransition* QAbstractTransition_new2(struct QAbstractTransition_VTable* vtbl, QState* sourceState);
+typedef struct VirtualQAbstractTransition VirtualQAbstractTransition;
+typedef struct QAbstractTransition_VTable{
+	void (*destructor)(VirtualQAbstractTransition* self);
+	QMetaObject* (*metaObject)(const VirtualQAbstractTransition* self);
+	void* (*metacast)(VirtualQAbstractTransition* self, const char* param1);
+	int (*metacall)(VirtualQAbstractTransition* self, int param1, int param2, void** param3);
+	bool (*eventTest)(VirtualQAbstractTransition* self, QEvent* event);
+	void (*onTransition)(VirtualQAbstractTransition* self, QEvent* event);
+	bool (*event)(VirtualQAbstractTransition* self, QEvent* e);
+	bool (*eventFilter)(VirtualQAbstractTransition* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQAbstractTransition* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQAbstractTransition* self, QChildEvent* event);
+	void (*customEvent)(VirtualQAbstractTransition* self, QEvent* event);
+	void (*connectNotify)(VirtualQAbstractTransition* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQAbstractTransition* self, QMetaMethod* signal);
+}QAbstractTransition_VTable;
+
+const QAbstractTransition_VTable* QAbstractTransition_vtbl(const VirtualQAbstractTransition* self);
+void* QAbstractTransition_vdata(const VirtualQAbstractTransition* self);
+void QAbstractTransition_setVdata(VirtualQAbstractTransition* self, void* vdata);
+
+VirtualQAbstractTransition* QAbstractTransition_new(const QAbstractTransition_VTable* vtbl, void* vdata);
+VirtualQAbstractTransition* QAbstractTransition_new2(const QAbstractTransition_VTable* vtbl, void* vdata, QState* sourceState);
+
 void QAbstractTransition_virtbase(QAbstractTransition* src, QObject** outptr_QObject);
 QMetaObject* QAbstractTransition_metaObject(const QAbstractTransition* self);
 void* QAbstractTransition_metacast(QAbstractTransition* self, const char* param1);
@@ -81,22 +88,25 @@ struct miqt_string QAbstractTransition_tr2(const char* s, const char* c);
 struct miqt_string QAbstractTransition_tr3(const char* s, const char* c, int n);
 struct miqt_string QAbstractTransition_trUtf82(const char* s, const char* c);
 struct miqt_string QAbstractTransition_trUtf83(const char* s, const char* c, int n);
-QMetaObject* QAbstractTransition_virtualbase_metaObject(const void* self);
-void* QAbstractTransition_virtualbase_metacast(void* self, const char* param1);
-int QAbstractTransition_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QAbstractTransition_virtualbase_eventTest(void* self, QEvent* event);
-void QAbstractTransition_virtualbase_onTransition(void* self, QEvent* event);
-bool QAbstractTransition_virtualbase_event(void* self, QEvent* e);
-bool QAbstractTransition_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QAbstractTransition_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QAbstractTransition_virtualbase_childEvent(void* self, QChildEvent* event);
-void QAbstractTransition_virtualbase_customEvent(void* self, QEvent* event);
-void QAbstractTransition_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QAbstractTransition_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QAbstractTransition_protectedbase_sender(const void* self);
-int QAbstractTransition_protectedbase_senderSignalIndex(const void* self);
-int QAbstractTransition_protectedbase_receivers(const void* self, const char* signal);
-bool QAbstractTransition_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QAbstractTransition_virtualbase_metaObject(const VirtualQAbstractTransition* self);
+void* QAbstractTransition_virtualbase_metacast(VirtualQAbstractTransition* self, const char* param1);
+int QAbstractTransition_virtualbase_metacall(VirtualQAbstractTransition* self, int param1, int param2, void** param3);
+bool QAbstractTransition_virtualbase_eventTest(VirtualQAbstractTransition* self, QEvent* event);
+void QAbstractTransition_virtualbase_onTransition(VirtualQAbstractTransition* self, QEvent* event);
+bool QAbstractTransition_virtualbase_event(VirtualQAbstractTransition* self, QEvent* e);
+bool QAbstractTransition_virtualbase_eventFilter(VirtualQAbstractTransition* self, QObject* watched, QEvent* event);
+void QAbstractTransition_virtualbase_timerEvent(VirtualQAbstractTransition* self, QTimerEvent* event);
+void QAbstractTransition_virtualbase_childEvent(VirtualQAbstractTransition* self, QChildEvent* event);
+void QAbstractTransition_virtualbase_customEvent(VirtualQAbstractTransition* self, QEvent* event);
+void QAbstractTransition_virtualbase_connectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal);
+void QAbstractTransition_virtualbase_disconnectNotify(VirtualQAbstractTransition* self, QMetaMethod* signal);
+
+QObject* QAbstractTransition_protectedbase_sender(const VirtualQAbstractTransition* self);
+int QAbstractTransition_protectedbase_senderSignalIndex(const VirtualQAbstractTransition* self);
+int QAbstractTransition_protectedbase_receivers(const VirtualQAbstractTransition* self, const char* signal);
+bool QAbstractTransition_protectedbase_isSignalConnected(const VirtualQAbstractTransition* self, QMetaMethod* signal);
+
 const QMetaObject* QAbstractTransition_staticMetaObject();
 void QAbstractTransition_delete(QAbstractTransition* self);
 

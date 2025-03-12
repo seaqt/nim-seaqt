@@ -36,6 +36,7 @@ QLocale* QLocale_new3(int language);
 QLocale* QLocale_new4(int language, int script, int country);
 QLocale* QLocale_new5(QLocale* other);
 QLocale* QLocale_new6(int language, int country);
+
 void QLocale_operatorAssign(QLocale* self, QLocale* other);
 void QLocale_swap(QLocale* self, QLocale* other);
 int QLocale_language(const QLocale* self);
@@ -177,6 +178,7 @@ struct miqt_string QLocale_formattedDataSize3(QLocale* self, long long bytes, in
 struct miqt_string QLocale_formattedDataSize22(const QLocale* self, long long bytes, int precision);
 struct miqt_string QLocale_formattedDataSize32(const QLocale* self, long long bytes, int precision, int format);
 struct miqt_string QLocale_quoteString2(const QLocale* self, struct miqt_string str, int style);
+
 const QMetaObject* QLocale_staticMetaObject();
 void QLocale_delete(QLocale* self);
 

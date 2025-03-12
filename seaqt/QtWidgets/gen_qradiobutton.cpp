@@ -38,41 +38,34 @@
 #include <QWidget>
 #include <qradiobutton.h>
 #include "gen_qradiobutton.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQRadioButton final : public QRadioButton {
-	struct QRadioButton_VTable* vtbl;
+	const QRadioButton_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QRadioButton_VTable* QRadioButton_vtbl(const VirtualQRadioButton* self);
+	friend void* QRadioButton_vdata(const VirtualQRadioButton* self);
+	friend void QRadioButton_setVdata(VirtualQRadioButton* self, void* vdata);
 
-	VirtualQRadioButton(struct QRadioButton_VTable* vtbl, QWidget* parent): QRadioButton(parent), vtbl(vtbl) {};
-	VirtualQRadioButton(struct QRadioButton_VTable* vtbl): QRadioButton(), vtbl(vtbl) {};
-	VirtualQRadioButton(struct QRadioButton_VTable* vtbl, const QString& text): QRadioButton(text), vtbl(vtbl) {};
-	VirtualQRadioButton(struct QRadioButton_VTable* vtbl, const QString& text, QWidget* parent): QRadioButton(text, parent), vtbl(vtbl) {};
+	VirtualQRadioButton(const QRadioButton_VTable* vtbl, void* vdata, QWidget* parent): QRadioButton(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQRadioButton(const QRadioButton_VTable* vtbl, void* vdata): QRadioButton(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQRadioButton(const QRadioButton_VTable* vtbl, void* vdata, const QString& text): QRadioButton(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQRadioButton(const QRadioButton_VTable* vtbl, void* vdata, const QString& text, QWidget* parent): QRadioButton(text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQRadioButton() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQRadioButton() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QRadioButton::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QRadioButton_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QRadioButton_virtualbase_metaObject(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QRadioButton::qt_metacast(param1);
@@ -80,14 +73,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QRadioButton_virtualbase_metacast(void* self, const char* param1);
+	friend void* QRadioButton_virtualbase_metacast(VirtualQRadioButton* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QRadioButton::qt_metacall(param1, param2, param3);
@@ -98,46 +90,43 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRadioButton_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QRadioButton_virtualbase_metacall(VirtualQRadioButton* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QRadioButton::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QRadioButton_virtualbase_sizeHint(const void* self);
+	friend QSize* QRadioButton_virtualbase_sizeHint(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QRadioButton::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QRadioButton_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QRadioButton_virtualbase_minimumSizeHint(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QRadioButton::event(e);
@@ -145,14 +134,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_event(void* self, QEvent* e);
+	friend bool QRadioButton_virtualbase_event(VirtualQRadioButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hitButton(const QPoint& param1) const override {
 		if (vtbl->hitButton == 0) {
 			return QRadioButton::hitButton(param1);
@@ -162,14 +150,13 @@ public:
 		// Cast returned reference into pointer
 		QPoint* sigval1 = const_cast<QPoint*>(&param1_ret);
 
-		bool callback_return_value = vtbl->hitButton(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->hitButton(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_hitButton(const void* self, QPoint* param1);
+	friend bool QRadioButton_virtualbase_hitButton(const VirtualQRadioButton* self, QPoint* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* param1) override {
 		if (vtbl->paintEvent == 0) {
 			QRadioButton::paintEvent(param1);
@@ -178,13 +165,12 @@ public:
 
 		QPaintEvent* sigval1 = param1;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_paintEvent(void* self, QPaintEvent* param1);
+	friend void QRadioButton_virtualbase_paintEvent(VirtualQRadioButton* self, QPaintEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* param1) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QRadioButton::mouseMoveEvent(param1);
@@ -193,13 +179,12 @@ public:
 
 		QMouseEvent* sigval1 = param1;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1);
+	friend void QRadioButton_virtualbase_mouseMoveEvent(VirtualQRadioButton* self, QMouseEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void checkStateSet() override {
 		if (vtbl->checkStateSet == 0) {
 			QRadioButton::checkStateSet();
@@ -207,13 +192,12 @@ public:
 		}
 
 
-		vtbl->checkStateSet(vtbl, this);
+		vtbl->checkStateSet(this);
 
 	}
 
-	friend void QRadioButton_virtualbase_checkStateSet(void* self);
+	friend void QRadioButton_virtualbase_checkStateSet(VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void nextCheckState() override {
 		if (vtbl->nextCheckState == 0) {
 			QRadioButton::nextCheckState();
@@ -221,13 +205,12 @@ public:
 		}
 
 
-		vtbl->nextCheckState(vtbl, this);
+		vtbl->nextCheckState(this);
 
 	}
 
-	friend void QRadioButton_virtualbase_nextCheckState(void* self);
+	friend void QRadioButton_virtualbase_nextCheckState(VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* e) override {
 		if (vtbl->keyPressEvent == 0) {
 			QRadioButton::keyPressEvent(e);
@@ -236,13 +219,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_keyPressEvent(void* self, QKeyEvent* e);
+	friend void QRadioButton_virtualbase_keyPressEvent(VirtualQRadioButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* e) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QRadioButton::keyReleaseEvent(e);
@@ -251,13 +233,12 @@ public:
 
 		QKeyEvent* sigval1 = e;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e);
+	friend void QRadioButton_virtualbase_keyReleaseEvent(VirtualQRadioButton* self, QKeyEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* e) override {
 		if (vtbl->mousePressEvent == 0) {
 			QRadioButton::mousePressEvent(e);
@@ -266,13 +247,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e);
+	friend void QRadioButton_virtualbase_mousePressEvent(VirtualQRadioButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* e) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QRadioButton::mouseReleaseEvent(e);
@@ -281,13 +261,12 @@ public:
 
 		QMouseEvent* sigval1 = e;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e);
+	friend void QRadioButton_virtualbase_mouseReleaseEvent(VirtualQRadioButton* self, QMouseEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* e) override {
 		if (vtbl->focusInEvent == 0) {
 			QRadioButton::focusInEvent(e);
@@ -296,13 +275,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_focusInEvent(void* self, QFocusEvent* e);
+	friend void QRadioButton_virtualbase_focusInEvent(VirtualQRadioButton* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* e) override {
 		if (vtbl->focusOutEvent == 0) {
 			QRadioButton::focusOutEvent(e);
@@ -311,13 +289,12 @@ public:
 
 		QFocusEvent* sigval1 = e;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_focusOutEvent(void* self, QFocusEvent* e);
+	friend void QRadioButton_virtualbase_focusOutEvent(VirtualQRadioButton* self, QFocusEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* e) override {
 		if (vtbl->changeEvent == 0) {
 			QRadioButton::changeEvent(e);
@@ -326,13 +303,12 @@ public:
 
 		QEvent* sigval1 = e;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_changeEvent(void* self, QEvent* e);
+	friend void QRadioButton_virtualbase_changeEvent(VirtualQRadioButton* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* e) override {
 		if (vtbl->timerEvent == 0) {
 			QRadioButton::timerEvent(e);
@@ -341,27 +317,25 @@ public:
 
 		QTimerEvent* sigval1 = e;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_timerEvent(void* self, QTimerEvent* e);
+	friend void QRadioButton_virtualbase_timerEvent(VirtualQRadioButton* self, QTimerEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QRadioButton::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRadioButton_virtualbase_devType(const void* self);
+	friend int QRadioButton_virtualbase_devType(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QRadioButton::setVisible(visible);
@@ -370,13 +344,12 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_setVisible(void* self, bool visible);
+	friend void QRadioButton_virtualbase_setVisible(VirtualQRadioButton* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QRadioButton::heightForWidth(param1);
@@ -384,42 +357,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRadioButton_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QRadioButton_virtualbase_heightForWidth(const VirtualQRadioButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QRadioButton::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QRadioButton_virtualbase_hasHeightForWidth(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QRadioButton::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QRadioButton_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QRadioButton_virtualbase_paintEngine(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QRadioButton::mouseDoubleClickEvent(event);
@@ -428,13 +398,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QRadioButton_virtualbase_mouseDoubleClickEvent(VirtualQRadioButton* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QRadioButton::wheelEvent(event);
@@ -443,13 +412,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QRadioButton_virtualbase_wheelEvent(VirtualQRadioButton* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QRadioButton::enterEvent(event);
@@ -458,13 +426,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QRadioButton_virtualbase_enterEvent(VirtualQRadioButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QRadioButton::leaveEvent(event);
@@ -473,13 +440,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QRadioButton_virtualbase_leaveEvent(VirtualQRadioButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QRadioButton::moveEvent(event);
@@ -488,13 +454,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QRadioButton_virtualbase_moveEvent(VirtualQRadioButton* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QRadioButton::resizeEvent(event);
@@ -503,13 +468,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QRadioButton_virtualbase_resizeEvent(VirtualQRadioButton* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QRadioButton::closeEvent(event);
@@ -518,13 +482,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QRadioButton_virtualbase_closeEvent(VirtualQRadioButton* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* event) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QRadioButton::contextMenuEvent(event);
@@ -533,13 +496,12 @@ public:
 
 		QContextMenuEvent* sigval1 = event;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event);
+	friend void QRadioButton_virtualbase_contextMenuEvent(VirtualQRadioButton* self, QContextMenuEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QRadioButton::tabletEvent(event);
@@ -548,13 +510,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QRadioButton_virtualbase_tabletEvent(VirtualQRadioButton* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QRadioButton::actionEvent(event);
@@ -563,13 +524,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QRadioButton_virtualbase_actionEvent(VirtualQRadioButton* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QRadioButton::dragEnterEvent(event);
@@ -578,13 +538,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QRadioButton_virtualbase_dragEnterEvent(VirtualQRadioButton* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QRadioButton::dragMoveEvent(event);
@@ -593,13 +552,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QRadioButton_virtualbase_dragMoveEvent(VirtualQRadioButton* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QRadioButton::dragLeaveEvent(event);
@@ -608,13 +566,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QRadioButton_virtualbase_dragLeaveEvent(VirtualQRadioButton* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QRadioButton::dropEvent(event);
@@ -623,13 +580,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QRadioButton_virtualbase_dropEvent(VirtualQRadioButton* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QRadioButton::showEvent(event);
@@ -638,13 +594,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QRadioButton_virtualbase_showEvent(VirtualQRadioButton* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QRadioButton::hideEvent(event);
@@ -653,13 +608,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QRadioButton_virtualbase_hideEvent(VirtualQRadioButton* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QRadioButton::nativeEvent(eventType, message, result);
@@ -674,14 +628,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QRadioButton_virtualbase_nativeEvent(VirtualQRadioButton* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QRadioButton::metric(param1);
@@ -690,14 +643,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QRadioButton_virtualbase_metric(const void* self, int param1);
+	friend int QRadioButton_virtualbase_metric(const VirtualQRadioButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QRadioButton::initPainter(painter);
@@ -706,13 +658,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QRadioButton_virtualbase_initPainter(const VirtualQRadioButton* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QRadioButton::redirected(offset);
@@ -720,28 +671,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QRadioButton_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QRadioButton_virtualbase_redirected(const VirtualQRadioButton* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QRadioButton::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QRadioButton_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QRadioButton_virtualbase_sharedPainter(const VirtualQRadioButton* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QRadioButton::inputMethodEvent(param1);
@@ -750,13 +699,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QRadioButton_virtualbase_inputMethodEvent(VirtualQRadioButton* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QRadioButton::inputMethodQuery(param1);
@@ -765,16 +713,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QRadioButton_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QRadioButton_virtualbase_inputMethodQuery(const VirtualQRadioButton* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QRadioButton::focusNextPrevChild(next);
@@ -782,14 +729,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QRadioButton_virtualbase_focusNextPrevChild(VirtualQRadioButton* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QRadioButton::eventFilter(watched, event);
@@ -798,14 +744,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QRadioButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QRadioButton_virtualbase_eventFilter(VirtualQRadioButton* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QRadioButton::childEvent(event);
@@ -814,13 +759,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QRadioButton_virtualbase_childEvent(VirtualQRadioButton* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QRadioButton::customEvent(event);
@@ -829,13 +773,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QRadioButton_virtualbase_customEvent(VirtualQRadioButton* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QRadioButton::connectNotify(signal);
@@ -846,13 +789,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QRadioButton_virtualbase_connectNotify(VirtualQRadioButton* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QRadioButton::disconnectNotify(signal);
@@ -863,41 +805,41 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QRadioButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QRadioButton_virtualbase_disconnectNotify(VirtualQRadioButton* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QRadioButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* button);
-	friend void QRadioButton_protectedbase_updateMicroFocus(void* self);
-	friend void QRadioButton_protectedbase_create(void* self);
-	friend void QRadioButton_protectedbase_destroy(void* self);
-	friend bool QRadioButton_protectedbase_focusNextChild(void* self);
-	friend bool QRadioButton_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QRadioButton_protectedbase_sender(const void* self);
-	friend int QRadioButton_protectedbase_senderSignalIndex(const void* self);
-	friend int QRadioButton_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QRadioButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QRadioButton_protectedbase_initStyleOption(const VirtualQRadioButton* self, QStyleOptionButton* button);
+	friend void QRadioButton_protectedbase_updateMicroFocus(VirtualQRadioButton* self);
+	friend void QRadioButton_protectedbase_create(VirtualQRadioButton* self);
+	friend void QRadioButton_protectedbase_destroy(VirtualQRadioButton* self);
+	friend bool QRadioButton_protectedbase_focusNextChild(VirtualQRadioButton* self);
+	friend bool QRadioButton_protectedbase_focusPreviousChild(VirtualQRadioButton* self);
+	friend QObject* QRadioButton_protectedbase_sender(const VirtualQRadioButton* self);
+	friend int QRadioButton_protectedbase_senderSignalIndex(const VirtualQRadioButton* self);
+	friend int QRadioButton_protectedbase_receivers(const VirtualQRadioButton* self, const char* signal);
+	friend bool QRadioButton_protectedbase_isSignalConnected(const VirtualQRadioButton* self, QMetaMethod* signal);
 };
 
-QRadioButton* QRadioButton_new(struct QRadioButton_VTable* vtbl, QWidget* parent) {
-	return new VirtualQRadioButton(vtbl, parent);
+VirtualQRadioButton* QRadioButton_new(const QRadioButton_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQRadioButton(vtbl, vdata, parent);
 }
 
-QRadioButton* QRadioButton_new2(struct QRadioButton_VTable* vtbl) {
-	return new VirtualQRadioButton(vtbl);
+VirtualQRadioButton* QRadioButton_new2(const QRadioButton_VTable* vtbl, void* vdata) {
+	return new VirtualQRadioButton(vtbl, vdata);
 }
 
-QRadioButton* QRadioButton_new3(struct QRadioButton_VTable* vtbl, struct miqt_string text) {
+VirtualQRadioButton* QRadioButton_new3(const QRadioButton_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQRadioButton(vtbl, text_QString);
+	return new VirtualQRadioButton(vtbl, vdata, text_QString);
 }
 
-QRadioButton* QRadioButton_new4(struct QRadioButton_VTable* vtbl, struct miqt_string text, QWidget* parent) {
+VirtualQRadioButton* QRadioButton_new4(const QRadioButton_VTable* vtbl, void* vdata, struct miqt_string text, QWidget* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQRadioButton(vtbl, text_QString, parent);
+	return new VirtualQRadioButton(vtbl, vdata, text_QString, parent);
 }
 
 void QRadioButton_virtbase(QRadioButton* src, QAbstractButton** outptr_QAbstractButton) {
@@ -990,394 +932,316 @@ struct miqt_string QRadioButton_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QRadioButton_virtualbase_metaObject(const void* self) {
+QMetaObject* QRadioButton_virtualbase_metaObject(const VirtualQRadioButton* self) {
 
-	return (QMetaObject*) ( (const VirtualQRadioButton*)(self) )->QRadioButton::metaObject();
-
+	return (QMetaObject*) self->QRadioButton::metaObject();
 }
 
-void* QRadioButton_virtualbase_metacast(void* self, const char* param1) {
+void* QRadioButton_virtualbase_metacast(VirtualQRadioButton* self, const char* param1) {
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::qt_metacast(param1);
-
+	return self->QRadioButton::qt_metacast(param1);
 }
 
-int QRadioButton_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QRadioButton_virtualbase_metacall(VirtualQRadioButton* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QRadioButton::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QRadioButton_virtualbase_sizeHint(const void* self) {
+QSize* QRadioButton_virtualbase_sizeHint(const VirtualQRadioButton* self) {
 
-	return new QSize(( (const VirtualQRadioButton*)(self) )->QRadioButton::sizeHint());
-
+	return new QSize(self->QRadioButton::sizeHint());
 }
 
-QSize* QRadioButton_virtualbase_minimumSizeHint(const void* self) {
+QSize* QRadioButton_virtualbase_minimumSizeHint(const VirtualQRadioButton* self) {
 
-	return new QSize(( (const VirtualQRadioButton*)(self) )->QRadioButton::minimumSizeHint());
-
+	return new QSize(self->QRadioButton::minimumSizeHint());
 }
 
-bool QRadioButton_virtualbase_event(void* self, QEvent* e) {
+bool QRadioButton_virtualbase_event(VirtualQRadioButton* self, QEvent* e) {
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::event(e);
-
+	return self->QRadioButton::event(e);
 }
 
-bool QRadioButton_virtualbase_hitButton(const void* self, QPoint* param1) {
+bool QRadioButton_virtualbase_hitButton(const VirtualQRadioButton* self, QPoint* param1) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::hitButton(*param1);
-
+	return self->QRadioButton::hitButton(*param1);
 }
 
-void QRadioButton_virtualbase_paintEvent(void* self, QPaintEvent* param1) {
+void QRadioButton_virtualbase_paintEvent(VirtualQRadioButton* self, QPaintEvent* param1) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::paintEvent(param1);
-
+	self->QRadioButton::paintEvent(param1);
 }
 
-void QRadioButton_virtualbase_mouseMoveEvent(void* self, QMouseEvent* param1) {
+void QRadioButton_virtualbase_mouseMoveEvent(VirtualQRadioButton* self, QMouseEvent* param1) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::mouseMoveEvent(param1);
-
+	self->QRadioButton::mouseMoveEvent(param1);
 }
 
-void QRadioButton_virtualbase_checkStateSet(void* self) {
+void QRadioButton_virtualbase_checkStateSet(VirtualQRadioButton* self) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::checkStateSet();
-
+	self->QRadioButton::checkStateSet();
 }
 
-void QRadioButton_virtualbase_nextCheckState(void* self) {
+void QRadioButton_virtualbase_nextCheckState(VirtualQRadioButton* self) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::nextCheckState();
-
+	self->QRadioButton::nextCheckState();
 }
 
-void QRadioButton_virtualbase_keyPressEvent(void* self, QKeyEvent* e) {
+void QRadioButton_virtualbase_keyPressEvent(VirtualQRadioButton* self, QKeyEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::keyPressEvent(e);
-
+	self->QRadioButton::keyPressEvent(e);
 }
 
-void QRadioButton_virtualbase_keyReleaseEvent(void* self, QKeyEvent* e) {
+void QRadioButton_virtualbase_keyReleaseEvent(VirtualQRadioButton* self, QKeyEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::keyReleaseEvent(e);
-
+	self->QRadioButton::keyReleaseEvent(e);
 }
 
-void QRadioButton_virtualbase_mousePressEvent(void* self, QMouseEvent* e) {
+void QRadioButton_virtualbase_mousePressEvent(VirtualQRadioButton* self, QMouseEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::mousePressEvent(e);
-
+	self->QRadioButton::mousePressEvent(e);
 }
 
-void QRadioButton_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* e) {
+void QRadioButton_virtualbase_mouseReleaseEvent(VirtualQRadioButton* self, QMouseEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::mouseReleaseEvent(e);
-
+	self->QRadioButton::mouseReleaseEvent(e);
 }
 
-void QRadioButton_virtualbase_focusInEvent(void* self, QFocusEvent* e) {
+void QRadioButton_virtualbase_focusInEvent(VirtualQRadioButton* self, QFocusEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::focusInEvent(e);
-
+	self->QRadioButton::focusInEvent(e);
 }
 
-void QRadioButton_virtualbase_focusOutEvent(void* self, QFocusEvent* e) {
+void QRadioButton_virtualbase_focusOutEvent(VirtualQRadioButton* self, QFocusEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::focusOutEvent(e);
-
+	self->QRadioButton::focusOutEvent(e);
 }
 
-void QRadioButton_virtualbase_changeEvent(void* self, QEvent* e) {
+void QRadioButton_virtualbase_changeEvent(VirtualQRadioButton* self, QEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::changeEvent(e);
-
+	self->QRadioButton::changeEvent(e);
 }
 
-void QRadioButton_virtualbase_timerEvent(void* self, QTimerEvent* e) {
+void QRadioButton_virtualbase_timerEvent(VirtualQRadioButton* self, QTimerEvent* e) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::timerEvent(e);
-
+	self->QRadioButton::timerEvent(e);
 }
 
-int QRadioButton_virtualbase_devType(const void* self) {
+int QRadioButton_virtualbase_devType(const VirtualQRadioButton* self) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::devType();
-
+	return self->QRadioButton::devType();
 }
 
-void QRadioButton_virtualbase_setVisible(void* self, bool visible) {
+void QRadioButton_virtualbase_setVisible(VirtualQRadioButton* self, bool visible) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::setVisible(visible);
-
+	self->QRadioButton::setVisible(visible);
 }
 
-int QRadioButton_virtualbase_heightForWidth(const void* self, int param1) {
+int QRadioButton_virtualbase_heightForWidth(const VirtualQRadioButton* self, int param1) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::heightForWidth(static_cast<int>(param1));
-
+	return self->QRadioButton::heightForWidth(static_cast<int>(param1));
 }
 
-bool QRadioButton_virtualbase_hasHeightForWidth(const void* self) {
+bool QRadioButton_virtualbase_hasHeightForWidth(const VirtualQRadioButton* self) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::hasHeightForWidth();
-
+	return self->QRadioButton::hasHeightForWidth();
 }
 
-QPaintEngine* QRadioButton_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QRadioButton_virtualbase_paintEngine(const VirtualQRadioButton* self) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::paintEngine();
-
+	return self->QRadioButton::paintEngine();
 }
 
-void QRadioButton_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QRadioButton_virtualbase_mouseDoubleClickEvent(VirtualQRadioButton* self, QMouseEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::mouseDoubleClickEvent(event);
-
+	self->QRadioButton::mouseDoubleClickEvent(event);
 }
 
-void QRadioButton_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QRadioButton_virtualbase_wheelEvent(VirtualQRadioButton* self, QWheelEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::wheelEvent(event);
-
+	self->QRadioButton::wheelEvent(event);
 }
 
-void QRadioButton_virtualbase_enterEvent(void* self, QEvent* event) {
+void QRadioButton_virtualbase_enterEvent(VirtualQRadioButton* self, QEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::enterEvent(event);
-
+	self->QRadioButton::enterEvent(event);
 }
 
-void QRadioButton_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QRadioButton_virtualbase_leaveEvent(VirtualQRadioButton* self, QEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::leaveEvent(event);
-
+	self->QRadioButton::leaveEvent(event);
 }
 
-void QRadioButton_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QRadioButton_virtualbase_moveEvent(VirtualQRadioButton* self, QMoveEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::moveEvent(event);
-
+	self->QRadioButton::moveEvent(event);
 }
 
-void QRadioButton_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QRadioButton_virtualbase_resizeEvent(VirtualQRadioButton* self, QResizeEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::resizeEvent(event);
-
+	self->QRadioButton::resizeEvent(event);
 }
 
-void QRadioButton_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QRadioButton_virtualbase_closeEvent(VirtualQRadioButton* self, QCloseEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::closeEvent(event);
-
+	self->QRadioButton::closeEvent(event);
 }
 
-void QRadioButton_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* event) {
+void QRadioButton_virtualbase_contextMenuEvent(VirtualQRadioButton* self, QContextMenuEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::contextMenuEvent(event);
-
+	self->QRadioButton::contextMenuEvent(event);
 }
 
-void QRadioButton_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QRadioButton_virtualbase_tabletEvent(VirtualQRadioButton* self, QTabletEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::tabletEvent(event);
-
+	self->QRadioButton::tabletEvent(event);
 }
 
-void QRadioButton_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QRadioButton_virtualbase_actionEvent(VirtualQRadioButton* self, QActionEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::actionEvent(event);
-
+	self->QRadioButton::actionEvent(event);
 }
 
-void QRadioButton_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QRadioButton_virtualbase_dragEnterEvent(VirtualQRadioButton* self, QDragEnterEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::dragEnterEvent(event);
-
+	self->QRadioButton::dragEnterEvent(event);
 }
 
-void QRadioButton_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QRadioButton_virtualbase_dragMoveEvent(VirtualQRadioButton* self, QDragMoveEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::dragMoveEvent(event);
-
+	self->QRadioButton::dragMoveEvent(event);
 }
 
-void QRadioButton_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QRadioButton_virtualbase_dragLeaveEvent(VirtualQRadioButton* self, QDragLeaveEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::dragLeaveEvent(event);
-
+	self->QRadioButton::dragLeaveEvent(event);
 }
 
-void QRadioButton_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QRadioButton_virtualbase_dropEvent(VirtualQRadioButton* self, QDropEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::dropEvent(event);
-
+	self->QRadioButton::dropEvent(event);
 }
 
-void QRadioButton_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QRadioButton_virtualbase_showEvent(VirtualQRadioButton* self, QShowEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::showEvent(event);
-
+	self->QRadioButton::showEvent(event);
 }
 
-void QRadioButton_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QRadioButton_virtualbase_hideEvent(VirtualQRadioButton* self, QHideEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::hideEvent(event);
-
+	self->QRadioButton::hideEvent(event);
 }
 
-bool QRadioButton_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QRadioButton_virtualbase_nativeEvent(VirtualQRadioButton* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QRadioButton::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QRadioButton_virtualbase_metric(const void* self, int param1) {
+int QRadioButton_virtualbase_metric(const VirtualQRadioButton* self, int param1) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::metric(static_cast<VirtualQRadioButton::PaintDeviceMetric>(param1));
-
+	return self->QRadioButton::metric(static_cast<VirtualQRadioButton::PaintDeviceMetric>(param1));
 }
 
-void QRadioButton_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QRadioButton_virtualbase_initPainter(const VirtualQRadioButton* self, QPainter* painter) {
 
-	( (const VirtualQRadioButton*)(self) )->QRadioButton::initPainter(painter);
-
+	self->QRadioButton::initPainter(painter);
 }
 
-QPaintDevice* QRadioButton_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QRadioButton_virtualbase_redirected(const VirtualQRadioButton* self, QPoint* offset) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::redirected(offset);
-
+	return self->QRadioButton::redirected(offset);
 }
 
-QPainter* QRadioButton_virtualbase_sharedPainter(const void* self) {
+QPainter* QRadioButton_virtualbase_sharedPainter(const VirtualQRadioButton* self) {
 
-	return ( (const VirtualQRadioButton*)(self) )->QRadioButton::sharedPainter();
-
+	return self->QRadioButton::sharedPainter();
 }
 
-void QRadioButton_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QRadioButton_virtualbase_inputMethodEvent(VirtualQRadioButton* self, QInputMethodEvent* param1) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::inputMethodEvent(param1);
-
+	self->QRadioButton::inputMethodEvent(param1);
 }
 
-QVariant* QRadioButton_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QRadioButton_virtualbase_inputMethodQuery(const VirtualQRadioButton* self, int param1) {
 
-	return new QVariant(( (const VirtualQRadioButton*)(self) )->QRadioButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QRadioButton::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QRadioButton_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QRadioButton_virtualbase_focusNextPrevChild(VirtualQRadioButton* self, bool next) {
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::focusNextPrevChild(next);
-
+	return self->QRadioButton::focusNextPrevChild(next);
 }
 
-bool QRadioButton_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QRadioButton_virtualbase_eventFilter(VirtualQRadioButton* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQRadioButton*)(self) )->QRadioButton::eventFilter(watched, event);
-
+	return self->QRadioButton::eventFilter(watched, event);
 }
 
-void QRadioButton_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QRadioButton_virtualbase_childEvent(VirtualQRadioButton* self, QChildEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::childEvent(event);
-
+	self->QRadioButton::childEvent(event);
 }
 
-void QRadioButton_virtualbase_customEvent(void* self, QEvent* event) {
+void QRadioButton_virtualbase_customEvent(VirtualQRadioButton* self, QEvent* event) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::customEvent(event);
-
+	self->QRadioButton::customEvent(event);
 }
 
-void QRadioButton_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QRadioButton_virtualbase_connectNotify(VirtualQRadioButton* self, QMetaMethod* signal) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::connectNotify(*signal);
-
+	self->QRadioButton::connectNotify(*signal);
 }
 
-void QRadioButton_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QRadioButton_virtualbase_disconnectNotify(VirtualQRadioButton* self, QMetaMethod* signal) {
 
-	( (VirtualQRadioButton*)(self) )->QRadioButton::disconnectNotify(*signal);
-
+	self->QRadioButton::disconnectNotify(*signal);
 }
 
 const QMetaObject* QRadioButton_staticMetaObject() { return &QRadioButton::staticMetaObject; }
-void QRadioButton_protectedbase_initStyleOption(const void* self, QStyleOptionButton* button) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	self_cast->initStyleOption(button);
 
+const QRadioButton_VTable* QRadioButton_vtbl(const VirtualQRadioButton* self) { return self->vtbl; }
+void* QRadioButton_vdata(const VirtualQRadioButton* self) { return self->vdata; }
+void QRadioButton_setVdata(VirtualQRadioButton* self, void* vdata) { self->vdata = vdata; }
+
+void QRadioButton_protectedbase_initStyleOption(const VirtualQRadioButton* self, QStyleOptionButton* button) {
+	self->initStyleOption(button);
 }
 
-void QRadioButton_protectedbase_updateMicroFocus(void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QRadioButton_protectedbase_updateMicroFocus(VirtualQRadioButton* self) {
+	self->updateMicroFocus();
 }
 
-void QRadioButton_protectedbase_create(void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	self_cast->create();
-
+void QRadioButton_protectedbase_create(VirtualQRadioButton* self) {
+	self->create();
 }
 
-void QRadioButton_protectedbase_destroy(void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	self_cast->destroy();
-
+void QRadioButton_protectedbase_destroy(VirtualQRadioButton* self) {
+	self->destroy();
 }
 
-bool QRadioButton_protectedbase_focusNextChild(void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QRadioButton_protectedbase_focusNextChild(VirtualQRadioButton* self) {
+	return self->focusNextChild();
 }
 
-bool QRadioButton_protectedbase_focusPreviousChild(void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QRadioButton_protectedbase_focusPreviousChild(VirtualQRadioButton* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QRadioButton_protectedbase_sender(const void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QRadioButton_protectedbase_sender(const VirtualQRadioButton* self) {
+	return self->sender();
 }
 
-int QRadioButton_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QRadioButton_protectedbase_senderSignalIndex(const VirtualQRadioButton* self) {
+	return self->senderSignalIndex();
 }
 
-int QRadioButton_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QRadioButton_protectedbase_receivers(const VirtualQRadioButton* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QRadioButton_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQRadioButton* self_cast = static_cast<VirtualQRadioButton*>( (QRadioButton*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QRadioButton_protectedbase_isSignalConnected(const VirtualQRadioButton* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QRadioButton_delete(QRadioButton* self) {

@@ -9,15 +9,6 @@
 #include <QVideoEncoderSettings>
 #include <qmediaencodersettings.h>
 #include "gen_qmediaencodersettings.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QAudioEncoderSettings* QAudioEncoderSettings_new() {
 	return new QAudioEncoderSettings();
 }

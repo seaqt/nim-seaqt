@@ -29,6 +29,7 @@ typedef struct QUrl QUrl;
 #endif
 
 QMimeDatabase* QMimeDatabase_new();
+
 QMimeType* QMimeDatabase_mimeTypeForName(const QMimeDatabase* self, struct miqt_string nameOrAlias);
 QMimeType* QMimeDatabase_mimeTypeForFile(const QMimeDatabase* self, struct miqt_string fileName);
 QMimeType* QMimeDatabase_mimeTypeForFileWithFileInfo(const QMimeDatabase* self, QFileInfo* fileInfo);
@@ -42,6 +43,7 @@ struct miqt_string QMimeDatabase_suffixForFileName(const QMimeDatabase* self, st
 struct miqt_array /* of QMimeType* */  QMimeDatabase_allMimeTypes(const QMimeDatabase* self);
 QMimeType* QMimeDatabase_mimeTypeForFile2(const QMimeDatabase* self, struct miqt_string fileName, int mode);
 QMimeType* QMimeDatabase_mimeTypeForFile22(const QMimeDatabase* self, QFileInfo* fileInfo, int mode);
+
 void QMimeDatabase_delete(QMimeDatabase* self);
 
 #ifdef __cplusplus

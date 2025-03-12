@@ -120,33 +120,40 @@ typedef struct QWebSettings QWebSettings;
 typedef struct QWidget QWidget;
 #endif
 
-struct QWebPage_VTable {
-	void (*destructor)(struct QWebPage_VTable* vtbl, QWebPage* self);
-	QMetaObject* (*metaObject)(struct QWebPage_VTable* vtbl, const QWebPage* self);
-	void* (*metacast)(struct QWebPage_VTable* vtbl, QWebPage* self, const char* param1);
-	int (*metacall)(struct QWebPage_VTable* vtbl, QWebPage* self, int param1, int param2, void** param3);
-	void (*triggerAction)(struct QWebPage_VTable* vtbl, QWebPage* self, int action, bool checked);
-	bool (*event)(struct QWebPage_VTable* vtbl, QWebPage* self, QEvent* param1);
-	bool (*extension)(struct QWebPage_VTable* vtbl, QWebPage* self, int extension, QWebPage__ExtensionOption* option, QWebPage__ExtensionReturn* output);
-	bool (*supportsExtension)(struct QWebPage_VTable* vtbl, const QWebPage* self, int extension);
-	bool (*shouldInterruptJavaScript)(struct QWebPage_VTable* vtbl, QWebPage* self);
-	QWebPage* (*createWindow)(struct QWebPage_VTable* vtbl, QWebPage* self, int type);
-	QObject* (*createPlugin)(struct QWebPage_VTable* vtbl, QWebPage* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
-	bool (*acceptNavigationRequest)(struct QWebPage_VTable* vtbl, QWebPage* self, QWebFrame* frame, QNetworkRequest* request, int type);
-	struct miqt_string (*chooseFile)(struct QWebPage_VTable* vtbl, QWebPage* self, QWebFrame* originatingFrame, struct miqt_string oldFile);
-	void (*javaScriptAlert)(struct QWebPage_VTable* vtbl, QWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
-	bool (*javaScriptConfirm)(struct QWebPage_VTable* vtbl, QWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
-	void (*javaScriptConsoleMessage)(struct QWebPage_VTable* vtbl, QWebPage* self, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
-	struct miqt_string (*userAgentForUrl)(struct QWebPage_VTable* vtbl, const QWebPage* self, QUrl* url);
-	bool (*eventFilter)(struct QWebPage_VTable* vtbl, QWebPage* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QWebPage_VTable* vtbl, QWebPage* self, QTimerEvent* event);
-	void (*childEvent)(struct QWebPage_VTable* vtbl, QWebPage* self, QChildEvent* event);
-	void (*customEvent)(struct QWebPage_VTable* vtbl, QWebPage* self, QEvent* event);
-	void (*connectNotify)(struct QWebPage_VTable* vtbl, QWebPage* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QWebPage_VTable* vtbl, QWebPage* self, QMetaMethod* signal);
-};
-QWebPage* QWebPage_new(struct QWebPage_VTable* vtbl);
-QWebPage* QWebPage_new2(struct QWebPage_VTable* vtbl, QObject* parent);
+typedef struct VirtualQWebPage VirtualQWebPage;
+typedef struct QWebPage_VTable{
+	void (*destructor)(VirtualQWebPage* self);
+	QMetaObject* (*metaObject)(const VirtualQWebPage* self);
+	void* (*metacast)(VirtualQWebPage* self, const char* param1);
+	int (*metacall)(VirtualQWebPage* self, int param1, int param2, void** param3);
+	void (*triggerAction)(VirtualQWebPage* self, int action, bool checked);
+	bool (*event)(VirtualQWebPage* self, QEvent* param1);
+	bool (*extension)(VirtualQWebPage* self, int extension, QWebPage__ExtensionOption* option, QWebPage__ExtensionReturn* output);
+	bool (*supportsExtension)(const VirtualQWebPage* self, int extension);
+	bool (*shouldInterruptJavaScript)(VirtualQWebPage* self);
+	QWebPage* (*createWindow)(VirtualQWebPage* self, int type);
+	QObject* (*createPlugin)(VirtualQWebPage* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
+	bool (*acceptNavigationRequest)(VirtualQWebPage* self, QWebFrame* frame, QNetworkRequest* request, int type);
+	struct miqt_string (*chooseFile)(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string oldFile);
+	void (*javaScriptAlert)(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
+	bool (*javaScriptConfirm)(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
+	void (*javaScriptConsoleMessage)(VirtualQWebPage* self, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
+	struct miqt_string (*userAgentForUrl)(const VirtualQWebPage* self, QUrl* url);
+	bool (*eventFilter)(VirtualQWebPage* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQWebPage* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQWebPage* self, QChildEvent* event);
+	void (*customEvent)(VirtualQWebPage* self, QEvent* event);
+	void (*connectNotify)(VirtualQWebPage* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQWebPage* self, QMetaMethod* signal);
+}QWebPage_VTable;
+
+const QWebPage_VTable* QWebPage_vtbl(const VirtualQWebPage* self);
+void* QWebPage_vdata(const VirtualQWebPage* self);
+void QWebPage_setVdata(VirtualQWebPage* self, void* vdata);
+
+VirtualQWebPage* QWebPage_new(const QWebPage_VTable* vtbl, void* vdata);
+VirtualQWebPage* QWebPage_new2(const QWebPage_VTable* vtbl, void* vdata, QObject* parent);
+
 void QWebPage_virtbase(QWebPage* src, QObject** outptr_QObject);
 QMetaObject* QWebPage_metaObject(const QWebPage* self);
 void* QWebPage_metacast(QWebPage* self, const char* param1);
@@ -208,67 +215,67 @@ bool QWebPage_extension(QWebPage* self, int extension, QWebPage__ExtensionOption
 bool QWebPage_supportsExtension(const QWebPage* self, int extension);
 bool QWebPage_shouldInterruptJavaScript(QWebPage* self);
 void QWebPage_loadStarted(QWebPage* self);
-void QWebPage_connect_loadStarted(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_loadStarted(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_loadProgress(QWebPage* self, int progress);
-void QWebPage_connect_loadProgress(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QWebPage_connect_loadProgress(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QWebPage_loadFinished(QWebPage* self, bool ok);
-void QWebPage_connect_loadFinished(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QWebPage_connect_loadFinished(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QWebPage_linkHovered(QWebPage* self, struct miqt_string link, struct miqt_string title, struct miqt_string textContent);
-void QWebPage_connect_linkHovered(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, struct miqt_string, struct miqt_string), void (*release)(intptr_t));
+void QWebPage_connect_linkHovered(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, struct miqt_string, struct miqt_string), void (*release)(intptr_t));
 void QWebPage_statusBarMessage(QWebPage* self, struct miqt_string text);
-void QWebPage_connect_statusBarMessage(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QWebPage_connect_statusBarMessage(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QWebPage_selectionChanged(QWebPage* self);
-void QWebPage_connect_selectionChanged(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_selectionChanged(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_frameCreated(QWebPage* self, QWebFrame* frame);
-void QWebPage_connect_frameCreated(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
+void QWebPage_connect_frameCreated(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
 void QWebPage_geometryChangeRequested(QWebPage* self, QRect* geom);
-void QWebPage_connect_geometryChangeRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
+void QWebPage_connect_geometryChangeRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
 void QWebPage_repaintRequested(QWebPage* self, QRect* dirtyRect);
-void QWebPage_connect_repaintRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
+void QWebPage_connect_repaintRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QRect*), void (*release)(intptr_t));
 void QWebPage_scrollRequested(QWebPage* self, int dx, int dy, QRect* scrollViewRect);
-void QWebPage_connect_scrollRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, int, int, QRect*), void (*release)(intptr_t));
+void QWebPage_connect_scrollRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, int, int, QRect*), void (*release)(intptr_t));
 void QWebPage_windowCloseRequested(QWebPage* self);
-void QWebPage_connect_windowCloseRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_windowCloseRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_printRequested(QWebPage* self, QWebFrame* frame);
-void QWebPage_connect_printRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
+void QWebPage_connect_printRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
 void QWebPage_linkClicked(QWebPage* self, QUrl* url);
-void QWebPage_connect_linkClicked(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t));
+void QWebPage_connect_linkClicked(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QUrl*), void (*release)(intptr_t));
 void QWebPage_toolBarVisibilityChangeRequested(QWebPage* self, bool visible);
-void QWebPage_connect_toolBarVisibilityChangeRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QWebPage_connect_toolBarVisibilityChangeRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QWebPage_statusBarVisibilityChangeRequested(QWebPage* self, bool visible);
-void QWebPage_connect_statusBarVisibilityChangeRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QWebPage_connect_statusBarVisibilityChangeRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QWebPage_menuBarVisibilityChangeRequested(QWebPage* self, bool visible);
-void QWebPage_connect_menuBarVisibilityChangeRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QWebPage_connect_menuBarVisibilityChangeRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QWebPage_unsupportedContent(QWebPage* self, QNetworkReply* reply);
-void QWebPage_connect_unsupportedContent(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t));
+void QWebPage_connect_unsupportedContent(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QNetworkReply*), void (*release)(intptr_t));
 void QWebPage_downloadRequested(QWebPage* self, QNetworkRequest* request);
-void QWebPage_connect_downloadRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QNetworkRequest*), void (*release)(intptr_t));
+void QWebPage_connect_downloadRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QNetworkRequest*), void (*release)(intptr_t));
 void QWebPage_focusedElementChanged(QWebPage* self, QWebElement* element);
-void QWebPage_connect_focusedElementChanged(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebElement*), void (*release)(intptr_t));
+void QWebPage_connect_focusedElementChanged(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebElement*), void (*release)(intptr_t));
 void QWebPage_microFocusChanged(QWebPage* self);
-void QWebPage_connect_microFocusChanged(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_microFocusChanged(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_contentsChanged(QWebPage* self);
-void QWebPage_connect_contentsChanged(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_contentsChanged(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_databaseQuotaExceeded(QWebPage* self, QWebFrame* frame, struct miqt_string databaseName);
-void QWebPage_connect_databaseQuotaExceeded(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, struct miqt_string), void (*release)(intptr_t));
+void QWebPage_connect_databaseQuotaExceeded(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, struct miqt_string), void (*release)(intptr_t));
 void QWebPage_applicationCacheQuotaExceeded(QWebPage* self, QWebSecurityOrigin* origin, unsigned long long defaultOriginQuota, unsigned long long totalSpaceNeeded);
-void QWebPage_connect_applicationCacheQuotaExceeded(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebSecurityOrigin*, unsigned long long, unsigned long long), void (*release)(intptr_t));
+void QWebPage_connect_applicationCacheQuotaExceeded(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebSecurityOrigin*, unsigned long long, unsigned long long), void (*release)(intptr_t));
 void QWebPage_saveFrameStateRequested(QWebPage* self, QWebFrame* frame, QWebHistoryItem* item);
-void QWebPage_connect_saveFrameStateRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, QWebHistoryItem*), void (*release)(intptr_t));
+void QWebPage_connect_saveFrameStateRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, QWebHistoryItem*), void (*release)(intptr_t));
 void QWebPage_restoreFrameStateRequested(QWebPage* self, QWebFrame* frame);
-void QWebPage_connect_restoreFrameStateRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
+void QWebPage_connect_restoreFrameStateRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*), void (*release)(intptr_t));
 void QWebPage_viewportChangeRequested(QWebPage* self);
-void QWebPage_connect_viewportChangeRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
+void QWebPage_connect_viewportChangeRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t));
 void QWebPage_featurePermissionRequested(QWebPage* self, QWebFrame* frame, int feature);
-void QWebPage_connect_featurePermissionRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, int), void (*release)(intptr_t));
+void QWebPage_connect_featurePermissionRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, int), void (*release)(intptr_t));
 void QWebPage_featurePermissionRequestCanceled(QWebPage* self, QWebFrame* frame, int feature);
-void QWebPage_connect_featurePermissionRequestCanceled(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, int), void (*release)(intptr_t));
+void QWebPage_connect_featurePermissionRequestCanceled(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFrame*, int), void (*release)(intptr_t));
 void QWebPage_fullScreenRequested(QWebPage* self, QWebFullScreenRequest* fullScreenRequest);
-void QWebPage_connect_fullScreenRequested(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFullScreenRequest*), void (*release)(intptr_t));
+void QWebPage_connect_fullScreenRequested(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, QWebFullScreenRequest*), void (*release)(intptr_t));
 void QWebPage_consoleMessageReceived(QWebPage* self, int source, int level, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
-void QWebPage_connect_consoleMessageReceived(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct miqt_string, int, struct miqt_string), void (*release)(intptr_t));
+void QWebPage_connect_consoleMessageReceived(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, int, int, struct miqt_string, int, struct miqt_string), void (*release)(intptr_t));
 void QWebPage_recentlyAudibleChanged(QWebPage* self, bool recentlyAudible);
-void QWebPage_connect_recentlyAudibleChanged(QWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QWebPage_connect_recentlyAudibleChanged(VirtualQWebPage* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 QWebPage* QWebPage_createWindow(QWebPage* self, int type);
 QObject* QWebPage_createPlugin(QWebPage* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
 bool QWebPage_acceptNavigationRequest(QWebPage* self, QWebFrame* frame, QNetworkRequest* request, int type);
@@ -282,37 +289,41 @@ struct miqt_string QWebPage_tr3(const char* s, const char* c, int n);
 struct miqt_string QWebPage_trUtf82(const char* s, const char* c);
 struct miqt_string QWebPage_trUtf83(const char* s, const char* c, int n);
 bool QWebPage_findText2(QWebPage* self, struct miqt_string subString, int options);
-QMetaObject* QWebPage_virtualbase_metaObject(const void* self);
-void* QWebPage_virtualbase_metacast(void* self, const char* param1);
-int QWebPage_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-void QWebPage_virtualbase_triggerAction(void* self, int action, bool checked);
-bool QWebPage_virtualbase_event(void* self, QEvent* param1);
-bool QWebPage_virtualbase_extension(void* self, int extension, QWebPage__ExtensionOption* option, QWebPage__ExtensionReturn* output);
-bool QWebPage_virtualbase_supportsExtension(const void* self, int extension);
-bool QWebPage_virtualbase_shouldInterruptJavaScript(void* self);
-QWebPage* QWebPage_virtualbase_createWindow(void* self, int type);
-QObject* QWebPage_virtualbase_createPlugin(void* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
-bool QWebPage_virtualbase_acceptNavigationRequest(void* self, QWebFrame* frame, QNetworkRequest* request, int type);
-struct miqt_string QWebPage_virtualbase_chooseFile(void* self, QWebFrame* originatingFrame, struct miqt_string oldFile);
-void QWebPage_virtualbase_javaScriptAlert(void* self, QWebFrame* originatingFrame, struct miqt_string msg);
-bool QWebPage_virtualbase_javaScriptConfirm(void* self, QWebFrame* originatingFrame, struct miqt_string msg);
-void QWebPage_virtualbase_javaScriptConsoleMessage(void* self, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
-struct miqt_string QWebPage_virtualbase_userAgentForUrl(const void* self, QUrl* url);
-bool QWebPage_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QWebPage_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QWebPage_virtualbase_childEvent(void* self, QChildEvent* event);
-void QWebPage_virtualbase_customEvent(void* self, QEvent* event);
-void QWebPage_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QWebPage_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QWebPage_protectedbase_sender(const void* self);
-int QWebPage_protectedbase_senderSignalIndex(const void* self);
-int QWebPage_protectedbase_receivers(const void* self, const char* signal);
-bool QWebPage_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QWebPage_virtualbase_metaObject(const VirtualQWebPage* self);
+void* QWebPage_virtualbase_metacast(VirtualQWebPage* self, const char* param1);
+int QWebPage_virtualbase_metacall(VirtualQWebPage* self, int param1, int param2, void** param3);
+void QWebPage_virtualbase_triggerAction(VirtualQWebPage* self, int action, bool checked);
+bool QWebPage_virtualbase_event(VirtualQWebPage* self, QEvent* param1);
+bool QWebPage_virtualbase_extension(VirtualQWebPage* self, int extension, QWebPage__ExtensionOption* option, QWebPage__ExtensionReturn* output);
+bool QWebPage_virtualbase_supportsExtension(const VirtualQWebPage* self, int extension);
+bool QWebPage_virtualbase_shouldInterruptJavaScript(VirtualQWebPage* self);
+QWebPage* QWebPage_virtualbase_createWindow(VirtualQWebPage* self, int type);
+QObject* QWebPage_virtualbase_createPlugin(VirtualQWebPage* self, struct miqt_string classid, QUrl* url, struct miqt_array /* of struct miqt_string */  paramNames, struct miqt_array /* of struct miqt_string */  paramValues);
+bool QWebPage_virtualbase_acceptNavigationRequest(VirtualQWebPage* self, QWebFrame* frame, QNetworkRequest* request, int type);
+struct miqt_string QWebPage_virtualbase_chooseFile(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string oldFile);
+void QWebPage_virtualbase_javaScriptAlert(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
+bool QWebPage_virtualbase_javaScriptConfirm(VirtualQWebPage* self, QWebFrame* originatingFrame, struct miqt_string msg);
+void QWebPage_virtualbase_javaScriptConsoleMessage(VirtualQWebPage* self, struct miqt_string message, int lineNumber, struct miqt_string sourceID);
+struct miqt_string QWebPage_virtualbase_userAgentForUrl(const VirtualQWebPage* self, QUrl* url);
+bool QWebPage_virtualbase_eventFilter(VirtualQWebPage* self, QObject* watched, QEvent* event);
+void QWebPage_virtualbase_timerEvent(VirtualQWebPage* self, QTimerEvent* event);
+void QWebPage_virtualbase_childEvent(VirtualQWebPage* self, QChildEvent* event);
+void QWebPage_virtualbase_customEvent(VirtualQWebPage* self, QEvent* event);
+void QWebPage_virtualbase_connectNotify(VirtualQWebPage* self, QMetaMethod* signal);
+void QWebPage_virtualbase_disconnectNotify(VirtualQWebPage* self, QMetaMethod* signal);
+
+QObject* QWebPage_protectedbase_sender(const VirtualQWebPage* self);
+int QWebPage_protectedbase_senderSignalIndex(const VirtualQWebPage* self);
+int QWebPage_protectedbase_receivers(const VirtualQWebPage* self, const char* signal);
+bool QWebPage_protectedbase_isSignalConnected(const VirtualQWebPage* self, QMetaMethod* signal);
+
 const QMetaObject* QWebPage_staticMetaObject();
 void QWebPage_delete(QWebPage* self);
 
 QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new();
 QWebPage__ViewportAttributes* QWebPage__ViewportAttributes_new2(QWebPage__ViewportAttributes* other);
+
 void QWebPage__ViewportAttributes_operatorAssign(QWebPage__ViewportAttributes* self, QWebPage__ViewportAttributes* other);
 double QWebPage__ViewportAttributes_initialScaleFactor(const QWebPage__ViewportAttributes* self);
 double QWebPage__ViewportAttributes_minimumScaleFactor(const QWebPage__ViewportAttributes* self);
@@ -321,13 +332,16 @@ double QWebPage__ViewportAttributes_devicePixelRatio(const QWebPage__ViewportAtt
 bool QWebPage__ViewportAttributes_isUserScalable(const QWebPage__ViewportAttributes* self);
 bool QWebPage__ViewportAttributes_isValid(const QWebPage__ViewportAttributes* self);
 QSizeF* QWebPage__ViewportAttributes_size(const QWebPage__ViewportAttributes* self);
+
 void QWebPage__ViewportAttributes_delete(QWebPage__ViewportAttributes* self);
 
 QWebPage__ExtensionOption* QWebPage__ExtensionOption_new(QWebPage__ExtensionOption* param1);
+
 void QWebPage__ExtensionOption_delete(QWebPage__ExtensionOption* self);
 
 QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new(QWebPage__ExtensionReturn* param1);
 QWebPage__ExtensionReturn* QWebPage__ExtensionReturn_new2();
+
 void QWebPage__ExtensionReturn_delete(QWebPage__ExtensionReturn* self);
 
 void QWebPage__ChooseMultipleFilesExtensionOption_virtbase(QWebPage__ChooseMultipleFilesExtensionOption* src, QWebPage__ExtensionOption** outptr_QWebPage__ExtensionOption);
@@ -337,14 +351,18 @@ void QWebPage__ChooseMultipleFilesExtensionReturn_virtbase(QWebPage__ChooseMulti
 void QWebPage__ChooseMultipleFilesExtensionReturn_delete(QWebPage__ChooseMultipleFilesExtensionReturn* self);
 
 QWebPage__ErrorPageExtensionOption* QWebPage__ErrorPageExtensionOption_new(QWebPage__ErrorPageExtensionOption* param1);
+
 void QWebPage__ErrorPageExtensionOption_virtbase(QWebPage__ErrorPageExtensionOption* src, QWebPage__ExtensionOption** outptr_QWebPage__ExtensionOption);
 void QWebPage__ErrorPageExtensionOption_operatorAssign(QWebPage__ErrorPageExtensionOption* self, QWebPage__ErrorPageExtensionOption* param1);
+
 void QWebPage__ErrorPageExtensionOption_delete(QWebPage__ErrorPageExtensionOption* self);
 
 QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new();
 QWebPage__ErrorPageExtensionReturn* QWebPage__ErrorPageExtensionReturn_new2(QWebPage__ErrorPageExtensionReturn* param1);
+
 void QWebPage__ErrorPageExtensionReturn_virtbase(QWebPage__ErrorPageExtensionReturn* src, QWebPage__ExtensionReturn** outptr_QWebPage__ExtensionReturn);
 void QWebPage__ErrorPageExtensionReturn_operatorAssign(QWebPage__ErrorPageExtensionReturn* self, QWebPage__ErrorPageExtensionReturn* param1);
+
 void QWebPage__ErrorPageExtensionReturn_delete(QWebPage__ErrorPageExtensionReturn* self);
 
 #ifdef __cplusplus

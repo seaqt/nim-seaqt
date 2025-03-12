@@ -7,15 +7,6 @@
 #include <QVariant>
 #include <qqmldebug.h>
 #include "gen_qqmldebug.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QQmlDebuggingEnabler* QQmlDebuggingEnabler_new() {
 	return new QQmlDebuggingEnabler();
 }

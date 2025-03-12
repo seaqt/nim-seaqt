@@ -29,6 +29,7 @@ typedef struct QUrl QUrl;
 QQmlFile* QQmlFile_new();
 QQmlFile* QQmlFile_new2(QQmlEngine* param1, QUrl* param2);
 QQmlFile* QQmlFile_new3(QQmlEngine* param1, struct miqt_string param2);
+
 bool QQmlFile_isNull(const QQmlFile* self);
 bool QQmlFile_isReady(const QQmlFile* self);
 bool QQmlFile_isError(const QQmlFile* self);
@@ -53,6 +54,7 @@ bool QQmlFile_isLocalFile(struct miqt_string url);
 bool QQmlFile_isLocalFileWithUrl(QUrl* url);
 struct miqt_string QQmlFile_urlToLocalFileOrQrc(struct miqt_string param1);
 struct miqt_string QQmlFile_urlToLocalFileOrQrcWithQUrl(QUrl* param1);
+
 void QQmlFile_delete(QQmlFile* self);
 
 #ifdef __cplusplus

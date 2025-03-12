@@ -8,15 +8,6 @@
 #include <cstring>
 #include <qcameraflashcontrol.h>
 #include "gen_qcameraflashcontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QCameraFlashControl_virtbase(QCameraFlashControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -133,6 +124,7 @@ struct miqt_string QCameraFlashControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QCameraFlashControl_staticMetaObject() { return &QCameraFlashControl::staticMetaObject; }
+
 void QCameraFlashControl_delete(QCameraFlashControl* self) {
 	delete self;
 }

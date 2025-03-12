@@ -9,15 +9,6 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QTimeZone__OffsetData
 #include <qtimezone.h>
 #include "gen_qtimezone.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTimeZone* QTimeZone_new() {
 	return new QTimeZone();
 }
@@ -369,7 +360,7 @@ void QTimeZone_delete(QTimeZone* self) {
 }
 
 QTimeZone__OffsetData* QTimeZone__OffsetData_new(QTimeZone__OffsetData* param1) {
-	return new QTimeZone::OffsetData(*param1);
+	return new QTimeZone__OffsetData(*param1);
 }
 
 void QTimeZone__OffsetData_operatorAssign(QTimeZone__OffsetData* self, QTimeZone__OffsetData* param1) {

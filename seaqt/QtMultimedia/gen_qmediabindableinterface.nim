@@ -41,8 +41,8 @@ export
 
 type cQMediaBindableInterface*{.exportc: "QMediaBindableInterface", incompleteStruct.} = object
 
-proc fcQMediaBindableInterface_mediaObject(self: pointer, ): pointer {.importc: "QMediaBindableInterface_mediaObject".}
+proc fcQMediaBindableInterface_mediaObject(self: pointer): pointer {.importc: "QMediaBindableInterface_mediaObject".}
 
-proc mediaObject*(self: gen_qmediabindableinterface_types.QMediaBindableInterface, ): gen_qmediaobject_types.QMediaObject =
+proc mediaObject*(self: gen_qmediabindableinterface_types.QMediaBindableInterface): gen_qmediaobject_types.QMediaObject =
   gen_qmediaobject_types.QMediaObject(h: fcQMediaBindableInterface_mediaObject(self.h), owned: false)
 

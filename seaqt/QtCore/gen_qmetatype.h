@@ -28,6 +28,7 @@ typedef struct QMetaType QMetaType;
 
 QMetaType* QMetaType_new();
 QMetaType* QMetaType_new2(const int type);
+
 bool QMetaType_unregisterType(int type);
 int QMetaType_registerTypedef(const char* typeName, int aliasId);
 int QMetaType_registerNormalizedTypedef(struct miqt_string normalizedTypeName, int aliasId);
@@ -65,6 +66,7 @@ bool QMetaType_hasRegisteredConverterFunction(int fromTypeId, int toTypeId);
 void* QMetaType_create22(int type, const void* copy);
 void* QMetaType_create1(const QMetaType* self, const void* copy);
 void* QMetaType_construct2(const QMetaType* self, void* where, const void* copy);
+
 void QMetaType_delete(QMetaType* self);
 
 #ifdef __cplusplus

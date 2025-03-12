@@ -36,17 +36,24 @@ typedef struct QUndoCommand QUndoCommand;
 typedef struct QUndoStack QUndoStack;
 #endif
 
-struct QUndoCommand_VTable {
-	void (*destructor)(struct QUndoCommand_VTable* vtbl, QUndoCommand* self);
-	void (*undo)(struct QUndoCommand_VTable* vtbl, QUndoCommand* self);
-	void (*redo)(struct QUndoCommand_VTable* vtbl, QUndoCommand* self);
-	int (*id)(struct QUndoCommand_VTable* vtbl, const QUndoCommand* self);
-	bool (*mergeWith)(struct QUndoCommand_VTable* vtbl, QUndoCommand* self, QUndoCommand* other);
-};
-QUndoCommand* QUndoCommand_new(struct QUndoCommand_VTable* vtbl);
-QUndoCommand* QUndoCommand_new2(struct QUndoCommand_VTable* vtbl, struct miqt_string text);
-QUndoCommand* QUndoCommand_new3(struct QUndoCommand_VTable* vtbl, QUndoCommand* parent);
-QUndoCommand* QUndoCommand_new4(struct QUndoCommand_VTable* vtbl, struct miqt_string text, QUndoCommand* parent);
+typedef struct VirtualQUndoCommand VirtualQUndoCommand;
+typedef struct QUndoCommand_VTable{
+	void (*destructor)(VirtualQUndoCommand* self);
+	void (*undo)(VirtualQUndoCommand* self);
+	void (*redo)(VirtualQUndoCommand* self);
+	int (*id)(const VirtualQUndoCommand* self);
+	bool (*mergeWith)(VirtualQUndoCommand* self, QUndoCommand* other);
+}QUndoCommand_VTable;
+
+const QUndoCommand_VTable* QUndoCommand_vtbl(const VirtualQUndoCommand* self);
+void* QUndoCommand_vdata(const VirtualQUndoCommand* self);
+void QUndoCommand_setVdata(VirtualQUndoCommand* self, void* vdata);
+
+VirtualQUndoCommand* QUndoCommand_new(const QUndoCommand_VTable* vtbl, void* vdata);
+VirtualQUndoCommand* QUndoCommand_new2(const QUndoCommand_VTable* vtbl, void* vdata, struct miqt_string text);
+VirtualQUndoCommand* QUndoCommand_new3(const QUndoCommand_VTable* vtbl, void* vdata, QUndoCommand* parent);
+VirtualQUndoCommand* QUndoCommand_new4(const QUndoCommand_VTable* vtbl, void* vdata, struct miqt_string text, QUndoCommand* parent);
+
 void QUndoCommand_undo(QUndoCommand* self);
 void QUndoCommand_redo(QUndoCommand* self);
 struct miqt_string QUndoCommand_text(const QUndoCommand* self);
@@ -58,27 +65,36 @@ int QUndoCommand_id(const QUndoCommand* self);
 bool QUndoCommand_mergeWith(QUndoCommand* self, QUndoCommand* other);
 int QUndoCommand_childCount(const QUndoCommand* self);
 QUndoCommand* QUndoCommand_child(const QUndoCommand* self, int index);
-void QUndoCommand_virtualbase_undo(void* self);
-void QUndoCommand_virtualbase_redo(void* self);
-int QUndoCommand_virtualbase_id(const void* self);
-bool QUndoCommand_virtualbase_mergeWith(void* self, QUndoCommand* other);
+
+void QUndoCommand_virtualbase_undo(VirtualQUndoCommand* self);
+void QUndoCommand_virtualbase_redo(VirtualQUndoCommand* self);
+int QUndoCommand_virtualbase_id(const VirtualQUndoCommand* self);
+bool QUndoCommand_virtualbase_mergeWith(VirtualQUndoCommand* self, QUndoCommand* other);
+
 void QUndoCommand_delete(QUndoCommand* self);
 
-struct QUndoStack_VTable {
-	void (*destructor)(struct QUndoStack_VTable* vtbl, QUndoStack* self);
-	QMetaObject* (*metaObject)(struct QUndoStack_VTable* vtbl, const QUndoStack* self);
-	void* (*metacast)(struct QUndoStack_VTable* vtbl, QUndoStack* self, const char* param1);
-	int (*metacall)(struct QUndoStack_VTable* vtbl, QUndoStack* self, int param1, int param2, void** param3);
-	bool (*event)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QEvent* event);
-	bool (*eventFilter)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QObject* watched, QEvent* event);
-	void (*timerEvent)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QTimerEvent* event);
-	void (*childEvent)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QChildEvent* event);
-	void (*customEvent)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QEvent* event);
-	void (*connectNotify)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QMetaMethod* signal);
-	void (*disconnectNotify)(struct QUndoStack_VTable* vtbl, QUndoStack* self, QMetaMethod* signal);
-};
-QUndoStack* QUndoStack_new(struct QUndoStack_VTable* vtbl);
-QUndoStack* QUndoStack_new2(struct QUndoStack_VTable* vtbl, QObject* parent);
+typedef struct VirtualQUndoStack VirtualQUndoStack;
+typedef struct QUndoStack_VTable{
+	void (*destructor)(VirtualQUndoStack* self);
+	QMetaObject* (*metaObject)(const VirtualQUndoStack* self);
+	void* (*metacast)(VirtualQUndoStack* self, const char* param1);
+	int (*metacall)(VirtualQUndoStack* self, int param1, int param2, void** param3);
+	bool (*event)(VirtualQUndoStack* self, QEvent* event);
+	bool (*eventFilter)(VirtualQUndoStack* self, QObject* watched, QEvent* event);
+	void (*timerEvent)(VirtualQUndoStack* self, QTimerEvent* event);
+	void (*childEvent)(VirtualQUndoStack* self, QChildEvent* event);
+	void (*customEvent)(VirtualQUndoStack* self, QEvent* event);
+	void (*connectNotify)(VirtualQUndoStack* self, QMetaMethod* signal);
+	void (*disconnectNotify)(VirtualQUndoStack* self, QMetaMethod* signal);
+}QUndoStack_VTable;
+
+const QUndoStack_VTable* QUndoStack_vtbl(const VirtualQUndoStack* self);
+void* QUndoStack_vdata(const VirtualQUndoStack* self);
+void QUndoStack_setVdata(VirtualQUndoStack* self, void* vdata);
+
+VirtualQUndoStack* QUndoStack_new(const QUndoStack_VTable* vtbl, void* vdata);
+VirtualQUndoStack* QUndoStack_new2(const QUndoStack_VTable* vtbl, void* vdata, QObject* parent);
+
 void QUndoStack_virtbase(QUndoStack* src, QObject** outptr_QObject);
 QMetaObject* QUndoStack_metaObject(const QUndoStack* self);
 void* QUndoStack_metacast(QUndoStack* self, const char* param1);
@@ -111,17 +127,17 @@ void QUndoStack_undo(QUndoStack* self);
 void QUndoStack_redo(QUndoStack* self);
 void QUndoStack_setActive(QUndoStack* self);
 void QUndoStack_indexChanged(QUndoStack* self, int idx);
-void QUndoStack_connect_indexChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
+void QUndoStack_connect_indexChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, int), void (*release)(intptr_t));
 void QUndoStack_cleanChanged(QUndoStack* self, bool clean);
-void QUndoStack_connect_cleanChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoStack_connect_cleanChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoStack_canUndoChanged(QUndoStack* self, bool canUndo);
-void QUndoStack_connect_canUndoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoStack_connect_canUndoChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoStack_canRedoChanged(QUndoStack* self, bool canRedo);
-void QUndoStack_connect_canRedoChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
+void QUndoStack_connect_canRedoChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t));
 void QUndoStack_undoTextChanged(QUndoStack* self, struct miqt_string undoText);
-void QUndoStack_connect_undoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QUndoStack_connect_undoTextChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 void QUndoStack_redoTextChanged(QUndoStack* self, struct miqt_string redoText);
-void QUndoStack_connect_redoTextChanged(QUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
+void QUndoStack_connect_redoTextChanged(VirtualQUndoStack* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string), void (*release)(intptr_t));
 struct miqt_string QUndoStack_tr2(const char* s, const char* c);
 struct miqt_string QUndoStack_tr3(const char* s, const char* c, int n);
 struct miqt_string QUndoStack_trUtf82(const char* s, const char* c);
@@ -129,20 +145,23 @@ struct miqt_string QUndoStack_trUtf83(const char* s, const char* c, int n);
 QAction* QUndoStack_createUndoAction2(const QUndoStack* self, QObject* parent, struct miqt_string prefix);
 QAction* QUndoStack_createRedoAction2(const QUndoStack* self, QObject* parent, struct miqt_string prefix);
 void QUndoStack_setActive1(QUndoStack* self, bool active);
-QMetaObject* QUndoStack_virtualbase_metaObject(const void* self);
-void* QUndoStack_virtualbase_metacast(void* self, const char* param1);
-int QUndoStack_virtualbase_metacall(void* self, int param1, int param2, void** param3);
-bool QUndoStack_virtualbase_event(void* self, QEvent* event);
-bool QUndoStack_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
-void QUndoStack_virtualbase_timerEvent(void* self, QTimerEvent* event);
-void QUndoStack_virtualbase_childEvent(void* self, QChildEvent* event);
-void QUndoStack_virtualbase_customEvent(void* self, QEvent* event);
-void QUndoStack_virtualbase_connectNotify(void* self, QMetaMethod* signal);
-void QUndoStack_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
-QObject* QUndoStack_protectedbase_sender(const void* self);
-int QUndoStack_protectedbase_senderSignalIndex(const void* self);
-int QUndoStack_protectedbase_receivers(const void* self, const char* signal);
-bool QUndoStack_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+
+QMetaObject* QUndoStack_virtualbase_metaObject(const VirtualQUndoStack* self);
+void* QUndoStack_virtualbase_metacast(VirtualQUndoStack* self, const char* param1);
+int QUndoStack_virtualbase_metacall(VirtualQUndoStack* self, int param1, int param2, void** param3);
+bool QUndoStack_virtualbase_event(VirtualQUndoStack* self, QEvent* event);
+bool QUndoStack_virtualbase_eventFilter(VirtualQUndoStack* self, QObject* watched, QEvent* event);
+void QUndoStack_virtualbase_timerEvent(VirtualQUndoStack* self, QTimerEvent* event);
+void QUndoStack_virtualbase_childEvent(VirtualQUndoStack* self, QChildEvent* event);
+void QUndoStack_virtualbase_customEvent(VirtualQUndoStack* self, QEvent* event);
+void QUndoStack_virtualbase_connectNotify(VirtualQUndoStack* self, QMetaMethod* signal);
+void QUndoStack_virtualbase_disconnectNotify(VirtualQUndoStack* self, QMetaMethod* signal);
+
+QObject* QUndoStack_protectedbase_sender(const VirtualQUndoStack* self);
+int QUndoStack_protectedbase_senderSignalIndex(const VirtualQUndoStack* self);
+int QUndoStack_protectedbase_receivers(const VirtualQUndoStack* self, const char* signal);
+bool QUndoStack_protectedbase_isSignalConnected(const VirtualQUndoStack* self, QMetaMethod* signal);
+
 const QMetaObject* QUndoStack_staticMetaObject();
 void QUndoStack_delete(QUndoStack* self);
 

@@ -75,6 +75,7 @@ QImage* QClipboard_image1(const QClipboard* self, int mode);
 QPixmap* QClipboard_pixmap1(const QClipboard* self, int mode);
 void QClipboard_setImage2(QClipboard* self, QImage* param1, int mode);
 void QClipboard_setPixmap2(QClipboard* self, QPixmap* param1, int mode);
+
 const QMetaObject* QClipboard_staticMetaObject();
 
 #ifdef __cplusplus

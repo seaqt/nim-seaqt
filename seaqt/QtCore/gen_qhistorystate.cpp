@@ -13,41 +13,34 @@
 #include <QTimerEvent>
 #include <qhistorystate.h>
 #include "gen_qhistorystate.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQHistoryState final : public QHistoryState {
-	struct QHistoryState_VTable* vtbl;
+	const QHistoryState_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QHistoryState_VTable* QHistoryState_vtbl(const VirtualQHistoryState* self);
+	friend void* QHistoryState_vdata(const VirtualQHistoryState* self);
+	friend void QHistoryState_setVdata(VirtualQHistoryState* self, void* vdata);
 
-	VirtualQHistoryState(struct QHistoryState_VTable* vtbl): QHistoryState(), vtbl(vtbl) {};
-	VirtualQHistoryState(struct QHistoryState_VTable* vtbl, QHistoryState::HistoryType type): QHistoryState(type), vtbl(vtbl) {};
-	VirtualQHistoryState(struct QHistoryState_VTable* vtbl, QState* parent): QHistoryState(parent), vtbl(vtbl) {};
-	VirtualQHistoryState(struct QHistoryState_VTable* vtbl, QHistoryState::HistoryType type, QState* parent): QHistoryState(type, parent), vtbl(vtbl) {};
+	VirtualQHistoryState(const QHistoryState_VTable* vtbl, void* vdata): QHistoryState(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHistoryState(const QHistoryState_VTable* vtbl, void* vdata, QHistoryState::HistoryType type): QHistoryState(type), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHistoryState(const QHistoryState_VTable* vtbl, void* vdata, QState* parent): QHistoryState(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQHistoryState(const QHistoryState_VTable* vtbl, void* vdata, QHistoryState::HistoryType type, QState* parent): QHistoryState(type, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQHistoryState() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQHistoryState() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QHistoryState::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QHistoryState_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QHistoryState_virtualbase_metaObject(const VirtualQHistoryState* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QHistoryState::qt_metacast(param1);
@@ -55,14 +48,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QHistoryState_virtualbase_metacast(void* self, const char* param1);
+	friend void* QHistoryState_virtualbase_metacast(VirtualQHistoryState* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QHistoryState::qt_metacall(param1, param2, param3);
@@ -73,14 +65,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QHistoryState_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QHistoryState_virtualbase_metacall(VirtualQHistoryState* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onEntry(QEvent* event) override {
 		if (vtbl->onEntry == 0) {
 			QHistoryState::onEntry(event);
@@ -89,13 +80,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onEntry(vtbl, this, sigval1);
+		vtbl->onEntry(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_onEntry(void* self, QEvent* event);
+	friend void QHistoryState_virtualbase_onEntry(VirtualQHistoryState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void onExit(QEvent* event) override {
 		if (vtbl->onExit == 0) {
 			QHistoryState::onExit(event);
@@ -104,13 +94,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->onExit(vtbl, this, sigval1);
+		vtbl->onExit(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_onExit(void* self, QEvent* event);
+	friend void QHistoryState_virtualbase_onExit(VirtualQHistoryState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* e) override {
 		if (vtbl->event == 0) {
 			return QHistoryState::event(e);
@@ -118,14 +107,13 @@ public:
 
 		QEvent* sigval1 = e;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QHistoryState_virtualbase_event(void* self, QEvent* e);
+	friend bool QHistoryState_virtualbase_event(VirtualQHistoryState* self, QEvent* e);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QHistoryState::eventFilter(watched, event);
@@ -134,14 +122,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QHistoryState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QHistoryState_virtualbase_eventFilter(VirtualQHistoryState* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QHistoryState::timerEvent(event);
@@ -150,13 +137,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QHistoryState_virtualbase_timerEvent(VirtualQHistoryState* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QHistoryState::childEvent(event);
@@ -165,13 +151,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QHistoryState_virtualbase_childEvent(VirtualQHistoryState* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QHistoryState::customEvent(event);
@@ -180,13 +165,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QHistoryState_virtualbase_customEvent(VirtualQHistoryState* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QHistoryState::connectNotify(signal);
@@ -197,13 +181,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QHistoryState_virtualbase_connectNotify(VirtualQHistoryState* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QHistoryState::disconnectNotify(signal);
@@ -214,33 +197,33 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QHistoryState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QHistoryState_virtualbase_disconnectNotify(VirtualQHistoryState* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QHistoryState_protectedbase_sender(const void* self);
-	friend int QHistoryState_protectedbase_senderSignalIndex(const void* self);
-	friend int QHistoryState_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QHistoryState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QHistoryState_protectedbase_sender(const VirtualQHistoryState* self);
+	friend int QHistoryState_protectedbase_senderSignalIndex(const VirtualQHistoryState* self);
+	friend int QHistoryState_protectedbase_receivers(const VirtualQHistoryState* self, const char* signal);
+	friend bool QHistoryState_protectedbase_isSignalConnected(const VirtualQHistoryState* self, QMetaMethod* signal);
 };
 
-QHistoryState* QHistoryState_new(struct QHistoryState_VTable* vtbl) {
-	return new VirtualQHistoryState(vtbl);
+VirtualQHistoryState* QHistoryState_new(const QHistoryState_VTable* vtbl, void* vdata) {
+	return new VirtualQHistoryState(vtbl, vdata);
 }
 
-QHistoryState* QHistoryState_new2(struct QHistoryState_VTable* vtbl, int type) {
-	return new VirtualQHistoryState(vtbl, static_cast<QHistoryState::HistoryType>(type));
+VirtualQHistoryState* QHistoryState_new2(const QHistoryState_VTable* vtbl, void* vdata, int type) {
+	return new VirtualQHistoryState(vtbl, vdata, static_cast<QHistoryState::HistoryType>(type));
 }
 
-QHistoryState* QHistoryState_new3(struct QHistoryState_VTable* vtbl, QState* parent) {
-	return new VirtualQHistoryState(vtbl, parent);
+VirtualQHistoryState* QHistoryState_new3(const QHistoryState_VTable* vtbl, void* vdata, QState* parent) {
+	return new VirtualQHistoryState(vtbl, vdata, parent);
 }
 
-QHistoryState* QHistoryState_new4(struct QHistoryState_VTable* vtbl, int type, QState* parent) {
-	return new VirtualQHistoryState(vtbl, static_cast<QHistoryState::HistoryType>(type), parent);
+VirtualQHistoryState* QHistoryState_new4(const QHistoryState_VTable* vtbl, void* vdata, int type, QState* parent) {
+	return new VirtualQHistoryState(vtbl, vdata, static_cast<QHistoryState::HistoryType>(type), parent);
 }
 
 void QHistoryState_virtbase(QHistoryState* src, QAbstractState** outptr_QAbstractState) {
@@ -350,105 +333,86 @@ struct miqt_string QHistoryState_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QHistoryState_virtualbase_metaObject(const void* self) {
+QMetaObject* QHistoryState_virtualbase_metaObject(const VirtualQHistoryState* self) {
 
-	return (QMetaObject*) ( (const VirtualQHistoryState*)(self) )->QHistoryState::metaObject();
-
+	return (QMetaObject*) self->QHistoryState::metaObject();
 }
 
-void* QHistoryState_virtualbase_metacast(void* self, const char* param1) {
+void* QHistoryState_virtualbase_metacast(VirtualQHistoryState* self, const char* param1) {
 
-	return ( (VirtualQHistoryState*)(self) )->QHistoryState::qt_metacast(param1);
-
+	return self->QHistoryState::qt_metacast(param1);
 }
 
-int QHistoryState_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QHistoryState_virtualbase_metacall(VirtualQHistoryState* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQHistoryState*)(self) )->QHistoryState::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QHistoryState::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QHistoryState_virtualbase_onEntry(void* self, QEvent* event) {
+void QHistoryState_virtualbase_onEntry(VirtualQHistoryState* self, QEvent* event) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::onEntry(event);
-
+	self->QHistoryState::onEntry(event);
 }
 
-void QHistoryState_virtualbase_onExit(void* self, QEvent* event) {
+void QHistoryState_virtualbase_onExit(VirtualQHistoryState* self, QEvent* event) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::onExit(event);
-
+	self->QHistoryState::onExit(event);
 }
 
-bool QHistoryState_virtualbase_event(void* self, QEvent* e) {
+bool QHistoryState_virtualbase_event(VirtualQHistoryState* self, QEvent* e) {
 
-	return ( (VirtualQHistoryState*)(self) )->QHistoryState::event(e);
-
+	return self->QHistoryState::event(e);
 }
 
-bool QHistoryState_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QHistoryState_virtualbase_eventFilter(VirtualQHistoryState* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQHistoryState*)(self) )->QHistoryState::eventFilter(watched, event);
-
+	return self->QHistoryState::eventFilter(watched, event);
 }
 
-void QHistoryState_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QHistoryState_virtualbase_timerEvent(VirtualQHistoryState* self, QTimerEvent* event) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::timerEvent(event);
-
+	self->QHistoryState::timerEvent(event);
 }
 
-void QHistoryState_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QHistoryState_virtualbase_childEvent(VirtualQHistoryState* self, QChildEvent* event) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::childEvent(event);
-
+	self->QHistoryState::childEvent(event);
 }
 
-void QHistoryState_virtualbase_customEvent(void* self, QEvent* event) {
+void QHistoryState_virtualbase_customEvent(VirtualQHistoryState* self, QEvent* event) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::customEvent(event);
-
+	self->QHistoryState::customEvent(event);
 }
 
-void QHistoryState_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QHistoryState_virtualbase_connectNotify(VirtualQHistoryState* self, QMetaMethod* signal) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::connectNotify(*signal);
-
+	self->QHistoryState::connectNotify(*signal);
 }
 
-void QHistoryState_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QHistoryState_virtualbase_disconnectNotify(VirtualQHistoryState* self, QMetaMethod* signal) {
 
-	( (VirtualQHistoryState*)(self) )->QHistoryState::disconnectNotify(*signal);
-
+	self->QHistoryState::disconnectNotify(*signal);
 }
 
 const QMetaObject* QHistoryState_staticMetaObject() { return &QHistoryState::staticMetaObject; }
-QObject* QHistoryState_protectedbase_sender(const void* self) {
-	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	
-	return self_cast->sender();
 
+const QHistoryState_VTable* QHistoryState_vtbl(const VirtualQHistoryState* self) { return self->vtbl; }
+void* QHistoryState_vdata(const VirtualQHistoryState* self) { return self->vdata; }
+void QHistoryState_setVdata(VirtualQHistoryState* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QHistoryState_protectedbase_sender(const VirtualQHistoryState* self) {
+	return self->sender();
 }
 
-int QHistoryState_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QHistoryState_protectedbase_senderSignalIndex(const VirtualQHistoryState* self) {
+	return self->senderSignalIndex();
 }
 
-int QHistoryState_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QHistoryState_protectedbase_receivers(const VirtualQHistoryState* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QHistoryState_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQHistoryState* self_cast = static_cast<VirtualQHistoryState*>( (QHistoryState*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QHistoryState_protectedbase_isSignalConnected(const VirtualQHistoryState* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QHistoryState_delete(QHistoryState* self) {

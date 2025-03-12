@@ -15,15 +15,6 @@
 #include <QWidget>
 #include <qgraphicssceneevent.h>
 #include "gen_qgraphicssceneevent.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QGraphicsSceneEvent* QGraphicsSceneEvent_new(int type) {
 	return new QGraphicsSceneEvent(static_cast<QEvent::Type>(type));
 }

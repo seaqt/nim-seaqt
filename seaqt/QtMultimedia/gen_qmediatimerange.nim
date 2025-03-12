@@ -39,22 +39,22 @@ type cQMediaTimeInterval*{.exportc: "QMediaTimeInterval", incompleteStruct.} = o
 type cQMediaTimeRange*{.exportc: "QMediaTimeRange", incompleteStruct.} = object
 
 proc fcQMediaTimeInterval_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaTimeInterval_operatorAssign".}
-proc fcQMediaTimeInterval_start(self: pointer, ): clonglong {.importc: "QMediaTimeInterval_start".}
-proc fcQMediaTimeInterval_endX(self: pointer, ): clonglong {.importc: "QMediaTimeInterval_end".}
+proc fcQMediaTimeInterval_start(self: pointer): clonglong {.importc: "QMediaTimeInterval_start".}
+proc fcQMediaTimeInterval_endX(self: pointer): clonglong {.importc: "QMediaTimeInterval_end".}
 proc fcQMediaTimeInterval_contains(self: pointer, time: clonglong): bool {.importc: "QMediaTimeInterval_contains".}
-proc fcQMediaTimeInterval_isNormal(self: pointer, ): bool {.importc: "QMediaTimeInterval_isNormal".}
-proc fcQMediaTimeInterval_normalized(self: pointer, ): pointer {.importc: "QMediaTimeInterval_normalized".}
+proc fcQMediaTimeInterval_isNormal(self: pointer): bool {.importc: "QMediaTimeInterval_isNormal".}
+proc fcQMediaTimeInterval_normalized(self: pointer): pointer {.importc: "QMediaTimeInterval_normalized".}
 proc fcQMediaTimeInterval_translated(self: pointer, offset: clonglong): pointer {.importc: "QMediaTimeInterval_translated".}
 proc fcQMediaTimeInterval_new(): ptr cQMediaTimeInterval {.importc: "QMediaTimeInterval_new".}
 proc fcQMediaTimeInterval_new2(start: clonglong, endVal: clonglong): ptr cQMediaTimeInterval {.importc: "QMediaTimeInterval_new2".}
 proc fcQMediaTimeInterval_new3(param1: pointer): ptr cQMediaTimeInterval {.importc: "QMediaTimeInterval_new3".}
 proc fcQMediaTimeRange_operatorAssign(self: pointer, param1: pointer): void {.importc: "QMediaTimeRange_operatorAssign".}
 proc fcQMediaTimeRange_operatorAssignWithQMediaTimeInterval(self: pointer, param1: pointer): void {.importc: "QMediaTimeRange_operatorAssignWithQMediaTimeInterval".}
-proc fcQMediaTimeRange_earliestTime(self: pointer, ): clonglong {.importc: "QMediaTimeRange_earliestTime".}
-proc fcQMediaTimeRange_latestTime(self: pointer, ): clonglong {.importc: "QMediaTimeRange_latestTime".}
-proc fcQMediaTimeRange_intervals(self: pointer, ): struct_miqt_array {.importc: "QMediaTimeRange_intervals".}
-proc fcQMediaTimeRange_isEmpty(self: pointer, ): bool {.importc: "QMediaTimeRange_isEmpty".}
-proc fcQMediaTimeRange_isContinuous(self: pointer, ): bool {.importc: "QMediaTimeRange_isContinuous".}
+proc fcQMediaTimeRange_earliestTime(self: pointer): clonglong {.importc: "QMediaTimeRange_earliestTime".}
+proc fcQMediaTimeRange_latestTime(self: pointer): clonglong {.importc: "QMediaTimeRange_latestTime".}
+proc fcQMediaTimeRange_intervals(self: pointer): struct_miqt_array {.importc: "QMediaTimeRange_intervals".}
+proc fcQMediaTimeRange_isEmpty(self: pointer): bool {.importc: "QMediaTimeRange_isEmpty".}
+proc fcQMediaTimeRange_isContinuous(self: pointer): bool {.importc: "QMediaTimeRange_isContinuous".}
 proc fcQMediaTimeRange_contains(self: pointer, time: clonglong): bool {.importc: "QMediaTimeRange_contains".}
 proc fcQMediaTimeRange_addInterval(self: pointer, start: clonglong, endVal: clonglong): void {.importc: "QMediaTimeRange_addInterval".}
 proc fcQMediaTimeRange_addIntervalWithInterval(self: pointer, interval: pointer): void {.importc: "QMediaTimeRange_addIntervalWithInterval".}
@@ -66,7 +66,7 @@ proc fcQMediaTimeRange_operatorPlusAssign(self: pointer, param1: pointer): point
 proc fcQMediaTimeRange_operatorPlusAssignWithQMediaTimeInterval(self: pointer, param1: pointer): pointer {.importc: "QMediaTimeRange_operatorPlusAssignWithQMediaTimeInterval".}
 proc fcQMediaTimeRange_operatorMinusAssign(self: pointer, param1: pointer): pointer {.importc: "QMediaTimeRange_operatorMinusAssign".}
 proc fcQMediaTimeRange_operatorMinusAssignWithQMediaTimeInterval(self: pointer, param1: pointer): pointer {.importc: "QMediaTimeRange_operatorMinusAssignWithQMediaTimeInterval".}
-proc fcQMediaTimeRange_clear(self: pointer, ): void {.importc: "QMediaTimeRange_clear".}
+proc fcQMediaTimeRange_clear(self: pointer): void {.importc: "QMediaTimeRange_clear".}
 proc fcQMediaTimeRange_new(): ptr cQMediaTimeRange {.importc: "QMediaTimeRange_new".}
 proc fcQMediaTimeRange_new2(start: clonglong, endVal: clonglong): ptr cQMediaTimeRange {.importc: "QMediaTimeRange_new2".}
 proc fcQMediaTimeRange_new3(param1: pointer): ptr cQMediaTimeRange {.importc: "QMediaTimeRange_new3".}
@@ -75,19 +75,19 @@ proc fcQMediaTimeRange_new4(range: pointer): ptr cQMediaTimeRange {.importc: "QM
 proc operatorAssign*(self: gen_qmediatimerange_types.QMediaTimeInterval, param1: gen_qmediatimerange_types.QMediaTimeInterval): void =
   fcQMediaTimeInterval_operatorAssign(self.h, param1.h)
 
-proc start*(self: gen_qmediatimerange_types.QMediaTimeInterval, ): clonglong =
+proc start*(self: gen_qmediatimerange_types.QMediaTimeInterval): clonglong =
   fcQMediaTimeInterval_start(self.h)
 
-proc endX*(self: gen_qmediatimerange_types.QMediaTimeInterval, ): clonglong =
+proc endX*(self: gen_qmediatimerange_types.QMediaTimeInterval): clonglong =
   fcQMediaTimeInterval_endX(self.h)
 
 proc contains*(self: gen_qmediatimerange_types.QMediaTimeInterval, time: clonglong): bool =
   fcQMediaTimeInterval_contains(self.h, time)
 
-proc isNormal*(self: gen_qmediatimerange_types.QMediaTimeInterval, ): bool =
+proc isNormal*(self: gen_qmediatimerange_types.QMediaTimeInterval): bool =
   fcQMediaTimeInterval_isNormal(self.h)
 
-proc normalized*(self: gen_qmediatimerange_types.QMediaTimeInterval, ): gen_qmediatimerange_types.QMediaTimeInterval =
+proc normalized*(self: gen_qmediatimerange_types.QMediaTimeInterval): gen_qmediatimerange_types.QMediaTimeInterval =
   gen_qmediatimerange_types.QMediaTimeInterval(h: fcQMediaTimeInterval_normalized(self.h), owned: true)
 
 proc translated*(self: gen_qmediatimerange_types.QMediaTimeInterval, offset: clonglong): gen_qmediatimerange_types.QMediaTimeInterval =
@@ -110,13 +110,13 @@ proc operatorAssign*(self: gen_qmediatimerange_types.QMediaTimeRange, param1: ge
 proc operatorAssign*(self: gen_qmediatimerange_types.QMediaTimeRange, param1: gen_qmediatimerange_types.QMediaTimeInterval): void =
   fcQMediaTimeRange_operatorAssignWithQMediaTimeInterval(self.h, param1.h)
 
-proc earliestTime*(self: gen_qmediatimerange_types.QMediaTimeRange, ): clonglong =
+proc earliestTime*(self: gen_qmediatimerange_types.QMediaTimeRange): clonglong =
   fcQMediaTimeRange_earliestTime(self.h)
 
-proc latestTime*(self: gen_qmediatimerange_types.QMediaTimeRange, ): clonglong =
+proc latestTime*(self: gen_qmediatimerange_types.QMediaTimeRange): clonglong =
   fcQMediaTimeRange_latestTime(self.h)
 
-proc intervals*(self: gen_qmediatimerange_types.QMediaTimeRange, ): seq[gen_qmediatimerange_types.QMediaTimeInterval] =
+proc intervals*(self: gen_qmediatimerange_types.QMediaTimeRange): seq[gen_qmediatimerange_types.QMediaTimeInterval] =
   var v_ma = fcQMediaTimeRange_intervals(self.h)
   var vx_ret = newSeq[gen_qmediatimerange_types.QMediaTimeInterval](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -125,10 +125,10 @@ proc intervals*(self: gen_qmediatimerange_types.QMediaTimeRange, ): seq[gen_qmed
   c_free(v_ma.data)
   vx_ret
 
-proc isEmpty*(self: gen_qmediatimerange_types.QMediaTimeRange, ): bool =
+proc isEmpty*(self: gen_qmediatimerange_types.QMediaTimeRange): bool =
   fcQMediaTimeRange_isEmpty(self.h)
 
-proc isContinuous*(self: gen_qmediatimerange_types.QMediaTimeRange, ): bool =
+proc isContinuous*(self: gen_qmediatimerange_types.QMediaTimeRange): bool =
   fcQMediaTimeRange_isContinuous(self.h)
 
 proc contains*(self: gen_qmediatimerange_types.QMediaTimeRange, time: clonglong): bool =
@@ -164,7 +164,7 @@ proc operatorMinusAssign*(self: gen_qmediatimerange_types.QMediaTimeRange, param
 proc operatorMinusAssign*(self: gen_qmediatimerange_types.QMediaTimeRange, param1: gen_qmediatimerange_types.QMediaTimeInterval): gen_qmediatimerange_types.QMediaTimeRange =
   gen_qmediatimerange_types.QMediaTimeRange(h: fcQMediaTimeRange_operatorMinusAssignWithQMediaTimeInterval(self.h, param1.h), owned: false)
 
-proc clear*(self: gen_qmediatimerange_types.QMediaTimeRange, ): void =
+proc clear*(self: gen_qmediatimerange_types.QMediaTimeRange): void =
   fcQMediaTimeRange_clear(self.h)
 
 proc create*(T: type gen_qmediatimerange_types.QMediaTimeRange): gen_qmediatimerange_types.QMediaTimeRange =

@@ -6,15 +6,6 @@
 #include <cstring>
 #include <qhostinfo.h>
 #include "gen_qhostinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QHostInfo* QHostInfo_new() {
 	return new QHostInfo();
 }

@@ -4,15 +4,6 @@
 #include <QTemporaryDir>
 #include <qtemporarydir.h>
 #include "gen_qtemporarydir.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QTemporaryDir* QTemporaryDir_new() {
 	return new QTemporaryDir();
 }

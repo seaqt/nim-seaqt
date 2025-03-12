@@ -2,15 +2,6 @@
 #include <QObject>
 #include <qbasictimer.h>
 #include "gen_qbasictimer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QBasicTimer* QBasicTimer_new(QBasicTimer* param1) {
 	return new QBasicTimer(*param1);
 }

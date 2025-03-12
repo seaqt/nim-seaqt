@@ -27,6 +27,7 @@ typedef struct QUrl QUrl;
 #endif
 
 QQmlInfo* QQmlInfo_new(QQmlInfo* param1);
+
 void QQmlInfo_virtbase(QQmlInfo* src, QDebug** outptr_QDebug);
 QQmlInfo* QQmlInfo_operatorShiftLeft(QQmlInfo* self, QChar* t);
 QQmlInfo* QQmlInfo_operatorShiftLeftWithBool(QQmlInfo* self, bool t);
@@ -46,6 +47,7 @@ QQmlInfo* QQmlInfo_operatorShiftLeftWithQString(QQmlInfo* self, struct miqt_stri
 QQmlInfo* QQmlInfo_operatorShiftLeftWithQByteArray(QQmlInfo* self, struct miqt_string t);
 QQmlInfo* QQmlInfo_operatorShiftLeftWithVoid(QQmlInfo* self, const void* t);
 QQmlInfo* QQmlInfo_operatorShiftLeftWithQUrl(QQmlInfo* self, QUrl* t);
+
 void QQmlInfo_delete(QQmlInfo* self);
 
 #ifdef __cplusplus

@@ -11,15 +11,6 @@
 #include <cstring>
 #include <qmediaplayercontrol.h>
 #include "gen_qmediaplayercontrol.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QMediaPlayerControl_virtbase(QMediaPlayerControl* src, QMediaControl** outptr_QMediaControl) {
 	*outptr_QMediaControl = static_cast<QMediaControl*>(src);
 }
@@ -438,6 +429,7 @@ struct miqt_string QMediaPlayerControl_trUtf83(const char* s, const char* c, int
 }
 
 const QMetaObject* QMediaPlayerControl_staticMetaObject() { return &QMediaPlayerControl::staticMetaObject; }
+
 void QMediaPlayerControl_delete(QMediaPlayerControl* self) {
 	delete self;
 }

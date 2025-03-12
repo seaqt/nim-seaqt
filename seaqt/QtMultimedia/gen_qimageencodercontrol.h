@@ -47,6 +47,7 @@ struct miqt_string QImageEncoderControl_tr2(const char* s, const char* c);
 struct miqt_string QImageEncoderControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QImageEncoderControl_trUtf82(const char* s, const char* c);
 struct miqt_string QImageEncoderControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QImageEncoderControl_staticMetaObject();
 void QImageEncoderControl_delete(QImageEncoderControl* self);
 

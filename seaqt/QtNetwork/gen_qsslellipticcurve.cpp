@@ -4,15 +4,6 @@
 #include <cstring>
 #include <qsslellipticcurve.h>
 #include "gen_qsslellipticcurve.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QSslEllipticCurve* QSslEllipticCurve_new() {
 	return new QSslEllipticCurve();
 }

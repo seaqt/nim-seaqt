@@ -52,73 +52,75 @@ export
 
 type cQSaveFile*{.exportc: "QSaveFile", incompleteStruct.} = object
 
-proc fcQSaveFile_metaObject(self: pointer, ): pointer {.importc: "QSaveFile_metaObject".}
+proc fcQSaveFile_metaObject(self: pointer): pointer {.importc: "QSaveFile_metaObject".}
 proc fcQSaveFile_metacast(self: pointer, param1: cstring): pointer {.importc: "QSaveFile_metacast".}
 proc fcQSaveFile_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSaveFile_metacall".}
 proc fcQSaveFile_tr(s: cstring): struct_miqt_string {.importc: "QSaveFile_tr".}
 proc fcQSaveFile_trUtf8(s: cstring): struct_miqt_string {.importc: "QSaveFile_trUtf8".}
-proc fcQSaveFile_fileName(self: pointer, ): struct_miqt_string {.importc: "QSaveFile_fileName".}
+proc fcQSaveFile_fileName(self: pointer): struct_miqt_string {.importc: "QSaveFile_fileName".}
 proc fcQSaveFile_setFileName(self: pointer, name: struct_miqt_string): void {.importc: "QSaveFile_setFileName".}
 proc fcQSaveFile_open(self: pointer, flags: cint): bool {.importc: "QSaveFile_open".}
-proc fcQSaveFile_commit(self: pointer, ): bool {.importc: "QSaveFile_commit".}
-proc fcQSaveFile_cancelWriting(self: pointer, ): void {.importc: "QSaveFile_cancelWriting".}
+proc fcQSaveFile_commit(self: pointer): bool {.importc: "QSaveFile_commit".}
+proc fcQSaveFile_cancelWriting(self: pointer): void {.importc: "QSaveFile_cancelWriting".}
 proc fcQSaveFile_setDirectWriteFallback(self: pointer, enabled: bool): void {.importc: "QSaveFile_setDirectWriteFallback".}
-proc fcQSaveFile_directWriteFallback(self: pointer, ): bool {.importc: "QSaveFile_directWriteFallback".}
+proc fcQSaveFile_directWriteFallback(self: pointer): bool {.importc: "QSaveFile_directWriteFallback".}
 proc fcQSaveFile_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QSaveFile_tr2".}
 proc fcQSaveFile_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSaveFile_tr3".}
 proc fcQSaveFile_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QSaveFile_trUtf82".}
 proc fcQSaveFile_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QSaveFile_trUtf83".}
+proc fcQSaveFile_vtbl(self: pointer): pointer {.importc: "QSaveFile_vtbl".}
+proc fcQSaveFile_vdata(self: pointer): pointer {.importc: "QSaveFile_vdata".}
 type cQSaveFileVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQSaveFileVTable, self: ptr cQSaveFile) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  fileName*: proc(vtbl, self: pointer, ): struct_miqt_string {.cdecl, raises: [], gcsafe.}
-  open*: proc(vtbl, self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
-  writeData*: proc(vtbl, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  isSequential*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  pos*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  seek*: proc(vtbl, self: pointer, offset: clonglong): bool {.cdecl, raises: [], gcsafe.}
-  atEnd*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  size*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  resize*: proc(vtbl, self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
-  permissions*: proc(vtbl, self: pointer, ): cint {.cdecl, raises: [], gcsafe.}
-  setPermissions*: proc(vtbl, self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
-  readData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  readLineData*: proc(vtbl, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
-  reset*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  bytesAvailable*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  bytesToWrite*: proc(vtbl, self: pointer, ): clonglong {.cdecl, raises: [], gcsafe.}
-  canReadLine*: proc(vtbl, self: pointer, ): bool {.cdecl, raises: [], gcsafe.}
-  waitForReadyRead*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
-  waitForBytesWritten*: proc(vtbl, self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQSaveFile_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QSaveFile_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  fileName*: proc(self: pointer): struct_miqt_string {.cdecl, raises: [], gcsafe.}
+  open*: proc(self: pointer, flags: cint): bool {.cdecl, raises: [], gcsafe.}
+  writeData*: proc(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  isSequential*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  pos*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  seek*: proc(self: pointer, offset: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  atEnd*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  size*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  resize*: proc(self: pointer, sz: clonglong): bool {.cdecl, raises: [], gcsafe.}
+  permissions*: proc(self: pointer): cint {.cdecl, raises: [], gcsafe.}
+  setPermissions*: proc(self: pointer, permissionSpec: cint): bool {.cdecl, raises: [], gcsafe.}
+  readData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  readLineData*: proc(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl, raises: [], gcsafe.}
+  reset*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  bytesAvailable*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  bytesToWrite*: proc(self: pointer): clonglong {.cdecl, raises: [], gcsafe.}
+  canReadLine*: proc(self: pointer): bool {.cdecl, raises: [], gcsafe.}
+  waitForReadyRead*: proc(self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  waitForBytesWritten*: proc(self: pointer, msecs: cint): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQSaveFile_virtualbase_metaObject(self: pointer): pointer {.importc: "QSaveFile_virtualbase_metaObject".}
 proc fcQSaveFile_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QSaveFile_virtualbase_metacast".}
 proc fcQSaveFile_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QSaveFile_virtualbase_metacall".}
-proc fcQSaveFile_virtualbase_fileName(self: pointer, ): struct_miqt_string {.importc: "QSaveFile_virtualbase_fileName".}
+proc fcQSaveFile_virtualbase_fileName(self: pointer): struct_miqt_string {.importc: "QSaveFile_virtualbase_fileName".}
 proc fcQSaveFile_virtualbase_open(self: pointer, flags: cint): bool {.importc: "QSaveFile_virtualbase_open".}
 proc fcQSaveFile_virtualbase_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.importc: "QSaveFile_virtualbase_writeData".}
-proc fcQSaveFile_virtualbase_isSequential(self: pointer, ): bool {.importc: "QSaveFile_virtualbase_isSequential".}
-proc fcQSaveFile_virtualbase_pos(self: pointer, ): clonglong {.importc: "QSaveFile_virtualbase_pos".}
+proc fcQSaveFile_virtualbase_isSequential(self: pointer): bool {.importc: "QSaveFile_virtualbase_isSequential".}
+proc fcQSaveFile_virtualbase_pos(self: pointer): clonglong {.importc: "QSaveFile_virtualbase_pos".}
 proc fcQSaveFile_virtualbase_seek(self: pointer, offset: clonglong): bool {.importc: "QSaveFile_virtualbase_seek".}
-proc fcQSaveFile_virtualbase_atEnd(self: pointer, ): bool {.importc: "QSaveFile_virtualbase_atEnd".}
-proc fcQSaveFile_virtualbase_size(self: pointer, ): clonglong {.importc: "QSaveFile_virtualbase_size".}
+proc fcQSaveFile_virtualbase_atEnd(self: pointer): bool {.importc: "QSaveFile_virtualbase_atEnd".}
+proc fcQSaveFile_virtualbase_size(self: pointer): clonglong {.importc: "QSaveFile_virtualbase_size".}
 proc fcQSaveFile_virtualbase_resize(self: pointer, sz: clonglong): bool {.importc: "QSaveFile_virtualbase_resize".}
-proc fcQSaveFile_virtualbase_permissions(self: pointer, ): cint {.importc: "QSaveFile_virtualbase_permissions".}
+proc fcQSaveFile_virtualbase_permissions(self: pointer): cint {.importc: "QSaveFile_virtualbase_permissions".}
 proc fcQSaveFile_virtualbase_setPermissions(self: pointer, permissionSpec: cint): bool {.importc: "QSaveFile_virtualbase_setPermissions".}
 proc fcQSaveFile_virtualbase_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSaveFile_virtualbase_readData".}
 proc fcQSaveFile_virtualbase_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.importc: "QSaveFile_virtualbase_readLineData".}
-proc fcQSaveFile_virtualbase_reset(self: pointer, ): bool {.importc: "QSaveFile_virtualbase_reset".}
-proc fcQSaveFile_virtualbase_bytesAvailable(self: pointer, ): clonglong {.importc: "QSaveFile_virtualbase_bytesAvailable".}
-proc fcQSaveFile_virtualbase_bytesToWrite(self: pointer, ): clonglong {.importc: "QSaveFile_virtualbase_bytesToWrite".}
-proc fcQSaveFile_virtualbase_canReadLine(self: pointer, ): bool {.importc: "QSaveFile_virtualbase_canReadLine".}
+proc fcQSaveFile_virtualbase_reset(self: pointer): bool {.importc: "QSaveFile_virtualbase_reset".}
+proc fcQSaveFile_virtualbase_bytesAvailable(self: pointer): clonglong {.importc: "QSaveFile_virtualbase_bytesAvailable".}
+proc fcQSaveFile_virtualbase_bytesToWrite(self: pointer): clonglong {.importc: "QSaveFile_virtualbase_bytesToWrite".}
+proc fcQSaveFile_virtualbase_canReadLine(self: pointer): bool {.importc: "QSaveFile_virtualbase_canReadLine".}
 proc fcQSaveFile_virtualbase_waitForReadyRead(self: pointer, msecs: cint): bool {.importc: "QSaveFile_virtualbase_waitForReadyRead".}
 proc fcQSaveFile_virtualbase_waitForBytesWritten(self: pointer, msecs: cint): bool {.importc: "QSaveFile_virtualbase_waitForBytesWritten".}
 proc fcQSaveFile_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QSaveFile_virtualbase_event".}
@@ -130,17 +132,17 @@ proc fcQSaveFile_virtualbase_connectNotify(self: pointer, signal: pointer): void
 proc fcQSaveFile_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QSaveFile_virtualbase_disconnectNotify".}
 proc fcQSaveFile_protectedbase_setOpenMode(self: pointer, openMode: cint): void {.importc: "QSaveFile_protectedbase_setOpenMode".}
 proc fcQSaveFile_protectedbase_setErrorString(self: pointer, errorString: struct_miqt_string): void {.importc: "QSaveFile_protectedbase_setErrorString".}
-proc fcQSaveFile_protectedbase_sender(self: pointer, ): pointer {.importc: "QSaveFile_protectedbase_sender".}
-proc fcQSaveFile_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QSaveFile_protectedbase_senderSignalIndex".}
+proc fcQSaveFile_protectedbase_sender(self: pointer): pointer {.importc: "QSaveFile_protectedbase_sender".}
+proc fcQSaveFile_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QSaveFile_protectedbase_senderSignalIndex".}
 proc fcQSaveFile_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QSaveFile_protectedbase_receivers".}
 proc fcQSaveFile_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QSaveFile_protectedbase_isSignalConnected".}
-proc fcQSaveFile_new(vtbl: pointer, name: struct_miqt_string): ptr cQSaveFile {.importc: "QSaveFile_new".}
-proc fcQSaveFile_new2(vtbl: pointer, ): ptr cQSaveFile {.importc: "QSaveFile_new2".}
-proc fcQSaveFile_new3(vtbl: pointer, name: struct_miqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new3".}
-proc fcQSaveFile_new4(vtbl: pointer, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new4".}
+proc fcQSaveFile_new(vtbl, vdata: pointer, name: struct_miqt_string): ptr cQSaveFile {.importc: "QSaveFile_new".}
+proc fcQSaveFile_new2(vtbl, vdata: pointer): ptr cQSaveFile {.importc: "QSaveFile_new2".}
+proc fcQSaveFile_new3(vtbl, vdata: pointer, name: struct_miqt_string, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new3".}
+proc fcQSaveFile_new4(vtbl, vdata: pointer, parent: pointer): ptr cQSaveFile {.importc: "QSaveFile_new4".}
 proc fcQSaveFile_staticMetaObject(): pointer {.importc: "QSaveFile_staticMetaObject".}
 
-proc metaObject*(self: gen_qsavefile_types.QSaveFile, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
@@ -161,7 +163,7 @@ proc trUtf8*(_: type gen_qsavefile_types.QSaveFile, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc fileName*(self: gen_qsavefile_types.QSaveFile, ): string =
+proc fileName*(self: gen_qsavefile_types.QSaveFile): string =
   let v_ms = fcQSaveFile_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -173,16 +175,16 @@ proc setFileName*(self: gen_qsavefile_types.QSaveFile, name: string): void =
 proc open*(self: gen_qsavefile_types.QSaveFile, flags: cint): bool =
   fcQSaveFile_open(self.h, cint(flags))
 
-proc commit*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc commit*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_commit(self.h)
 
-proc cancelWriting*(self: gen_qsavefile_types.QSaveFile, ): void =
+proc cancelWriting*(self: gen_qsavefile_types.QSaveFile): void =
   fcQSaveFile_cancelWriting(self.h)
 
 proc setDirectWriteFallback*(self: gen_qsavefile_types.QSaveFile, enabled: bool): void =
   fcQSaveFile_setDirectWriteFallback(self.h, enabled)
 
-proc directWriteFallback*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc directWriteFallback*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_directWriteFallback(self.h)
 
 proc tr*(_: type gen_qsavefile_types.QSaveFile, s: cstring, c: cstring): string =
@@ -269,11 +271,11 @@ type QSaveFileVTable* {.inheritable, pure.} = object
   customEvent*: QSaveFilecustomEventProc
   connectNotify*: QSaveFileconnectNotifyProc
   disconnectNotify*: QSaveFiledisconnectNotifyProc
-proc QSaveFilemetaObject*(self: gen_qsavefile_types.QSaveFile, ): gen_qobjectdefs_types.QMetaObject =
+proc QSaveFilemetaObject*(self: gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQSaveFile_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -284,8 +286,8 @@ proc miqt_exec_callback_cQSaveFile_metaObject(vtbl: pointer, self: pointer): poi
 proc QSaveFilemetacast*(self: gen_qsavefile_types.QSaveFile, param1: cstring): pointer =
   fcQSaveFile_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQSaveFile_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -294,8 +296,8 @@ proc miqt_exec_callback_cQSaveFile_metacast(vtbl: pointer, self: pointer, param1
 proc QSaveFilemetacall*(self: gen_qsavefile_types.QSaveFile, param1: cint, param2: cint, param3: pointer): cint =
   fcQSaveFile_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQSaveFile_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -303,14 +305,14 @@ proc miqt_exec_callback_cQSaveFile_metacall(vtbl: pointer, self: pointer, param1
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QSaveFilefileName*(self: gen_qsavefile_types.QSaveFile, ): string =
+proc QSaveFilefileName*(self: gen_qsavefile_types.QSaveFile): string =
   let v_ms = fcQSaveFile_virtualbase_fileName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc miqt_exec_callback_cQSaveFile_fileName(vtbl: pointer, self: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_fileName(self: pointer): struct_miqt_string {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].fileName(self)
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
@@ -320,8 +322,8 @@ proc miqt_exec_callback_cQSaveFile_fileName(vtbl: pointer, self: pointer): struc
 proc QSaveFileopen*(self: gen_qsavefile_types.QSaveFile, flags: cint): bool =
   fcQSaveFile_virtualbase_open(self.h, cint(flags))
 
-proc miqt_exec_callback_cQSaveFile_open(vtbl: pointer, self: pointer, flags: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = cint(flags)
   var virtualReturn = vtbl[].open(self, slotval1)
@@ -330,28 +332,28 @@ proc miqt_exec_callback_cQSaveFile_open(vtbl: pointer, self: pointer, flags: cin
 proc QSaveFilewriteData*(self: gen_qsavefile_types.QSaveFile, data: cstring, len: clonglong): clonglong =
   fcQSaveFile_virtualbase_writeData(self.h, data, len)
 
-proc miqt_exec_callback_cQSaveFile_writeData(vtbl: pointer, self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = (data)
   let slotval2 = len
   var virtualReturn = vtbl[].writeData(self, slotval1, slotval2)
   virtualReturn
 
-proc QSaveFileisSequential*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc QSaveFileisSequential*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_virtualbase_isSequential(self.h)
 
-proc miqt_exec_callback_cQSaveFile_isSequential(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_isSequential(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].isSequential(self)
   virtualReturn
 
-proc QSaveFilepos*(self: gen_qsavefile_types.QSaveFile, ): clonglong =
+proc QSaveFilepos*(self: gen_qsavefile_types.QSaveFile): clonglong =
   fcQSaveFile_virtualbase_pos(self.h)
 
-proc miqt_exec_callback_cQSaveFile_pos(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_pos(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].pos(self)
   virtualReturn
@@ -359,27 +361,27 @@ proc miqt_exec_callback_cQSaveFile_pos(vtbl: pointer, self: pointer): clonglong 
 proc QSaveFileseek*(self: gen_qsavefile_types.QSaveFile, offset: clonglong): bool =
   fcQSaveFile_virtualbase_seek(self.h, offset)
 
-proc miqt_exec_callback_cQSaveFile_seek(vtbl: pointer, self: pointer, offset: clonglong): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_seek(self: pointer, offset: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = offset
   var virtualReturn = vtbl[].seek(self, slotval1)
   virtualReturn
 
-proc QSaveFileatEnd*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc QSaveFileatEnd*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_virtualbase_atEnd(self.h)
 
-proc miqt_exec_callback_cQSaveFile_atEnd(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_atEnd(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].atEnd(self)
   virtualReturn
 
-proc QSaveFilesize*(self: gen_qsavefile_types.QSaveFile, ): clonglong =
+proc QSaveFilesize*(self: gen_qsavefile_types.QSaveFile): clonglong =
   fcQSaveFile_virtualbase_size(self.h)
 
-proc miqt_exec_callback_cQSaveFile_size(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_size(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].size(self)
   virtualReturn
@@ -387,18 +389,18 @@ proc miqt_exec_callback_cQSaveFile_size(vtbl: pointer, self: pointer): clonglong
 proc QSaveFileresize*(self: gen_qsavefile_types.QSaveFile, sz: clonglong): bool =
   fcQSaveFile_virtualbase_resize(self.h, sz)
 
-proc miqt_exec_callback_cQSaveFile_resize(vtbl: pointer, self: pointer, sz: clonglong): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = sz
   var virtualReturn = vtbl[].resize(self, slotval1)
   virtualReturn
 
-proc QSaveFilepermissions*(self: gen_qsavefile_types.QSaveFile, ): cint =
+proc QSaveFilepermissions*(self: gen_qsavefile_types.QSaveFile): cint =
   cint(fcQSaveFile_virtualbase_permissions(self.h))
 
-proc miqt_exec_callback_cQSaveFile_permissions(vtbl: pointer, self: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_permissions(self: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].permissions(self)
   cint(virtualReturn)
@@ -406,8 +408,8 @@ proc miqt_exec_callback_cQSaveFile_permissions(vtbl: pointer, self: pointer): ci
 proc QSaveFilesetPermissions*(self: gen_qsavefile_types.QSaveFile, permissionSpec: cint): bool =
   fcQSaveFile_virtualbase_setPermissions(self.h, cint(permissionSpec))
 
-proc miqt_exec_callback_cQSaveFile_setPermissions(vtbl: pointer, self: pointer, permissionSpec: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = cint(permissionSpec)
   var virtualReturn = vtbl[].setPermissions(self, slotval1)
@@ -416,8 +418,8 @@ proc miqt_exec_callback_cQSaveFile_setPermissions(vtbl: pointer, self: pointer, 
 proc QSaveFilereadData*(self: gen_qsavefile_types.QSaveFile, data: cstring, maxlen: clonglong): clonglong =
   fcQSaveFile_virtualbase_readData(self.h, data, maxlen)
 
-proc miqt_exec_callback_cQSaveFile_readData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = (data)
   let slotval2 = maxlen
@@ -427,46 +429,46 @@ proc miqt_exec_callback_cQSaveFile_readData(vtbl: pointer, self: pointer, data: 
 proc QSaveFilereadLineData*(self: gen_qsavefile_types.QSaveFile, data: cstring, maxlen: clonglong): clonglong =
   fcQSaveFile_virtualbase_readLineData(self.h, data, maxlen)
 
-proc miqt_exec_callback_cQSaveFile_readLineData(vtbl: pointer, self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = (data)
   let slotval2 = maxlen
   var virtualReturn = vtbl[].readLineData(self, slotval1, slotval2)
   virtualReturn
 
-proc QSaveFilereset*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc QSaveFilereset*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_virtualbase_reset(self.h)
 
-proc miqt_exec_callback_cQSaveFile_reset(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_reset(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].reset(self)
   virtualReturn
 
-proc QSaveFilebytesAvailable*(self: gen_qsavefile_types.QSaveFile, ): clonglong =
+proc QSaveFilebytesAvailable*(self: gen_qsavefile_types.QSaveFile): clonglong =
   fcQSaveFile_virtualbase_bytesAvailable(self.h)
 
-proc miqt_exec_callback_cQSaveFile_bytesAvailable(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].bytesAvailable(self)
   virtualReturn
 
-proc QSaveFilebytesToWrite*(self: gen_qsavefile_types.QSaveFile, ): clonglong =
+proc QSaveFilebytesToWrite*(self: gen_qsavefile_types.QSaveFile): clonglong =
   fcQSaveFile_virtualbase_bytesToWrite(self.h)
 
-proc miqt_exec_callback_cQSaveFile_bytesToWrite(vtbl: pointer, self: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].bytesToWrite(self)
   virtualReturn
 
-proc QSaveFilecanReadLine*(self: gen_qsavefile_types.QSaveFile, ): bool =
+proc QSaveFilecanReadLine*(self: gen_qsavefile_types.QSaveFile): bool =
   fcQSaveFile_virtualbase_canReadLine(self.h)
 
-proc miqt_exec_callback_cQSaveFile_canReadLine(vtbl: pointer, self: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_canReadLine(self: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   var virtualReturn = vtbl[].canReadLine(self)
   virtualReturn
@@ -474,8 +476,8 @@ proc miqt_exec_callback_cQSaveFile_canReadLine(vtbl: pointer, self: pointer): bo
 proc QSaveFilewaitForReadyRead*(self: gen_qsavefile_types.QSaveFile, msecs: cint): bool =
   fcQSaveFile_virtualbase_waitForReadyRead(self.h, msecs)
 
-proc miqt_exec_callback_cQSaveFile_waitForReadyRead(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForReadyRead(self, slotval1)
@@ -484,8 +486,8 @@ proc miqt_exec_callback_cQSaveFile_waitForReadyRead(vtbl: pointer, self: pointer
 proc QSaveFilewaitForBytesWritten*(self: gen_qsavefile_types.QSaveFile, msecs: cint): bool =
   fcQSaveFile_virtualbase_waitForBytesWritten(self.h, msecs)
 
-proc miqt_exec_callback_cQSaveFile_waitForBytesWritten(vtbl: pointer, self: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = msecs
   var virtualReturn = vtbl[].waitForBytesWritten(self, slotval1)
@@ -494,8 +496,8 @@ proc miqt_exec_callback_cQSaveFile_waitForBytesWritten(vtbl: pointer, self: poin
 proc QSaveFileevent*(self: gen_qsavefile_types.QSaveFile, event: gen_qcoreevent_types.QEvent): bool =
   fcQSaveFile_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQSaveFile_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -504,8 +506,8 @@ proc miqt_exec_callback_cQSaveFile_event(vtbl: pointer, self: pointer, event: po
 proc QSaveFileeventFilter*(self: gen_qsavefile_types.QSaveFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQSaveFile_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQSaveFile_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -515,8 +517,8 @@ proc miqt_exec_callback_cQSaveFile_eventFilter(vtbl: pointer, self: pointer, wat
 proc QSaveFiletimerEvent*(self: gen_qsavefile_types.QSaveFile, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQSaveFile_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSaveFile_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -524,8 +526,8 @@ proc miqt_exec_callback_cQSaveFile_timerEvent(vtbl: pointer, self: pointer, even
 proc QSaveFilechildEvent*(self: gen_qsavefile_types.QSaveFile, event: gen_qcoreevent_types.QChildEvent): void =
   fcQSaveFile_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSaveFile_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -533,8 +535,8 @@ proc miqt_exec_callback_cQSaveFile_childEvent(vtbl: pointer, self: pointer, even
 proc QSaveFilecustomEvent*(self: gen_qsavefile_types.QSaveFile, event: gen_qcoreevent_types.QEvent): void =
   fcQSaveFile_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQSaveFile_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -542,8 +544,8 @@ proc miqt_exec_callback_cQSaveFile_customEvent(vtbl: pointer, self: pointer, eve
 proc QSaveFileconnectNotify*(self: gen_qsavefile_types.QSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSaveFile_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSaveFile_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -551,19 +553,19 @@ proc miqt_exec_callback_cQSaveFile_connectNotify(vtbl: pointer, self: pointer, s
 proc QSaveFiledisconnectNotify*(self: gen_qsavefile_types.QSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQSaveFile_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQSaveFile_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QSaveFileVTable](vtbl)
+proc cQSaveFile_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QSaveFileVTable](fcQSaveFile_vdata(self))
   let self = QSaveFile(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQSaveFile* {.inheritable.} = ref object of QSaveFile
   vtbl*: cQSaveFileVTable
-method metaObject*(self: VirtualQSaveFile, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQSaveFile): gen_qobjectdefs_types.QMetaObject {.base.} =
   QSaveFilemetaObject(self[])
-proc miqt_exec_method_cQSaveFile_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQSaveFile_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -571,220 +573,220 @@ proc miqt_exec_method_cQSaveFile_metaObject(vtbl: pointer, inst: pointer): point
 
 method metacast*(self: VirtualQSaveFile, param1: cstring): pointer {.base.} =
   QSaveFilemetacast(self[], param1)
-proc miqt_exec_method_cQSaveFile_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQSaveFile, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QSaveFilemetacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQSaveFile_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method fileName*(self: VirtualQSaveFile, ): string {.base.} =
+method fileName*(self: VirtualQSaveFile): string {.base.} =
   QSaveFilefileName(self[])
-proc miqt_exec_method_cQSaveFile_fileName(vtbl: pointer, inst: pointer): struct_miqt_string {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.fileName()
+proc cQSaveFile_method_callback_fileName(self: pointer): struct_miqt_string {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.fileName()
   var virtualReturn_copy = cast[cstring](if len(virtualReturn) > 0: c_malloc(csize_t(len(virtualReturn))) else: nil)
   if len(virtualReturn) > 0: copyMem(cast[pointer](virtualReturn_copy), addr virtualReturn[0], csize_t(len(virtualReturn)))
   struct_miqt_string(data: virtualReturn_copy, len: csize_t(len(virtualReturn)))
 
 method open*(self: VirtualQSaveFile, flags: cint): bool {.base.} =
   QSaveFileopen(self[], flags)
-proc miqt_exec_method_cQSaveFile_open(vtbl: pointer, inst: pointer, flags: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_open(self: pointer, flags: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = cint(flags)
-  var virtualReturn = vtbl.open(slotval1)
+  var virtualReturn = inst.open(slotval1)
   virtualReturn
 
 method writeData*(self: VirtualQSaveFile, data: cstring, len: clonglong): clonglong {.base.} =
   QSaveFilewriteData(self[], data, len)
-proc miqt_exec_method_cQSaveFile_writeData(vtbl: pointer, inst: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_writeData(self: pointer, data: cstring, len: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = (data)
   let slotval2 = len
-  var virtualReturn = vtbl.writeData(slotval1, slotval2)
+  var virtualReturn = inst.writeData(slotval1, slotval2)
   virtualReturn
 
-method isSequential*(self: VirtualQSaveFile, ): bool {.base.} =
+method isSequential*(self: VirtualQSaveFile): bool {.base.} =
   QSaveFileisSequential(self[])
-proc miqt_exec_method_cQSaveFile_isSequential(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.isSequential()
+proc cQSaveFile_method_callback_isSequential(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.isSequential()
   virtualReturn
 
-method pos*(self: VirtualQSaveFile, ): clonglong {.base.} =
+method pos*(self: VirtualQSaveFile): clonglong {.base.} =
   QSaveFilepos(self[])
-proc miqt_exec_method_cQSaveFile_pos(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.pos()
+proc cQSaveFile_method_callback_pos(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.pos()
   virtualReturn
 
 method seek*(self: VirtualQSaveFile, offset: clonglong): bool {.base.} =
   QSaveFileseek(self[], offset)
-proc miqt_exec_method_cQSaveFile_seek(vtbl: pointer, inst: pointer, offset: clonglong): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_seek(self: pointer, offset: clonglong): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = offset
-  var virtualReturn = vtbl.seek(slotval1)
+  var virtualReturn = inst.seek(slotval1)
   virtualReturn
 
-method atEnd*(self: VirtualQSaveFile, ): bool {.base.} =
+method atEnd*(self: VirtualQSaveFile): bool {.base.} =
   QSaveFileatEnd(self[])
-proc miqt_exec_method_cQSaveFile_atEnd(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.atEnd()
+proc cQSaveFile_method_callback_atEnd(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.atEnd()
   virtualReturn
 
-method size*(self: VirtualQSaveFile, ): clonglong {.base.} =
+method size*(self: VirtualQSaveFile): clonglong {.base.} =
   QSaveFilesize(self[])
-proc miqt_exec_method_cQSaveFile_size(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.size()
+proc cQSaveFile_method_callback_size(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.size()
   virtualReturn
 
 method resize*(self: VirtualQSaveFile, sz: clonglong): bool {.base.} =
   QSaveFileresize(self[], sz)
-proc miqt_exec_method_cQSaveFile_resize(vtbl: pointer, inst: pointer, sz: clonglong): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_resize(self: pointer, sz: clonglong): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = sz
-  var virtualReturn = vtbl.resize(slotval1)
+  var virtualReturn = inst.resize(slotval1)
   virtualReturn
 
-method permissions*(self: VirtualQSaveFile, ): cint {.base.} =
+method permissions*(self: VirtualQSaveFile): cint {.base.} =
   QSaveFilepermissions(self[])
-proc miqt_exec_method_cQSaveFile_permissions(vtbl: pointer, inst: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.permissions()
+proc cQSaveFile_method_callback_permissions(self: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.permissions()
   cint(virtualReturn)
 
 method setPermissions*(self: VirtualQSaveFile, permissionSpec: cint): bool {.base.} =
   QSaveFilesetPermissions(self[], permissionSpec)
-proc miqt_exec_method_cQSaveFile_setPermissions(vtbl: pointer, inst: pointer, permissionSpec: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_setPermissions(self: pointer, permissionSpec: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = cint(permissionSpec)
-  var virtualReturn = vtbl.setPermissions(slotval1)
+  var virtualReturn = inst.setPermissions(slotval1)
   virtualReturn
 
 method readData*(self: VirtualQSaveFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
   QSaveFilereadData(self[], data, maxlen)
-proc miqt_exec_method_cQSaveFile_readData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_readData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
-  var virtualReturn = vtbl.readData(slotval1, slotval2)
+  var virtualReturn = inst.readData(slotval1, slotval2)
   virtualReturn
 
 method readLineData*(self: VirtualQSaveFile, data: cstring, maxlen: clonglong): clonglong {.base.} =
   QSaveFilereadLineData(self[], data, maxlen)
-proc miqt_exec_method_cQSaveFile_readLineData(vtbl: pointer, inst: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_readLineData(self: pointer, data: cstring, maxlen: clonglong): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = (data)
   let slotval2 = maxlen
-  var virtualReturn = vtbl.readLineData(slotval1, slotval2)
+  var virtualReturn = inst.readLineData(slotval1, slotval2)
   virtualReturn
 
-method reset*(self: VirtualQSaveFile, ): bool {.base.} =
+method reset*(self: VirtualQSaveFile): bool {.base.} =
   QSaveFilereset(self[])
-proc miqt_exec_method_cQSaveFile_reset(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.reset()
+proc cQSaveFile_method_callback_reset(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.reset()
   virtualReturn
 
-method bytesAvailable*(self: VirtualQSaveFile, ): clonglong {.base.} =
+method bytesAvailable*(self: VirtualQSaveFile): clonglong {.base.} =
   QSaveFilebytesAvailable(self[])
-proc miqt_exec_method_cQSaveFile_bytesAvailable(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.bytesAvailable()
+proc cQSaveFile_method_callback_bytesAvailable(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.bytesAvailable()
   virtualReturn
 
-method bytesToWrite*(self: VirtualQSaveFile, ): clonglong {.base.} =
+method bytesToWrite*(self: VirtualQSaveFile): clonglong {.base.} =
   QSaveFilebytesToWrite(self[])
-proc miqt_exec_method_cQSaveFile_bytesToWrite(vtbl: pointer, inst: pointer): clonglong {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.bytesToWrite()
+proc cQSaveFile_method_callback_bytesToWrite(self: pointer): clonglong {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.bytesToWrite()
   virtualReturn
 
-method canReadLine*(self: VirtualQSaveFile, ): bool {.base.} =
+method canReadLine*(self: VirtualQSaveFile): bool {.base.} =
   QSaveFilecanReadLine(self[])
-proc miqt_exec_method_cQSaveFile_canReadLine(vtbl: pointer, inst: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-  var virtualReturn = vtbl.canReadLine()
+proc cQSaveFile_method_callback_canReadLine(self: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
+  var virtualReturn = inst.canReadLine()
   virtualReturn
 
 method waitForReadyRead*(self: VirtualQSaveFile, msecs: cint): bool {.base.} =
   QSaveFilewaitForReadyRead(self[], msecs)
-proc miqt_exec_method_cQSaveFile_waitForReadyRead(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_waitForReadyRead(self: pointer, msecs: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = msecs
-  var virtualReturn = vtbl.waitForReadyRead(slotval1)
+  var virtualReturn = inst.waitForReadyRead(slotval1)
   virtualReturn
 
 method waitForBytesWritten*(self: VirtualQSaveFile, msecs: cint): bool {.base.} =
   QSaveFilewaitForBytesWritten(self[], msecs)
-proc miqt_exec_method_cQSaveFile_waitForBytesWritten(vtbl: pointer, inst: pointer, msecs: cint): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_waitForBytesWritten(self: pointer, msecs: cint): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = msecs
-  var virtualReturn = vtbl.waitForBytesWritten(slotval1)
+  var virtualReturn = inst.waitForBytesWritten(slotval1)
   virtualReturn
 
 method event*(self: VirtualQSaveFile, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSaveFileevent(self[], event)
-proc miqt_exec_method_cQSaveFile_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQSaveFile, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QSaveFileeventFilter(self[], watched, event)
-proc miqt_exec_method_cQSaveFile_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQSaveFile, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QSaveFiletimerEvent(self[], event)
-proc miqt_exec_method_cQSaveFile_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQSaveFile, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QSaveFilechildEvent(self[], event)
-proc miqt_exec_method_cQSaveFile_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQSaveFile, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QSaveFilecustomEvent(self[], event)
-proc miqt_exec_method_cQSaveFile_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSaveFileconnectNotify(self[], signal)
-proc miqt_exec_method_cQSaveFile_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQSaveFile, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QSaveFiledisconnectNotify(self[], signal)
-proc miqt_exec_method_cQSaveFile_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQSaveFile](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
+proc cQSaveFile_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQSaveFile](fcQSaveFile_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
 proc setOpenMode*(self: gen_qsavefile_types.QSaveFile, openMode: cint): void =
   fcQSaveFile_protectedbase_setOpenMode(self.h, cint(openMode))
@@ -792,10 +794,10 @@ proc setOpenMode*(self: gen_qsavefile_types.QSaveFile, openMode: cint): void =
 proc setErrorString*(self: gen_qsavefile_types.QSaveFile, errorString: string): void =
   fcQSaveFile_protectedbase_setErrorString(self.h, struct_miqt_string(data: errorString, len: csize_t(len(errorString))))
 
-proc sender*(self: gen_qsavefile_types.QSaveFile, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qsavefile_types.QSaveFile): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQSaveFile_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qsavefile_types.QSaveFile, ): cint =
+proc senderSignalIndex*(self: gen_qsavefile_types.QSaveFile): cint =
   fcQSaveFile_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qsavefile_types.QSaveFile, signal: cstring): cint =
@@ -809,434 +811,333 @@ proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ref QSaveFileVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSaveFileVTable](fcQSaveFile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSaveFile_metaObject
+    vtbl[].vtbl.metaObject = cQSaveFile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSaveFile_metacast
+    vtbl[].vtbl.metacast = cQSaveFile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSaveFile_metacall
+    vtbl[].vtbl.metacall = cQSaveFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
-    vtbl[].vtbl.fileName = miqt_exec_callback_cQSaveFile_fileName
+    vtbl[].vtbl.fileName = cQSaveFile_vtable_callback_fileName
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQSaveFile_open
+    vtbl[].vtbl.open = cQSaveFile_vtable_callback_open
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQSaveFile_writeData
+    vtbl[].vtbl.writeData = cQSaveFile_vtable_callback_writeData
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSaveFile_isSequential
+    vtbl[].vtbl.isSequential = cQSaveFile_vtable_callback_isSequential
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQSaveFile_pos
+    vtbl[].vtbl.pos = cQSaveFile_vtable_callback_pos
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQSaveFile_seek
+    vtbl[].vtbl.seek = cQSaveFile_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSaveFile_atEnd
+    vtbl[].vtbl.atEnd = cQSaveFile_vtable_callback_atEnd
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQSaveFile_size
+    vtbl[].vtbl.size = cQSaveFile_vtable_callback_size
   if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = miqt_exec_callback_cQSaveFile_resize
+    vtbl[].vtbl.resize = cQSaveFile_vtable_callback_resize
   if not isNil(vtbl[].permissions):
-    vtbl[].vtbl.permissions = miqt_exec_callback_cQSaveFile_permissions
+    vtbl[].vtbl.permissions = cQSaveFile_vtable_callback_permissions
   if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQSaveFile_setPermissions
+    vtbl[].vtbl.setPermissions = cQSaveFile_vtable_callback_setPermissions
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQSaveFile_readData
+    vtbl[].vtbl.readData = cQSaveFile_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSaveFile_readLineData
+    vtbl[].vtbl.readLineData = cQSaveFile_vtable_callback_readLineData
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQSaveFile_reset
+    vtbl[].vtbl.reset = cQSaveFile_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSaveFile_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQSaveFile_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSaveFile_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQSaveFile_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSaveFile_canReadLine
+    vtbl[].vtbl.canReadLine = cQSaveFile_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSaveFile_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQSaveFile_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSaveFile_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQSaveFile_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSaveFile_event
+    vtbl[].vtbl.event = cQSaveFile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSaveFile_eventFilter
+    vtbl[].vtbl.eventFilter = cQSaveFile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSaveFile_timerEvent
+    vtbl[].vtbl.timerEvent = cQSaveFile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSaveFile_childEvent
+    vtbl[].vtbl.childEvent = cQSaveFile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSaveFile_customEvent
+    vtbl[].vtbl.customEvent = cQSaveFile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSaveFile_connectNotify
+    vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSaveFile_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name)))), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ref QSaveFileVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSaveFileVTable](fcQSaveFile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSaveFile_metaObject
+    vtbl[].vtbl.metaObject = cQSaveFile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSaveFile_metacast
+    vtbl[].vtbl.metacast = cQSaveFile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSaveFile_metacall
+    vtbl[].vtbl.metacall = cQSaveFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
-    vtbl[].vtbl.fileName = miqt_exec_callback_cQSaveFile_fileName
+    vtbl[].vtbl.fileName = cQSaveFile_vtable_callback_fileName
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQSaveFile_open
+    vtbl[].vtbl.open = cQSaveFile_vtable_callback_open
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQSaveFile_writeData
+    vtbl[].vtbl.writeData = cQSaveFile_vtable_callback_writeData
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSaveFile_isSequential
+    vtbl[].vtbl.isSequential = cQSaveFile_vtable_callback_isSequential
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQSaveFile_pos
+    vtbl[].vtbl.pos = cQSaveFile_vtable_callback_pos
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQSaveFile_seek
+    vtbl[].vtbl.seek = cQSaveFile_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSaveFile_atEnd
+    vtbl[].vtbl.atEnd = cQSaveFile_vtable_callback_atEnd
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQSaveFile_size
+    vtbl[].vtbl.size = cQSaveFile_vtable_callback_size
   if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = miqt_exec_callback_cQSaveFile_resize
+    vtbl[].vtbl.resize = cQSaveFile_vtable_callback_resize
   if not isNil(vtbl[].permissions):
-    vtbl[].vtbl.permissions = miqt_exec_callback_cQSaveFile_permissions
+    vtbl[].vtbl.permissions = cQSaveFile_vtable_callback_permissions
   if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQSaveFile_setPermissions
+    vtbl[].vtbl.setPermissions = cQSaveFile_vtable_callback_setPermissions
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQSaveFile_readData
+    vtbl[].vtbl.readData = cQSaveFile_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSaveFile_readLineData
+    vtbl[].vtbl.readLineData = cQSaveFile_vtable_callback_readLineData
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQSaveFile_reset
+    vtbl[].vtbl.reset = cQSaveFile_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSaveFile_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQSaveFile_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSaveFile_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQSaveFile_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSaveFile_canReadLine
+    vtbl[].vtbl.canReadLine = cQSaveFile_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSaveFile_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQSaveFile_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSaveFile_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQSaveFile_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSaveFile_event
+    vtbl[].vtbl.event = cQSaveFile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSaveFile_eventFilter
+    vtbl[].vtbl.eventFilter = cQSaveFile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSaveFile_timerEvent
+    vtbl[].vtbl.timerEvent = cQSaveFile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSaveFile_childEvent
+    vtbl[].vtbl.childEvent = cQSaveFile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSaveFile_customEvent
+    vtbl[].vtbl.customEvent = cQSaveFile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSaveFile_connectNotify
+    vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSaveFile_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new2(addr(vtbl[].vtbl), ), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new2(addr(vtbl[].vtbl), addr(vtbl[])), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     name: string, parent: gen_qobject_types.QObject,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ref QSaveFileVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSaveFileVTable](fcQSaveFile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSaveFile_metaObject
+    vtbl[].vtbl.metaObject = cQSaveFile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSaveFile_metacast
+    vtbl[].vtbl.metacast = cQSaveFile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSaveFile_metacall
+    vtbl[].vtbl.metacall = cQSaveFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
-    vtbl[].vtbl.fileName = miqt_exec_callback_cQSaveFile_fileName
+    vtbl[].vtbl.fileName = cQSaveFile_vtable_callback_fileName
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQSaveFile_open
+    vtbl[].vtbl.open = cQSaveFile_vtable_callback_open
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQSaveFile_writeData
+    vtbl[].vtbl.writeData = cQSaveFile_vtable_callback_writeData
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSaveFile_isSequential
+    vtbl[].vtbl.isSequential = cQSaveFile_vtable_callback_isSequential
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQSaveFile_pos
+    vtbl[].vtbl.pos = cQSaveFile_vtable_callback_pos
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQSaveFile_seek
+    vtbl[].vtbl.seek = cQSaveFile_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSaveFile_atEnd
+    vtbl[].vtbl.atEnd = cQSaveFile_vtable_callback_atEnd
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQSaveFile_size
+    vtbl[].vtbl.size = cQSaveFile_vtable_callback_size
   if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = miqt_exec_callback_cQSaveFile_resize
+    vtbl[].vtbl.resize = cQSaveFile_vtable_callback_resize
   if not isNil(vtbl[].permissions):
-    vtbl[].vtbl.permissions = miqt_exec_callback_cQSaveFile_permissions
+    vtbl[].vtbl.permissions = cQSaveFile_vtable_callback_permissions
   if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQSaveFile_setPermissions
+    vtbl[].vtbl.setPermissions = cQSaveFile_vtable_callback_setPermissions
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQSaveFile_readData
+    vtbl[].vtbl.readData = cQSaveFile_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSaveFile_readLineData
+    vtbl[].vtbl.readLineData = cQSaveFile_vtable_callback_readLineData
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQSaveFile_reset
+    vtbl[].vtbl.reset = cQSaveFile_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSaveFile_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQSaveFile_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSaveFile_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQSaveFile_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSaveFile_canReadLine
+    vtbl[].vtbl.canReadLine = cQSaveFile_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSaveFile_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQSaveFile_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSaveFile_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQSaveFile_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSaveFile_event
+    vtbl[].vtbl.event = cQSaveFile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSaveFile_eventFilter
+    vtbl[].vtbl.eventFilter = cQSaveFile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSaveFile_timerEvent
+    vtbl[].vtbl.timerEvent = cQSaveFile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSaveFile_childEvent
+    vtbl[].vtbl.childEvent = cQSaveFile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSaveFile_customEvent
+    vtbl[].vtbl.customEvent = cQSaveFile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSaveFile_connectNotify
+    vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSaveFile_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new3(addr(vtbl[].vtbl), addr(vtbl[]), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h), owned: true)
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     parent: gen_qobject_types.QObject,
     vtbl: ref QSaveFileVTable = nil): gen_qsavefile_types.QSaveFile =
   let vtbl = if vtbl == nil: new QSaveFileVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ref QSaveFileVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QSaveFileVTable](fcQSaveFile_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQSaveFile_metaObject
+    vtbl[].vtbl.metaObject = cQSaveFile_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQSaveFile_metacast
+    vtbl[].vtbl.metacast = cQSaveFile_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQSaveFile_metacall
+    vtbl[].vtbl.metacall = cQSaveFile_vtable_callback_metacall
   if not isNil(vtbl[].fileName):
-    vtbl[].vtbl.fileName = miqt_exec_callback_cQSaveFile_fileName
+    vtbl[].vtbl.fileName = cQSaveFile_vtable_callback_fileName
   if not isNil(vtbl[].open):
-    vtbl[].vtbl.open = miqt_exec_callback_cQSaveFile_open
+    vtbl[].vtbl.open = cQSaveFile_vtable_callback_open
   if not isNil(vtbl[].writeData):
-    vtbl[].vtbl.writeData = miqt_exec_callback_cQSaveFile_writeData
+    vtbl[].vtbl.writeData = cQSaveFile_vtable_callback_writeData
   if not isNil(vtbl[].isSequential):
-    vtbl[].vtbl.isSequential = miqt_exec_callback_cQSaveFile_isSequential
+    vtbl[].vtbl.isSequential = cQSaveFile_vtable_callback_isSequential
   if not isNil(vtbl[].pos):
-    vtbl[].vtbl.pos = miqt_exec_callback_cQSaveFile_pos
+    vtbl[].vtbl.pos = cQSaveFile_vtable_callback_pos
   if not isNil(vtbl[].seek):
-    vtbl[].vtbl.seek = miqt_exec_callback_cQSaveFile_seek
+    vtbl[].vtbl.seek = cQSaveFile_vtable_callback_seek
   if not isNil(vtbl[].atEnd):
-    vtbl[].vtbl.atEnd = miqt_exec_callback_cQSaveFile_atEnd
+    vtbl[].vtbl.atEnd = cQSaveFile_vtable_callback_atEnd
   if not isNil(vtbl[].size):
-    vtbl[].vtbl.size = miqt_exec_callback_cQSaveFile_size
+    vtbl[].vtbl.size = cQSaveFile_vtable_callback_size
   if not isNil(vtbl[].resize):
-    vtbl[].vtbl.resize = miqt_exec_callback_cQSaveFile_resize
+    vtbl[].vtbl.resize = cQSaveFile_vtable_callback_resize
   if not isNil(vtbl[].permissions):
-    vtbl[].vtbl.permissions = miqt_exec_callback_cQSaveFile_permissions
+    vtbl[].vtbl.permissions = cQSaveFile_vtable_callback_permissions
   if not isNil(vtbl[].setPermissions):
-    vtbl[].vtbl.setPermissions = miqt_exec_callback_cQSaveFile_setPermissions
+    vtbl[].vtbl.setPermissions = cQSaveFile_vtable_callback_setPermissions
   if not isNil(vtbl[].readData):
-    vtbl[].vtbl.readData = miqt_exec_callback_cQSaveFile_readData
+    vtbl[].vtbl.readData = cQSaveFile_vtable_callback_readData
   if not isNil(vtbl[].readLineData):
-    vtbl[].vtbl.readLineData = miqt_exec_callback_cQSaveFile_readLineData
+    vtbl[].vtbl.readLineData = cQSaveFile_vtable_callback_readLineData
   if not isNil(vtbl[].reset):
-    vtbl[].vtbl.reset = miqt_exec_callback_cQSaveFile_reset
+    vtbl[].vtbl.reset = cQSaveFile_vtable_callback_reset
   if not isNil(vtbl[].bytesAvailable):
-    vtbl[].vtbl.bytesAvailable = miqt_exec_callback_cQSaveFile_bytesAvailable
+    vtbl[].vtbl.bytesAvailable = cQSaveFile_vtable_callback_bytesAvailable
   if not isNil(vtbl[].bytesToWrite):
-    vtbl[].vtbl.bytesToWrite = miqt_exec_callback_cQSaveFile_bytesToWrite
+    vtbl[].vtbl.bytesToWrite = cQSaveFile_vtable_callback_bytesToWrite
   if not isNil(vtbl[].canReadLine):
-    vtbl[].vtbl.canReadLine = miqt_exec_callback_cQSaveFile_canReadLine
+    vtbl[].vtbl.canReadLine = cQSaveFile_vtable_callback_canReadLine
   if not isNil(vtbl[].waitForReadyRead):
-    vtbl[].vtbl.waitForReadyRead = miqt_exec_callback_cQSaveFile_waitForReadyRead
+    vtbl[].vtbl.waitForReadyRead = cQSaveFile_vtable_callback_waitForReadyRead
   if not isNil(vtbl[].waitForBytesWritten):
-    vtbl[].vtbl.waitForBytesWritten = miqt_exec_callback_cQSaveFile_waitForBytesWritten
+    vtbl[].vtbl.waitForBytesWritten = cQSaveFile_vtable_callback_waitForBytesWritten
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQSaveFile_event
+    vtbl[].vtbl.event = cQSaveFile_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQSaveFile_eventFilter
+    vtbl[].vtbl.eventFilter = cQSaveFile_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQSaveFile_timerEvent
+    vtbl[].vtbl.timerEvent = cQSaveFile_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQSaveFile_childEvent
+    vtbl[].vtbl.childEvent = cQSaveFile_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQSaveFile_customEvent
+    vtbl[].vtbl.customEvent = cQSaveFile_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQSaveFile_connectNotify
+    vtbl[].vtbl.connectNotify = cQSaveFile_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQSaveFile_disconnectNotify
-  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new4(addr(vtbl[].vtbl), parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQSaveFile_vtable_callback_disconnectNotify
+  gen_qsavefile_types.QSaveFile(h: fcQSaveFile_new4(addr(vtbl[].vtbl), addr(vtbl[]), parent.h), owned: true)
 
+const cQSaveFile_mvtbl = cQSaveFileVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQSaveFile()[])](self.fcQSaveFile_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQSaveFile_method_callback_metaObject,
+  metacast: cQSaveFile_method_callback_metacast,
+  metacall: cQSaveFile_method_callback_metacall,
+  fileName: cQSaveFile_method_callback_fileName,
+  open: cQSaveFile_method_callback_open,
+  writeData: cQSaveFile_method_callback_writeData,
+  isSequential: cQSaveFile_method_callback_isSequential,
+  pos: cQSaveFile_method_callback_pos,
+  seek: cQSaveFile_method_callback_seek,
+  atEnd: cQSaveFile_method_callback_atEnd,
+  size: cQSaveFile_method_callback_size,
+  resize: cQSaveFile_method_callback_resize,
+  permissions: cQSaveFile_method_callback_permissions,
+  setPermissions: cQSaveFile_method_callback_setPermissions,
+  readData: cQSaveFile_method_callback_readData,
+  readLineData: cQSaveFile_method_callback_readLineData,
+  reset: cQSaveFile_method_callback_reset,
+  bytesAvailable: cQSaveFile_method_callback_bytesAvailable,
+  bytesToWrite: cQSaveFile_method_callback_bytesToWrite,
+  canReadLine: cQSaveFile_method_callback_canReadLine,
+  waitForReadyRead: cQSaveFile_method_callback_waitForReadyRead,
+  waitForBytesWritten: cQSaveFile_method_callback_waitForBytesWritten,
+  event: cQSaveFile_method_callback_event,
+  eventFilter: cQSaveFile_method_callback_eventFilter,
+  timerEvent: cQSaveFile_method_callback_timerEvent,
+  childEvent: cQSaveFile_method_callback_childEvent,
+  customEvent: cQSaveFile_method_callback_customEvent,
+  connectNotify: cQSaveFile_method_callback_connectNotify,
+  disconnectNotify: cQSaveFile_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     name: string,
-    vtbl: VirtualQSaveFile) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSaveFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSaveFile_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSaveFile_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSaveFile_metacall
-  vtbl[].vtbl.fileName = miqt_exec_method_cQSaveFile_fileName
-  vtbl[].vtbl.open = miqt_exec_method_cQSaveFile_open
-  vtbl[].vtbl.writeData = miqt_exec_method_cQSaveFile_writeData
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQSaveFile_isSequential
-  vtbl[].vtbl.pos = miqt_exec_method_cQSaveFile_pos
-  vtbl[].vtbl.seek = miqt_exec_method_cQSaveFile_seek
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQSaveFile_atEnd
-  vtbl[].vtbl.size = miqt_exec_method_cQSaveFile_size
-  vtbl[].vtbl.resize = miqt_exec_method_cQSaveFile_resize
-  vtbl[].vtbl.permissions = miqt_exec_method_cQSaveFile_permissions
-  vtbl[].vtbl.setPermissions = miqt_exec_method_cQSaveFile_setPermissions
-  vtbl[].vtbl.readData = miqt_exec_method_cQSaveFile_readData
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQSaveFile_readLineData
-  vtbl[].vtbl.reset = miqt_exec_method_cQSaveFile_reset
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQSaveFile_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQSaveFile_bytesToWrite
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQSaveFile_canReadLine
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQSaveFile_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQSaveFile_waitForBytesWritten
-  vtbl[].vtbl.event = miqt_exec_method_cQSaveFile_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSaveFile_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSaveFile_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSaveFile_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSaveFile_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSaveFile_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSaveFile_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSaveFile_new(addr(vtbl[].vtbl), struct_miqt_string(data: name, len: csize_t(len(name))))
-  vtbl[].owned = true
+    inst: VirtualQSaveFile) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSaveFile_new(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: name, len: csize_t(len(name))))
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
-    vtbl: VirtualQSaveFile) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSaveFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSaveFile_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSaveFile_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSaveFile_metacall
-  vtbl[].vtbl.fileName = miqt_exec_method_cQSaveFile_fileName
-  vtbl[].vtbl.open = miqt_exec_method_cQSaveFile_open
-  vtbl[].vtbl.writeData = miqt_exec_method_cQSaveFile_writeData
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQSaveFile_isSequential
-  vtbl[].vtbl.pos = miqt_exec_method_cQSaveFile_pos
-  vtbl[].vtbl.seek = miqt_exec_method_cQSaveFile_seek
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQSaveFile_atEnd
-  vtbl[].vtbl.size = miqt_exec_method_cQSaveFile_size
-  vtbl[].vtbl.resize = miqt_exec_method_cQSaveFile_resize
-  vtbl[].vtbl.permissions = miqt_exec_method_cQSaveFile_permissions
-  vtbl[].vtbl.setPermissions = miqt_exec_method_cQSaveFile_setPermissions
-  vtbl[].vtbl.readData = miqt_exec_method_cQSaveFile_readData
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQSaveFile_readLineData
-  vtbl[].vtbl.reset = miqt_exec_method_cQSaveFile_reset
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQSaveFile_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQSaveFile_bytesToWrite
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQSaveFile_canReadLine
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQSaveFile_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQSaveFile_waitForBytesWritten
-  vtbl[].vtbl.event = miqt_exec_method_cQSaveFile_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSaveFile_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSaveFile_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSaveFile_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSaveFile_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSaveFile_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSaveFile_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSaveFile_new2(addr(vtbl[].vtbl), )
-  vtbl[].owned = true
+    inst: VirtualQSaveFile) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSaveFile_new2(addr(cQSaveFile_mvtbl), addr(inst[]))
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     name: string, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQSaveFile) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSaveFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSaveFile_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSaveFile_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSaveFile_metacall
-  vtbl[].vtbl.fileName = miqt_exec_method_cQSaveFile_fileName
-  vtbl[].vtbl.open = miqt_exec_method_cQSaveFile_open
-  vtbl[].vtbl.writeData = miqt_exec_method_cQSaveFile_writeData
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQSaveFile_isSequential
-  vtbl[].vtbl.pos = miqt_exec_method_cQSaveFile_pos
-  vtbl[].vtbl.seek = miqt_exec_method_cQSaveFile_seek
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQSaveFile_atEnd
-  vtbl[].vtbl.size = miqt_exec_method_cQSaveFile_size
-  vtbl[].vtbl.resize = miqt_exec_method_cQSaveFile_resize
-  vtbl[].vtbl.permissions = miqt_exec_method_cQSaveFile_permissions
-  vtbl[].vtbl.setPermissions = miqt_exec_method_cQSaveFile_setPermissions
-  vtbl[].vtbl.readData = miqt_exec_method_cQSaveFile_readData
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQSaveFile_readLineData
-  vtbl[].vtbl.reset = miqt_exec_method_cQSaveFile_reset
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQSaveFile_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQSaveFile_bytesToWrite
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQSaveFile_canReadLine
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQSaveFile_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQSaveFile_waitForBytesWritten
-  vtbl[].vtbl.event = miqt_exec_method_cQSaveFile_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSaveFile_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSaveFile_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSaveFile_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSaveFile_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSaveFile_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSaveFile_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSaveFile_new3(addr(vtbl[].vtbl), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQSaveFile) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSaveFile_new3(addr(cQSaveFile_mvtbl), addr(inst[]), struct_miqt_string(data: name, len: csize_t(len(name))), parent.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qsavefile_types.QSaveFile,
     parent: gen_qobject_types.QObject,
-    vtbl: VirtualQSaveFile) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQSaveFileVTable, _: ptr cQSaveFile) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQSaveFile()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQSaveFile, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQSaveFile_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQSaveFile_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQSaveFile_metacall
-  vtbl[].vtbl.fileName = miqt_exec_method_cQSaveFile_fileName
-  vtbl[].vtbl.open = miqt_exec_method_cQSaveFile_open
-  vtbl[].vtbl.writeData = miqt_exec_method_cQSaveFile_writeData
-  vtbl[].vtbl.isSequential = miqt_exec_method_cQSaveFile_isSequential
-  vtbl[].vtbl.pos = miqt_exec_method_cQSaveFile_pos
-  vtbl[].vtbl.seek = miqt_exec_method_cQSaveFile_seek
-  vtbl[].vtbl.atEnd = miqt_exec_method_cQSaveFile_atEnd
-  vtbl[].vtbl.size = miqt_exec_method_cQSaveFile_size
-  vtbl[].vtbl.resize = miqt_exec_method_cQSaveFile_resize
-  vtbl[].vtbl.permissions = miqt_exec_method_cQSaveFile_permissions
-  vtbl[].vtbl.setPermissions = miqt_exec_method_cQSaveFile_setPermissions
-  vtbl[].vtbl.readData = miqt_exec_method_cQSaveFile_readData
-  vtbl[].vtbl.readLineData = miqt_exec_method_cQSaveFile_readLineData
-  vtbl[].vtbl.reset = miqt_exec_method_cQSaveFile_reset
-  vtbl[].vtbl.bytesAvailable = miqt_exec_method_cQSaveFile_bytesAvailable
-  vtbl[].vtbl.bytesToWrite = miqt_exec_method_cQSaveFile_bytesToWrite
-  vtbl[].vtbl.canReadLine = miqt_exec_method_cQSaveFile_canReadLine
-  vtbl[].vtbl.waitForReadyRead = miqt_exec_method_cQSaveFile_waitForReadyRead
-  vtbl[].vtbl.waitForBytesWritten = miqt_exec_method_cQSaveFile_waitForBytesWritten
-  vtbl[].vtbl.event = miqt_exec_method_cQSaveFile_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQSaveFile_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQSaveFile_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQSaveFile_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQSaveFile_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQSaveFile_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQSaveFile_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQSaveFile_new4(addr(vtbl[].vtbl), parent.h)
-  vtbl[].owned = true
+    inst: VirtualQSaveFile) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQSaveFile_new4(addr(cQSaveFile_mvtbl), addr(inst[]), parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qsavefile_types.QSaveFile): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQSaveFile_staticMetaObject())

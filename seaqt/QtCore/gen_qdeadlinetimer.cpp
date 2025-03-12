@@ -1,15 +1,6 @@
 #include <QDeadlineTimer>
 #include <qdeadlinetimer.h>
 #include "gen_qdeadlinetimer.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QDeadlineTimer* QDeadlineTimer_new() {
 	return new QDeadlineTimer();
 }

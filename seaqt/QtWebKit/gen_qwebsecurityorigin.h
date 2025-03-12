@@ -26,6 +26,7 @@ typedef struct QWebSecurityOrigin QWebSecurityOrigin;
 
 QWebSecurityOrigin* QWebSecurityOrigin_new(QUrl* url);
 QWebSecurityOrigin* QWebSecurityOrigin_new2(QWebSecurityOrigin* other);
+
 struct miqt_array /* of QWebSecurityOrigin* */  QWebSecurityOrigin_allOrigins();
 void QWebSecurityOrigin_addLocalScheme(struct miqt_string scheme);
 void QWebSecurityOrigin_removeLocalScheme(struct miqt_string scheme);
@@ -41,6 +42,7 @@ void QWebSecurityOrigin_setDatabaseQuota(QWebSecurityOrigin* self, long long quo
 void QWebSecurityOrigin_setApplicationCacheQuota(QWebSecurityOrigin* self, long long quota);
 struct miqt_array /* of QWebDatabase* */  QWebSecurityOrigin_databases(const QWebSecurityOrigin* self);
 void QWebSecurityOrigin_operatorAssign(QWebSecurityOrigin* self, QWebSecurityOrigin* other);
+
 void QWebSecurityOrigin_delete(QWebSecurityOrigin* self);
 
 #ifdef __cplusplus

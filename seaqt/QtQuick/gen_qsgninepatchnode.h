@@ -41,6 +41,7 @@ void QSGNinePatchNode_setDevicePixelRatio(QSGNinePatchNode* self, double ratio);
 void QSGNinePatchNode_setPadding(QSGNinePatchNode* self, double left, double top, double right, double bottom);
 void QSGNinePatchNode_update(QSGNinePatchNode* self);
 void QSGNinePatchNode_rebuildGeometry(QSGTexture* texture, QSGGeometry* geometry, QVector4D* padding, QRectF* bounds, double dpr);
+
 void QSGNinePatchNode_delete(QSGNinePatchNode* self);
 
 #ifdef __cplusplus

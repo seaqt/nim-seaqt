@@ -2,15 +2,6 @@
 #include <QVariant>
 #include <qprintengine.h>
 #include "gen_qprintengine.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QPrintEngine_setProperty(QPrintEngine* self, int key, QVariant* value) {
 	self->setProperty(static_cast<QPrintEngine::PrintEnginePropertyKey>(key), *value);
 }

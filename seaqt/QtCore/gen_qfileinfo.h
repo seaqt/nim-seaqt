@@ -31,6 +31,7 @@ QFileInfo* QFileInfo_new2(struct miqt_string file);
 QFileInfo* QFileInfo_new3(QFile* file);
 QFileInfo* QFileInfo_new4(QDir* dir, struct miqt_string file);
 QFileInfo* QFileInfo_new5(QFileInfo* fileinfo);
+
 void QFileInfo_operatorAssign(QFileInfo* self, QFileInfo* fileinfo);
 void QFileInfo_swap(QFileInfo* self, QFileInfo* other);
 bool QFileInfo_operatorEqual(const QFileInfo* self, QFileInfo* fileinfo);
@@ -88,6 +89,7 @@ QDateTime* QFileInfo_lastRead(const QFileInfo* self);
 QDateTime* QFileInfo_fileTime(const QFileInfo* self, int time);
 bool QFileInfo_caching(const QFileInfo* self);
 void QFileInfo_setCaching(QFileInfo* self, bool on);
+
 void QFileInfo_delete(QFileInfo* self);
 
 #ifdef __cplusplus

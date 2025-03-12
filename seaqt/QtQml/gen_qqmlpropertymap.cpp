@@ -12,39 +12,32 @@
 #include <QVariant>
 #include <qqmlpropertymap.h>
 #include "gen_qqmlpropertymap.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQQmlPropertyMap final : public QQmlPropertyMap {
-	struct QQmlPropertyMap_VTable* vtbl;
+	const QQmlPropertyMap_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QQmlPropertyMap_VTable* QQmlPropertyMap_vtbl(const VirtualQQmlPropertyMap* self);
+	friend void* QQmlPropertyMap_vdata(const VirtualQQmlPropertyMap* self);
+	friend void QQmlPropertyMap_setVdata(VirtualQQmlPropertyMap* self, void* vdata);
 
-	VirtualQQmlPropertyMap(struct QQmlPropertyMap_VTable* vtbl): QQmlPropertyMap(), vtbl(vtbl) {};
-	VirtualQQmlPropertyMap(struct QQmlPropertyMap_VTable* vtbl, QObject* parent): QQmlPropertyMap(parent), vtbl(vtbl) {};
+	VirtualQQmlPropertyMap(const QQmlPropertyMap_VTable* vtbl, void* vdata): QQmlPropertyMap(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQQmlPropertyMap(const QQmlPropertyMap_VTable* vtbl, void* vdata, QObject* parent): QQmlPropertyMap(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQQmlPropertyMap() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQQmlPropertyMap() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QQmlPropertyMap::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const VirtualQQmlPropertyMap* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QQmlPropertyMap::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QQmlPropertyMap_virtualbase_metacast(void* self, const char* param1);
+	friend void* QQmlPropertyMap_virtualbase_metacast(VirtualQQmlPropertyMap* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QQmlPropertyMap::qt_metacall(param1, param2, param3);
@@ -70,14 +62,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QQmlPropertyMap_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QQmlPropertyMap_virtualbase_metacall(VirtualQQmlPropertyMap* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant updateValue(const QString& key, const QVariant& input) override {
 		if (vtbl->updateValue == 0) {
 			return QQmlPropertyMap::updateValue(key, input);
@@ -95,16 +86,15 @@ public:
 		// Cast returned reference into pointer
 		QVariant* sigval2 = const_cast<QVariant*>(&input_ret);
 
-		QVariant* callback_return_value = vtbl->updateValue(vtbl, this, sigval1, sigval2);
+		QVariant* callback_return_value = vtbl->updateValue(this, sigval1, sigval2);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QQmlPropertyMap_virtualbase_updateValue(void* self, struct miqt_string key, QVariant* input);
+	friend QVariant* QQmlPropertyMap_virtualbase_updateValue(VirtualQQmlPropertyMap* self, struct miqt_string key, QVariant* input);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QQmlPropertyMap::event(event);
@@ -112,14 +102,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QQmlPropertyMap_virtualbase_event(void* self, QEvent* event);
+	friend bool QQmlPropertyMap_virtualbase_event(VirtualQQmlPropertyMap* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QQmlPropertyMap::eventFilter(watched, event);
@@ -128,14 +117,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QQmlPropertyMap_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QQmlPropertyMap_virtualbase_eventFilter(VirtualQQmlPropertyMap* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QQmlPropertyMap::timerEvent(event);
@@ -144,13 +132,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QQmlPropertyMap_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QQmlPropertyMap_virtualbase_timerEvent(VirtualQQmlPropertyMap* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QQmlPropertyMap::childEvent(event);
@@ -159,13 +146,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QQmlPropertyMap_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QQmlPropertyMap_virtualbase_childEvent(VirtualQQmlPropertyMap* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QQmlPropertyMap::customEvent(event);
@@ -174,13 +160,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QQmlPropertyMap_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QQmlPropertyMap_virtualbase_customEvent(VirtualQQmlPropertyMap* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QQmlPropertyMap::connectNotify(signal);
@@ -191,13 +176,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QQmlPropertyMap_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QQmlPropertyMap_virtualbase_connectNotify(VirtualQQmlPropertyMap* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QQmlPropertyMap::disconnectNotify(signal);
@@ -208,25 +192,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QQmlPropertyMap_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QQmlPropertyMap_virtualbase_disconnectNotify(VirtualQQmlPropertyMap* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QQmlPropertyMap_protectedbase_sender(const void* self);
-	friend int QQmlPropertyMap_protectedbase_senderSignalIndex(const void* self);
-	friend int QQmlPropertyMap_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QQmlPropertyMap_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QQmlPropertyMap_protectedbase_sender(const VirtualQQmlPropertyMap* self);
+	friend int QQmlPropertyMap_protectedbase_senderSignalIndex(const VirtualQQmlPropertyMap* self);
+	friend int QQmlPropertyMap_protectedbase_receivers(const VirtualQQmlPropertyMap* self, const char* signal);
+	friend bool QQmlPropertyMap_protectedbase_isSignalConnected(const VirtualQQmlPropertyMap* self, QMetaMethod* signal);
 };
 
-QQmlPropertyMap* QQmlPropertyMap_new(struct QQmlPropertyMap_VTable* vtbl) {
-	return new VirtualQQmlPropertyMap(vtbl);
+VirtualQQmlPropertyMap* QQmlPropertyMap_new(const QQmlPropertyMap_VTable* vtbl, void* vdata) {
+	return new VirtualQQmlPropertyMap(vtbl, vdata);
 }
 
-QQmlPropertyMap* QQmlPropertyMap_new2(struct QQmlPropertyMap_VTable* vtbl, QObject* parent) {
-	return new VirtualQQmlPropertyMap(vtbl, parent);
+VirtualQQmlPropertyMap* QQmlPropertyMap_new2(const QQmlPropertyMap_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQQmlPropertyMap(vtbl, vdata, parent);
 }
 
 void QQmlPropertyMap_virtbase(QQmlPropertyMap* src, QObject** outptr_QObject) {
@@ -336,7 +320,7 @@ void QQmlPropertyMap_valueChanged(QQmlPropertyMap* self, struct miqt_string key,
 	self->valueChanged(key_QString, *value);
 }
 
-void QQmlPropertyMap_connect_valueChanged(QQmlPropertyMap* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
+void QQmlPropertyMap_connect_valueChanged(VirtualQQmlPropertyMap* self, intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, struct miqt_string, QVariant*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, struct miqt_string, QVariant*);
@@ -402,100 +386,82 @@ struct miqt_string QQmlPropertyMap_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const void* self) {
+QMetaObject* QQmlPropertyMap_virtualbase_metaObject(const VirtualQQmlPropertyMap* self) {
 
-	return (QMetaObject*) ( (const VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::metaObject();
-
+	return (QMetaObject*) self->QQmlPropertyMap::metaObject();
 }
 
-void* QQmlPropertyMap_virtualbase_metacast(void* self, const char* param1) {
+void* QQmlPropertyMap_virtualbase_metacast(VirtualQQmlPropertyMap* self, const char* param1) {
 
-	return ( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::qt_metacast(param1);
-
+	return self->QQmlPropertyMap::qt_metacast(param1);
 }
 
-int QQmlPropertyMap_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QQmlPropertyMap_virtualbase_metacall(VirtualQQmlPropertyMap* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QQmlPropertyMap::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QVariant* QQmlPropertyMap_virtualbase_updateValue(void* self, struct miqt_string key, QVariant* input) {
+QVariant* QQmlPropertyMap_virtualbase_updateValue(VirtualQQmlPropertyMap* self, struct miqt_string key, QVariant* input) {
 	QString key_QString = QString::fromUtf8(key.data, key.len);
 
-	return new QVariant(( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::updateValue(key_QString, *input));
-
+	return new QVariant(self->QQmlPropertyMap::updateValue(key_QString, *input));
 }
 
-bool QQmlPropertyMap_virtualbase_event(void* self, QEvent* event) {
+bool QQmlPropertyMap_virtualbase_event(VirtualQQmlPropertyMap* self, QEvent* event) {
 
-	return ( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::event(event);
-
+	return self->QQmlPropertyMap::event(event);
 }
 
-bool QQmlPropertyMap_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QQmlPropertyMap_virtualbase_eventFilter(VirtualQQmlPropertyMap* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::eventFilter(watched, event);
-
+	return self->QQmlPropertyMap::eventFilter(watched, event);
 }
 
-void QQmlPropertyMap_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QQmlPropertyMap_virtualbase_timerEvent(VirtualQQmlPropertyMap* self, QTimerEvent* event) {
 
-	( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::timerEvent(event);
-
+	self->QQmlPropertyMap::timerEvent(event);
 }
 
-void QQmlPropertyMap_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QQmlPropertyMap_virtualbase_childEvent(VirtualQQmlPropertyMap* self, QChildEvent* event) {
 
-	( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::childEvent(event);
-
+	self->QQmlPropertyMap::childEvent(event);
 }
 
-void QQmlPropertyMap_virtualbase_customEvent(void* self, QEvent* event) {
+void QQmlPropertyMap_virtualbase_customEvent(VirtualQQmlPropertyMap* self, QEvent* event) {
 
-	( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::customEvent(event);
-
+	self->QQmlPropertyMap::customEvent(event);
 }
 
-void QQmlPropertyMap_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QQmlPropertyMap_virtualbase_connectNotify(VirtualQQmlPropertyMap* self, QMetaMethod* signal) {
 
-	( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::connectNotify(*signal);
-
+	self->QQmlPropertyMap::connectNotify(*signal);
 }
 
-void QQmlPropertyMap_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QQmlPropertyMap_virtualbase_disconnectNotify(VirtualQQmlPropertyMap* self, QMetaMethod* signal) {
 
-	( (VirtualQQmlPropertyMap*)(self) )->QQmlPropertyMap::disconnectNotify(*signal);
-
+	self->QQmlPropertyMap::disconnectNotify(*signal);
 }
 
 const QMetaObject* QQmlPropertyMap_staticMetaObject() { return &QQmlPropertyMap::staticMetaObject; }
-QObject* QQmlPropertyMap_protectedbase_sender(const void* self) {
-	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	
-	return self_cast->sender();
 
+const QQmlPropertyMap_VTable* QQmlPropertyMap_vtbl(const VirtualQQmlPropertyMap* self) { return self->vtbl; }
+void* QQmlPropertyMap_vdata(const VirtualQQmlPropertyMap* self) { return self->vdata; }
+void QQmlPropertyMap_setVdata(VirtualQQmlPropertyMap* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QQmlPropertyMap_protectedbase_sender(const VirtualQQmlPropertyMap* self) {
+	return self->sender();
 }
 
-int QQmlPropertyMap_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QQmlPropertyMap_protectedbase_senderSignalIndex(const VirtualQQmlPropertyMap* self) {
+	return self->senderSignalIndex();
 }
 
-int QQmlPropertyMap_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QQmlPropertyMap_protectedbase_receivers(const VirtualQQmlPropertyMap* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QQmlPropertyMap_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQQmlPropertyMap* self_cast = static_cast<VirtualQQmlPropertyMap*>( (QQmlPropertyMap*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QQmlPropertyMap_protectedbase_isSignalConnected(const VirtualQQmlPropertyMap* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QQmlPropertyMap_delete(QQmlPropertyMap* self) {

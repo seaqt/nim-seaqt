@@ -21,6 +21,7 @@ typedef struct QLinkedListData QLinkedListData;
 #endif
 
 QLinkedListData* QLinkedListData_new();
+
 void QLinkedListData_delete(QLinkedListData* self);
 
 #ifdef __cplusplus

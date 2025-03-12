@@ -63,6 +63,7 @@ struct miqt_string QVideoWidgetControl_tr2(const char* s, const char* c);
 struct miqt_string QVideoWidgetControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QVideoWidgetControl_trUtf82(const char* s, const char* c);
 struct miqt_string QVideoWidgetControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QVideoWidgetControl_staticMetaObject();
 void QVideoWidgetControl_delete(QVideoWidgetControl* self);
 

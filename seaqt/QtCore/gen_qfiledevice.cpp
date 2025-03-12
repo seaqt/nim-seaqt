@@ -9,15 +9,6 @@
 #include <cstring>
 #include <qfiledevice.h>
 #include "gen_qfiledevice.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QFileDevice_virtbase(QFileDevice* src, QIODevice** outptr_QIODevice) {
 	*outptr_QIODevice = static_cast<QIODevice*>(src);
 }
@@ -190,6 +181,7 @@ unsigned char* QFileDevice_map3(QFileDevice* self, long long offset, long long s
 }
 
 const QMetaObject* QFileDevice_staticMetaObject() { return &QFileDevice::staticMetaObject; }
+
 void QFileDevice_delete(QFileDevice* self) {
 	delete self;
 }

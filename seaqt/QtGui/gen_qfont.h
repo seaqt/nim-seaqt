@@ -32,6 +32,7 @@ QFont* QFont_new5(QFont* font);
 QFont* QFont_new6(struct miqt_string family, int pointSize);
 QFont* QFont_new7(struct miqt_string family, int pointSize, int weight);
 QFont* QFont_new8(struct miqt_string family, int pointSize, int weight, bool italic);
+
 void QFont_swap(QFont* self, QFont* other);
 struct miqt_string QFont_family(const QFont* self);
 void QFont_setFamily(QFont* self, struct miqt_string family);
@@ -108,6 +109,7 @@ QFont* QFont_resolve(const QFont* self, QFont* param1);
 unsigned int QFont_resolve2(const QFont* self);
 void QFont_resolveWithMask(QFont* self, unsigned int mask);
 void QFont_setStyleHint2(QFont* self, int param1, int param2);
+
 const QMetaObject* QFont_staticMetaObject();
 void QFont_delete(QFont* self);
 

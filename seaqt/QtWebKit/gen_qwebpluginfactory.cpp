@@ -16,39 +16,32 @@
 #define WORKAROUND_INNER_CLASS_DEFINITION_QWebPluginFactory__Plugin
 #include <qwebpluginfactory.h>
 #include "gen_qwebpluginfactory.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQWebPluginFactory final : public QWebPluginFactory {
-	struct QWebPluginFactory_VTable* vtbl;
+	const QWebPluginFactory_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QWebPluginFactory_VTable* QWebPluginFactory_vtbl(const VirtualQWebPluginFactory* self);
+	friend void* QWebPluginFactory_vdata(const VirtualQWebPluginFactory* self);
+	friend void QWebPluginFactory_setVdata(VirtualQWebPluginFactory* self, void* vdata);
 
-	VirtualQWebPluginFactory(struct QWebPluginFactory_VTable* vtbl): QWebPluginFactory(), vtbl(vtbl) {};
-	VirtualQWebPluginFactory(struct QWebPluginFactory_VTable* vtbl, QObject* parent): QWebPluginFactory(parent), vtbl(vtbl) {};
+	VirtualQWebPluginFactory(const QWebPluginFactory_VTable* vtbl, void* vdata): QWebPluginFactory(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQWebPluginFactory(const QWebPluginFactory_VTable* vtbl, void* vdata, QObject* parent): QWebPluginFactory(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQWebPluginFactory() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQWebPluginFactory() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QWebPluginFactory::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QWebPluginFactory_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QWebPluginFactory_virtualbase_metaObject(const VirtualQWebPluginFactory* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QWebPluginFactory::qt_metacast(param1);
@@ -56,14 +49,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1);
+	friend void* QWebPluginFactory_virtualbase_metacast(VirtualQWebPluginFactory* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QWebPluginFactory::qt_metacall(param1, param2, param3);
@@ -74,21 +66,20 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QWebPluginFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QWebPluginFactory_virtualbase_metacall(VirtualQWebPluginFactory* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QList<QWebPluginFactory::Plugin> plugins() const override {
 		if (vtbl->plugins == 0) {
 			return QList<QWebPluginFactory::Plugin>(); // Pure virtual, there is no base we can call
 		}
 
 
-		struct miqt_array /* of QWebPluginFactory__Plugin* */  callback_return_value = vtbl->plugins(vtbl, this);
+		struct miqt_array /* of QWebPluginFactory__Plugin* */  callback_return_value = vtbl->plugins(this);
 		QList<QWebPluginFactory::Plugin> callback_return_value_QList;
 		callback_return_value_QList.reserve(callback_return_value.len);
 		QWebPluginFactory__Plugin** callback_return_value_arr = static_cast<QWebPluginFactory__Plugin**>(callback_return_value.data);
@@ -100,7 +91,6 @@ public:
 		return callback_return_value_QList;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual void refreshPlugins() override {
 		if (vtbl->refreshPlugins == 0) {
 			QWebPluginFactory::refreshPlugins();
@@ -108,13 +98,12 @@ public:
 		}
 
 
-		vtbl->refreshPlugins(vtbl, this);
+		vtbl->refreshPlugins(this);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_refreshPlugins(void* self);
+	friend void QWebPluginFactory_virtualbase_refreshPlugins(VirtualQWebPluginFactory* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QObject* create(const QString& mimeType, const QUrl& param2, const QStringList& argumentNames, const QStringList& argumentValues) const override {
 		if (vtbl->create == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -166,12 +155,11 @@ public:
 		argumentValues_out.data = static_cast<void*>(argumentValues_arr);
 		struct miqt_array /* of struct miqt_string */  sigval4 = argumentValues_out;
 
-		QObject* callback_return_value = vtbl->create(vtbl, this, sigval1, sigval2, sigval3, sigval4);
+		QObject* callback_return_value = vtbl->create(this, sigval1, sigval2, sigval3, sigval4);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool extension(QWebPluginFactory::Extension extension, const QWebPluginFactory::ExtensionOption* option, QWebPluginFactory::ExtensionReturn* output) override {
 		if (vtbl->extension == 0) {
 			return QWebPluginFactory::extension(extension, option, output);
@@ -182,14 +170,13 @@ public:
 		QWebPluginFactory__ExtensionOption* sigval2 = (QWebPluginFactory__ExtensionOption*) option;
 		QWebPluginFactory__ExtensionReturn* sigval3 = output;
 
-		bool callback_return_value = vtbl->extension(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->extension(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebPluginFactory_virtualbase_extension(void* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output);
+	friend bool QWebPluginFactory_virtualbase_extension(VirtualQWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool supportsExtension(QWebPluginFactory::Extension extension) const override {
 		if (vtbl->supportsExtension == 0) {
 			return QWebPluginFactory::supportsExtension(extension);
@@ -198,14 +185,13 @@ public:
 		QWebPluginFactory::Extension extension_ret = extension;
 		int sigval1 = static_cast<int>(extension_ret);
 
-		bool callback_return_value = vtbl->supportsExtension(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->supportsExtension(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebPluginFactory_virtualbase_supportsExtension(const void* self, int extension);
+	friend bool QWebPluginFactory_virtualbase_supportsExtension(const VirtualQWebPluginFactory* self, int extension);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QWebPluginFactory::event(event);
@@ -213,14 +199,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebPluginFactory_virtualbase_event(void* self, QEvent* event);
+	friend bool QWebPluginFactory_virtualbase_event(VirtualQWebPluginFactory* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QWebPluginFactory::eventFilter(watched, event);
@@ -229,14 +214,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QWebPluginFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QWebPluginFactory_virtualbase_eventFilter(VirtualQWebPluginFactory* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QWebPluginFactory::timerEvent(event);
@@ -245,13 +229,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QWebPluginFactory_virtualbase_timerEvent(VirtualQWebPluginFactory* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QWebPluginFactory::childEvent(event);
@@ -260,13 +243,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QWebPluginFactory_virtualbase_childEvent(VirtualQWebPluginFactory* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QWebPluginFactory::customEvent(event);
@@ -275,13 +257,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QWebPluginFactory_virtualbase_customEvent(VirtualQWebPluginFactory* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QWebPluginFactory::connectNotify(signal);
@@ -292,13 +273,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QWebPluginFactory_virtualbase_connectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QWebPluginFactory::disconnectNotify(signal);
@@ -309,25 +289,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QWebPluginFactory_virtualbase_disconnectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QWebPluginFactory_protectedbase_sender(const void* self);
-	friend int QWebPluginFactory_protectedbase_senderSignalIndex(const void* self);
-	friend int QWebPluginFactory_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QWebPluginFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QWebPluginFactory_protectedbase_sender(const VirtualQWebPluginFactory* self);
+	friend int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFactory* self);
+	friend int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal);
+	friend bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal);
 };
 
-QWebPluginFactory* QWebPluginFactory_new(struct QWebPluginFactory_VTable* vtbl) {
-	return new VirtualQWebPluginFactory(vtbl);
+VirtualQWebPluginFactory* QWebPluginFactory_new(const QWebPluginFactory_VTable* vtbl, void* vdata) {
+	return new VirtualQWebPluginFactory(vtbl, vdata);
 }
 
-QWebPluginFactory* QWebPluginFactory_new2(struct QWebPluginFactory_VTable* vtbl, QObject* parent) {
-	return new VirtualQWebPluginFactory(vtbl, parent);
+VirtualQWebPluginFactory* QWebPluginFactory_new2(const QWebPluginFactory_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQWebPluginFactory(vtbl, vdata, parent);
 }
 
 void QWebPluginFactory_virtbase(QWebPluginFactory* src, QObject** outptr_QObject) {
@@ -456,111 +436,91 @@ struct miqt_string QWebPluginFactory_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QMetaObject* QWebPluginFactory_virtualbase_metaObject(const void* self) {
+QMetaObject* QWebPluginFactory_virtualbase_metaObject(const VirtualQWebPluginFactory* self) {
 
-	return (QMetaObject*) ( (const VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::metaObject();
-
+	return (QMetaObject*) self->QWebPluginFactory::metaObject();
 }
 
-void* QWebPluginFactory_virtualbase_metacast(void* self, const char* param1) {
+void* QWebPluginFactory_virtualbase_metacast(VirtualQWebPluginFactory* self, const char* param1) {
 
-	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::qt_metacast(param1);
-
+	return self->QWebPluginFactory::qt_metacast(param1);
 }
 
-int QWebPluginFactory_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QWebPluginFactory_virtualbase_metacall(VirtualQWebPluginFactory* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QWebPluginFactory::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-void QWebPluginFactory_virtualbase_refreshPlugins(void* self) {
+void QWebPluginFactory_virtualbase_refreshPlugins(VirtualQWebPluginFactory* self) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::refreshPlugins();
-
+	self->QWebPluginFactory::refreshPlugins();
 }
 
-bool QWebPluginFactory_virtualbase_extension(void* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output) {
+bool QWebPluginFactory_virtualbase_extension(VirtualQWebPluginFactory* self, int extension, QWebPluginFactory__ExtensionOption* option, QWebPluginFactory__ExtensionReturn* output) {
 
-	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::extension(static_cast<VirtualQWebPluginFactory::Extension>(extension), option, output);
-
+	return self->QWebPluginFactory::extension(static_cast<VirtualQWebPluginFactory::Extension>(extension), option, output);
 }
 
-bool QWebPluginFactory_virtualbase_supportsExtension(const void* self, int extension) {
+bool QWebPluginFactory_virtualbase_supportsExtension(const VirtualQWebPluginFactory* self, int extension) {
 
-	return ( (const VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::supportsExtension(static_cast<VirtualQWebPluginFactory::Extension>(extension));
-
+	return self->QWebPluginFactory::supportsExtension(static_cast<VirtualQWebPluginFactory::Extension>(extension));
 }
 
-bool QWebPluginFactory_virtualbase_event(void* self, QEvent* event) {
+bool QWebPluginFactory_virtualbase_event(VirtualQWebPluginFactory* self, QEvent* event) {
 
-	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::event(event);
-
+	return self->QWebPluginFactory::event(event);
 }
 
-bool QWebPluginFactory_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QWebPluginFactory_virtualbase_eventFilter(VirtualQWebPluginFactory* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::eventFilter(watched, event);
-
+	return self->QWebPluginFactory::eventFilter(watched, event);
 }
 
-void QWebPluginFactory_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QWebPluginFactory_virtualbase_timerEvent(VirtualQWebPluginFactory* self, QTimerEvent* event) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::timerEvent(event);
-
+	self->QWebPluginFactory::timerEvent(event);
 }
 
-void QWebPluginFactory_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QWebPluginFactory_virtualbase_childEvent(VirtualQWebPluginFactory* self, QChildEvent* event) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::childEvent(event);
-
+	self->QWebPluginFactory::childEvent(event);
 }
 
-void QWebPluginFactory_virtualbase_customEvent(void* self, QEvent* event) {
+void QWebPluginFactory_virtualbase_customEvent(VirtualQWebPluginFactory* self, QEvent* event) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::customEvent(event);
-
+	self->QWebPluginFactory::customEvent(event);
 }
 
-void QWebPluginFactory_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QWebPluginFactory_virtualbase_connectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::connectNotify(*signal);
-
+	self->QWebPluginFactory::connectNotify(*signal);
 }
 
-void QWebPluginFactory_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QWebPluginFactory_virtualbase_disconnectNotify(VirtualQWebPluginFactory* self, QMetaMethod* signal) {
 
-	( (VirtualQWebPluginFactory*)(self) )->QWebPluginFactory::disconnectNotify(*signal);
-
+	self->QWebPluginFactory::disconnectNotify(*signal);
 }
 
 const QMetaObject* QWebPluginFactory_staticMetaObject() { return &QWebPluginFactory::staticMetaObject; }
-QObject* QWebPluginFactory_protectedbase_sender(const void* self) {
-	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	
-	return self_cast->sender();
 
+const QWebPluginFactory_VTable* QWebPluginFactory_vtbl(const VirtualQWebPluginFactory* self) { return self->vtbl; }
+void* QWebPluginFactory_vdata(const VirtualQWebPluginFactory* self) { return self->vdata; }
+void QWebPluginFactory_setVdata(VirtualQWebPluginFactory* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QWebPluginFactory_protectedbase_sender(const VirtualQWebPluginFactory* self) {
+	return self->sender();
 }
 
-int QWebPluginFactory_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QWebPluginFactory_protectedbase_senderSignalIndex(const VirtualQWebPluginFactory* self) {
+	return self->senderSignalIndex();
 }
 
-int QWebPluginFactory_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QWebPluginFactory_protectedbase_receivers(const VirtualQWebPluginFactory* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QWebPluginFactory_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQWebPluginFactory* self_cast = static_cast<VirtualQWebPluginFactory*>( (QWebPluginFactory*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QWebPluginFactory_protectedbase_isSignalConnected(const VirtualQWebPluginFactory* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QWebPluginFactory_delete(QWebPluginFactory* self) {
@@ -568,7 +528,7 @@ void QWebPluginFactory_delete(QWebPluginFactory* self) {
 }
 
 QWebPluginFactory__MimeType* QWebPluginFactory__MimeType_new(QWebPluginFactory__MimeType* param1) {
-	return new QWebPluginFactory::MimeType(*param1);
+	return new QWebPluginFactory__MimeType(*param1);
 }
 
 bool QWebPluginFactory__MimeType_operatorEqual(const QWebPluginFactory__MimeType* self, QWebPluginFactory__MimeType* other) {
@@ -588,7 +548,7 @@ void QWebPluginFactory__MimeType_delete(QWebPluginFactory__MimeType* self) {
 }
 
 QWebPluginFactory__Plugin* QWebPluginFactory__Plugin_new(QWebPluginFactory__Plugin* param1) {
-	return new QWebPluginFactory::Plugin(*param1);
+	return new QWebPluginFactory__Plugin(*param1);
 }
 
 void QWebPluginFactory__Plugin_operatorAssign(QWebPluginFactory__Plugin* self, QWebPluginFactory__Plugin* param1) {

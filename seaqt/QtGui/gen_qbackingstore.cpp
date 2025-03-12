@@ -6,15 +6,6 @@
 #include <QWindow>
 #include <qbackingstore.h>
 #include "gen_qbackingstore.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QBackingStore* QBackingStore_new(QWindow* window) {
 	return new QBackingStore(window);
 }

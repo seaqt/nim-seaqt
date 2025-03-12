@@ -85,6 +85,7 @@ struct miqt_string QCameraExposure_trUtf83(const char* s, const char* c, int n);
 struct miqt_array /* of int */  QCameraExposure_supportedIsoSensitivities1(const QCameraExposure* self, bool* continuous);
 struct miqt_array /* of double */  QCameraExposure_supportedApertures1(const QCameraExposure* self, bool* continuous);
 struct miqt_array /* of double */  QCameraExposure_supportedShutterSpeeds1(const QCameraExposure* self, bool* continuous);
+
 const QMetaObject* QCameraExposure_staticMetaObject();
 
 #ifdef __cplusplus

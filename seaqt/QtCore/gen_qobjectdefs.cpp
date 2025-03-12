@@ -14,15 +14,6 @@
 #include <cstring>
 #include <qobjectdefs.h>
 #include "gen_qobjectdefs.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QGenericArgument* QGenericArgument_new() {
 	return new QGenericArgument();
 }
@@ -508,11 +499,11 @@ void QMetaObject_delete(QMetaObject* self) {
 }
 
 QMetaObject__Connection* QMetaObject__Connection_new() {
-	return new QMetaObject::Connection();
+	return new QMetaObject__Connection();
 }
 
 QMetaObject__Connection* QMetaObject__Connection_new2(QMetaObject__Connection* other) {
-	return new QMetaObject::Connection(*other);
+	return new QMetaObject__Connection(*other);
 }
 
 void QMetaObject__Connection_operatorAssign(QMetaObject__Connection* self, QMetaObject__Connection* other) {
@@ -524,15 +515,15 @@ void QMetaObject__Connection_delete(QMetaObject__Connection* self) {
 }
 
 QMetaObject__SuperData* QMetaObject__SuperData_new() {
-	return new QMetaObject::SuperData();
+	return new QMetaObject__SuperData();
 }
 
 QMetaObject__SuperData* QMetaObject__SuperData_new2(QMetaObject* mo) {
-	return new QMetaObject::SuperData(mo);
+	return new QMetaObject__SuperData(mo);
 }
 
 QMetaObject__SuperData* QMetaObject__SuperData_new3(QMetaObject__SuperData* param1) {
-	return new QMetaObject::SuperData(*param1);
+	return new QMetaObject__SuperData(*param1);
 }
 
 QMetaObject* QMetaObject__SuperData_operatorMinusGreater(const QMetaObject__SuperData* self) {

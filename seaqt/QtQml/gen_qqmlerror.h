@@ -26,6 +26,7 @@ typedef struct QUrl QUrl;
 
 QQmlError* QQmlError_new();
 QQmlError* QQmlError_new2(QQmlError* param1);
+
 void QQmlError_operatorAssign(QQmlError* self, QQmlError* param1);
 bool QQmlError_isValid(const QQmlError* self);
 QUrl* QQmlError_url(const QQmlError* self);
@@ -39,6 +40,7 @@ void QQmlError_setColumn(QQmlError* self, int column);
 QObject* QQmlError_object(const QQmlError* self);
 void QQmlError_setObject(QQmlError* self, QObject* object);
 struct miqt_string QQmlError_toString(const QQmlError* self);
+
 void QQmlError_delete(QQmlError* self);
 
 #ifdef __cplusplus

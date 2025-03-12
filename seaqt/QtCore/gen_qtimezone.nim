@@ -64,20 +64,20 @@ type cQTimeZoneOffsetData*{.exportc: "QTimeZone__OffsetData", incompleteStruct.}
 
 proc fcQTimeZone_operatorAssign(self: pointer, other: pointer): void {.importc: "QTimeZone_operatorAssign".}
 proc fcQTimeZone_swap(self: pointer, other: pointer): void {.importc: "QTimeZone_swap".}
-proc fcQTimeZone_isValid(self: pointer, ): bool {.importc: "QTimeZone_isValid".}
-proc fcQTimeZone_id(self: pointer, ): struct_miqt_string {.importc: "QTimeZone_id".}
-proc fcQTimeZone_country(self: pointer, ): cint {.importc: "QTimeZone_country".}
-proc fcQTimeZone_comment(self: pointer, ): struct_miqt_string {.importc: "QTimeZone_comment".}
+proc fcQTimeZone_isValid(self: pointer): bool {.importc: "QTimeZone_isValid".}
+proc fcQTimeZone_id(self: pointer): struct_miqt_string {.importc: "QTimeZone_id".}
+proc fcQTimeZone_country(self: pointer): cint {.importc: "QTimeZone_country".}
+proc fcQTimeZone_comment(self: pointer): struct_miqt_string {.importc: "QTimeZone_comment".}
 proc fcQTimeZone_displayName(self: pointer, atDateTime: pointer): struct_miqt_string {.importc: "QTimeZone_displayName".}
 proc fcQTimeZone_displayNameWithTimeType(self: pointer, timeType: cint): struct_miqt_string {.importc: "QTimeZone_displayNameWithTimeType".}
 proc fcQTimeZone_abbreviation(self: pointer, atDateTime: pointer): struct_miqt_string {.importc: "QTimeZone_abbreviation".}
 proc fcQTimeZone_offsetFromUtc(self: pointer, atDateTime: pointer): cint {.importc: "QTimeZone_offsetFromUtc".}
 proc fcQTimeZone_standardTimeOffset(self: pointer, atDateTime: pointer): cint {.importc: "QTimeZone_standardTimeOffset".}
 proc fcQTimeZone_daylightTimeOffset(self: pointer, atDateTime: pointer): cint {.importc: "QTimeZone_daylightTimeOffset".}
-proc fcQTimeZone_hasDaylightTime(self: pointer, ): bool {.importc: "QTimeZone_hasDaylightTime".}
+proc fcQTimeZone_hasDaylightTime(self: pointer): bool {.importc: "QTimeZone_hasDaylightTime".}
 proc fcQTimeZone_isDaylightTime(self: pointer, atDateTime: pointer): bool {.importc: "QTimeZone_isDaylightTime".}
 proc fcQTimeZone_offsetData(self: pointer, forDateTime: pointer): pointer {.importc: "QTimeZone_offsetData".}
-proc fcQTimeZone_hasTransitions(self: pointer, ): bool {.importc: "QTimeZone_hasTransitions".}
+proc fcQTimeZone_hasTransitions(self: pointer): bool {.importc: "QTimeZone_hasTransitions".}
 proc fcQTimeZone_nextTransition(self: pointer, afterDateTime: pointer): pointer {.importc: "QTimeZone_nextTransition".}
 proc fcQTimeZone_previousTransition(self: pointer, beforeDateTime: pointer): pointer {.importc: "QTimeZone_previousTransition".}
 proc fcQTimeZone_transitions(self: pointer, fromDateTime: pointer, toDateTime: pointer): struct_miqt_array {.importc: "QTimeZone_transitions".}
@@ -113,19 +113,19 @@ proc operatorAssign*(self: gen_qtimezone_types.QTimeZone, other: gen_qtimezone_t
 proc swap*(self: gen_qtimezone_types.QTimeZone, other: gen_qtimezone_types.QTimeZone): void =
   fcQTimeZone_swap(self.h, other.h)
 
-proc isValid*(self: gen_qtimezone_types.QTimeZone, ): bool =
+proc isValid*(self: gen_qtimezone_types.QTimeZone): bool =
   fcQTimeZone_isValid(self.h)
 
-proc id*(self: gen_qtimezone_types.QTimeZone, ): seq[byte] =
+proc id*(self: gen_qtimezone_types.QTimeZone): seq[byte] =
   var v_bytearray = fcQTimeZone_id(self.h)
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc country*(self: gen_qtimezone_types.QTimeZone, ): cint =
+proc country*(self: gen_qtimezone_types.QTimeZone): cint =
   cint(fcQTimeZone_country(self.h))
 
-proc comment*(self: gen_qtimezone_types.QTimeZone, ): string =
+proc comment*(self: gen_qtimezone_types.QTimeZone): string =
   let v_ms = fcQTimeZone_comment(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -158,7 +158,7 @@ proc standardTimeOffset*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qd
 proc daylightTimeOffset*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime): cint =
   fcQTimeZone_daylightTimeOffset(self.h, atDateTime.h)
 
-proc hasDaylightTime*(self: gen_qtimezone_types.QTimeZone, ): bool =
+proc hasDaylightTime*(self: gen_qtimezone_types.QTimeZone): bool =
   fcQTimeZone_hasDaylightTime(self.h)
 
 proc isDaylightTime*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatetime_types.QDateTime): bool =
@@ -167,7 +167,7 @@ proc isDaylightTime*(self: gen_qtimezone_types.QTimeZone, atDateTime: gen_qdatet
 proc offsetData*(self: gen_qtimezone_types.QTimeZone, forDateTime: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZoneOffsetData =
   gen_qtimezone_types.QTimeZoneOffsetData(h: fcQTimeZone_offsetData(self.h, forDateTime.h), owned: true)
 
-proc hasTransitions*(self: gen_qtimezone_types.QTimeZone, ): bool =
+proc hasTransitions*(self: gen_qtimezone_types.QTimeZone): bool =
   fcQTimeZone_hasTransitions(self.h)
 
 proc nextTransition*(self: gen_qtimezone_types.QTimeZone, afterDateTime: gen_qdatetime_types.QDateTime): gen_qtimezone_types.QTimeZoneOffsetData =
@@ -185,22 +185,22 @@ proc transitions*(self: gen_qtimezone_types.QTimeZone, fromDateTime: gen_qdateti
   c_free(v_ma.data)
   vx_ret
 
-proc systemTimeZoneId*(_: type gen_qtimezone_types.QTimeZone, ): seq[byte] =
+proc systemTimeZoneId*(_: type gen_qtimezone_types.QTimeZone): seq[byte] =
   var v_bytearray = fcQTimeZone_systemTimeZoneId()
   var vx_ret = @(toOpenArrayByte(v_bytearray.data, 0, int(v_bytearray.len)-1))
   c_free(v_bytearray.data)
   vx_ret
 
-proc systemTimeZone*(_: type gen_qtimezone_types.QTimeZone, ): gen_qtimezone_types.QTimeZone =
+proc systemTimeZone*(_: type gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
   gen_qtimezone_types.QTimeZone(h: fcQTimeZone_systemTimeZone(), owned: true)
 
-proc utc*(_: type gen_qtimezone_types.QTimeZone, ): gen_qtimezone_types.QTimeZone =
+proc utc*(_: type gen_qtimezone_types.QTimeZone): gen_qtimezone_types.QTimeZone =
   gen_qtimezone_types.QTimeZone(h: fcQTimeZone_utc(), owned: true)
 
 proc isTimeZoneIdAvailable*(_: type gen_qtimezone_types.QTimeZone, ianaId: seq[byte]): bool =
   fcQTimeZone_isTimeZoneIdAvailable(struct_miqt_string(data: cast[cstring](if len(ianaId) == 0: nil else: unsafeAddr ianaId[0]), len: csize_t(len(ianaId))))
 
-proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone, ): seq[seq[byte]] =
+proc availableTimeZoneIds*(_: type gen_qtimezone_types.QTimeZone): seq[seq[byte]] =
   var v_ma = fcQTimeZone_availableTimeZoneIds()
   var vx_ret = newSeq[seq[byte]](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)

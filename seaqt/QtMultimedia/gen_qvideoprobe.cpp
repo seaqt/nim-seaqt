@@ -13,39 +13,32 @@
 #include <QVideoProbe>
 #include <qvideoprobe.h>
 #include "gen_qvideoprobe.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQVideoProbe final : public QVideoProbe {
-	struct QVideoProbe_VTable* vtbl;
+	const QVideoProbe_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QVideoProbe_VTable* QVideoProbe_vtbl(const VirtualQVideoProbe* self);
+	friend void* QVideoProbe_vdata(const VirtualQVideoProbe* self);
+	friend void QVideoProbe_setVdata(VirtualQVideoProbe* self, void* vdata);
 
-	VirtualQVideoProbe(struct QVideoProbe_VTable* vtbl): QVideoProbe(), vtbl(vtbl) {};
-	VirtualQVideoProbe(struct QVideoProbe_VTable* vtbl, QObject* parent): QVideoProbe(parent), vtbl(vtbl) {};
+	VirtualQVideoProbe(const QVideoProbe_VTable* vtbl, void* vdata): QVideoProbe(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQVideoProbe(const QVideoProbe_VTable* vtbl, void* vdata, QObject* parent): QVideoProbe(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQVideoProbe() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQVideoProbe() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QVideoProbe::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QVideoProbe_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QVideoProbe_virtualbase_metaObject(const VirtualQVideoProbe* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QVideoProbe::qt_metacast(param1);
@@ -53,14 +46,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QVideoProbe_virtualbase_metacast(void* self, const char* param1);
+	friend void* QVideoProbe_virtualbase_metacast(VirtualQVideoProbe* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QVideoProbe::qt_metacall(param1, param2, param3);
@@ -71,14 +63,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QVideoProbe_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QVideoProbe_virtualbase_metacall(VirtualQVideoProbe* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QVideoProbe::event(event);
@@ -86,14 +77,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QVideoProbe_virtualbase_event(void* self, QEvent* event);
+	friend bool QVideoProbe_virtualbase_event(VirtualQVideoProbe* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QVideoProbe::eventFilter(watched, event);
@@ -102,14 +92,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QVideoProbe_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QVideoProbe_virtualbase_eventFilter(VirtualQVideoProbe* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QVideoProbe::timerEvent(event);
@@ -118,13 +107,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QVideoProbe_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QVideoProbe_virtualbase_timerEvent(VirtualQVideoProbe* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QVideoProbe::childEvent(event);
@@ -133,13 +121,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QVideoProbe_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QVideoProbe_virtualbase_childEvent(VirtualQVideoProbe* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QVideoProbe::customEvent(event);
@@ -148,13 +135,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QVideoProbe_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QVideoProbe_virtualbase_customEvent(VirtualQVideoProbe* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QVideoProbe::connectNotify(signal);
@@ -165,13 +151,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QVideoProbe_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QVideoProbe_virtualbase_connectNotify(VirtualQVideoProbe* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QVideoProbe::disconnectNotify(signal);
@@ -182,25 +167,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QVideoProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QVideoProbe_virtualbase_disconnectNotify(VirtualQVideoProbe* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QVideoProbe_protectedbase_sender(const void* self);
-	friend int QVideoProbe_protectedbase_senderSignalIndex(const void* self);
-	friend int QVideoProbe_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QVideoProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QVideoProbe_protectedbase_sender(const VirtualQVideoProbe* self);
+	friend int QVideoProbe_protectedbase_senderSignalIndex(const VirtualQVideoProbe* self);
+	friend int QVideoProbe_protectedbase_receivers(const VirtualQVideoProbe* self, const char* signal);
+	friend bool QVideoProbe_protectedbase_isSignalConnected(const VirtualQVideoProbe* self, QMetaMethod* signal);
 };
 
-QVideoProbe* QVideoProbe_new(struct QVideoProbe_VTable* vtbl) {
-	return new VirtualQVideoProbe(vtbl);
+VirtualQVideoProbe* QVideoProbe_new(const QVideoProbe_VTable* vtbl, void* vdata) {
+	return new VirtualQVideoProbe(vtbl, vdata);
 }
 
-QVideoProbe* QVideoProbe_new2(struct QVideoProbe_VTable* vtbl, QObject* parent) {
-	return new VirtualQVideoProbe(vtbl, parent);
+VirtualQVideoProbe* QVideoProbe_new2(const QVideoProbe_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQVideoProbe(vtbl, vdata, parent);
 }
 
 void QVideoProbe_virtbase(QVideoProbe* src, QObject** outptr_QObject) {
@@ -257,7 +242,7 @@ void QVideoProbe_videoFrameProbed(QVideoProbe* self, QVideoFrame* frame) {
 	self->videoFrameProbed(*frame);
 }
 
-void QVideoProbe_connect_videoFrameProbed(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
+void QVideoProbe_connect_videoFrameProbed(VirtualQVideoProbe* self, intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, QVideoFrame*), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, QVideoFrame*);
@@ -275,7 +260,7 @@ void QVideoProbe_flush(QVideoProbe* self) {
 	self->flush();
 }
 
-void QVideoProbe_connect_flush(QVideoProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QVideoProbe_connect_flush(VirtualQVideoProbe* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -330,93 +315,76 @@ struct miqt_string QVideoProbe_trUtf83(const char* s, const char* c, int n) {
 	return _ms;
 }
 
-QMetaObject* QVideoProbe_virtualbase_metaObject(const void* self) {
+QMetaObject* QVideoProbe_virtualbase_metaObject(const VirtualQVideoProbe* self) {
 
-	return (QMetaObject*) ( (const VirtualQVideoProbe*)(self) )->QVideoProbe::metaObject();
-
+	return (QMetaObject*) self->QVideoProbe::metaObject();
 }
 
-void* QVideoProbe_virtualbase_metacast(void* self, const char* param1) {
+void* QVideoProbe_virtualbase_metacast(VirtualQVideoProbe* self, const char* param1) {
 
-	return ( (VirtualQVideoProbe*)(self) )->QVideoProbe::qt_metacast(param1);
-
+	return self->QVideoProbe::qt_metacast(param1);
 }
 
-int QVideoProbe_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QVideoProbe_virtualbase_metacall(VirtualQVideoProbe* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQVideoProbe*)(self) )->QVideoProbe::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QVideoProbe::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QVideoProbe_virtualbase_event(void* self, QEvent* event) {
+bool QVideoProbe_virtualbase_event(VirtualQVideoProbe* self, QEvent* event) {
 
-	return ( (VirtualQVideoProbe*)(self) )->QVideoProbe::event(event);
-
+	return self->QVideoProbe::event(event);
 }
 
-bool QVideoProbe_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QVideoProbe_virtualbase_eventFilter(VirtualQVideoProbe* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQVideoProbe*)(self) )->QVideoProbe::eventFilter(watched, event);
-
+	return self->QVideoProbe::eventFilter(watched, event);
 }
 
-void QVideoProbe_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QVideoProbe_virtualbase_timerEvent(VirtualQVideoProbe* self, QTimerEvent* event) {
 
-	( (VirtualQVideoProbe*)(self) )->QVideoProbe::timerEvent(event);
-
+	self->QVideoProbe::timerEvent(event);
 }
 
-void QVideoProbe_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QVideoProbe_virtualbase_childEvent(VirtualQVideoProbe* self, QChildEvent* event) {
 
-	( (VirtualQVideoProbe*)(self) )->QVideoProbe::childEvent(event);
-
+	self->QVideoProbe::childEvent(event);
 }
 
-void QVideoProbe_virtualbase_customEvent(void* self, QEvent* event) {
+void QVideoProbe_virtualbase_customEvent(VirtualQVideoProbe* self, QEvent* event) {
 
-	( (VirtualQVideoProbe*)(self) )->QVideoProbe::customEvent(event);
-
+	self->QVideoProbe::customEvent(event);
 }
 
-void QVideoProbe_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QVideoProbe_virtualbase_connectNotify(VirtualQVideoProbe* self, QMetaMethod* signal) {
 
-	( (VirtualQVideoProbe*)(self) )->QVideoProbe::connectNotify(*signal);
-
+	self->QVideoProbe::connectNotify(*signal);
 }
 
-void QVideoProbe_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QVideoProbe_virtualbase_disconnectNotify(VirtualQVideoProbe* self, QMetaMethod* signal) {
 
-	( (VirtualQVideoProbe*)(self) )->QVideoProbe::disconnectNotify(*signal);
-
+	self->QVideoProbe::disconnectNotify(*signal);
 }
 
 const QMetaObject* QVideoProbe_staticMetaObject() { return &QVideoProbe::staticMetaObject; }
-QObject* QVideoProbe_protectedbase_sender(const void* self) {
-	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	
-	return self_cast->sender();
 
+const QVideoProbe_VTable* QVideoProbe_vtbl(const VirtualQVideoProbe* self) { return self->vtbl; }
+void* QVideoProbe_vdata(const VirtualQVideoProbe* self) { return self->vdata; }
+void QVideoProbe_setVdata(VirtualQVideoProbe* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QVideoProbe_protectedbase_sender(const VirtualQVideoProbe* self) {
+	return self->sender();
 }
 
-int QVideoProbe_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QVideoProbe_protectedbase_senderSignalIndex(const VirtualQVideoProbe* self) {
+	return self->senderSignalIndex();
 }
 
-int QVideoProbe_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QVideoProbe_protectedbase_receivers(const VirtualQVideoProbe* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QVideoProbe_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQVideoProbe* self_cast = static_cast<VirtualQVideoProbe*>( (QVideoProbe*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QVideoProbe_protectedbase_isSignalConnected(const VirtualQVideoProbe* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QVideoProbe_delete(QVideoProbe* self) {

@@ -54,19 +54,19 @@ proc fcQWebSecurityOrigin_removeLocalScheme(scheme: struct_miqt_string): void {.
 proc fcQWebSecurityOrigin_localSchemes(): struct_miqt_array {.importc: "QWebSecurityOrigin_localSchemes".}
 proc fcQWebSecurityOrigin_addAccessWhitelistEntry(self: pointer, scheme: struct_miqt_string, host: struct_miqt_string, subdomainSetting: cint): void {.importc: "QWebSecurityOrigin_addAccessWhitelistEntry".}
 proc fcQWebSecurityOrigin_removeAccessWhitelistEntry(self: pointer, scheme: struct_miqt_string, host: struct_miqt_string, subdomainSetting: cint): void {.importc: "QWebSecurityOrigin_removeAccessWhitelistEntry".}
-proc fcQWebSecurityOrigin_scheme(self: pointer, ): struct_miqt_string {.importc: "QWebSecurityOrigin_scheme".}
-proc fcQWebSecurityOrigin_host(self: pointer, ): struct_miqt_string {.importc: "QWebSecurityOrigin_host".}
-proc fcQWebSecurityOrigin_port(self: pointer, ): cint {.importc: "QWebSecurityOrigin_port".}
-proc fcQWebSecurityOrigin_databaseUsage(self: pointer, ): clonglong {.importc: "QWebSecurityOrigin_databaseUsage".}
-proc fcQWebSecurityOrigin_databaseQuota(self: pointer, ): clonglong {.importc: "QWebSecurityOrigin_databaseQuota".}
+proc fcQWebSecurityOrigin_scheme(self: pointer): struct_miqt_string {.importc: "QWebSecurityOrigin_scheme".}
+proc fcQWebSecurityOrigin_host(self: pointer): struct_miqt_string {.importc: "QWebSecurityOrigin_host".}
+proc fcQWebSecurityOrigin_port(self: pointer): cint {.importc: "QWebSecurityOrigin_port".}
+proc fcQWebSecurityOrigin_databaseUsage(self: pointer): clonglong {.importc: "QWebSecurityOrigin_databaseUsage".}
+proc fcQWebSecurityOrigin_databaseQuota(self: pointer): clonglong {.importc: "QWebSecurityOrigin_databaseQuota".}
 proc fcQWebSecurityOrigin_setDatabaseQuota(self: pointer, quota: clonglong): void {.importc: "QWebSecurityOrigin_setDatabaseQuota".}
 proc fcQWebSecurityOrigin_setApplicationCacheQuota(self: pointer, quota: clonglong): void {.importc: "QWebSecurityOrigin_setApplicationCacheQuota".}
-proc fcQWebSecurityOrigin_databases(self: pointer, ): struct_miqt_array {.importc: "QWebSecurityOrigin_databases".}
+proc fcQWebSecurityOrigin_databases(self: pointer): struct_miqt_array {.importc: "QWebSecurityOrigin_databases".}
 proc fcQWebSecurityOrigin_operatorAssign(self: pointer, other: pointer): void {.importc: "QWebSecurityOrigin_operatorAssign".}
 proc fcQWebSecurityOrigin_new(url: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new".}
 proc fcQWebSecurityOrigin_new2(other: pointer): ptr cQWebSecurityOrigin {.importc: "QWebSecurityOrigin_new2".}
 
-proc allOrigins*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): seq[gen_qwebsecurityorigin_types.QWebSecurityOrigin] =
+proc allOrigins*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin): seq[gen_qwebsecurityorigin_types.QWebSecurityOrigin] =
   var v_ma = fcQWebSecurityOrigin_allOrigins()
   var vx_ret = newSeq[gen_qwebsecurityorigin_types.QWebSecurityOrigin](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)
@@ -81,7 +81,7 @@ proc addLocalScheme*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, sc
 proc removeLocalScheme*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, scheme: string): void =
   fcQWebSecurityOrigin_removeLocalScheme(struct_miqt_string(data: scheme, len: csize_t(len(scheme))))
 
-proc localSchemes*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): seq[string] =
+proc localSchemes*(_: type gen_qwebsecurityorigin_types.QWebSecurityOrigin): seq[string] =
   var v_ma = fcQWebSecurityOrigin_localSchemes()
   var vx_ret = newSeq[string](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[struct_miqt_string]](v_ma.data)
@@ -99,25 +99,25 @@ proc addAccessWhitelistEntry*(self: gen_qwebsecurityorigin_types.QWebSecurityOri
 proc removeAccessWhitelistEntry*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, scheme: string, host: string, subdomainSetting: cint): void =
   fcQWebSecurityOrigin_removeAccessWhitelistEntry(self.h, struct_miqt_string(data: scheme, len: csize_t(len(scheme))), struct_miqt_string(data: host, len: csize_t(len(host))), cint(subdomainSetting))
 
-proc scheme*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): string =
+proc scheme*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): string =
   let v_ms = fcQWebSecurityOrigin_scheme(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc host*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): string =
+proc host*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): string =
   let v_ms = fcQWebSecurityOrigin_host(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc port*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): cint =
+proc port*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): cint =
   fcQWebSecurityOrigin_port(self.h)
 
-proc databaseUsage*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): clonglong =
+proc databaseUsage*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): clonglong =
   fcQWebSecurityOrigin_databaseUsage(self.h)
 
-proc databaseQuota*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): clonglong =
+proc databaseQuota*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): clonglong =
   fcQWebSecurityOrigin_databaseQuota(self.h)
 
 proc setDatabaseQuota*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, quota: clonglong): void =
@@ -126,7 +126,7 @@ proc setDatabaseQuota*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, qu
 proc setApplicationCacheQuota*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, quota: clonglong): void =
   fcQWebSecurityOrigin_setApplicationCacheQuota(self.h, quota)
 
-proc databases*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin, ): seq[gen_qwebdatabase_types.QWebDatabase] =
+proc databases*(self: gen_qwebsecurityorigin_types.QWebSecurityOrigin): seq[gen_qwebdatabase_types.QWebDatabase] =
   var v_ma = fcQWebSecurityOrigin_databases(self.h)
   var vx_ret = newSeq[gen_qwebdatabase_types.QWebDatabase](int(v_ma.len))
   let v_outCast = cast[ptr UncheckedArray[pointer]](v_ma.data)

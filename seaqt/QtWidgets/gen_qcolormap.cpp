@@ -3,15 +3,6 @@
 #include <QList>
 #include <qcolormap.h>
 #include "gen_qcolormap.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QColormap* QColormap_new(QColormap* colormap) {
 	return new QColormap(*colormap);
 }

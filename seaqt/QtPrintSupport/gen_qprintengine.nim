@@ -78,10 +78,10 @@ type cQPrintEngine*{.exportc: "QPrintEngine", incompleteStruct.} = object
 
 proc fcQPrintEngine_setProperty(self: pointer, key: cint, value: pointer): void {.importc: "QPrintEngine_setProperty".}
 proc fcQPrintEngine_property(self: pointer, key: cint): pointer {.importc: "QPrintEngine_property".}
-proc fcQPrintEngine_newPage(self: pointer, ): bool {.importc: "QPrintEngine_newPage".}
-proc fcQPrintEngine_abort(self: pointer, ): bool {.importc: "QPrintEngine_abort".}
+proc fcQPrintEngine_newPage(self: pointer): bool {.importc: "QPrintEngine_newPage".}
+proc fcQPrintEngine_abort(self: pointer): bool {.importc: "QPrintEngine_abort".}
 proc fcQPrintEngine_metric(self: pointer, param1: cint): cint {.importc: "QPrintEngine_metric".}
-proc fcQPrintEngine_printerState(self: pointer, ): cint {.importc: "QPrintEngine_printerState".}
+proc fcQPrintEngine_printerState(self: pointer): cint {.importc: "QPrintEngine_printerState".}
 proc fcQPrintEngine_operatorAssign(self: pointer, param1: pointer): void {.importc: "QPrintEngine_operatorAssign".}
 
 proc setProperty*(self: gen_qprintengine_types.QPrintEngine, key: cint, value: gen_qvariant_types.QVariant): void =
@@ -90,16 +90,16 @@ proc setProperty*(self: gen_qprintengine_types.QPrintEngine, key: cint, value: g
 proc property*(self: gen_qprintengine_types.QPrintEngine, key: cint): gen_qvariant_types.QVariant =
   gen_qvariant_types.QVariant(h: fcQPrintEngine_property(self.h, cint(key)), owned: true)
 
-proc newPage*(self: gen_qprintengine_types.QPrintEngine, ): bool =
+proc newPage*(self: gen_qprintengine_types.QPrintEngine): bool =
   fcQPrintEngine_newPage(self.h)
 
-proc abort*(self: gen_qprintengine_types.QPrintEngine, ): bool =
+proc abort*(self: gen_qprintengine_types.QPrintEngine): bool =
   fcQPrintEngine_abort(self.h)
 
 proc metric*(self: gen_qprintengine_types.QPrintEngine, param1: cint): cint =
   fcQPrintEngine_metric(self.h, cint(param1))
 
-proc printerState*(self: gen_qprintengine_types.QPrintEngine, ): cint =
+proc printerState*(self: gen_qprintengine_types.QPrintEngine): cint =
   cint(fcQPrintEngine_printerState(self.h))
 
 proc operatorAssign*(self: gen_qprintengine_types.QPrintEngine, param1: gen_qprintengine_types.QPrintEngine): void =

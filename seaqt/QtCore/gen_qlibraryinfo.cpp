@@ -7,15 +7,6 @@
 #include <QVersionNumber>
 #include <qlibraryinfo.h>
 #include "gen_qlibraryinfo.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 struct miqt_string QLibraryInfo_licensee() {
 	QString _ret = QLibraryInfo::licensee();
 	// Convert QString from UTF-16 in C++ RAII memory to UTF-8 in manually-managed C memory

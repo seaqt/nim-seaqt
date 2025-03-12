@@ -39,6 +39,7 @@ QIcon* QIcon_new2(QPixmap* pixmap);
 QIcon* QIcon_new3(QIcon* other);
 QIcon* QIcon_new4(struct miqt_string fileName);
 QIcon* QIcon_new5(QIconEngine* engine);
+
 void QIcon_operatorAssign(QIcon* self, QIcon* other);
 void QIcon_swap(QIcon* self, QIcon* other);
 QVariant* QIcon_ToQVariant(const QIcon* self);
@@ -96,6 +97,7 @@ void QIcon_addFile3(QIcon* self, struct miqt_string fileName, QSize* size, int m
 void QIcon_addFile4(QIcon* self, struct miqt_string fileName, QSize* size, int mode, int state);
 struct miqt_array /* of QSize* */  QIcon_availableSizes1(const QIcon* self, int mode);
 struct miqt_array /* of QSize* */  QIcon_availableSizes2(const QIcon* self, int mode, int state);
+
 void QIcon_delete(QIcon* self);
 
 #ifdef __cplusplus

@@ -139,78 +139,78 @@ export
 type cQPainter*{.exportc: "QPainter", incompleteStruct.} = object
 type cQPainterPixmapFragment*{.exportc: "QPainter__PixmapFragment", incompleteStruct.} = object
 
-proc fcQPainter_device(self: pointer, ): pointer {.importc: "QPainter_device".}
+proc fcQPainter_device(self: pointer): pointer {.importc: "QPainter_device".}
 proc fcQPainter_begin(self: pointer, param1: pointer): bool {.importc: "QPainter_begin".}
-proc fcQPainter_endX(self: pointer, ): bool {.importc: "QPainter_end".}
-proc fcQPainter_isActive(self: pointer, ): bool {.importc: "QPainter_isActive".}
+proc fcQPainter_endX(self: pointer): bool {.importc: "QPainter_end".}
+proc fcQPainter_isActive(self: pointer): bool {.importc: "QPainter_isActive".}
 proc fcQPainter_initFrom(self: pointer, device: pointer): void {.importc: "QPainter_initFrom".}
 proc fcQPainter_setCompositionMode(self: pointer, mode: cint): void {.importc: "QPainter_setCompositionMode".}
-proc fcQPainter_compositionMode(self: pointer, ): cint {.importc: "QPainter_compositionMode".}
-proc fcQPainter_font(self: pointer, ): pointer {.importc: "QPainter_font".}
+proc fcQPainter_compositionMode(self: pointer): cint {.importc: "QPainter_compositionMode".}
+proc fcQPainter_font(self: pointer): pointer {.importc: "QPainter_font".}
 proc fcQPainter_setFont(self: pointer, f: pointer): void {.importc: "QPainter_setFont".}
-proc fcQPainter_fontMetrics(self: pointer, ): pointer {.importc: "QPainter_fontMetrics".}
-proc fcQPainter_fontInfo(self: pointer, ): pointer {.importc: "QPainter_fontInfo".}
+proc fcQPainter_fontMetrics(self: pointer): pointer {.importc: "QPainter_fontMetrics".}
+proc fcQPainter_fontInfo(self: pointer): pointer {.importc: "QPainter_fontInfo".}
 proc fcQPainter_setPen(self: pointer, color: pointer): void {.importc: "QPainter_setPen".}
 proc fcQPainter_setPenWithPen(self: pointer, pen: pointer): void {.importc: "QPainter_setPenWithPen".}
 proc fcQPainter_setPenWithStyle(self: pointer, style: cint): void {.importc: "QPainter_setPenWithStyle".}
-proc fcQPainter_pen(self: pointer, ): pointer {.importc: "QPainter_pen".}
+proc fcQPainter_pen(self: pointer): pointer {.importc: "QPainter_pen".}
 proc fcQPainter_setBrush(self: pointer, brush: pointer): void {.importc: "QPainter_setBrush".}
 proc fcQPainter_setBrushWithStyle(self: pointer, style: cint): void {.importc: "QPainter_setBrushWithStyle".}
-proc fcQPainter_brush(self: pointer, ): pointer {.importc: "QPainter_brush".}
+proc fcQPainter_brush(self: pointer): pointer {.importc: "QPainter_brush".}
 proc fcQPainter_setBackgroundMode(self: pointer, mode: cint): void {.importc: "QPainter_setBackgroundMode".}
-proc fcQPainter_backgroundMode(self: pointer, ): cint {.importc: "QPainter_backgroundMode".}
-proc fcQPainter_brushOrigin(self: pointer, ): pointer {.importc: "QPainter_brushOrigin".}
+proc fcQPainter_backgroundMode(self: pointer): cint {.importc: "QPainter_backgroundMode".}
+proc fcQPainter_brushOrigin(self: pointer): pointer {.importc: "QPainter_brushOrigin".}
 proc fcQPainter_setBrushOrigin(self: pointer, x: cint, y: cint): void {.importc: "QPainter_setBrushOrigin".}
 proc fcQPainter_setBrushOriginWithBrushOrigin(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOriginWithBrushOrigin".}
 proc fcQPainter_setBrushOrigin2(self: pointer, brushOrigin: pointer): void {.importc: "QPainter_setBrushOrigin2".}
 proc fcQPainter_setBackground(self: pointer, bg: pointer): void {.importc: "QPainter_setBackground".}
-proc fcQPainter_background(self: pointer, ): pointer {.importc: "QPainter_background".}
-proc fcQPainter_opacity(self: pointer, ): float64 {.importc: "QPainter_opacity".}
+proc fcQPainter_background(self: pointer): pointer {.importc: "QPainter_background".}
+proc fcQPainter_opacity(self: pointer): float64 {.importc: "QPainter_opacity".}
 proc fcQPainter_setOpacity(self: pointer, opacity: float64): void {.importc: "QPainter_setOpacity".}
-proc fcQPainter_clipRegion(self: pointer, ): pointer {.importc: "QPainter_clipRegion".}
-proc fcQPainter_clipPath(self: pointer, ): pointer {.importc: "QPainter_clipPath".}
+proc fcQPainter_clipRegion(self: pointer): pointer {.importc: "QPainter_clipRegion".}
+proc fcQPainter_clipPath(self: pointer): pointer {.importc: "QPainter_clipPath".}
 proc fcQPainter_setClipRect(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRect".}
 proc fcQPainter_setClipRectWithQRect(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRectWithQRect".}
 proc fcQPainter_setClipRect2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setClipRect2".}
 proc fcQPainter_setClipRegion(self: pointer, param1: pointer): void {.importc: "QPainter_setClipRegion".}
 proc fcQPainter_setClipPath(self: pointer, path: pointer): void {.importc: "QPainter_setClipPath".}
 proc fcQPainter_setClipping(self: pointer, enable: bool): void {.importc: "QPainter_setClipping".}
-proc fcQPainter_hasClipping(self: pointer, ): bool {.importc: "QPainter_hasClipping".}
-proc fcQPainter_clipBoundingRect(self: pointer, ): pointer {.importc: "QPainter_clipBoundingRect".}
-proc fcQPainter_save(self: pointer, ): void {.importc: "QPainter_save".}
-proc fcQPainter_restore(self: pointer, ): void {.importc: "QPainter_restore".}
+proc fcQPainter_hasClipping(self: pointer): bool {.importc: "QPainter_hasClipping".}
+proc fcQPainter_clipBoundingRect(self: pointer): pointer {.importc: "QPainter_clipBoundingRect".}
+proc fcQPainter_save(self: pointer): void {.importc: "QPainter_save".}
+proc fcQPainter_restore(self: pointer): void {.importc: "QPainter_restore".}
 proc fcQPainter_setMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setMatrix".}
-proc fcQPainter_matrix(self: pointer, ): pointer {.importc: "QPainter_matrix".}
-proc fcQPainter_deviceMatrix(self: pointer, ): pointer {.importc: "QPainter_deviceMatrix".}
-proc fcQPainter_resetMatrix(self: pointer, ): void {.importc: "QPainter_resetMatrix".}
+proc fcQPainter_matrix(self: pointer): pointer {.importc: "QPainter_matrix".}
+proc fcQPainter_deviceMatrix(self: pointer): pointer {.importc: "QPainter_deviceMatrix".}
+proc fcQPainter_resetMatrix(self: pointer): void {.importc: "QPainter_resetMatrix".}
 proc fcQPainter_setTransform(self: pointer, transform: pointer): void {.importc: "QPainter_setTransform".}
-proc fcQPainter_transform(self: pointer, ): pointer {.importc: "QPainter_transform".}
-proc fcQPainter_deviceTransform(self: pointer, ): pointer {.importc: "QPainter_deviceTransform".}
-proc fcQPainter_resetTransform(self: pointer, ): void {.importc: "QPainter_resetTransform".}
+proc fcQPainter_transform(self: pointer): pointer {.importc: "QPainter_transform".}
+proc fcQPainter_deviceTransform(self: pointer): pointer {.importc: "QPainter_deviceTransform".}
+proc fcQPainter_resetTransform(self: pointer): void {.importc: "QPainter_resetTransform".}
 proc fcQPainter_setWorldMatrix(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldMatrix".}
-proc fcQPainter_worldMatrix(self: pointer, ): pointer {.importc: "QPainter_worldMatrix".}
-proc fcQPainter_combinedMatrix(self: pointer, ): pointer {.importc: "QPainter_combinedMatrix".}
+proc fcQPainter_worldMatrix(self: pointer): pointer {.importc: "QPainter_worldMatrix".}
+proc fcQPainter_combinedMatrix(self: pointer): pointer {.importc: "QPainter_combinedMatrix".}
 proc fcQPainter_setMatrixEnabled(self: pointer, enabled: bool): void {.importc: "QPainter_setMatrixEnabled".}
-proc fcQPainter_matrixEnabled(self: pointer, ): bool {.importc: "QPainter_matrixEnabled".}
+proc fcQPainter_matrixEnabled(self: pointer): bool {.importc: "QPainter_matrixEnabled".}
 proc fcQPainter_setWorldTransform(self: pointer, matrix: pointer): void {.importc: "QPainter_setWorldTransform".}
-proc fcQPainter_worldTransform(self: pointer, ): pointer {.importc: "QPainter_worldTransform".}
-proc fcQPainter_combinedTransform(self: pointer, ): pointer {.importc: "QPainter_combinedTransform".}
+proc fcQPainter_worldTransform(self: pointer): pointer {.importc: "QPainter_worldTransform".}
+proc fcQPainter_combinedTransform(self: pointer): pointer {.importc: "QPainter_combinedTransform".}
 proc fcQPainter_setWorldMatrixEnabled(self: pointer, enabled: bool): void {.importc: "QPainter_setWorldMatrixEnabled".}
-proc fcQPainter_worldMatrixEnabled(self: pointer, ): bool {.importc: "QPainter_worldMatrixEnabled".}
+proc fcQPainter_worldMatrixEnabled(self: pointer): bool {.importc: "QPainter_worldMatrixEnabled".}
 proc fcQPainter_scale(self: pointer, sx: float64, sy: float64): void {.importc: "QPainter_scale".}
 proc fcQPainter_shear(self: pointer, sh: float64, sv: float64): void {.importc: "QPainter_shear".}
 proc fcQPainter_rotate(self: pointer, a: float64): void {.importc: "QPainter_rotate".}
 proc fcQPainter_translate(self: pointer, offset: pointer): void {.importc: "QPainter_translate".}
 proc fcQPainter_translateWithOffset(self: pointer, offset: pointer): void {.importc: "QPainter_translateWithOffset".}
 proc fcQPainter_translate2(self: pointer, dx: float64, dy: float64): void {.importc: "QPainter_translate2".}
-proc fcQPainter_window(self: pointer, ): pointer {.importc: "QPainter_window".}
+proc fcQPainter_window(self: pointer): pointer {.importc: "QPainter_window".}
 proc fcQPainter_setWindow(self: pointer, window: pointer): void {.importc: "QPainter_setWindow".}
 proc fcQPainter_setWindow2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setWindow2".}
-proc fcQPainter_viewport(self: pointer, ): pointer {.importc: "QPainter_viewport".}
+proc fcQPainter_viewport(self: pointer): pointer {.importc: "QPainter_viewport".}
 proc fcQPainter_setViewport(self: pointer, viewport: pointer): void {.importc: "QPainter_setViewport".}
 proc fcQPainter_setViewport2(self: pointer, x: cint, y: cint, w: cint, h: cint): void {.importc: "QPainter_setViewport2".}
 proc fcQPainter_setViewTransformEnabled(self: pointer, enable: bool): void {.importc: "QPainter_setViewTransformEnabled".}
-proc fcQPainter_viewTransformEnabled(self: pointer, ): bool {.importc: "QPainter_viewTransformEnabled".}
+proc fcQPainter_viewTransformEnabled(self: pointer): bool {.importc: "QPainter_viewTransformEnabled".}
 proc fcQPainter_strokePath(self: pointer, path: pointer, pen: pointer): void {.importc: "QPainter_strokePath".}
 proc fcQPainter_fillPath(self: pointer, path: pointer, brush: pointer): void {.importc: "QPainter_fillPath".}
 proc fcQPainter_drawPath(self: pointer, path: pointer): void {.importc: "QPainter_drawPath".}
@@ -293,7 +293,7 @@ proc fcQPainter_drawImage7(self: pointer, p: pointer, image: pointer): void {.im
 proc fcQPainter_drawImage8(self: pointer, p: pointer, image: pointer): void {.importc: "QPainter_drawImage8".}
 proc fcQPainter_drawImage9(self: pointer, x: cint, y: cint, image: pointer): void {.importc: "QPainter_drawImage9".}
 proc fcQPainter_setLayoutDirection(self: pointer, direction: cint): void {.importc: "QPainter_setLayoutDirection".}
-proc fcQPainter_layoutDirection(self: pointer, ): cint {.importc: "QPainter_layoutDirection".}
+proc fcQPainter_layoutDirection(self: pointer): cint {.importc: "QPainter_layoutDirection".}
 proc fcQPainter_drawGlyphRun(self: pointer, position: pointer, glyphRun: pointer): void {.importc: "QPainter_drawGlyphRun".}
 proc fcQPainter_drawStaticText(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText".}
 proc fcQPainter_drawStaticText2(self: pointer, topLeftPosition: pointer, staticText: pointer): void {.importc: "QPainter_drawStaticText2".}
@@ -333,14 +333,14 @@ proc fcQPainter_eraseRect2(self: pointer, x: cint, y: cint, w: cint, h: cint): v
 proc fcQPainter_eraseRectWithQRect(self: pointer, param1: pointer): void {.importc: "QPainter_eraseRectWithQRect".}
 proc fcQPainter_setRenderHint(self: pointer, hint: cint): void {.importc: "QPainter_setRenderHint".}
 proc fcQPainter_setRenderHints(self: pointer, hints: cint): void {.importc: "QPainter_setRenderHints".}
-proc fcQPainter_renderHints(self: pointer, ): cint {.importc: "QPainter_renderHints".}
+proc fcQPainter_renderHints(self: pointer): cint {.importc: "QPainter_renderHints".}
 proc fcQPainter_testRenderHint(self: pointer, hint: cint): bool {.importc: "QPainter_testRenderHint".}
-proc fcQPainter_paintEngine(self: pointer, ): pointer {.importc: "QPainter_paintEngine".}
+proc fcQPainter_paintEngine(self: pointer): pointer {.importc: "QPainter_paintEngine".}
 proc fcQPainter_setRedirected(device: pointer, replacement: pointer): void {.importc: "QPainter_setRedirected".}
 proc fcQPainter_redirected(device: pointer): pointer {.importc: "QPainter_redirected".}
 proc fcQPainter_restoreRedirected(device: pointer): void {.importc: "QPainter_restoreRedirected".}
-proc fcQPainter_beginNativePainting(self: pointer, ): void {.importc: "QPainter_beginNativePainting".}
-proc fcQPainter_endNativePainting(self: pointer, ): void {.importc: "QPainter_endNativePainting".}
+proc fcQPainter_beginNativePainting(self: pointer): void {.importc: "QPainter_beginNativePainting".}
+proc fcQPainter_endNativePainting(self: pointer): void {.importc: "QPainter_endNativePainting".}
 proc fcQPainter_setClipRect22(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect22".}
 proc fcQPainter_setClipRect23(self: pointer, param1: pointer, op: cint): void {.importc: "QPainter_setClipRect23".}
 proc fcQPainter_setClipRect5(self: pointer, x: cint, y: cint, w: cint, h: cint, op: cint): void {.importc: "QPainter_setClipRect5".}
@@ -393,16 +393,16 @@ proc fcQPainterPixmapFragment_create4(pos: pointer, sourceRect: pointer, scaleX:
 proc fcQPainterPixmapFragment_create5(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64): pointer {.importc: "QPainter__PixmapFragment_create5".}
 proc fcQPainterPixmapFragment_create6(pos: pointer, sourceRect: pointer, scaleX: float64, scaleY: float64, rotation: float64, opacity: float64): pointer {.importc: "QPainter__PixmapFragment_create6".}
 
-proc device*(self: gen_qpainter_types.QPainter, ): gen_qpaintdevice_types.QPaintDevice =
+proc device*(self: gen_qpainter_types.QPainter): gen_qpaintdevice_types.QPaintDevice =
   gen_qpaintdevice_types.QPaintDevice(h: fcQPainter_device(self.h), owned: false)
 
 proc begin*(self: gen_qpainter_types.QPainter, param1: gen_qpaintdevice_types.QPaintDevice): bool =
   fcQPainter_begin(self.h, param1.h)
 
-proc endX*(self: gen_qpainter_types.QPainter, ): bool =
+proc endX*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_endX(self.h)
 
-proc isActive*(self: gen_qpainter_types.QPainter, ): bool =
+proc isActive*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_isActive(self.h)
 
 proc initFrom*(self: gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): void =
@@ -411,19 +411,19 @@ proc initFrom*(self: gen_qpainter_types.QPainter, device: gen_qpaintdevice_types
 proc setCompositionMode*(self: gen_qpainter_types.QPainter, mode: cint): void =
   fcQPainter_setCompositionMode(self.h, cint(mode))
 
-proc compositionMode*(self: gen_qpainter_types.QPainter, ): cint =
+proc compositionMode*(self: gen_qpainter_types.QPainter): cint =
   cint(fcQPainter_compositionMode(self.h))
 
-proc font*(self: gen_qpainter_types.QPainter, ): gen_qfont_types.QFont =
+proc font*(self: gen_qpainter_types.QPainter): gen_qfont_types.QFont =
   gen_qfont_types.QFont(h: fcQPainter_font(self.h), owned: false)
 
 proc setFont*(self: gen_qpainter_types.QPainter, f: gen_qfont_types.QFont): void =
   fcQPainter_setFont(self.h, f.h)
 
-proc fontMetrics*(self: gen_qpainter_types.QPainter, ): gen_qfontmetrics_types.QFontMetrics =
+proc fontMetrics*(self: gen_qpainter_types.QPainter): gen_qfontmetrics_types.QFontMetrics =
   gen_qfontmetrics_types.QFontMetrics(h: fcQPainter_fontMetrics(self.h), owned: true)
 
-proc fontInfo*(self: gen_qpainter_types.QPainter, ): gen_qfontinfo_types.QFontInfo =
+proc fontInfo*(self: gen_qpainter_types.QPainter): gen_qfontinfo_types.QFontInfo =
   gen_qfontinfo_types.QFontInfo(h: fcQPainter_fontInfo(self.h), owned: true)
 
 proc setPen*(self: gen_qpainter_types.QPainter, color: gen_qcolor_types.QColor): void =
@@ -435,7 +435,7 @@ proc setPen*(self: gen_qpainter_types.QPainter, pen: gen_qpen_types.QPen): void 
 proc setPen*(self: gen_qpainter_types.QPainter, style: cint): void =
   fcQPainter_setPenWithStyle(self.h, cint(style))
 
-proc pen*(self: gen_qpainter_types.QPainter, ): gen_qpen_types.QPen =
+proc pen*(self: gen_qpainter_types.QPainter): gen_qpen_types.QPen =
   gen_qpen_types.QPen(h: fcQPainter_pen(self.h), owned: false)
 
 proc setBrush*(self: gen_qpainter_types.QPainter, brush: gen_qbrush_types.QBrush): void =
@@ -444,16 +444,16 @@ proc setBrush*(self: gen_qpainter_types.QPainter, brush: gen_qbrush_types.QBrush
 proc setBrush*(self: gen_qpainter_types.QPainter, style: cint): void =
   fcQPainter_setBrushWithStyle(self.h, cint(style))
 
-proc brush*(self: gen_qpainter_types.QPainter, ): gen_qbrush_types.QBrush =
+proc brush*(self: gen_qpainter_types.QPainter): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQPainter_brush(self.h), owned: false)
 
 proc setBackgroundMode*(self: gen_qpainter_types.QPainter, mode: cint): void =
   fcQPainter_setBackgroundMode(self.h, cint(mode))
 
-proc backgroundMode*(self: gen_qpainter_types.QPainter, ): cint =
+proc backgroundMode*(self: gen_qpainter_types.QPainter): cint =
   cint(fcQPainter_backgroundMode(self.h))
 
-proc brushOrigin*(self: gen_qpainter_types.QPainter, ): gen_qpoint_types.QPoint =
+proc brushOrigin*(self: gen_qpainter_types.QPainter): gen_qpoint_types.QPoint =
   gen_qpoint_types.QPoint(h: fcQPainter_brushOrigin(self.h), owned: true)
 
 proc setBrushOrigin*(self: gen_qpainter_types.QPainter, x: cint, y: cint): void =
@@ -468,19 +468,19 @@ proc setBrushOrigin*(self: gen_qpainter_types.QPainter, brushOrigin: gen_qpoint_
 proc setBackground*(self: gen_qpainter_types.QPainter, bg: gen_qbrush_types.QBrush): void =
   fcQPainter_setBackground(self.h, bg.h)
 
-proc background*(self: gen_qpainter_types.QPainter, ): gen_qbrush_types.QBrush =
+proc background*(self: gen_qpainter_types.QPainter): gen_qbrush_types.QBrush =
   gen_qbrush_types.QBrush(h: fcQPainter_background(self.h), owned: false)
 
-proc opacity*(self: gen_qpainter_types.QPainter, ): float64 =
+proc opacity*(self: gen_qpainter_types.QPainter): float64 =
   fcQPainter_opacity(self.h)
 
 proc setOpacity*(self: gen_qpainter_types.QPainter, opacity: float64): void =
   fcQPainter_setOpacity(self.h, opacity)
 
-proc clipRegion*(self: gen_qpainter_types.QPainter, ): gen_qregion_types.QRegion =
+proc clipRegion*(self: gen_qpainter_types.QPainter): gen_qregion_types.QRegion =
   gen_qregion_types.QRegion(h: fcQPainter_clipRegion(self.h), owned: true)
 
-proc clipPath*(self: gen_qpainter_types.QPainter, ): gen_qpainterpath_types.QPainterPath =
+proc clipPath*(self: gen_qpainter_types.QPainter): gen_qpainterpath_types.QPainterPath =
   gen_qpainterpath_types.QPainterPath(h: fcQPainter_clipPath(self.h), owned: true)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF): void =
@@ -501,70 +501,70 @@ proc setClipPath*(self: gen_qpainter_types.QPainter, path: gen_qpainterpath_type
 proc setClipping*(self: gen_qpainter_types.QPainter, enable: bool): void =
   fcQPainter_setClipping(self.h, enable)
 
-proc hasClipping*(self: gen_qpainter_types.QPainter, ): bool =
+proc hasClipping*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_hasClipping(self.h)
 
-proc clipBoundingRect*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRectF =
+proc clipBoundingRect*(self: gen_qpainter_types.QPainter): gen_qrect_types.QRectF =
   gen_qrect_types.QRectF(h: fcQPainter_clipBoundingRect(self.h), owned: true)
 
-proc save*(self: gen_qpainter_types.QPainter, ): void =
+proc save*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_save(self.h)
 
-proc restore*(self: gen_qpainter_types.QPainter, ): void =
+proc restore*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_restore(self.h)
 
 proc setMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix): void =
   fcQPainter_setMatrix(self.h, matrix.h)
 
-proc matrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
+proc matrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_matrix(self.h), owned: false)
 
-proc deviceMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
+proc deviceMatrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_deviceMatrix(self.h), owned: false)
 
-proc resetMatrix*(self: gen_qpainter_types.QPainter, ): void =
+proc resetMatrix*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_resetMatrix(self.h)
 
 proc setTransform*(self: gen_qpainter_types.QPainter, transform: gen_qtransform_types.QTransform): void =
   fcQPainter_setTransform(self.h, transform.h)
 
-proc transform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
+proc transform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_transform(self.h), owned: false)
 
-proc deviceTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
+proc deviceTransform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_deviceTransform(self.h), owned: false)
 
-proc resetTransform*(self: gen_qpainter_types.QPainter, ): void =
+proc resetTransform*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_resetTransform(self.h)
 
 proc setWorldMatrix*(self: gen_qpainter_types.QPainter, matrix: gen_qmatrix_types.QMatrix): void =
   fcQPainter_setWorldMatrix(self.h, matrix.h)
 
-proc worldMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
+proc worldMatrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_worldMatrix(self.h), owned: false)
 
-proc combinedMatrix*(self: gen_qpainter_types.QPainter, ): gen_qmatrix_types.QMatrix =
+proc combinedMatrix*(self: gen_qpainter_types.QPainter): gen_qmatrix_types.QMatrix =
   gen_qmatrix_types.QMatrix(h: fcQPainter_combinedMatrix(self.h), owned: true)
 
 proc setMatrixEnabled*(self: gen_qpainter_types.QPainter, enabled: bool): void =
   fcQPainter_setMatrixEnabled(self.h, enabled)
 
-proc matrixEnabled*(self: gen_qpainter_types.QPainter, ): bool =
+proc matrixEnabled*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_matrixEnabled(self.h)
 
 proc setWorldTransform*(self: gen_qpainter_types.QPainter, matrix: gen_qtransform_types.QTransform): void =
   fcQPainter_setWorldTransform(self.h, matrix.h)
 
-proc worldTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
+proc worldTransform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_worldTransform(self.h), owned: false)
 
-proc combinedTransform*(self: gen_qpainter_types.QPainter, ): gen_qtransform_types.QTransform =
+proc combinedTransform*(self: gen_qpainter_types.QPainter): gen_qtransform_types.QTransform =
   gen_qtransform_types.QTransform(h: fcQPainter_combinedTransform(self.h), owned: true)
 
 proc setWorldMatrixEnabled*(self: gen_qpainter_types.QPainter, enabled: bool): void =
   fcQPainter_setWorldMatrixEnabled(self.h, enabled)
 
-proc worldMatrixEnabled*(self: gen_qpainter_types.QPainter, ): bool =
+proc worldMatrixEnabled*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_worldMatrixEnabled(self.h)
 
 proc scale*(self: gen_qpainter_types.QPainter, sx: float64, sy: float64): void =
@@ -585,7 +585,7 @@ proc translate*(self: gen_qpainter_types.QPainter, offset: gen_qpoint_types.QPoi
 proc translate*(self: gen_qpainter_types.QPainter, dx: float64, dy: float64): void =
   fcQPainter_translate2(self.h, dx, dy)
 
-proc window*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRect =
+proc window*(self: gen_qpainter_types.QPainter): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPainter_window(self.h), owned: true)
 
 proc setWindow*(self: gen_qpainter_types.QPainter, window: gen_qrect_types.QRect): void =
@@ -594,7 +594,7 @@ proc setWindow*(self: gen_qpainter_types.QPainter, window: gen_qrect_types.QRect
 proc setWindow*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, h: cint): void =
   fcQPainter_setWindow2(self.h, x, y, w, h)
 
-proc viewport*(self: gen_qpainter_types.QPainter, ): gen_qrect_types.QRect =
+proc viewport*(self: gen_qpainter_types.QPainter): gen_qrect_types.QRect =
   gen_qrect_types.QRect(h: fcQPainter_viewport(self.h), owned: true)
 
 proc setViewport*(self: gen_qpainter_types.QPainter, viewport: gen_qrect_types.QRect): void =
@@ -606,7 +606,7 @@ proc setViewport*(self: gen_qpainter_types.QPainter, x: cint, y: cint, w: cint, 
 proc setViewTransformEnabled*(self: gen_qpainter_types.QPainter, enable: bool): void =
   fcQPainter_setViewTransformEnabled(self.h, enable)
 
-proc viewTransformEnabled*(self: gen_qpainter_types.QPainter, ): bool =
+proc viewTransformEnabled*(self: gen_qpainter_types.QPainter): bool =
   fcQPainter_viewTransformEnabled(self.h)
 
 proc strokePath*(self: gen_qpainter_types.QPainter, path: gen_qpainterpath_types.QPainterPath, pen: gen_qpen_types.QPen): void =
@@ -879,7 +879,7 @@ proc drawImage*(self: gen_qpainter_types.QPainter, x: cint, y: cint, image: gen_
 proc setLayoutDirection*(self: gen_qpainter_types.QPainter, direction: cint): void =
   fcQPainter_setLayoutDirection(self.h, cint(direction))
 
-proc layoutDirection*(self: gen_qpainter_types.QPainter, ): cint =
+proc layoutDirection*(self: gen_qpainter_types.QPainter): cint =
   cint(fcQPainter_layoutDirection(self.h))
 
 proc drawGlyphRun*(self: gen_qpainter_types.QPainter, position: gen_qpoint_types.QPointF, glyphRun: gen_qglyphrun_types.QGlyphRun): void =
@@ -999,13 +999,13 @@ proc setRenderHint*(self: gen_qpainter_types.QPainter, hint: cint): void =
 proc setRenderHints*(self: gen_qpainter_types.QPainter, hints: cint): void =
   fcQPainter_setRenderHints(self.h, cint(hints))
 
-proc renderHints*(self: gen_qpainter_types.QPainter, ): cint =
+proc renderHints*(self: gen_qpainter_types.QPainter): cint =
   cint(fcQPainter_renderHints(self.h))
 
 proc testRenderHint*(self: gen_qpainter_types.QPainter, hint: cint): bool =
   fcQPainter_testRenderHint(self.h, cint(hint))
 
-proc paintEngine*(self: gen_qpainter_types.QPainter, ): gen_qpaintengine_types.QPaintEngine =
+proc paintEngine*(self: gen_qpainter_types.QPainter): gen_qpaintengine_types.QPaintEngine =
   gen_qpaintengine_types.QPaintEngine(h: fcQPainter_paintEngine(self.h), owned: false)
 
 proc setRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice, replacement: gen_qpaintdevice_types.QPaintDevice): void =
@@ -1017,10 +1017,10 @@ proc redirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_t
 proc restoreRedirected*(_: type gen_qpainter_types.QPainter, device: gen_qpaintdevice_types.QPaintDevice): void =
   fcQPainter_restoreRedirected(device.h)
 
-proc beginNativePainting*(self: gen_qpainter_types.QPainter, ): void =
+proc beginNativePainting*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_beginNativePainting(self.h)
 
-proc endNativePainting*(self: gen_qpainter_types.QPainter, ): void =
+proc endNativePainting*(self: gen_qpainter_types.QPainter): void =
   fcQPainter_endNativePainting(self.h)
 
 proc setClipRect*(self: gen_qpainter_types.QPainter, param1: gen_qrect_types.QRectF, op: cint): void =

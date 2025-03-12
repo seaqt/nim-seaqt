@@ -47,6 +47,7 @@ struct miqt_string QCameraViewfinderSettingsControl_tr2(const char* s, const cha
 struct miqt_string QCameraViewfinderSettingsControl_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraViewfinderSettingsControl_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraViewfinderSettingsControl_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QCameraViewfinderSettingsControl_staticMetaObject();
 void QCameraViewfinderSettingsControl_delete(QCameraViewfinderSettingsControl* self);
 
@@ -63,6 +64,7 @@ struct miqt_string QCameraViewfinderSettingsControl2_tr2(const char* s, const ch
 struct miqt_string QCameraViewfinderSettingsControl2_tr3(const char* s, const char* c, int n);
 struct miqt_string QCameraViewfinderSettingsControl2_trUtf82(const char* s, const char* c);
 struct miqt_string QCameraViewfinderSettingsControl2_trUtf83(const char* s, const char* c, int n);
+
 const QMetaObject* QCameraViewfinderSettingsControl2_staticMetaObject();
 void QCameraViewfinderSettingsControl2_delete(QCameraViewfinderSettingsControl2* self);
 

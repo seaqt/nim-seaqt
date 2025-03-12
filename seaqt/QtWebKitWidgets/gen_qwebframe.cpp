@@ -26,15 +26,6 @@
 #include <QWebSecurityOrigin>
 #include <qwebframe.h>
 #include "gen_qwebframe.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QWebHitTestResult* QWebHitTestResult_new() {
 	return new QWebHitTestResult();
 }
@@ -682,3 +673,4 @@ void QWebFrame_render3(QWebFrame* self, QPainter* param1, int layer, QRegion* cl
 }
 
 const QMetaObject* QWebFrame_staticMetaObject() { return &QWebFrame::staticMetaObject; }
+

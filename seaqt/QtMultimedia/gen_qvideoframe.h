@@ -30,6 +30,7 @@ QVideoFrame* QVideoFrame_new();
 QVideoFrame* QVideoFrame_new2(int bytes, QSize* size, int bytesPerLine, int format);
 QVideoFrame* QVideoFrame_new3(QImage* image);
 QVideoFrame* QVideoFrame_new4(QVideoFrame* other);
+
 void QVideoFrame_operatorAssign(QVideoFrame* self, QVideoFrame* other);
 bool QVideoFrame_operatorEqual(const QVideoFrame* self, QVideoFrame* other);
 bool QVideoFrame_operatorNotEqual(const QVideoFrame* self, QVideoFrame* other);
@@ -66,6 +67,7 @@ void QVideoFrame_setMetaData(QVideoFrame* self, struct miqt_string key, QVariant
 QImage* QVideoFrame_image(const QVideoFrame* self);
 int QVideoFrame_pixelFormatFromImageFormat(int format);
 int QVideoFrame_imageFormatFromPixelFormat(int format);
+
 void QVideoFrame_delete(QVideoFrame* self);
 
 #ifdef __cplusplus

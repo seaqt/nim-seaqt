@@ -12,39 +12,32 @@
 #include <QTimerEvent>
 #include <qparallelanimationgroup.h>
 #include "gen_qparallelanimationgroup.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQParallelAnimationGroup final : public QParallelAnimationGroup {
-	struct QParallelAnimationGroup_VTable* vtbl;
+	const QParallelAnimationGroup_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QParallelAnimationGroup_VTable* QParallelAnimationGroup_vtbl(const VirtualQParallelAnimationGroup* self);
+	friend void* QParallelAnimationGroup_vdata(const VirtualQParallelAnimationGroup* self);
+	friend void QParallelAnimationGroup_setVdata(VirtualQParallelAnimationGroup* self, void* vdata);
 
-	VirtualQParallelAnimationGroup(struct QParallelAnimationGroup_VTable* vtbl): QParallelAnimationGroup(), vtbl(vtbl) {};
-	VirtualQParallelAnimationGroup(struct QParallelAnimationGroup_VTable* vtbl, QObject* parent): QParallelAnimationGroup(parent), vtbl(vtbl) {};
+	VirtualQParallelAnimationGroup(const QParallelAnimationGroup_VTable* vtbl, void* vdata): QParallelAnimationGroup(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQParallelAnimationGroup(const QParallelAnimationGroup_VTable* vtbl, void* vdata, QObject* parent): QParallelAnimationGroup(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQParallelAnimationGroup() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQParallelAnimationGroup() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QParallelAnimationGroup::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const VirtualQParallelAnimationGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QParallelAnimationGroup::qt_metacast(param1);
@@ -52,14 +45,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QParallelAnimationGroup_virtualbase_metacast(void* self, const char* param1);
+	friend void* QParallelAnimationGroup_virtualbase_metacast(VirtualQParallelAnimationGroup* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QParallelAnimationGroup::qt_metacall(param1, param2, param3);
@@ -70,28 +62,26 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QParallelAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QParallelAnimationGroup_virtualbase_metacall(VirtualQParallelAnimationGroup* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual int duration() const override {
 		if (vtbl->duration == 0) {
 			return QParallelAnimationGroup::duration();
 		}
 
 
-		int callback_return_value = vtbl->duration(vtbl, this);
+		int callback_return_value = vtbl->duration(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QParallelAnimationGroup_virtualbase_duration(const void* self);
+	friend int QParallelAnimationGroup_virtualbase_duration(const VirtualQParallelAnimationGroup* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QParallelAnimationGroup::event(event);
@@ -99,14 +89,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QParallelAnimationGroup_virtualbase_event(void* self, QEvent* event);
+	friend bool QParallelAnimationGroup_virtualbase_event(VirtualQParallelAnimationGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateCurrentTime(int currentTime) override {
 		if (vtbl->updateCurrentTime == 0) {
 			QParallelAnimationGroup::updateCurrentTime(currentTime);
@@ -115,13 +104,12 @@ public:
 
 		int sigval1 = currentTime;
 
-		vtbl->updateCurrentTime(vtbl, this, sigval1);
+		vtbl->updateCurrentTime(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_updateCurrentTime(void* self, int currentTime);
+	friend void QParallelAnimationGroup_virtualbase_updateCurrentTime(VirtualQParallelAnimationGroup* self, int currentTime);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateState(QAbstractAnimation::State newState, QAbstractAnimation::State oldState) override {
 		if (vtbl->updateState == 0) {
 			QParallelAnimationGroup::updateState(newState, oldState);
@@ -133,13 +121,12 @@ public:
 		QAbstractAnimation::State oldState_ret = oldState;
 		int sigval2 = static_cast<int>(oldState_ret);
 
-		vtbl->updateState(vtbl, this, sigval1, sigval2);
+		vtbl->updateState(this, sigval1, sigval2);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_updateState(void* self, int newState, int oldState);
+	friend void QParallelAnimationGroup_virtualbase_updateState(VirtualQParallelAnimationGroup* self, int newState, int oldState);
 
-	// Subclass to allow providing a Go implementation
 	virtual void updateDirection(QAbstractAnimation::Direction direction) override {
 		if (vtbl->updateDirection == 0) {
 			QParallelAnimationGroup::updateDirection(direction);
@@ -149,13 +136,12 @@ public:
 		QAbstractAnimation::Direction direction_ret = direction;
 		int sigval1 = static_cast<int>(direction_ret);
 
-		vtbl->updateDirection(vtbl, this, sigval1);
+		vtbl->updateDirection(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_updateDirection(void* self, int direction);
+	friend void QParallelAnimationGroup_virtualbase_updateDirection(VirtualQParallelAnimationGroup* self, int direction);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QParallelAnimationGroup::eventFilter(watched, event);
@@ -164,14 +150,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QParallelAnimationGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QParallelAnimationGroup_virtualbase_eventFilter(VirtualQParallelAnimationGroup* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QParallelAnimationGroup::timerEvent(event);
@@ -180,13 +165,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QParallelAnimationGroup_virtualbase_timerEvent(VirtualQParallelAnimationGroup* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QParallelAnimationGroup::childEvent(event);
@@ -195,13 +179,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QParallelAnimationGroup_virtualbase_childEvent(VirtualQParallelAnimationGroup* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QParallelAnimationGroup::customEvent(event);
@@ -210,13 +193,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QParallelAnimationGroup_virtualbase_customEvent(VirtualQParallelAnimationGroup* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QParallelAnimationGroup::connectNotify(signal);
@@ -227,13 +209,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QParallelAnimationGroup_virtualbase_connectNotify(VirtualQParallelAnimationGroup* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QParallelAnimationGroup::disconnectNotify(signal);
@@ -244,25 +225,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QParallelAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QParallelAnimationGroup_virtualbase_disconnectNotify(VirtualQParallelAnimationGroup* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QParallelAnimationGroup_protectedbase_sender(const void* self);
-	friend int QParallelAnimationGroup_protectedbase_senderSignalIndex(const void* self);
-	friend int QParallelAnimationGroup_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QParallelAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QParallelAnimationGroup_protectedbase_sender(const VirtualQParallelAnimationGroup* self);
+	friend int QParallelAnimationGroup_protectedbase_senderSignalIndex(const VirtualQParallelAnimationGroup* self);
+	friend int QParallelAnimationGroup_protectedbase_receivers(const VirtualQParallelAnimationGroup* self, const char* signal);
+	friend bool QParallelAnimationGroup_protectedbase_isSignalConnected(const VirtualQParallelAnimationGroup* self, QMetaMethod* signal);
 };
 
-QParallelAnimationGroup* QParallelAnimationGroup_new(struct QParallelAnimationGroup_VTable* vtbl) {
-	return new VirtualQParallelAnimationGroup(vtbl);
+VirtualQParallelAnimationGroup* QParallelAnimationGroup_new(const QParallelAnimationGroup_VTable* vtbl, void* vdata) {
+	return new VirtualQParallelAnimationGroup(vtbl, vdata);
 }
 
-QParallelAnimationGroup* QParallelAnimationGroup_new2(struct QParallelAnimationGroup_VTable* vtbl, QObject* parent) {
-	return new VirtualQParallelAnimationGroup(vtbl, parent);
+VirtualQParallelAnimationGroup* QParallelAnimationGroup_new2(const QParallelAnimationGroup_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQParallelAnimationGroup(vtbl, vdata, parent);
 }
 
 void QParallelAnimationGroup_virtbase(QParallelAnimationGroup* src, QAnimationGroup** outptr_QAnimationGroup) {
@@ -351,117 +332,96 @@ struct miqt_string QParallelAnimationGroup_trUtf83(const char* s, const char* c,
 	return _ms;
 }
 
-QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const void* self) {
+QMetaObject* QParallelAnimationGroup_virtualbase_metaObject(const VirtualQParallelAnimationGroup* self) {
 
-	return (QMetaObject*) ( (const VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::metaObject();
-
+	return (QMetaObject*) self->QParallelAnimationGroup::metaObject();
 }
 
-void* QParallelAnimationGroup_virtualbase_metacast(void* self, const char* param1) {
+void* QParallelAnimationGroup_virtualbase_metacast(VirtualQParallelAnimationGroup* self, const char* param1) {
 
-	return ( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::qt_metacast(param1);
-
+	return self->QParallelAnimationGroup::qt_metacast(param1);
 }
 
-int QParallelAnimationGroup_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QParallelAnimationGroup_virtualbase_metacall(VirtualQParallelAnimationGroup* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QParallelAnimationGroup::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-int QParallelAnimationGroup_virtualbase_duration(const void* self) {
+int QParallelAnimationGroup_virtualbase_duration(const VirtualQParallelAnimationGroup* self) {
 
-	return ( (const VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::duration();
-
+	return self->QParallelAnimationGroup::duration();
 }
 
-bool QParallelAnimationGroup_virtualbase_event(void* self, QEvent* event) {
+bool QParallelAnimationGroup_virtualbase_event(VirtualQParallelAnimationGroup* self, QEvent* event) {
 
-	return ( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::event(event);
-
+	return self->QParallelAnimationGroup::event(event);
 }
 
-void QParallelAnimationGroup_virtualbase_updateCurrentTime(void* self, int currentTime) {
+void QParallelAnimationGroup_virtualbase_updateCurrentTime(VirtualQParallelAnimationGroup* self, int currentTime) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::updateCurrentTime(static_cast<int>(currentTime));
-
+	self->QParallelAnimationGroup::updateCurrentTime(static_cast<int>(currentTime));
 }
 
-void QParallelAnimationGroup_virtualbase_updateState(void* self, int newState, int oldState) {
+void QParallelAnimationGroup_virtualbase_updateState(VirtualQParallelAnimationGroup* self, int newState, int oldState) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::updateState(static_cast<VirtualQParallelAnimationGroup::State>(newState), static_cast<VirtualQParallelAnimationGroup::State>(oldState));
-
+	self->QParallelAnimationGroup::updateState(static_cast<VirtualQParallelAnimationGroup::State>(newState), static_cast<VirtualQParallelAnimationGroup::State>(oldState));
 }
 
-void QParallelAnimationGroup_virtualbase_updateDirection(void* self, int direction) {
+void QParallelAnimationGroup_virtualbase_updateDirection(VirtualQParallelAnimationGroup* self, int direction) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::updateDirection(static_cast<VirtualQParallelAnimationGroup::Direction>(direction));
-
+	self->QParallelAnimationGroup::updateDirection(static_cast<VirtualQParallelAnimationGroup::Direction>(direction));
 }
 
-bool QParallelAnimationGroup_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QParallelAnimationGroup_virtualbase_eventFilter(VirtualQParallelAnimationGroup* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::eventFilter(watched, event);
-
+	return self->QParallelAnimationGroup::eventFilter(watched, event);
 }
 
-void QParallelAnimationGroup_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QParallelAnimationGroup_virtualbase_timerEvent(VirtualQParallelAnimationGroup* self, QTimerEvent* event) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::timerEvent(event);
-
+	self->QParallelAnimationGroup::timerEvent(event);
 }
 
-void QParallelAnimationGroup_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QParallelAnimationGroup_virtualbase_childEvent(VirtualQParallelAnimationGroup* self, QChildEvent* event) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::childEvent(event);
-
+	self->QParallelAnimationGroup::childEvent(event);
 }
 
-void QParallelAnimationGroup_virtualbase_customEvent(void* self, QEvent* event) {
+void QParallelAnimationGroup_virtualbase_customEvent(VirtualQParallelAnimationGroup* self, QEvent* event) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::customEvent(event);
-
+	self->QParallelAnimationGroup::customEvent(event);
 }
 
-void QParallelAnimationGroup_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QParallelAnimationGroup_virtualbase_connectNotify(VirtualQParallelAnimationGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::connectNotify(*signal);
-
+	self->QParallelAnimationGroup::connectNotify(*signal);
 }
 
-void QParallelAnimationGroup_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QParallelAnimationGroup_virtualbase_disconnectNotify(VirtualQParallelAnimationGroup* self, QMetaMethod* signal) {
 
-	( (VirtualQParallelAnimationGroup*)(self) )->QParallelAnimationGroup::disconnectNotify(*signal);
-
+	self->QParallelAnimationGroup::disconnectNotify(*signal);
 }
 
 const QMetaObject* QParallelAnimationGroup_staticMetaObject() { return &QParallelAnimationGroup::staticMetaObject; }
-QObject* QParallelAnimationGroup_protectedbase_sender(const void* self) {
-	VirtualQParallelAnimationGroup* self_cast = static_cast<VirtualQParallelAnimationGroup*>( (QParallelAnimationGroup*)(self) );
-	
-	return self_cast->sender();
 
+const QParallelAnimationGroup_VTable* QParallelAnimationGroup_vtbl(const VirtualQParallelAnimationGroup* self) { return self->vtbl; }
+void* QParallelAnimationGroup_vdata(const VirtualQParallelAnimationGroup* self) { return self->vdata; }
+void QParallelAnimationGroup_setVdata(VirtualQParallelAnimationGroup* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QParallelAnimationGroup_protectedbase_sender(const VirtualQParallelAnimationGroup* self) {
+	return self->sender();
 }
 
-int QParallelAnimationGroup_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQParallelAnimationGroup* self_cast = static_cast<VirtualQParallelAnimationGroup*>( (QParallelAnimationGroup*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QParallelAnimationGroup_protectedbase_senderSignalIndex(const VirtualQParallelAnimationGroup* self) {
+	return self->senderSignalIndex();
 }
 
-int QParallelAnimationGroup_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQParallelAnimationGroup* self_cast = static_cast<VirtualQParallelAnimationGroup*>( (QParallelAnimationGroup*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QParallelAnimationGroup_protectedbase_receivers(const VirtualQParallelAnimationGroup* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QParallelAnimationGroup_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQParallelAnimationGroup* self_cast = static_cast<VirtualQParallelAnimationGroup*>( (QParallelAnimationGroup*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QParallelAnimationGroup_protectedbase_isSignalConnected(const VirtualQParallelAnimationGroup* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QParallelAnimationGroup_delete(QParallelAnimationGroup* self) {

@@ -19,43 +19,36 @@
 #include <QWidget>
 #include <qaction.h>
 #include "gen_qaction.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQAction final : public QAction {
-	struct QAction_VTable* vtbl;
+	const QAction_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QAction_VTable* QAction_vtbl(const VirtualQAction* self);
+	friend void* QAction_vdata(const VirtualQAction* self);
+	friend void QAction_setVdata(VirtualQAction* self, void* vdata);
 
-	VirtualQAction(struct QAction_VTable* vtbl): QAction(), vtbl(vtbl) {};
-	VirtualQAction(struct QAction_VTable* vtbl, const QString& text): QAction(text), vtbl(vtbl) {};
-	VirtualQAction(struct QAction_VTable* vtbl, const QIcon& icon, const QString& text): QAction(icon, text), vtbl(vtbl) {};
-	VirtualQAction(struct QAction_VTable* vtbl, QObject* parent): QAction(parent), vtbl(vtbl) {};
-	VirtualQAction(struct QAction_VTable* vtbl, const QString& text, QObject* parent): QAction(text, parent), vtbl(vtbl) {};
-	VirtualQAction(struct QAction_VTable* vtbl, const QIcon& icon, const QString& text, QObject* parent): QAction(icon, text, parent), vtbl(vtbl) {};
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata): QAction(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata, const QString& text): QAction(text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text): QAction(icon, text), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata, QObject* parent): QAction(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata, const QString& text, QObject* parent): QAction(text, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQAction(const QAction_VTable* vtbl, void* vdata, const QIcon& icon, const QString& text, QObject* parent): QAction(icon, text, parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQAction() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQAction() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QAction::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QAction_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QAction_virtualbase_metaObject(const VirtualQAction* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QAction::qt_metacast(param1);
@@ -63,14 +56,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QAction_virtualbase_metacast(void* self, const char* param1);
+	friend void* QAction_virtualbase_metacast(VirtualQAction* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QAction::qt_metacall(param1, param2, param3);
@@ -81,14 +73,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QAction_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QAction_virtualbase_metacall(VirtualQAction* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* param1) override {
 		if (vtbl->event == 0) {
 			return QAction::event(param1);
@@ -96,14 +87,13 @@ public:
 
 		QEvent* sigval1 = param1;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QAction_virtualbase_event(void* self, QEvent* param1);
+	friend bool QAction_virtualbase_event(VirtualQAction* self, QEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QAction::eventFilter(watched, event);
@@ -112,14 +102,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QAction_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QAction_virtualbase_eventFilter(VirtualQAction* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QAction::timerEvent(event);
@@ -128,13 +117,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QAction_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QAction_virtualbase_timerEvent(VirtualQAction* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QAction::childEvent(event);
@@ -143,13 +131,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QAction_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QAction_virtualbase_childEvent(VirtualQAction* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QAction::customEvent(event);
@@ -158,13 +145,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QAction_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QAction_virtualbase_customEvent(VirtualQAction* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QAction::connectNotify(signal);
@@ -175,13 +161,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QAction_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QAction_virtualbase_connectNotify(VirtualQAction* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QAction::disconnectNotify(signal);
@@ -192,45 +177,45 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QAction_virtualbase_disconnectNotify(VirtualQAction* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QAction_protectedbase_sender(const void* self);
-	friend int QAction_protectedbase_senderSignalIndex(const void* self);
-	friend int QAction_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QAction_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QAction_protectedbase_sender(const VirtualQAction* self);
+	friend int QAction_protectedbase_senderSignalIndex(const VirtualQAction* self);
+	friend int QAction_protectedbase_receivers(const VirtualQAction* self, const char* signal);
+	friend bool QAction_protectedbase_isSignalConnected(const VirtualQAction* self, QMetaMethod* signal);
 };
 
-QAction* QAction_new(struct QAction_VTable* vtbl) {
-	return new VirtualQAction(vtbl);
+VirtualQAction* QAction_new(const QAction_VTable* vtbl, void* vdata) {
+	return new VirtualQAction(vtbl, vdata);
 }
 
-QAction* QAction_new2(struct QAction_VTable* vtbl, struct miqt_string text) {
+VirtualQAction* QAction_new2(const QAction_VTable* vtbl, void* vdata, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQAction(vtbl, text_QString);
+	return new VirtualQAction(vtbl, vdata, text_QString);
 }
 
-QAction* QAction_new3(struct QAction_VTable* vtbl, QIcon* icon, struct miqt_string text) {
+VirtualQAction* QAction_new3(const QAction_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQAction(vtbl, *icon, text_QString);
+	return new VirtualQAction(vtbl, vdata, *icon, text_QString);
 }
 
-QAction* QAction_new4(struct QAction_VTable* vtbl, QObject* parent) {
-	return new VirtualQAction(vtbl, parent);
+VirtualQAction* QAction_new4(const QAction_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQAction(vtbl, vdata, parent);
 }
 
-QAction* QAction_new5(struct QAction_VTable* vtbl, struct miqt_string text, QObject* parent) {
+VirtualQAction* QAction_new5(const QAction_VTable* vtbl, void* vdata, struct miqt_string text, QObject* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQAction(vtbl, text_QString, parent);
+	return new VirtualQAction(vtbl, vdata, text_QString, parent);
 }
 
-QAction* QAction_new6(struct QAction_VTable* vtbl, QIcon* icon, struct miqt_string text, QObject* parent) {
+VirtualQAction* QAction_new6(const QAction_VTable* vtbl, void* vdata, QIcon* icon, struct miqt_string text, QObject* parent) {
 	QString text_QString = QString::fromUtf8(text.data, text.len);
-	return new VirtualQAction(vtbl, *icon, text_QString, parent);
+	return new VirtualQAction(vtbl, vdata, *icon, text_QString, parent);
 }
 
 void QAction_virtbase(QAction* src, QObject** outptr_QObject) {
@@ -575,7 +560,7 @@ void QAction_changed(QAction* self) {
 	self->changed();
 }
 
-void QAction_connect_changed(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAction_connect_changed(VirtualQAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -590,7 +575,7 @@ void QAction_triggered(QAction* self) {
 	self->triggered();
 }
 
-void QAction_connect_triggered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAction_connect_triggered(VirtualQAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -605,7 +590,7 @@ void QAction_hovered(QAction* self) {
 	self->hovered();
 }
 
-void QAction_connect_hovered(QAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QAction_connect_hovered(VirtualQAction* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -620,7 +605,7 @@ void QAction_toggled(QAction* self, bool param1) {
 	self->toggled(param1);
 }
 
-void QAction_connect_toggled(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAction_connect_toggled(VirtualQAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -684,7 +669,7 @@ void QAction_triggered1(QAction* self, bool checked) {
 	self->triggered(checked);
 }
 
-void QAction_connect_triggered1(QAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
+void QAction_connect_triggered1(VirtualQAction* self, intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t, bool), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t, bool);
@@ -696,93 +681,76 @@ void QAction_connect_triggered1(QAction* self, intptr_t slot, void (*callback)(i
 	VirtualQAction::connect(self, static_cast<void (QAction::*)(bool)>(&QAction::triggered), self, local_caller{slot, callback, release});
 }
 
-QMetaObject* QAction_virtualbase_metaObject(const void* self) {
+QMetaObject* QAction_virtualbase_metaObject(const VirtualQAction* self) {
 
-	return (QMetaObject*) ( (const VirtualQAction*)(self) )->QAction::metaObject();
-
+	return (QMetaObject*) self->QAction::metaObject();
 }
 
-void* QAction_virtualbase_metacast(void* self, const char* param1) {
+void* QAction_virtualbase_metacast(VirtualQAction* self, const char* param1) {
 
-	return ( (VirtualQAction*)(self) )->QAction::qt_metacast(param1);
-
+	return self->QAction::qt_metacast(param1);
 }
 
-int QAction_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QAction_virtualbase_metacall(VirtualQAction* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQAction*)(self) )->QAction::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QAction::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QAction_virtualbase_event(void* self, QEvent* param1) {
+bool QAction_virtualbase_event(VirtualQAction* self, QEvent* param1) {
 
-	return ( (VirtualQAction*)(self) )->QAction::event(param1);
-
+	return self->QAction::event(param1);
 }
 
-bool QAction_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QAction_virtualbase_eventFilter(VirtualQAction* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQAction*)(self) )->QAction::eventFilter(watched, event);
-
+	return self->QAction::eventFilter(watched, event);
 }
 
-void QAction_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QAction_virtualbase_timerEvent(VirtualQAction* self, QTimerEvent* event) {
 
-	( (VirtualQAction*)(self) )->QAction::timerEvent(event);
-
+	self->QAction::timerEvent(event);
 }
 
-void QAction_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QAction_virtualbase_childEvent(VirtualQAction* self, QChildEvent* event) {
 
-	( (VirtualQAction*)(self) )->QAction::childEvent(event);
-
+	self->QAction::childEvent(event);
 }
 
-void QAction_virtualbase_customEvent(void* self, QEvent* event) {
+void QAction_virtualbase_customEvent(VirtualQAction* self, QEvent* event) {
 
-	( (VirtualQAction*)(self) )->QAction::customEvent(event);
-
+	self->QAction::customEvent(event);
 }
 
-void QAction_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QAction_virtualbase_connectNotify(VirtualQAction* self, QMetaMethod* signal) {
 
-	( (VirtualQAction*)(self) )->QAction::connectNotify(*signal);
-
+	self->QAction::connectNotify(*signal);
 }
 
-void QAction_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QAction_virtualbase_disconnectNotify(VirtualQAction* self, QMetaMethod* signal) {
 
-	( (VirtualQAction*)(self) )->QAction::disconnectNotify(*signal);
-
+	self->QAction::disconnectNotify(*signal);
 }
 
 const QMetaObject* QAction_staticMetaObject() { return &QAction::staticMetaObject; }
-QObject* QAction_protectedbase_sender(const void* self) {
-	VirtualQAction* self_cast = static_cast<VirtualQAction*>( (QAction*)(self) );
-	
-	return self_cast->sender();
 
+const QAction_VTable* QAction_vtbl(const VirtualQAction* self) { return self->vtbl; }
+void* QAction_vdata(const VirtualQAction* self) { return self->vdata; }
+void QAction_setVdata(VirtualQAction* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QAction_protectedbase_sender(const VirtualQAction* self) {
+	return self->sender();
 }
 
-int QAction_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQAction* self_cast = static_cast<VirtualQAction*>( (QAction*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QAction_protectedbase_senderSignalIndex(const VirtualQAction* self) {
+	return self->senderSignalIndex();
 }
 
-int QAction_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQAction* self_cast = static_cast<VirtualQAction*>( (QAction*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QAction_protectedbase_receivers(const VirtualQAction* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QAction_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQAction* self_cast = static_cast<VirtualQAction*>( (QAction*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QAction_protectedbase_isSignalConnected(const VirtualQAction* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QAction_delete(QAction* self) {

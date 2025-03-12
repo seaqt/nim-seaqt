@@ -7,15 +7,6 @@
 #include <QSGTexture>
 #include <qsgimagenode.h>
 #include "gen_qsgimagenode.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QSGImageNode_virtbase(QSGImageNode* src, QSGGeometryNode** outptr_QSGGeometryNode) {
 	*outptr_QSGGeometryNode = static_cast<QSGGeometryNode*>(src);
 }

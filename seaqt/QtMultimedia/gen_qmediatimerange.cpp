@@ -3,15 +3,6 @@
 #include <QMediaTimeRange>
 #include <qmediatimerange.h>
 #include "gen_qmediatimerange.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 QMediaTimeInterval* QMediaTimeInterval_new() {
 	return new QMediaTimeInterval();
 }

@@ -77,42 +77,42 @@ type cQTextStream*{.exportc: "QTextStream", incompleteStruct.} = object
 
 proc fcQTextStream_setCodec(self: pointer, codec: pointer): void {.importc: "QTextStream_setCodec".}
 proc fcQTextStream_setCodecWithCodecName(self: pointer, codecName: cstring): void {.importc: "QTextStream_setCodecWithCodecName".}
-proc fcQTextStream_codec(self: pointer, ): pointer {.importc: "QTextStream_codec".}
+proc fcQTextStream_codec(self: pointer): pointer {.importc: "QTextStream_codec".}
 proc fcQTextStream_setAutoDetectUnicode(self: pointer, enabled: bool): void {.importc: "QTextStream_setAutoDetectUnicode".}
-proc fcQTextStream_autoDetectUnicode(self: pointer, ): bool {.importc: "QTextStream_autoDetectUnicode".}
+proc fcQTextStream_autoDetectUnicode(self: pointer): bool {.importc: "QTextStream_autoDetectUnicode".}
 proc fcQTextStream_setGenerateByteOrderMark(self: pointer, generate: bool): void {.importc: "QTextStream_setGenerateByteOrderMark".}
-proc fcQTextStream_generateByteOrderMark(self: pointer, ): bool {.importc: "QTextStream_generateByteOrderMark".}
+proc fcQTextStream_generateByteOrderMark(self: pointer): bool {.importc: "QTextStream_generateByteOrderMark".}
 proc fcQTextStream_setLocale(self: pointer, locale: pointer): void {.importc: "QTextStream_setLocale".}
-proc fcQTextStream_locale(self: pointer, ): pointer {.importc: "QTextStream_locale".}
+proc fcQTextStream_locale(self: pointer): pointer {.importc: "QTextStream_locale".}
 proc fcQTextStream_setDevice(self: pointer, device: pointer): void {.importc: "QTextStream_setDevice".}
-proc fcQTextStream_device(self: pointer, ): pointer {.importc: "QTextStream_device".}
-proc fcQTextStream_string(self: pointer, ): struct_miqt_string {.importc: "QTextStream_string".}
-proc fcQTextStream_status(self: pointer, ): cint {.importc: "QTextStream_status".}
+proc fcQTextStream_device(self: pointer): pointer {.importc: "QTextStream_device".}
+proc fcQTextStream_string(self: pointer): struct_miqt_string {.importc: "QTextStream_string".}
+proc fcQTextStream_status(self: pointer): cint {.importc: "QTextStream_status".}
 proc fcQTextStream_setStatus(self: pointer, status: cint): void {.importc: "QTextStream_setStatus".}
-proc fcQTextStream_resetStatus(self: pointer, ): void {.importc: "QTextStream_resetStatus".}
-proc fcQTextStream_atEnd(self: pointer, ): bool {.importc: "QTextStream_atEnd".}
-proc fcQTextStream_reset(self: pointer, ): void {.importc: "QTextStream_reset".}
-proc fcQTextStream_flush(self: pointer, ): void {.importc: "QTextStream_flush".}
+proc fcQTextStream_resetStatus(self: pointer): void {.importc: "QTextStream_resetStatus".}
+proc fcQTextStream_atEnd(self: pointer): bool {.importc: "QTextStream_atEnd".}
+proc fcQTextStream_reset(self: pointer): void {.importc: "QTextStream_reset".}
+proc fcQTextStream_flush(self: pointer): void {.importc: "QTextStream_flush".}
 proc fcQTextStream_seek(self: pointer, pos: clonglong): bool {.importc: "QTextStream_seek".}
-proc fcQTextStream_pos(self: pointer, ): clonglong {.importc: "QTextStream_pos".}
-proc fcQTextStream_skipWhiteSpace(self: pointer, ): void {.importc: "QTextStream_skipWhiteSpace".}
-proc fcQTextStream_readLine(self: pointer, ): struct_miqt_string {.importc: "QTextStream_readLine".}
-proc fcQTextStream_readAll(self: pointer, ): struct_miqt_string {.importc: "QTextStream_readAll".}
+proc fcQTextStream_pos(self: pointer): clonglong {.importc: "QTextStream_pos".}
+proc fcQTextStream_skipWhiteSpace(self: pointer): void {.importc: "QTextStream_skipWhiteSpace".}
+proc fcQTextStream_readLine(self: pointer): struct_miqt_string {.importc: "QTextStream_readLine".}
+proc fcQTextStream_readAll(self: pointer): struct_miqt_string {.importc: "QTextStream_readAll".}
 proc fcQTextStream_read(self: pointer, maxlen: clonglong): struct_miqt_string {.importc: "QTextStream_read".}
 proc fcQTextStream_setFieldAlignment(self: pointer, alignment: cint): void {.importc: "QTextStream_setFieldAlignment".}
-proc fcQTextStream_fieldAlignment(self: pointer, ): cint {.importc: "QTextStream_fieldAlignment".}
+proc fcQTextStream_fieldAlignment(self: pointer): cint {.importc: "QTextStream_fieldAlignment".}
 proc fcQTextStream_setPadChar(self: pointer, ch: pointer): void {.importc: "QTextStream_setPadChar".}
-proc fcQTextStream_padChar(self: pointer, ): pointer {.importc: "QTextStream_padChar".}
+proc fcQTextStream_padChar(self: pointer): pointer {.importc: "QTextStream_padChar".}
 proc fcQTextStream_setFieldWidth(self: pointer, width: cint): void {.importc: "QTextStream_setFieldWidth".}
-proc fcQTextStream_fieldWidth(self: pointer, ): cint {.importc: "QTextStream_fieldWidth".}
+proc fcQTextStream_fieldWidth(self: pointer): cint {.importc: "QTextStream_fieldWidth".}
 proc fcQTextStream_setNumberFlags(self: pointer, flags: cint): void {.importc: "QTextStream_setNumberFlags".}
-proc fcQTextStream_numberFlags(self: pointer, ): cint {.importc: "QTextStream_numberFlags".}
+proc fcQTextStream_numberFlags(self: pointer): cint {.importc: "QTextStream_numberFlags".}
 proc fcQTextStream_setIntegerBase(self: pointer, base: cint): void {.importc: "QTextStream_setIntegerBase".}
-proc fcQTextStream_integerBase(self: pointer, ): cint {.importc: "QTextStream_integerBase".}
+proc fcQTextStream_integerBase(self: pointer): cint {.importc: "QTextStream_integerBase".}
 proc fcQTextStream_setRealNumberNotation(self: pointer, notation: cint): void {.importc: "QTextStream_setRealNumberNotation".}
-proc fcQTextStream_realNumberNotation(self: pointer, ): cint {.importc: "QTextStream_realNumberNotation".}
+proc fcQTextStream_realNumberNotation(self: pointer): cint {.importc: "QTextStream_realNumberNotation".}
 proc fcQTextStream_setRealNumberPrecision(self: pointer, precision: cint): void {.importc: "QTextStream_setRealNumberPrecision".}
-proc fcQTextStream_realNumberPrecision(self: pointer, ): cint {.importc: "QTextStream_realNumberPrecision".}
+proc fcQTextStream_realNumberPrecision(self: pointer): cint {.importc: "QTextStream_realNumberPrecision".}
 proc fcQTextStream_operatorShiftRight(self: pointer, ch: pointer): pointer {.importc: "QTextStream_operatorShiftRight".}
 proc fcQTextStream_operatorShiftRightWithCh(self: pointer, ch: ptr cchar): pointer {.importc: "QTextStream_operatorShiftRightWithCh".}
 proc fcQTextStream_operatorShiftRightWithShort(self: pointer, i: ptr cshort): pointer {.importc: "QTextStream_operatorShiftRightWithShort".}
@@ -156,73 +156,73 @@ proc setCodec*(self: gen_qtextstream_types.QTextStream, codec: gen_qtextcodec_ty
 proc setCodec*(self: gen_qtextstream_types.QTextStream, codecName: cstring): void =
   fcQTextStream_setCodecWithCodecName(self.h, codecName)
 
-proc codec*(self: gen_qtextstream_types.QTextStream, ): gen_qtextcodec_types.QTextCodec =
+proc codec*(self: gen_qtextstream_types.QTextStream): gen_qtextcodec_types.QTextCodec =
   gen_qtextcodec_types.QTextCodec(h: fcQTextStream_codec(self.h), owned: false)
 
 proc setAutoDetectUnicode*(self: gen_qtextstream_types.QTextStream, enabled: bool): void =
   fcQTextStream_setAutoDetectUnicode(self.h, enabled)
 
-proc autoDetectUnicode*(self: gen_qtextstream_types.QTextStream, ): bool =
+proc autoDetectUnicode*(self: gen_qtextstream_types.QTextStream): bool =
   fcQTextStream_autoDetectUnicode(self.h)
 
 proc setGenerateByteOrderMark*(self: gen_qtextstream_types.QTextStream, generate: bool): void =
   fcQTextStream_setGenerateByteOrderMark(self.h, generate)
 
-proc generateByteOrderMark*(self: gen_qtextstream_types.QTextStream, ): bool =
+proc generateByteOrderMark*(self: gen_qtextstream_types.QTextStream): bool =
   fcQTextStream_generateByteOrderMark(self.h)
 
 proc setLocale*(self: gen_qtextstream_types.QTextStream, locale: gen_qlocale_types.QLocale): void =
   fcQTextStream_setLocale(self.h, locale.h)
 
-proc locale*(self: gen_qtextstream_types.QTextStream, ): gen_qlocale_types.QLocale =
+proc locale*(self: gen_qtextstream_types.QTextStream): gen_qlocale_types.QLocale =
   gen_qlocale_types.QLocale(h: fcQTextStream_locale(self.h), owned: true)
 
 proc setDevice*(self: gen_qtextstream_types.QTextStream, device: gen_qiodevice_types.QIODevice): void =
   fcQTextStream_setDevice(self.h, device.h)
 
-proc device*(self: gen_qtextstream_types.QTextStream, ): gen_qiodevice_types.QIODevice =
+proc device*(self: gen_qtextstream_types.QTextStream): gen_qiodevice_types.QIODevice =
   gen_qiodevice_types.QIODevice(h: fcQTextStream_device(self.h), owned: false)
 
-proc string*(self: gen_qtextstream_types.QTextStream, ): string =
+proc string*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_string(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc status*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc status*(self: gen_qtextstream_types.QTextStream): cint =
   cint(fcQTextStream_status(self.h))
 
 proc setStatus*(self: gen_qtextstream_types.QTextStream, status: cint): void =
   fcQTextStream_setStatus(self.h, cint(status))
 
-proc resetStatus*(self: gen_qtextstream_types.QTextStream, ): void =
+proc resetStatus*(self: gen_qtextstream_types.QTextStream): void =
   fcQTextStream_resetStatus(self.h)
 
-proc atEnd*(self: gen_qtextstream_types.QTextStream, ): bool =
+proc atEnd*(self: gen_qtextstream_types.QTextStream): bool =
   fcQTextStream_atEnd(self.h)
 
-proc reset*(self: gen_qtextstream_types.QTextStream, ): void =
+proc reset*(self: gen_qtextstream_types.QTextStream): void =
   fcQTextStream_reset(self.h)
 
-proc flush*(self: gen_qtextstream_types.QTextStream, ): void =
+proc flush*(self: gen_qtextstream_types.QTextStream): void =
   fcQTextStream_flush(self.h)
 
 proc seek*(self: gen_qtextstream_types.QTextStream, pos: clonglong): bool =
   fcQTextStream_seek(self.h, pos)
 
-proc pos*(self: gen_qtextstream_types.QTextStream, ): clonglong =
+proc pos*(self: gen_qtextstream_types.QTextStream): clonglong =
   fcQTextStream_pos(self.h)
 
-proc skipWhiteSpace*(self: gen_qtextstream_types.QTextStream, ): void =
+proc skipWhiteSpace*(self: gen_qtextstream_types.QTextStream): void =
   fcQTextStream_skipWhiteSpace(self.h)
 
-proc readLine*(self: gen_qtextstream_types.QTextStream, ): string =
+proc readLine*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_readLine(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc readAll*(self: gen_qtextstream_types.QTextStream, ): string =
+proc readAll*(self: gen_qtextstream_types.QTextStream): string =
   let v_ms = fcQTextStream_readAll(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -237,43 +237,43 @@ proc read*(self: gen_qtextstream_types.QTextStream, maxlen: clonglong): string =
 proc setFieldAlignment*(self: gen_qtextstream_types.QTextStream, alignment: cint): void =
   fcQTextStream_setFieldAlignment(self.h, cint(alignment))
 
-proc fieldAlignment*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc fieldAlignment*(self: gen_qtextstream_types.QTextStream): cint =
   cint(fcQTextStream_fieldAlignment(self.h))
 
 proc setPadChar*(self: gen_qtextstream_types.QTextStream, ch: gen_qchar_types.QChar): void =
   fcQTextStream_setPadChar(self.h, ch.h)
 
-proc padChar*(self: gen_qtextstream_types.QTextStream, ): gen_qchar_types.QChar =
+proc padChar*(self: gen_qtextstream_types.QTextStream): gen_qchar_types.QChar =
   gen_qchar_types.QChar(h: fcQTextStream_padChar(self.h), owned: true)
 
 proc setFieldWidth*(self: gen_qtextstream_types.QTextStream, width: cint): void =
   fcQTextStream_setFieldWidth(self.h, width)
 
-proc fieldWidth*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc fieldWidth*(self: gen_qtextstream_types.QTextStream): cint =
   fcQTextStream_fieldWidth(self.h)
 
 proc setNumberFlags*(self: gen_qtextstream_types.QTextStream, flags: cint): void =
   fcQTextStream_setNumberFlags(self.h, cint(flags))
 
-proc numberFlags*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc numberFlags*(self: gen_qtextstream_types.QTextStream): cint =
   cint(fcQTextStream_numberFlags(self.h))
 
 proc setIntegerBase*(self: gen_qtextstream_types.QTextStream, base: cint): void =
   fcQTextStream_setIntegerBase(self.h, base)
 
-proc integerBase*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc integerBase*(self: gen_qtextstream_types.QTextStream): cint =
   fcQTextStream_integerBase(self.h)
 
 proc setRealNumberNotation*(self: gen_qtextstream_types.QTextStream, notation: cint): void =
   fcQTextStream_setRealNumberNotation(self.h, cint(notation))
 
-proc realNumberNotation*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc realNumberNotation*(self: gen_qtextstream_types.QTextStream): cint =
   cint(fcQTextStream_realNumberNotation(self.h))
 
 proc setRealNumberPrecision*(self: gen_qtextstream_types.QTextStream, precision: cint): void =
   fcQTextStream_setRealNumberPrecision(self.h, precision)
 
-proc realNumberPrecision*(self: gen_qtextstream_types.QTextStream, ): cint =
+proc realNumberPrecision*(self: gen_qtextstream_types.QTextStream): cint =
   fcQTextStream_realNumberPrecision(self.h)
 
 proc operatorShiftRight*(self: gen_qtextstream_types.QTextStream, ch: gen_qchar_types.QChar): gen_qtextstream_types.QTextStream =

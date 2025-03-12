@@ -11,39 +11,32 @@
 #include <QTimerEvent>
 #include <qiconengineplugin.h>
 #include "gen_qiconengineplugin.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQIconEnginePlugin final : public QIconEnginePlugin {
-	struct QIconEnginePlugin_VTable* vtbl;
+	const QIconEnginePlugin_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QIconEnginePlugin_VTable* QIconEnginePlugin_vtbl(const VirtualQIconEnginePlugin* self);
+	friend void* QIconEnginePlugin_vdata(const VirtualQIconEnginePlugin* self);
+	friend void QIconEnginePlugin_setVdata(VirtualQIconEnginePlugin* self, void* vdata);
 
-	VirtualQIconEnginePlugin(struct QIconEnginePlugin_VTable* vtbl): QIconEnginePlugin(), vtbl(vtbl) {};
-	VirtualQIconEnginePlugin(struct QIconEnginePlugin_VTable* vtbl, QObject* parent): QIconEnginePlugin(parent), vtbl(vtbl) {};
+	VirtualQIconEnginePlugin(const QIconEnginePlugin_VTable* vtbl, void* vdata): QIconEnginePlugin(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQIconEnginePlugin(const QIconEnginePlugin_VTable* vtbl, void* vdata, QObject* parent): QIconEnginePlugin(parent), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQIconEnginePlugin() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQIconEnginePlugin() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QIconEnginePlugin::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QIconEnginePlugin_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QIconEnginePlugin_virtualbase_metaObject(const VirtualQIconEnginePlugin* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QIconEnginePlugin::qt_metacast(param1);
@@ -51,14 +44,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QIconEnginePlugin_virtualbase_metacast(void* self, const char* param1);
+	friend void* QIconEnginePlugin_virtualbase_metacast(VirtualQIconEnginePlugin* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QIconEnginePlugin::qt_metacall(param1, param2, param3);
@@ -69,14 +61,13 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QIconEnginePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QIconEnginePlugin_virtualbase_metacall(VirtualQIconEnginePlugin* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QIconEngine* create(const QString& filename) override {
 		if (vtbl->create == 0) {
 			return nullptr; // Pure virtual, there is no base we can call
@@ -91,12 +82,11 @@ public:
 		memcpy(filename_ms.data, filename_b.data(), filename_ms.len);
 		struct miqt_string sigval1 = filename_ms;
 
-		QIconEngine* callback_return_value = vtbl->create(vtbl, this, sigval1);
+		QIconEngine* callback_return_value = vtbl->create(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QIconEnginePlugin::event(event);
@@ -104,14 +94,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QIconEnginePlugin_virtualbase_event(void* self, QEvent* event);
+	friend bool QIconEnginePlugin_virtualbase_event(VirtualQIconEnginePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* watched, QEvent* event) override {
 		if (vtbl->eventFilter == 0) {
 			return QIconEnginePlugin::eventFilter(watched, event);
@@ -120,14 +109,13 @@ public:
 		QObject* sigval1 = watched;
 		QEvent* sigval2 = event;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QIconEnginePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event);
+	friend bool QIconEnginePlugin_virtualbase_eventFilter(VirtualQIconEnginePlugin* self, QObject* watched, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QIconEnginePlugin::timerEvent(event);
@@ -136,13 +124,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QIconEnginePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QIconEnginePlugin_virtualbase_timerEvent(VirtualQIconEnginePlugin* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QIconEnginePlugin::childEvent(event);
@@ -151,13 +138,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QIconEnginePlugin_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QIconEnginePlugin_virtualbase_childEvent(VirtualQIconEnginePlugin* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QIconEnginePlugin::customEvent(event);
@@ -166,13 +152,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QIconEnginePlugin_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QIconEnginePlugin_virtualbase_customEvent(VirtualQIconEnginePlugin* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QIconEnginePlugin::connectNotify(signal);
@@ -183,13 +168,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QIconEnginePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QIconEnginePlugin_virtualbase_connectNotify(VirtualQIconEnginePlugin* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QIconEnginePlugin::disconnectNotify(signal);
@@ -200,25 +184,25 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QIconEnginePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QIconEnginePlugin_virtualbase_disconnectNotify(VirtualQIconEnginePlugin* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend QObject* QIconEnginePlugin_protectedbase_sender(const void* self);
-	friend int QIconEnginePlugin_protectedbase_senderSignalIndex(const void* self);
-	friend int QIconEnginePlugin_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QIconEnginePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend QObject* QIconEnginePlugin_protectedbase_sender(const VirtualQIconEnginePlugin* self);
+	friend int QIconEnginePlugin_protectedbase_senderSignalIndex(const VirtualQIconEnginePlugin* self);
+	friend int QIconEnginePlugin_protectedbase_receivers(const VirtualQIconEnginePlugin* self, const char* signal);
+	friend bool QIconEnginePlugin_protectedbase_isSignalConnected(const VirtualQIconEnginePlugin* self, QMetaMethod* signal);
 };
 
-QIconEnginePlugin* QIconEnginePlugin_new(struct QIconEnginePlugin_VTable* vtbl) {
-	return new VirtualQIconEnginePlugin(vtbl);
+VirtualQIconEnginePlugin* QIconEnginePlugin_new(const QIconEnginePlugin_VTable* vtbl, void* vdata) {
+	return new VirtualQIconEnginePlugin(vtbl, vdata);
 }
 
-QIconEnginePlugin* QIconEnginePlugin_new2(struct QIconEnginePlugin_VTable* vtbl, QObject* parent) {
-	return new VirtualQIconEnginePlugin(vtbl, parent);
+VirtualQIconEnginePlugin* QIconEnginePlugin_new2(const QIconEnginePlugin_VTable* vtbl, void* vdata, QObject* parent) {
+	return new VirtualQIconEnginePlugin(vtbl, vdata, parent);
 }
 
 void QIconEnginePlugin_virtbase(QIconEnginePlugin* src, QObject** outptr_QObject) {
@@ -308,93 +292,76 @@ struct miqt_string QIconEnginePlugin_trUtf83(const char* s, const char* c, int n
 	return _ms;
 }
 
-QMetaObject* QIconEnginePlugin_virtualbase_metaObject(const void* self) {
+QMetaObject* QIconEnginePlugin_virtualbase_metaObject(const VirtualQIconEnginePlugin* self) {
 
-	return (QMetaObject*) ( (const VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::metaObject();
-
+	return (QMetaObject*) self->QIconEnginePlugin::metaObject();
 }
 
-void* QIconEnginePlugin_virtualbase_metacast(void* self, const char* param1) {
+void* QIconEnginePlugin_virtualbase_metacast(VirtualQIconEnginePlugin* self, const char* param1) {
 
-	return ( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::qt_metacast(param1);
-
+	return self->QIconEnginePlugin::qt_metacast(param1);
 }
 
-int QIconEnginePlugin_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QIconEnginePlugin_virtualbase_metacall(VirtualQIconEnginePlugin* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QIconEnginePlugin::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-bool QIconEnginePlugin_virtualbase_event(void* self, QEvent* event) {
+bool QIconEnginePlugin_virtualbase_event(VirtualQIconEnginePlugin* self, QEvent* event) {
 
-	return ( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::event(event);
-
+	return self->QIconEnginePlugin::event(event);
 }
 
-bool QIconEnginePlugin_virtualbase_eventFilter(void* self, QObject* watched, QEvent* event) {
+bool QIconEnginePlugin_virtualbase_eventFilter(VirtualQIconEnginePlugin* self, QObject* watched, QEvent* event) {
 
-	return ( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::eventFilter(watched, event);
-
+	return self->QIconEnginePlugin::eventFilter(watched, event);
 }
 
-void QIconEnginePlugin_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QIconEnginePlugin_virtualbase_timerEvent(VirtualQIconEnginePlugin* self, QTimerEvent* event) {
 
-	( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::timerEvent(event);
-
+	self->QIconEnginePlugin::timerEvent(event);
 }
 
-void QIconEnginePlugin_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QIconEnginePlugin_virtualbase_childEvent(VirtualQIconEnginePlugin* self, QChildEvent* event) {
 
-	( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::childEvent(event);
-
+	self->QIconEnginePlugin::childEvent(event);
 }
 
-void QIconEnginePlugin_virtualbase_customEvent(void* self, QEvent* event) {
+void QIconEnginePlugin_virtualbase_customEvent(VirtualQIconEnginePlugin* self, QEvent* event) {
 
-	( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::customEvent(event);
-
+	self->QIconEnginePlugin::customEvent(event);
 }
 
-void QIconEnginePlugin_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QIconEnginePlugin_virtualbase_connectNotify(VirtualQIconEnginePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::connectNotify(*signal);
-
+	self->QIconEnginePlugin::connectNotify(*signal);
 }
 
-void QIconEnginePlugin_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QIconEnginePlugin_virtualbase_disconnectNotify(VirtualQIconEnginePlugin* self, QMetaMethod* signal) {
 
-	( (VirtualQIconEnginePlugin*)(self) )->QIconEnginePlugin::disconnectNotify(*signal);
-
+	self->QIconEnginePlugin::disconnectNotify(*signal);
 }
 
 const QMetaObject* QIconEnginePlugin_staticMetaObject() { return &QIconEnginePlugin::staticMetaObject; }
-QObject* QIconEnginePlugin_protectedbase_sender(const void* self) {
-	VirtualQIconEnginePlugin* self_cast = static_cast<VirtualQIconEnginePlugin*>( (QIconEnginePlugin*)(self) );
-	
-	return self_cast->sender();
 
+const QIconEnginePlugin_VTable* QIconEnginePlugin_vtbl(const VirtualQIconEnginePlugin* self) { return self->vtbl; }
+void* QIconEnginePlugin_vdata(const VirtualQIconEnginePlugin* self) { return self->vdata; }
+void QIconEnginePlugin_setVdata(VirtualQIconEnginePlugin* self, void* vdata) { self->vdata = vdata; }
+
+QObject* QIconEnginePlugin_protectedbase_sender(const VirtualQIconEnginePlugin* self) {
+	return self->sender();
 }
 
-int QIconEnginePlugin_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQIconEnginePlugin* self_cast = static_cast<VirtualQIconEnginePlugin*>( (QIconEnginePlugin*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QIconEnginePlugin_protectedbase_senderSignalIndex(const VirtualQIconEnginePlugin* self) {
+	return self->senderSignalIndex();
 }
 
-int QIconEnginePlugin_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQIconEnginePlugin* self_cast = static_cast<VirtualQIconEnginePlugin*>( (QIconEnginePlugin*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QIconEnginePlugin_protectedbase_receivers(const VirtualQIconEnginePlugin* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QIconEnginePlugin_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQIconEnginePlugin* self_cast = static_cast<VirtualQIconEnginePlugin*>( (QIconEnginePlugin*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QIconEnginePlugin_protectedbase_isSignalConnected(const VirtualQIconEnginePlugin* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QIconEnginePlugin_delete(QIconEnginePlugin* self) {

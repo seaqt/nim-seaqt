@@ -110,21 +110,21 @@ export
 
 type cQRadioData*{.exportc: "QRadioData", incompleteStruct.} = object
 
-proc fcQRadioData_metaObject(self: pointer, ): pointer {.importc: "QRadioData_metaObject".}
+proc fcQRadioData_metaObject(self: pointer): pointer {.importc: "QRadioData_metaObject".}
 proc fcQRadioData_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioData_metacast".}
 proc fcQRadioData_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioData_metacall".}
 proc fcQRadioData_tr(s: cstring): struct_miqt_string {.importc: "QRadioData_tr".}
 proc fcQRadioData_trUtf8(s: cstring): struct_miqt_string {.importc: "QRadioData_trUtf8".}
-proc fcQRadioData_availability(self: pointer, ): cint {.importc: "QRadioData_availability".}
-proc fcQRadioData_mediaObject(self: pointer, ): pointer {.importc: "QRadioData_mediaObject".}
-proc fcQRadioData_stationId(self: pointer, ): struct_miqt_string {.importc: "QRadioData_stationId".}
-proc fcQRadioData_programType(self: pointer, ): cint {.importc: "QRadioData_programType".}
-proc fcQRadioData_programTypeName(self: pointer, ): struct_miqt_string {.importc: "QRadioData_programTypeName".}
-proc fcQRadioData_stationName(self: pointer, ): struct_miqt_string {.importc: "QRadioData_stationName".}
-proc fcQRadioData_radioText(self: pointer, ): struct_miqt_string {.importc: "QRadioData_radioText".}
-proc fcQRadioData_isAlternativeFrequenciesEnabled(self: pointer, ): bool {.importc: "QRadioData_isAlternativeFrequenciesEnabled".}
-proc fcQRadioData_error(self: pointer, ): cint {.importc: "QRadioData_error".}
-proc fcQRadioData_errorString(self: pointer, ): struct_miqt_string {.importc: "QRadioData_errorString".}
+proc fcQRadioData_availability(self: pointer): cint {.importc: "QRadioData_availability".}
+proc fcQRadioData_mediaObject(self: pointer): pointer {.importc: "QRadioData_mediaObject".}
+proc fcQRadioData_stationId(self: pointer): struct_miqt_string {.importc: "QRadioData_stationId".}
+proc fcQRadioData_programType(self: pointer): cint {.importc: "QRadioData_programType".}
+proc fcQRadioData_programTypeName(self: pointer): struct_miqt_string {.importc: "QRadioData_programTypeName".}
+proc fcQRadioData_stationName(self: pointer): struct_miqt_string {.importc: "QRadioData_stationName".}
+proc fcQRadioData_radioText(self: pointer): struct_miqt_string {.importc: "QRadioData_radioText".}
+proc fcQRadioData_isAlternativeFrequenciesEnabled(self: pointer): bool {.importc: "QRadioData_isAlternativeFrequenciesEnabled".}
+proc fcQRadioData_error(self: pointer): cint {.importc: "QRadioData_error".}
+proc fcQRadioData_errorString(self: pointer): struct_miqt_string {.importc: "QRadioData_errorString".}
 proc fcQRadioData_setAlternativeFrequenciesEnabled(self: pointer, enabled: bool): void {.importc: "QRadioData_setAlternativeFrequenciesEnabled".}
 proc fcQRadioData_stationIdChanged(self: pointer, stationId: struct_miqt_string): void {.importc: "QRadioData_stationIdChanged".}
 proc fcQRadioData_connect_stationIdChanged(self: pointer, slot: int, callback: proc (slot: int, stationId: struct_miqt_string) {.cdecl.}, release: proc(slot: int) {.cdecl.}) {.importc: "QRadioData_connect_stationIdChanged".}
@@ -144,24 +144,26 @@ proc fcQRadioData_tr2(s: cstring, c: cstring): struct_miqt_string {.importc: "QR
 proc fcQRadioData_tr3(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioData_tr3".}
 proc fcQRadioData_trUtf82(s: cstring, c: cstring): struct_miqt_string {.importc: "QRadioData_trUtf82".}
 proc fcQRadioData_trUtf83(s: cstring, c: cstring, n: cint): struct_miqt_string {.importc: "QRadioData_trUtf83".}
+proc fcQRadioData_vtbl(self: pointer): pointer {.importc: "QRadioData_vtbl".}
+proc fcQRadioData_vdata(self: pointer): pointer {.importc: "QRadioData_vdata".}
 type cQRadioDataVTable {.pure.} = object
-  destructor*: proc(vtbl: ptr cQRadioDataVTable, self: ptr cQRadioData) {.cdecl, raises:[], gcsafe.}
-  metaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  metacast*: proc(vtbl, self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
-  metacall*: proc(vtbl, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
-  mediaObject*: proc(vtbl, self: pointer, ): pointer {.cdecl, raises: [], gcsafe.}
-  setMediaObject*: proc(vtbl, self: pointer, mediaObject: pointer): bool {.cdecl, raises: [], gcsafe.}
-  event*: proc(vtbl, self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  eventFilter*: proc(vtbl, self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
-  timerEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  childEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  customEvent*: proc(vtbl, self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
-  connectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-  disconnectNotify*: proc(vtbl, self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
-proc fcQRadioData_virtualbase_metaObject(self: pointer, ): pointer {.importc: "QRadioData_virtualbase_metaObject".}
+  destructor*: proc(self: pointer) {.cdecl, raises:[], gcsafe.}
+  metaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  metacast*: proc(self: pointer, param1: cstring): pointer {.cdecl, raises: [], gcsafe.}
+  metacall*: proc(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl, raises: [], gcsafe.}
+  mediaObject*: proc(self: pointer): pointer {.cdecl, raises: [], gcsafe.}
+  setMediaObject*: proc(self: pointer, mediaObject: pointer): bool {.cdecl, raises: [], gcsafe.}
+  event*: proc(self: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  eventFilter*: proc(self: pointer, watched: pointer, event: pointer): bool {.cdecl, raises: [], gcsafe.}
+  timerEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  childEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  customEvent*: proc(self: pointer, event: pointer): void {.cdecl, raises: [], gcsafe.}
+  connectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+  disconnectNotify*: proc(self: pointer, signal: pointer): void {.cdecl, raises: [], gcsafe.}
+proc fcQRadioData_virtualbase_metaObject(self: pointer): pointer {.importc: "QRadioData_virtualbase_metaObject".}
 proc fcQRadioData_virtualbase_metacast(self: pointer, param1: cstring): pointer {.importc: "QRadioData_virtualbase_metacast".}
 proc fcQRadioData_virtualbase_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.importc: "QRadioData_virtualbase_metacall".}
-proc fcQRadioData_virtualbase_mediaObject(self: pointer, ): pointer {.importc: "QRadioData_virtualbase_mediaObject".}
+proc fcQRadioData_virtualbase_mediaObject(self: pointer): pointer {.importc: "QRadioData_virtualbase_mediaObject".}
 proc fcQRadioData_virtualbase_setMediaObject(self: pointer, mediaObject: pointer): bool {.importc: "QRadioData_virtualbase_setMediaObject".}
 proc fcQRadioData_virtualbase_event(self: pointer, event: pointer): bool {.importc: "QRadioData_virtualbase_event".}
 proc fcQRadioData_virtualbase_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.importc: "QRadioData_virtualbase_eventFilter".}
@@ -170,15 +172,15 @@ proc fcQRadioData_virtualbase_childEvent(self: pointer, event: pointer): void {.
 proc fcQRadioData_virtualbase_customEvent(self: pointer, event: pointer): void {.importc: "QRadioData_virtualbase_customEvent".}
 proc fcQRadioData_virtualbase_connectNotify(self: pointer, signal: pointer): void {.importc: "QRadioData_virtualbase_connectNotify".}
 proc fcQRadioData_virtualbase_disconnectNotify(self: pointer, signal: pointer): void {.importc: "QRadioData_virtualbase_disconnectNotify".}
-proc fcQRadioData_protectedbase_sender(self: pointer, ): pointer {.importc: "QRadioData_protectedbase_sender".}
-proc fcQRadioData_protectedbase_senderSignalIndex(self: pointer, ): cint {.importc: "QRadioData_protectedbase_senderSignalIndex".}
+proc fcQRadioData_protectedbase_sender(self: pointer): pointer {.importc: "QRadioData_protectedbase_sender".}
+proc fcQRadioData_protectedbase_senderSignalIndex(self: pointer): cint {.importc: "QRadioData_protectedbase_senderSignalIndex".}
 proc fcQRadioData_protectedbase_receivers(self: pointer, signal: cstring): cint {.importc: "QRadioData_protectedbase_receivers".}
 proc fcQRadioData_protectedbase_isSignalConnected(self: pointer, signal: pointer): bool {.importc: "QRadioData_protectedbase_isSignalConnected".}
-proc fcQRadioData_new(vtbl: pointer, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new".}
-proc fcQRadioData_new2(vtbl: pointer, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new2".}
+proc fcQRadioData_new(vtbl, vdata: pointer, mediaObject: pointer): ptr cQRadioData {.importc: "QRadioData_new".}
+proc fcQRadioData_new2(vtbl, vdata: pointer, mediaObject: pointer, parent: pointer): ptr cQRadioData {.importc: "QRadioData_new2".}
 proc fcQRadioData_staticMetaObject(): pointer {.importc: "QRadioData_staticMetaObject".}
 
-proc metaObject*(self: gen_qradiodata_types.QRadioData, ): gen_qobjectdefs_types.QMetaObject =
+proc metaObject*(self: gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_metaObject(self.h), owned: false)
 
 proc metacast*(self: gen_qradiodata_types.QRadioData, param1: cstring): pointer =
@@ -199,46 +201,46 @@ proc trUtf8*(_: type gen_qradiodata_types.QRadioData, s: cstring): string =
   c_free(v_ms.data)
   vx_ret
 
-proc availability*(self: gen_qradiodata_types.QRadioData, ): cint =
+proc availability*(self: gen_qradiodata_types.QRadioData): cint =
   cint(fcQRadioData_availability(self.h))
 
-proc mediaObject*(self: gen_qradiodata_types.QRadioData, ): gen_qmediaobject_types.QMediaObject =
+proc mediaObject*(self: gen_qradiodata_types.QRadioData): gen_qmediaobject_types.QMediaObject =
   gen_qmediaobject_types.QMediaObject(h: fcQRadioData_mediaObject(self.h), owned: false)
 
-proc stationId*(self: gen_qradiodata_types.QRadioData, ): string =
+proc stationId*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_stationId(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc programType*(self: gen_qradiodata_types.QRadioData, ): cint =
+proc programType*(self: gen_qradiodata_types.QRadioData): cint =
   cint(fcQRadioData_programType(self.h))
 
-proc programTypeName*(self: gen_qradiodata_types.QRadioData, ): string =
+proc programTypeName*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_programTypeName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc stationName*(self: gen_qradiodata_types.QRadioData, ): string =
+proc stationName*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_stationName(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc radioText*(self: gen_qradiodata_types.QRadioData, ): string =
+proc radioText*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_radioText(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
   vx_ret
 
-proc isAlternativeFrequenciesEnabled*(self: gen_qradiodata_types.QRadioData, ): bool =
+proc isAlternativeFrequenciesEnabled*(self: gen_qradiodata_types.QRadioData): bool =
   fcQRadioData_isAlternativeFrequenciesEnabled(self.h)
 
-proc error*(self: gen_qradiodata_types.QRadioData, ): cint =
+proc error*(self: gen_qradiodata_types.QRadioData): cint =
   cint(fcQRadioData_error(self.h))
 
-proc errorString*(self: gen_qradiodata_types.QRadioData, ): string =
+proc errorString*(self: gen_qradiodata_types.QRadioData): string =
   let v_ms = fcQRadioData_errorString(self.h)
   let vx_ret = string.fromBytes(toOpenArrayByte(v_ms.data, 0, int(v_ms.len)-1))
   c_free(v_ms.data)
@@ -251,7 +253,7 @@ proc stationIdChanged*(self: gen_qradiodata_types.QRadioData, stationId: string)
   fcQRadioData_stationIdChanged(self.h, struct_miqt_string(data: stationId, len: csize_t(len(stationId))))
 
 type QRadioDatastationIdChangedSlot* = proc(stationId: string)
-proc miqt_exec_callback_cQRadioData_stationIdChanged(slot: int, stationId: struct_miqt_string) {.cdecl.} =
+proc cQRadioData_slot_callback_stationIdChanged(slot: int, stationId: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDatastationIdChangedSlot](cast[pointer](slot))
   let vstationId_ms = stationId
   let vstationIdx_ret = string.fromBytes(toOpenArrayByte(vstationId_ms.data, 0, int(vstationId_ms.len)-1))
@@ -260,7 +262,7 @@ proc miqt_exec_callback_cQRadioData_stationIdChanged(slot: int, stationId: struc
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_stationIdChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_stationIdChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDatastationIdChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -268,19 +270,19 @@ proc onstationIdChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioData
   var tmp = new QRadioDatastationIdChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_stationIdChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_stationIdChanged, miqt_exec_callback_cQRadioData_stationIdChanged_release)
+  fcQRadioData_connect_stationIdChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_stationIdChanged, cQRadioData_slot_callback_stationIdChanged_release)
 
 proc programTypeChanged*(self: gen_qradiodata_types.QRadioData, programType: cint): void =
   fcQRadioData_programTypeChanged(self.h, cint(programType))
 
 type QRadioDataprogramTypeChangedSlot* = proc(programType: cint)
-proc miqt_exec_callback_cQRadioData_programTypeChanged(slot: int, programType: cint) {.cdecl.} =
+proc cQRadioData_slot_callback_programTypeChanged(slot: int, programType: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataprogramTypeChangedSlot](cast[pointer](slot))
   let slotval1 = cint(programType)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_programTypeChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_programTypeChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDataprogramTypeChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -288,13 +290,13 @@ proc onprogramTypeChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDa
   var tmp = new QRadioDataprogramTypeChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_programTypeChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_programTypeChanged, miqt_exec_callback_cQRadioData_programTypeChanged_release)
+  fcQRadioData_connect_programTypeChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_programTypeChanged, cQRadioData_slot_callback_programTypeChanged_release)
 
 proc programTypeNameChanged*(self: gen_qradiodata_types.QRadioData, programTypeName: string): void =
   fcQRadioData_programTypeNameChanged(self.h, struct_miqt_string(data: programTypeName, len: csize_t(len(programTypeName))))
 
 type QRadioDataprogramTypeNameChangedSlot* = proc(programTypeName: string)
-proc miqt_exec_callback_cQRadioData_programTypeNameChanged(slot: int, programTypeName: struct_miqt_string) {.cdecl.} =
+proc cQRadioData_slot_callback_programTypeNameChanged(slot: int, programTypeName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataprogramTypeNameChangedSlot](cast[pointer](slot))
   let vprogramTypeName_ms = programTypeName
   let vprogramTypeNamex_ret = string.fromBytes(toOpenArrayByte(vprogramTypeName_ms.data, 0, int(vprogramTypeName_ms.len)-1))
@@ -303,7 +305,7 @@ proc miqt_exec_callback_cQRadioData_programTypeNameChanged(slot: int, programTyp
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_programTypeNameChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_programTypeNameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDataprogramTypeNameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -311,13 +313,13 @@ proc onprogramTypeNameChanged*(self: gen_qradiodata_types.QRadioData, slot: QRad
   var tmp = new QRadioDataprogramTypeNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_programTypeNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_programTypeNameChanged, miqt_exec_callback_cQRadioData_programTypeNameChanged_release)
+  fcQRadioData_connect_programTypeNameChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_programTypeNameChanged, cQRadioData_slot_callback_programTypeNameChanged_release)
 
 proc stationNameChanged*(self: gen_qradiodata_types.QRadioData, stationName: string): void =
   fcQRadioData_stationNameChanged(self.h, struct_miqt_string(data: stationName, len: csize_t(len(stationName))))
 
 type QRadioDatastationNameChangedSlot* = proc(stationName: string)
-proc miqt_exec_callback_cQRadioData_stationNameChanged(slot: int, stationName: struct_miqt_string) {.cdecl.} =
+proc cQRadioData_slot_callback_stationNameChanged(slot: int, stationName: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDatastationNameChangedSlot](cast[pointer](slot))
   let vstationName_ms = stationName
   let vstationNamex_ret = string.fromBytes(toOpenArrayByte(vstationName_ms.data, 0, int(vstationName_ms.len)-1))
@@ -326,7 +328,7 @@ proc miqt_exec_callback_cQRadioData_stationNameChanged(slot: int, stationName: s
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_stationNameChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_stationNameChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDatastationNameChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -334,13 +336,13 @@ proc onstationNameChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioDa
   var tmp = new QRadioDatastationNameChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_stationNameChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_stationNameChanged, miqt_exec_callback_cQRadioData_stationNameChanged_release)
+  fcQRadioData_connect_stationNameChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_stationNameChanged, cQRadioData_slot_callback_stationNameChanged_release)
 
 proc radioTextChanged*(self: gen_qradiodata_types.QRadioData, radioText: string): void =
   fcQRadioData_radioTextChanged(self.h, struct_miqt_string(data: radioText, len: csize_t(len(radioText))))
 
 type QRadioDataradioTextChangedSlot* = proc(radioText: string)
-proc miqt_exec_callback_cQRadioData_radioTextChanged(slot: int, radioText: struct_miqt_string) {.cdecl.} =
+proc cQRadioData_slot_callback_radioTextChanged(slot: int, radioText: struct_miqt_string) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataradioTextChangedSlot](cast[pointer](slot))
   let vradioText_ms = radioText
   let vradioTextx_ret = string.fromBytes(toOpenArrayByte(vradioText_ms.data, 0, int(vradioText_ms.len)-1))
@@ -349,7 +351,7 @@ proc miqt_exec_callback_cQRadioData_radioTextChanged(slot: int, radioText: struc
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_radioTextChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_radioTextChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDataradioTextChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -357,19 +359,19 @@ proc onradioTextChanged*(self: gen_qradiodata_types.QRadioData, slot: QRadioData
   var tmp = new QRadioDataradioTextChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_radioTextChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_radioTextChanged, miqt_exec_callback_cQRadioData_radioTextChanged_release)
+  fcQRadioData_connect_radioTextChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_radioTextChanged, cQRadioData_slot_callback_radioTextChanged_release)
 
 proc alternativeFrequenciesEnabledChanged*(self: gen_qradiodata_types.QRadioData, enabled: bool): void =
   fcQRadioData_alternativeFrequenciesEnabledChanged(self.h, enabled)
 
 type QRadioDataalternativeFrequenciesEnabledChangedSlot* = proc(enabled: bool)
-proc miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged(slot: int, enabled: bool) {.cdecl.} =
+proc cQRadioData_slot_callback_alternativeFrequenciesEnabledChanged(slot: int, enabled: bool) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataalternativeFrequenciesEnabledChangedSlot](cast[pointer](slot))
   let slotval1 = enabled
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_alternativeFrequenciesEnabledChanged_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDataalternativeFrequenciesEnabledChangedSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -377,19 +379,19 @@ proc onalternativeFrequenciesEnabledChanged*(self: gen_qradiodata_types.QRadioDa
   var tmp = new QRadioDataalternativeFrequenciesEnabledChangedSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged, miqt_exec_callback_cQRadioData_alternativeFrequenciesEnabledChanged_release)
+  fcQRadioData_connect_alternativeFrequenciesEnabledChanged(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_alternativeFrequenciesEnabledChanged, cQRadioData_slot_callback_alternativeFrequenciesEnabledChanged_release)
 
 proc error*(self: gen_qradiodata_types.QRadioData, error: cint): void =
   fcQRadioData_errorWithError(self.h, cint(error))
 
 type QRadioDataerrorWithErrorSlot* = proc(error: cint)
-proc miqt_exec_callback_cQRadioData_errorWithError(slot: int, error: cint) {.cdecl.} =
+proc cQRadioData_slot_callback_errorWithError(slot: int, error: cint) {.cdecl.} =
   let nimfunc = cast[ptr QRadioDataerrorWithErrorSlot](cast[pointer](slot))
   let slotval1 = cint(error)
 
   nimfunc[](slotval1)
 
-proc miqt_exec_callback_cQRadioData_errorWithError_release(slot: int) {.cdecl.} =
+proc cQRadioData_slot_callback_errorWithError_release(slot: int) {.cdecl.} =
   let nimfunc = cast[ref QRadioDataerrorWithErrorSlot](cast[pointer](slot))
   GC_unref(nimfunc)
 
@@ -397,7 +399,7 @@ proc onerror*(self: gen_qradiodata_types.QRadioData, slot: QRadioDataerrorWithEr
   var tmp = new QRadioDataerrorWithErrorSlot
   tmp[] = slot
   GC_ref(tmp)
-  fcQRadioData_connect_errorWithError(self.h, cast[int](addr tmp[]), miqt_exec_callback_cQRadioData_errorWithError, miqt_exec_callback_cQRadioData_errorWithError_release)
+  fcQRadioData_connect_errorWithError(self.h, cast[int](addr tmp[]), cQRadioData_slot_callback_errorWithError, cQRadioData_slot_callback_errorWithError_release)
 
 proc tr*(_: type gen_qradiodata_types.QRadioData, s: cstring, c: cstring): string =
   let v_ms = fcQRadioData_tr2(s, c)
@@ -449,11 +451,11 @@ type QRadioDataVTable* {.inheritable, pure.} = object
   customEvent*: QRadioDatacustomEventProc
   connectNotify*: QRadioDataconnectNotifyProc
   disconnectNotify*: QRadioDatadisconnectNotifyProc
-proc QRadioDatametaObject*(self: gen_qradiodata_types.QRadioData, ): gen_qobjectdefs_types.QMetaObject =
+proc QRadioDatametaObject*(self: gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_virtualbase_metaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQRadioData_metaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   var virtualReturn = vtbl[].metaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -464,8 +466,8 @@ proc miqt_exec_callback_cQRadioData_metaObject(vtbl: pointer, self: pointer): po
 proc QRadioDatametacast*(self: gen_qradiodata_types.QRadioData, param1: cstring): pointer =
   fcQRadioData_virtualbase_metacast(self.h, param1)
 
-proc miqt_exec_callback_cQRadioData_metacast(vtbl: pointer, self: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = (param1)
   var virtualReturn = vtbl[].metacast(self, slotval1)
@@ -474,8 +476,8 @@ proc miqt_exec_callback_cQRadioData_metacast(vtbl: pointer, self: pointer, param
 proc QRadioDatametacall*(self: gen_qradiodata_types.QRadioData, param1: cint, param2: cint, param3: pointer): cint =
   fcQRadioData_virtualbase_metacall(self.h, cint(param1), param2, param3)
 
-proc miqt_exec_callback_cQRadioData_metacall(vtbl: pointer, self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = cint(param1)
   let slotval2 = param2
@@ -483,11 +485,11 @@ proc miqt_exec_callback_cQRadioData_metacall(vtbl: pointer, self: pointer, param
   var virtualReturn = vtbl[].metacall(self, slotval1, slotval2, slotval3)
   virtualReturn
 
-proc QRadioDatamediaObject*(self: gen_qradiodata_types.QRadioData, ): gen_qmediaobject_types.QMediaObject =
+proc QRadioDatamediaObject*(self: gen_qradiodata_types.QRadioData): gen_qmediaobject_types.QMediaObject =
   gen_qmediaobject_types.QMediaObject(h: fcQRadioData_virtualbase_mediaObject(self.h), owned: false)
 
-proc miqt_exec_callback_cQRadioData_mediaObject(vtbl: pointer, self: pointer): pointer {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_mediaObject(self: pointer): pointer {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   var virtualReturn = vtbl[].mediaObject(self)
   virtualReturn.owned = false # TODO move?
@@ -498,8 +500,8 @@ proc miqt_exec_callback_cQRadioData_mediaObject(vtbl: pointer, self: pointer): p
 proc QRadioDatasetMediaObject*(self: gen_qradiodata_types.QRadioData, mediaObject: gen_qmediaobject_types.QMediaObject): bool =
   fcQRadioData_virtualbase_setMediaObject(self.h, mediaObject.h)
 
-proc miqt_exec_callback_cQRadioData_setMediaObject(vtbl: pointer, self: pointer, mediaObject: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_setMediaObject(self: pointer, mediaObject: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject, owned: false)
   var virtualReturn = vtbl[].setMediaObject(self, slotval1)
@@ -508,8 +510,8 @@ proc miqt_exec_callback_cQRadioData_setMediaObject(vtbl: pointer, self: pointer,
 proc QRadioDataevent*(self: gen_qradiodata_types.QRadioData, event: gen_qcoreevent_types.QEvent): bool =
   fcQRadioData_virtualbase_event(self.h, event.h)
 
-proc miqt_exec_callback_cQRadioData_event(vtbl: pointer, self: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   var virtualReturn = vtbl[].event(self, slotval1)
@@ -518,8 +520,8 @@ proc miqt_exec_callback_cQRadioData_event(vtbl: pointer, self: pointer, event: p
 proc QRadioDataeventFilter*(self: gen_qradiodata_types.QRadioData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool =
   fcQRadioData_virtualbase_eventFilter(self.h, watched.h, event.h)
 
-proc miqt_exec_callback_cQRadioData_eventFilter(vtbl: pointer, self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
@@ -529,8 +531,8 @@ proc miqt_exec_callback_cQRadioData_eventFilter(vtbl: pointer, self: pointer, wa
 proc QRadioDatatimerEvent*(self: gen_qradiodata_types.QRadioData, event: gen_qcoreevent_types.QTimerEvent): void =
   fcQRadioData_virtualbase_timerEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRadioData_timerEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
   vtbl[].timerEvent(self, slotval1)
@@ -538,8 +540,8 @@ proc miqt_exec_callback_cQRadioData_timerEvent(vtbl: pointer, self: pointer, eve
 proc QRadioDatachildEvent*(self: gen_qradiodata_types.QRadioData, event: gen_qcoreevent_types.QChildEvent): void =
   fcQRadioData_virtualbase_childEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRadioData_childEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
   vtbl[].childEvent(self, slotval1)
@@ -547,8 +549,8 @@ proc miqt_exec_callback_cQRadioData_childEvent(vtbl: pointer, self: pointer, eve
 proc QRadioDatacustomEvent*(self: gen_qradiodata_types.QRadioData, event: gen_qcoreevent_types.QEvent): void =
   fcQRadioData_virtualbase_customEvent(self.h, event.h)
 
-proc miqt_exec_callback_cQRadioData_customEvent(vtbl: pointer, self: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
   vtbl[].customEvent(self, slotval1)
@@ -556,8 +558,8 @@ proc miqt_exec_callback_cQRadioData_customEvent(vtbl: pointer, self: pointer, ev
 proc QRadioDataconnectNotify*(self: gen_qradiodata_types.QRadioData, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQRadioData_virtualbase_connectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQRadioData_connectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].connectNotify(self, slotval1)
@@ -565,19 +567,19 @@ proc miqt_exec_callback_cQRadioData_connectNotify(vtbl: pointer, self: pointer, 
 proc QRadioDatadisconnectNotify*(self: gen_qradiodata_types.QRadioData, signal: gen_qmetaobject_types.QMetaMethod): void =
   fcQRadioData_virtualbase_disconnectNotify(self.h, signal.h)
 
-proc miqt_exec_callback_cQRadioData_disconnectNotify(vtbl: pointer, self: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[ptr QRadioDataVTable](vtbl)
+proc cQRadioData_vtable_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let vtbl = cast[ptr QRadioDataVTable](fcQRadioData_vdata(self))
   let self = QRadioData(h: self)
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
   vtbl[].disconnectNotify(self, slotval1)
 
 type VirtualQRadioData* {.inheritable.} = ref object of QRadioData
   vtbl*: cQRadioDataVTable
-method metaObject*(self: VirtualQRadioData, ): gen_qobjectdefs_types.QMetaObject {.base.} =
+method metaObject*(self: VirtualQRadioData): gen_qobjectdefs_types.QMetaObject {.base.} =
   QRadioDatametaObject(self[])
-proc miqt_exec_method_cQRadioData_metaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
-  var virtualReturn = vtbl.metaObject()
+proc cQRadioData_method_callback_metaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
+  var virtualReturn = inst.metaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -585,27 +587,27 @@ proc miqt_exec_method_cQRadioData_metaObject(vtbl: pointer, inst: pointer): poin
 
 method metacast*(self: VirtualQRadioData, param1: cstring): pointer {.base.} =
   QRadioDatametacast(self[], param1)
-proc miqt_exec_method_cQRadioData_metacast(vtbl: pointer, inst: pointer, param1: cstring): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_metacast(self: pointer, param1: cstring): pointer {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = (param1)
-  var virtualReturn = vtbl.metacast(slotval1)
+  var virtualReturn = inst.metacast(slotval1)
   virtualReturn
 
 method metacall*(self: VirtualQRadioData, param1: cint, param2: cint, param3: pointer): cint {.base.} =
   QRadioDatametacall(self[], param1, param2, param3)
-proc miqt_exec_method_cQRadioData_metacall(vtbl: pointer, inst: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_metacall(self: pointer, param1: cint, param2: cint, param3: pointer): cint {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = cint(param1)
   let slotval2 = param2
   let slotval3 = param3
-  var virtualReturn = vtbl.metacall(slotval1, slotval2, slotval3)
+  var virtualReturn = inst.metacall(slotval1, slotval2, slotval3)
   virtualReturn
 
-method mediaObject*(self: VirtualQRadioData, ): gen_qmediaobject_types.QMediaObject {.base.} =
+method mediaObject*(self: VirtualQRadioData): gen_qmediaobject_types.QMediaObject {.base.} =
   QRadioDatamediaObject(self[])
-proc miqt_exec_method_cQRadioData_mediaObject(vtbl: pointer, inst: pointer): pointer {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
-  var virtualReturn = vtbl.mediaObject()
+proc cQRadioData_method_callback_mediaObject(self: pointer): pointer {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
+  var virtualReturn = inst.mediaObject()
   virtualReturn.owned = false # TODO move?
   let virtualReturn_h = virtualReturn.h
   virtualReturn.h = nil
@@ -613,68 +615,68 @@ proc miqt_exec_method_cQRadioData_mediaObject(vtbl: pointer, inst: pointer): poi
 
 method setMediaObject*(self: VirtualQRadioData, mediaObject: gen_qmediaobject_types.QMediaObject): bool {.base.} =
   QRadioDatasetMediaObject(self[], mediaObject)
-proc miqt_exec_method_cQRadioData_setMediaObject(vtbl: pointer, inst: pointer, mediaObject: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_setMediaObject(self: pointer, mediaObject: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qmediaobject_types.QMediaObject(h: mediaObject, owned: false)
-  var virtualReturn = vtbl.setMediaObject(slotval1)
+  var virtualReturn = inst.setMediaObject(slotval1)
   virtualReturn
 
 method event*(self: VirtualQRadioData, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QRadioDataevent(self[], event)
-proc miqt_exec_method_cQRadioData_event(vtbl: pointer, inst: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_event(self: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.event(slotval1)
+  var virtualReturn = inst.event(slotval1)
   virtualReturn
 
 method eventFilter*(self: VirtualQRadioData, watched: gen_qobject_types.QObject, event: gen_qcoreevent_types.QEvent): bool {.base.} =
   QRadioDataeventFilter(self[], watched, event)
-proc miqt_exec_method_cQRadioData_eventFilter(vtbl: pointer, inst: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_eventFilter(self: pointer, watched: pointer, event: pointer): bool {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qobject_types.QObject(h: watched, owned: false)
   let slotval2 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  var virtualReturn = vtbl.eventFilter(slotval1, slotval2)
+  var virtualReturn = inst.eventFilter(slotval1, slotval2)
   virtualReturn
 
 method timerEvent*(self: VirtualQRadioData, event: gen_qcoreevent_types.QTimerEvent): void {.base.} =
   QRadioDatatimerEvent(self[], event)
-proc miqt_exec_method_cQRadioData_timerEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_timerEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QTimerEvent(h: event, owned: false)
-  vtbl.timerEvent(slotval1)
+  inst.timerEvent(slotval1)
 
 method childEvent*(self: VirtualQRadioData, event: gen_qcoreevent_types.QChildEvent): void {.base.} =
   QRadioDatachildEvent(self[], event)
-proc miqt_exec_method_cQRadioData_childEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_childEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QChildEvent(h: event, owned: false)
-  vtbl.childEvent(slotval1)
+  inst.childEvent(slotval1)
 
 method customEvent*(self: VirtualQRadioData, event: gen_qcoreevent_types.QEvent): void {.base.} =
   QRadioDatacustomEvent(self[], event)
-proc miqt_exec_method_cQRadioData_customEvent(vtbl: pointer, inst: pointer, event: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_customEvent(self: pointer, event: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qcoreevent_types.QEvent(h: event, owned: false)
-  vtbl.customEvent(slotval1)
+  inst.customEvent(slotval1)
 
 method connectNotify*(self: VirtualQRadioData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRadioDataconnectNotify(self[], signal)
-proc miqt_exec_method_cQRadioData_connectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_connectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.connectNotify(slotval1)
+  inst.connectNotify(slotval1)
 
 method disconnectNotify*(self: VirtualQRadioData, signal: gen_qmetaobject_types.QMetaMethod): void {.base.} =
   QRadioDatadisconnectNotify(self[], signal)
-proc miqt_exec_method_cQRadioData_disconnectNotify(vtbl: pointer, inst: pointer, signal: pointer): void {.cdecl.} =
-  let vtbl = cast[VirtualQRadioData](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
+proc cQRadioData_method_callback_disconnectNotify(self: pointer, signal: pointer): void {.cdecl.} =
+  let inst = cast[VirtualQRadioData](fcQRadioData_vdata(self))
   let slotval1 = gen_qmetaobject_types.QMetaMethod(h: signal, owned: false)
-  vtbl.disconnectNotify(slotval1)
+  inst.disconnectNotify(slotval1)
 
-proc sender*(self: gen_qradiodata_types.QRadioData, ): gen_qobject_types.QObject =
+proc sender*(self: gen_qradiodata_types.QRadioData): gen_qobject_types.QObject =
   gen_qobject_types.QObject(h: fcQRadioData_protectedbase_sender(self.h), owned: false)
 
-proc senderSignalIndex*(self: gen_qradiodata_types.QRadioData, ): cint =
+proc senderSignalIndex*(self: gen_qradiodata_types.QRadioData): cint =
   fcQRadioData_protectedbase_senderSignalIndex(self.h)
 
 proc receivers*(self: gen_qradiodata_types.QRadioData, signal: cstring): cint =
@@ -688,116 +690,100 @@ proc create*(T: type gen_qradiodata_types.QRadioData,
     vtbl: ref QRadioDataVTable = nil): gen_qradiodata_types.QRadioData =
   let vtbl = if vtbl == nil: new QRadioDataVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRadioDataVTable, _: ptr cQRadioData) {.cdecl.} =
-    let vtbl = cast[ref QRadioDataVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRadioDataVTable](fcQRadioData_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRadioData_metaObject
+    vtbl[].vtbl.metaObject = cQRadioData_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRadioData_metacast
+    vtbl[].vtbl.metacast = cQRadioData_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRadioData_metacall
+    vtbl[].vtbl.metacall = cQRadioData_vtable_callback_metacall
   if not isNil(vtbl[].mediaObject):
-    vtbl[].vtbl.mediaObject = miqt_exec_callback_cQRadioData_mediaObject
+    vtbl[].vtbl.mediaObject = cQRadioData_vtable_callback_mediaObject
   if not isNil(vtbl[].setMediaObject):
-    vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQRadioData_setMediaObject
+    vtbl[].vtbl.setMediaObject = cQRadioData_vtable_callback_setMediaObject
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRadioData_event
+    vtbl[].vtbl.event = cQRadioData_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRadioData_eventFilter
+    vtbl[].vtbl.eventFilter = cQRadioData_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRadioData_timerEvent
+    vtbl[].vtbl.timerEvent = cQRadioData_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRadioData_childEvent
+    vtbl[].vtbl.childEvent = cQRadioData_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRadioData_customEvent
+    vtbl[].vtbl.customEvent = cQRadioData_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRadioData_connectNotify
+    vtbl[].vtbl.connectNotify = cQRadioData_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRadioData_disconnectNotify
-  gen_qradiodata_types.QRadioData(h: fcQRadioData_new(addr(vtbl[].vtbl), mediaObject.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRadioData_vtable_callback_disconnectNotify
+  gen_qradiodata_types.QRadioData(h: fcQRadioData_new(addr(vtbl[].vtbl), addr(vtbl[]), mediaObject.h), owned: true)
 
 proc create*(T: type gen_qradiodata_types.QRadioData,
     mediaObject: gen_qmediaobject_types.QMediaObject, parent: gen_qobject_types.QObject,
     vtbl: ref QRadioDataVTable = nil): gen_qradiodata_types.QRadioData =
   let vtbl = if vtbl == nil: new QRadioDataVTable else: vtbl
   GC_ref(vtbl)
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRadioDataVTable, _: ptr cQRadioData) {.cdecl.} =
-    let vtbl = cast[ref QRadioDataVTable](vtbl)
+  vtbl[].vtbl.destructor = proc(self: pointer) {.cdecl.} =
+    let vtbl = cast[ref QRadioDataVTable](fcQRadioData_vdata(self))
     GC_unref(vtbl)
   if not isNil(vtbl[].metaObject):
-    vtbl[].vtbl.metaObject = miqt_exec_callback_cQRadioData_metaObject
+    vtbl[].vtbl.metaObject = cQRadioData_vtable_callback_metaObject
   if not isNil(vtbl[].metacast):
-    vtbl[].vtbl.metacast = miqt_exec_callback_cQRadioData_metacast
+    vtbl[].vtbl.metacast = cQRadioData_vtable_callback_metacast
   if not isNil(vtbl[].metacall):
-    vtbl[].vtbl.metacall = miqt_exec_callback_cQRadioData_metacall
+    vtbl[].vtbl.metacall = cQRadioData_vtable_callback_metacall
   if not isNil(vtbl[].mediaObject):
-    vtbl[].vtbl.mediaObject = miqt_exec_callback_cQRadioData_mediaObject
+    vtbl[].vtbl.mediaObject = cQRadioData_vtable_callback_mediaObject
   if not isNil(vtbl[].setMediaObject):
-    vtbl[].vtbl.setMediaObject = miqt_exec_callback_cQRadioData_setMediaObject
+    vtbl[].vtbl.setMediaObject = cQRadioData_vtable_callback_setMediaObject
   if not isNil(vtbl[].event):
-    vtbl[].vtbl.event = miqt_exec_callback_cQRadioData_event
+    vtbl[].vtbl.event = cQRadioData_vtable_callback_event
   if not isNil(vtbl[].eventFilter):
-    vtbl[].vtbl.eventFilter = miqt_exec_callback_cQRadioData_eventFilter
+    vtbl[].vtbl.eventFilter = cQRadioData_vtable_callback_eventFilter
   if not isNil(vtbl[].timerEvent):
-    vtbl[].vtbl.timerEvent = miqt_exec_callback_cQRadioData_timerEvent
+    vtbl[].vtbl.timerEvent = cQRadioData_vtable_callback_timerEvent
   if not isNil(vtbl[].childEvent):
-    vtbl[].vtbl.childEvent = miqt_exec_callback_cQRadioData_childEvent
+    vtbl[].vtbl.childEvent = cQRadioData_vtable_callback_childEvent
   if not isNil(vtbl[].customEvent):
-    vtbl[].vtbl.customEvent = miqt_exec_callback_cQRadioData_customEvent
+    vtbl[].vtbl.customEvent = cQRadioData_vtable_callback_customEvent
   if not isNil(vtbl[].connectNotify):
-    vtbl[].vtbl.connectNotify = miqt_exec_callback_cQRadioData_connectNotify
+    vtbl[].vtbl.connectNotify = cQRadioData_vtable_callback_connectNotify
   if not isNil(vtbl[].disconnectNotify):
-    vtbl[].vtbl.disconnectNotify = miqt_exec_callback_cQRadioData_disconnectNotify
-  gen_qradiodata_types.QRadioData(h: fcQRadioData_new2(addr(vtbl[].vtbl), mediaObject.h, parent.h), owned: true)
+    vtbl[].vtbl.disconnectNotify = cQRadioData_vtable_callback_disconnectNotify
+  gen_qradiodata_types.QRadioData(h: fcQRadioData_new2(addr(vtbl[].vtbl), addr(vtbl[]), mediaObject.h, parent.h), owned: true)
 
+const cQRadioData_mvtbl = cQRadioDataVTable(
+  destructor: proc(self: pointer) {.cdecl.} =
+    let inst = cast[ptr typeof(VirtualQRadioData()[])](self.fcQRadioData_vtbl())
+    inst[].h = nil
+    inst[].owned = false,
+  metaObject: cQRadioData_method_callback_metaObject,
+  metacast: cQRadioData_method_callback_metacast,
+  metacall: cQRadioData_method_callback_metacall,
+  mediaObject: cQRadioData_method_callback_mediaObject,
+  setMediaObject: cQRadioData_method_callback_setMediaObject,
+  event: cQRadioData_method_callback_event,
+  eventFilter: cQRadioData_method_callback_eventFilter,
+  timerEvent: cQRadioData_method_callback_timerEvent,
+  childEvent: cQRadioData_method_callback_childEvent,
+  customEvent: cQRadioData_method_callback_customEvent,
+  connectNotify: cQRadioData_method_callback_connectNotify,
+  disconnectNotify: cQRadioData_method_callback_disconnectNotify,
+)
 proc create*(T: type gen_qradiodata_types.QRadioData,
     mediaObject: gen_qmediaobject_types.QMediaObject,
-    vtbl: VirtualQRadioData) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRadioDataVTable, _: ptr cQRadioData) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRadioData()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRadioData_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRadioData_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRadioData_metacall
-  vtbl[].vtbl.mediaObject = miqt_exec_method_cQRadioData_mediaObject
-  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQRadioData_setMediaObject
-  vtbl[].vtbl.event = miqt_exec_method_cQRadioData_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRadioData_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRadioData_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRadioData_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRadioData_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRadioData_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRadioData_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRadioData_new(addr(vtbl[].vtbl), mediaObject.h)
-  vtbl[].owned = true
+    inst: VirtualQRadioData) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRadioData_new(addr(cQRadioData_mvtbl), addr(inst[]), mediaObject.h)
+  inst[].owned = true
 
 proc create*(T: type gen_qradiodata_types.QRadioData,
     mediaObject: gen_qmediaobject_types.QMediaObject, parent: gen_qobject_types.QObject,
-    vtbl: VirtualQRadioData) =
-
-  vtbl[].vtbl.destructor = proc(vtbl: ptr cQRadioDataVTable, _: ptr cQRadioData) {.cdecl.} =
-    let vtbl = cast[ptr typeof(VirtualQRadioData()[])](cast[uint](vtbl) - uint(offsetOf(VirtualQRadioData, vtbl)))
-    vtbl[].h = nil
-    vtbl[].owned = false
-  vtbl[].vtbl.metaObject = miqt_exec_method_cQRadioData_metaObject
-  vtbl[].vtbl.metacast = miqt_exec_method_cQRadioData_metacast
-  vtbl[].vtbl.metacall = miqt_exec_method_cQRadioData_metacall
-  vtbl[].vtbl.mediaObject = miqt_exec_method_cQRadioData_mediaObject
-  vtbl[].vtbl.setMediaObject = miqt_exec_method_cQRadioData_setMediaObject
-  vtbl[].vtbl.event = miqt_exec_method_cQRadioData_event
-  vtbl[].vtbl.eventFilter = miqt_exec_method_cQRadioData_eventFilter
-  vtbl[].vtbl.timerEvent = miqt_exec_method_cQRadioData_timerEvent
-  vtbl[].vtbl.childEvent = miqt_exec_method_cQRadioData_childEvent
-  vtbl[].vtbl.customEvent = miqt_exec_method_cQRadioData_customEvent
-  vtbl[].vtbl.connectNotify = miqt_exec_method_cQRadioData_connectNotify
-  vtbl[].vtbl.disconnectNotify = miqt_exec_method_cQRadioData_disconnectNotify
-  if vtbl[].h != nil: delete(move(vtbl[]))
-  vtbl[].h = fcQRadioData_new2(addr(vtbl[].vtbl), mediaObject.h, parent.h)
-  vtbl[].owned = true
+    inst: VirtualQRadioData) =
+  if inst[].h != nil: delete(move(inst[]))
+  inst[].h = fcQRadioData_new2(addr(cQRadioData_mvtbl), addr(inst[]), mediaObject.h, parent.h)
+  inst[].owned = true
 
 proc staticMetaObject*(_: type gen_qradiodata_types.QRadioData): gen_qobjectdefs_types.QMetaObject =
   gen_qobjectdefs_types.QMetaObject(h: fcQRadioData_staticMetaObject())

@@ -8,15 +8,6 @@
 #include <QWidget>
 #include <qwhatsthis.h>
 #include "gen_qwhatsthis.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 void QWhatsThis_enterWhatsThisMode() {
 	QWhatsThis::enterWhatsThisMode();
 }

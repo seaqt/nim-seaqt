@@ -40,43 +40,36 @@
 #include <QWidget>
 #include <qprogressdialog.h>
 #include "gen_qprogressdialog.h"
-
-#ifdef __cplusplus
-extern "C" {
-#endif
-
-#ifdef __cplusplus
-} /* extern C */
-#endif
-
 class VirtualQProgressDialog final : public QProgressDialog {
-	struct QProgressDialog_VTable* vtbl;
+	const QProgressDialog_VTable* vtbl;
+	void* vdata;
 public:
+	friend const QProgressDialog_VTable* QProgressDialog_vtbl(const VirtualQProgressDialog* self);
+	friend void* QProgressDialog_vdata(const VirtualQProgressDialog* self);
+	friend void QProgressDialog_setVdata(VirtualQProgressDialog* self, void* vdata);
 
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl, QWidget* parent): QProgressDialog(parent), vtbl(vtbl) {};
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl): QProgressDialog(), vtbl(vtbl) {};
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum): QProgressDialog(labelText, cancelButtonText, minimum, maximum), vtbl(vtbl) {};
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl, QWidget* parent, Qt::WindowFlags flags): QProgressDialog(parent, flags), vtbl(vtbl) {};
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum, QWidget* parent): QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent), vtbl(vtbl) {};
-	VirtualQProgressDialog(struct QProgressDialog_VTable* vtbl, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum, QWidget* parent, Qt::WindowFlags flags): QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, flags), vtbl(vtbl) {};
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata, QWidget* parent): QProgressDialog(parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata): QProgressDialog(), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum): QProgressDialog(labelText, cancelButtonText, minimum, maximum), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata, QWidget* parent, Qt::WindowFlags flags): QProgressDialog(parent, flags), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum, QWidget* parent): QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent), vtbl(vtbl), vdata(vdata) {}
+	VirtualQProgressDialog(const QProgressDialog_VTable* vtbl, void* vdata, const QString& labelText, const QString& cancelButtonText, int minimum, int maximum, QWidget* parent, Qt::WindowFlags flags): QProgressDialog(labelText, cancelButtonText, minimum, maximum, parent, flags), vtbl(vtbl), vdata(vdata) {}
 
-	virtual ~VirtualQProgressDialog() override { if(vtbl->destructor) vtbl->destructor(vtbl, this); }
+	virtual ~VirtualQProgressDialog() override { if(vtbl->destructor) vtbl->destructor(this); }
 
-	// Subclass to allow providing a Go implementation
 	virtual const QMetaObject* metaObject() const override {
 		if (vtbl->metaObject == 0) {
 			return QProgressDialog::metaObject();
 		}
 
 
-		QMetaObject* callback_return_value = vtbl->metaObject(vtbl, this);
+		QMetaObject* callback_return_value = vtbl->metaObject(this);
 
 		return callback_return_value;
 	}
 
-	friend QMetaObject* QProgressDialog_virtualbase_metaObject(const void* self);
+	friend QMetaObject* QProgressDialog_virtualbase_metaObject(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void* qt_metacast(const char* param1) override {
 		if (vtbl->metacast == 0) {
 			return QProgressDialog::qt_metacast(param1);
@@ -84,14 +77,13 @@ public:
 
 		const char* sigval1 = (const char*) param1;
 
-		void* callback_return_value = vtbl->metacast(vtbl, this, sigval1);
+		void* callback_return_value = vtbl->metacast(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend void* QProgressDialog_virtualbase_metacast(void* self, const char* param1);
+	friend void* QProgressDialog_virtualbase_metacast(VirtualQProgressDialog* self, const char* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual int qt_metacall(QMetaObject::Call param1, int param2, void** param3) override {
 		if (vtbl->metacall == 0) {
 			return QProgressDialog::qt_metacall(param1, param2, param3);
@@ -102,30 +94,28 @@ public:
 		int sigval2 = param2;
 		void** sigval3 = param3;
 
-		int callback_return_value = vtbl->metacall(vtbl, this, sigval1, sigval2, sigval3);
+		int callback_return_value = vtbl->metacall(this, sigval1, sigval2, sigval3);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3);
+	friend int QProgressDialog_virtualbase_metacall(VirtualQProgressDialog* self, int param1, int param2, void** param3);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize sizeHint() const override {
 		if (vtbl->sizeHint == 0) {
 			return QProgressDialog::sizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->sizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->sizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QProgressDialog_virtualbase_sizeHint(const void* self);
+	friend QSize* QProgressDialog_virtualbase_sizeHint(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void resizeEvent(QResizeEvent* event) override {
 		if (vtbl->resizeEvent == 0) {
 			QProgressDialog::resizeEvent(event);
@@ -134,13 +124,12 @@ public:
 
 		QResizeEvent* sigval1 = event;
 
-		vtbl->resizeEvent(vtbl, this, sigval1);
+		vtbl->resizeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_resizeEvent(void* self, QResizeEvent* event);
+	friend void QProgressDialog_virtualbase_resizeEvent(VirtualQProgressDialog* self, QResizeEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void closeEvent(QCloseEvent* event) override {
 		if (vtbl->closeEvent == 0) {
 			QProgressDialog::closeEvent(event);
@@ -149,13 +138,12 @@ public:
 
 		QCloseEvent* sigval1 = event;
 
-		vtbl->closeEvent(vtbl, this, sigval1);
+		vtbl->closeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_closeEvent(void* self, QCloseEvent* event);
+	friend void QProgressDialog_virtualbase_closeEvent(VirtualQProgressDialog* self, QCloseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void changeEvent(QEvent* event) override {
 		if (vtbl->changeEvent == 0) {
 			QProgressDialog::changeEvent(event);
@@ -164,13 +152,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->changeEvent(vtbl, this, sigval1);
+		vtbl->changeEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_changeEvent(void* self, QEvent* event);
+	friend void QProgressDialog_virtualbase_changeEvent(VirtualQProgressDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void showEvent(QShowEvent* event) override {
 		if (vtbl->showEvent == 0) {
 			QProgressDialog::showEvent(event);
@@ -179,13 +166,12 @@ public:
 
 		QShowEvent* sigval1 = event;
 
-		vtbl->showEvent(vtbl, this, sigval1);
+		vtbl->showEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_showEvent(void* self, QShowEvent* event);
+	friend void QProgressDialog_virtualbase_showEvent(VirtualQProgressDialog* self, QShowEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void setVisible(bool visible) override {
 		if (vtbl->setVisible == 0) {
 			QProgressDialog::setVisible(visible);
@@ -194,29 +180,27 @@ public:
 
 		bool sigval1 = visible;
 
-		vtbl->setVisible(vtbl, this, sigval1);
+		vtbl->setVisible(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_setVisible(void* self, bool visible);
+	friend void QProgressDialog_virtualbase_setVisible(VirtualQProgressDialog* self, bool visible);
 
-	// Subclass to allow providing a Go implementation
 	virtual QSize minimumSizeHint() const override {
 		if (vtbl->minimumSizeHint == 0) {
 			return QProgressDialog::minimumSizeHint();
 		}
 
 
-		QSize* callback_return_value = vtbl->minimumSizeHint(vtbl, this);
+		QSize* callback_return_value = vtbl->minimumSizeHint(this);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QSize* QProgressDialog_virtualbase_minimumSizeHint(const void* self);
+	friend QSize* QProgressDialog_virtualbase_minimumSizeHint(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void open() override {
 		if (vtbl->open == 0) {
 			QProgressDialog::open();
@@ -224,27 +208,25 @@ public:
 		}
 
 
-		vtbl->open(vtbl, this);
+		vtbl->open(this);
 
 	}
 
-	friend void QProgressDialog_virtualbase_open(void* self);
+	friend void QProgressDialog_virtualbase_open(VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int exec() override {
 		if (vtbl->exec == 0) {
 			return QProgressDialog::exec();
 		}
 
 
-		int callback_return_value = vtbl->exec(vtbl, this);
+		int callback_return_value = vtbl->exec(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressDialog_virtualbase_exec(void* self);
+	friend int QProgressDialog_virtualbase_exec(VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void done(int param1) override {
 		if (vtbl->done == 0) {
 			QProgressDialog::done(param1);
@@ -253,13 +235,12 @@ public:
 
 		int sigval1 = param1;
 
-		vtbl->done(vtbl, this, sigval1);
+		vtbl->done(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_done(void* self, int param1);
+	friend void QProgressDialog_virtualbase_done(VirtualQProgressDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void accept() override {
 		if (vtbl->accept == 0) {
 			QProgressDialog::accept();
@@ -267,13 +248,12 @@ public:
 		}
 
 
-		vtbl->accept(vtbl, this);
+		vtbl->accept(this);
 
 	}
 
-	friend void QProgressDialog_virtualbase_accept(void* self);
+	friend void QProgressDialog_virtualbase_accept(VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void reject() override {
 		if (vtbl->reject == 0) {
 			QProgressDialog::reject();
@@ -281,13 +261,12 @@ public:
 		}
 
 
-		vtbl->reject(vtbl, this);
+		vtbl->reject(this);
 
 	}
 
-	friend void QProgressDialog_virtualbase_reject(void* self);
+	friend void QProgressDialog_virtualbase_reject(VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyPressEvent(QKeyEvent* param1) override {
 		if (vtbl->keyPressEvent == 0) {
 			QProgressDialog::keyPressEvent(param1);
@@ -296,13 +275,12 @@ public:
 
 		QKeyEvent* sigval1 = param1;
 
-		vtbl->keyPressEvent(vtbl, this, sigval1);
+		vtbl->keyPressEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1);
+	friend void QProgressDialog_virtualbase_keyPressEvent(VirtualQProgressDialog* self, QKeyEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void contextMenuEvent(QContextMenuEvent* param1) override {
 		if (vtbl->contextMenuEvent == 0) {
 			QProgressDialog::contextMenuEvent(param1);
@@ -311,13 +289,12 @@ public:
 
 		QContextMenuEvent* sigval1 = param1;
 
-		vtbl->contextMenuEvent(vtbl, this, sigval1);
+		vtbl->contextMenuEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1);
+	friend void QProgressDialog_virtualbase_contextMenuEvent(VirtualQProgressDialog* self, QContextMenuEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool eventFilter(QObject* param1, QEvent* param2) override {
 		if (vtbl->eventFilter == 0) {
 			return QProgressDialog::eventFilter(param1, param2);
@@ -326,28 +303,26 @@ public:
 		QObject* sigval1 = param1;
 		QEvent* sigval2 = param2;
 
-		bool callback_return_value = vtbl->eventFilter(vtbl, this, sigval1, sigval2);
+		bool callback_return_value = vtbl->eventFilter(this, sigval1, sigval2);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2);
+	friend bool QProgressDialog_virtualbase_eventFilter(VirtualQProgressDialog* self, QObject* param1, QEvent* param2);
 
-	// Subclass to allow providing a Go implementation
 	virtual int devType() const override {
 		if (vtbl->devType == 0) {
 			return QProgressDialog::devType();
 		}
 
 
-		int callback_return_value = vtbl->devType(vtbl, this);
+		int callback_return_value = vtbl->devType(this);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressDialog_virtualbase_devType(const void* self);
+	friend int QProgressDialog_virtualbase_devType(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual int heightForWidth(int param1) const override {
 		if (vtbl->heightForWidth == 0) {
 			return QProgressDialog::heightForWidth(param1);
@@ -355,42 +330,39 @@ public:
 
 		int sigval1 = param1;
 
-		int callback_return_value = vtbl->heightForWidth(vtbl, this, sigval1);
+		int callback_return_value = vtbl->heightForWidth(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressDialog_virtualbase_heightForWidth(const void* self, int param1);
+	friend int QProgressDialog_virtualbase_heightForWidth(const VirtualQProgressDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool hasHeightForWidth() const override {
 		if (vtbl->hasHeightForWidth == 0) {
 			return QProgressDialog::hasHeightForWidth();
 		}
 
 
-		bool callback_return_value = vtbl->hasHeightForWidth(vtbl, this);
+		bool callback_return_value = vtbl->hasHeightForWidth(this);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressDialog_virtualbase_hasHeightForWidth(const void* self);
+	friend bool QProgressDialog_virtualbase_hasHeightForWidth(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintEngine* paintEngine() const override {
 		if (vtbl->paintEngine == 0) {
 			return QProgressDialog::paintEngine();
 		}
 
 
-		QPaintEngine* callback_return_value = vtbl->paintEngine(vtbl, this);
+		QPaintEngine* callback_return_value = vtbl->paintEngine(this);
 
 		return callback_return_value;
 	}
 
-	friend QPaintEngine* QProgressDialog_virtualbase_paintEngine(const void* self);
+	friend QPaintEngine* QProgressDialog_virtualbase_paintEngine(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool event(QEvent* event) override {
 		if (vtbl->event == 0) {
 			return QProgressDialog::event(event);
@@ -398,14 +370,13 @@ public:
 
 		QEvent* sigval1 = event;
 
-		bool callback_return_value = vtbl->event(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->event(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressDialog_virtualbase_event(void* self, QEvent* event);
+	friend bool QProgressDialog_virtualbase_event(VirtualQProgressDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mousePressEvent(QMouseEvent* event) override {
 		if (vtbl->mousePressEvent == 0) {
 			QProgressDialog::mousePressEvent(event);
@@ -414,13 +385,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mousePressEvent(vtbl, this, sigval1);
+		vtbl->mousePressEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event);
+	friend void QProgressDialog_virtualbase_mousePressEvent(VirtualQProgressDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseReleaseEvent(QMouseEvent* event) override {
 		if (vtbl->mouseReleaseEvent == 0) {
 			QProgressDialog::mouseReleaseEvent(event);
@@ -429,13 +399,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseReleaseEvent(vtbl, this, sigval1);
+		vtbl->mouseReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event);
+	friend void QProgressDialog_virtualbase_mouseReleaseEvent(VirtualQProgressDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseDoubleClickEvent(QMouseEvent* event) override {
 		if (vtbl->mouseDoubleClickEvent == 0) {
 			QProgressDialog::mouseDoubleClickEvent(event);
@@ -444,13 +413,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseDoubleClickEvent(vtbl, this, sigval1);
+		vtbl->mouseDoubleClickEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event);
+	friend void QProgressDialog_virtualbase_mouseDoubleClickEvent(VirtualQProgressDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void mouseMoveEvent(QMouseEvent* event) override {
 		if (vtbl->mouseMoveEvent == 0) {
 			QProgressDialog::mouseMoveEvent(event);
@@ -459,13 +427,12 @@ public:
 
 		QMouseEvent* sigval1 = event;
 
-		vtbl->mouseMoveEvent(vtbl, this, sigval1);
+		vtbl->mouseMoveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event);
+	friend void QProgressDialog_virtualbase_mouseMoveEvent(VirtualQProgressDialog* self, QMouseEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void wheelEvent(QWheelEvent* event) override {
 		if (vtbl->wheelEvent == 0) {
 			QProgressDialog::wheelEvent(event);
@@ -474,13 +441,12 @@ public:
 
 		QWheelEvent* sigval1 = event;
 
-		vtbl->wheelEvent(vtbl, this, sigval1);
+		vtbl->wheelEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event);
+	friend void QProgressDialog_virtualbase_wheelEvent(VirtualQProgressDialog* self, QWheelEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void keyReleaseEvent(QKeyEvent* event) override {
 		if (vtbl->keyReleaseEvent == 0) {
 			QProgressDialog::keyReleaseEvent(event);
@@ -489,13 +455,12 @@ public:
 
 		QKeyEvent* sigval1 = event;
 
-		vtbl->keyReleaseEvent(vtbl, this, sigval1);
+		vtbl->keyReleaseEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event);
+	friend void QProgressDialog_virtualbase_keyReleaseEvent(VirtualQProgressDialog* self, QKeyEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusInEvent(QFocusEvent* event) override {
 		if (vtbl->focusInEvent == 0) {
 			QProgressDialog::focusInEvent(event);
@@ -504,13 +469,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusInEvent(vtbl, this, sigval1);
+		vtbl->focusInEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event);
+	friend void QProgressDialog_virtualbase_focusInEvent(VirtualQProgressDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void focusOutEvent(QFocusEvent* event) override {
 		if (vtbl->focusOutEvent == 0) {
 			QProgressDialog::focusOutEvent(event);
@@ -519,13 +483,12 @@ public:
 
 		QFocusEvent* sigval1 = event;
 
-		vtbl->focusOutEvent(vtbl, this, sigval1);
+		vtbl->focusOutEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event);
+	friend void QProgressDialog_virtualbase_focusOutEvent(VirtualQProgressDialog* self, QFocusEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void enterEvent(QEvent* event) override {
 		if (vtbl->enterEvent == 0) {
 			QProgressDialog::enterEvent(event);
@@ -534,13 +497,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->enterEvent(vtbl, this, sigval1);
+		vtbl->enterEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_enterEvent(void* self, QEvent* event);
+	friend void QProgressDialog_virtualbase_enterEvent(VirtualQProgressDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void leaveEvent(QEvent* event) override {
 		if (vtbl->leaveEvent == 0) {
 			QProgressDialog::leaveEvent(event);
@@ -549,13 +511,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->leaveEvent(vtbl, this, sigval1);
+		vtbl->leaveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_leaveEvent(void* self, QEvent* event);
+	friend void QProgressDialog_virtualbase_leaveEvent(VirtualQProgressDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void paintEvent(QPaintEvent* event) override {
 		if (vtbl->paintEvent == 0) {
 			QProgressDialog::paintEvent(event);
@@ -564,13 +525,12 @@ public:
 
 		QPaintEvent* sigval1 = event;
 
-		vtbl->paintEvent(vtbl, this, sigval1);
+		vtbl->paintEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_paintEvent(void* self, QPaintEvent* event);
+	friend void QProgressDialog_virtualbase_paintEvent(VirtualQProgressDialog* self, QPaintEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void moveEvent(QMoveEvent* event) override {
 		if (vtbl->moveEvent == 0) {
 			QProgressDialog::moveEvent(event);
@@ -579,13 +539,12 @@ public:
 
 		QMoveEvent* sigval1 = event;
 
-		vtbl->moveEvent(vtbl, this, sigval1);
+		vtbl->moveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_moveEvent(void* self, QMoveEvent* event);
+	friend void QProgressDialog_virtualbase_moveEvent(VirtualQProgressDialog* self, QMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void tabletEvent(QTabletEvent* event) override {
 		if (vtbl->tabletEvent == 0) {
 			QProgressDialog::tabletEvent(event);
@@ -594,13 +553,12 @@ public:
 
 		QTabletEvent* sigval1 = event;
 
-		vtbl->tabletEvent(vtbl, this, sigval1);
+		vtbl->tabletEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event);
+	friend void QProgressDialog_virtualbase_tabletEvent(VirtualQProgressDialog* self, QTabletEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void actionEvent(QActionEvent* event) override {
 		if (vtbl->actionEvent == 0) {
 			QProgressDialog::actionEvent(event);
@@ -609,13 +567,12 @@ public:
 
 		QActionEvent* sigval1 = event;
 
-		vtbl->actionEvent(vtbl, this, sigval1);
+		vtbl->actionEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_actionEvent(void* self, QActionEvent* event);
+	friend void QProgressDialog_virtualbase_actionEvent(VirtualQProgressDialog* self, QActionEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragEnterEvent(QDragEnterEvent* event) override {
 		if (vtbl->dragEnterEvent == 0) {
 			QProgressDialog::dragEnterEvent(event);
@@ -624,13 +581,12 @@ public:
 
 		QDragEnterEvent* sigval1 = event;
 
-		vtbl->dragEnterEvent(vtbl, this, sigval1);
+		vtbl->dragEnterEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event);
+	friend void QProgressDialog_virtualbase_dragEnterEvent(VirtualQProgressDialog* self, QDragEnterEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragMoveEvent(QDragMoveEvent* event) override {
 		if (vtbl->dragMoveEvent == 0) {
 			QProgressDialog::dragMoveEvent(event);
@@ -639,13 +595,12 @@ public:
 
 		QDragMoveEvent* sigval1 = event;
 
-		vtbl->dragMoveEvent(vtbl, this, sigval1);
+		vtbl->dragMoveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event);
+	friend void QProgressDialog_virtualbase_dragMoveEvent(VirtualQProgressDialog* self, QDragMoveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dragLeaveEvent(QDragLeaveEvent* event) override {
 		if (vtbl->dragLeaveEvent == 0) {
 			QProgressDialog::dragLeaveEvent(event);
@@ -654,13 +609,12 @@ public:
 
 		QDragLeaveEvent* sigval1 = event;
 
-		vtbl->dragLeaveEvent(vtbl, this, sigval1);
+		vtbl->dragLeaveEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event);
+	friend void QProgressDialog_virtualbase_dragLeaveEvent(VirtualQProgressDialog* self, QDragLeaveEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void dropEvent(QDropEvent* event) override {
 		if (vtbl->dropEvent == 0) {
 			QProgressDialog::dropEvent(event);
@@ -669,13 +623,12 @@ public:
 
 		QDropEvent* sigval1 = event;
 
-		vtbl->dropEvent(vtbl, this, sigval1);
+		vtbl->dropEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_dropEvent(void* self, QDropEvent* event);
+	friend void QProgressDialog_virtualbase_dropEvent(VirtualQProgressDialog* self, QDropEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void hideEvent(QHideEvent* event) override {
 		if (vtbl->hideEvent == 0) {
 			QProgressDialog::hideEvent(event);
@@ -684,13 +637,12 @@ public:
 
 		QHideEvent* sigval1 = event;
 
-		vtbl->hideEvent(vtbl, this, sigval1);
+		vtbl->hideEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_hideEvent(void* self, QHideEvent* event);
+	friend void QProgressDialog_virtualbase_hideEvent(VirtualQProgressDialog* self, QHideEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool nativeEvent(const QByteArray& eventType, void* message, long* result) override {
 		if (vtbl->nativeEvent == 0) {
 			return QProgressDialog::nativeEvent(eventType, message, result);
@@ -705,14 +657,13 @@ public:
 		void* sigval2 = message;
 		long* sigval3 = result;
 
-		bool callback_return_value = vtbl->nativeEvent(vtbl, this, sigval1, sigval2, sigval3);
+		bool callback_return_value = vtbl->nativeEvent(this, sigval1, sigval2, sigval3);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result);
+	friend bool QProgressDialog_virtualbase_nativeEvent(VirtualQProgressDialog* self, struct miqt_string eventType, void* message, long* result);
 
-	// Subclass to allow providing a Go implementation
 	virtual int metric(QPaintDevice::PaintDeviceMetric param1) const override {
 		if (vtbl->metric == 0) {
 			return QProgressDialog::metric(param1);
@@ -721,14 +672,13 @@ public:
 		QPaintDevice::PaintDeviceMetric param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		int callback_return_value = vtbl->metric(vtbl, this, sigval1);
+		int callback_return_value = vtbl->metric(this, sigval1);
 
 		return static_cast<int>(callback_return_value);
 	}
 
-	friend int QProgressDialog_virtualbase_metric(const void* self, int param1);
+	friend int QProgressDialog_virtualbase_metric(const VirtualQProgressDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual void initPainter(QPainter* painter) const override {
 		if (vtbl->initPainter == 0) {
 			QProgressDialog::initPainter(painter);
@@ -737,13 +687,12 @@ public:
 
 		QPainter* sigval1 = painter;
 
-		vtbl->initPainter(vtbl, this, sigval1);
+		vtbl->initPainter(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_initPainter(const void* self, QPainter* painter);
+	friend void QProgressDialog_virtualbase_initPainter(const VirtualQProgressDialog* self, QPainter* painter);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPaintDevice* redirected(QPoint* offset) const override {
 		if (vtbl->redirected == 0) {
 			return QProgressDialog::redirected(offset);
@@ -751,28 +700,26 @@ public:
 
 		QPoint* sigval1 = offset;
 
-		QPaintDevice* callback_return_value = vtbl->redirected(vtbl, this, sigval1);
+		QPaintDevice* callback_return_value = vtbl->redirected(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend QPaintDevice* QProgressDialog_virtualbase_redirected(const void* self, QPoint* offset);
+	friend QPaintDevice* QProgressDialog_virtualbase_redirected(const VirtualQProgressDialog* self, QPoint* offset);
 
-	// Subclass to allow providing a Go implementation
 	virtual QPainter* sharedPainter() const override {
 		if (vtbl->sharedPainter == 0) {
 			return QProgressDialog::sharedPainter();
 		}
 
 
-		QPainter* callback_return_value = vtbl->sharedPainter(vtbl, this);
+		QPainter* callback_return_value = vtbl->sharedPainter(this);
 
 		return callback_return_value;
 	}
 
-	friend QPainter* QProgressDialog_virtualbase_sharedPainter(const void* self);
+	friend QPainter* QProgressDialog_virtualbase_sharedPainter(const VirtualQProgressDialog* self);
 
-	// Subclass to allow providing a Go implementation
 	virtual void inputMethodEvent(QInputMethodEvent* param1) override {
 		if (vtbl->inputMethodEvent == 0) {
 			QProgressDialog::inputMethodEvent(param1);
@@ -781,13 +728,12 @@ public:
 
 		QInputMethodEvent* sigval1 = param1;
 
-		vtbl->inputMethodEvent(vtbl, this, sigval1);
+		vtbl->inputMethodEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1);
+	friend void QProgressDialog_virtualbase_inputMethodEvent(VirtualQProgressDialog* self, QInputMethodEvent* param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual QVariant inputMethodQuery(Qt::InputMethodQuery param1) const override {
 		if (vtbl->inputMethodQuery == 0) {
 			return QProgressDialog::inputMethodQuery(param1);
@@ -796,16 +742,15 @@ public:
 		Qt::InputMethodQuery param1_ret = param1;
 		int sigval1 = static_cast<int>(param1_ret);
 
-		QVariant* callback_return_value = vtbl->inputMethodQuery(vtbl, this, sigval1);
+		QVariant* callback_return_value = vtbl->inputMethodQuery(this, sigval1);
 		auto callback_return_value_Value = std::move(*callback_return_value);
 		delete callback_return_value;
 
 		return callback_return_value_Value;
 	}
 
-	friend QVariant* QProgressDialog_virtualbase_inputMethodQuery(const void* self, int param1);
+	friend QVariant* QProgressDialog_virtualbase_inputMethodQuery(const VirtualQProgressDialog* self, int param1);
 
-	// Subclass to allow providing a Go implementation
 	virtual bool focusNextPrevChild(bool next) override {
 		if (vtbl->focusNextPrevChild == 0) {
 			return QProgressDialog::focusNextPrevChild(next);
@@ -813,14 +758,13 @@ public:
 
 		bool sigval1 = next;
 
-		bool callback_return_value = vtbl->focusNextPrevChild(vtbl, this, sigval1);
+		bool callback_return_value = vtbl->focusNextPrevChild(this, sigval1);
 
 		return callback_return_value;
 	}
 
-	friend bool QProgressDialog_virtualbase_focusNextPrevChild(void* self, bool next);
+	friend bool QProgressDialog_virtualbase_focusNextPrevChild(VirtualQProgressDialog* self, bool next);
 
-	// Subclass to allow providing a Go implementation
 	virtual void timerEvent(QTimerEvent* event) override {
 		if (vtbl->timerEvent == 0) {
 			QProgressDialog::timerEvent(event);
@@ -829,13 +773,12 @@ public:
 
 		QTimerEvent* sigval1 = event;
 
-		vtbl->timerEvent(vtbl, this, sigval1);
+		vtbl->timerEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_timerEvent(void* self, QTimerEvent* event);
+	friend void QProgressDialog_virtualbase_timerEvent(VirtualQProgressDialog* self, QTimerEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void childEvent(QChildEvent* event) override {
 		if (vtbl->childEvent == 0) {
 			QProgressDialog::childEvent(event);
@@ -844,13 +787,12 @@ public:
 
 		QChildEvent* sigval1 = event;
 
-		vtbl->childEvent(vtbl, this, sigval1);
+		vtbl->childEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_childEvent(void* self, QChildEvent* event);
+	friend void QProgressDialog_virtualbase_childEvent(VirtualQProgressDialog* self, QChildEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void customEvent(QEvent* event) override {
 		if (vtbl->customEvent == 0) {
 			QProgressDialog::customEvent(event);
@@ -859,13 +801,12 @@ public:
 
 		QEvent* sigval1 = event;
 
-		vtbl->customEvent(vtbl, this, sigval1);
+		vtbl->customEvent(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_customEvent(void* self, QEvent* event);
+	friend void QProgressDialog_virtualbase_customEvent(VirtualQProgressDialog* self, QEvent* event);
 
-	// Subclass to allow providing a Go implementation
 	virtual void connectNotify(const QMetaMethod& signal) override {
 		if (vtbl->connectNotify == 0) {
 			QProgressDialog::connectNotify(signal);
@@ -876,13 +817,12 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->connectNotify(vtbl, this, sigval1);
+		vtbl->connectNotify(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal);
+	friend void QProgressDialog_virtualbase_connectNotify(VirtualQProgressDialog* self, QMetaMethod* signal);
 
-	// Subclass to allow providing a Go implementation
 	virtual void disconnectNotify(const QMetaMethod& signal) override {
 		if (vtbl->disconnectNotify == 0) {
 			QProgressDialog::disconnectNotify(signal);
@@ -893,54 +833,54 @@ public:
 		// Cast returned reference into pointer
 		QMetaMethod* sigval1 = const_cast<QMetaMethod*>(&signal_ret);
 
-		vtbl->disconnectNotify(vtbl, this, sigval1);
+		vtbl->disconnectNotify(this, sigval1);
 
 	}
 
-	friend void QProgressDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal);
+	friend void QProgressDialog_virtualbase_disconnectNotify(VirtualQProgressDialog* self, QMetaMethod* signal);
 
 	// Wrappers to allow calling protected methods:
-	friend void QProgressDialog_protectedbase_forceShow(void* self);
-	friend void QProgressDialog_protectedbase_adjustPosition(void* self, QWidget* param1);
-	friend void QProgressDialog_protectedbase_updateMicroFocus(void* self);
-	friend void QProgressDialog_protectedbase_create(void* self);
-	friend void QProgressDialog_protectedbase_destroy(void* self);
-	friend bool QProgressDialog_protectedbase_focusNextChild(void* self);
-	friend bool QProgressDialog_protectedbase_focusPreviousChild(void* self);
-	friend QObject* QProgressDialog_protectedbase_sender(const void* self);
-	friend int QProgressDialog_protectedbase_senderSignalIndex(const void* self);
-	friend int QProgressDialog_protectedbase_receivers(const void* self, const char* signal);
-	friend bool QProgressDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal);
+	friend void QProgressDialog_protectedbase_forceShow(VirtualQProgressDialog* self);
+	friend void QProgressDialog_protectedbase_adjustPosition(VirtualQProgressDialog* self, QWidget* param1);
+	friend void QProgressDialog_protectedbase_updateMicroFocus(VirtualQProgressDialog* self);
+	friend void QProgressDialog_protectedbase_create(VirtualQProgressDialog* self);
+	friend void QProgressDialog_protectedbase_destroy(VirtualQProgressDialog* self);
+	friend bool QProgressDialog_protectedbase_focusNextChild(VirtualQProgressDialog* self);
+	friend bool QProgressDialog_protectedbase_focusPreviousChild(VirtualQProgressDialog* self);
+	friend QObject* QProgressDialog_protectedbase_sender(const VirtualQProgressDialog* self);
+	friend int QProgressDialog_protectedbase_senderSignalIndex(const VirtualQProgressDialog* self);
+	friend int QProgressDialog_protectedbase_receivers(const VirtualQProgressDialog* self, const char* signal);
+	friend bool QProgressDialog_protectedbase_isSignalConnected(const VirtualQProgressDialog* self, QMetaMethod* signal);
 };
 
-QProgressDialog* QProgressDialog_new(struct QProgressDialog_VTable* vtbl, QWidget* parent) {
-	return new VirtualQProgressDialog(vtbl, parent);
+VirtualQProgressDialog* QProgressDialog_new(const QProgressDialog_VTable* vtbl, void* vdata, QWidget* parent) {
+	return new VirtualQProgressDialog(vtbl, vdata, parent);
 }
 
-QProgressDialog* QProgressDialog_new2(struct QProgressDialog_VTable* vtbl) {
-	return new VirtualQProgressDialog(vtbl);
+VirtualQProgressDialog* QProgressDialog_new2(const QProgressDialog_VTable* vtbl, void* vdata) {
+	return new VirtualQProgressDialog(vtbl, vdata);
 }
 
-QProgressDialog* QProgressDialog_new3(struct QProgressDialog_VTable* vtbl, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum) {
+VirtualQProgressDialog* QProgressDialog_new3(const QProgressDialog_VTable* vtbl, void* vdata, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	QString cancelButtonText_QString = QString::fromUtf8(cancelButtonText.data, cancelButtonText.len);
-	return new VirtualQProgressDialog(vtbl, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum));
+	return new VirtualQProgressDialog(vtbl, vdata, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum));
 }
 
-QProgressDialog* QProgressDialog_new4(struct QProgressDialog_VTable* vtbl, QWidget* parent, int flags) {
-	return new VirtualQProgressDialog(vtbl, parent, static_cast<Qt::WindowFlags>(flags));
+VirtualQProgressDialog* QProgressDialog_new4(const QProgressDialog_VTable* vtbl, void* vdata, QWidget* parent, int flags) {
+	return new VirtualQProgressDialog(vtbl, vdata, parent, static_cast<Qt::WindowFlags>(flags));
 }
 
-QProgressDialog* QProgressDialog_new5(struct QProgressDialog_VTable* vtbl, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum, QWidget* parent) {
+VirtualQProgressDialog* QProgressDialog_new5(const QProgressDialog_VTable* vtbl, void* vdata, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum, QWidget* parent) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	QString cancelButtonText_QString = QString::fromUtf8(cancelButtonText.data, cancelButtonText.len);
-	return new VirtualQProgressDialog(vtbl, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum), parent);
+	return new VirtualQProgressDialog(vtbl, vdata, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum), parent);
 }
 
-QProgressDialog* QProgressDialog_new6(struct QProgressDialog_VTable* vtbl, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum, QWidget* parent, int flags) {
+VirtualQProgressDialog* QProgressDialog_new6(const QProgressDialog_VTable* vtbl, void* vdata, struct miqt_string labelText, struct miqt_string cancelButtonText, int minimum, int maximum, QWidget* parent, int flags) {
 	QString labelText_QString = QString::fromUtf8(labelText.data, labelText.len);
 	QString cancelButtonText_QString = QString::fromUtf8(cancelButtonText.data, cancelButtonText.len);
-	return new VirtualQProgressDialog(vtbl, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum), parent, static_cast<Qt::WindowFlags>(flags));
+	return new VirtualQProgressDialog(vtbl, vdata, labelText_QString, cancelButtonText_QString, static_cast<int>(minimum), static_cast<int>(maximum), parent, static_cast<Qt::WindowFlags>(flags));
 }
 
 void QProgressDialog_virtbase(QProgressDialog* src, QDialog** outptr_QDialog) {
@@ -1086,7 +1026,7 @@ void QProgressDialog_canceled(QProgressDialog* self) {
 	self->canceled();
 }
 
-void QProgressDialog_connect_canceled(QProgressDialog* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
+void QProgressDialog_connect_canceled(VirtualQProgressDialog* self, intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) {
 	struct local_caller : seaqt::caller {
 		constexpr local_caller(intptr_t slot, void (*callback)(intptr_t), void (*release)(intptr_t)) : callback(callback), caller{slot, release} {}
 		void (*callback)(intptr_t);
@@ -1141,413 +1081,330 @@ struct miqt_string QProgressDialog_trUtf83(const char* s, const char* c, int n) 
 	return _ms;
 }
 
-QMetaObject* QProgressDialog_virtualbase_metaObject(const void* self) {
+QMetaObject* QProgressDialog_virtualbase_metaObject(const VirtualQProgressDialog* self) {
 
-	return (QMetaObject*) ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::metaObject();
-
+	return (QMetaObject*) self->QProgressDialog::metaObject();
 }
 
-void* QProgressDialog_virtualbase_metacast(void* self, const char* param1) {
+void* QProgressDialog_virtualbase_metacast(VirtualQProgressDialog* self, const char* param1) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::qt_metacast(param1);
-
+	return self->QProgressDialog::qt_metacast(param1);
 }
 
-int QProgressDialog_virtualbase_metacall(void* self, int param1, int param2, void** param3) {
+int QProgressDialog_virtualbase_metacall(VirtualQProgressDialog* self, int param1, int param2, void** param3) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
-
+	return self->QProgressDialog::qt_metacall(static_cast<QMetaObject::Call>(param1), static_cast<int>(param2), param3);
 }
 
-QSize* QProgressDialog_virtualbase_sizeHint(const void* self) {
+QSize* QProgressDialog_virtualbase_sizeHint(const VirtualQProgressDialog* self) {
 
-	return new QSize(( (const VirtualQProgressDialog*)(self) )->QProgressDialog::sizeHint());
-
+	return new QSize(self->QProgressDialog::sizeHint());
 }
 
-void QProgressDialog_virtualbase_resizeEvent(void* self, QResizeEvent* event) {
+void QProgressDialog_virtualbase_resizeEvent(VirtualQProgressDialog* self, QResizeEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::resizeEvent(event);
-
+	self->QProgressDialog::resizeEvent(event);
 }
 
-void QProgressDialog_virtualbase_closeEvent(void* self, QCloseEvent* event) {
+void QProgressDialog_virtualbase_closeEvent(VirtualQProgressDialog* self, QCloseEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::closeEvent(event);
-
+	self->QProgressDialog::closeEvent(event);
 }
 
-void QProgressDialog_virtualbase_changeEvent(void* self, QEvent* event) {
+void QProgressDialog_virtualbase_changeEvent(VirtualQProgressDialog* self, QEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::changeEvent(event);
-
+	self->QProgressDialog::changeEvent(event);
 }
 
-void QProgressDialog_virtualbase_showEvent(void* self, QShowEvent* event) {
+void QProgressDialog_virtualbase_showEvent(VirtualQProgressDialog* self, QShowEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::showEvent(event);
-
+	self->QProgressDialog::showEvent(event);
 }
 
-void QProgressDialog_virtualbase_setVisible(void* self, bool visible) {
+void QProgressDialog_virtualbase_setVisible(VirtualQProgressDialog* self, bool visible) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::setVisible(visible);
-
+	self->QProgressDialog::setVisible(visible);
 }
 
-QSize* QProgressDialog_virtualbase_minimumSizeHint(const void* self) {
+QSize* QProgressDialog_virtualbase_minimumSizeHint(const VirtualQProgressDialog* self) {
 
-	return new QSize(( (const VirtualQProgressDialog*)(self) )->QProgressDialog::minimumSizeHint());
-
+	return new QSize(self->QProgressDialog::minimumSizeHint());
 }
 
-void QProgressDialog_virtualbase_open(void* self) {
+void QProgressDialog_virtualbase_open(VirtualQProgressDialog* self) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::open();
-
+	self->QProgressDialog::open();
 }
 
-int QProgressDialog_virtualbase_exec(void* self) {
+int QProgressDialog_virtualbase_exec(VirtualQProgressDialog* self) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::exec();
-
+	return self->QProgressDialog::exec();
 }
 
-void QProgressDialog_virtualbase_done(void* self, int param1) {
+void QProgressDialog_virtualbase_done(VirtualQProgressDialog* self, int param1) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::done(static_cast<int>(param1));
-
+	self->QProgressDialog::done(static_cast<int>(param1));
 }
 
-void QProgressDialog_virtualbase_accept(void* self) {
+void QProgressDialog_virtualbase_accept(VirtualQProgressDialog* self) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::accept();
-
+	self->QProgressDialog::accept();
 }
 
-void QProgressDialog_virtualbase_reject(void* self) {
+void QProgressDialog_virtualbase_reject(VirtualQProgressDialog* self) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::reject();
-
+	self->QProgressDialog::reject();
 }
 
-void QProgressDialog_virtualbase_keyPressEvent(void* self, QKeyEvent* param1) {
+void QProgressDialog_virtualbase_keyPressEvent(VirtualQProgressDialog* self, QKeyEvent* param1) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::keyPressEvent(param1);
-
+	self->QProgressDialog::keyPressEvent(param1);
 }
 
-void QProgressDialog_virtualbase_contextMenuEvent(void* self, QContextMenuEvent* param1) {
+void QProgressDialog_virtualbase_contextMenuEvent(VirtualQProgressDialog* self, QContextMenuEvent* param1) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::contextMenuEvent(param1);
-
+	self->QProgressDialog::contextMenuEvent(param1);
 }
 
-bool QProgressDialog_virtualbase_eventFilter(void* self, QObject* param1, QEvent* param2) {
+bool QProgressDialog_virtualbase_eventFilter(VirtualQProgressDialog* self, QObject* param1, QEvent* param2) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::eventFilter(param1, param2);
-
+	return self->QProgressDialog::eventFilter(param1, param2);
 }
 
-int QProgressDialog_virtualbase_devType(const void* self) {
+int QProgressDialog_virtualbase_devType(const VirtualQProgressDialog* self) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::devType();
-
+	return self->QProgressDialog::devType();
 }
 
-int QProgressDialog_virtualbase_heightForWidth(const void* self, int param1) {
+int QProgressDialog_virtualbase_heightForWidth(const VirtualQProgressDialog* self, int param1) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::heightForWidth(static_cast<int>(param1));
-
+	return self->QProgressDialog::heightForWidth(static_cast<int>(param1));
 }
 
-bool QProgressDialog_virtualbase_hasHeightForWidth(const void* self) {
+bool QProgressDialog_virtualbase_hasHeightForWidth(const VirtualQProgressDialog* self) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::hasHeightForWidth();
-
+	return self->QProgressDialog::hasHeightForWidth();
 }
 
-QPaintEngine* QProgressDialog_virtualbase_paintEngine(const void* self) {
+QPaintEngine* QProgressDialog_virtualbase_paintEngine(const VirtualQProgressDialog* self) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::paintEngine();
-
+	return self->QProgressDialog::paintEngine();
 }
 
-bool QProgressDialog_virtualbase_event(void* self, QEvent* event) {
+bool QProgressDialog_virtualbase_event(VirtualQProgressDialog* self, QEvent* event) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::event(event);
-
+	return self->QProgressDialog::event(event);
 }
 
-void QProgressDialog_virtualbase_mousePressEvent(void* self, QMouseEvent* event) {
+void QProgressDialog_virtualbase_mousePressEvent(VirtualQProgressDialog* self, QMouseEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::mousePressEvent(event);
-
+	self->QProgressDialog::mousePressEvent(event);
 }
 
-void QProgressDialog_virtualbase_mouseReleaseEvent(void* self, QMouseEvent* event) {
+void QProgressDialog_virtualbase_mouseReleaseEvent(VirtualQProgressDialog* self, QMouseEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::mouseReleaseEvent(event);
-
+	self->QProgressDialog::mouseReleaseEvent(event);
 }
 
-void QProgressDialog_virtualbase_mouseDoubleClickEvent(void* self, QMouseEvent* event) {
+void QProgressDialog_virtualbase_mouseDoubleClickEvent(VirtualQProgressDialog* self, QMouseEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::mouseDoubleClickEvent(event);
-
+	self->QProgressDialog::mouseDoubleClickEvent(event);
 }
 
-void QProgressDialog_virtualbase_mouseMoveEvent(void* self, QMouseEvent* event) {
+void QProgressDialog_virtualbase_mouseMoveEvent(VirtualQProgressDialog* self, QMouseEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::mouseMoveEvent(event);
-
+	self->QProgressDialog::mouseMoveEvent(event);
 }
 
-void QProgressDialog_virtualbase_wheelEvent(void* self, QWheelEvent* event) {
+void QProgressDialog_virtualbase_wheelEvent(VirtualQProgressDialog* self, QWheelEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::wheelEvent(event);
-
+	self->QProgressDialog::wheelEvent(event);
 }
 
-void QProgressDialog_virtualbase_keyReleaseEvent(void* self, QKeyEvent* event) {
+void QProgressDialog_virtualbase_keyReleaseEvent(VirtualQProgressDialog* self, QKeyEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::keyReleaseEvent(event);
-
+	self->QProgressDialog::keyReleaseEvent(event);
 }
 
-void QProgressDialog_virtualbase_focusInEvent(void* self, QFocusEvent* event) {
+void QProgressDialog_virtualbase_focusInEvent(VirtualQProgressDialog* self, QFocusEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::focusInEvent(event);
-
+	self->QProgressDialog::focusInEvent(event);
 }
 
-void QProgressDialog_virtualbase_focusOutEvent(void* self, QFocusEvent* event) {
+void QProgressDialog_virtualbase_focusOutEvent(VirtualQProgressDialog* self, QFocusEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::focusOutEvent(event);
-
+	self->QProgressDialog::focusOutEvent(event);
 }
 
-void QProgressDialog_virtualbase_enterEvent(void* self, QEvent* event) {
+void QProgressDialog_virtualbase_enterEvent(VirtualQProgressDialog* self, QEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::enterEvent(event);
-
+	self->QProgressDialog::enterEvent(event);
 }
 
-void QProgressDialog_virtualbase_leaveEvent(void* self, QEvent* event) {
+void QProgressDialog_virtualbase_leaveEvent(VirtualQProgressDialog* self, QEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::leaveEvent(event);
-
+	self->QProgressDialog::leaveEvent(event);
 }
 
-void QProgressDialog_virtualbase_paintEvent(void* self, QPaintEvent* event) {
+void QProgressDialog_virtualbase_paintEvent(VirtualQProgressDialog* self, QPaintEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::paintEvent(event);
-
+	self->QProgressDialog::paintEvent(event);
 }
 
-void QProgressDialog_virtualbase_moveEvent(void* self, QMoveEvent* event) {
+void QProgressDialog_virtualbase_moveEvent(VirtualQProgressDialog* self, QMoveEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::moveEvent(event);
-
+	self->QProgressDialog::moveEvent(event);
 }
 
-void QProgressDialog_virtualbase_tabletEvent(void* self, QTabletEvent* event) {
+void QProgressDialog_virtualbase_tabletEvent(VirtualQProgressDialog* self, QTabletEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::tabletEvent(event);
-
+	self->QProgressDialog::tabletEvent(event);
 }
 
-void QProgressDialog_virtualbase_actionEvent(void* self, QActionEvent* event) {
+void QProgressDialog_virtualbase_actionEvent(VirtualQProgressDialog* self, QActionEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::actionEvent(event);
-
+	self->QProgressDialog::actionEvent(event);
 }
 
-void QProgressDialog_virtualbase_dragEnterEvent(void* self, QDragEnterEvent* event) {
+void QProgressDialog_virtualbase_dragEnterEvent(VirtualQProgressDialog* self, QDragEnterEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::dragEnterEvent(event);
-
+	self->QProgressDialog::dragEnterEvent(event);
 }
 
-void QProgressDialog_virtualbase_dragMoveEvent(void* self, QDragMoveEvent* event) {
+void QProgressDialog_virtualbase_dragMoveEvent(VirtualQProgressDialog* self, QDragMoveEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::dragMoveEvent(event);
-
+	self->QProgressDialog::dragMoveEvent(event);
 }
 
-void QProgressDialog_virtualbase_dragLeaveEvent(void* self, QDragLeaveEvent* event) {
+void QProgressDialog_virtualbase_dragLeaveEvent(VirtualQProgressDialog* self, QDragLeaveEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::dragLeaveEvent(event);
-
+	self->QProgressDialog::dragLeaveEvent(event);
 }
 
-void QProgressDialog_virtualbase_dropEvent(void* self, QDropEvent* event) {
+void QProgressDialog_virtualbase_dropEvent(VirtualQProgressDialog* self, QDropEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::dropEvent(event);
-
+	self->QProgressDialog::dropEvent(event);
 }
 
-void QProgressDialog_virtualbase_hideEvent(void* self, QHideEvent* event) {
+void QProgressDialog_virtualbase_hideEvent(VirtualQProgressDialog* self, QHideEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::hideEvent(event);
-
+	self->QProgressDialog::hideEvent(event);
 }
 
-bool QProgressDialog_virtualbase_nativeEvent(void* self, struct miqt_string eventType, void* message, long* result) {
+bool QProgressDialog_virtualbase_nativeEvent(VirtualQProgressDialog* self, struct miqt_string eventType, void* message, long* result) {
 	QByteArray eventType_QByteArray(eventType.data, eventType.len);
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
-
+	return self->QProgressDialog::nativeEvent(eventType_QByteArray, message, static_cast<long*>(result));
 }
 
-int QProgressDialog_virtualbase_metric(const void* self, int param1) {
+int QProgressDialog_virtualbase_metric(const VirtualQProgressDialog* self, int param1) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::metric(static_cast<VirtualQProgressDialog::PaintDeviceMetric>(param1));
-
+	return self->QProgressDialog::metric(static_cast<VirtualQProgressDialog::PaintDeviceMetric>(param1));
 }
 
-void QProgressDialog_virtualbase_initPainter(const void* self, QPainter* painter) {
+void QProgressDialog_virtualbase_initPainter(const VirtualQProgressDialog* self, QPainter* painter) {
 
-	( (const VirtualQProgressDialog*)(self) )->QProgressDialog::initPainter(painter);
-
+	self->QProgressDialog::initPainter(painter);
 }
 
-QPaintDevice* QProgressDialog_virtualbase_redirected(const void* self, QPoint* offset) {
+QPaintDevice* QProgressDialog_virtualbase_redirected(const VirtualQProgressDialog* self, QPoint* offset) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::redirected(offset);
-
+	return self->QProgressDialog::redirected(offset);
 }
 
-QPainter* QProgressDialog_virtualbase_sharedPainter(const void* self) {
+QPainter* QProgressDialog_virtualbase_sharedPainter(const VirtualQProgressDialog* self) {
 
-	return ( (const VirtualQProgressDialog*)(self) )->QProgressDialog::sharedPainter();
-
+	return self->QProgressDialog::sharedPainter();
 }
 
-void QProgressDialog_virtualbase_inputMethodEvent(void* self, QInputMethodEvent* param1) {
+void QProgressDialog_virtualbase_inputMethodEvent(VirtualQProgressDialog* self, QInputMethodEvent* param1) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::inputMethodEvent(param1);
-
+	self->QProgressDialog::inputMethodEvent(param1);
 }
 
-QVariant* QProgressDialog_virtualbase_inputMethodQuery(const void* self, int param1) {
+QVariant* QProgressDialog_virtualbase_inputMethodQuery(const VirtualQProgressDialog* self, int param1) {
 
-	return new QVariant(( (const VirtualQProgressDialog*)(self) )->QProgressDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
-
+	return new QVariant(self->QProgressDialog::inputMethodQuery(static_cast<Qt::InputMethodQuery>(param1)));
 }
 
-bool QProgressDialog_virtualbase_focusNextPrevChild(void* self, bool next) {
+bool QProgressDialog_virtualbase_focusNextPrevChild(VirtualQProgressDialog* self, bool next) {
 
-	return ( (VirtualQProgressDialog*)(self) )->QProgressDialog::focusNextPrevChild(next);
-
+	return self->QProgressDialog::focusNextPrevChild(next);
 }
 
-void QProgressDialog_virtualbase_timerEvent(void* self, QTimerEvent* event) {
+void QProgressDialog_virtualbase_timerEvent(VirtualQProgressDialog* self, QTimerEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::timerEvent(event);
-
+	self->QProgressDialog::timerEvent(event);
 }
 
-void QProgressDialog_virtualbase_childEvent(void* self, QChildEvent* event) {
+void QProgressDialog_virtualbase_childEvent(VirtualQProgressDialog* self, QChildEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::childEvent(event);
-
+	self->QProgressDialog::childEvent(event);
 }
 
-void QProgressDialog_virtualbase_customEvent(void* self, QEvent* event) {
+void QProgressDialog_virtualbase_customEvent(VirtualQProgressDialog* self, QEvent* event) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::customEvent(event);
-
+	self->QProgressDialog::customEvent(event);
 }
 
-void QProgressDialog_virtualbase_connectNotify(void* self, QMetaMethod* signal) {
+void QProgressDialog_virtualbase_connectNotify(VirtualQProgressDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::connectNotify(*signal);
-
+	self->QProgressDialog::connectNotify(*signal);
 }
 
-void QProgressDialog_virtualbase_disconnectNotify(void* self, QMetaMethod* signal) {
+void QProgressDialog_virtualbase_disconnectNotify(VirtualQProgressDialog* self, QMetaMethod* signal) {
 
-	( (VirtualQProgressDialog*)(self) )->QProgressDialog::disconnectNotify(*signal);
-
+	self->QProgressDialog::disconnectNotify(*signal);
 }
 
 const QMetaObject* QProgressDialog_staticMetaObject() { return &QProgressDialog::staticMetaObject; }
-void QProgressDialog_protectedbase_forceShow(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	self_cast->forceShow();
 
+const QProgressDialog_VTable* QProgressDialog_vtbl(const VirtualQProgressDialog* self) { return self->vtbl; }
+void* QProgressDialog_vdata(const VirtualQProgressDialog* self) { return self->vdata; }
+void QProgressDialog_setVdata(VirtualQProgressDialog* self, void* vdata) { self->vdata = vdata; }
+
+void QProgressDialog_protectedbase_forceShow(VirtualQProgressDialog* self) {
+	self->forceShow();
 }
 
-void QProgressDialog_protectedbase_adjustPosition(void* self, QWidget* param1) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	self_cast->adjustPosition(param1);
-
+void QProgressDialog_protectedbase_adjustPosition(VirtualQProgressDialog* self, QWidget* param1) {
+	self->adjustPosition(param1);
 }
 
-void QProgressDialog_protectedbase_updateMicroFocus(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	self_cast->updateMicroFocus();
-
+void QProgressDialog_protectedbase_updateMicroFocus(VirtualQProgressDialog* self) {
+	self->updateMicroFocus();
 }
 
-void QProgressDialog_protectedbase_create(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	self_cast->create();
-
+void QProgressDialog_protectedbase_create(VirtualQProgressDialog* self) {
+	self->create();
 }
 
-void QProgressDialog_protectedbase_destroy(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	self_cast->destroy();
-
+void QProgressDialog_protectedbase_destroy(VirtualQProgressDialog* self) {
+	self->destroy();
 }
 
-bool QProgressDialog_protectedbase_focusNextChild(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->focusNextChild();
-
+bool QProgressDialog_protectedbase_focusNextChild(VirtualQProgressDialog* self) {
+	return self->focusNextChild();
 }
 
-bool QProgressDialog_protectedbase_focusPreviousChild(void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->focusPreviousChild();
-
+bool QProgressDialog_protectedbase_focusPreviousChild(VirtualQProgressDialog* self) {
+	return self->focusPreviousChild();
 }
 
-QObject* QProgressDialog_protectedbase_sender(const void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->sender();
-
+QObject* QProgressDialog_protectedbase_sender(const VirtualQProgressDialog* self) {
+	return self->sender();
 }
 
-int QProgressDialog_protectedbase_senderSignalIndex(const void* self) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->senderSignalIndex();
-
+int QProgressDialog_protectedbase_senderSignalIndex(const VirtualQProgressDialog* self) {
+	return self->senderSignalIndex();
 }
 
-int QProgressDialog_protectedbase_receivers(const void* self, const char* signal) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->receivers(signal);
-
+int QProgressDialog_protectedbase_receivers(const VirtualQProgressDialog* self, const char* signal) {
+	return self->receivers(signal);
 }
 
-bool QProgressDialog_protectedbase_isSignalConnected(const void* self, QMetaMethod* signal) {
-	VirtualQProgressDialog* self_cast = static_cast<VirtualQProgressDialog*>( (QProgressDialog*)(self) );
-	
-	return self_cast->isSignalConnected(*signal);
-
+bool QProgressDialog_protectedbase_isSignalConnected(const VirtualQProgressDialog* self, QMetaMethod* signal) {
+	return self->isSignalConnected(*signal);
 }
 
 void QProgressDialog_delete(QProgressDialog* self) {
